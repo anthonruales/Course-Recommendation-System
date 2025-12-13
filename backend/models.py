@@ -1,0 +1,17 @@
+from sqlalchemy import Column, Integer, String
+from database import Base
+
+class User(Base):
+    __tablename__ = "users"
+    id = Column(Integer, primary_key=True, index=True)
+    fullname = Column(String)
+    email = Column(String, unique=True, index=True)
+    password = Column(String)
+
+class Recommendation(Base):
+    __tablename__ = "recommendations"
+    id = Column(Integer, primary_key=True, index=True)
+    user_email = Column(String)
+    category = Column(String)
+    course = Column(String)
+    reasoning = Column(String)
