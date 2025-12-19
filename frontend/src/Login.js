@@ -29,7 +29,7 @@ function Login({ onSwitch, onLoginSuccess }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:8080/login', { email, password });
+      const res = await axios.post('http://localhost:8000/login', { email, password });
       onLoginSuccess(res.data.user);
     } catch (err) { 
       alert("Invalid login credentials."); 
@@ -56,8 +56,8 @@ function Login({ onSwitch, onLoginSuccess }) {
 
         <form onSubmit={handleSubmit} style={{width: '100%', maxWidth: '400px'}}>
           <div className="form-group">
-            <label>Institutional Email</label>
-            <input className="academic-input" type="email" placeholder="name@university.edu" required
+            <label>Email</label>
+            <input className="academic-input" type="email" placeholder="email@example.com" required
                    onChange={(e) => setEmail(e.target.value)} />
           </div>
 
