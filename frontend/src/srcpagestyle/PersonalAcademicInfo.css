@@ -1,0 +1,47 @@
+.student-form-container {
+  width: 800px;
+  margin: 100px auto;
+  background: #f8f9fa;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.student-form-container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.student-form label {
+  display: block;
+  margin-bottom: 15px;
+  font-size: 15px;
+  color: #444;
+}
+
+.student-form input,
+.student-form select {
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.student-form button {
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  margin-bottom: 1px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.student-form button:hover {
+  background-color: #0056b3;
+}
