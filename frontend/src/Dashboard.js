@@ -8,9 +8,9 @@ function Dashboard({ userName, onLogout, onStart }) {
         <h2 style={{color: 'var(--brand-primary)', fontWeight: 800, marginBottom: '40px'}}>CoursePro</h2>
         <nav style={{display: 'flex', flexDirection: 'column', gap: '10px'}}>
           <div className="nav-item active" style={{padding: '12px', borderRadius: '8px', background: '#eff6ff', color: 'var(--brand-primary)', fontWeight: 600}}>Dashboard</div>
-          <div className="nav-item" style={{padding: '12px', color: 'var(--text-muted)'}}>Career Assessment</div>
+      
           <div className="nav-item" style={{padding: '12px', color: 'var(--text-muted)'}}>My Results</div>
-          <div className="nav-item" style={{padding: '12px', color: 'var(--text-muted)'}}>University Catalog</div>
+          
         </nav>
         <button onClick={onLogout} style={{marginTop: 'auto', background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', textAlign: 'left', padding: '12px'}}>Logout</button>
       </aside>
