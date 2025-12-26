@@ -1,18 +1,32 @@
 import React from 'react';
 import './App.css';
 
-function Dashboard({ userName, onLogout, onStart }) {
+function Dashboard({ userName, onLogout, onStart, onViewProfile }) {
   return (
     <div className="portal-layout">
       <aside className="portal-sidebar">
         <h2 style={{color: 'var(--brand-primary)', fontWeight: 800, marginBottom: '40px'}}>CoursePro</h2>
         <nav style={{display: 'flex', flexDirection: 'column', gap: '10px'}}>
-          <div className="nav-item active" style={{padding: '12px', borderRadius: '8px', background: '#eff6ff', color: 'var(--brand-primary)', fontWeight: 600}}>Dashboard</div>
-      
-          <div className="nav-item" style={{padding: '12px', color: 'var(--text-muted)'}}>My Results</div>
+          <div className="nav-item active" style={{padding: '12px', borderRadius: '8px', background: '#eff6ff', color: 'var(--brand-primary)', fontWeight: 600, cursor: 'pointer'}}>
+            Dashboard
+          </div>
           
+          <div 
+            className="nav-item" 
+            onClick={onViewProfile} 
+            style={{padding: '12px', color: 'var(--text-muted)', cursor: 'pointer'}}
+          >
+            Academic Profile
+          </div>
+          
+          <div className="nav-item" style={{padding: '12px', color: 'var(--text-muted)', cursor: 'default'}}>
+            My Results
+          </div>
         </nav>
-        <button onClick={onLogout} style={{marginTop: 'auto', background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', textAlign: 'left', padding: '12px'}}>Logout</button>
+        
+        <button onClick={onLogout} style={{marginTop: 'auto', background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', textAlign: 'left', padding: '12px'}}>
+          Logout
+        </button>
       </aside>
 
       <main className="portal-main">
@@ -25,7 +39,9 @@ function Dashboard({ userName, onLogout, onStart }) {
           <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
             <div>
               <h3 style={{fontSize: '20px', fontWeight: 700, margin: '0 0 10px 0'}}>Ready for your recommendation?</h3>
-              <p style={{color: 'var(--text-muted)', maxWidth: '500px'}}>Our Rule-Based Decision Tree will analyze your GWA and strand to find the best fit for your future.</p>
+              <p style={{color: 'var(--text-muted)', maxWidth: '500px'}}>
+                Launch the assessment to begin the interest questionnaire. We will use your saved Academic Profile for the final analysis.
+              </p>
             </div>
             <button className="btn-solid" onClick={onStart}>Start New Assessment</button>
           </div>
