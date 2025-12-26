@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-function Dashboard({ userName, onLogout }) {
+function Dashboard({ userName, onLogout, onStart }) {
   return (
     <div className="portal-layout">
       <aside className="portal-sidebar">
@@ -27,7 +27,7 @@ function Dashboard({ userName, onLogout }) {
               <h3 style={{fontSize: '20px', fontWeight: 700, margin: '0 0 10px 0'}}>Ready for your recommendation?</h3>
               <p style={{color: 'var(--text-muted)', maxWidth: '500px'}}>Our Rule-Based Decision Tree will analyze your GWA and strand to find the best fit for your future.</p>
             </div>
-            <button className="btn-solid">Start New Assessment</button>
+            <button className="btn-solid" onClick={onStart}>Start New Assessment</button>
           </div>
         </div>
 
