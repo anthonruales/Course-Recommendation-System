@@ -3,7 +3,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard';
-import AssessmentForm from './AssessmentForm'; 
+import AssessmentForm from './AssessmentForm';
 import './App.css';
 
 function App() {
@@ -40,6 +40,7 @@ function App() {
           ) : (
             <AssessmentForm onBack={() => setView('dashboard')} /> /* This flips it back */
           )
+          
         ) : (
           <div className="auth-shell">
             {isLogin ? (
