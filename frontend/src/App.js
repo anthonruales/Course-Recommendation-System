@@ -3,14 +3,13 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard';
+import ProfileForm from './ProfileForm';
 import AssessmentForm from './AssessmentForm'; 
 import './App.css';
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
   const [user, setUser] = useState(localStorage.getItem('userName') || null);
-  
-  // THIS IS THE SWITCH: It can be 'dashboard' or 'assessment'
   const [view, setView] = useState('dashboard');
 
   const GOOGLE_CLIENT_ID = "324535586446-nbcj7tcp4373lrk5ct76u3v0od9n4vm3.apps.googleusercontent.com";
@@ -30,16 +29,24 @@ function App() {
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
       <div className="App">
         {user ? (
-          /* IF LOGGED IN, CHECK THE VIEW STATE */
-          view === 'dashboard' ? (
-            <Dashboard 
-              userName={user} 
-              onLogout={handleLogout} 
-              onStart={() => setView('assessment')} /* This flips the switch */
-            />
-          ) : (
-            <AssessmentForm onBack={() => setView('dashboard')} /> /* This flips it back */
-          )
+          <>
+            {view === 'dashboard' && (
+              <Dashboard 
+                userName={user} 
+                onLogout={handleLogout} 
+                onStart={() => setView('assessment')}
+                onViewProfile={() => setView('profile')}
+              />
+            )}
+
+            {view === 'profile' && (
+              <ProfileForm onBack={() => setView('dashboard')} />
+            )}
+
+            {view === 'assessment' && (
+              <AssessmentForm onBack={() => setView('dashboard')} />
+            )}
+          </>
         ) : (
           <div className="auth-shell">
             {isLogin ? (
