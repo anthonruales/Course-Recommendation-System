@@ -1,4 +1,6 @@
 import os
+from fastapi import FastAPI
+from pydantic import BaseModel
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
@@ -118,3 +120,14 @@ def get_history(db: Session = Depends(get_db)):
 @app.get("/")
 def home(): 
     return {"status": "online", "google_ready": bool(GOOGLE_CLIENT_ID)}
+
+@app.get("/dashboard/{user_id}")
+def get_dashboard_info(user_id: int):
+    # For now, we are just 'pretending' to get data from a database
+    # Later, we will connect this to your PostgreSQL database
+    return {
+        "message": "Welcome to your Dashboard!",
+        "user_id": user_id,
+        "status": "Ready to start assessment",
+        "progress": 0
+    }
