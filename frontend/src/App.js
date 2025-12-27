@@ -1,18 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard';
 import ProfileForm from './ProfileForm';
-import AssessmentForm from './AssessmentForm'; 
+import AssessmentForm from './AssessmentForm';
+import { calculateRecommendation } from './logicEngine';
 import './App.css';
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
   const [user, setUser] = useState(localStorage.getItem('userName') || null);
   const [view, setView] = useState('dashboard');
+  const [result, setResult] = useState(null);
+
+  // Initialize profileData as null; it will be populated by the useEffect below
+  const [profileData, setProfileData] = useState(null);
 
   const GOOGLE_CLIENT_ID = "324535586446-nbcj7tcp4373lrk5ct76u3v0od9n4vm3.apps.googleusercontent.com";
+
+  // EFFECT: Load the specific profile tied to the logged-in user
+  useEffect(() => {
+    if (user) {
+      const savedProfile = localStorage.getItem(`userProfile_${user}`);
+      setProfileData(savedProfile ? JSON.parse(savedProfile) : null);
+    } else {
+      setProfileData(null);
+    }
+    setResult(null); // Reset results when switching users
+  }, [user]);
 
   const handleLoginSuccess = (name) => {
     localStorage.setItem('userName', name);
@@ -22,6 +38,27 @@ function App() {
   const handleLogout = () => {
     localStorage.removeItem('userName');
     setUser(null);
+    setView('dashboard');
+  };
+
+  const handleProfileSave = (data) => {
+    // Save with a unique key for THIS user
+    localStorage.setItem(`userProfile_${user}`, JSON.stringify(data));
+    setProfileData(data);
+    setView('dashboard');
+  };
+
+  const handleAssessmentSubmit = (answers) => {
+    if (!profileData) {
+      alert("Please complete your Academic Profile first!");
+      setView('profile');
+      return;
+    }
+    
+    const recommendations = calculateRecommendation(profileData, answers);
+    setResult(recommendations);
+    
+    alert(`Logic Engine Output: Based on your ${profileData.shsStrand} strand and interests, we recommend: ${recommendations.join(", ")}`);
     setView('dashboard');
   };
 
@@ -36,15 +73,23 @@ function App() {
                 onLogout={handleLogout} 
                 onStart={() => setView('assessment')}
                 onViewProfile={() => setView('profile')}
+                recommendation={result}
               />
             )}
 
             {view === 'profile' && (
-              <ProfileForm onBack={() => setView('dashboard')} />
+              <ProfileForm 
+                onBack={() => setView('dashboard')} 
+                onSave={handleProfileSave}
+                initialData={profileData}
+              />
             )}
 
             {view === 'assessment' && (
-              <AssessmentForm onBack={() => setView('dashboard')} />
+              <AssessmentForm 
+                onBack={() => setView('dashboard')} 
+                onSubmit={handleAssessmentSubmit}
+              />
             )}
           </>
         ) : (

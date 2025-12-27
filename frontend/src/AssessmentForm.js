@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
-function AssessmentForm({ onBack }) {
+// ADD "onSubmit" to the curly braces here
+function AssessmentForm({ onBack, onSubmit }) { 
   const [formData, setFormData] = useState({ q1: '', q2: '', q3: '' });
 
   const handleChange = (e) => {
@@ -10,15 +11,14 @@ function AssessmentForm({ onBack }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Questionnaire Data:", formData);
-    alert("Assessment Complete! We are analyzing your interests against your saved profile.");
-    onBack();
+    // This now works because onSubmit is defined above
+    onSubmit(formData); 
   };
 
   return (
     <div className="portal-layout">
       <main className="portal-main">
-        <button onClick={onBack} className="btn-back" style={{marginBottom: '20px', cursor: 'pointer', background: 'none', border: 'none', color: '#3b82f6'}}>
+        <button onClick={onBack} style={{marginBottom: '20px', cursor: 'pointer', background: 'none', border: 'none', color: '#3b82f6'}}>
           ← Cancel Assessment
         </button>
 
@@ -29,19 +29,19 @@ function AssessmentForm({ onBack }) {
           </header>
 
           <form onSubmit={handleSubmit}>
-            <div style={questionStyle}>
+            <div style={{padding: '15px', borderBottom: '1px solid #f0f0f0', marginBottom: '10px'}}>
               <p>1. When faced with a broken gadget, do you prefer fixing it yourself rather than buying a new one?</p>
               <label><input type="radio" name="q1" value="yes" onChange={handleChange} required /> Yes</label>
               <label style={{marginLeft: '20px'}}><input type="radio" name="q1" value="no" onChange={handleChange} /> No</label>
             </div>
 
-            <div style={questionStyle}>
+            <div style={{padding: '15px', borderBottom: '1px solid #f0f0f0', marginBottom: '10px'}}>
               <p>2. Do you enjoy analyzing data or conducting experiments to find the truth?</p>
               <label><input type="radio" name="q2" value="yes" onChange={handleChange} required /> Yes</label>
               <label style={{marginLeft: '20px'}}><input type="radio" name="q2" value="no" onChange={handleChange} /> No</label>
             </div>
 
-            <div style={questionStyle}>
+            <div style={{padding: '15px', borderBottom: '1px solid #f0f0f0', marginBottom: '10px'}}>
               <p>3. Would you rather lead a team and pitch business ideas than work behind the scenes?</p>
               <label><input type="radio" name="q3" value="yes" onChange={handleChange} required /> Yes</label>
               <label style={{marginLeft: '20px'}}><input type="radio" name="q3" value="no" onChange={handleChange} /> No</label>
@@ -56,7 +56,5 @@ function AssessmentForm({ onBack }) {
     </div>
   );
 }
-
-const questionStyle = { padding: '15px', borderBottom: '1px solid #f0f0f0', marginBottom: '10px' };
 
 export default AssessmentForm;
