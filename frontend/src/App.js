@@ -5,6 +5,7 @@ import Signup from './Signup';
 import Dashboard from './Dashboard';
 import ProfileForm from './ProfileForm';
 import AssessmentForm from './AssessmentForm';
+import ResultsView from './ResultsView';
 import { calculateRecommendation } from './logicEngine';
 import './App.css';
 
@@ -13,21 +14,23 @@ function App() {
   const [user, setUser] = useState(localStorage.getItem('userName') || null);
   const [view, setView] = useState('dashboard');
   const [result, setResult] = useState(null);
-
-  // Initialize profileData as null; it will be populated by the useEffect below
   const [profileData, setProfileData] = useState(null);
+  const [history, setHistory] = useState([]);
 
   const GOOGLE_CLIENT_ID = "324535586446-nbcj7tcp4373lrk5ct76u3v0od9n4vm3.apps.googleusercontent.com";
 
-  // EFFECT: Load the specific profile tied to the logged-in user
   useEffect(() => {
     if (user) {
       const savedProfile = localStorage.getItem(`userProfile_${user}`);
       setProfileData(savedProfile ? JSON.parse(savedProfile) : null);
+
+      const savedHistory = localStorage.getItem(`assessmentHistory_${user}`);
+      setHistory(savedHistory ? JSON.parse(savedHistory) : []);
     } else {
       setProfileData(null);
+      setHistory([]);
     }
-    setResult(null); // Reset results when switching users
+    setResult(null); 
   }, [user]);
 
   const handleLoginSuccess = (name) => {
@@ -42,7 +45,6 @@ function App() {
   };
 
   const handleProfileSave = (data) => {
-    // Save with a unique key for THIS user
     localStorage.setItem(`userProfile_${user}`, JSON.stringify(data));
     setProfileData(data);
     setView('dashboard');
@@ -56,10 +58,19 @@ function App() {
     }
     
     const recommendations = calculateRecommendation(profileData, answers);
-    setResult(recommendations);
     
-    alert(`Logic Engine Output: Based on your ${profileData.shsStrand} strand and interests, we recommend: ${recommendations.join(", ")}`);
-    setView('dashboard');
+    const newResult = {
+      courses: recommendations,
+      date: new Date().toLocaleDateString(),
+      timestamp: Date.now()
+    };
+
+    const updatedHistory = [newResult, ...history];
+    setHistory(updatedHistory);
+    localStorage.setItem(`assessmentHistory_${user}`, JSON.stringify(updatedHistory));
+
+    setResult(newResult);
+    setView('results');
   };
 
   return (
@@ -74,6 +85,7 @@ function App() {
                 onStart={() => setView('assessment')}
                 onViewProfile={() => setView('profile')}
                 recommendation={result}
+                history={history}
               />
             )}
 
@@ -89,6 +101,15 @@ function App() {
               <AssessmentForm 
                 onBack={() => setView('dashboard')} 
                 onSubmit={handleAssessmentSubmit}
+              />
+            )}
+
+            {view === 'results' && (
+              <ResultsView 
+                recommendation={result?.courses} 
+                profileData={profileData}
+                onRetake={() => setView('assessment')}
+                onBack={() => setView('dashboard')}
               />
             )}
           </>
