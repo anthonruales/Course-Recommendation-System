@@ -44,9 +44,54 @@ function App() {
     setView('dashboard');
   };
 
-  const handleProfileSave = (data) => {
-    localStorage.setItem(`userProfile_${user}`, JSON.stringify(data));
-    setProfileData(data);
+  const handleProfileSave = (newData) => {
+    const changes = [];
+
+    if (profileData) {
+      if (profileData.fullName !== newData.fullName) {
+        changes.push(`Name: ${newData.fullName}`);
+      }
+      if (profileData.age !== newData.age) {
+        changes.push(`Age: ${newData.age}`);
+      }
+      if (profileData.gender !== newData.gender) {
+        changes.push(`Gender: ${newData.gender}`);
+      }
+      if (profileData.shsStrand !== newData.shsStrand) {
+        changes.push(`Strand: ${newData.shsStrand}`);
+      }
+      
+      if (JSON.stringify(profileData.grades) !== JSON.stringify(newData.grades)) {
+        const updatedSubjects = [];
+        Object.keys(newData.grades).forEach(subject => {
+          if (profileData.grades[subject] !== newData.grades[subject]) {
+            updatedSubjects.push(subject);
+          }
+        });
+        changes.push(`Grades (${updatedSubjects.join(", ")})`);
+      }
+    } else {
+      changes.push("Initial Profile Setup");
+    }
+
+    localStorage.setItem(`userProfile_${user}`, JSON.stringify(newData));
+    setProfileData(newData);
+
+    const changeMessage = changes.length > 0 
+      ? `Update Profile: ${changes.join(", ")}` 
+      : "Profile Saved (No changes)";
+
+    const profileLog = {
+      type: 'profile_update',
+      courses: [changeMessage], 
+      date: new Date().toLocaleDateString(),
+      timestamp: Date.now()
+    };
+
+    const updatedHistory = [profileLog, ...history];
+    setHistory(updatedHistory);
+    localStorage.setItem(`assessmentHistory_${user}`, JSON.stringify(updatedHistory));
+    
     setView('dashboard');
   };
 
@@ -60,6 +105,7 @@ function App() {
     const recommendations = calculateRecommendation(profileData, answers);
     
     const newResult = {
+      type: 'assessment',
       courses: recommendations,
       date: new Date().toLocaleDateString(),
       timestamp: Date.now()
