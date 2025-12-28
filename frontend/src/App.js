@@ -44,36 +44,37 @@ function App() {
     setView('dashboard');
   };
 
+  // FIX: Defensive logic to prevent "reading 'math' of undefined"
   const handleProfileSave = (newData) => {
     const changes = [];
 
     if (profileData) {
-      if (profileData.fullName !== newData.fullName) {
-        changes.push(`Name: ${newData.fullName}`);
-      }
-      if (profileData.age !== newData.age) {
-        changes.push(`Age: ${newData.age}`);
-      }
-      if (profileData.gender !== newData.gender) {
-        changes.push(`Gender: ${newData.gender}`);
-      }
-      if (profileData.shsStrand !== newData.shsStrand) {
-        changes.push(`Strand: ${newData.shsStrand}`);
-      }
+      if (profileData.fullName !== newData.fullName) changes.push(`Name: ${newData.fullName}`);
+      if (profileData.age !== newData.age) changes.push(`Age: ${newData.age}`);
+      if (profileData.gender !== newData.gender) changes.push(`Gender: ${newData.gender}`);
+      if (profileData.shsStrand !== newData.shsStrand) changes.push(`Strand: ${newData.shsStrand}`);
       
-      if (JSON.stringify(profileData.grades) !== JSON.stringify(newData.grades)) {
+      // Safety check for grades comparison
+      const oldGrades = profileData.grades || {};
+      const newGrades = newData.grades || {};
+
+      if (JSON.stringify(oldGrades) !== JSON.stringify(newGrades)) {
         const updatedSubjects = [];
-        Object.keys(newData.grades).forEach(subject => {
-          if (profileData.grades[subject] !== newData.grades[subject]) {
+        Object.keys(newGrades).forEach(subject => {
+          // Optional chaining ensures we don't crash if oldGrades is missing this subject
+          if (oldGrades[subject] !== newGrades[subject]) {
             updatedSubjects.push(subject);
           }
         });
-        changes.push(`Grades (${updatedSubjects.join(", ")})`);
+        if (updatedSubjects.length > 0) {
+          changes.push(`Grades (${updatedSubjects.join(", ")})`);
+        }
       }
     } else {
       changes.push("Initial Profile Setup");
     }
 
+    // Update States
     localStorage.setItem(`userProfile_${user}`, JSON.stringify(newData));
     setProfileData(newData);
 
@@ -102,11 +103,14 @@ function App() {
       return;
     }
     
-    const recommendations = calculateRecommendation(profileData, answers);
+    const recommendationObj = calculateRecommendation(profileData, answers);
     
     const newResult = {
       type: 'assessment',
-      courses: recommendations,
+      courses: recommendationObj.courses,
+      isAligned: recommendationObj.isAligned,
+      status: recommendationObj.status,
+      analysis: recommendationObj.analysis,
       date: new Date().toLocaleDateString(),
       timestamp: Date.now()
     };
@@ -130,7 +134,6 @@ function App() {
                 onLogout={handleLogout} 
                 onStart={() => setView('assessment')}
                 onViewProfile={() => setView('profile')}
-                recommendation={result}
                 history={history}
               />
             )}
@@ -152,7 +155,7 @@ function App() {
 
             {view === 'results' && (
               <ResultsView 
-                recommendation={result?.courses} 
+                recommendation={result} 
                 profileData={profileData}
                 onRetake={() => setView('assessment')}
                 onBack={() => setView('dashboard')}

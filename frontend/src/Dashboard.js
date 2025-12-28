@@ -4,6 +4,7 @@ import './App.css';
 function Dashboard({ userName, onLogout, onStart, onViewProfile, history }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
+  // Limits the view to 5 items unless "View All" is clicked
   const displayHistory = isExpanded ? history : history?.slice(0, 5);
 
   return (
@@ -32,6 +33,7 @@ function Dashboard({ userName, onLogout, onStart, onViewProfile, history }) {
           <p style={{color: 'var(--text-muted)'}}>Welcome back, {userName}. Track your progress and findings here.</p>
         </header>
 
+        {/* Action Card */}
         <div className="portal-card">
           <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
             <div>
@@ -45,6 +47,7 @@ function Dashboard({ userName, onLogout, onStart, onViewProfile, history }) {
         </div>
 
         <div style={{marginTop: '40px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', alignItems: 'start'}}>
+            {/* Left Column: Activity Feed */}
             <div className="portal-card">
                <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px'}}>
                  <h4 style={{margin: 0}}>Recent Activity</h4>
@@ -69,7 +72,8 @@ function Dashboard({ userName, onLogout, onStart, onViewProfile, history }) {
                            fontSize: '14px',
                            maxWidth: '70%'
                          }}>
-                           {item.courses.join(", ")}
+                           {/* item.courses contains the course name OR the Profile update message */}
+                           {Array.isArray(item.courses) ? item.courses.join(", ") : item.courses}
                          </div>
                          
                          <span style={{
@@ -93,15 +97,17 @@ function Dashboard({ userName, onLogout, onStart, onViewProfile, history }) {
                )}
             </div>
             
+            {/* Right Column: System Stats */}
             <div className="portal-card">
-               <h4 style={{margin: '0 0 10px 0'}}>System Notifications</h4>
-               <p style={{fontSize: '14px', color: 'var(--text-muted)'}}>System is running normally.</p>
+               <h4 style={{margin: '0 0 10px 0'}}>Account Summary</h4>
+               <p style={{fontSize: '14px', color: 'var(--text-muted)'}}>Your account is synchronized and up to date.</p>
                {history && history.length > 0 && (
                  <div style={{marginTop: '15px', padding: '12px', borderRadius: '8px', background: '#f8fafc', border: '1px solid #e2e8f0'}}>
-                   <p style={{fontSize: '13px', color: '#475569', margin: 0}}>
-                     <strong>Logs Recorded:</strong> {history.length}
-                   </p>
-                   <p style={{fontSize: '12px', color: '#64748b', marginTop: '6px'}}>
+                   <div style={{display: 'flex', alignItems: 'center', gap: '8px', color: '#10b981', marginBottom: '8px'}}>
+                      <span style={{fontSize: '16px'}}>✓</span>
+                      <span style={{fontSize: '13px', fontWeight: 600}}>{history.filter(h => h.type === 'assessment').length} Assessment(s) Recorded</span>
+                   </div>
+                   <p style={{fontSize: '12px', color: '#64748b', margin: 0}}>
                      Latest activity logged on {history[0].date}
                    </p>
                  </div>
