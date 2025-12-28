@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from 'react';
 
 function ProfileForm({ onBack, onSave, initialData }) {
-  // Initialize with initialData if it exists, otherwise empty defaults
   const [formData, setFormData] = useState({
     fullName: '', age: '', gender: '', shsStrand: '',
     mathGrade: '', englishGrade: '', scienceGrade: '', filipinoGrade: ''
   });
 
-  // Sync the form state whenever initialData changes (e.g., when switching users)
   useEffect(() => {
     if (initialData) {
-      setFormData(initialData);
-    } else {
+      // If loading existing data, we need to flatten the 'grades' object 
+      // back into the form fields so the user can edit them easily.
       setFormData({
-        fullName: '', age: '', gender: '', shsStrand: '',
-        mathGrade: '', englishGrade: '', scienceGrade: '', filipinoGrade: ''
+        fullName: initialData.fullName || '',
+        age: initialData.age || '',
+        gender: initialData.gender || '',
+        shsStrand: initialData.shsStrand || '',
+        mathGrade: initialData.grades?.math || '',
+        englishGrade: initialData.grades?.english || '',
+        scienceGrade: initialData.grades?.science || '',
+        filipinoGrade: initialData.grades?.filipino || ''
       });
     }
   }, [initialData]);
@@ -26,7 +30,22 @@ function ProfileForm({ onBack, onSave, initialData }) {
 
   const handleSave = (e) => {
     e.preventDefault();
-    onSave(formData); 
+    
+    // --- KEY UPDATE: RESTRUCTURE DATA FOR THE LOGIC ENGINE ---
+    const restructuredData = {
+      fullName: formData.fullName,
+      age: formData.age,
+      gender: formData.gender,
+      shsStrand: formData.shsStrand,
+      grades: {
+        math: formData.mathGrade,
+        english: formData.englishGrade,
+        science: formData.scienceGrade,
+        filipino: formData.filipinoGrade
+      }
+    };
+
+    onSave(restructuredData); 
     alert("Academic Profile Updated Successfully!");
   };
 
@@ -53,7 +72,7 @@ function ProfileForm({ onBack, onSave, initialData }) {
           <header style={{borderBottom: '1px solid #eee', marginBottom: '25px', paddingBottom: '10px'}}>
             <h2>Academic Profile Management</h2>
             <p style={{color: '#666', fontSize: '14px'}}>
-              Your data is saved specifically to your account.
+              Your data is saved specifically to your account and used for expert validation.
             </p>
           </header>
 
@@ -90,10 +109,10 @@ function ProfileForm({ onBack, onSave, initialData }) {
             </div>
 
             <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '15px', marginBottom: '30px'}}>
-              <div><label>Math</label><input name="mathGrade" type="number" min="0" max="100" value={formData.mathGrade} required onChange={handleChange} style={inputStyle} /></div>
-              <div><label>English</label><input name="englishGrade" type="number" min="0" max="100" value={formData.englishGrade} required onChange={handleChange} style={inputStyle} /></div>
-              <div><label>Science</label><input name="scienceGrade" type="number" min="0" max="100" value={formData.scienceGrade} required onChange={handleChange} style={inputStyle} /></div>
-              <div><label>Filipino</label><input name="filipinoGrade" type="number" min="0" max="100" value={formData.filipinoGrade} required onChange={handleChange} style={inputStyle} /></div>
+              <div><label>Math</label><input name="mathGrade" placeholder="60-100"type="number" min="0" max="100" value={formData.mathGrade} required onChange={handleChange} style={inputStyle} /></div>
+              <div><label>English</label><input name="englishGrade" placeholder="60-100" type="number" min="0" max="100" value={formData.englishGrade} required onChange={handleChange} style={inputStyle} /></div>
+              <div><label>Science</label><input name="scienceGrade" placeholder="60-100" type="number" min="0" max="100" value={formData.scienceGrade} required onChange={handleChange} style={inputStyle} /></div>
+              <div><label>Filipino</label><input name="filipinoGrade" placeholder="60-100" type="number" min="0" max="100" value={formData.filipinoGrade} required onChange={handleChange} style={inputStyle} /></div>
             </div>
 
             <button type="submit" className="btn-solid" style={{width: '100%', padding: '15px'}}>
