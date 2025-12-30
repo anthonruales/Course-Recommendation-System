@@ -4,7 +4,6 @@ import './App.css';
 function Dashboard({ userName, onLogout, onStart, onViewProfile, history }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  // Limits the view to 5 items unless "View All" is clicked
   const displayHistory = isExpanded ? history : history?.slice(0, 5);
 
   return (
@@ -33,7 +32,6 @@ function Dashboard({ userName, onLogout, onStart, onViewProfile, history }) {
           <p style={{color: 'var(--text-muted)'}}>Welcome back, {userName}. Track your progress and findings here.</p>
         </header>
 
-        {/* Action Card */}
         <div className="portal-card">
           <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
             <div>
@@ -47,7 +45,6 @@ function Dashboard({ userName, onLogout, onStart, onViewProfile, history }) {
         </div>
 
         <div style={{marginTop: '40px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', alignItems: 'start'}}>
-            {/* Left Column: Activity Feed */}
             <div className="portal-card">
                <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px'}}>
                  <h4 style={{margin: 0}}>Recent Activity</h4>
@@ -72,8 +69,9 @@ function Dashboard({ userName, onLogout, onStart, onViewProfile, history }) {
                            fontSize: '14px',
                            maxWidth: '70%'
                          }}>
-                           {/* item.courses contains the course name OR the Profile update message */}
-                           {Array.isArray(item.courses) ? item.courses.join(", ") : item.courses}
+                           {item.type === 'assessment' && Array.isArray(item.courses) && item.courses.length > 0
+                             ? (typeof item.courses[0] === 'object' ? item.courses[0].course : item.courses[0])
+                             : item.courses}
                          </div>
                          
                          <span style={{
@@ -97,7 +95,6 @@ function Dashboard({ userName, onLogout, onStart, onViewProfile, history }) {
                )}
             </div>
             
-            {/* Right Column: System Stats */}
             <div className="portal-card">
                <h4 style={{margin: '0 0 10px 0'}}>Account Summary</h4>
                <p style={{fontSize: '14px', color: 'var(--text-muted)'}}>Your account is synchronized and up to date.</p>
