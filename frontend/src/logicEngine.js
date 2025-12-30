@@ -1,77 +1,127 @@
-const strandRequirements = {
-  "STEM": ["Computer Science", "Civil Engineering", "Biology", "Data Science"],
-  "ABM": ["Accountancy", "Business Administration", "Marketing"],
-  "HUMSS": ["Psychology", "Communication Arts", "Political Science"],
-  "GAS": ["General Studies", "Entrepreneurship", "Education"],
-  "TVL": ["Information Technology", "Hospitality Management"]
-};
-
-const gradeThresholds = {
-  "BS Computer Science": { keyword: "math", min: 85 },
-  "BS Civil Engineering": { keyword: "math", min: 88 },
-  "BS Accountancy": { keyword: "math", min: 85 },
-  "BS Data Science": { keyword: "math", min: 85 },
-  "BS Psychology": { keyword: "science", min: 83 },
-  "BS Biology": { keyword: "science", min: 85 }
-};
+const courseDNA = [
+  { 
+    name: "BS Computer Science", 
+    traits: { analytical: 0.9, technical: 0.9, creative: 0.3 },
+    preferredStrand: "STEM",
+    reqSubject: "math",
+    minGrade: 85 
+  },
+  { 
+    name: "BS Accountancy", 
+    traits: { analytical: 0.8, organized: 0.9, technical: 0.2 },
+    preferredStrand: "ABM",
+    reqSubject: "math",
+    minGrade: 85 
+  },
+  { 
+    name: "BS Civil Engineering", 
+    traits: { analytical: 0.9, technical: 0.8, organized: 0.5 },
+    preferredStrand: "STEM",
+    reqSubject: "math",
+    minGrade: 88 
+  },
+  { 
+    name: "BS Psychology", 
+    traits: { social: 0.9, analytical: 0.6, persuasive: 0.4 },
+    preferredStrand: "HUMSS",
+    reqSubject: "science",
+    minGrade: 83 
+  },
+  { 
+    name: "BS Marketing", 
+    traits: { persuasive: 0.9, creative: 0.7, social: 0.6 },
+    preferredStrand: "ABM",
+    reqSubject: "math",
+    minGrade: 80 
+  }
+];
 
 export const calculateRecommendation = (profile, answers) => {
-  const currentStrand = profile?.shsStrand || 'GAS';
-  const candidatePool = strandRequirements[currentStrand] || strandRequirements["GAS"];
-  
-  let rankedPool = [...candidatePool];
+  let studentTraits = {
+    analytical: 0,
+    technical: 0,
+    creative: 0,
+    social: 0,
+    persuasive: 0,
+    organized: 0
+  };
 
-  if (answers?.q1 === 'yes') {
-    if (answers?.q2 === 'yes') {
-      rankedPool.sort((a, b) => (a.includes('Science') ? -1 : 1));
-    } else {
-      rankedPool.sort((a, b) => (a.includes('Engineering') ? -1 : 1));
-    }
-  } else if (answers?.q3 === 'yes') {
-    rankedPool.sort((a, b) => (a.includes('Accountancy') || a.includes('Business') ? -1 : 1));
+  if (answers.q1 === 'yes') { 
+    studentTraits.analytical += 15;
+    studentTraits.organized += 5; 
+  }
+  if (answers.q2 === 'yes') { 
+    studentTraits.technical += 15;
+    studentTraits.analytical += 5;
+  }
+  if (answers.q3 === 'yes') { 
+    studentTraits.persuasive += 12;
+    studentTraits.social += 8;
+    studentTraits.organized += 4;
   }
 
-  const topRecommendations = rankedPool.slice(0, 5).map((courseName) => {
-    const fullName = courseName.startsWith('BA') || courseName.includes('General') 
-      ? courseName 
-      : `BS ${courseName}`;
+  const studentStrand = profile?.shsStrand || "";
 
-    const isAligned = (strandRequirements[currentStrand] || []).includes(courseName);
-
-    let status = "Qualified";
-    let analysis = isAligned 
-      ? `Highly aligned with your ${currentStrand} background.` 
-      : `A strong alternative path based on your interests.`;
+  const results = courseDNA.map(course => {
+    let matchScore = 0;
     
-    const requirement = gradeThresholds[fullName];
-    const gradeSource = profile?.grades || profile?.profileData?.grades;
+    for (let trait in course.traits) {
+      matchScore += (studentTraits[trait] || 0) * course.traits[trait];
+    }
 
-    if (requirement && gradeSource) {
-      const targetKey = Object.keys(gradeSource).find(k => 
-        k.toLowerCase().includes(requirement.keyword.toLowerCase())
-      );
-      const studentGrade = parseInt(gradeSource[targetKey] || 0);
-
-      if (studentGrade === 0) {
-        status = "Profile Incomplete";
-        analysis = `Missing ${requirement.keyword} grade for validation.`;
-      } else if (studentGrade < requirement.min) {
-        status = "Bridging Required";
-        analysis = `Your ${requirement.keyword} grade (${studentGrade}) is below the target ${requirement.min}%.`;
-      }
+    if (studentStrand === course.preferredStrand) {
+      matchScore *= 1.1; 
     }
 
     return {
-      course: fullName,
-      status: status,
-      isAligned: isAligned,
-      analysis: analysis
+      course: course.name,
+      rawScore: matchScore,
+      config: course 
     };
   });
 
+  const topTrait = getTopTrait(studentTraits);
+
+  const topMatches = results
+    .sort((a, b) => b.rawScore - a.rawScore)
+    .slice(0, 5)
+    .map(match => {
+      let status = "Qualified";
+      let analysis = `Reflects your strong ${topTrait} affinity. `;
+
+      const studentGrades = profile?.grades || {};
+      const requiredSubject = match.config.reqSubject;
+      const passingGrade = match.config.minGrade;
+
+      const gradeKey = Object.keys(studentGrades).find(key => 
+        key.toLowerCase().includes(requiredSubject.toLowerCase())
+      );
+      
+      const studentGradeValue = parseInt(studentGrades[gradeKey] || 0);
+
+      if (studentGradeValue > 0 && studentGradeValue < passingGrade) {
+        status = "Bridging Required";
+        analysis = `Your ${requiredSubject} grade (${studentGradeValue}) is below the university threshold of ${passingGrade}.`;
+      } else if (studentGradeValue === 0) {
+        status = "Incomplete Profile";
+        analysis = `Academic history for ${requiredSubject} is missing. Results may vary.`;
+      }
+
+      return {
+        course: match.course,
+        status: status,
+        analysis: analysis,
+        score: Math.round(match.rawScore)
+      };
+    });
+
   return {
-    courses: topRecommendations,
-    primaryStrand: currentStrand,
-    overallAnalysis: `We've identified ${topRecommendations.length} potential pathways within the ${currentStrand} strand.`
+    courses: topMatches,
+    traitProfile: studentTraits 
   };
 };
+
+function getTopTrait(traits) {
+  const top = Object.keys(traits).reduce((a, b) => traits[a] > traits[b] ? a : b);
+  return top.charAt(0).toUpperCase() + top.slice(1);
+}
