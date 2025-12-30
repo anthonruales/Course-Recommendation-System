@@ -1,4 +1,3 @@
-// --- EXPERT KNOWLEDGE BASE ---
 const strandRequirements = {
   "STEM": ["Computer Science", "Civil Engineering", "Biology", "Data Science"],
   "ABM": ["Accountancy", "Business Administration", "Marketing"],
@@ -17,88 +16,62 @@ const gradeThresholds = {
 };
 
 export const calculateRecommendation = (profile, answers) => {
-  // DEBUGGER: This helps you see exactly what data is arriving in the engine
-  console.log("DEBUG: Received Profile:", profile);
-  console.log("DEBUG: Received Answers:", answers);
-
-  let recommendations = [];
-  let candidatePool = [];
-
   const currentStrand = profile?.shsStrand || 'GAS';
-  candidatePool = strandRequirements[currentStrand] || strandRequirements["GAS"];
+  const candidatePool = strandRequirements[currentStrand] || strandRequirements["GAS"];
+  
+  let rankedPool = [...candidatePool];
 
-  // 1. DECISION TREE (INTEREST QUESTIONNAIRE)
-  if (answers?.q1 === 'yes') { 
+  if (answers?.q1 === 'yes') {
     if (answers?.q2 === 'yes') {
-      if (candidatePool.includes('Computer Science')) recommendations.push('BS Computer Science');
-      if (candidatePool.includes('Data Science')) recommendations.push('BS Data Science');
+      rankedPool.sort((a, b) => (a.includes('Science') ? -1 : 1));
     } else {
-      if (candidatePool.includes('Civil Engineering')) recommendations.push('BS Civil Engineering');
+      rankedPool.sort((a, b) => (a.includes('Engineering') ? -1 : 1));
     }
-  } else {
-    if (answers?.q3 === 'yes') {
-      if (candidatePool.includes('Accountancy')) recommendations.push('BS Accountancy');
-      if (candidatePool.includes('Business Administration')) recommendations.push('BS Business Administration');
-    } else {
-      if (candidatePool.includes('Psychology')) recommendations.push('BS Psychology');
-      if (candidatePool.includes('Communication Arts')) recommendations.push('BA Communication Arts');
-    }
+  } else if (answers?.q3 === 'yes') {
+    rankedPool.sort((a, b) => (a.includes('Accountancy') || a.includes('Business') ? -1 : 1));
   }
 
-  if (recommendations.length === 0) {
-    recommendations.push(candidatePool[0] === 'General Studies' ? 'General Studies' : `BS ${candidatePool[0]}`); 
-  }
+  const topRecommendations = rankedPool.slice(0, 5).map((courseName) => {
+    const fullName = courseName.startsWith('BA') || courseName.includes('General') 
+      ? courseName 
+      : `BS ${courseName}`;
 
-  const primaryCourse = recommendations[0];
+    const isAligned = (strandRequirements[currentStrand] || []).includes(courseName);
 
-  // 2. EXPERT VALIDATION
-  const isAligned = (strandRequirements[currentStrand] || []).some(course => 
-    primaryCourse.includes(course)
-  );
-
-  let status = "Qualified";
-  let analysis = "";
-  const requirement = gradeThresholds[primaryCourse];
-
-  if (requirement) {
-    let studentGrade = 0;
-    let foundSubjectName = "";
-
-    // Aggressive Search Logic
-    // We check both profile.grades AND profile.profileData.grades in case of nesting
+    let status = "Qualified";
+    let analysis = isAligned 
+      ? `Highly aligned with your ${currentStrand} background.` 
+      : `A strong alternative path based on your interests.`;
+    
+    const requirement = gradeThresholds[fullName];
     const gradeSource = profile?.grades || profile?.profileData?.grades;
 
-    if (gradeSource) {
-      const keys = Object.keys(gradeSource);
-      const targetKey = keys.find(k => 
+    if (requirement && gradeSource) {
+      const targetKey = Object.keys(gradeSource).find(k => 
         k.toLowerCase().includes(requirement.keyword.toLowerCase())
       );
-      
-      if (targetKey) {
-        studentGrade = parseInt(gradeSource[targetKey]);
-        foundSubjectName = targetKey;
+      const studentGrade = parseInt(gradeSource[targetKey] || 0);
+
+      if (studentGrade === 0) {
+        status = "Profile Incomplete";
+        analysis = `Missing ${requirement.keyword} grade for validation.`;
+      } else if (studentGrade < requirement.min) {
+        status = "Bridging Required";
+        analysis = `Your ${requirement.keyword} grade (${studentGrade}) is below the target ${requirement.min}%.`;
       }
     }
-    
-    if (!gradeSource || studentGrade === 0) {
-      status = "Profile Incomplete";
-      analysis = `We couldn't find a grade for "${requirement.keyword}". Current data: ${JSON.stringify(gradeSource || 'Missing')}`;
-    } else if (studentGrade < requirement.min) {
-      status = "Bridging Required";
-      analysis = `Your interest matches ${primaryCourse}, but your ${foundSubjectName} grade (${studentGrade}) is below the recommended ${requirement.min}%. You may need bridging classes.`;
-    }
-  }
 
-  if (status === "Qualified") {
-    analysis = isAligned 
-      ? `This course is highly recommended! It perfectly aligns with your ${currentStrand} strand and your academic performance.` 
-      : `Based on your interests, ${primaryCourse} is a strong match, though it differs from your ${currentStrand} track.`;
-  }
+    return {
+      course: fullName,
+      status: status,
+      isAligned: isAligned,
+      analysis: analysis
+    };
+  });
 
   return {
-    courses: [primaryCourse],
-    isAligned: isAligned,
-    status: status,
-    analysis: analysis
+    courses: topRecommendations,
+    primaryStrand: currentStrand,
+    overallAnalysis: `We've identified ${topRecommendations.length} potential pathways within the ${currentStrand} strand.`
   };
 };

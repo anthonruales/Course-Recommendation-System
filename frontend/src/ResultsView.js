@@ -1,10 +1,7 @@
 import React from 'react';
 
 function ResultsView({ recommendation, profileData, onRetake, onBack }) {
-  // recommendation is now { courses: [], isAligned: bool, status: string, analysis: string }
-  if (!recommendation || !profileData) return null;
-
-  const isQualified = recommendation.status === 'Qualified';
+  if (!recommendation || !recommendation.courses || !profileData) return null;
 
   return (
     <div className="portal-layout">
@@ -13,65 +10,85 @@ function ResultsView({ recommendation, profileData, onRetake, onBack }) {
           ← Back to Dashboard
         </button>
 
-        <div className="portal-card" style={{maxWidth: '800px', margin: '0 auto', textAlign: 'center', padding: '40px'}}>
-          <div style={{fontSize: '50px', marginBottom: '10px'}}>🎓</div>
-          <h1 style={{margin: '0 0 10px 0'}}>Career Recommendation Results</h1>
-          <p style={{color: '#64748b'}}>Based on your Academic Profile and Interest Assessment</p>
-          
-          <hr style={{margin: '30px 0', border: '0', borderTop: '1px solid #e2e8f0'}} />
+        <div className="portal-card" style={{maxWidth: '850px', margin: '0 auto', padding: '40px'}}>
+          <header style={{textAlign: 'center', marginBottom: '40px'}}>
+            <div style={{fontSize: '50px', marginBottom: '10px'}}>🎯</div>
+            <h1 style={{margin: '0 0 10px 0'}}>Your Top 5 Career Matches</h1>
+            <p style={{color: '#64748b'}}>{recommendation.overallAnalysis}</p>
+          </header>
 
-          {/* TOP MATCH SECTION */}
-          <div style={{background: '#f8fafc', padding: '30px', borderRadius: '12px', border: '1px dashed #cbd5e1', marginBottom: '30px'}}>
-            <h3 style={{textTransform: 'uppercase', fontSize: '12px', letterSpacing: '1px', color: '#64748b', margin: '0 0 10px 0'}}>Top Match for you:</h3>
-            <h2 style={{fontSize: '32px', color: '#1e293b', margin: 0}}>
-              {recommendation.courses.join(", ")}
-            </h2>
+          <div style={{display: 'flex', flexDirection: 'column', gap: '20px'}}>
+            {recommendation.courses.map((item, index) => {
+              const isQualified = item.status === 'Qualified';
+              const isTopMatch = index === 0;
+
+              return (
+                <div 
+                  key={index} 
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '60px 1fr auto',
+                    alignItems: 'center',
+                    gap: '20px',
+                    padding: '20px',
+                    background: isTopMatch ? '#f0f9ff' : '#fff',
+                    border: `1px solid ${isTopMatch ? '#bae6fd' : '#e2e8f0'}`,
+                    borderRadius: '12px',
+                    boxShadow: isTopMatch ? '0 4px 6px -1px rgb(0 0 0 / 0.1)' : 'none',
+                    position: 'relative'
+                  }}
+                >
+                  <div style={{
+                    fontSize: '24px', 
+                    fontWeight: 800, 
+                    color: isTopMatch ? '#0ea5e9' : '#cbd5e1',
+                    textAlign: 'center'
+                  }}>
+                    #{index + 1}
+                  </div>
+
+                  <div>
+                    <h3 style={{margin: '0 0 5px 0', color: '#1e293b', fontSize: '18px'}}>
+                      {item.course}
+                      {item.isAligned && (
+                        <span title="Strand Aligned" style={{marginLeft: '8px', cursor: 'help'}}>✅</span>
+                      )}
+                    </h3>
+                    <p style={{margin: 0, fontSize: '14px', color: '#64748b'}}>
+                      {item.analysis}
+                    </p>
+                  </div>
+
+                  <div style={{textAlign: 'right'}}>
+                    <span style={{
+                      display: 'inline-block',
+                      padding: '6px 14px',
+                      borderRadius: '20px',
+                      fontSize: '11px',
+                      fontWeight: 700,
+                      textTransform: 'uppercase',
+                      backgroundColor: isQualified ? '#22c55e' : item.status === 'Profile Incomplete' ? '#64748b' : '#f59e0b',
+                      color: '#fff'
+                    }}>
+                      {item.status}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
-          {/* EXPERT ANALYSIS SECTION (The Step 3 Feature) */}
           <div style={{
-            textAlign: 'left', 
-            padding: '25px', 
-            borderRadius: '12px', 
-            marginBottom: '30px',
-            backgroundColor: isQualified ? '#f0fdf4' : '#fff7ed',
-            border: `1px solid ${isQualified ? '#bbf7d0' : '#ffedd5'}`
+            marginTop: '40px', 
+            padding: '20px', 
+            background: '#f8fafc', 
+            borderRadius: '8px', 
+            border: '1px solid #e2e8f0',
+            textAlign: 'center'
           }}>
-            <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px'}}>
-              <h4 style={{margin: 0, color: isQualified ? '#166534' : '#9a3412', fontSize: '18px'}}>Expert Path Validation</h4>
-              <span style={{
-                padding: '4px 12px',
-                borderRadius: '20px',
-                fontSize: '11px',
-                fontWeight: 800,
-                textTransform: 'uppercase',
-                backgroundColor: isQualified ? '#22c55e' : '#f59e0b',
-                color: '#fff'
-              }}>
-                {recommendation.status}
-              </span>
-            </div>
-            <p style={{margin: 0, color: '#4b5563', fontSize: '15px', lineHeight: '1.6'}}>
-              {recommendation.analysis}
+            <p style={{fontSize: '14px', color: '#64748b', margin: 0}}>
+              <strong>Expert Note:</strong> Recommendations are ranked based on your interest assessment and validated against your {recommendation.primaryStrand} academic records.
             </p>
-          </div>
-
-          {/* TWO-COLUMN DETAILS */}
-          <div style={{textAlign: 'left', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px'}}>
-            <div style={{padding: '20px', background: '#fff', border: '1px solid #e2e8f0', borderRadius: '8px'}}>
-              <h4 style={{margin: '0 0 10px 0', color: '#3b82f6'}}>Strand Alignment</h4>
-              <p style={{fontSize: '14px', margin: 0, color: '#64748b'}}>
-                {recommendation.isAligned 
-                  ? `Directly aligned with your ${profileData.shsStrand} background.` 
-                  : `Typically associated with a different SHS track, but matches your skills.`}
-              </p>
-            </div>
-            <div style={{padding: '20px', background: '#fff', border: '1px solid #e2e8f0', borderRadius: '8px'}}>
-              <h4 style={{margin: '0 0 10px 0', color: '#10b981'}}>Interest Match</h4>
-              <p style={{fontSize: '14px', margin: 0, color: '#64748b'}}>
-                Your responses indicate a strong preference for the logical and situational demands of this field.
-              </p>
-            </div>
           </div>
 
           <div style={{marginTop: '40px', display: 'flex', gap: '15px', justifyContent: 'center'}}>
@@ -79,7 +96,7 @@ function ResultsView({ recommendation, profileData, onRetake, onBack }) {
               Retake Assessment
             </button>
             <button onClick={() => window.print()} className="btn-outline" style={{padding: '12px 25px'}}>
-              Download PDF Report
+              Download Results (PDF)
             </button>
           </div>
         </div>
