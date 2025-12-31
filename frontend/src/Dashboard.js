@@ -6,22 +6,55 @@ function Dashboard({ userName, onLogout, onStart, onViewProfile, history }) {
 
   const displayHistory = isExpanded ? history : history?.slice(0, 5);
 
+  const categoryLabelStyle = {
+    fontSize: '11px',
+    fontWeight: 700,
+    color: '#94a3b8',
+    textTransform: 'uppercase',
+    letterSpacing: '0.05em',
+    marginBottom: '12px',
+    paddingLeft: '12px'
+  };
+
   return (
     <div className="portal-layout">
       <aside className="portal-sidebar">
         <h2 style={{color: 'var(--brand-primary)', fontWeight: 800, marginBottom: '40px'}}>CoursePro</h2>
-        <nav style={{display: 'flex', flexDirection: 'column', gap: '10px'}}>
-          <div className="nav-item active" style={{padding: '12px', borderRadius: '8px', background: '#eff6ff', color: 'var(--brand-primary)', fontWeight: 600, cursor: 'pointer'}}>
-            Dashboard
+        
+        <nav style={{display: 'flex', flexDirection: 'column', gap: '30px'}}>
+          <div>
+            <p style={categoryLabelStyle}>Main Menu</p>
+            <div className="nav-item active" style={{padding: '12px', borderRadius: '8px', background: '#eff6ff', color: 'var(--brand-primary)', fontWeight: 600, cursor: 'pointer'}}>
+              Dashboard
+            </div>
           </div>
-          <div className="nav-item" onClick={onViewProfile} style={{padding: '12px', color: 'var(--text-muted)', cursor: 'pointer'}}>
-            Academic Profile
+
+          <div>
+            <p style={categoryLabelStyle}>Academics</p>
+            <div style={{display: 'flex', flexDirection: 'column', gap: '4px'}}>
+              <div className="nav-item" onClick={onViewProfile} style={{padding: '12px', color: 'var(--text-muted)', cursor: 'pointer', borderRadius: '8px'}}>
+                Academic Profile
+              </div>
+              <div className="nav-item" style={{padding: '12px', color: 'var(--text-muted)', cursor: 'default', borderRadius: '8px'}}>
+                My Activity ({history ? history.length : 0})
+              </div>
+            </div>
           </div>
-          <div className="nav-item" style={{padding: '12px', color: 'var(--text-muted)', cursor: 'default'}}>
-            My Activity ({history ? history.length : 0})
+
+          <div>
+            <p style={categoryLabelStyle}>Support</p>
+            <div style={{display: 'flex', flexDirection: 'column', gap: '4px'}}>
+              <div className="nav-item" style={{padding: '12px', color: 'var(--text-muted)', cursor: 'pointer', borderRadius: '8px'}}>
+                Help Center
+              </div>
+              <div className="nav-item" style={{padding: '12px', color: 'var(--text-muted)', cursor: 'pointer', borderRadius: '8px'}}>
+                Feedback
+              </div>
+            </div>
           </div>
         </nav>
-        <button onClick={onLogout} style={{marginTop: 'auto', background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', textAlign: 'left', padding: '12px'}}>
+
+        <button onClick={onLogout} style={{marginTop: 'auto', background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', textAlign: 'left', padding: '12px', fontWeight: 600}}>
           Logout
         </button>
       </aside>
