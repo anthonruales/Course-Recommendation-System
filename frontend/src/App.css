@@ -88,36 +88,10 @@ body {
 .btn-solid:hover { background-color: #1e3a8a; }
 .btn-solid:active { transform: scale(0.98); }
 
-/* --- DASHBOARD PORTAL --- */
-.portal-layout {
-  display: flex;
-  min-height: 100vh;
-}
-
-.portal-sidebar {
-  width: 280px;
-  background: white;
-  border-right: 1px solid var(--border-color);
-  padding: 30px 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.portal-main {
-  flex: 1;
-  padding: 40px 60px;
-}
-
-.portal-card {
-  background: white;
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
-  padding: 30px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-}
 
 
-/* Add/Replace these specific parts in your App.css */
+
+
 
 .form-group {
   margin-bottom: 24px;
@@ -150,7 +124,7 @@ body {
 }
 
 .academic-input:focus {
-  border-color: #1e40af;
+  border-color: #000000;
   box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.1);
   outline: none;
 }
@@ -196,8 +170,10 @@ body {
   margin-bottom: 20px;
 }
 
+
+/* --- CONTINUE WITH GOOGLE --- */
 .btn-google-auth:hover {
-  background-color: #f8f9fa;
+  background-color: #858d8d;
   box-shadow: 0 1px 2px 0 rgba(60,64,67,.30), 0 1px 3px 1px rgba(60,64,67,.15);
 }
 
@@ -227,3 +203,7 @@ body {
 
 .auth-divider:not(:empty)::before { margin-right: 16px; }
 .auth-divider:not(:empty)::after { margin-left: 16px; }
+
+
+
+
