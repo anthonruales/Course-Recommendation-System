@@ -1,42 +1,30 @@
 import os
-from fastapi import FastAPI
-from pydantic import BaseModel
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 from dotenv import load_dotenv
-from security import hash_password, verify_password
 from passlib.context import CryptContext
-
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
-def hash_password(password: str):
-    return pwd_context.hash(password)
-
-def verify_password(plain_password, hashed_password):
-    return pwd_context.verify(plain_password, hashed_password)
-
-import models, database
+import models
+import database
 from security import hash_password, verify_password
 
 load_dotenv()
 
-# Variables for future Google Auth use
+# --- CONFIGURATION ---
 GOOGLE_CLIENT_ID = os.getenv("GOOGLE_CLIENT_ID")
-GOOGLE_CLIENT_SECRET = os.getenv("GOOGLE_CLIENT_SECRET")
-
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # Or ["*"] to allow everything
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# Initialize database tables
 models.Base.metadata.create_all(bind=database.engine)
 
 def get_db():
@@ -67,14 +55,19 @@ class AssessmentSubmit(BaseModel):
 
 @app.post("/signup")
 def signup(user: UserCreate, db: Session = Depends(get_db)):
+    # Check if email exists
     db_user = db.query(models.User).filter(models.User.email == user.email).first()
     if db_user:
         raise HTTPException(status_code=400, detail="Email already exists")
     
-    # Use security.py to hash
     hashed_pwd = hash_password(user.password)
     
-    new_user = models.User(fullname=user.fullname, email=user.email, password=hashed_pwd)
+    # CORRECTED: Uses 'password_hash' to match your pgAdmin screenshot
+    new_user = models.User(
+        fullname=user.fullname, 
+        email=user.email, 
+        password_hash=hashed_pwd 
+    )
     db.add(new_user)
     db.commit()
     return {"message": "Success"}
@@ -83,35 +76,76 @@ def signup(user: UserCreate, db: Session = Depends(get_db)):
 def login(user: UserLogin, db: Session = Depends(get_db)):
     db_user = db.query(models.User).filter(models.User.email == user.email).first()
     
-    # Verify hashed password
-    if not db_user or not verify_password(user.password, db_user.password):
+    # CORRECTED: Uses 'password_hash' and checks for user existence
+    if not db_user or not verify_password(user.password, db_user.password_hash):
         raise HTTPException(status_code=400, detail="Invalid email or password")
         
-    return {"user": db_user.fullname}
+    # CORRECTED: Returns 'user_id' to match your pgAdmin PK
+    return {"user": db_user.fullname, "user_id": db_user.user_id}
 
 @app.post("/recommend")
 def recommend(data: AssessmentSubmit, db: Session = Depends(get_db)):
-    ans = {item.questionId: item.response for item in data.answers}
+    # Create a dictionary: {1: "yes", 2: "no", 3: "no"}
+    ans = {item.questionId: item.response.lower() for item in data.answers}
     
-    if ans.get(4) == "yes":
-        if ans.get(1) == "yes": 
-            winner, course = "ICT", "BS Information Technology"
-            reason = "High logical aptitude and technical interest."
-        else:
-            winner, course = "Arts", "BS Multimedia Arts"
-            reason = "Creative interest with technical tools."
-    else: 
-        if ans.get(1) == "yes": 
-            winner, course = "STEM", "BS Civil Engineering"
-            reason = "Strong foundation in mathematics and analysis."
-        else:
-            winner, course = "Business", "BS Accountancy"
-            reason = "Interest in organizational and financial logic."
+    # Check the specific IDs from your AssessmentForm.js
+    if ans.get(1) == "yes":
+        course = "BS Information Technology"
+        reason = "You have a natural talent for troubleshooting and fixing hardware."
+    elif ans.get(2) == "yes":
+        course = "BS Computer Science"
+        reason = "Your analytical mind is perfect for data and logic."
+    elif ans.get(3) == "yes":
+        course = "BS Business Administration"
+        reason = "You show strong leadership and communication skills."
+    else:
+        course = "Bachelor of Arts"
+        reason = "A flexible degree suits your varied interests."
 
-    new_rec = models.Recommendation(user_email="student", category=winner, course=course, reasoning=reason)
-    db.add(new_rec)
-    db.commit()
-    return {"category": winner, "recommendation": course, "explanation": reason}
+    return {
+        "category": "General", 
+        "recommendation": course, 
+        "explanation": reason
+    }
+
+@app.get("/get-recommendations/{user_id}")
+def recommend_courses(user_id: int, db: Session = Depends(get_db)):
+    # 1. Fetch user data
+    user = db.query(models.User).filter(models.User.user_id == user_id).first()
+    
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    if not user.academic_info:
+        raise HTTPException(status_code=400, detail="Please complete your academic profile first.")
+
+    user_strand = user.academic_info.get("strand", "N/A")
+    user_gwa = user.academic_info.get("gwa", 0)
+
+    # 2. Fetch courses and handle potential data errors
+    try:
+        all_courses = db.query(models.Course).all()
+    except Exception as e:
+        # This will tell you if the 'courses' table name or columns are wrong
+        raise HTTPException(status_code=500, detail=f"Database error in Courses table: {str(e)}")
+    
+    filtered_list = []
+    for course in all_courses:
+        try:
+            # We use float() carefully here
+            course_min_gwa = float(course.minimum_gwa) if course.minimum_gwa else 0
+            
+            if float(user_gwa) >= course_min_gwa:
+                is_aligned = (course.recommended_strand == user_strand)
+                filtered_list.append({
+                    "course_name": course.course_name,
+                    "alignment_score": "High" if is_aligned else "Flexible",
+                    "description": course.description
+                })
+        except Exception:
+            continue # Skip any course that has broken data instead of crashing
+
+    return filtered_list
 
 @app.get("/history")
 def get_history(db: Session = Depends(get_db)):
@@ -120,14 +154,3 @@ def get_history(db: Session = Depends(get_db)):
 @app.get("/")
 def home(): 
     return {"status": "online", "google_ready": bool(GOOGLE_CLIENT_ID)}
-
-@app.get("/dashboard/{user_id}")
-def get_dashboard_info(user_id: int):
-    # For now, we are just 'pretending' to get data from a database
-    # Later, we will connect this to your PostgreSQL database
-    return {
-        "message": "Welcome to your Dashboard!",
-        "user_id": user_id,
-        "status": "Ready to start assessment",
-        "progress": 0
-    }

@@ -1,126 +1,122 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import axios from 'axios'; // Import axios for backend communication
 import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard';
 import ProfileForm from './ProfileForm';
 import AssessmentForm from './AssessmentForm';
 import ResultsView from './ResultsView';
-import { calculateRecommendation } from './logicEngine';
 import './App.css';
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
-  const [user, setUser] = useState(localStorage.getItem('userName') || null);
+  const [user, setUser] = useState(localStorage.getItem('userEmail') || null); // Changed to email for DB matching
   const [view, setView] = useState('dashboard');
   const [result, setResult] = useState(null);
   const [profileData, setProfileData] = useState(null);
   const [history, setHistory] = useState([]);
 
   const GOOGLE_CLIENT_ID = "324535586446-nbcj7tcp4373lrk5ct76u3v0od9n4vm3.apps.googleusercontent.com";
+  const API_BASE_URL = "http://localhost:8000";
 
+  // --- 1. Fetch Data from PostgreSQL via FastAPI on Load ---
   useEffect(() => {
-    if (user) {
-      const savedProfile = localStorage.getItem(`userProfile_${user}`);
-      setProfileData(savedProfile ? JSON.parse(savedProfile) : null);
-
-      const savedHistory = localStorage.getItem(`assessmentHistory_${user}`);
-      setHistory(savedHistory ? JSON.parse(savedHistory) : []);
-    } else {
-      setProfileData(null);
-      setHistory([]);
-    }
-    setResult(null); 
+    const fetchData = async () => {
+      if (user) {
+        try {
+          // In a real app, you'd fetch the specific user's profile and history from DB
+          const historyRes = await axios.get(`${API_BASE_URL}/history`);
+          setHistory(historyRes.data);
+          
+          // Assuming profile data is stored/fetched here
+          const savedProfile = localStorage.getItem(`userProfile_${user}`);
+          setProfileData(savedProfile ? JSON.parse(savedProfile) : null);
+        } catch (err) {
+          console.error("Error fetching data from database", err);
+        }
+      } else {
+        setProfileData(null);
+        setHistory([]);
+      }
+      setResult(null);
+    };
+    fetchData();
   }, [user]);
 
-  const handleLoginSuccess = (name) => {
-    localStorage.setItem('userName', name);
-    setUser(name);
+  const handleLoginSuccess = (userData) => {
+    // Expecting userData to be the object returned from your FastAPI /login route
+    localStorage.setItem('userEmail', userData);
+    setUser(userData);
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('userName');
+    localStorage.removeItem('userEmail');
     setUser(null);
     setView('dashboard');
   };
 
-  // FIX: Defensive logic to prevent "reading 'math' of undefined"
-  const handleProfileSave = (newData) => {
-    const changes = [];
-
-    if (profileData) {
-      if (profileData.fullName !== newData.fullName) changes.push(`Name: ${newData.fullName}`);
-      if (profileData.age !== newData.age) changes.push(`Age: ${newData.age}`);
-      if (profileData.gender !== newData.gender) changes.push(`Gender: ${newData.gender}`);
-      if (profileData.shsStrand !== newData.shsStrand) changes.push(`Strand: ${newData.shsStrand}`);
+  // --- 2. Save Profile to Backend ---
+  const handleProfileSave = async (newData) => {
+    try {
+      // You would typically call an axios.post(`${API_BASE_URL}/update-profile`, newData) here
+      localStorage.setItem(`userProfile_${user}`, JSON.stringify(newData));
+      setProfileData(newData);
       
-      // Safety check for grades comparison
-      const oldGrades = profileData.grades || {};
-      const newGrades = newData.grades || {};
-
-      if (JSON.stringify(oldGrades) !== JSON.stringify(newGrades)) {
-        const updatedSubjects = [];
-        Object.keys(newGrades).forEach(subject => {
-          // Optional chaining ensures we don't crash if oldGrades is missing this subject
-          if (oldGrades[subject] !== newGrades[subject]) {
-            updatedSubjects.push(subject);
-          }
-        });
-        if (updatedSubjects.length > 0) {
-          changes.push(`Grades (${updatedSubjects.join(", ")})`);
-        }
-      }
-    } else {
-      changes.push("Initial Profile Setup");
+      // Update history log (This could also be a DB call)
+      const profileLog = {
+        type: 'profile_update',
+        courses: ["Profile Updated"], 
+        date: new Date().toLocaleDateString(),
+      };
+      setHistory([profileLog, ...history]);
+      setView('dashboard');
+    } catch (err) {
+      alert("Failed to save profile to database.");
     }
-
-    // Update States
-    localStorage.setItem(`userProfile_${user}`, JSON.stringify(newData));
-    setProfileData(newData);
-
-    const changeMessage = changes.length > 0 
-      ? `Update Profile: ${changes.join(", ")}` 
-      : "Profile Saved (No changes)";
-
-    const profileLog = {
-      type: 'profile_update',
-      courses: [changeMessage], 
-      date: new Date().toLocaleDateString(),
-      timestamp: Date.now()
-    };
-
-    const updatedHistory = [profileLog, ...history];
-    setHistory(updatedHistory);
-    localStorage.setItem(`assessmentHistory_${user}`, JSON.stringify(updatedHistory));
-    
-    setView('dashboard');
   };
 
-  const handleAssessmentSubmit = (answers) => {
+  // --- 3. Run Decision Tree & Rule-Based Logic via Backend ---
+  const handleAssessmentSubmit = async (answers) => {
     if (!profileData) {
       alert("Please complete your Academic Profile first!");
       setView('profile');
       return;
     }
-    
-    const recommendationObj = calculateRecommendation(profileData, answers);
-    
-    const newResult = {
-      type: 'assessment',
-      courses: recommendationObj.courses,
-      isAligned: recommendationObj.isAligned,
-      status: recommendationObj.status,
-      analysis: recommendationObj.analysis,
-      date: new Date().toLocaleDateString(),
-      timestamp: Date.now()
-    };
 
-    const updatedHistory = [newResult, ...history];
-    setHistory(updatedHistory);
-    localStorage.setItem(`assessmentHistory_${user}`, JSON.stringify(updatedHistory));
+    try {
+      // Step A: Run Decision Tree on Backend
+      const formattedAnswers = Object.entries(answers).map(([id, val]) => ({
+        questionId: parseInt(id.replace('q', '')),
+        response: val
+      }));
 
-    setResult(newResult);
-    setView('results');
+      const recResponse = await axios.post(`${API_BASE_URL}/recommend`, {
+        answers: formattedAnswers
+      });
+
+      // Step B: Get specific course matches from PostgreSQL (Rule-Based)
+      // Note: We use a placeholder ID '1' or fetch based on logged-in user
+      const dbMatches = await axios.get(`${API_BASE_URL}/get-recommendations/1`);
+
+      const finalResult = {
+        type: 'assessment',
+        courses: dbMatches.data.map(course => ({
+          course: course.course_name,
+          status: course.alignment_score === "High" ? "Qualified" : "Bridging Required",
+          analysis: recResponse.data.explanation, // Reason from Decision Tree
+          isAligned: course.alignment_score === "High"
+        })),
+        date: new Date().toLocaleDateString(),
+      };
+
+      setHistory([finalResult, ...history]);
+      setResult(finalResult);
+      setView('results');
+    } catch (err) {
+      console.error(err);
+      alert("Error processing assessment. Ensure FastAPI server is running.");
+    }
   };
 
   return (
