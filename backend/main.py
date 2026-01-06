@@ -6,6 +6,7 @@ from pydantic import BaseModel
 from typing import List, Optional
 from dotenv import load_dotenv
 from passlib.context import CryptContext
+from sqlalchemy import text  # Added for database operations
 import models
 import database
 from security import hash_password, verify_password
@@ -24,8 +25,55 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Initialize database tables
+# 1. Initialize database tables (Creates the tables)
 models.Base.metadata.create_all(bind=database.engine)
+
+# 2. SEEDING LOGIC: This function populates the table
+def seed_database():
+    db = database.SessionLocal()
+    try:
+        # Check if we already have courses so we don't duplicate them
+        course_count = db.query(models.Course).count()
+        if course_count == 0:
+            print("Empty courses table detected. Seeding initial data...")
+            initial_courses = [
+                models.Course(
+                    course_name="BS Information Technology",
+                    description="Study of software development, networking, and systems.",
+                    minimum_gwa=85.0,
+                    recommended_strand="ICT"
+                ),
+                models.Course(
+                    course_name="BS Computer Science",
+                    description="Focus on algorithms, programming, and computing theory.",
+                    minimum_gwa=88.0,
+                    recommended_strand="STEM"
+                ),
+                models.Course(
+                    course_name="BS Accountancy",
+                    description="Professional track for certified public accountants.",
+                    minimum_gwa=90.0,
+                    recommended_strand="ABM"
+                ),
+                models.Course(
+                    course_name="BS Civil Engineering",
+                    description="Design and construction of infrastructure projects.",
+                    minimum_gwa=87.0,
+                    recommended_strand="STEM"
+                )
+            ]
+            db.add_all(initial_courses)
+            db.commit()
+            print("✅ Database seeded successfully!")
+        else:
+            print("✅ Database already contains course data.")
+    except Exception as e:
+        print(f"❌ Error seeding database: {e}")
+    finally:
+        db.close()
+
+# 3. TRIGGER SEEDING: Run it once when the app starts
+seed_database()
 
 def get_db():
     db = database.SessionLocal()
@@ -33,43 +81,6 @@ def get_db():
         yield db
     finally:
         db.close()
-
-        from sqlalchemy import text
-
-def seed_database(db: Session):
-    # Check if we already have courses so we don't duplicate them
-    course_count = db.query(models.Course).count()
-    if course_count == 0:
-        print("Empty courses table detected. Seeding initial data...")
-        initial_courses = [
-            models.Course(
-                course_name="BS Information Technology",
-                description="Study of software development, networking, and systems.",
-                minimum_gwa=85.0,
-                recommended_strand="ICT"
-            ),
-            models.Course(
-                course_name="BS Computer Science",
-                description="Focus on algorithms, programming, and computing theory.",
-                minimum_gwa=88.0,
-                recommended_strand="STEM"
-            ),
-            models.Course(
-                course_name="BS Accountancy",
-                description="Professional track for certified public accountants.",
-                minimum_gwa=90.0,
-                recommended_strand="ABM"
-            ),
-            models.Course(
-                course_name="BS Civil Engineering",
-                description="Design and construction of infrastructure projects.",
-                minimum_gwa=87.0,
-                recommended_strand="STEM"
-            )
-        ]
-        db.add_all(initial_courses)
-        db.commit()
-        print("Database seeded successfully!")
 
 # --- SCHEMAS ---
 class UserCreate(BaseModel):
@@ -92,14 +103,12 @@ class AssessmentSubmit(BaseModel):
 
 @app.post("/signup")
 def signup(user: UserCreate, db: Session = Depends(get_db)):
-    # Check if email exists
     db_user = db.query(models.User).filter(models.User.email == user.email).first()
     if db_user:
         raise HTTPException(status_code=400, detail="Email already exists")
     
     hashed_pwd = hash_password(user.password)
     
-    # CORRECTED: Uses 'password_hash' to match your pgAdmin screenshot
     new_user = models.User(
         fullname=user.fullname, 
         email=user.email, 
@@ -113,19 +122,15 @@ def signup(user: UserCreate, db: Session = Depends(get_db)):
 def login(user: UserLogin, db: Session = Depends(get_db)):
     db_user = db.query(models.User).filter(models.User.email == user.email).first()
     
-    # CORRECTED: Uses 'password_hash' and checks for user existence
     if not db_user or not verify_password(user.password, db_user.password_hash):
         raise HTTPException(status_code=400, detail="Invalid email or password")
         
-    # CORRECTED: Returns 'user_id' to match your pgAdmin PK
     return {"user": db_user.fullname, "user_id": db_user.user_id}
 
 @app.post("/recommend")
 def recommend(data: AssessmentSubmit, db: Session = Depends(get_db)):
-    # Create a dictionary: {1: "yes", 2: "no", 3: "no"}
     ans = {item.questionId: item.response.lower() for item in data.answers}
     
-    # Check the specific IDs from your AssessmentForm.js
     if ans.get(1) == "yes":
         course = "BS Information Technology"
         reason = "You have a natural talent for troubleshooting and fixing hardware."
@@ -147,7 +152,6 @@ def recommend(data: AssessmentSubmit, db: Session = Depends(get_db)):
 
 @app.get("/get-recommendations/{user_id}")
 def recommend_courses(user_id: int, db: Session = Depends(get_db)):
-    # 1. Fetch user data
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     
     if not user:
@@ -159,17 +163,14 @@ def recommend_courses(user_id: int, db: Session = Depends(get_db)):
     user_strand = user.academic_info.get("strand", "N/A")
     user_gwa = user.academic_info.get("gwa", 0)
 
-    # 2. Fetch courses and handle potential data errors
     try:
         all_courses = db.query(models.Course).all()
     except Exception as e:
-        # This will tell you if the 'courses' table name or columns are wrong
         raise HTTPException(status_code=500, detail=f"Database error in Courses table: {str(e)}")
     
     filtered_list = []
     for course in all_courses:
         try:
-            # We use float() carefully here
             course_min_gwa = float(course.minimum_gwa) if course.minimum_gwa else 0
             
             if float(user_gwa) >= course_min_gwa:
@@ -180,7 +181,7 @@ def recommend_courses(user_id: int, db: Session = Depends(get_db)):
                     "description": course.description
                 })
         except Exception:
-            continue # Skip any course that has broken data instead of crashing
+            continue 
 
     return filtered_list
 
