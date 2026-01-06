@@ -44,8 +44,7 @@ body {
 
 /* --- INPUTS --- */
 .form-group {
-  margin-bottom: 20px;
-  position: relative;
+  margin-bottom: 24px;
   max-width: 400px;
 }
 
@@ -57,12 +56,19 @@ body {
   color: var(--text-main);
 }
 
+.input-container-inner {
+  position: relative;
+  width: 100%;
+}
+
 .academic-input {
   width: 100%;
   padding: 14px 16px;
+  padding-right: 65px; /* Space for the password toggle button */
   border: 1.5px solid var(--border-color);
   border-radius: 8px;
   font-size: 16px;
+  box-sizing: border-box; 
   transition: all 0.2s;
 }
 
@@ -88,74 +94,7 @@ body {
 .btn-solid:hover { background-color: #1e3a8a; }
 .btn-solid:active { transform: scale(0.98); }
 
-/* --- DASHBOARD PORTAL --- */
-.portal-layout {
-  display: flex;
-  min-height: 100vh;
-}
-
-.portal-sidebar {
-  width: 280px;
-  background: white;
-  border-right: 1px solid var(--border-color);
-  padding: 30px 20px;
-  display: flex;
-  flex-direction: column;
-}
-
-.portal-main {
-  flex: 1;
-  padding: 40px 60px;
-}
-
-.portal-card {
-  background: white;
-  border-radius: 12px;
-  border: 1px solid var(--border-color);
-  padding: 30px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-}
-
-
-/* Add/Replace these specific parts in your App.css */
-
-.form-group {
-  margin-bottom: 24px;
-  max-width: 400px;
-}
-
-.form-group label {
-  display: block;
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: #0f172a;
-}
-
-/* The Magic Wrapper */
-.input-container-inner {
-  position: relative;
-  width: 100%;
-}
-
-.academic-input {
-  width: 100%;
-  padding: 14px 16px;
-  padding-right: 65px; /* Space for the button */
-  border: 1.5px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 16px;
-  box-sizing: border-box; /* Crucial for sizing */
-  transition: all 0.2s;
-}
-
-.academic-input:focus {
-  border-color: #1e40af;
-  box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.1);
-  outline: none;
-}
-
-/* The Professional Toggle */
+/* --- PASSWORD TOGGLE --- */
 .password-toggle-btn {
   position: absolute;
   right: 12px;
@@ -163,7 +102,7 @@ body {
   transform: translateY(-50%);
   background: none;
   border: none;
-  color: #1e40af;
+  color: var(--brand-primary);
   font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
@@ -185,7 +124,7 @@ body {
   width: 100%;
   max-width: 400px;
   background-color: #ffffff;
-  color: #3c4043; /* Google's dark grey text */
+  color: #3c4043;
   border: 1px solid #dadce0;
   padding: 12px;
   border-radius: 8px;

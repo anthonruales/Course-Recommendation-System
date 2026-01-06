@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import './components/style/Dashboard.css'; // I-konek ang CSS
 
 function AssessmentForm({ onBack }) {
   const [formData, setFormData] = useState({ q1: '', q2: '', q3: '' });
-  const [recommendation, setRecommendation] = useState(null); // To store the result
+  const [recommendation, setRecommendation] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
@@ -13,12 +14,10 @@ function AssessmentForm({ onBack }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
     try {
       const response = await fetch("http://localhost:8000/recommend", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        // This formats your q1, q2, q3 into the list your backend expects
         body: JSON.stringify({
           answers: [
             { questionId: 1, response: formData.q1 },
@@ -27,16 +26,13 @@ function AssessmentForm({ onBack }) {
           ],
         }),
       });
-
       const data = await response.json();
-
       if (response.ok) {
-        setRecommendation(data); // Save the result to show on screen
+        setRecommendation(data);
       } else {
-        alert("Failed to get recommendation. Check if backend is running.");
+        alert("Failed to get recommendation.");
       }
     } catch (error) {
-      console.error("Error:", error);
       alert("Connection error!");
     } finally {
       setLoading(false);
@@ -44,47 +40,49 @@ function AssessmentForm({ onBack }) {
   };
 
   return (
-    <div className="portal-layout">
+    <div className="portal-layout"> {/* Parehong background ng Dashboard */}
       <main className="portal-main">
-        <button onClick={onBack} style={{ marginBottom: '20px', cursor: 'pointer', background: 'none', border: 'none', color: '#3b82f6' }}>
+        <button onClick={onBack} className="link-btn" style={{ marginBottom: '20px' }}>
           ← Cancel Assessment
         </button>
 
         <div className="portal-card" style={{ maxWidth: '700px', margin: '0 auto' }}>
-          <header style={{ borderBottom: '1px solid #eee', marginBottom: '25px', paddingBottom: '10px' }}>
+          <header className="main-header" style={{ borderBottom: '1px solid #eee', paddingBottom: '10px' }}>
             <h2 style={{ margin: 0 }}>Career Interest Questionnaire</h2>
-            <p style={{ color: '#666', fontSize: '14px' }}>Answer these situational questions for the Decision Tree analysis.</p>
+            <p className="muted-text">Answer these situational questions for the Decision Tree analysis.</p>
           </header>
 
-          {/* SHOW RECOMMENDATION HERE IF IT EXISTS */}
           {recommendation ? (
-            <div style={{ padding: '20px', backgroundColor: '#f0f9ff', borderRadius: '8px', border: '1px solid #bae6fd', marginBottom: '20px' }}>
-              <h3 style={{ color: '#0369a1', marginTop: 0 }}>Recommended Course:</h3>
+            <div className="summary-box" style={{ backgroundColor: '#f0f9ff' }}>
+              <h3 className="summary-success" style={{ color: '#0369a1', marginTop: 0 }}>Recommended Course:</h3>
               <p style={{ fontSize: '20px', fontWeight: 'bold' }}>{recommendation.recommendation}</p>
-              <p style={{ color: '#555' }}>{recommendation.explanation}</p>
-              <button onClick={() => setRecommendation(null)} className="btn-solid" style={{ marginTop: '10px' }}>Retake Assessment</button>
+              <p className="muted-text">{recommendation.explanation}</p>
+              <button onClick={() => setRecommendation(null)} className="btn-solid" style={{ marginTop: '10px' }}>
+                Retake Assessment
+              </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit}>
-              <div style={{ padding: '15px', borderBottom: '1px solid #f0f0f0', marginBottom: '10px' }}>
-                <p>1. When faced with a broken gadget, do you prefer fixing it yourself rather than buying a new one?</p>
+              {/* Ginamit ang activity-item class para sa spacing ng questions */}
+              <div className="activity-item">
+                <p>1. When faced with a broken gadget, do you prefer fixing it yourself?</p>
                 <label><input type="radio" name="q1" value="yes" onChange={handleChange} required /> Yes</label>
                 <label style={{ marginLeft: '20px' }}><input type="radio" name="q1" value="no" onChange={handleChange} /> No</label>
               </div>
 
-              <div style={{ padding: '15px', borderBottom: '1px solid #f0f0f0', marginBottom: '10px' }}>
-                <p>2. Do you enjoy analyzing data or conducting experiments to find the truth?</p>
+              <div className="activity-item">
+                <p>2. Do you enjoy analyzing data or conducting experiments?</p>
                 <label><input type="radio" name="q2" value="yes" onChange={handleChange} required /> Yes</label>
                 <label style={{ marginLeft: '20px' }}><input type="radio" name="q2" value="no" onChange={handleChange} /> No</label>
               </div>
 
-              <div style={{ padding: '15px', borderBottom: '1px solid #f0f0f0', marginBottom: '10px' }}>
-                <p>3. Would you rather lead a team and pitch business ideas than work behind the scenes?</p>
+              <div className="activity-item">
+                <p>3. Would you rather lead a team and pitch business ideas?</p>
                 <label><input type="radio" name="q3" value="yes" onChange={handleChange} required /> Yes</label>
                 <label style={{ marginLeft: '20px' }}><input type="radio" name="q3" value="no" onChange={handleChange} /> No</label>
               </div>
 
-              <button type="submit" className="btn-solid" disabled={loading} style={{ width: '100%', padding: '15px', fontSize: '16px', marginTop: '20px' }}>
+              <button type="submit" className="btn-solid" disabled={loading} style={{ width: '100%', marginTop: '20px' }}>
                 {loading ? "Processing..." : "Finish & Get Recommendations"}
               </button>
             </form>
