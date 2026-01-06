@@ -34,6 +34,43 @@ def get_db():
     finally:
         db.close()
 
+        from sqlalchemy import text
+
+def seed_database(db: Session):
+    # Check if we already have courses so we don't duplicate them
+    course_count = db.query(models.Course).count()
+    if course_count == 0:
+        print("Empty courses table detected. Seeding initial data...")
+        initial_courses = [
+            models.Course(
+                course_name="BS Information Technology",
+                description="Study of software development, networking, and systems.",
+                minimum_gwa=85.0,
+                recommended_strand="ICT"
+            ),
+            models.Course(
+                course_name="BS Computer Science",
+                description="Focus on algorithms, programming, and computing theory.",
+                minimum_gwa=88.0,
+                recommended_strand="STEM"
+            ),
+            models.Course(
+                course_name="BS Accountancy",
+                description="Professional track for certified public accountants.",
+                minimum_gwa=90.0,
+                recommended_strand="ABM"
+            ),
+            models.Course(
+                course_name="BS Civil Engineering",
+                description="Design and construction of infrastructure projects.",
+                minimum_gwa=87.0,
+                recommended_strand="STEM"
+            )
+        ]
+        db.add_all(initial_courses)
+        db.commit()
+        print("Database seeded successfully!")
+
 # --- SCHEMAS ---
 class UserCreate(BaseModel):
     fullname: str
