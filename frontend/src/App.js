@@ -11,11 +11,11 @@ import './App.css';
 function App() {
   const [isLogin, setIsLogin] = useState(true);
 
-  // --- BYPASS MODE (Temporary) ---
+  // Temporary lang yang 15 at 16 nilagay ko lang yan para ma-access ko yung admin page agad
   const [view, setView] = useState('admin'); 
   const [user, setUser] = useState('Admin User');
   
-  // Kapag ibabalik sa normal:
+  // Kapag gusto mo bumalik sa Dashboard lagyan mo lang ng slash yung 15 at 16 para maging comment tapos yung 19 at 20 tanggalin mo lang yung slash para mapunta sa Dashboard
   // const [view, setView] = useState('dashboard');
   // const [user, setUser] = useState(localStorage.getItem('userName') || null);
 
