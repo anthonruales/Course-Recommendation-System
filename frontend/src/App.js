@@ -1,122 +1,53 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import axios from 'axios'; // Import axios for backend communication
 import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard';
 import ProfileForm from './ProfileForm';
 import AssessmentForm from './AssessmentForm';
-import ResultsView from './ResultsView';
+import Admin from './admin/Admin'; // Correct based on your folder structure
 import './App.css';
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
-  const [user, setUser] = useState(localStorage.getItem('userEmail') || null); // Changed to email for DB matching
-  const [view, setView] = useState('dashboard');
-  const [result, setResult] = useState(null);
+
+  // --- BYPASS MODE (Temporary) ---
+  const [view, setView] = useState('admin'); 
+  const [user, setUser] = useState('Admin User');
+  
+  // Kapag ibabalik sa normal:
+  // const [view, setView] = useState('dashboard');
+  // const [user, setUser] = useState(localStorage.getItem('userName') || null);
+
   const [profileData, setProfileData] = useState(null);
   const [history, setHistory] = useState([]);
 
   const GOOGLE_CLIENT_ID = "324535586446-nbcj7tcp4373lrk5ct76u3v0od9n4vm3.apps.googleusercontent.com";
-  const API_BASE_URL = "http://localhost:8000";
 
-  // --- 1. Fetch Data from PostgreSQL via FastAPI on Load ---
   useEffect(() => {
-    const fetchData = async () => {
-      if (user) {
-        try {
-          // In a real app, you'd fetch the specific user's profile and history from DB
-          const historyRes = await axios.get(`${API_BASE_URL}/history`);
-          setHistory(historyRes.data);
-          
-          // Assuming profile data is stored/fetched here
-          const savedProfile = localStorage.getItem(`userProfile_${user}`);
-          setProfileData(savedProfile ? JSON.parse(savedProfile) : null);
-        } catch (err) {
-          console.error("Error fetching data from database", err);
-        }
-      } else {
-        setProfileData(null);
-        setHistory([]);
-      }
-      setResult(null);
-    };
-    fetchData();
+    if (user && user !== 'Admin User') { // Don't fetch if it's just the temporary admin string
+      const savedProfile = localStorage.getItem(`userProfile_${user}`);
+      setProfileData(savedProfile ? JSON.parse(savedProfile) : null);
+      const savedHistory = localStorage.getItem(`assessmentHistory_${user}`);
+      setHistory(savedHistory ? JSON.parse(savedHistory) : []);
+    }
   }, [user]);
 
-  const handleLoginSuccess = (userData) => {
-    // Expecting userData to be the object returned from your FastAPI /login route
-    localStorage.setItem('userEmail', userData);
-    setUser(userData);
+  const handleLoginSuccess = (name, email) => {
+    localStorage.setItem('userName', name);
+    setUser(name);
+
+    if (email === "admin@gmail.com" || name === "Admin") {
+      setView('admin');
+    } else {
+      setView('dashboard');
+    }
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('userEmail');
+    localStorage.removeItem('userName');
     setUser(null);
     setView('dashboard');
-  };
-
-  // --- 2. Save Profile to Backend ---
-  const handleProfileSave = async (newData) => {
-    try {
-      // You would typically call an axios.post(`${API_BASE_URL}/update-profile`, newData) here
-      localStorage.setItem(`userProfile_${user}`, JSON.stringify(newData));
-      setProfileData(newData);
-      
-      // Update history log (This could also be a DB call)
-      const profileLog = {
-        type: 'profile_update',
-        courses: ["Profile Updated"], 
-        date: new Date().toLocaleDateString(),
-      };
-      setHistory([profileLog, ...history]);
-      setView('dashboard');
-    } catch (err) {
-      alert("Failed to save profile to database.");
-    }
-  };
-
-  // --- 3. Run Decision Tree & Rule-Based Logic via Backend ---
-  const handleAssessmentSubmit = async (answers) => {
-    if (!profileData) {
-      alert("Please complete your Academic Profile first!");
-      setView('profile');
-      return;
-    }
-
-    try {
-      // Step A: Run Decision Tree on Backend
-      const formattedAnswers = Object.entries(answers).map(([id, val]) => ({
-        questionId: parseInt(id.replace('q', '')),
-        response: val
-      }));
-
-      const recResponse = await axios.post(`${API_BASE_URL}/recommend`, {
-        answers: formattedAnswers
-      });
-
-      // Step B: Get specific course matches from PostgreSQL (Rule-Based)
-      // Note: We use a placeholder ID '1' or fetch based on logged-in user
-      const dbMatches = await axios.get(`${API_BASE_URL}/get-recommendations/1`);
-
-      const finalResult = {
-        type: 'assessment',
-        courses: dbMatches.data.map(course => ({
-          course: course.course_name,
-          status: course.alignment_score === "High" ? "Qualified" : "Bridging Required",
-          analysis: recResponse.data.explanation, // Reason from Decision Tree
-          isAligned: course.alignment_score === "High"
-        })),
-        date: new Date().toLocaleDateString(),
-      };
-
-      setHistory([finalResult, ...history]);
-      setResult(finalResult);
-      setView('results');
-    } catch (err) {
-      console.error(err);
-      alert("Error processing assessment. Ensure FastAPI server is running.");
-    }
   };
 
   return (
@@ -124,6 +55,8 @@ function App() {
       <div className="App">
         {user ? (
           <>
+            {view === 'admin' && <Admin onLogout={handleLogout} />}
+            
             {view === 'dashboard' && (
               <Dashboard 
                 userName={user} 
@@ -137,24 +70,15 @@ function App() {
             {view === 'profile' && (
               <ProfileForm 
                 onBack={() => setView('dashboard')} 
-                onSave={handleProfileSave}
-                initialData={profileData}
+                onSave={(data) => { setProfileData(data); setView('dashboard'); }} 
+                initialData={profileData} 
               />
             )}
 
             {view === 'assessment' && (
               <AssessmentForm 
                 onBack={() => setView('dashboard')} 
-                onSubmit={handleAssessmentSubmit}
-              />
-            )}
-
-            {view === 'results' && (
-              <ResultsView 
-                recommendation={result} 
-                profileData={profileData}
-                onRetake={() => setView('assessment')}
-                onBack={() => setView('dashboard')}
+                onSubmit={(ans) => setView('dashboard')} 
               />
             )}
           </>

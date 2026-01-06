@@ -1,90 +1,86 @@
 import React, { useState } from 'react';
-import './App.css';
+import './components/style/Dashboard.css';
 
 function Dashboard({ userName, onLogout, onStart, onViewProfile, history }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
+  // Kinukuha lang ang unang 5 history items kapag hindi "Expanded"
   const displayHistory = isExpanded ? history : history?.slice(0, 5);
-
-  const categoryLabelStyle = {
-    fontSize: '11px',
-    fontWeight: 700,
-    color: '#94a3b8',
-    textTransform: 'uppercase',
-    letterSpacing: '0.05em',
-    marginBottom: '12px',
-    paddingLeft: '12px'
-  };
 
   return (
     <div className="portal-layout">
+      {/* SIDEBAR */}
       <aside className="portal-sidebar">
-        <h2 style={{color: 'var(--brand-primary)', fontWeight: 800, marginBottom: '40px'}}>CoursePro</h2>
+        <h2 className="brand-title">CoursePro</h2>
         
-        <nav style={{display: 'flex', flexDirection: 'column', gap: '30px'}}>
+        <nav className="sidebar-nav">
           <div>
-            <p style={categoryLabelStyle}>Main Menu</p>
-            <div className="nav-item active" style={{padding: '12px', borderRadius: '8px', background: '#eff6ff', color: 'var(--brand-primary)', fontWeight: 600, cursor: 'pointer'}}>
-              Dashboard
-            </div>
+            <p className="category-label">Main Menu</p>
+            <div className="nav-item active">Dashboard</div>
           </div>
 
           <div>
-            <p style={categoryLabelStyle}>Academics</p>
-            <div style={{display: 'flex', flexDirection: 'column', gap: '4px'}}>
-              <div className="nav-item" onClick={onViewProfile} style={{padding: '12px', color: 'var(--text-muted)', cursor: 'pointer', borderRadius: '8px'}}>
+            <p className="category-label">Academics</p>
+            <div className="sidebar-nav">
+              <div className="nav-item" onClick={onViewProfile}>
                 Academic Profile
               </div>
-              <div className="nav-item" style={{padding: '12px', color: 'var(--text-muted)', cursor: 'default', borderRadius: '8px'}}>
+              <div className="nav-item disabled">
                 My Activity ({history ? history.length : 0})
               </div>
             </div>
           </div>
 
           <div>
-            <p style={categoryLabelStyle}>Support</p>
-            <div style={{display: 'flex', flexDirection: 'column', gap: '4px'}}>
-              <div className="nav-item" style={{padding: '12px', color: 'var(--text-muted)', cursor: 'pointer', borderRadius: '8px'}}>
-                Help Center
-              </div>
-              <div className="nav-item" style={{padding: '12px', color: 'var(--text-muted)', cursor: 'pointer', borderRadius: '8px'}}>
-                Feedback
-              </div>
+            <p className="category-label">Support</p>
+            <div className="sidebar-nav">
+              <div className="nav-item">Help Center</div>
+              <div className="nav-item">Feedback</div>
             </div>
           </div>
         </nav>
 
-        <button onClick={onLogout} style={{marginTop: 'auto', background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', textAlign: 'left', padding: '12px', fontWeight: 600}}>
+        <button onClick={onLogout} className="logout-btn">
           Logout
         </button>
       </aside>
 
+      {/* MAIN CONTENT */}
       <main className="portal-main">
-        <header style={{marginBottom: '40px'}}>
-          <h1 style={{fontSize: '28px', fontWeight: 700}}>Student Overview</h1>
-          <p style={{color: 'var(--text-muted)'}}>Welcome back, {userName}. Track your progress and findings here.</p>
+        <header className="main-header">
+          <h1>Student Overview</h1>
+          <p>Welcome back, {userName}. Track your progress and findings here.</p>
         </header>
 
-        <div className="portal-card">
-          <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+        {/* ASSESSMENT CALL TO ACTION */}
+        <div className="portal-card action-card">
+          <div className="action-content">
             <div>
-              <h3 style={{fontSize: '20px', fontWeight: 700, margin: '0 0 10px 0'}}>Ready for your recommendation?</h3>
-              <p style={{color: 'var(--text-muted)', maxWidth: '500px'}}>
-                Launch the assessment to begin the interest questionnaire. We will use your saved Academic Profile for the final analysis.
+              <h3 style={{ fontSize: '20px', fontWeight: 700, margin: '0 0 10px 0' }}>
+                Ready for your recommendation?
+              </h3>
+              <p className="muted-text" style={{ maxWidth: '500px', margin: 0 }}>
+                Launch the assessment to begin the interest questionnaire. 
+                We will use your saved Academic Profile for the final analysis.
               </p>
             </div>
-            <button className="btn-solid" onClick={onStart}>Start New Assessment</button>
+            <button className="btn-solid" onClick={onStart}>
+              Start New Assessment
+            </button>
           </div>
         </div>
 
-        <div style={{marginTop: '40px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', alignItems: 'start'}}>
+        {/* DASHBOARD GRID (History and Summary) */}
+        <div className="dashboard-grid">
+            
+            {/* RECENT ACTIVITY CARD */}
             <div className="portal-card">
-               <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px'}}>
-                 <h4 style={{margin: 0}}>Recent Activity</h4>
+               <div className="card-header">
+                 <h4 style={{ margin: 0 }}>Recent Activity</h4>
                  {history && history.length > 5 && (
                    <button 
+                    className="link-btn"
                     onClick={() => setIsExpanded(!isExpanded)}
-                    style={{background: 'none', border: 'none', color: '#3b82f6', cursor: 'pointer', fontSize: '13px', fontWeight: 600}}
                    >
                      {isExpanded ? 'Show Less' : 'View All'}
                    </button>
@@ -92,52 +88,42 @@ function Dashboard({ userName, onLogout, onStart, onViewProfile, history }) {
                </div>
 
                {history && history.length > 0 ? (
-                 <div style={{display: 'flex', flexDirection: 'column', gap: '12px'}}>
+                 <div className="activity-list">
                    {displayHistory.map((item, index) => (
-                     <div key={index} style={{paddingBottom: '10px', borderBottom: '1px solid #f1f5f9'}}>
-                       <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start'}}>
-                         <div style={{
-                           fontWeight: 600, 
-                           color: item.type === 'profile_update' ? '#64748b' : '#1e293b', 
-                           fontSize: '14px',
-                           maxWidth: '70%'
-                         }}>
+                     <div key={index} className="activity-item">
+                       <div className="activity-top">
+                         <div className="activity-text">
+                            {/* Logic para ipakita ang course name */}
                            {item.type === 'assessment' && Array.isArray(item.courses) && item.courses.length > 0
                              ? (typeof item.courses[0] === 'object' ? item.courses[0].course : item.courses[0])
                              : item.courses}
                          </div>
                          
-                         <span style={{
-                           fontSize: '10px',
-                           padding: '2px 8px',
-                           borderRadius: '12px',
-                           fontWeight: 700,
-                           textTransform: 'uppercase',
-                           backgroundColor: item.type === 'profile_update' ? '#f1f5f9' : '#e0f2fe',
-                           color: item.type === 'profile_update' ? '#64748b' : '#0369a1'
-                         }}>
+                         <span className={`activity-badge ${item.type === 'profile_update' ? 'profile' : 'assessment'}`}>
                            {item.type === 'profile_update' ? 'Profile' : 'Assessment'}
                          </span>
                        </div>
-                       <div style={{fontSize: '12px', color: '#94a3b8', marginTop: '4px'}}>{item.date}</div>
+                       <div className="activity-date">{item.date}</div>
                      </div>
                    ))}
                  </div>
                ) : (
-                 <p style={{fontSize: '14px', color: 'var(--text-muted)'}}>No history found.</p>
+                 <p className="muted-text">No history found.</p>
                )}
             </div>
             
+            {/* ACCOUNT SUMMARY CARD */}
             <div className="portal-card">
-               <h4 style={{margin: '0 0 10px 0'}}>Account Summary</h4>
-               <p style={{fontSize: '14px', color: 'var(--text-muted)'}}>Your account is synchronized and up to date.</p>
+               <h4 style={{ margin: '0 0 10px 0' }}>Account Summary</h4>
+               <p className="muted-text">Your account is synchronized and up to date.</p>
+               
                {history && history.length > 0 && (
-                 <div style={{marginTop: '15px', padding: '12px', borderRadius: '8px', background: '#f8fafc', border: '1px solid #e2e8f0'}}>
-                   <div style={{display: 'flex', alignItems: 'center', gap: '8px', color: '#10b981', marginBottom: '8px'}}>
-                      <span style={{fontSize: '16px'}}>✓</span>
-                      <span style={{fontSize: '13px', fontWeight: 600}}>{history.filter(h => h.type === 'assessment').length} Assessment(s) Recorded</span>
+                 <div className="summary-box">
+                   <div className="summary-success">
+                      <span style={{ marginRight: '8px' }}>✓</span>
+                      {history.filter(h => h.type === 'assessment').length} Assessment(s) Recorded
                    </div>
-                   <p style={{fontSize: '12px', color: '#64748b', margin: 0}}>
+                   <p className="summary-date">
                      Latest activity logged on {history[0].date}
                    </p>
                  </div>
