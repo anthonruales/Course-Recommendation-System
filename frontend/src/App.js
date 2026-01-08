@@ -5,38 +5,42 @@ import Signup from './Signup';
 import Dashboard from './Dashboard';
 import ProfileForm from './ProfileForm';
 import AssessmentForm from './AssessmentForm';
-import Admin from './admin/Admin'; // Correct based on your folder structure
+import Admin from './admin/Admin'; 
+import ResultsView from './ResultsView'; 
 import './App.css';
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
-
-  // Temporary lang yang 15 at 16 nilagay ko lang yan para ma-access ko yung admin page agad
- // const [view, setView] = useState('admin'); 
-  //const [user, setUser] = useState('Admin User');
+  const [view, setView] = useState('dashboard');
+  const [user, setUser] = useState(localStorage.getItem('userName') || null);
+  const [recommendationData, setRecommendationData] = useState(null);
   
-  // Kapag gusto mo bumalik sa Dashboard lagyan mo lang ng slash yung 15 at 16 para maging comment tapos yung 19 at 20 tanggalin mo lang yung slash para mapunta sa Dashboard
-   const [view, setView] = useState('dashboard');
-   const [user, setUser] = useState(localStorage.getItem('userName') || null);
-
-  const [profileData, setProfileData] = useState(null);
+  // Initialize as empty object to prevent "is not a function" errors
+  const [profileData, setProfileData] = useState({});
   const [history, setHistory] = useState([]);
 
   const GOOGLE_CLIENT_ID = "324535586446-nbcj7tcp4373lrk5ct76u3v0od9n4vm3.apps.googleusercontent.com";
 
   useEffect(() => {
-    if (user && user !== 'Admin User') { // Don't fetch if it's just the temporary admin string
+    if (user && user !== 'Admin User') {
       const savedProfile = localStorage.getItem(`userProfile_${user}`);
-      setProfileData(savedProfile ? JSON.parse(savedProfile) : null);
+      if (savedProfile) {
+        setProfileData(JSON.parse(savedProfile));
+      }
+      
       const savedHistory = localStorage.getItem(`assessmentHistory_${user}`);
-      setHistory(savedHistory ? JSON.parse(savedHistory) : []);
+      try {
+        const parsedHistory = savedHistory ? JSON.parse(savedHistory) : [];
+        setHistory(Array.isArray(parsedHistory) ? parsedHistory : []);
+      } catch (e) {
+        setHistory([]);
+      }
     }
   }, [user]);
 
   const handleLoginSuccess = (name, email) => {
     localStorage.setItem('userName', name);
     setUser(name);
-
     if (email === "admin@gmail.com" || name === "Admin") {
       setView('admin');
     } else {
@@ -47,7 +51,25 @@ function App() {
   const handleLogout = () => {
     localStorage.removeItem('userName');
     setUser(null);
+    setRecommendationData(null);
+    setProfileData({}); // Clear state on logout
     setView('dashboard');
+  };
+
+  const handleAssessmentResults = (data) => {
+    setRecommendationData(data);
+    
+    const newHistoryItem = {
+      type: 'assessment',
+      courses: data.courses && data.courses[0] ? (data.courses[0].course || data.courses[0]) : "Career Match",
+      date: new Date().toLocaleDateString()
+    };
+
+    const updatedHistory = [newHistoryItem, ...history];
+    setHistory(updatedHistory);
+    localStorage.setItem(`assessmentHistory_${user}`, JSON.stringify(updatedHistory));
+    
+    setView('results');
   };
 
   return (
@@ -70,15 +92,39 @@ function App() {
             {view === 'profile' && (
               <ProfileForm 
                 onBack={() => setView('dashboard')} 
-                onSave={(data) => { setProfileData(data); setView('dashboard'); }} 
-                initialData={profileData} 
+                onSave={() => { 
+                  // Save current state to local storage
+                  localStorage.setItem(`userProfile_${user}`, JSON.stringify(profileData));
+                  
+                  // Optional: Log the update in history
+                  const updateLog = {
+                    type: 'profile_update',
+                    courses: 'Profile Updated',
+                    date: new Date().toLocaleDateString()
+                  };
+                  setHistory([updateLog, ...history]);
+                  
+                  setView('dashboard'); 
+                }} 
+                // These props must match the names in ProfileForm.js
+                formData={profileData} 
+                setFormData={setProfileData} 
               />
             )}
 
             {view === 'assessment' && (
               <AssessmentForm 
                 onBack={() => setView('dashboard')} 
-                onSubmit={(ans) => setView('dashboard')} 
+                onShowResults={handleAssessmentResults} 
+              />
+            )}
+
+            {view === 'results' && recommendationData && (
+              <ResultsView 
+                recommendation={recommendationData}
+                profileData={profileData}
+                onRetake={() => setView('assessment')}
+                onBack={() => setView('dashboard')}
               />
             )}
           </>
