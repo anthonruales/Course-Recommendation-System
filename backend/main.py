@@ -10,6 +10,7 @@ import models
 import database
 from security import hash_password, verify_password
 from seed_data import COURSES_POOL, QUESTIONS_POOL
+from sqlalchemy import func # If using SQLAlchemy
 
 load_dotenv()
 
@@ -80,7 +81,7 @@ def seed_database():
         db.close()
 
 
-        
+
 def get_db():
     db = database.SessionLocal()
     try:
@@ -147,3 +148,11 @@ def recommend(data: AssessmentSubmit, db: Session = Depends(get_db)):
 @app.get("/")
 def home(): 
     return {"status": "online", "google_ready": bool(GOOGLE_CLIENT_ID)}
+
+
+
+@app.get("/questions")
+def get_random_questions(db: Session = Depends(get_db)):
+    # Add 'models.' before Question so Python can find it
+    questions = db.query(models.Question).order_by(func.random()).limit(10).all()
+    return questions

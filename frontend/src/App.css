@@ -1,168 +1,44 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+/* App.css */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-:root {
-  --brand-primary: #1e40af; /* Deep University Blue */
-  --brand-secondary: #3b82f6;
-  --bg-light: #f8fafc;
-  --text-main: #0f172a;
-  --text-muted: #64748b;
-  --border-color: #e2e8f0;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  background-color: var(--bg-light);
-  color: var(--text-main);
-}
-
-/* --- LOGIN/SIGNUP SPLIT LAYOUT --- */
-.auth-split-container {
-  display: flex;
-  height: 100vh;
-}
-
-.auth-visual-side {
-  flex: 1;
-  background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  padding: 40px;
-}
-
-.auth-form-side {
-  flex: 0.8;
-  background: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 80px;
-}
-
-/* --- INPUTS --- */
-.form-group {
-  margin-bottom: 24px;
-  max-width: 400px;
-}
-
-.form-group label {
-  display: block;
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: var(--text-main);
-}
-
-.input-container-inner {
-  position: relative;
-  width: 100%;
-}
-
-.academic-input {
-  width: 100%;
-  padding: 14px 16px;
-  padding-right: 65px; /* Space for the password toggle button */
-  border: 1.5px solid var(--border-color);
-  border-radius: 8px;
-  font-size: 16px;
-  box-sizing: border-box; 
-  transition: all 0.2s;
-}
-
-.academic-input:focus {
-  border-color: var(--brand-primary);
-  box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.1);
-  outline: none;
-}
-
-/* --- BUTTONS --- */
-.btn-solid {
-  background-color: var(--brand-primary);
-  color: white;
-  padding: 14px 28px;
-  border-radius: 8px;
-  border: none;
-  font-weight: 700;
-  font-size: 16px;
-  cursor: pointer;
-  transition: transform 0.1s, background 0.2s;
-}
-
-.btn-solid:hover { background-color: #1e3a8a; }
-.btn-solid:active { transform: scale(0.98); }
-
-/* --- PASSWORD TOGGLE --- */
-.password-toggle-btn {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: var(--brand-primary);
-  font-size: 13px;
-  font-weight: 700;
-  text-transform: uppercase;
-  cursor: pointer;
-  padding: 4px 8px;
-  z-index: 10;
-}
-
-.password-toggle-btn:hover {
-  color: #1e3a8a;
-}
-
-/* --- GOOGLE BUTTON STYLES --- */
-.btn-google-auth {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #020617; /* Deepest blue/black */
+  /* Luxury Mesh Gradient */
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+    radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+    radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+  background-attachment: fixed;
+  color: #ffffff;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+}
+
+.App {
   width: 100%;
-  max-width: 400px;
-  background-color: #ffffff;
-  color: #3c4043;
-  border: 1px solid #dadce0;
-  padding: 12px;
-  border-radius: 8px;
-  font-weight: 500;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.2s, box-shadow 0.2s;
-  margin-bottom: 20px;
-}
-
-.btn-google-auth:hover {
-  background-color: #f8f9fa;
-  box-shadow: 0 1px 2px 0 rgba(60,64,67,.30), 0 1px 3px 1px rgba(60,64,67,.15);
-}
-
-.google-icon-svg {
-  width: 20px;
-  height: 20px;
-}
-
-/* Divider for "or" */
-.auth-divider {
   display: flex;
+  justify-content: center;
   align-items: center;
+  padding: 20px;
+}
+
+/* This is the shell from your App.js */
+.auth-shell {
   width: 100%;
-  max-width: 400px;
-  margin: 24px 0;
-  color: var(--text-muted);
-  font-size: 14px;
+  max-width: 440px;
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.auth-divider::before,
-.auth-divider::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background-color: var(--border-color);
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
-
-.auth-divider:not(:empty)::before { margin-right: 16px; }
-.auth-divider:not(:empty)::after { margin-left: 16px; }
