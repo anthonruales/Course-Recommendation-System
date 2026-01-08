@@ -1,12 +1,8 @@
-from sqlalchemy import JSON, Column, Integer, String, Text, Numeric, Float
+from sqlalchemy import JSON, Column, Integer, String, Text, Float
 from database import Base
 
-
-# models.py
 class User(Base):
     __tablename__ = "users"
-    
-    # Ensure there are no spaces or capital letters here
     user_id = Column(Integer, primary_key=True, index=True)
     fullname = Column(String)
     email = Column(String, unique=True, index=True)
@@ -21,11 +17,18 @@ class Recommendation(Base):
     course = Column(String)
     reasoning = Column(String)
 
-
 class Course(Base):
     __tablename__ = "courses"
     course_id = Column(Integer, primary_key=True, index=True)
-    course_name = Column(String)
+    course_name = Column(String, nullable=False)
     description = Column(String)
-    minimum_gwa = Column(Float)  # Must match the numeric data in pgAdmin
+    trait_tag = Column(String)
     recommended_strand = Column(String)
+    minimum_gwa = Column(Float)
+
+class Question(Base):
+    __tablename__ = "questions"
+    question_id = Column(Integer, primary_key=True, index=True)
+    question_text = Column(Text, nullable=False)
+    category = Column(String) 
+    trait_tag = Column(String)
