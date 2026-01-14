@@ -1,484 +1,97 @@
 # seed_data.py
+
 COURSES_POOL = [
-
-
-
-    # Technical & Analytical (Engineering & IT)
-
-
+    # Technical & Analytical
+    {"course_name": "BS Computer Science", "description": "Study of computation, complexity, and advanced software design.", "minimum_gwa": 88, "recommended_strand": "STEM", "trait_tag": "Analytical"},
+    {"course_name": "BS Information Technology", "description": "Focuses on the practical application of computing technology to business processes.", "minimum_gwa": 85, "recommended_strand": "STEM / TVL", "trait_tag": "Technical"},
+    {"course_name": "BS Civil Engineering", "description": "Design and supervision of infrastructure projects like roads, bridges, and buildings.", "minimum_gwa": 90, "recommended_strand": "STEM", "trait_tag": "Analytical"},
+    {"course_name": "BS Accountancy", "description": "Detailed study of financial reporting, auditing, and taxation.", "minimum_gwa": 92, "recommended_strand": "ABM", "trait_tag": "Business"},
+    {"course_name": "BS Business Administration", "description": "Focuses on corporate operations, marketing, and financial management.", "minimum_gwa": 85, "recommended_strand": "ABM", "trait_tag": "Leadership"},
+    {"course_name": "BS Architecture", "description": "The art and science of designing physical structures and spaces.", "minimum_gwa": 88, "recommended_strand": "STEM", "trait_tag": "Creative"},
+    {"course_name": "BS Multimedia Arts", "description": "Combines digital design, animation, and visual storytelling.", "minimum_gwa": 83, "recommended_strand": "HUMSS / TVL", "trait_tag": "Creative"},
+    {"course_name": "BS Nursing", "description": "Professional healthcare training for patient care and medical support.", "minimum_gwa": 89, "recommended_strand": "STEM", "trait_tag": "Social"},
+    {"course_name": "BS Psychology", "description": "Scientific study of human behavior and mental processes.", "minimum_gwa": 87, "recommended_strand": "STEM / HUMSS", "trait_tag": "Social"},
+    {"course_name": "BS Criminology", "description": "Study of crime prevention, law enforcement, and criminal justice.", "minimum_gwa": 83, "recommended_strand": "HUMSS", "trait_tag": "Service"},
+    {"course_name": "BS Hospitality Management", "description": "Management of hotels, restaurants, and tourism-related businesses.", "minimum_gwa": 82, "recommended_strand": "ABM / TVL", "trait_tag": "Service"},
+    {"course_name": "Bachelor of Secondary Education", "description": "Training for teaching specific subjects in high school levels.", "minimum_gwa": 85, "recommended_strand": "HUMSS", "trait_tag": "Leadership"},
     
-  {
-    "course_name": "BS Computer Science",
-    "description": "Study of computation, complexity, and advanced software design.",
-    "minimum_gwa": 88,
-    "recommended_strand": "STEM",
-    "trait_tag": "Analytical"
-  },
-  {
-    "course_name": "BS Information Technology",
-    "description": "Focuses on the practical application of computing technology to business processes.",
-    "minimum_gwa": 85,
-    "recommended_strand": "STEM / TVL",
-    "trait_tag": "Technical"
-  },
-  {
-    "course_name": "BS Civil Engineering",
-    "description": "Design and supervision of infrastructure projects like roads, bridges, and buildings.",
-    "minimum_gwa": 90,
-    "recommended_strand": "STEM",
-    "trait_tag": "Analytical"
-  },
-  {
-    "course_name": "BS Accountancy",
-    "description": "Detailed study of financial reporting, auditing, and taxation.",
-    "minimum_gwa": 92,
-    "recommended_strand": "ABM",
-    "trait_tag": "Business"
-  },
-  {
-    "course_name": "BS Business Administration",
-    "description": "Focuses on corporate operations, marketing, and financial management.",
-    "minimum_gwa": 85,
-    "recommended_strand": "ABM",
-    "trait_tag": "Leadership"
-  },
-  {
-    "course_name": "BS Architecture",
-    "description": "The art and science of designing physical structures and spaces.",
-    "minimum_gwa": 88,
-    "recommended_strand": "STEM",
-    "trait_tag": "Creative"
-  },
-  {
-    "course_name": "BS Multimedia Arts",
-    "description": "Combines digital design, animation, and visual storytelling.",
-    "minimum_gwa": 83,
-    "recommended_strand": "HUMSS / TVL",
-    "trait_tag": "Creative"
-  },
-  {
-    "course_name": "BS Nursing",
-    "description": "Professional healthcare training for patient care and medical support.",
-    "minimum_gwa": 89,
-    "recommended_strand": "STEM",
-    "trait_tag": "Social"
-  },
-  {
-    "course_name": "BS Psychology",
-    "description": "Scientific study of human behavior and mental processes.",
-    "minimum_gwa": 87,
-    "recommended_strand": "STEM / HUMSS",
-    "trait_tag": "Social"
-  },
-  {
-    "course_name": "BS Criminology",
-    "description": "Study of crime prevention, law enforcement, and criminal justice.",
-    "minimum_gwa": 83,
-    "recommended_strand": "HUMSS",
-    "trait_tag": "Service"
-  },
-  {
-    "course_name": "BS Hospitality Management",
-    "description": "Management of hotels, restaurants, and tourism-related businesses.",
-    "minimum_gwa": 82,
-    "recommended_strand": "ABM / TVL",
-    "trait_tag": "Service"
-  },
-  {
-    "course_name": "Bachelor of Secondary Education",
-    "description": "Training for teaching specific subjects in high school levels.",
-    "minimum_gwa": 85,
-    "recommended_strand": "HUMSS",
-    "trait_tag": "Leadership"
-  },
-
-
-
-      # Business & Leadership (Accountancy & Management)
-
-
-
-  {
-    "course_name": "BS Accountancy",
-    "description": "Comprehensive study of financial recording, auditing, taxation, and business laws.",
-    "minimum_gwa": 92,
-    "recommended_strand": "ABM",
-    "trait_tag": "Business"
-  },
-  {
-    "course_name": "BS Business Administration major in Marketing Management",
-    "description": "Focuses on market research, consumer behavior, and strategic brand positioning.",
-    "minimum_gwa": 85,
-    "recommended_strand": "ABM",
-    "trait_tag": "Business"
-  },
-  {
-    "course_name": "BS Business Administration major in Financial Management",
-    "description": "Deals with investment decisions, capital markets, and corporate financial planning.",
-    "minimum_gwa": 86,
-    "recommended_strand": "ABM",
-    "trait_tag": "Business"
-  },
-  {
-    "course_name": "BS Business Administration major in Human Resource Management",
-    "description": "Studies organizational behavior, employee relations, and talent development.",
-    "minimum_gwa": 84,
-    "recommended_strand": "ABM",
-    "trait_tag": "Leadership"
-  },
-  {
-    "course_name": "BS Entrepreneurship",
-    "description": "Develops skills in identifying business opportunities and managing new ventures.",
-    "minimum_gwa": 83,
-    "recommended_strand": "ABM",
-    "trait_tag": "Leadership"
-  },
-  {
-    "course_name": "BS Hospitality Management",
-    "description": "Covers hotel and restaurant operations, catering, and service excellence.",
-    "minimum_gwa": 82,
-    "recommended_strand": "ABM / TVL",
-    "trait_tag": "Administrative"
-  },
-  {
-    "course_name": "BS Tourism Management",
-    "description": "Focuses on travel industry operations, sustainable tourism, and heritage management.",
-    "minimum_gwa": 82,
-    "recommended_strand": "ABM / HUMSS",
-    "trait_tag": "Administrative"
-  },
-  {
-    "course_name": "BS Customs Administration",
-    "description": "Focuses on tariff and customs laws, international trade, and logistics.",
-    "minimum_gwa": 85,
-    "recommended_strand": "ABM",
-    "trait_tag": "Business"
-  },
-  {
-    "course_name": "BS Real Estate Management",
-    "description": "Deals with property appraisal, brokerage, and real estate development laws.",
-    "minimum_gwa": 84,
-    "recommended_strand": "ABM",
-    "trait_tag": "Business"
-  },
-  {
-    "course_name": "BS Office Administration",
-    "description": "Training in office management, secretarial duties, and corporate records handling.",
-    "minimum_gwa": 80,
-    "recommended_strand": "ABM / TVL",
-    "trait_tag": "Administrative"
-  },
-
-
-
-  # Science & Healthcare (Medical Field)
-
-
-
-  {
-    "course_name": "BS Nursing",
-    "description": "Professional training in patient care, health promotion, and medical assistance.",
-    "minimum_gwa": 89,
-    "recommended_strand": "STEM",
-    "trait_tag": "Social"
-  },
-  {
-    "course_name": "BS Medical Technology",
-    "description": "Focuses on laboratory analysis of blood, tissues, and fluids for disease diagnosis.",
-    "minimum_gwa": 90,
-    "recommended_strand": "STEM",
-    "trait_tag": "Science"
-  },
-  {
-    "course_name": "BS Pharmacy",
-    "description": "Study of drug preparation, therapeutic uses, and pharmaceutical chemistry.",
-    "minimum_gwa": 88,
-    "recommended_strand": "STEM",
-    "trait_tag": "Science"
-  },
-  {
-    "course_name": "BS Physical Therapy",
-    "description": "Rehabilitation science focusing on improving patient mobility and physical function.",
-    "minimum_gwa": 89,
-    "recommended_strand": "STEM",
-    "trait_tag": "Social"
-  },
-  {
-    "course_name": "BS Occupational Therapy",
-    "description": "Helping patients develop skills for daily living and working through therapeutic activities.",
-    "minimum_gwa": 88,
-    "recommended_strand": "STEM",
-    "trait_tag": "Social"
-  },
-  {
-    "course_name": "BS Biology",
-    "description": "Scientific study of living organisms, from molecular levels to entire ecosystems.",
-    "minimum_gwa": 86,
-    "recommended_strand": "STEM",
-    "trait_tag": "Science"
-  },
-  {
-    "course_name": "BS Radiologic Technology",
-    "description": "Operating medical imaging equipment like X-rays, CT scans, and MRI.",
-    "minimum_gwa": 85,
-    "recommended_strand": "STEM",
-    "trait_tag": "Technical"
-  },
-  {
-    "course_name": "BS Nutrition and Dietetics",
-    "description": "Study of food science and the role of nutrition in health and disease management.",
-    "minimum_gwa": 85,
-    "recommended_strand": "STEM",
-    "trait_tag": "Science"
-  },
-  {
-    "course_name": "BS Psychology",
-    "description": "The scientific study of the human mind and behavior, often a pre-med track.",
-    "minimum_gwa": 87,
-    "recommended_strand": "STEM / HUMSS",
-    "trait_tag": "Social"
-  },
-  {
-    "course_name": "BS Midwifery",
-    "description": "Primary healthcare for women during pregnancy, childbirth, and the postpartum period.",
-    "minimum_gwa": 83,
-    "recommended_strand": "STEM / GAS",
-    "trait_tag": "Service"
-  },
-
-
-
-  # Creative & Design (Arts & Media)
-
-
-
-  {
-    "course_name": "BS Architecture",
-    "description": "Scientific and aesthetic design of buildings and structures with focus on planning and structural integrity.",
-    "minimum_gwa": 88,
-    "recommended_strand": "STEM",
-    "trait_tag": "Creative"
-  },
-  {
-    "course_name": "BS Multimedia Arts",
-    "description": "A field that integrates graphic design, 2D/3D animation, video production, and digital illustration.",
-    "minimum_gwa": 83,
-    "recommended_strand": "HUMSS / TVL",
-    "trait_tag": "Creative"
-  },
-  {
-    "course_name": "BS Interior Design",
-    "description": "Planning and design of interior spaces to improve function and aesthetic quality of life.",
-    "minimum_gwa": 85,
-    "recommended_strand": "STEM / HUMSS",
-    "trait_tag": "Creative"
-  },
-  {
-    "course_name": "Bachelor of Fine Arts",
-    "description": "Advanced study in traditional arts like painting, sculpture, and visual theory.",
-    "minimum_gwa": 80,
-    "recommended_strand": "HUMSS / GAS",
-    "trait_tag": "Creative"
-  },
-  {
-    "course_name": "BA in Communication",
-    "description": "Study of media production, public relations, broadcasting, and digital journalism.",
-    "minimum_gwa": 85,
-    "recommended_strand": "HUMSS",
-    "trait_tag": "Social"
-  },
-  {
-    "course_name": "BS Entertainment and Multimedia Computing",
-    "description": "Specialized study in game development, digital animation, and interactive software.",
-    "minimum_gwa": 86,
-    "recommended_strand": "STEM / TVL",
-    "trait_tag": "Technical"
-  },
-  {
-    "course_name": "BA in Fashion Design and Merchandising",
-    "description": "Study of apparel design, textile science, and the business of the fashion industry.",
-    "minimum_gwa": 82,
-    "recommended_strand": "HUMSS / ABM",
-    "trait_tag": "Creative"
-  },
-  {
-    "course_name": "BS Industrial Design",
-    "description": "Designing mass-produced products focusing on user experience, form, and industrial function.",
-    "minimum_gwa": 85,
-    "recommended_strand": "STEM",
-    "trait_tag": "Creative"
-  },
-  {
-    "course_name": "BA in Digital Filmmaking",
-    "description": "Comprehensive training in cinematography, scriptwriting, and post-production editing.",
-    "minimum_gwa": 84,
-    "recommended_strand": "HUMSS / TVL",
-    "trait_tag": "Creative"
-  },
-  {
-    "course_name": "BS Clothing Technology",
-    "description": "The technical side of garment production, quality control, and clothing manufacturing systems.",
-    "minimum_gwa": 84,
-    "recommended_strand": "STEM / TVL",
-    "trait_tag": "Technical"
-  },
-  
-  
-  
-  # Social & Service (Education & Public Service)
-
-
-
-  {
-    "course_name": "Bachelor of Elementary Education",
-    "description": "Training for teachers specializing in primary school education and child development.",
-    "minimum_gwa": 85,
-    "recommended_strand": "HUMSS",
-    "trait_tag": "Social"
-  },
-  {
-    "course_name": "Bachelor of Secondary Education",
-    "description": "Preparing teachers for high school levels with specialization in specific subject areas.",
-    "minimum_gwa": 85,
-    "recommended_strand": "HUMSS",
-    "trait_tag": "Social"
-  },
-  {
-    "course_name": "BS Criminology",
-    "description": "The study of crimes, criminals, and the operation of the criminal justice system.",
-    "minimum_gwa": 83,
-    "recommended_strand": "HUMSS / GAS",
-    "trait_tag": "Service"
-  },
-  {
-    "course_name": "BA in Political Science",
-    "description": "Study of government systems, political activities, and political behavior.",
-    "minimum_gwa": 86,
-    "recommended_strand": "HUMSS",
-    "trait_tag": "Analytical"
-  },
-  {
-    "course_name": "BS Social Work",
-    "description": "Focuses on social welfare, community organizing, and helping marginalized individuals.",
-    "minimum_gwa": 84,
-    "recommended_strand": "HUMSS",
-    "trait_tag": "Social"
-  },
-  {
-    "course_name": "BS Development Communication",
-    "description": "Using communication to promote social change and community development.",
-    "minimum_gwa": 85,
-    "recommended_strand": "HUMSS / STEM",
-    "trait_tag": "Social"
-  },
-  {
-    "course_name": "Bachelor of Library and Information Science",
-    "description": "Management of information resources in libraries, archives, and digital databases.",
-    "minimum_gwa": 82,
-    "recommended_strand": "HUMSS / ABM",
-    "trait_tag": "Administrative"
-  },
-  {
-    "course_name": "BS Community Development",
-    "description": "Planning and implementing programs for community empowerment and poverty alleviation.",
-    "minimum_gwa": 84,
-    "recommended_strand": "HUMSS",
-    "trait_tag": "Service"
-  },
-  {
-    "course_name": "BS Forensic Science",
-    "description": "Application of scientific principles to criminal investigation and legal evidence.",
-    "minimum_gwa": 87,
-    "recommended_strand": "STEM",
-    "trait_tag": "Analytical"
-  },
-  {
-    "course_name": "Bachelor of Public Administration",
-    "description": "Focuses on public policy, governance, and the management of government agencies.",
-    "minimum_gwa": 85,
-    "recommended_strand": "HUMSS / ABM",
-    "trait_tag": "Leadership"
-}
-],
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    # Business & Leadership
+    {"course_name": "BS Business Administration major in Marketing Management", "description": "Focuses on market research, consumer behavior, and strategic brand positioning.", "minimum_gwa": 85, "recommended_strand": "ABM", "trait_tag": "Business"},
+    {"course_name": "BS Business Administration major in Financial Management", "description": "Deals with investment decisions, capital markets, and corporate financial planning.", "minimum_gwa": 86, "recommended_strand": "ABM", "trait_tag": "Business"},
+    {"course_name": "BS Business Administration major in Human Resource Management", "description": "Studies organizational behavior, employee relations, and talent development.", "minimum_gwa": 84, "recommended_strand": "ABM", "trait_tag": "Leadership"},
+    {"course_name": "BS Entrepreneurship", "description": "Develops skills in identifying business opportunities and managing new ventures.", "minimum_gwa": 83, "recommended_strand": "ABM", "trait_tag": "Leadership"},
+    {"course_name": "BS Tourism Management", "description": "Focuses on travel industry operations, sustainable tourism, and heritage management.", "minimum_gwa": 82, "recommended_strand": "ABM / HUMSS", "trait_tag": "Administrative"},
+    {"course_name": "BS Customs Administration", "description": "Focuses on tariff and customs laws, international trade, and logistics.", "minimum_gwa": 85, "recommended_strand": "ABM", "trait_tag": "Business"},
+    {"course_name": "BS Real Estate Management", "description": "Deals with property appraisal, brokerage, and real estate development laws.", "minimum_gwa": 84, "recommended_strand": "ABM", "trait_tag": "Business"},
+    {"course_name": "BS Office Administration", "description": "Training in office management, secretarial duties, and corporate records handling.", "minimum_gwa": 80, "recommended_strand": "ABM / TVL", "trait_tag": "Administrative"},
+    
+    # Science & Healthcare
+    {"course_name": "BS Medical Technology", "description": "Focuses on laboratory analysis of blood, tissues, and fluids for disease diagnosis.", "minimum_gwa": 90, "recommended_strand": "STEM", "trait_tag": "Science"},
+    {"course_name": "BS Pharmacy", "description": "Study of drug preparation, therapeutic uses, and pharmaceutical chemistry.", "minimum_gwa": 88, "recommended_strand": "STEM", "trait_tag": "Science"},
+    {"course_name": "BS Physical Therapy", "description": "Rehabilitation science focusing on improving patient mobility and physical function.", "minimum_gwa": 89, "recommended_strand": "STEM", "trait_tag": "Social"},
+    {"course_name": "BS Occupational Therapy", "description": "Helping patients develop skills for daily living and working through therapeutic activities.", "minimum_gwa": 88, "recommended_strand": "STEM", "trait_tag": "Social"},
+    {"course_name": "BS Biology", "description": "Scientific study of living organisms, from molecular levels to entire ecosystems.", "minimum_gwa": 86, "recommended_strand": "STEM", "trait_tag": "Science"},
+    {"course_name": "BS Radiologic Technology", "description": "Operating medical imaging equipment like X-rays, CT scans, and MRI.", "minimum_gwa": 85, "recommended_strand": "STEM", "trait_tag": "Technical"},
+    {"course_name": "BS Nutrition and Dietetics", "description": "Study of food science and the role of nutrition in health and disease management.", "minimum_gwa": 85, "recommended_strand": "STEM", "trait_tag": "Science"},
+    {"course_name": "BS Midwifery", "description": "Primary healthcare for women during pregnancy, childbirth, and the postpartum period.", "minimum_gwa": 83, "recommended_strand": "STEM / GAS", "trait_tag": "Service"},
+    
+    # Creative & Design
+    {"course_name": "BS Interior Design", "description": "Planning and design of interior spaces to improve function and aesthetic quality of life.", "minimum_gwa": 85, "recommended_strand": "STEM / HUMSS", "trait_tag": "Creative"},
+    {"course_name": "Bachelor of Fine Arts", "description": "Advanced study in traditional arts like painting, sculpture, and visual theory.", "minimum_gwa": 80, "recommended_strand": "HUMSS / GAS", "trait_tag": "Creative"},
+    {"course_name": "BA in Communication", "description": "Study of media production, public relations, broadcasting, and digital journalism.", "minimum_gwa": 85, "recommended_strand": "HUMSS", "trait_tag": "Social"},
+    {"course_name": "BS Entertainment and Multimedia Computing", "description": "Specialized study in game development, digital animation, and interactive software.", "minimum_gwa": 86, "recommended_strand": "STEM / TVL", "trait_tag": "Technical"},
+    {"course_name": "BA in Fashion Design and Merchandising", "description": "Study of apparel design, textile science, and the business of the fashion industry.", "minimum_gwa": 82, "recommended_strand": "HUMSS / ABM", "trait_tag": "Creative"},
+    {"course_name": "BS Industrial Design", "description": "Designing mass-produced products focusing on user experience, form, and industrial function.", "minimum_gwa": 85, "recommended_strand": "STEM", "trait_tag": "Creative"},
+    {"course_name": "BA in Digital Filmmaking", "description": "Comprehensive training in cinematography, scriptwriting, and post-production editing.", "minimum_gwa": 84, "recommended_strand": "HUMSS / TVL", "trait_tag": "Creative"},
+    {"course_name": "BS Clothing Technology", "description": "The technical side of garment production, quality control, and clothing manufacturing systems.", "minimum_gwa": 84, "recommended_strand": "STEM / TVL", "trait_tag": "Technical"},
+    
+    # Social & Service
+    {"course_name": "Bachelor of Elementary Education", "description": "Training for teachers specializing in primary school education and child development.", "minimum_gwa": 85, "recommended_strand": "HUMSS", "trait_tag": "Social"},
+    {"course_name": "BA in Political Science", "description": "Study of government systems, political activities, and political behavior.", "minimum_gwa": 86, "recommended_strand": "HUMSS", "trait_tag": "Analytical"},
+    {"course_name": "BS Social Work", "description": "Focuses on social welfare, community organizing, and helping marginalized individuals.", "minimum_gwa": 84, "recommended_strand": "HUMSS", "trait_tag": "Social"},
+    {"course_name": "BS Development Communication", "description": "Using communication to promote social change and community development.", "minimum_gwa": 85, "recommended_strand": "HUMSS / STEM", "trait_tag": "Social"},
+    {"course_name": "Bachelor of Library and Information Science", "description": "Management of information resources in libraries, archives, and digital databases.", "minimum_gwa": 82, "recommended_strand": "HUMSS / ABM", "trait_tag": "Administrative"},
+    {"course_name": "BS Community Development", "description": "Planning and implementing programs for community empowerment and poverty alleviation.", "minimum_gwa": 84, "recommended_strand": "HUMSS", "trait_tag": "Service"},
+    {"course_name": "BS Forensic Science", "description": "Application of scientific principles to criminal investigation and legal evidence.", "minimum_gwa": 87, "recommended_strand": "STEM", "trait_tag": "Analytical"},
+    {"course_name": "Bachelor of Public Administration", "description": "Focuses on public policy, governance, and the management of government agencies.", "minimum_gwa": 85, "recommended_strand": "HUMSS / ABM", "trait_tag": "Leadership"}
+]
 
 QUESTIONS_POOL = [
     {"text": "Do you enjoy solving complex math puzzles?", "category": "Assessment", "tag": "Analytical"},
     {"text": "Are you interested in how software is built?", "category": "Assessment", "tag": "Technical"},
-    # Add your other questions here...
-
-
-
-
-{"text": "Do you find it satisfying to organize data and keep detailed records?", "category": "Assessment", "tag": "Administrative"},
-{"text": "Are you interested in designing layouts or creating visual content?", "category": "Assessment", "tag": "Creative"},
-{"text": "Do you enjoy leading a group to achieve a specific goal or project?", "category": "Assessment", "tag": "Leadership"},
-{"text": "Are you curious about how businesses manage their finances and growth?", "category": "Assessment", "tag": "Business"},
-{"text": "Do you like troubleshooting and fixing hardware or mechanical issues?", "category": "Assessment", "tag": "Technical"},
-{"text": "Are you curious about how artificial intelligence learns from data?", "category": "Assessment", "tag": "Technical"},
-{"text": "Do you enjoy finding logical errors in a set of instructions?", "category": "Assessment", "tag": "Analytical"},
-{"text": "Are you interested in the chemical composition of common household products?", "category": "Assessment", "tag": "Science"},
-{"text": "Do you prefer using math formulas to solve real-world problems?", "category": "Assessment", "tag": "Analytical"},
-{"text": "Would you like to learn how to build and maintain computer networks?", "category": "Assessment", "tag": "Technical"},
-{"text": "Are you fascinated by how biological systems fight diseases?", "category": "Assessment", "tag": "Science"},
-{"text": "Do you enjoy disassembling gadgets to see their internal parts?", "category": "Assessment", "tag": "Technical"},
-{"text": "Is it easy for you to understand complex graphs and statistics?", "category": "Assessment", "tag": "Analytical"},
-{"text": "Are you interested in how renewable energy sources are harnessed?", "category": "Assessment", "tag": "Science"},
-{"text": "Do you like writing code or scripts to automate repetitive tasks?", "category": "Assessment", "tag": "Technical"},
-
-
-
-{"text": "Do you enjoy negotiating to get the best deal possible?", "category": "Assessment", "tag": "Business"},
-{"text": "Are you comfortable speaking in front of a large audience?", "category": "Assessment", "tag": "Leadership"},
-{"text": "Do you find it easy to manage a budget and track expenses?", "category": "Assessment", "tag": "Business"},
-{"text": "Are you interested in how global markets affect local prices?", "category": "Assessment", "tag": "Business"},
-{"text": "Do you like organizing events and coordinating with different teams?", "category": "Assessment", "tag": "Administrative"},
-{"text": "Are you interested in the legal aspects of starting a company?", "category": "Assessment", "tag": "Business"},
-{"text": "Do you enjoy mentoring others to help them improve their skills?", "category": "Assessment", "tag": "Leadership"},
-{"text": "Is keeping a systematic filing system satisfying for you?", "category": "Assessment", "tag": "Administrative"},
-{"text": "Do you like analyzing consumer behavior to predict trends?", "category": "Assessment", "tag": "Business"},
-{"text": "Are you confident in making quick decisions during high-pressure situations?", "category": "Assessment", "tag": "Leadership"},
-
-
-
-{"text": "Do you enjoy creating digital art or editing videos?", "category": "Assessment", "tag": "Creative"},
-{"text": "Are you interested in how psychological factors affect human health?", "category": "Assessment", "tag": "Social"},
-{"text": "Do you like writing stories, poems, or journalistic articles?", "category": "Assessment", "tag": "Creative"},
-{"text": "Are you passionate about teaching or explaining things to others?", "category": "Assessment", "tag": "Social"},
-{"text": "Do you enjoy designing 3D models or architectural floor plans?", "category": "Assessment", "tag": "Creative"},
-{"text": "Are you interested in helping people resolve their personal conflicts?", "category": "Assessment", "tag": "Social"},
-{"text": "Do you like experimenting with different interior design styles?", "category": "Assessment", "tag": "Creative"},
-{"text": "Are you concerned about social justice and community welfare?", "category": "Assessment", "tag": "Social"},
-{"text": "Do you enjoy cooking and experimenting with various recipes?", "category": "Assessment", "tag": "Service"},
-{"text": "Are you interested in how historical events shape our current society?", "category": "Assessment", "tag": "Social"}
+    {"text": "Do you find it satisfying to organize data and keep detailed records?", "category": "Assessment", "tag": "Administrative"},
+    {"text": "Are you interested in designing layouts or creating visual content?", "category": "Assessment", "tag": "Creative"},
+    {"text": "Do you enjoy leading a group to achieve a specific goal or project?", "category": "Assessment", "tag": "Leadership"},
+    {"text": "Are you curious about how businesses manage their finances and growth?", "category": "Assessment", "tag": "Business"},
+    {"text": "Do you like troubleshooting and fixing hardware or mechanical issues?", "category": "Assessment", "tag": "Technical"},
+    {"text": "Are you curious about how artificial intelligence learns from data?", "category": "Assessment", "tag": "Technical"},
+    {"text": "Do you enjoy finding logical errors in a set of instructions?", "category": "Assessment", "tag": "Analytical"},
+    {"text": "Are you interested in the chemical composition of common household products?", "category": "Assessment", "tag": "Science"},
+    {"text": "Do you prefer using math formulas to solve real-world problems?", "category": "Assessment", "tag": "Analytical"},
+    {"text": "Would you like to learn how to build and maintain computer networks?", "category": "Assessment", "tag": "Technical"},
+    {"text": "Are you fascinated by how biological systems fight diseases?", "category": "Assessment", "tag": "Science"},
+    {"text": "Do you enjoy disassembling gadgets to see their internal parts?", "category": "Assessment", "tag": "Technical"},
+    {"text": "Is it easy for you to understand complex graphs and statistics?", "category": "Assessment", "tag": "Analytical"},
+    {"text": "Are you interested in how renewable energy sources are harnessed?", "category": "Assessment", "tag": "Science"},
+    {"text": "Do you like writing code or scripts to automate repetitive tasks?", "category": "Assessment", "tag": "Technical"},
+    {"text": "Do you enjoy negotiating to get the best deal possible?", "category": "Assessment", "tag": "Business"},
+    {"text": "Are you comfortable speaking in front of a large audience?", "category": "Assessment", "tag": "Leadership"},
+    {"text": "Do you find it easy to manage a budget and track expenses?", "category": "Assessment", "tag": "Business"},
+    {"text": "Are you interested in how global markets affect local prices?", "category": "Assessment", "tag": "Business"},
+    {"text": "Do you like organizing events and coordinating with different teams?", "category": "Assessment", "tag": "Administrative"},
+    {"text": "Are you interested in the legal aspects of starting a company?", "category": "Assessment", "tag": "Business"},
+    {"text": "Do you enjoy mentoring others to help them improve their skills?", "category": "Assessment", "tag": "Leadership"},
+    {"text": "Is keeping a systematic filing system satisfying for you?", "category": "Administrative", "tag": "Administrative"},
+    {"text": "Do you like analyzing consumer behavior to predict trends?", "category": "Assessment", "tag": "Business"},
+    {"text": "Are you confident in making quick decisions during high-pressure situations?", "category": "Assessment", "tag": "Leadership"},
+    {"text": "Do you enjoy creating digital art or editing videos?", "category": "Assessment", "tag": "Creative"},
+    {"text": "Are you interested in how psychological factors affect human health?", "category": "Assessment", "tag": "Social"},
+    {"text": "Do you like writing stories, poems, or journalistic articles?", "category": "Assessment", "tag": "Creative"},
+    {"text": "Are you passionate about teaching or explaining things to others?", "category": "Assessment", "tag": "Social"},
+    {"text": "Do you enjoy designing 3D models or architectural floor plans?", "category": "Assessment", "tag": "Creative"},
+    {"text": "Are you interested in helping people resolve their personal conflicts?", "category": "Assessment", "tag": "Social"},
+    {"text": "Do you like experimenting with different interior design styles?", "category": "Assessment", "tag": "Creative"},
+    {"text": "Are you concerned about social justice and community welfare?", "category": "Assessment", "tag": "Social"},
+    {"text": "Do you enjoy cooking and experimenting with various recipes?", "category": "Assessment", "tag": "Service"},
+    {"text": "Are you interested in how historical events shape our current society?", "category": "Assessment", "tag": "Social"}
 ]
