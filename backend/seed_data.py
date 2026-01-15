@@ -187,9 +187,9 @@ QUESTIONS_POOL = [
 
 
 
-    # Karugtong ng QUESTIONS_POOL (Starting from #38 to #150)
+    # Kadugtong ng mga tanong 
 
-    # --- MARITIME & AVIATION
+    # MARITIME & AVIATION (38-51)
     {"text": "Does the idea of navigating a ship across the open ocean excite you?", "category": "Assessment", "tag": "Service"},
     {"text": "Are you interested in how aircraft stay stable during turbulent weather?", "category": "Assessment", "tag": "Technical"},
     {"text": "Would you enjoy maintaining massive engines used in international vessels?", "category": "Assessment", "tag": "Technical"},
@@ -206,7 +206,7 @@ QUESTIONS_POOL = [
     {"text": "Do you like the idea of working in a uniform and professional setting?", "category": "Assessment", "tag": "Leadership"},
     {"text": "Are you interested in how electronic sensors detect underwater obstacles?", "category": "Assessment", "tag": "Technical"},
 
-    # --- AGRICULTURE, VETERINARY & ENVIRONMENT (Questions 53 - 70) ---
+    # AGRICULTURE, VETERINARY & ENVIRONMENT (52-69)
     {"text": "Do you enjoy caring for animals and observing their health?", "category": "Assessment", "tag": "Science"},
     {"text": "Are you interested in how modern technology can improve crop yields?", "category": "Assessment", "tag": "Technical"},
     {"text": "Do you find the study of plant diseases and pests fascinating?", "category": "Assessment", "tag": "Science"},
@@ -226,7 +226,7 @@ QUESTIONS_POOL = [
     {"text": "Would you like to study the chemical composition of fertilizers and pesticides?", "category": "Assessment", "tag": "Science"},
     {"text": "Do you enjoy observing the life cycles of insects and animals?", "category": "Assessment", "tag": "Science"},
 
-    # PURE SCIENCES, CHEMISTRY & PHYSICS (Questions 71 - 85) ---
+    # PURE SCIENCES, CHEMISTRY & PHYSICS (70-84)
     {"text": "Do you enjoy performing experiments in a laboratory setting?", "category": "Assessment", "tag": "Science"},
     {"text": "Are you interested in how molecules interact during a chemical reaction?", "category": "Assessment", "tag": "Science"},
     {"text": "Do you find the study of the periodic table and elements exciting?", "category": "Assessment", "tag": "Analytical"},
@@ -243,7 +243,7 @@ QUESTIONS_POOL = [
     {"text": "Are you curious about how materials behave at absolute zero temperature?", "category": "Assessment", "tag": "Science"},
     {"text": "Do you enjoy reading about recent breakthroughs in modern science?", "category": "Assessment", "tag": "Analytical"},
 
-    # ADVANCED TECHNICAL & IT (Questions 86 - 100) ---
+    # ADVANCED TECHNICAL & IT (85-99)
     {"text": "Do you enjoy the challenge of learning new programming languages?", "category": "Assessment", "tag": "Technical"},
     {"text": "Are you interested in how blockchain technology secures transactions?", "category": "Assessment", "tag": "Technical"},
     {"text": "Do you like the idea of ethical hacking to protect company data?", "category": "Assessment", "tag": "Technical"},
@@ -260,7 +260,7 @@ QUESTIONS_POOL = [
     {"text": "Are you curious about the future of quantum computing?", "category": "Assessment", "tag": "Technical"},
     {"text": "Do you like automating your daily digital tasks using scripts?", "category": "Assessment", "tag": "Technical"},
 
-    #  LEGAL, POLITICS & PUBLIC SERVICE
+    # LEGAL, POLITICS & PUBLIC SERVICE (100 -114)
     {"text": "Do you enjoy debating about current events and social issues?", "category": "Assessment", "tag": "Analytical"},
     {"text": "Are you interested in how the judicial system interprets laws?", "category": "Assessment", "tag": "Analytical"},
     {"text": "Do you find it meaningful to serve your local community?", "category": "Assessment", "tag": "Service"},
@@ -277,7 +277,7 @@ QUESTIONS_POOL = [
     {"text": "Are you good at researching historical facts for an argument?", "category": "Assessment", "tag": "Analytical"},
     {"text": "Do you want to play a part in making national laws?", "category": "Assessment", "tag": "Leadership"},
 
-    # BUSINESS, ECONOMICS & REAL ESTATE
+    # BUSINESS, ECONOMICS & REAL ESTATE (115-129)
     {"text": "Do you enjoy analyzing market trends to buy or sell stocks?", "category": "Assessment", "tag": "Business"},
     {"text": "Are you interested in how inflation affects our daily expenses?", "category": "Assessment", "tag": "Business"},
     {"text": "Do you like the idea of selling or managing real estate properties?", "category": "Assessment", "tag": "Business"},
@@ -294,7 +294,7 @@ QUESTIONS_POOL = [
     {"text": "Are you good at identifying a good investment opportunity?", "category": "Assessment", "tag": "Business"},
     {"text": "Do you enjoy managing people and delegating tasks?", "category": "Assessment", "tag": "Leadership"},
 
-    # CREATIVE, DESIGN & MEDIA
+    # CREATIVE, DESIGN & MEDIA (130-144)
     {"text": "Do you enjoy using digital tools to create illustrations?", "category": "Assessment", "tag": "Creative"},
     {"text": "Are you interested in the principles of balance and symmetry in design?", "category": "Assessment", "tag": "Creative"},
     {"text": "Do you like capturing stories through a camera lens?", "category": "Assessment", "tag": "Creative"},
@@ -311,8 +311,7 @@ QUESTIONS_POOL = [
     {"text": "Are you fascinated by the architecture of ancient buildings?", "category": "Assessment", "tag": "Creative"},
     {"text": "Do you enjoy collaborating with other artists on a project?", "category": "Assessment", "tag": "Social"},
 
-    # FINAL MISCELLANEOUS
-    {"text": "Do you find it rewarding to help someone learn a new skill?", "category": "Assessment", "tag": "Social"},
+    # FINAL MISCELLANEOUS (145-149)    {"text": "Do you find it rewarding to help someone learn a new skill?", "category": "Assessment", "tag": "Social"},
     {"text": "Are you interested in forensic science and solving crimes?", "category": "Assessment", "tag": "Analytical"},
     {"text": "Do you enjoy organizing your home library or digital files?", "category": "Assessment", "tag": "Administrative"},
     {"text": "Are you willing to work in shifting schedules including night shifts?", "category": "Assessment", "tag": "Service"},
