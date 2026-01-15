@@ -14,7 +14,18 @@ COURSES_POOL = [
     {"course_name": "BS Criminology", "description": "Study of crime prevention, law enforcement, and criminal justice.", "minimum_gwa": 83, "recommended_strand": "HUMSS", "trait_tag": "Service"},
     {"course_name": "BS Hospitality Management", "description": "Management of hotels, restaurants, and tourism-related businesses.", "minimum_gwa": 82, "recommended_strand": "ABM / TVL", "trait_tag": "Service"},
     {"course_name": "Bachelor of Secondary Education", "description": "Training for teaching specific subjects in high school levels.", "minimum_gwa": 85, "recommended_strand": "HUMSS", "trait_tag": "Leadership"},
-    
+    # Ito yung mga inadd ko pa sa baba
+    {"course_name": "BS Computer Engineering", "description": "Combines electronics engineering and computer science to develop computer hardware and software systems.", "minimum_gwa": 88, "recommended_strand": "STEM", "trait_tag": "Technical"},
+    {"course_name": "BS Electronics Engineering", "description": "Design and development of electronic circuits, communication systems, and automated devices.", "minimum_gwa": 88, "recommended_strand": "STEM", "trait_tag": "Technical"},
+    {"course_name": "BS Mechanical Engineering", "description": "Focuses on the design, analysis, and manufacturing of mechanical systems and machinery.", "minimum_gwa": 88, "recommended_strand": "STEM", "trait_tag": "Technical"},
+    {"course_name": "BS Electrical Engineering", "description": "Study of electricity, electronics, and electromagnetism for power generation and distribution.", "minimum_gwa": 88, "recommended_strand": "STEM", "trait_tag": "Analytical"},     
+    {"course_name": "BS Data Science", "description": "Uses scientific methods, algorithms, and systems to extract knowledge and insights from structured and unstructured data.", "minimum_gwa": 89, "recommended_strand": "STEM", "trait_tag": "Analytical"},
+    {"course_name": "BS Mathematics", "description": "Advanced study of mathematical structures, logic, and numerical analysis for various industries.", "minimum_gwa": 87, "recommended_strand": "STEM", "trait_tag": "Analytical"},
+    {"course_name": "BS Statistics", "description": "Focuses on the collection, analysis, interpretation, and presentation of quantitative data.", "minimum_gwa": 86, "recommended_strand": "STEM", "trait_tag": "Analytical"},
+    {"course_name": "BS Geodetic Engineering", "description": "Professional study of surveying, mapping, and global positioning systems (GPS).", "minimum_gwa": 86, "recommended_strand": "STEM", "trait_tag": "Technical"},
+    {"course_name": "BS Industrial Engineering", "description": "Focuses on optimizing complex processes, systems, and organizations to reduce waste.", "minimum_gwa": 86, "recommended_strand": "STEM", "trait_tag": "Analytical"},
+    {"course_name": "BS Cybersecurity", "description": "Specialized training in protecting networks, devices, and data from digital attacks.", "minimum_gwa": 87, "recommended_strand": "STEM / TVL", "trait_tag": "Technical"},
+
     # Business & Leadership
     {"course_name": "BS Business Administration major in Marketing Management", "description": "Focuses on market research, consumer behavior, and strategic brand positioning.", "minimum_gwa": 85, "recommended_strand": "ABM", "trait_tag": "Business"},
     {"course_name": "BS Business Administration major in Financial Management", "description": "Deals with investment decisions, capital markets, and corporate financial planning.", "minimum_gwa": 86, "recommended_strand": "ABM", "trait_tag": "Business"},
@@ -24,7 +35,17 @@ COURSES_POOL = [
     {"course_name": "BS Customs Administration", "description": "Focuses on tariff and customs laws, international trade, and logistics.", "minimum_gwa": 85, "recommended_strand": "ABM", "trait_tag": "Business"},
     {"course_name": "BS Real Estate Management", "description": "Deals with property appraisal, brokerage, and real estate development laws.", "minimum_gwa": 84, "recommended_strand": "ABM", "trait_tag": "Business"},
     {"course_name": "BS Office Administration", "description": "Training in office management, secretarial duties, and corporate records handling.", "minimum_gwa": 80, "recommended_strand": "ABM / TVL", "trait_tag": "Administrative"},
-    
+    # Ito naman yung sa Business & Leadership section na inadd ko
+    {"course_name": "BS Accountancy", "description": "Rigorous study of financial reporting, auditing, taxation, and accounting information systems.", "minimum_gwa": 90, "recommended_strand": "ABM", "trait_tag": "Business"},
+    {"course_name": "BS Accounting Information Systems", "description": "Combines accounting principles with information technology to manage business financial data.", "minimum_gwa": 88, "recommended_strand": "ABM", "trait_tag": "Technical"},
+    {"course_name": "BS Management Accounting", "description": "Focuses on providing internal financial information for business decision-making and strategic planning.", "minimum_gwa": 88, "recommended_strand": "ABM", "trait_tag": "Business"},
+    {"course_name": "BS Hospitality Management", "description": "Management of hotel operations, culinary arts, and restaurant service excellence.", "minimum_gwa": 82, "recommended_strand": "ABM / TVL", "trait_tag": "Administrative"},
+    {"course_name": "BS Business Administration major in Operations Management", "description": "Focuses on the production and delivery of goods and services, logistics, and supply chain.", "minimum_gwa": 84, "recommended_strand": "ABM", "trait_tag": "Administrative"},
+    {"course_name": "BS Business Economics", "description": "Study of economic theories and their practical application in business environments.", "minimum_gwa": 86, "recommended_strand": "ABM / STEM", "trait_tag": "Analytical"},
+    {"course_name": "BS Agribusiness", "description": "Management and operations of agricultural businesses and the food supply chain.", "minimum_gwa": 83, "recommended_strand": "ABM / GAS", "trait_tag": "Business"},
+    {"course_name": "BS Legal Management", "description": "Study of business administration combined with essential legal principles and procedures.", "minimum_gwa": 87, "recommended_strand": "ABM / HUMSS", "trait_tag": "Administrative"},
+    {"course_name": "Bachelor of Public Administration", "description": "Preparation for leadership roles in government, non-profits, and public service organizations.", "minimum_gwa": 85, "recommended_strand": "HUMSS / ABM", "trait_tag": "Leadership"},
+
     # Science & Healthcare
     {"course_name": "BS Medical Technology", "description": "Focuses on laboratory analysis of blood, tissues, and fluids for disease diagnosis.", "minimum_gwa": 90, "recommended_strand": "STEM", "trait_tag": "Science"},
     {"course_name": "BS Pharmacy", "description": "Study of drug preparation, therapeutic uses, and pharmaceutical chemistry.", "minimum_gwa": 88, "recommended_strand": "STEM", "trait_tag": "Science"},
@@ -34,6 +55,17 @@ COURSES_POOL = [
     {"course_name": "BS Radiologic Technology", "description": "Operating medical imaging equipment like X-rays, CT scans, and MRI.", "minimum_gwa": 85, "recommended_strand": "STEM", "trait_tag": "Technical"},
     {"course_name": "BS Nutrition and Dietetics", "description": "Study of food science and the role of nutrition in health and disease management.", "minimum_gwa": 85, "recommended_strand": "STEM", "trait_tag": "Science"},
     {"course_name": "BS Midwifery", "description": "Primary healthcare for women during pregnancy, childbirth, and the postpartum period.", "minimum_gwa": 83, "recommended_strand": "STEM / GAS", "trait_tag": "Service"},
+    # ito pa yung mga inadd ko sa Science & Healthcare
+    {"course_name": "BS Nursing", "description": "Professional training in patient care, health promotion, and community health nursing.", "minimum_gwa": 89, "recommended_strand": "STEM", "trait_tag": "Social"},
+    {"course_name": "BS Speech-Language Pathology", "description": "Specialized study in treating communication and swallowing disorders in patients.", "minimum_gwa": 90, "recommended_strand": "STEM", "trait_tag": "Social"},
+    {"course_name": "BS Respiratory Therapy", "description": "Focuses on the treatment and care of patients with cardiopulmonary and breathing disorders.", "minimum_gwa": 86, "recommended_strand": "STEM", "trait_tag": "Technical"},
+    {"course_name": "BS Chemistry", "description": "The study of matter, its properties, and how it changes during chemical reactions.", "minimum_gwa": 87, "recommended_strand": "STEM", "trait_tag": "Science"},
+    {"course_name": "BS Marine Biology", "description": "Study of marine organisms and their behaviors and interactions with the environment.", "minimum_gwa": 85, "recommended_strand": "STEM", "trait_tag": "Science"},
+    {"course_name": "BS Environmental Science", "description": "Interdisciplinary study of environmental problems and human impact on the ecosystem.", "minimum_gwa": 84, "recommended_strand": "STEM", "trait_tag": "Science"},
+    {"course_name": "BS Optometry", "description": "Specialized healthcare profession involving examining the eyes for defects or abnormalities.", "minimum_gwa": 88, "recommended_strand": "STEM", "trait_tag": "Technical"},
+    {"course_name": "BS Health Information Management", "description": "Combines medical science and IT to manage patient data and healthcare records.", "minimum_gwa": 83, "recommended_strand": "STEM / TVL", "trait_tag": "Administrative"},
+    {"course_name": "BS Biotechnology", "description": "Using biological systems or living organisms to develop or create different products.", "minimum_gwa": 88, "recommended_strand": "STEM", "trait_tag": "Analytical"},
+    {"course_name": "BS Exercise and Sports Science", "description": "Scientific study of human movement and how the body responds to physical activity.", "minimum_gwa": 82, "recommended_strand": "STEM / Sports", "trait_tag": "Social"},
     
     # Creative & Design
     {"course_name": "BS Interior Design", "description": "Planning and design of interior spaces to improve function and aesthetic quality of life.", "minimum_gwa": 85, "recommended_strand": "STEM / HUMSS", "trait_tag": "Creative"},
@@ -44,7 +76,18 @@ COURSES_POOL = [
     {"course_name": "BS Industrial Design", "description": "Designing mass-produced products focusing on user experience, form, and industrial function.", "minimum_gwa": 85, "recommended_strand": "STEM", "trait_tag": "Creative"},
     {"course_name": "BA in Digital Filmmaking", "description": "Comprehensive training in cinematography, scriptwriting, and post-production editing.", "minimum_gwa": 84, "recommended_strand": "HUMSS / TVL", "trait_tag": "Creative"},
     {"course_name": "BS Clothing Technology", "description": "The technical side of garment production, quality control, and clothing manufacturing systems.", "minimum_gwa": 84, "recommended_strand": "STEM / TVL", "trait_tag": "Technical"},
-    
+    #ito pa yung mga inadd ko sa Creative & Design
+    {"course_name": "BS Architecture", "description": "Integration of art and science in designing buildings and structures with focus on aesthetics and safety.", "minimum_gwa": 88, "recommended_strand": "STEM", "trait_tag": "Creative"},
+    {"course_name": "BS Multimedia Arts", "description": "Multidisciplinary program combining graphic design, 2D/3D animation, and video production.", "minimum_gwa": 83, "recommended_strand": "HUMSS / TVL", "trait_tag": "Creative"},
+    {"course_name": "BA in Advertising Arts", "description": "Focuses on visual communication, branding, and creative strategies for marketing campaigns.", "minimum_gwa": 84, "recommended_strand": "HUMSS / GAS", "trait_tag": "Creative"},
+    {"course_name": "BA in Animation", "description": "Technical and artistic study of creating movement and storytelling through digital and traditional animation.", "minimum_gwa": 82, "recommended_strand": "TVL / HUMSS", "trait_tag": "Technical"},
+    {"course_name": "BA in Game Art and Design", "description": "Focuses on the visual elements of games, including character design, environment art, and UI/UX.", "minimum_gwa": 84, "recommended_strand": "TVL / STEM", "trait_tag": "Creative"},
+    {"course_name": "BA in Photography", "description": "Professional study of digital and analog photography, lighting, and visual composition.", "minimum_gwa": 80, "recommended_strand": "HUMSS / GAS", "trait_tag": "Creative"},
+    {"course_name": "BA in Music Production", "description": "Study of sound design, music theory, and digital tools for audio recording and engineering.", "minimum_gwa": 82, "recommended_strand": "HUMSS / TVL", "trait_tag": "Technical"},
+    {"course_name": "BA in Theater Arts", "description": "The art of performance, stage management, scriptwriting, and theatrical production.", "minimum_gwa": 80, "recommended_strand": "HUMSS", "trait_tag": "Social"},
+    {"course_name": "BS Landscape Architecture", "description": "Designing outdoor public areas, parks, and gardens to harmonize with the environment.", "minimum_gwa": 85, "recommended_strand": "STEM", "trait_tag": "Creative"},
+    {"course_name": "BA in Journalism", "description": "Specialized training in news gathering, ethics, and writing for print, broadcast, and digital media.", "minimum_gwa": 85, "recommended_strand": "HUMSS", "trait_tag": "Analytical"},
+
     # Social & Service
     {"course_name": "Bachelor of Elementary Education", "description": "Training for teachers specializing in primary school education and child development.", "minimum_gwa": 85, "recommended_strand": "HUMSS", "trait_tag": "Social"},
     {"course_name": "BA in Political Science", "description": "Study of government systems, political activities, and political behavior.", "minimum_gwa": 86, "recommended_strand": "HUMSS", "trait_tag": "Analytical"},
@@ -53,7 +96,53 @@ COURSES_POOL = [
     {"course_name": "Bachelor of Library and Information Science", "description": "Management of information resources in libraries, archives, and digital databases.", "minimum_gwa": 82, "recommended_strand": "HUMSS / ABM", "trait_tag": "Administrative"},
     {"course_name": "BS Community Development", "description": "Planning and implementing programs for community empowerment and poverty alleviation.", "minimum_gwa": 84, "recommended_strand": "HUMSS", "trait_tag": "Service"},
     {"course_name": "BS Forensic Science", "description": "Application of scientific principles to criminal investigation and legal evidence.", "minimum_gwa": 87, "recommended_strand": "STEM", "trait_tag": "Analytical"},
-    {"course_name": "Bachelor of Public Administration", "description": "Focuses on public policy, governance, and the management of government agencies.", "minimum_gwa": 85, "recommended_strand": "HUMSS / ABM", "trait_tag": "Leadership"}
+    {"course_name": "Bachelor of Public Administration", "description": "Focuses on public policy, governance, and the management of government agencies.", "minimum_gwa": 85, "recommended_strand": "HUMSS / ABM", "trait_tag": "Leadership"},
+    # Ito naman yung mga inadd ko sa Social & Service
+    {"course_name": "Bachelor of Secondary Education", "description": "Preparing teachers for high school levels with specialization in specific subject areas like Math, English, or Science.", "minimum_gwa": 85, "recommended_strand": "HUMSS", "trait_tag": "Leadership"},
+    {"course_name": "BS Criminology", "description": "Scientific study of crimes, criminals, and the operation of the justice system and law enforcement.", "minimum_gwa": 83, "recommended_strand": "HUMSS / GAS", "trait_tag": "Service"},
+    {"course_name": "Bachelor of Special Needs Education", "description": "Specialized training for teaching students with diverse learning needs and disabilities.", "minimum_gwa": 86, "recommended_strand": "HUMSS", "trait_tag": "Social"},
+    {"course_name": "BA in International Studies", "description": "Study of global issues, diplomacy, foreign languages, and international relations.", "minimum_gwa": 87, "recommended_strand": "HUMSS", "trait_tag": "Analytical"},
+    {"course_name": "BA in Sociology", "description": "Systematic study of social institutions, collective behavior, and social development.", "minimum_gwa": 84, "recommended_strand": "HUMSS", "trait_tag": "Analytical"},
+    {"course_name": "BA in Philosophy", "description": "Critical study of fundamental questions regarding existence, knowledge, values, and reason.", "minimum_gwa": 85, "recommended_strand": "HUMSS", "trait_tag": "Analytical"},
+    {"course_name": "Bachelor of Early Childhood Education", "description": "Focuses on the holistic development and education of children from birth to age eight.", "minimum_gwa": 84, "recommended_strand": "HUMSS", "trait_tag": "Social"},
+    {"course_name": "Bachelor of Physical Education", "description": "Training for educators in sports, fitness, and health-related school programs.", "minimum_gwa": 82, "recommended_strand": "HUMSS / Sports", "trait_tag": "Leadership"},
+    {"course_name": "BA in Linguistics", "description": "Scientific study of language structure, evolution, and its role in human communication.", "minimum_gwa": 85, "recommended_strand": "HUMSS", "trait_tag": "Analytical"},
+    {"course_name": "BS Environmental Planning", "description": "Interdisciplinary study of urban development, resource management, and sustainable land use.", "minimum_gwa": 86, "recommended_strand": "STEM / HUMSS", "trait_tag": "Analytical"},
+
+
+
+ #ADDING MORE COURSES HERE IF NEEDED 
+    # MARITIME & TRANSPORTATION (Sea-based Careers)
+    {"course_name": "BS Marine Transportation", "description": "Professional training for deck officers, focusing on navigation and ship management.", "minimum_gwa": 85, "recommended_strand": "STEM / TVL", "trait_tag": "Service"},
+    {"course_name": "BS Marine Engineering", "description": "Technical study of marine propulsion, power plants, and ship machinery maintenance.", "minimum_gwa": 85, "recommended_strand": "STEM / TVL", "trait_tag": "Technical"},
+
+    # AGRICULTURE, FORESTRY & VETERINARY (Environmental Science)
+    {"course_name": "BS Agriculture", "description": "Scientific study of crop production, livestock raising, and soil management.", "minimum_gwa": 82, "recommended_strand": "STEM / GAS", "trait_tag": "Science"},
+    {"course_name": "BS Forestry", "description": "Management and protection of forest resources, ecosystems, and wildlife conservation.", "minimum_gwa": 82, "recommended_strand": "STEM", "trait_tag": "Service"},
+    {"course_name": "BS Fisheries", "description": "Study of aquaculture, fish processing, and sustainable aquatic resource management.", "minimum_gwa": 82, "recommended_strand": "STEM", "trait_tag": "Science"},
+    {"course_name": "Doctor of Veterinary Medicine", "description": "Six-year program focused on the prevention, diagnosis, and treatment of animal diseases.", "minimum_gwa": 88, "recommended_strand": "STEM", "trait_tag": "Science"},
+
+    # AVIATION & AERONAUTICS (Air-based Careers)
+    {"course_name": "BS Aeronautical Engineering", "description": "Design, construction, and maintenance of aircraft and spacecraft structures.", "minimum_gwa": 88, "recommended_strand": "STEM", "trait_tag": "Technical"},
+    {"course_name": "BS Aircraft Maintenance Technology", "description": "Specialized training in the inspection, repair, and overhaul of aircraft engines and systems.", "minimum_gwa": 85, "recommended_strand": "STEM / TVL", "trait_tag": "Technical"},
+    {"course_name": "BS Aviation Electronics Technology", "description": "Focuses on the electronic systems (avionics) used on aircraft and satellites.", "minimum_gwa": 85, "recommended_strand": "STEM / TVL", "trait_tag": "Technical"},
+
+    # EARTH & PURE SCIENCES (Research & Exploration)
+    {"course_name": "BS Geology", "description": "Study of the solid Earth, its rocks, and the processes by which they change.", "minimum_gwa": 85, "recommended_strand": "STEM", "trait_tag": "Analytical"},
+    {"course_name": "BS Physics", "description": "Fundamental study of matter, energy, and the laws of the universe.", "minimum_gwa": 87, "recommended_strand": "STEM", "trait_tag": "Analytical"},
+    {"course_name": "BS Meteorology", "description": "Scientific study of the atmosphere and weather patterns for forecasting.", "minimum_gwa": 85, "recommended_strand": "STEM", "trait_tag": "Science"},
+
+    # FOOD, HOSPITALITY & VOCATIONAL (Applied Arts)
+    {"course_name": "BS Food Technology", "description": "The application of food science to the selection, preservation, and packaging of food.", "minimum_gwa": 84, "recommended_strand": "STEM / TVL", "trait_tag": "Technical"},
+    {"course_name": "BS Culinary Management", "description": "Combines culinary arts with business management for professional kitchen operations.", "minimum_gwa": 82, "recommended_strand": "TVL / ABM", "trait_tag": "Creative"},
+    {"course_name": "Bachelor of Technical-Vocational Teacher Education", "description": "Training for teachers in technical and vocational fields like welding, automotive, and electronics.", "minimum_gwa": 83, "recommended_strand": "TVL", "trait_tag": "Leadership"},
+
+
+
+
+
+
+
 ]
 
 QUESTIONS_POOL = [
@@ -93,5 +182,139 @@ QUESTIONS_POOL = [
     {"text": "Do you like experimenting with different interior design styles?", "category": "Assessment", "tag": "Creative"},
     {"text": "Are you concerned about social justice and community welfare?", "category": "Assessment", "tag": "Social"},
     {"text": "Do you enjoy cooking and experimenting with various recipes?", "category": "Assessment", "tag": "Service"},
-    {"text": "Are you interested in how historical events shape our current society?", "category": "Assessment", "tag": "Social"}
+    {"text": "Are you interested in how historical events shape our current society?", "category": "Assessment", "tag": "Social"},
+
+
+
+
+    # Karugtong ng QUESTIONS_POOL (Starting from #38 to #150)
+
+    # --- MARITIME & AVIATION
+    {"text": "Does the idea of navigating a ship across the open ocean excite you?", "category": "Assessment", "tag": "Service"},
+    {"text": "Are you interested in how aircraft stay stable during turbulent weather?", "category": "Assessment", "tag": "Technical"},
+    {"text": "Would you enjoy maintaining massive engines used in international vessels?", "category": "Assessment", "tag": "Technical"},
+    {"text": "Are you comfortable following a strict chain of command like in the military?", "category": "Assessment", "tag": "Leadership"},
+    {"text": "Do you find it easy to use maps and compasses for navigation?", "category": "Assessment", "tag": "Analytical"},
+    {"text": "Are you willing to work in a job that requires staying away from home for months?", "category": "Assessment", "tag": "Service"},
+    {"text": "Are you interested in how air traffic controllers manage multiple flights?", "category": "Assessment", "tag": "Administrative"},
+    {"text": "Do you like learning about specialized communication tools used in aviation?", "category": "Assessment", "tag": "Technical"},
+    {"text": "Are you fascinated by the mechanics of helicopter rotors and jet turbines?", "category": "Assessment", "tag": "Technical"},
+    {"text": "Would you enjoy ensuring the safety and security of passengers at sea?", "category": "Assessment", "tag": "Service"},
+    {"text": "Do you find the physics of buoyancy and water displacement interesting?", "category": "Assessment", "tag": "Science"},
+    {"text": "Are you good at maintaining focus for long hours during a watch or shift?", "category": "Assessment", "tag": "Service"},
+    {"text": "Are you interested in the logistics of global shipping and trade routes?", "category": "Assessment", "tag": "Business"},
+    {"text": "Do you like the idea of working in a uniform and professional setting?", "category": "Assessment", "tag": "Leadership"},
+    {"text": "Are you interested in how electronic sensors detect underwater obstacles?", "category": "Assessment", "tag": "Technical"},
+
+    # --- AGRICULTURE, VETERINARY & ENVIRONMENT (Questions 53 - 70) ---
+    {"text": "Do you enjoy caring for animals and observing their health?", "category": "Assessment", "tag": "Science"},
+    {"text": "Are you interested in how modern technology can improve crop yields?", "category": "Assessment", "tag": "Technical"},
+    {"text": "Do you find the study of plant diseases and pests fascinating?", "category": "Assessment", "tag": "Science"},
+    {"text": "Would you enjoy working in a farm or a large-scale agricultural plantation?", "category": "Assessment", "tag": "Service"},
+    {"text": "Are you curious about the nutritional needs of different livestock?", "category": "Assessment", "tag": "Science"},
+    {"text": "Do you want to help solve the problem of food security in the Philippines?", "category": "Assessment", "tag": "Leadership"},
+    {"text": "Are you interested in how forests protect our local watersheds?", "category": "Assessment", "tag": "Science"},
+    {"text": "Would you like to learn how to identify different species of trees and wildlife?", "category": "Assessment", "tag": "Science"},
+    {"text": "Do you find the process of reforestation and soil conservation meaningful?", "category": "Assessment", "tag": "Service"},
+    {"text": "Are you interested in the biology of fish and aquatic organisms?", "category": "Assessment", "tag": "Science"},
+    {"text": "Would you enjoy designing sustainable systems for fish farming?", "category": "Assessment", "tag": "Analytical"},
+    {"text": "Are you comfortable performing medical procedures on animals?", "category": "Assessment", "tag": "Science"},
+    {"text": "Do you like the idea of working in a veterinary clinic or a laboratory?", "category": "Assessment", "tag": "Science"},
+    {"text": "Are you interested in how climate change affects local agriculture?", "category": "Assessment", "tag": "Analytical"},
+    {"text": "Do you enjoy getting your hands dirty while working with soil and plants?", "category": "Assessment", "tag": "Service"},
+    {"text": "Are you interested in the economic side of selling farm products?", "category": "Assessment", "tag": "Business"},
+    {"text": "Would you like to study the chemical composition of fertilizers and pesticides?", "category": "Assessment", "tag": "Science"},
+    {"text": "Do you enjoy observing the life cycles of insects and animals?", "category": "Assessment", "tag": "Science"},
+
+    # PURE SCIENCES, CHEMISTRY & PHYSICS (Questions 71 - 85) ---
+    {"text": "Do you enjoy performing experiments in a laboratory setting?", "category": "Assessment", "tag": "Science"},
+    {"text": "Are you interested in how molecules interact during a chemical reaction?", "category": "Assessment", "tag": "Science"},
+    {"text": "Do you find the study of the periodic table and elements exciting?", "category": "Assessment", "tag": "Analytical"},
+    {"text": "Are you fascinated by the laws of motion and gravity?", "category": "Assessment", "tag": "Analytical"},
+    {"text": "Do you enjoy solving word problems using advanced algebra or calculus?", "category": "Assessment", "tag": "Analytical"},
+    {"text": "Are you interested in how energy is transformed from one form to another?", "category": "Assessment", "tag": "Science"},
+    {"text": "Do you like analyzing the properties of light, sound, and electricity?", "category": "Assessment", "tag": "Analytical"},
+    {"text": "Are you curious about the origin of the universe and stellar evolution?", "category": "Assessment", "tag": "Science"},
+    {"text": "Do you find it satisfying to prove a hypothesis through data?", "category": "Assessment", "tag": "Analytical"},
+    {"text": "Are you interested in the ethical implications of genetic engineering?", "category": "Assessment", "tag": "Social"},
+    {"text": "Do you like using microscopes to observe cellular structures?", "category": "Assessment", "tag": "Science"},
+    {"text": "Are you interested in how vaccines are developed in a lab?", "category": "Assessment", "tag": "Science"},
+    {"text": "Do you find it easy to memorize scientific names and classifications?", "category": "Assessment", "tag": "Analytical"},
+    {"text": "Are you curious about how materials behave at absolute zero temperature?", "category": "Assessment", "tag": "Science"},
+    {"text": "Do you enjoy reading about recent breakthroughs in modern science?", "category": "Assessment", "tag": "Analytical"},
+
+    # ADVANCED TECHNICAL & IT (Questions 86 - 100) ---
+    {"text": "Do you enjoy the challenge of learning new programming languages?", "category": "Assessment", "tag": "Technical"},
+    {"text": "Are you interested in how blockchain technology secures transactions?", "category": "Assessment", "tag": "Technical"},
+    {"text": "Do you like the idea of ethical hacking to protect company data?", "category": "Assessment", "tag": "Technical"},
+    {"text": "Are you fascinated by how robots can be programmed to perform tasks?", "category": "Assessment", "tag": "Technical"},
+    {"text": "Do you enjoy designing user interfaces for mobile applications?", "category": "Assessment", "tag": "Creative"},
+    {"text": "Are you interested in the infrastructure that powers the internet?", "category": "Assessment", "tag": "Technical"},
+    {"text": "Do you find it fun to optimize code so it runs faster?", "category": "Assessment", "tag": "Analytical"},
+    {"text": "Are you interested in how cloud storage systems operate?", "category": "Assessment", "tag": "Technical"},
+    {"text": "Do you enjoy troubleshooting software bugs for hours?", "category": "Assessment", "tag": "Analytical"},
+    {"text": "Are you interested in the hardware side of supercomputers?", "category": "Assessment", "tag": "Technical"},
+    {"text": "Do you like the idea of creating your own video game engine?", "category": "Assessment", "tag": "Technical"},
+    {"text": "Are you interested in how data encryption protects our privacy?", "category": "Assessment", "tag": "Technical"},
+    {"text": "Do you enjoy setting up complex home networks or smart devices?", "category": "Assessment", "tag": "Technical"},
+    {"text": "Are you curious about the future of quantum computing?", "category": "Assessment", "tag": "Technical"},
+    {"text": "Do you like automating your daily digital tasks using scripts?", "category": "Assessment", "tag": "Technical"},
+
+    #  LEGAL, POLITICS & PUBLIC SERVICE
+    {"text": "Do you enjoy debating about current events and social issues?", "category": "Assessment", "tag": "Analytical"},
+    {"text": "Are you interested in how the judicial system interprets laws?", "category": "Assessment", "tag": "Analytical"},
+    {"text": "Do you find it meaningful to serve your local community?", "category": "Assessment", "tag": "Service"},
+    {"text": "Are you interested in the history of government and democracy?", "category": "Assessment", "tag": "Analytical"},
+    {"text": "Would you enjoy working in a government office to help citizens?", "category": "Assessment", "tag": "Administrative"},
+    {"text": "Are you good at drafting formal letters or policy documents?", "category": "Assessment", "tag": "Administrative"},
+    {"text": "Do you enjoy analyzing political speeches for hidden meanings?", "category": "Assessment", "tag": "Social"},
+    {"text": "Are you interested in international relations and diplomacy?", "category": "Assessment", "tag": "Leadership"},
+    {"text": "Would you like to study the causes of crime in the Philippines?", "category": "Assessment", "tag": "Analytical"},
+    {"text": "Do you enjoy organizing community outreach programs?", "category": "Assessment", "tag": "Service"},
+    {"text": "Are you interested in the ethical standards of public officials?", "category": "Assessment", "tag": "Leadership"},
+    {"text": "Would you like to learn how to represent someone in a court of law?", "category": "Assessment", "tag": "Analytical"},
+    {"text": "Do you find the study of human rights laws empowering?", "category": "Assessment", "tag": "Social"},
+    {"text": "Are you good at researching historical facts for an argument?", "category": "Assessment", "tag": "Analytical"},
+    {"text": "Do you want to play a part in making national laws?", "category": "Assessment", "tag": "Leadership"},
+
+    # BUSINESS, ECONOMICS & REAL ESTATE
+    {"text": "Do you enjoy analyzing market trends to buy or sell stocks?", "category": "Assessment", "tag": "Business"},
+    {"text": "Are you interested in how inflation affects our daily expenses?", "category": "Assessment", "tag": "Business"},
+    {"text": "Do you like the idea of selling or managing real estate properties?", "category": "Assessment", "tag": "Business"},
+    {"text": "Are you good at convincing people to support your ideas?", "category": "Assessment", "tag": "Leadership"},
+    {"text": "Do you find the study of supply and demand interesting?", "category": "Assessment", "tag": "Business"},
+    {"text": "Are you interested in how big corporations manage their taxes?", "category": "Assessment", "tag": "Business"},
+    {"text": "Do you like the challenge of turning a small capital into a profit?", "category": "Assessment", "tag": "Business"},
+    {"text": "Are you curious about the legalities of international trade?", "category": "Assessment", "tag": "Administrative"},
+    {"text": "Do you enjoy creating business plans for potential startups?", "category": "Assessment", "tag": "Leadership"},
+    {"text": "Are you interested in how banks manage interest rates?", "category": "Assessment", "tag": "Business"},
+    {"text": "Do you find it satisfying to analyze a company's financial audit?", "category": "Assessment", "tag": "Business"},
+    {"text": "Are you interested in the psychology behind consumer spending?", "category": "Assessment", "tag": "Social"},
+    {"text": "Do you like the idea of working in a corporate office setting?", "category": "Assessment", "tag": "Administrative"},
+    {"text": "Are you good at identifying a good investment opportunity?", "category": "Assessment", "tag": "Business"},
+    {"text": "Do you enjoy managing people and delegating tasks?", "category": "Assessment", "tag": "Leadership"},
+
+    # CREATIVE, DESIGN & MEDIA
+    {"text": "Do you enjoy using digital tools to create illustrations?", "category": "Assessment", "tag": "Creative"},
+    {"text": "Are you interested in the principles of balance and symmetry in design?", "category": "Assessment", "tag": "Creative"},
+    {"text": "Do you like capturing stories through a camera lens?", "category": "Assessment", "tag": "Creative"},
+    {"text": "Are you interested in how sounds and music affect movie scenes?", "category": "Assessment", "tag": "Creative"},
+    {"text": "Do you enjoy scriptwriting or creating storyboards for videos?", "category": "Assessment", "tag": "Creative"},
+    {"text": "Are you interested in the history of fashion and apparel?", "category": "Assessment", "tag": "Social"},
+    {"text": "Do you enjoy designing the layout of a room or a building?", "category": "Assessment", "tag": "Creative"},
+    {"text": "Are you curious about the process of 3D printing and prototyping?", "category": "Assessment", "tag": "Technical"},
+    {"text": "Do you like writing blogs or creating social media content?", "category": "Assessment", "tag": "Creative"},
+    {"text": "Are you interested in how advertisements influence people?", "category": "Assessment", "tag": "Social"},
+    {"text": "Do you enjoy performing on stage or behind the scenes in theater?", "category": "Assessment", "tag": "Creative"},
+    {"text": "Are you interested in the science of sound engineering?", "category": "Assessment", "tag": "Technical"},
+    {"text": "Do you like sketching your ideas before building them?", "category": "Assessment", "tag": "Creative"},
+    {"text": "Are you fascinated by the architecture of ancient buildings?", "category": "Assessment", "tag": "Creative"},
+    {"text": "Do you enjoy collaborating with other artists on a project?", "category": "Assessment", "tag": "Social"},
+
+    # FINAL MISCELLANEOUS
+    {"text": "Do you find it rewarding to help someone learn a new skill?", "category": "Assessment", "tag": "Social"},
+    {"text": "Are you interested in forensic science and solving crimes?", "category": "Assessment", "tag": "Analytical"},
+    {"text": "Do you enjoy organizing your home library or digital files?", "category": "Assessment", "tag": "Administrative"},
+    {"text": "Are you willing to work in shifting schedules including night shifts?", "category": "Assessment", "tag": "Service"},
+    {"text": "Do you believe you have the stamina for a physically demanding job?", "category": "Assessment", "tag": "Service"}
 ]
