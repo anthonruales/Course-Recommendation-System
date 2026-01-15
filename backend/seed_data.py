@@ -1,20 +1,10 @@
 # seed_data.py
 
 COURSES_POOL = [
-    # Technical & Analytical
+    # --- TECHNICAL & ANALYTICAL ---
     {"course_name": "BS Computer Science", "description": "Study of computation, complexity, and advanced software design.", "minimum_gwa": 88, "recommended_strand": "STEM", "trait_tag": "Analytical"},
     {"course_name": "BS Information Technology", "description": "Focuses on the practical application of computing technology to business processes.", "minimum_gwa": 85, "recommended_strand": "STEM / TVL", "trait_tag": "Technical"},
     {"course_name": "BS Civil Engineering", "description": "Design and supervision of infrastructure projects like roads, bridges, and buildings.", "minimum_gwa": 90, "recommended_strand": "STEM", "trait_tag": "Analytical"},
-    {"course_name": "BS Accountancy", "description": "Detailed study of financial reporting, auditing, and taxation.", "minimum_gwa": 92, "recommended_strand": "ABM", "trait_tag": "Business"},
-    {"course_name": "BS Business Administration", "description": "Focuses on corporate operations, marketing, and financial management.", "minimum_gwa": 85, "recommended_strand": "ABM", "trait_tag": "Leadership"},
-    {"course_name": "BS Architecture", "description": "The art and science of designing physical structures and spaces.", "minimum_gwa": 88, "recommended_strand": "STEM", "trait_tag": "Creative"},
-    {"course_name": "BS Multimedia Arts", "description": "Combines digital design, animation, and visual storytelling.", "minimum_gwa": 83, "recommended_strand": "HUMSS / TVL", "trait_tag": "Creative"},
-    {"course_name": "BS Nursing", "description": "Professional healthcare training for patient care and medical support.", "minimum_gwa": 89, "recommended_strand": "STEM", "trait_tag": "Social"},
-    {"course_name": "BS Psychology", "description": "Scientific study of human behavior and mental processes.", "minimum_gwa": 87, "recommended_strand": "STEM / HUMSS", "trait_tag": "Social"},
-    {"course_name": "BS Criminology", "description": "Study of crime prevention, law enforcement, and criminal justice.", "minimum_gwa": 83, "recommended_strand": "HUMSS", "trait_tag": "Service"},
-    {"course_name": "BS Hospitality Management", "description": "Management of hotels, restaurants, and tourism-related businesses.", "minimum_gwa": 82, "recommended_strand": "ABM / TVL", "trait_tag": "Service"},
-    {"course_name": "Bachelor of Secondary Education", "description": "Training for teaching specific subjects in high school levels.", "minimum_gwa": 85, "recommended_strand": "HUMSS", "trait_tag": "Leadership"},
-    # Ito yung mga inadd ko pa sa baba
     {"course_name": "BS Computer Engineering", "description": "Combines electronics engineering and computer science to develop computer hardware and software systems.", "minimum_gwa": 88, "recommended_strand": "STEM", "trait_tag": "Technical"},
     {"course_name": "BS Electronics Engineering", "description": "Design and development of electronic circuits, communication systems, and automated devices.", "minimum_gwa": 88, "recommended_strand": "STEM", "trait_tag": "Technical"},
     {"course_name": "BS Mechanical Engineering", "description": "Focuses on the design, analysis, and manufacturing of mechanical systems and machinery.", "minimum_gwa": 88, "recommended_strand": "STEM", "trait_tag": "Technical"},
@@ -26,27 +16,23 @@ COURSES_POOL = [
     {"course_name": "BS Industrial Engineering", "description": "Focuses on optimizing complex processes, systems, and organizations to reduce waste.", "minimum_gwa": 86, "recommended_strand": "STEM", "trait_tag": "Analytical"},
     {"course_name": "BS Cybersecurity", "description": "Specialized training in protecting networks, devices, and data from digital attacks.", "minimum_gwa": 87, "recommended_strand": "STEM / TVL", "trait_tag": "Technical"},
 
-    # Business & Leadership
+    # --- BUSINESS & LEADERSHIP ---
+    {"course_name": "BS Accountancy", "description": "Detailed study of financial reporting, auditing, and taxation.", "minimum_gwa": 92, "recommended_strand": "ABM", "trait_tag": "Business"},
     {"course_name": "BS Business Administration major in Marketing Management", "description": "Focuses on market research, consumer behavior, and strategic brand positioning.", "minimum_gwa": 85, "recommended_strand": "ABM", "trait_tag": "Business"},
     {"course_name": "BS Business Administration major in Financial Management", "description": "Deals with investment decisions, capital markets, and corporate financial planning.", "minimum_gwa": 86, "recommended_strand": "ABM", "trait_tag": "Business"},
     {"course_name": "BS Business Administration major in Human Resource Management", "description": "Studies organizational behavior, employee relations, and talent development.", "minimum_gwa": 84, "recommended_strand": "ABM", "trait_tag": "Leadership"},
     {"course_name": "BS Entrepreneurship", "description": "Develops skills in identifying business opportunities and managing new ventures.", "minimum_gwa": 83, "recommended_strand": "ABM", "trait_tag": "Leadership"},
-    {"course_name": "BS Tourism Management", "description": "Focuses on travel industry operations, sustainable tourism, and heritage management.", "minimum_gwa": 82, "recommended_strand": "ABM / HUMSS", "trait_tag": "Administrative"},
     {"course_name": "BS Customs Administration", "description": "Focuses on tariff and customs laws, international trade, and logistics.", "minimum_gwa": 85, "recommended_strand": "ABM", "trait_tag": "Business"},
     {"course_name": "BS Real Estate Management", "description": "Deals with property appraisal, brokerage, and real estate development laws.", "minimum_gwa": 84, "recommended_strand": "ABM", "trait_tag": "Business"},
-    {"course_name": "BS Office Administration", "description": "Training in office management, secretarial duties, and corporate records handling.", "minimum_gwa": 80, "recommended_strand": "ABM / TVL", "trait_tag": "Administrative"},
-    # Ito naman yung sa Business & Leadership section na inadd ko
-    {"course_name": "BS Accountancy", "description": "Rigorous study of financial reporting, auditing, taxation, and accounting information systems.", "minimum_gwa": 90, "recommended_strand": "ABM", "trait_tag": "Business"},
     {"course_name": "BS Accounting Information Systems", "description": "Combines accounting principles with information technology to manage business financial data.", "minimum_gwa": 88, "recommended_strand": "ABM", "trait_tag": "Technical"},
     {"course_name": "BS Management Accounting", "description": "Focuses on providing internal financial information for business decision-making and strategic planning.", "minimum_gwa": 88, "recommended_strand": "ABM", "trait_tag": "Business"},
-    {"course_name": "BS Hospitality Management", "description": "Management of hotel operations, culinary arts, and restaurant service excellence.", "minimum_gwa": 82, "recommended_strand": "ABM / TVL", "trait_tag": "Administrative"},
     {"course_name": "BS Business Administration major in Operations Management", "description": "Focuses on the production and delivery of goods and services, logistics, and supply chain.", "minimum_gwa": 84, "recommended_strand": "ABM", "trait_tag": "Administrative"},
     {"course_name": "BS Business Economics", "description": "Study of economic theories and their practical application in business environments.", "minimum_gwa": 86, "recommended_strand": "ABM / STEM", "trait_tag": "Analytical"},
     {"course_name": "BS Agribusiness", "description": "Management and operations of agricultural businesses and the food supply chain.", "minimum_gwa": 83, "recommended_strand": "ABM / GAS", "trait_tag": "Business"},
     {"course_name": "BS Legal Management", "description": "Study of business administration combined with essential legal principles and procedures.", "minimum_gwa": 87, "recommended_strand": "ABM / HUMSS", "trait_tag": "Administrative"},
     {"course_name": "Bachelor of Public Administration", "description": "Preparation for leadership roles in government, non-profits, and public service organizations.", "minimum_gwa": 85, "recommended_strand": "HUMSS / ABM", "trait_tag": "Leadership"},
 
-    # Science & Healthcare
+    # --- SCIENCE & HEALTHCARE ---
     {"course_name": "BS Medical Technology", "description": "Focuses on laboratory analysis of blood, tissues, and fluids for disease diagnosis.", "minimum_gwa": 90, "recommended_strand": "STEM", "trait_tag": "Science"},
     {"course_name": "BS Pharmacy", "description": "Study of drug preparation, therapeutic uses, and pharmaceutical chemistry.", "minimum_gwa": 88, "recommended_strand": "STEM", "trait_tag": "Science"},
     {"course_name": "BS Physical Therapy", "description": "Rehabilitation science focusing on improving patient mobility and physical function.", "minimum_gwa": 89, "recommended_strand": "STEM", "trait_tag": "Social"},
@@ -55,7 +41,6 @@ COURSES_POOL = [
     {"course_name": "BS Radiologic Technology", "description": "Operating medical imaging equipment like X-rays, CT scans, and MRI.", "minimum_gwa": 85, "recommended_strand": "STEM", "trait_tag": "Technical"},
     {"course_name": "BS Nutrition and Dietetics", "description": "Study of food science and the role of nutrition in health and disease management.", "minimum_gwa": 85, "recommended_strand": "STEM", "trait_tag": "Science"},
     {"course_name": "BS Midwifery", "description": "Primary healthcare for women during pregnancy, childbirth, and the postpartum period.", "minimum_gwa": 83, "recommended_strand": "STEM / GAS", "trait_tag": "Service"},
-    # ito pa yung mga inadd ko sa Science & Healthcare
     {"course_name": "BS Nursing", "description": "Professional training in patient care, health promotion, and community health nursing.", "minimum_gwa": 89, "recommended_strand": "STEM", "trait_tag": "Social"},
     {"course_name": "BS Speech-Language Pathology", "description": "Specialized study in treating communication and swallowing disorders in patients.", "minimum_gwa": 90, "recommended_strand": "STEM", "trait_tag": "Social"},
     {"course_name": "BS Respiratory Therapy", "description": "Focuses on the treatment and care of patients with cardiopulmonary and breathing disorders.", "minimum_gwa": 86, "recommended_strand": "STEM", "trait_tag": "Technical"},
@@ -66,8 +51,9 @@ COURSES_POOL = [
     {"course_name": "BS Health Information Management", "description": "Combines medical science and IT to manage patient data and healthcare records.", "minimum_gwa": 83, "recommended_strand": "STEM / TVL", "trait_tag": "Administrative"},
     {"course_name": "BS Biotechnology", "description": "Using biological systems or living organisms to develop or create different products.", "minimum_gwa": 88, "recommended_strand": "STEM", "trait_tag": "Analytical"},
     {"course_name": "BS Exercise and Sports Science", "description": "Scientific study of human movement and how the body responds to physical activity.", "minimum_gwa": 82, "recommended_strand": "STEM / Sports", "trait_tag": "Social"},
+    {"course_name": "BS Psychology", "description": "Scientific study of human behavior and mental processes.", "minimum_gwa": 87, "recommended_strand": "STEM / HUMSS", "trait_tag": "Social"},
     
-    # Creative & Design
+    # --- CREATIVE & DESIGN ---
     {"course_name": "BS Interior Design", "description": "Planning and design of interior spaces to improve function and aesthetic quality of life.", "minimum_gwa": 85, "recommended_strand": "STEM / HUMSS", "trait_tag": "Creative"},
     {"course_name": "Bachelor of Fine Arts", "description": "Advanced study in traditional arts like painting, sculpture, and visual theory.", "minimum_gwa": 80, "recommended_strand": "HUMSS / GAS", "trait_tag": "Creative"},
     {"course_name": "BA in Communication", "description": "Study of media production, public relations, broadcasting, and digital journalism.", "minimum_gwa": 85, "recommended_strand": "HUMSS", "trait_tag": "Social"},
@@ -76,7 +62,6 @@ COURSES_POOL = [
     {"course_name": "BS Industrial Design", "description": "Designing mass-produced products focusing on user experience, form, and industrial function.", "minimum_gwa": 85, "recommended_strand": "STEM", "trait_tag": "Creative"},
     {"course_name": "BA in Digital Filmmaking", "description": "Comprehensive training in cinematography, scriptwriting, and post-production editing.", "minimum_gwa": 84, "recommended_strand": "HUMSS / TVL", "trait_tag": "Creative"},
     {"course_name": "BS Clothing Technology", "description": "The technical side of garment production, quality control, and clothing manufacturing systems.", "minimum_gwa": 84, "recommended_strand": "STEM / TVL", "trait_tag": "Technical"},
-    #ito pa yung mga inadd ko sa Creative & Design
     {"course_name": "BS Architecture", "description": "Integration of art and science in designing buildings and structures with focus on aesthetics and safety.", "minimum_gwa": 88, "recommended_strand": "STEM", "trait_tag": "Creative"},
     {"course_name": "BS Multimedia Arts", "description": "Multidisciplinary program combining graphic design, 2D/3D animation, and video production.", "minimum_gwa": 83, "recommended_strand": "HUMSS / TVL", "trait_tag": "Creative"},
     {"course_name": "BA in Advertising Arts", "description": "Focuses on visual communication, branding, and creative strategies for marketing campaigns.", "minimum_gwa": 84, "recommended_strand": "HUMSS / GAS", "trait_tag": "Creative"},
@@ -88,7 +73,12 @@ COURSES_POOL = [
     {"course_name": "BS Landscape Architecture", "description": "Designing outdoor public areas, parks, and gardens to harmonize with the environment.", "minimum_gwa": 85, "recommended_strand": "STEM", "trait_tag": "Creative"},
     {"course_name": "BA in Journalism", "description": "Specialized training in news gathering, ethics, and writing for print, broadcast, and digital media.", "minimum_gwa": 85, "recommended_strand": "HUMSS", "trait_tag": "Analytical"},
 
-    # Social & Service
+    # --- SOCIAL, EDUCATION & SERVICE ---
+    {"course_name": "BS Criminology", "description": "Study of crime prevention, law enforcement, and criminal justice.", "minimum_gwa": 83, "recommended_strand": "HUMSS", "trait_tag": "Service"},
+    {"course_name": "BS Hospitality Management", "description": "Management of hotels, restaurants, and tourism-related businesses.", "minimum_gwa": 82, "recommended_strand": "ABM / TVL", "trait_tag": "Service"},
+    {"course_name": "Bachelor of Secondary Education", "description": "Preparing teachers for high school levels with specialization in specific subject areas like Math, English, or Science.", "minimum_gwa": 85, "recommended_strand": "HUMSS", "trait_tag": "Leadership"},
+    {"course_name": "BS Tourism Management", "description": "Focuses on travel industry operations, sustainable tourism, and heritage management.", "minimum_gwa": 82, "recommended_strand": "ABM / HUMSS", "trait_tag": "Administrative"},
+    {"course_name": "BS Office Administration", "description": "Training in office management, secretarial duties, and corporate records handling.", "minimum_gwa": 80, "recommended_strand": "ABM / TVL", "trait_tag": "Administrative"},
     {"course_name": "Bachelor of Elementary Education", "description": "Training for teachers specializing in primary school education and child development.", "minimum_gwa": 85, "recommended_strand": "HUMSS", "trait_tag": "Social"},
     {"course_name": "BA in Political Science", "description": "Study of government systems, political activities, and political behavior.", "minimum_gwa": 86, "recommended_strand": "HUMSS", "trait_tag": "Analytical"},
     {"course_name": "BS Social Work", "description": "Focuses on social welfare, community organizing, and helping marginalized individuals.", "minimum_gwa": 84, "recommended_strand": "HUMSS", "trait_tag": "Social"},
@@ -96,10 +86,6 @@ COURSES_POOL = [
     {"course_name": "Bachelor of Library and Information Science", "description": "Management of information resources in libraries, archives, and digital databases.", "minimum_gwa": 82, "recommended_strand": "HUMSS / ABM", "trait_tag": "Administrative"},
     {"course_name": "BS Community Development", "description": "Planning and implementing programs for community empowerment and poverty alleviation.", "minimum_gwa": 84, "recommended_strand": "HUMSS", "trait_tag": "Service"},
     {"course_name": "BS Forensic Science", "description": "Application of scientific principles to criminal investigation and legal evidence.", "minimum_gwa": 87, "recommended_strand": "STEM", "trait_tag": "Analytical"},
-    {"course_name": "Bachelor of Public Administration", "description": "Focuses on public policy, governance, and the management of government agencies.", "minimum_gwa": 85, "recommended_strand": "HUMSS / ABM", "trait_tag": "Leadership"},
-    # Ito naman yung mga inadd ko sa Social & Service
-    {"course_name": "Bachelor of Secondary Education", "description": "Preparing teachers for high school levels with specialization in specific subject areas like Math, English, or Science.", "minimum_gwa": 85, "recommended_strand": "HUMSS", "trait_tag": "Leadership"},
-    {"course_name": "BS Criminology", "description": "Scientific study of crimes, criminals, and the operation of the justice system and law enforcement.", "minimum_gwa": 83, "recommended_strand": "HUMSS / GAS", "trait_tag": "Service"},
     {"course_name": "Bachelor of Special Needs Education", "description": "Specialized training for teaching students with diverse learning needs and disabilities.", "minimum_gwa": 86, "recommended_strand": "HUMSS", "trait_tag": "Social"},
     {"course_name": "BA in International Studies", "description": "Study of global issues, diplomacy, foreign languages, and international relations.", "minimum_gwa": 87, "recommended_strand": "HUMSS", "trait_tag": "Analytical"},
     {"course_name": "BA in Sociology", "description": "Systematic study of social institutions, collective behavior, and social development.", "minimum_gwa": 84, "recommended_strand": "HUMSS", "trait_tag": "Analytical"},
@@ -109,40 +95,22 @@ COURSES_POOL = [
     {"course_name": "BA in Linguistics", "description": "Scientific study of language structure, evolution, and its role in human communication.", "minimum_gwa": 85, "recommended_strand": "HUMSS", "trait_tag": "Analytical"},
     {"course_name": "BS Environmental Planning", "description": "Interdisciplinary study of urban development, resource management, and sustainable land use.", "minimum_gwa": 86, "recommended_strand": "STEM / HUMSS", "trait_tag": "Analytical"},
 
-
-
- #ADDING MORE COURSES HERE IF NEEDED 
-    # MARITIME & TRANSPORTATION (Sea-based Careers)
+    # --- MARITIME, AVIATION & AGRICULTURE ---
     {"course_name": "BS Marine Transportation", "description": "Professional training for deck officers, focusing on navigation and ship management.", "minimum_gwa": 85, "recommended_strand": "STEM / TVL", "trait_tag": "Service"},
     {"course_name": "BS Marine Engineering", "description": "Technical study of marine propulsion, power plants, and ship machinery maintenance.", "minimum_gwa": 85, "recommended_strand": "STEM / TVL", "trait_tag": "Technical"},
-
-    # AGRICULTURE, FORESTRY & VETERINARY (Environmental Science)
     {"course_name": "BS Agriculture", "description": "Scientific study of crop production, livestock raising, and soil management.", "minimum_gwa": 82, "recommended_strand": "STEM / GAS", "trait_tag": "Science"},
     {"course_name": "BS Forestry", "description": "Management and protection of forest resources, ecosystems, and wildlife conservation.", "minimum_gwa": 82, "recommended_strand": "STEM", "trait_tag": "Service"},
     {"course_name": "BS Fisheries", "description": "Study of aquaculture, fish processing, and sustainable aquatic resource management.", "minimum_gwa": 82, "recommended_strand": "STEM", "trait_tag": "Science"},
     {"course_name": "Doctor of Veterinary Medicine", "description": "Six-year program focused on the prevention, diagnosis, and treatment of animal diseases.", "minimum_gwa": 88, "recommended_strand": "STEM", "trait_tag": "Science"},
-
-    # AVIATION & AERONAUTICS (Air-based Careers)
     {"course_name": "BS Aeronautical Engineering", "description": "Design, construction, and maintenance of aircraft and spacecraft structures.", "minimum_gwa": 88, "recommended_strand": "STEM", "trait_tag": "Technical"},
     {"course_name": "BS Aircraft Maintenance Technology", "description": "Specialized training in the inspection, repair, and overhaul of aircraft engines and systems.", "minimum_gwa": 85, "recommended_strand": "STEM / TVL", "trait_tag": "Technical"},
     {"course_name": "BS Aviation Electronics Technology", "description": "Focuses on the electronic systems (avionics) used on aircraft and satellites.", "minimum_gwa": 85, "recommended_strand": "STEM / TVL", "trait_tag": "Technical"},
-
-    # EARTH & PURE SCIENCES (Research & Exploration)
     {"course_name": "BS Geology", "description": "Study of the solid Earth, its rocks, and the processes by which they change.", "minimum_gwa": 85, "recommended_strand": "STEM", "trait_tag": "Analytical"},
     {"course_name": "BS Physics", "description": "Fundamental study of matter, energy, and the laws of the universe.", "minimum_gwa": 87, "recommended_strand": "STEM", "trait_tag": "Analytical"},
     {"course_name": "BS Meteorology", "description": "Scientific study of the atmosphere and weather patterns for forecasting.", "minimum_gwa": 85, "recommended_strand": "STEM", "trait_tag": "Science"},
-
-    # FOOD, HOSPITALITY & VOCATIONAL (Applied Arts)
     {"course_name": "BS Food Technology", "description": "The application of food science to the selection, preservation, and packaging of food.", "minimum_gwa": 84, "recommended_strand": "STEM / TVL", "trait_tag": "Technical"},
     {"course_name": "BS Culinary Management", "description": "Combines culinary arts with business management for professional kitchen operations.", "minimum_gwa": 82, "recommended_strand": "TVL / ABM", "trait_tag": "Creative"},
     {"course_name": "Bachelor of Technical-Vocational Teacher Education", "description": "Training for teachers in technical and vocational fields like welding, automotive, and electronics.", "minimum_gwa": 83, "recommended_strand": "TVL", "trait_tag": "Leadership"},
-
-
-
-
-
-
-
 ]
 
 QUESTIONS_POOL = [
