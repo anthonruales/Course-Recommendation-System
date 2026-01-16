@@ -18,7 +18,7 @@ function ResultsView({ recommendation, onRetake, onBack }) {
   }
 
   const calculatePercentage = (score) => {
-    const maxScore = 20;
+    const maxScore = 30;
     const percentage = Math.min(100, Math.max(0, (score / maxScore) * 100));
     return Math.round(percentage);
   };
@@ -40,9 +40,9 @@ function ResultsView({ recommendation, onRetake, onBack }) {
           </p>
 
           {topTraits.length > 0 && (
-            <div className="traits-container" style={{ marginTop: '15px' }}>
-              <span style={{ color: '#94a3b8', fontSize: '14px', marginRight: '10px' }}>Top Detected Traits:</span>
-              {topTraits.slice(0, 5).map(([trait, count], idx) => (
+            <div className="traits-container">
+              <span style={{ color: '#94a3b8', fontSize: '14px' }}>Detected Traits:</span>
+              {topTraits.map(([trait, count], idx) => (
                 <span key={idx} className="activity-badge badge-profile">
                   {trait} ({count})
                 </span>
@@ -55,10 +55,10 @@ function ResultsView({ recommendation, onRetake, onBack }) {
         <div className="results-grid">
           {recommendation.recommendations.map((item, index) => {
             // DYNAMIC BORDER LOGIC
-            let rankBorderColor = '#6366f1'; // Default indigo
-            if (index === 0) rankBorderColor = '#10b981'; // Green for top
-            else if (index === 1) rankBorderColor = '#3b82f6'; // Blue for second
-            else if (index === 2) rankBorderColor = '#f59e0b'; // Amber for third
+            let rankBorderColor = 'rgba(240, 223, 223, 0.08)'; // Default color
+            if (index === 0) rankBorderColor = 'gold';
+            else if (index === 1) rankBorderColor = '#C0C0C0'; // Para saSilver 
+            else if (index === 2) rankBorderColor = '#CD7F32'; // Para sa Bronze
 
             return (
               <div 
@@ -71,15 +71,14 @@ function ResultsView({ recommendation, onRetake, onBack }) {
                     <span 
                       className="activity-badge" 
                       style={{ 
-                        color: '#818cf8', 
-                        border: `1px solid #818cf8`,
-                        background: 'transparent',
-                        fontSize: '12px'
+                        color: rankBorderColor, 
+                        border: `1px solid ${rankBorderColor}`,
+                        background: 'transparent' 
                       }}
                     >
-                      Rank #{index + 1}
+                      Rank #{index + 1} Match
                     </span>
-                    <h3 className="course-title" style={{ color: '#818cf8' }}>
+                    <h3 className="course-title" style={{ color: index === 0 ? 'gold' : '#818cf8' }}>
                       {item.course_name}
                     </h3>
                     {item.description && <p className="header-subtitle">{item.description}</p>}
@@ -96,9 +95,7 @@ function ResultsView({ recommendation, onRetake, onBack }) {
                 {/* WHY THIS FITS BOX */}
                 <div className="reasoning-box">
                   <div className="reasoning-label">Why this fits you:</div>
-                  <p className="reasoning-text">
-                    {item.reasoning}
-                  </p>
+                  <p className="reasoning-text">{item.reasoning}</p>
                 </div>
                 
                 {/* TAGS SECTION */}
