@@ -116,7 +116,10 @@ function Signup({ onSwitch }) {
             </div>
           </div>
 
-          <button type="submit" style={styles.signupBtn} disabled={loading}>
+          <button type="submit" style={styles.signupBtn} disabled={loading}
+            onMouseEnter={(e) => { if (!loading) { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 15px 25px rgba(99, 102, 241, 0.5)'; } }}
+            onMouseLeave={(e) => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = '0 10px 15px rgba(99, 102, 241, 0.3)'; }}
+          >
             {loading ? "Creating Account..." : "Register Now"}
           </button>
         </form>
@@ -131,16 +134,12 @@ function Signup({ onSwitch }) {
 
 const styles = {
   authWrapper: {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    width: '100vw',
-    height: '100vh',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    zIndex: 1000,
-    overflow: 'hidden'
+    width: '100%',
+    minHeight: '100vh',
+    padding: '20px'
   },
   glassCard: {
     background: 'rgba(255, 255, 255, 0.05)', 
@@ -180,7 +179,8 @@ const styles = {
     color: 'white',
     fontSize: '15px',
     outline: 'none',
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
+    transition: 'all 0.3s ease'
   },
   viewBtn: {
     position: 'absolute',
@@ -206,6 +206,7 @@ const styles = {
     cursor: 'pointer',
     marginTop: '15px',
     boxShadow: '0 10px 15px rgba(99, 102, 241, 0.3)',
+    transition: 'all 0.3s ease'
   },
   footerText: { marginTop: '25px', color: 'rgba(255,255,255,0.5)', fontSize: '14px' },
   link: { color: '#818cf8', fontWeight: '700', cursor: 'pointer', marginLeft: '5px' }

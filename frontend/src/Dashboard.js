@@ -50,17 +50,29 @@ function Dashboard({ userName, onLogout, onStart, onViewProfile, history }) {
           <div style={{...styles.navItem, ...styles.navActive}}>📊 Dashboard</div>
 
           <div style={styles.categoryLabel}>Academics</div>
-          <div style={styles.navItem} onClick={onViewProfile}>👤 Academic Profile</div>
+          <div style={styles.navItem} onClick={onViewProfile}
+            onMouseEnter={(e) => { e.target.style.background = 'rgba(255, 255, 255, 0.05)'; e.target.style.color = '#cbd5e1'; e.target.style.transform = 'translateX(4px)'; }}
+            onMouseLeave={(e) => { e.target.style.background = 'transparent'; e.target.style.color = '#94a3b8'; e.target.style.transform = 'translateX(0)'; }}
+          >👤 Academic Profile</div>
           <div style={{...styles.navItem, cursor: 'default', opacity: 0.7}}>
             📂 My Activity ({history ? history.length : 0})
           </div>
 
           <div style={styles.categoryLabel}>Support</div>
-          <div style={styles.navItem}>❓ Help Center</div>
-          <div style={styles.navItem}>💬 Feedback</div>
+          <div style={styles.navItem}
+            onMouseEnter={(e) => { e.target.style.background = 'rgba(255, 255, 255, 0.05)'; e.target.style.color = '#cbd5e1'; e.target.style.transform = 'translateX(4px)'; }}
+            onMouseLeave={(e) => { e.target.style.background = 'transparent'; e.target.style.color = '#94a3b8'; e.target.style.transform = 'translateX(0)'; }}
+          >❓ Help Center</div>
+          <div style={styles.navItem}
+            onMouseEnter={(e) => { e.target.style.background = 'rgba(255, 255, 255, 0.05)'; e.target.style.color = '#cbd5e1'; e.target.style.transform = 'translateX(4px)'; }}
+            onMouseLeave={(e) => { e.target.style.background = 'transparent'; e.target.style.color = '#94a3b8'; e.target.style.transform = 'translateX(0)'; }}
+          >💬 Feedback</div>
         </nav>
 
-        <button onClick={onLogout} style={styles.logoutBtn}>
+        <button onClick={onLogout} style={styles.logoutBtn}
+          onMouseEnter={(e) => { e.target.style.background = 'rgba(239, 68, 68, 0.1)'; e.target.style.borderColor = 'rgba(239, 68, 68, 0.4)'; e.target.style.transform = 'translateY(-2px)'; }}
+          onMouseLeave={(e) => { e.target.style.background = 'transparent'; e.target.style.borderColor = 'rgba(239, 68, 68, 0.2)'; e.target.style.transform = 'translateY(0)'; }}
+        >
           Logout
         </button>
       </aside>
@@ -93,6 +105,8 @@ function Dashboard({ userName, onLogout, onStart, onViewProfile, history }) {
                 ...((!hasAcademicInfo && !checkingProfile) ? {opacity: 0.7, cursor: 'not-allowed'} : {})
               }} 
               onClick={handleStartAssessment}
+              onMouseEnter={(e) => { if (hasAcademicInfo) { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 15px 30px rgba(99, 102, 241, 0.4)'; } }}
+              onMouseLeave={(e) => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = '0 10px 20px rgba(99, 102, 241, 0.2)'; }}
             >
               {checkingProfile ? 'Checking...' : (hasAcademicInfo ? 'Start New Assessment' : 'Complete Profile First')}
             </button>
@@ -110,6 +124,8 @@ function Dashboard({ userName, onLogout, onStart, onViewProfile, history }) {
                 <button 
                   style={styles.linkBtn}
                   onClick={() => setIsExpanded(!isExpanded)}
+                  onMouseEnter={(e) => { e.target.style.color = '#818cf8'; e.target.style.textDecoration = 'underline'; }}
+                  onMouseLeave={(e) => { e.target.style.color = '#6366f1'; e.target.style.textDecoration = 'none'; }}
                 >
                   {isExpanded ? 'Show Less' : 'View All'}
                 </button>
@@ -181,12 +197,14 @@ const styles = {
   categoryLabel: { fontSize: '11px', fontWeight: '700', color: '#64748b', textTransform: 'uppercase', letterSpacing: '1px', margin: '20px 0 10px 10px' },
   navItem: {
     padding: '12px 15px', borderRadius: '10px', color: '#94a3b8', cursor: 'pointer',
-    fontSize: '14px', marginBottom: '4px', transition: '0.2s'
+    fontSize: '14px', marginBottom: '4px', transition: 'all 0.3s ease',
+    ':hover': { background: 'rgba(255, 255, 255, 0.05)', color: '#cbd5e1', transform: 'translateX(4px)' }
   },
   navActive: { background: 'rgba(99, 102, 241, 0.1)', color: '#818cf8', fontWeight: '600' },
   logoutBtn: {
     padding: '12px', borderRadius: '10px', border: '1px solid rgba(239, 68, 68, 0.2)',
-    background: 'transparent', color: '#ef4444', cursor: 'pointer', fontWeight: '600'
+    background: 'transparent', color: '#ef4444', cursor: 'pointer', fontWeight: '600',
+    transition: 'all 0.3s ease'
   },
   mainContent: { flex: 1, padding: '40px 60px', overflowY: 'auto' },
   header: { marginBottom: '30px' },
@@ -201,20 +219,22 @@ const styles = {
   actionText: { color: '#cbd5e1', fontSize: '14px', maxWidth: '500px', margin: 0, lineHeight: '1.5' },
   startBtn: {
     background: '#6366f1', color: 'white', padding: '14px 24px', borderRadius: '12px',
-    border: 'none', fontWeight: '700', cursor: 'pointer', boxShadow: '0 10px 20px rgba(99, 102, 241, 0.2)'
+    border: 'none', fontWeight: '700', cursor: 'pointer', boxShadow: '0 10px 20px rgba(99, 102, 241, 0.2)',
+    transition: 'all 0.3s ease'
   },
   dashboardGrid: { display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '25px' },
   portalCard: {
     background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.08)',
-    borderRadius: '20px', padding: '25px'
+    borderRadius: '20px', padding: '25px', transition: 'all 0.3s ease'
   },
   cardHeader: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' },
   cardTitle: { fontSize: '17px', fontWeight: '700', margin: 0 },
-  linkBtn: { background: 'none', border: 'none', color: '#6366f1', fontWeight: '700', fontSize: '12px', cursor: 'pointer' },
+  linkBtn: { background: 'none', border: 'none', color: '#6366f1', fontWeight: '700', fontSize: '12px', cursor: 'pointer', transition: 'all 0.3s ease' },
   activityList: { display: 'flex', flexDirection: 'column', gap: '12px' },
   activityItem: {
     padding: '15px', background: 'rgba(255,255,255,0.02)', borderRadius: '12px',
-    border: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+    border: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+    transition: 'all 0.3s ease'
   },
   activityName: { fontSize: '14px', fontWeight: '600', color: 'white' },
   activityDate: { fontSize: '12px', color: '#64748b', marginTop: '4px' },

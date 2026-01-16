@@ -15,9 +15,19 @@ function Login({ onSwitch, onLoginSuccess }) {
         const res = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
           headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
         });
-        onLoginSuccess(res.data.name); 
+        
+        // Call backend to create/login Google user
+        const backendRes = await axios.post('http://localhost:8000/google-login', {
+          email: res.data.email,
+          name: res.data.name
+        });
+        
+        // Store userId in localStorage
+        localStorage.setItem('userId', backendRes.data.user_id);
+        onLoginSuccess(backendRes.data.user, res.data.email);
       } catch (err) {
-        alert("Google Login Failed.");
+        console.error('Google login error:', err);
+        alert("Google Login Failed: " + (err.response?.data?.detail || err.message));
       } finally {
         setLoading(false);
       }
@@ -51,6 +61,8 @@ function Login({ onSwitch, onLoginSuccess }) {
           style={styles.googleBtn} 
           onClick={() => handleGoogleLogin()}
           disabled={loading}
+          onMouseEnter={(e) => { if (!loading) { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.15)'; } }}
+          onMouseLeave={(e) => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = 'none'; }}
         >
           <img src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/24px.svg" alt="G" style={{width: 18}} />
           <span>Continue with Google</span>
@@ -94,7 +106,10 @@ function Login({ onSwitch, onLoginSuccess }) {
             </div>
           </div>
 
-          <button type="submit" style={styles.loginBtn} disabled={loading}>
+          <button type="submit" style={styles.loginBtn} disabled={loading}
+            onMouseEnter={(e) => { if (!loading) { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 15px 25px rgba(99, 102, 241, 0.5)'; } }}
+            onMouseLeave={(e) => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = '0 10px 15px rgba(99, 102, 241, 0.3)'; }}
+          >
             {loading ? "Verifying..." : "Login to Portal"}
           </button>
         </form>
@@ -109,17 +124,12 @@ function Login({ onSwitch, onLoginSuccess }) {
 
 const styles = {
   authWrapper: {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    width: '100vw',
-    height: '100vh',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    // No background color here so your App.js background shows through
-    zIndex: 1000,
-    overflow: 'hidden'
+    width: '100%',
+    minHeight: '100vh',
+    padding: '20px'
   },
   glassCard: {
     // TRANSPARENT GLASS
@@ -163,6 +173,7 @@ const styles = {
     gap: '12px',
     cursor: 'pointer',
     marginBottom: '20px',
+    transition: 'all 0.3s ease'
   },
   divider: { display: 'flex', alignItems: 'center', gap: '15px', margin: '25px 0' },
   line: { flex: 1, height: '1px', background: 'rgba(255,255,255,0.2)' },
@@ -179,7 +190,8 @@ const styles = {
     color: 'white',
     fontSize: '15px',
     outline: 'none',
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
+    transition: 'all 0.3s ease'
   },
   viewBtn: {
     position: 'absolute',
@@ -204,7 +216,8 @@ const styles = {
     fontSize: '16px',
     cursor: 'pointer',
     marginTop: '10px',
-    boxShadow: '0 10px 15px rgba(99, 102, 241, 0.3)'
+    boxShadow: '0 10px 15px rgba(99, 102, 241, 0.3)',
+    transition: 'all 0.3s ease'
   },
   footerText: { marginTop: '30px', color: 'rgba(255,255,255,0.5)', fontSize: '14px' },
   link: { color: '#818cf8', fontWeight: '700', cursor: 'pointer', marginLeft: '5px' }
