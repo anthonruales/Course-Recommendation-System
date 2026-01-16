@@ -27,13 +27,18 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
     
     console.log('Saving academic info for userId:', userId, 'with data:', formData);
     
-    // Save to backend
+    // Save to backend - include all profile fields
     fetch(`http://localhost:8000/user/${userId}/academic-info`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         gwa: parseFloat(formData.gwa),
-        strand: formData.strand
+        strand: formData.strand,
+        fullname: formData.fullname || null,
+        age: formData.age ? parseInt(formData.age) : null,
+        gender: formData.gender || null,
+        interests: formData.interests || null,
+        skills: formData.skills || null
       })
     })
     .then(res => res.json())

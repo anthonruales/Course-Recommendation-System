@@ -7,7 +7,7 @@ from typing import List, Optional
 from dotenv import load_dotenv
 import models, database
 from security import hash_password, verify_password
-from seed_data import COURSES_POOL, SITUATIONAL_QUESTIONS_POOL, ASSESSMENT_QUESTIONS_POOL, ACADEMIC_QUESTIONS_POOL
+from seed_data import COURSES_POOL, QUESTIONS_POOL
 from sqlalchemy import func
 from sqlalchemy.orm import Session, joinedload
 
@@ -29,23 +29,44 @@ def seed_database():
         print("🧹 Cleaning out old data...")
         db.query(models.Recommendation).delete()
         db.query(models.StudentAnswer).delete()
+        db.query(models.TestAttempt).delete()
         db.query(models.Option).delete()
         db.query(models.Question).delete()
+        db.query(models.Test).delete()
         db.query(models.Course).delete()
         db.commit()
+
+        # Create default test
+        default_test = models.Test(
+            test_name="Career Assessment",
+            test_type="assessment",
+            description="Comprehensive career interest and aptitude assessment to recommend college courses"
+        )
+        db.add(default_test)
+        db.flush()
+        print(f"🌱 Created default test with ID: {default_test.test_id}")
 
         if COURSES_POOL:
             print(f"🌱 Seeding {len(COURSES_POOL)} courses...")
             for c in COURSES_POOL:
                 tags = c.get("trait_tag", [])
                 tag_str = ", ".join(tags) if isinstance(tags, list) else str(tags)
-                db.add(models.Course(course_name=c.get("course_name"), description=c.get("description"), minimum_gwa=c.get("minimum_gwa"), recommended_strand=c.get("recommended_strand"), trait_tag=tag_str))
+                db.add(models.Course(
+                    course_name=c.get("course_name"), 
+                    description=c.get("description"), 
+                    minimum_gwa=c.get("minimum_gwa"), 
+                    required_strand=c.get("recommended_strand"), 
+                    trait_tag=tag_str
+                ))
 
-        all_questions = SITUATIONAL_QUESTIONS_POOL + ASSESSMENT_QUESTIONS_POOL + ACADEMIC_QUESTIONS_POOL
-        if all_questions:
-            print(f"🌱 Seeding {len(all_questions)} questions...")
-            for q in all_questions:
-                new_q = models.Question(question_text=q.get("text"), category=q.get("category"))
+        if QUESTIONS_POOL:
+            print(f"🌱 Seeding {len(QUESTIONS_POOL)} questions...")
+            for q in QUESTIONS_POOL:
+                new_q = models.Question(
+                    test_id=default_test.test_id,
+                    question_text=q.get("question"), 
+                    category=q.get("category")
+                )
                 db.add(new_q)
                 db.flush()
                 options_list = q.get("options", [])
@@ -90,21 +111,26 @@ class QuestionSchema(BaseModel):
 
 
 class AcademicInfoUpdate(BaseModel):
-    gwa: float  # GWA on 80-100 scale (e.g., 88.5, 92.0)
-    strand: str  # e.g., "STEM", "ABM", "HUMSS", "GAS", "TVL", "Sports"
+    gwa: float
+    strand: str
+    fullname: Optional[str] = None
+    age: Optional[int] = None
+    gender: Optional[str] = None
+    interests: Optional[str] = None
+    skills: Optional[str] = None
 
 class CourseCreate(BaseModel):
     course_name: str
     description: str
     trait_tag: str
-    recommended_strand: Optional[str] = None
+    required_strand: Optional[str] = None
     minimum_gwa: Optional[float] = None
 
 class CourseUpdate(BaseModel):
     course_name: Optional[str] = None
     description: Optional[str] = None
     trait_tag: Optional[str] = None
-    recommended_strand: Optional[str] = None
+    required_strand: Optional[str] = None
     minimum_gwa: Optional[float] = None
 
 class QuestionCreate(BaseModel):
@@ -129,8 +155,25 @@ class OptionUpdate(BaseModel):
 def signup(user: UserCreate, db: Session = Depends(get_db)):
     if db.query(models.User).filter(models.User.email == user.email).first():
         raise HTTPException(status_code=400, detail="Email already exists")
-    db.add(models.User(fullname=user.fullname, email=user.email, password_hash=hash_password(user.password)))
-    db.commit(); return {"message": "Success"}
+    
+    # Parse fullname into first_name and last_name
+    name_parts = user.fullname.strip().split(" ", 1)
+    first_name = name_parts[0] if name_parts else user.fullname
+    last_name = name_parts[1] if len(name_parts) > 1 else ""
+    
+    # Generate username from email
+    username = user.email.split("@")[0]
+    
+    new_user = models.User(
+        username=username,
+        first_name=first_name,
+        last_name=last_name,
+        email=user.email,
+        password_hash=hash_password(user.password)
+    )
+    db.add(new_user)
+    db.commit()
+    return {"message": "Success"}
 
 @app.post("/login")
 def login(user: UserLogin, db: Session = Depends(get_db)):
@@ -140,35 +183,62 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
     return {"user": db_user.fullname, "user_id": db_user.user_id}
 
 
-@app.put("/user/{user_id}/academic-info")
-def update_academic_info(user_id: int, info: AcademicInfoUpdate, db: Session = Depends(get_db)):
-    """Update user's academic info (GWA and Strand) for recommendation accuracy"""
+@app.get("/user/{user_id}/academic-info")
+def get_academic_info(user_id: int, db: Session = Depends(get_db)):
+    """Get user's academic info including GWA, Strand, and personal info"""
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     
+    return {
+        "user_id": user_id,
+        "fullname": user.fullname,
+        "academic_info": user.academic_info,
+        "has_academic_info": user.academic_info is not None and user.academic_info.get("gwa") is not None and user.academic_info.get("strand") is not None
+    }
+
+@app.put("/user/{user_id}/academic-info")
+def update_academic_info(user_id: int, info: AcademicInfoUpdate, db: Session = Depends(get_db)):
+    """Update user's academic info (GWA, Strand, and personal info) for recommendation accuracy"""
+    user = db.query(models.User).filter(models.User.user_id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    # Update fullname if provided (parse into first_name and last_name)
+    if info.fullname:
+        name_parts = info.fullname.strip().split(" ", 1)
+        user.first_name = name_parts[0] if name_parts else info.fullname
+        user.last_name = name_parts[1] if len(name_parts) > 1 else ""
+    
+    # Update academic_info JSON with all fields (D4 - Personal & Academic Database)
     user.academic_info = {
         "gwa": info.gwa,
-        "strand": info.strand
+        "strand": info.strand,
+        "age": info.age,
+        "gender": info.gender,
+        "interests": info.interests,
+        "skills": info.skills
     }
     db.commit()
     return {
-        "message": "Academic info updated successfully",
+        "message": "Profile updated successfully",
         "user_id": user_id,
+        "fullname": user.fullname,
         "academic_info": user.academic_info
     }
 
 @app.post("/recommend")
 def recommend(data: AssessmentSubmit, db: Session = Depends(get_db)):
     """
+    DFD Process 5-7: Take a Test → Rule Based-Logic → Decision Tree
     Enhanced recommendation system that considers:
     1. User's trait scores from assessment answers
-    2. User's academic info (GWA, Strand)
-    3. Course requirements and recommendations
+    2. User's academic info (GWA, Strand) from D4
+    3. Course requirements from D3 (Course Database)
     """
     print(f"📝 Received recommendation request for user {data.userId} with {len(data.answers)} answers")
     
-    # 1. Fetch user's academic info
+    # 1. Fetch user's academic info (D4 - Personal & Academic Database)
     user = db.query(models.User).filter(models.User.user_id == data.userId).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
@@ -179,7 +249,21 @@ def recommend(data: AssessmentSubmit, db: Session = Depends(get_db)):
         user_gwa = user.academic_info.get("gwa")
         user_strand = user.academic_info.get("strand")
     
-    # 2. Count traits from the assessment answers
+    # Get the default test
+    default_test = db.query(models.Test).filter(models.Test.test_type == "assessment").first()
+    if not default_test:
+        raise HTTPException(status_code=500, detail="No assessment test found in system")
+    
+    # Create a new test attempt (D5 - Test Attempt Database)
+    test_attempt = models.TestAttempt(
+        user_id=data.userId,
+        test_id=default_test.test_id
+    )
+    db.add(test_attempt)
+    db.flush()  # Get the attempt_id
+    print(f"📋 Created test attempt ID: {test_attempt.attempt_id}")
+    
+    # 2. Process 6: Fetch Q&A - Count traits from the assessment answers
     trait_scores = {}
     total_answers = len(data.answers)
     valid_answers = 0
@@ -190,6 +274,13 @@ def recommend(data: AssessmentSubmit, db: Session = Depends(get_db)):
         ).first()
         
         if option:
+            # Save student answer linked to test attempt
+            db.add(models.StudentAnswer(
+                attempt_id=test_attempt.attempt_id,
+                question_id=ans.questionId,
+                chosen_option_id=ans.chosenOptionId
+            ))
+            
             if option.trait_tag and str(option.trait_tag).strip().lower() not in ["none", ""]:
                 tag = option.trait_tag.strip()
                 trait_scores[tag] = trait_scores.get(tag, 0) + 1
@@ -201,12 +292,13 @@ def recommend(data: AssessmentSubmit, db: Session = Depends(get_db)):
     print(f"📊 Trait Scores: {trait_scores}")
     
     if not trait_scores:
+        db.rollback()
         raise HTTPException(
             status_code=400, 
             detail=f"Unable to generate recommendations. No personality traits were identified from your {total_answers} answers. Please ensure you've answered all questions."
         )
     
-    # 3. Get sorted traits (highest scoring traits first)
+    # 3. Process 7: Rule Based-Logic - Get sorted traits (highest scoring traits first)
     sorted_traits = sorted(trait_scores.items(), key=lambda x: x[1], reverse=True)
     top_3_traits = sorted_traits[:3]
     primary_trait = top_3_traits[0][0]
@@ -228,21 +320,21 @@ def recommend(data: AssessmentSubmit, db: Session = Depends(get_db)):
                     score += count * 3  # Weight by how many times this trait was selected
                     matched_traits.append(trait)
         
-        # Check GWA requirement
+        # Check GWA requirement (D3 - Course Database)
         gwa_match = True
         gwa_penalty = 0
         if user_gwa and course.minimum_gwa:
-            if user_gwa >= course.minimum_gwa:
+            if user_gwa >= float(course.minimum_gwa):
                 score += 2  # Bonus for meeting GWA
             else:
                 gwa_match = False
                 gwa_penalty = 5
         
-        # Check Strand recommendation
+        # Check Strand recommendation (D3 - Course Database)
         strand_match = True
         strand_penalty = 0
-        if user_strand and course.recommended_strand:
-            if user_strand in course.recommended_strand:
+        if user_strand and course.required_strand:
+            if user_strand in course.required_strand:
                 score += 2  # Bonus for matching strand
                 strand_match = True
             else:
@@ -278,97 +370,52 @@ def recommend(data: AssessmentSubmit, db: Session = Depends(get_db)):
     for rec in top_recommendations:
         course = rec["course"]
         
-        # Build detailed reasoning with structured factors
-        reasoning_factors = {
-            "strand_influence": None,
-            "academic_interest": None,
-            "gwa_assessment": None,
-            "trait_alignment": None,
-            "summary": ""
-        }
-        
-        # 1. Trait Alignment
+        # Build reasoning message
         if rec['matched_traits']:
-            reasoning_factors["trait_alignment"] = f"Matches your personality traits: {', '.join(rec['matched_traits'])}"
+            reasoning = f"This course aligns with your interests in {', '.join(rec['matched_traits'])}. "
         else:
-            reasoning_factors["trait_alignment"] = "Recommended based on your overall profile"
+            reasoning = f"This course is recommended based on your overall profile. "
         
-        # 2. Strand Influence - Always show course requirements, compare if user has provided info
-        if course.recommended_strand:
-            if user_strand:
-                if rec["strand_match"]:
-                    reasoning_factors["strand_influence"] = f"✓ Your strand ({user_strand}) perfectly aligns with the recommended strand ({course.recommended_strand})"
-                else:
-                    reasoning_factors["strand_influence"] = f"⚠ Your strand ({user_strand}) differs from recommended ({course.recommended_strand}), but alternative path is available"
+        if user_gwa and course.minimum_gwa:
+            if not rec["gwa_match"]:
+                reasoning += f"Note: Your GWA ({user_gwa}) is below the minimum requirement ({course.minimum_gwa}). "
+            elif user_gwa >= float(course.minimum_gwa):
+                reasoning += f"Your GWA ({user_gwa}) meets the requirement ({course.minimum_gwa}). "
+        
+        if user_strand and course.required_strand:
+            if not rec["strand_match"]:
+                reasoning += f"Your strand ({user_strand}) is different from recommended ({course.required_strand}), but you may still qualify. "
             else:
-                reasoning_factors["strand_influence"] = f"Recommended strand: {course.recommended_strand} (Please update your academic profile to see compatibility)"
-        else:
-            reasoning_factors["strand_influence"] = "No specific strand requirement for this course"
-        
-        # 3. GWA Assessment - Always show course requirements, compare if user has provided GWA
-        if course.minimum_gwa:
-            if user_gwa:
-                if rec["gwa_match"]:
-                    gwa_buffer = user_gwa - course.minimum_gwa
-                    reasoning_factors["gwa_assessment"] = f"✓ Your GWA ({user_gwa}) exceeds the minimum requirement ({course.minimum_gwa}) by {gwa_buffer:.2f} points"
-                else:
-                    gwa_gap = course.minimum_gwa - user_gwa
-                    reasoning_factors["gwa_assessment"] = f"⚠ Your GWA ({user_gwa}) is {gwa_gap:.2f} points below the minimum requirement ({course.minimum_gwa}). You may need improvement."
-            else:
-                reasoning_factors["gwa_assessment"] = f"Minimum GWA required: {course.minimum_gwa} (Please update your academic profile to see compatibility)"
-        else:
-            reasoning_factors["gwa_assessment"] = "No GWA requirement for this course"
-        
-        # 4. Academic Interest (traits derived from assessment answers)
-        if trait_scores:
-            top_user_traits = [t[0] for t in sorted(trait_scores.items(), key=lambda x: x[1], reverse=True)[:3]]
-            reasoning_factors["academic_interest"] = f"Your assessment revealed interests in: {', '.join(top_user_traits)}"
-        else:
-            reasoning_factors["academic_interest"] = "Unable to determine academic interests from assessment"
-        
-        # Build summary reasoning
-        reasoning = f"{reasoning_factors['trait_alignment']}. {reasoning_factors['strand_influence']} {reasoning_factors['gwa_assessment']} {reasoning_factors['academic_interest']}"
-        reasoning_factors["summary"] = reasoning
+                reasoning += f"Your strand ({user_strand}) matches perfectly! "
         
         recommendations.append({
             "course_name": course.course_name,
             "description": course.description,
             "matched_traits": rec["matched_traits"],
-            "minimum_gwa": course.minimum_gwa,
-            "recommended_strand": course.recommended_strand,
+            "minimum_gwa": float(course.minimum_gwa) if course.minimum_gwa else None,
+            "recommended_strand": course.required_strand,
             "reasoning": reasoning,
-            "reasoning_details": reasoning_factors,
             "compatibility_score": rec["score"]
         })
     
-    # 7. Save recommendations to database
+    # Process 8: Decision Tree - Save recommendations to database
     try:
-        # Clear old recommendations for this user
-        db.query(models.Recommendation).filter(models.Recommendation.user_id == data.userId).delete()
-        
-        # Save new recommendations
-        for rec in top_recommendations:
+        # Save new recommendations linked to this test attempt
+        for idx, rec in enumerate(top_recommendations):
             course = rec["course"]
             db.add(models.Recommendation(
+                attempt_id=test_attempt.attempt_id,
                 user_id=data.userId,
                 course_id=course.course_id,
-                top_trait=primary_trait,
-                reasoning=recommendations[top_recommendations.index(rec)]["reasoning"]
-            ))
-        
-        # Save student answers
-        db.query(models.StudentAnswer).filter(models.StudentAnswer.user_id == data.userId).delete()
-        for ans in data.answers:
-            db.add(models.StudentAnswer(
-                user_id=data.userId,
-                question_id=ans.questionId,
-                chosen_option_id=ans.chosenOptionId
+                reasoning=recommendations[idx]["reasoning"]
             ))
         
         db.commit()
+        print(f"✅ Saved {len(top_recommendations)} recommendations for attempt {test_attempt.attempt_id}")
     except Exception as e:
         print(f"❌ Error saving recommendations: {e}")
         db.rollback()
+        raise HTTPException(status_code=500, detail=f"Error saving recommendations: {str(e)}")
     
     return {
         "user_id": data.userId,
@@ -378,94 +425,19 @@ def recommend(data: AssessmentSubmit, db: Session = Depends(get_db)):
         "recommendations": recommendations
     }
 
-def get_suitable_courses(user: models.User, db: Session):
-    """Get courses suitable for the student's academic profile (GWA & Strand)"""
-    if not user.academic_info:
-        return []
-    
-    user_gwa = user.academic_info.get("gwa")
-    user_strand = user.academic_info.get("strand")
-    
-    suitable_courses = []
-    if user_gwa and user_strand:
-        suitable_courses = db.query(models.Course).filter(
-            models.Course.minimum_gwa <= user_gwa,
-            models.Course.recommended_strand.contains(user_strand)
-        ).all()
-    
-    return suitable_courses
-
-def extract_trait_tags(courses: List[models.Course]):
-    """Extract all unique trait tags from a list of courses"""
-    trait_tags = set()
-    for course in courses:
-        if course.trait_tag:
-            tags = [tag.strip() for tag in course.trait_tag.split(",")]
-            trait_tags.update(tags)
-    return trait_tags
-
 @app.get("/questions", response_model=List[QuestionSchema])
-def get_questions(user_id: Optional[int] = None, db: Session = Depends(get_db)):
-    """
-    Fetch 10 random questions from each category (situational, assessment, academic).
-    If user_id is provided, bias questions towards traits of suitable courses for that student.
-    """
-    relevant_traits = set()
-    
-    # If user provided, get their academic profile and find suitable courses
-    if user_id:
-        user = db.query(models.User).filter(models.User.user_id == user_id).first()
-        if user and user.academic_info:
-            suitable_courses = get_suitable_courses(user, db)
-            relevant_traits = extract_trait_tags(suitable_courses)
-    
-    def get_questions_by_category(category: str, limit: int = 10):
-        """Fetch questions, prioritizing those with relevant traits"""
-        query = db.query(models.Question)\
-            .options(joinedload(models.Question.options))\
-            .filter(models.Question.category == category)
-        
-        all_questions = query.all()
-        
-        # If we have relevant traits, prioritize questions with matching traits
-        if relevant_traits:
-            prioritized = []
-            non_prioritized = []
-            
-            for question in all_questions:
-                # Check if any option in this question has a relevant trait
-                question_traits = set()
-                for option in question.options:
-                    if option.trait_tag:
-                        question_traits.add(option.trait_tag)
-                
-                # If question has relevant traits, prioritize it
-                if question_traits & relevant_traits:
-                    prioritized.append(question)
-                else:
-                    non_prioritized.append(question)
-            
-            # Return prioritized questions first, fill remaining with random non-prioritized
-            selected = prioritized[:limit]
-            if len(selected) < limit:
-                remaining_needed = limit - len(selected)
-                selected.extend(non_prioritized[:remaining_needed])
-            
-            return selected[:limit]
-        else:
-            # No academic profile, return random questions
-            return query.order_by(func.random()).limit(limit).all()
-    
-    # Fetch from each category
-    situational = get_questions_by_category("Situational", 10)
-    assessment = get_questions_by_category("Assessment", 10)
-    academic = get_questions_by_category("Academic", 10)
-    
-    questions = situational + assessment + academic
+def get_questions(db: Session = Depends(get_db)):
+    # Using func.random() (for SQLite/Postgres) or func.rand() (for MySQL) 
+    # to pull 20 random questions from the database
+    questions = db.query(models.Question)\
+        .options(joinedload(models.Question.options))\
+        .order_by(func.random())\
+        .limit(20)\
+        .all()
     
     if not questions:
         raise HTTPException(status_code=404, detail="No questions found")
-    
+        
     return questions
 
 @app.get("/")
@@ -489,12 +461,12 @@ def get_course(course_id: int, db: Session = Depends(get_db)):
 
 @app.post("/admin/courses")
 def create_course(course: CourseCreate, db: Session = Depends(get_db)):
-    """Admin: Create new course"""
+    """Admin: Create new course (D3 - Course Database)"""
     new_course = models.Course(
         course_name=course.course_name,
         description=course.description,
         trait_tag=course.trait_tag,
-        recommended_strand=course.recommended_strand,
+        required_strand=course.required_strand,
         minimum_gwa=course.minimum_gwa
     )
     db.add(new_course)
@@ -504,7 +476,7 @@ def create_course(course: CourseCreate, db: Session = Depends(get_db)):
 
 @app.put("/admin/courses/{course_id}")
 def update_course(course_id: int, course: CourseUpdate, db: Session = Depends(get_db)):
-    """Admin: Update existing course"""
+    """Admin: Update existing course (D3 - Course Database)"""
     db_course = db.query(models.Course).filter(models.Course.course_id == course_id).first()
     if not db_course:
         raise HTTPException(status_code=404, detail="Course not found")
@@ -515,8 +487,8 @@ def update_course(course_id: int, course: CourseUpdate, db: Session = Depends(ge
         db_course.description = course.description
     if course.trait_tag is not None:
         db_course.trait_tag = course.trait_tag
-    if course.recommended_strand is not None:
-        db_course.recommended_strand = course.recommended_strand
+    if course.required_strand is not None:
+        db_course.required_strand = course.required_strand
     if course.minimum_gwa is not None:
         db_course.minimum_gwa = course.minimum_gwa
     
@@ -686,13 +658,13 @@ def get_user_details(user_id: int, db: Session = Depends(get_db)):
         "email": user.email,
         "academic_info": user.academic_info,
         "created_at": user.created_at,
-        "total_assessments": answers_count // 20 if answers_count > 0 else 0,
+        "total_assessments": db.query(models.TestAttempt).filter(models.TestAttempt.user_id == user_id).count(),
         "recommendations_count": len(recommendations),
         "latest_recommendations": [
             {
                 "course_id": rec.course_id,
-                "top_trait": rec.top_trait,
-                "reasoning": rec.reasoning
+                "reasoning": rec.reasoning,
+                "recommended_at": rec.recommended_at
             } for rec in recommendations
         ]
     }
@@ -704,9 +676,14 @@ def delete_user(user_id: int, db: Session = Depends(get_db)):
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     
-    # Delete related data
+    # Delete related data (cascade will handle most)
     db.query(models.Recommendation).filter(models.Recommendation.user_id == user_id).delete()
-    db.query(models.StudentAnswer).filter(models.StudentAnswer.user_id == user_id).delete()
+    
+    # Get all test attempts for user
+    attempts = db.query(models.TestAttempt).filter(models.TestAttempt.user_id == user_id).all()
+    for attempt in attempts:
+        db.query(models.StudentAnswer).filter(models.StudentAnswer.attempt_id == attempt.attempt_id).delete()
+    db.query(models.TestAttempt).filter(models.TestAttempt.user_id == user_id).delete()
     
     db.delete(user)
     db.commit()
@@ -720,14 +697,16 @@ def get_system_overview(db: Session = Depends(get_db)):
     total_users = db.query(models.User).count()
     total_courses = db.query(models.Course).count()
     total_questions = db.query(models.Question).count()
-    total_assessments = db.query(models.StudentAnswer).count() // 20  # Assuming 20 questions per assessment
+    total_test_attempts = db.query(models.TestAttempt).count()
     total_recommendations = db.query(models.Recommendation).count()
+    total_tests = db.query(models.Test).count()
     
     return {
         "total_users": total_users,
         "total_courses": total_courses,
         "total_questions": total_questions,
-        "total_assessments_taken": total_assessments,
+        "total_tests": total_tests,
+        "total_test_attempts": total_test_attempts,
         "total_recommendations_generated": total_recommendations
     }
 
@@ -739,7 +718,7 @@ def get_popular_courses(db: Session = Depends(get_db)):
     popular_courses = db.query(
         models.Course.course_name,
         models.Course.course_id,
-        sql_func.count(models.Recommendation.id).label('recommendation_count')
+        sql_func.count(models.Recommendation.recommendation_id).label('recommendation_count')
     ).join(
         models.Recommendation,
         models.Course.course_id == models.Recommendation.course_id
@@ -747,7 +726,7 @@ def get_popular_courses(db: Session = Depends(get_db)):
         models.Course.course_id,
         models.Course.course_name
     ).order_by(
-        sql_func.count(models.Recommendation.id).desc()
+        sql_func.count(models.Recommendation.recommendation_id).desc()
     ).limit(10).all()
     
     return {
@@ -792,31 +771,33 @@ def get_trait_distribution(db: Session = Depends(get_db)):
 
 @app.get("/admin/reports/user-activity")
 def get_user_activity(db: Session = Depends(get_db)):
-    """Admin: Get recent user activity"""
+    """Admin: Get recent user activity based on test attempts"""
     from sqlalchemy import func as sql_func
     
-    recent_assessments = db.query(
-        models.User.fullname,
+    recent_activity = db.query(
+        models.User.first_name,
+        models.User.last_name,
         models.User.email,
-        sql_func.max(models.StudentAnswer.taken_at).label('last_assessment')
+        sql_func.max(models.TestAttempt.taken_at).label('last_assessment')
     ).join(
-        models.StudentAnswer,
-        models.User.user_id == models.StudentAnswer.user_id
+        models.TestAttempt,
+        models.User.user_id == models.TestAttempt.user_id
     ).group_by(
         models.User.user_id,
-        models.User.fullname,
+        models.User.first_name,
+        models.User.last_name,
         models.User.email
     ).order_by(
-        sql_func.max(models.StudentAnswer.taken_at).desc()
+        sql_func.max(models.TestAttempt.taken_at).desc()
     ).limit(20).all()
     
     return {
         "recent_activity": [
             {
-                "fullname": activity.fullname,
+                "fullname": f"{activity.first_name} {activity.last_name}".strip(),
                 "email": activity.email,
                 "last_assessment": activity.last_assessment
-            } for activity in recent_assessments
+            } for activity in recent_activity
         ]
     }
 
@@ -843,32 +824,78 @@ def get_user_recommendations(user_id: int, db: Session = Depends(get_db)):
             result.append({
                 "course_name": course.course_name,
                 "description": course.description,
-                "top_trait": rec.top_trait,
                 "reasoning": rec.reasoning,
-                "minimum_gwa": course.minimum_gwa,
-                "recommended_strand": course.recommended_strand
+                "minimum_gwa": float(course.minimum_gwa) if course.minimum_gwa else None,
+                "required_strand": course.required_strand,
+                "recommended_at": rec.recommended_at
             })
     
     return {"user_id": user_id, "recommendations": result}
 
 @app.get("/user/{user_id}/assessment-history")
 def get_assessment_history(user_id: int, db: Session = Depends(get_db)):
-    """Get user's assessment answer history"""
+    """Get user's test attempts history (D5 - Test Attempt Database)"""
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     
-    answers = db.query(models.StudentAnswer).filter(
-        models.StudentAnswer.user_id == user_id
-    ).order_by(models.StudentAnswer.taken_at.desc()).all()
+    # Get all test attempts for this user
+    attempts = db.query(models.TestAttempt).filter(
+        models.TestAttempt.user_id == user_id
+    ).order_by(models.TestAttempt.taken_at.desc()).all()
     
-    # Group by assessment session (assume consecutive answers within 1 hour are same session)
+    history = []
+    for attempt in attempts:
+        # Count answers for this attempt
+        answer_count = db.query(models.StudentAnswer).filter(
+            models.StudentAnswer.attempt_id == attempt.attempt_id
+        ).count()
+        
+        # Get test name
+        test = db.query(models.Test).filter(
+            models.Test.test_id == attempt.test_id
+        ).first()
+        
+        history.append({
+            "attempt_id": attempt.attempt_id,
+            "test_name": test.test_name if test else "Assessment",
+            "taken_at": attempt.taken_at,
+            "questions_answered": answer_count
+        })
+    
     return {
         "user_id": user_id,
-        "total_answers": len(answers),
-        "assessments_taken": len(answers) // 20 if len(answers) > 0 else 0,
-        "last_assessment": answers[0].taken_at if answers else None
+        "total_attempts": len(attempts),
+        "history": history
     }
+
+# ========== ADMIN: TEST MANAGEMENT ==========
+
+@app.get("/admin/tests")
+def get_all_tests(db: Session = Depends(get_db)):
+    """Admin: Get all tests"""
+    tests = db.query(models.Test).all()
+    return {"tests": tests}
+
+@app.get("/admin/test-attempts")
+def get_all_test_attempts(db: Session = Depends(get_db)):
+    """Admin: Get all test attempts with user info"""
+    attempts = db.query(models.TestAttempt).order_by(models.TestAttempt.taken_at.desc()).limit(50).all()
+    
+    result = []
+    for attempt in attempts:
+        user = db.query(models.User).filter(models.User.user_id == attempt.user_id).first()
+        test = db.query(models.Test).filter(models.Test.test_id == attempt.test_id).first()
+        
+        result.append({
+            "attempt_id": attempt.attempt_id,
+            "user_name": user.fullname if user else "Unknown",
+            "user_email": user.email if user else "Unknown",
+            "test_name": test.test_name if test else "Unknown",
+            "taken_at": attempt.taken_at
+        })
+    
+    return {"test_attempts": result}
 
 # Run server
 if __name__ == "__main__":
