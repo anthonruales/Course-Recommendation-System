@@ -115,7 +115,7 @@ COURSES_POOL = [
 
 # seed_data.py (Continued)
 
-QUESTIONS_POOL = [
+SITUATIONAL_QUESTIONS_POOL = [
     {
         "text": "When working on a group project, which task do you naturally gravitate toward?",
         "category": "Situational",
@@ -205,5 +205,751 @@ QUESTIONS_POOL = [
             {"text": "Focus on the children who are struggling the most.", "tag": "Patient"},
             {"text": "Observe how they interact to understand their behavior.", "tag": "Behavioral-analytical"}
         ]
-    }
+    },
+    {
+        "text": "You have an opportunity to start your own business. What aspect excites you most?",
+        "category": "Situational",
+        "options": [
+            {"text": "Creating a unique product or service idea.", "tag": "Innovative"},
+            {"text": "Building and managing a strong team.", "tag": "Leadership"},
+            {"text": "Understanding the market and customer needs.", "tag": "Strategic"},
+            {"text": "Managing finances and tracking profitability.", "tag": "Fiscal"}
+        ]
+    },
+    {
+        "text": "A creative project needs visual representation. What is your contribution?",
+        "category": "Situational",
+        "options": [
+            {"text": "Create eye-catching graphics or illustrations.", "tag": "Visual-focused"},
+            {"text": "Design the overall layout and user interface.", "tag": "Design-heavy"},
+            {"text": "Develop an animated or interactive presentation.", "tag": "Digital-creative"},
+            {"text": "Choose colors, fonts, and aesthetic elements.", "tag": "Aesthetic"}
+        ]
+    },
+    {
+        "text": "You are part of a team addressing climate change. What role appeals to you?",
+        "category": "Situational",
+        "options": [
+            {"text": "Research environmental data and solutions.", "tag": "Conservation-minded"},
+            {"text": "Advocate for policy changes with government officials.", "tag": "Governance-focused"},
+            {"text": "Educate the public through media campaigns.", "tag": "Media-literate"},
+            {"text": "Develop eco-friendly technology or products.", "tag": "Innovative"}
+        ]
+    },
+    {
+        "text": "Your company needs to improve its software system. What is your approach?",
+        "category": "Situational",
+        "options": [
+            {"text": "Write efficient code and improve system architecture.", "tag": "Technical"},
+            {"text": "Ensure the system is secure and protects data.", "tag": "Defensive"},
+            {"text": "Make the interface user-friendly and intuitive.", "tag": "Design-heavy"},
+            {"text": "Test extensively to find and fix bugs.", "tag": "Methodical"}
+        ]
+    },
+    {
+        "text": "You are designing a new public park for your community. What is your main focus?",
+        "category": "Situational",
+        "options": [
+            {"text": "Create sustainable green spaces and protect ecosystems.", "tag": "Ecological"},
+            {"text": "Design aesthetically beautiful walking trails and features.", "tag": "Aesthetic"},
+            {"text": "Plan facilities that serve the elderly and disabled.", "tag": "Inclusive"},
+            {"text": "Calculate budget and manage construction logistics.", "tag": "Methodical"}
+        ]
+    },
+    {
+        "text": "A medical emergency occurs in your workplace. What do you do first?",
+        "category": "Situational",
+        "options": [
+            {"text": "Assess the situation and call emergency services immediately.", "tag": "Medical"},
+            {"text": "Comfort the affected person and offer emotional support.", "tag": "Empathetic"},
+            {"text": "Document details for the medical report.", "tag": "Detail-oriented"},
+            {"text": "Organize coworkers to help and manage the situation.", "tag": "Leadership"}
+        ]
+    },
+    {
+    "text": "You are tasked to organize a fundraising event. What is your first step?",
+    "category": "Situational",
+    "options": [
+        {"text": "Plan the event logistics and schedule.", "tag": "Methodical"},
+        {"text": "Design creative promotional materials.", "tag": "Creative"},
+        {"text": "Reach out to potential sponsors and donors.", "tag": "Interpersonal"},
+        {"text": "Manage the event budget and finances.", "tag": "Fiscal"}
+    ]
+},
+{
+    "text": "A friend is struggling with a difficult subject. How do you help?",
+    "category": "Situational",
+    "options": [
+        {"text": "Break down the topic into simple steps.", "tag": "Analytical"},
+        {"text": "Encourage and motivate them.", "tag": "Empathetic"},
+        {"text": "Find online resources or tutorials.", "tag": "Resourceful"},
+        {"text": "Organize a group study session.", "tag": "Collaborative"}
+    ]
+},
+{
+    "text": "You are leading a team with conflicting ideas. What do you do?",
+    "category": "Situational",
+    "options": [
+        {"text": "Facilitate a discussion to reach consensus.", "tag": "Leadership"},
+        {"text": "Analyze each idea for pros and cons.", "tag": "Analytical"},
+        {"text": "Encourage creative brainstorming.", "tag": "Creative"},
+        {"text": "Assign roles based on strengths.", "tag": "Organized"}
+    ]
+},
+{
+    "text": "You are given a tight deadline for a project. How do you proceed?",
+    "category": "Situational",
+    "options": [
+        {"text": "Prioritize tasks and create a timeline.", "tag": "Methodical"},
+        {"text": "Work extra hours to finish on time.", "tag": "Resilient"},
+        {"text": "Delegate tasks to team members.", "tag": "Leadership"},
+        {"text": "Find shortcuts to speed up the process.", "tag": "Practical"}
+    ]
+},
+{
+    "text": "A new technology is introduced at work. What is your reaction?",
+    "category": "Situational",
+    "options": [
+        {"text": "Learn how it works and teach others.", "tag": "Technical"},
+        {"text": "Find ways to integrate it into current processes.", "tag": "Innovative"},
+        {"text": "Ask questions to understand its benefits.", "tag": "Analytical"},
+        {"text": "Wait for others to try it first.", "tag": "Cautious"}
+    ]
+},
+{
+    "text": "You are asked to mediate a conflict between two colleagues.",
+    "category": "Situational",
+    "options": [
+        {"text": "Listen to both sides and find common ground.", "tag": "Empathetic"},
+        {"text": "Suggest a compromise solution.", "tag": "Practical"},
+        {"text": "Refer the issue to a supervisor.", "tag": "Administrative"},
+        {"text": "Encourage open communication.", "tag": "Interpersonal"}
+    ]
+},
+{
+    "text": "You are responsible for a group presentation. What is your focus?",
+    "category": "Situational",
+    "options": [
+        {"text": "Ensure the content is accurate and well-researched.", "tag": "Analytical"},
+        {"text": "Make the slides visually appealing.", "tag": "Aesthetic"},
+        {"text": "Practice public speaking for a confident delivery.", "tag": "Articulate"},
+        {"text": "Coordinate team members' contributions.", "tag": "Organized"}
+    ]
+},
+{
+    "text": "You are asked to design a new product. What is your approach?",
+    "category": "Situational",
+    "options": [
+        {"text": "Research market needs and trends.", "tag": "Strategic"},
+        {"text": "Sketch creative design concepts.", "tag": "Creative"},
+        {"text": "Test prototypes for functionality.", "tag": "Technical"},
+        {"text": "Gather feedback from potential users.", "tag": "Interpersonal"}
+    ]
+},
+{
+    "text": "You are assigned to write a report on a complex issue.",
+    "category": "Situational",
+    "options": [
+        {"text": "Gather and analyze all relevant data.", "tag": "Analytical"},
+        {"text": "Summarize findings in a clear, concise way.", "tag": "Communication-focused"},
+        {"text": "Use visuals to support your points.", "tag": "Visual-focused"},
+        {"text": "Organize the report into logical sections.", "tag": "Methodical"}
+    ]
+},
+{
+    "text": "You are asked to help with a community outreach program.",
+    "category": "Situational",
+    "options": [
+        {"text": "Plan activities that engage participants.", "tag": "Creative"},
+        {"text": "Promote the event on social media.", "tag": "Media-literate"},
+        {"text": "Coordinate volunteers and resources.", "tag": "Organized"},
+        {"text": "Evaluate the program's impact.", "tag": "Analytical"}
+    ]
+},
+{
+    "text": "You are given a leadership role in a volunteer project.",
+    "category": "Situational",
+    "options": [
+        {"text": "Motivate and inspire your team.", "tag": "Leadership"},
+        {"text": "Set clear goals and expectations.", "tag": "Methodical"},
+        {"text": "Solve problems as they arise.", "tag": "Practical"},
+        {"text": "Celebrate team achievements.", "tag": "Empathetic"}
+    ]
+},
+{
+    "text": "You are asked to create a budget for a school event.",
+    "category": "Situational",
+    "options": [
+        {"text": "List all possible expenses and income.", "tag": "Detail-oriented"},
+        {"text": "Negotiate discounts with suppliers.", "tag": "Negotiation-focused"},
+        {"text": "Allocate funds based on priorities.", "tag": "Strategic"},
+        {"text": "Track spending to stay within budget.", "tag": "Methodical"}
+    ]
+},
+{
+    "text": "You are part of a team developing a new app.",
+    "category": "Situational",
+    "options": [
+        {"text": "Write and test the code.", "tag": "Technical"},
+        {"text": "Design the user interface.", "tag": "Aesthetic"},
+        {"text": "Conduct user testing and gather feedback.", "tag": "Interpersonal"},
+        {"text": "Market the app to potential users.", "tag": "Media-literate"}
+    ]
+},
+{
+    "text": "You are asked to solve a sudden technical problem.",
+    "category": "Situational",
+    "options": [
+        {"text": "Diagnose the issue step by step.", "tag": "Analytical"},
+        {"text": "Consult documentation or experts.", "tag": "Resourceful"},
+        {"text": "Try creative solutions to fix it.", "tag": "Innovative"},
+        {"text": "Document the solution for future reference.", "tag": "Methodical"}
+    ]
+},
+]
+
+ASSESSMENT_QUESTIONS_POOL = [
+    {
+        "text": "What type of work environment brings out your best performance?",
+        "category": "Assessment",
+        "options": [
+            {"text": "Independent workspace where I can focus deeply.", "tag": "Analytical"},
+            {"text": "Collaborative team environment with constant interaction.", "tag": "Social"},
+            {"text": "Flexible environment where I can work creatively.", "tag": "Creative"},
+            {"text": "Structured environment with clear rules and procedures.", "tag": "Methodical"}
+        ]
+    },
+    {
+        "text": "How do you typically respond to challenges or obstacles?",
+        "category": "Assessment",
+        "options": [
+            {"text": "Analyze the problem logically to find solutions.", "tag": "Logical"},
+            {"text": "Think outside the box and try unconventional approaches.", "tag": "Innovative"},
+            {"text": "Ask others for input and collaborate on solutions.", "tag": "Interpersonal"},
+            {"text": "Persist and work methodically until resolved.", "tag": "Resilient"}
+        ]
+    },
+    {
+        "text": "Which activity energizes you the most?",
+        "category": "Assessment",
+        "options": [
+            {"text": "Learning new technical skills or technologies.", "tag": "Technical"},
+            {"text": "Helping others achieve their goals.", "tag": "Service"},
+            {"text": "Creating something visible and tangible.", "tag": "Practical"},
+            {"text": "Exploring abstract concepts and theories.", "tag": "Theoretical"}
+        ]
+    },
+    {
+        "text": "How do you prefer to learn new information?",
+        "category": "Assessment",
+        "options": [
+            {"text": "Through hands-on practice and experimentation.", "tag": "Practical"},
+            {"text": "By reading and studying theory-based materials.", "tag": "Theoretical"},
+            {"text": "By listening to explanations and discussions.", "tag": "Communication-focused"},
+            {"text": "By visual diagrams, charts, and demonstrations.", "tag": "Visual-focused"}
+        ]
+    },
+    {
+        "text": "What motivates you most in your career?",
+        "category": "Assessment",
+        "options": [
+            {"text": "Making a positive impact on society.", "tag": "Altruistic"},
+            {"text": "Achieving recognition and professional success.", "tag": "Leadership"},
+            {"text": "Solving complex problems and puzzles.", "tag": "Logical"},
+            {"text": "Creating beautiful or meaningful work.", "tag": "Creative"}
+        ]
+    },
+    {
+        "text": "How do you prefer to spend your free time?",
+        "category": "Assessment",
+        "options": [
+            {"text": "Reading books or exploring online resources.", "tag": "Theoretical"},
+            {"text": "Engaging in sports or outdoor activities.", "tag": "Active"},
+            {"text": "Creating art, music, or other creative projects.", "tag": "Creative"},
+            {"text": "Spending time with friends and family.", "tag": "Social"}
+        ]
+    },
+    {
+        "text": "When facing a difficult decision, what do you rely on?",
+        "category": "Assessment",
+        "options": [
+            {"text": "Data and logical analysis.", "tag": "Logical"},
+            {"text": "My intuition and gut feeling.", "tag": "Intuitive"},
+            {"text": "Advice from trusted people.", "tag": "Interpersonal"},
+            {"text": "Past experience and patterns.", "tag": "Analytical"}
+        ]
+    },
+    {
+        "text": "How important is financial security to you?",
+        "category": "Assessment",
+        "options": [
+            {"text": "Very important - I prioritize stable income.", "tag": "Practical"},
+            {"text": "Important but not my only concern.", "tag": "Balanced"},
+            {"text": "Less important than doing work I love.", "tag": "Passionate"},
+            {"text": "I pursue wealth and entrepreneurial success.", "tag": "Ambitious"}
+        ]
+    },
+    {
+        "text": "Do you prefer working independently or in teams?",
+        "category": "Assessment",
+        "options": [
+            {"text": "Strongly prefer working alone.", "tag": "Analytical"},
+            {"text": "Prefer working independently with occasional collaboration.", "tag": "Self-reliant"},
+            {"text": "Enjoy balanced mix of both.", "tag": "Flexible"},
+            {"text": "Strongly prefer team-based work.", "tag": "Social"}
+        ]
+    },
+    {
+        "text": "How do you handle criticism or negative feedback?",
+        "category": "Assessment",
+        "options": [
+            {"text": "I see it as valuable input for improvement.", "tag": "Resilient"},
+            {"text": "I need time to process it before responding.", "tag": "Reflective"},
+            {"text": "I get defensive and feel hurt.", "tag": "Sensitive"},
+            {"text": "I analyze it objectively and extract useful points.", "tag": "Logical"}
+        ]
+    },
+    {
+        "text": "What kind of people do you work best with?",
+        "category": "Assessment",
+        "options": [
+            {"text": "Detail-oriented and organized people.", "tag": "Methodical"},
+            {"text": "Creative and innovative thinkers.", "tag": "Creative"},
+            {"text": "Compassionate and empathetic individuals.", "tag": "Empathetic"},
+            {"text": "Ambitious and driven professionals.", "tag": "Leadership"}
+        ]
+    },
+    {
+        "text": "How comfortable are you with taking risks?",
+        "category": "Assessment",
+        "options": [
+            {"text": "I prefer to play it safe and minimize risk.", "tag": "Cautious"},
+            {"text": "I take calculated risks when warranted.", "tag": "Balanced"},
+            {"text": "I enjoy risk-taking and new ventures.", "tag": "Innovative"},
+            {"text": "I actively seek high-risk, high-reward situations.", "tag": "Ambitious"}
+        ]
+    },
+    {
+        "text": "What role do ethics and values play in your decisions?",
+        "category": "Assessment",
+        "options": [
+            {"text": "They are my primary guide in all decisions.", "tag": "Ethical"},
+            {"text": "They are important but balanced with practicality.", "tag": "Principled"},
+            {"text": "They matter but financial concerns come first.", "tag": "Practical"},
+            {"text": "I follow rules and regulations strictly.", "tag": "Methodical"}
+        ]
+    },
+    {
+        "text": "How do you define success?",
+        "category": "Assessment",
+        "options": [
+            {"text": "Making a positive difference in the world.", "tag": "Altruistic"},
+            {"text": "Achieving high income and status.", "tag": "Ambitious"},
+            {"text": "Having work-life balance and personal fulfillment.", "tag": "Balanced"},
+            {"text": "Mastering my craft and continuous improvement.", "tag": "Perfectionist"}
+        ]
+    },
+    {
+        "text": "What aspect of work frustrates you most?",
+        "category": "Assessment",
+        "options": [
+            {"text": "Lack of clarity or poorly defined goals.", "tag": "Analytical"},
+            {"text": "Repetitive or routine tasks.", "tag": "Creative"},
+            {"text": "Interpersonal conflicts or difficult people.", "tag": "Empathetic"},
+            {"text": "Inefficiency or disorganization.", "tag": "Methodical"}
+        ]
+    },
+    {
+        "text": "How important is recognition and appreciation to you?",
+        "category": "Assessment",
+        "options": [
+            {"text": "Very important - I need constant validation.", "tag": "Ambitious"},
+            {"text": "Important but not essential.", "tag": "Balanced"},
+            {"text": "Not very important - I work for intrinsic reasons.", "tag": "Principled"},
+            {"text": "I appreciate it but don't seek it.", "tag": "Humble"}
+        ]
+    },
+    {
+        "text": "How do you approach learning new skills?",
+        "category": "Assessment",
+        "options": [
+            {"text": "I prefer formal education and structured courses.", "tag": "Theoretical"},
+            {"text": "I learn best by doing and making mistakes.", "tag": "Practical"},
+            {"text": "I prefer to teach myself at my own pace.", "tag": "Self-reliant"},
+            {"text": "I learn by observing and copying others.", "tag": "Observational"}
+        ]
+    },
+    {
+        "text": "What inspires you to pursue a career?",
+        "category": "Assessment",
+        "options": [
+            {"text": "Passion for the subject matter.", "tag": "Passionate"},
+            {"text": "Potential for helping others.", "tag": "Altruistic"},
+            {"text": "Financial rewards and stability.", "tag": "Practical"},
+            {"text": "Personal growth and development.", "tag": "Ambitious"}
+        ]
+    },
+    {
+        "text": "How do you manage stress and pressure?",
+        "category": "Assessment",
+        "options": [
+            {"text": "I stay calm and break problems into smaller tasks.", "tag": "Methodical"},
+            {"text": "I talk it through with others for support.", "tag": "Social"},
+            {"text": "I take breaks and do activities I enjoy.", "tag": "Balanced"},
+            {"text": "I channel it into productive work.", "tag": "Resilient"}
+        ]
+    },
+    {
+        "text": "How do you view authority and rules?",
+        "category": "Assessment",
+        "options": [
+            {"text": "I respect them and follow them carefully.", "tag": "Methodical"},
+            {"text": "I follow them but question if they make sense.", "tag": "Analytical"},
+            {"text": "I see them as guidelines, not restrictions.", "tag": "Innovative"},
+            {"text": "I challenge them when I disagree.", "tag": "Independent"}
+        ]
+    },
+    {
+        "text": "What kind of projects excite you most?",
+        "category": "Assessment",
+        "options": [
+            {"text": "Projects with clear, measurable outcomes.", "tag": "Analytical"},
+            {"text": "Projects that involve creating something new.", "tag": "Creative"},
+            {"text": "Projects that help people or communities.", "tag": "Altruistic"},
+            {"text": "Projects that push my technical skills.", "tag": "Technical"}
+        ]
+    },
+    {
+        "text": "How do you prefer to communicate?",
+        "category": "Assessment",
+        "options": [
+            {"text": "Face-to-face conversations.", "tag": "Social"},
+            {"text": "Written communication for clarity.", "tag": "Detail-oriented"},
+            {"text": "Visual presentations and demonstrations.", "tag": "Visual-focused"},
+            {"text": "Data and reports.", "tag": "Analytical"}
+        ]
+    },
+    {
+        "text": "What level of competition do you enjoy?",
+        "category": "Assessment",
+        "options": [
+            {"text": "I thrive on competition and winning.", "tag": "Ambitious"},
+            {"text": "Moderate competition motivates me.", "tag": "Balanced"},
+            {"text": "I prefer collaboration over competition.", "tag": "Social"},
+            {"text": "Competition stresses me out.", "tag": "Sensitive"}
+        ]
+    },
+    {
+    "text": "How do you handle multitasking?",
+    "category": "Assessment",
+    "options": [
+        {"text": "I prefer focusing on one task at a time.", "tag": "Methodical"},
+        {"text": "I can juggle multiple tasks easily.", "tag": "Flexible"},
+        {"text": "I prioritize tasks by urgency.", "tag": "Organized"},
+        {"text": "I delegate when possible.", "tag": "Leadership"}
+    ]
+},
+{
+    "text": "What motivates you to keep learning?",
+    "category": "Assessment",
+    "options": [
+        {"text": "Curiosity about new things.", "tag": "Passionate"},
+        {"text": "Desire for career advancement.", "tag": "Ambitious"},
+        {"text": "Need to solve real-world problems.", "tag": "Practical"},
+        {"text": "Enjoyment of academic challenges.", "tag": "Theoretical"}
+    ]
+},
+{
+    "text": "How do you approach teamwork?",
+    "category": "Assessment",
+    "options": [
+        {"text": "I take the lead and organize.", "tag": "Leadership"},
+        {"text": "I support others and fill gaps.", "tag": "Supportive"},
+        {"text": "I contribute ideas and solutions.", "tag": "Creative"},
+        {"text": "I prefer to work independently.", "tag": "Self-reliant"}
+    ]
+},
+{
+    "text": "How do you respond to failure?",
+    "category": "Assessment",
+    "options": [
+        {"text": "I analyze what went wrong and try again.", "tag": "Resilient"},
+        {"text": "I seek feedback to improve.", "tag": "Growth-oriented"},
+        {"text": "I move on to new challenges.", "tag": "Flexible"},
+        {"text": "I feel discouraged but recover quickly.", "tag": "Sensitive"}
+    ]
+},
+{
+    "text": "What is your preferred way to celebrate success?",
+    "category": "Assessment",
+    "options": [
+        {"text": "Share achievements with others.", "tag": "Social"},
+        {"text": "Reflect privately on accomplishments.", "tag": "Introspective"},
+        {"text": "Set new goals right away.", "tag": "Ambitious"},
+        {"text": "Reward myself with a treat.", "tag": "Practical"}
+    ]
+},
+]
+
+ACADEMIC_QUESTIONS_POOL = [
+    {
+        "text": "Which subject has always come naturally to you in school?",
+        "category": "Academic",
+        "options": [
+            {"text": "Mathematics and quantitative subjects.", "tag": "Logical"},
+            {"text": "Science and laboratory work.", "tag": "Scientific"},
+            {"text": "Languages and literature.", "tag": "Communication-focused"},
+            {"text": "Arts and creative subjects.", "tag": "Creative"}
+        ]
+    },
+    {
+        "text": "In science class, what type of experiments interest you most?",
+        "category": "Academic",
+        "options": [
+            {"text": "Biology experiments with living organisms.", "tag": "Biological"},
+            {"text": "Chemistry experiments involving reactions and compounds.", "tag": "Molecular-focused"},
+            {"text": "Physics experiments about motion and energy.", "tag": "Mathematical-logic"},
+            {"text": "Environmental science field studies.", "tag": "Ecological"}
+        ]
+    },
+    {
+        "text": "How do you perform best on assignments and projects?",
+        "category": "Academic",
+        "options": [
+            {"text": "Individual work where I control every detail.", "tag": "Detail-oriented"},
+            {"text": "Group work where I can collaborate and share ideas.", "tag": "Collaborative"},
+            {"text": "Open-ended projects where I can be creative.", "tag": "Creative"},
+            {"text": "Structured assignments with clear requirements.", "tag": "Methodical"}
+        ]
+    },
+    {
+        "text": "Which academic skill is your strongest?",
+        "category": "Academic",
+        "options": [
+            {"text": "Written communication and essays.", "tag": "Writing-heavy"},
+            {"text": "Mathematical problem-solving.", "tag": "Logical"},
+            {"text": "Oral presentations and public speaking.", "tag": "Articulate"},
+            {"text": "Research and data analysis.", "tag": "Analytical"}
+        ]
+    },
+    {
+        "text": "What type of academic subject excites your curiosity?",
+        "category": "Academic",
+        "options": [
+            {"text": "How things are built and how systems work.", "tag": "Technical"},
+            {"text": "How people behave and think.", "tag": "Behavioral-analytical"},
+            {"text": "How society and cultures develop.", "tag": "Societal-analytical"},
+            {"text": "How technology can solve real-world problems.", "tag": "Innovative"}
+        ]
+    },
+    {
+        "text": "When studying for exams, what is your approach?",
+        "category": "Academic",
+        "options": [
+            {"text": "I create detailed notes and study guides.", "tag": "Methodical"},
+            {"text": "I form study groups and discuss with others.", "tag": "Social"},
+            {"text": "I use flashcards and memory techniques.", "tag": "Logical"},
+            {"text": "I review past exams and practice problems.", "tag": "Practical"}
+        ]
+    },
+    {
+        "text": "How do you handle difficult or complex topics?",
+        "category": "Academic",
+        "options": [
+            {"text": "I break them down into smaller parts.", "tag": "Analytical"},
+            {"text": "I seek help from teachers or tutors.", "tag": "Help-seeking"},
+            {"text": "I persist and figure it out myself.", "tag": "Resilient"},
+            {"text": "I visualize or create analogies to understand.", "tag": "Visual-focused"}
+        ]
+    },
+    {
+        "text": "What type of grading system motivates you?",
+        "category": "Academic",
+        "options": [
+            {"text": "Letter grades and comparative ranking.", "tag": "Competitive"},
+            {"text": "Detailed feedback on my work.", "tag": "Growth-oriented"},
+            {"text": "Pass/fail or completion-based grades.", "tag": "Practical"},
+            {"text": "Mastery-based assessment.", "tag": "Perfectionist"}
+        ]
+    },
+    {
+        "text": "How important is extracurricular involvement to you?",
+        "category": "Academic",
+        "options": [
+            {"text": "Very important - clubs and activities are essential.", "tag": "Social"},
+            {"text": "Somewhat important - I participate selectively.", "tag": "Balanced"},
+            {"text": "Not important - I focus on academics.", "tag": "Focused"},
+            {"text": "I lead clubs and take leadership roles.", "tag": "Leadership"}
+        ]
+    },
+    {
+        "text": "Which type of reading do you prefer?",
+        "category": "Academic",
+        "options": [
+            {"text": "Technical manuals and instructional texts.", "tag": "Technical"},
+            {"text": "Fiction and imaginative literature.", "tag": "Creative"},
+            {"text": "News and current events.", "tag": "Analytical"},
+            {"text": "Historical and biographical accounts.", "tag": "Theoretical"}
+        ]
+    },
+    {
+        "text": "How do you feel about memorization in academics?",
+        "category": "Academic",
+        "options": [
+            {"text": "I'm good at it and find it useful.", "tag": "Methodical"},
+            {"text": "I prefer understanding over memorization.", "tag": "Analytical"},
+            {"text": "I struggle with memorization.", "tag": "Creative"},
+            {"text": "I use memory aids and techniques.", "tag": "Practical"}
+        ]
+    },
+    {
+        "text": "What academic environment do you thrive in?",
+        "category": "Academic",
+        "options": [
+            {"text": "Large universities with diverse opportunities.", "tag": "Social"},
+            {"text": "Smaller institutions with close faculty relationships.", "tag": "Interpersonal"},
+            {"text": "Specialized or technical schools.", "tag": "Technical"},
+            {"text": "Flexible or online learning environments.", "tag": "Independent"}
+        ]
+    },
+    {
+        "text": "How do you approach research papers and projects?",
+        "category": "Academic",
+        "options": [
+            {"text": "I start early and plan thoroughly.", "tag": "Methodical"},
+            {"text": "I research deeply and create comprehensive work.", "tag": "Analytical"},
+            {"text": "I add creative elements to make it interesting.", "tag": "Creative"},
+            {"text": "I focus on meeting the requirements efficiently.", "tag": "Practical"}
+        ]
+    },
+    {
+        "text": "What type of teacher/professor helps you learn best?",
+        "category": "Academic",
+        "options": [
+            {"text": "Engaging storytellers who make topics interesting.", "tag": "Communication-focused"},
+            {"text": "Experts who provide deep technical knowledge.", "tag": "Technical"},
+            {"text": "Mentors who provide personalized feedback.", "tag": "Supportive"},
+            {"text": "Organized instructors with clear expectations.", "tag": "Methodical"}
+        ]
+    },
+    {
+        "text": "How do you view collaboration on academic work?",
+        "category": "Academic",
+        "options": [
+            {"text": "It's essential for learning and motivation.", "tag": "Social"},
+            {"text": "It's helpful but I prefer individual work.", "tag": "Independent"},
+            {"text": "It's necessary but can be challenging.", "tag": "Realistic"},
+            {"text": "I excel at bringing team strengths together.", "tag": "Leadership"}
+        ]
+    },
+    {
+        "text": "Which type of writing assignment appeals to you most?",
+        "category": "Academic",
+        "options": [
+            {"text": "Creative writing and storytelling.", "tag": "Creative"},
+            {"text": "Analytical and argumentative essays.", "tag": "Analytical"},
+            {"text": "Technical and instructional writing.", "tag": "Technical"},
+            {"text": "Reflective and personal narratives.", "tag": "Introspective"}
+        ]
+    },
+    {
+        "text": "How do you handle time management for schoolwork?",
+        "category": "Academic",
+        "options": [
+            {"text": "I plan ahead and work consistently.", "tag": "Methodical"},
+            {"text": "I work best under deadline pressure.", "tag": "Practical"},
+            {"text": "I struggle with procrastination.", "tag": "Realistic"},
+            {"text": "I balance work with other priorities well.", "tag": "Organized"}
+        ]
+    },
+    {
+        "text": "What motivates you to do well academically?",
+        "category": "Academic",
+        "options": [
+            {"text": "Getting good grades and high rankings.", "tag": "Ambitious"},
+            {"text": "Mastering the subject matter.", "tag": "Perfectionist"},
+            {"text": "Meeting expectations of parents or mentors.", "tag": "Dutiful"},
+            {"text": "Personal curiosity and love of learning.", "tag": "Passionate"}
+        ]
+    },
+    {
+        "text": "How comfortable are you with public speaking in class?",
+        "category": "Academic",
+        "options": [
+            {"text": "Very comfortable - I enjoy presentations.", "tag": "Articulate"},
+            {"text": "Somewhat comfortable with preparation.", "tag": "Practical"},
+            {"text": "Uncomfortable but I can do it.", "tag": "Resilient"},
+            {"text": "Very uncomfortable - I avoid it.", "tag": "Shy"}
+        ]
+    },
+    {
+        "text": "Which academic discipline interests you most?",
+        "category": "Academic",
+        "options": [
+            {"text": "Engineering and applied sciences.", "tag": "Technical"},
+            {"text": "Humanities and social sciences.", "tag": "Societal-analytical"},
+            {"text": "Business and economics.", "tag": "Strategic"},
+            {"text": "Health sciences and medicine.", "tag": "Medical"}
+        ]
+    },
+    {
+        "text": "How do you respond when you get a low grade?",
+        "category": "Academic",
+        "options": [
+            {"text": "I analyze what went wrong and improve.", "tag": "Growth-oriented"},
+            {"text": "I feel discouraged and lose motivation.", "tag": "Sensitive"},
+            {"text": "I question the grading fairness.", "tag": "Analytical"},
+            {"text": "I work harder to prove myself.", "tag": "Ambitious"}
+        ]
+    },
+    {
+    "text": "Which science subject do you find most interesting?",
+    "category": "Academic",
+    "options": [
+        {"text": "Biology", "tag": "Biological"},
+        {"text": "Chemistry", "tag": "Molecular-focused"},
+        {"text": "Physics", "tag": "Mathematical-logic"},
+        {"text": "Earth Science", "tag": "Ecological"}
+    ]
+},
+{
+    "text": "How do you approach group projects in school?",
+    "category": "Academic",
+    "options": [
+        {"text": "Take the lead and assign tasks.", "tag": "Leadership"},
+        {"text": "Focus on my assigned part.", "tag": "Detail-oriented"},
+        {"text": "Help coordinate and communicate.", "tag": "Collaborative"},
+        {"text": "Ensure deadlines are met.", "tag": "Methodical"}
+    ]
+},
+{
+    "text": "What type of math problems do you enjoy?",
+    "category": "Academic",
+    "options": [
+        {"text": "Solving equations and logic puzzles.", "tag": "Logical"},
+        {"text": "Applying math to real-life situations.", "tag": "Practical"},
+        {"text": "Exploring abstract concepts.", "tag": "Theoretical"},
+        {"text": "Working with statistics and data.", "tag": "Analytical"}
+    ]
+},
+{
+    "text": "How do you prepare for oral presentations?",
+    "category": "Academic",
+    "options": [
+        {"text": "Practice speaking in front of others.", "tag": "Articulate"},
+        {"text": "Create detailed notes and outlines.", "tag": "Methodical"},
+        {"text": "Use visuals to support my talk.", "tag": "Visual-focused"},
+        {"text": "Rehearse until I feel confident.", "tag": "Resilient"}
+    ]
+},
+{
+    "text": "Which academic competition would you join?",
+    "category": "Academic",
+    "options": [
+        {"text": "Math Olympiad", "tag": "Logical"},
+        {"text": "Science Fair", "tag": "Scientific"},
+        {"text": "Debate Tournament", "tag": "Articulate"},
+        {"text": "Art Contest", "tag": "Creative"}
+    ]
+},
 ]

@@ -30,7 +30,8 @@ function Login({ onSwitch, onLoginSuccess }) {
     setLoading(true);
     try {
       const res = await axios.post('http://localhost:8000/login', { email, password });
-      onLoginSuccess(res.data.user); 
+      localStorage.setItem('userId', res.data.user_id);
+      onLoginSuccess(res.data.user, email); 
     } catch (err) { 
       alert(err.response?.data?.detail || "Invalid login credentials."); 
     } finally {

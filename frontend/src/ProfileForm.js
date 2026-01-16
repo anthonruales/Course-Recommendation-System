@@ -11,6 +11,43 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
     });
   };
 
+  // Save handler with backend sync
+  const handleSaveProfile = () => {
+    // Validate required fields
+    if (!formData.gwa || !formData.strand) {
+      alert('Please fill in both GWA and SHS Strand to save your profile');
+      return;
+    }
+    
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      alert('User ID not found. Please log in again.');
+      return;
+    }
+    
+    console.log('Saving academic info for userId:', userId, 'with data:', formData);
+    
+    // Save to backend
+    fetch(`http://localhost:8000/user/${userId}/academic-info`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        gwa: parseFloat(formData.gwa),
+        strand: formData.strand
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log('✅ Academic info saved to backend:', data);
+      alert('✅ Profile updated successfully! Your academic information has been saved.');
+      onSave();
+    })
+    .catch(err => {
+      console.error('❌ Error saving to backend:', err);
+      alert('⚠️ Profile saved locally but failed to sync with server. Please try again.');
+    });
+  };
+
   // Loading state if data isn't ready
   if (formData === null) {
     return (
@@ -114,13 +151,13 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
                 <input 
                   style={styles.input} 
                   type="number" 
-                  step="0.01"
-                  min="1.0"
-                  max="5.0"
+                  step="0.1"
+                  min="80.0"
+                  max="100.0"
                   name="gwa"
                   value={formData?.gwa || ''} 
                   onChange={handleChange}
-                  placeholder="e.g. 1.75"
+                  placeholder="e.g. 88.5"
                 />
               </div>
             </div>
@@ -151,7 +188,7 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
             </div>
 
             <div style={styles.footer}>
-              <button type="submit" style={styles.saveBtn}>Update Profile Configuration</button>
+              <button type="button" onClick={handleSaveProfile} style={styles.saveBtn}>Update Profile Configuration</button>
             </div>
           </form>
 
