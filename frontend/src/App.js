@@ -23,9 +23,32 @@ function App() {
 
   useEffect(() => {
     if (user && user !== 'Admin User') {
-      const savedProfile = localStorage.getItem(`userProfile_${user}`);
-      if (savedProfile) {
-        setProfileData(JSON.parse(savedProfile));
+      // Load profile from backend
+      const userId = localStorage.getItem('userId');
+      if (userId) {
+        fetch(`http://localhost:8000/user/${userId}/academic-info`)
+          .then(res => res.json())
+          .then(data => {
+            if (data.academic_info) {
+              setProfileData({
+                fullname: data.fullname || '',
+                gwa: data.academic_info.gwa || '',
+                strand: data.academic_info.strand || '',
+                age: data.academic_info.age || '',
+                gender: data.academic_info.gender || '',
+                interests: data.academic_info.interests || '',
+                skills: data.academic_info.skills || ''
+              });
+            }
+          })
+          .catch(err => {
+            console.error('Error loading profile:', err);
+            // Fallback to localStorage
+            const savedProfile = localStorage.getItem(`userProfile_${user}`);
+            if (savedProfile) {
+              setProfileData(JSON.parse(savedProfile));
+            }
+          });
       }
       
       const savedHistory = localStorage.getItem(`assessmentHistory_${user}`);

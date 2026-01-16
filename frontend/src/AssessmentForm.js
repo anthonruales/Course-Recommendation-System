@@ -5,9 +5,36 @@ function AssessmentForm({ onBack, onShowResults }) {
   const [answers, setAnswers] = useState({});
   const [loading, setLoading] = useState(false);
   const [isFetching, setIsFetching] = useState(true);
+  const [profileCheck, setProfileCheck] = useState({ checking: true, hasProfile: false });
 
-  // GET RANDOMIZED QUESTIONS
+  // CHECK ACADEMIC PROFILE FIRST
   useEffect(() => {
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      fetch(`http://localhost:8000/user/${userId}/academic-info`)
+        .then(res => res.json())
+        .then(data => {
+          if (!data.has_academic_info) {
+            alert('⚠️ Please complete your Academic Profile first!\n\nYou need to fill in your GWA and SHS Strand before taking the assessment.');
+            onBack();
+          } else {
+            setProfileCheck({ checking: false, hasProfile: true });
+          }
+        })
+        .catch(err => {
+          console.error('Error checking academic info:', err);
+          setProfileCheck({ checking: false, hasProfile: false });
+        });
+    } else {
+      alert('User ID not found. Please log in again.');
+      onBack();
+    }
+  }, [onBack]);
+
+  // GET RANDOMIZED QUESTIONS (only if profile is complete)
+  useEffect(() => {
+    if (!profileCheck.hasProfile) return;
+    
     setIsFetching(true);
     fetch("http://localhost:8000/questions")
       .then(res => {
@@ -23,7 +50,7 @@ function AssessmentForm({ onBack, onShowResults }) {
         console.error("Fetch error:", err);
         setIsFetching(false);
       });
-  }, []);
+  }, [profileCheck.hasProfile]);
 
   const handleRadioChange = (questionId, optionId) => {
     setAnswers({ ...answers, [questionId]: optionId });

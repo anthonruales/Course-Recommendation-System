@@ -1,7 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function Dashboard({ userName, onLogout, onStart, onViewProfile, history }) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [hasAcademicInfo, setHasAcademicInfo] = useState(false);
+  const [checkingProfile, setCheckingProfile] = useState(true);
+
+  // Check if user has filled academic info
+  useEffect(() => {
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      fetch(`http://localhost:8000/user/${userId}/academic-info`)
+        .then(res => res.json())
+        .then(data => {
+          setHasAcademicInfo(data.has_academic_info || false);
+          setCheckingProfile(false);
+        })
+        .catch(err => {
+          console.error('Error checking academic info:', err);
+          setCheckingProfile(false);
+        });
+    } else {
+      setCheckingProfile(false);
+    }
+  }, []);
+
+  const handleStartAssessment = () => {
+    if (!hasAcademicInfo) {
+      alert('⚠️ Please complete your Academic Profile first!\n\nYou need to fill in your GWA and SHS Strand before taking the assessment.');
+      onViewProfile();
+      return;
+    }
+    onStart();
+  };
 
   // Keeps your original logic for history display
   const displayHistory = isExpanded ? history : history?.slice(0, 5);
@@ -51,9 +81,20 @@ function Dashboard({ userName, onLogout, onStart, onViewProfile, history }) {
                 Launch the assessment to begin the interest questionnaire. 
                 We will use your saved Academic Profile for the final analysis.
               </p>
+              {!checkingProfile && !hasAcademicInfo && (
+                <p style={{color: '#f59e0b', fontSize: '13px', marginTop: '10px'}}>
+                  ⚠️ Please complete your Academic Profile (GWA & Strand) before taking the assessment.
+                </p>
+              )}
             </div>
-            <button style={styles.startBtn} onClick={onStart}>
-              Start New Assessment
+            <button 
+              style={{
+                ...styles.startBtn,
+                ...((!hasAcademicInfo && !checkingProfile) ? {opacity: 0.7, cursor: 'not-allowed'} : {})
+              }} 
+              onClick={handleStartAssessment}
+            >
+              {checkingProfile ? 'Checking...' : (hasAcademicInfo ? 'Start New Assessment' : 'Complete Profile First')}
             </button>
           </div>
         </div>
