@@ -117,7 +117,10 @@ function AssessmentForm({ onBack, onShowResults }) {
         </div>
         <div style={styles.nav}>
           <div style={styles.navActive}>🧠 Career Assessment</div>
-          <div style={styles.navLink} onClick={onBack}>⬅ Exit</div>
+          <div style={styles.navLink} onClick={onBack}
+            onMouseEnter={(e) => { e.target.style.background = 'rgba(255, 255, 255, 0.05)'; e.target.style.color = '#cbd5e1'; }}
+            onMouseLeave={(e) => { e.target.style.background = 'transparent'; e.target.style.color = '#94a3b8'; }}
+          >⬅ Exit</div>
         </div>
       </aside>
 
@@ -147,7 +150,22 @@ function AssessmentForm({ onBack, onShowResults }) {
                         <label key={option.option_id} style={{
                           ...styles.option,
                           ...(answers[q.question_id] === option.option_id ? styles.selected : {})
-                        }}>
+                        }}
+                        onMouseEnter={(e) => { 
+                          if (answers[q.question_id] !== option.option_id) {
+                            e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; 
+                            e.currentTarget.style.borderColor = 'rgba(99, 102, 241, 0.3)';
+                            e.currentTarget.style.transform = 'translateX(4px)';
+                          }
+                        }}
+                        onMouseLeave={(e) => { 
+                          if (answers[q.question_id] !== option.option_id) {
+                            e.currentTarget.style.background = 'rgba(255,255,255,0.02)'; 
+                            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
+                            e.currentTarget.style.transform = 'translateX(0)';
+                          }
+                        }}
+                        >
                           <input 
                             type="radio" 
                             name={`q${q.question_id}`} 
@@ -164,12 +182,17 @@ function AssessmentForm({ onBack, onShowResults }) {
                   </div>
                 </div>
               ))}
-              <button type="submit" disabled={loading} style={styles.btn}>
-                {loading ? "Analyzing..." : 
-                 Object.keys(answers).length === questions.length 
-                   ? "Finish Assessment" 
-                   : `Answer All Questions (${Object.keys(answers).length}/${questions.length})`}
-              </button>
+              <div style={{ gridColumn: '1 / -1' }}>
+                <button type="submit" disabled={loading} style={styles.btn}
+                  onMouseEnter={(e) => { if (!loading) { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 15px 30px rgba(99, 102, 241, 0.4)'; } }}
+                  onMouseLeave={(e) => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = '0 10px 20px rgba(99, 102, 241, 0.2)'; }}
+                >
+                  {loading ? "Analyzing..." : 
+                   Object.keys(answers).length === questions.length 
+                     ? "Finish Assessment" 
+                     : `Answer All Questions (${Object.keys(answers).length}/${questions.length})`}
+                </button>
+              </div>
             </div>
           ) : (
             <div style={styles.error}>No questions found. Check your backend <code>/questions</code> route.</div>
@@ -181,27 +204,34 @@ function AssessmentForm({ onBack, onShowResults }) {
 }
 
 const styles = {
-  container: { display: 'flex', width: '100vw', height: '100vh', background: '#0a0a0c', color: 'white' },
-  sidebar: { width: '260px', borderRight: '1px solid #222', padding: '40px 20px', display: 'flex', flexDirection: 'column' },
+  container: { 
+    display: 'flex', 
+    width: '100vw', 
+    height: '100vh', 
+    background: '#020617',
+    backgroundImage: 'radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%)',
+    color: 'white' 
+  },
+  sidebar: { width: '260px', background: 'rgba(255, 255, 255, 0.02)', backdropFilter: 'blur(20px)', borderRight: '1px solid rgba(255, 255, 255, 0.08)', padding: '40px 20px', display: 'flex', flexDirection: 'column' },
   brand: { display: 'flex', alignItems: 'center', marginBottom: '50px' },
   logo: { width: '32px', height: '32px', background: '#6366f1', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', marginRight: '10px' },
   brandName: { fontSize: '18px', fontWeight: 'bold' },
   nav: { flex: 1 },
   navActive: { padding: '12px', background: 'rgba(99, 102, 241, 0.1)', color: '#818cf8', borderRadius: '8px', fontWeight: '600' },
-  navLink: { padding: '12px', color: '#666', cursor: 'pointer', marginTop: '10px' },
-  main: { flex: 1, padding: '60px', display: 'flex', flexDirection: 'column' },
+  navLink: { padding: '12px', color: '#94a3b8', cursor: 'pointer', marginTop: '10px', borderRadius: '10px', transition: 'all 0.3s ease' },
+  main: { flex: 1, padding: '40px 60px', display: 'flex', flexDirection: 'column', maxWidth: '1400px', margin: '0 auto', width: '100%' },
   header: { marginBottom: '40px' },
-  title: { fontSize: '32px', fontWeight: '800' },
-  subtitle: { color: '#666', marginTop: '10px' },
+  title: { fontSize: '32px', fontWeight: '800', color: 'white' },
+  subtitle: { color: '#94a3b8', marginTop: '10px' },
   progress: { color: '#818cf8', marginTop: '10px', fontSize: '16px', fontWeight: '500' },
-  form: { flex: 1, overflow: 'hidden', maxWidth: '700px' },
-  scrollArea: { height: '100%', overflowY: 'auto', paddingRight: '20px' },
-  card: { background: '#111', border: '1px solid #222', padding: '25px', borderRadius: '16px', marginBottom: '20px' },
-  questionText: { fontSize: '18px', fontWeight: '500', marginBottom: '20px' },
-  options: { display: 'flex', gap: '10px' },
-  option: { flex: 1, padding: '12px', border: '1px solid #333', borderRadius: '10px', textAlign: 'center', cursor: 'pointer', transition: '0.2s' },
-  selected: { background: '#6366f1', borderColor: '#6366f1' },
-  btn: { width: '100%', padding: '18px', background: '#6366f1', border: 'none', borderRadius: '12px', color: 'white', fontWeight: 'bold', cursor: 'pointer', marginTop: '20px' },
+  form: { flex: 1, overflow: 'hidden', width: '100%' },
+  scrollArea: { height: '100%', overflowY: 'auto', paddingRight: '20px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))', gap: '20px', alignContent: 'start' },
+  card: { background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.08)', borderRadius: '20px', padding: '30px', height: 'fit-content', transition: 'all 0.3s ease' },
+  questionText: { fontSize: '17px', fontWeight: '600', marginBottom: '20px', lineHeight: '1.5', color: 'white' },
+  options: { display: 'flex', flexDirection: 'column', gap: '12px' },
+  option: { padding: '14px 18px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', textAlign: 'left', cursor: 'pointer', transition: 'all 0.3s ease', fontSize: '15px', color: '#cbd5e1' },
+  selected: { background: 'rgba(99, 102, 241, 0.2)', borderColor: '#6366f1', color: 'white' },
+  btn: { width: '100%', padding: '18px', background: '#6366f1', border: 'none', borderRadius: '12px', color: 'white', fontWeight: '700', cursor: 'pointer', marginTop: '20px', boxShadow: '0 10px 20px rgba(99, 102, 241, 0.2)', transition: 'all 0.3s ease' },
   loading: { textAlign: 'center', color: '#6366f1', padding: '50px' },
   error: { color: '#ef4444', textAlign: 'center', padding: '50px' }
 };

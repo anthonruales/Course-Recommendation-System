@@ -854,5 +854,185 @@ QUESTIONS_POOL = [
             {"text": "Somewhat interested but not a priority", "tag": "Practical"},
             {"text": "Not particularly focused on environmental issues", "tag": "None"}
         ]
+    },
+    {
+        "question": "In group projects, what role do you naturally take?",
+        "category": "Team Dynamics",
+        "options": [
+            {"text": "Coordinating everyone's efforts and ensuring smooth collaboration", "tag": "Team-centric"},
+            {"text": "Leading the strategy and making key decisions", "tag": "Leadership"},
+            {"text": "Working independently on my assigned tasks", "tag": "Independent"},
+            {"text": "Supporting others and helping where needed", "tag": "Collaborative"}
+        ]
+    },
+    {
+        "question": "How do you feel about tasks that require long-term dedication?",
+        "category": "Patience Level",
+        "options": [
+            {"text": "I thrive on projects that take months or years to complete", "tag": "Patient"},
+            {"text": "I prefer quick results and fast-paced work", "tag": "Active"},
+            {"text": "I can handle both depending on the importance", "tag": "Adaptive"},
+            {"text": "I like steady progress with clear milestones", "tag": "Methodical"}
+        ]
+    },
+    {
+        "question": "When someone is struggling, what's your first instinct?",
+        "category": "Compassion Expression",
+        "options": [
+            {"text": "Offer emotional support and understanding", "tag": "Compassionate"},
+            {"text": "Help solve their practical problems", "tag": "Helping-others"},
+            {"text": "Listen actively without judgment", "tag": "Empathetic"},
+            {"text": "Give advice based on logic", "tag": "Logical"}
+        ]
+    },
+    {
+        "question": "What do you notice most about your surroundings?",
+        "category": "Observation Skills",
+        "options": [
+            {"text": "Small details and patterns that others miss", "tag": "Observational"},
+            {"text": "How things work and their functions", "tag": "Analytical"},
+            {"text": "The overall aesthetic and atmosphere", "tag": "Aesthetic-sense"},
+            {"text": "People's emotions and social dynamics", "tag": "Empathetic"}
+        ]
+    },
+    {
+        "question": "How do you feel about spending time in natural environments?",
+        "category": "Nature Connection",
+        "options": [
+            {"text": "It's essential for my wellbeing - I feel most alive outdoors", "tag": "Nature-connected"},
+            {"text": "I enjoy outdoor activities and adventure", "tag": "Outdoor-enthusiast"},
+            {"text": "I appreciate nature but prefer urban settings", "tag": "Office-based"},
+            {"text": "I'm more focused on indoor hobbies", "tag": "Introverted"}
+        ]
+    },
+    {
+        "question": "When you need to convince someone of your idea, you:",
+        "category": "Persuasion Style",
+        "options": [
+            {"text": "Use compelling arguments and influence their perspective", "tag": "Persuasive"},
+            {"text": "Present data and logical evidence", "tag": "Analytical"},
+            {"text": "Build relationships and find common ground", "tag": "Collaborative"},
+            {"text": "Demonstrate through actions and results", "tag": "Practical"}
+        ]
+    },
+    {
+        "question": "Do you easily spot patterns in data, behavior, or systems?",
+        "category": "Pattern Recognition",
+        "options": [
+            {"text": "Yes, I naturally see connections and recurring themes", "tag": "Pattern-recognition"},
+            {"text": "I'm good at analyzing structured data", "tag": "Quantitative"},
+            {"text": "I focus more on individual details than patterns", "tag": "Detail-focused"},
+            {"text": "I see the big picture rather than specific patterns", "tag": "Big-picture"}
+        ]
+    },
+    {
+        "question": "How important is contributing to your community?",
+        "category": "Community Engagement",
+        "options": [
+            {"text": "It's central to my life - I want to make a local impact", "tag": "Community-focused"},
+            {"text": "I prefer helping people through my professional work", "tag": "Service-oriented"},
+            {"text": "I care about broader social causes", "tag": "Advocacy"},
+            {"text": "I focus on personal and family wellbeing first", "tag": "Independent"}
+        ]
+    },
+    {
+        "question": "How do you approach people from different cultural backgrounds?",
+        "category": "Cultural Sensitivity",
+        "options": [
+            {"text": "I actively learn about and respect diverse perspectives", "tag": "Cultural-awareness"},
+            {"text": "I adapt my communication to different audiences", "tag": "Adaptive"},
+            {"text": "I treat everyone the same regardless of background", "tag": "Ethical"},
+            {"text": "I'm curious and ask questions to understand", "tag": "Inquisitive"}
+        ]
+    },
+    {
+        "question": "When faced with limited resources, you:",
+        "category": "Resourcefulness",
+        "options": [
+            {"text": "Find creative solutions and make the most of what's available", "tag": "Resourceful"},
+            {"text": "Innovate new approaches", "tag": "Innovative"},
+            {"text": "Plan carefully to optimize efficiency", "tag": "Strategic"},
+            {"text": "Work harder with what you have", "tag": "Resilient"}
+        ]
+    },
+    {
+        "question": "How would you describe your work habits?",
+        "category": "Discipline Assessment",
+        "options": [
+            {"text": "Highly structured with strict routines and self-control", "tag": "Disciplined"},
+            {"text": "Organized with clear systems", "tag": "Organized"},
+            {"text": "Methodical but flexible", "tag": "Methodical"},
+            {"text": "Adaptable to changing needs", "tag": "Adaptive"}
+        ]
+    },
+    {
+        "question": "How do you feel about helping others grow and develop?",
+        "category": "Nurturing Tendency",
+        "options": [
+            {"text": "I love guiding and caring for others' development", "tag": "Nurturing"},
+            {"text": "I enjoy mentoring and teaching", "tag": "Mentoring"},
+            {"text": "I prefer coaching toward specific goals", "tag": "Coaching"},
+            {"text": "I support others but focus on my own growth", "tag": "Independent"}
+        ]
+    },
+    {
+        "question": "When evaluating information, you:",
+        "category": "Critical Analysis",
+        "options": [
+            {"text": "Question assumptions and examine evidence critically", "tag": "Critical-thinking"},
+            {"text": "Break down complex ideas systematically", "tag": "Analytical"},
+            {"text": "Look for logical inconsistencies", "tag": "Logical"},
+            {"text": "Investigate thoroughly before forming opinions", "tag": "Investigative"}
+        ]
+    },
+    {
+        "question": "What's your approach to new experiences?",
+        "category": "Exploration Mindset",
+        "options": [
+            {"text": "I actively seek out novel experiences and discoveries", "tag": "Exploratory"},
+            {"text": "I'm curious but prefer structured learning", "tag": "Inquisitive"},
+            {"text": "I take calculated risks", "tag": "Risk-taking"},
+            {"text": "I prefer familiar and proven approaches", "tag": "Methodical"}
+        ]
+    },
+    {
+        "question": "If working in healthcare, what aspect appeals most?",
+        "category": "Healthcare Interaction",
+        "options": [
+            {"text": "Direct interaction and care with patients", "tag": "Patient-interaction"},
+            {"text": "Focus on patient wellbeing and recovery", "tag": "Patient-focused"},
+            {"text": "Medical research and laboratory work", "tag": "Laboratory"},
+            {"text": "Health policy and system improvement", "tag": "Governance-focus"}
+        ]
+    },
+    {
+        "question": "How do you make important decisions?",
+        "category": "Data Orientation",
+        "options": [
+            {"text": "Based on data analysis and evidence", "tag": "Data-driven"},
+            {"text": "Using numbers and statistical reasoning", "tag": "Quantitative"},
+            {"text": "Through logical reasoning", "tag": "Logical"},
+            {"text": "Combining data with intuition", "tag": "Strategic"}
+        ]
+    },
+    {
+        "question": "How comfortable are you working directly with clients?",
+        "category": "Client Relations",
+        "options": [
+            {"text": "I thrive on building client relationships", "tag": "Client-interaction"},
+            {"text": "I enjoy social interaction in professional settings", "tag": "Extroverted"},
+            {"text": "I prefer collaborative team environments", "tag": "Collaborative"},
+            {"text": "I work better behind the scenes", "tag": "Independent"}
+        ]
+    },
+    {
+        "question": "How important is physical fitness to you?",
+        "category": "Physical Wellness",
+        "options": [
+            {"text": "It's a core part of my lifestyle and identity", "tag": "Physical-fitness"},
+            {"text": "I'm active and enjoy sports", "tag": "Athletic-passion"},
+            {"text": "I maintain basic health but it's not a focus", "tag": "Health-conscious"},
+            {"text": "I prioritize mental over physical activities", "tag": "Contemplative"}
+        ]
     }
 ]
