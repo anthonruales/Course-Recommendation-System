@@ -1310,12 +1310,12 @@ def get_user_recommendations(user_id: int, db: Session = Depends(get_db)):
 
 @app.get("/user/{user_id}/assessment-history")
 def get_assessment_history(user_id: int, db: Session = Depends(get_db)):
-    """Get user's test attempts history (D5 - Test Attempt Database)"""
+    """Get user's test attempts history with recommendations and answered questions (D5 - Test Attempt Database)"""
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     
-    # Get all test attempts for this user
+    # Get all test attempts for this user with recommendations
     attempts = db.query(models.TestAttempt).filter(
         models.TestAttempt.user_id == user_id
     ).order_by(models.TestAttempt.taken_at.desc()).all()
@@ -1332,11 +1332,57 @@ def get_assessment_history(user_id: int, db: Session = Depends(get_db)):
             models.Test.test_id == attempt.test_id
         ).first()
         
+        # Get all student answers with questions and options
+        student_answers = db.query(models.StudentAnswer).filter(
+            models.StudentAnswer.attempt_id == attempt.attempt_id
+        ).all()
+        
+        answered_questions = []
+        for answer in student_answers:
+            question = db.query(models.Question).filter(
+                models.Question.question_id == answer.question_id
+            ).first()
+            
+            chosen_option = db.query(models.Option).filter(
+                models.Option.option_id == answer.chosen_option_id
+            ).first()
+            
+            if question and chosen_option:
+                answered_questions.append({
+                    "question_id": question.question_id,
+                    "question_text": question.question_text,
+                    "category": question.category,
+                    "chosen_option_id": chosen_option.option_id,
+                    "chosen_option_text": chosen_option.option_text,
+                    "trait_tag": chosen_option.trait_tag
+                })
+        
+        # Get recommendations for this attempt
+        recommendations = db.query(models.Recommendation).filter(
+            models.Recommendation.attempt_id == attempt.attempt_id
+        ).all()
+        
+        recommended_courses = []
+        for rec in recommendations:
+            course = db.query(models.Course).filter(
+                models.Course.course_id == rec.course_id
+            ).first()
+            if course:
+                recommended_courses.append({
+                    "course_id": course.course_id,
+                    "course_name": course.course_name,
+                    "description": course.description,
+                    "reasoning": rec.reasoning
+                })
+        
         history.append({
             "attempt_id": attempt.attempt_id,
             "test_name": test.test_name if test else "Assessment",
             "taken_at": attempt.taken_at,
-            "questions_answered": answer_count
+            "questions_answered": answer_count,
+            "answered_questions": answered_questions,
+            "recommended_courses": recommended_courses,
+            "recommendation_count": len(recommended_courses)
         })
     
     return {

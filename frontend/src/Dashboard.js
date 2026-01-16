@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function Dashboard({ userName, onLogout, onStart, onViewProfile, history }) {
+function Dashboard({ userName, onLogout, onStart, onViewProfile, onViewActivity, history }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [hasAcademicInfo, setHasAcademicInfo] = useState(false);
   const [checkingProfile, setCheckingProfile] = useState(true);
@@ -54,9 +54,10 @@ function Dashboard({ userName, onLogout, onStart, onViewProfile, history }) {
             onMouseEnter={(e) => { e.target.style.background = 'rgba(255, 255, 255, 0.05)'; e.target.style.color = '#cbd5e1'; e.target.style.transform = 'translateX(4px)'; }}
             onMouseLeave={(e) => { e.target.style.background = 'transparent'; e.target.style.color = '#94a3b8'; e.target.style.transform = 'translateX(0)'; }}
           >👤 Academic Profile</div>
-          <div style={{...styles.navItem, cursor: 'default', opacity: 0.7}}>
-            📂 My Activity ({history ? history.length : 0})
-          </div>
+          <div style={styles.navItem} onClick={onViewActivity}
+            onMouseEnter={(e) => { e.target.style.background = 'rgba(255, 255, 255, 0.05)'; e.target.style.color = '#cbd5e1'; e.target.style.transform = 'translateX(4px)'; }}
+            onMouseLeave={(e) => { e.target.style.background = 'transparent'; e.target.style.color = '#94a3b8'; e.target.style.transform = 'translateX(0)'; }}
+          >📂 My Activity ({history ? history.length : 0})</div>
 
           <div style={styles.categoryLabel}>Support</div>
           <div style={styles.navItem}

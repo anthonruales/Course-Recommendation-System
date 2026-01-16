@@ -5,6 +5,7 @@ import Signup from './Signup';
 import Dashboard from './Dashboard';
 import ProfileForm from './ProfileForm';
 import AssessmentForm from './AssessmentForm';
+import MyActivity from './MyActivity';
 import Admin from './admin/Admin'; 
 import ResultsView from './ResultsView'; 
 import './App.css';
@@ -109,6 +110,7 @@ function App() {
                 onLogout={handleLogout} 
                 onStart={() => setView('assessment')}
                 onViewProfile={() => setView('profile')}
+                onViewActivity={() => setView('activity')}
                 history={history}
               />
             )}
@@ -140,6 +142,12 @@ function App() {
               <AssessmentForm 
                 onBack={() => setView('dashboard')} 
                 onShowResults={handleAssessmentResults} 
+              />
+            )}
+
+            {view === 'activity' && (
+              <MyActivity 
+                onBack={() => setView('dashboard')}
               />
             )}
 
