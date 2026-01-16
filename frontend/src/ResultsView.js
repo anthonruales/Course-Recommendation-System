@@ -1,111 +1,133 @@
 import React from 'react';
 import './components/style/Dashboard.css';
 
-function ResultsView({ recommendation, profileData, onRetake, onBack }) {
-  // Safety check: If data hasn't arrived or is malformed, show a loading state
+function ResultsView({ recommendation, onRetake, onBack }) {
+  // Loading state
   if (!recommendation || !recommendation.recommendations) {
     return (
-      <div className="portal-layout">
-        <main className="portal-main" style={{ textAlign: 'center', marginTop: '50px' }}>
-          <h2>Analyzing your responses...</h2>
-          <p>If this takes too long, please check your connection.</p>
-          <button onClick={onBack} className="btn-solid">Return to Dashboard</button>
+      <div className="dashboard-wrapper">
+        <main className="portal-main" style={{ textAlign: 'center', justifyContent: 'center', display: 'flex', flexDirection: 'column' }}>
+          <h2 className="header-title">Analyzing your responses...</h2>
+          <p className="header-subtitle">If this takes too long, please check your connection.</p>
+          <button onClick={onBack} className="start-btn" style={{ marginTop: '20px', alignSelf: 'center' }}>
+            Return to Dashboard
+          </button>
         </main>
       </div>
     );
   }
 
-  // Calculate percentage score (normalize compatibility_score to 0-100%)
   const calculatePercentage = (score) => {
-    // Assuming max score is around 20-30, normalize to percentage
     const maxScore = 30;
     const percentage = Math.min(100, Math.max(0, (score / maxScore) * 100));
     return Math.round(percentage);
   };
 
-  // Get top traits for display
   const topTraits = recommendation.detected_traits || [];
-  const userGwa = recommendation.user_gwa;
-  const userStrand = recommendation.user_strand;
+  const { user_gwa, user_strand } = recommendation;
 
   return (
-    <div className="portal-layout">
-      <main className="portal-main">
-        <div className="results-header" style={{ marginBottom: '30px' }}>
-          <button onClick={onBack} className="link-btn">← Back to Dashboard</button>
-          <h1 style={{ marginTop: '20px' }}>Your Career Recommendations</h1>
-          <p className="muted-text">
+    <div className="dashboard-wrapper">
+      <main className="portal-main results-container">
+        {/* HEADER SECTION */}
+        <header className="results-header-section">
+          <button onClick={onBack} className="logout-btn">← Back to Dashboard</button>
+          <h1 className="header-title" style={{ marginTop: '20px' }}>Your Career Recommendations</h1>
+          <p className="header-subtitle">
             Based on your personality traits and academic profile
-            {userStrand && ` as a ${userStrand} student`}
-            {userGwa && ` with GWA of ${userGwa}`}.
+            {user_strand && ` as a ${user_strand} student`}
+            {user_gwa && ` with GWA of ${user_gwa}`}.
           </p>
+
           {topTraits.length > 0 && (
-            <div style={{ marginTop: '15px', display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-              <span style={{ color: '#64748b', fontSize: '14px' }}>Your top traits:</span>
+            <div className="traits-container">
+              <span style={{ color: '#94a3b8', fontSize: '14px' }}>Detected Traits:</span>
               {topTraits.map(([trait, count], idx) => (
-                <span key={idx} className="activity-badge profile">
+                <span key={idx} className="activity-badge badge-profile">
                   {trait} ({count})
                 </span>
               ))}
             </div>
           )}
-        </div>
+        </header>
 
-        <div className="results-grid" style={{ display: 'grid', gap: '20px' }}>
-          {recommendation.recommendations.map((item, index) => (
-            <div key={index} className="portal-card" style={{ borderLeft: index === 0 ? '5px solid #1e40af' : '1px solid #e2e8f0' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                <div>
-                  <span className="activity-badge assessment" style={{ marginBottom: '10px', display: 'inline-block' }}>
-                    Rank #{index + 1} Match
-                  </span>
-                  <h3 style={{ margin: '5px 0', fontSize: '22px', color: '#1e293b' }}>{item.course_name}</h3>
-                  {item.description && (
-                    <p style={{ color: '#64748b', fontSize: '14px', marginTop: '5px' }}>{item.description}</p>
+        {/* RECOMMENDATIONS LIST */}
+        <div className="results-grid">
+          {recommendation.recommendations.map((item, index) => {
+            // DYNAMIC BORDER LOGIC
+            let rankBorderColor = 'rgba(240, 223, 223, 0.08)'; // Default color
+            if (index === 0) rankBorderColor = 'gold';
+            else if (index === 1) rankBorderColor = '#C0C0C0'; // Para saSilver 
+            else if (index === 2) rankBorderColor = '#CD7F32'; // Para sa Bronze
+
+            return (
+              <div 
+                key={index} 
+                className="result-card" 
+                style={{ borderLeft: `5px solid ${rankBorderColor}` }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                  <div style={{ flex: 1 }}>
+                    <span 
+                      className="activity-badge" 
+                      style={{ 
+                        color: rankBorderColor, 
+                        border: `1px solid ${rankBorderColor}`,
+                        background: 'transparent' 
+                      }}
+                    >
+                      Rank #{index + 1} Match
+                    </span>
+                    <h3 className="course-title" style={{ color: index === 0 ? 'gold' : '#818cf8' }}>
+                      {item.course_name}
+                    </h3>
+                    {item.description && <p className="header-subtitle">{item.description}</p>}
+                  </div>
+                  
+                  <div className="score-display">
+                    <div className="percentage-text" style={{ color: rankBorderColor }}>
+                      {calculatePercentage(item.compatibility_score)}%
+                    </div>
+                    <div className="nav-category" style={{ margin: 0 }}>Match Score</div>
+                  </div>
+                </div>
+
+                {/* WHY THIS FITS BOX */}
+                <div className="reasoning-box">
+                  <div className="reasoning-label">Why this fits you:</div>
+                  <p className="reasoning-text">{item.reasoning}</p>
+                </div>
+                
+                {/* TAGS SECTION */}
+                <div className="tags-row">
+                  {item.matched_traits?.map((trait, idx) => (
+                    <span key={idx} className="activity-badge badge-profile">{trait}</span>
+                  ))}
+                  {item.minimum_gwa && (
+                    <span className="activity-badge badge-assessment">Min GWA: {item.minimum_gwa}</span>
+                  )}
+                  {item.recommended_strand && (
+                    <span className="activity-badge badge-profile">Strand: {item.recommended_strand}</span>
                   )}
                 </div>
-                <div style={{ textAlign: 'right' }}>
-                  <div style={{ fontSize: '24px', fontWeight: '800', color: '#1e40af' }}>
-                    {calculatePercentage(item.compatibility_score)}%
-                  </div>
-                  <div className="muted-text" style={{ fontSize: '12px' }}>Match Score</div>
-                </div>
               </div>
-
-              <div style={{ marginTop: '15px', padding: '15px', backgroundColor: '#f8fafc', borderRadius: '8px' }}>
-                <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#64748b', textTransform: 'uppercase' }}>Why this fits you:</h4>
-                <p style={{ margin: 0, lineHeight: '1.6', color: '#334155' }}>{item.reasoning}</p>
-              </div>
-              
-              <div style={{ marginTop: '15px', display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                {item.matched_traits && item.matched_traits.length > 0 && (
-                  <>
-                    <span style={{ color: '#64748b', fontSize: '12px', width: '100%' }}>Matching traits:</span>
-                    {item.matched_traits.map((trait, idx) => (
-                      <span key={idx} className="activity-badge profile">{trait}</span>
-                    ))}
-                  </>
-                )}
-                {item.minimum_gwa && (
-                  <span className="activity-badge assessment">Min GWA: {item.minimum_gwa}</span>
-                )}
-                {item.recommended_strand && (
-                  <span className="activity-badge profile">Strand: {item.recommended_strand}</span>
-                )}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        <div style={{ marginTop: '40px', textAlign: 'center', paddingBottom: '50px' }}>
-          <p className="muted-text">Not satisfied with these results?</p>
-          <button onClick={onRetake} className="btn-solid" style={{ marginRight: '15px' }}>
-            Retake Assessment
-          </button>
-          <button onClick={onBack} className="link-btn">
-            Go to Dashboard
-          </button>
-        </div>
+        {/* FOOTER ACTIONS */}
+        <footer className="action-footer">
+          <h3 className="header-title" style={{ fontSize: '20px' }}>Not satisfied with these results?</h3>
+          <p className="header-subtitle" style={{ marginBottom: '25px' }}>You can always retake the assessment to explore other interests.</p>
+          <div style={{ display: 'flex', gap: '15px', justifyContent: 'center' }}>
+            <button onClick={onRetake} className="start-btn">
+              Retake Assessment
+            </button>
+            <button onClick={onBack} className="logout-btn" style={{ marginTop: 0 }}>
+              Go to Dashboard
+            </button>
+          </div>
+        </footer>
       </main>
     </div>
   );
