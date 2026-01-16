@@ -25,30 +25,51 @@ function AssessmentForm({ onBack, onShowResults }) {
       });
   }, []);
 
-  const handleRadioChange = (questionId, value) => {
-    setAnswers({ ...answers, [questionId]: value });
+  const handleRadioChange = (questionId, optionId) => {
+    setAnswers({ ...answers, [questionId]: optionId });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Validate that all questions are answered
+    const unansweredCount = questions.length - Object.keys(answers).length;
+    if (unansweredCount > 0) {
+      alert(`Please answer all questions! You have ${unansweredCount} unanswered question(s).`);
+      return;
+    }
+    
     setLoading(true);
 
-    const formattedAnswers = Object.entries(answers).map(([id, response]) => ({
+    const formattedAnswers = Object.entries(answers).map(([id, chosenOptionId]) => ({
       questionId: parseInt(id),
-      response: response
+      chosenOptionId: parseInt(chosenOptionId)
     }));
+
+    // Get user profile from localStorage to include GWA and strand
+    const userName = localStorage.getItem('userName');
+    const savedProfile = userName ? localStorage.getItem(`userProfile_${userName}`) : null;
+    const profileData = savedProfile ? JSON.parse(savedProfile) : {};
 
     try {
       const response = await fetch("http://localhost:8000/recommend", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ answers: formattedAnswers }),
+        body: JSON.stringify({ 
+          userId: 1, // You may want to get this from user context/session
+          answers: formattedAnswers,
+          gwa: profileData.gwa ? parseFloat(profileData.gwa) : null,
+          strand: profileData.strand || null
+        }),
       });
       const data = await response.json();
-      if (response.ok) onShowResults(data);
-      else alert("Failed to generate recommendation.");
+      if (response.ok) {
+        onShowResults(data);
+      } else {
+        alert(`Failed to generate recommendation: ${data.detail || 'Unknown error'}`);
+      }
     } catch (error) {
-      alert("Connection error!");
+      alert("Connection error! Please check if the backend server is running.");
     } finally {
       setLoading(false);
     }
@@ -73,6 +94,11 @@ function AssessmentForm({ onBack, onShowResults }) {
         <header style={styles.header}>
           <h1 style={styles.title}>Discovery Mode</h1>
           <p style={styles.subtitle}>Our AI is analyzing your interests from these random questions.</p>
+          {questions.length > 0 && (
+            <p style={styles.progress}>
+              Progress: {Object.keys(answers).length} / {questions.length} questions answered
+            </p>
+          )}
         </header>
 
         <form onSubmit={handleSubmit} style={styles.form}>
@@ -84,26 +110,33 @@ function AssessmentForm({ onBack, onShowResults }) {
                 <div key={q.question_id} style={styles.card}>
                   <p style={styles.questionText}>{q.question_text}</p>
                   <div style={styles.options}>
-                    {['yes', 'no'].map(choice => (
-                      <label key={choice} style={{
-                        ...styles.option,
-                        ...(answers[q.question_id] === choice ? styles.selected : {})
-                      }}>
-                        <input 
-                          type="radio" 
-                          name={`q${q.question_id}`} 
-                          style={{display: 'none'}}
-                          onChange={() => handleRadioChange(q.question_id, choice)} 
-                          required 
-                        />
-                        {choice.toUpperCase()}
-                      </label>
-                    ))}
+                    {q.options && q.options.length > 0 ? (
+                      q.options.map(option => (
+                        <label key={option.option_id} style={{
+                          ...styles.option,
+                          ...(answers[q.question_id] === option.option_id ? styles.selected : {})
+                        }}>
+                          <input 
+                            type="radio" 
+                            name={`q${q.question_id}`} 
+                            style={{display: 'none'}}
+                            onChange={() => handleRadioChange(q.question_id, option.option_id)} 
+                            required 
+                          />
+                          {option.option_text}
+                        </label>
+                      ))
+                    ) : (
+                      <p style={{color: '#ef4444'}}>No options available for this question</p>
+                    )}
                   </div>
                 </div>
               ))}
               <button type="submit" disabled={loading} style={styles.btn}>
-                {loading ? "Analyzing..." : "Finish Assessment"}
+                {loading ? "Analyzing..." : 
+                 Object.keys(answers).length === questions.length 
+                   ? "Finish Assessment" 
+                   : `Answer All Questions (${Object.keys(answers).length}/${questions.length})`}
               </button>
             </div>
           ) : (
@@ -128,6 +161,7 @@ const styles = {
   header: { marginBottom: '40px' },
   title: { fontSize: '32px', fontWeight: '800' },
   subtitle: { color: '#666', marginTop: '10px' },
+  progress: { color: '#818cf8', marginTop: '10px', fontSize: '16px', fontWeight: '500' },
   form: { flex: 1, overflow: 'hidden', maxWidth: '700px' },
   scrollArea: { height: '100%', overflowY: 'auto', paddingRight: '20px' },
   card: { background: '#111', border: '1px solid #222', padding: '25px', borderRadius: '16px', marginBottom: '20px' },

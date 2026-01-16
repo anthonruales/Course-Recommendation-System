@@ -113,176 +113,97 @@ COURSES_POOL = [
     {"course_name": "Bachelor of Technical-Vocational Teacher Education", "description": "Training for teachers in technical and vocational fields like welding, automotive, and electronics.", "minimum_gwa": 83, "recommended_strand": "TVL", "trait_tag": ["Vocational-skilled", "Mentoring-focused", "Practical-expert", "Social", "Service"]},
 ]
 
+# seed_data.py (Continued)
+
 QUESTIONS_POOL = [
-    {"text": "Do you enjoy solving complex math puzzles?", "category": "Assessment", "tag": "Mathematical-logic"},
-    {"text": "Are you interested in how software is built?", "category": "Assessment", "tag": "Coding-heavy"},
-    {"text": "Do you find it satisfying to organize data and keep detailed records?", "category": "Assessment", "tag": "Organized"},
-    {"text": "Are you interested in designing layouts or creating visual content?", "category": "Assessment", "tag": "Visual-focused"},
-    {"text": "Do you enjoy leading a group to achieve a specific goal or project?", "category": "Assessment", "tag": "Leadership"},
-    {"text": "Are you curious about how businesses manage their finances and growth?", "category": "Assessment", "tag": "Business-minded"},
-    {"text": "Do you like troubleshooting and fixing hardware or mechanical issues?", "category": "Assessment", "tag": "Mechanical-practical"},
-    {"text": "Are you curious about how artificial intelligence learns from data?", "category": "Assessment", "tag": "Algorithm-focused"},
-    {"text": "Do you enjoy finding logical errors in a set of instructions?", "category": "Assessment", "tag": "Logical"},
-    {"text": "Are you interested in the chemical composition of common household products?", "category": "Assessment", "tag": "Molecular-focused"},
-    {"text": "Do you prefer using math formulas to solve real-world problems?", "category": "Assessment", "tag": "Analytical"},
-    {"text": "Would you like to learn how to build and maintain computer networks?", "category": "Assessment", "tag": "Technical"},
-    {"text": "Are you fascinated by how biological systems fight diseases?", "category": "Assessment", "tag": "Biological"},
-    {"text": "Do you enjoy disassembling gadgets to see their internal parts?", "category": "Assessment", "tag": "Hardware-oriented"},
-    {"text": "Is it easy for you to understand complex graphs and statistics?", "category": "Assessment", "tag": "Statistical"},
-    {"text": "Are you interested in how renewable energy sources are harnessed?", "category": "Assessment", "tag": "Sustainability-minded"},
-    {"text": "Do you like writing code or scripts to automate repetitive tasks?", "category": "Assessment", "tag": "Technical"},
-    {"text": "Do you enjoy negotiating to get the best deal possible?", "category": "Assessment", "tag": "Negotiation-focused"},
-    {"text": "Are you comfortable speaking in front of a large audience?", "category": "Assessment", "tag": "Articulate"},
-    {"text": "Do you find it easy to manage a budget and track expenses?", "category": "Assessment", "tag": "Fiscal"},
-    {"text": "Are you interested in how global markets affect local prices?", "category": "Assessment", "tag": "Global-analytical"},
-    {"text": "Do you like organizing events and coordinating with different teams?", "category": "Assessment", "tag": "Administrative"},
-    {"text": "Are you interested in the legal aspects of starting a company?", "category": "Assessment", "tag": "Law-oriented"},
-    {"text": "Do you enjoy mentoring others to help them improve their skills?", "category": "Assessment", "tag": "Mentoring-focused"},
-    {"text": "Is keeping a systematic filing system satisfying for you?", "category": "Assessment", "tag": "Methodical"},
-    {"text": "Do you like analyzing consumer behavior to predict trends?", "category": "Assessment", "tag": "Market-analytical"},
-    {"text": "Are you confident in making quick decisions during high-pressure situations?", "category": "Assessment", "tag": "Crisis-management"},
-    {"text": "Do you enjoy creating digital art or editing videos?", "category": "Assessment", "tag": "Digital-artist"},
-    {"text": "Are you interested in how psychological factors affect human health?", "category": "Assessment", "tag": "Behavioral-analytical"},
-    {"text": "Do you like writing stories, poems, or journalistic articles?", "category": "Assessment", "tag": "Writing-heavy"},
-    {"text": "Are you passionate about teaching or explaining things to others?", "category": "Assessment", "tag": "Instructive"},
-    {"text": "Do you enjoy designing 3D models or architectural floor plans?", "category": "Assessment", "tag": "Architectural"},
-    {"text": "Are you interested in helping people resolve their personal conflicts?", "category": "Assessment", "tag": "Empathetic"},
-    {"text": "Do you like experimenting with different interior design styles?", "category": "Assessment", "tag": "Spatial-creative"},
-    {"text": "Are you concerned about social justice and community welfare?", "category": "Assessment", "tag": "Advocacy-driven"},
-    {"text": "Do you enjoy cooking and experimenting with various recipes?", "category": "Assessment", "tag": "Gastronomic-creative"},
-    {"text": "Are you interested in how historical events shape our current society?", "category": "Assessment", "tag": "Societal-analytical"},
-
-
-
-
-    # Kadugtong ng mga tanong 
-
-    # MARITIME & AVIATION (38-51)
-    {"text": "Does the idea of navigating a ship across the open ocean excite you?", "category": "Assessment", "tag": "Navigational"},
-    {"text": "Are you interested in how aircraft stay stable during turbulent weather?", "category": "Assessment", "tag": "Aerodynamic-focused"},
-    {"text": "Would you enjoy maintaining massive engines used in international vessels?", "category": "Assessment", "tag": "Engine-oriented"},
-    {"text": "Are you comfortable following a strict chain of command like in the military?", "category": "Assessment", "tag": "Disciplined"},
-    {"text": "Do you find it easy to use maps and compasses for navigation?", "category": "Assessment", "tag": "Mapping-oriented"},
-    {"text": "Are you willing to work in a job that requires staying away from home for months?", "category": "Assessment", "tag": "Resilient"},
-    {"text": "Are you interested in how air traffic controllers manage multiple flights?", "category": "Assessment", "tag": "Systemic"},
-    {"text": "Do you like learning about specialized communication tools used in aviation?", "category": "Assessment", "tag": "Aviation-technical"},
-    {"text": "Are you fascinated by the mechanics of helicopter rotors and jet turbines?", "category": "Assessment", "tag": "Technical"},
-    {"text": "Would you enjoy ensuring the safety and security of passengers at sea?", "category": "Assessment", "tag": "Protective"},
-    {"text": "Do you find the physics of buoyancy and water displacement interesting?", "category": "Assessment", "tag": "Science"},
-    {"text": "Are you good at maintaining focus for long hours during a watch or shift?", "category": "Assessment", "tag": "Vigilant"},
-    {"text": "Are you interested in the logistics of global shipping and trade routes?", "category": "Assessment", "tag": "Trade-oriented"},
-    {"text": "Do you like the idea of working in a uniform and professional setting?", "category": "Assessment", "tag": "Leadership"},
-    {"text": "Are you interested in how electronic sensors detect underwater obstacles?", "category": "Assessment", "tag": "Maritime-technical"},
-
-    # AGRICULTURE, VETERINARY & ENVIRONMENT (52-69)
-    {"text": "Do you enjoy caring for animals and observing their health?", "category": "Assessment", "tag": "Animal-care"},
-    {"text": "Are you interested in how modern technology can improve crop yields?", "category": "Assessment", "tag": "Agronomical"},
-    {"text": "Do you find the study of plant diseases and pests fascinating?", "category": "Assessment", "tag": "Botanical-minded"},
-    {"text": "Would you enjoy working in a farm or a large-scale agricultural plantation?", "category": "Assessment", "tag": "Agricultural"},
-    {"text": "Are you curious about the nutritional needs of different livestock?", "category": "Assessment", "tag": "Resource-management"},
-    {"text": "Do you want to help solve the problem of food security in the Philippines?", "category": "Assessment", "tag": "Civic-minded"},
-    {"text": "Are you interested in how forests protect our local watersheds?", "category": "Assessment", "tag": "Ecological"},
-    {"text": "Would you like to learn how to identify different species of trees and wildlife?", "category": "Assessment", "tag": "Nature-focused"},
-    {"text": "Do you find the process of reforestation and soil conservation meaningful?", "category": "Assessment", "tag": "Conservation-minded"},
-    {"text": "Are you interested in the biology of fish and aquatic organisms?", "category": "Assessment", "tag": "Aquatic-focused"},
-    {"text": "Would you enjoy designing sustainable systems for fish farming?", "category": "Assessment", "tag": "Aquacultural"},
-    {"text": "Are you comfortable performing medical procedures on animals?", "category": "Assessment", "tag": "Medical"},
-    {"text": "Do you like the idea of working in a veterinary clinic or a laboratory?", "category": "Assessment", "tag": "Clinical-precision"},
-    {"text": "Are you interested in how climate change affects local agriculture?", "category": "Assessment", "tag": "Sustainability-minded"},
-    {"text": "Do you enjoy getting your hands dirty while working with soil and plants?", "category": "Assessment", "tag": "Nature-connected"},
-    {"text": "Are you interested in the economic side of selling farm products?", "category": "Assessment", "tag": "Business-minded"},
-    {"text": "Would you like to study the chemical composition of fertilizers and pesticides?", "category": "Assessment", "tag": "Food-chemistry"},
-    {"text": "Do you enjoy observing the life cycles of insects and animals?", "category": "Assessment", "tag": "Biological"},
-
-    # PURE SCIENCES, CHEMISTRY & PHYSICS (70-84)
-    {"text": "Do you enjoy performing experiments in a laboratory setting?", "category": "Assessment", "tag": "Laboratory-oriented"},
-    {"text": "Are you interested in how molecules interact during a chemical reaction?", "category": "Assessment", "tag": "Molecular-focused"},
-    {"text": "Do you find the study of the periodic table and elements exciting?", "category": "Assessment", "tag": "Analytical"},
-    {"text": "Are you fascinated by the laws of motion and gravity?", "category": "Assessment", "tag": "Theoretical-abstract"},
-    {"text": "Do you enjoy solving word problems using advanced algebra or calculus?", "category": "Assessment", "tag": "Mathematical-logic"},
-    {"text": "Are you interested in how energy is transformed from one form to another?", "category": "Assessment", "tag": "Science"},
-    {"text": "Do you like analyzing the properties of light, sound, and electricity?", "category": "Assessment", "tag": "Technical"},
-    {"text": "Are you curious about the origin of the universe and stellar evolution?", "category": "Assessment", "tag": "Fundamental-science"},
-    {"text": "Do you find it satisfying to prove a hypothesis through data?", "category": "Assessment", "tag": "Data-driven"},
-    {"text": "Are you interested in the ethical implications of genetic engineering?", "category": "Assessment", "tag": "Bio-innovative"},
-    {"text": "Do you like using microscopes to observe cellular structures?", "category": "Assessment", "tag": "Clinical"},
-    {"text": "Are you interested in how vaccines are developed in a lab?", "category": "Assessment", "tag": "Research-oriented"},
-    {"text": "Do you find it easy to memorize scientific names and classifications?", "category": "Assessment", "tag": "Methodical"},
-    {"text": "Are you curious about how materials behave at absolute zero temperature?", "category": "Assessment", "tag": "Theoretical"},
-    {"text": "Do you enjoy reading about recent breakthroughs in modern science?", "category": "Assessment", "tag": "Science"},
-
-    # ADVANCED TECHNICAL & IT (85-99)
-    {"text": "Do you enjoy the challenge of learning new programming languages?", "category": "Assessment", "tag": "Technical"},
-    {"text": "Are you interested in how blockchain technology secures transactions?", "category": "Assessment", "tag": "Defensive"},
-    {"text": "Do you like the idea of ethical hacking to protect company data?", "category": "Assessment", "tag": "Vigilant"},
-    {"text": "Are you fascinated by how robots can be programmed to perform tasks?", "category": "Assessment", "tag": "Technical-creative"},
-    {"text": "Do you enjoy designing user interfaces for mobile applications?", "category": "Assessment", "tag": "Digital-creative"},
-    {"text": "Are you interested in the infrastructure that powers the internet?", "category": "Assessment", "tag": "Systematic"},
-    {"text": "Do you find it fun to optimize code so it runs faster?", "category": "Assessment", "tag": "Algorithm-focused"},
-    {"text": "Are you interested in how cloud storage systems operate?", "category": "Assessment", "tag": "Technical"},
-    {"text": "Do you enjoy troubleshooting software bugs for hours?", "category": "Assessment", "tag": "Analytical"},
-    {"text": "Are you interested in the hardware side of supercomputers?", "category": "Assessment", "tag": "Technical"},
-    {"text": "Do you like the idea of creating your own video game engine?", "category": "Assessment", "tag": "Coding-heavy"},
-    {"text": "Are you interested in how data encryption protects our privacy?", "category": "Assessment", "tag": "Defensive"},
-    {"text": "Do you enjoy setting up complex home networks or smart devices?", "category": "Assessment", "tag": "Technical"},
-    {"text": "Are you curious about the future of quantum computing?", "category": "Assessment", "tag": "Theoretical-abstract"},
-    {"text": "Do you like automating your daily digital tasks using scripts?", "category": "Assessment", "tag": "Logical"},
-
-    # LEGAL, POLITICS & PUBLIC SERVICE (100 -114)
-    {"text": "Do you enjoy debating about current events and social issues?", "category": "Assessment", "tag": "Argumentative-logical"},
-    {"text": "Are you interested in how the judicial system interprets laws?", "category": "Assessment", "tag": "Law-oriented"},
-    {"text": "Do you find it meaningful to serve your local community?", "category": "Assessment", "tag": "Community-focused"},
-    {"text": "Are you interested in the history of government and democracy?", "category": "Assessment", "tag": "Governance-focused"},
-    {"text": "Would you enjoy working in a government office to help citizens?", "category": "Assessment", "tag": "Civic-minded"},
-    {"text": "Are you good at drafting formal letters or policy documents?", "category": "Assessment", "tag": "Administrative"},
-    {"text": "Do you enjoy analyzing political speeches for hidden meanings?", "category": "Assessment", "tag": "Societal-analytical"},
-    {"text": "Are you interested in international relations and diplomacy?", "category": "Assessment", "tag": "Diplomatic"},
-    {"text": "Would you like to study the causes of crime in the Philippines?", "category": "Assessment", "tag": "Investigative"},
-    {"text": "Do you enjoy organizing community outreach programs?", "category": "Assessment", "tag": "Social"},
-    {"text": "Are you interested in the ethical standards of public officials?", "category": "Assessment", "tag": "Ethical"},
-    {"text": "Would you like to learn how to represent someone in a court of law?", "category": "Assessment", "tag": "Compliance-focused"},
-    {"text": "Do you find the study of human rights laws empowering?", "category": "Assessment", "tag": "Advocacy-driven"},
-    {"text": "Are you good at researching historical facts for an argument?", "category": "Assessment", "tag": "Analytical"},
-    {"text": "Do you want to play a part in making national laws?", "category": "Assessment", "tag": "Leadership"},
-
-    # BUSINESS, ECONOMICS & REAL ESTATE (115-129)
-    {"text": "Do you enjoy analyzing market trends to buy or sell stocks?", "category": "Assessment", "tag": "Investment-oriented"},
-    {"text": "Are you interested in how inflation affects our daily expenses?", "category": "Assessment", "tag": "Business"},
-    {"text": "Do you like the idea of selling or managing real estate properties?", "category": "Assessment", "tag": "Sales-oriented"},
-    {"text": "Are you good at convincing people to support your ideas?", "category": "Assessment", "tag": "Persuasive"},
-    {"text": "Do you find the study of supply and demand interesting?", "category": "Assessment", "tag": "Market-analytical"},
-    {"text": "Are you interested in how big corporations manage their taxes?", "category": "Assessment", "tag": "Fiscal"},
-    {"text": "Do you like the challenge of turning a small capital into a profit?", "category": "Assessment", "tag": "Risk-taking"},
-    {"text": "Are you curious about the legalities of international trade?", "category": "Assessment", "tag": "Trade-oriented"},
-    {"text": "Do you enjoy creating business plans for potential startups?", "category": "Assessment", "tag": "Business-minded"},
-    {"text": "Are you interested in how banks manage interest rates?", "category": "Assessment", "tag": "Business"},
-    {"text": "Do you find it satisfying to analyze a company's financial audit?", "category": "Assessment", "tag": "Internal-audit"},
-    {"text": "Are you interested in the psychology behind consumer spending?", "category": "Assessment", "tag": "Behavioral-analytical"},
-    {"text": "Do you like the idea of working in a corporate office setting?", "category": "Assessment", "tag": "Administrative"},
-    {"text": "Are you good at identifying a good investment opportunity?", "category": "Assessment", "tag": "Risk-evaluative"},
-    {"text": "Do you enjoy managing people and delegating tasks?", "category": "Assessment", "tag": "Supervisory"},
-
-    # CREATIVE, DESIGN & MEDIA (130-144)
-    {"text": "Do you enjoy using digital tools to create illustrations?", "category": "Assessment", "tag": "Digital-artist"},
-    {"text": "Are you interested in the principles of balance and symmetry in design?", "category": "Assessment", "tag": "Aesthetic"},
-    {"text": "Do you like capturing stories through a camera lens?", "category": "Assessment", "tag": "Cinematic"},
-    {"text": "Are you interested in how sounds and music affect movie scenes?", "category": "Assessment", "tag": "Auditory-creative"},
-    {"text": "Do you enjoy scriptwriting or creating storyboards for videos?", "category": "Assessment", "tag": "Storytelling"},
-    {"text": "Are you interested in the history of fashion and apparel?", "category": "Assessment", "tag": "Style-conscious"},
-    {"text": "Do you enjoy designing the layout of a room or a building?", "category": "Assessment", "tag": "Spatial-creative"},
-    {"text": "Are you curious about the process of 3D printing and prototyping?", "category": "Assessment", "tag": "Product-focused"},
-    {"text": "Do you like writing blogs or creating social media content?", "category": "Assessment", "tag": "Media-literate"},
-    {"text": "Are you interested in how advertisements influence people?", "category": "Assessment", "tag": "Promotional"},
-    {"text": "Do you enjoy performing on stage or behind the scenes in theater?", "category": "Assessment", "tag": "Performative"},
-    {"text": "Are you interested in the science of sound engineering?", "category": "Assessment", "tag": "Acoustic-technical"},
-    {"text": "Do you like sketching your ideas before building them?", "category": "Assessment", "tag": "Design-heavy"},
-    {"text": "Are you fascinated by the architecture of ancient buildings?", "category": "Assessment", "tag": "Architectural"},
-    {"text": "Do you enjoy collaborating with other artists on a project?", "category": "Assessment", "tag": "Collaborative"},
-
-    # FINAL MISCELLANEOUS (145-149)
-    {"text": "Do you find it rewarding to help someone learn a new skill?", "category": "Assessment", "tag": "Instructive"},
-    {"text": "Are you interested in forensic science and solving crimes?", "category": "Assessment", "tag": "Investigative"},
-    {"text": "Do you enjoy organizing your home library or digital files?", "category": "Assessment", "tag": "Archival-focused"},
-    {"text": "Are you willing to work in shifting schedules including night shifts?", "category": "Assessment", "tag": "Resilient"},
-    {"text": "Do you believe you have the stamina for a physically demanding job?", "category": "Assessment", "tag": "Practical"}
+    {
+        "text": "When working on a group project, which task do you naturally gravitate toward?",
+        "category": "Situational",
+        "options": [
+            {"text": "Organizing the timeline and leading the meetings.", "tag": "Leadership"},
+            {"text": "Diving into the data and researching the facts.", "tag": "Analytical"},
+            {"text": "Designing the layout, visuals, or the final presentation.", "tag": "Design-heavy"},
+            {"text": "Writing the report and explaining it to the class.", "tag": "Communication-focused"}
+        ]
+    },
+    {
+        "text": "Your community is facing a serious problem with plastic waste. How do you decide to help?",
+        "category": "Situational",
+        "options": [
+            {"text": "Create a viral video or social media campaign to raise awareness.", "tag": "Media-literate"},
+            {"text": "Research local laws and present a new policy to the Barangay captain.", "tag": "Governance-focused"},
+            {"text": "Start a non-profit group to help those most affected by the pollution.", "tag": "Advocacy-driven"},
+            {"text": "Study how the language and signs used in the area affect people's habits.", "tag": "Linguistic-analytical"}
+        ]
+    },
+    {
+        "text": "You are given a piece of empty land in a beautiful location. What is the first thing you want to do with it?",
+        "category": "Situational",
+        "options": [
+            {"text": "Design a strong, safe building that fits the landscape.", "tag": "Structural"},
+            {"text": "Measure the land accurately and create a detailed map of its borders.", "tag": "Mapping-oriented"},
+            {"text": "Focus on the interior look, colors, and how the rooms feel inside.", "tag": "Aesthetic"},
+            {"text": "Study the local plants and animals to ensure they are protected.", "tag": "Ecological"}
+        ]
+    },
+    {
+        "text": "You are in a high-tech laboratory and discovered an unknown substance. What is your first approach to studying it?",
+        "category": "Situational",
+        "options": [
+            {"text": "Try to modify its genetic structure to see if it can benefit humans.", "tag": "Bio-innovative"},
+            {"text": "Break it down into its smallest molecules to understand its chemical makeup.", "tag": "Molecular-focused"},
+            {"text": "Investigate its origin like a detective using forensic tools.", "tag": "Investigative"},
+            {"text": "Test its reaction to electrical currents and circuits.", "tag": "Circuit-focused"}
+        ]
+    },
+    {
+        "text": "A ship is navigating through a difficult storm. What is your priority?",
+        "category": "Situational",
+        "options": [
+            {"text": "Using nautical instruments to plot the safest path.", "tag": "Nautical-focused"},
+            {"text": "Maintaining the engine and mechanical systems.", "tag": "Maritime-technical"},
+            {"text": "Organizing the crew to ensure passenger safety.", "tag": "Leadership"},
+            {"text": "Calculating the fuel efficiency and resources left.", "tag": "Resourceful"}
+        ]
+    },
+    {
+        "text": "An aircraft engine shows an unusual vibration before takeoff. What do you do?",
+        "category": "Situational",
+        "options": [
+            {"text": "Study the aerodynamic forces acting on the wing.", "tag": "Aerodynamic-focused"},
+            {"text": "Perform a manual inspection of the engine's hardware.", "tag": "Avionics-practical"},
+            {"text": "Analyze the electronic sensors in the cockpit.", "tag": "Aviation-technical"},
+            {"text": "Re-check the structural integrity of the fuselage.", "tag": "Structural"}
+        ]
+    },
+    {
+        "text": "You see a patient struggling with a physical injury. What is your first instinct?",
+        "category": "Situational",
+        "options": [
+            {"text": "Design a long-term exercise plan for their recovery.", "tag": "Rehabilitative"},
+            {"text": "Check their vital signs and provide immediate medical care.", "tag": "Medical"},
+            {"text": "Listen to their concerns and offer emotional support.", "tag": "Empathetic"},
+            {"text": "Analyze the chemistry of the medicine they need.", "tag": "Pharmacological"}
+        ]
+    },
+    {
+        "text": "A local business is losing money and needs a new plan. How do you help?",
+        "category": "Situational",
+        "options": [
+            {"text": "Analyze their financial statements for errors.", "tag": "Fiscal"},
+            {"text": "Create a new brand identity and marketing strategy.", "tag": "Strategic"},
+            {"text": "Improve the way employees work together.", "tag": "People-oriented"},
+            {"text": "Find ways to make their production more efficient.", "tag": "Efficiency-driven"}
+        ]
+    },
+    {
+        "text": "You are asked to teach a group of children a new skill. How do you approach it?",
+        "category": "Situational",
+        "options": [
+            {"text": "Prepare a structured lesson plan with clear goals.", "tag": "Instructive"},
+            {"text": "Use games and creative activities to make it fun.", "tag": "Creative-educator"},
+            {"text": "Focus on the children who are struggling the most.", "tag": "Patient"},
+            {"text": "Observe how they interact to understand their behavior.", "tag": "Behavioral-analytical"}
+        ]
+    }
 ]

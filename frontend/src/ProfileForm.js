@@ -91,7 +91,7 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
               </div>
 
               {/* SHS STRAND */}
-              <div style={{...styles.inputGroup, gridColumn: 'span 2'}}>
+              <div style={styles.inputGroup}>
                 <label style={styles.label}>SHS Strand</label>
                 <select 
                   style={styles.input} 
@@ -106,6 +106,22 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
                   <option value="GAS">GAS</option>
                   <option value="TVL">TVL</option>
                 </select>
+              </div>
+
+              {/* GWA */}
+              <div style={styles.inputGroup}>
+                <label style={styles.label}>General Weighted Average (GWA)</label>
+                <input 
+                  style={styles.input} 
+                  type="number" 
+                  step="0.01"
+                  min="1.0"
+                  max="5.0"
+                  name="gwa"
+                  value={formData?.gwa || ''} 
+                  onChange={handleChange}
+                  placeholder="e.g. 1.75"
+                />
               </div>
             </div>
 
