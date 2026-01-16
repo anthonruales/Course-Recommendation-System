@@ -7,10 +7,11 @@ from typing import List, Optional
 from dotenv import load_dotenv
 import models, database
 from security import hash_password, verify_password
-from seed_data import COURSES_POOL, QUESTIONS_POOL
+from seed_data import COURSES_POOL, QUESTIONS_POOL, ASSESSMENT_TIERS
 from sqlalchemy import func
 from sqlalchemy.orm import Session, joinedload
 from trait_mapping import apply_trait_mapping
+from assessment_service import AssessmentService
 
 load_dotenv()
 
@@ -826,6 +827,94 @@ def get_questions(db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="No questions found")
         
     return questions
+
+# ==================== ASSESSMENT TIER ENDPOINTS ====================
+
+@app.get("/assessment/tiers")
+def get_assessment_tiers():
+    """Get all available assessment tiers with their details"""
+    try:
+        tiers = AssessmentService.get_available_tiers()
+        return {
+            "success": True,
+            "message": "Assessment tiers retrieved successfully",
+            "tiers": tiers,
+            "total_tiers": len(tiers)
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/assessment/start/{tier}")
+def start_assessment(tier: str, db: Session = Depends(get_db)):
+    """Start an assessment with a specific tier and fetch questions from database"""
+    try:
+        # Validate tier
+        tier_config = AssessmentService.get_available_tiers()
+        if tier not in tier_config:
+            raise ValueError(f"Invalid tier. Must be one of: {list(tier_config.keys())}")
+        
+        question_count = tier_config[tier]["question_count"]
+        
+        # Fetch random questions from database
+        all_questions = db.query(models.Question)\
+            .options(joinedload(models.Question.options))\
+            .all()
+        
+        if not all_questions:
+            raise ValueError("No questions found in database")
+        
+        # Randomly select the specified number of questions
+        import random
+        selected_questions = random.sample(all_questions, min(question_count, len(all_questions)))
+        
+        # Format questions with database IDs
+        formatted_questions = []
+        for q in selected_questions:
+            formatted_questions.append({
+                "question_id": q.question_id,
+                "question_text": q.question_text,
+                "category": q.category,
+                "options": [
+                    {
+                        "option_id": opt.option_id,
+                        "option_text": opt.option_text,
+                        "trait_tag": opt.trait_tag
+                    }
+                    for opt in q.options
+                ]
+            })
+        
+        return {
+            "success": True,
+            "message": f"{tier_config[tier]['name']} started successfully",
+            "tier": tier,
+            "name": tier_config[tier]['name'],
+            "description": tier_config[tier]['description'],
+            "question_count": question_count,
+            "estimated_time": tier_config[tier]['estimated_time'],
+            "accuracy": tier_config[tier]['accuracy'],
+            "questions": formatted_questions
+        }
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/assessment/questions/{tier}")
+def get_assessment_questions(tier: str):
+    """Get questions for a specific assessment tier without full assessment metadata"""
+    try:
+        questions = AssessmentService.get_specific_questions(tier)
+        return {
+            "success": True,
+            "tier": tier,
+            "question_count": len(questions),
+            "questions": questions
+        }
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/")
 def home(): return {"status": "online"}
