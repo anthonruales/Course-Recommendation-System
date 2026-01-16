@@ -50,6 +50,7 @@ function App() {
 
   const handleLogout = () => {
     localStorage.removeItem('userName');
+    localStorage.removeItem('userId');
     setUser(null);
     setRecommendationData(null);
     setProfileData({}); // Clear state on logout
@@ -93,10 +94,10 @@ function App() {
               <ProfileForm 
                 onBack={() => setView('dashboard')} 
                 onSave={() => { 
-                  // Save current state to local storage
+                  // Save to local storage
                   localStorage.setItem(`userProfile_${user}`, JSON.stringify(profileData));
                   
-                  // Optional: Log the update in history
+                  // Log the update in history
                   const updateLog = {
                     type: 'profile_update',
                     courses: 'Profile Updated',

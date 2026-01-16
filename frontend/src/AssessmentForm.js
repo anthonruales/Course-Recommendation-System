@@ -46,29 +46,34 @@ function AssessmentForm({ onBack, onShowResults }) {
       chosenOptionId: parseInt(chosenOptionId)
     }));
 
-    // Get user profile from localStorage to include GWA and strand
-    const userName = localStorage.getItem('userName');
-    const savedProfile = userName ? localStorage.getItem(`userProfile_${userName}`) : null;
-    const profileData = savedProfile ? JSON.parse(savedProfile) : {};
+    // Get userId from localStorage
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      alert('User ID not found. Please log in again.');
+      setLoading(false);
+      return;
+    }
+    
+    console.log('Submitting assessment for userId:', userId);
 
     try {
       const response = await fetch("http://localhost:8000/recommend", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
-          userId: 1, // You may want to get this from user context/session
-          answers: formattedAnswers,
-          gwa: profileData.gwa ? parseFloat(profileData.gwa) : null,
-          strand: profileData.strand || null
+          userId: parseInt(userId),
+          answers: formattedAnswers
         }),
       });
       const data = await response.json();
       if (response.ok) {
+        console.log('Recommendation received:', data);
         onShowResults(data);
       } else {
         alert(`Failed to generate recommendation: ${data.detail || 'Unknown error'}`);
       }
     } catch (error) {
+      console.error('Assessment submission error:', error);
       alert("Connection error! Please check if the backend server is running.");
     } finally {
       setLoading(false);

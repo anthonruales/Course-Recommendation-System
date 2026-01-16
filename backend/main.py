@@ -7,7 +7,7 @@ from typing import List, Optional
 from dotenv import load_dotenv
 import models, database
 from security import hash_password, verify_password
-from seed_data import COURSES_POOL, QUESTIONS_POOL
+from seed_data import COURSES_POOL, SITUATIONAL_QUESTIONS_POOL, ASSESSMENT_QUESTIONS_POOL, ACADEMIC_QUESTIONS_POOL
 from sqlalchemy import func
 from sqlalchemy.orm import Session, joinedload
 
@@ -41,9 +41,10 @@ def seed_database():
                 tag_str = ", ".join(tags) if isinstance(tags, list) else str(tags)
                 db.add(models.Course(course_name=c.get("course_name"), description=c.get("description"), minimum_gwa=c.get("minimum_gwa"), recommended_strand=c.get("recommended_strand"), trait_tag=tag_str))
 
-        if QUESTIONS_POOL:
-            print(f"🌱 Seeding {len(QUESTIONS_POOL)} questions...")
-            for q in QUESTIONS_POOL:
+        all_questions = SITUATIONAL_QUESTIONS_POOL + ASSESSMENT_QUESTIONS_POOL + ACADEMIC_QUESTIONS_POOL
+        if all_questions:
+            print(f"🌱 Seeding {len(all_questions)} questions...")
+            for q in all_questions:
                 new_q = models.Question(question_text=q.get("text"), category=q.get("category"))
                 db.add(new_q)
                 db.flush()
@@ -89,8 +90,8 @@ class QuestionSchema(BaseModel):
 
 
 class AcademicInfoUpdate(BaseModel):
-    gwa: float
-    strand: str
+    gwa: float  # GWA on 80-100 scale (e.g., 88.5, 92.0)
+    strand: str  # e.g., "STEM", "ABM", "HUMSS", "GAS", "TVL", "Sports"
 
 class CourseCreate(BaseModel):
     course_name: str
@@ -277,23 +278,57 @@ def recommend(data: AssessmentSubmit, db: Session = Depends(get_db)):
     for rec in top_recommendations:
         course = rec["course"]
         
-        # Build reasoning message
+        # Build detailed reasoning with structured factors
+        reasoning_factors = {
+            "strand_influence": None,
+            "academic_interest": None,
+            "gwa_assessment": None,
+            "trait_alignment": None,
+            "summary": ""
+        }
+        
+        # 1. Trait Alignment
         if rec['matched_traits']:
-            reasoning = f"This course aligns with your interests in {', '.join(rec['matched_traits'])}. "
+            reasoning_factors["trait_alignment"] = f"Matches your personality traits: {', '.join(rec['matched_traits'])}"
         else:
-            reasoning = f"This course is recommended based on your overall profile. "
+            reasoning_factors["trait_alignment"] = "Recommended based on your overall profile"
         
-        if user_gwa and course.minimum_gwa:
-            if not rec["gwa_match"]:
-                reasoning += f"Note: Your GWA ({user_gwa}) is below the minimum requirement ({course.minimum_gwa}). "
-            elif user_gwa >= course.minimum_gwa:
-                reasoning += f"Your GWA ({user_gwa}) meets the requirement ({course.minimum_gwa}). "
-        
-        if user_strand and course.recommended_strand:
-            if not rec["strand_match"]:
-                reasoning += f"Your strand ({user_strand}) is different from recommended ({course.recommended_strand}), but you may still qualify. "
+        # 2. Strand Influence - Always show course requirements, compare if user has provided info
+        if course.recommended_strand:
+            if user_strand:
+                if rec["strand_match"]:
+                    reasoning_factors["strand_influence"] = f"✓ Your strand ({user_strand}) perfectly aligns with the recommended strand ({course.recommended_strand})"
+                else:
+                    reasoning_factors["strand_influence"] = f"⚠ Your strand ({user_strand}) differs from recommended ({course.recommended_strand}), but alternative path is available"
             else:
-                reasoning += f"Your strand ({user_strand}) matches perfectly! "
+                reasoning_factors["strand_influence"] = f"Recommended strand: {course.recommended_strand} (Please update your academic profile to see compatibility)"
+        else:
+            reasoning_factors["strand_influence"] = "No specific strand requirement for this course"
+        
+        # 3. GWA Assessment - Always show course requirements, compare if user has provided GWA
+        if course.minimum_gwa:
+            if user_gwa:
+                if rec["gwa_match"]:
+                    gwa_buffer = user_gwa - course.minimum_gwa
+                    reasoning_factors["gwa_assessment"] = f"✓ Your GWA ({user_gwa}) exceeds the minimum requirement ({course.minimum_gwa}) by {gwa_buffer:.2f} points"
+                else:
+                    gwa_gap = course.minimum_gwa - user_gwa
+                    reasoning_factors["gwa_assessment"] = f"⚠ Your GWA ({user_gwa}) is {gwa_gap:.2f} points below the minimum requirement ({course.minimum_gwa}). You may need improvement."
+            else:
+                reasoning_factors["gwa_assessment"] = f"Minimum GWA required: {course.minimum_gwa} (Please update your academic profile to see compatibility)"
+        else:
+            reasoning_factors["gwa_assessment"] = "No GWA requirement for this course"
+        
+        # 4. Academic Interest (traits derived from assessment answers)
+        if trait_scores:
+            top_user_traits = [t[0] for t in sorted(trait_scores.items(), key=lambda x: x[1], reverse=True)[:3]]
+            reasoning_factors["academic_interest"] = f"Your assessment revealed interests in: {', '.join(top_user_traits)}"
+        else:
+            reasoning_factors["academic_interest"] = "Unable to determine academic interests from assessment"
+        
+        # Build summary reasoning
+        reasoning = f"{reasoning_factors['trait_alignment']}. {reasoning_factors['strand_influence']} {reasoning_factors['gwa_assessment']} {reasoning_factors['academic_interest']}"
+        reasoning_factors["summary"] = reasoning
         
         recommendations.append({
             "course_name": course.course_name,
@@ -302,6 +337,7 @@ def recommend(data: AssessmentSubmit, db: Session = Depends(get_db)):
             "minimum_gwa": course.minimum_gwa,
             "recommended_strand": course.recommended_strand,
             "reasoning": reasoning,
+            "reasoning_details": reasoning_factors,
             "compatibility_score": rec["score"]
         })
     
@@ -342,19 +378,94 @@ def recommend(data: AssessmentSubmit, db: Session = Depends(get_db)):
         "recommendations": recommendations
     }
 
+def get_suitable_courses(user: models.User, db: Session):
+    """Get courses suitable for the student's academic profile (GWA & Strand)"""
+    if not user.academic_info:
+        return []
+    
+    user_gwa = user.academic_info.get("gwa")
+    user_strand = user.academic_info.get("strand")
+    
+    suitable_courses = []
+    if user_gwa and user_strand:
+        suitable_courses = db.query(models.Course).filter(
+            models.Course.minimum_gwa <= user_gwa,
+            models.Course.recommended_strand.contains(user_strand)
+        ).all()
+    
+    return suitable_courses
+
+def extract_trait_tags(courses: List[models.Course]):
+    """Extract all unique trait tags from a list of courses"""
+    trait_tags = set()
+    for course in courses:
+        if course.trait_tag:
+            tags = [tag.strip() for tag in course.trait_tag.split(",")]
+            trait_tags.update(tags)
+    return trait_tags
+
 @app.get("/questions", response_model=List[QuestionSchema])
-def get_questions(db: Session = Depends(get_db)):
-    # Using func.random() (for SQLite/Postgres) or func.rand() (for MySQL) 
-    # to pull 20 random questions from the database
-    questions = db.query(models.Question)\
-        .options(joinedload(models.Question.options))\
-        .order_by(func.random())\
-        .limit(20)\
-        .all()
+def get_questions(user_id: Optional[int] = None, db: Session = Depends(get_db)):
+    """
+    Fetch 10 random questions from each category (situational, assessment, academic).
+    If user_id is provided, bias questions towards traits of suitable courses for that student.
+    """
+    relevant_traits = set()
+    
+    # If user provided, get their academic profile and find suitable courses
+    if user_id:
+        user = db.query(models.User).filter(models.User.user_id == user_id).first()
+        if user and user.academic_info:
+            suitable_courses = get_suitable_courses(user, db)
+            relevant_traits = extract_trait_tags(suitable_courses)
+    
+    def get_questions_by_category(category: str, limit: int = 10):
+        """Fetch questions, prioritizing those with relevant traits"""
+        query = db.query(models.Question)\
+            .options(joinedload(models.Question.options))\
+            .filter(models.Question.category == category)
+        
+        all_questions = query.all()
+        
+        # If we have relevant traits, prioritize questions with matching traits
+        if relevant_traits:
+            prioritized = []
+            non_prioritized = []
+            
+            for question in all_questions:
+                # Check if any option in this question has a relevant trait
+                question_traits = set()
+                for option in question.options:
+                    if option.trait_tag:
+                        question_traits.add(option.trait_tag)
+                
+                # If question has relevant traits, prioritize it
+                if question_traits & relevant_traits:
+                    prioritized.append(question)
+                else:
+                    non_prioritized.append(question)
+            
+            # Return prioritized questions first, fill remaining with random non-prioritized
+            selected = prioritized[:limit]
+            if len(selected) < limit:
+                remaining_needed = limit - len(selected)
+                selected.extend(non_prioritized[:remaining_needed])
+            
+            return selected[:limit]
+        else:
+            # No academic profile, return random questions
+            return query.order_by(func.random()).limit(limit).all()
+    
+    # Fetch from each category
+    situational = get_questions_by_category("Situational", 10)
+    assessment = get_questions_by_category("Assessment", 10)
+    academic = get_questions_by_category("Academic", 10)
+    
+    questions = situational + assessment + academic
     
     if not questions:
         raise HTTPException(status_code=404, detail="No questions found")
-        
+    
     return questions
 
 @app.get("/")
