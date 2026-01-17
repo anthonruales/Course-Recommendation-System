@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './components/style/Dashboard.css'; // Siguraduhing tama ang path
+import './components/style/Dashboard.css';
 
 function MyActivity({ onBack }) {
   const [activityHistory, setActivityHistory] = useState([]);
