@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './components/style/Dashboard.css';
+import FeedbackForm from './FeedbackForm';
 
 function ResultsView({ recommendation, onRetake, onBack }) {
+  const [showFeedback, setShowFeedback] = useState(null);
+  
   // Loading state
   if (!recommendation || !recommendation.recommendations) {
     return (
@@ -124,10 +127,17 @@ function ResultsView({ recommendation, onRetake, onBack }) {
 
         {/* FOOTER ACTIONS */}
         <footer className="action-footer">
-          <h3 className="header-title" style={{ fontSize: '20px' }}>Not satisfied with these results?</h3>
-          <p className="header-subtitle" style={{ marginBottom: '25px' }}>You can always retake the assessment to explore other interests.</p>
-          <div style={{ display: 'flex', gap: '15px', justifyContent: 'center' }}>
-            <button onClick={onRetake} className="start-btn">
+          <h3 className="header-title" style={{ fontSize: '20px' }}>How helpful were these recommendations?</h3>
+          <p className="header-subtitle" style={{ marginBottom: '25px' }}>Your feedback helps us improve our recommendation engine.</p>
+          
+          <div style={{ display: 'flex', gap: '15px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '30px' }}>
+            <button 
+              onClick={() => setShowFeedback({ overall: true })}
+              className="start-btn"
+            >
+              💬 Provide Feedback
+            </button>
+            <button onClick={onRetake} className="logout-btn" style={{ marginTop: 0 }}>
               Retake Assessment
             </button>
             <button onClick={onBack} className="logout-btn" style={{ marginTop: 0 }}>
@@ -136,6 +146,17 @@ function ResultsView({ recommendation, onRetake, onBack }) {
           </div>
         </footer>
       </main>
+
+      {/* FEEDBACK MODAL */}
+      {showFeedback && (
+        <FeedbackForm
+          recommendation={showFeedback}
+          onSubmit={() => {
+            alert('Thank you for your feedback!');
+          }}
+          onClose={() => setShowFeedback(null)}
+        />
+      )}
     </div>
   );
 }

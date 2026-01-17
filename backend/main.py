@@ -195,6 +195,33 @@ class OptionUpdate(BaseModel):
     trait_tag: Optional[str] = None
 
 
+# ========== FEEDBACK SYSTEM SCHEMAS ==========
+class FeedbackSubmit(BaseModel):
+    recommendation_id: Optional[int] = None  # Optional for overall feedback
+    rating: int  # 1-5 stars
+    feedback_text: Optional[str] = None
+
+
+class FeedbackResponse(BaseModel):
+    feedback_id: int
+    recommendation_id: int
+    user_id: int
+    rating: int
+    feedback_text: Optional[str]
+    created_at: str
+    
+    class Config:
+        from_attributes = True
+
+
+class FeedbackStats(BaseModel):
+    recommendation_id: int
+    course_name: str
+    avg_rating: float
+    total_feedbacks: int
+    feedback_breakdown: dict  # {1: count, 2: count, ...}
+
+
 @app.post("/signup")
 def signup(user: UserCreate, db: Session = Depends(get_db)):
     if db.query(models.User).filter(models.User.email == user.email).first():
@@ -1257,6 +1284,307 @@ def get_all_test_attempts(db: Session = Depends(get_db)):
         })
     
     return {"test_attempts": result}
+
+# ========== FEEDBACK SYSTEM ENDPOINTS ==========
+
+@app.post("/feedback/submit")
+def submit_recommendation_feedback(
+    feedback: FeedbackSubmit,
+    db: Session = Depends(get_db)
+):
+    """User: Submit feedback/rating on a recommendation or overall recommendations"""
+    
+    # Validate rating is 1-5
+    if feedback.rating < 1 or feedback.rating > 5:
+        raise HTTPException(status_code=400, detail="Rating must be between 1 and 5")
+    
+    # Handle overall feedback (no specific recommendation)
+    if feedback.recommendation_id is None:
+        new_feedback = models.RecommendationFeedback(
+            recommendation_id=None,
+            user_id=None,  # Overall feedback not tied to user
+            rating=feedback.rating,
+            feedback_text=feedback.feedback_text
+        )
+        db.add(new_feedback)
+        db.commit()
+        db.refresh(new_feedback)
+        
+        return {
+            "success": True,
+            "message": "Overall feedback submitted successfully",
+            "feedback_id": new_feedback.feedback_id,
+            "rating": new_feedback.rating
+        }
+    
+    # Handle specific recommendation feedback
+    recommendation = db.query(models.Recommendation).filter(
+        models.Recommendation.recommendation_id == feedback.recommendation_id
+    ).first()
+    
+    if not recommendation:
+        raise HTTPException(status_code=404, detail="Recommendation not found")
+    
+    # Check if user already gave feedback on this recommendation
+    existing_feedback = db.query(models.RecommendationFeedback).filter(
+        models.RecommendationFeedback.recommendation_id == feedback.recommendation_id,
+        models.RecommendationFeedback.user_id == recommendation.user_id
+    ).first()
+    
+    if existing_feedback:
+        # Update existing feedback
+        existing_feedback.rating = feedback.rating
+        existing_feedback.feedback_text = feedback.feedback_text
+        db.commit()
+        return {
+            "success": True,
+            "message": "Feedback updated successfully",
+            "feedback_id": existing_feedback.feedback_id
+        }
+    
+    # Create new feedback
+    new_feedback = models.RecommendationFeedback(
+        recommendation_id=feedback.recommendation_id,
+        user_id=recommendation.user_id,
+        rating=feedback.rating,
+        feedback_text=feedback.feedback_text
+    )
+    
+    db.add(new_feedback)
+    db.commit()
+    db.refresh(new_feedback)
+    
+    return {
+        "success": True,
+        "message": "Feedback submitted successfully",
+        "feedback_id": new_feedback.feedback_id,
+        "rating": new_feedback.rating
+    }
+
+
+@app.get("/feedback/recommendation/{recommendation_id}")
+def get_recommendation_feedback(
+    recommendation_id: int,
+    db: Session = Depends(get_db)
+):
+    """Get all feedback for a specific recommendation"""
+    
+    recommendation = db.query(models.Recommendation).filter(
+        models.Recommendation.recommendation_id == recommendation_id
+    ).first()
+    
+    if not recommendation:
+        raise HTTPException(status_code=404, detail="Recommendation not found")
+    
+    feedbacks = db.query(models.RecommendationFeedback).filter(
+        models.RecommendationFeedback.recommendation_id == recommendation_id
+    ).all()
+    
+    feedback_list = [
+        {
+            "feedback_id": f.feedback_id,
+            "rating": f.rating,
+            "feedback_text": f.feedback_text,
+            "created_at": f.created_at.isoformat(),
+            "user_fullname": db.query(models.User).filter(
+                models.User.user_id == f.user_id
+            ).first().fullname
+        }
+        for f in feedbacks
+    ]
+    
+    return {
+        "recommendation_id": recommendation_id,
+        "course_name": recommendation.course.course_name,
+        "total_feedbacks": len(feedback_list),
+        "feedbacks": feedback_list
+    }
+
+
+@app.get("/user/{user_id}/feedback")
+def get_user_feedback_history(
+    user_id: int,
+    db: Session = Depends(get_db)
+):
+    """Get all feedback submitted by a user"""
+    
+    user = db.query(models.User).filter(models.User.user_id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    feedbacks = db.query(models.RecommendationFeedback).filter(
+        models.RecommendationFeedback.user_id == user_id
+    ).order_by(models.RecommendationFeedback.created_at.desc()).all()
+    
+    feedback_list = [
+        {
+            "feedback_id": f.feedback_id,
+            "course_name": f.recommendation.course.course_name,
+            "rating": f.rating,
+            "feedback_text": f.feedback_text,
+            "created_at": f.created_at.isoformat(),
+            "reasoning": f.recommendation.reasoning
+        }
+        for f in feedbacks
+    ]
+    
+    return {
+        "user_id": user_id,
+        "user_name": user.fullname,
+        "total_feedbacks": len(feedback_list),
+        "feedbacks": feedback_list
+    }
+
+
+@app.get("/admin/feedback/stats")
+def get_feedback_statistics(db: Session = Depends(get_db)):
+    """Admin: Get overall feedback statistics"""
+    
+    total_feedbacks = db.query(models.RecommendationFeedback).count()
+    
+    # Average rating
+    avg_rating_query = db.query(
+        func.avg(models.RecommendationFeedback.rating)
+    ).scalar()
+    avg_rating = round(float(avg_rating_query) if avg_rating_query else 0, 2)
+    
+    # Rating distribution
+    rating_dist = {}
+    for rating in range(1, 6):
+        count = db.query(models.RecommendationFeedback).filter(
+            models.RecommendationFeedback.rating == rating
+        ).count()
+        rating_dist[str(rating)] = count
+    
+    # Most feedback on courses (top 10)
+    top_courses = db.query(
+        models.Course.course_name,
+        func.count(models.RecommendationFeedback.feedback_id).label('feedback_count'),
+        func.avg(models.RecommendationFeedback.rating).label('avg_rating')
+    ).join(
+        models.Recommendation,
+        models.Course.course_id == models.Recommendation.course_id
+    ).join(
+        models.RecommendationFeedback,
+        models.Recommendation.recommendation_id == models.RecommendationFeedback.recommendation_id
+    ).group_by(models.Course.course_name).order_by(
+        func.count(models.RecommendationFeedback.feedback_id).desc()
+    ).limit(10).all()
+    
+    top_courses_list = [
+        {
+            "course_name": course[0],
+            "feedback_count": course[1],
+            "avg_rating": round(float(course[2]), 2) if course[2] else 0
+        }
+        for course in top_courses
+    ]
+    
+    return {
+        "total_feedbacks": total_feedbacks,
+        "average_rating": avg_rating,
+        "rating_distribution": rating_dist,
+        "top_courses": top_courses_list
+    }
+
+
+@app.get("/admin/feedback/courses/{course_id}")
+def get_course_feedback_detailed(
+    course_id: int,
+    db: Session = Depends(get_db)
+):
+    """Admin: Get detailed feedback for a specific course"""
+    
+    course = db.query(models.Course).filter(models.Course.course_id == course_id).first()
+    if not course:
+        raise HTTPException(status_code=404, detail="Course not found")
+    
+    feedbacks = db.query(models.RecommendationFeedback).join(
+        models.Recommendation,
+        models.RecommendationFeedback.recommendation_id == models.Recommendation.recommendation_id
+    ).filter(
+        models.Recommendation.course_id == course_id
+    ).order_by(models.RecommendationFeedback.created_at.desc()).all()
+    
+    feedback_list = [
+        {
+            "feedback_id": f.feedback_id,
+            "rating": f.rating,
+            "feedback_text": f.feedback_text,
+            "created_at": f.created_at.isoformat(),
+            "user_name": f.user.fullname
+        }
+        for f in feedbacks
+    ]
+    
+    # Calculate stats
+    total = len(feedback_list)
+    avg_rating = sum([f["rating"] for f in feedback_list]) / total if total > 0 else 0
+    
+    rating_breakdown = {}
+    for rating in range(1, 6):
+        rating_breakdown[str(rating)] = len([f for f in feedback_list if f["rating"] == rating])
+    
+    return {
+        "course_id": course_id,
+        "course_name": course.course_name,
+        "total_feedbacks": total,
+        "average_rating": round(avg_rating, 2),
+        "rating_breakdown": rating_breakdown,
+        "feedbacks": feedback_list
+    }
+
+
+@app.get("/admin/feedback/low-rated")
+def get_low_rated_recommendations(
+    min_rating: int = 3,
+    db: Session = Depends(get_db)
+):
+    """Admin: Get recommendations that received ratings below threshold (alerts for improvement)"""
+    
+    # Get feedback with ratings below threshold
+    low_rated = db.query(models.RecommendationFeedback).filter(
+        models.RecommendationFeedback.rating < min_rating
+    ).order_by(models.RecommendationFeedback.created_at.desc()).all()
+    
+    alerts = [
+        {
+            "feedback_id": f.feedback_id,
+            "course_name": f.recommendation.course.course_name,
+            "rating": f.rating,
+            "feedback_text": f.feedback_text,
+            "user_name": f.user.fullname,
+            "created_at": f.created_at.isoformat(),
+            "recommendation_reasoning": f.recommendation.reasoning
+        }
+        for f in low_rated
+    ]
+    
+    return {
+        "threshold": min_rating,
+        "total_low_rated": len(alerts),
+        "alerts": alerts[:20]  # Return latest 20
+    }
+
+
+@app.delete("/admin/feedback/{feedback_id}")
+def delete_feedback(
+    feedback_id: int,
+    db: Session = Depends(get_db)
+):
+    """Admin: Delete a feedback entry"""
+    
+    feedback = db.query(models.RecommendationFeedback).filter(
+        models.RecommendationFeedback.feedback_id == feedback_id
+    ).first()
+    
+    if not feedback:
+        raise HTTPException(status_code=404, detail="Feedback not found")
+    
+    db.delete(feedback)
+    db.commit()
+    
+    return {"success": True, "message": "Feedback deleted successfully"}
 
 # Run server
 if __name__ == "__main__":

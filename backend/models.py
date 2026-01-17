@@ -124,3 +124,19 @@ class Recommendation(Base):
     attempt = relationship("TestAttempt", back_populates="recommendations")
     user = relationship("User", back_populates="recommendations")
     course = relationship("Course", back_populates="recommendations")
+    feedback = relationship("RecommendationFeedback", back_populates="recommendation", cascade="all, delete-orphan")
+
+
+# ========== RECOMMENDATION FEEDBACK TABLE ==========
+class RecommendationFeedback(Base):
+    __tablename__ = "recommendation_feedback"
+    feedback_id = Column(Integer, primary_key=True, index=True)
+    recommendation_id = Column(Integer, ForeignKey("recommendations.recommendation_id"), nullable=False)
+    user_id = Column(Integer, ForeignKey("users.user_id"), nullable=False)
+    rating = Column(Integer, nullable=False)  # 1-5 stars
+    feedback_text = Column(Text, nullable=True)  # Optional comment
+    created_at = Column(DateTime, server_default=func.now())
+    
+    # Relationships
+    recommendation = relationship("Recommendation", back_populates="feedback")
+    user = relationship("User")

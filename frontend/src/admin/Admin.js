@@ -5,6 +5,7 @@ import ManageQuestion from "./ManageQuestion";
 import ViewReport from "./ViewReport";
 import ManageCourse from "./ManageCourse";
 import ViewUser from "./ViewUser";
+import ViewFeedback from "./ViewFeedback";
 
 function Admin({ onLogout }) {
   const [activeTab, setActiveTab] = useState("viewuser");
@@ -42,6 +43,12 @@ function Admin({ onLogout }) {
             >
               Manage Questions
             </li>
+            <li 
+              className={`sidebar-item ${activeTab === "feedback" ? "active" : ""}`}
+              onClick={() => setActiveTab("feedback")}
+            >
+              Feedback Analytics
+            </li>
           </ul>
         </nav>
 
@@ -56,6 +63,7 @@ function Admin({ onLogout }) {
         {activeTab === "courses" && <ManageCourse />}
         {activeTab === "reports" && <ViewReport />}
         {activeTab === "questions" && <ManageQuestion />}
+        {activeTab === "feedback" && <ViewFeedback />}
       </div>
 
     </div>
