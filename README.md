@@ -176,38 +176,44 @@ The algorithm is based on established theories from the thesis:
 │                                                                              │
 │   INPUT: User Profile + Assessment Answers + Trait Scores                   │
 │                                                                              │
+│   ⚠️  IMPORTANT: Academic Info (GWA, Strand) = BONUS POINTS ONLY            │
+│   🎯  PRIMARY FOCUS: Trait Matching from Assessment Answers                 │
+│   ✅  ALL COURSES are available to ALL users regardless of strand/GWA       │
+│                                                                              │
 │   ═══════════════════════════════════════════════════════════════════════   │
 │   ║                  PHASE 1: RULE-BASED FILTERING                      ║   │
 │   ║                  (Giarratano & Riley, 2005)                         ║   │
 │   ═══════════════════════════════════════════════════════════════════════   │
 │                                                                              │
-│   Applies IF-THEN rules to filter and score courses:                        │
+│   Applies IF-THEN rules to score courses (NO HARD EXCLUSIONS):              │
 │                                                                              │
-│   ELIGIBILITY RULES (Hard Constraints):                                     │
+│   TRAIT-BASED RULES (PRIMARY - Highest Priority):                           │
 │   ┌─────────────────────────────────────────────────────────────────────┐  │
-│   │ E1: IF user_gwa < course_minimum_gwa - 5 THEN mark INELIGIBLE       │  │
-│   │ E2: IF strand completely incompatible THEN apply heavy penalty      │  │
+│   │ P1: IF primary_trait IN course_traits THEN +20 points               │  │
+│   │ P2: IF trait_matches >= 3 THEN +15 points (synergy bonus)           │  │
+│   │ P3: IF course IN user's career_path THEN +25 points                 │  │
+│   │ P6: IF work environment preference matches THEN +8 points           │  │
+│   │ P7: IF learning style matches THEN +6 points                        │  │
 │   └─────────────────────────────────────────────────────────────────────┘  │
 │                                                                              │
-│   PREFERENCE RULES (Soft Constraints - Add Points):                         │
+│   ACADEMIC BONUS RULES (Secondary - Bonus Only, Never Excludes):            │
 │   ┌─────────────────────────────────────────────────────────────────────┐  │
-│   │ P1: IF primary_trait IN course_traits THEN +15 points               │  │
-│   │ P2: IF trait_matches >= 3 THEN +10 points (synergy bonus)           │  │
-│   │ P3: IF course IN user's career_path THEN +20 points                 │  │
-│   │ P4: IF user_gwa exceeds requirement by 5+ THEN +8 points            │  │
-│   │ P5: IF strand perfectly matches THEN +12 points                     │  │
-│   │ P6: IF work environment preference matches THEN +6 points           │  │
-│   │ P7: IF learning style matches THEN +5 points                        │  │
+│   │ A1: IF user_gwa >= course_min_gwa THEN +10 bonus                    │  │
+│   │     IF user_gwa < course_min_gwa THEN small penalty (max -15)       │  │
+│   │     ⚠️ Course still available - user can pursue with extra effort  │  │
+│   │                                                                     │  │
+│   │ A2: IF strand matches perfectly THEN +8 bonus                       │  │
+│   │     IF strand compatible THEN +4 bonus                              │  │
+│   │     IF strand different THEN NO PENALTY (course still available!)   │  │
 │   └─────────────────────────────────────────────────────────────────────┘  │
 │                                                                              │
-│   PENALTY RULES (Subtract Points):                                          │
+│   PENALTY RULES (Only for trait mismatch):                                  │
 │   ┌─────────────────────────────────────────────────────────────────────┐  │
-│   │ N1: IF user_gwa < course_min THEN -(gap × 5) points                 │  │
-│   │ N2: IF strand_mismatch THEN -10 points                              │  │
 │   │ N3: IF no_trait_matches THEN -15 points                             │  │
 │   └─────────────────────────────────────────────────────────────────────┘  │
 │                                                                              │
 │   OUTPUT: Eligibility Score + Rule Explanations for each course             │
+│   ✅ ALL courses remain eligible - scoring determines ranking               │
 │                                                                              │
 │   ═══════════════════════════════════════════════════════════════════════   │
 │   ║                PHASE 2: DECISION TREE CLASSIFICATION                ║   │
@@ -264,17 +270,20 @@ The algorithm is based on established theories from the thesis:
 | **Creative** | Creative-expression, Artistic-passion, Innovative | BS Multimedia Arts, Architecture |
 | **Leading** | Leadership, Strategic, Big-picture, Ambitious | BS Business Administration, Public Admin |
 
-### Strand Compatibility Matrix
+### Strand Compatibility (BONUS ONLY - No Restrictions)
+
+**Important:** Strand compatibility is used for **bonus points only**. Users can pursue ANY course regardless of their strand - the system just gives a small bonus for matching strands.
 
 ```python
-STRAND_COMPATIBILITY = {
-    'STEM':   ['STEM', 'GAS'],
-    'ABM':    ['ABM', 'GAS', 'HUMSS'],
-    'HUMSS':  ['HUMSS', 'GAS', 'ABM'],
-    'GAS':    ['STEM', 'ABM', 'HUMSS', 'GAS', 'TVL', 'Sports'],  # Most flexible
-    'TVL':    ['TVL', 'GAS', 'STEM'],
-    'Sports': ['Sports', 'GAS', 'HUMSS'],
+# Strand gives BONUS POINTS, never restricts course access
+STRAND_BONUS = {
+    'perfect_match': +8,   # User strand matches course perfectly
+    'compatible':    +4,   # User strand is compatible
+    'different':     0,    # NO PENALTY - course still available!
 }
+
+# Example: TVL student can still get recommended for STEM courses
+# if their assessment shows strong analytical/technical traits
 ```
 
 ---
