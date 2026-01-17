@@ -45,8 +45,8 @@ function FeedbackForm({ recommendation, onSubmit, onClose }) {
         if (onSubmit) {
           onSubmit(data);
         }
-        // Auto close after 2 seconds
-        setTimeout(() => onClose && onClose(), 2000);
+        // Auto close after 5 seconds
+        setTimeout(() => onClose && onClose(), 5000);
       } else {
         alert('Error submitting feedback');
       }
