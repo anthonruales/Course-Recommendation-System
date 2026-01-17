@@ -5,6 +5,7 @@ import Signup from './Signup';
 import Dashboard from './Dashboard';
 import ProfileForm from './ProfileForm';
 import AssessmentForm from './AssessmentForm';
+import AdaptiveAssessment from './AdaptiveAssessment';
 import MyActivity from './MyActivity';
 import Admin from './admin/Admin'; 
 import ResultsView from './ResultsView'; 
@@ -109,6 +110,7 @@ function App() {
                 userName={user} 
                 onLogout={handleLogout} 
                 onStart={() => setView('assessment')}
+                onStartAdaptive={() => setView('adaptive')}
                 onViewProfile={() => setView('profile')}
                 onViewActivity={() => setView('activity')}
                 history={history}
@@ -140,6 +142,13 @@ function App() {
 
             {view === 'assessment' && (
               <AssessmentForm 
+                onBack={() => setView('dashboard')} 
+                onShowResults={handleAssessmentResults} 
+              />
+            )}
+
+            {view === 'adaptive' && (
+              <AdaptiveAssessment 
                 onBack={() => setView('dashboard')} 
                 onShowResults={handleAssessmentResults} 
               />

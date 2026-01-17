@@ -18,6 +18,7 @@ from sqlalchemy.orm import Session, joinedload
 from trait_mapping import apply_trait_mapping
 from assessment_service import AssessmentService
 from recommendation_engine import HybridRecommendationEngine
+from adaptive_assessment import AdaptiveAssessmentEngine, initialize_adaptive_engine, get_adaptive_engine
 import json
 
 load_dotenv()
@@ -72,9 +73,11 @@ def seed_database():
             print(f"🌱 Seeding {len(QUESTIONS_POOL)} questions...")
             for q in QUESTIONS_POOL:
                 question_type = q.get("question_type", "standard")
+                # Support both old format ("question") and new format ("question_text")
+                question_text = q.get("question_text") or q.get("question")
                 new_q = models.Question(
                     test_id=default_test.test_id,
-                    question_text=q.get("question"), 
+                    question_text=question_text, 
                     category=q.get("category"),
                     question_type=question_type
                 )
@@ -93,10 +96,14 @@ def seed_database():
                             trait_tags_json = json.dumps(opt.get("trait_tags", []))
                             recommended_courses_json = json.dumps(opt.get("recommended_courses", []))
                         
+                        # Support both old format ("text"/"tag") and new format ("option_text"/"trait_tag")
+                        option_text = opt.get("option_text") or opt.get("text")
+                        trait_tag = opt.get("trait_tag") or opt.get("tag")
+                        
                         db.add(models.Option(
                             question_id=new_q.question_id, 
-                            option_text=opt.get("text"), 
-                            trait_tag=opt.get("tag"),
+                            option_text=option_text, 
+                            trait_tag=trait_tag,
                             weight=weight,
                             trait_tags_json=trait_tags_json,
                             recommended_courses_json=recommended_courses_json
@@ -1151,3 +1158,271 @@ def get_all_test_attempts(db: Session = Depends(get_db)):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=8000)
+
+
+# ==================== AKINATOR-STYLE ADAPTIVE ASSESSMENT ====================
+# These endpoints implement an intelligent question-by-question assessment
+# that selects the BEST next question based on previous answers
+
+# Global adaptive engine (initialized after database is seeded)
+_adaptive_engine: AdaptiveAssessmentEngine = None
+
+def get_or_init_adaptive_engine(db: Session) -> AdaptiveAssessmentEngine:
+    """Get or initialize the adaptive engine with courses and questions from DB"""
+    global _adaptive_engine
+    
+    if _adaptive_engine is None:
+        # Load courses from database
+        courses = db.query(models.Course).all()
+        courses_data = [
+            {
+                "course_name": c.course_name,
+                "description": c.description,
+                "minimum_gwa": c.minimum_gwa,
+                "required_strand": c.required_strand,
+                "trait_tag": c.trait_tag
+            }
+            for c in courses
+        ]
+        
+        # Load questions from database
+        questions = db.query(models.Question).options(joinedload(models.Question.options)).all()
+        questions_data = [
+            {
+                "question_id": q.question_id,
+                "question_text": q.question_text,
+                "category": q.category,
+                "options": [
+                    {
+                        "option_id": opt.option_id,
+                        "option_text": opt.option_text,
+                        "trait_tag": opt.trait_tag
+                    }
+                    for opt in q.options
+                ]
+            }
+            for q in questions
+        ]
+        
+        _adaptive_engine = AdaptiveAssessmentEngine(courses_data, questions_data)
+    
+    return _adaptive_engine
+
+
+class AdaptiveSessionStart(BaseModel):
+    userId: int
+
+
+class AdaptiveAnswerSubmit(BaseModel):
+    sessionId: str
+    questionId: int
+    chosenOptionId: int
+
+
+@app.post("/adaptive/start")
+def start_adaptive_assessment(data: AdaptiveSessionStart, db: Session = Depends(get_db)):
+    """
+    🧠 AKINATOR-STYLE ASSESSMENT - Start Session
+    
+    Starts an adaptive assessment that asks questions ONE AT A TIME.
+    Each subsequent question is intelligently selected based on previous answers.
+    
+    Returns: session_id and first question
+    """
+    # Get user info for initial scoring
+    user = db.query(models.User).filter(models.User.user_id == data.userId).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    user_gwa = None
+    user_strand = None
+    if user.academic_info:
+        user_gwa = user.academic_info.get("gwa")
+        user_strand = user.academic_info.get("strand")
+    
+    # Initialize adaptive engine
+    engine = get_or_init_adaptive_engine(db)
+    
+    # Create session
+    session_id = engine.create_session(data.userId, user_gwa, user_strand)
+    
+    # Get first question
+    first_question = engine.get_next_question(session_id)
+    
+    if not first_question:
+        raise HTTPException(status_code=500, detail="Failed to start adaptive assessment")
+    
+    return {
+        "success": True,
+        "message": "🧠 Adaptive assessment started! Answer one question at a time.",
+        "session_id": session_id,
+        "mode": "adaptive",
+        "description": "Questions are selected based on your previous answers to find the best course match.",
+        "max_questions": engine.MAX_QUESTIONS,
+        "min_questions": engine.MIN_QUESTIONS,
+        "first_question": first_question
+    }
+
+
+def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommendations: list):
+    """Helper function to save adaptive assessment results to database for history tracking"""
+    try:
+        session = engine.sessions.get(session_id)
+        if not session:
+            return
+        
+        # Get or create adaptive test type
+        adaptive_test = db.query(models.Test).filter(models.Test.test_type == "adaptive").first()
+        if not adaptive_test:
+            adaptive_test = models.Test(
+                test_name="Smart Assessment (Adaptive)",
+                test_type="adaptive",
+                description="Akinator-style adaptive assessment"
+            )
+            db.add(adaptive_test)
+            db.flush()
+        
+        # Create test attempt
+        test_attempt = models.TestAttempt(
+            user_id=session.user_id,
+            test_id=adaptive_test.test_id
+        )
+        db.add(test_attempt)
+        db.flush()
+        
+        # Save answered questions
+        for question_id, option_id in session.answered_questions.items():
+            db.add(models.StudentAnswer(
+                attempt_id=test_attempt.attempt_id,
+                question_id=question_id,
+                chosen_option_id=option_id
+            ))
+        
+        # Save recommendations
+        for rec in recommendations:
+            course = db.query(models.Course).filter(
+                models.Course.course_name == rec["course_name"]
+            ).first()
+            if course:
+                db.add(models.Recommendation(
+                    attempt_id=test_attempt.attempt_id,
+                    user_id=session.user_id,
+                    course_id=course.course_id,
+                    reasoning=f"Match: {rec.get('match_percentage', 75)}% - Matched traits: {', '.join(rec.get('matched_traits', []))}"
+                ))
+        
+        db.commit()
+        print(f"✅ Saved adaptive assessment to database: attempt_id={test_attempt.attempt_id}")
+    except Exception as e:
+        print(f"⚠️ Warning: Could not save to history: {e}")
+        db.rollback()
+
+
+@app.post("/adaptive/answer")
+def submit_adaptive_answer(data: AdaptiveAnswerSubmit, db: Session = Depends(get_db)):
+    """
+    🧠 AKINATOR-STYLE ASSESSMENT - Submit Answer & Get Next Question
+    
+    Processes your answer and intelligently selects the NEXT BEST question.
+    Shows you how courses are narrowing down in real-time.
+    """
+    engine = get_or_init_adaptive_engine(db)
+    
+    # Process the answer
+    result = engine.process_answer(data.sessionId, data.questionId, data.chosenOptionId)
+    
+    if "error" in result:
+        raise HTTPException(status_code=400, detail=result["error"])
+    
+    # If session is complete, return final results
+    if result.get("status") == "complete":
+        # Save to database for history
+        save_adaptive_session_to_db(db, engine, data.sessionId, result["recommendations"])
+        return {
+            "success": True,
+            "is_complete": True,
+            "message": "Assessment complete! Here are your personalized recommendations.",
+            "recommendations": result["recommendations"]
+        }
+    
+    # Get next question
+    next_question = engine.get_next_question(data.sessionId)
+    
+    if next_question is None:
+        # Assessment complete
+        final_results = engine.get_final_results(data.sessionId)
+        # Save to database for history
+        save_adaptive_session_to_db(db, engine, data.sessionId, final_results["recommendations"])
+        return {
+            "success": True,
+            "is_complete": True,
+            "message": f"Assessment complete after {result['round']} questions!",
+            "total_questions": result["round"],
+            "confidence": result["confidence"],
+            "recommendations": final_results["recommendations"]
+        }
+    
+    return {
+        "success": True,
+        "is_complete": False,
+        "current_round": result["round"],
+        "trait_recorded": result.get("trait_recorded"),
+        "courses_remaining": result["courses_remaining"],
+        "confidence": result["confidence"],
+        "top_courses_preview": result.get("top_courses_preview", []),
+        "traits_discovered": result.get("traits_discovered", 0),
+        "next_question": next_question,
+        "can_finish_early": next_question.get("can_finish_early", False)
+    }
+
+
+@app.post("/adaptive/finish")
+def finish_adaptive_early(data: dict, db: Session = Depends(get_db)):
+    """
+    🧠 AKINATOR-STYLE ASSESSMENT - Finish Early
+    
+    If you've answered enough questions and want to see results now.
+    Requires at least 10 questions answered.
+    """
+    session_id = data.get("sessionId")
+    if not session_id:
+        raise HTTPException(status_code=400, detail="Session ID required")
+    
+    engine = get_or_init_adaptive_engine(db)
+    result = engine.finish_early(session_id)
+    
+    if "error" in result:
+        raise HTTPException(status_code=400, detail=result["error"])
+    
+    # Save to database for history using the helper function
+    save_adaptive_session_to_db(db, engine, session_id, result.get("recommendations", []))
+    
+    return {
+        "success": True,
+        "message": f"Assessment finished early after {result['total_questions_asked']} questions!",
+        "total_questions": result["total_questions_asked"],
+        "confidence": result["confidence"],
+        "traits_discovered": result["traits_discovered"],
+        "recommendations": result["recommendations"]
+    }
+
+
+@app.get("/adaptive/status/{session_id}")
+def get_adaptive_status(session_id: str, db: Session = Depends(get_db)):
+    """Get current status of an adaptive assessment session"""
+    engine = get_or_init_adaptive_engine(db)
+    
+    if not engine.sessions.get(session_id):
+        raise HTTPException(status_code=404, detail="Session not found")
+    
+    session = engine.sessions[session_id]
+    
+    return {
+        "session_id": session_id,
+        "is_complete": session.is_complete,
+        "round": session.round_number,
+        "confidence": round(session.confidence * 100, 1),
+        "traits_discovered": len(session.trait_scores),
+        "courses_remaining": len(session.active_courses),
+        "questions_answered": len(session.answered_questions)
+    }
