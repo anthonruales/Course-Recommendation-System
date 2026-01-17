@@ -1361,10 +1361,44 @@ class HybridRecommendationEngine:
             course_traits = [t.strip() for t in (course.trait_tag or "").split(",")]
             matched_traits = [t for t in top_traits if t in course_traits]
             
-            # Final combined score
+            # Final combined score (raw points)
             final_score = rule_score + tree_boost
             
-            # Calculate confidence score
+            # ============ CALCULATE TRUE PERCENTAGE (0-100%) ============
+            # Maximum possible score breakdown:
+            # - Trait match base: 7 traits × 10 = 70 points max
+            # - P1 Primary trait: +20 points
+            # - P2 Trait synergy: +15 points
+            # - P3 Career path: +25 points
+            # - P6 Work environment: +8 points
+            # - P7 Learning style: +6 points
+            # - A1 GWA bonus: +10 points
+            # - A2 Strand bonus: +8 points
+            # - Tree boost: +25 points max
+            # TOTAL MAX: ~187 points (but realistically 120-150 for good matches)
+            MAX_REALISTIC_SCORE = 120  # A very good match would get around this
+            
+            # Calculate percentage based on actual scoring potential
+            # Use a curve that differentiates better between scores
+            raw_percentage = (final_score / MAX_REALISTIC_SCORE) * 100
+            
+            # Apply a more discriminating curve:
+            # - Scores below 30 points = 30-50% range
+            # - Scores 30-60 points = 50-70% range  
+            # - Scores 60-90 points = 70-85% range
+            # - Scores 90+ points = 85-98% range (cap at 98% - nothing is perfect!)
+            if final_score <= 30:
+                compatibility_percentage = 30 + (final_score / 30) * 20  # 30-50%
+            elif final_score <= 60:
+                compatibility_percentage = 50 + ((final_score - 30) / 30) * 20  # 50-70%
+            elif final_score <= 90:
+                compatibility_percentage = 70 + ((final_score - 60) / 30) * 15  # 70-85%
+            else:
+                compatibility_percentage = 85 + min(13, ((final_score - 90) / 30) * 13)  # 85-98%
+            
+            compatibility_percentage = round(min(98, max(25, compatibility_percentage)), 1)
+            
+            # Calculate confidence components
             trait_confidence = (len(matched_traits) / max(1, len(course_traits))) * 100
             academic_confidence = 100 if fc.boost_total > fc.penalty_total else 50
             tree_confidence = confidence * 100 if in_predicted_category else 50
@@ -1386,6 +1420,7 @@ class HybridRecommendationEngine:
                 "final_score": final_score,
                 "rule_score": rule_score,
                 "tree_boost": tree_boost,
+                "compatibility_percentage": compatibility_percentage,  # True percentage for display
                 "confidence": round(overall_confidence, 1),
                 "priority": priority,
                 "matched_traits": matched_traits,
@@ -1444,7 +1479,8 @@ class HybridRecommendationEngine:
                 "minimum_gwa": float(course.minimum_gwa) if course.minimum_gwa else None,
                 "recommended_strand": course.required_strand,
                 "reasoning": " | ".join(reasoning_parts),
-                "compatibility_score": rec["final_score"],
+                "compatibility_score": rec["compatibility_percentage"],  # Now a true percentage (0-98%)
+                "raw_score": rec["final_score"],  # Keep raw score for debugging
                 "confidence_score": rec["confidence"],
                 "priority_tier": rec["priority"],
                 "match_details": {

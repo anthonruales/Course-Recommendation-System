@@ -17,10 +17,10 @@ function ResultsView({ recommendation, onRetake, onBack }) {
     );
   }
 
-  const calculatePercentage = (score) => {
-    const maxScore = 30;
-    const percentage = Math.min(100, Math.max(0, (score / maxScore) * 100));
-    return Math.round(percentage);
+  // Backend now sends a true percentage (0-98%) - no calculation needed
+  const getDisplayPercentage = (score) => {
+    // Score is already a percentage from the backend
+    return Math.round(score);
   };
 
   const topTraits = recommendation.detected_traits || [];
@@ -86,7 +86,7 @@ function ResultsView({ recommendation, onRetake, onBack }) {
                   
                   <div className="score-display">
                     <div className="percentage-text" style={{ color: rankBorderColor }}>
-                      {calculatePercentage(item.compatibility_score)}%
+                      {getDisplayPercentage(item.compatibility_score)}%
                     </div>
                     <div className="nav-category" style={{ margin: 0 }}>Match Score</div>
                   </div>
