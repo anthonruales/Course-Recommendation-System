@@ -22,6 +22,15 @@ from dataclasses import dataclass, field
 from enum import Enum
 import json
 
+# Import enhanced trait system for accurate matching
+from trait_system import (
+    calculate_trait_match_score,
+    get_trait_similarity,
+    get_user_profile_from_traits,
+    EXPANDED_TRAIT_MAPPING,
+    TRAIT_CATEGORIES
+)
+
 
 # ================================================================================
 # PHASE 1: RULE-BASED FILTERING SYSTEM
@@ -332,29 +341,61 @@ class RuleBasedFilter:
             explanation = "Strand is now a bonus factor only"
         
         elif check_type == "primary_trait_match":
-            # P1: Check if primary trait matches
-            if primary_trait and primary_trait in course_traits:
-                passed = True
-                action_taken = "boost_applied"
-                points = rule.boost_points
-                explanation = f"Primary trait '{primary_trait}' matches course requirements"
+            # P1: Check if primary trait matches (now with similarity matching)
+            if primary_trait:
+                # Check for exact match first
+                if primary_trait in course_traits:
+                    passed = True
+                    action_taken = "boost_applied"
+                    points = rule.boost_points
+                    explanation = f"Primary trait '{primary_trait}' matches course requirements"
+                else:
+                    # Check for similar trait match using enhanced system
+                    best_similarity = 0.0
+                    best_match = None
+                    for c_trait in course_traits:
+                        similarity = get_trait_similarity(primary_trait, c_trait)
+                        if similarity > best_similarity:
+                            best_similarity = similarity
+                            best_match = c_trait
+                    
+                    if best_similarity >= 0.7:  # Strong similarity threshold
+                        passed = True
+                        action_taken = "boost_applied"
+                        points = int(rule.boost_points * best_similarity)  # Partial boost
+                        explanation = f"Primary trait '{primary_trait}' is similar to course trait '{best_match}' ({int(best_similarity*100)}% match)"
+                    elif best_similarity >= 0.5:  # Moderate similarity
+                        passed = True
+                        action_taken = "boost_applied"
+                        points = int(rule.boost_points * 0.5)  # Half boost
+                        explanation = f"Primary trait '{primary_trait}' has moderate alignment with '{best_match}'"
+                    else:
+                        passed = True
+                        action_taken = "no_boost"
+                        explanation = f"Primary trait '{primary_trait}' not strongly aligned with course traits"
             else:
                 passed = True
                 action_taken = "no_boost"
-                explanation = f"Primary trait '{primary_trait}' not in course traits"
+                explanation = "No primary trait identified"
         
         elif check_type == "trait_synergy":
-            # P2: Check for multiple trait matches
+            # P2: Check for multiple trait matches (using enhanced matching)
             min_matches = rule.conditions.get("min_matches", 3)
-            if len(matched_traits) >= min_matches:
+            # Count includes exact + similar matches
+            match_details = context.get("match_details", {})
+            exact_count = len(match_details.get("exact", []))
+            similar_count = len(match_details.get("similar", []))
+            total_meaningful_matches = exact_count + (similar_count * 0.5)  # Similar matches count as half
+            
+            if total_meaningful_matches >= min_matches:
                 passed = True
                 action_taken = "boost_applied"
                 points = rule.boost_points
-                explanation = f"Trait synergy: {len(matched_traits)} traits match ({', '.join(matched_traits[:3])}...)"
+                explanation = f"Trait synergy: {exact_count} exact + {similar_count} similar matches ({', '.join(matched_traits[:3])}...)"
             else:
                 passed = True
                 action_taken = "no_boost"
-                explanation = f"Trait synergy not met: only {len(matched_traits)} matches (need {min_matches})"
+                explanation = f"Trait synergy not met: {exact_count} exact + {similar_count} similar (need {min_matches} total)"
         
         elif check_type == "career_path_match":
             # P3: Check if course is in user's career path preference
@@ -482,6 +523,11 @@ class RuleBasedFilter:
         """
         PHASE 1: Apply rule-based filtering to all courses
         
+        Uses ENHANCED TRAIT MATCHING with:
+        - Exact matches (highest score)
+        - Similar trait matches (partial score based on relationship)
+        - Category-level matches (bonus points)
+        
         Args:
             courses: List of all courses from database
             user_profile: Dictionary with user's academic info (gwa, strand, etc.)
@@ -497,19 +543,27 @@ class RuleBasedFilter:
         user_gwa = user_profile.get("gwa")
         user_strand = user_profile.get("strand")
         
-        # Get top traits for matching
+        # Get top traits for matching - use more traits for better matching
         sorted_traits = sorted(trait_scores.items(), key=lambda x: x[1], reverse=True)
-        top_traits = [t for t, _ in sorted_traits[:7]]
+        top_traits = [t for t, _ in sorted_traits[:10]]  # Increased from 7 to 10
         primary_trait = sorted_traits[0][0] if sorted_traits else None
+        secondary_trait = sorted_traits[1][0] if len(sorted_traits) > 1 else None
         
         # Determine user's learning style and work environment preferences from traits
         user_learning_style = self._determine_learning_style(top_traits)
         user_work_env = self._determine_work_environment(top_traits)
         
+        # Get user profile analysis for better matching
+        user_profile_analysis = get_user_profile_from_traits(trait_scores)
+        
         for course in courses:
-            # Calculate matched traits for this course
+            # Calculate matched traits using ENHANCED trait matching
             course_traits = [t.strip() for t in (course.trait_tag or "").split(",")]
-            matched_traits = [t for t in top_traits if t in course_traits]
+            
+            # Use enhanced trait matching with similarity scores
+            trait_match_score, matched_traits, match_details = calculate_trait_match_score(
+                top_traits, course_traits
+            )
             
             # Build context for rule evaluation
             context = {
@@ -518,10 +572,14 @@ class RuleBasedFilter:
                 "course": course,
                 "user_traits": top_traits,
                 "primary_trait": primary_trait,
+                "secondary_trait": secondary_trait,
                 "career_path_courses": career_path_courses or [],
                 "user_work_environment": user_work_env,
                 "user_learning_style": user_learning_style,
                 "matched_traits": matched_traits,
+                "trait_match_score": trait_match_score,  # Enhanced score
+                "match_details": match_details,  # Detailed breakdown
+                "user_profile_analysis": user_profile_analysis,  # User's trait categories
             }
             
             # Evaluate all rules
@@ -563,9 +621,17 @@ class RuleBasedFilter:
                         failed_rules.append(f"{rule.rule_id}: {rule.rule_name}")
                         explanations.append(f"⚠ {rule.rule_name}: {result.explanation}")
             
-            # Calculate eligibility score
-            base_score = len(matched_traits) * 10  # 10 points per matched trait
+            # Calculate eligibility score using ENHANCED trait matching
+            # Base score now uses the comprehensive trait match score
+            base_score = trait_match_score  # This includes exact + similar + category matches
             eligibility_score = base_score + total_boost - total_penalty
+            
+            # Add bonus for having multiple exact matches (synergy)
+            exact_match_count = len(match_details.get("exact", []))
+            if exact_match_count >= 4:
+                eligibility_score += 10  # Synergy bonus for strong matches
+            elif exact_match_count >= 3:
+                eligibility_score += 5
             
             filtered_courses.append(FilteredCourse(
                 course=course,
@@ -1357,16 +1423,28 @@ class HybridRecommendationEngine:
             if in_predicted_category:
                 tree_boost = tree_modifier
             
-            # Calculate matched traits for this course
+            # Calculate matched traits using enhanced system for display
             course_traits = [t.strip() for t in (course.trait_tag or "").split(",")]
-            matched_traits = [t for t in top_traits if t in course_traits]
+            
+            # Use enhanced matching - get both exact and similar matches
+            trait_match_score, matched_traits_display, match_details = calculate_trait_match_score(
+                top_traits, course_traits
+            )
+            
+            # For backwards compatibility, also compute simple matches
+            simple_matched = [t for t in top_traits if t in course_traits]
+            
+            # Use enhanced matched traits for display (shows "trait≈similar" format)
+            matched_traits = match_details.get("exact", [])  # Show only exact matches
             
             # Final combined score (raw points)
             final_score = rule_score + tree_boost
             
             # ============ CALCULATE TRUE PERCENTAGE (0-100%) ============
+            # With enhanced trait matching, scores are higher
             # Maximum possible score breakdown:
-            # - Trait match base: 7 traits × 10 = 70 points max
+            # - Enhanced trait match: ~90 points (exact+similar+category)
+            # - Synergy bonus: +10 points
             # - P1 Primary trait: +20 points
             # - P2 Trait synergy: +15 points
             # - P3 Career path: +25 points
@@ -1375,42 +1453,48 @@ class HybridRecommendationEngine:
             # - A1 GWA bonus: +10 points
             # - A2 Strand bonus: +8 points
             # - Tree boost: +25 points max
-            # TOTAL MAX: ~187 points (but realistically 120-150 for good matches)
-            MAX_REALISTIC_SCORE = 120  # A very good match would get around this
+            # TOTAL MAX: ~217 points for excellent matches
+            MAX_REALISTIC_SCORE = 150  # Adjusted for enhanced matching
             
             # Calculate percentage based on actual scoring potential
             # Use a curve that differentiates better between scores
             raw_percentage = (final_score / MAX_REALISTIC_SCORE) * 100
             
-            # Apply a more discriminating curve:
-            # - Scores below 30 points = 30-50% range
-            # - Scores 30-60 points = 50-70% range  
-            # - Scores 60-90 points = 70-85% range
-            # - Scores 90+ points = 85-98% range (cap at 98% - nothing is perfect!)
-            if final_score <= 30:
-                compatibility_percentage = 30 + (final_score / 30) * 20  # 30-50%
-            elif final_score <= 60:
-                compatibility_percentage = 50 + ((final_score - 30) / 30) * 20  # 50-70%
-            elif final_score <= 90:
-                compatibility_percentage = 70 + ((final_score - 60) / 30) * 15  # 70-85%
+            # Apply a more discriminating curve (adjusted for enhanced scoring):
+            # - Scores below 40 points = 25-45% range (weak match)
+            # - Scores 40-70 points = 45-65% range (moderate match)
+            # - Scores 70-100 points = 65-80% range (good match)
+            # - Scores 100-130 points = 80-90% range (strong match)
+            # - Scores 130+ points = 90-97% range (excellent match)
+            if final_score <= 40:
+                compatibility_percentage = 25 + (final_score / 40) * 20  # 25-45%
+            elif final_score <= 70:
+                compatibility_percentage = 45 + ((final_score - 40) / 30) * 20  # 45-65%
+            elif final_score <= 100:
+                compatibility_percentage = 65 + ((final_score - 70) / 30) * 15  # 65-80%
+            elif final_score <= 130:
+                compatibility_percentage = 80 + ((final_score - 100) / 30) * 10  # 80-90%
             else:
-                compatibility_percentage = 85 + min(13, ((final_score - 90) / 30) * 13)  # 85-98%
+                compatibility_percentage = 90 + min(7, ((final_score - 130) / 30) * 7)  # 90-97%
             
-            compatibility_percentage = round(min(98, max(25, compatibility_percentage)), 1)
+            compatibility_percentage = round(min(97, max(25, compatibility_percentage)), 1)
             
-            # Calculate confidence components
-            trait_confidence = (len(matched_traits) / max(1, len(course_traits))) * 100
+            # Calculate confidence components using enhanced matching
+            exact_match_count = len(match_details.get("exact", []))
+            similar_match_count = len(match_details.get("similar", []))
+            total_matches = exact_match_count + (similar_match_count * 0.6)  # Similar counts partially
+            trait_confidence = (total_matches / max(1, len(course_traits))) * 100
             academic_confidence = 100 if fc.boost_total > fc.penalty_total else 50
             tree_confidence = confidence * 100 if in_predicted_category else 50
             
             overall_confidence = (trait_confidence * 0.4 + academic_confidence * 0.3 + tree_confidence * 0.3)
             
-            # Determine priority tier
-            if len(matched_traits) >= 3 and fc.penalty_total == 0 and in_predicted_category:
+            # Determine priority tier (adjusted for enhanced matching)
+            if exact_match_count >= 3 and fc.penalty_total == 0 and in_predicted_category:
                 priority = "EXCELLENT"
-            elif len(matched_traits) >= 2 and fc.penalty_total <= 5:
+            elif exact_match_count >= 2 or (exact_match_count >= 1 and similar_match_count >= 2):
                 priority = "GOOD"
-            elif len(matched_traits) >= 1:
+            elif exact_match_count >= 1 or similar_match_count >= 2:
                 priority = "FAIR"
             else:
                 priority = "EXPLORATORY"

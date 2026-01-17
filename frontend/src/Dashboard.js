@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function Dashboard({ userName, onLogout, onStart, onViewProfile, onViewActivity, history }) {
+function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile, onViewActivity, history }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [hasAcademicInfo, setHasAcademicInfo] = useState(false);
   const [checkingProfile, setCheckingProfile] = useState(true);
@@ -31,6 +31,15 @@ function Dashboard({ userName, onLogout, onStart, onViewProfile, onViewActivity,
       return;
     }
     onStart();
+  };
+
+  const handleStartAdaptive = () => {
+    if (!hasAcademicInfo) {
+      alert('⚠️ Please complete your Academic Profile first!\n\nYou need to fill in your GWA and SHS Strand before taking the assessment.');
+      onViewProfile();
+      return;
+    }
+    onStartAdaptive();
   };
 
   // Keeps your original logic for history display
@@ -88,11 +97,10 @@ function Dashboard({ userName, onLogout, onStart, onViewProfile, onViewActivity,
         {/* ASSESSMENT CALL TO ACTION */}
         <div style={styles.actionCard}>
           <div style={styles.actionContent}>
-            <div>
+            <div style={{flex: 1}}>
               <h3 style={styles.actionTitle}>Ready for your recommendation?</h3>
               <p style={styles.actionText}>
-                Launch the assessment to begin the interest questionnaire. 
-                We will use your saved Academic Profile for the final analysis.
+                Choose your assessment style. Both use AI to find your perfect course match.
               </p>
               {!checkingProfile && !hasAcademicInfo && (
                 <p style={{color: '#f59e0b', fontSize: '13px', marginTop: '10px'}}>
@@ -100,17 +108,44 @@ function Dashboard({ userName, onLogout, onStart, onViewProfile, onViewActivity,
                 </p>
               )}
             </div>
-            <button 
-              style={{
-                ...styles.startBtn,
-                ...((!hasAcademicInfo && !checkingProfile) ? {opacity: 0.7, cursor: 'not-allowed'} : {})
-              }} 
-              onClick={handleStartAssessment}
-              onMouseEnter={(e) => { if (hasAcademicInfo) { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 15px 30px rgba(99, 102, 241, 0.4)'; } }}
-              onMouseLeave={(e) => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = '0 10px 20px rgba(99, 102, 241, 0.2)'; }}
-            >
-              {checkingProfile ? 'Checking...' : (hasAcademicInfo ? 'Start New Assessment' : 'Complete Profile First')}
-            </button>
+            <div style={styles.assessmentButtons}>
+              <button 
+                style={{
+                  ...styles.adaptiveBtn,
+                  ...((!hasAcademicInfo && !checkingProfile) ? {opacity: 0.7, cursor: 'not-allowed'} : {})
+                }} 
+                onClick={handleStartAdaptive}
+                onMouseEnter={(e) => { if (hasAcademicInfo) { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 15px 30px rgba(16, 185, 129, 0.4)'; } }}
+                onMouseLeave={(e) => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = '0 10px 20px rgba(16, 185, 129, 0.2)'; }}
+              >
+                <span style={{fontSize: '20px', marginRight: '8px'}}>🧞‍♂️</span>
+                {checkingProfile ? 'Checking...' : 'Smart Assessment'}
+                <span style={styles.recommendedBadge}>Recommended</span>
+              </button>
+              <button 
+                style={{
+                  ...styles.startBtn,
+                  ...((!hasAcademicInfo && !checkingProfile) ? {opacity: 0.7, cursor: 'not-allowed'} : {})
+                }} 
+                onClick={handleStartAssessment}
+                onMouseEnter={(e) => { if (hasAcademicInfo) { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 15px 30px rgba(99, 102, 241, 0.4)'; } }}
+                onMouseLeave={(e) => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = '0 10px 20px rgba(99, 102, 241, 0.2)'; }}
+              >
+                📝 Full Assessment
+              </button>
+            </div>
+          </div>
+          <div style={styles.assessmentInfo}>
+            <div style={styles.infoCard}>
+              <span style={styles.infoIcon}>🧞‍♂️</span>
+              <strong>Smart Assessment</strong>
+              <span style={styles.infoDesc}>10-25 adaptive questions</span>
+            </div>
+            <div style={styles.infoCard}>
+              <span style={styles.infoIcon}>📝</span>
+              <strong>Full Assessment</strong>
+              <span style={styles.infoDesc}>Complete questionnaire</span>
+            </div>
           </div>
         </div>
 
@@ -221,8 +256,28 @@ const styles = {
   startBtn: {
     background: '#6366f1', color: 'white', padding: '14px 24px', borderRadius: '12px',
     border: 'none', fontWeight: '700', cursor: 'pointer', boxShadow: '0 10px 20px rgba(99, 102, 241, 0.2)',
-    transition: 'all 0.3s ease'
+    transition: 'all 0.3s ease', fontSize: '14px'
   },
+  adaptiveBtn: {
+    background: 'linear-gradient(135deg, #10b981, #059669)', color: 'white', padding: '14px 24px', borderRadius: '12px',
+    border: 'none', fontWeight: '700', cursor: 'pointer', boxShadow: '0 10px 20px rgba(16, 185, 129, 0.2)',
+    transition: 'all 0.3s ease', display: 'flex', alignItems: 'center', position: 'relative', fontSize: '14px'
+  },
+  recommendedBadge: {
+    position: 'absolute', top: '-8px', right: '-8px', background: '#f59e0b', color: 'white',
+    fontSize: '9px', fontWeight: '800', padding: '3px 8px', borderRadius: '10px', textTransform: 'uppercase'
+  },
+  assessmentButtons: {
+    display: 'flex', gap: '15px', alignItems: 'center'
+  },
+  assessmentInfo: {
+    display: 'flex', gap: '20px', marginTop: '20px', paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.08)'
+  },
+  infoCard: {
+    display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13px', color: '#94a3b8'
+  },
+  infoIcon: { fontSize: '20px' },
+  infoDesc: { color: '#64748b', fontSize: '12px', marginLeft: '5px' },
   dashboardGrid: { display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '25px' },
   portalCard: {
     background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.08)',

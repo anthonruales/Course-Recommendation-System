@@ -18,8 +18,15 @@ function ResultsView({ recommendation, onRetake, onBack }) {
   }
 
   // Backend now sends a true percentage (0-98%) - no calculation needed
-  const getDisplayPercentage = (score) => {
-    // Score is already a percentage from the backend
+  const getDisplayPercentage = (item) => {
+    // Check multiple possible field names for the score
+    let score = item.compatibility_score ?? item.final_score ?? item.match_percentage ?? item.score;
+    
+    // Handle NaN or undefined
+    if (score === undefined || score === null || isNaN(score)) {
+      score = 75; // Default fallback
+    }
+    
     return Math.round(score);
   };
 
@@ -86,7 +93,7 @@ function ResultsView({ recommendation, onRetake, onBack }) {
                   
                   <div className="score-display">
                     <div className="percentage-text" style={{ color: rankBorderColor }}>
-                      {getDisplayPercentage(item.compatibility_score)}%
+                      {getDisplayPercentage(item)}%
                     </div>
                     <div className="nav-category" style={{ margin: 0 }}>Match Score</div>
                   </div>
