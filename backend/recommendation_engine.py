@@ -102,44 +102,50 @@ class RuleBasedFilter:
     def _initialize_rules(self):
         """Initialize the rule base with predefined IF-THEN rules"""
         
-        # ==================== ELIGIBILITY RULES (Hard Constraints) ====================
+        # ==================== ACADEMIC BONUS RULES (Soft Constraints - Bonus Points Only) ====================
+        # NOTE: Academic info (GWA, Strand) are BONUS POINTS only, NOT hard constraints
+        # All courses remain eligible regardless of user's strand or GWA
+        # The PRIMARY focus is on TRAIT MATCHING from assessment answers
         
-        # Rule E1: GWA Minimum Requirement
+        # Rule A1: GWA Bonus/Penalty (Soft Constraint)
         self.rules.append(Rule(
-            rule_id="E1",
-            rule_name="GWA Minimum Requirement",
-            rule_type=RuleType.ELIGIBILITY,
-            conditions={"check": "gwa_requirement"},
-            action="check_eligibility",
-            penalty_points=0,
-            explanation_template="IF user_gwa ({user_gwa}) < course_minimum_gwa ({min_gwa}) THEN course is INELIGIBLE",
-            priority=10
+            rule_id="A1",
+            rule_name="GWA Academic Bonus",
+            rule_type=RuleType.PREFERENCE,
+            conditions={"check": "gwa_bonus"},
+            action="adjust_score",
+            boost_points=10,  # Bonus for meeting GWA
+            penalty_points=5,  # Small penalty per point below (not disqualifying)
+            explanation_template="IF user_gwa ({user_gwa}) meets course_minimum_gwa ({min_gwa}) THEN BONUS, else small penalty",
+            priority=5  # Lower priority than trait matching
         ))
         
-        # Rule E2: Strand Alignment Check
+        # Rule A2: Strand Alignment Bonus (Soft Constraint)
         self.rules.append(Rule(
-            rule_id="E2",
-            rule_name="Strand Alignment",
-            rule_type=RuleType.ELIGIBILITY,
-            conditions={"check": "strand_alignment"},
-            action="check_eligibility",
-            penalty_points=0,
-            explanation_template="IF user_strand ({user_strand}) is incompatible with required_strand ({req_strand}) THEN apply penalty",
-            priority=9
+            rule_id="A2",
+            rule_name="Strand Alignment Bonus",
+            rule_type=RuleType.PREFERENCE,
+            conditions={"check": "strand_bonus"},
+            action="adjust_score",
+            boost_points=8,  # Bonus for matching strand
+            penalty_points=0,  # NO penalty for mismatch - all courses available
+            explanation_template="IF user_strand ({user_strand}) matches required_strand ({req_strand}) THEN BONUS (no penalty for mismatch)",
+            priority=4  # Lower priority than trait matching
         ))
         
-        # ==================== PREFERENCE RULES (Soft Constraints with Scoring) ====================
+        # ==================== TRAIT-BASED PREFERENCE RULES (PRIMARY FOCUS) ====================
+        # These have HIGHEST PRIORITY - assessment answers determine recommendations
         
-        # Rule P1: Primary Trait Match
+        # Rule P1: Primary Trait Match (HIGHEST PRIORITY)
         self.rules.append(Rule(
             rule_id="P1",
             rule_name="Primary Trait Alignment",
             rule_type=RuleType.PREFERENCE,
             conditions={"check": "primary_trait_match"},
             action="boost_score",
-            boost_points=15,
-            explanation_template="IF user_primary_trait ({primary_trait}) IN course_traits THEN BOOST +15 points",
-            priority=8
+            boost_points=20,  # Increased - primary focus
+            explanation_template="IF user_primary_trait ({primary_trait}) IN course_traits THEN BOOST +20 points",
+            priority=10  # Highest priority
         ))
         
         # Rule P2: Multiple Trait Match (Synergy)
@@ -149,9 +155,9 @@ class RuleBasedFilter:
             rule_type=RuleType.PREFERENCE,
             conditions={"check": "trait_synergy", "min_matches": 3},
             action="boost_score",
-            boost_points=10,
-            explanation_template="IF trait_matches >= 3 THEN BOOST +10 points (synergy bonus)",
-            priority=7
+            boost_points=15,  # Increased - trait matching is primary
+            explanation_template="IF trait_matches >= 3 THEN BOOST +15 points (synergy bonus)",
+            priority=9
         ))
         
         # Rule P3: Career Path Direct Match
@@ -161,33 +167,9 @@ class RuleBasedFilter:
             rule_type=RuleType.PREFERENCE,
             conditions={"check": "career_path_match"},
             action="boost_score",
-            boost_points=20,
-            explanation_template="IF user selected career path that maps to this course THEN BOOST +20 points",
+            boost_points=25,  # High - user expressed interest
+            explanation_template="IF user selected career path that maps to this course THEN BOOST +25 points",
             priority=10
-        ))
-        
-        # Rule P4: GWA Excellence Bonus
-        self.rules.append(Rule(
-            rule_id="P4",
-            rule_name="GWA Excellence",
-            rule_type=RuleType.PREFERENCE,
-            conditions={"check": "gwa_excellence", "threshold": 5},
-            action="boost_score",
-            boost_points=8,
-            explanation_template="IF user_gwa exceeds requirement by >= 5 points THEN BOOST +8 points",
-            priority=6
-        ))
-        
-        # Rule P5: Strand Perfect Match
-        self.rules.append(Rule(
-            rule_id="P5",
-            rule_name="Strand Perfect Match",
-            rule_type=RuleType.PREFERENCE,
-            conditions={"check": "strand_perfect_match"},
-            action="boost_score",
-            boost_points=12,
-            explanation_template="IF user_strand == required_strand THEN BOOST +12 points",
-            priority=7
         ))
         
         # Rule P6: Work Environment Preference
@@ -197,9 +179,9 @@ class RuleBasedFilter:
             rule_type=RuleType.PREFERENCE,
             conditions={"check": "work_environment_match"},
             action="boost_score",
-            boost_points=6,
-            explanation_template="IF user preferred work environment matches course setting THEN BOOST +6 points",
-            priority=5
+            boost_points=8,
+            explanation_template="IF user preferred work environment matches course setting THEN BOOST +8 points",
+            priority=7
         ))
         
         # Rule P7: Learning Style Compatibility
@@ -209,36 +191,12 @@ class RuleBasedFilter:
             rule_type=RuleType.PREFERENCE,
             conditions={"check": "learning_style_match"},
             action="boost_score",
-            boost_points=5,
-            explanation_template="IF user learning style matches course teaching method THEN BOOST +5 points",
-            priority=5
+            boost_points=6,
+            explanation_template="IF user learning style matches course teaching method THEN BOOST +6 points",
+            priority=6
         ))
         
         # ==================== PENALTY RULES ====================
-        
-        # Rule N1: GWA Below Requirement Penalty
-        self.rules.append(Rule(
-            rule_id="N1",
-            rule_name="GWA Shortfall Penalty",
-            rule_type=RuleType.PREFERENCE,
-            conditions={"check": "gwa_shortfall"},
-            action="penalize_score",
-            penalty_points=5,  # Per point below
-            explanation_template="IF user_gwa < course_minimum_gwa THEN PENALIZE {gap} × 5 points",
-            priority=9
-        ))
-        
-        # Rule N2: Strand Mismatch Penalty
-        self.rules.append(Rule(
-            rule_id="N2",
-            rule_name="Strand Mismatch Penalty",
-            rule_type=RuleType.PREFERENCE,
-            conditions={"check": "strand_mismatch"},
-            action="penalize_score",
-            penalty_points=10,
-            explanation_template="IF user_strand incompatible with required_strand THEN PENALIZE -10 points",
-            priority=8
-        ))
         
         # Rule N3: No Trait Match Penalty
         self.rules.append(Rule(
@@ -290,58 +248,88 @@ class RuleBasedFilter:
         
         # ==================== RULE EVALUATION LOGIC ====================
         
-        if check_type == "gwa_requirement":
-            # E1: Check if GWA meets minimum requirement
+        if check_type == "gwa_bonus":
+            # A1: GWA Bonus/Penalty (SOFT CONSTRAINT - NEVER MARKS INELIGIBLE)
+            # All courses remain eligible regardless of GWA
             if user_gwa is not None and course_min_gwa > 0:
-                if user_gwa < course_min_gwa:
-                    gap = course_min_gwa - user_gwa
-                    if gap > 5:  # More than 5 points below - ineligible
-                        passed = False
-                        action_taken = "marked_ineligible"
-                        explanation = f"GWA ({user_gwa}) is {gap:.1f} points below requirement ({course_min_gwa})"
-                    else:  # Within 5 points - eligible but penalized
-                        passed = True
-                        action_taken = "eligible_with_warning"
-                        explanation = f"GWA ({user_gwa}) is slightly below requirement ({course_min_gwa}) - achievable with effort"
-                else:
+                if user_gwa >= course_min_gwa:
+                    # User meets or exceeds requirement - give bonus
                     passed = True
-                    action_taken = "passed"
-                    explanation = f"GWA ({user_gwa}) meets or exceeds requirement ({course_min_gwa})"
+                    action_taken = "boost_applied"
+                    points = rule.boost_points
+                    explanation = f"GWA Bonus: Your GWA ({user_gwa}) meets the course requirement ({course_min_gwa}) +{points} points"
+                else:
+                    # User below requirement - apply small penalty but STILL ELIGIBLE
+                    gap = course_min_gwa - user_gwa
+                    passed = True  # ALWAYS ELIGIBLE
+                    action_taken = "penalty_applied"
+                    points = -min(int(gap * rule.penalty_points), 15)  # Cap penalty at -15 points
+                    explanation = f"GWA Note: Your GWA ({user_gwa}) is below requirement ({course_min_gwa}), but you can still pursue this course with extra effort. ({points} points)"
             else:
                 passed = True
                 action_taken = "skipped"
                 explanation = "GWA check skipped (no requirement or user data)"
         
-        elif check_type == "strand_alignment":
-            # E2: Check strand compatibility
+        elif check_type == "strand_bonus":
+            # A2: Strand Alignment Bonus (SOFT CONSTRAINT - NEVER MARKS INELIGIBLE)
+            # All courses remain eligible regardless of strand
             if user_strand and course_strand:
-                # Define strand compatibility matrix
+                # Define strand compatibility matrix for BONUS only (not restriction)
+                best_strands = {
+                    'STEM': ['STEM'],
+                    'ABM': ['ABM'],
+                    'HUMSS': ['HUMSS'],
+                    'GAS': ['GAS'],
+                    'TVL': ['TVL'],
+                    'Sports': ['Sports'],
+                }
                 compatible_strands = {
-                    'STEM': ['STEM', 'GAS'],
-                    'ABM': ['ABM', 'GAS', 'HUMSS'],
-                    'HUMSS': ['HUMSS', 'GAS', 'ABM'],
-                    'GAS': ['STEM', 'ABM', 'HUMSS', 'GAS', 'TVL', 'Sports'],
-                    'TVL': ['TVL', 'GAS', 'STEM'],
-                    'Sports': ['Sports', 'GAS', 'HUMSS'],
+                    'STEM': ['GAS', 'TVL'],
+                    'ABM': ['GAS', 'HUMSS'],
+                    'HUMSS': ['GAS', 'ABM'],
+                    'GAS': ['STEM', 'ABM', 'HUMSS', 'TVL', 'Sports'],
+                    'TVL': ['GAS', 'STEM'],
+                    'Sports': ['GAS', 'HUMSS'],
                 }
                 
-                user_compatible = compatible_strands.get(user_strand, [user_strand])
+                user_best = best_strands.get(user_strand, [user_strand])
+                user_compatible = compatible_strands.get(user_strand, [])
                 
-                if course_strand in user_compatible or user_strand == course_strand:
+                if course_strand in user_best or user_strand == course_strand:
+                    # Perfect match - give full bonus
                     passed = True
-                    action_taken = "passed"
-                    if user_strand == course_strand:
-                        explanation = f"Perfect strand match: {user_strand}"
-                    else:
-                        explanation = f"Compatible strand: {user_strand} can take {course_strand} courses"
+                    action_taken = "boost_applied"
+                    points = rule.boost_points
+                    explanation = f"Strand Bonus: Your strand ({user_strand}) perfectly matches the course +{points} points"
+                elif course_strand in user_compatible:
+                    # Compatible - give partial bonus
+                    passed = True
+                    action_taken = "boost_applied"
+                    points = rule.boost_points // 2
+                    explanation = f"Strand Bonus: Your strand ({user_strand}) is compatible with {course_strand} courses +{points} points"
                 else:
-                    passed = True  # Still eligible but will be penalized
-                    action_taken = "eligible_with_penalty"
-                    explanation = f"Strand mismatch: {user_strand} → {course_strand} (may require bridging)"
+                    # Different strand - NO PENALTY, just no bonus
+                    # User can still take ANY course regardless of strand!
+                    passed = True
+                    action_taken = "no_penalty"
+                    points = 0
+                    explanation = f"Your strand ({user_strand}) differs from {course_strand}, but you can still pursue this course based on your interests!"
             else:
                 passed = True
                 action_taken = "skipped"
                 explanation = "Strand check skipped (no requirement or user data)"
+        
+        elif check_type == "gwa_requirement":
+            # DEPRECATED - Redirect to gwa_bonus for backward compatibility
+            passed = True
+            action_taken = "skipped"
+            explanation = "GWA is now a bonus factor only"
+        
+        elif check_type == "strand_alignment":
+            # DEPRECATED - Redirect to strand_bonus for backward compatibility
+            passed = True
+            action_taken = "skipped"
+            explanation = "Strand is now a bonus factor only"
         
         elif check_type == "primary_trait_match":
             # P1: Check if primary trait matches
@@ -381,35 +369,16 @@ class RuleBasedFilter:
                 explanation = "Course not in user's career path preferences"
         
         elif check_type == "gwa_excellence":
-            # P4: Bonus for exceeding GWA requirement
-            threshold = rule.conditions.get("threshold", 5)
-            if user_gwa is not None and course_min_gwa > 0:
-                gap = user_gwa - course_min_gwa
-                if gap >= threshold:
-                    passed = True
-                    action_taken = "boost_applied"
-                    points = rule.boost_points
-                    explanation = f"GWA excellence: exceeds requirement by {gap:.1f} points"
-                else:
-                    passed = True
-                    action_taken = "no_boost"
-                    explanation = f"GWA does not exceed requirement by {threshold}+ points"
-            else:
-                passed = True
-                action_taken = "skipped"
-                explanation = "GWA excellence check skipped"
+            # DEPRECATED - GWA bonus handled by A1 rule now
+            passed = True
+            action_taken = "skipped"
+            explanation = "GWA excellence now handled by GWA Academic Bonus rule"
         
         elif check_type == "strand_perfect_match":
-            # P5: Bonus for perfect strand match
-            if user_strand and course_strand and user_strand == course_strand:
-                passed = True
-                action_taken = "boost_applied"
-                points = rule.boost_points
-                explanation = f"Perfect strand alignment: {user_strand}"
-            else:
-                passed = True
-                action_taken = "no_boost"
-                explanation = "Strand not a perfect match"
+            # DEPRECATED - Strand bonus handled by A2 rule now
+            passed = True
+            action_taken = "skipped"
+            explanation = "Strand matching now handled by Strand Alignment Bonus rule"
         
         elif check_type == "work_environment_match":
             # P6: Work environment preference
@@ -466,50 +435,16 @@ class RuleBasedFilter:
                 explanation = "Learning style preference not matched"
         
         elif check_type == "gwa_shortfall":
-            # N1: Penalty for GWA below requirement
-            if user_gwa is not None and course_min_gwa > 0:
-                if user_gwa < course_min_gwa:
-                    gap = course_min_gwa - user_gwa
-                    passed = True
-                    action_taken = "penalty_applied"
-                    points = -int(gap * rule.penalty_points)
-                    explanation = f"GWA shortfall penalty: -{int(gap * rule.penalty_points)} points ({gap:.1f} below requirement)"
-                else:
-                    passed = True
-                    action_taken = "no_penalty"
-                    explanation = "No GWA shortfall"
-            else:
-                passed = True
-                action_taken = "skipped"
-                explanation = "GWA shortfall check skipped"
+            # DEPRECATED - GWA penalty now handled by A1 rule
+            passed = True
+            action_taken = "skipped"
+            explanation = "GWA shortfall now handled by GWA Academic Bonus rule"
         
         elif check_type == "strand_mismatch":
-            # N2: Penalty for strand mismatch
-            if user_strand and course_strand:
-                compatible_strands = {
-                    'STEM': ['STEM', 'GAS'],
-                    'ABM': ['ABM', 'GAS', 'HUMSS'],
-                    'HUMSS': ['HUMSS', 'GAS', 'ABM'],
-                    'GAS': ['STEM', 'ABM', 'HUMSS', 'GAS', 'TVL', 'Sports'],
-                    'TVL': ['TVL', 'GAS', 'STEM'],
-                    'Sports': ['Sports', 'GAS', 'HUMSS'],
-                }
-                
-                user_compatible = compatible_strands.get(user_strand, [user_strand])
-                
-                if course_strand not in user_compatible and user_strand != course_strand:
-                    passed = True
-                    action_taken = "penalty_applied"
-                    points = -rule.penalty_points
-                    explanation = f"Strand mismatch penalty: -{rule.penalty_points} points ({user_strand} → {course_strand})"
-                else:
-                    passed = True
-                    action_taken = "no_penalty"
-                    explanation = "No strand mismatch"
-            else:
-                passed = True
-                action_taken = "skipped"
-                explanation = "Strand mismatch check skipped"
+            # DEPRECATED - No strand penalties anymore - all courses available
+            passed = True
+            action_taken = "skipped"
+            explanation = "Strand mismatch removed - all courses available regardless of strand"
         
         elif check_type == "no_trait_match":
             # N3: Penalty for no trait matches
