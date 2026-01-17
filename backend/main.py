@@ -7,8 +7,17 @@ from typing import List, Optional
 from dotenv import load_dotenv
 import models, database
 from security import hash_password, verify_password
+
+# Import enhanced questions if available, fall back to seed_data
+try:
+    from questions_enhanced import QUESTIONS_POOL_ENHANCED as QUESTIONS_POOL
+    print("✓ Using enhanced questions (8-10 options per question)")
+except ImportError:
+    from seed_data import QUESTIONS_POOL
+    print("! Using standard questions from seed_data")
+
 from seed_data import (
-    COURSES_POOL, QUESTIONS_POOL, ASSESSMENT_TIERS, COURSE_DIRECT_MAPPING, SCALE_WEIGHTS,
+    COURSES_POOL, ASSESSMENT_TIERS, COURSE_DIRECT_MAPPING, SCALE_WEIGHTS,
     LEARNING_STYLE_MAPPING, WORK_ENVIRONMENT_MAPPING, COURSE_EMPLOYABILITY, 
     COURSE_PUBLIC_AVAILABILITY, COURSE_SKILL_REQUIREMENTS, CAREER_GOAL_MAPPING,
     PERSONALITY_COMPATIBILITY
@@ -579,9 +588,35 @@ def get_assessment_tiers():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.get("/assessment/strands")
+def get_available_strands():
+    """Get all available SHS strands with their focus areas"""
+    try:
+        from assessment_service import STRAND_TRAIT_MAPPING
+        strands = {
+            strand: {
+                "name": info["name"],
+                "focus_areas": info["priority_traits"][:5]
+            }
+            for strand, info in STRAND_TRAIT_MAPPING.items()
+        }
+        return {
+            "success": True,
+            "strands": strands
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 @app.get("/assessment/start/{tier}")
-def start_assessment(tier: str, db: Session = Depends(get_db)):
-    """Start an assessment with a specific tier and fetch questions from database"""
+def start_assessment(tier: str, strand: str = None, db: Session = Depends(get_db)):
+    """
+    Start an assessment with a specific tier and fetch questions from database.
+    Questions are prioritized based on user's SHS strand.
+    
+    Args:
+        tier: Assessment tier (quick, standard, comprehensive)
+        strand: User's SHS strand (STEM, ABM, HUMSS, TVL, GAS, SPORTS, ARTS)
+    """
     try:
         # Validate tier
         tier_config = AssessmentService.get_available_tiers()
@@ -590,7 +625,7 @@ def start_assessment(tier: str, db: Session = Depends(get_db)):
         
         question_count = tier_config[tier]["question_count"]
         
-        # Fetch random questions from database
+        # Fetch all questions from database
         all_questions = db.query(models.Question)\
             .options(joinedload(models.Question.options))\
             .all()
@@ -598,9 +633,67 @@ def start_assessment(tier: str, db: Session = Depends(get_db)):
         if not all_questions:
             raise ValueError("No questions found in database")
         
-        # Randomly select the specified number of questions
+        # Get strand-based trait priorities
+        from assessment_service import STRAND_TRAIT_MAPPING
+        strand_upper = strand.upper() if strand else "GAS"
+        if strand_upper not in STRAND_TRAIT_MAPPING:
+            strand_upper = "GAS"
+        
+        strand_config = STRAND_TRAIT_MAPPING[strand_upper]
+        priority_traits = set(strand_config["priority_traits"])
+        secondary_traits = set(strand_config.get("secondary_traits", []))
+        
+        # Categorize questions by relevance to strand
+        priority_questions = []
+        secondary_questions = []
+        general_questions = []
+        
+        for q in all_questions:
+            question_traits = set()
+            for opt in q.options:
+                if opt.trait_tag:
+                    question_traits.add(opt.trait_tag)
+            
+            priority_match = question_traits & priority_traits
+            secondary_match = question_traits & secondary_traits
+            
+            if priority_match:
+                priority_questions.append(q)
+            elif secondary_match:
+                secondary_questions.append(q)
+            else:
+                general_questions.append(q)
+        
+        # Calculate distribution
         import random
-        selected_questions = random.sample(all_questions, min(question_count, len(all_questions)))
+        if strand_upper == "GAS":
+            priority_count = question_count // 3
+            secondary_count = question_count // 3
+            general_count = question_count - priority_count - secondary_count
+        else:
+            priority_count = int(question_count * 0.50)
+            secondary_count = int(question_count * 0.30)
+            general_count = question_count - priority_count - secondary_count
+        
+        # Select questions
+        selected_questions = []
+        random.shuffle(priority_questions)
+        selected_questions.extend(priority_questions[:min(priority_count, len(priority_questions))])
+        
+        random.shuffle(secondary_questions)
+        selected_questions.extend(secondary_questions[:min(secondary_count, len(secondary_questions))])
+        
+        random.shuffle(general_questions)
+        selected_questions.extend(general_questions[:min(general_count, len(general_questions))])
+        
+        # Fill remaining if needed
+        all_remaining = [q for q in all_questions if q not in selected_questions]
+        random.shuffle(all_remaining)
+        while len(selected_questions) < question_count and all_remaining:
+            selected_questions.append(all_remaining.pop())
+        
+        # Shuffle final selection
+        random.shuffle(selected_questions)
         
         # Format questions with database IDs
         formatted_questions = []
@@ -625,9 +718,11 @@ def start_assessment(tier: str, db: Session = Depends(get_db)):
             "tier": tier,
             "name": tier_config[tier]['name'],
             "description": tier_config[tier]['description'],
-            "question_count": question_count,
+            "question_count": len(formatted_questions),
             "estimated_time": tier_config[tier]['estimated_time'],
             "accuracy": tier_config[tier]['accuracy'],
+            "strand": strand_upper,
+            "strand_name": strand_config["name"],
             "questions": formatted_questions
         }
     except ValueError as e:
@@ -636,13 +731,22 @@ def start_assessment(tier: str, db: Session = Depends(get_db)):
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/assessment/questions/{tier}")
-def get_assessment_questions(tier: str):
-    """Get questions for a specific assessment tier without full assessment metadata"""
+def get_assessment_questions(tier: str, strand: str = None):
+    """
+    Get questions for a specific assessment tier without full assessment metadata.
+    Questions are prioritized based on user's SHS strand.
+    """
     try:
-        questions = AssessmentService.get_specific_questions(tier)
+        questions = AssessmentService.get_specific_questions(tier, strand=strand)
+        from assessment_service import STRAND_TRAIT_MAPPING
+        strand_upper = strand.upper() if strand else "GAS"
+        strand_name = STRAND_TRAIT_MAPPING.get(strand_upper, {}).get("name", "General")
+        
         return {
             "success": True,
             "tier": tier,
+            "strand": strand_upper if strand else None,
+            "strand_name": strand_name if strand else None,
             "question_count": len(questions),
             "questions": questions
         }
