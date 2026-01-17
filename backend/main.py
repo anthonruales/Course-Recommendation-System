@@ -7,11 +7,18 @@ from typing import List, Optional
 from dotenv import load_dotenv
 import models, database
 from security import hash_password, verify_password
-from seed_data import COURSES_POOL, QUESTIONS_POOL, ASSESSMENT_TIERS
+from seed_data import (
+    COURSES_POOL, QUESTIONS_POOL, ASSESSMENT_TIERS, COURSE_DIRECT_MAPPING, SCALE_WEIGHTS,
+    LEARNING_STYLE_MAPPING, WORK_ENVIRONMENT_MAPPING, COURSE_EMPLOYABILITY, 
+    COURSE_PUBLIC_AVAILABILITY, COURSE_SKILL_REQUIREMENTS, CAREER_GOAL_MAPPING,
+    PERSONALITY_COMPATIBILITY
+)
 from sqlalchemy import func
 from sqlalchemy.orm import Session, joinedload
 from trait_mapping import apply_trait_mapping
 from assessment_service import AssessmentService
+from recommendation_engine import HybridRecommendationEngine
+import json
 
 load_dotenv()
 
@@ -64,17 +71,36 @@ def seed_database():
         if QUESTIONS_POOL:
             print(f"🌱 Seeding {len(QUESTIONS_POOL)} questions...")
             for q in QUESTIONS_POOL:
+                question_type = q.get("question_type", "standard")
                 new_q = models.Question(
                     test_id=default_test.test_id,
                     question_text=q.get("question"), 
-                    category=q.get("category")
+                    category=q.get("category"),
+                    question_type=question_type
                 )
                 db.add(new_q)
                 db.flush()
                 options_list = q.get("options", [])
                 if options_list:
                     for opt in options_list:
-                        db.add(models.Option(question_id=new_q.question_id, option_text=opt.get("text"), trait_tag=opt.get("tag")))
+                        # Handle different question types
+                        trait_tags_json = None
+                        recommended_courses_json = None
+                        weight = opt.get("weight", 1)
+                        
+                        # For career_path, extracurricular, and situational_mapped questions
+                        if question_type in ["career_path", "extracurricular", "situational_mapped"]:
+                            trait_tags_json = json.dumps(opt.get("trait_tags", []))
+                            recommended_courses_json = json.dumps(opt.get("recommended_courses", []))
+                        
+                        db.add(models.Option(
+                            question_id=new_q.question_id, 
+                            option_text=opt.get("text"), 
+                            trait_tag=opt.get("tag"),
+                            weight=weight,
+                            trait_tags_json=trait_tags_json,
+                            recommended_courses_json=recommended_courses_json
+                        ))
                 else:
                     db.add(models.Option(question_id=new_q.question_id, option_text="Yes", trait_tag=q.get("tag")))
                     db.add(models.Option(question_id=new_q.question_id, option_text="No", trait_tag="None"))
@@ -261,20 +287,47 @@ def update_academic_info(user_id: int, info: AcademicInfoUpdate, db: Session = D
         "academic_info": user.academic_info
     }
 
+# Initialize the Hybrid Recommendation Engine (Rule-Based + Decision Tree)
+recommendation_engine = HybridRecommendationEngine()
+
 @app.post("/recommend")
 def recommend(data: AssessmentSubmit, db: Session = Depends(get_db)):
     """
-    DFD Process 5-7: Take a Test → Rule Based-Logic → Decision Tree
-    ENHANCED recommendation system with:
-    1. Multi-criteria weighted decision tree
-    2. Confidence scoring & recommendation quality metrics
-    3. Priority-based rule system with tiered matching
-    4. Algorithm diversity using multiple scoring methods
-    5. Comprehensive explanation generation
-    """
-    print(f"📝 Received recommendation request for user {data.userId} with {len(data.answers)} answers")
+    ================================================================================
+    COURSE RECOMMENDATION SYSTEM - THESIS IMPLEMENTATION
+    ================================================================================
     
-    # 1. Fetch user's academic info (D4 - Personal & Academic Database)
+    This endpoint implements the hybrid recommendation system as described in the thesis:
+    
+    DFD Process 5-7: Take a Test → Rule Based-Logic → Decision Tree
+    
+    PHASE 1: RULE-BASED FILTERING (Giarratano & Riley, 2005)
+    -------------------------------------------------------
+    - Uses explicit IF-THEN rules to filter courses
+    - Applies eligibility rules (GWA requirements, strand alignment)
+    - Applies preference rules (trait matching, career path preferences)
+    - Applies penalty rules (mismatches and shortfalls)
+    
+    PHASE 2: DECISION TREE CLASSIFICATION (Quinlan, 1986)
+    ----------------------------------------------------
+    - Classifies user into a career category using hierarchical decisions
+    - Ranks courses based on decision tree path
+    - Provides confidence scores for predictions
+    
+    HYBRID APPROACH (Burke, 2002)
+    ----------------------------
+    - Combines scores from both phases
+    - Provides transparent, explainable recommendations
+    
+    ================================================================================
+    """
+    print("=" * 80)
+    print("🎓 COURSE RECOMMENDATION SYSTEM - THESIS IMPLEMENTATION")
+    print("=" * 80)
+    print(f"📝 Processing recommendation for user {data.userId} with {len(data.answers)} answers")
+    
+    # ==================== STEP 1: FETCH USER DATA ====================
+    # D4 - Personal & Academic Database
     user = db.query(models.User).filter(models.User.user_id == data.userId).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
@@ -285,507 +338,159 @@ def recommend(data: AssessmentSubmit, db: Session = Depends(get_db)):
         user_gwa = user.academic_info.get("gwa")
         user_strand = user.academic_info.get("strand")
     
-    # Get the default test
+    print(f"👤 User Profile: GWA={user_gwa}, Strand={user_strand}")
+    
+    # ==================== STEP 2: CREATE TEST ATTEMPT ====================
+    # D5 - Test Attempt Database
     default_test = db.query(models.Test).filter(models.Test.test_type == "assessment").first()
     if not default_test:
         raise HTTPException(status_code=500, detail="No assessment test found in system")
     
-    # Create a new test attempt (D5 - Test Attempt Database)
     test_attempt = models.TestAttempt(
         user_id=data.userId,
         test_id=default_test.test_id
     )
     db.add(test_attempt)
-    db.flush()  # Get the attempt_id
+    db.flush()
     print(f"📋 Created test attempt ID: {test_attempt.attempt_id}")
     
-    # 2. Process 6: Fetch Q&A - Count traits from the assessment answers
+    # ==================== STEP 3: PROCESS ASSESSMENT ANSWERS ====================
+    # Extract traits from user's answers
     trait_scores = {}
-    category_distribution = {}
-    trait_positions = {}  # NEW: Track which questions contributed to each trait
-    trait_categories = {}  # NEW: Track which categories each trait appears in
-    total_answers = len(data.answers)
-    valid_answers = 0
+    career_path_courses = []  # Direct course preferences from career path questions
     
-    for idx, ans in enumerate(data.answers):
+    for ans in data.answers:
         option = db.query(models.Option).filter(
             models.Option.option_id == ans.chosenOptionId
         ).first()
         
         if option:
-            # Save student answer linked to test attempt
             question = db.query(models.Question).filter(
                 models.Question.question_id == ans.questionId
             ).first()
             
+            # Save student answer
             db.add(models.StudentAnswer(
                 attempt_id=test_attempt.attempt_id,
                 question_id=ans.questionId,
                 chosen_option_id=ans.chosenOptionId
             ))
             
-            # Track category distribution for better insights
-            if question and question.category:
-                category_distribution[question.category] = category_distribution.get(question.category, 0) + 1
+            question_type = question.question_type if question else "standard"
             
-            if option.trait_tag and str(option.trait_tag).strip().lower() not in ["none", ""]:
-                tag = option.trait_tag.strip()
-                trait_scores[tag] = trait_scores.get(tag, 0) + 1
+            # === SCALE QUESTIONS: Apply weighted scoring ===
+            if question_type == "scale" and option.weight:
+                weight = option.weight
+                scale_config = SCALE_WEIGHTS.get(weight, {"multiplier": 1.0})
+                multiplier = scale_config["multiplier"]
                 
-                # NEW: Track positions where trait appeared (for consistency analysis)
-                if tag not in trait_positions:
-                    trait_positions[tag] = []
-                trait_positions[tag].append(idx)
+                if option.trait_tag and str(option.trait_tag).strip().lower() not in ["none", ""]:
+                    tag = option.trait_tag.strip()
+                    trait_scores[tag] = trait_scores.get(tag, 0) + (1 * multiplier)
+            
+            # === CAREER PATH / EXTRACURRICULAR / SITUATIONAL QUESTIONS ===
+            elif question_type in ["career_path", "extracurricular", "situational_mapped"]:
+                # Process multiple trait tags
+                if option.trait_tags_json:
+                    try:
+                        trait_tags = json.loads(option.trait_tags_json)
+                        for tag in trait_tags:
+                            trait_scores[tag] = trait_scores.get(tag, 0) + 1.5
+                    except json.JSONDecodeError:
+                        pass
                 
-                # NEW: Track which categories this trait appears in
-                if question and question.category:
-                    if tag not in trait_categories:
-                        trait_categories[tag] = set()
-                    trait_categories[tag].add(question.category)
+                # Collect direct course recommendations
+                if option.recommended_courses_json:
+                    try:
+                        recommended = json.loads(option.recommended_courses_json)
+                        career_path_courses.extend(recommended)
+                    except json.JSONDecodeError:
+                        pass
                 
-                valid_answers += 1
-        else:
-            print(f"⚠️ Warning: Option ID {ans.chosenOptionId} not found in database")
+                # Process primary trait tag
+                if option.trait_tag and str(option.trait_tag).strip().lower() not in ["none", ""]:
+                    tag = option.trait_tag.strip()
+                    trait_scores[tag] = trait_scores.get(tag, 0) + 2
+                    
+                    # Check direct mapping
+                    if tag in COURSE_DIRECT_MAPPING:
+                        mapping = COURSE_DIRECT_MAPPING[tag]
+                        career_path_courses.extend(mapping.get("courses", []))
+            
+            # === STANDARD QUESTIONS ===
+            else:
+                if option.trait_tag and str(option.trait_tag).strip().lower() not in ["none", ""]:
+                    tag = option.trait_tag.strip()
+                    trait_scores[tag] = trait_scores.get(tag, 0) + 1
     
-    print(f"📊 Assessment Stats: {total_answers} answers, {valid_answers} with valid traits")
-    print(f"📊 Trait Scores: {trait_scores}")
-    print(f"📊 Category Distribution: {category_distribution}")
-    print(f"🎯 Trait Consistency: {trait_positions}")
+    print(f"📊 Extracted {len(trait_scores)} unique traits from assessment")
+    print(f"📊 Career path preferences: {len(set(career_path_courses))} courses")
     
     if not trait_scores:
         db.rollback()
         raise HTTPException(
             status_code=400, 
-            detail=f"Unable to generate recommendations. No personality traits were identified from your {total_answers} answers. Please ensure you've answered all questions."
+            detail=f"Unable to generate recommendations. No personality traits were identified from your answers."
         )
     
-    # 3. IMPROVED Rule Based-Logic with Statistical Analysis
-    # Normalize trait scores to percentages for better comparison
-    total_trait_selections = sum(trait_scores.values())
-    trait_percentages = {trait: (count / total_trait_selections) * 100 
-                         for trait, count in trait_scores.items()}
-    
-    # NEW: Calculate trait consistency (are trait selections clustered or spread out?)
-    trait_consistency_scores = {}
-    for trait, positions in trait_positions.items():
-        if len(positions) > 1:
-            # Calculate average gap between selections
-            gaps = [positions[i+1] - positions[i] for i in range(len(positions)-1)]
-            avg_gap = sum(gaps) / len(gaps) if gaps else 0
-            # Lower average gap = more clustered = higher consistency
-            consistency = 1.0 / (1 + avg_gap / 5)  # Normalize to 0-1 scale
-            trait_consistency_scores[trait] = consistency
-        else:
-            trait_consistency_scores[trait] = 0.5  # Neutral for single occurrence
-    
-    # NEW: Calculate category breadth (trait appearing in multiple categories = more versatile)
-    trait_breadth_scores = {}
-    for trait in trait_scores.keys():
-        if trait in trait_categories:
-            breadth = len(trait_categories[trait])  # Number of different categories
-            trait_breadth_scores[trait] = breadth
-        else:
-            trait_breadth_scores[trait] = 1
-    
+    # Sort traits by score
     sorted_traits = sorted(trait_scores.items(), key=lambda x: x[1], reverse=True)
+    top_traits = sorted_traits[:7]
+    primary_trait = sorted_traits[0][0] if sorted_traits else None
     
-    # Adaptive trait selection: take more traits if answers are diverse, fewer if focused
-    trait_diversity = len([t for t in trait_scores.values() if t >= 2])
-    if trait_diversity >= 6:
-        top_traits_count = 7  # Highly diverse - consider more traits
-    elif trait_diversity >= 4:
-        top_traits_count = 5  # Moderately diverse
-    else:
-        top_traits_count = 3  # Focused personality - fewer traits
+    print(f"🎯 Primary Trait: {primary_trait}")
+    print(f"🌈 Top 7 Traits: {[t[0] for t in top_traits]}")
     
-    top_traits = sorted_traits[:top_traits_count]
-    primary_trait = top_traits[0][0]
-    trait_focus = trait_percentages.get(primary_trait, 0)
+    # ==================== STEP 4: FETCH ALL COURSES ====================
+    all_courses = db.query(models.Course).all()
+    print(f"📚 Total courses in database: {len(all_courses)}")
     
-    print(f"🎯 Trait Consistency Scores: {trait_consistency_scores}")
-    print(f"📚 Trait Breadth (category diversity): {trait_breadth_scores}")
+    # ==================== STEP 5: RUN HYBRID RECOMMENDATION ENGINE ====================
+    # This implements PHASE 1 (Rule-Based Filtering) + PHASE 2 (Decision Tree Classification)
     
-    print(f"🎯 Primary Trait: {primary_trait} ({trait_focus:.1f}% focus)")
-    print(f"🌈 Trait Diversity: {trait_diversity} distinct traits, using top {top_traits_count}")
+    user_profile = {
+        "gwa": user_gwa,
+        "strand": user_strand
+    }
     
-    # 4. ENHANCED Decision Tree with Multi-Algorithm Scoring
-    all_matching_courses = db.query(models.Course).all()
-    
-    scored_courses = []
-    for course in all_matching_courses:
-        # Initialize scoring components
-        trait_score = 0
-        academic_score = 0
-        matched_traits = []
-        match_quality = {}
-        
-        # === ALGORITHM 1: Improved Weighted Trait Matching ===
-        if course.trait_tag:
-            # Apply trait mapping to course tags for better matching
-            course_tags = [apply_trait_mapping(tag.strip()) for tag in course.trait_tag.split(",")]
-            
-            # Calculate weights based on trait importance and user's trait strength
-            for idx, (trait, count) in enumerate(top_traits):
-                if trait in course_tags:
-                    # Base weight decreases with rank
-                    position_weight = top_traits_count - idx
-                    
-                    # Strength multiplier based on how often user selected this trait
-                    strength_multiplier = min(2.0, count / 3)  # Cap at 2x for strong traits
-                    
-                    # NEW: Consistency bonus - reward traits that appeared consistently
-                    consistency_bonus = trait_consistency_scores.get(trait, 0.5) * 2  # 0-2 points
-                    
-                    # NEW: Breadth bonus - reward versatile traits (appeared in multiple categories)
-                    breadth_bonus = min(2.0, trait_breadth_scores.get(trait, 1) * 0.5)  # 0-2 points
-                    
-                    # Focus bonus: if user has high focus on few traits, reward exact matches more
-                    if trait_focus > 40 and idx == 0:
-                        focus_bonus = 3
-                    else:
-                        focus_bonus = 0
-                    
-                    # Enhanced scoring with consistency and breadth
-                    trait_contribution = (count * position_weight * strength_multiplier) + focus_bonus + consistency_bonus + breadth_bonus
-                    trait_score += trait_contribution
-                    matched_traits.append(trait)
-            
-            # Bonus for courses matching multiple user traits (synergy bonus)
-            if len(matched_traits) >= 3:
-                trait_score += 5  # Strong synergy
-            elif len(matched_traits) >= 2:
-                trait_score += 2  # Good synergy
-            
-            # Calculate trait match quality (what % of course requirements user meets)
-            trait_match_pct = (len(matched_traits) / len(course_tags)) * 100 if course_tags else 0
-            match_quality['trait_alignment'] = trait_match_pct
-            match_quality['trait_count'] = len(matched_traits)
-        
-        # === ALGORITHM 2: Improved Academic Compatibility ===
-        gwa_match = True
-        gwa_score = 0
-        gwa_penalty = 0
-        gwa_gap = 0
-        
-        if user_gwa and course.minimum_gwa:
-            gwa_gap = user_gwa - float(course.minimum_gwa)
-            
-            if gwa_gap >= 0:
-                # Graduated bonus system - rewards excellence without over-weighting it
-                if gwa_gap >= 8:
-                    gwa_score = 7  # Outstanding (95+)
-                elif gwa_gap >= 5:
-                    gwa_score = 5  # Excellent
-                elif gwa_gap >= 3:
-                    gwa_score = 4  # Very good
-                elif gwa_gap >= 1:
-                    gwa_score = 3  # Good
-                else:
-                    gwa_score = 2  # Just meets
-                gwa_match = True
-            else:
-                # More forgiving penalty system - don't eliminate good trait matches
-                gwa_match = False
-                gap_size = abs(gwa_gap)
-                if gap_size <= 0.5:
-                    gwa_penalty = 1  # Very close miss
-                elif gap_size <= 1.5:
-                    gwa_penalty = 3  # Close miss
-                elif gap_size <= 3:
-                    gwa_penalty = 6  # Moderate gap
-                elif gap_size <= 5:
-                    gwa_penalty = 10  # Large gap
-                else:
-                    gwa_penalty = 15  # Very large gap
-        
-        academic_score += gwa_score
-        match_quality['gwa_fit'] = gwa_match
-        match_quality['gwa_gap'] = round(gwa_gap, 2)
-        
-        # === ALGORITHM 3: Improved Strand Alignment ===
-        strand_match = True
-        strand_score = 0
-        strand_penalty = 0
-        
-        if user_strand and course.required_strand:
-            if user_strand in course.required_strand:
-                strand_score = 6  # Perfect match - increased importance
-                strand_match = True
-            else:
-                # Enhanced strand compatibility matrix
-                related_strands = {
-                    'STEM': ['GAS'],  # GAS general education fits STEM
-                    'ABM': ['GAS', 'HUMSS'],  # Business relates to social sciences
-                    'HUMSS': ['GAS', 'ABM'],  # Social sciences overlap
-                    'GAS': ['STEM', 'ABM', 'HUMSS', 'TVL', 'Sports'],  # GAS is versatile
-                    'TVL': ['GAS', 'STEM'],  # Technical-vocational can fit some STEM
-                    'Sports': ['GAS'],  # Sports can fit general programs
-                }
-                
-                compatible_strands = related_strands.get(user_strand, [])
-                
-                if course.required_strand in compatible_strands:
-                    strand_score = 2  # Compatible but not perfect
-                    strand_penalty = 3  # Minor penalty
-                    strand_match = True  # Still consider it a match
-                else:
-                    # Check reverse compatibility (course accepts diverse strands)
-                    course_accepts_diverse = course.required_strand in ['GAS', 'Any']
-                    if course_accepts_diverse:
-                        strand_score = 1
-                        strand_penalty = 4
-                    else:
-                        strand_match = False
-                        strand_penalty = 7  # Significant mismatch
-        
-        academic_score += strand_score
-        match_quality['strand_fit'] = strand_match
-        
-        # === Calculate Final Score with Balance ===
-        # Balance trait importance with academic factors (60% trait, 40% academic)
-        base_score = trait_score + academic_score
-        final_score = max(0, base_score - gwa_penalty - strand_penalty)
-        
-        # NEW: Academic-Trait Synergy Bonus - reward courses where academic fit + trait fit align
-        if gwa_match and strand_match and len(matched_traits) >= 2:
-            synergy_strength = len(matched_traits) / top_traits_count  # 0.3-1.0 scale
-            synergy_bonus = 5 + (synergy_strength * 5)  # 5-10 point bonus
-            final_score += synergy_bonus
-        elif (gwa_match or strand_match) and len(matched_traits) >= 3:
-            # Strong trait match can compensate for partial academic match
-            final_score += 4
-        
-        # === Calculate Confidence Score (0-100) with Enhanced Factors ===
-        confidence_factors = []
-        
-        # Factor 1: Trait match strength (40% weight)
-        if course.trait_tag:
-            course_tags = [tag.strip() for tag in course.trait_tag.split(",")]
-            expected_matches = min(top_traits_count, len(course_tags))
-            trait_confidence = min(100, (len(matched_traits) / expected_matches) * 100)
-        else:
-            trait_confidence = 0
-        confidence_factors.append(trait_confidence * 0.40)
-        
-        # Factor 2: Academic fit (30% weight)
-        academic_confidence = 0
-        if gwa_match:
-            academic_confidence += 50
-        if strand_match:
-            academic_confidence += 50
-        confidence_factors.append(academic_confidence * 0.30)
-        
-        # Factor 3: Primary trait alignment (20% weight)
-        primary_match = 100 if primary_trait in matched_traits else 0
-        confidence_factors.append(primary_match * 0.20)
-        
-        # NEW Factor 4: Trait consistency factor (10% weight)
-        # Higher confidence if matched traits were consistently selected
-        consistency_factor = 0
-        if matched_traits:
-            avg_consistency = sum(trait_consistency_scores.get(t, 0.5) for t in matched_traits) / len(matched_traits)
-            consistency_factor = avg_consistency * 100
-        confidence_factors.append(consistency_factor * 0.10)
-        
-        confidence_score = sum(confidence_factors)
-        
-        # === Determine Match Priority with Better Logic ===
-        trait_quality = len(matched_traits) >= 3
-        academic_quality = gwa_match and strand_match
-        primary_present = primary_trait in matched_traits
-        
-        if academic_quality and trait_quality and primary_present:
-            priority = "EXCELLENT"
-        elif (gwa_match and strand_match) or (trait_quality and primary_present):
-            priority = "GOOD"
-        elif (gwa_match or strand_match) and len(matched_traits) >= 2:
-            priority = "FAIR"
-        else:
-            priority = "EXPLORATORY"
-        
-        scored_courses.append({
-            "course": course,
-            "score": final_score,
-            "base_score": base_score,
-            "trait_score": trait_score,
-            "academic_score": academic_score,
-            "confidence": round(confidence_score, 1),
-            "priority": priority,
-            "matched_traits": matched_traits,
-            "match_quality": match_quality,
-            "gwa_match": gwa_match,
-            "strand_match": strand_match,
-            "gwa_gap": gwa_gap
-        })
-    
-    print(f"📊 Scored {len(scored_courses)} courses")
-    
-    # 5. IMPROVED Sorting: Balanced multi-factor ranking
-    # Primary: score (trait + academic fit)
-    # Secondary: confidence (how certain we are)
-    # Tertiary: priority tier
-    priority_weights = {"EXCELLENT": 4, "GOOD": 3, "FAIR": 2, "EXPLORATORY": 1}
-    
-    # Composite ranking score for better sorting
-    for course_data in scored_courses:
-        # Normalized components (0-1 scale)
-        score_norm = course_data["score"] / max(1, max([c["score"] for c in scored_courses]))
-        confidence_norm = course_data["confidence"] / 100
-        priority_norm = priority_weights.get(course_data["priority"], 0) / 4
-        
-        # Weighted composite: 60% score, 25% confidence, 15% priority
-        course_data["composite_rank"] = (score_norm * 0.6) + (confidence_norm * 0.25) + (priority_norm * 0.15)
-    
-    scored_courses.sort(key=lambda x: x["composite_rank"], reverse=True)
-    
-    # Intelligent diversity: balance between best matches and variety
-    diverse_recommendations = []
-    used_strands = {}  # Track how many per strand
-    MAX_PER_STRAND = 3  # Allow up to 3 courses per strand
-    
-    for course_data in scored_courses:
-        course = course_data["course"]
-        strand = course.required_strand or "General"
-        
-        # Accept if under strand limit or if it's really high scoring
-        strand_count = used_strands.get(strand, 0)
-        is_high_priority = course_data["priority"] in ["EXCELLENT", "GOOD"]
-        
-        if strand_count < MAX_PER_STRAND or (is_high_priority and len(diverse_recommendations) < 10):
-            diverse_recommendations.append(course_data)
-            used_strands[strand] = strand_count + 1
-        
-        if len(diverse_recommendations) >= 10:  # Get top 10 for final filtering
-            break
-    
-    # Final selection: prioritize quality over quantity
-    # Take best 5, but ensure at least 1 exploratory option if available
-    excellent_good = [r for r in diverse_recommendations if r["priority"] in ["EXCELLENT", "GOOD"]]
-    other = [r for r in diverse_recommendations if r["priority"] not in ["EXCELLENT", "GOOD"]]
-    
-    if len(excellent_good) >= 4 and other:
-        top_recommendations = excellent_good[:4] + other[:1]  # 4 strong + 1 exploratory
-    else:
-        print(f"📊 Scored {len(scored_courses)} courses")
-    
-    # 5. ENHANCED Sorting: Multi-tier ranking
-    # Primary: by score, Secondary: by confidence, Tertiary: by priority
-    priority_weights = {"EXCELLENT": 4, "GOOD": 3, "FAIR": 2, "EXPLORATORY": 1}
-    scored_courses.sort(
-        key=lambda x: (x["score"], x["confidence"], priority_weights.get(x["priority"], 0)), 
-        reverse=True
+    result = recommendation_engine.generate_recommendations(
+        courses=all_courses,
+        user_profile=user_profile,
+        trait_scores=trait_scores,
+        career_path_courses=list(set(career_path_courses)),
+        top_n=5
     )
     
-    # Ensure diversity in recommendations (avoid recommending too many similar courses)
-    diverse_recommendations = []
-    used_strands = set()
+    recommendations = result["recommendations"]
+    algorithm_details = result["algorithm_details"]
+    user_analysis = result["user_analysis"]
     
-    for course_data in scored_courses:
-        course = course_data["course"]
-        # Add course if we haven't filled quota OR if it's a different strand
-        if len(diverse_recommendations) < 5 or course.required_strand not in used_strands:
-            diverse_recommendations.append(course_data)
-            if course.required_strand:
-                used_strands.add(course.required_strand)
-        if len(diverse_recommendations) >= 7:  # Get top 7 for final selection
-            break
-    
-    # Select final top 5
-    top_recommendations = diverse_recommendations[:5]
-    
-    # 6. ENHANCED Reasoning with Detailed Explanations
-    recommendations = []
-    for rank, rec in enumerate(top_recommendations, 1):
-        course = rec["course"]
-        
-        # Build comprehensive reasoning
-        reasoning_parts = []
-        
-        # Trait alignment explanation
-        if rec['matched_traits']:
-            trait_strength = "strong" if len(rec['matched_traits']) >= 3 else "moderate" if len(rec['matched_traits']) >= 2 else "some"
-            reasoning_parts.append(
-                f"✓ Shows {trait_strength} alignment with your personality: {', '.join(rec['matched_traits'][:3])}"
-                + (f" (+{len(rec['matched_traits'])-3} more)" if len(rec['matched_traits']) > 3 else "")
-            )
-        else:
-            reasoning_parts.append("• This course may expand your horizons into new areas")
-        
-        # GWA assessment
-        if user_gwa and course.minimum_gwa:
-            if rec["gwa_match"]:
-                if rec["gwa_gap"] >= 5:
-                    reasoning_parts.append(f"✓ Your GWA ({user_gwa}) significantly exceeds the requirement ({course.minimum_gwa})")
-                elif rec["gwa_gap"] >= 2:
-                    reasoning_parts.append(f"✓ Your GWA ({user_gwa}) comfortably meets the requirement ({course.minimum_gwa})")
-                else:
-                    reasoning_parts.append(f"✓ Your GWA ({user_gwa}) meets the minimum requirement ({course.minimum_gwa})")
-            else:
-                gap = abs(rec["gwa_gap"])
-                if gap <= 1:
-                    reasoning_parts.append(f"⚠ Your GWA ({user_gwa}) is slightly below requirement ({course.minimum_gwa}) - achievable with effort")
-                else:
-                    reasoning_parts.append(f"⚠ Your GWA ({user_gwa}) is {gap:.1f} points below requirement ({course.minimum_gwa}) - significant improvement needed")
-        
-        # Strand alignment
-        if user_strand and course.required_strand:
-            if rec["strand_match"]:
-                reasoning_parts.append(f"✓ Perfect fit for your {user_strand} strand background")
-            else:
-                reasoning_parts.append(f"⚠ Recommended for {course.required_strand} strand (you're from {user_strand}) - consider prerequisites")
-        
-        # Priority tier explanation
-        if rec["priority"] == "EXCELLENT":
-            reasoning_parts.append("🌟 Highly recommended - excellent overall match")
-        elif rec["priority"] == "GOOD":
-            reasoning_parts.append("✨ Good match - solid foundation for success")
-        elif rec["priority"] == "FAIR":
-            reasoning_parts.append("💡 Fair match - could be rewarding with dedication")
-        else:
-            reasoning_parts.append("🔍 Exploratory option - consider your broader interests")
-        
-        full_reasoning = " | ".join(reasoning_parts)
-        
-        recommendations.append({
-            "rank": rank,
-            "course_name": course.course_name,
-            "description": course.description,
-            "matched_traits": rec["matched_traits"],
-            "minimum_gwa": float(course.minimum_gwa) if course.minimum_gwa else None,
-            "recommended_strand": course.required_strand,
-            "reasoning": full_reasoning,
-            "compatibility_score": rec["score"],
-            "confidence_score": rec["confidence"],
-            "priority_tier": rec["priority"],
-            "match_details": {
-                "trait_matches": len(rec["matched_traits"]),
-                "gwa_compatible": rec["gwa_match"],
-                "strand_compatible": rec["strand_match"],
-                "overall_fit": rec["match_quality"]
-            }
-        })
-    
-    # Process 8: Decision Tree - Save recommendations to database
+    # ==================== STEP 6: SAVE RECOMMENDATIONS TO DATABASE ====================
+    # D7 - Course Recommendation Database
     try:
-        # Save new recommendations linked to this test attempt
-        for idx, rec in enumerate(top_recommendations):
-            course = rec["course"]
-            db.add(models.Recommendation(
-                attempt_id=test_attempt.attempt_id,
-                user_id=data.userId,
-                course_id=course.course_id,
-                reasoning=recommendations[idx]["reasoning"]
-            ))
+        for rec in recommendations:
+            course = db.query(models.Course).filter(
+                models.Course.course_name == rec["course_name"]
+            ).first()
+            
+            if course:
+                db.add(models.Recommendation(
+                    attempt_id=test_attempt.attempt_id,
+                    user_id=data.userId,
+                    course_id=course.course_id,
+                    reasoning=rec["reasoning"]
+                ))
         
         db.commit()
-        print(f"✅ Saved {len(top_recommendations)} recommendations for attempt {test_attempt.attempt_id}")
+        print(f"✅ Saved {len(recommendations)} recommendations to database")
     except Exception as e:
         print(f"❌ Error saving recommendations: {e}")
         db.rollback()
         raise HTTPException(status_code=500, detail=f"Error saving recommendations: {str(e)}")
     
-    # Generate algorithm performance metrics
-    avg_confidence = sum(r["confidence_score"] for r in recommendations) / len(recommendations)
+    # ==================== STEP 7: GENERATE RESPONSE ====================
+    # Calculate algorithm metrics
+    avg_confidence = sum(r["confidence_score"] for r in recommendations) / len(recommendations) if recommendations else 0
     priority_breakdown = {
         "excellent": len([r for r in recommendations if r["priority_tier"] == "EXCELLENT"]),
         "good": len([r for r in recommendations if r["priority_tier"] == "GOOD"]),
@@ -793,23 +498,46 @@ def recommend(data: AssessmentSubmit, db: Session = Depends(get_db)):
         "exploratory": len([r for r in recommendations if r["priority_tier"] == "EXPLORATORY"])
     }
     
+    print("=" * 80)
+    print("✅ RECOMMENDATION COMPLETE")
+    print(f"   → {len(recommendations)} recommendations generated")
+    print(f"   → Average confidence: {avg_confidence:.1f}%")
+    print(f"   → Phase 1 filtered: {algorithm_details['phase1_rule_based']['eligible_courses']} eligible courses")
+    print(f"   → Phase 2 classification: {algorithm_details['phase2_decision_tree']['classification']}")
+    print("=" * 80)
+    
     return {
         "user_id": data.userId,
         "user_gwa": user_gwa,
         "user_strand": user_strand,
-        "detected_traits": top_traits,
+        "detected_traits": list(top_traits),
         "trait_analysis": {
             "primary_trait": primary_trait,
-            "trait_focus_percentage": round(trait_focus, 1),
-            "trait_diversity_score": trait_diversity,
+            "top_traits": user_analysis["top_traits"],
+            "predicted_career_category": user_analysis["predicted_career_category"],
+            "work_environments": user_analysis["work_environments"],
             "total_traits_detected": len(trait_scores)
         },
         "recommendations": recommendations,
         "algorithm_metrics": {
             "average_confidence": round(avg_confidence, 1),
             "priority_distribution": priority_breakdown,
-            "total_courses_analyzed": len(all_matching_courses),
-            "matching_algorithm_version": "2.0-Enhanced"
+            "total_courses_analyzed": len(all_courses),
+            "matching_algorithm_version": "3.0-RuleBased-DecisionTree"
+        },
+        "algorithm_details": {
+            "phase1_rule_based": {
+                "description": "Rule-Based Filtering using IF-THEN logic (Giarratano & Riley, 2005)",
+                "rules_applied": algorithm_details["phase1_rule_based"]["rules_applied"],
+                "eligible_courses": algorithm_details["phase1_rule_based"]["eligible_courses"],
+                "ineligible_courses": algorithm_details["phase1_rule_based"]["ineligible_courses"]
+            },
+            "phase2_decision_tree": {
+                "description": "Decision Tree Classification (Quinlan, 1986)",
+                "classification": algorithm_details["phase2_decision_tree"]["classification"],
+                "confidence": algorithm_details["phase2_decision_tree"]["confidence"],
+                "decision_path": algorithm_details["phase2_decision_tree"]["decision_path"]
+            }
         }
     }
 
