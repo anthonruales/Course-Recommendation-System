@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 /**
- * AKINATOR-STYLE ADAPTIVE ASSESSMENT
+ * AI-POWERED ADAPTIVE CAREER ASSESSMENT
  * 
  * This component provides an intelligent assessment experience:
  * - Questions appear ONE AT A TIME
@@ -225,8 +225,8 @@ function AdaptiveAssessment({ onBack, onShowResults }) {
 
         <main style={styles.main}>
           <div style={styles.startScreen}>
-            <div style={styles.genieIcon}>🧞‍♂️</div>
-            <h1 style={styles.title}>Akinator-Style Assessment</h1>
+            <div style={styles.genieIcon}>🎓</div>
+            <h1 style={styles.title}>AI-Powered Career Assessment</h1>
             <p style={styles.subtitle}>
               Experience an intelligent assessment that adapts to YOUR answers!
             </p>
@@ -234,23 +234,23 @@ function AdaptiveAssessment({ onBack, onShowResults }) {
             <div style={styles.featureGrid}>
               <div style={styles.featureCard}>
                 <span style={styles.featureIcon}>🎯</span>
-                <h3>Smart Questions</h3>
-                <p>Each question is chosen based on your previous answers</p>
+                <h3>Adaptive Intelligence</h3>
+                <p>Each question is dynamically selected based on your responses</p>
               </div>
               <div style={styles.featureCard}>
                 <span style={styles.featureIcon}>⚡</span>
-                <h3>Faster Results</h3>
-                <p>Get accurate recommendations with fewer questions (10-25)</p>
+                <h3>Efficient Analysis</h3>
+                <p>Get precise recommendations with only 10-25 targeted questions</p>
               </div>
               <div style={styles.featureCard}>
                 <span style={styles.featureIcon}>📊</span>
-                <h3>Live Preview</h3>
-                <p>Watch courses narrow down in real-time as you answer</p>
+                <h3>Real-Time Matching</h3>
+                <p>Watch your career matches refine as you progress</p>
               </div>
               <div style={styles.featureCard}>
-                <span style={styles.featureIcon}>🎮</span>
-                <h3>Interactive</h3>
-                <p>One question at a time, like talking to a career advisor</p>
+                <span style={styles.featureIcon}>💼</span>
+                <h3>Personalized Guidance</h3>
+                <p>One-on-one style consultation powered by AI</p>
               </div>
             </div>
 
@@ -259,7 +259,7 @@ function AdaptiveAssessment({ onBack, onShowResults }) {
               disabled={isStarting}
               style={styles.startButton}
             >
-              {isStarting ? '🔄 Preparing...' : '🚀 Start Smart Assessment'}
+              {isStarting ? '🔄 Preparing...' : '🚀 Begin Assessment'}
             </button>
 
             {error && <p style={styles.error}>{error}</p>}

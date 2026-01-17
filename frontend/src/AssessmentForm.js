@@ -9,6 +9,7 @@ function AssessmentForm({ onBack, onShowResults }) {
   const [selectedTier, setSelectedTier] = useState(null);
   const [tiers, setTiers] = useState(null);
   const [tierLoading, setTierLoading] = useState(true);
+  const [userStrand, setUserStrand] = useState(null);
 
   // CHECK ACADEMIC PROFILE FIRST
   useEffect(() => {
@@ -22,6 +23,10 @@ function AssessmentForm({ onBack, onShowResults }) {
             onBack();
           } else {
             setProfileCheck({ checking: false, hasProfile: true });
+            // Store the user's strand for strand-based question filtering
+            const strand = data.academic_info?.strand;
+            setUserStrand(strand || 'GAS');
+            console.log('User strand loaded:', strand);
           }
         })
         .catch(err => {
@@ -61,7 +66,10 @@ function AssessmentForm({ onBack, onShowResults }) {
     // Reset answers when tier changes
     setAnswers({});
     setIsFetching(true);
-    fetch(`http://localhost:8000/assessment/start/${selectedTier}`)
+    
+    // Include strand in the request for strand-based question prioritization
+    const strandParam = userStrand ? `?strand=${userStrand}` : '';
+    fetch(`http://localhost:8000/assessment/start/${selectedTier}${strandParam}`)
       .then(res => {
         if (!res.ok) throw new Error("Server error or Route not found");
         return res.json();
@@ -69,13 +77,14 @@ function AssessmentForm({ onBack, onShowResults }) {
       .then(data => {
         // Questions now come directly from database with proper IDs
         setQuestions(data.questions || []);
+        console.log(`Loaded ${data.question_count} questions for ${data.strand_name || 'general'} strand`);
         setIsFetching(false);
       })
       .catch(err => {
         console.error("Fetch error:", err);
         setIsFetching(false);
       });
-  }, [selectedTier]);
+  }, [selectedTier, userStrand]);
 
   const handleRadioChange = (questionId, optionId) => {
     setAnswers({ ...answers, [questionId]: optionId });
@@ -156,6 +165,11 @@ function AssessmentForm({ onBack, onShowResults }) {
           <header style={styles.header}>
             <h1 style={styles.title}>Choose Your Assessment Level</h1>
             <p style={styles.subtitle}>Select an assessment duration that fits your schedule. More questions = More accurate recommendations.</p>
+            {userStrand && (
+              <p style={styles.strandBadge}>
+                🎯 Questions personalized for <strong>{userStrand}</strong> strand
+              </p>
+            )}
           </header>
 
           {tierLoading ? (
@@ -321,6 +335,7 @@ const styles = {
   header: { marginBottom: '40px' },
   title: { fontSize: '32px', fontWeight: '800', color: 'white' },
   subtitle: { color: '#94a3b8', marginTop: '10px' },
+  strandBadge: { color: '#10b981', marginTop: '15px', fontSize: '15px', fontWeight: '500', background: 'rgba(16, 185, 129, 0.1)', padding: '10px 18px', borderRadius: '30px', display: 'inline-block', border: '1px solid rgba(16, 185, 129, 0.3)' },
   progress: { color: '#818cf8', marginTop: '10px', fontSize: '16px', fontWeight: '500' },
   form: { flex: 1, overflow: 'hidden', width: '100%' },
   scrollArea: { height: '100%', overflowY: 'auto', paddingRight: '20px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))', gap: '20px', alignContent: 'start' },

@@ -46,6 +46,9 @@ class AdaptiveSession:
     session_id: str
     user_id: int
     
+    # User's SHS strand (for question prioritization)
+    user_strand: str = None
+    
     # Student's accumulated traits with strengths
     trait_scores: Dict[str, float] = field(default_factory=dict)
     
@@ -72,6 +75,25 @@ class AdaptiveSession:
     
     # Final recommendations when complete
     final_recommendations: List[dict] = field(default_factory=list)
+
+
+# Strand to prioritized traits mapping for question selection
+STRAND_PRIORITY_TRAITS = {
+    "STEM": ["Software-Dev", "Hardware-Systems", "Lab-Research", "Analytical", "Investigative", 
+             "Scientific", "Math-Logic", "Realistic", "Data-Analytics"],
+    "ABM": ["Finance-Acct", "Marketing-Sales", "Startup-Venture", "Enterprising", "Conventional",
+            "Business-Ops", "Corporate-Mgmt", "Communication"],
+    "HUMSS": ["Teaching-Ed", "Community-Serve", "Law-Enforce", "Social", "Artistic",
+              "Media-Journalism", "Linguistic-Cultural", "Public-Admin"],
+    "TVL": ["Software-Dev", "Hospitality-Svc", "Mechanical-Design", "Realistic", "Conventional",
+            "Practical", "Manual-Technical", "Agriculture-Env"],
+    "GAS": ["Investigative", "Social", "Enterprising", "Analytical", "Communication",
+            "Creative", "Leadership", "Critical-Think"],
+    "SPORTS": ["Sports-Fitness", "Coaching-Training", "Realistic", "Social",
+               "Practical", "Wellness-Health", "Leadership"],
+    "ARTS": ["Creative-Design", "Media-Production", "Artistic", "Creative",
+             "Visual-Arts", "Performing-Arts", "Communication"]
+}
 
 
 class AdaptiveAssessmentEngine:
@@ -140,6 +162,11 @@ class AdaptiveAssessmentEngine:
         import uuid
         session_id = str(uuid.uuid4())[:8]
         
+        # Normalize strand
+        normalized_strand = user_strand.upper() if user_strand else "GAS"
+        if normalized_strand not in STRAND_PRIORITY_TRAITS:
+            normalized_strand = "GAS"
+        
         # Initialize all courses with base score
         course_scores = {name: 50.0 for name in self.courses}
         
@@ -160,12 +187,13 @@ class AdaptiveAssessmentEngine:
         session = AdaptiveSession(
             session_id=session_id,
             user_id=user_id,
+            user_strand=normalized_strand,  # Store strand for question selection
             course_scores=course_scores,
             active_courses=set(self.courses.keys())
         )
         
         self.sessions[session_id] = session
-        print(f"📋 Created adaptive session {session_id} for user {user_id}")
+        print(f"📋 Created adaptive session {session_id} for user {user_id} (strand: {normalized_strand})")
         return session_id
     
     def get_next_question(self, session_id: str) -> Optional[dict]:
@@ -261,9 +289,12 @@ class AdaptiveAssessmentEngine:
     
     def _score_question(self, question: dict, trait_values: Dict[str, float], 
                        session: AdaptiveSession) -> float:
-        """Score how valuable a question would be"""
+        """Score how valuable a question would be, with strand-based prioritization"""
         score = 0
         options = question.get('options', [])
+        
+        # Get strand priority traits
+        strand_priority_traits = set(STRAND_PRIORITY_TRAITS.get(session.user_strand, []))
         
         for opt in options:
             trait = opt.get('trait_tag')
@@ -271,10 +302,17 @@ class AdaptiveAssessmentEngine:
                 # Direct trait value
                 score += trait_values.get(trait, 0)
                 
+                # STRAND BONUS: Prioritize questions relevant to user's strand
+                if trait in strand_priority_traits:
+                    score += 0.5  # Significant bonus for strand-relevant traits
+                
                 # Also consider mapped traits from our trait system
                 mapped_traits = EXPANDED_TRAIT_MAPPING.get(trait, [])
                 for mapped_trait in mapped_traits:
                     score += trait_values.get(mapped_trait, 0) * 0.5
+                    # Strand bonus for mapped traits too
+                    if mapped_trait in strand_priority_traits:
+                        score += 0.25
         
         # Bonus for questions with more options (more information)
         option_bonus = min(len(options) / 4, 1.5)
