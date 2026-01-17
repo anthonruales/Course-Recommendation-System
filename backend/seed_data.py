@@ -1644,8 +1644,1236 @@ QUESTIONS_POOL = [
             {"text": "Somewhat important but career is priority", "tag": "Ambitious"},
             {"text": "Not my main concern", "tag": "Work-focused"}
         ]
+    },
+    
+    # ==================== SCALE-BASED QUESTIONS (1-5 RATING) ====================
+    # These questions use a scale format with weighted trait scoring
+    {
+        "question": "How confident are you in solving mathematical problems?",
+        "category": "Scale Assessment",
+        "question_type": "scale",
+        "options": [
+            {"text": "1 - Not confident at all", "tag": "Math-Low", "weight": 1},
+            {"text": "2 - Slightly confident", "tag": "Math-Low", "weight": 2},
+            {"text": "3 - Moderately confident", "tag": "Math-Medium", "weight": 3},
+            {"text": "4 - Very confident", "tag": "Math-High", "weight": 4},
+            {"text": "5 - Extremely confident", "tag": "Math-High", "weight": 5}
+        ],
+        "trait_mapping": {
+            "high": ["Logical", "Analytical", "Problem-solving", "Quantitative"],
+            "medium": ["Methodical", "Detail-focused"],
+            "low": ["Creative-expression", "Social"]
+        },
+        "course_boost": {
+            "high": ["BS Computer Science", "BS Mathematics", "BS Statistics", "BS Data Science", "BS Accountancy", "BS Civil Engineering", "BS Electrical Engineering"],
+            "medium": ["BS Business Administration major in Financial Management", "BS Economics", "BS Architecture"],
+            "low": []
+        }
+    },
+    {
+        "question": "Rate your interest in technology and computer-related activities.",
+        "category": "Scale Assessment",
+        "question_type": "scale",
+        "options": [
+            {"text": "1 - Not interested at all", "tag": "Tech-Low", "weight": 1},
+            {"text": "2 - Slightly interested", "tag": "Tech-Low", "weight": 2},
+            {"text": "3 - Moderately interested", "tag": "Tech-Medium", "weight": 3},
+            {"text": "4 - Very interested", "tag": "Tech-High", "weight": 4},
+            {"text": "5 - Extremely interested", "tag": "Tech-High", "weight": 5}
+        ],
+        "trait_mapping": {
+            "high": ["Tech-savvy", "Algorithm-focused", "Innovative", "Problem-solving"],
+            "medium": ["Analytical", "Logical"],
+            "low": ["Hands-on", "Field-work", "Social"]
+        },
+        "course_boost": {
+            "high": ["BS Computer Science", "BS Information Technology", "BS Computer Engineering", "BS Data Science", "BS Cybersecurity", "BS Entertainment and Multimedia Computing"],
+            "medium": ["BS Accounting Information Systems", "BS Health Information Management"],
+            "low": []
+        }
+    },
+    {
+        "question": "Rate your comfort level with public speaking and presentations.",
+        "category": "Scale Assessment",
+        "question_type": "scale",
+        "options": [
+            {"text": "1 - Very uncomfortable", "tag": "Speaking-Low", "weight": 1},
+            {"text": "2 - Somewhat uncomfortable", "tag": "Speaking-Low", "weight": 2},
+            {"text": "3 - Neutral", "tag": "Speaking-Medium", "weight": 3},
+            {"text": "4 - Comfortable", "tag": "Speaking-High", "weight": 4},
+            {"text": "5 - Very comfortable", "tag": "Speaking-High", "weight": 5}
+        ],
+        "trait_mapping": {
+            "high": ["Extroverted", "Articulate", "Leading-teams", "Confident"],
+            "medium": ["Collaborative", "Social"],
+            "low": ["Introverted", "Independent", "Detail-focused"]
+        },
+        "course_boost": {
+            "high": ["BA in Communication", "Bachelor of Secondary Education", "BA in Political Science", "BS Tourism Management", "BA in Theater Arts", "BA in Journalism"],
+            "medium": ["BS Business Administration major in Marketing Management", "Bachelor of Public Administration"],
+            "low": []
+        }
+    },
+    {
+        "question": "How interested are you in understanding how the human body works?",
+        "category": "Scale Assessment",
+        "question_type": "scale",
+        "options": [
+            {"text": "1 - Not interested at all", "tag": "Health-Low", "weight": 1},
+            {"text": "2 - Slightly interested", "tag": "Health-Low", "weight": 2},
+            {"text": "3 - Moderately interested", "tag": "Health-Medium", "weight": 3},
+            {"text": "4 - Very interested", "tag": "Health-High", "weight": 4},
+            {"text": "5 - Extremely interested", "tag": "Health-High", "weight": 5}
+        ],
+        "trait_mapping": {
+            "high": ["Helping-others", "Patient-focused", "Scientific-thinking", "Empathetic"],
+            "medium": ["Analytical", "Research-oriented"],
+            "low": ["Tech-savvy", "Business-minded"]
+        },
+        "course_boost": {
+            "high": ["BS Nursing", "BS Medical Technology", "BS Physical Therapy", "BS Pharmacy", "Doctor of Veterinary Medicine", "BS Biology", "BS Psychology"],
+            "medium": ["BS Nutrition and Dietetics", "BS Exercise and Sports Science"],
+            "low": []
+        }
+    },
+    {
+        "question": "Rate your creativity and artistic abilities.",
+        "category": "Scale Assessment",
+        "question_type": "scale",
+        "options": [
+            {"text": "1 - Not creative at all", "tag": "Creative-Low", "weight": 1},
+            {"text": "2 - Slightly creative", "tag": "Creative-Low", "weight": 2},
+            {"text": "3 - Moderately creative", "tag": "Creative-Medium", "weight": 3},
+            {"text": "4 - Very creative", "tag": "Creative-High", "weight": 4},
+            {"text": "5 - Extremely creative", "tag": "Creative-High", "weight": 5}
+        ],
+        "trait_mapping": {
+            "high": ["Creative-expression", "Artistic-passion", "Innovative", "Visual-learner"],
+            "medium": ["Aesthetic-sense", "Hands-on"],
+            "low": ["Logical", "Analytical", "Methodical"]
+        },
+        "course_boost": {
+            "high": ["Bachelor of Fine Arts", "BS Architecture", "BS Multimedia Arts", "BA in Animation", "BA in Fashion Design and Merchandising", "BS Interior Design"],
+            "medium": ["BA in Communication", "BA in Advertising Arts"],
+            "low": []
+        }
+    },
+    {
+        "question": "How comfortable are you with leadership and taking charge?",
+        "category": "Scale Assessment",
+        "question_type": "scale",
+        "options": [
+            {"text": "1 - Not comfortable at all", "tag": "Leadership-Low", "weight": 1},
+            {"text": "2 - Slightly comfortable", "tag": "Leadership-Low", "weight": 2},
+            {"text": "3 - Moderately comfortable", "tag": "Leadership-Medium", "weight": 3},
+            {"text": "4 - Very comfortable", "tag": "Leadership-High", "weight": 4},
+            {"text": "5 - Extremely comfortable", "tag": "Leadership-High", "weight": 5}
+        ],
+        "trait_mapping": {
+            "high": ["Leading-teams", "Ambitious", "Strategic", "Big-picture"],
+            "medium": ["Collaborative", "Team-centric"],
+            "low": ["Independent", "Detail-focused", "Introverted"]
+        },
+        "course_boost": {
+            "high": ["BS Business Administration major in Operations Management", "BS Entrepreneurship", "Bachelor of Public Administration", "BS Industrial Engineering"],
+            "medium": ["BS Business Administration major in Marketing Management", "BS Business Administration major in Human Resource Management"],
+            "low": []
+        }
+    },
+    {
+        "question": "Rate your interest in helping and caring for others.",
+        "category": "Scale Assessment",
+        "question_type": "scale",
+        "options": [
+            {"text": "1 - Not interested", "tag": "Helping-Low", "weight": 1},
+            {"text": "2 - Slightly interested", "tag": "Helping-Low", "weight": 2},
+            {"text": "3 - Moderately interested", "tag": "Helping-Medium", "weight": 3},
+            {"text": "4 - Very interested", "tag": "Helping-High", "weight": 4},
+            {"text": "5 - Extremely interested", "tag": "Helping-High", "weight": 5}
+        ],
+        "trait_mapping": {
+            "high": ["Helping-others", "Empathetic", "Compassionate", "Patient-focused"],
+            "medium": ["Collaborative", "Social", "Service-oriented"],
+            "low": ["Independent", "Analytical", "Problem-solving"]
+        },
+        "course_boost": {
+            "high": ["BS Nursing", "BS Social Work", "Bachelor of Elementary Education", "Bachelor of Special Needs Education", "BS Physical Therapy", "BS Psychology"],
+            "medium": ["BS Hospitality Management", "BS Tourism Management"],
+            "low": []
+        }
+    },
+    {
+        "question": "How interested are you in business, finance, and entrepreneurship?",
+        "category": "Scale Assessment",
+        "question_type": "scale",
+        "options": [
+            {"text": "1 - Not interested at all", "tag": "Business-Low", "weight": 1},
+            {"text": "2 - Slightly interested", "tag": "Business-Low", "weight": 2},
+            {"text": "3 - Moderately interested", "tag": "Business-Medium", "weight": 3},
+            {"text": "4 - Very interested", "tag": "Business-High", "weight": 4},
+            {"text": "5 - Extremely interested", "tag": "Business-High", "weight": 5}
+        ],
+        "trait_mapping": {
+            "high": ["Business-minded", "Ambitious", "Strategic", "Investment-minded"],
+            "medium": ["Analytical", "Practical", "Organized"],
+            "low": ["Creative-expression", "Research-oriented"]
+        },
+        "course_boost": {
+            "high": ["BS Accountancy", "BS Entrepreneurship", "BS Business Administration major in Financial Management", "BS Business Administration major in Marketing Management", "BS Real Estate Management"],
+            "medium": ["BS Business Economics", "BS Management Accounting"],
+            "low": []
+        }
+    },
+    {
+        "question": "Rate your interest in scientific research and laboratory work.",
+        "category": "Scale Assessment",
+        "question_type": "scale",
+        "options": [
+            {"text": "1 - Not interested at all", "tag": "Research-Low", "weight": 1},
+            {"text": "2 - Slightly interested", "tag": "Research-Low", "weight": 2},
+            {"text": "3 - Moderately interested", "tag": "Research-Medium", "weight": 3},
+            {"text": "4 - Very interested", "tag": "Research-High", "weight": 4},
+            {"text": "5 - Extremely interested", "tag": "Research-High", "weight": 5}
+        ],
+        "trait_mapping": {
+            "high": ["Research-oriented", "Laboratory", "Scientific-thinking", "Analytical"],
+            "medium": ["Detail-focused", "Methodical"],
+            "low": ["Hands-on", "Social", "Field-work"]
+        },
+        "course_boost": {
+            "high": ["BS Biology", "BS Chemistry", "BS Biotechnology", "BS Medical Technology", "BS Forensic Science", "BS Physics"],
+            "medium": ["BS Environmental Science", "BS Food Technology"],
+            "low": []
+        }
+    },
+    {
+        "question": "How much do you enjoy outdoor activities and fieldwork?",
+        "category": "Scale Assessment",
+        "question_type": "scale",
+        "options": [
+            {"text": "1 - Strongly prefer indoors", "tag": "Outdoor-Low", "weight": 1},
+            {"text": "2 - Prefer indoors", "tag": "Outdoor-Low", "weight": 2},
+            {"text": "3 - No preference", "tag": "Outdoor-Medium", "weight": 3},
+            {"text": "4 - Prefer outdoors", "tag": "Outdoor-High", "weight": 4},
+            {"text": "5 - Strongly prefer outdoors", "tag": "Outdoor-High", "weight": 5}
+        ],
+        "trait_mapping": {
+            "high": ["Field-work", "Outdoor-enthusiast", "Nature-connected", "Adventurous"],
+            "medium": ["Hands-on", "Active"],
+            "low": ["Office-based", "Laboratory", "Studio-work"]
+        },
+        "course_boost": {
+            "high": ["BS Agriculture", "BS Forestry", "BS Marine Biology", "BS Geology", "BS Environmental Science", "BS Marine Transportation"],
+            "medium": ["BS Civil Engineering", "BS Geodetic Engineering"],
+            "low": []
+        }
+    },
+    
+    # ==================== CAREER PATH PREFERENCE QUESTIONS ====================
+    # Direct mapping to course categories
+    {
+        "question": "Which career path appeals to you the most?",
+        "category": "Career Preference",
+        "question_type": "career_path",
+        "options": [
+            {"text": "Engineering - Building, designing, and solving technical problems", "tag": "Engineering-Path", 
+             "course_tags": ["Problem-solving", "Technical", "Analytical", "Hands-on"],
+             "recommended_courses": ["BS Civil Engineering", "BS Computer Engineering", "BS Electrical Engineering", "BS Mechanical Engineering", "BS Industrial Engineering"]},
+            {"text": "Education - Teaching, mentoring, and developing others", "tag": "Education-Path",
+             "course_tags": ["Helping-others", "Mentoring", "Patient", "Leading-teams"],
+             "recommended_courses": ["Bachelor of Elementary Education", "Bachelor of Secondary Education", "Bachelor of Special Needs Education", "Bachelor of Physical Education"]},
+            {"text": "Medicine & Healthcare - Caring for patients and promoting health", "tag": "Healthcare-Path",
+             "course_tags": ["Helping-others", "Patient-focused", "Clinical-setting", "Empathetic"],
+             "recommended_courses": ["BS Nursing", "BS Medical Technology", "BS Pharmacy", "BS Physical Therapy", "Doctor of Veterinary Medicine"]},
+            {"text": "Business & Finance - Managing organizations and financial resources", "tag": "Business-Path",
+             "course_tags": ["Business-minded", "Strategic", "Analytical", "Leading-teams"],
+             "recommended_courses": ["BS Accountancy", "BS Business Administration major in Financial Management", "BS Entrepreneurship", "BS Business Economics"]},
+            {"text": "Arts & Design - Creating visual content and artistic works", "tag": "Arts-Path",
+             "course_tags": ["Creative-expression", "Visual-learner", "Artistic-passion", "Innovative"],
+             "recommended_courses": ["Bachelor of Fine Arts", "BS Architecture", "BS Multimedia Arts", "BA in Animation", "BS Interior Design"]},
+            {"text": "Law & Public Service - Advocating justice and serving communities", "tag": "Law-Path",
+             "course_tags": ["Analytical", "Advocacy", "Leadership", "Critical-thinking"],
+             "recommended_courses": ["BA in Political Science", "BS Legal Management", "Bachelor of Public Administration", "BS Criminology"]}
+        ]
+    },
+    {
+        "question": "Which secondary career area interests you?",
+        "category": "Career Preference",
+        "question_type": "career_path",
+        "options": [
+            {"text": "Technology & Computing - Software, data, and digital systems", "tag": "Tech-Path",
+             "course_tags": ["Tech-savvy", "Algorithm-focused", "Logical", "Problem-solving"],
+             "recommended_courses": ["BS Computer Science", "BS Information Technology", "BS Data Science", "BS Cybersecurity"]},
+            {"text": "Science & Research - Discovering new knowledge through research", "tag": "Science-Path",
+             "course_tags": ["Research-oriented", "Scientific-thinking", "Analytical", "Laboratory"],
+             "recommended_courses": ["BS Biology", "BS Chemistry", "BS Physics", "BS Biotechnology", "BS Environmental Science"]},
+            {"text": "Communication & Media - Creating content and connecting with audiences", "tag": "Media-Path",
+             "course_tags": ["Creative-expression", "Articulate", "Media-savvy", "Extroverted"],
+             "recommended_courses": ["BA in Communication", "BA in Journalism", "BA in Digital Filmmaking", "BS Development Communication"]},
+            {"text": "Hospitality & Tourism - Serving guests and promoting travel", "tag": "Hospitality-Path",
+             "course_tags": ["Service-oriented", "Social", "Cultural-awareness", "Extroverted"],
+             "recommended_courses": ["BS Hospitality Management", "BS Tourism Management", "BS Culinary Management"]},
+            {"text": "Agriculture & Environment - Working with nature and sustainability", "tag": "Agriculture-Path",
+             "course_tags": ["Nature-connected", "Field-work", "Outdoor-enthusiast", "Practical"],
+             "recommended_courses": ["BS Agriculture", "BS Forestry", "BS Environmental Science", "BS Marine Biology"]},
+            {"text": "Maritime & Aviation - Working at sea or in the skies", "tag": "Maritime-Path",
+             "course_tags": ["Adventurous", "Disciplined", "Technical", "Field-work"],
+             "recommended_courses": ["BS Marine Transportation", "BS Marine Engineering", "BS Aeronautical Engineering", "BS Aircraft Maintenance Technology"]}
+        ]
+    },
+    
+    # ==================== EXTRACURRICULAR PREFERENCE QUESTIONS ====================
+    {
+        "question": "Which extracurricular activity do you prefer or would enjoy most?",
+        "category": "Extracurricular Preference",
+        "question_type": "extracurricular",
+        "options": [
+            {"text": "Debating / Public Speaking Club", "tag": "Debating-Club",
+             "trait_tags": ["Articulate", "Critical-thinking", "Confident", "Analytical"],
+             "recommended_courses": ["BA in Political Science", "BA in Communication", "BS Legal Management", "BA in Philosophy"]},
+            {"text": "Programming / Robotics / Tech Club", "tag": "Programming-Club",
+             "trait_tags": ["Tech-savvy", "Algorithm-focused", "Logical", "Problem-solving"],
+             "recommended_courses": ["BS Computer Science", "BS Information Technology", "BS Computer Engineering", "BS Data Science"]},
+            {"text": "Arts / Music / Drama Club", "tag": "Arts-Club",
+             "trait_tags": ["Creative-expression", "Artistic-passion", "Expressive", "Visual-learner"],
+             "recommended_courses": ["Bachelor of Fine Arts", "BA in Theater Arts", "BA in Music Production", "BS Multimedia Arts"]},
+            {"text": "Science / Math Olympiad", "tag": "Science-Club",
+             "trait_tags": ["Analytical", "Problem-solving", "Logical", "Research-oriented"],
+             "recommended_courses": ["BS Mathematics", "BS Physics", "BS Chemistry", "BS Statistics"]},
+            {"text": "Student Government / Leadership", "tag": "Leadership-Club",
+             "trait_tags": ["Leading-teams", "Strategic", "Civic-minded", "Ambitious"],
+             "recommended_courses": ["Bachelor of Public Administration", "BS Business Administration major in Operations Management", "BS Entrepreneurship"]},
+            {"text": "Community Service / Volunteering", "tag": "Service-Club",
+             "trait_tags": ["Helping-others", "Empathetic", "Community-focused", "Compassionate"],
+             "recommended_courses": ["BS Social Work", "BS Nursing", "Bachelor of Elementary Education", "BS Community Development"]},
+            {"text": "Sports / Athletic Teams", "tag": "Sports-Club",
+             "trait_tags": ["Active", "Athletic-passion", "Team-centric", "Physical-fitness"],
+             "recommended_courses": ["Bachelor of Physical Education", "BS Exercise and Sports Science", "BS Criminology"]},
+            {"text": "School Publication / Writing", "tag": "Publication-Club",
+             "trait_tags": ["Articulate", "Creative-expression", "Inquisitive", "Investigative"],
+             "recommended_courses": ["BA in Journalism", "BA in Communication", "Bachelor of Library and Information Science"]}
+        ]
+    },
+    {
+        "question": "What type of school project do you enjoy working on most?",
+        "category": "Extracurricular Preference",
+        "question_type": "extracurricular",
+        "options": [
+            {"text": "Building models, prototypes, or experiments", "tag": "Prototype-Projects",
+             "trait_tags": ["Hands-on", "Technical", "Problem-solving", "Practical"],
+             "recommended_courses": ["BS Civil Engineering", "BS Mechanical Engineering", "BS Architecture", "BS Industrial Design"]},
+            {"text": "Research papers and case studies", "tag": "Research-Projects",
+             "trait_tags": ["Research-oriented", "Analytical", "Detail-focused", "Methodical"],
+             "recommended_courses": ["BS Psychology", "BS Biology", "BA in Sociology", "BS Chemistry"]},
+            {"text": "Creative presentations and multimedia", "tag": "Creative-Projects",
+             "trait_tags": ["Creative-expression", "Visual-learner", "Tech-savvy", "Innovative"],
+             "recommended_courses": ["BS Multimedia Arts", "BA in Communication", "BA in Advertising Arts", "BS Entertainment and Multimedia Computing"]},
+            {"text": "Business plans and financial analysis", "tag": "Business-Projects",
+             "trait_tags": ["Business-minded", "Strategic", "Analytical", "Ambitious"],
+             "recommended_courses": ["BS Entrepreneurship", "BS Business Administration major in Financial Management", "BS Accountancy"]},
+            {"text": "Community outreach and social programs", "tag": "Community-Projects",
+             "trait_tags": ["Helping-others", "Community-focused", "Advocacy", "Collaborative"],
+             "recommended_courses": ["BS Social Work", "BS Development Communication", "BS Community Development"]},
+            {"text": "Science experiments and laboratory work", "tag": "Lab-Projects",
+             "trait_tags": ["Laboratory", "Scientific-thinking", "Research-oriented", "Detail-focused"],
+             "recommended_courses": ["BS Medical Technology", "BS Chemistry", "BS Biology", "BS Food Technology"]}
+        ]
+    },
+    
+    # ==================== ENHANCED SITUATIONAL QUESTIONS WITH COURSE MAPPING ====================
+    {
+        "question": "You're given a group project. What role do you prefer to take?",
+        "category": "Situational - Role Preference",
+        "question_type": "situational_mapped",
+        "options": [
+            {"text": "Leader / Organizer - Coordinating the team and delegating tasks", "tag": "Leader-Role",
+             "trait_tags": ["Leading-teams", "Strategic", "Organized", "Big-picture"],
+             "course_categories": ["Business Administration", "Education", "Political Science", "Management courses"],
+             "recommended_courses": ["BS Business Administration major in Operations Management", "Bachelor of Secondary Education", "BA in Political Science", "BS Entrepreneurship", "Bachelor of Public Administration"]},
+            {"text": "Researcher / Analyst - Gathering data and analyzing information", "tag": "Researcher-Role",
+             "trait_tags": ["Research-oriented", "Analytical", "Detail-focused", "Methodical"],
+             "course_categories": ["Engineering", "Science Related courses", "Information Technology"],
+             "recommended_courses": ["BS Civil Engineering", "BS Computer Science", "BS Data Science", "BS Chemistry", "BS Statistics"]},
+            {"text": "Designer / Creative contributor - Creating visuals and innovative ideas", "tag": "Designer-Role",
+             "trait_tags": ["Creative-expression", "Visual-learner", "Innovative", "Artistic-passion"],
+             "course_categories": ["Architecture", "Multimedia Arts", "Graphic Design", "Communication Arts"],
+             "recommended_courses": ["BS Architecture", "BS Multimedia Arts", "BA in Animation", "BA in Advertising Arts", "BS Interior Design"]},
+            {"text": "Presenter / Communicator - Explaining ideas and presenting to others", "tag": "Presenter-Role",
+             "trait_tags": ["Articulate", "Extroverted", "Confident", "Communication-skills"],
+             "course_categories": ["Mass Communication", "Education", "Law", "Tourism Management"],
+             "recommended_courses": ["BA in Communication", "Bachelor of Secondary Education", "BS Legal Management", "BS Tourism Management", "BA in Journalism"]}
+        ]
+    },
+    {
+        "question": "Your school needs to raise funds for charity. What would you volunteer to do?",
+        "category": "Situational - Role Preference",
+        "question_type": "situational_mapped",
+        "options": [
+            {"text": "Plan the event logistics and coordinate volunteers", "tag": "Event-Planner",
+             "trait_tags": ["Leading-teams", "Organized", "Strategic", "Collaborative"],
+             "recommended_courses": ["BS Hospitality Management", "BS Business Administration major in Operations Management", "BS Tourism Management", "Bachelor of Public Administration"]},
+            {"text": "Handle the finances, budgeting, and accounting", "tag": "Finance-Handler",
+             "trait_tags": ["Analytical", "Detail-focused", "Numerical-thinking", "Methodical"],
+             "recommended_courses": ["BS Accountancy", "BS Business Administration major in Financial Management", "BS Management Accounting"]},
+            {"text": "Create promotional materials and social media content", "tag": "Promo-Creator",
+             "trait_tags": ["Creative-expression", "Media-savvy", "Visual-learner", "Innovative"],
+             "recommended_courses": ["BA in Communication", "BA in Advertising Arts", "BS Multimedia Arts", "BA in Digital Filmmaking"]},
+            {"text": "Directly engage with donors and explain the cause", "tag": "Donor-Engager",
+             "trait_tags": ["Extroverted", "Persuasive", "Helping-others", "Social"],
+             "recommended_courses": ["BS Business Administration major in Marketing Management", "BS Social Work", "BS Real Estate Management", "Bachelor of Elementary Education"]}
+        ]
+    },
+    {
+        "question": "A friend is struggling with personal problems. How do you help?",
+        "category": "Situational - Helping Style",
+        "question_type": "situational_mapped",
+        "options": [
+            {"text": "Listen carefully and offer emotional support", "tag": "Emotional-Support",
+             "trait_tags": ["Empathetic", "Compassionate", "Patient", "Helping-others"],
+             "recommended_courses": ["BS Psychology", "BS Social Work", "BS Nursing", "Bachelor of Special Needs Education"]},
+            {"text": "Analyze the situation and suggest practical solutions", "tag": "Solution-Provider",
+             "trait_tags": ["Analytical", "Problem-solving", "Logical", "Practical"],
+             "recommended_courses": ["BS Computer Science", "BS Industrial Engineering", "BS Business Administration major in Operations Management"]},
+            {"text": "Help them research resources and options", "tag": "Resource-Researcher",
+             "trait_tags": ["Research-oriented", "Helpful", "Detail-focused", "Methodical"],
+             "recommended_courses": ["Bachelor of Library and Information Science", "BS Health Information Management", "BA in Sociology"]},
+            {"text": "Distract them with fun activities to lift their spirits", "tag": "Mood-Lifter",
+             "trait_tags": ["Extroverted", "Social", "Active", "Creative-expression"],
+             "recommended_courses": ["BS Hospitality Management", "BS Entertainment and Multimedia Computing", "Bachelor of Physical Education"]}
+        ]
+    },
+    {
+        "question": "You notice a technical problem with the school's computer system. What do you do?",
+        "category": "Situational - Problem Response",
+        "question_type": "situational_mapped",
+        "options": [
+            {"text": "Try to diagnose and fix it yourself", "tag": "Self-Fixer",
+             "trait_tags": ["Problem-solving", "Tech-savvy", "Independent", "Hands-on"],
+             "recommended_courses": ["BS Computer Science", "BS Information Technology", "BS Computer Engineering", "BS Cybersecurity"]},
+            {"text": "Report it to the IT department with detailed documentation", "tag": "Detail-Reporter",
+             "trait_tags": ["Detail-focused", "Organized", "Systematic", "Methodical"],
+             "recommended_courses": ["BS Health Information Management", "BS Office Administration", "BS Accounting Information Systems"]},
+            {"text": "Alert others and help coordinate a workaround", "tag": "Coordinator",
+             "trait_tags": ["Leading-teams", "Collaborative", "Communication-skills", "Helpful"],
+             "recommended_courses": ["BS Business Administration major in Operations Management", "BA in Communication", "BS Industrial Engineering"]},
+            {"text": "Let someone else handle it - tech isn't my thing", "tag": "Non-Tech",
+             "trait_tags": ["Social", "Creative-expression", "Field-work", "Hands-on"],
+             "recommended_courses": ["Bachelor of Fine Arts", "BS Agriculture", "BS Nursing", "BS Hospitality Management"]}
+        ]
+    },
+    {
+        "question": "You're asked to present your ideas to a panel of judges. How do you feel?",
+        "category": "Situational - Presentation",
+        "question_type": "situational_mapped",
+        "options": [
+            {"text": "Excited! I love presenting and persuading others", "tag": "Presentation-Lover",
+             "trait_tags": ["Extroverted", "Confident", "Articulate", "Persuasive"],
+             "recommended_courses": ["BA in Communication", "BS Business Administration major in Marketing Management", "BA in Journalism", "BS Legal Management"]},
+            {"text": "Nervous, but I can do it if I prepare well", "tag": "Prepared-Presenter",
+             "trait_tags": ["Methodical", "Detail-focused", "Resilient", "Analytical"],
+             "recommended_courses": ["BS Accountancy", "BS Statistics", "BS Architecture", "BS Civil Engineering"]},
+            {"text": "I'd rather someone else present while I prepare the content", "tag": "Content-Creator",
+             "trait_tags": ["Research-oriented", "Detail-focused", "Independent", "Analytical"],
+             "recommended_courses": ["BS Data Science", "BS Chemistry", "BS Biotechnology", "BS Medical Technology"]},
+            {"text": "I prefer visual presentations - let my work speak for itself", "tag": "Visual-Presenter",
+             "trait_tags": ["Visual-learner", "Creative-expression", "Artistic-passion", "Independent"],
+             "recommended_courses": ["BS Architecture", "BS Multimedia Arts", "BA in Animation", "BA in Photography"]}
+        ]
+    },
+    {
+        "question": "There's an emergency situation at school. What's your instinct?",
+        "category": "Situational - Crisis Response",
+        "question_type": "situational_mapped",
+        "options": [
+            {"text": "Take charge and help organize the response", "tag": "Crisis-Leader",
+             "trait_tags": ["Leading-teams", "Crisis-management", "Confident", "Decisive"],
+             "recommended_courses": ["BS Criminology", "Bachelor of Public Administration", "BS Business Administration major in Operations Management", "BS Marine Transportation"]},
+            {"text": "Help those who are injured or in distress", "tag": "Crisis-Helper",
+             "trait_tags": ["Helping-others", "Empathetic", "Compassionate", "Patient-focused"],
+             "recommended_courses": ["BS Nursing", "BS Medical Technology", "BS Physical Therapy", "BS Respiratory Therapy"]},
+            {"text": "Stay calm and follow established protocols", "tag": "Protocol-Follower",
+             "trait_tags": ["Methodical", "Disciplined", "Systematic", "Detail-focused"],
+             "recommended_courses": ["BS Accountancy", "BS Customs Administration", "BS Office Administration"]},
+            {"text": "Document the situation and communicate information", "tag": "Situation-Documenter",
+             "trait_tags": ["Analytical", "Detail-focused", "Communication-skills", "Observational"],
+             "recommended_courses": ["BA in Journalism", "BS Forensic Science", "BA in Communication", "BS Health Information Management"]}
+        ]
+    },
+    {
+        "question": "Your teacher assigns a research topic you know nothing about. How do you approach it?",
+        "category": "Situational - Learning Approach",
+        "question_type": "situational_mapped",
+        "options": [
+            {"text": "Dive deep into books, journals, and online resources", "tag": "Deep-Researcher",
+             "trait_tags": ["Research-oriented", "Independent", "Detail-focused", "Methodical"],
+             "recommended_courses": ["BS Biology", "BS Chemistry", "BA in Philosophy", "BS Psychology", "BS Statistics"]},
+            {"text": "Find experts or knowledgeable people to interview", "tag": "Network-Learner",
+             "trait_tags": ["Extroverted", "Social", "Collaborative", "Inquisitive"],
+             "recommended_courses": ["BA in Journalism", "BA in Communication", "BS Social Work", "BS Tourism Management"]},
+            {"text": "Try hands-on experiments to understand through doing", "tag": "Hands-On-Learner",
+             "trait_tags": ["Hands-on", "Practical", "Active", "Experiential"],
+             "recommended_courses": ["BS Civil Engineering", "BS Mechanical Engineering", "BS Agriculture", "BS Food Technology"]},
+            {"text": "Watch videos and look for visual explanations", "tag": "Visual-Learner",
+             "trait_tags": ["Visual-learner", "Tech-savvy", "Creative-expression", "Digital-art"],
+             "recommended_courses": ["BS Multimedia Arts", "BA in Digital Filmmaking", "BS Entertainment and Multimedia Computing", "BA in Animation"]}
+        ]
+    },
+    {
+        "question": "You have free time after school. How do you spend it?",
+        "category": "Situational - Free Time",
+        "question_type": "situational_mapped",
+        "options": [
+            {"text": "Working on personal coding projects or tech experiments", "tag": "Tech-Hobbyist",
+             "trait_tags": ["Tech-savvy", "Algorithm-focused", "Independent", "Innovative"],
+             "recommended_courses": ["BS Computer Science", "BS Information Technology", "BS Data Science", "BS Entertainment and Multimedia Computing"]},
+            {"text": "Volunteering or helping in community activities", "tag": "Community-Helper",
+             "trait_tags": ["Helping-others", "Community-focused", "Compassionate", "Social"],
+             "recommended_courses": ["BS Social Work", "BS Nursing", "Bachelor of Elementary Education", "BS Community Development"]},
+            {"text": "Creating art, music, or working on creative projects", "tag": "Creative-Hobbyist",
+             "trait_tags": ["Creative-expression", "Artistic-passion", "Innovative", "Visual-learner"],
+             "recommended_courses": ["Bachelor of Fine Arts", "BA in Music Production", "BS Multimedia Arts", "BA in Animation"]},
+            {"text": "Playing sports or engaging in physical activities", "tag": "Sports-Enthusiast",
+             "trait_tags": ["Active", "Athletic-passion", "Physical-fitness", "Team-centric"],
+             "recommended_courses": ["Bachelor of Physical Education", "BS Exercise and Sports Science", "BS Hospitality Management"]},
+            {"text": "Reading books or learning something new online", "tag": "Self-Learner",
+             "trait_tags": ["Research-oriented", "Independent", "Inquisitive", "Contemplative"],
+             "recommended_courses": ["BA in Philosophy", "Bachelor of Library and Information Science", "BS Psychology", "BA in Linguistics"]}
+        ]
+    },
+    {
+        "question": "A classmate asks you to help them understand a difficult concept. How do you explain?",
+        "category": "Situational - Teaching Style",
+        "question_type": "situational_mapped",
+        "options": [
+            {"text": "Break it down step-by-step with clear explanations", "tag": "Step-By-Step-Teacher",
+             "trait_tags": ["Methodical", "Patient", "Mentoring", "Helping-others"],
+             "recommended_courses": ["Bachelor of Elementary Education", "Bachelor of Secondary Education", "Bachelor of Special Needs Education"]},
+            {"text": "Use diagrams, drawings, and visual aids", "tag": "Visual-Teacher",
+             "trait_tags": ["Visual-learner", "Creative-expression", "Hands-on", "Practical"],
+             "recommended_courses": ["BS Architecture", "BS Interior Design", "BS Multimedia Arts", "BA in Animation"]},
+            {"text": "Give real-world examples and practical applications", "tag": "Practical-Teacher",
+             "trait_tags": ["Practical", "Hands-on", "Problem-solving", "Business-minded"],
+             "recommended_courses": ["BS Business Administration major in Operations Management", "BS Industrial Engineering", "BS Civil Engineering"]},
+            {"text": "Encourage them to discover the answer themselves with guidance", "tag": "Discovery-Teacher",
+             "trait_tags": ["Mentoring", "Analytical", "Independent", "Research-oriented"],
+             "recommended_courses": ["BS Psychology", "Bachelor of Secondary Education", "BA in Philosophy"]}
+        ]
+    },
+    {
+        "question": "You're planning a dream vacation. What type of trip appeals most?",
+        "category": "Situational - Preferences",
+        "question_type": "situational_mapped",
+        "options": [
+            {"text": "Adventure trip - hiking, diving, exploring nature", "tag": "Adventure-Trip",
+             "trait_tags": ["Adventurous", "Outdoor-enthusiast", "Active", "Field-work"],
+             "recommended_courses": ["BS Marine Biology", "BS Forestry", "BS Environmental Science", "BS Geology"]},
+            {"text": "Cultural trip - museums, historical sites, local experiences", "tag": "Cultural-Trip",
+             "trait_tags": ["Cultural-awareness", "Inquisitive", "Research-oriented", "Global-minded"],
+             "recommended_courses": ["BS Tourism Management", "BA in International Studies", "BA in Sociology", "BA in Philosophy"]},
+            {"text": "Relaxation trip - resorts, spas, and leisure activities", "tag": "Relaxation-Trip",
+             "trait_tags": ["Service-oriented", "Health-conscious", "Social", "Practical"],
+             "recommended_courses": ["BS Hospitality Management", "BS Nutrition and Dietetics", "BS Tourism Management"]},
+            {"text": "City exploration - shopping, restaurants, nightlife", "tag": "Urban-Trip",
+             "trait_tags": ["Social", "Extroverted", "Urban-focus", "Business-minded"],
+             "recommended_courses": ["BS Business Administration major in Marketing Management", "BS Real Estate Management", "BS Environmental Planning"]}
+        ]
+    },
+    
+    # ==================== PHILIPPINE PUBLIC UNIVERSITY FOCUSED QUESTIONS ====================
+    # These questions specifically target popular and affordable courses in SUCs (State Universities and Colleges)
+    
+    # --- PUBLIC SERVICE & GOVERNMENT CAREER QUESTIONS ---
+    {
+        "question": "Would you consider working for the government or public sector after graduation?",
+        "category": "Public Service Interest",
+        "question_type": "career_path",
+        "options": [
+            {"text": "Yes, I want to serve the Filipino people through government work", "tag": "Public-Service-Path",
+             "course_tags": ["Civic-minded", "Public-service", "Leadership", "Helping-others"],
+             "recommended_courses": ["Bachelor of Public Administration", "BS Criminology", "BS Social Work", "Bachelor of Secondary Education", "BA in Political Science"]},
+            {"text": "Yes, particularly in law enforcement or peace and order", "tag": "Law-Enforcement-Path",
+             "course_tags": ["Disciplined", "Protective", "Justice-minded", "Physical-fitness"],
+             "recommended_courses": ["BS Criminology", "Bachelor of Public Administration", "BS Forensic Science"]},
+            {"text": "Yes, I want to help with rural development and agriculture", "tag": "Rural-Development-Path",
+             "course_tags": ["Field-work", "Nature-connected", "Community-focused", "Practical"],
+             "recommended_courses": ["BS Agriculture", "BS Forestry", "BS Fisheries", "BS Community Development", "BS Agribusiness"]},
+            {"text": "I prefer working in private companies or starting my own business", "tag": "Private-Sector-Path",
+             "course_tags": ["Business-minded", "Independent", "Ambitious", "Entrepreneurial"],
+             "recommended_courses": ["BS Entrepreneurship", "BS Business Administration major in Marketing Management", "BS Information Technology"]}
+        ]
+    },
+    {
+        "question": "If you could help your community, which way would you prefer?",
+        "category": "Community Service Preference",
+        "question_type": "situational_mapped",
+        "options": [
+            {"text": "Teaching children and youth in our barangay", "tag": "Community-Teacher",
+             "trait_tags": ["Mentoring", "Helping-others", "Patient", "Child-focused"],
+             "recommended_courses": ["Bachelor of Elementary Education", "Bachelor of Secondary Education", "Bachelor of Early Childhood Education", "Bachelor of Special Needs Education"]},
+            {"text": "Organizing community programs and outreach activities", "tag": "Community-Organizer",
+             "trait_tags": ["Leadership", "Community-focused", "Collaborative", "Advocacy"],
+             "recommended_courses": ["BS Community Development", "BS Social Work", "BS Development Communication", "Bachelor of Public Administration"]},
+            {"text": "Helping farmers and fisherfolk improve their livelihood", "tag": "Agricultural-Helper",
+             "trait_tags": ["Practical", "Nature-connected", "Field-work", "Helping-others"],
+             "recommended_courses": ["BS Agriculture", "BS Fisheries", "BS Agribusiness", "BS Forestry"]},
+            {"text": "Providing healthcare and first aid services", "tag": "Community-Health-Worker",
+             "trait_tags": ["Helping-others", "Clinical-setting", "Empathetic", "Patient-focused"],
+             "recommended_courses": ["BS Nursing", "BS Midwifery", "BS Medical Technology", "BS Physical Therapy"]}
+        ]
+    },
+    
+    # --- EDUCATION PATH QUESTIONS (Very Popular in Public Schools) ---
+    {
+        "question": "What age group would you most enjoy teaching or working with?",
+        "category": "Teaching Preference",
+        "question_type": "situational_mapped",
+        "options": [
+            {"text": "Young children (kindergarten to elementary)", "tag": "Early-Childhood-Teacher",
+             "trait_tags": ["Nurturing", "Patient", "Child-focused", "Playful"],
+             "recommended_courses": ["Bachelor of Elementary Education", "Bachelor of Early Childhood Education"]},
+            {"text": "Teenagers (high school students)", "tag": "High-School-Teacher",
+             "trait_tags": ["Mentoring", "Subject-expertise", "Leadership", "Patient"],
+             "recommended_courses": ["Bachelor of Secondary Education", "Bachelor of Physical Education"]},
+            {"text": "Students with special learning needs", "tag": "Special-Education-Teacher",
+             "trait_tags": ["Empathetic", "Adaptive", "Compassionate", "Patient"],
+             "recommended_courses": ["Bachelor of Special Needs Education", "BS Psychology"]},
+            {"text": "Adults learning vocational/technical skills", "tag": "Vocational-Teacher",
+             "trait_tags": ["Practical-skills", "Hands-on", "Technical", "Mentoring"],
+             "recommended_courses": ["Bachelor of Technical-Vocational Teacher Education", "BS Information Technology"]}
+        ]
+    },
+    {
+        "question": "If you become a teacher, what subject would you want to specialize in?",
+        "category": "Teaching Specialization",
+        "question_type": "situational_mapped",
+        "options": [
+            {"text": "Mathematics or Science subjects", "tag": "STEM-Teacher",
+             "trait_tags": ["Logical", "Analytical", "Problem-solving", "Methodical"],
+             "recommended_courses": ["Bachelor of Secondary Education", "BS Mathematics", "BS Biology", "BS Chemistry"]},
+            {"text": "English, Filipino, or Literature", "tag": "Language-Teacher",
+             "trait_tags": ["Articulate", "Creative-expression", "Language-passion", "Communication-skills"],
+             "recommended_courses": ["Bachelor of Secondary Education", "BA in Linguistics", "BA in Communication"]},
+            {"text": "Physical Education and Sports", "tag": "PE-Teacher",
+             "trait_tags": ["Athletic-passion", "Active", "Coaching", "Motivational"],
+             "recommended_courses": ["Bachelor of Physical Education", "BS Exercise and Sports Science"]},
+            {"text": "Social Studies, History, or Values Education", "tag": "Social-Studies-Teacher",
+             "trait_tags": ["Cultural-awareness", "Civic-minded", "Research-oriented", "Ethical"],
+             "recommended_courses": ["Bachelor of Secondary Education", "BA in Political Science", "BA in Sociology", "BA in Philosophy"]}
+        ]
+    },
+    
+    # --- CRIMINOLOGY & LAW ENFORCEMENT (Very Popular in Philippines) ---
+    {
+        "question": "How do you feel about maintaining peace and order in your community?",
+        "category": "Law Enforcement Interest",
+        "question_type": "situational_mapped",
+        "options": [
+            {"text": "I would enjoy being directly involved in law enforcement", "tag": "Direct-Law-Enforcement",
+             "trait_tags": ["Disciplined", "Protective", "Physical-fitness", "Justice-minded"],
+             "recommended_courses": ["BS Criminology"]},
+            {"text": "I prefer investigating crimes and collecting evidence", "tag": "Crime-Investigation",
+             "trait_tags": ["Investigative", "Analytical", "Detail-focused", "Methodical"],
+             "recommended_courses": ["BS Criminology", "BS Forensic Science"]},
+            {"text": "I want to help rehabilitate offenders and prevent crimes", "tag": "Crime-Prevention",
+             "trait_tags": ["Helping-others", "Empathetic", "Community-focused", "Advocacy"],
+             "recommended_courses": ["BS Criminology", "BS Social Work", "BS Psychology"]},
+            {"text": "I'm more interested in legal procedures and court processes", "tag": "Legal-Process",
+             "trait_tags": ["Analytical", "Law-oriented", "Detail-focused", "Critical-thinking"],
+             "recommended_courses": ["BS Legal Management", "BA in Political Science", "Bachelor of Public Administration"]}
+        ]
+    },
+    
+    # --- AGRICULTURE, FISHERIES & FORESTRY (Common in Provincial SUCs) ---
+    {
+        "question": "How do you feel about working in farms, forests, or fishing communities?",
+        "category": "Agriculture Interest",
+        "question_type": "situational_mapped",
+        "options": [
+            {"text": "I love the idea of growing crops and working with plants", "tag": "Crop-Farming",
+             "trait_tags": ["Nature-connected", "Hands-on", "Outdoor-enthusiast", "Practical"],
+             "recommended_courses": ["BS Agriculture", "BS Agribusiness", "BS Forestry"]},
+            {"text": "I'm interested in fishing, aquaculture, or marine resources", "tag": "Aquatic-Resources",
+             "trait_tags": ["Aquatic-passion", "Field-work", "Nature-connected", "Resourceful"],
+             "recommended_courses": ["BS Fisheries", "BS Marine Biology", "BS Marine Transportation"]},
+            {"text": "I want to protect forests and wildlife", "tag": "Forest-Conservation",
+             "trait_tags": ["Conservation-minded", "Environmental-passion", "Nature-focused", "Advocacy"],
+             "recommended_courses": ["BS Forestry", "BS Environmental Science", "BS Biology"]},
+            {"text": "I want to help farmers and fisherfolk sell their products better", "tag": "Agri-Business",
+             "trait_tags": ["Business-minded", "Practical", "Community-focused", "Entrepreneurial"],
+             "recommended_courses": ["BS Agribusiness", "BS Agriculture", "BS Entrepreneurship"]}
+        ]
+    },
+    {
+        "question": "Would you be willing to work in rural or provincial areas after graduation?",
+        "category": "Work Location Preference",
+        "question_type": "career_path",
+        "options": [
+            {"text": "Yes, I want to help develop rural communities", "tag": "Rural-Work-Path",
+             "course_tags": ["Community-focused", "Field-work", "Nature-connected", "Helping-others"],
+             "recommended_courses": ["BS Agriculture", "BS Community Development", "Bachelor of Elementary Education", "BS Social Work", "BS Forestry"]},
+            {"text": "Yes, especially in coastal or fishing communities", "tag": "Coastal-Work-Path",
+             "course_tags": ["Aquatic-passion", "Field-work", "Nature-connected", "Adventurous"],
+             "recommended_courses": ["BS Fisheries", "BS Marine Biology", "BS Marine Transportation", "BS Tourism Management"]},
+            {"text": "I prefer working in cities but willing to do fieldwork", "tag": "Urban-Field-Path",
+             "course_tags": ["Office-based", "Field-work", "Analytical", "Practical"],
+             "recommended_courses": ["BS Civil Engineering", "BS Environmental Planning", "BS Geology", "BS Social Work"]},
+            {"text": "I prefer working in urban areas or office settings", "tag": "Urban-Office-Path",
+             "course_tags": ["Office-based", "Tech-savvy", "Business-minded", "Independent"],
+             "recommended_courses": ["BS Information Technology", "BS Computer Science", "BS Accountancy", "BS Business Administration major in Financial Management"]}
+        ]
+    },
+    
+    # --- HEALTHCARE PATHS (Affordable in Public Medical Schools) ---
+    {
+        "question": "What aspect of healthcare interests you the most?",
+        "category": "Healthcare Interest",
+        "question_type": "situational_mapped",
+        "options": [
+            {"text": "Direct patient care and nursing", "tag": "Nursing-Care",
+             "trait_tags": ["Helping-others", "Empathetic", "Patient-focused", "Compassionate"],
+             "recommended_courses": ["BS Nursing", "BS Midwifery", "BS Physical Therapy"]},
+            {"text": "Laboratory work and medical testing", "tag": "Medical-Lab",
+             "trait_tags": ["Laboratory", "Analytical", "Detail-focused", "Methodical"],
+             "recommended_courses": ["BS Medical Technology", "BS Chemistry", "BS Biology"]},
+            {"text": "Nutrition and helping people eat healthier", "tag": "Nutrition-Focus",
+             "trait_tags": ["Health-conscious", "Helping-others", "Scientific-thinking", "Empathetic"],
+             "recommended_courses": ["BS Nutrition and Dietetics", "BS Food Technology"]},
+            {"text": "Community health education and disease prevention", "tag": "Community-Health",
+             "trait_tags": ["Community-focused", "Advocacy", "Helping-others", "Extroverted"],
+             "recommended_courses": ["BS Nursing", "BS Midwifery", "BS Community Development", "BS Social Work"]}
+        ]
+    },
+    
+    # --- PRACTICAL/TECHNICAL SKILLS (TVL Track & Tech-Voc Programs) ---
+    {
+        "question": "Do you prefer learning practical, hands-on skills that you can use immediately?",
+        "category": "Practical Skills Interest",
+        "question_type": "situational_mapped",
+        "options": [
+            {"text": "Yes, I want to learn computer and IT skills", "tag": "IT-Skills",
+             "trait_tags": ["Tech-savvy", "Problem-solving", "Practical", "Independent"],
+             "recommended_courses": ["BS Information Technology", "BS Computer Science", "BS Entertainment and Multimedia Computing"]},
+            {"text": "Yes, I want to learn about cooking and food service", "tag": "Culinary-Skills",
+             "trait_tags": ["Culinary-passion", "Hands-on", "Service-oriented", "Creative-expression"],
+             "recommended_courses": ["BS Culinary Management", "BS Hospitality Management", "BS Food Technology"]},
+            {"text": "Yes, I want to learn technical/mechanical skills", "tag": "Technical-Skills",
+             "trait_tags": ["Mechanical-minded", "Hands-on", "Technical", "Practical"],
+             "recommended_courses": ["Bachelor of Technical-Vocational Teacher Education", "BS Industrial Engineering", "BS Mechanical Engineering"]},
+            {"text": "Yes, I want to learn about tourism and hospitality", "tag": "Hospitality-Skills",
+             "trait_tags": ["Service-oriented", "Social", "Cultural-awareness", "Guest-focused"],
+             "recommended_courses": ["BS Tourism Management", "BS Hospitality Management", "BS Office Administration"]}
+        ]
+    },
+    
+    # --- BUDGET/SCHOLARSHIP CONSIDERATIONS ---
+    {
+        "question": "What is your primary consideration when choosing a college course?",
+        "category": "Course Selection Priority",
+        "question_type": "career_path",
+        "options": [
+            {"text": "Affordability - I need a course I can afford or get a scholarship for", "tag": "Budget-Conscious-Path",
+             "course_tags": ["Practical", "Accessible", "Public-service", "Community-focused"],
+             "recommended_courses": ["Bachelor of Elementary Education", "Bachelor of Secondary Education", "BS Agriculture", "BS Criminology", "BS Information Technology"]},
+            {"text": "Job availability - I want a course with many job opportunities", "tag": "Employment-Path",
+             "course_tags": ["Practical", "In-demand", "Versatile", "Tech-savvy"],
+             "recommended_courses": ["BS Nursing", "BS Information Technology", "BS Accountancy", "BS Civil Engineering", "BS Criminology"]},
+            {"text": "Passion - I want to study what I truly love regardless of job prospects", "tag": "Passion-Path",
+             "course_tags": ["Creative-expression", "Artistic-passion", "Independent", "Authentic"],
+             "recommended_courses": ["Bachelor of Fine Arts", "BA in Music Production", "BA in Theater Arts", "BA in Philosophy"]},
+            {"text": "Family or community impact - I want to help my family or community", "tag": "Family-Impact-Path",
+             "course_tags": ["Helping-others", "Community-focused", "Practical", "Service-oriented"],
+             "recommended_courses": ["BS Nursing", "Bachelor of Elementary Education", "BS Agriculture", "BS Social Work", "BS Midwifery"]}
+        ]
+    },
+    {
+        "question": "Are you planning to apply for government scholarships like CHED or DOST?",
+        "category": "Scholarship Interest",
+        "question_type": "career_path",
+        "options": [
+            {"text": "Yes, DOST scholarship (Science and Technology courses)", "tag": "DOST-Scholar-Path",
+             "course_tags": ["Scientific-thinking", "Research-oriented", "Technical", "Analytical"],
+             "recommended_courses": ["BS Computer Science", "BS Information Technology", "BS Biology", "BS Chemistry", "BS Civil Engineering", "BS Agriculture"]},
+            {"text": "Yes, CHED scholarship (various courses in SUCs)", "tag": "CHED-Scholar-Path",
+             "course_tags": ["Practical", "Accessible", "Public-service", "Versatile"],
+             "recommended_courses": ["Bachelor of Elementary Education", "Bachelor of Secondary Education", "BS Criminology", "BS Nursing", "Bachelor of Public Administration"]},
+            {"text": "Yes, Teacher Education scholarship (DepEd programs)", "tag": "Teacher-Scholar-Path",
+             "course_tags": ["Mentoring", "Helping-others", "Patient", "Public-service"],
+             "recommended_courses": ["Bachelor of Elementary Education", "Bachelor of Secondary Education", "Bachelor of Special Needs Education", "Bachelor of Early Childhood Education"]},
+            {"text": "No, I will self-fund or look for private scholarships", "tag": "Private-Fund-Path",
+             "course_tags": ["Independent", "Ambitious", "Flexible", "Self-directed"],
+             "recommended_courses": ["BS Business Administration major in Marketing Management", "BS Entrepreneurship", "BS Architecture", "BS Accountancy"]}
+        ]
+    },
+    
+    # --- SCALE QUESTIONS FOR POPULAR SUC COURSES ---
+    {
+        "question": "Rate your interest in becoming a teacher and educating future generations.",
+        "category": "Scale Assessment - Teaching",
+        "question_type": "scale",
+        "options": [
+            {"text": "1 - Not interested at all", "tag": "Teaching-Low", "weight": 1},
+            {"text": "2 - Slightly interested", "tag": "Teaching-Low", "weight": 2},
+            {"text": "3 - Moderately interested", "tag": "Teaching-Medium", "weight": 3},
+            {"text": "4 - Very interested", "tag": "Teaching-High", "weight": 4},
+            {"text": "5 - Extremely interested, teaching is my calling", "tag": "Teaching-High", "weight": 5}
+        ],
+        "trait_mapping": {
+            "high": ["Mentoring", "Patient", "Helping-others", "Child-focused"],
+            "medium": ["Collaborative", "Social", "Communicative"],
+            "low": ["Independent", "Technical", "Office-based"]
+        },
+        "course_boost": {
+            "high": ["Bachelor of Elementary Education", "Bachelor of Secondary Education", "Bachelor of Early Childhood Education", "Bachelor of Special Needs Education", "Bachelor of Physical Education"],
+            "medium": ["Bachelor of Technical-Vocational Teacher Education", "BS Psychology"],
+            "low": []
+        }
+    },
+    {
+        "question": "Rate your interest in law enforcement, crime prevention, and maintaining peace and order.",
+        "category": "Scale Assessment - Criminology",
+        "question_type": "scale",
+        "options": [
+            {"text": "1 - Not interested at all", "tag": "Criminology-Low", "weight": 1},
+            {"text": "2 - Slightly interested", "tag": "Criminology-Low", "weight": 2},
+            {"text": "3 - Moderately interested", "tag": "Criminology-Medium", "weight": 3},
+            {"text": "4 - Very interested", "tag": "Criminology-High", "weight": 4},
+            {"text": "5 - Extremely interested, I want to serve in law enforcement", "tag": "Criminology-High", "weight": 5}
+        ],
+        "trait_mapping": {
+            "high": ["Disciplined", "Protective", "Justice-minded", "Physical-fitness"],
+            "medium": ["Analytical", "Investigative", "Detail-focused"],
+            "low": ["Creative-expression", "Artistic-passion", "Introverted"]
+        },
+        "course_boost": {
+            "high": ["BS Criminology", "BS Forensic Science"],
+            "medium": ["BA in Political Science", "Bachelor of Public Administration", "BS Legal Management"],
+            "low": []
+        }
+    },
+    {
+        "question": "Rate your interest in farming, fishing, or working with natural resources.",
+        "category": "Scale Assessment - Agriculture",
+        "question_type": "scale",
+        "options": [
+            {"text": "1 - Not interested at all", "tag": "Agriculture-Low", "weight": 1},
+            {"text": "2 - Slightly interested", "tag": "Agriculture-Low", "weight": 2},
+            {"text": "3 - Moderately interested", "tag": "Agriculture-Medium", "weight": 3},
+            {"text": "4 - Very interested", "tag": "Agriculture-High", "weight": 4},
+            {"text": "5 - Extremely interested, I love working with nature", "tag": "Agriculture-High", "weight": 5}
+        ],
+        "trait_mapping": {
+            "high": ["Nature-connected", "Outdoor-enthusiast", "Practical", "Field-work"],
+            "medium": ["Hands-on", "Resourceful", "Independent"],
+            "low": ["Office-based", "Tech-savvy", "Urban-focus"]
+        },
+        "course_boost": {
+            "high": ["BS Agriculture", "BS Fisheries", "BS Forestry", "BS Agribusiness", "BS Marine Biology"],
+            "medium": ["BS Environmental Science", "Doctor of Veterinary Medicine", "BS Geology"],
+            "low": []
+        }
+    },
+    {
+        "question": "Rate your interest in helping sick people recover and providing healthcare services.",
+        "category": "Scale Assessment - Healthcare",
+        "question_type": "scale",
+        "options": [
+            {"text": "1 - Not interested at all", "tag": "Healthcare-Low", "weight": 1},
+            {"text": "2 - Slightly interested", "tag": "Healthcare-Low", "weight": 2},
+            {"text": "3 - Moderately interested", "tag": "Healthcare-Medium", "weight": 3},
+            {"text": "4 - Very interested", "tag": "Healthcare-High", "weight": 4},
+            {"text": "5 - Extremely interested, I want to save lives", "tag": "Healthcare-High", "weight": 5}
+        ],
+        "trait_mapping": {
+            "high": ["Helping-others", "Empathetic", "Patient-focused", "Compassionate"],
+            "medium": ["Clinical-setting", "Detail-focused", "Methodical"],
+            "low": ["Independent", "Office-based", "Tech-savvy"]
+        },
+        "course_boost": {
+            "high": ["BS Nursing", "BS Midwifery", "BS Physical Therapy", "BS Medical Technology", "BS Pharmacy"],
+            "medium": ["BS Nutrition and Dietetics", "BS Respiratory Therapy", "BS Psychology"],
+            "low": []
+        }
+    },
+    {
+        "question": "Rate your interest in serving the government or working for public institutions.",
+        "category": "Scale Assessment - Public Service",
+        "question_type": "scale",
+        "options": [
+            {"text": "1 - Not interested at all", "tag": "PublicService-Low", "weight": 1},
+            {"text": "2 - Slightly interested", "tag": "PublicService-Low", "weight": 2},
+            {"text": "3 - Moderately interested", "tag": "PublicService-Medium", "weight": 3},
+            {"text": "4 - Very interested", "tag": "PublicService-High", "weight": 4},
+            {"text": "5 - Extremely interested, I want to serve the Filipino people", "tag": "PublicService-High", "weight": 5}
+        ],
+        "trait_mapping": {
+            "high": ["Civic-minded", "Public-service", "Leadership", "Community-focused"],
+            "medium": ["Collaborative", "Helping-others", "Organized"],
+            "low": ["Independent", "Entrepreneurial", "Risk-taking"]
+        },
+        "course_boost": {
+            "high": ["Bachelor of Public Administration", "BA in Political Science", "BS Criminology", "BS Social Work", "Bachelor of Elementary Education"],
+            "medium": ["Bachelor of Secondary Education", "BS Community Development", "BS Development Communication"],
+            "low": []
+        }
+    },
+    {
+        "question": "Rate your interest in tourism, hospitality, and serving guests or tourists.",
+        "category": "Scale Assessment - Hospitality",
+        "question_type": "scale",
+        "options": [
+            {"text": "1 - Not interested at all", "tag": "Hospitality-Low", "weight": 1},
+            {"text": "2 - Slightly interested", "tag": "Hospitality-Low", "weight": 2},
+            {"text": "3 - Moderately interested", "tag": "Hospitality-Medium", "weight": 3},
+            {"text": "4 - Very interested", "tag": "Hospitality-High", "weight": 4},
+            {"text": "5 - Extremely interested, I love serving and interacting with people", "tag": "Hospitality-High", "weight": 5}
+        ],
+        "trait_mapping": {
+            "high": ["Service-oriented", "Social", "Cultural-awareness", "Guest-focused"],
+            "medium": ["Extroverted", "Collaborative", "Organized"],
+            "low": ["Introverted", "Independent", "Technical"]
+        },
+        "course_boost": {
+            "high": ["BS Tourism Management", "BS Hospitality Management", "BS Culinary Management"],
+            "medium": ["BS Office Administration", "BA in Communication", "BS Business Administration major in Marketing Management"],
+            "low": []
+        }
+    },
+    
+    # --- OFW/ABROAD WORK OPPORTUNITIES ---
+    {
+        "question": "Are you considering working abroad (OFW) after graduation?",
+        "category": "Career Location",
+        "question_type": "career_path",
+        "options": [
+            {"text": "Yes, I want to work as a nurse or healthcare worker abroad", "tag": "OFW-Healthcare-Path",
+             "course_tags": ["Helping-others", "Clinical-setting", "Patient-focused", "Global-opportunity"],
+             "recommended_courses": ["BS Nursing", "BS Physical Therapy", "BS Medical Technology", "BS Respiratory Therapy"]},
+            {"text": "Yes, I want to work in the maritime or shipping industry", "tag": "OFW-Maritime-Path",
+             "course_tags": ["Sea-passion", "Disciplined", "Technical", "Adventurous"],
+             "recommended_courses": ["BS Marine Transportation", "BS Marine Engineering"]},
+            {"text": "Yes, I want to work in hotels or cruise ships abroad", "tag": "OFW-Hospitality-Path",
+             "course_tags": ["Service-oriented", "Social", "Cultural-awareness", "Guest-focused"],
+             "recommended_courses": ["BS Hospitality Management", "BS Tourism Management", "BS Culinary Management"]},
+            {"text": "I prefer to work and serve in the Philippines", "tag": "Local-Career-Path",
+             "course_tags": ["Community-focused", "Civic-minded", "Local-service", "Helping-others"],
+             "recommended_courses": ["Bachelor of Elementary Education", "Bachelor of Secondary Education", "BS Criminology", "Bachelor of Public Administration", "BS Social Work"]}
+        ]
+    },
+    
+    # --- FAMILY BUSINESS/LIVELIHOOD ---
+    {
+        "question": "Does your family have a business or livelihood you might continue or support?",
+        "category": "Family Business Interest",
+        "question_type": "situational_mapped",
+        "options": [
+            {"text": "Yes, we have a farm or agricultural business", "tag": "Family-Farm",
+             "trait_tags": ["Nature-connected", "Business-minded", "Practical", "Family-oriented"],
+             "recommended_courses": ["BS Agriculture", "BS Agribusiness", "BS Fisheries", "BS Forestry"]},
+            {"text": "Yes, we have a small retail or service business (sari-sari store, eatery, etc.)", "tag": "Family-Retail",
+             "trait_tags": ["Business-minded", "Service-oriented", "Practical", "Entrepreneurial"],
+             "recommended_courses": ["BS Entrepreneurship", "BS Business Administration major in Marketing Management", "BS Accountancy", "BS Hospitality Management"]},
+            {"text": "No, but I want to start a business to help my family", "tag": "Future-Entrepreneur",
+             "trait_tags": ["Ambitious", "Entrepreneurial", "Independent", "Risk-taking"],
+             "recommended_courses": ["BS Entrepreneurship", "BS Business Administration major in Financial Management", "BS Information Technology"]},
+            {"text": "No, I want to pursue a professional career", "tag": "Professional-Career",
+             "trait_tags": ["Ambitious", "Independent", "Career-focused", "Professional"],
+             "recommended_courses": ["BS Computer Science", "BS Civil Engineering", "BS Accountancy", "BS Nursing", "BS Architecture"]}
+        ]
     }
 ]
+
+# ==================== COURSE DIRECT MAPPING ====================
+# Maps specific traits to recommended courses with weights
+COURSE_DIRECT_MAPPING = {
+    # Engineering Courses
+    "Engineering-Path": {
+        "courses": ["BS Civil Engineering", "BS Computer Engineering", "BS Electrical Engineering", "BS Mechanical Engineering", "BS Industrial Engineering", "BS Electronics Engineering"],
+        "required_traits": ["Problem-solving", "Analytical", "Technical"],
+        "boost_weight": 15
+    },
+    # Technology Courses
+    "Tech-Path": {
+        "courses": ["BS Computer Science", "BS Information Technology", "BS Data Science", "BS Cybersecurity", "BS Entertainment and Multimedia Computing"],
+        "required_traits": ["Tech-savvy", "Algorithm-focused", "Logical"],
+        "boost_weight": 15
+    },
+    # Healthcare Courses
+    "Healthcare-Path": {
+        "courses": ["BS Nursing", "BS Medical Technology", "BS Pharmacy", "BS Physical Therapy", "Doctor of Veterinary Medicine", "BS Respiratory Therapy"],
+        "required_traits": ["Helping-others", "Patient-focused", "Empathetic"],
+        "boost_weight": 15
+    },
+    # Business Courses
+    "Business-Path": {
+        "courses": ["BS Accountancy", "BS Business Administration major in Financial Management", "BS Entrepreneurship", "BS Business Economics", "BS Management Accounting"],
+        "required_traits": ["Business-minded", "Strategic", "Analytical"],
+        "boost_weight": 15
+    },
+    # Arts & Design Courses
+    "Arts-Path": {
+        "courses": ["Bachelor of Fine Arts", "BS Architecture", "BS Multimedia Arts", "BA in Animation", "BS Interior Design", "BA in Fashion Design and Merchandising"],
+        "required_traits": ["Creative-expression", "Visual-learner", "Artistic-passion"],
+        "boost_weight": 15
+    },
+    # Education Courses
+    "Education-Path": {
+        "courses": ["Bachelor of Elementary Education", "Bachelor of Secondary Education", "Bachelor of Special Needs Education", "Bachelor of Physical Education"],
+        "required_traits": ["Helping-others", "Mentoring", "Patient"],
+        "boost_weight": 15
+    },
+    # Science & Research Courses
+    "Science-Path": {
+        "courses": ["BS Biology", "BS Chemistry", "BS Physics", "BS Biotechnology", "BS Environmental Science", "BS Mathematics"],
+        "required_traits": ["Research-oriented", "Scientific-thinking", "Analytical"],
+        "boost_weight": 15
+    },
+    
+    # ========== PHILIPPINE PUBLIC UNIVERSITY POPULAR COURSES ==========
+    # Criminology Path (Very popular in SUCs)
+    "Criminology-Path": {
+        "courses": ["BS Criminology", "BS Forensic Science"],
+        "required_traits": ["Disciplined", "Protective", "Justice-minded", "Physical-fitness"],
+        "boost_weight": 15
+    },
+    # Agriculture & Fisheries Path (Provincial SUCs)
+    "Agriculture-Path": {
+        "courses": ["BS Agriculture", "BS Fisheries", "BS Forestry", "BS Agribusiness", "Doctor of Veterinary Medicine"],
+        "required_traits": ["Nature-connected", "Field-work", "Outdoor-enthusiast", "Practical"],
+        "boost_weight": 15
+    },
+    # Public Administration Path (Government careers)
+    "PublicAdmin-Path": {
+        "courses": ["Bachelor of Public Administration", "BA in Political Science", "BS Community Development", "BS Social Work"],
+        "required_traits": ["Civic-minded", "Public-service", "Leadership", "Community-focused"],
+        "boost_weight": 15
+    },
+    # Teacher Education Path (Very common in SUCs)
+    "Teacher-Path": {
+        "courses": ["Bachelor of Elementary Education", "Bachelor of Secondary Education", "Bachelor of Early Childhood Education", "Bachelor of Special Needs Education", "Bachelor of Physical Education", "Bachelor of Technical-Vocational Teacher Education"],
+        "required_traits": ["Mentoring", "Patient", "Helping-others", "Child-focused"],
+        "boost_weight": 18
+    },
+    # Nursing & Allied Health Path (High demand)
+    "Nursing-Path": {
+        "courses": ["BS Nursing", "BS Midwifery", "BS Medical Technology", "BS Physical Therapy", "BS Respiratory Therapy"],
+        "required_traits": ["Helping-others", "Empathetic", "Patient-focused", "Clinical-setting"],
+        "boost_weight": 15
+    },
+    # Maritime Path (OFW opportunities)
+    "Maritime-Path": {
+        "courses": ["BS Marine Transportation", "BS Marine Engineering"],
+        "required_traits": ["Sea-passion", "Disciplined", "Technical", "Adventurous"],
+        "boost_weight": 15
+    },
+    # Hospitality & Tourism Path (Common in SUCs)
+    "Hospitality-Path": {
+        "courses": ["BS Hospitality Management", "BS Tourism Management", "BS Culinary Management", "BS Office Administration"],
+        "required_traits": ["Service-oriented", "Social", "Cultural-awareness", "Guest-focused"],
+        "boost_weight": 15
+    },
+    # IT Path (Widely available in public schools)
+    "IT-Path": {
+        "courses": ["BS Information Technology", "BS Computer Science", "BS Entertainment and Multimedia Computing"],
+        "required_traits": ["Tech-savvy", "Problem-solving", "Logical", "Independent"],
+        "boost_weight": 15
+    }
+}
+
+# ==================== SCALE QUESTION PROCESSING CONFIG ====================
+SCALE_WEIGHTS = {
+    5: {"multiplier": 2.0, "confidence_boost": 20},   # Extremely/Very strong
+    4: {"multiplier": 1.5, "confidence_boost": 10},   # Very/Strong
+    3: {"multiplier": 1.0, "confidence_boost": 0},    # Moderate/Neutral
+    2: {"multiplier": 0.5, "confidence_boost": -5},   # Slight/Low
+    1: {"multiplier": 0.25, "confidence_boost": -10}  # Not at all/Very low
+}
+
+# ==================== ENHANCED ALGORITHM CONFIGURATIONS ====================
+
+# === LEARNING STYLE MAPPING ===
+# Maps trait tags to learning style categories
+LEARNING_STYLE_MAPPING = {
+    "visual": ["Visual-learner", "Creative-expression", "Artistic-passion", "Aesthetic-sense", "Cinematic-vision", "Digital-art"],
+    "hands_on": ["Hands-on", "Practical", "Field-work", "Laboratory", "Active", "Technical"],
+    "theoretical": ["Theoretical", "Research-oriented", "Analytical", "Abstract-thinking", "Contemplative", "Scientific-thinking"],
+    "social": ["Collaborative", "Extroverted", "Team-centric", "Social", "Helping-others", "Mentoring"],
+    "independent": ["Independent", "Introverted", "Detail-focused", "Methodical", "Systematic", "Office-based"]
+}
+
+# === WORK ENVIRONMENT MAPPING ===
+# Maps courses to their primary work environments
+WORK_ENVIRONMENT_MAPPING = {
+    "office": ["Office-based", "Remote-friendly", "Systematic", "Administrative-skills"],
+    "field": ["Field-work", "Outdoor-enthusiast", "Nature-connected", "Adventurous"],
+    "clinical": ["Clinical-setting", "Patient-focused", "Healthcare", "Empathetic"],
+    "laboratory": ["Laboratory", "Research-oriented", "Scientific-thinking", "Detail-focused"],
+    "creative_studio": ["Studio-work", "Creative-expression", "Artistic-passion", "Visual-learner"],
+    "active_physical": ["Active", "Athletic-passion", "Physical-fitness", "Hands-on"]
+}
+
+# === COURSE EMPLOYABILITY & DEMAND SCORES ===
+# Based on CHED, DOLE, and job market data for Philippines (1-10 scale)
+COURSE_EMPLOYABILITY = {
+    # Very High Demand (9-10)
+    "BS Nursing": {"demand_score": 10, "ofw_opportunity": True, "gov_opportunity": True, "salary_potential": "high"},
+    "BS Information Technology": {"demand_score": 9, "ofw_opportunity": True, "gov_opportunity": True, "salary_potential": "high"},
+    "BS Computer Science": {"demand_score": 9, "ofw_opportunity": True, "gov_opportunity": True, "salary_potential": "very_high"},
+    "BS Accountancy": {"demand_score": 9, "ofw_opportunity": True, "gov_opportunity": True, "salary_potential": "high"},
+    "BS Civil Engineering": {"demand_score": 9, "ofw_opportunity": True, "gov_opportunity": True, "salary_potential": "high"},
+    "BS Medical Technology": {"demand_score": 9, "ofw_opportunity": True, "gov_opportunity": True, "salary_potential": "high"},
+    "BS Pharmacy": {"demand_score": 8, "ofw_opportunity": True, "gov_opportunity": True, "salary_potential": "high"},
+    
+    # High Demand (7-8)
+    "Bachelor of Elementary Education": {"demand_score": 8, "ofw_opportunity": False, "gov_opportunity": True, "salary_potential": "moderate"},
+    "Bachelor of Secondary Education": {"demand_score": 8, "ofw_opportunity": False, "gov_opportunity": True, "salary_potential": "moderate"},
+    "BS Criminology": {"demand_score": 8, "ofw_opportunity": False, "gov_opportunity": True, "salary_potential": "moderate"},
+    "BS Electrical Engineering": {"demand_score": 8, "ofw_opportunity": True, "gov_opportunity": True, "salary_potential": "high"},
+    "BS Mechanical Engineering": {"demand_score": 8, "ofw_opportunity": True, "gov_opportunity": True, "salary_potential": "high"},
+    "BS Marine Transportation": {"demand_score": 8, "ofw_opportunity": True, "gov_opportunity": False, "salary_potential": "very_high"},
+    "BS Marine Engineering": {"demand_score": 8, "ofw_opportunity": True, "gov_opportunity": False, "salary_potential": "very_high"},
+    "BS Physical Therapy": {"demand_score": 8, "ofw_opportunity": True, "gov_opportunity": True, "salary_potential": "high"},
+    "BS Hospitality Management": {"demand_score": 7, "ofw_opportunity": True, "gov_opportunity": False, "salary_potential": "moderate"},
+    "BS Tourism Management": {"demand_score": 7, "ofw_opportunity": True, "gov_opportunity": False, "salary_potential": "moderate"},
+    "BS Agriculture": {"demand_score": 7, "ofw_opportunity": False, "gov_opportunity": True, "salary_potential": "moderate"},
+    "BS Midwifery": {"demand_score": 7, "ofw_opportunity": True, "gov_opportunity": True, "salary_potential": "moderate"},
+    "Bachelor of Public Administration": {"demand_score": 7, "ofw_opportunity": False, "gov_opportunity": True, "salary_potential": "moderate"},
+    "BS Social Work": {"demand_score": 7, "ofw_opportunity": False, "gov_opportunity": True, "salary_potential": "moderate"},
+    
+    # Moderate Demand (5-6)
+    "BS Psychology": {"demand_score": 6, "ofw_opportunity": False, "gov_opportunity": True, "salary_potential": "moderate"},
+    "BS Architecture": {"demand_score": 6, "ofw_opportunity": True, "gov_opportunity": True, "salary_potential": "high"},
+    "BS Business Administration major in Marketing Management": {"demand_score": 6, "ofw_opportunity": False, "gov_opportunity": False, "salary_potential": "moderate"},
+    "BS Business Administration major in Financial Management": {"demand_score": 6, "ofw_opportunity": False, "gov_opportunity": True, "salary_potential": "moderate"},
+    "BS Entrepreneurship": {"demand_score": 5, "ofw_opportunity": False, "gov_opportunity": False, "salary_potential": "variable"},
+    "BS Culinary Management": {"demand_score": 6, "ofw_opportunity": True, "gov_opportunity": False, "salary_potential": "moderate"},
+    "BS Multimedia Arts": {"demand_score": 6, "ofw_opportunity": False, "gov_opportunity": False, "salary_potential": "moderate"},
+    "BA in Communication": {"demand_score": 5, "ofw_opportunity": False, "gov_opportunity": True, "salary_potential": "moderate"},
+    "BS Fisheries": {"demand_score": 5, "ofw_opportunity": False, "gov_opportunity": True, "salary_potential": "low"},
+    "BS Forestry": {"demand_score": 5, "ofw_opportunity": False, "gov_opportunity": True, "salary_potential": "low"}
+}
+
+# === COURSE ACCESSIBILITY IN PUBLIC SCHOOLS ===
+# Availability in SUCs (State Universities and Colleges) - affects affordability
+COURSE_PUBLIC_AVAILABILITY = {
+    # Widely Available (most SUCs offer these)
+    "Bachelor of Elementary Education": {"availability": "very_high", "typical_tuition": "free_in_suc", "scholarship_available": True},
+    "Bachelor of Secondary Education": {"availability": "very_high", "typical_tuition": "free_in_suc", "scholarship_available": True},
+    "BS Criminology": {"availability": "very_high", "typical_tuition": "free_in_suc", "scholarship_available": True},
+    "BS Information Technology": {"availability": "very_high", "typical_tuition": "free_in_suc", "scholarship_available": True},
+    "BS Agriculture": {"availability": "very_high", "typical_tuition": "free_in_suc", "scholarship_available": True},
+    "BS Fisheries": {"availability": "high", "typical_tuition": "free_in_suc", "scholarship_available": True},
+    "BS Forestry": {"availability": "high", "typical_tuition": "free_in_suc", "scholarship_available": True},
+    "Bachelor of Public Administration": {"availability": "high", "typical_tuition": "free_in_suc", "scholarship_available": True},
+    "BS Social Work": {"availability": "high", "typical_tuition": "free_in_suc", "scholarship_available": True},
+    "BS Hospitality Management": {"availability": "high", "typical_tuition": "free_in_suc", "scholarship_available": True},
+    "BS Tourism Management": {"availability": "high", "typical_tuition": "free_in_suc", "scholarship_available": True},
+    
+    # Available in Many SUCs
+    "BS Nursing": {"availability": "moderate", "typical_tuition": "subsidized", "scholarship_available": True},
+    "BS Civil Engineering": {"availability": "moderate", "typical_tuition": "subsidized", "scholarship_available": True},
+    "BS Computer Science": {"availability": "moderate", "typical_tuition": "free_in_suc", "scholarship_available": True},
+    "BS Accountancy": {"availability": "moderate", "typical_tuition": "subsidized", "scholarship_available": True},
+    "BS Biology": {"availability": "moderate", "typical_tuition": "free_in_suc", "scholarship_available": True},
+    "BS Chemistry": {"availability": "moderate", "typical_tuition": "free_in_suc", "scholarship_available": True},
+    "BS Mathematics": {"availability": "moderate", "typical_tuition": "free_in_suc", "scholarship_available": True},
+    "BS Midwifery": {"availability": "moderate", "typical_tuition": "free_in_suc", "scholarship_available": True},
+    
+    # Limited Availability (select SUCs only)
+    "BS Medical Technology": {"availability": "limited", "typical_tuition": "subsidized", "scholarship_available": True},
+    "BS Pharmacy": {"availability": "limited", "typical_tuition": "subsidized", "scholarship_available": True},
+    "BS Architecture": {"availability": "limited", "typical_tuition": "subsidized", "scholarship_available": True},
+    "BS Marine Transportation": {"availability": "limited", "typical_tuition": "subsidized", "scholarship_available": True},
+    "BS Marine Engineering": {"availability": "limited", "typical_tuition": "subsidized", "scholarship_available": True},
+    
+    # Primarily Private Schools
+    "BS Multimedia Arts": {"availability": "low", "typical_tuition": "private_rate", "scholarship_available": False},
+    "BA in Animation": {"availability": "low", "typical_tuition": "private_rate", "scholarship_available": False},
+    "BS Entertainment and Multimedia Computing": {"availability": "low", "typical_tuition": "private_rate", "scholarship_available": False}
+}
+
+# === SKILL REQUIREMENT MAPPING ===
+# Maps courses to required skill levels (for self-assessment matching)
+COURSE_SKILL_REQUIREMENTS = {
+    # Math-Heavy Courses
+    "BS Computer Science": {"math": "high", "communication": "moderate", "physical": "low", "creativity": "moderate"},
+    "BS Civil Engineering": {"math": "very_high", "communication": "moderate", "physical": "moderate", "creativity": "moderate"},
+    "BS Accountancy": {"math": "high", "communication": "moderate", "physical": "low", "creativity": "low"},
+    "BS Mathematics": {"math": "very_high", "communication": "low", "physical": "low", "creativity": "moderate"},
+    "BS Statistics": {"math": "very_high", "communication": "moderate", "physical": "low", "creativity": "low"},
+    "BS Physics": {"math": "very_high", "communication": "low", "physical": "low", "creativity": "moderate"},
+    "BS Data Science": {"math": "high", "communication": "moderate", "physical": "low", "creativity": "moderate"},
+    
+    # Communication-Heavy Courses
+    "Bachelor of Elementary Education": {"math": "moderate", "communication": "high", "physical": "moderate", "creativity": "high"},
+    "Bachelor of Secondary Education": {"math": "moderate", "communication": "high", "physical": "low", "creativity": "moderate"},
+    "BA in Communication": {"math": "low", "communication": "very_high", "physical": "low", "creativity": "high"},
+    "BA in Journalism": {"math": "low", "communication": "very_high", "physical": "moderate", "creativity": "high"},
+    "BS Social Work": {"math": "low", "communication": "high", "physical": "moderate", "creativity": "moderate"},
+    "Bachelor of Public Administration": {"math": "moderate", "communication": "high", "physical": "low", "creativity": "low"},
+    
+    # Physical/Active Courses
+    "BS Criminology": {"math": "low", "communication": "moderate", "physical": "high", "creativity": "low"},
+    "Bachelor of Physical Education": {"math": "low", "communication": "moderate", "physical": "very_high", "creativity": "moderate"},
+    "BS Marine Transportation": {"math": "moderate", "communication": "moderate", "physical": "high", "creativity": "low"},
+    "BS Agriculture": {"math": "moderate", "communication": "low", "physical": "high", "creativity": "moderate"},
+    "BS Nursing": {"math": "moderate", "communication": "high", "physical": "high", "creativity": "low"},
+    
+    # Creative Courses
+    "Bachelor of Fine Arts": {"math": "low", "communication": "moderate", "physical": "moderate", "creativity": "very_high"},
+    "BS Architecture": {"math": "high", "communication": "moderate", "physical": "low", "creativity": "very_high"},
+    "BS Multimedia Arts": {"math": "low", "communication": "moderate", "physical": "low", "creativity": "very_high"},
+    "BA in Animation": {"math": "low", "communication": "low", "physical": "low", "creativity": "very_high"},
+    "BS Interior Design": {"math": "moderate", "communication": "moderate", "physical": "low", "creativity": "very_high"},
+    
+    # Balanced Courses
+    "BS Information Technology": {"math": "moderate", "communication": "moderate", "physical": "low", "creativity": "moderate"},
+    "BS Hospitality Management": {"math": "low", "communication": "high", "physical": "moderate", "creativity": "moderate"},
+    "BS Tourism Management": {"math": "low", "communication": "high", "physical": "moderate", "creativity": "moderate"},
+    "BS Psychology": {"math": "moderate", "communication": "high", "physical": "low", "creativity": "moderate"}
+}
+
+# === CAREER GOAL MAPPING ===
+# Maps career goals/aspirations to suitable courses
+CAREER_GOAL_MAPPING = {
+    "ofw_healthcare": ["BS Nursing", "BS Physical Therapy", "BS Medical Technology", "BS Midwifery", "BS Respiratory Therapy"],
+    "ofw_maritime": ["BS Marine Transportation", "BS Marine Engineering"],
+    "ofw_hospitality": ["BS Hospitality Management", "BS Tourism Management", "BS Culinary Management"],
+    "ofw_tech": ["BS Computer Science", "BS Information Technology", "BS Data Science"],
+    "government_service": ["Bachelor of Public Administration", "BS Criminology", "Bachelor of Elementary Education", "Bachelor of Secondary Education", "BS Social Work"],
+    "teaching": ["Bachelor of Elementary Education", "Bachelor of Secondary Education", "Bachelor of Special Needs Education", "Bachelor of Physical Education", "Bachelor of Technical-Vocational Teacher Education"],
+    "healthcare_local": ["BS Nursing", "BS Medical Technology", "BS Pharmacy", "BS Physical Therapy", "BS Midwifery"],
+    "business_entrepreneur": ["BS Entrepreneurship", "BS Business Administration major in Marketing Management", "BS Accountancy", "BS Business Administration major in Financial Management"],
+    "agriculture_rural": ["BS Agriculture", "BS Agribusiness", "BS Fisheries", "BS Forestry"],
+    "tech_startup": ["BS Computer Science", "BS Information Technology", "BS Data Science", "BS Entertainment and Multimedia Computing"],
+    "creative_arts": ["Bachelor of Fine Arts", "BS Multimedia Arts", "BA in Animation", "BA in Music Production", "BS Architecture"],
+    "law_enforcement": ["BS Criminology", "BS Forensic Science"],
+    "community_service": ["BS Social Work", "BS Community Development", "BS Development Communication"]
+}
+
+# === PERSONALITY-COURSE COMPATIBILITY ===
+# Maps personality dimensions to course compatibility scores
+PERSONALITY_COMPATIBILITY = {
+    "introvert_friendly": ["BS Computer Science", "BS Mathematics", "BS Statistics", "BS Accountancy", "BA in Animation", 
+                           "Bachelor of Library and Information Science", "BS Data Science", "BS Chemistry", "BS Physics",
+                           "BS Biology", "BA in Philosophy"],
+    "extrovert_friendly": ["BS Hospitality Management", "BS Tourism Management", "Bachelor of Elementary Education",
+                           "BA in Communication", "BS Social Work", "BS Business Administration major in Marketing Management",
+                           "Bachelor of Physical Education", "BA in Theater Arts", "BS Nursing"],
+    "structured_preference": ["BS Accountancy", "BS Civil Engineering", "BS Criminology", "BS Nursing", 
+                              "BS Medical Technology", "Bachelor of Public Administration"],
+    "flexible_creative": ["BS Entrepreneurship", "Bachelor of Fine Arts", "BS Multimedia Arts", "BS Architecture",
+                          "BA in Communication", "BA in Journalism", "BA in Fashion Design and Merchandising"]
+}
+
+# ==================== FILTERED QUESTION LISTS (For Algorithm Use) ====================
+# Filter questions by type from the main pool for easy access
+SCALE_QUESTIONS = [q for q in QUESTIONS_POOL if q.get("question_type") == "scale"]
+CAREER_PATH_QUESTIONS = [q for q in QUESTIONS_POOL if q.get("question_type") == "career_path"]
+EXTRACURRICULAR_QUESTIONS = [q for q in QUESTIONS_POOL if q.get("question_type") == "extracurricular"]
+SITUATIONAL_MAPPED_QUESTIONS = [q for q in QUESTIONS_POOL if q.get("question_type") == "situational_mapped"]
+
+# Standard questions (without explicit question_type)
+STANDARD_QUESTIONS = [q for q in QUESTIONS_POOL if not q.get("question_type") or q.get("question_type") == "standard"]
 
 # ==================== ASSESSMENT CONFIGURATION ====================
 ASSESSMENT_TIERS = {

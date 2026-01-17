@@ -62,6 +62,7 @@ class Question(Base):
     test_id = Column(Integer, ForeignKey("tests.test_id"), nullable=True)  # Links to which test this belongs
     question_text = Column(Text, nullable=False)
     category = Column(String(50))  # e.g., "Situational", "Assessment", "Academic"
+    question_type = Column(String(30), default="standard")  # "standard", "scale", "career_path", "extracurricular", "situational_mapped"
     
     # Relationships
     test = relationship("Test", back_populates="questions")
@@ -75,6 +76,9 @@ class Option(Base):
     question_id = Column(Integer, ForeignKey("questions.question_id"), nullable=False)
     option_text = Column(Text, nullable=False)
     trait_tag = Column(String(100))  # This is where "Cinematic", "Fiscal", etc. go
+    weight = Column(Integer, default=1)  # For scale questions (1-5)
+    trait_tags_json = Column(JSON, nullable=True)  # For storing multiple trait tags
+    recommended_courses_json = Column(JSON, nullable=True)  # For storing direct course recommendations
     
     # Relationships
     question = relationship("Question", back_populates="options")
