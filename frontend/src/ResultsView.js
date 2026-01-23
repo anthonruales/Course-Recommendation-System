@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import './components/style/Dashboard.css';
 import FeedbackForm from './FeedbackForm';
 
-function ResultsView({ recommendation, onRetake, onBack }) {
+function ResultsView({ recommendation, profileData, onRetake, onBack }) {
   const [showFeedback, setShowFeedback] = useState(null);
+  const userId = localStorage.getItem('userId');
+  
+  console.log('[ResultsView] userId from localStorage:', userId);
   
   // Loading state
   if (!recommendation || !recommendation.recommendations) {
@@ -147,10 +150,10 @@ function ResultsView({ recommendation, onRetake, onBack }) {
         </footer>
       </main>
 
-      {/* FEEDBACK MODAL */}
       {showFeedback && (
         <FeedbackForm
           recommendation={showFeedback}
+          userId={parseInt(userId) || null}
           onSubmit={() => {
             alert('Thank you for your feedback!');
           }}

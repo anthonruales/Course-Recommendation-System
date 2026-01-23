@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './FeedbackForm.css';
 
-function FeedbackForm({ recommendation, onSubmit, onClose }) {
+function FeedbackForm({ recommendation, userId, onSubmit, onClose }) {
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [feedbackText, setFeedbackText] = useState('');
@@ -9,6 +9,9 @@ function FeedbackForm({ recommendation, onSubmit, onClose }) {
   const [submitted, setSubmitted] = useState(false);
 
   const isOverallFeedback = recommendation?.overall === true;
+  
+  console.log('[FeedbackForm] userId from props:', userId);
+  console.log('[FeedbackForm] isOverallFeedback:', isOverallFeedback);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,15 +24,22 @@ function FeedbackForm({ recommendation, onSubmit, onClose }) {
     setLoading(true);
 
     try {
-      const endpoint = isOverallFeedback ? '/feedback/submit' : '/feedback/submit';
+      const endpoint = '/feedback/submit';
       
       const payload = isOverallFeedback 
-        ? { rating: rating, feedback_text: feedbackText || null }
+        ? { 
+            rating: rating, 
+            feedback_text: feedbackText || null,
+            user_id: userId || null
+          }
         : {
             recommendation_id: recommendation.recommendation_id,
+            user_id: userId || null,
             rating: rating,
             feedback_text: feedbackText || null
           };
+
+      console.log('Sending feedback payload:', payload);
 
       const response = await fetch(`http://localhost:8000${endpoint}`, {
         method: 'POST',
@@ -39,8 +49,12 @@ function FeedbackForm({ recommendation, onSubmit, onClose }) {
         body: JSON.stringify(payload)
       });
 
+      console.log('[FeedbackForm] Response status:', response.status);
+      console.log('[FeedbackForm] Response ok:', response.ok);
+
       if (response.ok) {
         const data = await response.json();
+        console.log('[FeedbackForm] Success response:', data);
         setSubmitted(true);
         if (onSubmit) {
           onSubmit(data);
@@ -48,11 +62,19 @@ function FeedbackForm({ recommendation, onSubmit, onClose }) {
         // Auto close after 5 seconds
         setTimeout(() => onClose && onClose(), 5000);
       } else {
-        alert('Error submitting feedback');
+        try {
+          const errorData = await response.json();
+          console.error('[FeedbackForm] Error response body:', errorData);
+          alert(`Error submitting feedback: ${errorData.detail || 'Unknown error'}`);
+        } catch(parseError) {
+          console.error('[FeedbackForm] Error parsing response:', parseError);
+          console.error('[FeedbackForm] Response text:', await response.text());
+          alert(`Error submitting feedback: HTTP ${response.status}`);
+        }
       }
     } catch (error) {
-      console.error('Error:', error);
-      alert('Failed to submit feedback');
+      console.error('[FeedbackForm] Fetch error:', error);
+      alert('Failed to submit feedback: ' + error.message);
     } finally {
       setLoading(false);
     }
