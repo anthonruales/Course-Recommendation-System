@@ -7,7 +7,7 @@ from database import Base
 class User(Base):
     __tablename__ = "users"
     user_id = Column(Integer, primary_key=True, index=True)
-    username = Column(String(50), unique=True, index=True, nullable=True)  # Optional for Google users
+    username = Column(String(50), unique=True, index=True, nullable=False)  # Required for login
     password_hash = Column(String(255), nullable=False)
     first_name = Column(String(50))
     last_name = Column(String(50))

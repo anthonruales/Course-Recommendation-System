@@ -132,8 +132,15 @@ def get_db():
     try: yield db
     finally: db.close()
 
-class UserCreate(BaseModel): fullname: str; email: str; password: str
-class UserLogin(BaseModel): email: str; password: str
+class UserCreate(BaseModel): 
+    username: str
+    fullname: str
+    email: str
+    password: str
+
+class UserLogin(BaseModel): 
+    username: str
+    password: str
 class AssessmentAnswer(BaseModel):
     questionId: int
     chosenOptionId: int
@@ -224,6 +231,11 @@ class FeedbackStats(BaseModel):
 
 @app.post("/signup")
 def signup(user: UserCreate, db: Session = Depends(get_db)):
+    # Check for duplicate username
+    if db.query(models.User).filter(models.User.username == user.username).first():
+        raise HTTPException(status_code=400, detail="Username already exists")
+    
+    # Check for duplicate email
     if db.query(models.User).filter(models.User.email == user.email).first():
         raise HTTPException(status_code=400, detail="Email already exists")
     
@@ -232,11 +244,8 @@ def signup(user: UserCreate, db: Session = Depends(get_db)):
     first_name = name_parts[0] if name_parts else user.fullname
     last_name = name_parts[1] if len(name_parts) > 1 else ""
     
-    # Generate username from email
-    username = user.email.split("@")[0]
-    
     new_user = models.User(
-        username=username,
+        username=user.username,
         first_name=first_name,
         last_name=last_name,
         email=user.email,
@@ -248,14 +257,14 @@ def signup(user: UserCreate, db: Session = Depends(get_db)):
 
 @app.post("/login")
 def login(user: UserLogin, db: Session = Depends(get_db)):
-    db_user = db.query(models.User).filter(models.User.email == user.email).first()
+    db_user = db.query(models.User).filter(models.User.username == user.username).first()
     if not db_user or not verify_password(user.password, db_user.password_hash):
-        raise HTTPException(status_code=400, detail="Invalid email or password")
+        raise HTTPException(status_code=400, detail="Invalid username or password")
     return {"user": db_user.fullname, "user_id": db_user.user_id}
 
 @app.post("/google-login")
 def google_login(user: dict, db: Session = Depends(get_db)):
-    """Handle Google OAuth login - creates user if doesn't exist, returns existing user if does"""
+    """Handle Google OAuth login - returns existing user or indicates new user needs username"""
     email = user.get("email")
     name = user.get("name", "")
     
@@ -267,23 +276,52 @@ def google_login(user: dict, db: Session = Depends(get_db)):
     
     if db_user:
         # User exists, return their info
-        return {"user": db_user.fullname, "user_id": db_user.user_id}
+        return {"user": db_user.fullname, "user_id": db_user.user_id, "needs_username": False}
     else:
-        # Create new user with Google info
-        name_parts = name.strip().split(" ", 1)
-        first_name = name_parts[0] if name_parts else name
-        last_name = name_parts[1] if len(name_parts) > 1 else ""
-        
-        new_user = models.User(
-            first_name=first_name,
-            last_name=last_name,
-            email=email,
-            password_hash=hash_password(f"google_oauth_{email}")  # Dummy password for Google users
-        )
-        db.add(new_user)
-        db.commit()
-        db.refresh(new_user)
-        return {"user": new_user.fullname, "user_id": new_user.user_id}
+        # New user - they need to choose a username
+        return {
+            "needs_username": True,
+            "email": email,
+            "name": name
+        }
+
+
+@app.post("/google-register")
+def google_register(user: dict, db: Session = Depends(get_db)):
+    """Complete Google registration with chosen username"""
+    email = user.get("email")
+    name = user.get("name", "")
+    username = user.get("username")
+    
+    if not email:
+        raise HTTPException(status_code=400, detail="Email is required")
+    if not username:
+        raise HTTPException(status_code=400, detail="Username is required")
+    
+    # Check if username is taken
+    if db.query(models.User).filter(models.User.username == username).first():
+        raise HTTPException(status_code=400, detail="Username already taken")
+    
+    # Check if email already exists
+    if db.query(models.User).filter(models.User.email == email).first():
+        raise HTTPException(status_code=400, detail="Email already registered")
+    
+    # Create new user with chosen username
+    name_parts = name.strip().split(" ", 1)
+    first_name = name_parts[0] if name_parts else name
+    last_name = name_parts[1] if len(name_parts) > 1 else ""
+    
+    new_user = models.User(
+        username=username,
+        first_name=first_name,
+        last_name=last_name,
+        email=email,
+        password_hash=hash_password(f"google_oauth_{email}")  # Dummy password for Google users
+    )
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+    return {"user": new_user.fullname, "user_id": new_user.user_id}
 
 
 @app.get("/user/{user_id}/academic-info")
@@ -377,11 +415,16 @@ def recommend(data: AssessmentSubmit, db: Session = Depends(get_db)):
     
     user_gwa = None
     user_strand = None
+    user_interests = None
+    user_skills = None
     if user.academic_info:
         user_gwa = user.academic_info.get("gwa")
         user_strand = user.academic_info.get("strand")
+        user_interests = user.academic_info.get("interests", "")
+        user_skills = user.academic_info.get("skills", "")
     
     print(f"👤 User Profile: GWA={user_gwa}, Strand={user_strand}")
+    print(f"📝 Qualitative: Interests='{user_interests}', Skills='{user_skills}'")
     
     # ==================== STEP 2: CREATE TEST ATTEMPT ====================
     # D5 - Test Attempt Database
@@ -493,7 +536,9 @@ def recommend(data: AssessmentSubmit, db: Session = Depends(get_db)):
     
     user_profile = {
         "gwa": user_gwa,
-        "strand": user_strand
+        "strand": user_strand,
+        "interests": user_interests or "",
+        "skills": user_skills or ""
     }
     
     result = recommendation_engine.generate_recommendations(
@@ -1643,6 +1688,7 @@ def get_or_init_adaptive_engine(db: Session) -> AdaptiveAssessmentEngine:
 
 class AdaptiveSessionStart(BaseModel):
     userId: int
+    maxQuestions: int = 30
 
 
 class AdaptiveAnswerSubmit(BaseModel):
@@ -1654,10 +1700,11 @@ class AdaptiveAnswerSubmit(BaseModel):
 @app.post("/adaptive/start")
 def start_adaptive_assessment(data: AdaptiveSessionStart, db: Session = Depends(get_db)):
     """
-    🧠 AKINATOR-STYLE ASSESSMENT - Start Session
+    🧠 SMART ASSESSMENT - Start Session
     
     Starts an adaptive assessment that asks questions ONE AT A TIME.
     Each subsequent question is intelligently selected based on previous answers.
+    User can choose 30, 50, or 60 questions.
     
     Returns: session_id and first question
     """
@@ -1675,8 +1722,13 @@ def start_adaptive_assessment(data: AdaptiveSessionStart, db: Session = Depends(
     # Initialize adaptive engine
     engine = get_or_init_adaptive_engine(db)
     
-    # Create session
-    session_id = engine.create_session(data.userId, user_gwa, user_strand)
+    # Update engine settings based on user selection
+    max_questions = data.maxQuestions
+    if max_questions not in [30, 50, 60]:
+        max_questions = 30  # Default to 30 if invalid
+    
+    # Create session with custom max questions
+    session_id = engine.create_session(data.userId, user_gwa, user_strand, max_questions)
     
     # Get first question
     first_question = engine.get_next_question(session_id)
@@ -1684,14 +1736,17 @@ def start_adaptive_assessment(data: AdaptiveSessionStart, db: Session = Depends(
     if not first_question:
         raise HTTPException(status_code=500, detail="Failed to start adaptive assessment")
     
+    # Get session to return correct max/min values
+    session = engine.sessions.get(session_id)
+    
     return {
         "success": True,
-        "message": "🧠 Adaptive assessment started! Answer one question at a time.",
+        "message": f"🧠 Smart Assessment started with {max_questions} questions!",
         "session_id": session_id,
         "mode": "adaptive",
         "description": "Questions are selected based on your previous answers to find the best course match.",
-        "max_questions": engine.MAX_QUESTIONS,
-        "min_questions": engine.MIN_QUESTIONS,
+        "max_questions": session.max_questions if session else max_questions,
+        "min_questions": session.min_questions if session else int(max_questions * 0.5),
         "first_question": first_question
     }
 
@@ -1797,7 +1852,7 @@ def submit_adaptive_answer(data: AdaptiveAnswerSubmit, db: Session = Depends(get
     return {
         "success": True,
         "is_complete": False,
-        "current_round": result["round"],
+        "current_round": next_question["round"],
         "trait_recorded": result.get("trait_recorded"),
         "courses_remaining": result["courses_remaining"],
         "confidence": result["confidence"],

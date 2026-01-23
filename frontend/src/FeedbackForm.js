@@ -113,7 +113,7 @@ function FeedbackForm({ recommendation, onSubmit, onClose }) {
               <label htmlFor="feedback">Additional Comments (Optional)</label>
               <textarea
                 id="feedback"
-                placeholder="Tell us why... (e.g., 'I love coding and this matches perfectly!' or 'Not interested in this field')"
+                placeholder="Share your thoughts..."
                 value={feedbackText}
                 onChange={(e) => setFeedbackText(e.target.value)}
                 maxLength={500}

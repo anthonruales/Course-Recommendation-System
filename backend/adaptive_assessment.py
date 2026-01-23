@@ -49,6 +49,10 @@ class AdaptiveSession:
     # User's SHS strand (for question prioritization)
     user_strand: str = None
     
+    # Custom max/min questions per session
+    max_questions: int = 30
+    min_questions: int = 15
+    
     # Student's accumulated traits with strengths
     trait_scores: Dict[str, float] = field(default_factory=dict)
     
@@ -153,9 +157,15 @@ class AdaptiveAssessmentEngine:
             return set(trait_tag)
         return set(t.strip() for t in str(trait_tag).split(',') if t.strip())
     
-    def create_session(self, user_id: int, user_gwa: float = None, user_strand: str = None) -> str:
+    def create_session(self, user_id: int, user_gwa: float = None, user_strand: str = None, max_questions: int = 30) -> str:
         """
         Start a new adaptive assessment session.
+        
+        Args:
+            user_id: User's ID
+            user_gwa: User's GWA (optional)
+            user_strand: User's SHS strand (optional)
+            max_questions: Maximum questions to ask (30, 50, or 60)
         
         Returns session_id for tracking.
         """
@@ -166,6 +176,9 @@ class AdaptiveAssessmentEngine:
         normalized_strand = user_strand.upper() if user_strand else "GAS"
         if normalized_strand not in STRAND_PRIORITY_TRAITS:
             normalized_strand = "GAS"
+        
+        # Calculate min questions (50% of max)
+        min_questions = int(max_questions * 0.5)
         
         # Initialize all courses with base score
         course_scores = {name: 50.0 for name in self.courses}
@@ -188,12 +201,14 @@ class AdaptiveAssessmentEngine:
             session_id=session_id,
             user_id=user_id,
             user_strand=normalized_strand,  # Store strand for question selection
+            max_questions=max_questions,
+            min_questions=min_questions,
             course_scores=course_scores,
             active_courses=set(self.courses.keys())
         )
         
         self.sessions[session_id] = session
-        print(f"📋 Created adaptive session {session_id} for user {user_id} (strand: {normalized_strand})")
+        print(f"📋 Created adaptive session {session_id} for user {user_id} (strand: {normalized_strand}, questions: {max_questions})")
         return session_id
     
     def get_next_question(self, session_id: str) -> Optional[dict]:
@@ -236,14 +251,15 @@ class AdaptiveAssessmentEngine:
         
         if best_question:
             session.round_number += 1
+            print(f"🎯 Selected question {best_question.get('question_id')} for round {session.round_number}/{session.max_questions}")
             return {
                 "session_id": session_id,
                 "round": session.round_number,
-                "total_max_rounds": self.MAX_QUESTIONS,
+                "total_max_rounds": session.max_questions,
                 "question": best_question,
                 "courses_remaining": len(session.active_courses),
                 "confidence": round(session.confidence * 100, 1),
-                "can_finish_early": session.round_number >= self.MIN_QUESTIONS
+                "can_finish_early": session.round_number >= session.min_questions
             }
         
         # No more questions available
@@ -361,6 +377,7 @@ class AdaptiveAssessmentEngine:
         # Record the answer
         session.answered_questions[question_id] = chosen_option_id
         session.excluded_question_ids.add(question_id)
+        print(f"📝 Answered question {question_id}, excluded: {session.excluded_question_ids}")
         
         # Extract trait from chosen option
         chosen_trait = chosen_option.get('trait_tag')
@@ -486,19 +503,19 @@ class AdaptiveAssessmentEngine:
         gap_ratio = (top_5_avg - rest_avg) / top_5_avg
         
         # Also factor in number of questions answered
-        question_factor = min(session.round_number / self.MIN_QUESTIONS, 1.0)
+        question_factor = min(session.round_number / session.min_questions, 1.0)
         
         confidence = gap_ratio * 0.7 + question_factor * 0.3
         return min(max(confidence, 0), 1)
     
     def _should_stop(self, session: AdaptiveSession) -> bool:
         """Determine if we should stop asking questions"""
-        # Must ask minimum questions
-        if session.round_number < self.MIN_QUESTIONS:
+        # Must ask minimum questions (use session's min_questions)
+        if session.round_number < session.min_questions:
             return False
         
-        # Stop at max questions
-        if session.round_number >= self.MAX_QUESTIONS:
+        # Stop at max questions (use session's max_questions)
+        if session.round_number >= session.max_questions:
             return True
         
         # Stop if confidence is high enough

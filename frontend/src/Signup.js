@@ -3,7 +3,8 @@ import axios from 'axios';
 
 function Signup({ onSwitch }) {
   const [formData, setFormData] = useState({
-    username: '', 
+    username: '',
+    fullname: '', 
     email: '',
     password: '',
     confirmPassword: ''
@@ -24,12 +25,21 @@ function Signup({ onSwitch }) {
       return;
     }
 
+    if (formData.username.length < 3) {
+      alert("Username must be at least 3 characters long.");
+      return;
+    }
+
+    if (!/^[a-zA-Z0-9_]+$/.test(formData.username)) {
+      alert("Username can only contain letters, numbers, and underscores.");
+      return;
+    }
+
     setLoading(true);
     try {
-      // PATH FIXED: Changed to /signup to match main.py
-      // KEYS FIXED: Changed username to fullname to match UserCreate schema
       const response = await axios.post('http://localhost:8000/signup', {
-        fullname: formData.username,
+        username: formData.username,
+        fullname: formData.fullname,
         email: formData.email,
         password: formData.password
       });
@@ -51,17 +61,28 @@ function Signup({ onSwitch }) {
         <div style={styles.brandIcon}>C</div>
         
         <h2 style={styles.title}>Create Account</h2>
-        <p style={styles.subtitle}>Join CoursePro to find your ideal career path</p>
+        <p style={styles.subtitle}>Get personalized course recommendations</p>
 
         <form onSubmit={handleSubmit}>
+          <div style={styles.inputWrapper}>
+            <label style={styles.label}>Username</label>
+            <input 
+              style={styles.input} 
+              type="text" 
+              placeholder="Choose a username"
+              required
+              onChange={(e) => setFormData({...formData, username: e.target.value})} 
+            />
+          </div>
+
           <div style={styles.inputWrapper}>
             <label style={styles.label}>Full Name</label>
             <input 
               style={styles.input} 
               type="text" 
-              placeholder="Juan Dela Cruz"
+              placeholder="Enter your full name"
               required
-              onChange={(e) => setFormData({...formData, username: e.target.value})} 
+              onChange={(e) => setFormData({...formData, fullname: e.target.value})} 
             />
           </div>
 

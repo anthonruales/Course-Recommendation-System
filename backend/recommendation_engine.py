@@ -33,6 +33,160 @@ from trait_system import (
 
 
 # ================================================================================
+# QUALITATIVE KEYWORD MAPPING
+# Maps user-entered interests/skills keywords to course-related traits
+# ================================================================================
+
+QUALITATIVE_KEYWORD_MAPPING = {
+    # ============================================
+    # ACADEMIC INTERESTS (matches frontend options)
+    # ============================================
+    
+    # Science & Research
+    "science": ["Scientific", "Analytical", "Research", "STEM", "Technical"],
+    "biology": ["Scientific", "Medical", "Healthcare", "Research", "Life Sciences"],
+    "chemistry": ["Scientific", "Analytical", "Research", "Laboratory", "Technical"],
+    "physics": ["Scientific", "Analytical", "Engineering", "Technical", "Mathematical"],
+    "environment": ["Environmental", "Scientific", "Sustainable", "Natural", "Research"],
+    
+    # Technology
+    "programming": ["Technical", "Computational", "Software", "IT", "Analytical"],
+    "computer": ["Technical", "IT", "Computational", "Software", "Digital"],
+    "data": ["Analytical", "Technical", "Computational", "Research", "Statistical"],
+    "ai": ["Technical", "Computational", "Innovation", "Research", "Analytical"],
+    "cybersecurity": ["Technical", "IT", "Security", "Analytical"],
+    
+    # Engineering
+    "engineering": ["Engineering", "Technical", "Analytical", "Problem-Solving", "STEM"],
+    "mechanical": ["Engineering", "Technical", "Mechanical", "Analytical"],
+    "electrical": ["Engineering", "Technical", "Electrical", "Analytical"],
+    "civil": ["Engineering", "Technical", "Infrastructure", "Analytical"],
+    
+    # Business & Finance
+    "business": ["Business", "Entrepreneurial", "Fiscal", "Management", "Commercial"],
+    "finance": ["Fiscal", "Business", "Analytical", "Quantitative", "Banking"],
+    "marketing": ["Business", "Commercial", "Creative", "Communication", "Social"],
+    "accounting": ["Fiscal", "Analytical", "Business", "Quantitative", "Financial"],
+    "economics": ["Fiscal", "Analytical", "Business", "Quantitative", "Social"],
+    
+    # Arts & Creative
+    "art": ["Creative", "Artistic", "Visual", "Design", "Expressive"],
+    "music": ["Creative", "Musical", "Artistic", "Expressive", "Performance"],
+    "film": ["Creative", "Cinematic", "Visual", "Media", "Storytelling"],
+    "writing": ["Literary", "Communication", "Creative", "Expressive", "Journalism"],
+    "photography": ["Creative", "Visual", "Artistic", "Media", "Design"],
+    
+    # Healthcare
+    "medical": ["Medical", "Healthcare", "Scientific", "Helping", "Clinical"],
+    "nursing": ["Healthcare", "Helping", "Medical", "Caregiving", "Clinical"],
+    "psychology": ["Psychological", "Healthcare", "Helping", "Counseling", "Behavioral"],
+    
+    # Social & Humanities
+    "education": ["Educational", "Academic", "Helping", "Communication", "Mentoring"],
+    "law": ["Legal", "Analytical", "Advocacy", "Justice", "Research"],
+    "politics": ["Political", "Public Administration", "Leadership", "Advocacy", "Social"],
+    "social": ["Social", "Community", "Helping", "Interpersonal", "Humanitarian"],
+    "history": ["Historical", "Cultural", "Research", "Academic", "Humanities"],
+    
+    # Others
+    "sports": ["Athletic", "Physical", "Competitive", "Health", "Fitness"],
+    "tourism": ["Tourism", "Hospitality", "Cultural", "Service", "Management"],
+    "food": ["Culinary", "Hospitality", "Creative", "Service", "Management"],
+    "agriculture": ["Agricultural", "Environmental", "Scientific", "Sustainable", "Natural"],
+    
+    # ============================================
+    # SKILLS (matches frontend options)
+    # ============================================
+    
+    # Technical Skills
+    "programming_skill": ["Technical", "Computational", "Software", "IT", "Analytical"],
+    "data_analysis": ["Analytical", "Technical", "Computational", "Research", "Statistical"],
+    "web_development": ["Technical", "Creative", "Digital", "IT", "Design"],
+    "graphic_design": ["Creative", "Design", "Visual", "Digital", "Artistic"],
+    "video_editing": ["Creative", "Media", "Technical", "Digital", "Visual"],
+    "math_skills": ["Mathematical", "Analytical", "Logical", "Computational", "Quantitative"],
+    "laboratory": ["Scientific", "Research", "Technical", "Analytical"],
+    "technical_writing": ["Communication", "Technical", "Analytical", "Documentation"],
+    
+    # Communication Skills
+    "public_speaking": ["Communication", "Public Speaking", "Leadership", "Confidence"],
+    "writing_skill": ["Literary", "Communication", "Creative", "Expressive"],
+    "presentation": ["Communication", "Leadership", "Public Speaking", "Professional"],
+    "negotiation": ["Communication", "Business", "Interpersonal", "Persuasion"],
+    "foreign_language": ["Communication", "Cultural", "International", "Linguistic"],
+    
+    # Leadership & Management
+    "leadership": ["Leadership", "Management", "Decision-Making", "Organizational"],
+    "project_management": ["Management", "Leadership", "Organizational", "Planning"],
+    "team_management": ["Leadership", "Management", "Interpersonal", "Organizational"],
+    "decision_making": ["Leadership", "Analytical", "Management", "Strategic"],
+    "planning": ["Organizational", "Management", "Strategic", "Analytical"],
+    
+    # Interpersonal Skills
+    "teamwork": ["Interpersonal", "Collaborative", "Social", "Communication"],
+    "empathy": ["Helping", "Caregiving", "Healthcare", "Interpersonal", "Social"],
+    "customer_service": ["Service", "Communication", "Hospitality", "Interpersonal"],
+    "mentoring": ["Educational", "Helping", "Leadership", "Communication", "Mentoring"],
+    "conflict_resolution": ["Interpersonal", "Communication", "Leadership", "Mediation"],
+    
+    # Analytical Skills
+    "critical_thinking": ["Analytical", "Problem-Solving", "Logical", "Research"],
+    "problem_solving": ["Analytical", "Engineering", "Technical", "Problem-Solving"],
+    "research": ["Research", "Analytical", "Scientific", "Academic"],
+    "attention_detail": ["Analytical", "Technical", "Quality", "Precision"],
+    "logical_reasoning": ["Analytical", "Mathematical", "Logical", "Computational"],
+    
+    # Creative Skills
+    "creativity": ["Creative", "Innovation", "Artistic", "Design"],
+    "artistic": ["Creative", "Artistic", "Visual", "Design", "Expressive"],
+    "music_skill": ["Creative", "Musical", "Artistic", "Expressive", "Performance"],
+    "storytelling": ["Creative", "Communication", "Literary", "Media"],
+    "design_thinking": ["Creative", "Design", "Innovation", "Problem-Solving"],
+}
+
+
+def calculate_qualitative_bonus(interests: str, skills: str, course_traits: List[str]) -> Tuple[int, List[str]]:
+    """
+    Calculate bonus points based on keyword matches between user's interests/skills and course traits
+    
+    Returns:
+        Tuple of (bonus_points, matched_keywords)
+    """
+    if not interests and not skills:
+        return 0, []
+    
+    # Parse comma-separated interests and skills into lists
+    interest_list = [i.strip().lower() for i in (interests or "").split(",") if i.strip()]
+    skill_list = [s.strip().lower() for s in (skills or "").split(",") if s.strip()]
+    user_selections = set(interest_list + skill_list)
+    
+    # Normalize course traits for matching
+    course_traits_lower = [t.lower().strip() for t in course_traits]
+    
+    matched_keywords = []
+    bonus_points = 0
+    
+    for keyword, related_traits in QUALITATIVE_KEYWORD_MAPPING.items():
+        keyword_lower = keyword.lower()
+        # Check if user selected this exact interest/skill
+        if keyword_lower in user_selections:
+            # Check if any related trait matches course traits
+            for trait in related_traits:
+                trait_lower = trait.lower()
+                for course_trait in course_traits_lower:
+                    if trait_lower in course_trait or course_trait in trait_lower:
+                        if keyword not in matched_keywords:
+                            matched_keywords.append(keyword)
+                            bonus_points += 5  # 5 points per keyword match
+                        break
+    
+    # Cap bonus at 25 points
+    bonus_points = min(bonus_points, 25)
+    
+    return bonus_points, matched_keywords
+
+
+# ================================================================================
 # PHASE 1: RULE-BASED FILTERING SYSTEM
 # ================================================================================
 
@@ -203,6 +357,18 @@ class RuleBasedFilter:
             boost_points=6,
             explanation_template="IF user learning style matches course teaching method THEN BOOST +6 points",
             priority=6
+        ))
+        
+        # Rule P8: Qualitative Interests/Skills Bonus
+        self.rules.append(Rule(
+            rule_id="P8",
+            rule_name="Interests & Skills Bonus",
+            rule_type=RuleType.PREFERENCE,
+            conditions={"check": "qualitative_bonus"},
+            action="boost_score",
+            boost_points=25,  # Max bonus from qualitative matching
+            explanation_template="IF user interests/skills keywords match course traits THEN BOOST up to +25 points",
+            priority=8
         ))
         
         # ==================== PENALTY RULES ====================
@@ -499,6 +665,33 @@ class RuleBasedFilter:
                 action_taken = "no_penalty"
                 explanation = f"Has {len(matched_traits)} trait matches"
         
+        elif check_type == "qualitative_bonus":
+            # P8: Qualitative interests/skills bonus
+            user_interests = context.get("user_interests", "")
+            user_skills = context.get("user_skills", "")
+            
+            if user_interests or user_skills:
+                bonus_points, matched_keywords = calculate_qualitative_bonus(
+                    user_interests, user_skills, course_traits
+                )
+                
+                if bonus_points > 0:
+                    passed = True
+                    action_taken = "boost_applied"
+                    points = bonus_points
+                    keywords_str = ", ".join(matched_keywords[:3])
+                    if len(matched_keywords) > 3:
+                        keywords_str += f" +{len(matched_keywords) - 3} more"
+                    explanation = f"Interests/skills bonus: Keywords '{keywords_str}' match course +{bonus_points} points"
+                else:
+                    passed = True
+                    action_taken = "no_boost"
+                    explanation = "No keyword matches found between your interests/skills and this course"
+            else:
+                passed = True
+                action_taken = "skipped"
+                explanation = "No interests/skills provided in profile"
+        
         else:
             passed = True
             action_taken = "unknown_rule"
@@ -542,6 +735,8 @@ class RuleBasedFilter:
         # Prepare user context
         user_gwa = user_profile.get("gwa")
         user_strand = user_profile.get("strand")
+        user_interests = user_profile.get("interests", "")
+        user_skills = user_profile.get("skills", "")
         
         # Get top traits for matching - use more traits for better matching
         sorted_traits = sorted(trait_scores.items(), key=lambda x: x[1], reverse=True)
@@ -569,6 +764,8 @@ class RuleBasedFilter:
             context = {
                 "user_gwa": user_gwa,
                 "user_strand": user_strand,
+                "user_interests": user_interests,
+                "user_skills": user_skills,
                 "course": course,
                 "user_traits": top_traits,
                 "primary_trait": primary_trait,
