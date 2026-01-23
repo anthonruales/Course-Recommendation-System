@@ -22,7 +22,7 @@ from seed_data import (
     COURSE_PUBLIC_AVAILABILITY, COURSE_SKILL_REQUIREMENTS, CAREER_GOAL_MAPPING,
     PERSONALITY_COMPATIBILITY
 )
-from sqlalchemy import func
+from sqlalchemy import func, text
 from sqlalchemy.orm import Session, joinedload
 from trait_mapping import apply_trait_mapping
 from assessment_service import AssessmentService
@@ -35,6 +35,22 @@ load_dotenv()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     print("🛠️ Synchronizing database schema...")
+    
+    # Drop the old recommendation_feedback table if it exists with old schema
+    # This ensures we recreate it with nullable columns
+    db = database.SessionLocal()
+    try:
+        print("🗑️  Dropping old recommendation_feedback table (if exists)...")
+        db.execute(text("DROP TABLE IF EXISTS recommendation_feedback CASCADE"))
+        db.commit()
+        print("✓ Old table dropped")
+    except Exception as e:
+        print(f"⚠️  Could not drop old table: {e}")
+        db.rollback()
+    finally:
+        db.close()
+    
+    # Now create all tables with the updated schema
     models.Base.metadata.create_all(bind=database.engine)
     seed_database()
     yield
@@ -205,6 +221,7 @@ class OptionUpdate(BaseModel):
 # ========== FEEDBACK SYSTEM SCHEMAS ==========
 class FeedbackSubmit(BaseModel):
     recommendation_id: Optional[int] = None  # Optional for overall feedback
+    user_id: Optional[int] = None  # Optional for anonymous feedback
     rating: int  # 1-5 stars
     feedback_text: Optional[str] = None
 
@@ -1339,72 +1356,87 @@ def submit_recommendation_feedback(
 ):
     """User: Submit feedback/rating on a recommendation or overall recommendations"""
     
+    print(f"[FEEDBACK] Received feedback: recommendation_id={feedback.recommendation_id}, user_id={feedback.user_id}, rating={feedback.rating}")
+    
     # Validate rating is 1-5
     if feedback.rating < 1 or feedback.rating > 5:
         raise HTTPException(status_code=400, detail="Rating must be between 1 and 5")
     
-    # Handle overall feedback (no specific recommendation)
-    if feedback.recommendation_id is None:
+    # Handle specific recommendation feedback
+    if feedback.recommendation_id is not None:
+        recommendation = db.query(models.Recommendation).filter(
+            models.Recommendation.recommendation_id == feedback.recommendation_id
+        ).first()
+        
+        if not recommendation:
+            raise HTTPException(status_code=404, detail="Recommendation not found")
+        
+        # Check if user already gave feedback on this recommendation
+        existing_feedback = db.query(models.RecommendationFeedback).filter(
+            models.RecommendationFeedback.recommendation_id == feedback.recommendation_id,
+            models.RecommendationFeedback.user_id == feedback.user_id
+        ).first()
+        
+        if existing_feedback:
+            # Update existing feedback
+            existing_feedback.rating = feedback.rating
+            existing_feedback.feedback_text = feedback.feedback_text
+            db.commit()
+            return {
+                "success": True,
+                "message": "Feedback updated successfully",
+                "feedback_id": existing_feedback.feedback_id
+            }
+        
+        # Create new feedback
         new_feedback = models.RecommendationFeedback(
-            recommendation_id=None,
-            user_id=None,  # Overall feedback not tied to user
+            recommendation_id=feedback.recommendation_id,
+            user_id=feedback.user_id,
             rating=feedback.rating,
             feedback_text=feedback.feedback_text
         )
-        db.add(new_feedback)
-        db.commit()
-        db.refresh(new_feedback)
         
-        return {
-            "success": True,
-            "message": "Overall feedback submitted successfully",
-            "feedback_id": new_feedback.feedback_id,
-            "rating": new_feedback.rating
-        }
+        try:
+            db.add(new_feedback)
+            db.commit()
+            db.refresh(new_feedback)
+            print(f"[FEEDBACK] Successfully saved specific feedback: feedback_id={new_feedback.feedback_id}, rec_id={feedback.recommendation_id}")
+            
+            return {
+                "success": True,
+                "message": "Feedback submitted successfully",
+                "feedback_id": new_feedback.feedback_id,
+                "rating": new_feedback.rating
+            }
+        except Exception as e:
+            db.rollback()
+            print(f"[FEEDBACK] Error saving specific feedback: {str(e)}")
+            raise HTTPException(status_code=500, detail=f"Failed to save feedback: {str(e)}")
     
-    # Handle specific recommendation feedback
-    recommendation = db.query(models.Recommendation).filter(
-        models.Recommendation.recommendation_id == feedback.recommendation_id
-    ).first()
-    
-    if not recommendation:
-        raise HTTPException(status_code=404, detail="Recommendation not found")
-    
-    # Check if user already gave feedback on this recommendation
-    existing_feedback = db.query(models.RecommendationFeedback).filter(
-        models.RecommendationFeedback.recommendation_id == feedback.recommendation_id,
-        models.RecommendationFeedback.user_id == recommendation.user_id
-    ).first()
-    
-    if existing_feedback:
-        # Update existing feedback
-        existing_feedback.rating = feedback.rating
-        existing_feedback.feedback_text = feedback.feedback_text
-        db.commit()
-        return {
-            "success": True,
-            "message": "Feedback updated successfully",
-            "feedback_id": existing_feedback.feedback_id
-        }
-    
-    # Create new feedback
-    new_feedback = models.RecommendationFeedback(
-        recommendation_id=feedback.recommendation_id,
-        user_id=recommendation.user_id,
-        rating=feedback.rating,
-        feedback_text=feedback.feedback_text
-    )
-    
-    db.add(new_feedback)
-    db.commit()
-    db.refresh(new_feedback)
-    
-    return {
-        "success": True,
-        "message": "Feedback submitted successfully",
-        "feedback_id": new_feedback.feedback_id,
-        "rating": new_feedback.rating
-    }
+    # Handle overall feedback (no specific recommendation)
+    else:
+        try:
+            new_feedback = models.RecommendationFeedback(
+                recommendation_id=None,
+                user_id=feedback.user_id,
+                rating=feedback.rating,
+                feedback_text=feedback.feedback_text
+            )
+            db.add(new_feedback)
+            db.commit()
+            db.refresh(new_feedback)
+            print(f"[FEEDBACK] Successfully saved overall feedback: feedback_id={new_feedback.feedback_id}")
+            
+            return {
+                "success": True,
+                "message": "Overall feedback submitted successfully",
+                "feedback_id": new_feedback.feedback_id,
+                "rating": new_feedback.rating
+            }
+        except Exception as e:
+            db.rollback()
+            print(f"[FEEDBACK] Error saving overall feedback: {str(e)}")
+            raise HTTPException(status_code=500, detail=f"Failed to save feedback: {str(e)}")
 
 
 @app.get("/feedback/recommendation/{recommendation_id}")

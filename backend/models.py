@@ -131,8 +131,8 @@ class Recommendation(Base):
 class RecommendationFeedback(Base):
     __tablename__ = "recommendation_feedback"
     feedback_id = Column(Integer, primary_key=True, index=True)
-    recommendation_id = Column(Integer, ForeignKey("recommendations.recommendation_id"), nullable=False)
-    user_id = Column(Integer, ForeignKey("users.user_id"), nullable=False)
+    recommendation_id = Column(Integer, ForeignKey("recommendations.recommendation_id"), nullable=True)  # Nullable for overall feedback
+    user_id = Column(Integer, ForeignKey("users.user_id"), nullable=True)  # Nullable for anonymous feedback
     rating = Column(Integer, nullable=False)  # 1-5 stars
     feedback_text = Column(Text, nullable=True)  # Optional comment
     created_at = Column(DateTime, server_default=func.now())
