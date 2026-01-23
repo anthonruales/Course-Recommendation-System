@@ -1,10 +1,161 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+// Predefined options for Academic Interests
+const INTEREST_OPTIONS = [
+  // Science & Research
+  { id: 'science', label: 'Science & Research', category: 'Science' },
+  { id: 'biology', label: 'Biology & Life Sciences', category: 'Science' },
+  { id: 'chemistry', label: 'Chemistry', category: 'Science' },
+  { id: 'physics', label: 'Physics', category: 'Science' },
+  { id: 'environment', label: 'Environment & Nature', category: 'Science' },
+  
+  // Technology
+  { id: 'programming', label: 'Programming & Coding', category: 'Technology' },
+  { id: 'computer', label: 'Computers & IT', category: 'Technology' },
+  { id: 'data', label: 'Data & Analytics', category: 'Technology' },
+  { id: 'ai', label: 'AI & Machine Learning', category: 'Technology' },
+  { id: 'cybersecurity', label: 'Cybersecurity', category: 'Technology' },
+  
+  // Engineering
+  { id: 'engineering', label: 'Engineering', category: 'Engineering' },
+  { id: 'mechanical', label: 'Mechanical Systems', category: 'Engineering' },
+  { id: 'electrical', label: 'Electrical & Electronics', category: 'Engineering' },
+  { id: 'civil', label: 'Civil & Construction', category: 'Engineering' },
+  
+  // Business & Finance
+  { id: 'business', label: 'Business & Entrepreneurship', category: 'Business' },
+  { id: 'finance', label: 'Finance & Banking', category: 'Business' },
+  { id: 'marketing', label: 'Marketing & Advertising', category: 'Business' },
+  { id: 'accounting', label: 'Accounting', category: 'Business' },
+  { id: 'economics', label: 'Economics', category: 'Business' },
+  
+  // Arts & Creative
+  { id: 'art', label: 'Arts & Design', category: 'Arts' },
+  { id: 'music', label: 'Music & Performance', category: 'Arts' },
+  { id: 'film', label: 'Film & Media Production', category: 'Arts' },
+  { id: 'writing', label: 'Writing & Literature', category: 'Arts' },
+  { id: 'photography', label: 'Photography & Visual Arts', category: 'Arts' },
+  
+  // Healthcare
+  { id: 'medical', label: 'Medicine & Healthcare', category: 'Healthcare' },
+  { id: 'nursing', label: 'Nursing & Patient Care', category: 'Healthcare' },
+  { id: 'psychology', label: 'Psychology & Mental Health', category: 'Healthcare' },
+  
+  // Social & Humanities
+  { id: 'education', label: 'Education & Teaching', category: 'Social' },
+  { id: 'law', label: 'Law & Justice', category: 'Social' },
+  { id: 'politics', label: 'Politics & Government', category: 'Social' },
+  { id: 'social', label: 'Social Work & Community', category: 'Social' },
+  { id: 'history', label: 'History & Culture', category: 'Social' },
+  
+  // Others
+  { id: 'sports', label: 'Sports & Fitness', category: 'Others' },
+  { id: 'tourism', label: 'Tourism & Hospitality', category: 'Others' },
+  { id: 'food', label: 'Culinary & Food Science', category: 'Others' },
+  { id: 'agriculture', label: 'Agriculture & Farming', category: 'Others' },
+];
+
+// Predefined options for Skills
+const SKILL_OPTIONS = [
+  // Technical Skills
+  { id: 'programming_skill', label: 'Programming / Coding', category: 'Technical' },
+  { id: 'data_analysis', label: 'Data Analysis', category: 'Technical' },
+  { id: 'web_development', label: 'Web Development', category: 'Technical' },
+  { id: 'graphic_design', label: 'Graphic Design', category: 'Technical' },
+  { id: 'video_editing', label: 'Video Editing', category: 'Technical' },
+  { id: 'math_skills', label: 'Mathematics', category: 'Technical' },
+  { id: 'laboratory', label: 'Laboratory Work', category: 'Technical' },
+  { id: 'technical_writing', label: 'Technical Writing', category: 'Technical' },
+  
+  // Communication Skills
+  { id: 'public_speaking', label: 'Public Speaking', category: 'Communication' },
+  { id: 'writing_skill', label: 'Writing & Composition', category: 'Communication' },
+  { id: 'presentation', label: 'Presentation Skills', category: 'Communication' },
+  { id: 'negotiation', label: 'Negotiation', category: 'Communication' },
+  { id: 'foreign_language', label: 'Foreign Languages', category: 'Communication' },
+  
+  // Leadership & Management
+  { id: 'leadership', label: 'Leadership', category: 'Leadership' },
+  { id: 'project_management', label: 'Project Management', category: 'Leadership' },
+  { id: 'team_management', label: 'Team Management', category: 'Leadership' },
+  { id: 'decision_making', label: 'Decision Making', category: 'Leadership' },
+  { id: 'planning', label: 'Planning & Organization', category: 'Leadership' },
+  
+  // Interpersonal Skills
+  { id: 'teamwork', label: 'Teamwork & Collaboration', category: 'Interpersonal' },
+  { id: 'empathy', label: 'Empathy & Compassion', category: 'Interpersonal' },
+  { id: 'customer_service', label: 'Customer Service', category: 'Interpersonal' },
+  { id: 'mentoring', label: 'Mentoring & Teaching', category: 'Interpersonal' },
+  { id: 'conflict_resolution', label: 'Conflict Resolution', category: 'Interpersonal' },
+  
+  // Analytical Skills
+  { id: 'critical_thinking', label: 'Critical Thinking', category: 'Analytical' },
+  { id: 'problem_solving', label: 'Problem Solving', category: 'Analytical' },
+  { id: 'research', label: 'Research & Investigation', category: 'Analytical' },
+  { id: 'attention_detail', label: 'Attention to Detail', category: 'Analytical' },
+  { id: 'logical_reasoning', label: 'Logical Reasoning', category: 'Analytical' },
+  
+  // Creative Skills
+  { id: 'creativity', label: 'Creativity & Innovation', category: 'Creative' },
+  { id: 'artistic', label: 'Artistic Ability', category: 'Creative' },
+  { id: 'music_skill', label: 'Musical Ability', category: 'Creative' },
+  { id: 'storytelling', label: 'Storytelling', category: 'Creative' },
+  { id: 'design_thinking', label: 'Design Thinking', category: 'Creative' },
+];
 
 function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
+  const [gwaError, setGwaError] = useState('');
+  
+  // Parse interests and skills from comma-separated string to array
+  const selectedInterests = formData?.interests ? formData.interests.split(',').filter(i => i.trim()) : [];
+  const selectedSkills = formData?.skills ? formData.skills.split(',').filter(s => s.trim()) : [];
+  
+  // Toggle interest selection
+  const toggleInterest = (interestId) => {
+    const current = [...selectedInterests];
+    const index = current.indexOf(interestId);
+    if (index > -1) {
+      current.splice(index, 1);
+    } else {
+      current.push(interestId);
+    }
+    setFormData(prev => ({
+      ...prev,
+      interests: current.join(',')
+    }));
+  };
+  
+  // Toggle skill selection
+  const toggleSkill = (skillId) => {
+    const current = [...selectedSkills];
+    const index = current.indexOf(skillId);
+    if (index > -1) {
+      current.splice(index, 1);
+    } else {
+      current.push(skillId);
+    }
+    setFormData(prev => ({
+      ...prev,
+      skills: current.join(',')
+    }));
+  };
   
   // Safe Change Handler
   const handleChange = (e) => {
     const { name, value } = e.target;
+    
+    // GWA validation
+    if (name === 'gwa') {
+      const gwaValue = parseFloat(value);
+      if (value && gwaValue > 100) {
+        setGwaError('GWA cannot exceed 100');
+      } else if (value && gwaValue < 75) {
+        setGwaError('GWA must be at least 75');
+      } else {
+        setGwaError('');
+      }
+    }
+    
     setFormData(prev => {
       const currentData = prev || {};
       return { ...currentData, [name]: value };
@@ -16,6 +167,17 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
     // Validate required fields
     if (!formData.gwa || !formData.strand) {
       alert('Please fill in both GWA and SHS Strand to save your profile');
+      return;
+    }
+    
+    // Validate GWA range
+    const gwaValue = parseFloat(formData.gwa);
+    if (gwaValue > 100) {
+      alert('GWA cannot exceed 100');
+      return;
+    }
+    if (gwaValue < 75) {
+      alert('GWA must be at least 75');
       return;
     }
     
@@ -37,8 +199,8 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
         fullname: formData.fullname || null,
         age: formData.age ? parseInt(formData.age) : null,
         gender: formData.gender || null,
-        interests: formData.interests || null,
-        skills: formData.skills || null
+        interests: selectedInterests.join(', ') || null,
+        skills: selectedSkills.join(', ') || null
       })
     })
     .then(res => res.json())
@@ -99,7 +261,7 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
                 name="fullname"
                 value={formData?.fullname || ''} 
                 onChange={handleChange}
-                placeholder="Juan Dela Cruz"
+                placeholder=""
               />
             </div>
 
@@ -113,7 +275,7 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
                   name="age"
                   value={formData?.age || ''} 
                   onChange={handleChange}
-                  placeholder="e.g. 18"
+                  placeholder=""
                 />
               </div>
 
@@ -154,16 +316,29 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
               <div style={styles.inputGroup}>
                 <label style={styles.label}>General Weighted Average (GWA)</label>
                 <input 
-                  style={styles.input} 
+                  style={{
+                    ...styles.input,
+                    ...(gwaError ? {borderColor: '#ef4444'} : {})
+                  }} 
                   type="number" 
-                  step="0.1"
-                  min="80.0"
-                  max="100.0"
+                  step="0.01"
+                  min="75"
+                  max="100"
                   name="gwa"
                   value={formData?.gwa || ''} 
                   onChange={handleChange}
-                  placeholder="e.g. 88.5"
+                  placeholder="75.00 - 100.00"
                 />
+                {gwaError && (
+                  <span style={{color: '#ef4444', fontSize: '12px', marginTop: '4px', display: 'block'}}>
+                    {gwaError}
+                  </span>
+                )}
+                {!gwaError && (
+                  <span style={{color: 'rgba(255,255,255,0.5)', fontSize: '12px', marginTop: '4px', display: 'block'}}>
+                    Enter a value between 75 and 100
+                  </span>
+                )}
               </div>
             </div>
 
@@ -171,25 +346,55 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
             <div style={{...styles.formSectionTitle, marginTop: '40px'}}>Qualitative Analysis</div>
             
             <div style={styles.inputGroup}>
-              <label style={styles.label}>Academic Interests</label>
-              <textarea 
-                style={{...styles.input, height: '100px', resize: 'none'}} 
-                name="interests"
-                placeholder="What subjects or topics do you enjoy?"
-                value={formData?.interests || ''} 
-                onChange={handleChange}
-              />
+              <label style={styles.label}>Academic Interests <span style={{color: 'rgba(255,255,255,0.5)', fontWeight: 'normal'}}>(Select all that apply)</span></label>
+              <div style={styles.checkboxGrid}>
+                {INTEREST_OPTIONS.map(option => (
+                  <label 
+                    key={option.id} 
+                    style={{
+                      ...styles.checkboxLabel,
+                      ...(selectedInterests.includes(option.id) ? styles.checkboxLabelSelected : {})
+                    }}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selectedInterests.includes(option.id)}
+                      onChange={() => toggleInterest(option.id)}
+                      style={styles.checkbox}
+                    />
+                    <span>{option.label}</span>
+                  </label>
+                ))}
+              </div>
+              <span style={{color: 'rgba(255,255,255,0.5)', fontSize: '12px', marginTop: '8px', display: 'block'}}>
+                {selectedInterests.length} selected
+              </span>
             </div>
 
-            <div style={{...styles.inputGroup, marginTop: '20px'}}>
-              <label style={styles.label}>Technical & Soft Skills</label>
-              <textarea 
-                style={{...styles.input, height: '100px', resize: 'none'}} 
-                name="skills"
-                placeholder="e.g. Programming, Public Speaking, Drawing..."
-                value={formData?.skills || ''} 
-                onChange={handleChange}
-              />
+            <div style={{...styles.inputGroup, marginTop: '30px'}}>
+              <label style={styles.label}>Technical & Soft Skills <span style={{color: 'rgba(255,255,255,0.5)', fontWeight: 'normal'}}>(Select all that apply)</span></label>
+              <div style={styles.checkboxGrid}>
+                {SKILL_OPTIONS.map(option => (
+                  <label 
+                    key={option.id} 
+                    style={{
+                      ...styles.checkboxLabel,
+                      ...(selectedSkills.includes(option.id) ? styles.checkboxLabelSelected : {})
+                    }}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selectedSkills.includes(option.id)}
+                      onChange={() => toggleSkill(option.id)}
+                      style={styles.checkbox}
+                    />
+                    <span>{option.label}</span>
+                  </label>
+                ))}
+              </div>
+              <span style={{color: 'rgba(255,255,255,0.5)', fontSize: '12px', marginTop: '8px', display: 'block'}}>
+                {selectedSkills.length} selected
+              </span>
             </div>
 
             <div style={styles.footer}>
@@ -263,6 +468,41 @@ const styles = {
   statusBox: { display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '15px' },
   statusDot: { width: '8px', height: '8px', borderRadius: '50%', background: '#10b981', boxShadow: '0 0 10px #10b981' },
   infoText: { fontSize: '13px', color: '#94a3b8', lineHeight: '1.6', margin: 0 },
+  checkboxGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
+    gap: '10px',
+    maxHeight: '300px',
+    overflowY: 'auto',
+    padding: '15px',
+    background: 'rgba(30, 30, 50, 0.6)',
+    borderRadius: '12px',
+    border: '1px solid rgba(255,255,255,0.1)',
+  },
+  checkboxLabel: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+    padding: '10px 14px',
+    background: 'rgba(255,255,255,0.03)',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    fontSize: '13px',
+    color: 'rgba(255,255,255,0.7)',
+    border: '1px solid rgba(255,255,255,0.08)',
+    transition: 'all 0.2s ease',
+  },
+  checkboxLabelSelected: {
+    background: 'rgba(99, 102, 241, 0.15)',
+    borderColor: 'rgba(99, 102, 241, 0.4)',
+    color: '#a5b4fc',
+  },
+  checkbox: {
+    width: '16px',
+    height: '16px',
+    accentColor: '#6366f1',
+    cursor: 'pointer',
+  },
 };
 
 export default ProfileForm;

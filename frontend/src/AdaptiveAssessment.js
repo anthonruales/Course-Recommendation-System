@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
 /**
- * AI-POWERED ADAPTIVE CAREER ASSESSMENT
+ * SMART CAREER ASSESSMENT
  * 
  * This component provides an intelligent assessment experience:
  * - Questions appear ONE AT A TIME
  * - Each question is intelligently selected based on your previous answers
  * - You can see courses narrowing down in real-time
- * - Can finish early once enough questions are answered
+ * - User selects 30, 50, or 60 questions
  */
-function AdaptiveAssessment({ onBack, onShowResults }) {
+function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
   // Session state
   const [sessionId, setSessionId] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(null);
@@ -19,8 +19,8 @@ function AdaptiveAssessment({ onBack, onShowResults }) {
   
   // Progress tracking
   const [currentRound, setCurrentRound] = useState(0);
-  const [maxRounds, setMaxRounds] = useState(25);
-  const [minRounds, setMinRounds] = useState(10);
+  const [maxRounds, setMaxRounds] = useState(maxQuestions);
+  const [minRounds, setMinRounds] = useState(Math.floor(maxQuestions * 0.5));
   const [confidence, setConfidence] = useState(0);
   const [coursesRemaining, setCoursesRemaining] = useState(99);
   const [traitsDiscovered, setTraitsDiscovered] = useState(0);
@@ -73,7 +73,10 @@ function AdaptiveAssessment({ onBack, onShowResults }) {
       const response = await fetch('http://localhost:8000/adaptive/start', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId: parseInt(userId) })
+        body: JSON.stringify({ 
+          userId: parseInt(userId),
+          maxQuestions: maxQuestions
+        })
       });
 
       const data = await response.json();

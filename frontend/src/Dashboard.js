@@ -4,6 +4,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
   const [isExpanded, setIsExpanded] = useState(false);
   const [hasAcademicInfo, setHasAcademicInfo] = useState(false);
   const [checkingProfile, setCheckingProfile] = useState(true);
+  const [selectedQuestionCount, setSelectedQuestionCount] = useState(30);
 
   // Check if user has filled academic info
   useEffect(() => {
@@ -24,22 +25,14 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
     }
   }, []);
 
-  const handleStartAssessment = () => {
-    if (!hasAcademicInfo) {
-      alert('⚠️ Please complete your Academic Profile first!\n\nYou need to fill in your GWA and SHS Strand before taking the assessment.');
-      onViewProfile();
-      return;
-    }
-    onStart();
-  };
-
   const handleStartAdaptive = () => {
     if (!hasAcademicInfo) {
       alert('⚠️ Please complete your Academic Profile first!\n\nYou need to fill in your GWA and SHS Strand before taking the assessment.');
       onViewProfile();
       return;
     }
-    onStartAdaptive();
+    // Pass the selected question count to the assessment
+    onStartAdaptive(selectedQuestionCount);
   };
 
   // Keeps your original logic for history display
@@ -90,17 +83,17 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
       {/* MAIN CONTENT */}
       <main style={styles.mainContent}>
         <header style={styles.header}>
-          <h1 style={styles.headerTitle}>Student Overview</h1>
-          <p style={styles.headerSubtitle}>Welcome back, {userName}. Track your progress and findings here.</p>
+          <h1 style={styles.headerTitle}>Dashboard</h1>
+          <p style={styles.headerSubtitle}>Welcome back, {userName}</p>
         </header>
 
         {/* ASSESSMENT CALL TO ACTION */}
         <div style={styles.actionCard}>
           <div style={styles.actionContent}>
             <div style={{flex: 1}}>
-              <h3 style={styles.actionTitle}>Ready for your recommendation?</h3>
+              <h3 style={styles.actionTitle}>Take an Assessment</h3>
               <p style={styles.actionText}>
-                Choose your assessment style. Both use AI to find your perfect course match.
+                Answer questions to receive personalized course recommendations based on your interests and skills.
               </p>
               {!checkingProfile && !hasAcademicInfo && (
                 <p style={{color: '#f59e0b', fontSize: '13px', marginTop: '10px'}}>
@@ -109,42 +102,51 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
               )}
             </div>
             <div style={styles.assessmentButtons}>
+              <div style={styles.questionSelector}>
+                <span style={styles.selectorLabel}>Number of Questions:</span>
+                <div style={styles.selectorOptions}>
+                  {[30, 50, 60].map((count) => (
+                    <button
+                      key={count}
+                      style={{
+                        ...styles.selectorBtn,
+                        ...(selectedQuestionCount === count ? styles.selectorBtnActive : {})
+                      }}
+                      onClick={() => setSelectedQuestionCount(count)}
+                    >
+                      {count}
+                    </button>
+                  ))}
+                </div>
+              </div>
               <button 
                 style={{
                   ...styles.adaptiveBtn,
                   ...((!hasAcademicInfo && !checkingProfile) ? {opacity: 0.7, cursor: 'not-allowed'} : {})
                 }} 
                 onClick={handleStartAdaptive}
-                onMouseEnter={(e) => { if (hasAcademicInfo) { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 15px 30px rgba(16, 185, 129, 0.4)'; } }}
-                onMouseLeave={(e) => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = '0 10px 20px rgba(16, 185, 129, 0.2)'; }}
-              >
-                <span style={{fontSize: '20px', marginRight: '8px'}}>🧞‍♂️</span>
-                {checkingProfile ? 'Checking...' : 'Smart Assessment'}
-                <span style={styles.recommendedBadge}>Recommended</span>
-              </button>
-              <button 
-                style={{
-                  ...styles.startBtn,
-                  ...((!hasAcademicInfo && !checkingProfile) ? {opacity: 0.7, cursor: 'not-allowed'} : {})
-                }} 
-                onClick={handleStartAssessment}
                 onMouseEnter={(e) => { if (hasAcademicInfo) { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 15px 30px rgba(99, 102, 241, 0.4)'; } }}
                 onMouseLeave={(e) => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = '0 10px 20px rgba(99, 102, 241, 0.2)'; }}
               >
-                📝 Full Assessment
+                {checkingProfile ? 'Checking...' : 'Start Assessment'}
               </button>
             </div>
           </div>
           <div style={styles.assessmentInfo}>
             <div style={styles.infoCard}>
-              <span style={styles.infoIcon}>🧞‍♂️</span>
-              <strong>Smart Assessment</strong>
-              <span style={styles.infoDesc}>10-25 adaptive questions</span>
+              <span style={styles.infoIcon}>⚡</span>
+              <strong>30 Questions</strong>
+              <span style={styles.infoDesc}>Quick assessment (~10 min)</span>
             </div>
             <div style={styles.infoCard}>
-              <span style={styles.infoIcon}>📝</span>
-              <strong>Full Assessment</strong>
-              <span style={styles.infoDesc}>Complete questionnaire</span>
+              <span style={styles.infoIcon}>📊</span>
+              <strong>50 Questions</strong>
+              <span style={styles.infoDesc}>Standard assessment (~15 min)</span>
+            </div>
+            <div style={styles.infoCard}>
+              <span style={styles.infoIcon}>🎯</span>
+              <strong>60 Questions</strong>
+              <span style={styles.infoDesc}>Comprehensive (~20 min)</span>
             </div>
           </div>
         </div>
@@ -259,16 +261,34 @@ const styles = {
     transition: 'all 0.3s ease', fontSize: '14px'
   },
   adaptiveBtn: {
-    background: 'linear-gradient(135deg, #10b981, #059669)', color: 'white', padding: '14px 24px', borderRadius: '12px',
-    border: 'none', fontWeight: '700', cursor: 'pointer', boxShadow: '0 10px 20px rgba(16, 185, 129, 0.2)',
-    transition: 'all 0.3s ease', display: 'flex', alignItems: 'center', position: 'relative', fontSize: '14px'
+    background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', color: 'white', padding: '16px 32px', borderRadius: '12px',
+    border: 'none', fontWeight: '700', cursor: 'pointer', boxShadow: '0 10px 20px rgba(99, 102, 241, 0.2)',
+    transition: 'all 0.3s ease', fontSize: '15px', letterSpacing: '0.5px'
   },
   recommendedBadge: {
     position: 'absolute', top: '-8px', right: '-8px', background: '#f59e0b', color: 'white',
     fontSize: '9px', fontWeight: '800', padding: '3px 8px', borderRadius: '10px', textTransform: 'uppercase'
   },
   assessmentButtons: {
-    display: 'flex', gap: '15px', alignItems: 'center'
+    display: 'flex', gap: '15px', alignItems: 'center', flexDirection: 'column'
+  },
+  questionSelector: {
+    display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '10px'
+  },
+  selectorLabel: {
+    fontSize: '14px', color: '#94a3b8', fontWeight: '600'
+  },
+  selectorOptions: {
+    display: 'flex', gap: '8px'
+  },
+  selectorBtn: {
+    padding: '10px 20px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.15)',
+    background: 'rgba(255,255,255,0.03)', color: '#94a3b8', cursor: 'pointer',
+    fontWeight: '700', fontSize: '15px', transition: 'all 0.2s ease'
+  },
+  selectorBtnActive: {
+    background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', color: 'white',
+    borderColor: '#6366f1', boxShadow: '0 5px 15px rgba(99, 102, 241, 0.3)'
   },
   assessmentInfo: {
     display: 'flex', gap: '20px', marginTop: '20px', paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.08)'

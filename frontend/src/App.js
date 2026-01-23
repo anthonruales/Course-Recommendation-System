@@ -16,6 +16,7 @@ function App() {
   const [view, setView] = useState('dashboard');
   const [user, setUser] = useState(localStorage.getItem('userName') || null);
   const [recommendationData, setRecommendationData] = useState(null);
+  const [selectedQuestionCount, setSelectedQuestionCount] = useState(30);
   
   // Initialize as empty object to prevent "is not a function" errors
   const [profileData, setProfileData] = useState({});
@@ -110,7 +111,10 @@ function App() {
                 userName={user} 
                 onLogout={handleLogout} 
                 onStart={() => setView('assessment')}
-                onStartAdaptive={() => setView('adaptive')}
+                onStartAdaptive={(questionCount) => {
+                  setSelectedQuestionCount(questionCount || 30);
+                  setView('adaptive');
+                }}
                 onViewProfile={() => setView('profile')}
                 onViewActivity={() => setView('activity')}
                 history={history}
@@ -150,7 +154,8 @@ function App() {
             {view === 'adaptive' && (
               <AdaptiveAssessment 
                 onBack={() => setView('dashboard')} 
-                onShowResults={handleAssessmentResults} 
+                onShowResults={handleAssessmentResults}
+                maxQuestions={selectedQuestionCount}
               />
             )}
 

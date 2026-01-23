@@ -3,10 +3,15 @@ import axios from 'axios';
 import { useGoogleLogin } from '@react-oauth/google';
 
 function Login({ onSwitch, onLoginSuccess }) {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  
+  // Google username selection modal state
+  const [showUsernameModal, setShowUsernameModal] = useState(false);
+  const [googleUsername, setGoogleUsername] = useState('');
+  const [googleUserData, setGoogleUserData] = useState(null);
 
   const handleGoogleLogin = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
@@ -16,15 +21,26 @@ function Login({ onSwitch, onLoginSuccess }) {
           headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
         });
         
-        // Call backend to create/login Google user
+        // Call backend to check if user exists
         const backendRes = await axios.post('http://localhost:8000/google-login', {
           email: res.data.email,
           name: res.data.name
         });
         
-        // Store userId in localStorage
-        localStorage.setItem('userId', backendRes.data.user_id);
-        onLoginSuccess(backendRes.data.user, res.data.email);
+        if (backendRes.data.needs_username) {
+          // New user - show username selection modal
+          setGoogleUserData({
+            email: backendRes.data.email,
+            name: backendRes.data.name
+          });
+          // Suggest username from email
+          setGoogleUsername(backendRes.data.email.split('@')[0]);
+          setShowUsernameModal(true);
+        } else {
+          // Existing user - login directly
+          localStorage.setItem('userId', backendRes.data.user_id);
+          onLoginSuccess(backendRes.data.user, res.data.email);
+        }
       } catch (err) {
         console.error('Google login error:', err);
         alert("Google Login Failed: " + (err.response?.data?.detail || err.message));
@@ -35,13 +51,44 @@ function Login({ onSwitch, onLoginSuccess }) {
     onError: () => alert("Google Login Failed."),
   });
 
+  const handleGoogleRegister = async (e) => {
+    e.preventDefault();
+    
+    if (googleUsername.length < 3) {
+      alert("Username must be at least 3 characters long.");
+      return;
+    }
+    
+    if (!/^[a-zA-Z0-9_]+$/.test(googleUsername)) {
+      alert("Username can only contain letters, numbers, and underscores.");
+      return;
+    }
+    
+    setLoading(true);
+    try {
+      const res = await axios.post('http://localhost:8000/google-register', {
+        email: googleUserData.email,
+        name: googleUserData.name,
+        username: googleUsername
+      });
+      
+      localStorage.setItem('userId', res.data.user_id);
+      setShowUsernameModal(false);
+      onLoginSuccess(res.data.user, googleUserData.email);
+    } catch (err) {
+      alert(err.response?.data?.detail || "Registration failed. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:8000/login', { email, password });
+      const res = await axios.post('http://localhost:8000/login', { username, password });
       localStorage.setItem('userId', res.data.user_id);
-      onLoginSuccess(res.data.user, email); 
+      onLoginSuccess(res.data.user, username); 
     } catch (err) { 
       alert(err.response?.data?.detail || "Invalid login credentials."); 
     } finally {
@@ -49,13 +96,49 @@ function Login({ onSwitch, onLoginSuccess }) {
     }
   };
 
+  // Username selection modal for Google users
+  if (showUsernameModal) {
+    return (
+      <div style={styles.authWrapper}>
+        <div style={styles.glassCard}>
+          <div style={styles.brandIcon}>C</div>
+          
+          <h2 style={styles.title}>Choose Username</h2>
+          <p style={styles.subtitle}>Create a username for your account</p>
+          
+          <form onSubmit={handleGoogleRegister}>
+            <div style={styles.inputWrapper}>
+              <label style={styles.label}>Username</label>
+              <input 
+                style={styles.input} 
+                type="text" 
+                placeholder="Enter username"
+                value={googleUsername}
+                onChange={(e) => setGoogleUsername(e.target.value)}
+                required 
+              />
+            </div>
+
+            <button type="submit" style={styles.loginBtn} disabled={loading}>
+              {loading ? "Creating..." : "Continue"}
+            </button>
+          </form>
+
+          <p style={styles.footerText}>
+            <span onClick={() => setShowUsernameModal(false)} style={styles.link}>← Back</span>
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div style={styles.authWrapper}>
       <div style={styles.glassCard}>
         <div style={styles.brandIcon}>C</div>
         
         <h2 style={styles.title}>Sign In</h2>
-        <p style={styles.subtitle}>Welcome back to CoursePro AI</p>
+        <p style={styles.subtitle}>Welcome back</p>
 
         <button 
           style={styles.googleBtn} 
@@ -76,12 +159,12 @@ function Login({ onSwitch, onLoginSuccess }) {
 
         <form onSubmit={handleSubmit}>
           <div style={styles.inputWrapper}>
-            <label style={styles.label}>Email Address</label>
+            <label style={styles.label}>Username</label>
             <input 
               style={styles.input} 
-              type="email" 
-              placeholder="name@example.com"
-              onChange={(e) => setEmail(e.target.value)}
+              type="text" 
+              placeholder="Enter your username"
+              onChange={(e) => setUsername(e.target.value)}
               required 
             />
           </div>
