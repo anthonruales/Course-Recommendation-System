@@ -102,6 +102,26 @@ function MyActivity({ onBack }) {
                     </div>
                   </div>
 
+                  {/* TOP RECOMMENDED COURSE PREVIEW */}
+                  {activity.top_course && (
+                    <div style={{
+                      padding: '12px 15px',
+                      background: 'linear-gradient(135deg, rgba(100, 150, 255, 0.1), rgba(150, 100, 255, 0.1))',
+                      borderTop: '1px solid rgba(100, 150, 255, 0.2)',
+                      borderBottom: expandedAttempt === activity.attempt_id ? '1px solid rgba(100, 150, 255, 0.2)' : 'none'
+                    }}>
+                      <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                        <span style={{ fontSize: '18px' }}>⭐</span>
+                        <div style={{ flex: 1 }}>
+                          <p style={{ margin: '0 0 2px 0', fontSize: '12px', color: '#888' }}>Top Recommended</p>
+                          <p style={{ margin: 0, fontSize: '14px', fontWeight: '600', color: '#fff' }}>
+                            {activity.top_course.course_name}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
                   {/* EXPANDED CONTENT */}
                   {expandedAttempt === activity.attempt_id && (
                     <div style={{ padding: '20px', background: 'rgba(0,0,0,0.2)' }}>
