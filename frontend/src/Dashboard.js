@@ -25,6 +25,53 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
     }
   }, []);
 
+  // Periodically update activity to keep user marked as online
+  useEffect(() => {
+    const userId = localStorage.getItem('userId');
+    if (!userId) return;
+
+    // Update activity immediately on mount
+    const updateActivity = async () => {
+      try {
+        await fetch(`http://localhost:8000/user/${userId}/update-activity`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+      } catch (err) {
+        console.error('Error updating activity:', err);
+      }
+    };
+
+    updateActivity();
+
+    // Update activity every 5 minutes (300000ms)
+    const activityInterval = setInterval(updateActivity, 5 * 60 * 1000);
+
+    // Cleanup interval on unmount
+    return () => clearInterval(activityInterval);
+  }, []);
+
+  // Handle logout with activity tracking
+  const handleLogout = async () => {
+    const userId = localStorage.getItem('userId');
+    
+    // Call logout endpoint to mark user as offline
+    if (userId) {
+      try {
+        await fetch(`http://localhost:8000/logout`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ user_id: userId })
+        });
+      } catch (err) {
+        console.error('Error during logout:', err);
+      }
+    }
+    
+    // Call the original logout handler
+    onLogout();
+  };
+
   const handleStartAdaptive = () => {
     if (!hasAcademicInfo) {
       alert('⚠️ Please complete your Academic Profile first!\n\nYou need to fill in your GWA and SHS Strand before taking the assessment.');

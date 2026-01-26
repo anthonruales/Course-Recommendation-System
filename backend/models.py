@@ -14,6 +14,8 @@ class User(Base):
     email = Column(String(100), unique=True, index=True, nullable=False)
     academic_info = Column(JSON, nullable=True)  # D4 - Personal & Academic Database (GWA, Strand, Age, Gender, etc.)
     created_at = Column(DateTime, server_default=func.now())
+    last_active = Column(DateTime, nullable=True)  # Track when user was last active
+    is_online = Column(Integer, default=0)  # 1 = online, 0 = offline
     
     # Relationships
     test_attempts = relationship("TestAttempt", back_populates="user", cascade="all, delete-orphan")
