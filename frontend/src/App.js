@@ -4,7 +4,6 @@ import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard';
 import ProfileForm from './ProfileForm';
-import AssessmentForm from './AssessmentForm';
 import AdaptiveAssessment from './AdaptiveAssessment';
 import MyActivity from './MyActivity';
 import Admin from './admin/Admin'; 
@@ -110,7 +109,6 @@ function App() {
               <Dashboard 
                 userName={user} 
                 onLogout={handleLogout} 
-                onStart={() => setView('assessment')}
                 onStartAdaptive={(questionCount) => {
                   setSelectedQuestionCount(questionCount || 30);
                   setView('adaptive');
@@ -144,12 +142,7 @@ function App() {
               />
             )}
 
-            {view === 'assessment' && (
-              <AssessmentForm 
-                onBack={() => setView('dashboard')} 
-                onShowResults={handleAssessmentResults} 
-              />
-            )}
+            {/* OLD ASSESSMENT FORM REMOVED - Only adaptive assessment is used now */}
 
             {view === 'adaptive' && (
               <AdaptiveAssessment 

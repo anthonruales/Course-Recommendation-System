@@ -280,6 +280,7 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
     db_user = db.query(models.User).filter(models.User.username == user.username).first()
     if not db_user or not verify_password(user.password, db_user.password_hash):
         raise HTTPException(status_code=400, detail="Invalid username or password")
+    
     return {"user": db_user.fullname, "user_id": db_user.user_id}
 
 @app.post("/google-login")
@@ -391,8 +392,9 @@ def update_academic_info(user_id: int, info: AcademicInfoUpdate, db: Session = D
 # Initialize the Hybrid Recommendation Engine (Rule-Based + Decision Tree)
 recommendation_engine = HybridRecommendationEngine()
 
-@app.post("/recommend")
-def recommend(data: AssessmentSubmit, db: Session = Depends(get_db)):
+# OLD RECOMMENDATION ENDPOINT DEPRECATED - Use adaptive assessment instead
+@app.post("/recommend_deprecated")
+def recommend_deprecated(data: AssessmentSubmit, db: Session = Depends(get_db)):
     """
     ================================================================================
     COURSE RECOMMENDATION SYSTEM - THESIS IMPLEMENTATION
@@ -581,6 +583,27 @@ def recommend(data: AssessmentSubmit, db: Session = Depends(get_db)):
     try:
         db.commit()
         print(f"✅ Saved test attempt {test_attempt.attempt_id} and {len(data.answers)} student answers to database")
+        
+        # Also save to user_test_attempts for backward compatibility
+        try:
+            from sqlalchemy import text
+            db.execute(text('''
+                INSERT INTO user_test_attempts 
+                (attempt_id, user_id, test_id, score, total_questions, attempt_date, time_taken, created_at)
+                VALUES (:attempt_id, :user_id, :test_id, :score, :total_questions, :attempt_date, :time_taken, NOW())
+            '''), {
+                'attempt_id': test_attempt.attempt_id,
+                'user_id': data.userId,
+                'test_id': default_test.test_id,
+                'score': 0,
+                'total_questions': len(data.answers),
+                'attempt_date': test_attempt.taken_at,
+                'time_taken': 0
+            })
+            db.commit()
+            print(f"✅ Also saved to user_test_attempts for backward compatibility")
+        except Exception as sync_error:
+            print(f"⚠️ Warning: Could not sync to user_test_attempts: {sync_error}")
     except Exception as e:
         print(f"❌ Error saving test attempt/answers: {e}")
         db.rollback()
@@ -678,8 +701,9 @@ def get_questions(db: Session = Depends(get_db)):
 
 # ==================== ASSESSMENT TIER ENDPOINTS ====================
 
-@app.get("/assessment/tiers")
-def get_assessment_tiers():
+# OLD ASSESSMENT TIERS ENDPOINT REMOVED - Use adaptive assessment instead
+@app.get("/assessment/tiers_deprecated")
+def get_assessment_tiers_deprecated():
     """Get all available assessment tiers with their details"""
     try:
         tiers = AssessmentService.get_available_tiers()
@@ -692,8 +716,9 @@ def get_assessment_tiers():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/assessment/strands")
-def get_available_strands():
+# OLD ASSESSMENT STRANDS ENDPOINT REMOVED - Use adaptive assessment instead  
+@app.get("/assessment/strands_deprecated")
+def get_available_strands_deprecated():
     """Get all available SHS strands with their focus areas"""
     try:
         from assessment_service import STRAND_TRAIT_MAPPING
@@ -711,8 +736,9 @@ def get_available_strands():
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/assessment/start/{tier}")
-def start_assessment(tier: str, strand: str = None, db: Session = Depends(get_db)):
+# OLD ASSESSMENT START ENDPOINT REMOVED - Use /adaptive/start instead
+@app.get("/assessment/start_deprecated/{tier}")
+def start_assessment_deprecated(tier: str, strand: str = None, db: Session = Depends(get_db)):
     """
     Start an assessment with a specific tier and fetch questions from database.
     Questions are prioritized based on user's SHS strand.
@@ -834,8 +860,9 @@ def start_assessment(tier: str, strand: str = None, db: Session = Depends(get_db
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/assessment/questions/{tier}")
-def get_assessment_questions(tier: str, strand: str = None):
+# OLD ASSESSMENT QUESTIONS ENDPOINT REMOVED - Use adaptive assessment instead
+@app.get("/assessment/questions_deprecated/{tier}")
+def get_assessment_questions_deprecated(tier: str, strand: str = None):
     """
     Get questions for a specific assessment tier without full assessment metadata.
     Questions are prioritized based on user's SHS strand.
@@ -1042,16 +1069,28 @@ def delete_option(option_id: int, db: Session = Depends(get_db)):
 @app.get("/admin/users")
 def get_all_users(db: Session = Depends(get_db)):
     """Admin: Get all users with their info"""
-    users = db.query(models.User).all()
-    user_list = []
-    for user in users:
-        user_list.append({
-            "user_id": user.user_id,
-            "fullname": user.fullname,
-            "email": user.email,
-            "academic_info": user.academic_info,
-            "created_at": user.created_at
-        })
+    try:
+        users = db.query(models.User).all()
+        user_list = []
+        
+        for user in users:
+            # Count test attempts for this user
+            tests_taken = db.query(models.TestAttempt).filter(
+                models.TestAttempt.user_id == user.user_id
+            ).count()
+            
+            user_list.append({
+                "user_id": user.user_id,
+                "fullname": user.fullname,
+                "email": user.email,
+                "academic_info": user.academic_info,
+                "created_at": str(user.created_at) if user.created_at else None,
+                "tests_taken": tests_taken
+            })
+        
+    except Exception as e:
+        return {"error": str(e)}
+    
     return {"users": user_list}
 
 @app.get("/admin/users/{user_id}")
@@ -1819,9 +1858,9 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
         # If we still don't have user_id, we can't save
         if not user_id:
             print(f"❌ No user_id available for session {session_id}")
-            return
+            raise Exception(f"Cannot save adaptive session {session_id}: No user_id available")
         
-        print(f"🔍 Saving adaptive - User: {user_id}, Recs: {len(recommendations)}")
+        print(f"🔍 Saving adaptive session {session_id} - User: {user_id}, Questions answered: {len(answered_questions) if answered_questions else 0}, Recs: {len(recommendations)}")
         if recommendations:
             print(f"    First rec: {recommendations[0].get('course_name')}")
         
@@ -1835,6 +1874,7 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
             )
             db.add(adaptive_test)
             db.flush()
+            print(f"🆕 Created new adaptive test with ID: {adaptive_test.test_id}")
         
         # Create test attempt
         test_attempt = models.TestAttempt(
@@ -1843,7 +1883,7 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
         )
         db.add(test_attempt)
         db.flush()
-        print(f"✅ Created test attempt: {test_attempt.attempt_id}")
+        print(f"✅ Created test attempt: {test_attempt.attempt_id} for user {user_id}")
         
         # Save answered questions
         if answered_questions:
@@ -1857,6 +1897,29 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
         # 🔑 COMMIT TestAttempt and StudentAnswers FIRST
         db.commit()
         print(f"✅ Committed attempt and answers: attempt_id={test_attempt.attempt_id}")
+        
+        # 🔄 ALSO SAVE TO user_test_attempts for backward compatibility
+        try:
+            from sqlalchemy import text
+            # Insert into user_test_attempts table for backward compatibility
+            db.execute(text('''
+                INSERT INTO user_test_attempts 
+                (attempt_id, user_id, test_id, score, total_questions, attempt_date, time_taken, created_at)
+                VALUES (:attempt_id, :user_id, :test_id, :score, :total_questions, :attempt_date, :time_taken, NOW())
+            '''), {
+                'attempt_id': test_attempt.attempt_id,
+                'user_id': user_id,
+                'test_id': adaptive_test.test_id,
+                'score': 0,  # Placeholder
+                'total_questions': len(answered_questions) if answered_questions else 0,
+                'attempt_date': test_attempt.taken_at,
+                'time_taken': 0  # Placeholder
+            })
+            db.commit()
+            print(f"✅ Also saved to user_test_attempts table for backward compatibility")
+        except Exception as sync_error:
+            print(f"⚠️ Warning: Could not sync to user_test_attempts: {sync_error}")
+            # Don't fail completely if backward compat table sync fails
         
         # NOW save recommendations
         if recommendations and len(recommendations) > 0:
@@ -2009,8 +2072,14 @@ def finish_adaptive_early(data: dict, db: Session = Depends(get_db)):
     
     # Save to database for history using the helper function
     try:
-        save_adaptive_session_to_db(db, engine, session_id, result.get("recommendations", []))
-        print(f"✅ Saved adaptive assessment from /adaptive/finish endpoint")
+        # Get session to extract user_id and answered questions
+        session = engine.sessions.get(session_id)
+        if session:
+            save_adaptive_session_to_db(db, engine, session_id, result.get("recommendations", []), user_id=session.user_id, answered_questions=session.answered_questions)
+            print(f"✅ Saved adaptive assessment from /adaptive/finish endpoint with user_id={session.user_id}")
+        else:
+            print(f"⚠️ Could not find session {session_id} to save")
+            raise Exception(f"Session {session_id} not found")
     except Exception as e:
         print(f"⚠️ Error saving adaptive assessment: {e}")
         raise HTTPException(status_code=500, detail=f"Error saving assessment: {str(e)}")
