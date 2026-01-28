@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import './FeedbackForm.css';
+import Toast from './Toast';
 
 function FeedbackForm({ recommendation, userId, onSubmit, onClose }) {
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [feedbackText, setFeedbackText] = useState('');
   const [loading, setLoading] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [toast, setToast] = useState(null);
+
+  const showToast = (message, type = 'info') => {
+    setToast({ message, type });
+  };
 
   const isOverallFeedback = recommendation?.overall === true;
   
@@ -17,7 +22,7 @@ function FeedbackForm({ recommendation, userId, onSubmit, onClose }) {
     e.preventDefault();
     
     if (rating === 0) {
-      alert('Please select a rating');
+      showToast('Please select a rating', 'warning');
       return;
     }
 
@@ -55,41 +60,30 @@ function FeedbackForm({ recommendation, userId, onSubmit, onClose }) {
       if (response.ok) {
         const data = await response.json();
         console.log('[FeedbackForm] Success response:', data);
-        setSubmitted(true);
+        showToast('✓ Thank you for your feedback!', 'success');
         if (onSubmit) {
           onSubmit(data);
         }
-        // Auto close after 5 seconds
-        setTimeout(() => onClose && onClose(), 5000);
+        // Auto close after 2 seconds
+        setTimeout(() => onClose && onClose(), 2000);
       } else {
         try {
           const errorData = await response.json();
           console.error('[FeedbackForm] Error response body:', errorData);
-          alert(`Error submitting feedback: ${errorData.detail || 'Unknown error'}`);
+          showToast(`Error submitting feedback: ${errorData.detail || 'Unknown error'}`, 'error');
         } catch(parseError) {
           console.error('[FeedbackForm] Error parsing response:', parseError);
           console.error('[FeedbackForm] Response text:', await response.text());
-          alert(`Error submitting feedback: HTTP ${response.status}`);
+          showToast(`Error submitting feedback: HTTP ${response.status}`, 'error');
         }
       }
     } catch (error) {
       console.error('[FeedbackForm] Fetch error:', error);
-      alert('Failed to submit feedback: ' + error.message);
+      showToast(`Failed to submit feedback: ${error.message}`, 'error');
     } finally {
       setLoading(false);
     }
   };
-
-  if (submitted) {
-    return (
-      <div className="feedback-form">
-        <div className="feedback-success">
-          <h3>✅ Thank You!</h3>
-          <p>Your feedback helps us improve recommendations.</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="feedback-form">
@@ -154,6 +148,14 @@ function FeedbackForm({ recommendation, userId, onSubmit, onClose }) {
           </form>
         </div>
       </div>
+
+      {toast && (
+        <Toast 
+          message={toast.message} 
+          type={toast.type} 
+          onClose={() => setToast(null)}
+        />
+      )}
     </div>
   );
 }
