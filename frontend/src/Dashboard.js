@@ -1,12 +1,65 @@
 import React, { useState, useEffect } from 'react';
 
+// Add CSS keyframes for smooth animations
+const keyframes = `
+  @keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-8px) rotate(1deg); }
+    66% { transform: translateY(-4px) rotate(-1deg); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(0.98); }
+  }
+  @keyframes glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.2), 0 0 60px rgba(99, 102, 241, 0.1); }
+    50% { box-shadow: 0 0 30px rgba(139, 92, 246, 0.3), 0 0 80px rgba(139, 92, 246, 0.15); }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+  }
+  @keyframes dotPulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+    50% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+  }
+`;
+
 function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile, onViewActivity, history }) {
-  const [isExpanded, setIsExpanded] = useState(false);
   const [hasAcademicInfo, setHasAcademicInfo] = useState(false);
   const [checkingProfile, setCheckingProfile] = useState(true);
   const [selectedQuestionCount, setSelectedQuestionCount] = useState(30);
   const [showHelpCenter, setShowHelpCenter] = useState(false);
   const [activityCount, setActivityCount] = useState(0);
+  const [profilePhoto, setProfilePhoto] = useState(null);
+
+  // Load profile photo from localStorage
+  useEffect(() => {
+    const savedPhoto = localStorage.getItem('profilePhoto');
+    if (savedPhoto) {
+      setProfilePhoto(savedPhoto);
+    }
+  }, []);
 
   // Check if user has filled academic info and fetch activity count
   useEffect(() => {
@@ -94,190 +147,221 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
     onStartAdaptive(selectedQuestionCount);
   };
 
-  // Keeps your original logic for history display
-  const displayHistory = isExpanded ? history : history?.slice(0, 5);
+  // Inject keyframes into document
+  useEffect(() => {
+    const styleSheet = document.createElement('style');
+    styleSheet.textContent = keyframes;
+    document.head.appendChild(styleSheet);
+    return () => document.head.removeChild(styleSheet);
+  }, []);
 
   return (
-    <div style={styles.dashboardWrapper}>
-      {/* SIDEBAR */}
-      <aside style={styles.sidebar}>
-        <div style={styles.brandContainer}>
-          <img src="/logo.svg" alt="CoursePro" style={styles.logoIcon} />
-          <h2 style={styles.brandName}>CoursePro</h2>
-        </div>
-        
-        <nav style={styles.nav}>
-          <div style={styles.categoryLabel}>Main Menu</div>
-          <div style={{...styles.navItem, ...styles.navActive}}>📊 Dashboard</div>
+    <div style={styles.pageWrapper}>
+      {/* Animated background elements */}
+      <div style={styles.bgGradient1}></div>
+      <div style={styles.bgGradient2}></div>
+      <div style={styles.bgGrid}></div>
 
-          <div style={styles.categoryLabel}>Academics</div>
-          <div style={styles.navItem} onClick={onViewProfile}
-            onMouseEnter={(e) => { e.target.style.background = 'rgba(255, 255, 255, 0.05)'; e.target.style.color = '#cbd5e1'; e.target.style.transform = 'translateX(4px)'; }}
-            onMouseLeave={(e) => { e.target.style.background = 'transparent'; e.target.style.color = '#94a3b8'; e.target.style.transform = 'translateX(0)'; }}
-          >👤 Academic Profile</div>
-          <div style={styles.navItem} onClick={onViewActivity}
-            onMouseEnter={(e) => { e.target.style.background = 'rgba(255, 255, 255, 0.05)'; e.target.style.color = '#cbd5e1'; e.target.style.transform = 'translateX(4px)'; }}
-            onMouseLeave={(e) => { e.target.style.background = 'transparent'; e.target.style.color = '#94a3b8'; e.target.style.transform = 'translateX(0)'; }}
-          >📂 My Activity ({activityCount})</div>
+      {/* TOP NAVIGATION */}
+      <nav style={styles.navbar}>
+        <div style={styles.navContainer}>
+          <div style={styles.navBrand}>
+            <img src="/logo.svg" alt="CoursePro" style={styles.navLogo} />
+            <span style={styles.navBrandName}>CoursePro</span>
+          </div>
 
-          <div style={styles.categoryLabel}>Support</div>
-          <div style={styles.navItem}
-            onClick={() => setShowHelpCenter(true)}
-            onMouseEnter={(e) => { e.target.style.background = 'rgba(255, 255, 255, 0.05)'; e.target.style.color = '#cbd5e1'; e.target.style.transform = 'translateX(4px)'; }}
-            onMouseLeave={(e) => { e.target.style.background = 'transparent'; e.target.style.color = '#94a3b8'; e.target.style.transform = 'translateX(0)'; }}
-          >❓ Help Center</div>
-        </nav>
+          <div style={styles.navLinks}>
+            <span style={{...styles.navLink, ...styles.navLinkActive}}>Home</span>
+            <span style={styles.navLink} onClick={onViewProfile}>Profile</span>
+            <span style={styles.navLink} onClick={onViewActivity}>
+              Activity
+              {activityCount > 0 && <span style={styles.navBadge}>{activityCount}</span>}
+            </span>
+            <span style={styles.navLink} onClick={() => setShowHelpCenter(true)}>Help</span>
+          </div>
 
-        <button onClick={onLogout} style={styles.logoutBtn}
-          onMouseEnter={(e) => { e.target.style.background = 'rgba(239, 68, 68, 0.1)'; e.target.style.borderColor = 'rgba(239, 68, 68, 0.4)'; e.target.style.transform = 'translateY(-2px)'; }}
-          onMouseLeave={(e) => { e.target.style.background = 'transparent'; e.target.style.borderColor = 'rgba(239, 68, 68, 0.2)'; e.target.style.transform = 'translateY(0)'; }}
-        >
-          Logout
-        </button>
-      </aside>
-
-      {/* MAIN CONTENT */}
-      <main style={styles.mainContent}>
-        <header style={styles.header}>
-          <h1 style={styles.headerTitle}>Dashboard</h1>
-          <p style={styles.headerSubtitle}>Welcome back, {userName}</p>
-        </header>
-
-        {/* ASSESSMENT CALL TO ACTION */}
-        <div style={styles.actionCard}>
-          <div style={styles.actionContent}>
-            <div style={{flex: 1}}>
-              <h3 style={styles.actionTitle}>Take an Assessment</h3>
-              <p style={styles.actionText}>
-                Answer questions to receive personalized course recommendations based on your interests and skills.
-              </p>
-              {!checkingProfile && !hasAcademicInfo && (
-                <p style={{color: '#f59e0b', fontSize: '13px', marginTop: '10px'}}>
-                  ⚠️ Please complete your Academic Profile (GWA & Strand) before taking the assessment.
-                </p>
+          <div style={styles.navRight}>
+            <div style={styles.userPill}>
+              {profilePhoto ? (
+                <img src={profilePhoto} alt="Profile" style={styles.userAvatarImg} />
+              ) : (
+                <div style={styles.userAvatar}>{userName?.charAt(0)?.toUpperCase() || 'U'}</div>
               )}
-            </div>
-            <div style={styles.assessmentButtons}>
-              <div style={styles.questionSelector}>
-                <span style={styles.selectorLabel}>Number of Questions:</span>
-                <div style={styles.selectorOptions}>
-                  {[30, 50, 60].map((count) => (
-                    <button
-                      key={count}
-                      style={{
-                        ...styles.selectorBtn,
-                        ...(selectedQuestionCount === count ? styles.selectorBtnActive : {})
-                      }}
-                      onClick={() => setSelectedQuestionCount(count)}
-                    >
-                      {count}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              <button 
-                style={{
-                  ...styles.adaptiveBtn,
-                  ...((!hasAcademicInfo && !checkingProfile) ? {opacity: 0.7, cursor: 'not-allowed'} : {})
-                }} 
-                onClick={handleStartAdaptive}
-                onMouseEnter={(e) => { if (hasAcademicInfo) { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 15px 30px rgba(99, 102, 241, 0.4)'; } }}
-                onMouseLeave={(e) => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = '0 10px 20px rgba(99, 102, 241, 0.2)'; }}
-              >
-                {checkingProfile ? 'Checking...' : 'Start Assessment'}
+              <span style={styles.userName}>{userName}</span>
+              <button onClick={handleLogout} style={styles.logoutBtn}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/>
+                </svg>
               </button>
             </div>
           </div>
-          <div style={styles.assessmentInfo}>
-            <div style={styles.infoCard}>
-              <span style={styles.infoIcon}>⚡</span>
-              <strong>30 Questions</strong>
-              <span style={styles.infoDesc}>Quick assessment (~10 min)</span>
-            </div>
-            <div style={styles.infoCard}>
-              <span style={styles.infoIcon}>📊</span>
-              <strong>50 Questions</strong>
-              <span style={styles.infoDesc}>Standard assessment (~15 min)</span>
-            </div>
-            <div style={styles.infoCard}>
-              <span style={styles.infoIcon}>🎯</span>
-              <strong>60 Questions</strong>
-              <span style={styles.infoDesc}>Comprehensive (~20 min)</span>
-            </div>
-          </div>
         </div>
+      </nav>
 
-        {/* DASHBOARD GRID */}
-        <div style={styles.dashboardGrid}>
-          
-          {/* RECENT ACTIVITY CARD */}
-          <div style={styles.portalCard}>
-            <div style={styles.cardHeader}>
-              <h4 style={styles.cardTitle}>Recent Activity</h4>
-              {history && history.length > 5 && (
-                <button 
-                  style={styles.linkBtn}
-                  onClick={() => setIsExpanded(!isExpanded)}
-                  onMouseEnter={(e) => { e.target.style.color = '#818cf8'; e.target.style.textDecoration = 'underline'; }}
-                  onMouseLeave={(e) => { e.target.style.color = '#6366f1'; e.target.style.textDecoration = 'none'; }}
-                >
-                  {isExpanded ? 'Show Less' : 'View All'}
-                </button>
-              )}
-            </div>
+      {/* HERO SECTION */}
+      <main style={styles.mainContent}>
+        <section style={styles.heroSection}>
+          <div style={styles.heroContent}>
+            <h1 style={styles.heroTitle}>
+              <span style={styles.heroLine1}>Welcome back,</span>
+              <span className="gradient-text" style={styles.heroLine2}>{userName}</span>
+            </h1>
 
-            {history && history.length > 0 ? (
-              <div style={styles.activityList}>
-                {displayHistory.map((item, index) => (
-                  <div key={index} style={styles.activityItem}>
-                    <div style={styles.activityInfo}>
-                      <div style={styles.activityName}>
-                        {item.type === 'assessment' && Array.isArray(item.courses) && item.courses.length > 0
-                          ? (typeof item.courses[0] === 'object' ? item.courses[0].course : item.courses[0])
-                          : item.courses}
-                      </div>
-                      <div style={styles.activityDate}>{item.date}</div>
+            {!checkingProfile && !hasAcademicInfo && (
+              <div style={styles.warningCard}>
+                <div style={styles.warningIcon}>⚠️</div>
+                <div style={styles.warningText}>
+                  <strong>Complete your profile</strong>
+                  <span>Add your GWA & Strand for accurate recommendations</span>
+                </div>
+                <button style={styles.warningBtn} onClick={onViewProfile}>Setup Profile</button>
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* BENTO GRID SECTION */}
+        <section style={styles.bentoGrid}>
+          {/* Assessment Card - Large - MAIN CTA */}
+          <div style={styles.bentoCardLarge}>
+            <div style={styles.cardGlow}></div>
+            <div style={styles.cardContent}>
+              <div style={styles.cardHeader}>
+                <span style={styles.cardIcon}>🎯</span>
+                <span style={styles.cardTagHighlight}>TAKE ASSESSMENT</span>
+              </div>
+              <h2 style={styles.cardTitleLarge}>Find Your Perfect Course</h2>
+              <p style={styles.cardDescLarge}>Answer questions and get personalized course recommendations based on your interests and skills.</p>
+              
+              <div style={styles.quizLengthLabel}>Select Quiz Length:</div>
+              <div style={styles.assessmentOptions}>
+                {[
+                  { count: 30, label: 'Quick', icon: '⚡', time: '~10 min', color: '#22c55e' },
+                  { count: 50, label: 'Standard', icon: '📊', time: '~15 min', color: '#6366f1' },
+                  { count: 60, label: 'Comprehensive', icon: '🎯', time: '~20 min', color: '#f59e0b' }
+                ].map((option) => (
+                  <div
+                    key={option.count}
+                    style={{
+                      ...styles.assessmentOption,
+                      ...(selectedQuestionCount === option.count ? {
+                        ...styles.assessmentOptionActive,
+                        borderColor: option.color,
+                        boxShadow: `0 0 30px ${option.color}30`
+                      } : {})
+                    }}
+                    onClick={() => setSelectedQuestionCount(option.count)}
+                  >
+                    <span style={styles.optionEmoji}>{option.icon}</span>
+                    <div style={styles.optionInfo}>
+                      <strong style={styles.optionName}>{option.label}</strong>
+                      <span style={styles.optionMeta}>{option.count} questions • {option.time}</span>
                     </div>
-                    <span style={{
-                      ...styles.badge,
-                      ...(item.type === 'profile_update' ? styles.profileBadge : styles.assessmentBadge)
-                    }}>
-                      {item.type === 'profile_update' ? 'Profile' : 'Assessment'}
-                    </span>
+                    {selectedQuestionCount === option.count && (
+                      <div style={{...styles.checkMark, background: option.color}}>✓</div>
+                    )}
                   </div>
                 ))}
               </div>
-            ) : (
-              <p style={styles.mutedText}>No history found.</p>
-            )}
+
+              <button 
+                style={{
+                  ...styles.startBtn,
+                  ...((!hasAcademicInfo && !checkingProfile) ? styles.startBtnDisabled : {})
+                }}
+                onClick={handleStartAdaptive}
+              >
+                <span style={styles.btnText}>{checkingProfile ? 'Loading...' : 'Start Assessment'}</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
+              
+              {(!hasAcademicInfo && !checkingProfile) && (
+                <p style={styles.profileWarning}>
+                  ⚠️ Please <span style={styles.profileLink} onClick={onViewProfile}>complete your profile</span> first
+                </p>
+              )}
+            </div>
           </div>
 
-          {/* ACCOUNT SUMMARY CARD */}
-          <div style={styles.portalCard}>
-            <h4 style={styles.cardTitle}>Account Summary</h4>
-            <p style={styles.mutedText}>Your account is synchronized and up to date.</p>
-            
-            {history && history.length > 0 && (
-              <div style={styles.summaryBox}>
-                <div style={styles.summarySuccess}>
-                  <span style={{ marginRight: '8px', color: '#10b981' }}>✓</span>
-                  {history.filter(h => h.type === 'assessment').length} Assessment(s) Recorded
-                </div>
-                <p style={styles.summaryDate}>
-                  Latest activity logged on {history[0].date}
-                </p>
-              </div>
-            )}
+          {/* Profile Card */}
+          <div 
+            style={styles.bentoCardSmall}
+            onClick={onViewProfile}
+          >
+            <div style={styles.smallCardIcon}>👤</div>
+            <h3 style={styles.smallCardTitle}>Academic Profile</h3>
+            <p style={styles.smallCardDesc}>Update your GWA & strand</p>
+            <div style={styles.cardArrow}>→</div>
           </div>
-        </div>
+
+          {/* Activity Card */}
+          <div 
+            style={styles.bentoCardSmall}
+            onClick={onViewActivity}
+          >
+            <div style={styles.smallCardIcon}>📊</div>
+            <h3 style={styles.smallCardTitle}>My Activity</h3>
+            <p style={styles.smallCardDesc}>View assessment history</p>
+            {activityCount > 0 && <span style={styles.activityBadge}>{activityCount} tests taken</span>}
+            <div style={styles.cardArrow}>→</div>
+          </div>
+
+          {/* Recent Activity Card */}
+          {history && history.length > 0 && (
+          <div style={styles.bentoCardActivity}>
+            <div style={styles.activityHeader}>
+              <h3 style={styles.activityTitle}>Recent Activity</h3>
+              {history.length > 3 && (
+                <button style={styles.viewAllBtn} onClick={() => onViewActivity()}>View All</button>
+              )}
+            </div>
+            
+            <div style={styles.activityList}>
+              {history.slice(0, 3).map((item, index) => (
+                <div key={index} style={styles.activityItem}>
+                  <div style={{
+                    ...styles.activityDot,
+                    background: item.type === 'assessment' ? '#6366f1' : '#f43f5e'
+                  }}></div>
+                  <div style={styles.activityInfo}>
+                    <span style={styles.activityItemName}>
+                      {item.type === 'assessment' && Array.isArray(item.courses) && item.courses.length > 0
+                        ? (typeof item.courses[0] === 'object' ? item.courses[0].course : item.courses[0])
+                        : item.courses}
+                    </span>
+                    <span style={styles.activityItemDate}>{item.date}</span>
+                  </div>
+                  <span style={{
+                    ...styles.activityItemBadge,
+                    background: item.type === 'assessment' ? 'rgba(99, 102, 241, 0.15)' : 'rgba(244, 63, 94, 0.15)',
+                    color: item.type === 'assessment' ? '#818cf8' : '#fb7185'
+                  }}>
+                    {item.type === 'profile_update' ? 'Profile' : 'Test'}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+          )}
+        </section>
       </main>
+
+      {/* Footer */}
+      <footer style={styles.footer}>
+        <div style={styles.footerContent}>
+          <span style={styles.footerLogo}>CoursePro</span>
+          <span style={styles.footerText}>© 2026 CoursePro</span>
+        </div>
+      </footer>
 
       {/* HELP CENTER MODAL */}
       {showHelpCenter && (
         <div style={styles.modalOverlay} onClick={() => setShowHelpCenter(false)}>
           <div style={styles.modalContent} onClick={(e) => e.stopPropagation()}>
             <div style={styles.modalHeader}>
-              <h2 style={styles.modalTitle}>❓ Help Center</h2>
+              <h2 style={styles.modalTitle}>Help Center</h2>
               <button style={styles.closeBtn} onClick={() => setShowHelpCenter(false)}>✕</button>
             </div>
             
@@ -286,47 +370,31 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
                 <h3 style={styles.helpSectionTitle}>🚀 Getting Started</h3>
                 <div style={styles.helpItem}>
                   <strong>1. Complete Your Profile</strong>
-                  <p>Before taking the assessment, fill in your Academic Profile with your GWA and SHS Strand. This helps us give you more accurate recommendations.</p>
+                  <p>Fill in your Academic Profile with your GWA and SHS Strand.</p>
                 </div>
                 <div style={styles.helpItem}>
                   <strong>2. Take the Assessment</strong>
-                  <p>Click "Start Assessment" and answer questions honestly. Choose the option that best describes your interests and preferences.</p>
+                  <p>Answer questions honestly. Choose what best describes you.</p>
                 </div>
                 <div style={styles.helpItem}>
                   <strong>3. View Recommendations</strong>
-                  <p>After completing the assessment, you'll receive personalized course recommendations based on your responses.</p>
+                  <p>Get personalized course recommendations instantly.</p>
                 </div>
               </div>
 
               <div style={styles.helpSection}>
-                <h3 style={styles.helpSectionTitle}>📋 Assessment Tips</h3>
+                <h3 style={styles.helpSectionTitle}>📋 Assessment Types</h3>
                 <div style={styles.helpItem}>
-                  <strong>Quick (30 questions)</strong>
-                  <p>Best for getting fast recommendations. Takes about 5-10 minutes.</p>
+                  <strong>Quick (30 questions) ~10 min</strong>
+                  <p>Fast overview of your interests and skills.</p>
                 </div>
                 <div style={styles.helpItem}>
-                  <strong>Standard (50 questions)</strong>
-                  <p>Balanced assessment for better accuracy. Takes about 10-15 minutes.</p>
+                  <strong>Standard (50 questions) ~15 min</strong>
+                  <p>Balanced assessment for better accuracy.</p>
                 </div>
                 <div style={styles.helpItem}>
-                  <strong>Comprehensive (80 questions)</strong>
-                  <p>Most thorough assessment for highly accurate results. Takes about 20-30 minutes.</p>
-                </div>
-              </div>
-
-              <div style={styles.helpSection}>
-                <h3 style={styles.helpSectionTitle}>❔ FAQs</h3>
-                <div style={styles.helpItem}>
-                  <strong>Can I retake the assessment?</strong>
-                  <p>Yes! You can take the assessment multiple times. Each attempt is saved in your activity history.</p>
-                </div>
-                <div style={styles.helpItem}>
-                  <strong>How are courses recommended?</strong>
-                  <p>Our system analyzes your responses to identify your interests, skills, and preferences, then matches them with courses that fit your profile.</p>
-                </div>
-                <div style={styles.helpItem}>
-                  <strong>Is my data private?</strong>
-                  <p>Yes, your assessment data is kept confidential and only used to generate your personalized recommendations.</p>
+                  <strong>Deep (60 questions) ~20 min</strong>
+                  <p>Most thorough analysis for best results.</p>
                 </div>
               </div>
             </div>
@@ -338,137 +406,867 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
 }
 
 const styles = {
-  dashboardWrapper: { display: 'flex', width: '100vw', height: '100vh', background: 'transparent', color: 'white' },
-  sidebar: {
-    width: '260px', background: 'rgba(255, 255, 255, 0.02)', backdropFilter: 'blur(20px)',
-    borderRight: '1px solid rgba(255, 255, 255, 0.08)', display: 'flex', flexDirection: 'column', padding: '40px 20px'
+  // Page wrapper with animated background
+  pageWrapper: {
+    minHeight: '100vh',
+    background: 'linear-gradient(180deg, #030308 0%, #0a0a18 50%, #050510 100%)',
+    color: '#f8fafc',
+    position: 'relative',
+    overflow: 'hidden'
   },
-  brandContainer: { display: 'flex', alignItems: 'center', marginBottom: '40px', paddingLeft: '10px' },
-  logoIcon: {
-    width: '40px', height: '40px', borderRadius: '10px', marginRight: '12px', objectFit: 'contain'
+
+  // Animated background gradients - smoother
+  bgGradient1: {
+    position: 'fixed',
+    top: '-30%',
+    left: '-30%',
+    width: '160%',
+    height: '160%',
+    background: 'radial-gradient(ellipse at 30% 30%, rgba(99, 102, 241, 0.12) 0%, transparent 60%)',
+    animation: 'breathe 20s ease-in-out infinite',
+    pointerEvents: 'none'
   },
-  brandName: { fontSize: '18px', fontWeight: '700', margin: 0 },
-  nav: { flex: 1 },
-  categoryLabel: { fontSize: '11px', fontWeight: '700', color: '#64748b', textTransform: 'uppercase', letterSpacing: '1px', margin: '20px 0 10px 10px' },
-  navItem: {
-    padding: '12px 15px', borderRadius: '10px', color: '#94a3b8', cursor: 'pointer',
-    fontSize: '14px', marginBottom: '4px', transition: 'all 0.3s ease',
-    ':hover': { background: 'rgba(255, 255, 255, 0.05)', color: '#cbd5e1', transform: 'translateX(4px)' }
+  bgGradient2: {
+    position: 'fixed',
+    bottom: '-30%',
+    right: '-30%',
+    width: '160%',
+    height: '160%',
+    background: 'radial-gradient(ellipse at 70% 70%, rgba(139, 92, 246, 0.1) 0%, transparent 60%)',
+    animation: 'breathe 25s ease-in-out infinite reverse',
+    pointerEvents: 'none'
   },
-  navActive: { background: 'rgba(99, 102, 241, 0.1)', color: '#818cf8', fontWeight: '600' },
+  bgGrid: {
+    position: 'fixed',
+    inset: 0,
+    backgroundImage: 'linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)',
+    backgroundSize: '80px 80px',
+    pointerEvents: 'none',
+    opacity: 0.8
+  },
+
+  // Navigation - smoother
+  navbar: {
+    position: 'sticky',
+    top: 0,
+    zIndex: 100,
+    background: 'rgba(5, 5, 16, 0.85)',
+    backdropFilter: 'blur(24px)',
+    WebkitBackdropFilter: 'blur(24px)',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.04)',
+    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+  },
+  navContainer: {
+    maxWidth: '1400px',
+    margin: '0 auto',
+    padding: '14px 40px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  navBrand: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '14px'
+  },
+  navLogo: {
+    width: '38px',
+    height: '38px',
+    borderRadius: '10px',
+    transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+  },
+  navBrandName: {
+    fontSize: '19px',
+    fontWeight: '700',
+    color: '#fff',
+    letterSpacing: '-0.3px'
+  },
+  navLinks: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '2px',
+    background: 'rgba(255, 255, 255, 0.03)',
+    padding: '5px',
+    borderRadius: '14px',
+    border: '1px solid rgba(255, 255, 255, 0.04)'
+  },
+  navLink: {
+    padding: '10px 20px',
+    borderRadius: '10px',
+    color: '#8892a6',
+    fontSize: '14px',
+    fontWeight: '500',
+    cursor: 'pointer',
+    transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+    position: 'relative'
+  },
+  navLinkActive: {
+    background: 'rgba(255, 255, 255, 0.1)',
+    color: '#fff'
+  },
+  navBadge: {
+    background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+    color: 'white',
+    fontSize: '10px',
+    fontWeight: '700',
+    padding: '3px 7px',
+    borderRadius: '6px',
+    minWidth: '18px',
+    textAlign: 'center',
+    boxShadow: '0 2px 8px rgba(99, 102, 241, 0.4)'
+  },
+  navRight: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  userPill: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    padding: '6px 8px 6px 6px',
+    background: 'rgba(255, 255, 255, 0.04)',
+    borderRadius: '14px',
+    border: '1px solid rgba(255, 255, 255, 0.06)',
+    transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)'
+  },
+  userAvatar: {
+    width: '34px',
+    height: '34px',
+    borderRadius: '10px',
+    background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '14px',
+    fontWeight: '700',
+    color: 'white',
+    boxShadow: '0 2px 10px rgba(99, 102, 241, 0.3)'
+  },
+  userAvatarImg: {
+    width: '34px',
+    height: '34px',
+    borderRadius: '10px',
+    objectFit: 'cover',
+    border: '2px solid rgba(99, 102, 241, 0.3)',
+  },
+  userName: {
+    fontSize: '14px',
+    fontWeight: '500',
+    color: '#e2e8f0',
+    paddingRight: '6px'
+  },
   logoutBtn: {
-    padding: '12px', borderRadius: '10px', border: '1px solid rgba(239, 68, 68, 0.2)',
-    background: 'transparent', color: '#ef4444', cursor: 'pointer', fontWeight: '600',
-    transition: 'all 0.3s ease'
+    width: '34px',
+    height: '34px',
+    borderRadius: '10px',
+    background: 'rgba(244, 63, 94, 0.1)',
+    border: '1px solid rgba(244, 63, 94, 0.2)',
+    color: '#f87171',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    transition: 'all 0.2s ease'
   },
-  mainContent: { flex: 1, padding: '40px 60px', overflowY: 'auto' },
-  header: { marginBottom: '30px' },
-  headerTitle: { fontSize: '28px', fontWeight: '800', margin: 0 },
-  headerSubtitle: { color: '#94a3b8', fontSize: '15px', marginTop: '5px' },
-  actionCard: {
-    background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(168, 85, 247, 0.05) 100%)',
-    border: '1px solid rgba(255,255,255,0.08)', borderRadius: '20px', padding: '30px', marginBottom: '30px'
+
+  // Main Content
+  mainContent: {
+    position: 'relative',
+    zIndex: 1,
+    maxWidth: '1200px',
+    margin: '0 auto',
+    padding: '0 40px 40px'
   },
-  actionContent: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
-  actionTitle: { fontSize: '20px', fontWeight: '700', margin: '0 0 10px 0' },
-  actionText: { color: '#cbd5e1', fontSize: '14px', maxWidth: '500px', margin: 0, lineHeight: '1.5' },
-  startBtn: {
-    background: '#6366f1', color: 'white', padding: '14px 24px', borderRadius: '12px',
-    border: 'none', fontWeight: '700', cursor: 'pointer', boxShadow: '0 10px 20px rgba(99, 102, 241, 0.2)',
-    transition: 'all 0.3s ease', fontSize: '14px'
+
+  // Hero Section
+  heroSection: {
+    padding: '40px 0 32px',
+    textAlign: 'center',
+    animation: 'fadeIn 0.6s ease-out'
   },
-  adaptiveBtn: {
-    background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', color: 'white', padding: '16px 32px', borderRadius: '12px',
-    border: 'none', fontWeight: '700', cursor: 'pointer', boxShadow: '0 10px 20px rgba(99, 102, 241, 0.2)',
-    transition: 'all 0.3s ease', fontSize: '15px', letterSpacing: '0.5px'
+  heroContent: {
+    maxWidth: '600px',
+    margin: '0 auto'
+  },
+  announcementBanner: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '12px',
+    padding: '10px 18px 10px 14px',
+    background: 'linear-gradient(90deg, rgba(99, 102, 241, 0.08) 0%, rgba(139, 92, 246, 0.08) 100%)',
+    border: '1px solid rgba(99, 102, 241, 0.15)',
+    borderRadius: '100px',
+    fontSize: '14px',
+    color: '#c4b5fd',
+    marginBottom: '32px',
+    cursor: 'pointer',
+    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+    backdropFilter: 'blur(10px)'
+  },
+  announcementDot: {
+    width: '8px',
+    height: '8px',
+    borderRadius: '50%',
+    background: '#22c55e',
+    animation: 'dotPulse 2s ease-in-out infinite'
+  },
+  heroTitle: {
+    fontSize: '42px',
+    fontWeight: '700',
+    lineHeight: '1.15',
+    marginBottom: '0',
+    letterSpacing: '-1px'
+  },
+  heroLine1: {
+    display: 'block',
+    color: '#94a3b8',
+    fontSize: '18px',
+    fontWeight: '500',
+    marginBottom: '8px'
+  },
+  heroLine2: {
+    display: 'block'
+  },
+  heroSubtitle: {
+    fontSize: '18px',
+    color: '#64748b',
+    lineHeight: '1.75',
+    marginBottom: '36px',
+    fontWeight: '400'
+  },
+
+  // Warning Card
+  warningCard: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '18px',
+    padding: '18px 24px',
+    background: 'rgba(245, 158, 11, 0.06)',
+    border: '1px solid rgba(245, 158, 11, 0.15)',
+    borderRadius: '18px',
+    marginBottom: '28px',
+    backdropFilter: 'blur(10px)',
+    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+  },
+  warningIcon: {
+    fontSize: '26px'
+  },
+  warningText: {
+    textAlign: 'left',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '4px'
+  },
+  warningBtn: {
+    padding: '12px 24px',
+    background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+    border: 'none',
+    borderRadius: '12px',
+    color: 'white',
+    fontSize: '14px',
+    fontWeight: '600',
+    cursor: 'pointer',
+    boxShadow: '0 6px 20px rgba(245, 158, 11, 0.25)',
+    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+  },
+
+  // Bento Grid
+  bentoGrid: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    gap: '20px',
+    maxWidth: '800px',
+    margin: '0 auto',
+    animation: 'slideIn 0.7s cubic-bezier(0.4, 0, 0.2, 1)'
+  },
+
+  // Large Assessment Card - MAIN CTA
+  bentoCardLarge: {
+    gridColumn: 'span 2',
+    position: 'relative',
+    padding: '28px 32px',
+    background: 'linear-gradient(145deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 27, 75, 0.6) 100%)',
+    border: '1px solid rgba(99, 102, 241, 0.2)',
+    borderRadius: '24px',
+    overflow: 'hidden',
+    backdropFilter: 'blur(20px)',
+    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+  },
+  cardGlow: {
+    position: 'absolute',
+    top: '-150px',
+    right: '-150px',
+    width: '400px',
+    height: '400px',
+    background: 'radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, transparent 70%)',
+    pointerEvents: 'none',
+    animation: 'breathe 6s ease-in-out infinite'
+  },
+  cardPulse: {
+    position: 'absolute',
+    top: '20px',
+    left: '20px',
+    width: '12px',
+    height: '12px',
+    borderRadius: '50%',
+    background: '#22c55e',
+    boxShadow: '0 0 20px #22c55e',
+    animation: 'dotPulse 2s ease-in-out infinite'
+  },
+  cardContent: {
+    position: 'relative',
+    zIndex: 1
+  },
+  cardHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+    marginBottom: '12px'
+  },
+  cardIcon: {
+    fontSize: '28px'
+  },
+  cardTag: {
+    padding: '5px 10px',
+    background: 'rgba(99, 102, 241, 0.15)',
+    borderRadius: '8px',
+    fontSize: '10px',
+    fontWeight: '700',
+    color: '#a5b4fc',
+    letterSpacing: '1px'
+  },
+  cardTagHighlight: {
+    padding: '6px 12px',
+    background: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)',
+    borderRadius: '16px',
+    fontSize: '11px',
+    fontWeight: '700',
+    color: 'white',
+    letterSpacing: '0.5px',
+  },
+  cardTitle: {
+    fontSize: '22px',
+    fontWeight: '700',
+    color: '#fff',
+    marginBottom: '6px',
+    letterSpacing: '-0.3px'
+  },
+  cardTitleLarge: {
+    fontSize: '24px',
+    fontWeight: '700',
+    color: '#fff',
+    marginBottom: '8px',
+    letterSpacing: '-0.3px',
+    lineHeight: '1.2'
+  },
+  cardDesc: {
+    fontSize: '14px',
+    color: '#94a3b8',
+    marginBottom: '20px',
+    lineHeight: '1.5'
+  },
+  cardDescLarge: {
+    fontSize: '14px',
+    color: '#94a3b8',
+    marginBottom: '16px',
+    lineHeight: '1.5',
+    maxWidth: '90%'
+  },
+
+  // Assessment Steps
+  assessmentSteps: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    gap: '12px',
+    marginBottom: '28px',
+    padding: '16px 20px',
+    background: 'rgba(255, 255, 255, 0.03)',
+    borderRadius: '16px',
+    border: '1px solid rgba(255, 255, 255, 0.05)'
+  },
+  stepItem: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px'
+  },
+  stepNumber: {
+    width: '28px',
+    height: '28px',
+    borderRadius: '50%',
+    background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '13px',
+    fontWeight: '700',
+    color: 'white'
+  },
+  stepText: {
+    fontSize: '14px',
+    color: '#e2e8f0',
+    fontWeight: '500'
+  },
+  stepArrow: {
+    color: '#475569',
+    fontSize: '16px'
+  },
+  quizLengthLabel: {
+    fontSize: '12px',
+    fontWeight: '600',
+    color: '#94a3b8',
+    marginBottom: '10px',
+    textTransform: 'uppercase',
+    letterSpacing: '1px'
+  },
+
+  // Assessment Options
+  assessmentOptions: {
+    display: 'flex',
+    gap: '14px',
+    marginBottom: '20px'
+  },
+  assessmentOption: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: '8px',
+    padding: '18px 14px',
+    background: 'rgba(255, 255, 255, 0.03)',
+    border: '2px solid rgba(255, 255, 255, 0.08)',
+    borderRadius: '16px',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease',
+    position: 'relative',
+    textAlign: 'center'
+  },
+  assessmentOptionActive: {
+    background: 'rgba(99, 102, 241, 0.1)',
+    borderColor: 'rgba(99, 102, 241, 0.4)',
+    boxShadow: '0 8px 32px rgba(99, 102, 241, 0.2)'
+  },
+  optionEmoji: {
+    fontSize: '24px',
+    marginBottom: '2px'
+  },
+  optionInfo: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: '2px'
+  },
+  optionName: {
+    display: 'block',
+    fontSize: '15px',
+    fontWeight: '600',
+    color: '#fff'
+  },
+  optionMeta: {
+    fontSize: '11px',
+    color: '#64748b'
+  },
+  optionDesc: {
+    fontSize: '12px',
+    fontWeight: '600',
+    marginTop: '4px'
+  },
+  checkMark: {
+    position: 'absolute',
+    top: '8px',
+    right: '8px',
+    width: '20px',
+    height: '20px',
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '11px',
+    fontWeight: '700',
+    color: '#fff'
   },
   recommendedBadge: {
-    position: 'absolute', top: '-8px', right: '-8px', background: '#f59e0b', color: 'white',
-    fontSize: '9px', fontWeight: '800', padding: '3px 8px', borderRadius: '10px', textTransform: 'uppercase'
+    position: 'absolute',
+    top: '-8px',
+    right: '-8px',
+    width: '24px',
+    height: '24px',
+    borderRadius: '50%',
+    background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '12px',
+    color: 'white',
+    boxShadow: '0 4px 12px rgba(245, 158, 11, 0.4)'
   },
-  assessmentButtons: {
-    display: 'flex', gap: '15px', alignItems: 'center', flexDirection: 'column'
+
+  // Start Button
+  startBtn: {
+    width: '100%',
+    padding: '16px 28px',
+    background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%)',
+    border: 'none',
+    borderRadius: '14px',
+    color: 'white',
+    fontSize: '16px',
+    fontWeight: '600',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '10px',
+    boxShadow: '0 8px 24px rgba(99, 102, 241, 0.3)',
+    transition: 'all 0.3s ease',
   },
-  questionSelector: {
-    display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '10px'
+  startBtnDisabled: {
+    opacity: 0.5,
+    cursor: 'not-allowed',
+    animation: 'none'
   },
-  selectorLabel: {
-    fontSize: '14px', color: '#94a3b8', fontWeight: '600'
+  btnIcon: {
+    fontSize: '22px'
   },
-  selectorOptions: {
-    display: 'flex', gap: '8px'
+  btnText: {
+    flex: 1
   },
-  selectorBtn: {
-    padding: '10px 20px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.15)',
-    background: 'rgba(255,255,255,0.03)', color: '#94a3b8', cursor: 'pointer',
-    fontWeight: '700', fontSize: '15px', transition: 'all 0.2s ease'
+  profileWarning: {
+    marginTop: '12px',
+    fontSize: '13px',
+    color: '#f59e0b',
+    textAlign: 'center'
   },
-  selectorBtnActive: {
-    background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', color: 'white',
-    borderColor: '#6366f1', boxShadow: '0 5px 15px rgba(99, 102, 241, 0.3)'
+  profileLink: {
+    color: '#a5b4fc',
+    fontWeight: '600',
+    cursor: 'pointer',
+    textDecoration: 'underline'
   },
-  assessmentInfo: {
-    display: 'flex', gap: '20px', marginTop: '20px', paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.08)'
+
+  // Stats Card
+  bentoCardStats: {
+    gridColumn: 'span 4',
+    background: 'linear-gradient(145deg, rgba(34, 197, 94, 0.06) 0%, rgba(16, 185, 129, 0.03) 100%)',
+    border: '1px solid rgba(34, 197, 94, 0.12)',
+    borderRadius: '28px',
+    padding: '28px',
+    display: 'flex',
+    alignItems: 'center',
+    backdropFilter: 'blur(20px)',
+    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
   },
-  infoCard: {
-    display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13px', color: '#94a3b8'
+  statsInner: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '24px'
   },
-  infoIcon: { fontSize: '20px' },
-  infoDesc: { color: '#64748b', fontSize: '12px', marginLeft: '5px' },
-  dashboardGrid: { display: 'grid', gridTemplateColumns: '1.5fr 1fr', gap: '25px' },
-  portalCard: {
-    background: 'rgba(255, 255, 255, 0.03)', border: '1px solid rgba(255, 255, 255, 0.08)',
-    borderRadius: '20px', padding: '25px', transition: 'all 0.3s ease'
+  statItem: {
+    textAlign: 'center'
   },
-  cardHeader: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' },
-  cardTitle: { fontSize: '17px', fontWeight: '700', margin: 0 },
-  linkBtn: { background: 'none', border: 'none', color: '#6366f1', fontWeight: '700', fontSize: '12px', cursor: 'pointer', transition: 'all 0.3s ease' },
-  activityList: { display: 'flex', flexDirection: 'column', gap: '12px' },
-  activityItem: {
-    padding: '15px', background: 'rgba(255,255,255,0.02)', borderRadius: '12px',
-    border: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+  statNumber: {
+    display: 'block',
+    fontSize: '36px',
+    fontWeight: '700',
+    color: '#fff',
+    marginBottom: '6px',
+    letterSpacing: '-1px'
+  },
+  statText: {
+    fontSize: '12px',
+    color: '#64748b',
+    textTransform: 'uppercase',
+    letterSpacing: '1.5px',
+    fontWeight: '500'
+  },
+  statDivider: {
+    height: '1px',
+    background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent)'
+  },
+
+  // Small Bento Cards
+  bentoCardSmall: {
+    gridColumn: 'span 1',
+    padding: '22px',
+    background: 'rgba(15, 23, 42, 0.6)',
+    border: '1px solid rgba(255, 255, 255, 0.06)',
+    borderRadius: '18px',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease',
+    position: 'relative',
+    backdropFilter: 'blur(10px)'
+  },
+  bentoCardHover: {
+    background: 'rgba(255, 255, 255, 0.03)',
+    transform: 'translateY(-4px)',
+    boxShadow: '0 15px 40px rgba(0, 0, 0, 0.2)',
+    borderColor: 'rgba(255, 255, 255, 0.1)'
+  },
+  smallCardIcon: {
+    fontSize: '32px',
+    marginBottom: '14px',
+    display: 'block'
+  },
+  smallCardTitle: {
+    fontSize: '16px',
+    fontWeight: '600',
+    color: '#fff',
+    marginBottom: '6px'
+  },
+  smallCardDesc: {
+    fontSize: '13px',
+    color: '#64748b',
+    lineHeight: '1.5'
+  },
+  cardArrow: {
+    position: 'absolute',
+    bottom: '18px',
+    right: '18px',
+    fontSize: '16px',
+    color: '#475569',
     transition: 'all 0.3s ease'
   },
-  activityName: { fontSize: '14px', fontWeight: '600', color: 'white' },
-  activityDate: { fontSize: '12px', color: '#64748b', marginTop: '4px' },
-  badge: { padding: '4px 10px', borderRadius: '6px', fontSize: '10px', fontWeight: '800', textTransform: 'uppercase' },
-  assessmentBadge: { background: 'rgba(99, 102, 241, 0.1)', color: '#818cf8' },
-  profileBadge: { background: 'rgba(244, 63, 94, 0.1)', color: '#fb7185' },
-  mutedText: { color: '#64748b', fontSize: '14px' },
-  summaryBox: { marginTop: '20px', padding: '15px', background: 'rgba(255,255,255,0.02)', borderRadius: '12px' },
-  summarySuccess: { fontSize: '14px', fontWeight: '600', color: '#e2e8f0', display: 'flex', alignItems: 'center' },
-  summaryDate: { fontSize: '12px', color: '#64748b', marginTop: '8px' },
-  // Help Center Modal Styles
+  activityBadge: {
+    marginTop: '10px',
+    display: 'inline-block',
+    padding: '4px 10px',
+    background: 'rgba(99, 102, 241, 0.12)',
+    borderRadius: '6px',
+    fontSize: '11px',
+    color: '#a5b4fc',
+    fontWeight: '500'
+  },
+
+  // Activity Card
+  bentoCardActivity: {
+    gridColumn: 'span 2',
+    padding: '22px',
+    background: 'rgba(15, 23, 42, 0.6)',
+    border: '1px solid rgba(255, 255, 255, 0.06)',
+    borderRadius: '18px',
+    backdropFilter: 'blur(10px)',
+    transition: 'all 0.3s ease'
+  },
+  activityHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '14px'
+  },
+  activityTitle: {
+    fontSize: '15px',
+    fontWeight: '600',
+    color: '#fff',
+    margin: 0
+  },
+  viewAllBtn: {
+    padding: '6px 12px',
+    background: 'rgba(255, 255, 255, 0.04)',
+    border: '1px solid rgba(255, 255, 255, 0.06)',
+    borderRadius: '8px',
+    color: '#94a3b8',
+    fontSize: '12px',
+    fontWeight: '500',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease'
+  },
+  activityList: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '10px'
+  },
+  activityItem: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+    padding: '12px 14px',
+    background: 'rgba(255, 255, 255, 0.015)',
+    borderRadius: '10px',
+    border: '1px solid rgba(255, 255, 255, 0.03)',
+    transition: 'all 0.3s ease'
+  },
+  activityDot: {
+    width: '10px',
+    height: '10px',
+    borderRadius: '50%',
+    flexShrink: 0,
+    boxShadow: '0 0 10px currentColor'
+  },
+  activityInfo: {
+    flex: 1,
+    minWidth: 0
+  },
+  activityItemName: {
+    display: 'block',
+    fontSize: '15px',
+    fontWeight: '500',
+    color: '#e2e8f0',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis'
+  },
+  activityItemDate: {
+    fontSize: '13px',
+    color: '#64748b'
+  },
+  activityItemBadge: {
+    padding: '5px 12px',
+    borderRadius: '8px',
+    fontSize: '11px',
+    fontWeight: '600',
+    textTransform: 'uppercase',
+    letterSpacing: '0.5px'
+  },
+  emptyActivity: {
+    textAlign: 'center',
+    padding: '48px 24px',
+    color: '#475569'
+  },
+  emptyIcon: {
+    fontSize: '40px',
+    marginBottom: '14px',
+    display: 'block',
+    opacity: 0.4
+  },
+
+  // Features Card
+  bentoCardFeatures: {
+    gridColumn: 'span 6',
+    padding: '28px',
+    background: 'linear-gradient(145deg, rgba(244, 63, 94, 0.05) 0%, rgba(251, 113, 133, 0.02) 100%)',
+    border: '1px solid rgba(244, 63, 94, 0.1)',
+    borderRadius: '24px',
+    backdropFilter: 'blur(10px)',
+    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
+  },
+  featuresTitle: {
+    fontSize: '17px',
+    fontWeight: '600',
+    color: '#fff',
+    marginBottom: '24px'
+  },
+  featuresList: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '16px'
+  },
+  featureItem: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '14px',
+    fontSize: '15px',
+    color: '#94a3b8'
+  },
+  featureIcon: {
+    fontSize: '20px'
+  },
+
+  // Footer
+  footer: {
+    position: 'relative',
+    zIndex: 1,
+    borderTop: '1px solid rgba(255, 255, 255, 0.04)',
+    padding: '28px 40px'
+  },
+  footerContent: {
+    maxWidth: '1200px',
+    margin: '0 auto',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  footerLogo: {
+    fontSize: '16px',
+    fontWeight: '700',
+    color: '#475569'
+  },
+  footerText: {
+    fontSize: '14px',
+    color: '#475569'
+  },
+
+  // Modal
   modalOverlay: {
-    position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-    background: 'rgba(0, 0, 0, 0.8)', backdropFilter: 'blur(5px)',
-    display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: 'rgba(0, 0, 0, 0.8)',
+    backdropFilter: 'blur(20px)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 1000,
+    animation: 'fadeIn 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
   },
   modalContent: {
-    background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
-    borderRadius: '20px', width: '90%', maxWidth: '600px', maxHeight: '80vh',
-    border: '1px solid rgba(255, 255, 255, 0.1)', overflow: 'hidden'
+    background: 'linear-gradient(145deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 27, 75, 0.95) 100%)',
+    borderRadius: '28px',
+    width: '90%',
+    maxWidth: '540px',
+    maxHeight: '85vh',
+    border: '1px solid rgba(255, 255, 255, 0.08)',
+    overflow: 'hidden',
+    boxShadow: '0 30px 100px rgba(0, 0, 0, 0.5)',
+    animation: 'slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
   },
   modalHeader: {
-    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-    padding: '20px 25px', borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-    background: 'rgba(99, 102, 241, 0.1)'
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '24px 28px',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.05)'
   },
-  modalTitle: { margin: 0, fontSize: '20px', fontWeight: '700', color: '#f1f5f9' },
+  modalTitle: {
+    margin: 0,
+    fontSize: '20px',
+    fontWeight: '600',
+    color: '#f1f5f9'
+  },
   closeBtn: {
-    background: 'rgba(255, 255, 255, 0.1)', border: 'none', color: '#94a3b8',
-    width: '32px', height: '32px', borderRadius: '8px', cursor: 'pointer',
-    fontSize: '16px', transition: 'all 0.2s ease'
+    background: 'rgba(255, 255, 255, 0.05)',
+    border: 'none',
+    color: '#94a3b8',
+    width: '40px',
+    height: '40px',
+    borderRadius: '12px',
+    cursor: 'pointer',
+    fontSize: '18px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
   },
-  modalBody: { padding: '25px', overflowY: 'auto', maxHeight: 'calc(80vh - 80px)' },
-  helpSection: { marginBottom: '25px' },
+  modalBody: {
+    padding: '28px',
+    overflowY: 'auto',
+    maxHeight: 'calc(85vh - 80px)'
+  },
+  helpSection: {
+    marginBottom: '28px'
+  },
   helpSectionTitle: {
-    fontSize: '16px', fontWeight: '700', color: '#818cf8', margin: '0 0 15px 0',
-    paddingBottom: '10px', borderBottom: '1px solid rgba(255, 255, 255, 0.05)'
+    fontSize: '13px',
+    fontWeight: '600',
+    color: '#818cf8',
+    margin: '0 0 16px 0',
+    textTransform: 'uppercase',
+    letterSpacing: '1.5px'
   },
   helpItem: {
-    marginBottom: '15px', padding: '15px', background: 'rgba(255, 255, 255, 0.03)',
-    borderRadius: '10px', border: '1px solid rgba(255, 255, 255, 0.05)'
+    marginBottom: '12px',
+    padding: '18px',
+    background: 'rgba(255, 255, 255, 0.02)',
+    borderRadius: '14px',
+    border: '1px solid rgba(255, 255, 255, 0.04)',
+    fontSize: '15px',
+    color: '#94a3b8',
+    lineHeight: '1.6',
+    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
   }
 };
 

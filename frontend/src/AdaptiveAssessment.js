@@ -214,23 +214,33 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
   // RENDER: Start Screen
   if (!sessionId) {
     return (
-      <div style={styles.container}>
-        <aside style={styles.sidebar}>
-          <div style={styles.brand}>
-            <img src="/logo.svg" alt="CoursePro" style={styles.logo} />
-            <h2 style={styles.brandName}>CoursePro</h2>
+      <div style={styles.pageWrapper}>
+        {/* TOP NAVIGATION */}
+        <nav style={styles.navbar}>
+          <div style={styles.navContainer}>
+            <div style={styles.navBrand}>
+              <img src="/logo.svg" alt="CoursePro" style={styles.navLogo} />
+              <span style={styles.navBrandName}>CoursePro</span>
+            </div>
+            <div style={styles.navLinks}>
+              <span style={styles.navLink} onClick={onBack}>Dashboard</span>
+              <span style={{...styles.navLink, ...styles.navLinkActive}}>Assessment</span>
+            </div>
+            <div style={styles.navRight}>
+              <button onClick={onBack} style={styles.exitBtn}>← Exit Assessment</button>
+            </div>
           </div>
-          <div style={styles.nav}>
-            <div style={styles.navActive}>🧠 Smart Assessment</div>
-            <div style={styles.navLink} onClick={onBack}>⬅ Exit</div>
-          </div>
-        </aside>
+        </nav>
 
-        <main style={styles.main}>
+        <main style={styles.mainContent}>
           <div style={styles.startScreen}>
-            <div style={styles.genieIcon}>🎓</div>
-            <h1 style={styles.title}>AI-Powered Career Assessment</h1>
-            <p style={styles.subtitle}>
+            <div style={styles.heroBadge}>
+              <span>🧠</span> AI-Powered Analysis
+            </div>
+            <h1 style={styles.heroTitle}>
+              Smart Career <span style={styles.heroGradient}>Assessment</span>
+            </h1>
+            <p style={styles.heroSubtitle}>
               Experience an intelligent assessment that adapts to YOUR answers!
             </p>
 
@@ -275,23 +285,33 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
   // RENDER: Results Screen
   if (isComplete && results) {
     return (
-      <div style={styles.container}>
-        <aside style={styles.sidebar}>
-          <div style={styles.brand}>
-            <img src="/logo.svg" alt="CoursePro" style={styles.logo} />
-            <h2 style={styles.brandName}>CoursePro</h2>
+      <div style={styles.pageWrapper}>
+        <nav style={styles.navbar}>
+          <div style={styles.navContainer}>
+            <div style={styles.navBrand}>
+              <img src="/logo.svg" alt="CoursePro" style={styles.navLogo} />
+              <span style={styles.navBrandName}>CoursePro</span>
+            </div>
+            <div style={styles.navLinks}>
+              <span style={styles.navLink} onClick={onBack}>Dashboard</span>
+              <span style={{...styles.navLink, ...styles.navLinkActive}}>Results</span>
+            </div>
+            <div style={styles.navRight}>
+              <button onClick={onBack} style={styles.exitBtn}>← Back to Dashboard</button>
+            </div>
           </div>
-          <div style={styles.nav}>
-            <div style={styles.navActive}>✅ Complete</div>
-            <div style={styles.navLink} onClick={onBack}>⬅ Dashboard</div>
-          </div>
-        </aside>
+        </nav>
 
-        <main style={styles.main}>
+        <main style={styles.mainContent}>
           <div style={styles.resultsHeader}>
-            <h1 style={styles.title}>🎉 Assessment Complete!</h1>
-            <p style={styles.subtitle}>
-              Based on {currentRound} questions, here are your personalized recommendations
+            <div style={styles.heroBadge}>
+              <span>🎉</span> Assessment Complete
+            </div>
+            <h1 style={styles.heroTitle}>
+              Your <span style={styles.heroGradient}>Recommendations</span>
+            </h1>
+            <p style={styles.heroSubtitle}>
+              Based on {currentRound} questions, here are your personalized career matches
             </p>
             <div style={styles.statsRow}>
               <div style={styles.stat}>
@@ -311,7 +331,6 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
 
           <div style={styles.resultsGrid}>
             {results.slice(0, 5).map((course, index) => {
-              // Ensure match_percentage is a valid number
               const matchPercent = typeof course.match_percentage === 'number' && !isNaN(course.match_percentage) 
                 ? course.match_percentage 
                 : 75;
@@ -356,215 +375,577 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
 
   // RENDER: Question Screen
   return (
-    <div style={styles.container}>
-      <aside style={styles.sidebar}>
-        <div style={styles.brand}>
-          <img src="/logo.svg" alt="CoursePro" style={styles.logo} />
-          <h2 style={styles.brandName}>CoursePro</h2>
-        </div>
-        
-        {/* Progress Section */}
-        <div style={styles.progressSection}>
-          <h3 style={styles.progressTitle}>Progress</h3>
-          
-          <div style={styles.progressBar}>
-            <div style={{
-              ...styles.progressFill,
-              width: `${(currentRound / maxRounds) * 100}%`
-            }} />
+    <div style={styles.questionPageWrapper}>
+      {/* Compact top bar during questions */}
+      <nav style={styles.questionNavbar}>
+        <div style={styles.navContainer}>
+          <div style={styles.navBrand}>
+            <img src="/logo.svg" alt="CoursePro" style={styles.navLogo} />
+            <span style={styles.navBrandName}>CoursePro</span>
           </div>
-          <p style={styles.progressText}>Question {currentRound} of {maxRounds}</p>
           
-          <div style={styles.confidenceMeter}>
-            <span>Confidence</span>
-            <div style={styles.confidenceBar}>
+          {/* Progress in navbar */}
+          <div style={styles.navProgress}>
+            <span style={styles.navProgressText}>Question {currentRound} of {maxRounds}</span>
+            <div style={styles.navProgressBar}>
               <div style={{
-                ...styles.confidenceFill,
-                width: `${confidence}%`,
-                background: confidence > 70 ? '#10b981' : confidence > 40 ? '#f59e0b' : '#6366f1'
+                ...styles.navProgressFill,
+                width: `${(currentRound / maxRounds) * 100}%`
               }} />
             </div>
-            <span style={styles.confidenceValue}>{confidence}%</span>
-          </div>
-          
-          <div style={styles.statsSmall}>
-            <div>📚 {coursesRemaining} courses in consideration</div>
-            <div>🏷️ {traitsDiscovered} traits discovered</div>
-          </div>
-        </div>
-
-        {/* Top Courses Preview */}
-        {topCoursesPreview.length > 0 && (
-          <div style={styles.previewSection}>
-            <h3 style={styles.previewTitle}>🔥 Top Matches</h3>
-            {topCoursesPreview.slice(0, 3).map((course, index) => (
-              <div key={index} style={styles.previewCard}>
-                <div style={styles.previewRank}>#{index + 1}</div>
-                <div style={styles.previewName}>{course.course_name}</div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        <div style={styles.nav}>
-          {canFinishEarly && (
-            <div style={styles.finishButton} onClick={finishEarly}>
-              ✅ Finish & See Results
-            </div>
-          )}
-          <div style={styles.navLink} onClick={onBack}>⬅ Exit</div>
-        </div>
-      </aside>
-
-      <main style={styles.mainQuestion}>
-        {/* Last trait indicator */}
-        {lastTraitRecorded && (
-          <div style={styles.traitIndicator}>
-            ✨ Trait recorded: <strong>{lastTraitRecorded}</strong>
-          </div>
-        )}
-
-        <div style={{
-          ...styles.questionCard,
-          opacity: isTransitioning ? 0.5 : 1,
-          transform: isTransitioning ? 'translateX(20px)' : 'translateX(0)'
-        }}>
-          <div style={styles.questionHeader}>
-            <span style={styles.questionNumber}>Question {currentRound}</span>
-            <span style={styles.questionCategory}>{currentQuestion?.category}</span>
+            <span style={styles.navConfidence}>{confidence}% confidence</span>
           </div>
 
-          <h2 style={styles.questionText}>{currentQuestion?.question_text}</h2>
-
-          <div style={styles.optionsContainer}>
-            {currentQuestion?.options?.map((option) => (
-              <button
-                key={option.option_id}
-                onClick={() => submitAnswer(option.option_id)}
-                disabled={isLoading}
-                style={styles.optionButton}
-                onMouseEnter={(e) => {
-                  e.target.style.background = 'rgba(99, 102, 241, 0.2)';
-                  e.target.style.borderColor = '#6366f1';
-                  e.target.style.transform = 'translateX(8px)';
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.background = 'rgba(255,255,255,0.03)';
-                  e.target.style.borderColor = 'rgba(255,255,255,0.1)';
-                  e.target.style.transform = 'translateX(0)';
-                }}
-              >
-                {option.option_text}
+          <div style={styles.navRight}>
+            {canFinishEarly && (
+              <button onClick={finishEarly} style={styles.finishBtn}>
+                ✅ Finish Early
               </button>
-            ))}
+            )}
+            <button onClick={onBack} style={styles.exitBtn}>← Exit</button>
+          </div>
+        </div>
+      </nav>
+
+      <main style={styles.questionMain}>
+        {/* Side Info Panel */}
+        <aside style={styles.infoPanel}>
+          <div style={styles.infoPanelSection}>
+            <h4 style={styles.infoPanelTitle}>
+              <span style={{fontSize: '14px'}}>📊</span> Progress
+            </h4>
+            <div style={styles.statsSmall}>
+              <div style={styles.statItem}>
+                <span style={styles.statIcon}>📚</span>
+                <span>{coursesRemaining} courses in consideration</span>
+              </div>
+              <div style={styles.statItem}>
+                <span style={styles.statIcon}>🏷️</span>
+                <span>{traitsDiscovered} traits discovered</span>
+              </div>
+            </div>
           </div>
 
-          {isLoading && (
-            <div style={styles.loadingOverlay}>
-              <div style={styles.loadingSpinner}>🔄</div>
-              <p>Analyzing your response...</p>
+          {/* Top Courses Preview */}
+          {topCoursesPreview.length > 0 && (
+            <div style={styles.previewSection}>
+              <h4 style={styles.infoPanelTitle}>
+                <span style={{fontSize: '14px'}}>🔥</span> Top Matches
+              </h4>
+              {topCoursesPreview.slice(0, 3).map((course, index) => (
+                <div key={index} style={styles.previewCard}>
+                  <div style={styles.previewRank}>#{index + 1}</div>
+                  <div style={styles.previewName}>{course.course_name}</div>
+                </div>
+              ))}
             </div>
           )}
-        </div>
+        </aside>
 
-        {error && <p style={styles.error}>{error}</p>}
+        {/* Question Card */}
+        <div style={styles.questionArea}>
+          {/* Last trait indicator */}
+          {lastTraitRecorded && (
+            <div style={styles.traitIndicator}>
+              ✨ Trait recorded: <strong>{lastTraitRecorded}</strong>
+            </div>
+          )}
+
+          <div style={{
+            ...styles.questionCard,
+            opacity: isTransitioning ? 0.5 : 1,
+            transform: isTransitioning ? 'translateX(20px)' : 'translateX(0)'
+          }}>
+            <div style={styles.questionHeader}>
+              <span style={styles.questionNumber}>Question {currentRound}</span>
+              <span style={styles.questionCategory}>{currentQuestion?.category}</span>
+            </div>
+
+            <h2 style={styles.questionText}>{currentQuestion?.question_text}</h2>
+
+            <div style={styles.optionsContainer}>
+              {currentQuestion?.options?.map((option, index) => (
+                <button
+                  key={option.option_id}
+                  onClick={() => submitAnswer(option.option_id)}
+                  disabled={isLoading}
+                  style={styles.optionButton}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(99, 102, 241, 0.15)';
+                    e.currentTarget.style.borderColor = '#6366f1';
+                    e.currentTarget.style.transform = 'translateX(6px)';
+                    e.currentTarget.style.boxShadow = '0 4px 20px rgba(99, 102, 241, 0.2)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'rgba(30, 41, 59, 0.5)';
+                    e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)';
+                    e.currentTarget.style.transform = 'translateX(0)';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
+                >
+                  {option.option_text}
+                </button>
+              ))}
+            </div>
+
+            {isLoading && (
+              <div style={styles.loadingOverlay}>
+                <div style={styles.loadingSpinner}>🔄</div>
+                <p>Analyzing your response...</p>
+              </div>
+            )}
+          </div>
+
+          {error && <p style={styles.error}>{error}</p>}
+        </div>
       </main>
     </div>
   );
 }
 
 const styles = {
-  container: {
-    display: 'flex',
-    width: '100vw',
-    height: '100vh',
-    background: '#020617',
-    backgroundImage: 'radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%)',
-    color: 'white',
-    overflow: 'hidden'
-  },
-  sidebar: {
-    width: '280px',
-    background: 'rgba(255, 255, 255, 0.02)',
-    backdropFilter: 'blur(20px)',
-    borderRight: '1px solid rgba(255, 255, 255, 0.08)',
-    padding: '30px 20px',
+  // Page wrapper with top nav pattern
+  pageWrapper: {
+    minHeight: '100vh',
+    background: '#050510',
     display: 'flex',
     flexDirection: 'column',
-    overflowY: 'auto'
+    color: 'white',
+    position: 'relative',
+    animation: 'fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
   },
-  brand: { display: 'flex', alignItems: 'center', marginBottom: '30px' },
-  logo: { width: '40px', height: '40px', borderRadius: '10px', marginRight: '10px', objectFit: 'contain' },
-  brandName: { fontSize: '18px', fontWeight: 'bold' },
-  nav: { marginTop: 'auto' },
-  navActive: { padding: '12px', background: 'rgba(99, 102, 241, 0.1)', color: '#818cf8', borderRadius: '8px', fontWeight: '600', marginBottom: '10px' },
-  navLink: { padding: '12px', color: '#94a3b8', cursor: 'pointer', borderRadius: '10px', transition: 'all 0.3s ease' },
-  main: { flex: 1, padding: '40px 60px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', overflowY: 'auto' },
-  mainQuestion: { flex: 1, padding: '40px 60px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' },
+  questionPageWrapper: {
+    minHeight: '100vh',
+    background: 'linear-gradient(180deg, #050510 0%, #0a0a1a 50%, #050510 100%)',
+    display: 'flex',
+    flexDirection: 'column',
+    color: 'white',
+    position: 'relative',
+    animation: 'fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+  },
+  
+  // Navbar
+  navbar: {
+    position: 'sticky',
+    top: 0,
+    zIndex: 100,
+    background: 'rgba(5, 5, 16, 0.75)',
+    backdropFilter: 'blur(30px)',
+    borderBottom: '1px solid rgba(255,255,255,0.04)',
+    padding: '14px 0',
+    transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+  },
+  questionNavbar: {
+    position: 'sticky',
+    top: 0,
+    zIndex: 100,
+    background: 'rgba(5, 5, 16, 0.92)',
+    backdropFilter: 'blur(30px)',
+    borderBottom: '1px solid rgba(255,255,255,0.04)',
+    padding: '14px 0',
+    transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+  },
+  navContainer: {
+    maxWidth: '1400px',
+    margin: '0 auto',
+    padding: '0 48px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  navBrand: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '14px',
+  },
+  navLogo: {
+    width: '42px',
+    height: '42px',
+    borderRadius: '14px',
+    objectFit: 'contain',
+  },
+  navBrandName: {
+    fontSize: '21px',
+    fontWeight: '700',
+    background: 'linear-gradient(135deg, #f8fafc 0%, #94a3b8 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+  },
+  navLinks: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '36px',
+  },
+  navLink: {
+    color: '#94a3b8',
+    fontSize: '15px',
+    fontWeight: '500',
+    cursor: 'pointer',
+    transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+    padding: '10px 0',
+  },
+  navLinkActive: {
+    color: '#a5b4fc',
+    fontWeight: '600',
+    borderBottom: '2px solid #6366f1',
+  },
+  navRight: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '14px',
+  },
+  exitBtn: {
+    background: 'rgba(239, 68, 68, 0.08)',
+    border: '1px solid rgba(239, 68, 68, 0.15)',
+    color: '#f87171',
+    padding: '12px 24px',
+    borderRadius: '12px',
+    fontSize: '14px',
+    fontWeight: '600',
+    cursor: 'pointer',
+    transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+  },
+  finishBtn: {
+    background: 'rgba(16, 185, 129, 0.12)',
+    border: '1px solid rgba(16, 185, 129, 0.25)',
+    color: '#34d399',
+    padding: '12px 24px',
+    borderRadius: '12px',
+    fontSize: '14px',
+    fontWeight: '600',
+    cursor: 'pointer',
+    transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+  },
+  navProgress: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '18px',
+  },
+  navProgressText: {
+    fontSize: '14px',
+    color: '#94a3b8',
+    fontWeight: '500',
+  },
+  navProgressBar: {
+    width: '220px',
+    height: '7px',
+    background: 'rgba(255,255,255,0.06)',
+    borderRadius: '4px',
+    overflow: 'hidden',
+  },
+  navProgressFill: {
+    height: '100%',
+    background: 'linear-gradient(90deg, #6366f1, #8b5cf6, #a855f7)',
+    transition: 'width 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+    borderRadius: '4px',
+  },
+  navConfidence: {
+    fontSize: '14px',
+    color: '#a5b4fc',
+    fontWeight: '600',
+  },
+  
+  // Main content areas
+  mainContent: {
+    flex: 1,
+    padding: '52px 48px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: '1200px',
+    margin: '0 auto',
+    width: '100%',
+    boxSizing: 'border-box',
+  },
+  questionMain: {
+    flex: 1,
+    display: 'flex',
+    gap: '40px',
+    padding: '40px 60px',
+    maxWidth: '1300px',
+    margin: '0 auto',
+    width: '100%',
+    boxSizing: 'border-box',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+  },
+  
+  // Hero elements
+  heroBadge: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '10px',
+    background: 'rgba(99, 102, 241, 0.08)',
+    border: '1px solid rgba(99, 102, 241, 0.15)',
+    borderRadius: '50px',
+    padding: '10px 24px',
+    fontSize: '14px',
+    color: '#a5b4fc',
+    fontWeight: '600',
+    marginBottom: '28px',
+    backdropFilter: 'blur(10px)',
+  },
+  heroTitle: {
+    fontSize: '48px',
+    fontWeight: '800',
+    color: '#f8fafc',
+    margin: '0 0 18px 0',
+    lineHeight: 1.15,
+    textAlign: 'center',
+    letterSpacing: '-1px',
+  },
+  heroGradient: {
+    background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 40%, #a855f7 70%, #c084fc 100%)',
+    backgroundSize: '300% 300%',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    animation: 'gradientShift 6s ease infinite',
+  },
+  heroSubtitle: {
+    color: '#64748b',
+    fontSize: '18px',
+    marginBottom: '52px',
+    lineHeight: 1.7,
+    textAlign: 'center',
+    maxWidth: '620px',
+  },
   
   // Start Screen
-  startScreen: { textAlign: 'center', maxWidth: '800px' },
-  genieIcon: { fontSize: '80px', marginBottom: '20px' },
-  title: { fontSize: '36px', fontWeight: '800', marginBottom: '15px' },
-  subtitle: { fontSize: '18px', color: '#94a3b8', marginBottom: '40px' },
-  featureGrid: { display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px', marginBottom: '40px' },
-  featureCard: { background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '16px', padding: '25px', textAlign: 'center' },
-  featureIcon: { fontSize: '32px', marginBottom: '10px', display: 'block' },
-  startButton: { padding: '18px 50px', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', border: 'none', borderRadius: '12px', color: 'white', fontSize: '18px', fontWeight: '700', cursor: 'pointer', transition: 'all 0.3s ease' },
+  startScreen: { textAlign: 'center', maxWidth: '840px' },
+  featureGrid: { display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '24px', marginBottom: '52px' },
+  featureCard: { background: 'rgba(15, 23, 42, 0.5)', border: '1px solid rgba(255,255,255,0.05)', borderRadius: '24px', padding: '32px', textAlign: 'center', backdropFilter: 'blur(20px)', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)' },
+  featureIcon: { fontSize: '36px', marginBottom: '18px', display: 'block' },
+  startButton: { padding: '20px 64px', background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%)', backgroundSize: '200% 200%', border: 'none', borderRadius: '16px', color: 'white', fontSize: '17px', fontWeight: '700', cursor: 'pointer', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)', boxShadow: '0 10px 35px rgba(99, 102, 241, 0.3)' },
   
-  // Progress Section
-  progressSection: { background: 'rgba(255,255,255,0.02)', borderRadius: '12px', padding: '20px', marginBottom: '20px' },
-  progressTitle: { fontSize: '14px', color: '#94a3b8', marginBottom: '15px', textTransform: 'uppercase', letterSpacing: '1px' },
-  progressBar: { height: '8px', background: 'rgba(255,255,255,0.1)', borderRadius: '4px', overflow: 'hidden', marginBottom: '8px' },
-  progressFill: { height: '100%', background: 'linear-gradient(90deg, #6366f1, #8b5cf6)', transition: 'width 0.5s ease' },
-  progressText: { fontSize: '13px', color: '#64748b' },
-  confidenceMeter: { marginTop: '15px', display: 'flex', alignItems: 'center', gap: '10px', fontSize: '13px', color: '#94a3b8' },
-  confidenceBar: { flex: 1, height: '6px', background: 'rgba(255,255,255,0.1)', borderRadius: '3px', overflow: 'hidden' },
-  confidenceFill: { height: '100%', transition: 'all 0.5s ease' },
-  confidenceValue: { fontWeight: '600', color: 'white', minWidth: '40px' },
-  statsSmall: { marginTop: '15px', fontSize: '12px', color: '#64748b', display: 'flex', flexDirection: 'column', gap: '5px' },
+  // Question Screen - Info Panel (Left Sidebar)
+  infoPanel: {
+    width: '260px',
+    flexShrink: 0,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '20px',
+    position: 'sticky',
+    top: '100px',
+  },
+  infoPanelSection: {
+    background: 'rgba(15, 23, 42, 0.6)',
+    backdropFilter: 'blur(20px)',
+    border: '1px solid rgba(255,255,255,0.06)',
+    borderRadius: '20px',
+    padding: '20px',
+    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+  },
+  infoPanelTitle: {
+    fontSize: '11px',
+    color: '#818cf8',
+    textTransform: 'uppercase',
+    letterSpacing: '2px',
+    fontWeight: '700',
+    margin: '0 0 16px 0',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+  },
+  statsSmall: { 
+    fontSize: '14px', 
+    color: '#94a3b8', 
+    display: 'flex', 
+    flexDirection: 'column', 
+    gap: '10px',
+    lineHeight: '1.5'
+  },
+  statItem: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    padding: '8px 12px',
+    background: 'rgba(255,255,255,0.02)',
+    borderRadius: '10px',
+    transition: 'all 0.3s ease',
+  },
+  statIcon: {
+    fontSize: '14px',
+  },
+  previewSection: { 
+    background: 'rgba(16, 185, 129, 0.06)', 
+    borderRadius: '20px', 
+    padding: '20px', 
+    border: '1px solid rgba(16, 185, 129, 0.12)' 
+  },
+  previewCard: { 
+    display: 'flex', 
+    alignItems: 'center', 
+    gap: '12px', 
+    padding: '12px 14px', 
+    background: 'rgba(255,255,255,0.03)', 
+    borderRadius: '12px', 
+    marginBottom: '8px', 
+    transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)' 
+  },
+  previewRank: { 
+    width: '26px', 
+    height: '26px', 
+    background: 'linear-gradient(135deg, #10b981, #059669)', 
+    borderRadius: '8px', 
+    display: 'flex', 
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    fontSize: '12px', 
+    fontWeight: '700',
+    color: 'white'
+  },
+  previewName: { 
+    fontSize: '13px', 
+    color: '#e2e8f0', 
+    flex: 1, 
+    fontWeight: '500',
+    lineHeight: '1.3'
+  },
   
-  // Preview Section
-  previewSection: { background: 'rgba(16, 185, 129, 0.1)', borderRadius: '12px', padding: '15px', marginBottom: '20px' },
-  previewTitle: { fontSize: '14px', color: '#10b981', marginBottom: '12px' },
-  previewCard: { display: 'flex', alignItems: 'center', gap: '10px', padding: '8px', background: 'rgba(255,255,255,0.05)', borderRadius: '8px', marginBottom: '6px' },
-  previewRank: { width: '24px', height: '24px', background: '#10b981', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '12px', fontWeight: 'bold' },
-  previewName: { fontSize: '12px', color: '#e2e8f0', flex: 1 },
-  
-  finishButton: { padding: '12px', background: 'rgba(16, 185, 129, 0.2)', color: '#10b981', borderRadius: '8px', cursor: 'pointer', textAlign: 'center', fontWeight: '600', marginBottom: '10px', transition: 'all 0.3s ease' },
-  
-  // Question Card
-  traitIndicator: { padding: '10px 20px', background: 'rgba(99, 102, 241, 0.2)', borderRadius: '20px', marginBottom: '30px', fontSize: '14px', color: '#818cf8' },
-  questionCard: { background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '24px', padding: '50px', maxWidth: '700px', width: '100%', transition: 'all 0.3s ease', position: 'relative' },
-  questionHeader: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' },
-  questionNumber: { fontSize: '14px', color: '#6366f1', fontWeight: '600', background: 'rgba(99, 102, 241, 0.1)', padding: '6px 14px', borderRadius: '20px' },
-  questionCategory: { fontSize: '13px', color: '#64748b', textTransform: 'uppercase', letterSpacing: '1px' },
-  questionText: { fontSize: '24px', fontWeight: '600', lineHeight: '1.5', marginBottom: '40px', color: 'white' },
-  optionsContainer: { display: 'flex', flexDirection: 'column', gap: '15px' },
-  optionButton: { width: '100%', padding: '18px 24px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', color: '#e2e8f0', fontSize: '16px', textAlign: 'left', cursor: 'pointer', transition: 'all 0.3s ease' },
-  loadingOverlay: { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(2, 6, 23, 0.9)', borderRadius: '24px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' },
-  loadingSpinner: { fontSize: '40px', animation: 'spin 1s linear infinite' },
+  // Question Area (Main Content)
+  questionArea: {
+    flex: 1,
+    maxWidth: '760px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  traitIndicator: { 
+    padding: '12px 24px', 
+    background: 'rgba(34, 197, 94, 0.1)', 
+    borderRadius: '24px', 
+    marginBottom: '24px', 
+    fontSize: '14px', 
+    color: '#4ade80', 
+    fontWeight: '500', 
+    border: '1px solid rgba(34, 197, 94, 0.2)', 
+    backdropFilter: 'blur(10px)',
+    animation: 'fadeIn 0.4s ease'
+  },
+  questionCard: { 
+    background: 'linear-gradient(145deg, rgba(15, 23, 42, 0.7) 0%, rgba(30, 27, 75, 0.5) 100%)', 
+    border: '1px solid rgba(255,255,255,0.08)', 
+    borderRadius: '28px', 
+    padding: '44px 48px', 
+    width: '100%', 
+    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)', 
+    position: 'relative', 
+    backdropFilter: 'blur(30px)', 
+    boxShadow: '0 20px 60px rgba(0, 0, 0, 0.25)' 
+  },
+  questionHeader: { 
+    display: 'flex', 
+    justifyContent: 'space-between', 
+    alignItems: 'center', 
+    marginBottom: '28px' 
+  },
+  questionNumber: { 
+    fontSize: '13px', 
+    color: '#a5b4fc', 
+    fontWeight: '600', 
+    background: 'rgba(99, 102, 241, 0.12)', 
+    padding: '10px 20px', 
+    borderRadius: '20px',
+    border: '1px solid rgba(99, 102, 241, 0.2)'
+  },
+  questionCategory: { 
+    fontSize: '11px', 
+    color: '#64748b', 
+    textTransform: 'uppercase', 
+    letterSpacing: '2px', 
+    fontWeight: '600',
+    background: 'rgba(255,255,255,0.05)',
+    padding: '8px 14px',
+    borderRadius: '8px'
+  },
+  questionText: { 
+    fontSize: '22px', 
+    fontWeight: '600', 
+    lineHeight: '1.5', 
+    marginBottom: '32px', 
+    color: '#f1f5f9',
+    letterSpacing: '-0.3px'
+  },
+  optionsContainer: { 
+    display: 'flex', 
+    flexDirection: 'column', 
+    gap: '12px' 
+  },
+  optionButton: { 
+    width: '100%', 
+    padding: '18px 24px', 
+    background: 'rgba(30, 41, 59, 0.5)', 
+    border: '2px solid rgba(255,255,255,0.06)', 
+    borderRadius: '14px', 
+    color: '#e2e8f0', 
+    fontSize: '15px', 
+    textAlign: 'left', 
+    cursor: 'pointer', 
+    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', 
+    fontWeight: '500',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '14px'
+  },
+  optionLetter: {
+    width: '32px',
+    height: '32px',
+    background: 'rgba(99, 102, 241, 0.15)',
+    border: '1px solid rgba(99, 102, 241, 0.25)',
+    borderRadius: '8px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '14px',
+    fontWeight: '700',
+    color: '#a5b4fc',
+    flexShrink: 0,
+  },
+  optionText: {
+    flex: 1,
+    lineHeight: '1.4',
+  },
+  loadingOverlay: { 
+    position: 'absolute', 
+    top: 0, 
+    left: 0, 
+    right: 0, 
+    bottom: 0, 
+    background: 'rgba(15, 23, 42, 0.95)', 
+    borderRadius: '28px', 
+    display: 'flex', 
+    flexDirection: 'column', 
+    alignItems: 'center', 
+    justifyContent: 'center', 
+    backdropFilter: 'blur(8px)',
+    gap: '16px'
+  },
+  loadingSpinner: { 
+    fontSize: '48px', 
+    animation: 'spin 1s linear infinite' 
+  },
   
   // Results
-  resultsHeader: { textAlign: 'center', marginBottom: '40px' },
-  statsRow: { display: 'flex', justifyContent: 'center', gap: '40px', marginTop: '30px' },
-  stat: { textAlign: 'center' },
-  statValue: { fontSize: '32px', fontWeight: '700', color: '#6366f1', display: 'block' },
-  statLabel: { fontSize: '14px', color: '#64748b' },
-  resultsGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px', width: '100%', maxWidth: '1200px' },
-  resultCard: { background: 'rgba(255,255,255,0.03)', border: '2px solid', borderRadius: '16px', padding: '25px', position: 'relative' },
-  resultRank: { position: 'absolute', top: '-12px', right: '20px', background: '#6366f1', padding: '4px 12px', borderRadius: '20px', fontSize: '14px', fontWeight: '600' },
-  resultName: { fontSize: '18px', fontWeight: '600', marginBottom: '15px', paddingRight: '50px' },
-  resultMatch: { display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '15px' },
-  matchBar: { flex: 1, height: '8px', background: 'rgba(255,255,255,0.1)', borderRadius: '4px', overflow: 'hidden' },
-  matchFill: { height: '100%', transition: 'width 0.5s ease' },
-  matchPercent: { fontWeight: '600', color: '#10b981', minWidth: '45px' },
-  resultDesc: { fontSize: '13px', color: '#94a3b8', lineHeight: '1.6', marginBottom: '15px' },
-  traitTags: { display: 'flex', flexWrap: 'wrap', gap: '6px' },
-  traitTag: { fontSize: '11px', background: 'rgba(99, 102, 241, 0.2)', color: '#818cf8', padding: '4px 10px', borderRadius: '20px' },
-  viewFullButton: { marginTop: '30px', padding: '16px 40px', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', border: 'none', borderRadius: '12px', color: 'white', fontSize: '16px', fontWeight: '600', cursor: 'pointer' },
+  resultsHeader: { textAlign: 'center', marginBottom: '52px' },
+  statsRow: { display: 'flex', justifyContent: 'center', gap: '56px', marginTop: '36px' },
+  stat: { textAlign: 'center', background: 'rgba(15, 23, 42, 0.5)', padding: '28px 36px', borderRadius: '20px', border: '1px solid rgba(255,255,255,0.05)', backdropFilter: 'blur(10px)' },
+  statValue: { fontSize: '40px', fontWeight: '800', background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', display: 'block' },
+  statLabel: { fontSize: '15px', color: '#64748b', marginTop: '10px', display: 'block' },
+  resultsGrid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '28px', width: '100%', maxWidth: '1200px' },
+  resultCard: { background: 'rgba(15, 23, 42, 0.5)', border: '2px solid', borderRadius: '24px', padding: '32px', position: 'relative', backdropFilter: 'blur(20px)', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)' },
+  resultRank: { position: 'absolute', top: '-14px', right: '28px', background: 'linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7)', padding: '10px 22px', borderRadius: '28px', fontSize: '15px', fontWeight: '700', boxShadow: '0 6px 18px rgba(99, 102, 241, 0.3)' },
+  resultName: { fontSize: '20px', fontWeight: '700', marginBottom: '18px', paddingRight: '70px', color: '#f1f5f9' },
+  resultMatch: { display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '18px' },
+  matchBar: { flex: 1, height: '9px', background: 'rgba(255,255,255,0.06)', borderRadius: '5px', overflow: 'hidden' },
+  matchFill: { height: '100%', transition: 'width 0.5s cubic-bezier(0.4, 0, 0.2, 1)', borderRadius: '5px' },
+  matchPercent: { fontWeight: '700', color: '#34d399', minWidth: '55px', fontSize: '18px' },
+  resultDesc: { fontSize: '15px', color: '#94a3b8', lineHeight: '1.7', marginBottom: '18px' },
+  traitTags: { display: 'flex', flexWrap: 'wrap', gap: '10px' },
+  traitTag: { fontSize: '13px', background: 'rgba(99, 102, 241, 0.12)', color: '#a5b4fc', padding: '8px 16px', borderRadius: '24px', fontWeight: '500' },
+  viewFullButton: { marginTop: '48px', padding: '20px 56px', background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%)', backgroundSize: '200% 200%', border: 'none', borderRadius: '16px', color: 'white', fontSize: '17px', fontWeight: '700', cursor: 'pointer', boxShadow: '0 10px 35px rgba(99, 102, 241, 0.3)', transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)' },
   
-  error: { color: '#ef4444', marginTop: '20px', textAlign: 'center' }
+  error: { color: '#f87171', marginTop: '24px', textAlign: 'center', fontSize: '15px' }
 };
 
 export default AdaptiveAssessment;

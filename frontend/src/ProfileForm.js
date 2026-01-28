@@ -109,9 +109,52 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
   const [interestModalOpen, setInterestModalOpen] = useState(false);
   const [skillsModalOpen, setSkillsModalOpen] = useState(false);
   const [toast, setToast] = useState(null);
+  const [profilePhoto, setProfilePhoto] = useState(null);
+  const fileInputRef = useRef(null);
+  
+  // Load saved profile photo from localStorage on mount
+  useEffect(() => {
+    const savedPhoto = localStorage.getItem('profilePhoto');
+    if (savedPhoto) {
+      setProfilePhoto(savedPhoto);
+    }
+  }, []);
   
   const showToast = (message, type = 'info') => {
     setToast({ message, type });
+  };
+  
+  // Handle profile photo upload
+  const handlePhotoUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Check file size (max 2MB)
+      if (file.size > 2 * 1024 * 1024) {
+        showToast('Image size must be less than 2MB', 'error');
+        return;
+      }
+      
+      // Check file type
+      if (!file.type.startsWith('image/')) {
+        showToast('Please upload an image file', 'error');
+        return;
+      }
+      
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result;
+        setProfilePhoto(base64String);
+        localStorage.setItem('profilePhoto', base64String);
+        showToast('Profile photo updated!', 'success');
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+  
+  const removePhoto = () => {
+    setProfilePhoto(null);
+    localStorage.removeItem('profilePhoto');
+    showToast('Profile photo removed', 'info');
   };
   
   // Parse interests and skills from comma-separated string to array
@@ -272,39 +315,94 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
   // Loading state if data isn't ready
   if (formData === null) {
     return (
-      <div style={{...styles.dashboardWrapper, justifyContent: 'center', alignItems: 'center'}}>
-        <div style={{color: '#6366f1', fontWeight: 'bold'}}>Loading profile data...</div>
+      <div style={{...styles.pageWrapper, justifyContent: 'center', alignItems: 'center'}}>
+        <div style={{color: '#6366f1', fontWeight: 'bold', fontSize: '18px'}}>Loading profile data...</div>
       </div>
     );
   }
 
   return (
-    <div style={styles.dashboardWrapper}>
-      {/* SIDEBAR */}
-      <aside style={styles.sidebar}>
-        <div style={styles.brandContainer}>
-          <img src="/logo.svg" alt="CoursePro" style={styles.logoIcon} />
-          <h2 style={styles.brandName}>CoursePro</h2>
+    <div style={styles.pageWrapper}>
+      {/* TOP NAVIGATION BAR */}
+      <nav style={styles.navbar}>
+        <div style={styles.navContainer}>
+          <div style={styles.navBrand}>
+            <img src="/logo.svg" alt="CoursePro" style={styles.navLogo} />
+            <span style={styles.navBrandName}>CoursePro</span>
+          </div>
+          
+          <div style={styles.navLinks}>
+            <span style={styles.navLink} onClick={onBack}>Dashboard</span>
+            <span style={{...styles.navLink, ...styles.navLinkActive}}>Academic Profile</span>
+          </div>
+
+          <div style={styles.navRight}>
+            <button onClick={onBack} style={styles.discardBtn}>← Back to Dashboard</button>
+          </div>
         </div>
-        <nav style={styles.nav}>
-          <div style={styles.categoryLabel}>Settings</div>
-          <div style={styles.navItem} onClick={onBack}>📊 Back to Dashboard</div>
-          <div style={{...styles.navItem, ...styles.navActive}}>📝 Edit Profile</div>
-        </nav>
-        <button onClick={onBack} style={styles.cancelBtn}>Discard Changes</button>
-      </aside>
+      </nav>
 
       {/* MAIN CONTENT */}
       <main style={styles.mainContent}>
-        <header style={styles.header}>
-          <h1 style={styles.headerTitle}>Personal Profile</h1>
-          <p style={styles.headerSubtitle}>Configure your background for better AI precision.</p>
-        </header>
+        {/* Hero Header */}
+        <div style={styles.heroHeader}>
+          <div style={styles.heroBadge}>
+            <span>📝</span> Configure Your Profile
+          </div>
+          <h1 style={styles.heroTitle}>
+            Academic <span style={styles.heroGradient}>Profile</span>
+          </h1>
+          <p style={styles.heroSubtitle}>
+            Personalize your background for more accurate AI-powered course recommendations.
+          </p>
+        </div>
 
         <div style={styles.formContainer}>
           <form style={styles.glassCard} onSubmit={(e) => { e.preventDefault(); onSave(); }}>
             
             <div style={styles.formSectionTitle}>Basic Information</div>
+            
+            {/* PROFILE PHOTO */}
+            <div style={styles.photoSection}>
+              <div style={styles.photoWrapper}>
+                {profilePhoto ? (
+                  <img src={profilePhoto} alt="Profile" style={styles.photoImage} />
+                ) : (
+                  <div style={styles.photoPlaceholder}>
+                    <span style={styles.photoIcon}>👤</span>
+                  </div>
+                )}
+                <div style={styles.photoOverlay} onClick={() => fileInputRef.current?.click()}>
+                  <span>📷</span>
+                </div>
+              </div>
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handlePhotoUpload}
+                accept="image/*"
+                style={{ display: 'none' }}
+              />
+              <div style={styles.photoActions}>
+                <button 
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()} 
+                  style={styles.uploadBtn}
+                >
+                  {profilePhoto ? 'Change Photo' : 'Upload Photo'}
+                </button>
+                {profilePhoto && (
+                  <button 
+                    type="button"
+                    onClick={removePhoto} 
+                    style={styles.removePhotoBtn}
+                  >
+                    Remove
+                  </button>
+                )}
+              </div>
+              <p style={styles.photoHint}>Max 2MB • JPG, PNG, or GIF</p>
+            </div>
             
             {/* FULL NAME FIELD - Added back here */}
             <div style={{...styles.inputGroup, marginBottom: '25px'}}>
@@ -483,6 +581,11 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
             <p style={styles.infoText}>
               Ensuring your interests and skills are accurate helps our engine find the best career matches beyond just grades.
             </p>
+            <div style={styles.tipsList}>
+              <div style={styles.tipItem}>✓ Add at least 3 interests</div>
+              <div style={styles.tipItem}>✓ Include both technical & soft skills</div>
+              <div style={styles.tipItem}>✓ Keep GWA accurate</div>
+            </div>
           </div>
         </div>
       </main>
@@ -593,109 +696,390 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
 }
 
 const styles = {
-  dashboardWrapper: { display: 'flex', width: '100vw', height: '100vh', background: 'transparent' },
-  sidebar: { width: '260px', background: 'rgba(255, 255, 255, 0.02)', backdropFilter: 'blur(20px)', borderRight: '1px solid rgba(255, 255, 255, 0.08)', display: 'flex', flexDirection: 'column', padding: '40px 20px' },
-  logoIcon: { width: '40px', height: '40px', borderRadius: '10px', marginRight: '12px', objectFit: 'contain' },
-  brandContainer: { display: 'flex', alignItems: 'center', marginBottom: '40px', paddingLeft: '10px' },
-  brandName: { fontSize: '18px', fontWeight: '700', color: 'white', margin: 0 },
-  nav: { flex: 1 },
-  categoryLabel: { fontSize: '11px', fontWeight: '700', color: '#64748b', textTransform: 'uppercase', letterSpacing: '1px', margin: '20px 0 10px 10px' },
-  navItem: { padding: '12px 15px', borderRadius: '10px', color: '#94a3b8', cursor: 'pointer', fontSize: '14px', marginBottom: '4px' },
-  navActive: { background: 'rgba(99, 102, 241, 0.1)', color: '#818cf8', fontWeight: '600' },
-  cancelBtn: { padding: '12px', borderRadius: '10px', border: '1px solid rgba(255,255,255,0.1)', background: 'transparent', color: '#94a3b8', cursor: 'pointer', fontWeight: '600', fontSize: '13px' },
-  mainContent: { flex: 1, padding: '40px 60px', overflowY: 'auto' },
-  header: { marginBottom: '30px' },
-  headerTitle: { fontSize: '28px', fontWeight: '800', color: 'white', margin: 0 },
-  headerSubtitle: { color: 'rgba(255,255,255,0.6)', fontSize: '15px', marginTop: '5px' },
-  formContainer: { display: 'grid', gridTemplateColumns: '1fr 280px', gap: '40px', alignItems: 'start' },
+  pageWrapper: { 
+    minHeight: '100vh',
+    background: '#050510',
+    display: 'flex',
+    flexDirection: 'column',
+    position: 'relative',
+  },
+  navbar: {
+    position: 'sticky',
+    top: 0,
+    zIndex: 100,
+    background: 'rgba(5, 5, 16, 0.8)',
+    backdropFilter: 'blur(20px)',
+    borderBottom: '1px solid rgba(255,255,255,0.05)',
+    padding: '12px 0',
+  },
+  navContainer: {
+    maxWidth: '1400px',
+    margin: '0 auto',
+    padding: '0 40px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  navBrand: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+  },
+  navLogo: {
+    width: '40px',
+    height: '40px',
+    borderRadius: '12px',
+    objectFit: 'contain',
+  },
+  navBrandName: {
+    fontSize: '20px',
+    fontWeight: '700',
+    background: 'linear-gradient(135deg, #f8fafc 0%, #94a3b8 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+  },
+  navLinks: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '32px',
+  },
+  navLink: {
+    color: '#94a3b8',
+    fontSize: '14px',
+    fontWeight: '500',
+    cursor: 'pointer',
+    transition: 'color 0.2s ease',
+    padding: '8px 0',
+  },
+  navLinkActive: {
+    color: '#a5b4fc',
+    fontWeight: '600',
+    borderBottom: '2px solid #6366f1',
+  },
+  navRight: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '16px',
+  },
+  discardBtn: {
+    background: 'rgba(239, 68, 68, 0.1)',
+    border: '1px solid rgba(239, 68, 68, 0.2)',
+    color: '#f87171',
+    padding: '10px 20px',
+    borderRadius: '10px',
+    fontSize: '14px',
+    fontWeight: '600',
+    cursor: 'pointer',
+    transition: 'all 0.2s ease',
+  },
+  mainContent: { 
+    flex: 1, 
+    padding: '48px 40px',
+    maxWidth: '1400px',
+    margin: '0 auto',
+    width: '100%',
+    boxSizing: 'border-box',
+  },
+  heroHeader: {
+    textAlign: 'center',
+    marginBottom: '48px',
+  },
+  heroBadge: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '8px',
+    background: 'rgba(99, 102, 241, 0.1)',
+    border: '1px solid rgba(99, 102, 241, 0.2)',
+    borderRadius: '50px',
+    padding: '8px 20px',
+    fontSize: '13px',
+    color: '#a5b4fc',
+    fontWeight: '600',
+    marginBottom: '24px',
+  },
+  heroTitle: {
+    fontSize: '42px',
+    fontWeight: '800',
+    color: '#f8fafc',
+    margin: '0 0 16px 0',
+    lineHeight: 1.2,
+  },
+  heroGradient: {
+    background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+  },
+  heroSubtitle: {
+    color: '#64748b',
+    fontSize: '16px',
+    maxWidth: '600px',
+    margin: '0 auto',
+    lineHeight: 1.6,
+  },
+  formContainer: { 
+    display: 'grid', 
+    gridTemplateColumns: '1fr 320px', 
+    gap: '40px', 
+    alignItems: 'start',
+    maxWidth: '1200px',
+    margin: '0 auto',
+  },
   glassCard: { 
-    background: 'rgba(255, 255, 255, 0.05)', 
-    backdropFilter: 'blur(20px) saturate(180%)',
-    WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-    border: '1px solid rgba(255, 255, 255, 0.15)', 
+    background: 'rgba(15, 23, 42, 0.6)', 
+    backdropFilter: 'blur(20px)',
+    WebkitBackdropFilter: 'blur(20px)',
+    border: '1px solid rgba(255, 255, 255, 0.06)', 
     borderRadius: '24px', 
     padding: '40px', 
-    boxShadow: '0 20px 40px rgba(0,0,0,0.3)' 
+    boxShadow: '0 20px 40px rgba(0,0,0,0.2)' 
   },
-  formSectionTitle: { fontSize: '14px', fontWeight: '700', color: '#818cf8', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '20px' },
-  formGrid: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '25px' },
-  inputGroup: { display: 'flex', flexDirection: 'column' },
-  label: { fontSize: '13px', fontWeight: '600', color: 'rgba(255,255,255,0.8)', marginBottom: '8px', marginLeft: '4px' },
+  formSectionTitle: { 
+    fontSize: '13px', 
+    fontWeight: '700', 
+    color: '#a5b4fc', 
+    textTransform: 'uppercase', 
+    letterSpacing: '1px', 
+    marginBottom: '24px',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+  },
+  
+  // Profile Photo Styles
+  photoSection: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginBottom: '32px',
+    padding: '24px',
+    background: 'rgba(255, 255, 255, 0.02)',
+    borderRadius: '16px',
+    border: '1px solid rgba(255, 255, 255, 0.04)',
+  },
+  photoWrapper: {
+    position: 'relative',
+    width: '120px',
+    height: '120px',
+    borderRadius: '50%',
+    overflow: 'hidden',
+    marginBottom: '16px',
+    border: '3px solid rgba(99, 102, 241, 0.3)',
+    boxShadow: '0 8px 32px rgba(99, 102, 241, 0.2)',
+  },
+  photoImage: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+  },
+  photoPlaceholder: {
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
+  },
+  photoIcon: {
+    fontSize: '48px',
+    opacity: 0.5,
+  },
+  photoOverlay: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: '36px',
+    background: 'rgba(0, 0, 0, 0.7)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    cursor: 'pointer',
+    fontSize: '16px',
+    opacity: 0.8,
+    transition: 'opacity 0.2s ease',
+  },
+  photoActions: {
+    display: 'flex',
+    gap: '10px',
+    marginBottom: '8px',
+  },
+  uploadBtn: {
+    padding: '10px 20px',
+    background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+    border: 'none',
+    borderRadius: '10px',
+    color: 'white',
+    fontSize: '13px',
+    fontWeight: '600',
+    cursor: 'pointer',
+    transition: 'all 0.2s ease',
+  },
+  removePhotoBtn: {
+    padding: '10px 20px',
+    background: 'rgba(239, 68, 68, 0.1)',
+    border: '1px solid rgba(239, 68, 68, 0.2)',
+    borderRadius: '10px',
+    color: '#f87171',
+    fontSize: '13px',
+    fontWeight: '600',
+    cursor: 'pointer',
+    transition: 'all 0.2s ease',
+  },
+  photoHint: {
+    margin: 0,
+    fontSize: '12px',
+    color: '#64748b',
+  },
+  
+  formGrid: { 
+    display: 'grid', 
+    gridTemplateColumns: '1fr 1fr', 
+    gap: '24px' 
+  },
+  inputGroup: { 
+    display: 'flex', 
+    flexDirection: 'column' 
+  },
+  label: { 
+    fontSize: '13px', 
+    fontWeight: '600', 
+    color: '#94a3b8', 
+    marginBottom: '10px', 
+    marginLeft: '4px' 
+  },
   input: { 
-    padding: '14px 16px', 
-    background: 'rgba(30, 30, 50, 0.9)', // Solid dark background for dropdown compatibility
-    border: '1px solid rgba(255,255,255,0.1)', 
+    padding: '14px 18px', 
+    background: 'rgba(30, 41, 59, 0.8)', 
+    border: '1px solid rgba(255,255,255,0.06)', 
     borderRadius: '12px', 
-    color: 'white', 
+    color: '#f1f5f9', 
     fontSize: '15px', 
     outline: 'none',
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
+    transition: 'all 0.2s ease'
   },
-  // Added this to style the options inside the select
   option: {
-    background: '#1a1a2e', 
-    color: 'white'
+    background: '#1e293b', 
+    color: '#f1f5f9'
   },
-  footer: { marginTop: '40px', borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '30px', display: 'flex', justifyContent: 'flex-end' },
-  saveBtn: { background: '#6366f1', color: 'white', padding: '16px 32px', borderRadius: '14px', border: 'none', fontWeight: '700', fontSize: '15px', cursor: 'pointer', boxShadow: '0 10px 15px rgba(99, 102, 241, 0.2)' },
-  infoCol: { background: 'rgba(99, 102, 241, 0.03)', border: '1px solid rgba(99, 102, 241, 0.1)', borderRadius: '20px', padding: '25px' },
-  statusBox: { display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '15px' },
-  statusDot: { width: '8px', height: '8px', borderRadius: '50%', background: '#10b981', boxShadow: '0 0 10px #10b981' },
-  infoText: { fontSize: '13px', color: '#94a3b8', lineHeight: '1.6', margin: 0 },
+  footer: { 
+    marginTop: '40px', 
+    borderTop: '1px solid rgba(255,255,255,0.06)', 
+    paddingTop: '32px', 
+    display: 'flex', 
+    justifyContent: 'flex-end' 
+  },
+  saveBtn: { 
+    background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)', 
+    color: 'white', 
+    padding: '16px 36px', 
+    borderRadius: '14px', 
+    border: 'none', 
+    fontWeight: '700', 
+    fontSize: '15px', 
+    cursor: 'pointer', 
+    boxShadow: '0 8px 24px rgba(99, 102, 241, 0.25)',
+    transition: 'all 0.3s ease'
+  },
+  infoCol: { 
+    background: 'rgba(15, 23, 42, 0.6)', 
+    backdropFilter: 'blur(20px)',
+    border: '1px solid rgba(99, 102, 241, 0.15)', 
+    borderRadius: '20px', 
+    padding: '28px',
+    position: 'sticky',
+    top: '120px',
+  },
+  statusBox: { 
+    display: 'flex', 
+    alignItems: 'center', 
+    gap: '10px', 
+    marginBottom: '16px',
+    background: 'rgba(16, 185, 129, 0.1)',
+    padding: '10px 14px',
+    borderRadius: '10px',
+  },
+  statusDot: { 
+    width: '10px', 
+    height: '10px', 
+    borderRadius: '50%', 
+    background: '#10b981', 
+    boxShadow: '0 0 12px rgba(16, 185, 129, 0.5)',
+    animation: 'pulse 2s infinite',
+  },
+  infoText: { 
+    fontSize: '14px', 
+    color: '#94a3b8', 
+    lineHeight: '1.7', 
+    margin: '0 0 20px 0' 
+  },
+  tipsList: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '10px',
+  },
+  tipItem: {
+    fontSize: '13px',
+    color: '#64748b',
+    padding: '10px 14px',
+    background: 'rgba(255,255,255,0.02)',
+    borderRadius: '8px',
+    border: '1px solid rgba(255,255,255,0.04)',
+  },
   checkboxGrid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
-    gap: '10px',
-    maxHeight: '300px',
+    gap: '12px',
+    maxHeight: '320px',
     overflowY: 'auto',
-    padding: '15px',
-    background: 'rgba(30, 30, 50, 0.6)',
-    borderRadius: '12px',
-    border: '1px solid rgba(255,255,255,0.1)',
+    padding: '18px',
+    background: 'rgba(30, 41, 59, 0.5)',
+    borderRadius: '14px',
+    border: '1px solid rgba(255,255,255,0.06)',
   },
   checkboxLabel: {
     display: 'flex',
     alignItems: 'center',
-    gap: '8px',
-    padding: '10px 14px',
-    background: 'rgba(255,255,255,0.03)',
-    borderRadius: '8px',
+    gap: '10px',
+    padding: '12px 16px',
+    background: 'rgba(255,255,255,0.02)',
+    borderRadius: '10px',
     cursor: 'pointer',
     fontSize: '13px',
-    color: 'rgba(255,255,255,0.7)',
-    border: '1px solid rgba(255,255,255,0.08)',
+    color: '#94a3b8',
+    border: '1px solid rgba(255,255,255,0.04)',
     transition: 'all 0.2s ease',
   },
   checkboxLabelSelected: {
-    background: 'rgba(99, 102, 241, 0.15)',
-    borderColor: 'rgba(99, 102, 241, 0.4)',
+    background: 'rgba(99, 102, 241, 0.12)',
+    borderColor: 'rgba(99, 102, 241, 0.3)',
     color: '#a5b4fc',
   },
   checkbox: {
-    width: '16px',
-    height: '16px',
+    width: '18px',
+    height: '18px',
     accentColor: '#6366f1',
     cursor: 'pointer',
   },
   tagsContainer: {
     display: 'flex',
     flexWrap: 'wrap',
-    gap: '12px',
-    padding: '20px',
-    background: 'rgba(30, 30, 50, 0.4)',
-    borderRadius: '14px',
-    border: '1px solid rgba(255,255,255,0.1)',
-    minHeight: '120px',
+    gap: '14px',
+    padding: '24px',
+    background: 'rgba(30, 41, 59, 0.4)',
+    borderRadius: '16px',
+    border: '1px solid rgba(255,255,255,0.06)',
+    minHeight: '140px',
     alignContent: 'flex-start',
   },
   tagItem: {
-    padding: '12px 18px',
-    background: 'rgba(255,255,255,0.05)',
-    border: '2px solid rgba(255,255,255,0.1)',
+    padding: '12px 20px',
+    background: 'rgba(255,255,255,0.03)',
+    border: '2px solid rgba(255,255,255,0.06)',
     borderRadius: '12px',
     cursor: 'pointer',
     fontSize: '13px',
-    color: 'rgba(255,255,255,0.6)',
+    color: '#94a3b8',
     fontWeight: '500',
     transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
     whiteSpace: 'nowrap',
@@ -703,19 +1087,19 @@ const styles = {
     boxShadow: 'none',
   },
   tagItemSelected: {
-    background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(139, 92, 246, 0.15))',
-    borderColor: 'rgba(99, 102, 241, 0.6)',
+    background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.12))',
+    borderColor: 'rgba(99, 102, 241, 0.5)',
     color: '#a5b4fc',
     fontWeight: '600',
-    transform: 'scale(1.05)',
-    boxShadow: '0 8px 20px rgba(99, 102, 241, 0.25)',
+    transform: 'scale(1.03)',
+    boxShadow: '0 8px 20px rgba(99, 102, 241, 0.2)',
   },
   clickableField: {
-    padding: '14px 16px',
-    background: 'rgba(30, 30, 50, 0.9)',
-    border: '1px solid rgba(255,255,255,0.1)',
+    padding: '14px 18px',
+    background: 'rgba(30, 41, 59, 0.8)',
+    border: '1px solid rgba(255,255,255,0.06)',
     borderRadius: '12px',
-    color: 'white',
+    color: '#f1f5f9',
     fontSize: '15px',
     outline: 'none',
     boxSizing: 'border-box',
@@ -724,25 +1108,25 @@ const styles = {
     display: 'flex',
     alignItems: 'flex-start',
     flexWrap: 'wrap',
-    gap: '8px',
+    gap: '10px',
   },
   selectedTagsContainer: {
     display: 'flex',
     flexWrap: 'wrap',
-    gap: '8px',
+    gap: '10px',
     width: '100%',
   },
   selectedTag: {
     display: 'flex',
     alignItems: 'center',
-    gap: '6px',
-    padding: '6px 12px',
-    background: 'rgba(99, 102, 241, 0.2)',
-    border: '1px solid rgba(99, 102, 241, 0.4)',
+    gap: '8px',
+    padding: '8px 14px',
+    background: 'rgba(99, 102, 241, 0.15)',
+    border: '1px solid rgba(99, 102, 241, 0.3)',
     borderRadius: '8px',
     color: '#a5b4fc',
     fontSize: '12px',
-    fontWeight: '500',
+    fontWeight: '600',
   },
   removeBtn: {
     cursor: 'pointer',
@@ -757,42 +1141,44 @@ const styles = {
     left: 0,
     right: 0,
     bottom: 0,
-    background: 'rgba(0, 0, 0, 0.6)',
-    backdropFilter: 'blur(5px)',
+    background: 'rgba(0, 0, 0, 0.7)',
+    backdropFilter: 'blur(8px)',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 1000,
   },
   modalContent: {
-    background: 'rgba(20, 20, 40, 0.95)',
+    background: 'rgba(15, 23, 42, 0.95)',
     backdropFilter: 'blur(20px)',
-    border: '1px solid rgba(255, 255, 255, 0.15)',
+    border: '1px solid rgba(255, 255, 255, 0.08)',
     borderRadius: '24px',
     width: '90%',
-    maxWidth: '700px',
+    maxWidth: '720px',
     maxHeight: '85vh',
     display: 'flex',
     flexDirection: 'column',
-    boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)',
+    boxShadow: '0 25px 60px rgba(0, 0, 0, 0.4)',
   },
   modalHeader: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '24px 28px',
-    borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+    padding: '28px 32px',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.06)',
   },
   modalTitle: {
-    fontSize: '20px',
+    fontSize: '22px',
     fontWeight: '700',
-    color: 'white',
+    background: 'linear-gradient(135deg, #f8fafc 0%, #cbd5e1 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
     margin: 0,
   },
   closeBtn: {
     background: 'none',
     border: 'none',
-    color: '#94a3b8',
+    color: '#64748b',
     fontSize: '24px',
     cursor: 'pointer',
     padding: '4px 8px',
@@ -801,46 +1187,46 @@ const styles = {
   modalBody: {
     flex: 1,
     overflowY: 'auto',
-    padding: '24px 28px',
+    padding: '28px 32px',
   },
   categorySection: {
-    marginBottom: '28px',
+    marginBottom: '32px',
   },
   categoryTitle: {
-    fontSize: '13px',
+    fontSize: '12px',
     fontWeight: '700',
-    color: '#818cf8',
+    color: '#a5b4fc',
     textTransform: 'uppercase',
-    letterSpacing: '0.5px',
-    marginBottom: '14px',
-    margin: '0 0 14px 0',
+    letterSpacing: '1px',
+    marginBottom: '16px',
+    margin: '0 0 16px 0',
   },
   tagsGrid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
-    gap: '10px',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(170px, 1fr))',
+    gap: '12px',
   },
   modalTag: {
-    padding: '12px 14px',
-    background: 'rgba(255, 255, 255, 0.05)',
-    border: '2px solid rgba(255, 255, 255, 0.1)',
-    borderRadius: '10px',
+    padding: '14px 16px',
+    background: 'rgba(255, 255, 255, 0.03)',
+    border: '2px solid rgba(255, 255, 255, 0.06)',
+    borderRadius: '12px',
     cursor: 'pointer',
     fontSize: '13px',
-    color: 'rgba(255, 255, 255, 0.6)',
+    color: '#94a3b8',
     fontWeight: '500',
     transition: 'all 0.2s ease',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    gap: '8px',
+    gap: '10px',
   },
   modalTagSelected: {
-    background: 'rgba(99, 102, 241, 0.2)',
-    borderColor: 'rgba(99, 102, 241, 0.6)',
+    background: 'rgba(99, 102, 241, 0.15)',
+    borderColor: 'rgba(99, 102, 241, 0.5)',
     color: '#a5b4fc',
     fontWeight: '600',
-    boxShadow: '0 0 15px rgba(99, 102, 241, 0.2)',
+    boxShadow: '0 0 20px rgba(99, 102, 241, 0.15)',
   },
   checkmark: {
     color: '#10b981',
@@ -848,21 +1234,22 @@ const styles = {
     fontWeight: 'bold',
   },
   modalFooter: {
-    padding: '20px 28px',
-    borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+    padding: '24px 32px',
+    borderTop: '1px solid rgba(255, 255, 255, 0.06)',
     display: 'flex',
     justifyContent: 'flex-end',
   },
   modalCloseBtn: {
-    background: '#6366f1',
+    background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
     color: 'white',
-    padding: '12px 24px',
-    borderRadius: '10px',
+    padding: '14px 28px',
+    borderRadius: '12px',
     border: 'none',
     fontWeight: '600',
     fontSize: '14px',
     cursor: 'pointer',
     transition: 'all 0.2s ease',
+    boxShadow: '0 4px 16px rgba(99, 102, 241, 0.2)',
   },
 };
 

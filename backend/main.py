@@ -889,6 +889,21 @@ def get_assessment_questions_deprecated(tier: str, strand: str = None):
 @app.get("/")
 def home(): return {"status": "online"}
 
+# ========== PUBLIC STATS ==========
+
+@app.get("/public/stats")
+def get_public_stats(db: Session = Depends(get_db)):
+    """Get public system statistics - real data only"""
+    total_courses = db.query(models.Course).count()
+    total_questions = db.query(models.Question).count()
+    total_assessments = db.query(models.TestAttempt).count()
+    
+    return {
+        "total_courses": total_courses,
+        "total_questions": total_questions,
+        "total_assessments": total_assessments
+    }
+
 # ========== ADMIN: COURSE MANAGEMENT ==========
 
 @app.get("/admin/courses")
