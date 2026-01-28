@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Toast from './Toast';
 
 // Predefined options for Academic Interests
@@ -170,6 +170,50 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
     });
   };
 
+  // Track original values to detect changes
+  const originalDataRef = useRef(null);
+  
+  useEffect(() => {
+    if (formData && !originalDataRef.current) {
+      originalDataRef.current = {
+        fullname: formData.fullname || '',
+        gwa: formData.gwa || '',
+        strand: formData.strand || '',
+        age: formData.age || '',
+        gender: formData.gender || '',
+        interests: formData.interests || '',
+        skills: formData.skills || ''
+      };
+    }
+  }, [formData]);
+
+  const getChangedFields = () => {
+    const original = originalDataRef.current || {};
+    const changes = [];
+    const fieldLabels = {
+      fullname: 'Full Name',
+      gwa: 'GWA',
+      strand: 'SHS Strand',
+      age: 'Age',
+      gender: 'Gender',
+      interests: 'Academic Interests',
+      skills: 'Skills'
+    };
+    
+    const currentInterests = selectedInterests.join(', ');
+    const currentSkills = selectedSkills.join(', ');
+    
+    if ((formData.fullname || '') !== original.fullname) changes.push(fieldLabels.fullname);
+    if ((formData.gwa || '') !== original.gwa) changes.push(fieldLabels.gwa);
+    if ((formData.strand || '') !== original.strand) changes.push(fieldLabels.strand);
+    if ((formData.age || '') !== original.age) changes.push(fieldLabels.age);
+    if ((formData.gender || '') !== original.gender) changes.push(fieldLabels.gender);
+    if (currentInterests !== (original.interests || '')) changes.push(fieldLabels.interests);
+    if (currentSkills !== (original.skills || '')) changes.push(fieldLabels.skills);
+    
+    return changes;
+  };
+
   const handleSaveProfile = () => {
     // Validate required fields
     if (!formData.gwa || !formData.strand) {
@@ -196,6 +240,9 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
     
     console.log('Saving academic info for userId:', userId, 'with data:', formData);
     
+    // Get what fields changed before saving
+    const changedFields = getChangedFields();
+    
     // Save to backend - include all profile fields
     fetch(`http://localhost:8000/user/${userId}/academic-info`, {
       method: 'PUT',
@@ -213,8 +260,8 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
     .then(res => res.json())
     .then(data => {
       console.log('✅ Academic info saved to backend:', data);
-      showToast('✓ Profile updated successfully!', 'success');
-      onSave();
+      showToast('Profile updated successfully!', 'success');
+      onSave(changedFields);
     })
     .catch(err => {
       console.error('❌ Error saving to backend:', err);
@@ -236,7 +283,7 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
       {/* SIDEBAR */}
       <aside style={styles.sidebar}>
         <div style={styles.brandContainer}>
-          <div style={styles.logoIcon}>C</div>
+          <img src="/logo.svg" alt="CoursePro" style={styles.logoIcon} />
           <h2 style={styles.brandName}>CoursePro</h2>
         </div>
         <nav style={styles.nav}>
@@ -548,7 +595,7 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
 const styles = {
   dashboardWrapper: { display: 'flex', width: '100vw', height: '100vh', background: 'transparent' },
   sidebar: { width: '260px', background: 'rgba(255, 255, 255, 0.02)', backdropFilter: 'blur(20px)', borderRight: '1px solid rgba(255, 255, 255, 0.08)', display: 'flex', flexDirection: 'column', padding: '40px 20px' },
-  logoIcon: { width: '35px', height: '35px', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800', color: 'white', marginRight: '12px' },
+  logoIcon: { width: '40px', height: '40px', borderRadius: '10px', marginRight: '12px', objectFit: 'contain' },
   brandContainer: { display: 'flex', alignItems: 'center', marginBottom: '40px', paddingLeft: '10px' },
   brandName: { fontSize: '18px', fontWeight: '700', color: 'white', margin: 0 },
   nav: { flex: 1 },

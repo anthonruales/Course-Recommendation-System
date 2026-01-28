@@ -122,19 +122,35 @@ function App() {
             {view === 'profile' && (
               <ProfileForm 
                 onBack={() => setView('dashboard')} 
-                onSave={() => { 
+                onSave={(changedFields) => { 
                   // Save to local storage
                   localStorage.setItem(`userProfile_${user}`, JSON.stringify(profileData));
                   
-                  // Log the update in history
+                  // Build specific description of what changed
+                  let changeDescription = 'Profile Updated';
+                  if (changedFields && changedFields.length > 0) {
+                    if (changedFields.length === 1) {
+                      changeDescription = `Updated ${changedFields[0]}`;
+                    } else if (changedFields.length === 2) {
+                      changeDescription = `Updated ${changedFields[0]} & ${changedFields[1]}`;
+                    } else {
+                      changeDescription = `Updated ${changedFields.slice(0, 2).join(', ')} +${changedFields.length - 2} more`;
+                    }
+                  }
+                  
+                  // Log the update in history with specific changes
                   const updateLog = {
                     type: 'profile_update',
-                    courses: 'Profile Updated',
+                    courses: changeDescription,
+                    changedFields: changedFields || [],
                     date: new Date().toLocaleDateString()
                   };
                   setHistory([updateLog, ...history]);
                   
-                  setView('dashboard'); 
+                  // Delay navigation to allow toast to be seen
+                  setTimeout(() => {
+                    setView('dashboard');
+                  }, 1500);
                 }} 
                 // These props must match the names in ProfileForm.js
                 formData={profileData} 

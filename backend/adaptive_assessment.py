@@ -1,28 +1,15 @@
-# adaptive_assessment.py - Akinator-Style Adaptive Question System
+# adaptive_assessment.py
 """
-================================================================================
-ADAPTIVE ASSESSMENT ENGINE - Like Akinator but for Course Recommendations
-================================================================================
+Adaptive Assessment Engine
 
-This system asks questions ONE AT A TIME and intelligently selects the next 
-question based on the student's previous answers to maximize information gain.
+Asks questions one at a time, selecting the next question based on 
+previous answers to maximize information gain about course fit.
 
-Key Concepts:
-1. INFORMATION GAIN - Pick questions that best discriminate between courses
-2. COURSE NARROWING - Each answer eliminates some courses, strengthens others
-3. EARLY STOPPING - Can stop when confident enough about top recommendations
-4. TRAIT ACCUMULATION - Build student profile incrementally
-
-Algorithm:
-1. Start with all 99 courses as candidates
-2. For each round:
-   a. Calculate which traits would most discriminate remaining courses
-   b. Pick question that tests the most discriminating trait
-   c. Update course scores based on answer
-   d. Eliminate courses that fall too far behind
-3. Stop when top 5 courses are significantly ahead OR max questions reached
-
-================================================================================
+The algorithm:
+- Start with all courses as candidates
+- Each answer updates course scores based on trait matching
+- Questions are prioritized by how well they discriminate between remaining courses
+- Stops when confident or max questions reached
 """
 
 import math
@@ -42,46 +29,31 @@ from trait_system import (
 
 @dataclass
 class AdaptiveSession:
-    """Stores the state of an adaptive assessment session"""
+    """State for a single assessment session"""
     session_id: str
     user_id: int
     
-    # User's SHS strand (for question prioritization)
     user_strand: str = None
+    user_interests: str = None
+    user_skills: str = None
     
-    # Custom max/min questions per session
     max_questions: int = 30
     min_questions: int = 15
     
-    # Student's accumulated traits with strengths
     trait_scores: Dict[str, float] = field(default_factory=dict)
-    
-    # Course scores (higher = better match)
     course_scores: Dict[str, float] = field(default_factory=dict)
-    
-    # Questions already asked (question_id -> chosen_option)
     answered_questions: Dict[int, int] = field(default_factory=dict)
-    
-    # Questions to avoid (already asked or similar)
     excluded_question_ids: Set[int] = field(default_factory=set)
+    rejected_topics: Set[str] = field(default_factory=set)
     
-    # Current round number
     round_number: int = 0
-    
-    # Courses still in consideration (not eliminated)
     active_courses: Set[str] = field(default_factory=set)
-    
-    # Confidence level (0-1)
     confidence: float = 0.0
-    
-    # Is session complete?
     is_complete: bool = False
-    
-    # Final recommendations when complete
     final_recommendations: List[dict] = field(default_factory=list)
 
 
-# Strand to prioritized traits mapping for question selection
+# Maps SHS strand to prioritized traits for question selection
 STRAND_PRIORITY_TRAITS = {
     "STEM": ["Software-Dev", "Hardware-Systems", "Lab-Research", "Analytical", "Investigative", 
              "Scientific", "Math-Logic", "Realistic", "Data-Analytics"],
@@ -102,13 +74,8 @@ STRAND_PRIORITY_TRAITS = {
 
 class AdaptiveAssessmentEngine:
     """
-    Akinator-style question selector for course recommendations.
-    
-    Instead of asking ALL questions upfront, it:
-    1. Asks one question at a time
-    2. Picks the BEST next question based on previous answers
-    3. Narrows down courses dynamically
-    4. Stops when confident enough
+    Selects questions adaptively based on previous answers.
+    Prioritizes questions that best discriminate between remaining course candidates.
     """
     
     # Configuration
@@ -118,18 +85,12 @@ class AdaptiveAssessmentEngine:
     TOP_N_RECOMMENDATIONS = 5  # Number of courses to recommend
     
     def __init__(self, courses: List[dict], questions: List[dict]):
-        """
-        Initialize with available courses and questions.
-        
-        Args:
-            courses: List of course dicts with trait_tag field
-            questions: List of question dicts with options and their trait_tags
-        """
+        """Initialize with course and question data."""
         self.courses = {c['course_name']: c for c in courses}
         self.questions = {q['question_id']: q for q in questions}
         self.sessions: Dict[str, AdaptiveSession] = {}
         
-        # Pre-compute trait -> courses mapping for faster lookups
+        # Build lookup tables
         self.trait_to_courses: Dict[str, Set[str]] = defaultdict(set)
         self.course_traits: Dict[str, Set[str]] = {}
         
@@ -157,18 +118,283 @@ class AdaptiveAssessmentEngine:
             return set(trait_tag)
         return set(t.strip() for t in str(trait_tag).split(',') if t.strip())
     
-    def create_session(self, user_id: int, user_gwa: float = None, user_strand: str = None, max_questions: int = 30) -> str:
-        """
-        Start a new adaptive assessment session.
+    def _calculate_profile_bonus(self, interests: str, skills: str, course_traits: Set[str]) -> float:
+        """Calculate bonus points (0-15) for courses matching user's profile interests/skills."""
+        if not interests and not skills:
+            return 0.0
         
-        Args:
-            user_id: User's ID
-            user_gwa: User's GWA (optional)
-            user_strand: User's SHS strand (optional)
-            max_questions: Maximum questions to ask (30, 50, or 60)
+        # Profile keyword to trait mapping
+        PROFILE_TO_TRAITS = {
+            "science": ["Scientific", "Lab-Research", "Analytical", "Investigative"],
+            "biology": ["Medical", "Healthcare", "Lab-Research", "Scientific"],
+            "chemistry": ["Scientific", "Lab-Research", "Medical-Lab", "Analytical"],
+            "physics": ["Scientific", "Engineering", "Analytical", "Technical"],
+            "environment": ["Field-Research", "Agri-Nature", "Environmental", "Scientific"],
+            "programming": ["Software-Dev", "Technical", "Computational", "Data-Analytics"],
+            "computer": ["Software-Dev", "Hardware-Systems", "Technical", "IT"],
+            "data": ["Data-Analytics", "Analytical", "Technical", "Computational"],
+            "ai": ["Software-Dev", "Data-Analytics", "Technical", "Innovation"],
+            "cybersecurity": ["Cyber-Defense", "Technical", "Software-Dev", "Security"],
+            "engineering": ["Civil-Build", "Mechanical-Design", "Technical", "Engineering"],
+            "mechanical": ["Mechanical-Design", "Technical", "Engineering", "Industrial-Ops"],
+            "electrical": ["Electrical-Power", "Hardware-Systems", "Technical", "Engineering"],
+            "civil": ["Civil-Build", "Spatial-Design", "Technical", "Engineering"],
+            "business": ["Startup-Venture", "Marketing-Sales", "Finance-Acct", "Admin-Skill"],
+            "finance": ["Finance-Acct", "Analytical", "Business", "Banking"],
+            "marketing": ["Marketing-Sales", "Creative", "Communication", "Business"],
+            "accounting": ["Finance-Acct", "Analytical", "Business", "Admin-Skill"],
+            "economics": ["Finance-Acct", "Analytical", "Business", "Social"],
+            "art": ["Visual-Design", "Creative-Skill", "Artistic", "Creative"],
+            "music": ["Creative-Skill", "Musical", "Artistic", "Performance"],
+            "film": ["Digital-Media", "Creative-Skill", "Visual", "Media"],
+            "writing": ["Creative-Skill", "Communication", "Literary", "Journalism"],
+            "photography": ["Visual-Design", "Creative-Skill", "Digital-Media", "Artistic"],
+            "medical": ["Patient-Care", "Medical-Lab", "Healthcare", "Scientific"],
+            "nursing": ["Patient-Care", "Healthcare", "Medical", "Caregiving"],
+            "psychology": ["Rehab-Therapy", "Healthcare", "Counseling", "Behavioral"],
+            "education": ["Teaching-Ed", "Educational", "Communication", "Mentoring"],
+            "law": ["Law-Enforce", "Legal", "Analytical", "Advocacy"],
+            "politics": ["Community-Serve", "Political", "Leadership", "Social"],
+            "social": ["Community-Serve", "Social", "Helping", "Interpersonal"],
+            "history": ["Cultural", "Research", "Academic", "Humanities"],
+            "sports": ["Athletic", "Physical", "Health", "Fitness"],
+            "tourism": ["Hospitality-Svc", "Tourism", "Cultural", "Service"],
+            "food": ["Hospitality-Svc", "Culinary", "Creative", "Service"],
+            "agriculture": ["Agri-Nature", "Environmental", "Scientific", "Natural"],
+            
+            # Skills
+            "programming_skill": ["Software-Dev", "Technical", "Computational", "Analytical"],
+            "data_analysis": ["Data-Analytics", "Analytical", "Technical", "Research"],
+            "web_development": ["Software-Dev", "Digital-Media", "Technical", "Creative"],
+            "graphic_design": ["Visual-Design", "Creative-Skill", "Digital-Media", "Artistic"],
+            "video_editing": ["Digital-Media", "Creative-Skill", "Visual", "Technical"],
+            "math_skills": ["Analytical", "Mathematical", "Technical", "Logical"],
+            "laboratory": ["Lab-Research", "Medical-Lab", "Scientific", "Technical"],
+            "technical_writing": ["Technical", "Communication", "Writing", "Analytical"],
+            "public_speaking": ["Communication", "Leadership", "Presentation", "Social"],
+            "writing_skill": ["Communication", "Creative-Skill", "Literary", "Expression"],
+            "presentation": ["Communication", "Leadership", "Visual", "Professional"],
+            "negotiation": ["Business", "Communication", "Leadership", "Interpersonal"],
+            "foreign_language": ["Communication", "Cultural", "Linguistic", "International"],
+            "leadership": ["Startup-Venture", "Leadership", "Management", "Decision-Making"],
+            "project_management": ["Admin-Skill", "Leadership", "Organization", "Planning"],
+            "team_management": ["Leadership", "People-Skill", "Management", "Interpersonal"],
+            "decision_making": ["Leadership", "Analytical", "Strategic", "Critical-Think"],
+            "planning": ["Admin-Skill", "Organization", "Strategic", "Management"],
+            "teamwork": ["People-Skill", "Interpersonal", "Collaboration", "Social"],
+            "empathy": ["Patient-Care", "Rehab-Therapy", "Helping", "Compassion"],
+            "customer_service": ["Hospitality-Svc", "People-Skill", "Communication", "Service"],
+            "mentoring": ["Teaching-Ed", "Leadership", "Communication", "Helping"],
+            "conflict_resolution": ["People-Skill", "Leadership", "Communication", "Diplomacy"],
+            "critical_thinking": ["Analytical", "Critical-Think", "Problem-Solving", "Logical"],
+            "problem_solving": ["Analytical", "Technical", "Innovation", "Critical-Think"],
+            "research": ["Lab-Research", "Analytical", "Academic", "Investigation"],
+            "attention_detail": ["Analytical", "Admin-Skill", "Technical", "Quality"],
+            "logical_reasoning": ["Analytical", "Mathematical", "Logical", "Critical-Think"],
+            "creativity": ["Creative-Skill", "Visual-Design", "Innovation", "Artistic"],
+            "artistic": ["Visual-Design", "Creative-Skill", "Artistic", "Expressive"],
+            "music_skill": ["Creative-Skill", "Musical", "Performance", "Artistic"],
+            "storytelling": ["Creative-Skill", "Communication", "Writing", "Media"],
+            "design_thinking": ["Visual-Design", "Creative-Skill", "Innovation", "Problem-Solving"],
+        }
         
-        Returns session_id for tracking.
-        """
+        # Parse user's selections
+        interest_list = [i.strip().lower() for i in (interests or "").split(",") if i.strip()]
+        skill_list = [s.strip().lower() for s in (skills or "").split(",") if s.strip()]
+        user_selections = set(interest_list + skill_list)
+        
+        # Normalize course traits for matching
+        course_traits_lower = {t.lower() for t in course_traits}
+        
+        bonus = 0.0
+        matched_count = 0
+        
+        for selection in user_selections:
+            # Get related traits for this selection
+            related_traits = PROFILE_TO_TRAITS.get(selection, [])
+            
+            for trait in related_traits:
+                trait_lower = trait.lower()
+                # Check if any course trait matches
+                for course_trait in course_traits_lower:
+                    if trait_lower in course_trait or course_trait in trait_lower:
+                        matched_count += 1
+                        bonus += 3.0  # 3 points per match
+                        break
+        
+        # Cap bonus at 15 points (5 strong matches)
+        return min(bonus, 15.0)
+    
+    def _determine_rejected_topic(self, question: dict, chosen_option: dict) -> Optional[str]:
+        """Figure out which topic the user rejected when they selected 'none'."""
+        option_text = chosen_option.get('option_text', '').lower()
+        
+        # Keyword to topic mapping
+        REJECTION_KEYWORDS = {
+            "healthcare": "Patient-Care",
+            "nursing": "Patient-Care",
+            "medical": "Medical-Lab",
+            "technology": "Software-Dev",
+            "programming": "Software-Dev",
+            "coding": "Software-Dev",
+            "engineering": "Civil-Build",
+            "business": "Finance-Acct",
+            "accounting": "Finance-Acct",
+            "finance": "Finance-Acct",
+            "teaching": "Teaching-Ed",
+            "education": "Teaching-Ed",
+            "teach": "Teaching-Ed",
+            "creative": "Visual-Design",
+            "arts": "Visual-Design",
+            "design": "Visual-Design",
+            "maritime": "Maritime-Sea",
+            "sea": "Maritime-Sea",
+            "ship": "Maritime-Sea",
+            "agriculture": "Agri-Nature",
+            "farming": "Agri-Nature",
+            "urban": "Agri-Nature",
+            "land-based": "Maritime-Sea",
+            "hospitality": "Hospitality-Svc",
+            "hotel": "Hospitality-Svc",
+            "tourism": "Hospitality-Svc",
+            "law": "Law-Enforce",
+            "police": "Law-Enforce",
+            "criminology": "Law-Enforce",
+            "private sector": "Community-Serve",
+            "public": "Community-Serve",
+        }
+        
+        # Check for direct keyword matches in the rejection text
+        for keyword, topic in REJECTION_KEYWORDS.items():
+            if keyword in option_text:
+                return topic
+        
+        # If no direct match, analyze the question's other options
+        # The rejected topic is likely what most other options are about
+        question_category = question.get('category', '').lower()
+        
+        # Category-based rejection
+        CATEGORY_TO_TOPIC = {
+            "healthcare": "Patient-Care",
+            "nursing": "Patient-Care",
+            "medical": "Medical-Lab",
+            "technology": "Software-Dev",
+            "tech": "Software-Dev",
+            "engineering": "Civil-Build",
+            "business": "Finance-Acct",
+            "finance": "Finance-Acct",
+            "education": "Teaching-Ed",
+            "creative": "Visual-Design",
+            "arts": "Visual-Design",
+            "maritime": "Maritime-Sea",
+            "agriculture": "Agri-Nature",
+            "hospitality": "Hospitality-Svc",
+            "public service": "Community-Serve",
+            "law": "Law-Enforce",
+        }
+        
+        for category_keyword, topic in CATEGORY_TO_TOPIC.items():
+            if category_keyword in question_category:
+                return topic
+        
+        # Count traits from other options to determine majority topic
+        trait_counts: Dict[str, int] = {}
+        for opt in question.get('options', []):
+            if opt.get('option_id') != chosen_option.get('option_id'):
+                trait = opt.get('trait_tag')
+                if trait:
+                    trait_counts[trait] = trait_counts.get(trait, 0) + 1
+        
+        # Return the most common trait from other options (what user rejected)
+        if trait_counts:
+            most_common = max(trait_counts.items(), key=lambda x: x[1])
+            if most_common[1] >= 2:  # At least 2 options had this trait
+                return most_common[0]
+        
+        return None
+    
+    def _get_profile_priority_traits(self, session: AdaptiveSession) -> Set[str]:
+        """Get traits that should be prioritized based on user's profile interests/skills."""
+        if not session.user_interests and not session.user_skills:
+            return set()
+        
+        # Reuse the PROFILE_TO_TRAITS mapping
+        PROFILE_TO_TRAITS = {
+            "science": ["Scientific", "Lab-Research", "Medical-Lab"],
+            "biology": ["Medical-Lab", "Lab-Research", "Patient-Care"],
+            "chemistry": ["Medical-Lab", "Lab-Research"],
+            "physics": ["Mechanical-Design", "Electrical-Power", "Civil-Build"],
+            "environment": ["Agri-Nature", "Field-Research"],
+            "programming": ["Software-Dev", "Data-Analytics", "Cyber-Defense"],
+            "computer": ["Software-Dev", "Hardware-Systems", "Data-Analytics"],
+            "data": ["Data-Analytics", "Software-Dev"],
+            "ai": ["Software-Dev", "Data-Analytics"],
+            "cybersecurity": ["Cyber-Defense", "Software-Dev"],
+            "engineering": ["Civil-Build", "Mechanical-Design", "Electrical-Power", "Industrial-Ops"],
+            "mechanical": ["Mechanical-Design", "Industrial-Ops"],
+            "electrical": ["Electrical-Power", "Hardware-Systems"],
+            "civil": ["Civil-Build", "Spatial-Design"],
+            "business": ["Startup-Venture", "Marketing-Sales", "Finance-Acct"],
+            "finance": ["Finance-Acct", "Startup-Venture"],
+            "marketing": ["Marketing-Sales", "Startup-Venture"],
+            "accounting": ["Finance-Acct", "Admin-Skill"],
+            "economics": ["Finance-Acct"],
+            "art": ["Visual-Design", "Creative-Skill", "Digital-Media"],
+            "music": ["Creative-Skill"],
+            "film": ["Digital-Media", "Creative-Skill"],
+            "writing": ["Creative-Skill"],
+            "photography": ["Visual-Design", "Digital-Media"],
+            "medical": ["Patient-Care", "Medical-Lab", "Rehab-Therapy"],
+            "nursing": ["Patient-Care"],
+            "psychology": ["Rehab-Therapy", "Community-Serve"],
+            "education": ["Teaching-Ed"],
+            "law": ["Law-Enforce"],
+            "politics": ["Community-Serve"],
+            "social": ["Community-Serve", "Rehab-Therapy"],
+            "tourism": ["Hospitality-Svc"],
+            "food": ["Hospitality-Svc"],
+            "agriculture": ["Agri-Nature"],
+            # Skills mapping
+            "programming_skill": ["Software-Dev", "Data-Analytics"],
+            "data_analysis": ["Data-Analytics", "Software-Dev"],
+            "web_development": ["Software-Dev", "Digital-Media"],
+            "graphic_design": ["Visual-Design", "Digital-Media"],
+            "video_editing": ["Digital-Media"],
+            "laboratory": ["Lab-Research", "Medical-Lab"],
+            "leadership": ["Startup-Venture", "Admin-Skill"],
+            "project_management": ["Admin-Skill", "Industrial-Ops"],
+            "empathy": ["Patient-Care", "Rehab-Therapy"],
+            "customer_service": ["Hospitality-Svc"],
+            "mentoring": ["Teaching-Ed"],
+            "research": ["Lab-Research", "Field-Research"],
+            "creativity": ["Visual-Design", "Creative-Skill", "Digital-Media"],
+            "artistic": ["Visual-Design", "Creative-Skill"],
+        }
+        
+        priority_traits = set()
+        
+        # Parse interests
+        if session.user_interests:
+            for interest in session.user_interests.split(','):
+                interest = interest.strip().lower()
+                traits = PROFILE_TO_TRAITS.get(interest, [])
+                priority_traits.update(traits)
+        
+        # Parse skills
+        if session.user_skills:
+            for skill in session.user_skills.split(','):
+                skill = skill.strip().lower()
+                traits = PROFILE_TO_TRAITS.get(skill, [])
+                priority_traits.update(traits)
+        
+        return priority_traits
+    
+    def _get_strand_priority_traits(self, strand: str) -> Set[str]:
+        """Get traits prioritized by user's SHS strand."""
+        return set(STRAND_PRIORITY_TRAITS.get(strand, []))
+
+    def create_session(self, user_id: int, user_gwa: float = None, user_strand: str = None, max_questions: int = 30, user_interests: str = None, user_skills: str = None) -> str:
+        """Start a new assessment session. Returns session_id."""
         import uuid
         session_id = str(uuid.uuid4())[:8]
         
@@ -196,11 +422,19 @@ class AdaptiveAssessmentEngine:
             if user_strand and course.get('required_strand'):
                 if user_strand.upper() == course['required_strand'].upper():
                     course_scores[course_name] += 5  # Bonus for matching strand
+            
+            # Add profile bonus from interests/skills
+            if user_interests or user_skills:
+                course_traits = self.course_traits.get(course_name, set())
+                profile_bonus = self._calculate_profile_bonus(user_interests, user_skills, course_traits)
+                course_scores[course_name] += profile_bonus
         
         session = AdaptiveSession(
             session_id=session_id,
             user_id=user_id,
             user_strand=normalized_strand,  # Store strand for question selection
+            user_interests=user_interests,  # Store for later use
+            user_skills=user_skills,  # Store for later use
             max_questions=max_questions,
             min_questions=min_questions,
             course_scores=course_scores,
@@ -208,33 +442,30 @@ class AdaptiveAssessmentEngine:
         )
         
         self.sessions[session_id] = session
-        print(f"📋 Created adaptive session {session_id} for user {user_id} (strand: {normalized_strand}, questions: {max_questions})")
+        print(f"📋 Created adaptive session {session_id} for user {user_id} (strand: {normalized_strand}, questions: {max_questions}, interests: {bool(user_interests)}, skills: {bool(user_skills)})")
         return session_id
     
     def get_next_question(self, session_id: str) -> Optional[dict]:
-        """
-        Select the BEST next question to ask based on current state.
-        
-        Uses information gain to pick the question that will most
-        discriminate between the remaining courses.
-        """
+        """Select question based on profile relevance (early) and information gain (later)."""
         session = self.sessions.get(session_id)
         if not session or session.is_complete:
             return None
         
-        # Check if we should stop
         if self._should_stop(session):
             self._finalize_session(session)
             return None
         
-        # Calculate which traits would give us most information
-        trait_scores = self._calculate_trait_information_gain(session)
+        # Get user's profile traits (from interests, skills, strand)
+        profile_traits = self._get_profile_priority_traits(session)
+        strand_traits = self._get_strand_priority_traits(session.user_strand)
+        all_priority_traits = profile_traits | strand_traits
         
-        # Find questions that test the highest-value traits
+        # Calculate information gain for adaptive selection
+        trait_info_scores = self._calculate_trait_information_gain(session)
+        
         best_question = None
         best_score = -1
         
-        # Shuffle questions for variety when scores are similar
         question_ids = list(self.questions.keys())
         random.shuffle(question_ids)
         
@@ -243,7 +474,40 @@ class AdaptiveAssessmentEngine:
                 continue
             
             question = self.questions[qid]
-            question_score = self._score_question(question, trait_scores, session)
+            options = question.get('options', [])
+            
+            # Check how many options are about rejected topics
+            rejected_count = 0
+            profile_match_count = 0
+            
+            for opt in options:
+                trait = opt.get('trait_tag')
+                if trait:
+                    if trait in session.rejected_topics:
+                        rejected_count += 1
+                    if trait in all_priority_traits:
+                        profile_match_count += 1
+            
+            # Skip questions where most options are about rejected topics
+            if len(options) > 0 and rejected_count / len(options) > 0.5:
+                continue
+            
+            # Calculate base score
+            question_score = self._score_question(question, trait_info_scores, session)
+            
+            # FIRST 5 QUESTIONS: Focus on profile-relevant questions
+            if session.round_number < 5:
+                # Strong bonus for questions matching user's profile
+                if profile_match_count >= 3:
+                    question_score += 3.0
+                elif profile_match_count >= 2:
+                    question_score += 2.0
+                elif profile_match_count >= 1:
+                    question_score += 1.0
+                
+                # Penalty for rejected topic presence (even partial)
+                if rejected_count > 0:
+                    question_score *= (1 - rejected_count / len(options) * 0.8)
             
             if question_score > best_score:
                 best_score = question_score
@@ -251,7 +515,7 @@ class AdaptiveAssessmentEngine:
         
         if best_question:
             session.round_number += 1
-            print(f"🎯 Selected question {best_question.get('question_id')} for round {session.round_number}/{session.max_questions}")
+            print(f"🎯 Round {session.round_number}: Q{best_question.get('question_id')} (score: {best_score:.2f})")
             return {
                 "session_id": session_id,
                 "round": session.round_number,
@@ -261,6 +525,32 @@ class AdaptiveAssessmentEngine:
                 "confidence": round(session.confidence * 100, 1),
                 "can_finish_early": session.round_number >= session.min_questions
             }
+        
+        self._finalize_session(session)
+        return None
+    
+    def _calculate_profile_question_bonus(self, question: dict, profile_traits: Set[str], bonus_multiplier: float) -> float:
+        """Calculate bonus score for questions matching user's profile interests/skills."""
+        if not profile_traits:
+            return 0
+        
+        options = question.get('options', [])
+        matching_options = 0
+        
+        for opt in options:
+            trait = opt.get('trait_tag')
+            if trait and trait in profile_traits:
+                matching_options += 1
+        
+        # Bonus based on how many options match profile traits
+        if matching_options >= 3:
+            return bonus_multiplier * 1.5  # Strong match
+        elif matching_options >= 2:
+            return bonus_multiplier * 1.0
+        elif matching_options >= 1:
+            return bonus_multiplier * 0.5
+        
+        return 0
         
         # No more questions available
         self._finalize_session(session)
@@ -305,30 +595,50 @@ class AdaptiveAssessmentEngine:
     
     def _score_question(self, question: dict, trait_values: Dict[str, float], 
                        session: AdaptiveSession) -> float:
-        """Score how valuable a question would be, with strand-based prioritization"""
+        """Score question value based on trait info gain and strand relevance."""
         score = 0
         options = question.get('options', [])
         
         # Get strand priority traits
         strand_priority_traits = set(STRAND_PRIORITY_TRAITS.get(session.user_strand, []))
         
+        # Track if this question is primarily about a rejected topic
+        rejected_option_count = 0
+        total_options = len(options)
+        
         for opt in options:
             trait = opt.get('trait_tag')
             if trait:
+                # Check if this option's trait is in rejected topics
+                if trait in session.rejected_topics:
+                    rejected_option_count += 1
+                
                 # Direct trait value
                 score += trait_values.get(trait, 0)
                 
-                # STRAND BONUS: Prioritize questions relevant to user's strand
+                # Strand relevance bonus
                 if trait in strand_priority_traits:
-                    score += 0.5  # Significant bonus for strand-relevant traits
+                    score += 0.5
                 
                 # Also consider mapped traits from our trait system
                 mapped_traits = EXPANDED_TRAIT_MAPPING.get(trait, [])
                 for mapped_trait in mapped_traits:
                     score += trait_values.get(mapped_trait, 0) * 0.5
-                    # Strand bonus for mapped traits too
                     if mapped_trait in strand_priority_traits:
                         score += 0.25
+                    # Check mapped traits for rejection too
+                    if mapped_trait in session.rejected_topics:
+                        rejected_option_count += 0.5
+        
+        # Penalize questions about rejected topics
+        if total_options > 0:
+            rejection_ratio = rejected_option_count / total_options
+            if rejection_ratio > 0.5:
+                score *= 0.1
+            elif rejection_ratio > 0.3:
+                score *= 0.4
+            elif rejection_ratio > 0.1:
+                score *= 0.7
         
         # Bonus for questions with more options (more information)
         option_bonus = min(len(options) / 4, 1.5)
@@ -345,11 +655,7 @@ class AdaptiveAssessmentEngine:
     
     def process_answer(self, session_id: str, question_id: int, 
                       chosen_option_id: int) -> dict:
-        """
-        Process a student's answer and update course scores.
-        
-        Returns current state including narrowed courses.
-        """
+        """Process answer and update trait/course scores."""
         session = self.sessions.get(session_id)
         if not session:
             return {"error": "Session not found"}
@@ -378,6 +684,49 @@ class AdaptiveAssessmentEngine:
         session.answered_questions[question_id] = chosen_option_id
         session.excluded_question_ids.add(question_id)
         print(f"📝 Answered question {question_id}, excluded: {session.excluded_question_ids}")
+        
+        # Check if user rejected this topic (e.g., "none", "not interested")
+        option_text = chosen_option.get('option_text', '').lower()
+        is_rejection = any(phrase in option_text for phrase in [
+            "none", "not interested", "don't want", "prefer not", 
+            "i'm not", "im not", "prefer non-", "prefer other",
+            "i don't want to", "not for me"
+        ])
+        
+        # Also check for specific topic rejections in the option text
+        EXPLICIT_REJECTIONS = {
+            "don't want to teach": "Teaching-Ed",
+            "not teach": "Teaching-Ed",
+            "don't want to be a teacher": "Teaching-Ed",
+            "not in education": "Teaching-Ed",
+            "don't want healthcare": "Patient-Care",
+            "not medical": "Patient-Care",
+            "don't want engineering": "Civil-Build",
+            "not engineering": "Civil-Build",
+            "don't want business": "Finance-Acct",
+            "not business": "Finance-Acct",
+            "don't want technology": "Software-Dev",
+            "not tech": "Software-Dev",
+            "don't want maritime": "Maritime-Sea",
+            "not maritime": "Maritime-Sea",
+        }
+        
+        for phrase, topic in EXPLICIT_REJECTIONS.items():
+            if phrase in option_text:
+                session.rejected_topics.add(topic)
+                print(f"🚫 Explicit rejection detected: {topic}")
+        
+        if is_rejection:
+            # Determine what topic was rejected based on the question category and other options
+            rejected_topic = self._determine_rejected_topic(question, chosen_option)
+            if rejected_topic:
+                session.rejected_topics.add(rejected_topic)
+                print(f"🚫 User rejected topic: {rejected_topic}")
+                
+                # Penalize courses associated with this rejected topic
+                for course_name, course_traits in self.course_traits.items():
+                    if rejected_topic in course_traits:
+                        session.course_scores[course_name] -= 8  # Penalty for rejected topic
         
         # Extract trait from chosen option
         chosen_trait = chosen_option.get('trait_tag')
@@ -429,7 +778,7 @@ class AdaptiveAssessmentEngine:
         }
     
     def _get_specialized_similarity(self, trait1: str, trait2: str) -> float:
-        """Get similarity between two traits using SPECIALIZED relationships"""
+        """Get similarity score between two traits (0-1)."""
         # Exact match
         if trait1 == trait2:
             return 1.0
@@ -447,7 +796,7 @@ class AdaptiveAssessmentEngine:
         return get_trait_similarity(trait1, trait2)
     
     def _update_course_scores(self, session: AdaptiveSession, chosen_trait: str):
-        """Update course scores based on the chosen trait (using SPECIALIZED traits)"""
+        """Boost course scores based on trait matches."""
         if not chosen_trait:
             return
         
@@ -464,26 +813,16 @@ class AdaptiveAssessmentEngine:
                     sim = self._get_specialized_similarity(chosen_trait, course_trait)
                     best_similarity = max(best_similarity, sim)
                 
-                # Apply boosts based on similarity level
+                # Similarity-based score boost
                 if best_similarity > 0.7:
-                    session.course_scores[course_name] += 4.0  # Strong similarity
+                    session.course_scores[course_name] += 4.0
                 elif best_similarity > 0.4:
-                    session.course_scores[course_name] += 2.0  # Moderate similarity
+                    session.course_scores[course_name] += 2.0
                 elif best_similarity > 0.2:
-                    session.course_scores[course_name] += 0.5  # Slight similarity
-                # NO PENALTY for non-matching traits - just don't boost
-                # This prevents courses from being eliminated too quickly
-        
-        # REMOVED: Aggressive course elimination
-        # We no longer remove courses that fall behind - let them compete naturally
-        # The top courses will still rise to the top based on accumulated scores
+                    session.course_scores[course_name] += 0.5
     
     def _calculate_confidence(self, session: AdaptiveSession) -> float:
-        """
-        Calculate confidence that we have a good recommendation.
-        
-        High confidence when top courses are significantly ahead.
-        """
+        """Calculate recommendation confidence based on score separation."""
         if len(session.active_courses) == 0:
             return 1.0
         
@@ -522,13 +861,10 @@ class AdaptiveAssessmentEngine:
         if session.confidence >= self.CONFIDENCE_THRESHOLD:
             return True
         
-        # REMOVED: Stop if very few courses left
-        # We no longer eliminate courses, so this check is not needed
-        
         return False
     
     def _finalize_session(self, session: AdaptiveSession):
-        """Create final recommendations when assessment is complete"""
+        """Build final course recommendations."""
         session.is_complete = True
         
         # Sort courses by score
@@ -565,6 +901,20 @@ class AdaptiveAssessmentEngine:
             # Find which traits matched
             matched_traits = list(course_traits & set(session.trait_scores.keys()))
             
+            # Calculate profile bonus for display (shows if user's interests/skills helped)
+            profile_bonus = 0
+            if session.user_interests or session.user_skills:
+                profile_bonus = self._calculate_profile_bonus(
+                    session.user_interests, 
+                    session.user_skills, 
+                    course_traits
+                )
+            
+            reasoning = self._generate_recommendation_reasoning(
+                session, course_name, course, course_traits, 
+                matched_traits, profile_bonus, raw_score
+            )
+            
             recommendations.append({
                 "rank": i + 1,
                 "course_name": course_name,
@@ -572,14 +922,263 @@ class AdaptiveAssessmentEngine:
                 "match_percentage": round(float(percentage), 1),
                 "matched_traits": matched_traits[:5],  # Top 5 traits
                 "minimum_gwa": course.get('minimum_gwa'),
-                "recommended_strand": course.get('required_strand')
+                "recommended_strand": course.get('required_strand'),
+                "profile_bonus_applied": profile_bonus > 0,
+                "reasoning": reasoning  # Detailed explanation
             })
         
         session.final_recommendations = recommendations
         print(f"✅ Session {session.session_id} complete after {session.round_number} questions")
     
+    def _generate_recommendation_reasoning(self, session: AdaptiveSession, course_name: str,
+                                           course: dict, course_traits: Set[str],
+                                           matched_traits: List[str], profile_bonus: float,
+                                           raw_score: float) -> str:
+        """Generate explanation for why this course was recommended."""
+        reasons = []
+        
+        # Trait matches from responses
+        if matched_traits:
+            trait_labels = self._get_trait_labels(matched_traits[:3])
+            if len(matched_traits) >= 3:
+                reasons.append(f"Your responses showed strong alignment with {trait_labels}")
+            elif len(matched_traits) >= 1:
+                reasons.append(f"You demonstrated interest in {trait_labels}")
+        
+        # Profile interests match
+        profile_matches = []
+        if session.user_interests:
+            interests = [i.strip().lower() for i in session.user_interests.split(',') if i.strip()]
+            course_name_lower = course_name.lower()
+            course_desc_lower = course.get('description', '').lower()
+            
+            for interest in interests:
+                interest_label = self._get_interest_label(interest)
+                if interest_label and (interest in course_name_lower or 
+                    any(t.lower() in course_desc_lower for t in self._get_interest_traits(interest))):
+                    profile_matches.append(interest_label)
+        
+        if profile_matches:
+            reasons.append(f"This aligns with your stated interests: {', '.join(profile_matches[:2])}")
+        
+        # Skills match
+        skill_matches = []
+        if session.user_skills:
+            skills = [s.strip().lower() for s in session.user_skills.split(',') if s.strip()]
+            for skill in skills:
+                skill_label = self._get_skill_label(skill)
+                if skill_label and profile_bonus > 0:
+                    skill_matches.append(skill_label)
+        
+        if skill_matches and len(skill_matches) <= 2:
+            reasons.append(f"Your skills in {', '.join(skill_matches[:2])} are valuable for this field")
+        
+        # Strand match
+        required_strand = course.get('required_strand', '')
+        if session.user_strand and required_strand:
+            if session.user_strand.upper() == required_strand.upper():
+                reasons.append(f"This is a natural progression from your {session.user_strand} strand")
+            elif required_strand.upper() == "GAS":
+                reasons.append("This course welcomes students from any strand background")
+        
+        # Career category bonus
+        career_reason = self._get_career_reasoning(course_name, course_traits)
+        if career_reason:
+            reasons.append(career_reason)
+        
+        # Strong answer patterns
+        strong_traits = [t for t, score in session.trait_scores.items() if score >= 2.0]
+        strong_matching = [t for t in strong_traits if t in course_traits]
+        if strong_matching:
+            trait_label = self._get_trait_labels([strong_matching[0]])
+            reasons.append(f"You consistently showed preference for {trait_label}-related activities")
+        
+        # Combine reasons into a coherent paragraph
+        if not reasons:
+            # Fallback reasoning
+            return f"Based on your assessment responses, {course_name} appears to be a good match for your interests and aptitudes."
+        
+        # Join first 3 reasons
+        reasoning_text = ". ".join(reasons[:3])
+        if not reasoning_text.endswith('.'):
+            reasoning_text += '.'
+        
+        return reasoning_text
+    
+    def _get_trait_labels(self, traits: List[str]) -> str:
+        """Convert trait tags to readable labels."""
+        TRAIT_LABELS = {
+            "Patient-Care": "patient care and healthcare",
+            "Medical-Lab": "medical laboratory and diagnostics",
+            "Rehab-Therapy": "therapy and rehabilitation",
+            "Software-Dev": "software development and programming",
+            "Hardware-Systems": "computer hardware and systems",
+            "Data-Analytics": "data analysis and statistics",
+            "Cyber-Defense": "cybersecurity",
+            "Digital-Media": "digital media and multimedia",
+            "Civil-Build": "construction and infrastructure",
+            "Mechanical-Design": "mechanical systems and design",
+            "Electrical-Power": "electrical systems",
+            "Industrial-Ops": "industrial operations",
+            "Spatial-Design": "spatial design and architecture",
+            "Finance-Acct": "finance and accounting",
+            "Marketing-Sales": "marketing and sales",
+            "Startup-Venture": "entrepreneurship and business",
+            "Admin-Skill": "administration and organization",
+            "Teaching-Ed": "teaching and education",
+            "Visual-Design": "visual arts and design",
+            "Creative-Skill": "creative and artistic expression",
+            "Law-Enforce": "law enforcement and justice",
+            "Community-Serve": "public service and community",
+            "Maritime-Sea": "maritime and ocean industries",
+            "Agri-Nature": "agriculture and environmental science",
+            "Hospitality-Svc": "hospitality and tourism",
+            "Lab-Research": "scientific research",
+            "Field-Research": "field research and exploration",
+            "People-Skill": "interpersonal communication",
+            "Technical-Skill": "technical problem-solving",
+        }
+        labels = [TRAIT_LABELS.get(t, t.replace('-', ' ').lower()) for t in traits]
+        if len(labels) == 1:
+            return labels[0]
+        elif len(labels) == 2:
+            return f"{labels[0]} and {labels[1]}"
+        else:
+            return f"{', '.join(labels[:-1])}, and {labels[-1]}"
+    
+    def _get_interest_label(self, interest: str) -> str:
+        """Map interest ID to display name."""
+        INTEREST_LABELS = {
+            "science": "Science & Research",
+            "biology": "Biology",
+            "chemistry": "Chemistry",
+            "physics": "Physics",
+            "environment": "Environmental Science",
+            "programming": "Programming",
+            "computer": "Computers & IT",
+            "data": "Data Analytics",
+            "ai": "AI & Machine Learning",
+            "cybersecurity": "Cybersecurity",
+            "engineering": "Engineering",
+            "mechanical": "Mechanical Systems",
+            "electrical": "Electronics",
+            "civil": "Civil Engineering",
+            "business": "Business",
+            "finance": "Finance",
+            "marketing": "Marketing",
+            "accounting": "Accounting",
+            "economics": "Economics",
+            "art": "Arts & Design",
+            "music": "Music",
+            "film": "Film & Media",
+            "writing": "Writing",
+            "photography": "Photography",
+            "medical": "Medicine",
+            "nursing": "Nursing",
+            "psychology": "Psychology",
+            "education": "Education",
+            "law": "Law",
+            "politics": "Political Science",
+            "social": "Social Work",
+            "history": "History",
+            "sports": "Sports",
+            "tourism": "Tourism",
+            "food": "Culinary Arts",
+            "agriculture": "Agriculture",
+        }
+        return INTEREST_LABELS.get(interest.lower(), "")
+    
+    def _get_interest_traits(self, interest: str) -> List[str]:
+        """Get keywords associated with an interest."""
+        INTEREST_TRAITS = {
+            "science": ["scientific", "research", "laboratory"],
+            "programming": ["software", "coding", "development", "tech"],
+            "business": ["business", "entrepreneurship", "management"],
+            "medical": ["medical", "healthcare", "patient"],
+            "nursing": ["nursing", "patient care", "healthcare"],
+            "engineering": ["engineering", "technical", "mechanical"],
+            "education": ["education", "teaching", "pedagogy"],
+            "art": ["art", "design", "creative"],
+        }
+        return INTEREST_TRAITS.get(interest.lower(), [interest])
+    
+    def _get_skill_label(self, skill: str) -> str:
+        """Map skill ID to display name."""
+        SKILL_LABELS = {
+            "programming_skill": "Programming",
+            "data_analysis": "Data Analysis",
+            "web_development": "Web Development",
+            "graphic_design": "Graphic Design",
+            "video_editing": "Video Editing",
+            "math_skills": "Mathematics",
+            "laboratory": "Laboratory Work",
+            "technical_writing": "Technical Writing",
+            "public_speaking": "Public Speaking",
+            "writing_skill": "Writing",
+            "presentation": "Presentation",
+            "negotiation": "Negotiation",
+            "foreign_language": "Foreign Languages",
+            "leadership": "Leadership",
+            "project_management": "Project Management",
+            "team_management": "Team Management",
+            "decision_making": "Decision Making",
+            "planning": "Planning & Organization",
+            "teamwork": "Teamwork",
+            "empathy": "Empathy",
+            "customer_service": "Customer Service",
+            "mentoring": "Mentoring",
+            "conflict_resolution": "Conflict Resolution",
+            "critical_thinking": "Critical Thinking",
+            "problem_solving": "Problem Solving",
+            "research": "Research",
+            "attention_detail": "Attention to Detail",
+            "logical_reasoning": "Logical Reasoning",
+            "creativity": "Creativity",
+            "artistic": "Artistic Ability",
+            "music_skill": "Musical Ability",
+            "storytelling": "Storytelling",
+            "design_thinking": "Design Thinking",
+        }
+        return SKILL_LABELS.get(skill.lower(), "")
+    
+    def _get_career_reasoning(self, course_name: str, course_traits: Set[str]) -> str:
+        """Get career-focused blurb based on course traits."""
+        course_lower = course_name.lower()
+        
+        if any(t in course_traits for t in ["Patient-Care", "Medical-Lab", "Rehab-Therapy"]):
+            return "This career path offers opportunities to help others and make a direct impact on people's health and wellbeing"
+        
+        if any(t in course_traits for t in ["Software-Dev", "Hardware-Systems", "Data-Analytics"]):
+            return "The tech industry offers excellent career growth, competitive salaries, and opportunities for innovation"
+        
+        if any(t in course_traits for t in ["Civil-Build", "Mechanical-Design", "Electrical-Power"]):
+            return "Engineering careers are in high demand and offer the chance to build and create tangible solutions"
+        
+        if any(t in course_traits for t in ["Finance-Acct", "Marketing-Sales", "Startup-Venture"]):
+            return "Business careers offer diverse paths from corporate roles to entrepreneurship opportunities"
+        
+        if any(t in course_traits for t in ["Teaching-Ed"]):
+            return "Education careers allow you to shape future generations and make a lasting societal impact"
+        
+        if any(t in course_traits for t in ["Visual-Design", "Creative-Skill", "Digital-Media"]):
+            return "Creative careers let you express yourself while building practical skills valued in many industries"
+        
+        if any(t in course_traits for t in ["Law-Enforce", "Community-Serve"]):
+            return "Public service careers offer the satisfaction of serving your community and upholding justice"
+        
+        if any(t in course_traits for t in ["Maritime-Sea"]):
+            return "Maritime careers offer unique opportunities for travel and are essential to global trade"
+        
+        if any(t in course_traits for t in ["Hospitality-Svc"]):
+            return "Hospitality careers combine service excellence with opportunities in tourism and culinary arts"
+        
+        if any(t in course_traits for t in ["Agri-Nature", "Field-Research"]):
+            return "Careers in agriculture and environmental science address crucial sustainability challenges"
+        
+        return ""
+    
     def get_final_results(self, session_id: str) -> dict:
-        """Get final recommendations for a completed session"""
+        """Retrieve final recommendations."""
         session = self.sessions.get(session_id)
         if not session:
             return {"error": "Session not found"}
@@ -598,7 +1197,7 @@ class AdaptiveAssessmentEngine:
         }
     
     def finish_early(self, session_id: str) -> dict:
-        """Allow user to finish early and get current recommendations"""
+        """End session early and return current recommendations."""
         session = self.sessions.get(session_id)
         if not session:
             return {"error": "Session not found"}

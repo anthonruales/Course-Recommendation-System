@@ -1376,10 +1376,13 @@ def get_assessment_history(user_id: int, db: Session = Depends(get_db)):
             "recommendation_count": len(recommended_courses)
         })
     
+    # Filter out incomplete attempts (no recommendations = test not finished)
+    completed_history = [h for h in history if h["recommendation_count"] > 0]
+    
     return {
         "user_id": user_id,
-        "total_attempts": len(attempts),
-        "history": history
+        "total_attempts": len(completed_history),
+        "history": completed_history
     }
 
 # ========== ADMIN: TEST MANAGEMENT ==========
@@ -1810,9 +1813,13 @@ def start_adaptive_assessment(data: AdaptiveSessionStart, db: Session = Depends(
     
     user_gwa = None
     user_strand = None
+    user_interests = None
+    user_skills = None
     if user.academic_info:
         user_gwa = user.academic_info.get("gwa")
         user_strand = user.academic_info.get("strand")
+        user_interests = user.academic_info.get("interests", "")
+        user_skills = user.academic_info.get("skills", "")
     
     # Initialize adaptive engine
     engine = get_or_init_adaptive_engine(db)
@@ -1822,8 +1829,8 @@ def start_adaptive_assessment(data: AdaptiveSessionStart, db: Session = Depends(
     if max_questions not in [30, 50, 60]:
         max_questions = 30  # Default to 30 if invalid
     
-    # Create session with custom max questions
-    session_id = engine.create_session(data.userId, user_gwa, user_strand, max_questions)
+    # Create session with custom max questions and profile data (interests/skills)
+    session_id = engine.create_session(data.userId, user_gwa, user_strand, max_questions, user_interests, user_skills)
     
     # Get first question
     first_question = engine.get_next_question(session_id)

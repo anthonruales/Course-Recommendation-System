@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="mainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="50%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <linearGradient id="shineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.3"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#6366f1" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  
+  <!-- Background with rounded square -->
+  <rect x="16" y="16" width="480" height="480" rx="96" fill="url(#mainGrad)"/>
+  
+  <!-- Shine overlay -->
+  <rect x="16" y="16" width="480" height="240" rx="96" fill="url(#shineGrad)"/>
+  
+  <!-- Stylized "C" letter with book/path design -->
+  <g filter="shadow">
+    <!-- Main C shape - thick and bold -->
+    <path d="M 320 156 
+             C 260 136, 180 160, 160 256
+             C 180 352, 260 376, 320 356" 
+          fill="none" stroke="#ffffff" stroke-width="56" stroke-linecap="round"/>
+    
+    <!-- Inner accent line -->
+    <path d="M 300 180 
+             C 250 165, 195 185, 180 256
+             C 195 327, 250 347, 300 332" 
+          fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="24" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Compass/Target element (representing guidance) -->
+  <g filter="glow">
+    <circle cx="340" cy="176" r="28" fill="#22d3ee"/>
+    <circle cx="340" cy="176" r="16" fill="#ffffff"/>
+    <circle cx="340" cy="176" r="6" fill="#6366f1"/>
+    
+    <circle cx="340" cy="336" r="28" fill="#10b981"/>
+    <circle cx="340" cy="336" r="16" fill="#ffffff"/>
+    <circle cx="340" cy="336" r="6" fill="#6366f1"/>
+  </g>
+  
+  <!-- Decorative dots (representing multiple course paths) -->
+  <circle cx="120" cy="256" r="12" fill="rgba(255,255,255,0.6)"/>
+  <circle cx="100" cy="200" r="8" fill="rgba(255,255,255,0.4)"/>
+  <circle cx="100" cy="312" r="8" fill="rgba(255,255,255,0.4)"/>
+  
+  <!-- Pro badge -->
+  <rect x="350" y="390" width="90" height="36" rx="18" fill="#ffffff"/>
+  <text x="395" y="415" font-family="Arial, sans-serif" font-size="20" font-weight="800" fill="#6366f1" text-anchor="middle">PRO</text>
+</svg>

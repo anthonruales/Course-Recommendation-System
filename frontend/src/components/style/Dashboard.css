@@ -345,26 +345,28 @@
 
 /* Reasoning Box */
 .reasoning-box {
-    margin-top: 20px;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    margin-top: 10px;
+    padding: 12px 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .reasoning-label {
-    font-size: 12px;
-    font-weight: 700;
-    color: #64748b;
+    font-size: 11px;
+    font-weight: 600;
+    color: #94a3b8;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+    display: block;
 }
 
 .reasoning-text {
-    line-height: 1.6;
-    color: #cbd5e1;
-    font-size: 15px;
+    line-height: 1.5;
+    color: #e2e8f0;
+    font-size: 14px;
+    margin: 0;
 }
 
 .tags-row {
@@ -399,10 +401,16 @@
     overflow-y: auto;
 }
 
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
 /* Activity Cards */
 .activity-card {
-    background: linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.4) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
     margin-bottom: 15px;
     overflow: hidden;
@@ -410,8 +418,8 @@
 }
 
 .activity-card:hover {
-    border-color: rgba(99, 102, 241, 0.3);
-    background: rgba(30, 41, 59, 0.6);
+    border-color: rgba(99, 102, 241, 0.4);
+    background: linear-gradient(135deg, rgba(40, 51, 69, 0.95) 0%, rgba(20, 28, 47, 0.95) 100%);
 }
 
 .activity-card-header {
@@ -420,6 +428,7 @@
     align-items: center;
     padding: 20px;
     cursor: pointer;
+    color: #e2e8f0;
 }
 
 /* Tabs */
@@ -447,18 +456,26 @@
     border-bottom-color: #6366f1;
 }
 
+/* Tab Content Container */
+.tab-content {
+    padding: 10px 0;
+}
+
 /* Detailed Cards (Answers/Courses) */
 .detail-item-card {
     display: flex;
     gap: 15px;
     padding: 15px;
-    background: rgba(32, 44, 73, 0.4);
+    background: rgba(30, 41, 59, 0.8);
     border-radius: 8px;
     margin-bottom: 10px;
     border-left: 4px solid #6366f1;
 }
 
-.detail-item-card.answer { border-left-color: #10b981; }
+.detail-item-card.answer { 
+    border-left-color: #10b981; 
+    background: rgba(30, 41, 59, 0.8);
+}
 
 .item-number-badge {
     width: 32px;
@@ -471,9 +488,23 @@
     flex-shrink: 0;
     background: #6366f1;
     color: white;
+    font-size: 12px;
 }
 
 .item-number-badge.answer { background: #10b981; }
+
+/* Activity text styles */
+.course-name {
+    color: #f1f5f9;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.course-title {
+    color: #f1f5f9;
+    font-weight: 600;
+}
 
 .empty-state-container {
     text-align: center;

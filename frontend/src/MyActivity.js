@@ -1,6 +1,105 @@
 import React, { useState, useEffect } from 'react';
 import './components/style/Dashboard.css';
 
+// Inline styles to ensure dark theme visibility
+const styles = {
+  expandedContent: {
+    padding: '20px',
+    background: '#0f172a'
+  },
+  cardItem: {
+    display: 'flex',
+    gap: '15px',
+    padding: '15px',
+    background: '#1e293b',
+    borderRadius: '8px',
+    marginBottom: '10px',
+    borderLeft: '4px solid #6366f1'
+  },
+  cardItemAnswer: {
+    display: 'flex',
+    gap: '15px',
+    padding: '15px',
+    background: '#1e293b',
+    borderRadius: '8px',
+    marginBottom: '10px',
+    borderLeft: '4px solid #10b981'
+  },
+  badge: {
+    width: '32px',
+    height: '32px',
+    borderRadius: '6px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontWeight: '700',
+    fontSize: '12px',
+    flexShrink: 0,
+    background: '#6366f1',
+    color: '#ffffff'
+  },
+  badgeAnswer: {
+    width: '32px',
+    height: '32px',
+    borderRadius: '6px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontWeight: '700',
+    fontSize: '12px',
+    flexShrink: 0,
+    background: '#10b981',
+    color: '#ffffff'
+  },
+  categoryBadge: {
+    padding: '4px 10px',
+    borderRadius: '6px',
+    fontSize: '10px',
+    fontWeight: '800',
+    textTransform: 'uppercase',
+    background: 'rgba(99, 102, 241, 0.2)',
+    color: '#818cf8'
+  },
+  questionText: {
+    fontWeight: '600',
+    margin: '8px 0',
+    color: '#e2e8f0',
+    fontSize: '14px'
+  },
+  courseTitle: {
+    fontSize: '16px',
+    margin: 0,
+    color: '#f1f5f9',
+    fontWeight: '600'
+  },
+  courseDesc: {
+    margin: '5px 0',
+    color: '#94a3b8',
+    fontSize: '14px'
+  },
+  reasoningBox: {
+    marginTop: '10px',
+    padding: '12px 15px',
+    background: '#0f172a',
+    borderRadius: '8px',
+    border: '1px solid rgba(255, 255, 255, 0.1)'
+  },
+  reasoningLabel: {
+    fontSize: '11px',
+    fontWeight: '600',
+    color: '#94a3b8',
+    textTransform: 'uppercase',
+    letterSpacing: '0.5px',
+    display: 'block',
+    marginBottom: '4px'
+  },
+  reasoningText: {
+    color: '#e2e8f0',
+    fontSize: '14px',
+    margin: 0
+  }
+};
+
 function MyActivity({ onBack }) {
   const [activityHistory, setActivityHistory] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -45,7 +144,7 @@ function MyActivity({ onBack }) {
       {/* SIDEBAR (Reusable styles from Dashboard) */}
       <aside className="portal-sidebar">
         <div className="sidebar-brand">
-          <div className="brand-logo">C</div>
+          <img src="/logo.svg" alt="CoursePro" className="brand-logo" style={{ width: '40px', height: '40px', borderRadius: '10px' }} />
           <span className="brand-name">CoursePro</span>
         </div>
         
@@ -124,7 +223,7 @@ function MyActivity({ onBack }) {
 
                   {/* EXPANDED CONTENT */}
                   {expandedAttempt === activity.attempt_id && (
-                    <div style={{ padding: '20px', background: 'rgba(0,0,0,0.2)' }}>
+                    <div style={styles.expandedContent}>
                       <div className="activity-tabs-nav">
                         <button 
                           className={`activity-tab-btn ${expandedTab[activity.attempt_id] !== 'results' ? 'active' : ''}`}
@@ -136,34 +235,40 @@ function MyActivity({ onBack }) {
                         >🎯 Recommended Courses</button>
                       </div>
 
-                      <div className="tab-content">
+                      <div style={{ marginTop: '15px' }}>
                         {expandedTab[activity.attempt_id] !== 'results' ? (
                           activity.answered_questions?.map((qa, qIdx) => (
-                            <div key={qIdx} className="detail-item-card answer">
-                              <div className="item-number-badge answer">{qIdx + 1}</div>
+                            <div key={qIdx} style={styles.cardItemAnswer}>
+                              <div style={styles.badgeAnswer}>{qIdx + 1}</div>
                               <div style={{ flex: 1 }}>
-                                <span className="activity-badge badge-assessment" style={{ fontSize: '10px' }}>{qa.category}</span>
-                                <h5 className="reasoning-text" style={{ fontWeight: '600', margin: '5px 0' }}>{qa.question_text}</h5>
-                                <div className="reasoning-box">
-                                  <span className="reasoning-label">Your Choice:</span>
-                                  <p className="reasoning-text">{qa.chosen_option_text}</p>
+                                <span style={styles.categoryBadge}>{qa.category}</span>
+                                <h5 style={styles.questionText}>{qa.question_text}</h5>
+                                <div style={styles.reasoningBox}>
+                                  <span style={styles.reasoningLabel}>Your Choice:</span>
+                                  <p style={styles.reasoningText}>{qa.chosen_option_text}</p>
                                 </div>
                               </div>
                             </div>
                           ))
                         ) : (
-                          activity.recommended_courses?.map((course, cIdx) => (
-                            <div key={cIdx} className="detail-item-card">
-                              <div className="item-number-badge">{cIdx + 1}</div>
-                              <div style={{ flex: 1 }}>
-                                <h5 className="course-title" style={{ fontSize: '16px', margin: 0 }}>{course.course_name}</h5>
-                                <p className="header-subtitle" style={{ margin: '5px 0' }}>{course.description}</p>
-                                <div className="reasoning-box">
-                                  <p className="reasoning-text"><strong>Why:</strong> {course.reasoning}</p>
+                          activity.recommended_courses?.length > 0 ? (
+                            activity.recommended_courses.map((course, cIdx) => (
+                              <div key={cIdx} style={styles.cardItem}>
+                                <div style={styles.badge}>{cIdx + 1}</div>
+                                <div style={{ flex: 1 }}>
+                                  <h5 style={styles.courseTitle}>{course.course_name}</h5>
+                                  <p style={styles.courseDesc}>{course.description}</p>
+                                  <div style={styles.reasoningBox}>
+                                    <p style={styles.reasoningText}><strong style={{color: '#94a3b8'}}>Why:</strong> {course.reasoning || 'Based on your assessment responses'}</p>
+                                  </div>
                                 </div>
                               </div>
+                            ))
+                          ) : (
+                            <div style={{ textAlign: 'center', padding: '40px', color: '#94a3b8' }}>
+                              <p>No course recommendations found for this assessment.</p>
                             </div>
-                          ))
+                          )
                         )}
                       </div>
                     </div>
