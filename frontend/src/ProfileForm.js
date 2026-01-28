@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Toast from './Toast';
 
 // Predefined options for Academic Interests
 const INTEREST_OPTIONS = [
@@ -105,6 +106,13 @@ const SKILL_OPTIONS = [
 
 function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
   const [gwaError, setGwaError] = useState('');
+  const [interestModalOpen, setInterestModalOpen] = useState(false);
+  const [skillsModalOpen, setSkillsModalOpen] = useState(false);
+  const [toast, setToast] = useState(null);
+  
+  const showToast = (message, type = 'info') => {
+    setToast({ message, type });
+  };
   
   // Parse interests and skills from comma-separated string to array
   const selectedInterests = formData?.interests ? formData.interests.split(',').filter(i => i.trim()) : [];
@@ -162,28 +170,27 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
     });
   };
 
-  // Save handler with backend sync
   const handleSaveProfile = () => {
     // Validate required fields
     if (!formData.gwa || !formData.strand) {
-      alert('Please fill in both GWA and SHS Strand to save your profile');
+      showToast('Please fill in both GWA and SHS Strand to save your profile', 'warning');
       return;
     }
     
     // Validate GWA range
     const gwaValue = parseFloat(formData.gwa);
     if (gwaValue > 100) {
-      alert('GWA cannot exceed 100');
+      showToast('GWA cannot exceed 100', 'error');
       return;
     }
     if (gwaValue < 75) {
-      alert('GWA must be at least 75');
+      showToast('GWA must be at least 75', 'error');
       return;
     }
     
     const userId = localStorage.getItem('userId');
     if (!userId) {
-      alert('User ID not found. Please log in again.');
+      showToast('User ID not found. Please log in again.', 'error');
       return;
     }
     
@@ -206,13 +213,13 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
     .then(res => res.json())
     .then(data => {
       console.log('✅ Academic info saved to backend:', data);
-      alert('✅ Profile updated successfully! Your academic information has been saved.');
+      showToast('✓ Profile updated successfully!', 'success');
       onSave();
     })
     .catch(err => {
       console.error('❌ Error saving to backend:', err);
-      alert('⚠️ Profile saved locally but failed to sync with server. Please try again.');
-    });
+      showToast('Profile saved locally but failed to sync with server. Please try again.', 'error');
+    })
   };
 
   // Loading state if data isn't ready
@@ -346,55 +353,73 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
             <div style={{...styles.formSectionTitle, marginTop: '40px'}}>Qualitative Analysis</div>
             
             <div style={styles.inputGroup}>
-              <label style={styles.label}>Academic Interests <span style={{color: 'rgba(255,255,255,0.5)', fontWeight: 'normal'}}>(Select all that apply)</span></label>
-              <div style={styles.checkboxGrid}>
-                {INTEREST_OPTIONS.map(option => (
-                  <label 
-                    key={option.id} 
-                    style={{
-                      ...styles.checkboxLabel,
-                      ...(selectedInterests.includes(option.id) ? styles.checkboxLabelSelected : {})
-                    }}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={selectedInterests.includes(option.id)}
-                      onChange={() => toggleInterest(option.id)}
-                      style={styles.checkbox}
-                    />
-                    <span>{option.label}</span>
-                  </label>
-                ))}
+              <label style={styles.label}>Academic Interests</label>
+              <div 
+                onClick={() => setInterestModalOpen(true)}
+                style={{
+                  ...styles.clickableField,
+                  minHeight: selectedInterests.length > 0 ? 'auto' : '50px'
+                }}
+              >
+                {selectedInterests.length > 0 ? (
+                  <div style={styles.selectedTagsContainer}>
+                    {selectedInterests.map(id => {
+                      const interest = INTEREST_OPTIONS.find(o => o.id === id);
+                      return (
+                        <div key={id} style={styles.selectedTag}>
+                          <span>{interest?.label}</span>
+                          <span 
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleInterest(id);
+                            }}
+                            style={styles.removeBtn}
+                          >
+                            ×
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <span style={{color: 'rgba(255,255,255,0.4)'}}>Click to select interests...</span>
+                )}
               </div>
-              <span style={{color: 'rgba(255,255,255,0.5)', fontSize: '12px', marginTop: '8px', display: 'block'}}>
-                {selectedInterests.length} selected
-              </span>
             </div>
 
             <div style={{...styles.inputGroup, marginTop: '30px'}}>
-              <label style={styles.label}>Technical & Soft Skills <span style={{color: 'rgba(255,255,255,0.5)', fontWeight: 'normal'}}>(Select all that apply)</span></label>
-              <div style={styles.checkboxGrid}>
-                {SKILL_OPTIONS.map(option => (
-                  <label 
-                    key={option.id} 
-                    style={{
-                      ...styles.checkboxLabel,
-                      ...(selectedSkills.includes(option.id) ? styles.checkboxLabelSelected : {})
-                    }}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={selectedSkills.includes(option.id)}
-                      onChange={() => toggleSkill(option.id)}
-                      style={styles.checkbox}
-                    />
-                    <span>{option.label}</span>
-                  </label>
-                ))}
+              <label style={styles.label}>Technical & Soft Skills</label>
+              <div 
+                onClick={() => setSkillsModalOpen(true)}
+                style={{
+                  ...styles.clickableField,
+                  minHeight: selectedSkills.length > 0 ? 'auto' : '50px'
+                }}
+              >
+                {selectedSkills.length > 0 ? (
+                  <div style={styles.selectedTagsContainer}>
+                    {selectedSkills.map(id => {
+                      const skill = SKILL_OPTIONS.find(o => o.id === id);
+                      return (
+                        <div key={id} style={styles.selectedTag}>
+                          <span>{skill?.label}</span>
+                          <span 
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleSkill(id);
+                            }}
+                            style={styles.removeBtn}
+                          >
+                            ×
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <span style={{color: 'rgba(255,255,255,0.4)'}}>Click to select skills...</span>
+                )}
               </div>
-              <span style={{color: 'rgba(255,255,255,0.5)', fontSize: '12px', marginTop: '8px', display: 'block'}}>
-                {selectedSkills.length} selected
-              </span>
             </div>
 
             <div style={styles.footer}>
@@ -414,6 +439,108 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
           </div>
         </div>
       </main>
+
+      {/* ACADEMIC INTERESTS MODAL */}
+      {interestModalOpen && (
+        <div style={styles.modalOverlay} onClick={() => setInterestModalOpen(false)}>
+          <div style={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <div style={styles.modalHeader}>
+              <h2 style={styles.modalTitle}>Select Academic Interests</h2>
+              <button onClick={() => setInterestModalOpen(false)} style={styles.closeBtn}>✕</button>
+            </div>
+            <div style={styles.modalBody}>
+              {Object.values(
+                INTEREST_OPTIONS.reduce((acc, option) => {
+                  if (!acc[option.category]) acc[option.category] = [];
+                  acc[option.category].push(option);
+                  return acc;
+                }, {})
+              ).map((categoryItems, idx) => (
+                <div key={idx} style={styles.categorySection}>
+                  <h3 style={styles.categoryTitle}>{categoryItems[0].category}</h3>
+                  <div style={styles.tagsGrid}>
+                    {categoryItems.map(option => (
+                      <div
+                        key={option.id}
+                        onClick={() => toggleInterest(option.id)}
+                        style={{
+                          ...styles.modalTag,
+                          ...(selectedInterests.includes(option.id) ? styles.modalTagSelected : {})
+                        }}
+                      >
+                        <span>{option.label}</span>
+                        {selectedInterests.includes(option.id) && (
+                          <span style={styles.checkmark}>✓</span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div style={styles.modalFooter}>
+              <button onClick={() => setInterestModalOpen(false)} style={styles.modalCloseBtn}>
+                Done ({selectedInterests.length} selected)
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* TECHNICAL & SOFT SKILLS MODAL */}
+      {skillsModalOpen && (
+        <div style={styles.modalOverlay} onClick={() => setSkillsModalOpen(false)}>
+          <div style={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <div style={styles.modalHeader}>
+              <h2 style={styles.modalTitle}>Select Technical & Soft Skills</h2>
+              <button onClick={() => setSkillsModalOpen(false)} style={styles.closeBtn}>✕</button>
+            </div>
+            <div style={styles.modalBody}>
+              {Object.values(
+                SKILL_OPTIONS.reduce((acc, option) => {
+                  if (!acc[option.category]) acc[option.category] = [];
+                  acc[option.category].push(option);
+                  return acc;
+                }, {})
+              ).map((categoryItems, idx) => (
+                <div key={idx} style={styles.categorySection}>
+                  <h3 style={styles.categoryTitle}>{categoryItems[0].category}</h3>
+                  <div style={styles.tagsGrid}>
+                    {categoryItems.map(option => (
+                      <div
+                        key={option.id}
+                        onClick={() => toggleSkill(option.id)}
+                        style={{
+                          ...styles.modalTag,
+                          ...(selectedSkills.includes(option.id) ? styles.modalTagSelected : {})
+                        }}
+                      >
+                        <span>{option.label}</span>
+                        {selectedSkills.includes(option.id) && (
+                          <span style={styles.checkmark}>✓</span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div style={styles.modalFooter}>
+              <button onClick={() => setSkillsModalOpen(false)} style={styles.modalCloseBtn}>
+                Done ({selectedSkills.length} selected)
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {toast && (
+        <Toast 
+          message={toast.message} 
+          type={toast.type} 
+          onClose={() => setToast(null)}
+        />
+      )}
     </div>
   );
 }
@@ -502,6 +629,193 @@ const styles = {
     height: '16px',
     accentColor: '#6366f1',
     cursor: 'pointer',
+  },
+  tagsContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '12px',
+    padding: '20px',
+    background: 'rgba(30, 30, 50, 0.4)',
+    borderRadius: '14px',
+    border: '1px solid rgba(255,255,255,0.1)',
+    minHeight: '120px',
+    alignContent: 'flex-start',
+  },
+  tagItem: {
+    padding: '12px 18px',
+    background: 'rgba(255,255,255,0.05)',
+    border: '2px solid rgba(255,255,255,0.1)',
+    borderRadius: '12px',
+    cursor: 'pointer',
+    fontSize: '13px',
+    color: 'rgba(255,255,255,0.6)',
+    fontWeight: '500',
+    transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
+    whiteSpace: 'nowrap',
+    transform: 'scale(1)',
+    boxShadow: 'none',
+  },
+  tagItemSelected: {
+    background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(139, 92, 246, 0.15))',
+    borderColor: 'rgba(99, 102, 241, 0.6)',
+    color: '#a5b4fc',
+    fontWeight: '600',
+    transform: 'scale(1.05)',
+    boxShadow: '0 8px 20px rgba(99, 102, 241, 0.25)',
+  },
+  clickableField: {
+    padding: '14px 16px',
+    background: 'rgba(30, 30, 50, 0.9)',
+    border: '1px solid rgba(255,255,255,0.1)',
+    borderRadius: '12px',
+    color: 'white',
+    fontSize: '15px',
+    outline: 'none',
+    boxSizing: 'border-box',
+    cursor: 'pointer',
+    transition: 'all 0.2s ease',
+    display: 'flex',
+    alignItems: 'flex-start',
+    flexWrap: 'wrap',
+    gap: '8px',
+  },
+  selectedTagsContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '8px',
+    width: '100%',
+  },
+  selectedTag: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '6px',
+    padding: '6px 12px',
+    background: 'rgba(99, 102, 241, 0.2)',
+    border: '1px solid rgba(99, 102, 241, 0.4)',
+    borderRadius: '8px',
+    color: '#a5b4fc',
+    fontSize: '12px',
+    fontWeight: '500',
+  },
+  removeBtn: {
+    cursor: 'pointer',
+    fontWeight: 'bold',
+    fontSize: '16px',
+    color: '#f87171',
+    transition: 'color 0.2s ease',
+  },
+  modalOverlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: 'rgba(0, 0, 0, 0.6)',
+    backdropFilter: 'blur(5px)',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1000,
+  },
+  modalContent: {
+    background: 'rgba(20, 20, 40, 0.95)',
+    backdropFilter: 'blur(20px)',
+    border: '1px solid rgba(255, 255, 255, 0.15)',
+    borderRadius: '24px',
+    width: '90%',
+    maxWidth: '700px',
+    maxHeight: '85vh',
+    display: 'flex',
+    flexDirection: 'column',
+    boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)',
+  },
+  modalHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '24px 28px',
+    borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+  },
+  modalTitle: {
+    fontSize: '20px',
+    fontWeight: '700',
+    color: 'white',
+    margin: 0,
+  },
+  closeBtn: {
+    background: 'none',
+    border: 'none',
+    color: '#94a3b8',
+    fontSize: '24px',
+    cursor: 'pointer',
+    padding: '4px 8px',
+    transition: 'color 0.2s ease',
+  },
+  modalBody: {
+    flex: 1,
+    overflowY: 'auto',
+    padding: '24px 28px',
+  },
+  categorySection: {
+    marginBottom: '28px',
+  },
+  categoryTitle: {
+    fontSize: '13px',
+    fontWeight: '700',
+    color: '#818cf8',
+    textTransform: 'uppercase',
+    letterSpacing: '0.5px',
+    marginBottom: '14px',
+    margin: '0 0 14px 0',
+  },
+  tagsGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
+    gap: '10px',
+  },
+  modalTag: {
+    padding: '12px 14px',
+    background: 'rgba(255, 255, 255, 0.05)',
+    border: '2px solid rgba(255, 255, 255, 0.1)',
+    borderRadius: '10px',
+    cursor: 'pointer',
+    fontSize: '13px',
+    color: 'rgba(255, 255, 255, 0.6)',
+    fontWeight: '500',
+    transition: 'all 0.2s ease',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: '8px',
+  },
+  modalTagSelected: {
+    background: 'rgba(99, 102, 241, 0.2)',
+    borderColor: 'rgba(99, 102, 241, 0.6)',
+    color: '#a5b4fc',
+    fontWeight: '600',
+    boxShadow: '0 0 15px rgba(99, 102, 241, 0.2)',
+  },
+  checkmark: {
+    color: '#10b981',
+    fontSize: '16px',
+    fontWeight: 'bold',
+  },
+  modalFooter: {
+    padding: '20px 28px',
+    borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+    display: 'flex',
+    justifyContent: 'flex-end',
+  },
+  modalCloseBtn: {
+    background: '#6366f1',
+    color: 'white',
+    padding: '12px 24px',
+    borderRadius: '10px',
+    border: 'none',
+    fontWeight: '600',
+    fontSize: '14px',
+    cursor: 'pointer',
+    transition: 'all 0.2s ease',
   },
 };
 

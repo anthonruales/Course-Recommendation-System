@@ -35,7 +35,7 @@
     overflow-y: auto;
     animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     color: #f8fafc;
-    padding: 0; /* Handled by header and content */
+    padding: 0;
 }
 
 @keyframes slideUp {
@@ -147,7 +147,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    max-width: 320px; /* Pantay sa spread ng stars */
+    max-width: 320px;
     padding: 0 5px;
 }
 

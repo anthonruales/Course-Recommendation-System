@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Toast from './Toast';
 
 function Signup({ onSwitch }) {
   const [formData, setFormData] = useState({
@@ -11,27 +12,32 @@ function Signup({ onSwitch }) {
   });
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [toast, setToast] = useState(null);
+
+  const showToast = (message, type = 'info') => {
+    setToast({ message, type });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
+      showToast("Passwords do not match!", "error");
       return;
     }
 
     if (formData.password.length < 6) {
-      alert("Password must be at least 6 characters long.");
+      showToast("Password must be at least 6 characters long.", "error");
       return;
     }
 
     if (formData.username.length < 3) {
-      alert("Username must be at least 3 characters long.");
+      showToast("Username must be at least 3 characters long.", "error");
       return;
     }
 
     if (!/^[a-zA-Z0-9_]+$/.test(formData.username)) {
-      alert("Username can only contain letters, numbers, and underscores.");
+      showToast("Username can only contain letters, numbers, and underscores.", "error");
       return;
     }
 
@@ -45,11 +51,11 @@ function Signup({ onSwitch }) {
       });
 
       if (response.status === 200 || response.status === 201) {
-        alert("Account created successfully! Please sign in.");
-        onSwitch();
+        showToast("✓ Account created successfully! Redirecting to sign in...", "success");
+        setTimeout(() => onSwitch(), 2000);
       }
     } catch (err) {
-      alert(err.response?.data?.detail || "Registration failed. Please try again.");
+      showToast(err.response?.data?.detail || "Registration failed. Please try again.", "error");
     } finally {
       setLoading(false);
     }
@@ -149,6 +155,14 @@ function Signup({ onSwitch }) {
           Already have an account? <span onClick={onSwitch} style={styles.link}>Sign In</span>
         </p>
       </div>
+
+      {toast && (
+        <Toast 
+          message={toast.message} 
+          type={toast.type} 
+          onClose={() => setToast(null)}
+        />
+      )}
     </div>
   );
 }

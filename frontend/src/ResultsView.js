@@ -155,7 +155,7 @@ function ResultsView({ recommendation, profileData, onRetake, onBack }) {
           recommendation={showFeedback}
           userId={parseInt(userId) || null}
           onSubmit={() => {
-            alert('Thank you for your feedback!');
+            // Feedback submission is handled with toast notification
           }}
           onClose={() => setShowFeedback(null)}
         />
