@@ -611,21 +611,27 @@ def recommend_deprecated(data: AssessmentSubmit, db: Session = Depends(get_db)):
     
     # Now save recommendations (separately)
     try:
+        saved_count = 0
         for rec in recommendations:
+            print(f"🔍 Looking for course: '{rec['course_name']}'")
             course = db.query(models.Course).filter(
                 models.Course.course_name == rec["course_name"]
             ).first()
             
             if course:
+                print(f"   ✓ Found course ID: {course.course_id}")
                 db.add(models.Recommendation(
                     attempt_id=test_attempt.attempt_id,
                     user_id=data.userId,
                     course_id=course.course_id,
                     reasoning=rec["reasoning"]
                 ))
+                saved_count += 1
+            else:
+                print(f"   ✗ Course NOT FOUND in database!")
         
         db.commit()
-        print(f"✅ Saved {len(recommendations)} recommendations to database")
+        print(f"✅ Saved {saved_count}/{len(recommendations)} recommendations to database")
     except Exception as e:
         print(f"❌ Error saving recommendations: {e}")
         db.rollback()
@@ -1391,13 +1397,13 @@ def get_assessment_history(user_id: int, db: Session = Depends(get_db)):
             "recommendation_count": len(recommended_courses)
         })
     
-    # Filter out incomplete attempts (no recommendations = test not finished)
-    completed_history = [h for h in history if h["recommendation_count"] > 0]
+    # Show all attempts (including those without recommendations for debugging)
+    # Previously we filtered: completed_history = [h for h in history if h["recommendation_count"] > 0]
     
     return {
         "user_id": user_id,
-        "total_attempts": len(completed_history),
-        "history": completed_history
+        "total_attempts": len(history),
+        "history": history
     }
 
 # ========== ADMIN: TEST MANAGEMENT ==========
@@ -1870,6 +1876,7 @@ def start_adaptive_assessment(data: AdaptiveSessionStart, db: Session = Depends(
 
 def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommendations: list, user_id: int = None, answered_questions: dict = None):
     """Helper function to save adaptive assessment results to database for history tracking"""
+    print(f"🔵 ENTERING save_adaptive_session_to_db - session_id: {session_id}")
     try:
         # Get session from engine if available
         session = engine.sessions.get(session_id)
@@ -1882,9 +1889,12 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
             print(f"❌ No user_id available for session {session_id}")
             raise Exception(f"Cannot save adaptive session {session_id}: No user_id available")
         
-        print(f"🔍 Saving adaptive session {session_id} - User: {user_id}, Questions answered: {len(answered_questions) if answered_questions else 0}, Recs: {len(recommendations)}")
-        if recommendations:
-            print(f"    First rec: {recommendations[0].get('course_name')}")
+        print(f"🔍 Saving adaptive session {session_id} - User: {user_id}, Questions answered: {len(answered_questions) if answered_questions else 0}, Recs: {len(recommendations) if recommendations else 0}")
+        if recommendations and len(recommendations) > 0:
+            print(f"    First rec course_name: '{recommendations[0].get('course_name')}'")
+            print(f"    All rec course names: {[r.get('course_name') for r in recommendations]}")
+        else:
+            print(f"    ⚠️ Recommendations list is empty or None: {recommendations}")
         
         # Get or create adaptive test type
         adaptive_test = db.query(models.Test).filter(models.Test.test_type == "adaptive").first()
@@ -1920,30 +1930,7 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
         db.commit()
         print(f"✅ Committed attempt and answers: attempt_id={test_attempt.attempt_id}")
         
-        # 🔄 ALSO SAVE TO user_test_attempts for backward compatibility
-        try:
-            from sqlalchemy import text
-            # Insert into user_test_attempts table for backward compatibility
-            db.execute(text('''
-                INSERT INTO user_test_attempts 
-                (attempt_id, user_id, test_id, score, total_questions, attempt_date, time_taken, created_at)
-                VALUES (:attempt_id, :user_id, :test_id, :score, :total_questions, :attempt_date, :time_taken, NOW())
-            '''), {
-                'attempt_id': test_attempt.attempt_id,
-                'user_id': user_id,
-                'test_id': adaptive_test.test_id,
-                'score': 0,  # Placeholder
-                'total_questions': len(answered_questions) if answered_questions else 0,
-                'attempt_date': test_attempt.taken_at,
-                'time_taken': 0  # Placeholder
-            })
-            db.commit()
-            print(f"✅ Also saved to user_test_attempts table for backward compatibility")
-        except Exception as sync_error:
-            print(f"⚠️ Warning: Could not sync to user_test_attempts: {sync_error}")
-            # Don't fail completely if backward compat table sync fails
-        
-        # NOW save recommendations
+        # NOW save recommendations (removed broken user_test_attempts sync that was causing transaction failures)
         if recommendations and len(recommendations) > 0:
             try:
                 rec_count = 0
@@ -2017,13 +2004,19 @@ def submit_adaptive_answer(data: AdaptiveAnswerSubmit, db: Session = Depends(get
     
     # If session is complete, return final results
     if result.get("status") == "complete":
-        print(f"✅ Assessment complete! Saving to database...")
-        print(f"🔍 DEBUG: Recommendations about to save: {result.get('recommendations')}")
+        print(f"✅ Assessment complete (status=complete)! Saving to database...")
+        recs = result.get('recommendations', [])
+        print(f"🔍 DEBUG: status=complete has {len(recs) if recs else 0} recommendations")
+        if recs:
+            print(f"🔍 DEBUG: Recommendation courses: {[r.get('course_name') for r in recs]}")
+        else:
+            print(f"⚠️ WARNING: No recommendations in result! result={result}")
         # Get session to extract user_id and answered questions
         session = engine.sessions.get(data.sessionId)
         if session:
             # Save to database for history
-            save_adaptive_session_to_db(db, engine, data.sessionId, result["recommendations"], user_id=session.user_id, answered_questions=session.answered_questions)
+            print(f"🔍 DEBUG: Session user_id={session.user_id}, is_complete={session.is_complete}")
+            save_adaptive_session_to_db(db, engine, data.sessionId, recs, user_id=session.user_id, answered_questions=session.answered_questions)
             print(f"✅ Saved to DB with user_id={session.user_id}")
         else:
             print(f"⚠️ Could not find session {data.sessionId} to save")
@@ -2031,7 +2024,7 @@ def submit_adaptive_answer(data: AdaptiveAnswerSubmit, db: Session = Depends(get
             "success": True,
             "is_complete": True,
             "message": "Assessment complete! Here are your personalized recommendations.",
-            "recommendations": result["recommendations"]
+            "recommendations": recs
         }
     
     # Get next question
@@ -2041,12 +2034,18 @@ def submit_adaptive_answer(data: AdaptiveAnswerSubmit, db: Session = Depends(get
         # Assessment complete
         print(f"✅ Assessment complete (no next question)! Saving to database...")
         final_results = engine.get_final_results(data.sessionId)
-        print(f"🔍 DEBUG: Final results recommendations: {final_results.get('recommendations')}")
+        recs = final_results.get('recommendations', [])
+        print(f"🔍 DEBUG: Final results has {len(recs) if recs else 0} recommendations")
+        if recs:
+            print(f"🔍 DEBUG: Recommendation courses: {[r.get('course_name') for r in recs]}")
+        else:
+            print(f"⚠️ WARNING: No recommendations in final_results! final_results={final_results}")
         # Get session to extract user_id and answered questions
         session = engine.sessions.get(data.sessionId)
         if session:
             # Save to database for history
-            save_adaptive_session_to_db(db, engine, data.sessionId, final_results["recommendations"], user_id=session.user_id, answered_questions=session.answered_questions)
+            print(f"🔍 DEBUG: Session user_id={session.user_id}, is_complete={session.is_complete}, final_recs={len(session.final_recommendations) if session.final_recommendations else 0}")
+            save_adaptive_session_to_db(db, engine, data.sessionId, recs, user_id=session.user_id, answered_questions=session.answered_questions)
             print(f"✅ Saved to DB with user_id={session.user_id}")
         else:
             print(f"⚠️ Could not find session {data.sessionId} to save")
@@ -2056,7 +2055,7 @@ def submit_adaptive_answer(data: AdaptiveAnswerSubmit, db: Session = Depends(get
             "message": f"Assessment complete after {result['round']} questions!",
             "total_questions": result["round"],
             "confidence": result["confidence"],
-            "recommendations": final_results["recommendations"]
+            "recommendations": recs
         }
     
     print(f"⏳ Assessment in progress: round={result.get('round')}, confidence={result.get('confidence')}")

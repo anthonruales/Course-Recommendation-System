@@ -865,6 +865,7 @@ class AdaptiveAssessmentEngine:
     
     def _finalize_session(self, session: AdaptiveSession):
         """Build final course recommendations."""
+        print(f"🟢 FINALIZE SESSION CALLED - session_id: {session.session_id}")
         session.is_complete = True
         
         # Sort courses by score
@@ -873,6 +874,10 @@ class AdaptiveAssessmentEngine:
             key=lambda x: x[1],
             reverse=True
         )
+        
+        print(f"🟢 Total courses scored: {len(sorted_courses)}")
+        if sorted_courses:
+            print(f"🟢 Top 5 courses: {sorted_courses[:5]}")
         
         # Normalize scores to percentages
         top_score = sorted_courses[0][1] if sorted_courses else 1
@@ -928,6 +933,8 @@ class AdaptiveAssessmentEngine:
             })
         
         session.final_recommendations = recommendations
+        print(f"🟢 Generated {len(recommendations)} recommendations")
+        print(f"🟢 Recommendation course names: {[r['course_name'] for r in recommendations]}")
         print(f"✅ Session {session.session_id} complete after {session.round_number} questions")
     
     def _generate_recommendation_reasoning(self, session: AdaptiveSession, course_name: str,
@@ -1179,14 +1186,18 @@ class AdaptiveAssessmentEngine:
     
     def get_final_results(self, session_id: str) -> dict:
         """Retrieve final recommendations."""
+        print(f"🔵 get_final_results called for session: {session_id}")
         session = self.sessions.get(session_id)
         if not session:
+            print(f"🔴 Session not found: {session_id}")
             return {"error": "Session not found"}
         
         if not session.is_complete:
+            print(f"🟡 Session not complete, forcing finalize...")
             # Force finalize
             self._finalize_session(session)
         
+        print(f"🔵 Returning {len(session.final_recommendations)} recommendations")
         return {
             "session_id": session_id,
             "is_complete": True,
