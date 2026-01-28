@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useGoogleLogin } from '@react-oauth/google';
 
-function Login({ onSwitch, onLoginSuccess }) {
+function Login({ onSwitch, onLoginSuccess, onBack }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -100,6 +100,8 @@ function Login({ onSwitch, onLoginSuccess }) {
   if (showUsernameModal) {
     return (
       <div style={styles.authWrapper}>
+        <div style={styles.bgGradient1}></div>
+        <div style={styles.bgGradient2}></div>
         <div style={styles.glassCard}>
           <img src="/logo.svg" alt="CoursePro" style={styles.brandIcon} />
           
@@ -134,6 +136,8 @@ function Login({ onSwitch, onLoginSuccess }) {
 
   return (
     <div style={styles.authWrapper}>
+      <div style={styles.bgGradient1}></div>
+      <div style={styles.bgGradient2}></div>
       <div style={styles.glassCard}>
         <img src="/logo.svg" alt="CoursePro" style={styles.brandIcon} />
         
@@ -200,6 +204,12 @@ function Login({ onSwitch, onLoginSuccess }) {
         <p style={styles.footerText}>
           New here? <span onClick={onSwitch} style={styles.link}>Create Account</span>
         </p>
+        
+        {onBack && (
+          <p style={styles.backLink} onClick={onBack}>
+            ← Back to Home
+          </p>
+        )}
       </div>
     </div>
   );
@@ -212,92 +222,181 @@ const styles = {
     justifyContent: 'center',
     width: '100%',
     minHeight: '100vh',
-    padding: '20px'
+    padding: '40px 20px',
+    background: '#050510',
+    position: 'relative',
+    overflow: 'hidden'
+  },
+  bgGradient1: {
+    position: 'fixed',
+    top: '-50%',
+    left: '-50%',
+    width: '200%',
+    height: '200%',
+    background: 'radial-gradient(ellipse at 30% 30%, rgba(99, 102, 241, 0.12) 0%, transparent 55%)',
+    pointerEvents: 'none',
+    animation: 'breathe 8s ease-in-out infinite'
+  },
+  bgGradient2: {
+    position: 'fixed',
+    bottom: '-50%',
+    right: '-50%',
+    width: '200%',
+    height: '200%',
+    background: 'radial-gradient(ellipse at 70% 70%, rgba(139, 92, 246, 0.1) 0%, transparent 55%)',
+    pointerEvents: 'none',
+    animation: 'breathe 8s ease-in-out infinite 2s'
   },
   glassCard: {
-    // TRANSPARENT GLASS
-    background: 'rgba(255, 255, 255, 0.05)', 
-    backdropFilter: 'blur(20px) saturate(180%)', // Makes background "shine" through blurred
-    WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-    border: '1px solid rgba(255, 255, 255, 0.15)', // Light border to define the box
-    borderRadius: '28px',
-    padding: '60px 70px', 
-    width: '540px', // Large Boxy Size
-    boxShadow: '0 25px 50px -12px rgba(0,0,0,0.5)',
+    position: 'relative',
+    background: 'linear-gradient(145deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 27, 75, 0.75) 100%)',
+    backdropFilter: 'blur(40px)',
+    WebkitBackdropFilter: 'blur(40px)',
+    border: '1px solid rgba(255, 255, 255, 0.08)',
+    borderRadius: '32px',
+    padding: '52px 56px',
+    width: '100%',
+    maxWidth: '440px',
+    boxShadow: '0 30px 100px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.03) inset',
     textAlign: 'center',
-    boxSizing: 'border-box'
+    zIndex: 1,
+    animation: 'slideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1)'
   },
   brandIcon: {
     width: '64px',
     height: '64px',
-    borderRadius: '14px',
-    margin: '0 auto 24px',
-    objectFit: 'contain'
+    borderRadius: '20px',
+    margin: '0 auto 28px',
+    objectFit: 'contain',
+    background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%)',
+    padding: '15px',
+    boxShadow: '0 15px 40px rgba(99, 102, 241, 0.35)'
   },
-  title: { fontSize: '32px', fontWeight: '700', color: 'white', margin: '0 0 10px' },
-  subtitle: { color: 'rgba(255,255,255,0.6)', fontSize: '15px', marginBottom: '35px' },
+  title: { 
+    fontSize: '28px', 
+    fontWeight: '700', 
+    color: '#fff', 
+    margin: '0 0 8px',
+    letterSpacing: '-0.5px'
+  },
+  subtitle: { 
+    color: '#64748b', 
+    fontSize: '15px', 
+    marginBottom: '36px',
+    fontWeight: '400'
+  },
   googleBtn: {
     width: '100%',
-    padding: '14px',
-    borderRadius: '14px',
-    border: 'none',
-    background: 'white',
-    color: '#1e293b',
-    fontWeight: '600',
+    padding: '16px 22px',
+    borderRadius: '16px',
+    border: '1px solid rgba(255, 255, 255, 0.08)',
+    background: 'rgba(255, 255, 255, 0.03)',
+    color: '#e2e8f0',
+    fontWeight: '500',
+    fontSize: '15px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: '12px',
+    gap: '14px',
     cursor: 'pointer',
-    marginBottom: '20px',
-    transition: 'all 0.3s ease'
+    marginBottom: '28px',
+    transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+    backdropFilter: 'blur(10px)'
   },
-  divider: { display: 'flex', alignItems: 'center', gap: '15px', margin: '25px 0' },
-  line: { flex: 1, height: '1px', background: 'rgba(255,255,255,0.2)' },
-  dividerText: { color: 'rgba(255,255,255,0.4)', fontSize: '11px', fontWeight: '800' },
-  inputWrapper: { textAlign: 'left', marginBottom: '20px' },
-  label: { display: 'block', fontSize: '13px', fontWeight: '600', color: 'rgba(255,255,255,0.8)', marginBottom: '8px', marginLeft: '4px' },
+  divider: { 
+    display: 'flex', 
+    alignItems: 'center', 
+    gap: '18px', 
+    margin: '28px 0' 
+  },
+  line: { 
+    flex: 1, 
+    height: '1px', 
+    background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent)' 
+  },
+  dividerText: { 
+    color: '#475569', 
+    fontSize: '11px', 
+    fontWeight: '600',
+    textTransform: 'uppercase',
+    letterSpacing: '2px'
+  },
+  inputWrapper: { 
+    textAlign: 'left', 
+    marginBottom: '20px' 
+  },
+  label: { 
+    display: 'block', 
+    fontSize: '12px', 
+    fontWeight: '600', 
+    color: '#94a3b8', 
+    marginBottom: '10px',
+    letterSpacing: '0.5px',
+    textTransform: 'uppercase'
+  },
   input: {
     width: '100%',
-    padding: '16px',
-    // GLASS INPUTS
-    background: 'rgba(255, 255, 255, 0.03)', 
-    border: '1px solid rgba(255, 255, 255, 0.1)',
-    borderRadius: '12px',
-    color: 'white',
+    padding: '16px 20px',
+    background: 'rgba(15, 23, 42, 0.5)',
+    border: '1px solid rgba(255, 255, 255, 0.06)',
+    borderRadius: '14px',
+    color: '#f1f5f9',
     fontSize: '15px',
     outline: 'none',
     boxSizing: 'border-box',
-    transition: 'all 0.3s ease'
+    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
   },
   viewBtn: {
     position: 'absolute',
-    right: '12px',
+    right: '16px',
     top: '50%',
     transform: 'translateY(-50%)',
-    background: 'none',
+    background: 'rgba(99, 102, 241, 0.12)',
     border: 'none',
     color: '#818cf8',
     fontWeight: '700',
-    fontSize: '11px',
-    cursor: 'pointer'
+    fontSize: '10px',
+    cursor: 'pointer',
+    letterSpacing: '0.5px',
+    padding: '7px 12px',
+    borderRadius: '8px',
+    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
   },
   loginBtn: {
     width: '100%',
-    padding: '16px',
-    background: '#6366f1',
+    padding: '18px 28px',
+    background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%)',
+    backgroundSize: '200% 200%',
     color: 'white',
     border: 'none',
-    borderRadius: '12px',
-    fontWeight: '700',
+    borderRadius: '16px',
+    fontWeight: '600',
     fontSize: '16px',
     cursor: 'pointer',
-    marginTop: '10px',
-    boxShadow: '0 10px 15px rgba(99, 102, 241, 0.3)',
-    transition: 'all 0.3s ease'
+    marginTop: '14px',
+    boxShadow: '0 10px 35px rgba(99, 102, 241, 0.35)',
+    transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+    letterSpacing: '0.3px'
   },
-  footerText: { marginTop: '30px', color: 'rgba(255,255,255,0.5)', fontSize: '14px' },
-  link: { color: '#818cf8', fontWeight: '700', cursor: 'pointer', marginLeft: '5px' }
+  footerText: { 
+    marginTop: '32px', 
+    color: '#64748b', 
+    fontSize: '15px' 
+  },
+  link: { 
+    color: '#a5b4fc', 
+    fontWeight: '600', 
+    cursor: 'pointer', 
+    marginLeft: '6px',
+    transition: 'color 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+  },
+  backLink: {
+    marginTop: '16px',
+    color: '#64748b',
+    fontSize: '14px',
+    cursor: 'pointer',
+    transition: 'color 0.3s ease',
+  }
 };
 
 export default Login;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import LandingPage from './LandingPage';
 import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard';
@@ -11,7 +12,7 @@ import ResultsView from './ResultsView';
 import './App.css';
 
 function App() {
-  const [isLogin, setIsLogin] = useState(true);
+  const [authView, setAuthView] = useState('landing'); // 'landing', 'login', 'signup'
   const [view, setView] = useState('dashboard');
   const [user, setUser] = useState(localStorage.getItem('userName') || null);
   const [recommendationData, setRecommendationData] = useState(null);
@@ -80,6 +81,7 @@ function App() {
     setRecommendationData(null);
     setProfileData({}); // Clear state on logout
     setView('dashboard');
+    setAuthView('landing'); // Go back to landing page
   };
 
   const handleAssessmentResults = (data) => {
@@ -184,13 +186,31 @@ function App() {
             )}
           </>
         ) : (
-          <div className="auth-shell">
-            {isLogin ? (
-              <Login onSwitch={() => setIsLogin(false)} onLoginSuccess={handleLoginSuccess} />
-            ) : (
-              <Signup onSwitch={() => setIsLogin(true)} />
+          <>
+            {authView === 'landing' && (
+              <LandingPage 
+                onLogin={() => setAuthView('login')}
+                onSignup={() => setAuthView('signup')}
+              />
             )}
-          </div>
+            {authView === 'login' && (
+              <div className="auth-shell">
+                <Login 
+                  onSwitch={() => setAuthView('signup')} 
+                  onLoginSuccess={handleLoginSuccess}
+                  onBack={() => setAuthView('landing')}
+                />
+              </div>
+            )}
+            {authView === 'signup' && (
+              <div className="auth-shell">
+                <Signup 
+                  onSwitch={() => setAuthView('login')}
+                  onBack={() => setAuthView('landing')}
+                />
+              </div>
+            )}
+          </>
         )}
       </div>
     </GoogleOAuthProvider>
