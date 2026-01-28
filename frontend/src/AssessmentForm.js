@@ -148,7 +148,7 @@ function AssessmentForm({ onBack, onShowResults }) {
         {/* SIDEBAR */}
         <aside style={styles.sidebar}>
           <div style={styles.brand}>
-            <div style={styles.logo}>C</div>
+            <img src="/logo.svg" alt="CoursePro" style={styles.logo} />
             <h2 style={styles.brandName}>CoursePro</h2>
           </div>
           <div style={styles.nav}>
@@ -220,7 +220,7 @@ function AssessmentForm({ onBack, onShowResults }) {
       {/* SIDEBAR */}
       <aside style={styles.sidebar}>
         <div style={styles.brand}>
-          <div style={styles.logo}>C</div>
+          <img src="/logo.svg" alt="CoursePro" style={styles.logo} />
           <h2 style={styles.brandName}>CoursePro</h2>
         </div>
         <div style={styles.nav}>
@@ -326,7 +326,7 @@ const styles = {
   },
   sidebar: { width: '260px', background: 'rgba(255, 255, 255, 0.02)', backdropFilter: 'blur(20px)', borderRight: '1px solid rgba(255, 255, 255, 0.08)', padding: '40px 20px', display: 'flex', flexDirection: 'column' },
   brand: { display: 'flex', alignItems: 'center', marginBottom: '50px' },
-  logo: { width: '32px', height: '32px', background: '#6366f1', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', marginRight: '10px' },
+  logo: { width: '40px', height: '40px', borderRadius: '10px', marginRight: '10px', objectFit: 'contain' },
   brandName: { fontSize: '18px', fontWeight: 'bold' },
   nav: { flex: 1 },
   navActive: { padding: '12px', background: 'rgba(99, 102, 241, 0.1)', color: '#818cf8', borderRadius: '8px', fontWeight: '600' },

@@ -64,7 +64,7 @@ function Signup({ onSwitch }) {
   return (
     <div style={styles.authWrapper}>
       <div style={styles.glassCard}>
-        <div style={styles.brandIcon}>C</div>
+        <img src="/logo.svg" alt="CoursePro" style={styles.brandIcon} />
         
         <h2 style={styles.title}>Create Account</h2>
         <p style={styles.subtitle}>Get personalized course recommendations</p>
@@ -189,17 +189,11 @@ const styles = {
     boxSizing: 'border-box'
   },
   brandIcon: {
-    width: '56px',
-    height: '56px',
-    background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
+    width: '64px',
+    height: '64px',
     borderRadius: '14px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: 'white',
-    fontSize: '22px',
-    fontWeight: '800',
     margin: '0 auto 20px',
+    objectFit: 'contain'
   },
   title: { fontSize: '32px', fontWeight: '700', margin: '0 0 10px', color: 'white' },
   subtitle: { color: 'rgba(255,255,255,0.6)', fontSize: '15px', marginBottom: '30px' },

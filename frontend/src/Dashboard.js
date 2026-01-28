@@ -5,8 +5,10 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
   const [hasAcademicInfo, setHasAcademicInfo] = useState(false);
   const [checkingProfile, setCheckingProfile] = useState(true);
   const [selectedQuestionCount, setSelectedQuestionCount] = useState(30);
+  const [showHelpCenter, setShowHelpCenter] = useState(false);
+  const [activityCount, setActivityCount] = useState(0);
 
-  // Check if user has filled academic info
+  // Check if user has filled academic info and fetch activity count
   useEffect(() => {
     const userId = localStorage.getItem('userId');
     if (userId) {
@@ -19,6 +21,16 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
         .catch(err => {
           console.error('Error checking academic info:', err);
           setCheckingProfile(false);
+        });
+      
+      // Fetch actual activity count from API
+      fetch(`http://localhost:8000/user/${userId}/assessment-history`)
+        .then(res => res.json())
+        .then(data => {
+          setActivityCount(data.total_attempts || 0);
+        })
+        .catch(err => {
+          console.error('Error fetching activity count:', err);
         });
     } else {
       setCheckingProfile(false);
@@ -90,7 +102,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
       {/* SIDEBAR */}
       <aside style={styles.sidebar}>
         <div style={styles.brandContainer}>
-          <div style={styles.logoIcon}>C</div>
+          <img src="/logo.svg" alt="CoursePro" style={styles.logoIcon} />
           <h2 style={styles.brandName}>CoursePro</h2>
         </div>
         
@@ -106,17 +118,14 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
           <div style={styles.navItem} onClick={onViewActivity}
             onMouseEnter={(e) => { e.target.style.background = 'rgba(255, 255, 255, 0.05)'; e.target.style.color = '#cbd5e1'; e.target.style.transform = 'translateX(4px)'; }}
             onMouseLeave={(e) => { e.target.style.background = 'transparent'; e.target.style.color = '#94a3b8'; e.target.style.transform = 'translateX(0)'; }}
-          >📂 My Activity ({history ? history.length : 0})</div>
+          >📂 My Activity ({activityCount})</div>
 
           <div style={styles.categoryLabel}>Support</div>
           <div style={styles.navItem}
+            onClick={() => setShowHelpCenter(true)}
             onMouseEnter={(e) => { e.target.style.background = 'rgba(255, 255, 255, 0.05)'; e.target.style.color = '#cbd5e1'; e.target.style.transform = 'translateX(4px)'; }}
             onMouseLeave={(e) => { e.target.style.background = 'transparent'; e.target.style.color = '#94a3b8'; e.target.style.transform = 'translateX(0)'; }}
           >❓ Help Center</div>
-          <div style={styles.navItem}
-            onMouseEnter={(e) => { e.target.style.background = 'rgba(255, 255, 255, 0.05)'; e.target.style.color = '#cbd5e1'; e.target.style.transform = 'translateX(4px)'; }}
-            onMouseLeave={(e) => { e.target.style.background = 'transparent'; e.target.style.color = '#94a3b8'; e.target.style.transform = 'translateX(0)'; }}
-          >💬 Feedback</div>
         </nav>
 
         <button onClick={onLogout} style={styles.logoutBtn}
@@ -262,6 +271,68 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
           </div>
         </div>
       </main>
+
+      {/* HELP CENTER MODAL */}
+      {showHelpCenter && (
+        <div style={styles.modalOverlay} onClick={() => setShowHelpCenter(false)}>
+          <div style={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <div style={styles.modalHeader}>
+              <h2 style={styles.modalTitle}>❓ Help Center</h2>
+              <button style={styles.closeBtn} onClick={() => setShowHelpCenter(false)}>✕</button>
+            </div>
+            
+            <div style={styles.modalBody}>
+              <div style={styles.helpSection}>
+                <h3 style={styles.helpSectionTitle}>🚀 Getting Started</h3>
+                <div style={styles.helpItem}>
+                  <strong>1. Complete Your Profile</strong>
+                  <p>Before taking the assessment, fill in your Academic Profile with your GWA and SHS Strand. This helps us give you more accurate recommendations.</p>
+                </div>
+                <div style={styles.helpItem}>
+                  <strong>2. Take the Assessment</strong>
+                  <p>Click "Start Assessment" and answer questions honestly. Choose the option that best describes your interests and preferences.</p>
+                </div>
+                <div style={styles.helpItem}>
+                  <strong>3. View Recommendations</strong>
+                  <p>After completing the assessment, you'll receive personalized course recommendations based on your responses.</p>
+                </div>
+              </div>
+
+              <div style={styles.helpSection}>
+                <h3 style={styles.helpSectionTitle}>📋 Assessment Tips</h3>
+                <div style={styles.helpItem}>
+                  <strong>Quick (30 questions)</strong>
+                  <p>Best for getting fast recommendations. Takes about 5-10 minutes.</p>
+                </div>
+                <div style={styles.helpItem}>
+                  <strong>Standard (50 questions)</strong>
+                  <p>Balanced assessment for better accuracy. Takes about 10-15 minutes.</p>
+                </div>
+                <div style={styles.helpItem}>
+                  <strong>Comprehensive (80 questions)</strong>
+                  <p>Most thorough assessment for highly accurate results. Takes about 20-30 minutes.</p>
+                </div>
+              </div>
+
+              <div style={styles.helpSection}>
+                <h3 style={styles.helpSectionTitle}>❔ FAQs</h3>
+                <div style={styles.helpItem}>
+                  <strong>Can I retake the assessment?</strong>
+                  <p>Yes! You can take the assessment multiple times. Each attempt is saved in your activity history.</p>
+                </div>
+                <div style={styles.helpItem}>
+                  <strong>How are courses recommended?</strong>
+                  <p>Our system analyzes your responses to identify your interests, skills, and preferences, then matches them with courses that fit your profile.</p>
+                </div>
+                <div style={styles.helpItem}>
+                  <strong>Is my data private?</strong>
+                  <p>Yes, your assessment data is kept confidential and only used to generate your personalized recommendations.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -274,8 +345,7 @@ const styles = {
   },
   brandContainer: { display: 'flex', alignItems: 'center', marginBottom: '40px', paddingLeft: '10px' },
   logoIcon: {
-    width: '35px', height: '35px', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
-    borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '800', marginRight: '12px'
+    width: '40px', height: '40px', borderRadius: '10px', marginRight: '12px', objectFit: 'contain'
   },
   brandName: { fontSize: '18px', fontWeight: '700', margin: 0 },
   nav: { flex: 1 },
@@ -367,7 +437,39 @@ const styles = {
   mutedText: { color: '#64748b', fontSize: '14px' },
   summaryBox: { marginTop: '20px', padding: '15px', background: 'rgba(255,255,255,0.02)', borderRadius: '12px' },
   summarySuccess: { fontSize: '14px', fontWeight: '600', color: '#e2e8f0', display: 'flex', alignItems: 'center' },
-  summaryDate: { fontSize: '12px', color: '#64748b', marginTop: '8px' }
+  summaryDate: { fontSize: '12px', color: '#64748b', marginTop: '8px' },
+  // Help Center Modal Styles
+  modalOverlay: {
+    position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+    background: 'rgba(0, 0, 0, 0.8)', backdropFilter: 'blur(5px)',
+    display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000
+  },
+  modalContent: {
+    background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
+    borderRadius: '20px', width: '90%', maxWidth: '600px', maxHeight: '80vh',
+    border: '1px solid rgba(255, 255, 255, 0.1)', overflow: 'hidden'
+  },
+  modalHeader: {
+    display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+    padding: '20px 25px', borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+    background: 'rgba(99, 102, 241, 0.1)'
+  },
+  modalTitle: { margin: 0, fontSize: '20px', fontWeight: '700', color: '#f1f5f9' },
+  closeBtn: {
+    background: 'rgba(255, 255, 255, 0.1)', border: 'none', color: '#94a3b8',
+    width: '32px', height: '32px', borderRadius: '8px', cursor: 'pointer',
+    fontSize: '16px', transition: 'all 0.2s ease'
+  },
+  modalBody: { padding: '25px', overflowY: 'auto', maxHeight: 'calc(80vh - 80px)' },
+  helpSection: { marginBottom: '25px' },
+  helpSectionTitle: {
+    fontSize: '16px', fontWeight: '700', color: '#818cf8', margin: '0 0 15px 0',
+    paddingBottom: '10px', borderBottom: '1px solid rgba(255, 255, 255, 0.05)'
+  },
+  helpItem: {
+    marginBottom: '15px', padding: '15px', background: 'rgba(255, 255, 255, 0.03)',
+    borderRadius: '10px', border: '1px solid rgba(255, 255, 255, 0.05)'
+  }
 };
 
 export default Dashboard;
