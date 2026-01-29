@@ -2,6 +2,33 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Toast from './Toast';
 
+// Bad words filter list (common inappropriate words)
+const BAD_WORDS = [
+  'fuck', 'shit', 'ass', 'bitch', 'damn', 'crap', 'bastard', 'dick', 'pussy', 'cock',
+  'asshole', 'motherfucker', 'nigger', 'nigga', 'faggot', 'slut', 'whore', 'cunt',
+  'retard', 'idiot', 'stupid', 'dumb', 'moron', 'loser', 'gay', 'homo', 'lesbian',
+  'puta', 'gago', 'tangina', 'taena', 'bobo', 'tanga', 'putangina', 'ulol', 'lintik',
+  'peste', 'punyeta', 'leche', 'hayop', 'animal', 'pokpok', 'malandi'
+];
+
+// Helper function to capitalize each word in a name properly
+const capitalizeName = (name) => {
+  if (!name) return '';
+  return name
+    .toLowerCase()
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+};
+
+// Check if name contains bad words
+const containsBadWords = (name) => {
+  if (!name) return false;
+  const lowerName = name.toLowerCase().replace(/[^a-z\s]/g, '');
+  const words = lowerName.split(/\s+/);
+  return words.some(word => BAD_WORDS.includes(word));
+};
+
 function Signup({ onSwitch, onBack }) {
   const [formData, setFormData] = useState({
     username: '',
@@ -38,6 +65,24 @@ function Signup({ onSwitch, onBack }) {
 
     if (!/^[a-zA-Z0-9_]+$/.test(formData.username)) {
       showToast("Username can only contain letters, numbers, and underscores.", "error");
+      return;
+    }
+
+    // Validate full name
+    if (!formData.fullname || formData.fullname.trim().length < 2) {
+      showToast("Please enter a valid full name.", "error");
+      return;
+    }
+
+    // Check for bad words in name
+    if (containsBadWords(formData.fullname)) {
+      showToast("Please use an appropriate name.", "error");
+      return;
+    }
+
+    // Check name only contains letters, spaces, hyphens, and apostrophes
+    if (!/^[a-zA-Z\s'-]+$/.test(formData.fullname.trim())) {
+      showToast("Name can only contain letters, spaces, hyphens, and apostrophes.", "error");
       return;
     }
 
@@ -90,7 +135,12 @@ function Signup({ onSwitch, onBack }) {
               type="text" 
               placeholder="Enter your full name"
               required
-              onChange={(e) => setFormData({...formData, fullname: e.target.value})} 
+              value={formData.fullname}
+              onChange={(e) => {
+                // Auto-capitalize as user types
+                const capitalized = capitalizeName(e.target.value);
+                setFormData({...formData, fullname: capitalized});
+              }} 
             />
           </div>
 

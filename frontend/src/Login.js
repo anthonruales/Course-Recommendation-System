@@ -39,6 +39,7 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
         } else {
           // Existing user - login directly
           localStorage.setItem('userId', backendRes.data.user_id);
+          localStorage.setItem('userUsername', backendRes.data.username || '');
           onLoginSuccess(backendRes.data.user, res.data.email);
         }
       } catch (err) {
@@ -73,6 +74,7 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
       });
       
       localStorage.setItem('userId', res.data.user_id);
+      localStorage.setItem('userUsername', googleUsername);
       setShowUsernameModal(false);
       onLoginSuccess(res.data.user, googleUserData.email);
     } catch (err) {
@@ -88,6 +90,7 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
     try {
       const res = await axios.post('http://localhost:8000/login', { username, password });
       localStorage.setItem('userId', res.data.user_id);
+      localStorage.setItem('userUsername', res.data.username || username);
       onLoginSuccess(res.data.user, username); 
     } catch (err) { 
       alert(err.response?.data?.detail || "Invalid login credentials."); 

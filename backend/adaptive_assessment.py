@@ -314,7 +314,12 @@ class AdaptiveAssessmentEngine:
         return None
     
     def _get_profile_priority_traits(self, session: AdaptiveSession) -> Set[str]:
-        """Get traits that should be prioritized based on user's profile interests/skills."""
+        """Get traits that should be prioritized based on user's profile interests/skills.
+        
+        When user selects many interests/skills, we prioritize traits that appear
+        most frequently across their selections (shows stronger preference).
+        We limit to top 6 traits to ensure focused early questions.
+        """
         if not session.user_interests and not session.user_skills:
             return set()
         
@@ -369,25 +374,45 @@ class AdaptiveAssessmentEngine:
             "research": ["Lab-Research", "Field-Research"],
             "creativity": ["Visual-Design", "Creative-Skill", "Digital-Media"],
             "artistic": ["Visual-Design", "Creative-Skill"],
+            # Additional common terms
+            "public_speaking": ["Teaching-Ed", "Marketing-Sales"],
+            "communication": ["Marketing-Sales", "Teaching-Ed", "Admin-Skill"],
+            "problem_solving": ["Software-Dev", "Mechanical-Design", "Data-Analytics"],
+            "critical_thinking": ["Scientific", "Lab-Research", "Data-Analytics"],
+            "teamwork": ["Industrial-Ops", "Admin-Skill", "Community-Serve"],
+            "writing_skill": ["Creative-Skill", "Admin-Skill"],
         }
         
-        priority_traits = set()
+        # Count how often each trait appears across all selected interests/skills
+        trait_counts = {}
         
         # Parse interests
         if session.user_interests:
             for interest in session.user_interests.split(','):
                 interest = interest.strip().lower()
                 traits = PROFILE_TO_TRAITS.get(interest, [])
-                priority_traits.update(traits)
+                for trait in traits:
+                    trait_counts[trait] = trait_counts.get(trait, 0) + 1
         
         # Parse skills
         if session.user_skills:
             for skill in session.user_skills.split(','):
                 skill = skill.strip().lower()
                 traits = PROFILE_TO_TRAITS.get(skill, [])
-                priority_traits.update(traits)
+                for trait in traits:
+                    trait_counts[trait] = trait_counts.get(trait, 0) + 1
         
-        return priority_traits
+        if not trait_counts:
+            return set()
+        
+        # Sort traits by frequency (most common first) and take top 6
+        # This ensures early questions focus on the user's STRONGEST interests
+        sorted_traits = sorted(trait_counts.items(), key=lambda x: x[1], reverse=True)
+        top_traits = [trait for trait, count in sorted_traits[:6]]
+        
+        print(f"📊 User profile traits (top 6 of {len(trait_counts)}): {top_traits}")
+        
+        return set(top_traits)
     
     def _get_strand_priority_traits(self, strand: str) -> Set[str]:
         """Get traits prioritized by user's SHS strand."""

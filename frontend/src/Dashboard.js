@@ -53,11 +53,16 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
   const [activityCount, setActivityCount] = useState(0);
   const [profilePhoto, setProfilePhoto] = useState(null);
 
-  // Load profile photo from localStorage
+  // Load profile photo from localStorage (user-specific)
   useEffect(() => {
-    const savedPhoto = localStorage.getItem('profilePhoto');
-    if (savedPhoto) {
-      setProfilePhoto(savedPhoto);
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      const savedPhoto = localStorage.getItem(`profilePhoto_${userId}`);
+      if (savedPhoto) {
+        setProfilePhoto(savedPhoto);
+      } else {
+        setProfilePhoto(null); // Clear photo if switching accounts
+      }
     }
   }, []);
 
