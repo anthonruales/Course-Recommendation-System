@@ -3,7 +3,7 @@
 # Try to import enhanced questions first, fall back to seed_data
 try:
     from questions_enhanced import QUESTIONS_POOL_ENHANCED as QUESTIONS_POOL
-    print("✓ Using enhanced questions (8-10 options each)")
+    print("[OK] Using enhanced questions (8-10 options each)")
 except ImportError:
     from seed_data import QUESTIONS_POOL
     print("! Using standard questions from seed_data")

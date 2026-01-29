@@ -10,13 +10,13 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 
 # If no DATABASE_URL in .env, use SQLite as fallback
 if not DATABASE_URL:
-    print("⚠️ No DATABASE_URL found in .env, using SQLite as fallback")
+    print("[WARN] No DATABASE_URL found in .env, using SQLite as fallback")
     DATABASE_URL = "sqlite:///./coursepro.db"
 
 try:
     # Create engine with connection pool settings for PostgreSQL
     if DATABASE_URL.startswith("postgresql"):
-        print(f"🔌 Connecting to PostgreSQL: {DATABASE_URL.split('@')[1] if '@' in DATABASE_URL else 'localhost'}")
+        print(f"[DB] Connecting to PostgreSQL: {DATABASE_URL.split('@')[1] if '@' in DATABASE_URL else 'localhost'}")
         engine = create_engine(
             DATABASE_URL,
             pool_pre_ping=True,  # Verify connections before using
@@ -25,7 +25,7 @@ try:
             echo=False  # Set to True for SQL query logging
         )
     else:
-        print(f"🔌 Connecting to SQLite: {DATABASE_URL}")
+        print(f"[DB] Connecting to SQLite: {DATABASE_URL}")
         engine = create_engine(
             DATABASE_URL,
             connect_args={"check_same_thread": False}
@@ -33,11 +33,11 @@ try:
     
     # Test the connection
     with engine.connect() as conn:
-        print("✅ Database connection successful!")
+        print("[DB] Database connection successful!")
         
 except Exception as e:
-    print(f"❌ Database connection failed: {e}")
-    print("⚠️ Falling back to SQLite...")
+    print(f"[DB_ERROR] Database connection failed: {e}")
+    print("[DB] Falling back to SQLite...")
     DATABASE_URL = "sqlite:///./coursepro.db"
     engine = create_engine(
         DATABASE_URL,

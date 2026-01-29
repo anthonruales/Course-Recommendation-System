@@ -795,7 +795,7 @@ class RuleBasedFilter:
                     if result.action_taken == "boost_applied":
                         total_boost += result.points_applied
                         passed_rules.append(f"{rule.rule_id}: {rule.rule_name}")
-                        explanations.append(f"✓ {rule.rule_name}: {result.explanation}")
+                        explanations.append(f"[OK] {rule.rule_name}: {result.explanation}")
                     elif result.action_taken == "penalty_applied":
                         total_penalty += abs(result.points_applied)
                         warnings.append(f"{rule.rule_id}: {result.explanation}")
@@ -1576,7 +1576,7 @@ class HybridRecommendationEngine:
         }
         
         # ==================== PHASE 1: RULE-BASED FILTERING ====================
-        print("📋 PHASE 1: Applying Rule-Based Filtering...")
+        print("[FORM] PHASE 1: Applying Rule-Based Filtering...")
         
         filtered_courses = self.rule_filter.filter_courses(
             courses=courses,
@@ -1588,7 +1588,7 @@ class HybridRecommendationEngine:
         eligible_courses = [fc for fc in filtered_courses if fc.is_eligible]
         ineligible_courses = [fc for fc in filtered_courses if not fc.is_eligible]
         
-        print(f"   ✓ {len(eligible_courses)} eligible courses")
+        print(f"   [OK] {len(eligible_courses)} eligible courses")
         print(f"   ✗ {len(ineligible_courses)} ineligible courses")
         
         # ==================== PHASE 2: DECISION TREE CLASSIFICATION ====================
@@ -1731,15 +1731,15 @@ class HybridRecommendationEngine:
                 trait_str = ", ".join(rec["matched_traits"][:3])
                 if len(rec["matched_traits"]) > 3:
                     trait_str += f" (+{len(rec['matched_traits'])-3} more)"
-                reasoning_parts.append(f"✓ Personality alignment: {trait_str}")
+                reasoning_parts.append(f"[OK] Personality alignment: {trait_str}")
             
             # Decision tree explanation
             if rec["in_predicted_category"]:
-                reasoning_parts.append(f"✓ Matches your predicted career path: {classification.replace('_', ' ').title()}")
+                reasoning_parts.append(f"[OK] Matches your predicted career path: {classification.replace('_', ' ').title()}")
             
             # Academic fit
             if rec["penalty_total"] == 0:
-                reasoning_parts.append("✓ Meets all academic requirements")
+                reasoning_parts.append("[OK] Meets all academic requirements")
             elif rec["warnings"]:
                 reasoning_parts.append(f"⚠ {rec['warnings'][0]}")
             
@@ -1748,7 +1748,7 @@ class HybridRecommendationEngine:
                 "EXCELLENT": "🌟 Highly Recommended - Excellent match for your profile",
                 "GOOD": "✨ Good Match - Strong alignment with your interests",
                 "FAIR": "💡 Worth Considering - Could be rewarding with dedication",
-                "EXPLORATORY": "🔍 Explore Option - Expand your horizons"
+                "EXPLORATORY": "[DEBUG] Explore Option - Expand your horizons"
             }
             reasoning_parts.append(priority_explanations.get(rec["priority"], ""))
             
