@@ -108,7 +108,7 @@ class AdaptiveAssessmentEngine:
                 if trait:
                     self.trait_to_questions[trait].append(qid)
         
-        print(f"🧠 Adaptive Engine initialized with {len(self.courses)} courses and {len(self.questions)} questions")
+        print(f"[ENGINE] Adaptive Engine initialized with {len(self.courses)} courses and {len(self.questions)} questions")
     
     def _parse_traits(self, trait_tag) -> Set[str]:
         """Parse trait_tag field into set of traits"""
@@ -410,7 +410,7 @@ class AdaptiveAssessmentEngine:
         sorted_traits = sorted(trait_counts.items(), key=lambda x: x[1], reverse=True)
         top_traits = [trait for trait, count in sorted_traits[:6]]
         
-        print(f"📊 User profile traits (top 6 of {len(trait_counts)}): {top_traits}")
+        print(f"[STATS] User profile traits (top 6 of {len(trait_counts)}): {top_traits}")
         
         return set(top_traits)
     
@@ -467,7 +467,7 @@ class AdaptiveAssessmentEngine:
         )
         
         self.sessions[session_id] = session
-        print(f"📋 Created adaptive session {session_id} for user {user_id} (strand: {normalized_strand}, questions: {max_questions}, interests: {bool(user_interests)}, skills: {bool(user_skills)})")
+        print(f"[SESSION] Created adaptive session {session_id} for user {user_id} (strand: {normalized_strand}, questions: {max_questions}, interests: {bool(user_interests)}, skills: {bool(user_skills)})")
         return session_id
     
     def get_next_question(self, session_id: str) -> Optional[dict]:
@@ -540,7 +540,7 @@ class AdaptiveAssessmentEngine:
         
         if best_question:
             session.round_number += 1
-            print(f"🎯 Round {session.round_number}: Q{best_question.get('question_id')} (score: {best_score:.2f})")
+            print(f"[TARGET] Round {session.round_number}: Q{best_question.get('question_id')} (score: {best_score:.2f})")
             return {
                 "session_id": session_id,
                 "round": session.round_number,
@@ -708,7 +708,7 @@ class AdaptiveAssessmentEngine:
         # Record the answer
         session.answered_questions[question_id] = chosen_option_id
         session.excluded_question_ids.add(question_id)
-        print(f"📝 Answered question {question_id}, excluded: {session.excluded_question_ids}")
+        print(f"[ANSWER] Answered question {question_id}, excluded: {session.excluded_question_ids}")
         
         # Check if user rejected this topic (e.g., "none", "not interested")
         option_text = chosen_option.get('option_text', '').lower()
@@ -739,14 +739,14 @@ class AdaptiveAssessmentEngine:
         for phrase, topic in EXPLICIT_REJECTIONS.items():
             if phrase in option_text:
                 session.rejected_topics.add(topic)
-                print(f"🚫 Explicit rejection detected: {topic}")
+                print(f"[REJECT] Explicit rejection detected: {topic}")
         
         if is_rejection:
             # Determine what topic was rejected based on the question category and other options
             rejected_topic = self._determine_rejected_topic(question, chosen_option)
             if rejected_topic:
                 session.rejected_topics.add(rejected_topic)
-                print(f"🚫 User rejected topic: {rejected_topic}")
+                print(f"[REJECT] User rejected topic: {rejected_topic}")
                 
                 # Penalize courses associated with this rejected topic
                 for course_name, course_traits in self.course_traits.items():
@@ -890,7 +890,7 @@ class AdaptiveAssessmentEngine:
     
     def _finalize_session(self, session: AdaptiveSession):
         """Build final course recommendations."""
-        print(f"🟢 FINALIZE SESSION CALLED - session_id: {session.session_id}")
+        print(f"[OK_GREEN] FINALIZE SESSION CALLED - session_id: {session.session_id}")
         session.is_complete = True
         
         # Sort courses by score
@@ -900,9 +900,9 @@ class AdaptiveAssessmentEngine:
             reverse=True
         )
         
-        print(f"🟢 Total courses scored: {len(sorted_courses)}")
+        print(f"[OK_GREEN] Total courses scored: {len(sorted_courses)}")
         if sorted_courses:
-            print(f"🟢 Top 5 courses: {sorted_courses[:5]}")
+            print(f"[OK_GREEN] Top 5 courses: {sorted_courses[:5]}")
         
         # Normalize scores to percentages
         top_score = sorted_courses[0][1] if sorted_courses else 1
@@ -958,9 +958,9 @@ class AdaptiveAssessmentEngine:
             })
         
         session.final_recommendations = recommendations
-        print(f"🟢 Generated {len(recommendations)} recommendations")
-        print(f"🟢 Recommendation course names: {[r['course_name'] for r in recommendations]}")
-        print(f"✅ Session {session.session_id} complete after {session.round_number} questions")
+        print(f"[OK_GREEN] Generated {len(recommendations)} recommendations")
+        print(f"[OK_GREEN] Recommendation course names: {[r['course_name'] for r in recommendations]}")
+        print(f"[OK] Session {session.session_id} complete after {session.round_number} questions")
     
     def _generate_recommendation_reasoning(self, session: AdaptiveSession, course_name: str,
                                            course: dict, course_traits: Set[str],
@@ -1211,18 +1211,18 @@ class AdaptiveAssessmentEngine:
     
     def get_final_results(self, session_id: str) -> dict:
         """Retrieve final recommendations."""
-        print(f"🔵 get_final_results called for session: {session_id}")
+        print(f"[BLUE] get_final_results called for session: {session_id}")
         session = self.sessions.get(session_id)
         if not session:
-            print(f"🔴 Session not found: {session_id}")
+            print(f"[RED] Session not found: {session_id}")
             return {"error": "Session not found"}
         
         if not session.is_complete:
-            print(f"🟡 Session not complete, forcing finalize...")
+            print(f"[YELLOW] Session not complete, forcing finalize...")
             # Force finalize
             self._finalize_session(session)
         
-        print(f"🔵 Returning {len(session.final_recommendations)} recommendations")
+        print(f"[BLUE] Returning {len(session.final_recommendations)} recommendations")
         return {
             "session_id": session_id,
             "is_complete": True,
