@@ -1,6 +1,33 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Toast from './Toast';
 
+// Bad words filter list (common inappropriate words)
+const BAD_WORDS = [
+  'fuck', 'shit', 'ass', 'bitch', 'damn', 'crap', 'bastard', 'dick', 'pussy', 'cock',
+  'asshole', 'motherfucker', 'nigger', 'nigga', 'faggot', 'slut', 'whore', 'cunt',
+  'retard', 'idiot', 'stupid', 'dumb', 'moron', 'loser', 'gay', 'homo', 'lesbian',
+  'puta', 'gago', 'tangina', 'taena', 'bobo', 'tanga', 'putangina', 'ulol', 'lintik',
+  'peste', 'punyeta', 'leche', 'hayop', 'animal', 'pokpok', 'malandi'
+];
+
+// Helper function to capitalize each word in a name properly
+const capitalizeName = (name) => {
+  if (!name) return '';
+  return name
+    .toLowerCase()
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+};
+
+// Check if name contains bad words
+const containsBadWords = (name) => {
+  if (!name) return false;
+  const lowerName = name.toLowerCase().replace(/[^a-z\s]/g, '');
+  const words = lowerName.split(/\s+/);
+  return words.some(word => BAD_WORDS.includes(word));
+};
+
 // Predefined options for Academic Interests
 const INTEREST_OPTIONS = [
   // Science & Research
@@ -112,11 +139,16 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
   const [profilePhoto, setProfilePhoto] = useState(null);
   const fileInputRef = useRef(null);
   
-  // Load saved profile photo from localStorage on mount
+  // Load saved profile photo from localStorage on mount (user-specific)
   useEffect(() => {
-    const savedPhoto = localStorage.getItem('profilePhoto');
-    if (savedPhoto) {
-      setProfilePhoto(savedPhoto);
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      const savedPhoto = localStorage.getItem(`profilePhoto_${userId}`);
+      if (savedPhoto) {
+        setProfilePhoto(savedPhoto);
+      } else {
+        setProfilePhoto(null); // Clear photo if switching accounts
+      }
     }
   }, []);
   
@@ -143,8 +175,11 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
       const reader = new FileReader();
       reader.onloadend = () => {
         const base64String = reader.result;
+        const userId = localStorage.getItem('userId');
         setProfilePhoto(base64String);
-        localStorage.setItem('profilePhoto', base64String);
+        if (userId) {
+          localStorage.setItem(`profilePhoto_${userId}`, base64String);
+        }
         showToast('Profile photo updated!', 'success');
       };
       reader.readAsDataURL(file);
@@ -152,14 +187,21 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
   };
   
   const removePhoto = () => {
+    const userId = localStorage.getItem('userId');
     setProfilePhoto(null);
-    localStorage.removeItem('profilePhoto');
+    if (userId) {
+      localStorage.removeItem(`profilePhoto_${userId}`);
+    }
     showToast('Profile photo removed', 'info');
   };
   
-  // Parse interests and skills from comma-separated string to array
-  const selectedInterests = formData?.interests ? formData.interests.split(',').filter(i => i.trim()) : [];
-  const selectedSkills = formData?.skills ? formData.skills.split(',').filter(s => s.trim()) : [];
+  // Parse interests and skills from comma-separated string to array (trim each value!)
+  const selectedInterests = formData?.interests 
+    ? formData.interests.split(',').map(i => i.trim()).filter(i => i) 
+    : [];
+  const selectedSkills = formData?.skills 
+    ? formData.skills.split(',').map(s => s.trim()).filter(s => s) 
+    : [];
   
   // Toggle interest selection
   const toggleInterest = (interestId) => {
@@ -194,6 +236,16 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
   // Safe Change Handler
   const handleChange = (e) => {
     const { name, value } = e.target;
+    
+    // Auto-capitalize fullname and validate
+    if (name === 'fullname') {
+      const capitalizedName = capitalizeName(value);
+      setFormData(prev => {
+        const currentData = prev || {};
+        return { ...currentData, fullname: capitalizedName };
+      });
+      return;
+    }
     
     // GWA validation
     if (name === 'gwa') {
@@ -262,6 +314,21 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
     if (!formData.gwa || !formData.strand) {
       showToast('Please fill in both GWA and SHS Strand to save your profile', 'warning');
       return;
+    }
+    
+    // Validate fullname if provided
+    if (formData.fullname) {
+      // Check for bad words in name
+      if (containsBadWords(formData.fullname)) {
+        showToast('Please use an appropriate name.', 'error');
+        return;
+      }
+      
+      // Check name only contains letters, spaces, hyphens, and apostrophes
+      if (!/^[a-zA-Z\s'-]+$/.test(formData.fullname.trim())) {
+        showToast('Name can only contain letters, spaces, hyphens, and apostrophes.', 'error');
+        return;
+      }
     }
     
     // Validate GWA range
@@ -402,6 +469,33 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
                 )}
               </div>
               <p style={styles.photoHint}>Max 2MB • JPG, PNG, or GIF</p>
+            </div>
+            
+            {/* USERNAME FIELD - Read-only so user can see their username */}
+            <div style={{...styles.inputGroup, marginBottom: '25px'}}>
+              <label style={styles.label}>Username</label>
+              <div style={{
+                ...styles.input,
+                backgroundColor: 'rgba(255,255,255,0.03)',
+                color: 'rgba(255,255,255,0.7)',
+                cursor: 'not-allowed',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px'
+              }}>
+                <span style={{ color: 'rgba(139, 92, 246, 0.8)' }}>@</span>
+                <span>{localStorage.getItem('userUsername') || 'Unknown'}</span>
+                <span style={{ 
+                  marginLeft: 'auto', 
+                  fontSize: '11px', 
+                  color: 'rgba(255,255,255,0.4)',
+                  backgroundColor: 'rgba(255,255,255,0.05)',
+                  padding: '3px 8px',
+                  borderRadius: '4px'
+                }}>
+                  Cannot be changed
+                </span>
+              </div>
             </div>
             
             {/* FULL NAME FIELD - Added back here */}

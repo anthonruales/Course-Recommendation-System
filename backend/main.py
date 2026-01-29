@@ -1,4 +1,5 @@
 import os
+import re
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -7,6 +8,43 @@ from typing import List, Optional
 from dotenv import load_dotenv
 import models, database
 from security import hash_password, verify_password
+
+# Bad words filter list (common inappropriate words)
+BAD_WORDS = [
+    'fuck', 'shit', 'ass', 'bitch', 'damn', 'crap', 'bastard', 'dick', 'pussy', 'cock',
+    'asshole', 'motherfucker', 'nigger', 'nigga', 'faggot', 'slut', 'whore', 'cunt',
+    'retard', 'idiot', 'stupid', 'dumb', 'moron', 'loser', 'gay', 'homo', 'lesbian',
+    'puta', 'gago', 'tangina', 'taena', 'bobo', 'tanga', 'putangina', 'ulol', 'lintik',
+    'peste', 'punyeta', 'leche', 'hayop', 'animal', 'pokpok', 'malandi'
+]
+
+def capitalize_name(name: str) -> str:
+    """Capitalize first letter of each word in name"""
+    if not name:
+        return ''
+    return ' '.join(word.capitalize() for word in name.lower().split())
+
+def contains_bad_words(name: str) -> bool:
+    """Check if name contains inappropriate words"""
+    if not name:
+        return False
+    lower_name = re.sub(r'[^a-z\s]', '', name.lower())
+    words = lower_name.split()
+    return any(word in BAD_WORDS for word in words)
+
+def validate_name(name: str) -> tuple:
+    """Validate and sanitize name. Returns (is_valid, error_message, sanitized_name)"""
+    if not name or len(name.strip()) < 2:
+        return (False, "Name must be at least 2 characters", name)
+    
+    if contains_bad_words(name):
+        return (False, "Please use an appropriate name", name)
+    
+    # Only allow letters, spaces, hyphens, and apostrophes
+    if not re.match(r"^[a-zA-Z\s'-]+$", name.strip()):
+        return (False, "Name can only contain letters, spaces, hyphens, and apostrophes", name)
+    
+    return (True, None, capitalize_name(name.strip()))
 
 # Import enhanced questions if available, fall back to seed_data
 try:
@@ -259,9 +297,14 @@ def signup(user: UserCreate, db: Session = Depends(get_db)):
     if db.query(models.User).filter(models.User.email == user.email).first():
         raise HTTPException(status_code=400, detail="Email already exists")
     
+    # Validate and sanitize fullname
+    is_valid, error_msg, sanitized_name = validate_name(user.fullname)
+    if not is_valid:
+        raise HTTPException(status_code=400, detail=error_msg)
+    
     # Parse fullname into first_name and last_name
-    name_parts = user.fullname.strip().split(" ", 1)
-    first_name = name_parts[0] if name_parts else user.fullname
+    name_parts = sanitized_name.split(" ", 1)
+    first_name = name_parts[0] if name_parts else sanitized_name
     last_name = name_parts[1] if len(name_parts) > 1 else ""
     
     new_user = models.User(
@@ -281,7 +324,7 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
     if not db_user or not verify_password(user.password, db_user.password_hash):
         raise HTTPException(status_code=400, detail="Invalid username or password")
     
-    return {"user": db_user.fullname, "user_id": db_user.user_id}
+    return {"user": db_user.fullname, "user_id": db_user.user_id, "username": db_user.username}
 
 @app.post("/google-login")
 def google_login(user: dict, db: Session = Depends(get_db)):
@@ -297,7 +340,7 @@ def google_login(user: dict, db: Session = Depends(get_db)):
     
     if db_user:
         # User exists, return their info
-        return {"user": db_user.fullname, "user_id": db_user.user_id, "needs_username": False}
+        return {"user": db_user.fullname, "user_id": db_user.user_id, "username": db_user.username, "needs_username": False}
     else:
         # New user - they need to choose a username
         return {
@@ -366,10 +409,13 @@ def update_academic_info(user_id: int, info: AcademicInfoUpdate, db: Session = D
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     
-    # Update fullname if provided (parse into first_name and last_name)
+    # Update fullname if provided (validate, sanitize, parse into first_name and last_name)
     if info.fullname:
-        name_parts = info.fullname.strip().split(" ", 1)
-        user.first_name = name_parts[0] if name_parts else info.fullname
+        is_valid, error_msg, sanitized_name = validate_name(info.fullname)
+        if not is_valid:
+            raise HTTPException(status_code=400, detail=error_msg)
+        name_parts = sanitized_name.split(" ", 1)
+        user.first_name = name_parts[0] if name_parts else sanitized_name
         user.last_name = name_parts[1] if len(name_parts) > 1 else ""
     
     # Update academic_info JSON with all fields (D4 - Personal & Academic Database)
