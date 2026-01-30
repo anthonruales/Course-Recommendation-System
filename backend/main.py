@@ -331,9 +331,11 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="Invalid username or password")
     
     # Mark user as online and update last_active
+    print(f"\n[LOGIN] User '{user.username}' logging in...")
     db_user.is_online = 1
     db_user.last_active = datetime.datetime.now()
     db.commit()
+    print(f"[LOGIN] Updated last_active to: {db_user.last_active}")
     
     return {"user": db_user.fullname, "user_id": db_user.user_id, "username": db_user.username}
 
@@ -350,10 +352,16 @@ def google_login(user: dict, db: Session = Depends(get_db)):
     db_user = db.query(models.User).filter(models.User.email == email).first()
     
     if db_user:
-        # User exists, return their info
+        # User exists - update last_active and online status
+        print(f"\n[GOOGLE-LOGIN] User '{email}' logging in via Google...")
+        db_user.is_online = 1
+        db_user.last_active = datetime.datetime.now()
+        db.commit()
+        print(f"[GOOGLE-LOGIN] Updated last_active to: {db_user.last_active}")
         return {"user": db_user.fullname, "user_id": db_user.user_id, "username": db_user.username, "needs_username": False}
     else:
         # New user - they need to choose a username
+        print(f"\n[GOOGLE-LOGIN] New user: {email}")
         return {
             "needs_username": True,
             "email": email,
@@ -391,12 +399,73 @@ def google_register(user: dict, db: Session = Depends(get_db)):
         first_name=first_name,
         last_name=last_name,
         email=email,
-        password_hash=hash_password(f"google_oauth_{email}")  # Dummy password for Google users
+        password_hash=hash_password(f"google_oauth_{email}"),  # Dummy password for Google users
+        is_online=1,  # Mark as online
+        last_active=datetime.datetime.now()  # Set last_active on registration
     )
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
     return {"user": new_user.fullname, "user_id": new_user.user_id}
+
+@app.post("/user/{user_id}/update-activity")
+def update_activity(user_id: int, db: Session = Depends(get_db)):
+    """Update user online status only - DO NOT update last_active (only login should update that)"""
+    user = db.query(models.User).filter(models.User.user_id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    # Mark user as online, but DO NOT update last_active timestamp
+    user.is_online = 1
+    db.commit()
+    
+    return {"message": "Online status updated"}
+
+@app.post("/logout")
+def logout(data: dict, db: Session = Depends(get_db)):
+    """Handle user logout - mark user as offline"""
+    user_id = data.get("user_id")
+    
+    if not user_id:
+        raise HTTPException(status_code=400, detail="user_id is required")
+    
+    user = db.query(models.User).filter(models.User.user_id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    # Mark user as offline
+    user.is_online = 0
+    db.commit()
+    
+    return {"message": "Logged out successfully", "user_id": user_id}
+
+@app.post("/refresh-user-activity/{user_id}")
+def refresh_user_activity(user_id: int, db: Session = Depends(get_db)):
+    """Force refresh user's last_active timestamp on login"""
+    print(f"\n[REFRESH-ACTIVITY] Endpoint called for user_id: {user_id}")
+    
+    user = db.query(models.User).filter(models.User.user_id == user_id).first()
+    if not user:
+        print(f"[REFRESH-ACTIVITY] User {user_id} not found!")
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    # Update the timestamp and online status
+    old_time = user.last_active
+    user.is_online = 1
+    user.last_active = datetime.datetime.now()
+    db.commit()
+    db.refresh(user)
+    
+    print(f"[REFRESH-ACTIVITY] Updated {user.fullname}")
+    print(f"  Old last_active: {old_time}")
+    print(f"  New last_active: {user.last_active}")
+    
+    return {
+        "success": True,
+        "user_id": user_id,
+        "last_active": str(user.last_active),
+        "message": "User activity refreshed"
+    }
 
 
 @app.get("/user/{user_id}/academic-info")
@@ -1209,6 +1278,7 @@ def get_user_details(user_id: int, db: Session = Depends(get_db)):
         "email": user.email,
         "academic_info": user.academic_info,
         "created_at": user.created_at,
+        "last_active": str(user.last_active) if user.last_active else None,
         "total_assessments": db.query(models.TestAttempt).filter(models.TestAttempt.user_id == user_id).count(),
         "recommendations_count": len(recommendations),
         "latest_recommendations": [
