@@ -50,6 +50,12 @@ class TestAttempt(Base):
     test_id = Column(Integer, ForeignKey("tests.test_id"), nullable=False)
     taken_at = Column(DateTime, server_default=func.now())
     
+    # Quiz configuration tracking (NEW)
+    max_questions = Column(Integer, nullable=True)  # Quiz length selected by student (30, 50, 60)
+    questions_presented = Column(Integer, nullable=True)  # How many questions were actually shown
+    questions_answered = Column(Integer, nullable=True)  # How many questions were actually answered
+    confidence_score = Column(Float, nullable=True)  # Final confidence percentage
+    
     # Relationships
     user = relationship("User", back_populates="test_attempts")
     test = relationship("Test", back_populates="test_attempts")

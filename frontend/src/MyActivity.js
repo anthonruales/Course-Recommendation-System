@@ -208,6 +208,10 @@ const styles = {
     background: 'rgba(16, 185, 129, 0.15)',
     color: '#10b981',
   },
+  badgeConfidence: {
+    background: 'rgba(139, 92, 246, 0.15)',
+    color: '#d8b4fe',
+  },
   expandedContent: {
     padding: '24px',
     background: 'linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 27, 75, 0.5) 100%)',
@@ -505,8 +509,9 @@ function MyActivity({ onBack }) {
                   </div>
                   
                   <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                     <span style={{...styles.activityBadge, ...styles.badgeAssessment}}>{activity.questions_answered} Qs</span>
-                     <span style={{...styles.activityBadge, ...styles.badgeProfile}}>{getTierLabel(activity.questions_answered)}</span>
+                     <span style={{...styles.activityBadge, ...styles.badgeAssessment}}>{activity.max_questions || activity.questions_answered} Q</span>
+                     <span style={{...styles.activityBadge, ...styles.badgeProfile}}>{activity.traits_found || 0} Traits</span>
+                     <span style={{...styles.activityBadge, ...styles.badgeConfidence}}>{activity.confidence_score || 0}%</span>
                      <span style={{ 
                        color: '#64748b',
                        transform: expandedAttempt === activity.attempt_id ? 'rotate(180deg)' : 'rotate(0deg)',

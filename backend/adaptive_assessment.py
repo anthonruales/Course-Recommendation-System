@@ -1227,7 +1227,7 @@ class AdaptiveAssessmentEngine:
             "session_id": session_id,
             "is_complete": True,
             "total_questions_asked": session.round_number,
-            "traits_discovered": dict(session.trait_scores),
+            "traits_discovered": len(session.trait_scores),
             "confidence": round(session.confidence * 100, 1),
             "recommendations": session.final_recommendations
         }

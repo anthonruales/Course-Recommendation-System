@@ -1413,6 +1413,8 @@ def get_assessment_history(user_id: int, db: Session = Depends(get_db)):
         ).all()
         
         answered_questions = []
+        discovered_traits = set()  # Collect unique traits
+        
         for answer in student_answers:
             question = db.query(models.Question).filter(
                 models.Question.question_id == answer.question_id
@@ -1431,6 +1433,9 @@ def get_assessment_history(user_id: int, db: Session = Depends(get_db)):
                     "chosen_option_text": chosen_option.option_text,
                     "trait_tag": chosen_option.trait_tag
                 })
+                # Collect trait for counting
+                if chosen_option.trait_tag:
+                    discovered_traits.add(chosen_option.trait_tag)
         
         # Get recommendations for this attempt (ordered by creation time to get first/top one)
         recommendations = db.query(models.Recommendation).filter(
@@ -1457,12 +1462,48 @@ def get_assessment_history(user_id: int, db: Session = Depends(get_db)):
                 if idx == 0:
                     top_course = course_data
         
+        # Get tracking data from test_attempts table (new columns)
+        max_questions = getattr(attempt, 'max_questions', None)
+        confidence_score = getattr(attempt, 'confidence_score', None)
+        traits_found_db = getattr(attempt, 'traits_found', None)  # NEW: Get from test_attempts
+        
+        # Try to get from user_test_attempts if not in test_attempts
+        if max_questions is None or confidence_score is None or traits_found_db is None:
+            try:
+                from sqlalchemy import text
+                uta_result = db.execute(text('''
+                    SELECT max_questions, confidence_score, traits_found 
+                    FROM user_test_attempts 
+                    WHERE attempt_id = :attempt_id
+                '''), {'attempt_id': attempt.attempt_id}).fetchone()
+                
+                if uta_result:
+                    max_questions = uta_result[0] if max_questions is None else max_questions
+                    confidence_score = uta_result[1] if confidence_score is None else confidence_score
+                    traits_found_db = uta_result[2] if traits_found_db is None else traits_found_db
+            except Exception as e:
+                print(f"[WARN] Could not fetch from user_test_attempts: {e}")
+        
+        # Use the stored traits_found value (matches what was shown during assessment)
+        traits_found = traits_found_db if traits_found_db is not None else len(discovered_traits)
+        
+        # Build traits list safely
+        traits_list = []
+        if discovered_traits:
+            sample = next(iter(discovered_traits), None)
+            if isinstance(sample, str):
+                traits_list = list(discovered_traits)
+        
         history.append({
             "attempt_id": attempt.attempt_id,
             "test_name": test.test_name if test else "Assessment",
             "test_type": test.test_type if test else "assessment",
             "taken_at": attempt.taken_at,
             "questions_answered": answer_count,
+            "max_questions": max_questions,  # Quiz length selected (30, 50, 60)
+            "confidence_score": round(confidence_score, 1) if confidence_score else None,  # Final confidence %
+            "traits_found": traits_found,  # Number of unique traits discovered
+            "traits_list": traits_list,  # List of trait names
             "answered_questions": answered_questions,
             "recommended_courses": recommended_courses,
             "top_course": top_course,
@@ -1996,15 +2037,27 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
             db.flush()
             print(f"🆕 Created new adaptive test with ID: {adaptive_test.test_id}")
         
-        # Create test attempt
+        # Extract quiz config from session for tracking
+        max_questions_selected = session.max_questions if session else None
+        questions_presented = session.round_number if session else None  # Total rounds = questions shown
+        questions_answered = len(answered_questions) if answered_questions else 0
+        # Use 1 decimal place to match what student app displays
+        confidence_score = round(session.confidence * 100, 1) if session else None
+        
+        # Create test attempt with full tracking data
         test_attempt = models.TestAttempt(
             user_id=user_id,
-            test_id=adaptive_test.test_id
+            test_id=adaptive_test.test_id,
+            max_questions=max_questions_selected,  # Quiz length selected (30, 50, 60)
+            questions_presented=questions_presented,  # How many questions were shown
+            questions_answered=questions_answered,  # How many were actually answered
+            confidence_score=confidence_score  # Final confidence %
         )
         db.add(test_attempt)
         db.flush()
         attempt_id = test_attempt.attempt_id  # CACHE THE ATTEMPT ID BEFORE COMMIT!
         print(f"[OK] Created test attempt: {attempt_id} for user {user_id}")
+        print(f"[TRACKING] max_questions={max_questions_selected}, presented={questions_presented}, answered={questions_answered}, confidence={confidence_score}%")
         
         # Save answered questions
         if answered_questions:
@@ -2019,31 +2072,41 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
         db.commit()
         print(f"[OK] Committed attempt and answers: attempt_id={attempt_id}")
         
-        # Sync to user_test_attempts (per-user tracking table)
+        # Sync to user_test_attempts (per-user tracking table) with FULL quiz tracking data
         try:
             from sqlalchemy import text
             cursor_check = db.execute(text('''
                 SELECT attempt_id FROM user_test_attempts WHERE attempt_id = :attempt_id
             '''), {'attempt_id': attempt_id})
             
+            # Calculate traits found from session
+            traits_found = len(session.trait_scores) if session and hasattr(session, 'trait_scores') else 0
+            
             if not cursor_check.fetchone():
                 db.execute(text('''
                     INSERT INTO user_test_attempts 
-                    (attempt_id, user_id, test_id, score, total_questions, attempt_date, time_taken, created_at)
-                    VALUES (:attempt_id, :user_id, :test_id, :score, :total_questions, :attempt_date, :time_taken, NOW())
+                    (attempt_id, user_id, test_id, score, total_questions, attempt_date, time_taken, created_at,
+                     max_questions, confidence_score, traits_found)
+                    VALUES (:attempt_id, :user_id, :test_id, :score, :total_questions, :attempt_date, :time_taken, NOW(),
+                            :max_questions, :confidence_score, :traits_found)
                 '''), {
                     'attempt_id': attempt_id,
                     'user_id': user_id,
                     'test_id': adaptive_test.test_id,
                     'score': 0,
-                    'total_questions': len(answered_questions) if answered_questions else 0,
+                    'total_questions': questions_answered,  # Actual questions answered
                     'attempt_date': test_attempt.taken_at,
-                    'time_taken': 0
+                    'time_taken': 0,
+                    'max_questions': max_questions_selected,  # Quiz length student selected (30, 50, 60)
+                    'confidence_score': confidence_score,  # Final confidence %
+                    'traits_found': traits_found  # Number of unique traits discovered
                 })
-                print(f"[OK] Synced to user_test_attempts (per-user tracking)")
+                print(f"[OK] Synced to user_test_attempts with tracking: max_q={max_questions_selected}, conf={confidence_score}%, traits={traits_found}")
             db.commit()
         except Exception as sync_error:
             print(f"[WARN] Could not sync to user_test_attempts: {sync_error}")
+            import traceback
+            traceback.print_exc()
         
         # NOW save recommendations
         if recommendations and len(recommendations) > 0:
@@ -2142,6 +2205,8 @@ def submit_adaptive_answer(data: AdaptiveAnswerSubmit, db: Session = Depends(get
             "success": True,
             "is_complete": True,
             "message": "Assessment complete! Here are your personalized recommendations.",
+            "traits_discovered": len(session.trait_scores) if session else 0,
+            "confidence": result.get("confidence", 0),
             "recommendations": recs
         }
     
@@ -2172,7 +2237,8 @@ def submit_adaptive_answer(data: AdaptiveAnswerSubmit, db: Session = Depends(get
             "is_complete": True,
             "message": f"Assessment complete after {result['round']} questions!",
             "total_questions": result["round"],
-            "confidence": result["confidence"],
+            "traits_discovered": final_results.get("traits_discovered", 0),
+            "confidence": final_results.get("confidence", 0),
             "recommendations": recs
         }
     
