@@ -125,7 +125,9 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
       }
 
       if (data.is_complete) {
-        // Assessment finished
+        // Assessment finished - update final values before showing results
+        setTraitsDiscovered(data.traits_discovered);
+        setConfidence(data.confidence);
         setIsComplete(true);
         setResults(data.recommendations);
       } else {
@@ -169,6 +171,9 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
       const data = await response.json();
 
       if (response.ok && data.success) {
+        // Update final state values before displaying results
+        setTraitsDiscovered(data.traits_discovered);
+        setConfidence(data.confidence);
         setIsComplete(true);
         setResults(data.recommendations);
       } else {
