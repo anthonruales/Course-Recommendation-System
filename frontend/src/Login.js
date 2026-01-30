@@ -40,6 +40,17 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
           // Existing user - login directly
           localStorage.setItem('userId', backendRes.data.user_id);
           localStorage.setItem('userUsername', backendRes.data.username || '');
+          
+          // Ensure last_active is updated on login
+          try {
+            await fetch(`http://localhost:8000/refresh-user-activity/${backendRes.data.user_id}`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' }
+            });
+          } catch (err) {
+            console.warn('Could not refresh user activity:', err);
+          }
+          
           onLoginSuccess(backendRes.data.user, res.data.email);
         }
       } catch (err) {
@@ -76,6 +87,17 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
       localStorage.setItem('userId', res.data.user_id);
       localStorage.setItem('userUsername', googleUsername);
       setShowUsernameModal(false);
+      
+      // Ensure last_active is updated on new registration
+      try {
+        await fetch(`http://localhost:8000/refresh-user-activity/${res.data.user_id}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+      } catch (err) {
+        console.warn('Could not refresh user activity:', err);
+      }
+      
       onLoginSuccess(res.data.user, googleUserData.email);
     } catch (err) {
       alert(err.response?.data?.detail || "Registration failed. Please try again.");
@@ -91,6 +113,17 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
       const res = await axios.post('http://localhost:8000/login', { username, password });
       localStorage.setItem('userId', res.data.user_id);
       localStorage.setItem('userUsername', res.data.username || username);
+      
+      // Ensure last_active is updated on login
+      try {
+        await fetch(`http://localhost:8000/refresh-user-activity/${res.data.user_id}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+      } catch (err) {
+        console.warn('Could not refresh user activity:', err);
+      }
+      
       onLoginSuccess(res.data.user, username); 
     } catch (err) { 
       alert(err.response?.data?.detail || "Invalid login credentials."); 
