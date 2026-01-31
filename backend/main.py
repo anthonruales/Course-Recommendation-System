@@ -2082,6 +2082,7 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
         if session:
             user_id = session.user_id
             answered_questions = session.answered_questions
+            print(f"[DEBUG] Session found: round_number={session.round_number}, answered_questions={len(session.answered_questions)}, excluded_ids={len(session.excluded_question_ids)}")
         
         # If we still don't have user_id, we can't save
         if not user_id:
@@ -2252,6 +2253,20 @@ def submit_adaptive_answer(data: AdaptiveAnswerSubmit, db: Session = Depends(get
     
     if "error" in result:
         raise HTTPException(status_code=400, detail=result["error"])
+    
+    # Handle duplicate answer (user clicked too fast on same question)
+    if result.get("status") == "duplicate":
+        print(f"[WARN] Duplicate answer detected for session {data.sessionId}, question {data.questionId}")
+        # Just return the current state without getting next question
+        return {
+            "success": True,
+            "is_complete": False,
+            "message": "Answer already recorded for this question",
+            "current_round": result.get("round"),
+            "confidence": result.get("confidence"),
+            "traits_discovered": result.get("traits_discovered"),
+            "courses_remaining": result.get("courses_remaining"),
+        }
     
     # If session is complete, return final results
     if result.get("status") == "complete":

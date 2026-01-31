@@ -683,9 +683,11 @@ class AdaptiveAssessmentEngine:
         """Process answer and update trait/course scores."""
         session = self.sessions.get(session_id)
         if not session:
+            print(f"[WARN] process_answer: Session {session_id} not found!")
             return {"error": "Session not found"}
         
         if session.is_complete:
+            print(f"[WARN] process_answer: Session {session_id} already complete, answer NOT recorded for q{question_id}")
             return {
                 "status": "complete",
                 "recommendations": session.final_recommendations
@@ -693,6 +695,7 @@ class AdaptiveAssessmentEngine:
         
         question = self.questions.get(question_id)
         if not question:
+            print(f"[WARN] process_answer: Question {question_id} not found in engine questions!")
             return {"error": "Question not found"}
         
         # Find the chosen option
@@ -703,12 +706,27 @@ class AdaptiveAssessmentEngine:
                 break
         
         if not chosen_option:
+            print(f"[WARN] process_answer: Option {chosen_option_id} not found for question {question_id}!")
             return {"error": "Option not found"}
+        
+        # Check if this question was already answered (prevent duplicate answers)
+        if question_id in session.answered_questions:
+            print(f"[WARN] process_answer: Question {question_id} already answered! Skipping duplicate.")
+            # Still return success to not break the flow, but don't overwrite
+            return {
+                "status": "duplicate",
+                "message": "Question already answered",
+                "session_id": session_id,
+                "round": session.round_number,
+                "confidence": round(session.confidence * 100, 1),
+                "courses_remaining": len(self.courses),
+                "traits_discovered": len(session.trait_scores)
+            }
         
         # Record the answer
         session.answered_questions[question_id] = chosen_option_id
         session.excluded_question_ids.add(question_id)
-        print(f"[ANSWER] Answered question {question_id}, excluded: {session.excluded_question_ids}")
+        print(f"[ANSWER] Q{question_id} answered. Total answers={len(session.answered_questions)}, round={session.round_number}, excluded={len(session.excluded_question_ids)}")
         
         # Check if user rejected this topic (e.g., "none", "not interested")
         option_text = chosen_option.get('option_text', '').lower()
