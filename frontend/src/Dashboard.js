@@ -247,13 +247,15 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
                 ].map((option) => (
                   <div
                     key={option.count}
-                    style={{
+                    style={selectedQuestionCount === option.count ? {
                       ...styles.assessmentOption,
-                      ...(selectedQuestionCount === option.count ? {
-                        ...styles.assessmentOptionActive,
-                        borderColor: option.color,
-                        boxShadow: `0 0 30px ${option.color}30`
-                      } : {})
+                      ...styles.assessmentOptionActive,
+                      borderColor: option.color,
+                      boxShadow: `0 0 30px ${option.color}30`
+                    } : {
+                      ...styles.assessmentOption,
+                      borderColor: 'rgba(255, 255, 255, 0.08)',
+                      boxShadow: 'none'
                     }}
                     onClick={() => setSelectedQuestionCount(option.count)}
                   >

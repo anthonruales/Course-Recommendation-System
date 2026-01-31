@@ -707,9 +707,13 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
                       <div
                         key={option.id}
                         onClick={() => toggleInterest(option.id)}
-                        style={{
+                        style={selectedInterests.includes(option.id) ? {
                           ...styles.modalTag,
-                          ...(selectedInterests.includes(option.id) ? styles.modalTagSelected : {})
+                          ...styles.modalTagSelected
+                        } : {
+                          ...styles.modalTag,
+                          borderColor: 'rgba(255, 255, 255, 0.06)',
+                          boxShadow: 'none'
                         }}
                       >
                         <span>{option.label}</span>
@@ -754,9 +758,13 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
                       <div
                         key={option.id}
                         onClick={() => toggleSkill(option.id)}
-                        style={{
+                        style={selectedSkills.includes(option.id) ? {
                           ...styles.modalTag,
-                          ...(selectedSkills.includes(option.id) ? styles.modalTagSelected : {})
+                          ...styles.modalTagSelected
+                        } : {
+                          ...styles.modalTag,
+                          borderColor: 'rgba(255, 255, 255, 0.06)',
+                          boxShadow: 'none'
                         }}
                       >
                         <span>{option.label}</span>
