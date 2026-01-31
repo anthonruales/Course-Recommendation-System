@@ -111,7 +111,7 @@ function Signup({ onSwitch, onBack }) {
       <div style={styles.bgGradient1}></div>
       <div style={styles.bgGradient2}></div>
       <div style={styles.glassCard}>
-        <img src="/logo.svg" alt="CoursePro" style={styles.brandIcon} />
+        <img src="/logo.png" alt="CoursePro" style={styles.brandIcon} />
         
         <h2 style={styles.title}>Create Account</h2>
         <p style={styles.subtitle}>Get personalized course recommendations</p>
@@ -273,14 +273,15 @@ const styles = {
     animation: 'slideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1)'
   },
   brandIcon: {
-    width: '64px',
-    height: '64px',
-    borderRadius: '20px',
+    width: '120px',
+    height: '120px',
     margin: '0 auto 24px',
-    objectFit: 'contain',
-    background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%)',
-    padding: '15px',
-    boxShadow: '0 15px 40px rgba(99, 102, 241, 0.35)'
+    objectFit: 'cover',
+    borderRadius: '20px',
+    background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%)',
+    padding: '0',
+    boxShadow: '0 0 30px rgba(99, 102, 241, 0.5), 0 0 60px rgba(139, 92, 246, 0.3), inset 0 0 30px rgba(255, 255, 255, 0.05)',
+    border: '2px solid rgba(139, 92, 246, 0.4)',
   },
   title: { 
     fontSize: '26px', 
