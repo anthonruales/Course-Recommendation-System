@@ -1,5 +1,21 @@
 import React, { useState, useEffect } from 'react';
 
+// Add keyframes for pulse animation
+const pulseKeyframes = `
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+`;
+
+// Inject the keyframes into the document
+if (typeof document !== 'undefined') {
+  const styleSheet = document.createElement('style');
+  styleSheet.textContent = pulseKeyframes;
+  document.head.appendChild(styleSheet);
+}
+
 // Inline styles for modern top-nav layout
 const styles = {
   pageWrapper: {
@@ -166,6 +182,22 @@ const styles = {
     borderRadius: '20px',
     overflow: 'hidden',
     transition: 'all 0.3s ease',
+    position: 'relative',
+  },
+  activityCardUnseen: {
+    border: '1px solid rgba(99, 102, 241, 0.5)',
+    boxShadow: '0 0 20px rgba(99, 102, 241, 0.15)',
+  },
+  unseenDot: {
+    position: 'absolute',
+    top: '12px',
+    right: '12px',
+    width: '10px',
+    height: '10px',
+    borderRadius: '50%',
+    background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
+    boxShadow: '0 0 10px rgba(99, 102, 241, 0.5)',
+    animation: 'pulse 2s infinite',
   },
   activityCardHeader: {
     padding: '24px',
@@ -390,10 +422,15 @@ function MyActivity({ onBack }) {
   const [loading, setLoading] = useState(true);
   const [expandedAttempt, setExpandedAttempt] = useState(null);
   const [expandedTab, setExpandedTab] = useState({});
+  const [seenActivities, setSeenActivities] = useState([]);
 
   useEffect(() => {
     const userId = localStorage.getItem('userId');
     if (userId) {
+      // Load previously seen activities
+      const savedSeen = JSON.parse(localStorage.getItem(`seenActivities_${userId}`) || '[]');
+      setSeenActivities(savedSeen);
+      
       fetch(`http://localhost:8000/user/${userId}/assessment-history`)
         .then(res => res.json())
         .then(data => {
@@ -408,6 +445,24 @@ function MyActivity({ onBack }) {
       setLoading(false);
     }
   }, []);
+
+  // Mark an activity as seen when clicked/expanded
+  const markAsSeen = (attemptId) => {
+    const userId = localStorage.getItem('userId');
+    if (!userId) return;
+    
+    if (!seenActivities.includes(attemptId)) {
+      const newSeenActivities = [...seenActivities, attemptId];
+      setSeenActivities(newSeenActivities);
+      localStorage.setItem(`seenActivities_${userId}`, JSON.stringify(newSeenActivities));
+    }
+  };
+
+  // Handle activity card click - expand and mark as seen
+  const handleActivityClick = (attemptId) => {
+    setExpandedAttempt(expandedAttempt === attemptId ? null : attemptId);
+    markAsSeen(attemptId);
+  };
 
   const formatDate = (dateString) => {
     if (!dateString) return 'N/A';
@@ -493,12 +548,23 @@ function MyActivity({ onBack }) {
           </div>
         ) : (
           <div style={styles.activityList}>
-            {activityHistory.map((activity, index) => (
-              <div key={activity.attempt_id} style={styles.activityCard}>
+            {activityHistory.map((activity, index) => {
+              const isUnseen = !seenActivities.includes(activity.attempt_id);
+              return (
+              <div 
+                key={activity.attempt_id} 
+                style={{
+                  ...styles.activityCard,
+                  ...(isUnseen ? styles.activityCardUnseen : {})
+                }}
+              >
+                {/* Unseen indicator dot */}
+                {isUnseen && <div style={styles.unseenDot} />}
+                
                 {/* CARD HEADER */}
                 <div 
                   style={styles.activityCardHeader}
-                  onClick={() => setExpandedAttempt(expandedAttempt === activity.attempt_id ? null : activity.attempt_id)}
+                  onClick={() => handleActivityClick(activity.attempt_id)}
                 >
                   <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
                     <div style={styles.itemNumberBadge}>#{activityHistory.length - index}</div>
@@ -584,7 +650,8 @@ function MyActivity({ onBack }) {
                   </div>
                 )}
               </div>
-            ))}
+            );
+            })}
           </div>
         )}
       </main>

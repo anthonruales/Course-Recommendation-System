@@ -51,6 +51,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
   const [selectedQuestionCount, setSelectedQuestionCount] = useState(30);
   const [showHelpCenter, setShowHelpCenter] = useState(false);
   const [activityCount, setActivityCount] = useState(0);
+  const [unseenActivityCount, setUnseenActivityCount] = useState(0);
   const [profilePhoto, setProfilePhoto] = useState(null);
 
   // Load profile photo from localStorage (user-specific)
@@ -81,11 +82,18 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
           setCheckingProfile(false);
         });
       
-      // Fetch actual activity count from API
+      // Fetch actual activity count from API and calculate unseen
       fetch(`http://localhost:8000/user/${userId}/assessment-history`)
         .then(res => res.json())
         .then(data => {
-          setActivityCount(data.total_attempts || 0);
+          const totalAttempts = data.total_attempts || 0;
+          setActivityCount(totalAttempts);
+          
+          // Calculate unseen activities
+          const seenActivities = JSON.parse(localStorage.getItem(`seenActivities_${userId}`) || '[]');
+          const allAttemptIds = (data.history || []).map(h => h.attempt_id);
+          const unseenCount = allAttemptIds.filter(id => !seenActivities.includes(id)).length;
+          setUnseenActivityCount(unseenCount);
         })
         .catch(err => {
           console.error('Error fetching activity count:', err);
@@ -180,7 +188,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
             <span style={styles.navLink} onClick={onViewProfile}>Profile</span>
             <span style={styles.navLink} onClick={onViewActivity}>
               Activity
-              {activityCount > 0 && <span style={styles.navBadge}>{activityCount}</span>}
+              {unseenActivityCount > 0 && <span style={styles.navBadge}>{unseenActivityCount}</span>}
             </span>
             <span style={styles.navLink} onClick={() => setShowHelpCenter(true)}>Help</span>
           </div>

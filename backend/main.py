@@ -1553,6 +1553,8 @@ def get_assessment_history(user_id: int, db: Session = Depends(get_db)):
                     traits_found_db = uta_result[2] if traits_found_db is None else traits_found_db
             except Exception as e:
                 print(f"[WARN] Could not fetch from user_test_attempts: {e}")
+                # Rollback the failed transaction to allow subsequent queries to work
+                db.rollback()
         
         # Use the stored traits_found value (matches what was shown during assessment)
         traits_found = traits_found_db if traits_found_db is not None else len(discovered_traits)
@@ -2178,6 +2180,8 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
             print(f"[WARN] Could not sync to user_test_attempts: {sync_error}")
             import traceback
             traceback.print_exc()
+            # Rollback to clear the failed transaction state so subsequent queries work
+            db.rollback()
         
         # NOW save recommendations
         if recommendations and len(recommendations) > 0:
