@@ -157,6 +157,45 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
     }
   };
 
+  // Go to previous question
+  const goToPrevious = async () => {
+    if (!sessionId || currentRound <= 1) return;
+
+    setIsLoading(true);
+    setIsTransitioning(true);
+
+    try {
+      const response = await fetch('http://localhost:8000/adaptive/previous', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.detail || 'Failed to go to previous question');
+      }
+
+      // Update state with previous question
+      setCurrentRound(data.current_round);
+      setConfidence(data.confidence);
+      setTraitsDiscovered(data.traits_discovered);
+      setTopCoursesPreview(data.top_courses_preview || []);
+      
+      setTimeout(() => {
+        setCurrentQuestion(data.next_question);
+        setIsTransitioning(false);
+        setIsLoading(false);
+      }, 300);
+    } catch (err) {
+      console.error('Previous error:', err);
+      setError(err.message);
+      setIsTransitioning(false);
+      setIsLoading(false);
+    }
+  };
+
   // Finish early
   const finishEarly = async () => {
     if (!sessionId) return;
@@ -501,6 +540,37 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
                 <p>Analyzing your response...</p>
               </div>
             )}
+
+            {/* Navigation buttons */}
+            <div style={{
+              display: 'flex',
+              gap: '12px',
+              marginTop: '28px',
+              justifyContent: 'center'
+            }}>
+              <button
+                onClick={goToPrevious}
+                disabled={isLoading || currentRound <= 1}
+                style={{
+                  ...styles.navButton,
+                  opacity: currentRound <= 1 ? 0.5 : 1,
+                  cursor: currentRound <= 1 ? 'not-allowed' : 'pointer'
+                }}
+              >
+                ← Previous Question
+              </button>
+              <button
+                onClick={finishEarly}
+                disabled={isLoading || currentRound < minRounds}
+                style={{
+                  ...styles.finishButton,
+                  opacity: currentRound < minRounds ? 0.5 : 1,
+                  cursor: currentRound < minRounds ? 'not-allowed' : 'pointer'
+                }}
+              >
+                Finish Early ✓
+              </button>
+            </div>
           </div>
 
           {error && <p style={styles.error}>{error}</p>}
@@ -613,6 +683,28 @@ const styles = {
     transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
   },
   finishBtn: {
+    background: 'rgba(16, 185, 129, 0.12)',
+    border: '1px solid rgba(16, 185, 129, 0.25)',
+    color: '#34d399',
+    padding: '12px 24px',
+    borderRadius: '12px',
+    fontSize: '14px',
+    fontWeight: '600',
+    cursor: 'pointer',
+    transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+  },
+  navButton: {
+    background: 'rgba(99, 102, 241, 0.12)',
+    border: '1px solid rgba(99, 102, 241, 0.25)',
+    color: '#a5b4fc',
+    padding: '12px 24px',
+    borderRadius: '12px',
+    fontSize: '14px',
+    fontWeight: '600',
+    cursor: 'pointer',
+    transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+  },
+  finishButton: {
     background: 'rgba(16, 185, 129, 0.12)',
     border: '1px solid rgba(16, 185, 129, 0.25)',
     color: '#34d399',
