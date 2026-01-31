@@ -130,6 +130,7 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
         setConfidence(data.confidence);
         setIsComplete(true);
         setResults(data.recommendations);
+        setIsLoading(false);  // Only set loading false after completion
       } else {
         // Update state with new info
         setLastTraitRecorded(data.trait_recorded);
@@ -140,18 +141,19 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
         setTopCoursesPreview(data.top_courses_preview || []);
         setCanFinishEarly(data.can_finish_early);
         
-        // Brief delay for transition effect
+        // Brief delay for transition effect - IMPORTANT: Keep isLoading true until question is updated
+        // to prevent user from clicking again with old question_id
         setTimeout(() => {
           setCurrentQuestion(data.next_question.question);
           setIsTransitioning(false);
+          setIsLoading(false);  // Only allow new clicks after question is updated
         }, 300);
       }
     } catch (err) {
       console.error('Submit error:', err);
       setError(err.message);
       setIsTransitioning(false);
-    } finally {
-      setIsLoading(false);
+      setIsLoading(false);  // Allow retry on error
     }
   };
 
