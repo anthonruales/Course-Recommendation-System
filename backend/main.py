@@ -2384,6 +2384,36 @@ def finish_adaptive_early(data: dict, db: Session = Depends(get_db)):
     }
 
 
+@app.post("/adaptive/previous")
+def go_to_previous_question(data: dict, db: Session = Depends(get_db)):
+    """
+    [BRAIN] AKINATOR-STYLE ASSESSMENT - Go to Previous Question
+    
+    Allows user to go back to the previous question and change their answer.
+    """
+    session_id = data.get("sessionId")
+    if not session_id:
+        raise HTTPException(status_code=400, detail="Session ID required")
+    
+    engine = get_or_init_adaptive_engine(db)
+    result = engine.go_to_previous_question(session_id)
+    
+    if "error" in result:
+        raise HTTPException(status_code=400, detail=result["error"])
+    
+    return {
+        "success": True,
+        "is_complete": False,
+        "current_round": result["round"],
+        "confidence": result["confidence"],
+        "traits_discovered": result["traits_discovered"],
+        "courses_remaining": result["courses_remaining"],
+        "next_question": result.get("question"),
+        "top_courses_preview": result.get("top_courses_preview", []),
+        "message": result.get("message")
+    }
+
+
 @app.get("/adaptive/status/{session_id}")
 def get_adaptive_status(session_id: str, db: Session = Depends(get_db)):
     """Get current status of an adaptive assessment session"""

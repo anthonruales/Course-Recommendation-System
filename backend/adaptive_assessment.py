@@ -45,6 +45,8 @@ class AdaptiveSession:
     answered_questions: Dict[int, int] = field(default_factory=dict)
     excluded_question_ids: Set[int] = field(default_factory=set)
     rejected_topics: Set[str] = field(default_factory=set)
+    question_history: List[int] = field(default_factory=list)  # Track order of answered questions for "Previous"
+    answer_trait_changes: Dict[int, Dict[str, float]] = field(default_factory=dict)  # Track trait changes per question for reversal
     
     round_number: int = 0
     active_courses: Set[str] = field(default_factory=set)
@@ -123,79 +125,91 @@ class AdaptiveAssessmentEngine:
         if not interests and not skills:
             return 0.0
         
-        # Profile keyword to trait mapping
+        # Profile keyword to trait mapping - MUST use actual trait names from courses
         PROFILE_TO_TRAITS = {
-            "science": ["Scientific", "Lab-Research", "Analytical", "Investigative"],
-            "biology": ["Medical", "Healthcare", "Lab-Research", "Scientific"],
-            "chemistry": ["Scientific", "Lab-Research", "Medical-Lab", "Analytical"],
-            "physics": ["Scientific", "Engineering", "Analytical", "Technical"],
-            "environment": ["Field-Research", "Agri-Nature", "Environmental", "Scientific"],
-            "programming": ["Software-Dev", "Technical", "Computational", "Data-Analytics"],
-            "computer": ["Software-Dev", "Hardware-Systems", "Technical", "IT"],
-            "data": ["Data-Analytics", "Analytical", "Technical", "Computational"],
-            "ai": ["Software-Dev", "Data-Analytics", "Technical", "Innovation"],
-            "cybersecurity": ["Cyber-Defense", "Technical", "Software-Dev", "Security"],
-            "engineering": ["Civil-Build", "Mechanical-Design", "Technical", "Engineering"],
-            "mechanical": ["Mechanical-Design", "Technical", "Engineering", "Industrial-Ops"],
-            "electrical": ["Electrical-Power", "Hardware-Systems", "Technical", "Engineering"],
-            "civil": ["Civil-Build", "Spatial-Design", "Technical", "Engineering"],
+            "science": ["Scientific", "Lab-Research", "Medical-Lab"],
+            "biology": ["Medical-Lab", "Lab-Research", "Patient-Care"],
+            "chemistry": ["Medical-Lab", "Lab-Research", "Scientific"],
+            "physics": ["Mechanical-Design", "Electrical-Power", "Civil-Build"],
+            "environment": ["Field-Research", "Agri-Nature"],
+            "programming": ["Software-Dev", "Data-Analytics", "Cyber-Defense"],
+            "computer": ["Software-Dev", "Hardware-Systems", "Data-Analytics"],
+            "data": ["Data-Analytics", "Software-Dev"],
+            "ai": ["Software-Dev", "Data-Analytics"],
+            "cybersecurity": ["Cyber-Defense", "Software-Dev"],
+            "engineering": ["Civil-Build", "Mechanical-Design", "Electrical-Power", "Industrial-Ops"],
+            "mechanical": ["Mechanical-Design", "Industrial-Ops"],
+            "electrical": ["Electrical-Power", "Hardware-Systems"],
+            "civil": ["Civil-Build", "Spatial-Design"],
             "business": ["Startup-Venture", "Marketing-Sales", "Finance-Acct", "Admin-Skill"],
-            "finance": ["Finance-Acct", "Analytical", "Business", "Banking"],
-            "marketing": ["Marketing-Sales", "Creative", "Communication", "Business"],
-            "accounting": ["Finance-Acct", "Analytical", "Business", "Admin-Skill"],
-            "economics": ["Finance-Acct", "Analytical", "Business", "Social"],
-            "art": ["Visual-Design", "Creative-Skill", "Artistic", "Creative"],
-            "music": ["Creative-Skill", "Musical", "Artistic", "Performance"],
-            "film": ["Digital-Media", "Creative-Skill", "Visual", "Media"],
-            "writing": ["Creative-Skill", "Communication", "Literary", "Journalism"],
-            "photography": ["Visual-Design", "Creative-Skill", "Digital-Media", "Artistic"],
-            "medical": ["Patient-Care", "Medical-Lab", "Healthcare", "Scientific"],
-            "nursing": ["Patient-Care", "Healthcare", "Medical", "Caregiving"],
-            "psychology": ["Rehab-Therapy", "Healthcare", "Counseling", "Behavioral"],
-            "education": ["Teaching-Ed", "Educational", "Communication", "Mentoring"],
-            "law": ["Law-Enforce", "Legal", "Analytical", "Advocacy"],
-            "politics": ["Community-Serve", "Political", "Leadership", "Social"],
-            "social": ["Community-Serve", "Social", "Helping", "Interpersonal"],
-            "history": ["Cultural", "Research", "Academic", "Humanities"],
-            "sports": ["Athletic", "Physical", "Health", "Fitness"],
-            "tourism": ["Hospitality-Svc", "Tourism", "Cultural", "Service"],
-            "food": ["Hospitality-Svc", "Culinary", "Creative", "Service"],
-            "agriculture": ["Agri-Nature", "Environmental", "Scientific", "Natural"],
+            "finance": ["Finance-Acct", "Startup-Venture"],
+            "marketing": ["Marketing-Sales", "Startup-Venture"],
+            "accounting": ["Finance-Acct", "Admin-Skill"],
+            "economics": ["Finance-Acct"],
+            "art": ["Visual-Design", "Creative-Skill", "Digital-Media"],
+            "music": ["Creative-Skill"],
+            "film": ["Digital-Media", "Creative-Skill"],
+            "writing": ["Creative-Skill"],
+            "photography": ["Visual-Design", "Digital-Media"],
+            "medical": ["Patient-Care", "Medical-Lab", "Rehab-Therapy"],
+            "nursing": ["Patient-Care"],
+            "psychology": ["Rehab-Therapy", "Community-Serve"],
+            "education": ["Teaching-Ed"],
+            "law": ["Law-Enforce"],
+            "politics": ["Community-Serve"],
+            "social": ["Community-Serve", "Rehab-Therapy"],
+            "history": ["Community-Serve"],
+            # Sports & Fitness - CORRECT trait names
+            "sports": ["Physical-Skill", "Rehab-Therapy", "Teaching-Ed"],
+            "fitness": ["Physical-Skill", "Rehab-Therapy"],
+            "sports & fitness": ["Physical-Skill", "Rehab-Therapy", "Teaching-Ed"],
+            "sports and fitness": ["Physical-Skill", "Rehab-Therapy", "Teaching-Ed"],
+            "athletic": ["Physical-Skill"],
+            "physical education": ["Physical-Skill", "Teaching-Ed"],
+            "tourism": ["Hospitality-Svc"],
+            "food": ["Hospitality-Svc"],
+            "agriculture": ["Agri-Nature", "Field-Research"],
             
-            # Skills
-            "programming_skill": ["Software-Dev", "Technical", "Computational", "Analytical"],
-            "data_analysis": ["Data-Analytics", "Analytical", "Technical", "Research"],
-            "web_development": ["Software-Dev", "Digital-Media", "Technical", "Creative"],
-            "graphic_design": ["Visual-Design", "Creative-Skill", "Digital-Media", "Artistic"],
-            "video_editing": ["Digital-Media", "Creative-Skill", "Visual", "Technical"],
-            "math_skills": ["Analytical", "Mathematical", "Technical", "Logical"],
-            "laboratory": ["Lab-Research", "Medical-Lab", "Scientific", "Technical"],
-            "technical_writing": ["Technical", "Communication", "Writing", "Analytical"],
-            "public_speaking": ["Communication", "Leadership", "Presentation", "Social"],
-            "writing_skill": ["Communication", "Creative-Skill", "Literary", "Expression"],
-            "presentation": ["Communication", "Leadership", "Visual", "Professional"],
-            "negotiation": ["Business", "Communication", "Leadership", "Interpersonal"],
-            "foreign_language": ["Communication", "Cultural", "Linguistic", "International"],
-            "leadership": ["Startup-Venture", "Leadership", "Management", "Decision-Making"],
-            "project_management": ["Admin-Skill", "Leadership", "Organization", "Planning"],
-            "team_management": ["Leadership", "People-Skill", "Management", "Interpersonal"],
-            "decision_making": ["Leadership", "Analytical", "Strategic", "Critical-Think"],
-            "planning": ["Admin-Skill", "Organization", "Strategic", "Management"],
-            "teamwork": ["People-Skill", "Interpersonal", "Collaboration", "Social"],
-            "empathy": ["Patient-Care", "Rehab-Therapy", "Helping", "Compassion"],
-            "customer_service": ["Hospitality-Svc", "People-Skill", "Communication", "Service"],
-            "mentoring": ["Teaching-Ed", "Leadership", "Communication", "Helping"],
-            "conflict_resolution": ["People-Skill", "Leadership", "Communication", "Diplomacy"],
-            "critical_thinking": ["Analytical", "Critical-Think", "Problem-Solving", "Logical"],
-            "problem_solving": ["Analytical", "Technical", "Innovation", "Critical-Think"],
-            "research": ["Lab-Research", "Analytical", "Academic", "Investigation"],
-            "attention_detail": ["Analytical", "Admin-Skill", "Technical", "Quality"],
-            "logical_reasoning": ["Analytical", "Mathematical", "Logical", "Critical-Think"],
-            "creativity": ["Creative-Skill", "Visual-Design", "Innovation", "Artistic"],
-            "artistic": ["Visual-Design", "Creative-Skill", "Artistic", "Expressive"],
-            "music_skill": ["Creative-Skill", "Musical", "Performance", "Artistic"],
-            "storytelling": ["Creative-Skill", "Communication", "Writing", "Media"],
-            "design_thinking": ["Visual-Design", "Creative-Skill", "Innovation", "Problem-Solving"],
+            # Skills - CORRECT trait names
+            "programming_skill": ["Software-Dev", "Data-Analytics"],
+            "data_analysis": ["Data-Analytics", "Software-Dev"],
+            "web_development": ["Software-Dev", "Digital-Media"],
+            "graphic_design": ["Visual-Design", "Digital-Media"],
+            "video_editing": ["Digital-Media", "Creative-Skill"],
+            "math_skills": ["Data-Analytics", "Finance-Acct"],
+            "laboratory": ["Lab-Research", "Medical-Lab"],
+            "technical_writing": ["Admin-Skill", "Software-Dev"],
+            "public_speaking": ["Teaching-Ed", "Marketing-Sales"],
+            "writing_skill": ["Creative-Skill", "Admin-Skill"],
+            "presentation": ["Marketing-Sales", "Teaching-Ed"],
+            "negotiation": ["Marketing-Sales", "Startup-Venture"],
+            "foreign_language": ["Teaching-Ed", "Hospitality-Svc"],
+            "leadership": ["Startup-Venture", "Admin-Skill"],
+            "project_management": ["Admin-Skill", "Industrial-Ops"],
+            "team_management": ["Admin-Skill", "People-Skill"],
+            "decision_making": ["Startup-Venture", "Admin-Skill"],
+            "planning": ["Admin-Skill", "Industrial-Ops"],
+            "teamwork": ["People-Skill", "Industrial-Ops"],
+            "empathy": ["Patient-Care", "Rehab-Therapy"],
+            "customer_service": ["Hospitality-Svc", "People-Skill"],
+            "mentoring": ["Teaching-Ed"],
+            "conflict_resolution": ["People-Skill", "Community-Serve"],
+            # Musical Ability - CORRECT trait names
+            "musical": ["Creative-Skill"],
+            "musical ability": ["Creative-Skill"],
+            "singing": ["Creative-Skill"],
+            "instrument": ["Creative-Skill"],
+            # Additional analytical skills
+            "critical_thinking": ["Data-Analytics", "Lab-Research"],
+            "problem_solving": ["Software-Dev", "Mechanical-Design", "Data-Analytics"],
+            "research": ["Lab-Research", "Field-Research"],
+            "attention_detail": ["Admin-Skill", "Finance-Acct"],
+            "logical_reasoning": ["Data-Analytics", "Software-Dev"],
+            "creativity": ["Creative-Skill", "Visual-Design", "Digital-Media"],
+            "artistic": ["Visual-Design", "Creative-Skill"],
+            "music_skill": ["Creative-Skill"],
+            "storytelling": ["Creative-Skill", "Digital-Media"],
+            "design_thinking": ["Visual-Design", "Creative-Skill"],
         }
         
         # Parse user's selections
@@ -381,6 +395,19 @@ class AdaptiveAssessmentEngine:
             "critical_thinking": ["Scientific", "Lab-Research", "Data-Analytics"],
             "teamwork": ["Industrial-Ops", "Admin-Skill", "Community-Serve"],
             "writing_skill": ["Creative-Skill", "Admin-Skill"],
+            # Sports & Fitness
+            "sports": ["Physical-Skill", "Rehab-Therapy"],
+            "fitness": ["Physical-Skill", "Rehab-Therapy"],
+            "sports & fitness": ["Physical-Skill", "Rehab-Therapy"],
+            "sports and fitness": ["Physical-Skill", "Rehab-Therapy"],
+            "athletic": ["Physical-Skill"],
+            "physical education": ["Physical-Skill", "Teaching-Ed"],
+            # Musical Ability
+            "musical": ["Creative-Skill"],
+            "musical ability": ["Creative-Skill"],
+            "music": ["Creative-Skill"],
+            "singing": ["Creative-Skill"],
+            "instrument": ["Creative-Skill"],
         }
         
         # Count how often each trait appears across all selected interests/skills
@@ -726,6 +753,7 @@ class AdaptiveAssessmentEngine:
         # Record the answer
         session.answered_questions[question_id] = chosen_option_id
         session.excluded_question_ids.add(question_id)
+        session.question_history.append(question_id)  # Track for "Previous" button
         print(f"[ANSWER] Q{question_id} answered. Total answers={len(session.answered_questions)}, round={session.round_number}, excluded={len(session.excluded_question_ids)}")
         
         # Check if user rejected this topic (e.g., "none", "not interested")
@@ -773,20 +801,48 @@ class AdaptiveAssessmentEngine:
         
         # Extract trait from chosen option
         chosen_trait = chosen_option.get('trait_tag')
+        option_text = chosen_option.get('option_text', '').lower()
         
-        if chosen_trait:
+        # Track all trait changes for this question (for reversal with "Previous" button)
+        trait_changes = {}
+        
+        # Check if this is a "None" or "Not interested" option
+        is_none_option = any(phrase in option_text for phrase in [
+            'none', 'not interested', "don't want", 'prefer not',
+            'none of these', 'not for me', "i don't"
+        ])
+        
+        # Track which traits to update course scores for
+        traits_to_boost = []
+        
+        if is_none_option:
+            # For "None" options, don't add any traits - the user is rejecting this topic
+            # The rejection penalty was already applied above
+            # This prevents arbitrary traits from being added
+            print(f"[NONE_OPTION] No traits added - user rejected this topic")
+            chosen_trait = None
+        elif chosen_trait:
+            # Normal option - use the trait tag
             # Increase student's affinity for this trait
             current = session.trait_scores.get(chosen_trait, 0)
             session.trait_scores[chosen_trait] = current + 1.0
+            trait_changes[chosen_trait] = 1.0
+            traits_to_boost.append(chosen_trait)
             
             # Also add mapped traits (from our enhanced trait system)
             mapped_traits = EXPANDED_TRAIT_MAPPING.get(chosen_trait, [])
             for mapped_trait in mapped_traits:
                 current = session.trait_scores.get(mapped_trait, 0)
                 session.trait_scores[mapped_trait] = current + 0.5
+                trait_changes[mapped_trait] = trait_changes.get(mapped_trait, 0) + 0.5
+                traits_to_boost.append(mapped_trait)
         
-        # Update course scores based on this answer
-        self._update_course_scores(session, chosen_trait)
+        # Store the trait changes for this question (for reversal)
+        session.answer_trait_changes[question_id] = trait_changes
+        
+        # Update course scores based on this answer - for all traits boosted
+        for trait in traits_to_boost:
+            self._update_course_scores(session, trait)
         
         # Calculate confidence
         session.confidence = self._calculate_confidence(session)
@@ -1265,6 +1321,91 @@ class AdaptiveAssessmentEngine:
         
         self._finalize_session(session)
         return self.get_final_results(session_id)
+    
+    def go_to_previous_question(self, session_id: str) -> dict:
+        """Go back to previous question and allow user to change answer."""
+        session = self.sessions.get(session_id)
+        if not session:
+            return {"error": "Session not found"}
+        
+        if len(session.question_history) == 0:
+            return {"error": "No previous questions"}
+        
+        # Get the last answered question
+        previous_question_id = session.question_history.pop()
+        
+        # Remove from answered and excluded
+        if previous_question_id in session.answered_questions:
+            del session.answered_questions[previous_question_id]
+        session.excluded_question_ids.discard(previous_question_id)
+        
+        # PROPERLY reverse all trait score changes from this answer
+        if previous_question_id in session.answer_trait_changes:
+            trait_changes = session.answer_trait_changes[previous_question_id]
+            for trait, amount in trait_changes.items():
+                if trait in session.trait_scores:
+                    session.trait_scores[trait] -= amount
+                    # Remove trait if score is 0 or negative
+                    if session.trait_scores[trait] <= 0:
+                        del session.trait_scores[trait]
+            # Remove the stored changes
+            del session.answer_trait_changes[previous_question_id]
+            print(f"[PREVIOUS] Reversed trait changes: {trait_changes}")
+        
+        # Get the question to show again
+        question = self.questions.get(previous_question_id)
+        
+        # Decrement round
+        session.round_number -= 1
+        
+        # Recalculate course scores based on current trait scores
+        self._recalculate_all_course_scores(session)
+        
+        # Recalculate confidence
+        session.confidence = self._calculate_confidence(session)
+        
+        # Get top courses preview - only if there are traits discovered
+        top_courses = []
+        if len(session.trait_scores) > 0:
+            sorted_courses = sorted(
+                session.course_scores.items(),
+                key=lambda x: x[1],
+                reverse=True
+            )
+            top_courses = [
+                {
+                    "course_name": name,
+                    "current_score": round(score, 1),
+                    "traits_matched": len(self.course_traits.get(name, set()) & 
+                                        set(session.trait_scores.keys()))
+                }
+                for name, score in sorted_courses[:5]
+            ]
+        
+        print(f"[PREVIOUS] Went back to Q{previous_question_id}. Round: {session.round_number}, answers: {len(session.answered_questions)}, traits: {len(session.trait_scores)}")
+        
+        return {
+            "status": "continue",
+            "session_id": session_id,
+            "round": session.round_number,
+            "question": question,
+            "confidence": round(session.confidence * 100, 1),
+            "courses_remaining": len(self.courses),
+            "traits_discovered": len(session.trait_scores),
+            "top_courses_preview": top_courses,
+            "message": "Go back to previous question. Select a different answer."
+        }
+    
+    def _recalculate_all_course_scores(self, session: AdaptiveSession):
+        """Recalculate all course scores from scratch based on current trait scores."""
+        # Reset to base scores
+        session.course_scores = {name: 50.0 for name in self.courses}
+        
+        # Apply trait-based scoring
+        for trait, score in session.trait_scores.items():
+            if trait in self.trait_to_courses:
+                for course_name in self.trait_to_courses[trait]:
+                    session.course_scores[course_name] = session.course_scores.get(course_name, 50.0) + (score * 2)
 
 
 # Singleton instance (will be initialized by FastAPI)
