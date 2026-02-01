@@ -1,15 +1,40 @@
 # adaptive_assessment.py
 """
-Adaptive Assessment Engine
+Adaptive Assessment Engine using Decision Tree Principles (Information Gain)
 
-Asks questions one at a time, selecting the next question based on 
-previous answers to maximize information gain about course fit.
+================================================================================
+ALGORITHM FOUNDATION: Decision Tree Classification with Information Gain
+Based on: Quinlan, J.R. (1986). Induction of Decision Trees. Machine Learning.
+================================================================================
+
+This module implements an adaptive question selection system using the same
+Information Gain calculation that powers Decision Tree algorithms (ID3/C4.5).
+
+The Decision Tree Approach:
+- Uses Information Gain (Shannon Entropy) to select optimal splitting questions
+- Each question acts as a decision node that splits the candidate course set
+- Answers traverse the implicit decision tree towards leaf nodes (recommendations)
+- The tree is dynamically constructed based on real-time user responses
+
+Key Decision Tree Concepts Applied:
+1. INFORMATION GAIN: Measures how well a question discriminates between courses
+   (same formula used in ID3/C4.5 Decision Tree construction)
+2. ENTROPY CALCULATION: Shannon entropy to find questions that best split candidates
+3. ATTRIBUTE SELECTION: Choosing the most informative trait-based question
+4. PRUNING: Excluding already-answered questions and rejected topics
 
 The algorithm:
-- Start with all courses as candidates
-- Each answer updates course scores based on trait matching
-- Questions are prioritized by how well they discriminate between remaining courses
-- Stops when confident or max questions reached
+- Start with all courses as candidates (root of implicit tree)
+- Calculate Information Gain for each potential question (finding best split)
+- Select question with highest gain (optimal decision node)
+- User's answer updates trait scores (traversing the tree)
+- Repeat until confident or max questions reached (reaching leaf nodes)
+- Final recommendations are the courses at the terminal leaf nodes
+
+This approach is MORE ADAPTIVE than a pre-built static Decision Tree because:
+- The tree structure adapts to each user's unique responses
+- No training data required - uses trait-course relationships directly
+- Handles new questions/courses without retraining
 """
 
 import math

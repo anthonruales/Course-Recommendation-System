@@ -202,7 +202,7 @@ class UserCreate(BaseModel):
     password: str
 
 class UserLogin(BaseModel): 
-    username: str
+    username: str  # Can be username OR email
     password: str
 class AssessmentAnswer(BaseModel):
     questionId: int
@@ -326,12 +326,20 @@ def signup(user: UserCreate, db: Session = Depends(get_db)):
 
 @app.post("/login")
 def login(user: UserLogin, db: Session = Depends(get_db)):
-    db_user = db.query(models.User).filter(models.User.username == user.username).first()
+    # Allow login with username OR email
+    login_input = user.username.strip()
+    
+    # Check if input looks like an email
+    if '@' in login_input:
+        db_user = db.query(models.User).filter(models.User.email == login_input.lower()).first()
+    else:
+        db_user = db.query(models.User).filter(models.User.username == login_input).first()
+    
     if not db_user or not verify_password(user.password, db_user.password_hash):
-        raise HTTPException(status_code=400, detail="Invalid username or password")
+        raise HTTPException(status_code=400, detail="Invalid username/email or password")
     
     # Mark user as online and update last_active
-    print(f"\n[LOGIN] User '{user.username}' logging in...")
+    print(f"\n[LOGIN] User '{db_user.username}' logging in...")
     db_user.is_online = 1
     db_user.last_active = datetime.datetime.now()
     db.commit()
