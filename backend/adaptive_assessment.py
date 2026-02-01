@@ -67,11 +67,13 @@ class AdaptiveSession:
     
     trait_scores: Dict[str, float] = field(default_factory=dict)
     course_scores: Dict[str, float] = field(default_factory=dict)
+    initial_course_scores: Dict[str, float] = field(default_factory=dict)  # Store initial scores with profile bonuses for proper recalculation
     answered_questions: Dict[int, int] = field(default_factory=dict)
     excluded_question_ids: Set[int] = field(default_factory=set)
     rejected_topics: Set[str] = field(default_factory=set)
     question_history: List[int] = field(default_factory=list)  # Track order of answered questions for "Previous"
     answer_trait_changes: Dict[int, Dict[str, float]] = field(default_factory=dict)  # Track trait changes per question for reversal
+    answer_rejection_data: Dict[int, Dict] = field(default_factory=dict)  # Track rejected topics and penalties per question for reversal
     
     round_number: int = 0
     active_courses: Set[str] = field(default_factory=set)
@@ -267,40 +269,105 @@ class AdaptiveAssessmentEngine:
     def _determine_rejected_topic(self, question: dict, chosen_option: dict) -> Optional[str]:
         """Figure out which topic the user rejected when they selected 'none'."""
         option_text = chosen_option.get('option_text', '').lower()
+        question_text = question.get('question_text', '').lower()
+        question_category = question.get('category', '').lower()
         
-        # Keyword to topic mapping
+        # Keyword to topic mapping - expanded for better detection
         REJECTION_KEYWORDS = {
+            # Healthcare
             "healthcare": "Patient-Care",
             "nursing": "Patient-Care",
+            "nurse": "Patient-Care",
+            "patient": "Patient-Care",
+            "hospital": "Patient-Care",
             "medical": "Medical-Lab",
+            "medicine": "Medical-Lab",
+            "laboratory": "Medical-Lab",
+            "therapy": "Rehab-Therapy",
+            "rehabilitation": "Rehab-Therapy",
+            
+            # Technology
             "technology": "Software-Dev",
             "programming": "Software-Dev",
             "coding": "Software-Dev",
+            "software": "Software-Dev",
+            "computer": "Software-Dev",
+            "tech": "Software-Dev",
+            "it career": "Software-Dev",
+            
+            # Engineering
             "engineering": "Civil-Build",
+            "construction": "Civil-Build",
+            "building": "Civil-Build",
+            "architect": "Spatial-Design",
+            
+            # Business
             "business": "Finance-Acct",
             "accounting": "Finance-Acct",
             "finance": "Finance-Acct",
+            "accountant": "Finance-Acct",
+            "banking": "Finance-Acct",
+            "entrepreneur": "Startup-Venture",
+            "marketing": "Marketing-Sales",
+            
+            # Education
             "teaching": "Teaching-Ed",
             "education": "Teaching-Ed",
             "teach": "Teaching-Ed",
+            "teacher": "Teaching-Ed",
+            "instructor": "Teaching-Ed",
+            "professor": "Teaching-Ed",
+            "classroom": "Teaching-Ed",
+            
+            # Arts & Creative
             "creative": "Visual-Design",
             "arts": "Visual-Design",
+            "art": "Visual-Design",
             "design": "Visual-Design",
+            "artist": "Visual-Design",
+            "music": "Creative-Skill",
+            "film": "Digital-Media",
+            "animation": "Digital-Media",
+            
+            # Maritime
             "maritime": "Maritime-Sea",
             "sea": "Maritime-Sea",
             "ship": "Maritime-Sea",
+            "ocean": "Maritime-Sea",
+            "sailor": "Maritime-Sea",
+            "captain": "Maritime-Sea",
+            "navigation": "Maritime-Sea",
+            
+            # Agriculture
             "agriculture": "Agri-Nature",
             "farming": "Agri-Nature",
-            "urban": "Agri-Nature",
-            "land-based": "Maritime-Sea",
+            "farm": "Agri-Nature",
+            "crops": "Agri-Nature",
+            "plants": "Agri-Nature",
+            "environmental": "Field-Research",
+            
+            # Hospitality
             "hospitality": "Hospitality-Svc",
             "hotel": "Hospitality-Svc",
             "tourism": "Hospitality-Svc",
+            "travel": "Hospitality-Svc",
+            "culinary": "Hospitality-Svc",
+            "chef": "Hospitality-Svc",
+            "cooking": "Hospitality-Svc",
+            
+            # Law & Security
             "law": "Law-Enforce",
             "police": "Law-Enforce",
             "criminology": "Law-Enforce",
-            "private sector": "Community-Serve",
+            "criminal": "Law-Enforce",
+            "security": "Law-Enforce",
+            "detective": "Law-Enforce",
+            
+            # Public Service
+            "government": "Community-Serve",
             "public": "Community-Serve",
+            "social work": "Community-Serve",
+            "politics": "Community-Serve",
         }
         
         # Check for direct keyword matches in the rejection text
@@ -308,9 +375,13 @@ class AdaptiveAssessmentEngine:
             if keyword in option_text:
                 return topic
         
+        # Also check the question text for context
+        for keyword, topic in REJECTION_KEYWORDS.items():
+            if keyword in question_text:
+                return topic
+        
         # If no direct match, analyze the question's other options
         # The rejected topic is likely what most other options are about
-        question_category = question.get('category', '').lower()
         
         # Category-based rejection
         CATEGORY_TO_TOPIC = {
@@ -319,10 +390,13 @@ class AdaptiveAssessmentEngine:
             "medical": "Medical-Lab",
             "technology": "Software-Dev",
             "tech": "Software-Dev",
+            "programming": "Software-Dev",
             "engineering": "Civil-Build",
             "business": "Finance-Acct",
             "finance": "Finance-Acct",
+            "accounting": "Finance-Acct",
             "education": "Teaching-Ed",
+            "teaching": "Teaching-Ed",
             "creative": "Visual-Design",
             "arts": "Visual-Design",
             "maritime": "Maritime-Sea",
@@ -330,6 +404,7 @@ class AdaptiveAssessmentEngine:
             "hospitality": "Hospitality-Svc",
             "public service": "Community-Serve",
             "law": "Law-Enforce",
+            "criminology": "Law-Enforce",
         }
         
         for category_keyword, topic in CATEGORY_TO_TOPIC.items():
@@ -515,6 +590,7 @@ class AdaptiveAssessmentEngine:
             max_questions=max_questions,
             min_questions=min_questions,
             course_scores=course_scores,
+            initial_course_scores=course_scores.copy(),  # Store initial scores with all profile bonuses
             active_courses=set(self.courses.keys())
         )
         
@@ -557,6 +633,42 @@ class AdaptiveAssessmentEngine:
             rejected_count = 0
             profile_match_count = 0
             
+            # Check if the question category matches a rejected topic
+            question_category = question.get('category', '').lower()
+            
+            # Map question categories to traits for complete exclusion
+            CATEGORY_TO_REJECTED_TRAIT = {
+                "education": "Teaching-Ed",
+                "teaching": "Teaching-Ed",
+                "healthcare": "Patient-Care",
+                "nursing": "Patient-Care",
+                "medical": "Medical-Lab",
+                "technology": "Software-Dev",
+                "programming": "Software-Dev",
+                "engineering": "Civil-Build",
+                "business": "Finance-Acct",
+                "accounting": "Finance-Acct",
+                "finance": "Finance-Acct",
+                "maritime": "Maritime-Sea",
+                "agriculture": "Agri-Nature",
+                "hospitality": "Hospitality-Svc",
+                "criminology": "Law-Enforce",
+                "law": "Law-Enforce",
+                "arts": "Visual-Design",
+                "creative": "Visual-Design",
+                "public service": "Community-Serve",
+            }
+            
+            # SKIP entire question if its category matches a rejected topic
+            category_rejected = False
+            for cat_keyword, rejected_trait in CATEGORY_TO_REJECTED_TRAIT.items():
+                if cat_keyword in question_category and rejected_trait in session.rejected_topics:
+                    category_rejected = True
+                    break
+            
+            if category_rejected:
+                continue  # Skip this question entirely
+            
             for opt in options:
                 trait = opt.get('trait_tag')
                 if trait:
@@ -565,8 +677,8 @@ class AdaptiveAssessmentEngine:
                     if trait in all_priority_traits:
                         profile_match_count += 1
             
-            # Skip questions where most options are about rejected topics
-            if len(options) > 0 and rejected_count / len(options) > 0.5:
+            # Skip questions where most options are about rejected topics (lowered threshold)
+            if len(options) > 0 and rejected_count / len(options) > 0.3:
                 continue
             
             # Calculate base score
@@ -593,6 +705,23 @@ class AdaptiveAssessmentEngine:
         if best_question:
             session.round_number += 1
             print(f"[TARGET] Round {session.round_number}: Q{best_question.get('question_id')} (score: {best_score:.2f})")
+            
+            # Get top courses preview based on current scores (includes profile bonuses)
+            sorted_courses = sorted(
+                session.course_scores.items(),
+                key=lambda x: x[1],
+                reverse=True
+            )
+            top_courses = [
+                {
+                    "course_name": name,
+                    "current_score": round(score, 1),
+                    "traits_matched": len(self.course_traits.get(name, set()) & 
+                                        set(session.trait_scores.keys()))
+                }
+                for name, score in sorted_courses[:5]
+            ]
+            
             return {
                 "session_id": session_id,
                 "round": session.round_number,
@@ -600,7 +729,8 @@ class AdaptiveAssessmentEngine:
                 "question": best_question,
                 "courses_remaining": len(session.active_courses),
                 "confidence": round(session.confidence * 100, 1),
-                "can_finish_early": session.round_number >= session.min_questions
+                "can_finish_early": session.round_number >= session.min_questions,
+                "top_courses_preview": top_courses  # Include initial top courses based on profile
             }
         
         self._finalize_session(session)
@@ -789,6 +919,9 @@ class AdaptiveAssessmentEngine:
             "i don't want to", "not for me"
         ])
         
+        # Track rejection data for this question (for reversal with "Previous" button)
+        rejection_data = {"rejected_topics": [], "course_penalties": {}}
+        
         # Also check for specific topic rejections in the option text
         EXPLICIT_REJECTIONS = {
             "don't want to teach": "Teaching-Ed",
@@ -809,20 +942,28 @@ class AdaptiveAssessmentEngine:
         
         for phrase, topic in EXPLICIT_REJECTIONS.items():
             if phrase in option_text:
-                session.rejected_topics.add(topic)
-                print(f"[REJECT] Explicit rejection detected: {topic}")
+                if topic not in session.rejected_topics:  # Only add if not already rejected
+                    session.rejected_topics.add(topic)
+                    rejection_data["rejected_topics"].append(topic)
+                    print(f"[REJECT] Explicit rejection detected: {topic}")
         
         if is_rejection:
             # Determine what topic was rejected based on the question category and other options
             rejected_topic = self._determine_rejected_topic(question, chosen_option)
-            if rejected_topic:
+            if rejected_topic and rejected_topic not in session.rejected_topics:
                 session.rejected_topics.add(rejected_topic)
+                rejection_data["rejected_topics"].append(rejected_topic)
                 print(f"[REJECT] User rejected topic: {rejected_topic}")
                 
                 # Penalize courses associated with this rejected topic
                 for course_name, course_traits in self.course_traits.items():
                     if rejected_topic in course_traits:
                         session.course_scores[course_name] -= 8  # Penalty for rejected topic
+                        # Track the penalty for reversal
+                        rejection_data["course_penalties"][course_name] = rejection_data["course_penalties"].get(course_name, 0) + 8
+        
+        # Store rejection data for this question (for reversal)
+        session.answer_rejection_data[question_id] = rejection_data
         
         # Extract trait from chosen option
         chosen_trait = chosen_option.get('trait_tag')
@@ -924,12 +1065,21 @@ class AdaptiveAssessmentEngine:
         if not chosen_trait:
             return
         
+        # Early answers have MORE impact - user is actively making choices
+        # This ensures user's answers can override profile-based starting scores
+        early_boost_multiplier = 1.0
+        if session.round_number <= 3:
+            early_boost_multiplier = 2.5  # First 3 answers: 2.5x impact
+        elif session.round_number <= 7:
+            early_boost_multiplier = 1.5  # Next 4 answers: 1.5x impact
+        
         for course_name in list(session.active_courses):
             course_traits = self.course_traits.get(course_name, set())
             
             # Direct trait match - BIG BOOST (matches unique specialized trait)
             if chosen_trait in course_traits:
-                session.course_scores[course_name] += 8.0  # Increased for specialized traits
+                boost = 12.0 * early_boost_multiplier  # Base 12 points (was 8)
+                session.course_scores[course_name] += boost
             else:
                 # Check for similar traits using our SPECIALIZED trait system
                 best_similarity = 0
@@ -937,13 +1087,13 @@ class AdaptiveAssessmentEngine:
                     sim = self._get_specialized_similarity(chosen_trait, course_trait)
                     best_similarity = max(best_similarity, sim)
                 
-                # Similarity-based score boost
+                # Similarity-based score boost (also scaled by early multiplier)
                 if best_similarity > 0.7:
-                    session.course_scores[course_name] += 4.0
+                    session.course_scores[course_name] += 6.0 * early_boost_multiplier
                 elif best_similarity > 0.4:
-                    session.course_scores[course_name] += 2.0
+                    session.course_scores[course_name] += 3.0 * early_boost_multiplier
                 elif best_similarity > 0.2:
-                    session.course_scores[course_name] += 0.5
+                    session.course_scores[course_name] += 1.0 * early_boost_multiplier
     
     def _calculate_confidence(self, session: AdaptiveSession) -> float:
         """Calculate recommendation confidence based on score separation."""
@@ -1377,6 +1527,24 @@ class AdaptiveAssessmentEngine:
             del session.answer_trait_changes[previous_question_id]
             print(f"[PREVIOUS] Reversed trait changes: {trait_changes}")
         
+        # PROPERLY reverse rejection data (rejected topics and course penalties)
+        if previous_question_id in session.answer_rejection_data:
+            rejection_data = session.answer_rejection_data[previous_question_id]
+            
+            # Remove rejected topics that were added by this question
+            for topic in rejection_data.get("rejected_topics", []):
+                session.rejected_topics.discard(topic)
+                print(f"[PREVIOUS] Removed rejected topic: {topic}")
+            
+            # Reverse course penalties
+            for course_name, penalty in rejection_data.get("course_penalties", {}).items():
+                if course_name in session.course_scores:
+                    session.course_scores[course_name] += penalty  # Add back the penalty
+                    print(f"[PREVIOUS] Reversed penalty for {course_name}: +{penalty}")
+            
+            # Remove the stored rejection data
+            del session.answer_rejection_data[previous_question_id]
+        
         # Get the question to show again
         question = self.questions.get(previous_question_id)
         
@@ -1389,23 +1557,21 @@ class AdaptiveAssessmentEngine:
         # Recalculate confidence
         session.confidence = self._calculate_confidence(session)
         
-        # Get top courses preview - only if there are traits discovered
-        top_courses = []
-        if len(session.trait_scores) > 0:
-            sorted_courses = sorted(
-                session.course_scores.items(),
-                key=lambda x: x[1],
-                reverse=True
-            )
-            top_courses = [
-                {
-                    "course_name": name,
-                    "current_score": round(score, 1),
-                    "traits_matched": len(self.course_traits.get(name, set()) & 
-                                        set(session.trait_scores.keys()))
-                }
-                for name, score in sorted_courses[:5]
-            ]
+        # Get top courses preview - ALWAYS show based on current scores (includes profile bonuses)
+        sorted_courses = sorted(
+            session.course_scores.items(),
+            key=lambda x: x[1],
+            reverse=True
+        )
+        top_courses = [
+            {
+                "course_name": name,
+                "current_score": round(score, 1),
+                "traits_matched": len(self.course_traits.get(name, set()) & 
+                                    set(session.trait_scores.keys()))
+            }
+            for name, score in sorted_courses[:5]
+        ]
         
         print(f"[PREVIOUS] Went back to Q{previous_question_id}. Round: {session.round_number}, answers: {len(session.answered_questions)}, traits: {len(session.trait_scores)}")
         
@@ -1423,8 +1589,9 @@ class AdaptiveAssessmentEngine:
     
     def _recalculate_all_course_scores(self, session: AdaptiveSession):
         """Recalculate all course scores from scratch based on current trait scores."""
-        # Reset to base scores
-        session.course_scores = {name: 50.0 for name in self.courses}
+        # Reset to INITIAL base scores (includes GWA, strand, and profile bonuses)
+        # This preserves the user's academic profile influence
+        session.course_scores = session.initial_course_scores.copy()
         
         # Apply trait-based scoring
         for trait, score in session.trait_scores.items():
