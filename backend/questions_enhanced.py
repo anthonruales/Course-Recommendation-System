@@ -1786,6 +1786,348 @@ QUESTIONS_POOL_ENHANCED = [
             {"option_id": 975, "option_text": "Travel and explore new places", "trait_tag": "Hospitality-Svc"},
             {"option_id": 976, "option_text": "Buy books and study materials", "trait_tag": "Lab-Research"}
         ]
+    },
+    
+    # ==================== NEW SITUATIONAL QUESTIONS (101-120) ====================
+    {
+        "question_id": 101,
+        "question_text": "Your school is organizing a career fair. Which booth would you volunteer to manage?",
+        "category": "Situational - Career Fair",
+        "options": [
+            {"option_id": 1001, "option_text": "Healthcare booth - explaining nursing and medical careers", "trait_tag": "Patient-Care"},
+            {"option_id": 1002, "option_text": "Technology booth - demonstrating apps and coding projects", "trait_tag": "Software-Dev"},
+            {"option_id": 1003, "option_text": "Engineering booth - showing building models and designs", "trait_tag": "Civil-Build"},
+            {"option_id": 1004, "option_text": "Business booth - presenting entrepreneurship success stories", "trait_tag": "Startup-Venture"},
+            {"option_id": 1005, "option_text": "Arts booth - displaying creative works and portfolios", "trait_tag": "Visual-Design"},
+            {"option_id": 1006, "option_text": "Education booth - helping students explore teaching careers", "trait_tag": "Teaching-Ed"},
+            {"option_id": 1007, "option_text": "Law & Security booth - discussing criminology and justice", "trait_tag": "Law-Enforce"},
+            {"option_id": 1008, "option_text": "Maritime booth - explaining ship careers and navigation", "trait_tag": "Maritime-Sea"},
+            {"option_id": 1009, "option_text": "Agriculture booth - showcasing farming innovations", "trait_tag": "Agri-Nature"},
+            {"option_id": 1010, "option_text": "Hospitality booth - promoting tourism and hotel management", "trait_tag": "Hospitality-Svc"}
+        ]
+    },
+    {
+        "question_id": 102,
+        "question_text": "A local barangay asks for help solving a community problem. What role would you take?",
+        "category": "Situational - Community Problem",
+        "options": [
+            {"option_id": 1011, "option_text": "Organize a health screening for residents", "trait_tag": "Patient-Care"},
+            {"option_id": 1012, "option_text": "Set up a computer literacy program for youth", "trait_tag": "Software-Dev"},
+            {"option_id": 1013, "option_text": "Help design safer roads and walkways", "trait_tag": "Civil-Build"},
+            {"option_id": 1014, "option_text": "Start a livelihood program for unemployed residents", "trait_tag": "Startup-Venture"},
+            {"option_id": 1015, "option_text": "Create murals and beautify public spaces", "trait_tag": "Visual-Design"},
+            {"option_id": 1016, "option_text": "Tutor children who are struggling in school", "trait_tag": "Teaching-Ed"},
+            {"option_id": 1017, "option_text": "Help establish a neighborhood watch program", "trait_tag": "Law-Enforce"},
+            {"option_id": 1018, "option_text": "Advocate for government services and social welfare", "trait_tag": "Community-Serve"},
+            {"option_id": 1019, "option_text": "Set up an urban garden for food security", "trait_tag": "Agri-Nature"},
+            {"option_id": 1020, "option_text": "Organize community events and festivals", "trait_tag": "Hospitality-Svc"}
+        ]
+    },
+    {
+        "question_id": 103,
+        "question_text": "You discover your friend is making unhealthy life choices. How do you help?",
+        "category": "Situational - Friend Support",
+        "options": [
+            {"option_id": 1021, "option_text": "Research health information and share it with them", "trait_tag": "Patient-Care"},
+            {"option_id": 1022, "option_text": "Find apps or tools that could help them track their habits", "trait_tag": "Software-Dev"},
+            {"option_id": 1023, "option_text": "Create a structured plan with goals and timelines", "trait_tag": "Industrial-Ops"},
+            {"option_id": 1024, "option_text": "Connect them with a counselor or therapist", "trait_tag": "Rehab-Therapy"},
+            {"option_id": 1025, "option_text": "Express your feelings through creative activities together", "trait_tag": "Creative-Skill"},
+            {"option_id": 1026, "option_text": "Teach them about self-care and wellness techniques", "trait_tag": "Teaching-Ed"},
+            {"option_id": 1027, "option_text": "Investigate what triggered their behavior changes", "trait_tag": "Lab-Research"},
+            {"option_id": 1028, "option_text": "Organize group activities to keep them engaged socially", "trait_tag": "People-Skill"},
+            {"option_id": 1029, "option_text": "Encourage physical activities like sports or exercise", "trait_tag": "Physical-Skill"},
+            {"option_id": 1030, "option_text": "Help them manage their time and finances better", "trait_tag": "Finance-Acct"}
+        ]
+    },
+    {
+        "question_id": 104,
+        "question_text": "Your family is planning to start a small business. What role would you take?",
+        "category": "Situational - Family Business",
+        "options": [
+            {"option_id": 1031, "option_text": "Handle the bookkeeping and financial records", "trait_tag": "Finance-Acct"},
+            {"option_id": 1032, "option_text": "Build a website and manage online presence", "trait_tag": "Software-Dev"},
+            {"option_id": 1033, "option_text": "Design the store layout and physical setup", "trait_tag": "Spatial-Design"},
+            {"option_id": 1034, "option_text": "Create the business plan and growth strategy", "trait_tag": "Startup-Venture"},
+            {"option_id": 1035, "option_text": "Design logos, packaging, and marketing materials", "trait_tag": "Visual-Design"},
+            {"option_id": 1036, "option_text": "Train employees and create procedures", "trait_tag": "Teaching-Ed"},
+            {"option_id": 1037, "option_text": "Handle customer relations and sales", "trait_tag": "Marketing-Sales"},
+            {"option_id": 1038, "option_text": "Manage inventory and supply chain logistics", "trait_tag": "Admin-Skill"},
+            {"option_id": 1039, "option_text": "Research market trends and competition", "trait_tag": "Data-Analytics"},
+            {"option_id": 1040, "option_text": "Ensure safety and security measures are in place", "trait_tag": "Law-Enforce"}
+        ]
+    },
+    {
+        "question_id": 105,
+        "question_text": "There's a power outage in your area for several hours. How do you spend your time?",
+        "category": "Situational - Power Outage",
+        "options": [
+            {"option_id": 1041, "option_text": "Check on elderly neighbors and offer assistance", "trait_tag": "Patient-Care"},
+            {"option_id": 1042, "option_text": "Think about how to prevent this with better infrastructure", "trait_tag": "Electrical-Power"},
+            {"option_id": 1043, "option_text": "Plan a backup power solution like solar panels", "trait_tag": "Mechanical-Design"},
+            {"option_id": 1044, "option_text": "Calculate how much money was lost due to the outage", "trait_tag": "Finance-Acct"},
+            {"option_id": 1045, "option_text": "Draw, paint, or work on creative projects by candlelight", "trait_tag": "Visual-Design"},
+            {"option_id": 1046, "option_text": "Read books and study without distractions", "trait_tag": "Lab-Research"},
+            {"option_id": 1047, "option_text": "Play games and tell stories with family", "trait_tag": "People-Skill"},
+            {"option_id": 1048, "option_text": "Help organize the neighborhood response", "trait_tag": "Community-Serve"},
+            {"option_id": 1049, "option_text": "Go outside and explore nature", "trait_tag": "Field-Research"},
+            {"option_id": 1050, "option_text": "Cook and prepare food using alternative methods", "trait_tag": "Hospitality-Svc"}
+        ]
+    },
+    {
+        "question_id": 106,
+        "question_text": "Your school needs help preparing for an accreditation visit. What would you volunteer to do?",
+        "category": "Situational - Accreditation",
+        "options": [
+            {"option_id": 1051, "option_text": "Organize health records and first aid stations", "trait_tag": "Health-Admin"},
+            {"option_id": 1052, "option_text": "Set up computer systems and presentations", "trait_tag": "Software-Dev"},
+            {"option_id": 1053, "option_text": "Help with building maintenance and repairs", "trait_tag": "Civil-Build"},
+            {"option_id": 1054, "option_text": "Prepare financial reports and budget documents", "trait_tag": "Finance-Acct"},
+            {"option_id": 1055, "option_text": "Create visual displays and decorations", "trait_tag": "Visual-Design"},
+            {"option_id": 1056, "option_text": "Prepare lesson plans and teaching demonstrations", "trait_tag": "Teaching-Ed"},
+            {"option_id": 1057, "option_text": "Manage security and visitor flow", "trait_tag": "Law-Enforce"},
+            {"option_id": 1058, "option_text": "Organize documents and administrative files", "trait_tag": "Admin-Skill"},
+            {"option_id": 1059, "option_text": "Prepare scientific lab demonstrations", "trait_tag": "Lab-Research"},
+            {"option_id": 1060, "option_text": "Coordinate food and hospitality for guests", "trait_tag": "Hospitality-Svc"}
+        ]
+    },
+    {
+        "question_id": 107,
+        "question_text": "You witness someone collapse on the street. What is your immediate response?",
+        "category": "Situational - Medical Emergency",
+        "options": [
+            {"option_id": 1061, "option_text": "Rush to help and check their vital signs", "trait_tag": "Patient-Care"},
+            {"option_id": 1062, "option_text": "Call emergency services immediately", "trait_tag": "Technical-Skill"},
+            {"option_id": 1063, "option_text": "Look for a safe space to move them away from traffic", "trait_tag": "Civil-Build"},
+            {"option_id": 1064, "option_text": "Start CPR if they're unresponsive", "trait_tag": "Rehab-Therapy"},
+            {"option_id": 1065, "option_text": "Document what happened in case it's needed", "trait_tag": "Law-Enforce"},
+            {"option_id": 1066, "option_text": "Calm down bystanders and explain what to do", "trait_tag": "Teaching-Ed"},
+            {"option_id": 1067, "option_text": "Direct traffic to prevent accidents", "trait_tag": "Community-Serve"},
+            {"option_id": 1068, "option_text": "Search their belongings for medical information", "trait_tag": "Medical-Lab"},
+            {"option_id": 1069, "option_text": "Stay with them and provide emotional support", "trait_tag": "People-Skill"},
+            {"option_id": 1070, "option_text": "Think about how hospitals could respond faster", "trait_tag": "Health-Admin"}
+        ]
+    },
+    {
+        "question_id": 108,
+        "question_text": "Your group is assigned a research project. What role do you naturally take?",
+        "category": "Situational - Group Research",
+        "options": [
+            {"option_id": 1071, "option_text": "Conduct interviews and gather primary data", "trait_tag": "People-Skill"},
+            {"option_id": 1072, "option_text": "Analyze data and create statistical reports", "trait_tag": "Data-Analytics"},
+            {"option_id": 1073, "option_text": "Write the research paper and documentation", "trait_tag": "Lab-Research"},
+            {"option_id": 1074, "option_text": "Design the presentation and visual aids", "trait_tag": "Visual-Design"},
+            {"option_id": 1075, "option_text": "Present the findings to the class", "trait_tag": "Teaching-Ed"},
+            {"option_id": 1076, "option_text": "Manage the timeline and task assignments", "trait_tag": "Admin-Skill"},
+            {"option_id": 1077, "option_text": "Create digital tools or apps for data collection", "trait_tag": "Software-Dev"},
+            {"option_id": 1078, "option_text": "Conduct experiments and lab work", "trait_tag": "Medical-Lab"},
+            {"option_id": 1079, "option_text": "Do field research and site visits", "trait_tag": "Field-Research"},
+            {"option_id": 1080, "option_text": "Handle the budget and resource allocation", "trait_tag": "Finance-Acct"}
+        ]
+    },
+    {
+        "question_id": 109,
+        "question_text": "A typhoon warning is issued for your area. How do you prepare?",
+        "category": "Situational - Typhoon Preparation",
+        "options": [
+            {"option_id": 1081, "option_text": "Prepare first aid kit and medical supplies", "trait_tag": "Patient-Care"},
+            {"option_id": 1082, "option_text": "Charge devices and backup important files", "trait_tag": "Software-Dev"},
+            {"option_id": 1083, "option_text": "Secure the house structure and check for weak points", "trait_tag": "Civil-Build"},
+            {"option_id": 1084, "option_text": "Stock up on food and essential supplies", "trait_tag": "Hospitality-Svc"},
+            {"option_id": 1085, "option_text": "Create evacuation plans and routes", "trait_tag": "Community-Serve"},
+            {"option_id": 1086, "option_text": "Teach family members about safety protocols", "trait_tag": "Teaching-Ed"},
+            {"option_id": 1087, "option_text": "Check emergency hotlines and communication plans", "trait_tag": "Technical-Skill"},
+            {"option_id": 1088, "option_text": "Prepare flashlights and alternative power sources", "trait_tag": "Electrical-Power"},
+            {"option_id": 1089, "option_text": "Protect plants and agricultural materials", "trait_tag": "Agri-Nature"},
+            {"option_id": 1090, "option_text": "Calculate potential damage costs for insurance", "trait_tag": "Finance-Acct"}
+        ]
+    },
+    {
+        "question_id": 110,
+        "question_text": "You're given the chance to shadow a professional for a day. Who would you choose?",
+        "category": "Situational - Job Shadow",
+        "options": [
+            {"option_id": 1091, "option_text": "A doctor or nurse in a busy hospital", "trait_tag": "Patient-Care"},
+            {"option_id": 1092, "option_text": "A software engineer at a tech company", "trait_tag": "Software-Dev"},
+            {"option_id": 1093, "option_text": "An architect designing a new building", "trait_tag": "Spatial-Design"},
+            {"option_id": 1094, "option_text": "A CEO running a successful company", "trait_tag": "Startup-Venture"},
+            {"option_id": 1095, "option_text": "A film director or artist in a studio", "trait_tag": "Digital-Media"},
+            {"option_id": 1096, "option_text": "A university professor teaching students", "trait_tag": "Teaching-Ed"},
+            {"option_id": 1097, "option_text": "A detective solving criminal cases", "trait_tag": "Law-Enforce"},
+            {"option_id": 1098, "option_text": "A marine biologist researching ocean life", "trait_tag": "Field-Research"},
+            {"option_id": 1099, "option_text": "A ship captain on an international voyage", "trait_tag": "Maritime-Sea"},
+            {"option_id": 1100, "option_text": "A physical therapist helping patients recover", "trait_tag": "Rehab-Therapy"}
+        ]
+    },
+    {
+        "question_id": 111,
+        "question_text": "Your school website has been hacked. How would you help?",
+        "category": "Situational - Cyber Attack",
+        "options": [
+            {"option_id": 1101, "option_text": "Identify the vulnerability and fix the security breach", "trait_tag": "Cyber-Defense"},
+            {"option_id": 1102, "option_text": "Restore the website from backup systems", "trait_tag": "Software-Dev"},
+            {"option_id": 1103, "option_text": "Investigate who was responsible and gather evidence", "trait_tag": "Law-Enforce"},
+            {"option_id": 1104, "option_text": "Communicate with students about what happened", "trait_tag": "Teaching-Ed"},
+            {"option_id": 1105, "option_text": "Calculate the damage and costs to fix it", "trait_tag": "Finance-Acct"},
+            {"option_id": 1106, "option_text": "Redesign the website with better security", "trait_tag": "Visual-Design"},
+            {"option_id": 1107, "option_text": "Create a report documenting the incident", "trait_tag": "Admin-Skill"},
+            {"option_id": 1108, "option_text": "Train others on cybersecurity best practices", "trait_tag": "Technical-Skill"},
+            {"option_id": 1109, "option_text": "Analyze data logs to understand the attack pattern", "trait_tag": "Data-Analytics"},
+            {"option_id": 1110, "option_text": "Coordinate with the IT team on the response", "trait_tag": "Hardware-Systems"}
+        ]
+    },
+    {
+        "question_id": 112,
+        "question_text": "A new shopping mall is opening in your town. What job would interest you there?",
+        "category": "Situational - Mall Jobs",
+        "options": [
+            {"option_id": 1111, "option_text": "Clinic staff in the mall's medical center", "trait_tag": "Patient-Care"},
+            {"option_id": 1112, "option_text": "IT support for the mall's technology systems", "trait_tag": "Software-Dev"},
+            {"option_id": 1113, "option_text": "Facilities manager overseeing building operations", "trait_tag": "Civil-Build"},
+            {"option_id": 1114, "option_text": "Store owner running my own business there", "trait_tag": "Startup-Venture"},
+            {"option_id": 1115, "option_text": "Interior designer for store layouts", "trait_tag": "Spatial-Design"},
+            {"option_id": 1116, "option_text": "Customer service training manager", "trait_tag": "Teaching-Ed"},
+            {"option_id": 1117, "option_text": "Security officer ensuring safety", "trait_tag": "Law-Enforce"},
+            {"option_id": 1118, "option_text": "Marketing staff promoting mall events", "trait_tag": "Marketing-Sales"},
+            {"option_id": 1119, "option_text": "Restaurant manager in the food court", "trait_tag": "Hospitality-Svc"},
+            {"option_id": 1120, "option_text": "Accountant managing finances for stores", "trait_tag": "Finance-Acct"}
+        ]
+    },
+    {
+        "question_id": 113,
+        "question_text": "Your neighbor's pet is acting strangely and seems sick. What do you do?",
+        "category": "Situational - Sick Pet",
+        "options": [
+            {"option_id": 1121, "option_text": "Check the pet's symptoms and suggest going to a vet", "trait_tag": "Patient-Care"},
+            {"option_id": 1122, "option_text": "Search online for possible causes and treatments", "trait_tag": "Software-Dev"},
+            {"option_id": 1123, "option_text": "Think about what in their environment could be causing it", "trait_tag": "Field-Research"},
+            {"option_id": 1124, "option_text": "Offer to help pay for veterinary care", "trait_tag": "Finance-Acct"},
+            {"option_id": 1125, "option_text": "Make the pet comfortable and provide comfort", "trait_tag": "Rehab-Therapy"},
+            {"option_id": 1126, "option_text": "Explain to the neighbor about pet health care", "trait_tag": "Teaching-Ed"},
+            {"option_id": 1127, "option_text": "Investigate if other neighborhood pets are affected", "trait_tag": "Lab-Research"},
+            {"option_id": 1128, "option_text": "Contact animal rescue organizations for help", "trait_tag": "Community-Serve"},
+            {"option_id": 1129, "option_text": "Prepare special food or medicine if needed", "trait_tag": "Hospitality-Svc"},
+            {"option_id": 1130, "option_text": "Check if it might be something agricultural-related", "trait_tag": "Agri-Nature"}
+        ]
+    },
+    {
+        "question_id": 114,
+        "question_text": "Your school wants to reduce its environmental impact. What initiative would you lead?",
+        "category": "Situational - Environmental Initiative",
+        "options": [
+            {"option_id": 1131, "option_text": "Health education about environmental pollution effects", "trait_tag": "Patient-Care"},
+            {"option_id": 1132, "option_text": "Develop an app to track the school's carbon footprint", "trait_tag": "Software-Dev"},
+            {"option_id": 1133, "option_text": "Design eco-friendly building modifications", "trait_tag": "Civil-Build"},
+            {"option_id": 1134, "option_text": "Create a recycling business that generates funds", "trait_tag": "Startup-Venture"},
+            {"option_id": 1135, "option_text": "Design posters and campaigns for awareness", "trait_tag": "Visual-Design"},
+            {"option_id": 1136, "option_text": "Teach students about sustainability and conservation", "trait_tag": "Teaching-Ed"},
+            {"option_id": 1137, "option_text": "Conduct scientific research on local environmental issues", "trait_tag": "Field-Research"},
+            {"option_id": 1138, "option_text": "Advocate for policy changes with school administration", "trait_tag": "Community-Serve"},
+            {"option_id": 1139, "option_text": "Start a school garden and composting program", "trait_tag": "Agri-Nature"},
+            {"option_id": 1140, "option_text": "Install solar panels or energy-efficient systems", "trait_tag": "Electrical-Power"}
+        ]
+    },
+    {
+        "question_id": 115,
+        "question_text": "You find a wallet with a large amount of cash and no ID. What do you do?",
+        "category": "Situational - Found Wallet",
+        "options": [
+            {"option_id": 1141, "option_text": "Turn it in to the nearest authority or police station", "trait_tag": "Law-Enforce"},
+            {"option_id": 1142, "option_text": "Post about it on social media to find the owner", "trait_tag": "Digital-Media"},
+            {"option_id": 1143, "option_text": "Count the money and document everything carefully", "trait_tag": "Finance-Acct"},
+            {"option_id": 1144, "option_text": "Look for any clues inside about who owns it", "trait_tag": "Lab-Research"},
+            {"option_id": 1145, "option_text": "Ask people in the area if they lost a wallet", "trait_tag": "People-Skill"},
+            {"option_id": 1146, "option_text": "Teach others about honesty and integrity through this", "trait_tag": "Teaching-Ed"},
+            {"option_id": 1147, "option_text": "Leave your contact info in case the owner returns", "trait_tag": "Admin-Skill"},
+            {"option_id": 1148, "option_text": "Think about creating a lost-and-found system", "trait_tag": "Community-Serve"},
+            {"option_id": 1149, "option_text": "Consider the emotional impact on the person who lost it", "trait_tag": "Rehab-Therapy"},
+            {"option_id": 1150, "option_text": "Give it to the nearest establishment for safekeeping", "trait_tag": "Hospitality-Svc"}
+        ]
+    },
+    {
+        "question_id": 116,
+        "question_text": "A factory near your town is causing pollution. How would you address this?",
+        "category": "Situational - Factory Pollution",
+        "options": [
+            {"option_id": 1151, "option_text": "Study the health effects on nearby residents", "trait_tag": "Patient-Care"},
+            {"option_id": 1152, "option_text": "Develop sensors to monitor pollution levels", "trait_tag": "Hardware-Systems"},
+            {"option_id": 1153, "option_text": "Design better waste management systems for the factory", "trait_tag": "Industrial-Ops"},
+            {"option_id": 1154, "option_text": "Calculate the economic impact of the pollution", "trait_tag": "Finance-Acct"},
+            {"option_id": 1155, "option_text": "Create documentary or media content about the issue", "trait_tag": "Digital-Media"},
+            {"option_id": 1156, "option_text": "Educate the community about their rights", "trait_tag": "Teaching-Ed"},
+            {"option_id": 1157, "option_text": "File legal complaints and gather evidence", "trait_tag": "Law-Enforce"},
+            {"option_id": 1158, "option_text": "Conduct scientific tests on water and air quality", "trait_tag": "Lab-Research"},
+            {"option_id": 1159, "option_text": "Organize community protests and advocacy", "trait_tag": "Community-Serve"},
+            {"option_id": 1160, "option_text": "Study the environmental damage to local ecosystems", "trait_tag": "Field-Research"}
+        ]
+    },
+    {
+        "question_id": 117,
+        "question_text": "Your classmate is struggling financially and can't afford school supplies. How do you help?",
+        "category": "Situational - Helping Classmate",
+        "options": [
+            {"option_id": 1161, "option_text": "Share your supplies and offer emotional support", "trait_tag": "Patient-Care"},
+            {"option_id": 1162, "option_text": "Help them find online resources and free materials", "trait_tag": "Software-Dev"},
+            {"option_id": 1163, "option_text": "Organize a donation drive at school", "trait_tag": "Community-Serve"},
+            {"option_id": 1164, "option_text": "Help them budget and manage their money better", "trait_tag": "Finance-Acct"},
+            {"option_id": 1165, "option_text": "Create study materials they can use for free", "trait_tag": "Visual-Design"},
+            {"option_id": 1166, "option_text": "Tutor them so they can succeed without expensive materials", "trait_tag": "Teaching-Ed"},
+            {"option_id": 1167, "option_text": "Connect them with school assistance programs", "trait_tag": "Admin-Skill"},
+            {"option_id": 1168, "option_text": "Help them find a part-time job opportunity", "trait_tag": "Startup-Venture"},
+            {"option_id": 1169, "option_text": "Advocate to school for more student financial aid", "trait_tag": "People-Skill"},
+            {"option_id": 1170, "option_text": "Research scholarship opportunities for them", "trait_tag": "Lab-Research"}
+        ]
+    },
+    {
+        "question_id": 118,
+        "question_text": "You're asked to plan your family reunion. What aspect would you focus on?",
+        "category": "Situational - Family Reunion",
+        "options": [
+            {"option_id": 1171, "option_text": "Ensure everyone's health needs are accommodated", "trait_tag": "Patient-Care"},
+            {"option_id": 1172, "option_text": "Create a digital invitation and photo slideshow", "trait_tag": "Digital-Media"},
+            {"option_id": 1173, "option_text": "Choose and set up the perfect venue", "trait_tag": "Spatial-Design"},
+            {"option_id": 1174, "option_text": "Manage the budget and collect contributions", "trait_tag": "Finance-Acct"},
+            {"option_id": 1175, "option_text": "Design decorations and create a festive atmosphere", "trait_tag": "Visual-Design"},
+            {"option_id": 1176, "option_text": "Plan educational activities and games for kids", "trait_tag": "Teaching-Ed"},
+            {"option_id": 1177, "option_text": "Organize the program flow and event timeline", "trait_tag": "Admin-Skill"},
+            {"option_id": 1178, "option_text": "Plan the food menu and catering", "trait_tag": "Hospitality-Svc"},
+            {"option_id": 1179, "option_text": "Document family history and create a family tree", "trait_tag": "Lab-Research"},
+            {"option_id": 1180, "option_text": "Handle transportation and logistics", "trait_tag": "Industrial-Ops"}
+        ]
+    },
+    {
+        "question_id": 119,
+        "question_text": "Your town is experiencing a water shortage. What solution would you propose?",
+        "category": "Situational - Water Shortage",
+        "options": [
+            {"option_id": 1181, "option_text": "Ensure clean drinking water reaches vulnerable people first", "trait_tag": "Patient-Care"},
+            {"option_id": 1182, "option_text": "Develop a water tracking and distribution app", "trait_tag": "Software-Dev"},
+            {"option_id": 1183, "option_text": "Design rainwater collection and storage systems", "trait_tag": "Civil-Build"},
+            {"option_id": 1184, "option_text": "Calculate costs of different water solutions", "trait_tag": "Finance-Acct"},
+            {"option_id": 1185, "option_text": "Create awareness campaigns about water conservation", "trait_tag": "Visual-Design"},
+            {"option_id": 1186, "option_text": "Teach people how to conserve and recycle water", "trait_tag": "Teaching-Ed"},
+            {"option_id": 1187, "option_text": "Research new water purification technologies", "trait_tag": "Lab-Research"},
+            {"option_id": 1188, "option_text": "Coordinate with government for emergency water supply", "trait_tag": "Community-Serve"},
+            {"option_id": 1189, "option_text": "Study sustainable agricultural water practices", "trait_tag": "Agri-Nature"},
+            {"option_id": 1190, "option_text": "Design efficient water pumping systems", "trait_tag": "Mechanical-Design"}
+        ]
+    },
+    {
+        "question_id": 120,
+        "question_text": "You have the opportunity to intern anywhere for a month. Where would you go?",
+        "category": "Situational - Dream Internship",
+        "options": [
+            {"option_id": 1191, "option_text": "A major hospital or healthcare facility", "trait_tag": "Patient-Care"},
+            {"option_id": 1192, "option_text": "A tech startup or software company", "trait_tag": "Software-Dev"},
+            {"option_id": 1193, "option_text": "A construction company or architecture firm", "trait_tag": "Spatial-Design"},
+            {"option_id": 1194, "option_text": "An investment bank or financial institution", "trait_tag": "Finance-Acct"},
+            {"option_id": 1195, "option_text": "A film studio or creative agency", "trait_tag": "Digital-Media"},
+            {"option_id": 1196, "option_text": "A school or educational organization", "trait_tag": "Teaching-Ed"},
+            {"option_id": 1197, "option_text": "A law firm or government agency", "trait_tag": "Law-Enforce"},
+            {"option_id": 1198, "option_text": "A research laboratory or university", "trait_tag": "Lab-Research"},
+            {"option_id": 1199, "option_text": "A shipping company or port authority", "trait_tag": "Maritime-Sea"},
+            {"option_id": 1200, "option_text": "A resort, hotel, or travel company", "trait_tag": "Hospitality-Svc"}
+        ]
     }
 ]
 

@@ -89,6 +89,7 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
         setCurrentRound(data.first_question.round);
         setCoursesRemaining(data.first_question.courses_remaining);
         setConfidence(data.first_question.confidence);
+        setTopCoursesPreview(data.first_question.top_courses_preview || []);  // Show initial profile-based courses
       } else {
         setError(data.detail || 'Failed to start assessment');
       }
