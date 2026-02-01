@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useGoogleLogin } from '@react-oauth/google';
 
 function Login({ onSwitch, onLoginSuccess, onBack }) {
-  const [username, setUsername] = useState('');
+  const [usernameOrEmail, setUsernameOrEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -110,9 +110,9 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:8000/login', { username, password });
+      const res = await axios.post('http://localhost:8000/login', { username: usernameOrEmail, password });
       localStorage.setItem('userId', res.data.user_id);
-      localStorage.setItem('userUsername', res.data.username || username);
+      localStorage.setItem('userUsername', res.data.username || usernameOrEmail);
       
       // Ensure last_active is updated on login
       try {
@@ -124,7 +124,7 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
         console.warn('Could not refresh user activity:', err);
       }
       
-      onLoginSuccess(res.data.user, username); 
+      onLoginSuccess(res.data.user, usernameOrEmail); 
     } catch (err) { 
       alert(err.response?.data?.detail || "Invalid login credentials."); 
     } finally {
@@ -199,12 +199,12 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
 
         <form onSubmit={handleSubmit}>
           <div style={styles.inputWrapper}>
-            <label style={styles.label}>Username</label>
+            <label style={styles.label}>Username or Email</label>
             <input 
               style={styles.input} 
               type="text" 
-              placeholder="Enter your username"
-              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter username or email"
+              onChange={(e) => setUsernameOrEmail(e.target.value)}
               required 
             />
           </div>

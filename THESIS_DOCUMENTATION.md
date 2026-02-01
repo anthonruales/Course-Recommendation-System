@@ -398,11 +398,19 @@ Where:
 
 ### 6.1 Overview
 
-The Adaptive Assessment Engine implements an **intelligent, question-by-question assessment** similar to the "20 Questions" game (like Akinator). Instead of asking all questions at once, it:
+The Adaptive Assessment Engine implements an **intelligent, question-by-question assessment** using **Decision Tree principles through Information Gain calculation**. This is the same mathematical foundation used in Decision Tree algorithms like ID3 and C4.5 (Quinlan, 1986).
+
+**Connection to Decision Tree Algorithm:**
+- Information Gain is the core metric used to BUILD Decision Trees
+- Each question acts as a decision node that splits the candidate course set
+- User answers traverse the implicit tree structure toward recommendations
+- The system dynamically constructs the optimal decision path for each user
+
+Instead of asking all questions at once, it:
 
 1. Asks **one question at a time**
 2. Analyzes the answer to **update trait scores**
-3. Selects the **next best question** based on information gain
+3. Selects the **next best question** using **Information Gain** (Decision Tree splitting criterion)
 4. Continues until **confident** or **max questions reached**
 
 ### 6.2 Key Configuration
@@ -443,14 +451,17 @@ class AdaptiveSession:
     final_recommendations: List[dict]   # Top 5 courses
 ```
 
-### 6.4 Question Selection Algorithm
+### 6.4 Question Selection Algorithm (Decision Tree Information Gain)
 
-The algorithm calculates **Information Gain** for each potential question:
+The algorithm calculates **Information Gain** for each potential question. This is the **same formula used in Decision Tree construction** (ID3/C4.5 algorithms):
 
 ```python
 def _calculate_trait_information_gain(self, session):
     """
-    Calculate how valuable each trait would be to ask about.
+    Calculate Information Gain for each trait - the same metric used
+    in Decision Tree algorithms (ID3, C4.5) for attribute selection.
+    
+    Based on: Quinlan, J.R. (1986). Induction of Decision Trees.
     
     Traits that appear in ~50% of courses are MOST valuable
     (they split the candidate set best - maximum entropy).
@@ -462,6 +473,7 @@ def _calculate_trait_information_gain(self, session):
         active_with_trait = len(courses_with_trait & session.active_courses)
         
         # Information gain is highest when trait splits courses 50/50
+        # This is the classic Decision Tree splitting criterion
         p = active_with_trait / total_active
         entropy = -p * log2(p) - (1-p) * log2(1-p)  # Shannon Entropy
         
