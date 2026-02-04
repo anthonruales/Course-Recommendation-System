@@ -308,13 +308,195 @@ const styles = {
     color: '#64748b',
     marginBottom: '24px',
   },
+  // Export Section Styles
+  exportSection: {
+    textAlign: 'center',
+    padding: '32px',
+    background: 'rgba(15, 23, 42, 0.6)',
+    backdropFilter: 'blur(20px)',
+    border: '1px solid rgba(255,255,255,0.06)',
+    borderRadius: '20px',
+    marginBottom: '24px',
+  },
+  exportTitle: {
+    fontSize: '18px',
+    fontWeight: '700',
+    color: '#f1f5f9',
+    margin: '0 0 8px 0',
+  },
+  exportSubtitle: {
+    color: '#64748b',
+    fontSize: '14px',
+    margin: '0 0 20px 0',
+  },
+  exportButtons: {
+    display: 'flex',
+    gap: '16px',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+  },
+  exportBtn: {
+    background: 'rgba(99, 102, 241, 0.1)',
+    color: '#a5b4fc',
+    padding: '14px 28px',
+    borderRadius: '12px',
+    border: '1px solid rgba(99, 102, 241, 0.2)',
+    fontWeight: '600',
+    fontSize: '14px',
+    cursor: 'pointer',
+    transition: 'all 0.2s ease',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+  },
+  exportMessage: {
+    padding: '12px 20px',
+    borderRadius: '10px',
+    border: '1px solid',
+    marginBottom: '20px',
+    fontSize: '14px',
+    fontWeight: '500',
+  },
+  // Email Modal Styles
+  modalOverlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: 'rgba(0, 0, 0, 0.7)',
+    backdropFilter: 'blur(8px)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 1000,
+  },
+  emailModal: {
+    background: 'rgba(15, 23, 42, 0.95)',
+    border: '1px solid rgba(255,255,255,0.1)',
+    borderRadius: '20px',
+    padding: '32px',
+    maxWidth: '400px',
+    width: '90%',
+    textAlign: 'center',
+  },
+  emailModalTitle: {
+    fontSize: '20px',
+    fontWeight: '700',
+    color: '#f1f5f9',
+    margin: '0 0 8px 0',
+  },
+  emailModalSubtitle: {
+    color: '#64748b',
+    fontSize: '14px',
+    margin: '0 0 24px 0',
+  },
+  emailInput: {
+    width: '100%',
+    padding: '14px 18px',
+    borderRadius: '12px',
+    border: '1px solid rgba(255,255,255,0.1)',
+    background: 'rgba(255,255,255,0.05)',
+    color: '#f1f5f9',
+    fontSize: '14px',
+    marginBottom: '20px',
+    outline: 'none',
+    boxSizing: 'border-box',
+  },
+  emailModalButtons: {
+    display: 'flex',
+    gap: '12px',
+    justifyContent: 'center',
+  },
 };
 
 function ResultsView({ recommendation, profileData, onRetake, onBack }) {
   const [showFeedback, setShowFeedback] = useState(null);
+  const [exporting, setExporting] = useState(false);
+  const [emailSending, setEmailSending] = useState(false);
+  const [showEmailModal, setShowEmailModal] = useState(false);
+  const [emailAddress, setEmailAddress] = useState('');
+  const [exportMessage, setExportMessage] = useState(null);
   const userId = localStorage.getItem('userId');
+  const userName = localStorage.getItem('userName') || 'Student';
+  const userEmail = localStorage.getItem('userEmail') || '';
   
   console.log('[ResultsView] userId from localStorage:', userId);
+
+  // Export to PDF
+  const handleExportPDF = async () => {
+    setExporting(true);
+    setExportMessage(null);
+    try {
+      const response = await fetch('http://localhost:8000/export/pdf', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          user_name: userName,
+          user_gwa: recommendation.user_gwa,
+          user_strand: recommendation.user_strand,
+          detected_traits: recommendation.detected_traits || [],
+          recommendations: recommendation.recommendations
+        })
+      });
+      
+      if (response.ok) {
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `CoursePro_Recommendations_${userName.replace(/\s+/g, '_')}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+        setExportMessage({ type: 'success', text: 'PDF downloaded successfully!' });
+      } else {
+        const error = await response.json();
+        setExportMessage({ type: 'error', text: error.detail || 'Failed to generate PDF' });
+      }
+    } catch (err) {
+      setExportMessage({ type: 'error', text: 'Error generating PDF. Please try again.' });
+    }
+    setExporting(false);
+  };
+
+  // Send to Email
+  const handleSendEmail = async () => {
+    if (!emailAddress || !emailAddress.includes('@')) {
+      setExportMessage({ type: 'error', text: 'Please enter a valid email address' });
+      return;
+    }
+    
+    setEmailSending(true);
+    setExportMessage(null);
+    try {
+      const response = await fetch('http://localhost:8000/export/email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: emailAddress,
+          user_name: userName,
+          user_gwa: recommendation.user_gwa,
+          user_strand: recommendation.user_strand,
+          detected_traits: recommendation.detected_traits || [],
+          recommendations: recommendation.recommendations
+        })
+      });
+      
+      const result = await response.json();
+      if (response.ok) {
+        setExportMessage({ type: 'success', text: result.message || 'Email sent successfully!' });
+        setShowEmailModal(false);
+        setEmailAddress('');
+      } else {
+        setExportMessage({ type: 'error', text: result.detail || 'Failed to send email' });
+      }
+    } catch (err) {
+      setExportMessage({ type: 'error', text: 'Error sending email. Please try again.' });
+    }
+    setEmailSending(false);
+  };
   
   // Loading state
   if (!recommendation || !recommendation.recommendations) {
@@ -472,6 +654,42 @@ function ResultsView({ recommendation, profileData, onRetake, onBack }) {
           })}
         </div>
 
+        {/* Export Section */}
+        <div style={styles.exportSection}>
+          <h3 style={styles.exportTitle}>📥 Save Your Results</h3>
+          <p style={styles.exportSubtitle}>Download or share your recommendations</p>
+          
+          {exportMessage && (
+            <div style={{
+              ...styles.exportMessage,
+              background: exportMessage.type === 'success' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+              borderColor: exportMessage.type === 'success' ? 'rgba(16, 185, 129, 0.3)' : 'rgba(239, 68, 68, 0.3)',
+              color: exportMessage.type === 'success' ? '#10b981' : '#ef4444'
+            }}>
+              {exportMessage.text}
+            </div>
+          )}
+          
+          <div style={styles.exportButtons}>
+            <button 
+              onClick={handleExportPDF}
+              disabled={exporting}
+              style={styles.exportBtn}
+            >
+              {exporting ? '⏳ Generating...' : '📄 Download PDF'}
+            </button>
+            <button 
+              onClick={() => {
+                setEmailAddress(userEmail);
+                setShowEmailModal(true);
+              }}
+              style={styles.exportBtn}
+            >
+              ✉️ Send to Email
+            </button>
+          </div>
+        </div>
+
         {/* Footer Actions */}
         <footer style={styles.footer}>
           <h3 style={styles.footerTitle}>How helpful were these recommendations?</h3>
@@ -493,6 +711,40 @@ function ResultsView({ recommendation, profileData, onRetake, onBack }) {
           </div>
         </footer>
       </main>
+
+      {/* Email Modal */}
+      {showEmailModal && (
+        <div style={styles.modalOverlay} onClick={() => setShowEmailModal(false)}>
+          <div style={styles.emailModal} onClick={e => e.stopPropagation()}>
+            <h3 style={styles.emailModalTitle}>✉️ Send to Email</h3>
+            <p style={styles.emailModalSubtitle}>Enter the email address to receive your recommendations</p>
+            
+            <input
+              type="email"
+              value={emailAddress}
+              onChange={(e) => setEmailAddress(e.target.value)}
+              placeholder="Enter email address"
+              style={styles.emailInput}
+            />
+            
+            <div style={styles.emailModalButtons}>
+              <button 
+                onClick={handleSendEmail}
+                disabled={emailSending}
+                style={styles.primaryBtn}
+              >
+                {emailSending ? '⏳ Sending...' : '📧 Send Email'}
+              </button>
+              <button 
+                onClick={() => setShowEmailModal(false)}
+                style={styles.secondaryBtn}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {showFeedback && (
         <FeedbackForm
