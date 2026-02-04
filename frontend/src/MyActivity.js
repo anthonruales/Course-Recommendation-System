@@ -7,6 +7,14 @@ const pulseKeyframes = `
     50% { transform: scale(1.2); opacity: 0.7; }
     100% { transform: scale(1); opacity: 1; }
   }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  @keyframes slideIn {
+    0% { transform: translateX(100%); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
 `;
 
 // Inject the keyframes into the document
@@ -418,6 +426,82 @@ const styles = {
     fontSize: '15px',
     fontWeight: '600',
     color: '#f1f5f9',
+  },
+  dailyDigestBtn: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '10px',
+    background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+    border: 'none',
+    color: '#ffffff',
+    padding: '14px 28px',
+    borderRadius: '12px',
+    fontSize: '15px',
+    fontWeight: '600',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease',
+    boxShadow: '0 4px 16px rgba(16, 185, 129, 0.3)',
+  },
+  dailyDigestBtnDisabled: {
+    background: 'linear-gradient(135deg, #475569 0%, #334155 100%)',
+    cursor: 'not-allowed',
+    boxShadow: 'none',
+  },
+  digestButtonContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginBottom: '32px',
+  },
+  toastSuccess: {
+    position: 'fixed',
+    top: '20px',
+    right: '20px',
+    background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+    color: '#ffffff',
+    padding: '16px 24px',
+    borderRadius: '12px',
+    boxShadow: '0 4px 20px rgba(16, 185, 129, 0.4)',
+    zIndex: 9999,
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+    fontSize: '14px',
+    fontWeight: '600',
+    animation: 'slideIn 0.3s ease',
+  },
+  toastError: {
+    position: 'fixed',
+    top: '20px',
+    right: '20px',
+    background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+    color: '#ffffff',
+    padding: '16px 24px',
+    borderRadius: '12px',
+    boxShadow: '0 4px 20px rgba(239, 68, 68, 0.4)',
+    zIndex: 9999,
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+    fontSize: '14px',
+    fontWeight: '600',
+    animation: 'slideIn 0.3s ease',
+  },
+  toastInfo: {
+    position: 'fixed',
+    top: '20px',
+    right: '20px',
+    background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)',
+    color: '#ffffff',
+    padding: '16px 24px',
+    borderRadius: '12px',
+    boxShadow: '0 4px 20px rgba(99, 102, 241, 0.4)',
+    zIndex: 9999,
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+    fontSize: '14px',
+    fontWeight: '600',
+    animation: 'slideIn 0.3s ease',
   }
 };
 
@@ -427,6 +511,8 @@ function MyActivity({ onBack }) {
   const [expandedAttempt, setExpandedAttempt] = useState(null);
   const [expandedTab, setExpandedTab] = useState({});
   const [seenActivities, setSeenActivities] = useState([]);
+  const [sendingDigest, setSendingDigest] = useState(false);
+  const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
 
   useEffect(() => {
     const userId = localStorage.getItem('userId');
@@ -483,8 +569,65 @@ function MyActivity({ onBack }) {
     return '🎯 Deep';
   };
 
+  // Show toast notification
+  const showToast = (message, type = 'success') => {
+    setToast({ show: true, message, type });
+    setTimeout(() => setToast({ show: false, message: '', type: 'success' }), 4000);
+  };
+
+  // Check if there are assessments from today
+  const getTodayAssessments = () => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return activityHistory.filter(activity => {
+      const activityDate = new Date(activity.taken_at);
+      activityDate.setHours(0, 0, 0, 0);
+      return activityDate.getTime() === today.getTime();
+    });
+  };
+
+  // Send Daily Digest email
+  const handleSendDailyDigest = async () => {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      showToast('Please log in to send daily digest', 'error');
+      return;
+    }
+
+    const todayAssessments = getTodayAssessments();
+    if (todayAssessments.length === 0) {
+      showToast('No assessments found for today. Complete an assessment first!', 'info');
+      return;
+    }
+
+    setSendingDigest(true);
+    try {
+      const response = await fetch('http://localhost:8000/send-daily-digest', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user_id: parseInt(userId) }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        showToast(`📧 ${data.message}`, 'success');
+      } else {
+        showToast(data.detail || data.message || 'Failed to send daily digest', 'error');
+      }
+    } catch (error) {
+      console.error('Error sending daily digest:', error);
+      showToast('Failed to send daily digest. Please try again.', 'error');
+    } finally {
+      setSendingDigest(false);
+    }
+  };
+
   const totalQuestions = activityHistory.reduce((sum, a) => sum + (a.questions_answered || 0), 0);
   const avgQuestions = activityHistory.length > 0 ? Math.round(totalQuestions / activityHistory.length) : 0;
+  const todayCount = getTodayAssessments().length;
 
   return (
     <div style={styles.pageWrapper}>
@@ -537,6 +680,63 @@ function MyActivity({ onBack }) {
             <span style={styles.statLabel}>Avg per Assessment</span>
           </div>
         </div>
+
+        {/* Daily Digest Button */}
+        <div style={styles.digestButtonContainer}>
+          <button
+            onClick={handleSendDailyDigest}
+            disabled={sendingDigest || loading}
+            style={{
+              ...styles.dailyDigestBtn,
+              ...(sendingDigest || loading ? styles.dailyDigestBtnDisabled : {}),
+            }}
+            onMouseOver={(e) => {
+              if (!sendingDigest && !loading) {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 6px 24px rgba(16, 185, 129, 0.4)';
+              }
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = '0 4px 16px rgba(16, 185, 129, 0.3)';
+            }}
+          >
+            {sendingDigest ? (
+              <>
+                <span style={{ animation: 'spin 1s linear infinite' }}>⏳</span>
+                Sending...
+              </>
+            ) : (
+              <>
+                📧 Send Daily Digest
+                {todayCount > 0 && (
+                  <span style={{
+                    background: 'rgba(255,255,255,0.2)',
+                    padding: '4px 10px',
+                    borderRadius: '20px',
+                    fontSize: '12px',
+                  }}>
+                    {todayCount} today
+                  </span>
+                )}
+              </>
+            )}
+          </button>
+        </div>
+
+        {/* Toast Notification */}
+        {toast.show && (
+          <div style={
+            toast.type === 'success' ? styles.toastSuccess :
+            toast.type === 'error' ? styles.toastError :
+            styles.toastInfo
+          }>
+            <span style={{ fontSize: '18px' }}>
+              {toast.type === 'success' ? '✓' : toast.type === 'error' ? '✕' : 'ℹ'}
+            </span>
+            {toast.message}
+          </div>
+        )}
 
         {/* Activity List */}
         {loading ? (
