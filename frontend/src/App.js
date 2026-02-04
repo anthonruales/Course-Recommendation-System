@@ -4,7 +4,8 @@ import LandingPage from './LandingPage';
 import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard';
-import ProfileForm from './ProfileForm';
+import ProfileView from './ProfileView';
+import Settings from './Settings';
 import AdaptiveAssessment from './AdaptiveAssessment';
 import MyActivity from './MyActivity';
 import Admin from './admin/Admin'; 
@@ -117,12 +118,21 @@ function App() {
                 }}
                 onViewProfile={() => setView('profile')}
                 onViewActivity={() => setView('activity')}
+                onViewSettings={() => setView('settings')}
                 history={history}
               />
             )}
 
             {view === 'profile' && (
-              <ProfileForm 
+              <ProfileView 
+                profileData={profileData}
+                onBack={() => setView('dashboard')} 
+                onSettings={() => setView('settings')}
+              />
+            )}
+
+            {view === 'settings' && (
+              <Settings 
                 onBack={() => setView('dashboard')} 
                 onSave={(changedFields) => { 
                   // Save to local storage
@@ -154,7 +164,6 @@ function App() {
                     setView('dashboard');
                   }, 1500);
                 }} 
-                // These props must match the names in ProfileForm.js
                 formData={profileData} 
                 setFormData={setProfileData} 
               />

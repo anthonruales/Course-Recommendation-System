@@ -40,6 +40,7 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
           // Existing user - login directly
           localStorage.setItem('userId', backendRes.data.user_id);
           localStorage.setItem('userUsername', backendRes.data.username || '');
+          localStorage.setItem('userEmail', backendRes.data.email || '');
           
           // Ensure last_active is updated on login
           try {
@@ -86,6 +87,7 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
       
       localStorage.setItem('userId', res.data.user_id);
       localStorage.setItem('userUsername', googleUsername);
+      localStorage.setItem('userEmail', googleUserData.email || '');
       setShowUsernameModal(false);
       
       // Ensure last_active is updated on new registration
@@ -113,6 +115,7 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
       const res = await axios.post('http://localhost:8000/login', { username: usernameOrEmail, password });
       localStorage.setItem('userId', res.data.user_id);
       localStorage.setItem('userUsername', res.data.username || usernameOrEmail);
+      localStorage.setItem('userEmail', res.data.email || '');
       
       // Ensure last_active is updated on login
       try {
