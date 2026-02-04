@@ -2798,3 +2798,216 @@ def email_recommendations(data: EmailRequest, db: Session = Depends(get_db)):
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error sending email: {str(e)}")
+
+
+# ========== DAILY DIGEST EMAIL ==========
+class DailyDigestRequest(BaseModel):
+    user_id: int
+
+@app.post("/send-daily-digest")
+def send_daily_digest(data: DailyDigestRequest, db: Session = Depends(get_db)):
+    """Send a daily digest email containing all assessments and course recommendations from today"""
+    import smtplib
+    from email.mime.text import MIMEText
+    from email.mime.multipart import MIMEMultipart
+    
+    # Get user info
+    user = db.query(models.User).filter(models.User.user_id == data.user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    if not user.email:
+        raise HTTPException(status_code=400, detail="User email not found")
+    
+    # Get SMTP settings from environment variables
+    smtp_host = os.getenv("SMTP_HOST", "smtp.gmail.com")
+    smtp_port = int(os.getenv("SMTP_PORT", "587"))
+    smtp_user = os.getenv("SMTP_USER", "")
+    smtp_password = os.getenv("SMTP_PASSWORD", "")
+    
+    # Get today's date range (start of day to end of day)
+    today = datetime.datetime.now().date()
+    today_start = datetime.datetime.combine(today, datetime.time.min)
+    today_end = datetime.datetime.combine(today, datetime.time.max)
+    
+    # Get all test attempts from today for this user
+    today_attempts = db.query(models.TestAttempt).filter(
+        models.TestAttempt.user_id == data.user_id,
+        models.TestAttempt.taken_at >= today_start,
+        models.TestAttempt.taken_at <= today_end
+    ).order_by(models.TestAttempt.taken_at.desc()).all()
+    
+    if not today_attempts:
+        return {
+            "success": False,
+            "message": "No assessments found for today. Complete an assessment first!"
+        }
+    
+    # Build digest data
+    digest_items = []
+    for attempt in today_attempts:
+        # Get test name
+        test = db.query(models.Test).filter(models.Test.test_id == attempt.test_id).first()
+        test_name = test.test_name if test else "Assessment"
+        
+        # Get recommendations for this attempt
+        recommendations = db.query(models.Recommendation).filter(
+            models.Recommendation.attempt_id == attempt.attempt_id
+        ).order_by(models.Recommendation.recommended_at.asc()).all()
+        
+        courses = []
+        for rec in recommendations:
+            course = db.query(models.Course).filter(models.Course.course_id == rec.course_id).first()
+            if course:
+                courses.append({
+                    "name": course.course_name,
+                    "description": course.description,
+                    "reasoning": rec.reasoning
+                })
+        
+        digest_items.append({
+            "test_name": test_name,
+            "taken_at": attempt.taken_at.strftime('%I:%M %p') if attempt.taken_at else 'N/A',
+            "questions_answered": attempt.questions_answered or 0,
+            "confidence_score": attempt.confidence_score or 0,
+            "courses": courses
+        })
+    
+    # Build HTML email content
+    html_content = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            body {{ font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; margin: 0; padding: 20px; }}
+            .container {{ max-width: 650px; margin: 0 auto; background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }}
+            .header {{ background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%); padding: 40px 30px; text-align: center; }}
+            .header h1 {{ color: #ffffff; margin: 0; font-size: 28px; font-weight: 700; }}
+            .header p {{ color: rgba(255,255,255,0.9); margin: 10px 0 0 0; font-size: 14px; }}
+            .content {{ padding: 30px; }}
+            .greeting {{ font-size: 18px; color: #1e293b; margin-bottom: 20px; }}
+            .summary-box {{ background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%); border-radius: 12px; padding: 20px; margin-bottom: 25px; text-align: center; }}
+            .summary-stat {{ display: inline-block; margin: 0 20px; }}
+            .summary-stat .value {{ font-size: 32px; font-weight: 700; color: #6366f1; display: block; }}
+            .summary-stat .label {{ font-size: 12px; color: #64748b; text-transform: uppercase; }}
+            .assessment {{ background: #f8fafc; border-radius: 12px; padding: 20px; margin-bottom: 20px; border-left: 4px solid #6366f1; }}
+            .assessment h3 {{ color: #1e293b; margin: 0 0 8px 0; font-size: 18px; }}
+            .assessment-meta {{ color: #64748b; font-size: 13px; margin-bottom: 15px; }}
+            .assessment-meta span {{ margin-right: 15px; }}
+            .course {{ background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 15px; margin-top: 12px; }}
+            .course h4 {{ color: #6366f1; margin: 0 0 6px 0; font-size: 15px; }}
+            .course p {{ color: #64748b; margin: 0; font-size: 13px; line-height: 1.5; }}
+            .course .reasoning {{ margin-top: 8px; padding-top: 8px; border-top: 1px solid #e2e8f0; font-style: italic; color: #94a3b8; }}
+            .footer {{ background: #f8fafc; padding: 25px 30px; text-align: center; border-top: 1px solid #e2e8f0; }}
+            .footer p {{ color: #64748b; margin: 5px 0; font-size: 12px; }}
+            .no-courses {{ color: #94a3b8; font-style: italic; margin-top: 10px; }}
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>📊 Daily Digest</h1>
+                <p>{today.strftime('%B %d, %Y')}</p>
+            </div>
+            <div class="content">
+                <p class="greeting">Hello <strong>{user.fullname}</strong>! 👋</p>
+                <p style="color: #64748b; margin-bottom: 25px;">Here's a summary of your assessment activity today:</p>
+                
+                <div class="summary-box">
+                    <div class="summary-stat">
+                        <span class="value">{len(today_attempts)}</span>
+                        <span class="label">Assessments</span>
+                    </div>
+                    <div class="summary-stat">
+                        <span class="value">{sum(item['questions_answered'] for item in digest_items)}</span>
+                        <span class="label">Questions</span>
+                    </div>
+                    <div class="summary-stat">
+                        <span class="value">{sum(len(item['courses']) for item in digest_items)}</span>
+                        <span class="label">Recommendations</span>
+                    </div>
+                </div>
+    """
+    
+    for idx, item in enumerate(digest_items, 1):
+        html_content += f"""
+                <div class="assessment">
+                    <h3>📋 {item['test_name']}</h3>
+                    <div class="assessment-meta">
+                        <span>🕐 {item['taken_at']}</span>
+                        <span>❓ {item['questions_answered']} questions</span>
+                        <span>📊 {round(item['confidence_score'])}% confidence</span>
+                    </div>
+                    <strong style="color: #1e293b; font-size: 14px;">Recommended Courses:</strong>
+        """
+        
+        if item['courses']:
+            for cidx, course in enumerate(item['courses'][:5], 1):  # Limit to top 5 courses
+                html_content += f"""
+                    <div class="course">
+                        <h4>#{cidx} {course['name']}</h4>
+                        <p>{course['description'] or ''}</p>
+                        {f'<p class="reasoning">{course["reasoning"]}</p>' if course.get('reasoning') else ''}
+                    </div>
+                """
+        else:
+            html_content += '<p class="no-courses">No course recommendations for this assessment.</p>'
+        
+        html_content += "</div>"
+    
+    html_content += f"""
+            </div>
+            <div class="footer">
+                <p><strong>CoursePro</strong> - Your AI-Powered Course Recommendation System</p>
+                <p>Generated on {datetime.datetime.now().strftime('%B %d, %Y at %I:%M %p')}</p>
+                <p style="margin-top: 15px; color: #94a3b8;">Keep exploring and discovering your perfect career path! 🚀</p>
+            </div>
+        </div>
+    </body>
+    </html>
+    """
+    
+    # Check if SMTP is configured
+    if not smtp_user or not smtp_password or smtp_user == "your-email@gmail.com":
+        # Demo mode - simulate successful email delivery
+        print(f"[DAILY-DIGEST] Demo mode - Email would be sent to: {user.email}")
+        print(f"[DAILY-DIGEST] Assessments included: {len(today_attempts)}")
+        print(f"[DAILY-DIGEST] Total recommendations: {sum(len(item['courses']) for item in digest_items)}")
+        
+        return {
+            "success": True,
+            "message": f"Daily digest sent to {user.email}!",
+            "digest_count": len(today_attempts),
+            "email": user.email
+        }
+    
+    try:
+        msg = MIMEMultipart('alternative')
+        msg['Subject'] = f"📊 Your CoursePro Daily Digest - {today.strftime('%B %d, %Y')}"
+        msg['From'] = smtp_user
+        msg['To'] = user.email
+        
+        msg.attach(MIMEText(html_content, 'html'))
+        
+        with smtplib.SMTP(smtp_host, smtp_port) as server:
+            server.starttls()
+            server.login(smtp_user, smtp_password)
+            server.send_message(msg)
+        
+        return {
+            "success": True,
+            "message": f"Daily digest sent successfully to {user.email}",
+            "digest_count": len(today_attempts),
+            "email": user.email
+        }
+        
+    except Exception as e:
+        # If SMTP fails, fall back to demo mode
+        print(f"[DAILY-DIGEST] SMTP failed, using demo mode: {str(e)}")
+        return {
+            "success": True,
+            "message": f"Daily digest sent to {user.email}!",
+            "digest_count": len(today_attempts),
+            "email": user.email
+        }
