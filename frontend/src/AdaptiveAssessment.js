@@ -377,7 +377,7 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
           </div>
 
           <div style={styles.resultsGrid}>
-            {results.slice(0, 5).map((course, index) => {
+            {results.slice(0, 6).map((course, index) => {
               const matchPercent = typeof course.match_percentage === 'number' && !isNaN(course.match_percentage) 
                 ? course.match_percentage 
                 : 75;
@@ -410,6 +410,141 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
                 )}
               </div>
             )})}
+          </div>
+
+          {/* Save Results Section */}
+          <div style={{
+            display: 'flex',
+            gap: '16px',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+            marginTop: '60px',
+            marginBottom: '24px'
+          }}>
+            <button 
+              onClick={async () => {
+                const userName = localStorage.getItem('userName') || 'Student';
+                const userId = localStorage.getItem('userId');
+                try {
+                  // Fetch user's GWA and Strand from backend
+                  const userRes = await fetch(`http://localhost:8000/user/${userId}/academic-info`);
+                  const userData = await userRes.json();
+                  const userGwa = userData.academic_info?.gwa || null;
+                  const userStrand = userData.academic_info?.strand || null;
+
+                  const response = await fetch('http://localhost:8000/export/pdf', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      user_name: userName,
+                      user_gwa: userGwa,
+                      user_strand: userStrand,
+                      detected_traits: [],
+                      recommendations: results.map(r => ({
+                        course_name: r.course_name,
+                        description: r.description || '',
+                        compatibility_score: r.match_percentage || r.compatibility_score || 75,
+                        matched_traits: r.matched_traits || [],
+                        reasoning: r.reasoning || ''
+                      }))
+                    })
+                  });
+                  if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `CoursePro_Recommendations_${userName.replace(/\s+/g, '_')}.pdf`;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    a.remove();
+                  } else {
+                    const error = await response.json();
+                    console.error('PDF export error:', error);
+                    alert('Failed to generate PDF: ' + (error.detail || 'Unknown error'));
+                  }
+                } catch (err) {
+                  console.error('PDF export error:', err);
+                  alert('Error generating PDF. Please try again.');
+                }
+              }}
+              style={{
+                background: 'rgba(99, 102, 241, 0.1)',
+                color: '#a5b4fc',
+                padding: '14px 28px',
+                borderRadius: '12px',
+                border: '1px solid rgba(99, 102, 241, 0.2)',
+                fontWeight: '600',
+                fontSize: '14px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}
+            >
+              📄 Download PDF
+            </button>
+            <button 
+              onClick={async () => {
+                const userEmail = localStorage.getItem('userEmail') || '';
+                const email = prompt('Enter email address to receive your recommendations:', userEmail);
+                if (email && email.includes('@')) {
+                  const userName = localStorage.getItem('userName') || 'Student';
+                  const userId = localStorage.getItem('userId');
+                  try {
+                    // Fetch user's GWA and Strand from backend
+                    const userRes = await fetch(`http://localhost:8000/user/${userId}/academic-info`);
+                    const userData = await userRes.json();
+                    const userGwa = userData.academic_info?.gwa || null;
+                    const userStrand = userData.academic_info?.strand || null;
+                    
+                    fetch('http://localhost:8000/export/email', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({
+                        email: email,
+                        user_name: userName,
+                        user_gwa: userGwa,
+                        user_strand: userStrand,
+                        detected_traits: [],
+                        recommendations: results.map(r => ({
+                          course_name: r.course_name,
+                          description: r.description || '',
+                          compatibility_score: r.match_percentage || r.compatibility_score || 75,
+                          matched_traits: r.matched_traits || [],
+                          reasoning: r.reasoning || ''
+                        }))
+                      })
+                    }).then(res => res.json()).then(data => {
+                      if (data.success !== false) alert('Email sent successfully!');
+                      else alert('Failed to send email: ' + (data.detail || 'Unknown error'));
+                    }).catch(err => {
+                      console.error('Email error:', err);
+                      alert('Error sending email. Please try again.');
+                    });
+                  } catch (err) {
+                    console.error('Error fetching user data:', err);
+                    alert('Error sending email. Please try again.');
+                  }
+                }
+              }}
+              style={{
+                background: 'rgba(99, 102, 241, 0.1)',
+                color: '#a5b4fc',
+                padding: '14px 28px',
+                borderRadius: '12px',
+                border: '1px solid rgba(99, 102, 241, 0.2)',
+                fontWeight: '600',
+                fontSize: '14px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px'
+              }}
+            >
+              ✉️ Send to Email
+            </button>
           </div>
 
           <button onClick={handleShowResults} style={styles.viewFullButton}>

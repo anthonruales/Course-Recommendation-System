@@ -428,15 +428,29 @@ function ResultsView({ recommendation, profileData, onRetake, onBack }) {
     setExporting(true);
     setExportMessage(null);
     try {
+      const userId = localStorage.getItem('userId');
+      
+      // Fetch user's GWA and Strand from backend
+      const userRes = await fetch(`http://localhost:8000/user/${userId}/academic-info`);
+      const userData = await userRes.json();
+      const userGwa = userData.academic_info?.gwa || null;
+      const userStrand = userData.academic_info?.strand || null;
+      
       const response = await fetch('http://localhost:8000/export/pdf', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           user_name: userName,
-          user_gwa: recommendation.user_gwa,
-          user_strand: recommendation.user_strand,
+          user_gwa: userGwa,
+          user_strand: userStrand,
           detected_traits: recommendation.detected_traits || [],
-          recommendations: recommendation.recommendations
+          recommendations: recommendation.recommendations.map(r => ({
+            course_name: r.course_name,
+            description: r.description || '',
+            compatibility_score: r.compatibility_score || r.match_percentage || 75,
+            matched_traits: r.matched_traits || [],
+            reasoning: r.reasoning || ''
+          }))
         })
       });
       
@@ -456,6 +470,7 @@ function ResultsView({ recommendation, profileData, onRetake, onBack }) {
         setExportMessage({ type: 'error', text: error.detail || 'Failed to generate PDF' });
       }
     } catch (err) {
+      console.error('PDF export error:', err);
       setExportMessage({ type: 'error', text: 'Error generating PDF. Please try again.' });
     }
     setExporting(false);
@@ -593,6 +608,42 @@ function ResultsView({ recommendation, profileData, onRetake, onBack }) {
           )}
         </div>
 
+        {/* Export Section - Moved to top */}
+        <div style={styles.exportSection}>
+          <h3 style={styles.exportTitle}>📥 Save Your Results</h3>
+          <p style={styles.exportSubtitle}>Download or share your recommendations</p>
+          
+          {exportMessage && (
+            <div style={{
+              ...styles.exportMessage,
+              background: exportMessage.type === 'success' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+              borderColor: exportMessage.type === 'success' ? 'rgba(16, 185, 129, 0.3)' : 'rgba(239, 68, 68, 0.3)',
+              color: exportMessage.type === 'success' ? '#10b981' : '#ef4444'
+            }}>
+              {exportMessage.text}
+            </div>
+          )}
+          
+          <div style={styles.exportButtons}>
+            <button 
+              onClick={handleExportPDF}
+              disabled={exporting}
+              style={styles.exportBtn}
+            >
+              {exporting ? '⏳ Generating...' : '📄 Download PDF'}
+            </button>
+            <button 
+              onClick={() => {
+                setEmailAddress(userEmail);
+                setShowEmailModal(true);
+              }}
+              style={styles.exportBtn}
+            >
+              ✉️ Send to Email
+            </button>
+          </div>
+        </div>
+
         {/* Results List */}
         <div style={styles.resultsGrid}>
           {recommendation.recommendations.map((item, index) => {
@@ -652,42 +703,6 @@ function ResultsView({ recommendation, profileData, onRetake, onBack }) {
               </div>
             );
           })}
-        </div>
-
-        {/* Export Section */}
-        <div style={styles.exportSection}>
-          <h3 style={styles.exportTitle}>📥 Save Your Results</h3>
-          <p style={styles.exportSubtitle}>Download or share your recommendations</p>
-          
-          {exportMessage && (
-            <div style={{
-              ...styles.exportMessage,
-              background: exportMessage.type === 'success' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)',
-              borderColor: exportMessage.type === 'success' ? 'rgba(16, 185, 129, 0.3)' : 'rgba(239, 68, 68, 0.3)',
-              color: exportMessage.type === 'success' ? '#10b981' : '#ef4444'
-            }}>
-              {exportMessage.text}
-            </div>
-          )}
-          
-          <div style={styles.exportButtons}>
-            <button 
-              onClick={handleExportPDF}
-              disabled={exporting}
-              style={styles.exportBtn}
-            >
-              {exporting ? '⏳ Generating...' : '📄 Download PDF'}
-            </button>
-            <button 
-              onClick={() => {
-                setEmailAddress(userEmail);
-                setShowEmailModal(true);
-              }}
-              style={styles.exportBtn}
-            >
-              ✉️ Send to Email
-            </button>
-          </div>
         </div>
 
         {/* Footer Actions */}

@@ -765,7 +765,7 @@ def recommend_deprecated(data: AssessmentSubmit, db: Session = Depends(get_db)):
         user_profile=user_profile,
         trait_scores=trait_scores,
         career_path_courses=list(set(career_path_courses)),
-        top_n=5
+        top_n=6
     )
     
     recommendations = result["recommendations"]
@@ -830,7 +830,8 @@ def recommend_deprecated(data: AssessmentSubmit, db: Session = Depends(get_db)):
                     attempt_id=test_attempt.attempt_id,
                     user_id=data.userId,
                     course_id=course.course_id,
-                    reasoning=rec["reasoning"]
+                    reasoning=rec["reasoning"],
+                    score=rec.get("confidence_score", None)  # Store the compatibility score
                 ))
                 saved_count += 1
             else:
@@ -1595,7 +1596,8 @@ def get_assessment_history(user_id: int, db: Session = Depends(get_db)):
                     "course_id": course.course_id,
                     "course_name": course.course_name,
                     "description": course.description,
-                    "reasoning": rec.reasoning
+                    "reasoning": rec.reasoning,
+                    "compatibility_score": rec.score if rec.score is not None else 75  # Use stored score, default to 75
                 }
                 recommended_courses.append(course_data)
                 
@@ -1650,7 +1652,9 @@ def get_assessment_history(user_id: int, db: Session = Depends(get_db)):
             "answered_questions": answered_questions,
             "recommended_courses": recommended_courses,
             "top_course": top_course,
-            "recommendation_count": len(recommended_courses)
+            "recommendation_count": len(recommended_courses),
+            "user_gwa": getattr(attempt, 'user_gwa', None),  # GWA at time of assessment
+            "user_strand": getattr(attempt, 'user_strand', None)  # Strand at time of assessment
         })
     
     # Show all attempts (including those without recommendations for debugging)
@@ -2195,7 +2199,9 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
             max_questions=max_questions_selected,  # Quiz length selected (30, 50, 60)
             questions_presented=questions_presented,  # How many questions were shown
             questions_answered=questions_answered,  # How many were actually answered
-            confidence_score=confidence_score  # Final confidence %
+            confidence_score=confidence_score,  # Final confidence %
+            user_gwa=session.user_gwa if session else None,  # User's GWA at time of assessment
+            user_strand=session.user_strand if session else None  # User's strand at time of assessment
         )
         db.add(test_attempt)
         db.flush()
@@ -2283,7 +2289,8 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
                             attempt_id=attempt_id,
                             user_id=user_id,
                             course_id=course.course_id,
-                            reasoning=f"{rec.get('description', '')} - Match: {rec.get('match_percentage', 75)}%"
+                            reasoning=f"{rec.get('description', '')} - Match: {rec.get('match_percentage', 75)}%",
+                            score=rec.get('match_percentage', 75)  # Store the match percentage as score
                         )
                         db.add(rec_obj)
                         rec_count += 1
@@ -2639,9 +2646,6 @@ def export_recommendations_pdf(data: ExportRequest):
             score = rec.get('compatibility_score') or rec.get('final_score') or rec.get('match_percentage') or 0
             
             elements.append(Paragraph(f"#{idx} - {course_name}", course_title_style))
-            
-            if score:
-                elements.append(Paragraph(f"<b>Match Score:</b> {round(score)}%", body_style))
             
             if description:
                 elements.append(Paragraph(f"<b>Description:</b> {description}", body_style))

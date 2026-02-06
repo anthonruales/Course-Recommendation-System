@@ -708,7 +708,7 @@ function MyActivity({ onBack }) {
               </>
             ) : (
               <>
-                📧 Send Daily Digest
+                📧 Email Today's Results
                 {todayCount > 0 && (
                   <span style={{
                     background: 'rgba(255,255,255,0.2)',
@@ -782,6 +782,83 @@ function MyActivity({ onBack }) {
                      <span style={{...styles.activityBadge, ...styles.badgeAssessment}}>{activity.max_questions || activity.questions_answered} Q</span>
                      <span style={{...styles.activityBadge, ...styles.badgeProfile}}>{activity.traits_found || 0} Traits</span>
                      <span style={{...styles.activityBadge, ...styles.badgeConfidence}}>{activity.confidence_score || 0}%</span>
+                     <button
+                       onClick={async (e) => {
+                         e.stopPropagation();
+                         const userName = localStorage.getItem('userName') || 'Student';
+                         const userId = localStorage.getItem('userId');
+                         const courses = activity.recommended_courses || [];
+                         if (courses.length === 0) {
+                           alert('No courses to export for this assessment');
+                           return;
+                         }
+                         
+                         // Use stored historical GWA/Strand if available, otherwise fetch current
+                         let userGwa = activity.user_gwa;
+                         let userStrand = activity.user_strand;
+                         
+                         if (userGwa === null || userGwa === undefined || userStrand === null || userStrand === undefined) {
+                           try {
+                             const res = await fetch(`http://localhost:8000/user/${userId}/academic-info`);
+                             const userData = await res.json();
+                             userGwa = userGwa ?? userData.academic_info?.gwa;
+                             userStrand = userStrand ?? userData.academic_info?.strand;
+                           } catch (err) {
+                             console.warn('Could not fetch fallback academic info:', err);
+                           }
+                         }
+                         
+                         try {
+                           const response = await fetch('http://localhost:8000/export/pdf', {
+                             method: 'POST',
+                             headers: { 'Content-Type': 'application/json' },
+                             body: JSON.stringify({
+                               user_name: userName,
+                               user_gwa: userGwa,
+                               user_strand: userStrand,
+                               detected_traits: [],
+                               recommendations: courses.map(c => ({
+                                 course_name: c.course_name,
+                                 description: c.description || '',
+                                 compatibility_score: c.compatibility_score || 75,
+                                 matched_traits: c.matched_traits || [],
+                                 reasoning: c.reasoning || ''
+                               }))
+                             })
+                           });
+                           
+                           if (!response.ok) throw new Error('Failed to generate PDF');
+                           const blob = await response.blob();
+                           const url = window.URL.createObjectURL(blob);
+                           const a = document.createElement('a');
+                           a.href = url;
+                           a.download = `CoursePro_Assessment_${activity.attempt_id}.pdf`;
+                           document.body.appendChild(a);
+                           a.click();
+                           window.URL.revokeObjectURL(url);
+                           a.remove();
+                           showToast('PDF downloaded successfully!', 'success');
+                         } catch (err) {
+                           console.error('PDF error:', err);
+                           showToast('Failed to download PDF', 'error');
+                         }
+                       }}
+                       style={{
+                         background: 'rgba(99, 102, 241, 0.1)',
+                         border: '1px solid rgba(99, 102, 241, 0.3)',
+                         color: '#a5b4fc',
+                         padding: '6px 12px',
+                         borderRadius: '8px',
+                         fontSize: '12px',
+                         fontWeight: '600',
+                         cursor: 'pointer',
+                         display: 'flex',
+                         alignItems: 'center',
+                         gap: '4px'
+                       }}
+                     >
+                       📄 PDF
+                     </button>
                      <span style={{ 
                        color: '#64748b',
                        transform: expandedAttempt === activity.attempt_id ? 'rotate(180deg)' : 'rotate(0deg)',

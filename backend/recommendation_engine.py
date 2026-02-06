@@ -1543,7 +1543,7 @@ class HybridRecommendationEngine:
         user_profile: Dict[str, Any],
         trait_scores: Dict[str, float],
         career_path_courses: List[str] = None,
-        top_n: int = 5
+        top_n: int = 6
     ) -> Dict[str, Any]:
         """
         Generate course recommendations using the hybrid approach

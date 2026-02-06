@@ -56,6 +56,10 @@ class TestAttempt(Base):
     questions_answered = Column(Integer, nullable=True)  # How many questions were actually answered
     confidence_score = Column(Float, nullable=True)  # Final confidence percentage
     
+    # User's academic profile at time of assessment (for historical PDF exports)
+    user_gwa = Column(Float, nullable=True)  # User's GWA when they took this assessment
+    user_strand = Column(String(50), nullable=True)  # User's strand when they took this assessment
+    
     # Relationships
     user = relationship("User", back_populates="test_attempts")
     test = relationship("Test", back_populates="test_attempts")
@@ -126,6 +130,7 @@ class Recommendation(Base):
     user_id = Column(Integer, ForeignKey("users.user_id"), nullable=False)
     course_id = Column(Integer, ForeignKey("courses.course_id"), nullable=False)
     reasoning = Column(Text)
+    score = Column(Float, nullable=True)  # Compatibility/confidence score (0-100)
     recommended_at = Column(DateTime, server_default=func.now())
     
     # Relationships
