@@ -58,6 +58,7 @@ class AdaptiveSession:
     session_id: str
     user_id: int
     
+    user_gwa: float = None
     user_strand: str = None
     user_interests: str = None
     user_skills: str = None
@@ -111,7 +112,7 @@ class AdaptiveAssessmentEngine:
     MAX_QUESTIONS = 25  # Maximum questions to ask
     MIN_QUESTIONS = 10  # Minimum before allowing early stop
     CONFIDENCE_THRESHOLD = 0.75  # Stop when top courses are this far ahead
-    TOP_N_RECOMMENDATIONS = 5  # Number of courses to recommend
+    TOP_N_RECOMMENDATIONS = 6  # Number of courses to recommend
     
     def __init__(self, courses: List[dict], questions: List[dict]):
         """Initialize with course and question data."""
@@ -584,6 +585,7 @@ class AdaptiveAssessmentEngine:
         session = AdaptiveSession(
             session_id=session_id,
             user_id=user_id,
+            user_gwa=user_gwa,  # Store GWA for PDF exports
             user_strand=normalized_strand,  # Store strand for question selection
             user_interests=user_interests,  # Store for later use
             user_skills=user_skills,  # Store for later use
