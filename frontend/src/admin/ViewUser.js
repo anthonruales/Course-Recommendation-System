@@ -62,6 +62,25 @@ function ViewUser() {
     setSelectedUser(null);
   };
 
+  const toggleUserStatus = async (userId) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/admin/users/${userId}/toggle-status`, {
+        method: 'PUT'
+      });
+      const data = await response.json();
+      if (response.ok) {
+        alert(data.message);
+        fetchUsers();
+        fetchUserDetails(userId);
+      } else {
+        alert('Failed to toggle user status');
+      }
+    } catch (err) {
+      console.error('Error toggling user status:', err);
+      alert('Error toggling user status');
+    }
+  };
+
   const filteredUsers = users.filter(user =>
     user.fullname.toLowerCase().includes(searchTerm.toLowerCase()) ||
     user.email.toLowerCase().includes(searchTerm.toLowerCase())
@@ -212,6 +231,37 @@ function ViewUser() {
                   <label style={modalStyles.label}>LAST ACTIVE:</label>
                   <p style={modalStyles.value}>{formatDateTime(selectedUser.last_active)}</p>
                 </div>
+                <div style={modalStyles.column}>
+                  <label style={modalStyles.label}>ACCOUNT STATUS:</label>
+                  <p style={modalStyles.value}>
+                    <span style={{
+                      background: selectedUser.is_active === 1 ? '#28a745' : '#dc3545',
+                      color: 'white',
+                      padding: '4px 8px',
+                      borderRadius: '4px',
+                      display: 'inline-block'
+                    }}>
+                      {selectedUser.is_active === 1 ? 'Active' : 'Deactivated'}
+                    </span>
+                  </p>
+                </div>
+              </div>
+
+              <div style={{marginTop: '20px', borderTop: '1px solid #3a4a63', paddingTop: '20px'}}>
+                <button
+                  onClick={() => toggleUserStatus(selectedUser.user_id)}
+                  style={{
+                    background: selectedUser.is_active === 1 ? '#dc3545' : '#28a745',
+                    color: 'white',
+                    border: 'none',
+                    padding: '10px 20px',
+                    borderRadius: '4px',
+                    cursor: 'pointer',
+                    fontWeight: '600'
+                  }}
+                >
+                  {selectedUser.is_active === 1 ? 'Deactivate Account' : 'Activate Account'}
+                </button>
               </div>
             </div>
           </div>
