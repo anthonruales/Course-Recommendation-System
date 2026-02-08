@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API_BASE_URL from './config';
 
 /**
  * SMART CAREER ASSESSMENT
@@ -41,7 +42,7 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
   useEffect(() => {
     const userId = localStorage.getItem('userId');
     if (userId) {
-      fetch(`http://localhost:8000/user/${userId}/academic-info`)
+      fetch(`${API_BASE_URL}/user/${userId}/academic-info`)
         .then(res => res.json())
         .then(data => {
           if (!data.has_academic_info) {
@@ -70,7 +71,7 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:8000/adaptive/start', {
+      const response = await fetch(`${API_BASE_URL}/adaptive/start`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -109,7 +110,7 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
     setIsTransitioning(true);
 
     try {
-      const response = await fetch('http://localhost:8000/adaptive/answer', {
+      const response = await fetch(`${API_BASE_URL}/adaptive/answer`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -166,7 +167,7 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
     setIsTransitioning(true);
 
     try {
-      const response = await fetch('http://localhost:8000/adaptive/previous', {
+      const response = await fetch(`${API_BASE_URL}/adaptive/previous`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sessionId })
@@ -204,7 +205,7 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8000/adaptive/finish', {
+      const response = await fetch(`${API_BASE_URL}/adaptive/finish`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ sessionId })
@@ -427,12 +428,12 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
                 const userId = localStorage.getItem('userId');
                 try {
                   // Fetch user's GWA and Strand from backend
-                  const userRes = await fetch(`http://localhost:8000/user/${userId}/academic-info`);
+                  const userRes = await fetch(`${API_BASE_URL}/user/${userId}/academic-info`);
                   const userData = await userRes.json();
                   const userGwa = userData.academic_info?.gwa || null;
                   const userStrand = userData.academic_info?.strand || null;
 
-                  const response = await fetch('http://localhost:8000/export/pdf', {
+                  const response = await fetch(`${API_BASE_URL}/export/pdf`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -494,12 +495,12 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
                   const userId = localStorage.getItem('userId');
                   try {
                     // Fetch user's GWA and Strand from backend
-                    const userRes = await fetch(`http://localhost:8000/user/${userId}/academic-info`);
+                    const userRes = await fetch(`${API_BASE_URL}/user/${userId}/academic-info`);
                     const userData = await userRes.json();
                     const userGwa = userData.academic_info?.gwa || null;
                     const userStrand = userData.academic_info?.strand || null;
                     
-                    fetch('http://localhost:8000/export/email', {
+                    fetch(`${API_BASE_URL}/export/email`, {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
                       body: JSON.stringify({

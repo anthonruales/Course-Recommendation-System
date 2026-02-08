@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import API_BASE_URL from './config';
 import Toast from './Toast';
 
 // Bad words filter list (common inappropriate words)
@@ -88,7 +89,7 @@ function Signup({ onSwitch, onBack }) {
 
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:8000/signup', {
+      const response = await axios.post(`${API_BASE_URL}/signup`, {
         username: formData.username,
         fullname: formData.fullname,
         email: formData.email,

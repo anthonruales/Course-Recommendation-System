@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API_BASE_URL from './config';
 
 // Add keyframes for pulse animation
 const pulseKeyframes = `
@@ -521,7 +522,7 @@ function MyActivity({ onBack }) {
       const savedSeen = JSON.parse(localStorage.getItem(`seenActivities_${userId}`) || '[]');
       setSeenActivities(savedSeen);
       
-      fetch(`http://localhost:8000/user/${userId}/assessment-history`)
+      fetch(`${API_BASE_URL}/user/${userId}/assessment-history`)
         .then(res => res.json())
         .then(data => {
           setActivityHistory(data.history || []);
@@ -602,7 +603,7 @@ function MyActivity({ onBack }) {
 
     setSendingDigest(true);
     try {
-      const response = await fetch('http://localhost:8000/send-daily-digest', {
+      const response = await fetch(`${API_BASE_URL}/send-daily-digest`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -799,7 +800,7 @@ function MyActivity({ onBack }) {
                          
                          if (userGwa === null || userGwa === undefined || userStrand === null || userStrand === undefined) {
                            try {
-                             const res = await fetch(`http://localhost:8000/user/${userId}/academic-info`);
+                             const res = await fetch(`${API_BASE_URL}/user/${userId}/academic-info`);
                              const userData = await res.json();
                              userGwa = userGwa ?? userData.academic_info?.gwa;
                              userStrand = userStrand ?? userData.academic_info?.strand;
@@ -809,7 +810,7 @@ function MyActivity({ onBack }) {
                          }
                          
                          try {
-                           const response = await fetch('http://localhost:8000/export/pdf', {
+                           const response = await fetch(`${API_BASE_URL}/export/pdf`, {
                              method: 'POST',
                              headers: { 'Content-Type': 'application/json' },
                              body: JSON.stringify({

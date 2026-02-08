@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import API_BASE_URL from '../config';
 
 function ViewUser() {
   const [users, setUsers] = useState([]);
@@ -18,7 +19,7 @@ function ViewUser() {
   const fetchUsers = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/admin/users');
+      const response = await fetch(`${API_BASE_URL}/admin/users`);
       const data = await response.json();
       setUsers(data.users || []);
     } catch (err) {
@@ -30,7 +31,7 @@ function ViewUser() {
 
   const fetchUserDetails = async (userId) => {
     try {
-      const response = await fetch(`http://localhost:8000/admin/users/${userId}`);
+      const response = await fetch(`${API_BASE_URL}/admin/users/${userId}`);
       const data = await response.json();
       setSelectedUser(data);
     } catch (err) {

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API_BASE_URL from './config';
 import FeedbackForm from './FeedbackForm';
 
 const styles = {
@@ -431,12 +432,12 @@ function ResultsView({ recommendation, profileData, onRetake, onBack }) {
       const userId = localStorage.getItem('userId');
       
       // Fetch user's GWA and Strand from backend
-      const userRes = await fetch(`http://localhost:8000/user/${userId}/academic-info`);
+      const userRes = await fetch(`${API_BASE_URL}/user/${userId}/academic-info`);
       const userData = await userRes.json();
       const userGwa = userData.academic_info?.gwa || null;
       const userStrand = userData.academic_info?.strand || null;
       
-      const response = await fetch('http://localhost:8000/export/pdf', {
+      const response = await fetch(`${API_BASE_URL}/export/pdf`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -486,7 +487,7 @@ function ResultsView({ recommendation, profileData, onRetake, onBack }) {
     setEmailSending(true);
     setExportMessage(null);
     try {
-      const response = await fetch('http://localhost:8000/export/email', {
+      const response = await fetch(`${API_BASE_URL}/export/email`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

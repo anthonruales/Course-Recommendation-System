@@ -473,7 +473,15 @@ Each course includes:
 
 - Python 3.10+
 - Node.js 16+
-- PostgreSQL 13+
+- PostgreSQL 13+ (or SQLite for development)
+
+### Quick Start (Development)
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/Course-Recommendation-System.git
+cd Course-Recommendation-System
+```
 
 ### Backend Setup
 
@@ -488,8 +496,9 @@ source .venv/bin/activate  # Linux/Mac
 # Install dependencies
 pip install -r requirements.txt
 
-# Configure database (create .env file)
-echo "DATABASE_URL=postgresql://username:password@localhost:5432/coursepro_db" > .env
+# Configure environment (copy and edit .env.example)
+cp .env.example .env
+# Edit .env with your database credentials
 
 # Run server
 uvicorn main:app --reload --port 8000
@@ -513,6 +522,73 @@ The database is automatically seeded on first run with:
 - 99 courses
 - 193 questions
 - Default assessment test
+
+### Demo Accounts
+
+Run the demo data seeder to create test accounts:
+
+```bash
+cd backend
+python seed_demo_data.py
+```
+
+**Demo Student Accounts** (password: `demo123`):
+| Email | Name | Strand | GWA |
+|-------|------|--------|-----|
+| maria.santos@demo.com | Maria Santos | STEM | 92.5 |
+| juan.reyes@demo.com | Juan Reyes | ABM | 88.0 |
+| ana.cruz@demo.com | Ana Cruz | HUMSS | 95.0 |
+| miguel.garcia@demo.com | Miguel Garcia | TVL-ICT | 85.5 |
+| sofia.mendoza@demo.com | Sofia Mendoza | GAS | 90.0 |
+
+**Admin Account** (password: `admin123`):
+- admin@coursepro.com
+
+### Environment Variables
+
+**Backend (.env)**:
+```env
+DATABASE_URL=postgresql://user:pass@host:5432/dbname
+GOOGLE_CLIENT_ID=your-google-client-id
+GOOGLE_CLIENT_SECRET=your-google-client-secret
+SECRET_KEY=your-random-secret-key
+ALGORITHM=HS256
+```
+
+**Frontend (.env)**:
+```env
+REACT_APP_API_URL=http://localhost:8000
+REACT_APP_GOOGLE_CLIENT_ID=your-google-client-id
+```
+
+---
+
+## 🌐 Deployment
+
+### Backend (Railway/Render)
+
+1. Push your code to GitHub
+2. Connect your repository to Railway or Render
+3. Set environment variables in the dashboard
+4. Deploy!
+
+**Railway:**
+```bash
+# railway.toml
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "uvicorn main:app --host 0.0.0.0 --port $PORT"
+```
+
+### Frontend (Vercel/Netlify)
+
+1. Connect your GitHub repository
+2. Set build command: `npm run build`
+3. Set output directory: `build`
+4. Add environment variable: `REACT_APP_API_URL=https://your-backend-url.com`
+5. Deploy!
 
 ---
 
