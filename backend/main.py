@@ -1,14 +1,55 @@
 import os
 import datetime
 import re
+import time
+from functools import lru_cache
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.gzip import GZipMiddleware
 from pydantic import BaseModel
 from typing import List, Optional
 from dotenv import load_dotenv
 import models, database
 from security import hash_password, verify_password
+
+# ================================================================================
+# SIMPLE IN-MEMORY CACHE FOR READ-ONLY ENDPOINTS
+# This caches frequently accessed data that doesn't change often
+# ================================================================================
+class SimpleCache:
+    def __init__(self, ttl_seconds: int = 60):
+        self._cache = {}
+        self._timestamps = {}
+        self.ttl = ttl_seconds
+    
+    def get(self, key: str):
+        if key in self._cache:
+            if time.time() - self._timestamps[key] < self.ttl:
+                return self._cache[key]
+            else:
+                del self._cache[key]
+                del self._timestamps[key]
+        return None
+    
+    def set(self, key: str, value):
+        self._cache[key] = value
+        self._timestamps[key] = time.time()
+    
+    def invalidate(self, key: str = None):
+        if key:
+            self._cache.pop(key, None)
+            self._timestamps.pop(key, None)
+        else:
+            self._cache.clear()
+            self._timestamps.clear()
+
+# Cache for courses (60 second TTL) - courses rarely change
+courses_cache = SimpleCache(ttl_seconds=60)
+# Cache for questions (60 second TTL) - questions rarely change  
+questions_cache = SimpleCache(ttl_seconds=60)
+# Cache for public stats (30 second TTL) - stats update more frequently
+stats_cache = SimpleCache(ttl_seconds=30)
 
 # Bad words filter list (common inappropriate words)
 BAD_WORDS = [
@@ -88,6 +129,8 @@ async def lifespan(app: FastAPI):
     yield
 
 app = FastAPI(lifespan=lifespan)
+# GZip compression for responses > 500 bytes (reduces bandwidth significantly)
+app.add_middleware(GZipMiddleware, minimum_size=500)
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 
 def seed_database():
@@ -1106,24 +1149,38 @@ def home(): return {"status": "online"}
 
 @app.get("/public/stats")
 def get_public_stats(db: Session = Depends(get_db)):
-    """Get public system statistics - real data only"""
+    """Get public system statistics - real data only (cached for 30s)"""
+    # Check cache first
+    cached = stats_cache.get("public_stats")
+    if cached:
+        return cached
+    
     total_courses = db.query(models.Course).count()
     total_questions = db.query(models.Question).count()
     total_assessments = db.query(models.TestAttempt).count()
     
-    return {
+    result = {
         "total_courses": total_courses,
         "total_questions": total_questions,
         "total_assessments": total_assessments
     }
+    stats_cache.set("public_stats", result)
+    return result
 
 # ========== ADMIN: COURSE MANAGEMENT ==========
 
 @app.get("/admin/courses")
 def get_all_courses(db: Session = Depends(get_db)):
-    """Admin: Get all courses with full details"""
+    """Admin: Get all courses with full details (cached for 60s)"""
+    # Check cache first
+    cached = courses_cache.get("all_courses")
+    if cached:
+        return cached
+    
     courses = db.query(models.Course).all()
-    return {"courses": courses}
+    result = {"courses": courses}
+    courses_cache.set("all_courses", result)
+    return result
 
 @app.get("/admin/courses/{course_id}")
 def get_course(course_id: int, db: Session = Depends(get_db)):
@@ -1146,6 +1203,9 @@ def create_course(course: CourseCreate, db: Session = Depends(get_db)):
     db.add(new_course)
     db.commit()
     db.refresh(new_course)
+    # Invalidate cache after creating course
+    courses_cache.invalidate()
+    stats_cache.invalidate()
     return {"message": "Course created successfully", "course": new_course}
 
 @app.put("/admin/courses/{course_id}")
@@ -1168,6 +1228,8 @@ def update_course(course_id: int, course: CourseUpdate, db: Session = Depends(ge
     
     db.commit()
     db.refresh(db_course)
+    # Invalidate cache after updating course
+    courses_cache.invalidate()
     return {"message": "Course updated successfully", "course": db_course}
 
 @app.delete("/admin/courses/{course_id}")
@@ -1179,15 +1241,25 @@ def delete_course(course_id: int, db: Session = Depends(get_db)):
     
     db.delete(course)
     db.commit()
+    # Invalidate cache after deleting course
+    courses_cache.invalidate()
+    stats_cache.invalidate()
     return {"message": f"Course '{course.course_name}' deleted successfully"}
 
 # ========== ADMIN: QUESTION MANAGEMENT ==========
 
 @app.get("/admin/questions")
 def get_all_questions_admin(db: Session = Depends(get_db)):
-    """Admin: Get all questions with options"""
+    """Admin: Get all questions with options (cached for 60s)"""
+    # Check cache first
+    cached = questions_cache.get("all_questions")
+    if cached:
+        return cached
+    
     questions = db.query(models.Question).options(joinedload(models.Question.options)).all()
-    return {"questions": questions}
+    result = {"questions": questions}
+    questions_cache.set("all_questions", result)
+    return result
 
 @app.get("/admin/questions/{question_id}")
 def get_question_admin(question_id: int, db: Session = Depends(get_db)):
@@ -1219,6 +1291,9 @@ def create_question(question: QuestionCreate, db: Session = Depends(get_db)):
     
     db.commit()
     db.refresh(new_question)
+    # Invalidate cache after creating question
+    questions_cache.invalidate()
+    stats_cache.invalidate()
     return {"message": "Question created successfully", "question_id": new_question.question_id}
 
 @app.put("/admin/questions/{question_id}")
@@ -1234,6 +1309,8 @@ def update_question(question_id: int, question: QuestionUpdate, db: Session = De
         db_question.category = question.category
     
     db.commit()
+    # Invalidate cache after updating question
+    questions_cache.invalidate()
     return {"message": "Question updated successfully"}
 
 @app.delete("/admin/questions/{question_id}")
@@ -1245,6 +1322,9 @@ def delete_question(question_id: int, db: Session = Depends(get_db)):
     
     db.delete(question)
     db.commit()
+    # Invalidate cache after deleting question
+    questions_cache.invalidate()
+    stats_cache.invalidate()
     return {"message": "Question deleted successfully"}
 
 # ========== ADMIN: OPTION MANAGEMENT ==========
@@ -1264,6 +1344,8 @@ def add_option(question_id: int, option: OptionCreate, db: Session = Depends(get
     db.add(new_option)
     db.commit()
     db.refresh(new_option)
+    # Invalidate cache after adding option
+    questions_cache.invalidate()
     return {"message": "Option added successfully", "option": new_option}
 
 @app.put("/admin/options/{option_id}")
@@ -1279,6 +1361,8 @@ def update_option(option_id: int, option: OptionUpdate, db: Session = Depends(ge
         db_option.trait_tag = option.trait_tag
     
     db.commit()
+    # Invalidate cache after updating option
+    questions_cache.invalidate()
     return {"message": "Option updated successfully"}
 
 @app.delete("/admin/options/{option_id}")
@@ -1290,6 +1374,8 @@ def delete_option(option_id: int, db: Session = Depends(get_db)):
     
     db.delete(option)
     db.commit()
+    # Invalidate cache after deleting option
+    questions_cache.invalidate()
     return {"message": "Option deleted successfully"}
 
 # ========== ADMIN: USER MANAGEMENT ==========
