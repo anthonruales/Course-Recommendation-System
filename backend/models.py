@@ -16,6 +16,7 @@ class User(Base):
     created_at = Column(DateTime, server_default=func.now())
     last_active = Column(DateTime, nullable=True)  # Track when user was last active
     is_online = Column(Integer, default=0)  # 1 = online, 0 = offline
+    is_active = Column(Integer, default=1)  # 1 = active, 0 = deactivated (can be toggled by admin)
     
     # Relationships
     test_attempts = relationship("TestAttempt", back_populates="user", cascade="all, delete-orphan")
