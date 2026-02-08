@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import API_BASE_URL from '../config';
 import './ViewFeedback.css';
 
 function ViewFeedback() {
@@ -18,7 +19,7 @@ function ViewFeedback() {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('http://localhost:8000/admin/feedback/stats');
+      const response = await fetch(`${API_BASE_URL}/admin/feedback/stats`);
       if (response.ok) {
         const data = await response.json();
         setStats(data);
@@ -35,7 +36,7 @@ function ViewFeedback() {
   const loadLowRated = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:8000/admin/feedback/low-rated?min_rating=3');
+      const response = await fetch(`${API_BASE_URL}/admin/feedback/low-rated?min_rating=3`);
       if (response.ok) {
         const data = await response.json();
         setLowRated(data);
@@ -50,7 +51,7 @@ function ViewFeedback() {
   const loadCourseFeedback = async (courseId) => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:8000/admin/feedback/courses/${courseId}`);
+      const response = await fetch(`${API_BASE_URL}/admin/feedback/courses/${courseId}`);
       if (response.ok) {
         const data = await response.json();
         setCourseFeedback(data);
@@ -66,7 +67,7 @@ function ViewFeedback() {
     if (!window.confirm('Delete this feedback?')) return;
     
     try {
-      const response = await fetch(`http://localhost:8000/admin/feedback/${feedbackId}`, {
+      const response = await fetch(`${API_BASE_URL}/admin/feedback/${feedbackId}`, {
         method: 'DELETE'
       });
       

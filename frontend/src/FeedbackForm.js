@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import API_BASE_URL from './config';
 import './FeedbackForm.css';
 import Toast from './Toast';
 
@@ -46,7 +47,7 @@ function FeedbackForm({ recommendation, userId, onSubmit, onClose }) {
 
       console.log('Sending feedback payload:', payload);
 
-      const response = await fetch(`http://localhost:8000${endpoint}`, {
+      const response = await fetch(`${API_BASE_URL}${endpoint}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

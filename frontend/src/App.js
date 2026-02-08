@@ -1,16 +1,45 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import API_BASE_URL from './config';
 import LandingPage from './LandingPage';
 import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard';
 import ProfileView from './ProfileView';
-import Settings from './Settings';
-import AdaptiveAssessment from './AdaptiveAssessment';
-import MyActivity from './MyActivity';
-import Admin from './admin/Admin'; 
-import ResultsView from './ResultsView'; 
 import './App.css';
+
+// Lazy load heavy components for better initial load performance
+const Settings = lazy(() => import('./Settings'));
+const AdaptiveAssessment = lazy(() => import('./AdaptiveAssessment'));
+const MyActivity = lazy(() => import('./MyActivity'));
+const Admin = lazy(() => import('./admin/Admin'));
+const ResultsView = lazy(() => import('./ResultsView'));
+
+// Loading fallback component
+const LoadingFallback = () => (
+  <div style={{
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',
+    background: 'linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #0f0f1a 100%)',
+    color: '#fff'
+  }}>
+    <div style={{ textAlign: 'center' }}>
+      <div style={{
+        width: '50px',
+        height: '50px',
+        border: '3px solid rgba(139, 92, 246, 0.3)',
+        borderTop: '3px solid #8b5cf6',
+        borderRadius: '50%',
+        animation: 'spin 1s linear infinite',
+        margin: '0 auto 16px'
+      }} />
+      <p style={{ opacity: 0.7 }}>Loading...</p>
+      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+    </div>
+  </div>
+);
 
 function App() {
   const [authView, setAuthView] = useState('landing'); // 'landing', 'login', 'signup'
@@ -23,14 +52,15 @@ function App() {
   const [profileData, setProfileData] = useState({});
   const [history, setHistory] = useState([]);
 
-  const GOOGLE_CLIENT_ID = "324535586446-nbcj7tcp4373lrk5ct76u3v0od9n4vm3.apps.googleusercontent.com";
+  // Google OAuth Client ID from environment variable
+  const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID || "324535586446-nbcj7tcp4373lrk5ct76u3v0od9n4vm3.apps.googleusercontent.com";
 
   useEffect(() => {
     if (user && user !== 'Admin User') {
       // Load profile from backend
       const userId = localStorage.getItem('userId');
       if (userId) {
-        fetch(`http://localhost:8000/user/${userId}/academic-info`)
+        fetch(`${API_BASE_URL}/user/${userId}/academic-info`)
           .then(res => res.json())
           .then(data => {
             if (data.academic_info) {
@@ -105,7 +135,7 @@ function App() {
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
       <div className="App">
         {user ? (
-          <>
+          <Suspense fallback={<LoadingFallback />}>
             {view === 'admin' && <Admin onLogout={handleLogout} />}
             
             {view === 'dashboard' && (
@@ -193,7 +223,7 @@ function App() {
                 onBack={() => setView('dashboard')}
               />
             )}
-          </>
+          </Suspense>
         ) : (
           <>
             {authView === 'landing' && (

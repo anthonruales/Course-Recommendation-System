@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import API_BASE_URL from './config';
 
 // Add CSS keyframes for smooth animations
 const keyframes = `
@@ -72,7 +73,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
   useEffect(() => {
     const userId = localStorage.getItem('userId');
     if (userId) {
-      fetch(`http://localhost:8000/user/${userId}/academic-info`)
+      fetch(`${API_BASE_URL}/user/${userId}/academic-info`)
         .then(res => res.json())
         .then(data => {
           setHasAcademicInfo(data.has_academic_info || false);
@@ -84,7 +85,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
         });
       
       // Fetch actual activity count from API and calculate unseen
-      fetch(`http://localhost:8000/user/${userId}/assessment-history`)
+      fetch(`${API_BASE_URL}/user/${userId}/assessment-history`)
         .then(res => res.json())
         .then(data => {
           const totalAttempts = data.total_attempts || 0;
@@ -112,7 +113,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
     // Update activity immediately on mount
     const updateActivity = async () => {
       try {
-        await fetch(`http://localhost:8000/user/${userId}/update-activity`, {
+        await fetch(`${API_BASE_URL}/user/${userId}/update-activity`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' }
         });
@@ -130,14 +131,14 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
     return () => clearInterval(activityInterval);
   }, []);
 
-  // Handle logout with activity tracking
-  const handleLogout = async () => {
+  // Handle logout with activity tracking - memoized to prevent re-renders
+  const handleLogout = useCallback(async () => {
     const userId = localStorage.getItem('userId');
     
     // Call logout endpoint to mark user as offline
     if (userId) {
       try {
-        await fetch(`http://localhost:8000/logout`, {
+        await fetch(`${API_BASE_URL}/logout`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ user_id: userId })
@@ -149,9 +150,10 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
     
     // Call the original logout handler
     onLogout();
-  };
+  }, [onLogout]);
 
-  const handleStartAdaptive = () => {
+  // Memoized handler for starting adaptive assessment
+  const handleStartAdaptive = useCallback(() => {
     if (!hasAcademicInfo) {
       alert('⚠️ Please complete your Academic Profile first!\n\nYou need to fill in your GWA and SHS Strand before taking the assessment.');
       onViewProfile();
@@ -159,7 +161,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
     }
     // Pass the selected question count to the assessment
     onStartAdaptive(selectedQuestionCount);
-  };
+  }, [hasAcademicInfo, onViewProfile, onStartAdaptive, selectedQuestionCount]);
 
   // Inject keyframes into document
   useEffect(() => {
