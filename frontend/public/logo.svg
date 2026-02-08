@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4f46e5"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="pathGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Rounded square background -->
+  <rect x="20" y="20" width="472" height="472" rx="100" fill="url(#bgGrad)"/>
+  
+  <!-- Open Book Base (representing courses/education) -->
+  <g transform="translate(256, 320)">
+    <!-- Left page -->
+    <path d="M -10 0 Q -80 -20 -140 10 L -140 80 Q -80 50 -10 70 Z" 
+          fill="#ffffff" opacity="0.95"/>
+    <!-- Right page -->
+    <path d="M 10 0 Q 80 -20 140 10 L 140 80 Q 80 50 10 70 Z" 
+          fill="#ffffff" opacity="0.85"/>
+    <!-- Book spine -->
+    <path d="M -10 0 L 0 -10 L 10 0 L 10 70 L 0 80 L -10 70 Z" 
+          fill="#e0e7ff"/>
+    <!-- Page lines left -->
+    <line x1="-30" y1="25" x2="-110" y2="35" stroke="#c7d2fe" stroke-width="4" stroke-linecap="round"/>
+    <line x1="-30" y1="45" x2="-100" y2="52" stroke="#c7d2fe" stroke-width="4" stroke-linecap="round"/>
+    <!-- Page lines right -->
+    <line x1="30" y1="25" x2="110" y2="35" stroke="#c7d2fe" stroke-width="4" stroke-linecap="round"/>
+    <line x1="30" y1="45" x2="100" y2="52" stroke="#c7d2fe" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Rising Path/Arrow (representing guided career path) -->
+  <g>
+    <!-- Main ascending path -->
+    <path d="M 130 280 
+             Q 180 240 220 200
+             Q 260 160 300 140
+             L 340 100" 
+          fill="none" stroke="url(#pathGrad)" stroke-width="28" stroke-linecap="round"/>
+    
+    <!-- Arrow head -->
+    <polygon points="340,70 370,115 325,115" fill="#10b981"/>
+    
+    <!-- Path dots (milestones/checkpoints) -->
+    <circle cx="150" cy="265" r="14" fill="#22d3ee"/>
+    <circle cx="150" cy="265" r="6" fill="#ffffff"/>
+    
+    <circle cx="220" cy="200" r="14" fill="#34d399"/>
+    <circle cx="220" cy="200" r="6" fill="#ffffff"/>
+    
+    <circle cx="290" cy="145" r="14" fill="#10b981"/>
+    <circle cx="290" cy="145" r="6" fill="#ffffff"/>
+  </g>
+  
+  <!-- Graduation cap at the end (success/goal) -->
+  <g transform="translate(370, 85)">
+    <!-- Cap top -->
+    <polygon points="0,-35 50,0 0,20 -50,0" fill="#fbbf24"/>
+    <!-- Cap button -->
+    <circle cx="0" cy="-5" r="8" fill="#f59e0b"/>
+    <!-- Tassel -->
+    <path d="M 0 -5 Q 20 10 25 35" stroke="#fbbf24" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <circle cx="27" cy="40" r="7" fill="#fbbf24"/>
+  </g>
+  
+  <!-- Sparkles (AI/smart recommendation) -->
+  <g fill="#ffffff" opacity="0.8">
+    <polygon points="100,120 105,130 115,130 107,138 110,150 100,142 90,150 93,138 85,130 95,130" transform="scale(0.8)"/>
+    <polygon points="420,220 425,230 435,230 427,238 430,250 420,242 410,250 413,238 405,230 415,230" transform="scale(0.6)"/>
+  </g>
+</svg>
