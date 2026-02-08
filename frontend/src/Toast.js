@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './Toast.css';
 
 function Toast({ message, type = 'info', duration = 3000, onClose }) {

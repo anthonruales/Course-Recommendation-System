@@ -416,8 +416,7 @@ function Settings({ formData = {}, setFormData, onSave, onBack }) {
   };
 
   const userName = localStorage.getItem('userName') || 'User';
-  const userEmail = localStorage.getItem('userEmail') || '';
-  const userUsername = localStorage.getItem('userUsername') || '';
+    const userUsername = localStorage.getItem('userUsername') || '';
 
   const settingsSections = [
     { id: 'profile', label: 'Profile Information', icon: '👤' },

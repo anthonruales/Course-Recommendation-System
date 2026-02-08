@@ -563,12 +563,6 @@ function MyActivity({ onBack }) {
     });
   };
 
-  const getTierLabel = (count) => {
-    if (count <= 30) return '⚡ Quick';
-    if (count <= 80) return '📊 Standard';
-    return '🎯 Deep';
-  };
-
   // Show toast notification
   const showToast = (message, type = 'success') => {
     setToast({ show: true, message, type });
