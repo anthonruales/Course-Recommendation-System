@@ -11,7 +11,6 @@ import './App.css';
 const Settings = lazy(() => import('./Settings'));
 const AdaptiveAssessment = lazy(() => import('./AdaptiveAssessment'));
 const MyActivity = lazy(() => import('./MyActivity'));
-const Admin = lazy(() => import('./admin/Admin'));
 const ResultsView = lazy(() => import('./ResultsView'));
 
 // Loading fallback component
@@ -96,11 +95,7 @@ function App() {
   const handleLoginSuccess = (name, email) => {
     localStorage.setItem('userName', name);
     setUser(name);
-    if (email === "admin@gmail.com" || name === "Admin") {
-      setView('admin');
-    } else {
-      setView('dashboard');
-    }
+    setView('dashboard');
   };
 
   const handleLogout = () => {
@@ -134,8 +129,7 @@ function App() {
       <div className="App">
         {user ? (
           <Suspense fallback={<LoadingFallback />}>
-            {view === 'admin' && <Admin onLogout={handleLogout} />}
-            
+                        
             {view === 'dashboard' && (
               <Dashboard 
                 userName={user} 
