@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import API_BASE_URL from './config';
 
 // Add CSS keyframes for smooth animations
 const keyframes = `
@@ -73,7 +72,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
   useEffect(() => {
     const userId = localStorage.getItem('userId');
     if (userId) {
-      fetch(`${API_BASE_URL}/user/${userId}/academic-info`)
+      fetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`)
         .then(res => res.json())
         .then(data => {
           setHasAcademicInfo(data.has_academic_info || false);
@@ -85,7 +84,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
         });
       
       // Fetch actual activity count from API and calculate unseen
-      fetch(`${API_BASE_URL}/user/${userId}/assessment-history`)
+      fetch(`${process.env.REACT_APP_API_URL}/user/${userId}/assessment-history`)
         .then(res => res.json())
         .then(data => {
           const totalAttempts = data.total_attempts || 0;
@@ -113,7 +112,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
     // Update activity immediately on mount
     const updateActivity = async () => {
       try {
-        await fetch(`${API_BASE_URL}/user/${userId}/update-activity`, {
+        await fetch(`${process.env.REACT_APP_API_URL}/user/${userId}/update-activity`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' }
         });
@@ -138,7 +137,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
     // Call logout endpoint to mark user as offline
     if (userId) {
       try {
-        await fetch(`${API_BASE_URL}/logout`, {
+        await fetch(`${process.env.REACT_APP_API_URL}/logout`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ user_id: userId })

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import API_BASE_URL from './config';
 import LandingPage from './LandingPage';
 import Login from './Login';
 import Signup from './Signup';
@@ -52,15 +51,14 @@ function App() {
   const [profileData, setProfileData] = useState({});
   const [history, setHistory] = useState([]);
 
-  // Google OAuth Client ID from environment variable
-  const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID || "324535586446-nbcj7tcp4373lrk5ct76u3v0od9n4vm3.apps.googleusercontent.com";
+  const GOOGLE_CLIENT_ID = "324535586446-nbcj7tcp4373lrk5ct76u3v0od9n4vm3.apps.googleusercontent.com";
 
   useEffect(() => {
     if (user && user !== 'Admin User') {
       // Load profile from backend
       const userId = localStorage.getItem('userId');
       if (userId) {
-        fetch(`${API_BASE_URL}/user/${userId}/academic-info`)
+        fetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`)
           .then(res => res.json())
           .then(data => {
             if (data.academic_info) {

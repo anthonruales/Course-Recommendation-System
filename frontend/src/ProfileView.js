@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import API_BASE_URL from './config';
 
 // Predefined options for Academic Interests
 const INTEREST_OPTIONS = [
@@ -92,7 +91,7 @@ function ProfileView({ profileData, onBack, onSettings }) {
       }
       
       // Fetch assessment history stats
-      fetch(`${API_BASE_URL}/user/${userId}/assessment-history`)
+      fetch(`${process.env.REACT_APP_API_URL}/user/${userId}/assessment-history`)
         .then(res => res.json())
         .then(data => {
           setAssessmentStats({
