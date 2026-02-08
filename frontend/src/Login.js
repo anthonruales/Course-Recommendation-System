@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import API_BASE_URL from './config';
 import { useGoogleLogin } from '@react-oauth/google';
 
 function Login({ onSwitch, onLoginSuccess, onBack }) {
@@ -23,7 +22,7 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
         });
         
         // Call backend to check if user exists
-        const backendRes = await axios.post(`${API_BASE_URL}/google-login`, {
+        const backendRes = await axios.post(`${process.env.REACT_APP_API_URL}/google-login`, {
           email: res.data.email,
           name: res.data.name
         });
@@ -45,7 +44,7 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
           
           // Ensure last_active is updated on login
           try {
-            await fetch(`${API_BASE_URL}/refresh-user-activity/${backendRes.data.user_id}`, {
+            await fetch(`${process.env.REACT_APP_API_URL}/refresh-user-activity/${backendRes.data.user_id}`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' }
             });
@@ -80,7 +79,7 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
     
     setLoading(true);
     try {
-      const res = await axios.post(`${API_BASE_URL}/google-register`, {
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/google-register`, {
         email: googleUserData.email,
         name: googleUserData.name,
         username: googleUsername
@@ -93,7 +92,7 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
       
       // Ensure last_active is updated on new registration
       try {
-        await fetch(`${API_BASE_URL}/refresh-user-activity/${res.data.user_id}`, {
+        await fetch(`${process.env.REACT_APP_API_URL}/refresh-user-activity/${res.data.user_id}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' }
         });
@@ -113,14 +112,14 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post(`${API_BASE_URL}/login`, { username: usernameOrEmail, password });
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/login`, { username: usernameOrEmail, password });
       localStorage.setItem('userId', res.data.user_id);
       localStorage.setItem('userUsername', res.data.username || usernameOrEmail);
       localStorage.setItem('userEmail', res.data.email || '');
       
       // Ensure last_active is updated on login
       try {
-        await fetch(`${API_BASE_URL}/refresh-user-activity/${res.data.user_id}`, {
+        await fetch(`${process.env.REACT_APP_API_URL}/refresh-user-activity/${res.data.user_id}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' }
         });

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import API_BASE_URL from './config';
 
 function AssessmentForm({ onBack, onShowResults }) {
   const [questions, setQuestions] = useState([]);
@@ -16,7 +15,7 @@ function AssessmentForm({ onBack, onShowResults }) {
   useEffect(() => {
     const userId = localStorage.getItem('userId');
     if (userId) {
-      fetch(`${API_BASE_URL}/user/${userId}/academic-info`)
+      fetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`)
         .then(res => res.json())
         .then(data => {
           if (!data.has_academic_info) {
@@ -45,7 +44,7 @@ function AssessmentForm({ onBack, onShowResults }) {
     if (!profileCheck.hasProfile) return;
     
     setTierLoading(true);
-    fetch(`${API_BASE_URL}/assessment/tiers`)
+    fetch(`${process.env.REACT_APP_API_URL}/assessment/tiers`)
       .then(res => {
         if (!res.ok) throw new Error("Failed to fetch assessment tiers");
         return res.json();
@@ -70,7 +69,7 @@ function AssessmentForm({ onBack, onShowResults }) {
     
     // Include strand in the request for strand-based question prioritization
     const strandParam = userStrand ? `?strand=${userStrand}` : '';
-    fetch(`${API_BASE_URL}/assessment/start/${selectedTier}${strandParam}`)
+    fetch(`${process.env.REACT_APP_API_URL}/assessment/start/${selectedTier}${strandParam}`)
       .then(res => {
         if (!res.ok) throw new Error("Server error or Route not found");
         return res.json();
@@ -119,7 +118,7 @@ function AssessmentForm({ onBack, onShowResults }) {
     console.log('Submitting assessment for userId:', userId);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/recommend`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/recommend`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 

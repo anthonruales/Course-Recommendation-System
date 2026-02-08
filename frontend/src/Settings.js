@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import API_BASE_URL from './config';
 import Toast from './Toast';
 
 // Bad words filter list
@@ -316,7 +315,7 @@ function Settings({ formData = {}, setFormData, onSave, onBack }) {
       }
       
       try {
-        const emailRes = await fetch(`${API_BASE_URL}/user/${userId}/change-email`, {
+        const emailRes = await fetch(`${process.env.REACT_APP_API_URL}/user/${userId}/change-email`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ new_email: newEmail })
@@ -341,7 +340,7 @@ function Settings({ formData = {}, setFormData, onSave, onBack }) {
       }
     }
     
-    fetch(`${API_BASE_URL}/user/${userId}/academic-info`, {
+    fetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -392,7 +391,7 @@ function Settings({ formData = {}, setFormData, onSave, onBack }) {
     }
     
     try {
-      const response = await fetch(`${API_BASE_URL}/user/${userId}/change-password`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/user/${userId}/change-password`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
