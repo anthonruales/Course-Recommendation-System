@@ -47,6 +47,20 @@ def validate_name(name: str) -> tuple:
     
     return (True, None, capitalize_name(name.strip()))
 
+def validate_email(email: str) -> tuple:
+    """Validate email format. Returns (is_valid, error_message)"""
+    if not email or not email.strip():
+        return (False, "Email is required")
+    
+    email = email.strip().lower()
+    
+    # Regex requires: text@domain.tld (must have dot in domain part)
+    email_regex = r'^[^\s@]+@[^\s@]+\.[^\s@]+$'
+    if not re.match(email_regex, email):
+        return (False, "Please enter a valid email address (e.g., name@gmail.com)")
+    
+    return (True, None)
+
 # Import enhanced questions if available, fall back to seed_data
 try:
     from questions_enhanced import QUESTIONS_POOL_ENHANCED as QUESTIONS_POOL
@@ -295,12 +309,17 @@ class FeedbackStats(BaseModel):
 
 @app.post("/signup")
 def signup(user: UserCreate, db: Session = Depends(get_db)):
+    # Validate email format first
+    is_valid_email, email_error = validate_email(user.email)
+    if not is_valid_email:
+        raise HTTPException(status_code=400, detail=email_error)
+    
     # Check for duplicate username
     if db.query(models.User).filter(models.User.username == user.username).first():
         raise HTTPException(status_code=400, detail="Username already exists")
     
     # Check for duplicate email
-    if db.query(models.User).filter(models.User.email == user.email).first():
+    if db.query(models.User).filter(models.User.email == user.email.strip().lower()).first():
         raise HTTPException(status_code=400, detail="Email already exists")
     
     # Validate and sanitize fullname
@@ -317,7 +336,7 @@ def signup(user: UserCreate, db: Session = Depends(get_db)):
         username=user.username,
         first_name=first_name,
         last_name=last_name,
-        email=user.email,
+        email=user.email.strip().lower(),
         password_hash=hash_password(user.password)
     )
     db.add(new_user)
