@@ -486,7 +486,7 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
                     const userGwa = userData.academic_info?.gwa || null;
                     const userStrand = userData.academic_info?.strand || null;
                     
-                    fetch(`${process.env.REACT_APP_API_URL}/export/email`, {
+                    const res = await fetch(`${process.env.REACT_APP_API_URL}/export/email`, {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
                       body: JSON.stringify({
@@ -503,13 +503,13 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
                           reasoning: r.reasoning || ''
                         }))
                       })
-                    }).then(res => res.json()).then(data => {
-                      if (data.success !== false) alert('Email sent successfully!');
-                      else alert('Failed to send email: ' + (data.detail || 'Unknown error'));
-                    }).catch(err => {
-                      console.error('Email error:', err);
-                      alert('Error sending email. Please try again.');
                     });
+                    const data = await res.json();
+                    if (res.ok && data.success) {
+                      alert('Email sent successfully!');
+                    } else {
+                      alert('Failed to send email: ' + (data.detail || data.message || 'Unknown error'));
+                    }
                   } catch (err) {
                     console.error('Error fetching user data:', err);
                     alert('Error sending email. Please try again.');
