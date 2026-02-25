@@ -2776,13 +2776,7 @@ def email_recommendations(data: EmailRequest, db: Session = Depends(get_db)):
     smtp_password = os.getenv("SMTP_PASSWORD", "")
     
     if not smtp_user or not smtp_password:
-        # Return success but note that email is not configured
-        # For demo purposes, we'll just return success
-        return {
-            "success": True,
-            "message": f"Email functionality is configured. Your recommendations have been prepared for {data.email}.",
-            "note": "Email sending requires SMTP configuration in environment variables."
-        }
+        raise HTTPException(status_code=500, detail="Email service is not configured. Please set SMTP_USER and SMTP_PASSWORD environment variables.")
     
     try:
         # Build email content
@@ -2853,17 +2847,25 @@ def email_recommendations(data: EmailRequest, db: Session = Depends(get_db)):
         
         msg.attach(MIMEText(html_content, 'html'))
         
-        with smtplib.SMTP(smtp_host, smtp_port) as server:
+        with smtplib.SMTP(smtp_host, smtp_port, timeout=30) as server:
             server.starttls()
             server.login(smtp_user, smtp_password)
             server.send_message(msg)
         
+        print(f"[EMAIL] Successfully sent recommendations to {data.email}")
         return {
             "success": True,
             "message": f"Recommendations sent successfully to {data.email}"
         }
         
+    except smtplib.SMTPAuthenticationError as e:
+        print(f"[EMAIL] SMTP auth failed: {str(e)}")
+        raise HTTPException(status_code=500, detail="Email authentication failed. Please check SMTP credentials.")
+    except smtplib.SMTPException as e:
+        print(f"[EMAIL] SMTP error: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Email delivery failed: {str(e)}")
     except Exception as e:
+        print(f"[EMAIL] Unexpected error: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error sending email: {str(e)}")
 
 
@@ -3037,17 +3039,7 @@ def send_daily_digest(data: DailyDigestRequest, db: Session = Depends(get_db)):
     
     # Check if SMTP is configured
     if not smtp_user or not smtp_password or smtp_user == "your-email@gmail.com":
-        # Demo mode - simulate successful email delivery
-        print(f"[DAILY-DIGEST] Demo mode - Email would be sent to: {user.email}")
-        print(f"[DAILY-DIGEST] Assessments included: {len(today_attempts)}")
-        print(f"[DAILY-DIGEST] Total recommendations: {sum(len(item['courses']) for item in digest_items)}")
-        
-        return {
-            "success": True,
-            "message": f"Daily digest sent to {user.email}!",
-            "digest_count": len(today_attempts),
-            "email": user.email
-        }
+        raise HTTPException(status_code=500, detail="Email service is not configured. Please set SMTP_USER and SMTP_PASSWORD environment variables.")
     
     try:
         msg = MIMEMultipart('alternative')
@@ -3057,11 +3049,12 @@ def send_daily_digest(data: DailyDigestRequest, db: Session = Depends(get_db)):
         
         msg.attach(MIMEText(html_content, 'html'))
         
-        with smtplib.SMTP(smtp_host, smtp_port) as server:
+        with smtplib.SMTP(smtp_host, smtp_port, timeout=30) as server:
             server.starttls()
             server.login(smtp_user, smtp_password)
             server.send_message(msg)
         
+        print(f"[DAILY-DIGEST] Successfully sent digest to {user.email}")
         return {
             "success": True,
             "message": f"Daily digest sent successfully to {user.email}",
@@ -3069,12 +3062,12 @@ def send_daily_digest(data: DailyDigestRequest, db: Session = Depends(get_db)):
             "email": user.email
         }
         
+    except smtplib.SMTPAuthenticationError as e:
+        print(f"[DAILY-DIGEST] SMTP auth failed: {str(e)}")
+        raise HTTPException(status_code=500, detail="Email authentication failed. Please check SMTP credentials.")
+    except smtplib.SMTPException as e:
+        print(f"[DAILY-DIGEST] SMTP error: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Email delivery failed: {str(e)}")
     except Exception as e:
-        # If SMTP fails, fall back to demo mode
-        print(f"[DAILY-DIGEST] SMTP failed, using demo mode: {str(e)}")
-        return {
-            "success": True,
-            "message": f"Daily digest sent to {user.email}!",
-            "digest_count": len(today_attempts),
-            "email": user.email
-        }
+        print(f"[DAILY-DIGEST] Failed: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to send email: {str(e)}")
