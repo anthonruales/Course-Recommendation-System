@@ -62,7 +62,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
     }
     return () => { document.body.style.overflow = ''; };
   }, [showHelpCenter]);
-  const [unseenActivityCount, setUnseenActivityCount] = useState(0);
+  const [, setUnseenActivityCount] = useState(0);
   const [profilePhoto, setProfilePhoto] = useState(null);
   const [showUserMenu, setShowUserMenu] = useState(false);
 
@@ -1179,7 +1179,6 @@ const styles = {
   bentoCardSmall: {
     gridColumn: 'span 1',
     padding: '22px',
-    cursor: 'default',
     background: 'rgba(15, 23, 42, 0.6)',
     border: '1px solid rgba(255, 255, 255, 0.06)',
     borderRadius: '18px',
