@@ -2584,6 +2584,74 @@ def get_adaptive_status(session_id: str, db: Session = Depends(get_db)):
 
 from fastapi.responses import StreamingResponse
 from io import BytesIO
+import urllib.request
+import urllib.error
+
+def send_email_html(to_email: str, subject: str, html_content: str, from_name: str = "CoursePro"):
+    """Send an HTML email using Resend HTTP API (preferred) or SMTP fallback."""
+    
+    # Try Resend HTTP API first (works on Railway/cloud platforms)
+    resend_api_key = os.getenv("RESEND_API_KEY", "")
+    resend_from = os.getenv("RESEND_FROM", "CoursePro <onboarding@resend.dev>")
+    
+    if resend_api_key:
+        import json as _json
+        payload = _json.dumps({
+            "from": resend_from,
+            "to": [to_email],
+            "subject": subject,
+            "html": html_content
+        }).encode("utf-8")
+        
+        req = urllib.request.Request(
+            "https://api.resend.com/emails",
+            data=payload,
+            headers={
+                "Authorization": f"Bearer {resend_api_key}",
+                "Content-Type": "application/json"
+            },
+            method="POST"
+        )
+        
+        try:
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                result = _json.loads(resp.read().decode())
+                print(f"[EMAIL] Resend success: {result}")
+                return True
+        except urllib.error.HTTPError as e:
+            body = e.read().decode()
+            print(f"[EMAIL] Resend HTTP error {e.code}: {body}")
+            raise Exception(f"Resend API error ({e.code}): {body}")
+        except Exception as e:
+            print(f"[EMAIL] Resend error: {e}")
+            raise Exception(f"Resend API error: {str(e)}")
+    
+    # Fallback: SMTP (works locally, may be blocked on some cloud platforms)
+    import smtplib
+    from email.mime.text import MIMEText
+    from email.mime.multipart import MIMEMultipart
+    
+    smtp_host = os.getenv("SMTP_HOST", "smtp.gmail.com")
+    smtp_port = int(os.getenv("SMTP_PORT", "587"))
+    smtp_user = os.getenv("SMTP_USER", "")
+    smtp_password = os.getenv("SMTP_PASSWORD", "")
+    
+    if not smtp_user or not smtp_password:
+        raise Exception("No email service configured. Set RESEND_API_KEY or SMTP_USER/SMTP_PASSWORD.")
+    
+    msg = MIMEMultipart("alternative")
+    msg["Subject"] = subject
+    msg["From"] = f"{from_name} <{smtp_user}>"
+    msg["To"] = to_email
+    msg.attach(MIMEText(html_content, "html"))
+    
+    with smtplib.SMTP(smtp_host, smtp_port, timeout=30) as server:
+        server.starttls()
+        server.login(smtp_user, smtp_password)
+        server.send_message(msg)
+    
+    print(f"[EMAIL] SMTP success: sent to {to_email}")
+    return True
 
 class ExportRequest(BaseModel):
     user_name: str
@@ -2764,19 +2832,6 @@ def export_recommendations_pdf(data: ExportRequest):
 @app.post("/export/email")
 def email_recommendations(data: EmailRequest, db: Session = Depends(get_db)):
     """Send course recommendations to user's email"""
-    import smtplib
-    from email.mime.text import MIMEText
-    from email.mime.multipart import MIMEMultipart
-    import os
-    
-    # Get SMTP settings from environment variables
-    smtp_host = os.getenv("SMTP_HOST", "smtp.gmail.com")
-    smtp_port = int(os.getenv("SMTP_PORT", "587"))
-    smtp_user = os.getenv("SMTP_USER", "")
-    smtp_password = os.getenv("SMTP_PASSWORD", "")
-    
-    if not smtp_user or not smtp_password:
-        raise HTTPException(status_code=500, detail="Email service is not configured. Please set SMTP_USER and SMTP_PASSWORD environment variables.")
     
     try:
         # Build email content
@@ -2840,32 +2895,16 @@ def email_recommendations(data: EmailRequest, db: Session = Depends(get_db)):
         </html>
         """
         
-        msg = MIMEMultipart('alternative')
-        msg['Subject'] = f"Your CoursePro Recommendations - {data.user_name}"
-        msg['From'] = smtp_user
-        msg['To'] = data.email
+        subject = f"Your CoursePro Recommendations - {data.user_name}"
+        send_email_html(data.email, subject, html_content)
         
-        msg.attach(MIMEText(html_content, 'html'))
-        
-        with smtplib.SMTP(smtp_host, smtp_port, timeout=30) as server:
-            server.starttls()
-            server.login(smtp_user, smtp_password)
-            server.send_message(msg)
-        
-        print(f"[EMAIL] Successfully sent recommendations to {data.email}")
         return {
             "success": True,
             "message": f"Recommendations sent successfully to {data.email}"
         }
         
-    except smtplib.SMTPAuthenticationError as e:
-        print(f"[EMAIL] SMTP auth failed: {str(e)}")
-        raise HTTPException(status_code=500, detail="Email authentication failed. Please check SMTP credentials.")
-    except smtplib.SMTPException as e:
-        print(f"[EMAIL] SMTP error: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Email delivery failed: {str(e)}")
     except Exception as e:
-        print(f"[EMAIL] Unexpected error: {str(e)}")
+        print(f"[EMAIL] Failed to send recommendations: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error sending email: {str(e)}")
 
 
@@ -2876,9 +2915,6 @@ class DailyDigestRequest(BaseModel):
 @app.post("/send-daily-digest")
 def send_daily_digest(data: DailyDigestRequest, db: Session = Depends(get_db)):
     """Send a daily digest email containing all assessments and course recommendations from today"""
-    import smtplib
-    from email.mime.text import MIMEText
-    from email.mime.multipart import MIMEMultipart
     
     # Get user info
     user = db.query(models.User).filter(models.User.user_id == data.user_id).first()
@@ -2887,12 +2923,6 @@ def send_daily_digest(data: DailyDigestRequest, db: Session = Depends(get_db)):
     
     if not user.email:
         raise HTTPException(status_code=400, detail="User email not found")
-    
-    # Get SMTP settings from environment variables
-    smtp_host = os.getenv("SMTP_HOST", "smtp.gmail.com")
-    smtp_port = int(os.getenv("SMTP_PORT", "587"))
-    smtp_user = os.getenv("SMTP_USER", "")
-    smtp_password = os.getenv("SMTP_PASSWORD", "")
     
     # Get today's date range (start of day to end of day)
     today = datetime.datetime.now().date()
@@ -3037,24 +3067,17 @@ def send_daily_digest(data: DailyDigestRequest, db: Session = Depends(get_db)):
     </html>
     """
     
-    # Check if SMTP is configured
-    if not smtp_user or not smtp_password or smtp_user == "your-email@gmail.com":
-        raise HTTPException(status_code=500, detail="Email service is not configured. Please set SMTP_USER and SMTP_PASSWORD environment variables.")
+    # Check if email service is configured
+    resend_key = os.getenv("RESEND_API_KEY", "")
+    smtp_user = os.getenv("SMTP_USER", "")
+    smtp_password = os.getenv("SMTP_PASSWORD", "")
+    if not resend_key and (not smtp_user or not smtp_password or smtp_user == "your-email@gmail.com"):
+        raise HTTPException(status_code=500, detail="Email service is not configured. Please set RESEND_API_KEY or SMTP credentials.")
     
     try:
-        msg = MIMEMultipart('alternative')
-        msg['Subject'] = f"📊 Your CoursePro Daily Digest - {today.strftime('%B %d, %Y')}"
-        msg['From'] = smtp_user
-        msg['To'] = user.email
+        subject = f"📊 Your CoursePro Daily Digest - {today.strftime('%B %d, %Y')}"
+        send_email_html(user.email, subject, html_content)
         
-        msg.attach(MIMEText(html_content, 'html'))
-        
-        with smtplib.SMTP(smtp_host, smtp_port, timeout=30) as server:
-            server.starttls()
-            server.login(smtp_user, smtp_password)
-            server.send_message(msg)
-        
-        print(f"[DAILY-DIGEST] Successfully sent digest to {user.email}")
         return {
             "success": True,
             "message": f"Daily digest sent successfully to {user.email}",
@@ -3062,12 +3085,6 @@ def send_daily_digest(data: DailyDigestRequest, db: Session = Depends(get_db)):
             "email": user.email
         }
         
-    except smtplib.SMTPAuthenticationError as e:
-        print(f"[DAILY-DIGEST] SMTP auth failed: {str(e)}")
-        raise HTTPException(status_code=500, detail="Email authentication failed. Please check SMTP credentials.")
-    except smtplib.SMTPException as e:
-        print(f"[DAILY-DIGEST] SMTP error: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Email delivery failed: {str(e)}")
     except Exception as e:
         print(f"[DAILY-DIGEST] Failed: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Failed to send email: {str(e)}")
