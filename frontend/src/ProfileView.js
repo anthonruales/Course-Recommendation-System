@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import NavBar from './components/NavBar';
 
 // Predefined options for Academic Interests
 const INTEREST_OPTIONS = [
@@ -77,7 +78,7 @@ const SKILL_OPTIONS = [
   { id: 'design_thinking', label: 'Design Thinking', category: 'Creative' },
 ];
 
-function ProfileView({ profileData, onBack, onSettings }) {
+function ProfileView({ profileData, onBack, onViewActivity, onSettings }) {
   const [profilePhoto, setProfilePhoto] = useState(null);
   const [assessmentStats, setAssessmentStats] = useState({ total: 0, lastDate: null });
   
@@ -134,29 +135,22 @@ function ProfileView({ profileData, onBack, onSettings }) {
       <div style={styles.bgGrid}></div>
 
       {/* TOP NAVIGATION BAR */}
-      <nav style={styles.navbar}>
-        <div style={styles.navContainer}>
-          <div style={styles.navBrand}>
-            <img src="/logo.png" alt="CoursePro" style={styles.navLogo} />
-            <span style={styles.navBrandName}>CoursePro</span>
-          </div>
-          
-          <div style={styles.navLinks}>
-            <span style={styles.navLink} onClick={onBack}>Dashboard</span>
-            <span style={{...styles.navLink, ...styles.navLinkActive}}>Profile</span>
-          </div>
-
-          <div style={styles.navRight}>
-            <button onClick={onSettings} style={styles.settingsBtn}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="12" cy="12" r="3"/>
-                <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
-              </svg>
-              Settings
-            </button>
-          </div>
-        </div>
-      </nav>
+      <NavBar
+        activePage="profile"
+        onNavigate={(page) => {
+          if (page === 'home') onBack();
+          else if (page === 'activity') onViewActivity();
+        }}
+        rightContent={
+          <button onClick={onSettings} style={styles.settingsBtn}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
+            </svg>
+            Settings
+          </button>
+        }
+      />
 
       {/* MAIN CONTENT */}
       <main style={styles.mainContent}>
@@ -353,7 +347,7 @@ const styles = {
     background: 'linear-gradient(180deg, #030308 0%, #0a0a18 50%, #050510 100%)',
     color: '#f8fafc',
     position: 'relative',
-    overflow: 'hidden'
+    overflowX: 'clip',
   },
   bgGradient1: {
     position: 'fixed',
@@ -398,7 +392,8 @@ const styles = {
     padding: '14px 40px',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    position: 'relative'
   },
   navBrand: {
     display: 'flex',
@@ -420,6 +415,9 @@ const styles = {
     color: '#fff'
   },
   navLinks: {
+    position: 'absolute',
+    left: '50%',
+    transform: 'translateX(-50%)',
     display: 'flex',
     alignItems: 'center',
     gap: '2px',

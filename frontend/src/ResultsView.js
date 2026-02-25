@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import FeedbackForm from './FeedbackForm';
+import NavBar from './components/NavBar';
 
 const styles = {
   pageWrapper: {
@@ -410,7 +411,7 @@ const styles = {
   },
 };
 
-function ResultsView({ recommendation, profileData, onRetake, onBack }) {
+function ResultsView({ recommendation, profileData, onRetake, onBack, onViewProfile, onViewActivity }) {
   const [showFeedback, setShowFeedback] = useState(null);
   const [exporting, setExporting] = useState(false);
   const [emailSending, setEmailSending] = useState(false);
@@ -517,17 +518,14 @@ function ResultsView({ recommendation, profileData, onRetake, onBack }) {
   if (!recommendation || !recommendation.recommendations) {
     return (
       <div style={styles.pageWrapper}>
-        <nav style={styles.navbar}>
-          <div style={styles.navContainer}>
-            <div style={styles.navBrand}>
-              <img src="/logo.png" alt="CoursePro" style={styles.navLogo} />
-              <span style={styles.navBrandName}>CoursePro</span>
-            </div>
-            <div style={styles.navRight}>
-              <button onClick={onBack} style={styles.backBtn}>← Back to Dashboard</button>
-            </div>
-          </div>
-        </nav>
+        <NavBar
+          activePage={null}
+          onNavigate={(page) => {
+            if (page === 'home') onBack();
+            else if (page === 'profile') onViewProfile && onViewProfile();
+            else if (page === 'activity') onViewActivity && onViewActivity();
+          }}
+        />
         <main style={styles.mainContent}>
           <div style={styles.loadingState}>
             <h2 style={styles.loadingTitle}>Analyzing your responses...</h2>
@@ -556,29 +554,26 @@ function ResultsView({ recommendation, profileData, onRetake, onBack }) {
     return '#6366f1';
   };
 
-  const topTraits = recommendation.detected_traits || [];
+  // Deduplicate traits by consolidating counts for the same trait name
+  const rawTraits = recommendation.detected_traits || [];
+  const traitMap = {};
+  rawTraits.forEach(([trait, count]) => {
+    traitMap[trait] = (traitMap[trait] || 0) + count;
+  });
+  const topTraits = Object.entries(traitMap).sort((a, b) => b[1] - a[1]);
   const { user_gwa, user_strand } = recommendation;
 
   return (
     <div style={styles.pageWrapper}>
       {/* TOP NAVIGATION */}
-      <nav style={styles.navbar}>
-        <div style={styles.navContainer}>
-          <div style={styles.navBrand}>
-            <img src="/logo.png" alt="CoursePro" style={styles.navLogo} />
-            <span style={styles.navBrandName}>CoursePro</span>
-          </div>
-          
-          <div style={styles.navLinks}>
-            <span style={styles.navLink} onClick={onBack}>Dashboard</span>
-            <span style={{...styles.navLink, ...styles.navLinkActive}}>Results</span>
-          </div>
-
-          <div style={styles.navRight}>
-            <button onClick={onBack} style={styles.backBtn}>← Back to Dashboard</button>
-          </div>
-        </div>
-      </nav>
+      <NavBar
+        activePage={null}
+        onNavigate={(page) => {
+          if (page === 'home') onBack();
+          else if (page === 'profile') onViewProfile && onViewProfile();
+          else if (page === 'activity') onViewActivity && onViewActivity();
+        }}
+      />
 
       {/* MAIN CONTENT */}
       <main style={styles.mainContent}>

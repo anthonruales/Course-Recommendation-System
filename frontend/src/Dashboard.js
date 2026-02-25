@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import NavBar from './components/NavBar';
 
 // Add CSS keyframes for smooth animations
 const keyframes = `
@@ -45,12 +46,22 @@ const keyframes = `
   }
 `;
 
-function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile, onViewActivity, onViewSettings, history }) {
+function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfile, onViewActivity, onViewSettings, history }) {
   const [hasAcademicInfo, setHasAcademicInfo] = useState(false);
   const [checkingProfile, setCheckingProfile] = useState(true);
   const [selectedQuestionCount, setSelectedQuestionCount] = useState(30);
   const [showHelpCenter, setShowHelpCenter] = useState(false);
   const [activityCount, setActivityCount] = useState(0);
+
+  // Lock body scroll when Help Center modal is open
+  useEffect(() => {
+    if (showHelpCenter) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [showHelpCenter]);
   const [unseenActivityCount, setUnseenActivityCount] = useState(0);
   const [profilePhoto, setProfilePhoto] = useState(null);
   const [showUserMenu, setShowUserMenu] = useState(false);
@@ -151,7 +162,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
     onLogout();
   }, [onLogout]);
 
-  // Memoized handler for starting adaptive assessment
+  // Memoized handler for starting assessment
   const handleStartAdaptive = useCallback(() => {
     if (!hasAcademicInfo) {
       alert('⚠️ Please complete your Academic Profile first!\n\nYou need to fill in your GWA and SHS Strand before taking the assessment.');
@@ -159,8 +170,8 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
       return;
     }
     // Pass the selected question count to the assessment
-    onStartAdaptive(selectedQuestionCount);
-  }, [hasAcademicInfo, onViewProfile, onStartAdaptive, selectedQuestionCount]);
+    onStartAssessment(selectedQuestionCount);
+  }, [hasAcademicInfo, onViewProfile, onStartAssessment, selectedQuestionCount]);
 
   // Inject keyframes into document
   useEffect(() => {
@@ -178,107 +189,95 @@ function Dashboard({ userName, onLogout, onStart, onStartAdaptive, onViewProfile
       <div style={styles.bgGrid}></div>
 
       {/* TOP NAVIGATION */}
-      <nav style={styles.navbar}>
-        <div style={styles.navContainer}>
-          <div style={styles.navBrand}>
-            <img src="/logo.png" alt="CoursePro" style={styles.navLogo} />
-            <span style={styles.navBrandName}>CoursePro</span>
-          </div>
-
-          <div style={styles.navLinks}>
-            <span style={{...styles.navLink, ...styles.navLinkActive}}>Home</span>
-            <span style={styles.navLink} onClick={onViewProfile}>Profile</span>
-            <span style={styles.navLink} onClick={onViewActivity}>
-              Activity
-              {unseenActivityCount > 0 && <span style={styles.navBadge}>{unseenActivityCount}</span>}
-            </span>
-          </div>
-
-          <div style={styles.navRight}>
-            <div style={styles.userPillWrapper}>
-              <div 
-                style={styles.userPill} 
-                onClick={() => setShowUserMenu(!showUserMenu)}
-              >
-                {profilePhoto ? (
-                  <img src={profilePhoto} alt="Profile" style={styles.userAvatarImg} />
-                ) : (
-                  <div style={styles.userAvatar}>{userName?.charAt(0)?.toUpperCase() || 'U'}</div>
-                )}
-                <span style={styles.userName}>{userName}</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{marginLeft: '4px', opacity: 0.6}}>
-                  <path d="M6 9l6 6 6-6"/>
-                </svg>
-              </div>
-              
-              {/* User Dropdown Menu */}
-              {showUserMenu && (
-                <>
-                  <div style={styles.menuBackdrop} onClick={() => setShowUserMenu(false)}></div>
-                  <div style={styles.userMenu}>
-                    <div style={styles.userMenuHeader}>
-                      <div style={styles.userMenuAvatar}>
-                        {profilePhoto ? (
-                          <img src={profilePhoto} alt="Profile" style={styles.userMenuAvatarImg} />
-                        ) : (
-                          <span>{userName?.charAt(0)?.toUpperCase() || 'U'}</span>
-                        )}
-                      </div>
-                      <div style={styles.userMenuInfo}>
-                        <span style={styles.userMenuName}>{userName}</span>
-                        <span style={styles.userMenuEmail}>{localStorage.getItem('userEmail') || ''}</span>
-                      </div>
+      <NavBar
+        activePage="home"
+        onNavigate={(page) => {
+          if (page === 'profile') onViewProfile();
+          else if (page === 'activity') onViewActivity();
+        }}
+        rightContent={
+          <div style={styles.userPillWrapper}>
+            <div 
+              style={styles.userPill} 
+              onClick={() => setShowUserMenu(!showUserMenu)}
+            >
+              {profilePhoto ? (
+                <img src={profilePhoto} alt="Profile" style={styles.userAvatarImg} />
+              ) : (
+                <div style={styles.userAvatar}>{userName?.charAt(0)?.toUpperCase() || 'U'}</div>
+              )}
+              <span style={styles.userName}>{userName}</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{marginLeft: '4px', opacity: 0.6}}>
+                <path d="M6 9l6 6 6-6"/>
+              </svg>
+            </div>
+            
+            {/* User Dropdown Menu */}
+            {showUserMenu && (
+              <>
+                <div style={styles.menuBackdrop} onClick={() => setShowUserMenu(false)}></div>
+                <div style={styles.userMenu}>
+                  <div style={styles.userMenuHeader}>
+                    <div style={styles.userMenuAvatar}>
+                      {profilePhoto ? (
+                        <img src={profilePhoto} alt="Profile" style={styles.userMenuAvatarImg} />
+                      ) : (
+                        <span>{userName?.charAt(0)?.toUpperCase() || 'U'}</span>
+                      )}
                     </div>
-                    <div style={styles.userMenuDivider}></div>
-                    <div 
-                      style={styles.userMenuItem} 
-                      onClick={() => { setShowUserMenu(false); onViewProfile(); }}
-                    >
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
-                        <circle cx="12" cy="7" r="4"/>
-                      </svg>
-                      <span>View Profile</span>
-                    </div>
-                    <div 
-                      style={styles.userMenuItem} 
-                      onClick={() => { setShowUserMenu(false); onViewSettings && onViewSettings(); }}
-                    >
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <circle cx="12" cy="12" r="3"/>
-                        <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
-                      </svg>
-                      <span>Settings</span>
-                    </div>
-                    <div 
-                      style={styles.userMenuItem} 
-                      onClick={() => { setShowUserMenu(false); setShowHelpCenter(true); }}
-                    >
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
-                        <line x1="12" y1="17" x2="12.01" y2="17"/>
-                      </svg>
-                      <span>Help Center</span>
-                    </div>
-                    <div style={styles.userMenuDivider}></div>
-                    <div 
-                      style={{...styles.userMenuItem, ...styles.userMenuItemDanger}} 
-                      onClick={() => { setShowUserMenu(false); handleLogout(); }}
-                    >
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/>
-                      </svg>
-                      <span>Log Out</span>
+                    <div style={styles.userMenuInfo}>
+                      <span style={styles.userMenuName}>{userName}</span>
+                      <span style={styles.userMenuEmail}>{localStorage.getItem('userEmail') || ''}</span>
                     </div>
                   </div>
-                </>
-              )}
-            </div>
+                  <div style={styles.userMenuDivider}></div>
+                  <div 
+                    style={styles.userMenuItem} 
+                    onClick={() => { setShowUserMenu(false); onViewProfile(); }}
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                      <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    <span>View Profile</span>
+                  </div>
+                  <div 
+                    style={styles.userMenuItem} 
+                    onClick={() => { setShowUserMenu(false); onViewSettings && onViewSettings(); }}
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <circle cx="12" cy="12" r="3"/>
+                      <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
+                    </svg>
+                    <span>Settings</span>
+                  </div>
+                  <div 
+                    style={styles.userMenuItem} 
+                    onClick={() => { setShowUserMenu(false); setShowHelpCenter(true); }}
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <circle cx="12" cy="12" r="10"/>
+                      <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
+                      <line x1="12" y1="17" x2="12.01" y2="17"/>
+                    </svg>
+                    <span>Help Center</span>
+                  </div>
+                  <div style={styles.userMenuDivider}></div>
+                  <div 
+                    style={{...styles.userMenuItem, ...styles.userMenuItemDanger}} 
+                    onClick={() => { setShowUserMenu(false); handleLogout(); }}
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/>
+                    </svg>
+                    <span>Log Out</span>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
-        </div>
-      </nav>
-
+        }
+      />
       {/* HERO SECTION */}
       <main style={styles.mainContent}>
         <section style={styles.heroSection}>
@@ -494,7 +493,7 @@ const styles = {
     background: 'linear-gradient(180deg, #030308 0%, #0a0a18 50%, #050510 100%)',
     color: '#f8fafc',
     position: 'relative',
-    overflow: 'hidden'
+    overflowX: 'clip',
   },
 
   // Animated background gradients - smoother
@@ -1143,7 +1142,8 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     backdropFilter: 'blur(20px)',
-    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
+    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+    cursor: 'default'
   },
   statsInner: {
     width: '100%',
@@ -1152,7 +1152,8 @@ const styles = {
     gap: '24px'
   },
   statItem: {
-    textAlign: 'center'
+    textAlign: 'center',
+    cursor: 'default'
   },
   statNumber: {
     display: 'block',
@@ -1178,6 +1179,7 @@ const styles = {
   bentoCardSmall: {
     gridColumn: 'span 1',
     padding: '22px',
+    cursor: 'default',
     background: 'rgba(15, 23, 42, 0.6)',
     border: '1px solid rgba(255, 255, 255, 0.06)',
     borderRadius: '18px',
@@ -1235,7 +1237,8 @@ const styles = {
     border: '1px solid rgba(255, 255, 255, 0.06)',
     borderRadius: '18px',
     backdropFilter: 'blur(10px)',
-    transition: 'all 0.3s ease'
+    transition: 'all 0.3s ease',
+    cursor: 'default'
   },
   activityHeader: {
     display: 'flex',
@@ -1273,7 +1276,8 @@ const styles = {
     background: 'rgba(255, 255, 255, 0.015)',
     borderRadius: '10px',
     border: '1px solid rgba(255, 255, 255, 0.03)',
-    transition: 'all 0.3s ease'
+    transition: 'all 0.3s ease',
+    cursor: 'default'
   },
   activityDot: {
     width: '10px',
@@ -1310,7 +1314,8 @@ const styles = {
   emptyActivity: {
     textAlign: 'center',
     padding: '48px 24px',
-    color: '#475569'
+    color: '#475569',
+    cursor: 'default'
   },
   emptyIcon: {
     fontSize: '40px',
@@ -1327,7 +1332,8 @@ const styles = {
     border: '1px solid rgba(244, 63, 94, 0.1)',
     borderRadius: '24px',
     backdropFilter: 'blur(10px)',
-    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
+    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+    cursor: 'default'
   },
   featuresTitle: {
     fontSize: '17px',
@@ -1345,7 +1351,8 @@ const styles = {
     alignItems: 'center',
     gap: '14px',
     fontSize: '15px',
-    color: '#94a3b8'
+    color: '#94a3b8',
+    cursor: 'default'
   },
   featureIcon: {
     fontSize: '20px'

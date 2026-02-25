@@ -1,4 +1,4 @@
-import React, { useState, useEffect, lazy, Suspense } from 'react';
+import React, { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import LandingPage from './LandingPage';
 import Login from './Login';
@@ -12,6 +12,18 @@ const Settings = lazy(() => import('./Settings'));
 const AdaptiveAssessment = lazy(() => import('./AdaptiveAssessment'));
 const MyActivity = lazy(() => import('./MyActivity'));
 const ResultsView = lazy(() => import('./ResultsView'));
+
+// Valid views that can be stored in the URL hash
+const VALID_VIEWS = ['dashboard', 'profile', 'settings', 'assessment', 'activity', 'results'];
+const VALID_AUTH_VIEWS = ['landing', 'login', 'signup'];
+
+// Helper: read view from hash
+const getViewFromHash = () => {
+  const hash = window.location.hash.replace('#/', '').replace('#', '');
+  if (VALID_VIEWS.includes(hash)) return { view: hash, authView: null };
+  if (VALID_AUTH_VIEWS.includes(hash)) return { view: null, authView: hash };
+  return { view: null, authView: null };
+};
 
 // Loading fallback component
 const LoadingFallback = () => (
@@ -40,8 +52,23 @@ const LoadingFallback = () => (
 );
 
 function App() {
-  const [authView, setAuthView] = useState('landing'); // 'landing', 'login', 'signup'
-  const [view, setView] = useState('dashboard');
+  const isLoggedIn = !!localStorage.getItem('userName');
+  
+  // Initialize view from URL hash so refresh preserves the page
+  const initialHash = getViewFromHash();
+  const [authView, setAuthViewState] = useState(() => {
+    if (!isLoggedIn) return initialHash.authView || 'landing';
+    return 'landing';
+  });
+  const [view, setViewState] = useState(() => {
+    if (isLoggedIn) {
+      // Don't restore 'results' or 'adaptive' on refresh (they need session data)
+      const restored = initialHash.view;
+      if (restored && restored !== 'results' && restored !== 'adaptive') return restored;
+      return 'dashboard';
+    }
+    return 'dashboard';
+  });
   const [user, setUser] = useState(localStorage.getItem('userName') || null);
   const [recommendationData, setRecommendationData] = useState(null);
   const [selectedQuestionCount, setSelectedQuestionCount] = useState(30);
@@ -49,6 +76,60 @@ function App() {
   // Initialize as empty object to prevent "is not a function" errors
   const [profileData, setProfileData] = useState({});
   const [history, setHistory] = useState([]);
+
+  // Wrap setView to also push to browser history
+  const setView = useCallback((newView) => {
+    setViewState(newView);
+    const newHash = `#/${newView}`;
+    if (window.location.hash !== newHash) {
+      window.history.pushState(null, '', newHash);
+    }
+  }, []);
+
+  // Wrap setAuthView to also push to browser history
+  const setAuthView = useCallback((newAuthView) => {
+    setAuthViewState(newAuthView);
+    const newHash = `#/${newAuthView}`;
+    if (window.location.hash !== newHash) {
+      window.history.pushState(null, '', newHash);
+    }
+  }, []);
+
+  // Listen for browser back/forward button (popstate)
+  useEffect(() => {
+    const handlePopState = () => {
+      const { view: hashView, authView: hashAuthView } = getViewFromHash();
+      if (user) {
+        // Logged in: navigate between app views
+        if (hashView && hashView !== 'results' && hashView !== 'adaptive') {
+          setViewState(hashView);
+        } else if (hashView === 'results' && recommendationData) {
+          setViewState('results');
+        } else {
+          setViewState('dashboard');
+        }
+      } else {
+        // Not logged in: navigate between auth views
+        if (hashAuthView) {
+          setAuthViewState(hashAuthView);
+        } else {
+          setAuthViewState('landing');
+        }
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [user, recommendationData]);
+
+  // Set initial hash on mount if none exists
+  useEffect(() => {
+    if (!window.location.hash) {
+      const initialView = user ? view : authView;
+      window.history.replaceState(null, '', `#/${initialView}`);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const GOOGLE_CLIENT_ID = "324535586446-nbcj7tcp4373lrk5ct76u3v0od9n4vm3.apps.googleusercontent.com";
 
@@ -95,7 +176,8 @@ function App() {
   const handleLoginSuccess = (name, email) => {
     localStorage.setItem('userName', name);
     setUser(name);
-    setView('dashboard');
+    setViewState('dashboard');
+    window.history.replaceState(null, '', '#/dashboard');
   };
 
   const handleLogout = () => {
@@ -104,8 +186,9 @@ function App() {
     setUser(null);
     setRecommendationData(null);
     setProfileData({}); // Clear state on logout
-    setView('dashboard');
-    setAuthView('landing'); // Go back to landing page
+    setViewState('dashboard');
+    setAuthViewState('landing');
+    window.history.replaceState(null, '', '#/landing');
   };
 
   const handleAssessmentResults = (data) => {
@@ -134,9 +217,9 @@ function App() {
               <Dashboard 
                 userName={user} 
                 onLogout={handleLogout} 
-                onStartAdaptive={(questionCount) => {
+                onStartAssessment={(questionCount) => {
                   setSelectedQuestionCount(questionCount || 30);
-                  setView('adaptive');
+                  setView('assessment');
                 }}
                 onViewProfile={() => setView('profile')}
                 onViewActivity={() => setView('activity')}
@@ -149,13 +232,16 @@ function App() {
               <ProfileView 
                 profileData={profileData}
                 onBack={() => setView('dashboard')} 
+                onViewActivity={() => setView('activity')}
                 onSettings={() => setView('settings')}
               />
             )}
 
             {view === 'settings' && (
               <Settings 
-                onBack={() => setView('dashboard')} 
+                onBack={() => setView('dashboard')}
+                onViewProfile={() => setView('profile')}
+                onViewActivity={() => setView('activity')}
                 onSave={(changedFields) => { 
                   // Save to local storage
                   localStorage.setItem(`userProfile_${user}`, JSON.stringify(profileData));
@@ -181,10 +267,26 @@ function App() {
                   };
                   setHistory([updateLog, ...history]);
                   
-                  // Delay navigation to allow toast to be seen
-                  setTimeout(() => {
-                    setView('dashboard');
-                  }, 1500);
+                  // Re-fetch profile data to sync state with backend
+                  const userId = localStorage.getItem('userId');
+                  if (userId) {
+                    fetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`)
+                      .then(res => res.json())
+                      .then(data => {
+                        if (data.academic_info) {
+                          setProfileData({
+                            fullname: data.fullname || '',
+                            gwa: data.academic_info.gwa || '',
+                            strand: data.academic_info.strand || '',
+                            age: data.academic_info.age || '',
+                            gender: data.academic_info.gender || '',
+                            interests: data.academic_info.interests || '',
+                            skills: data.academic_info.skills || ''
+                          });
+                        }
+                      })
+                      .catch(err => console.error('Error re-fetching profile:', err));
+                  }
                 }} 
                 formData={profileData} 
                 setFormData={setProfileData} 
@@ -193,9 +295,11 @@ function App() {
 
             {/* OLD ASSESSMENT FORM REMOVED - Only adaptive assessment is used now */}
 
-            {view === 'adaptive' && (
+            {view === 'assessment' && (
               <AdaptiveAssessment 
-                onBack={() => setView('dashboard')} 
+                onBack={() => setView('dashboard')}
+                onViewProfile={() => setView('profile')}
+                onViewActivity={() => setView('activity')}
                 onShowResults={handleAssessmentResults}
                 maxQuestions={selectedQuestionCount}
               />
@@ -204,6 +308,7 @@ function App() {
             {view === 'activity' && (
               <MyActivity 
                 onBack={() => setView('dashboard')}
+                onViewProfile={() => setView('profile')}
               />
             )}
 
@@ -213,6 +318,8 @@ function App() {
                 profileData={profileData}
                 onRetake={() => setView('assessment')}
                 onBack={() => setView('dashboard')}
+                onViewProfile={() => setView('profile')}
+                onViewActivity={() => setView('activity')}
               />
             )}
           </Suspense>

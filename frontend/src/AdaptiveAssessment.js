@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import NavBar from './components/NavBar';
 
 /**
  * SMART CAREER ASSESSMENT
@@ -9,7 +10,7 @@ import React, { useState, useEffect } from 'react';
  * - You can see courses narrowing down in real-time
  * - User selects 30, 50, or 60 questions
  */
-function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
+function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewProfile, onViewActivity }) {
   // Session state
   const [sessionId, setSessionId] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(null);
@@ -263,21 +264,14 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
     return (
       <div style={styles.pageWrapper}>
         {/* TOP NAVIGATION */}
-        <nav style={styles.navbar}>
-          <div style={styles.navContainer}>
-            <div style={styles.navBrand}>
-              <img src="/logo.png" alt="CoursePro" style={styles.navLogo} />
-              <span style={styles.navBrandName}>CoursePro</span>
-            </div>
-            <div style={styles.navLinks}>
-              <span style={styles.navLink} onClick={onBack}>Dashboard</span>
-              <span style={{...styles.navLink, ...styles.navLinkActive}}>Assessment</span>
-            </div>
-            <div style={styles.navRight}>
-              <button onClick={onBack} style={styles.exitBtn}>← Exit Assessment</button>
-            </div>
-          </div>
-        </nav>
+        <NavBar
+          activePage={null}
+          onNavigate={(page) => {
+            if (page === 'home') onBack();
+            else if (page === 'profile') onViewProfile && onViewProfile();
+            else if (page === 'activity') onViewActivity && onViewActivity();
+          }}
+        />
 
         <main style={styles.mainContent}>
           <div style={styles.startScreen}>
@@ -333,21 +327,14 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
   if (isComplete && results) {
     return (
       <div style={styles.pageWrapper}>
-        <nav style={styles.navbar}>
-          <div style={styles.navContainer}>
-            <div style={styles.navBrand}>
-              <img src="/logo.png" alt="CoursePro" style={styles.navLogo} />
-              <span style={styles.navBrandName}>CoursePro</span>
-            </div>
-            <div style={styles.navLinks}>
-              <span style={styles.navLink} onClick={onBack}>Dashboard</span>
-              <span style={{...styles.navLink, ...styles.navLinkActive}}>Results</span>
-            </div>
-            <div style={styles.navRight}>
-              <button onClick={onBack} style={styles.exitBtn}>← Back to Dashboard</button>
-            </div>
-          </div>
-        </nav>
+        <NavBar
+          activePage={null}
+          onNavigate={(page) => {
+            if (page === 'home') onBack();
+            else if (page === 'profile') onViewProfile && onViewProfile();
+            else if (page === 'activity') onViewActivity && onViewActivity();
+          }}
+        />
 
         <main style={styles.mainContent}>
           <div style={styles.resultsHeader}>
@@ -561,7 +548,7 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
       {/* Compact top bar during questions */}
       <nav style={styles.questionNavbar}>
         <div style={styles.navContainer}>
-          <div style={styles.navBrand}>
+          <div style={styles.navBrand} onClick={onBack}>
             <img src="/logo.png" alt="CoursePro" style={styles.navLogo} />
             <span style={styles.navBrandName}>CoursePro</span>
           </div>
@@ -626,13 +613,6 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
 
         {/* Question Card */}
         <div style={styles.questionArea}>
-          {/* Last trait indicator */}
-          {lastTraitRecorded && (
-            <div style={styles.traitIndicator}>
-              ✨ Trait recorded: <strong>{lastTraitRecorded}</strong>
-            </div>
-          )}
-
           <div style={{
             ...styles.questionCard,
             opacity: isTransitioning ? 0.5 : 1,
@@ -711,6 +691,22 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30 }) {
 
           {error && <p style={styles.error}>{error}</p>}
         </div>
+
+        {/* Right Trait Panel */}
+        <aside style={styles.traitPanel}>
+          {lastTraitRecorded && (
+            <div style={styles.infoPanelSection}>
+              <h4 style={styles.infoPanelTitle}>
+                <span style={{fontSize: '14px'}}>✨</span> Trait Recorded
+              </h4>
+              <div style={styles.traitDisplayContainer}>
+                <div style={styles.traitDisplay}>
+                  {lastTraitRecorded}
+                </div>
+              </div>
+            </div>
+          )}
+        </aside>
       </main>
     </div>
   );
@@ -735,6 +731,10 @@ const styles = {
     color: 'white',
     position: 'relative',
     animation: 'fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+    userSelect: 'none',
+    WebkitUserSelect: 'none',
+    MozUserSelect: 'none',
+    msUserSelect: 'none',
   },
   
   // Navbar
@@ -770,6 +770,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: '14px',
+    cursor: 'pointer',
   },
   navLogo: {
     width: '48px',
@@ -1040,6 +1041,34 @@ const styles = {
     flex: 1, 
     fontWeight: '500',
     lineHeight: '1.3'
+  },
+  
+  // Right Trait Panel
+  traitPanel: {
+    width: '260px',
+    flexShrink: 0,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '20px',
+    position: 'sticky',
+    top: '100px',
+  },
+  traitDisplayContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '12px',
+  },
+  traitDisplay: {
+    padding: '14px 16px',
+    background: 'rgba(34, 197, 94, 0.08)',
+    borderRadius: '12px',
+    fontSize: '14px',
+    color: '#4ade80',
+    fontWeight: '600',
+    border: '1px solid rgba(34, 197, 94, 0.25)',
+    backdropFilter: 'blur(10px)',
+    animation: 'fadeIn 0.4s ease',
+    textAlign: 'center',
   },
   
   // Question Area (Main Content)
