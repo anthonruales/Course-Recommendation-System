@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Toast from './Toast';
+import NavBar from './components/NavBar';
 
 // Bad words filter list
 const BAD_WORDS = [
@@ -99,13 +100,14 @@ const SKILL_OPTIONS = [
   { id: 'design_thinking', label: 'Design Thinking', category: 'Creative' },
 ];
 
-function Settings({ formData = {}, setFormData, onSave, onBack }) {
+function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, onViewActivity }) {
   const [activeSection, setActiveSection] = useState('profile');
   const [gwaError, setGwaError] = useState('');
   const [interestModalOpen, setInterestModalOpen] = useState(false);
   const [skillsModalOpen, setSkillsModalOpen] = useState(false);
   const [toast, setToast] = useState(null);
   const [profilePhoto, setProfilePhoto] = useState(null);
+  const pendingPhotoRef = useRef({ changed: false, value: null });
   const [newEmail, setNewEmail] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordData, setPasswordData] = useState({
@@ -140,7 +142,7 @@ function Settings({ formData = {}, setFormData, onSave, onBack }) {
     setToast({ message, type });
   };
   
-  // Handle profile photo upload
+  // Handle profile photo upload (preview only, saved on Save Changes)
   const handlePhotoUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -155,24 +157,18 @@ function Settings({ formData = {}, setFormData, onSave, onBack }) {
       const reader = new FileReader();
       reader.onloadend = () => {
         const base64String = reader.result;
-        const userId = localStorage.getItem('userId');
         setProfilePhoto(base64String);
-        if (userId) {
-          localStorage.setItem(`profilePhoto_${userId}`, base64String);
-        }
-        showToast('Profile photo updated!', 'success');
+        pendingPhotoRef.current = { changed: true, value: base64String };
+        showToast('Photo selected — click Save Changes to apply', 'info');
       };
       reader.readAsDataURL(file);
     }
   };
   
   const removePhoto = () => {
-    const userId = localStorage.getItem('userId');
     setProfilePhoto(null);
-    if (userId) {
-      localStorage.removeItem(`profilePhoto_${userId}`);
-    }
-    showToast('Profile photo removed', 'info');
+    pendingPhotoRef.current = { changed: true, value: null };
+    showToast('Photo removed — click Save Changes to apply', 'info');
   };
   
   // Parse interests and skills
@@ -355,7 +351,27 @@ function Settings({ formData = {}, setFormData, onSave, onBack }) {
     })
     .then(res => res.json())
     .then(data => {
+      // Persist pending photo change to localStorage on save
+      if (pendingPhotoRef.current.changed) {
+        if (pendingPhotoRef.current.value) {
+          localStorage.setItem(`profilePhoto_${userId}`, pendingPhotoRef.current.value);
+        } else {
+          localStorage.removeItem(`profilePhoto_${userId}`);
+        }
+        changedFields.push('Profile Photo');
+        pendingPhotoRef.current = { changed: false, value: null };
+      }
       showToast('Profile updated successfully!', 'success');
+      // Reset original data ref so change tracking resets
+      originalDataRef.current = {
+        fullname: formData.fullname || '',
+        gwa: formData.gwa || '',
+        strand: formData.strand || '',
+        age: formData.age || '',
+        gender: formData.gender || '',
+        interests: selectedInterests.join(', ') || '',
+        skills: selectedSkills.join(', ') || ''
+      };
       onSave(changedFields);
     })
     .catch(err => {
@@ -431,23 +447,14 @@ function Settings({ formData = {}, setFormData, onSave, onBack }) {
       <div style={styles.bgGrid}></div>
 
       {/* TOP NAVIGATION BAR */}
-      <nav style={styles.navbar}>
-        <div style={styles.navContainer}>
-          <div style={styles.navBrand}>
-            <img src="/logo.png" alt="CoursePro" style={styles.navLogo} />
-            <span style={styles.navBrandName}>CoursePro</span>
-          </div>
-          
-          <div style={styles.navLinks}>
-            <span style={styles.navLink} onClick={onBack}>Dashboard</span>
-            <span style={{...styles.navLink, ...styles.navLinkActive}}>Settings</span>
-          </div>
-
-          <div style={styles.navRight}>
-            <button onClick={onBack} style={styles.backBtn}>← Back</button>
-          </div>
-        </div>
-      </nav>
+      <NavBar
+        activePage={null}
+        onNavigate={(page) => {
+          if (page === 'home') onBack();
+          else if (page === 'profile') onViewProfile && onViewProfile();
+          else if (page === 'activity') onViewActivity && onViewActivity();
+        }}
+      />
 
       {/* MAIN CONTENT */}
       <main style={styles.mainContent}>
@@ -906,7 +913,7 @@ const styles = {
     background: 'linear-gradient(180deg, #030308 0%, #0a0a18 50%, #050510 100%)',
     color: '#f8fafc',
     position: 'relative',
-    overflow: 'hidden'
+    overflowX: 'clip',
   },
   bgGradient1: {
     position: 'fixed',

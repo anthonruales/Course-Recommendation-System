@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import NavBar from './components/NavBar';
 
 // Add keyframes for pulse animation
 const pulseKeyframes = `
@@ -49,6 +50,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    position: 'relative',
   },
   navBrand: {
     display: 'flex',
@@ -73,22 +75,33 @@ const styles = {
     WebkitTextFillColor: 'transparent',
   },
   navLinks: {
+    position: 'absolute',
+    left: '50%',
+    transform: 'translateX(-50%)',
     display: 'flex',
     alignItems: 'center',
-    gap: '32px',
+    gap: '2px',
+    background: 'rgba(255, 255, 255, 0.03)',
+    padding: '5px',
+    borderRadius: '14px',
+    border: '1px solid rgba(255, 255, 255, 0.04)',
   },
   navLink: {
-    color: '#94a3b8',
+    padding: '10px 20px',
+    borderRadius: '10px',
+    color: '#8892a6',
     fontSize: '14px',
     fontWeight: '500',
     cursor: 'pointer',
-    transition: 'color 0.2s ease',
-    padding: '8px 0',
+    transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+    position: 'relative',
   },
   navLinkActive: {
-    color: '#a5b4fc',
-    fontWeight: '600',
-    borderBottom: '2px solid #6366f1',
+    background: 'rgba(255, 255, 255, 0.1)',
+    color: '#fff',
   },
   navRight: {
     display: 'flex',
@@ -505,7 +518,7 @@ const styles = {
   }
 };
 
-function MyActivity({ onBack }) {
+function MyActivity({ onBack, onViewProfile }) {
   const [activityHistory, setActivityHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [expandedAttempt, setExpandedAttempt] = useState(null);
@@ -626,23 +639,13 @@ function MyActivity({ onBack }) {
   return (
     <div style={styles.pageWrapper}>
       {/* TOP NAVIGATION BAR */}
-      <nav style={styles.navbar}>
-        <div style={styles.navContainer}>
-          <div style={styles.navBrand}>
-            <img src="/logo.png" alt="CoursePro" style={styles.navLogo} />
-            <span style={styles.navBrandName}>CoursePro</span>
-          </div>
-          
-          <div style={styles.navLinks}>
-            <span style={styles.navLink} onClick={onBack}>Dashboard</span>
-            <span style={{...styles.navLink, ...styles.navLinkActive}}>My Activity</span>
-          </div>
-
-          <div style={styles.navRight}>
-            <button onClick={onBack} style={styles.backBtn}>← Back to Dashboard</button>
-          </div>
-        </div>
-      </nav>
+      <NavBar
+        activePage="activity"
+        onNavigate={(page) => {
+          if (page === 'home') onBack();
+          else if (page === 'profile') onViewProfile();
+        }}
+      />
 
       {/* MAIN CONTENT */}
       <main style={styles.mainContent}>
