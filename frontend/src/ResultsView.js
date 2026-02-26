@@ -415,8 +415,6 @@ function ResultsView({ recommendation, profileData, onRetake, onBack, onViewProf
   const [showFeedback, setShowFeedback] = useState(null);
   const [exporting, setExporting] = useState(false);
   const [emailSending, setEmailSending] = useState(false);
-  const [showEmailModal, setShowEmailModal] = useState(false);
-  const [emailAddress, setEmailAddress] = useState('');
   const [exportMessage, setExportMessage] = useState(null);
   const userId = localStorage.getItem('userId');
   const userName = localStorage.getItem('userName') || 'Student';
@@ -477,10 +475,10 @@ function ResultsView({ recommendation, profileData, onRetake, onBack, onViewProf
     setExporting(false);
   };
 
-  // Send to Email
+  // Send to Email (auto-sends to user's account email)
   const handleSendEmail = async () => {
-    if (!emailAddress || !emailAddress.includes('@')) {
-      setExportMessage({ type: 'error', text: 'Please enter a valid email address' });
+    if (!userEmail || !userEmail.includes('@')) {
+      setExportMessage({ type: 'error', text: 'No email address found on your account. Please add one in Settings.' });
       return;
     }
     
@@ -491,7 +489,7 @@ function ResultsView({ recommendation, profileData, onRetake, onBack, onViewProf
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          email: emailAddress,
+          email: userEmail,
           user_name: userName,
           user_gwa: recommendation.user_gwa,
           user_strand: recommendation.user_strand,
@@ -502,9 +500,7 @@ function ResultsView({ recommendation, profileData, onRetake, onBack, onViewProf
       
       const result = await response.json();
       if (response.ok) {
-        setExportMessage({ type: 'success', text: result.message || 'Email sent successfully!' });
-        setShowEmailModal(false);
-        setEmailAddress('');
+        setExportMessage({ type: 'success', text: result.message || `Email sent to ${userEmail}!` });
       } else {
         setExportMessage({ type: 'error', text: result.detail || 'Failed to send email' });
       }
@@ -628,13 +624,11 @@ function ResultsView({ recommendation, profileData, onRetake, onBack, onViewProf
               {exporting ? '⏳ Generating...' : '📄 Download PDF'}
             </button>
             <button 
-              onClick={() => {
-                setEmailAddress(userEmail);
-                setShowEmailModal(true);
-              }}
+              onClick={handleSendEmail}
+              disabled={emailSending}
               style={styles.exportBtn}
             >
-              ✉️ Send to Email
+              {emailSending ? '⏳ Sending...' : '✉️ Send to Email'}
             </button>
           </div>
         </div>
@@ -721,40 +715,6 @@ function ResultsView({ recommendation, profileData, onRetake, onBack, onViewProf
           </div>
         </footer>
       </main>
-
-      {/* Email Modal */}
-      {showEmailModal && (
-        <div style={styles.modalOverlay} onClick={() => setShowEmailModal(false)}>
-          <div style={styles.emailModal} onClick={e => e.stopPropagation()}>
-            <h3 style={styles.emailModalTitle}>✉️ Send to Email</h3>
-            <p style={styles.emailModalSubtitle}>Enter the email address to receive your recommendations</p>
-            
-            <input
-              type="email"
-              value={emailAddress}
-              onChange={(e) => setEmailAddress(e.target.value)}
-              placeholder="Enter email address"
-              style={styles.emailInput}
-            />
-            
-            <div style={styles.emailModalButtons}>
-              <button 
-                onClick={handleSendEmail}
-                disabled={emailSending}
-                style={styles.primaryBtn}
-              >
-                {emailSending ? '⏳ Sending...' : '📧 Send Email'}
-              </button>
-              <button 
-                onClick={() => setShowEmailModal(false)}
-                style={styles.secondaryBtn}
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {showFeedback && (
         <FeedbackForm

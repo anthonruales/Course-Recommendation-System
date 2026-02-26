@@ -476,45 +476,46 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
             <button 
               onClick={async () => {
                 const userEmail = localStorage.getItem('userEmail') || '';
-                const email = prompt('Enter email address to receive your recommendations:', userEmail);
-                if (email && email.includes('@')) {
-                  const userName = localStorage.getItem('userName') || 'Student';
-                  const userId = localStorage.getItem('userId');
-                  try {
-                    // Fetch user's GWA and Strand from backend
-                    const userRes = await fetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`);
-                    const userData = await userRes.json();
-                    const userGwa = userData.academic_info?.gwa || null;
-                    const userStrand = userData.academic_info?.strand || null;
-                    
-                    const res = await fetch(`${process.env.REACT_APP_API_URL}/export/email`, {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({
-                        email: email,
-                        user_name: userName,
-                        user_gwa: userGwa,
-                        user_strand: userStrand,
-                        detected_traits: [],
-                        recommendations: results.map(r => ({
-                          course_name: r.course_name,
-                          description: r.description || '',
-                          compatibility_score: r.match_percentage || r.compatibility_score || 75,
-                          matched_traits: r.matched_traits || [],
-                          reasoning: r.reasoning || ''
-                        }))
-                      })
-                    });
-                    const data = await res.json();
-                    if (res.ok && data.success) {
-                      alert('Email sent successfully!');
-                    } else {
-                      alert('Failed to send email: ' + (data.detail || data.message || 'Unknown error'));
-                    }
-                  } catch (err) {
-                    console.error('Error fetching user data:', err);
-                    alert('Error sending email. Please try again.');
+                if (!userEmail || !userEmail.includes('@')) {
+                  alert('No email address found on your account. Please add one in Settings.');
+                  return;
+                }
+                const userName = localStorage.getItem('userName') || 'Student';
+                const userId = localStorage.getItem('userId');
+                try {
+                  // Fetch user's GWA and Strand from backend
+                  const userRes = await fetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`);
+                  const userData = await userRes.json();
+                  const userGwa = userData.academic_info?.gwa || null;
+                  const userStrand = userData.academic_info?.strand || null;
+                  
+                  const res = await fetch(`${process.env.REACT_APP_API_URL}/export/email`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      email: userEmail,
+                      user_name: userName,
+                      user_gwa: userGwa,
+                      user_strand: userStrand,
+                      detected_traits: [],
+                      recommendations: results.map(r => ({
+                        course_name: r.course_name,
+                        description: r.description || '',
+                        compatibility_score: r.match_percentage || r.compatibility_score || 75,
+                        matched_traits: r.matched_traits || [],
+                        reasoning: r.reasoning || ''
+                      }))
+                    })
+                  });
+                  const data = await res.json();
+                  if (res.ok && data.success) {
+                    alert('Email sent successfully to ' + userEmail + '!');
+                  } else {
+                    alert('Failed to send email: ' + (data.detail || data.message || 'Unknown error'));
                   }
+                } catch (err) {
+                  console.error('Error fetching user data:', err);
+                  alert('Error sending email. Please try again.');
                 }
               }}
               style={{
