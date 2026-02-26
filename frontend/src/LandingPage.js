@@ -56,13 +56,13 @@ function LandingPage({ onLogin, onSignup }) {
         background: scrolled ? 'rgba(5, 5, 16, 0.95)' : 'transparent',
         borderBottom: scrolled ? '1px solid rgba(255,255,255,0.05)' : 'none',
       }}>
-        <div style={styles.navContainer}>
+        <div className="landing-nav-container" style={styles.navContainer}>
           <div style={styles.navBrand}>
             <img src="/logo.png" alt="CoursePro" style={styles.navLogo} />
             <span style={styles.navBrandName}>CoursePro</span>
           </div>
           
-          <div style={styles.navLinks}>
+          <div className="landing-nav-links" style={styles.navLinks}>
             <a href="#features" style={styles.navLink}>Features</a>
             <a href="#how-it-works" style={styles.navLink}>How It Works</a>
           </div>
@@ -80,7 +80,7 @@ function LandingPage({ onLogin, onSignup }) {
       </nav>
 
       {/* Hero Section */}
-      <section style={styles.heroSection}>
+      <section className="landing-hero-section" style={styles.heroSection}>
         <div style={styles.heroContent}>
           <div style={styles.heroBadge}>
             <span style={styles.badgeDot} />
@@ -88,19 +88,19 @@ function LandingPage({ onLogin, onSignup }) {
             <span style={styles.badgeArrow}>→</span>
           </div>
           
-          <h1 style={styles.heroTitle}>
+          <h1 className="landing-hero-title" style={styles.heroTitle}>
             Find Your
             <br />
-            <span className="gradient-text" style={styles.heroGradient}>Perfect Career Path</span>
+            <span className="gradient-text landing-hero-title" style={styles.heroGradient}>Perfect Career Path</span>
           </h1>
           
-          <p style={styles.heroSubtitle}>
+          <p className="landing-hero-subtitle" style={styles.heroSubtitle}>
             Not sure what course to take? Take our quick assessment to discover 
             your strengths and interests, then get matched with college courses 
             that fit your goals.
           </p>
 
-          <div style={styles.heroCTA}>
+          <div className="landing-hero-cta" style={styles.heroCTA}>
             <button onClick={onSignup} style={styles.primaryBtn}>
               Start Assessment
               <span style={styles.btnArrow}>→</span>
@@ -117,10 +117,10 @@ function LandingPage({ onLogin, onSignup }) {
       </section>
 
       {/* Features Section */}
-      <section id="features" style={styles.featuresSection}>
+      <section id="features" className="landing-features-section" style={styles.featuresSection}>
         <div style={styles.sectionHeader}>
           <span style={styles.sectionBadge}>Features</span>
-          <h2 style={styles.sectionTitle}>
+          <h2 className="landing-section-title" style={styles.sectionTitle}>
             How CoursePro <span style={styles.highlight}>helps you</span>
           </h2>
           <p style={styles.sectionSubtitle}>
@@ -128,7 +128,7 @@ function LandingPage({ onLogin, onSignup }) {
           </p>
         </div>
 
-        <div style={styles.featuresGrid}>
+        <div className="landing-features-grid" style={styles.featuresGrid}>
           {features.map((feature, index) => (
             <div 
               key={index} 
@@ -153,32 +153,32 @@ function LandingPage({ onLogin, onSignup }) {
       </section>
 
       {/* How It Works Section */}
-      <section id="how-it-works" style={styles.howSection}>
+      <section id="how-it-works" className="landing-steps-section" style={styles.howSection}>
         <div style={styles.sectionHeader}>
           <span style={styles.sectionBadge}>How It Works</span>
-          <h2 style={styles.sectionTitle}>
+          <h2 className="landing-section-title" style={styles.sectionTitle}>
             Three simple steps to your <span style={styles.highlight}>future career</span>
           </h2>
         </div>
 
-        <div style={styles.stepsContainer}>
-          <div style={styles.stepCard}>
+        <div className="landing-steps-container" style={styles.stepsContainer}>
+          <div className="landing-step-card" style={styles.stepCard}>
             <div style={styles.stepNumber}>1</div>
             <h3 style={styles.stepTitle}>Create Your Profile</h3>
             <p style={styles.stepDesc}>Enter your academic information, including your GWA and SHS strand.</p>
           </div>
-          <div style={styles.stepConnector}>
+          <div className="landing-step-connector" style={styles.stepConnector}>
             <div style={styles.connectorLine} />
           </div>
-          <div style={styles.stepCard}>
+          <div className="landing-step-card" style={styles.stepCard}>
             <div style={styles.stepNumber}>2</div>
             <h3 style={styles.stepTitle}>Take the Assessment</h3>
             <p style={styles.stepDesc}>Answer questions that adapt to your responses for accurate trait detection.</p>
           </div>
-          <div style={styles.stepConnector}>
+          <div className="landing-step-connector" style={styles.stepConnector}>
             <div style={styles.connectorLine} />
           </div>
-          <div style={styles.stepCard}>
+          <div className="landing-step-card" style={styles.stepCard}>
             <div style={styles.stepNumber}>3</div>
             <h3 style={styles.stepTitle}>Get Recommendations</h3>
             <p style={styles.stepDesc}>Receive personalized course matches based on your unique profile.</p>
@@ -187,9 +187,9 @@ function LandingPage({ onLogin, onSignup }) {
       </section>
 
       {/* CTA Section */}
-      <section style={styles.ctaSection}>
-        <div style={styles.ctaCard}>
-          <h2 style={styles.ctaTitle}>Ready to find the right course for you?</h2>
+      <section className="landing-cta-section" style={styles.ctaSection}>
+        <div className="landing-cta-card" style={styles.ctaCard}>
+          <h2 className="landing-cta-title" style={styles.ctaTitle}>Ready to find the right course for you?</h2>
           <p style={styles.ctaSubtitle}>
             Take our assessment and get personalized course recommendations
           </p>
@@ -201,8 +201,8 @@ function LandingPage({ onLogin, onSignup }) {
       </section>
 
       {/* Footer */}
-      <footer style={styles.footer}>
-        <div style={styles.footerContent}>
+      <footer className="landing-footer" style={styles.footer}>
+        <div className="landing-footer-content" style={styles.footerContent}>
           <div style={styles.footerBrand}>
             <img src="/logo.png" alt="CoursePro" style={styles.footerLogo} />
             <span style={styles.footerBrandName}>CoursePro</span>

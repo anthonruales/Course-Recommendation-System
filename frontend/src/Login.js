@@ -141,8 +141,8 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
       <div style={styles.authWrapper}>
         <div style={styles.bgGradient1}></div>
         <div style={styles.bgGradient2}></div>
-        <div style={styles.glassCard}>
-          <img src="/logo.png" alt="CoursePro" style={styles.brandIcon} />
+        <div className="auth-glass-card" style={styles.glassCard}>
+          <img src="/logo.png" alt="CoursePro" className="auth-brand-icon" style={styles.brandIcon} />
           
           <h2 style={styles.title}>Choose Username</h2>
           <p style={styles.subtitle}>Create a username for your account</p>
@@ -177,8 +177,8 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
     <div style={styles.authWrapper}>
       <div style={styles.bgGradient1}></div>
       <div style={styles.bgGradient2}></div>
-      <div style={styles.glassCard}>
-        <img src="/logo.png" alt="CoursePro" style={styles.brandIcon} />
+      <div className="auth-glass-card" style={styles.glassCard}>
+        <img src="/logo.png" alt="CoursePro" className="auth-brand-icon" style={styles.brandIcon} />
         
         <h2 style={styles.title}>Sign In</h2>
         <p style={styles.subtitle}>Welcome back</p>

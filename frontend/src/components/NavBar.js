@@ -17,18 +17,19 @@ function NavBar({ activePage = 'home', onNavigate, rightContent }) {
 
   return (
     <nav style={navStyles.navbar}>
-      <div style={navStyles.navContainer}>
+      <div className="nav-container" style={navStyles.navContainer}>
         {/* Brand - clickable to go home */}
         <div style={navStyles.navBrand} onClick={() => onNavigate && onNavigate('home')}>
-          <img src="/logo.png" alt="CoursePro" style={navStyles.navLogo} />
-          <span style={navStyles.navBrandName}>CoursePro</span>
+          <img src="/logo.png" alt="CoursePro" className="nav-logo" style={navStyles.navLogo} />
+          <span className="nav-brand-text" style={navStyles.navBrandName}>CoursePro</span>
         </div>
 
         {/* Center tabs */}
-        <div style={navStyles.navLinks}>
+        <div className="nav-links" style={navStyles.navLinks}>
           {pages.map((p) => (
             <span
               key={p.key}
+              className="nav-link"
               style={
                 activePage === p.key
                   ? { ...navStyles.navLink, ...navStyles.navLinkActive }

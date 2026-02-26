@@ -1,0 +1,421 @@
+/* ================================================
+   MOBILE RESPONSIVE OVERRIDES
+   Applied globally via media queries.
+   These override inline styles on mobile devices.
+   ================================================ */
+
+/* ---- Global mobile padding fix ---- */
+@media (max-width: 768px) {
+
+  /* Prevent horizontal overflow everywhere */
+  html, body, #root, .App {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  /* --- NAVBAR --- */
+  .nav-container {
+    padding: 10px 16px !important;
+    gap: 8px !important;
+  }
+
+  .nav-links {
+    position: static !important;
+    transform: none !important;
+    gap: 4px !important;
+  }
+
+  .nav-link {
+    padding: 8px 12px !important;
+    font-size: 12px !important;
+  }
+
+  .nav-brand-text {
+    font-size: 16px !important;
+  }
+
+  .nav-logo {
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  /* --- LANDING PAGE --- */
+  .landing-nav-container {
+    padding: 0 16px !important;
+  }
+
+  .landing-nav-links {
+    display: none !important;
+  }
+
+  .landing-hero-section {
+    padding: 100px 20px 60px !important;
+  }
+
+  .landing-hero-title {
+    font-size: 32px !important;
+    line-height: 1.2 !important;
+  }
+
+  .landing-hero-subtitle {
+    font-size: 16px !important;
+  }
+
+  .landing-hero-cta {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  .landing-hero-cta button,
+  .landing-hero-cta a {
+    width: 100% !important;
+  }
+
+  .landing-features-section {
+    padding: 60px 20px !important;
+  }
+
+  .landing-features-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .landing-section-title {
+    font-size: 28px !important;
+  }
+
+  .landing-steps-container {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 16px !important;
+  }
+
+  .landing-step-card {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .landing-step-connector {
+    display: none !important;
+  }
+
+  .landing-steps-section {
+    padding: 60px 20px !important;
+  }
+
+  .landing-cta-section {
+    padding: 60px 20px !important;
+  }
+
+  .landing-cta-card {
+    padding: 40px 24px !important;
+  }
+
+  .landing-cta-title {
+    font-size: 28px !important;
+  }
+
+  .landing-footer {
+    padding: 32px 20px !important;
+  }
+
+  .landing-footer-content {
+    flex-direction: column !important;
+    gap: 8px !important;
+    text-align: center !important;
+  }
+
+  /* --- AUTH PAGES (Login/Signup) --- */
+  .auth-glass-card {
+    padding: 32px 20px !important;
+    margin: 0 8px !important;
+  }
+
+  .auth-brand-icon {
+    width: 80px !important;
+    height: 80px !important;
+    font-size: 36px !important;
+  }
+
+  /* --- DASHBOARD --- */
+  .dash-main-content {
+    padding: 0 16px 24px !important;
+  }
+
+  .dash-hero-title {
+    font-size: 28px !important;
+  }
+
+  .dash-hero-subtitle {
+    font-size: 14px !important;
+  }
+
+  .dash-bento-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .dash-bento-large {
+    grid-column: span 1 !important;
+  }
+
+  .dash-assessment-options {
+    flex-direction: column !important;
+  }
+
+  .dash-assessment-option {
+    min-width: unset !important;
+  }
+
+  .dash-warning-card {
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+
+  .dash-activity-card {
+    grid-column: span 1 !important;
+  }
+
+  .dash-header-actions {
+    gap: 8px !important;
+  }
+
+  .dash-user-menu {
+    right: 0 !important;
+    left: auto !important;
+    width: 260px !important;
+  }
+
+  /* --- ADAPTIVE ASSESSMENT --- */
+  .assess-main-content {
+    padding: 0 16px 24px !important;
+  }
+
+  .assess-hero-title {
+    font-size: 28px !important;
+  }
+
+  .assess-feature-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .assess-question-main {
+    flex-direction: column !important;
+    padding: 16px !important;
+    gap: 16px !important;
+  }
+
+  .assess-info-panel {
+    width: 100% !important;
+    flex-shrink: 1 !important;
+  }
+
+  .assess-trait-panel {
+    width: 100% !important;
+    flex-shrink: 1 !important;
+  }
+
+  .assess-question-card {
+    padding: 24px 16px !important;
+  }
+
+  .assess-question-text {
+    font-size: 18px !important;
+  }
+
+  .assess-stats-row {
+    gap: 16px !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
+
+  .assess-stat {
+    padding: 16px 20px !important;
+    min-width: 100px !important;
+  }
+
+  .assess-results-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .assess-start-button {
+    padding: 16px 32px !important;
+    font-size: 16px !important;
+  }
+
+  .assess-nav-progress {
+    width: 120px !important;
+  }
+
+  /* --- RESULTS VIEW --- */
+  .results-main-content {
+    padding: 24px 16px !important;
+  }
+
+  .results-hero-title {
+    font-size: 28px !important;
+  }
+
+  .results-card-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+
+  .results-score-display {
+    margin-left: 0 !important;
+  }
+
+  .results-percentage-text {
+    font-size: 32px !important;
+  }
+
+  .results-export-buttons {
+    flex-direction: column !important;
+  }
+
+  .results-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* --- MY ACTIVITY --- */
+  .activity-main-content {
+    padding: 24px 16px !important;
+  }
+
+  .activity-hero-title {
+    font-size: 28px !important;
+  }
+
+  .activity-stats-bar {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .activity-card-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px !important;
+  }
+
+  .activity-card-header-right {
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+  }
+
+  .activity-tabs-nav {
+    flex-direction: column !important;
+  }
+
+  /* --- SETTINGS --- */
+  .settings-main-content {
+    padding: 24px 16px !important;
+  }
+
+  .settings-layout {
+    grid-template-columns: 1fr !important;
+  }
+
+  .settings-sidebar {
+    position: static !important;
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+    padding-bottom: 16px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    gap: 8px !important;
+  }
+
+  .settings-sidebar-nav {
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+  }
+
+  .settings-form-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .settings-photo-section {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  .settings-page-title {
+    font-size: 24px !important;
+  }
+
+  /* --- PROFILE VIEW --- */
+  .profile-main-content {
+    padding: 24px 16px !important;
+  }
+
+  .profile-info {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 16px !important;
+    padding: 0 16px 24px !important;
+  }
+
+  .profile-avatar {
+    width: 90px !important;
+    height: 90px !important;
+    font-size: 36px !important;
+    margin-top: -45px !important;
+  }
+
+  .profile-avatar-img {
+    width: 90px !important;
+    height: 90px !important;
+  }
+
+  .profile-avatar-placeholder {
+    width: 90px !important;
+    height: 90px !important;
+  }
+
+  .profile-edit-btn {
+    margin-top: 0 !important;
+  }
+
+  .profile-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  .profile-content-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .profile-name {
+    font-size: 22px !important;
+  }
+
+  .profile-details {
+    padding-top: 16px !important;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 400px) {
+  .nav-link {
+    padding: 6px 8px !important;
+    font-size: 11px !important;
+  }
+
+  .landing-hero-title {
+    font-size: 26px !important;
+  }
+
+  .dash-hero-title,
+  .assess-hero-title,
+  .results-hero-title,
+  .activity-hero-title {
+    font-size: 24px !important;
+  }
+
+  .profile-stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

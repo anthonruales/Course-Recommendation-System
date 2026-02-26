@@ -526,7 +526,7 @@ function ResultsView({ recommendation, profileData, onRetake, onBack, onViewProf
             else if (page === 'activity') onViewActivity && onViewActivity();
           }}
         />
-        <main style={styles.mainContent}>
+        <main className="results-main-content" style={styles.mainContent}>
           <div style={styles.loadingState}>
             <h2 style={styles.loadingTitle}>Analyzing your responses...</h2>
             <p style={styles.loadingText}>If this takes too long, please check your connection.</p>
@@ -576,13 +576,13 @@ function ResultsView({ recommendation, profileData, onRetake, onBack, onViewProf
       />
 
       {/* MAIN CONTENT */}
-      <main style={styles.mainContent}>
+      <main className="results-main-content" style={styles.mainContent}>
         {/* Hero Header */}
         <div style={styles.heroHeader}>
           <div style={styles.heroBadge}>
             <span>🎯</span> Analysis Complete
           </div>
-          <h1 style={styles.heroTitle}>
+          <h1 className="results-hero-title" style={styles.heroTitle}>
             Your Career <span style={styles.heroGradient}>Recommendations</span>
           </h1>
           <p style={styles.heroSubtitle}>
@@ -619,7 +619,7 @@ function ResultsView({ recommendation, profileData, onRetake, onBack, onViewProf
             </div>
           )}
           
-          <div style={styles.exportButtons}>
+          <div className="results-export-buttons" style={styles.exportButtons}>
             <button 
               onClick={handleExportPDF}
               disabled={exporting}
@@ -640,7 +640,7 @@ function ResultsView({ recommendation, profileData, onRetake, onBack, onViewProf
         </div>
 
         {/* Results List */}
-        <div style={styles.resultsGrid}>
+        <div className="results-grid" style={styles.resultsGrid}>
           {recommendation.recommendations.map((item, index) => {
             const rankColor = getRankColor(index);
             
@@ -652,7 +652,7 @@ function ResultsView({ recommendation, profileData, onRetake, onBack, onViewProf
                   borderLeft: `4px solid ${rankColor}`
                 }}
               >
-                <div style={styles.cardHeader}>
+                <div className="results-card-header" style={styles.cardHeader}>
                   <div style={{ flex: 1 }}>
                     <span 
                       style={{
@@ -669,8 +669,8 @@ function ResultsView({ recommendation, profileData, onRetake, onBack, onViewProf
                     {item.description && <p style={styles.courseDesc}>{item.description}</p>}
                   </div>
                   
-                  <div style={styles.scoreDisplay}>
-                    <div style={{...styles.percentageText, color: rankColor}}>
+                  <div className="results-score-display" style={styles.scoreDisplay}>
+                    <div className="results-percentage-text" style={{...styles.percentageText, color: rankColor}}>
                       {getDisplayPercentage(item)}%
                     </div>
                     <div style={styles.matchLabel}>Match Score</div>

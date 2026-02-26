@@ -273,19 +273,19 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
           }}
         />
 
-        <main style={styles.mainContent}>
+        <main className="assess-main-content" style={styles.mainContent}>
           <div style={styles.startScreen}>
             <div style={styles.heroBadge}>
               <span>🧠</span> AI-Powered Analysis
             </div>
-            <h1 style={styles.heroTitle}>
+            <h1 className="assess-hero-title" style={styles.heroTitle}>
               Smart Career <span style={styles.heroGradient}>Assessment</span>
             </h1>
             <p style={styles.heroSubtitle}>
               Experience an intelligent assessment that adapts to YOUR answers!
             </p>
 
-            <div style={styles.featureGrid}>
+            <div className="assess-feature-grid" style={styles.featureGrid}>
               <div style={styles.featureCard}>
                 <span style={styles.featureIcon}>🎯</span>
                 <h3>Adaptive Intelligence</h3>
@@ -311,6 +311,7 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
             <button 
               onClick={startAssessment} 
               disabled={isStarting}
+              className="assess-start-button"
               style={styles.startButton}
             >
               {isStarting ? '🔄 Preparing...' : '🚀 Begin Assessment'}
@@ -336,34 +337,34 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
           }}
         />
 
-        <main style={styles.mainContent}>
+        <main className="assess-main-content" style={styles.mainContent}>
           <div style={styles.resultsHeader}>
             <div style={styles.heroBadge}>
               <span>🎉</span> Assessment Complete
             </div>
-            <h1 style={styles.heroTitle}>
+            <h1 className="assess-hero-title" style={styles.heroTitle}>
               Your <span style={styles.heroGradient}>Recommendations</span>
             </h1>
             <p style={styles.heroSubtitle}>
               Based on {currentRound} questions, here are your personalized career matches
             </p>
-            <div style={styles.statsRow}>
-              <div style={styles.stat}>
+            <div className="assess-stats-row" style={styles.statsRow}>
+              <div className="assess-stat" style={styles.stat}>
                 <span style={styles.statValue}>{currentRound}</span>
                 <span style={styles.statLabel}>Questions</span>
               </div>
-              <div style={styles.stat}>
+              <div className="assess-stat" style={styles.stat}>
                 <span style={styles.statValue}>{traitsDiscovered}</span>
                 <span style={styles.statLabel}>Traits Found</span>
               </div>
-              <div style={styles.stat}>
+              <div className="assess-stat" style={styles.stat}>
                 <span style={styles.statValue}>{confidence}%</span>
                 <span style={styles.statLabel}>Confidence</span>
               </div>
             </div>
           </div>
 
-          <div style={styles.resultsGrid}>
+          <div className="assess-results-grid" style={styles.resultsGrid}>
             {results.slice(0, 6).map((course, index) => {
               const matchPercent = typeof course.match_percentage === 'number' && !isNaN(course.match_percentage) 
                 ? course.match_percentage 
@@ -554,9 +555,9 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
           </div>
           
           {/* Progress in navbar */}
-          <div style={styles.navProgress}>
+          <div className="assess-nav-progress" style={styles.navProgress}>
             <span style={styles.navProgressText}>Question {currentRound} of {maxRounds}</span>
-            <div style={styles.navProgressBar}>
+            <div className="assess-nav-progress" style={styles.navProgressBar}>
               <div style={{
                 ...styles.navProgressFill,
                 width: `${(currentRound / maxRounds) * 100}%`
@@ -576,9 +577,9 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
         </div>
       </nav>
 
-      <main style={styles.questionMain}>
+      <main className="assess-question-main" style={styles.questionMain}>
         {/* Side Info Panel */}
-        <aside style={styles.infoPanel}>
+        <aside className="assess-info-panel" style={styles.infoPanel}>
           <div style={styles.infoPanelSection}>
             <h4 style={styles.infoPanelTitle}>
               <span style={{fontSize: '14px'}}>📊</span> Progress
@@ -613,7 +614,7 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
 
         {/* Question Card */}
         <div style={styles.questionArea}>
-          <div style={{
+          <div className="assess-question-card" style={{
             ...styles.questionCard,
             opacity: isTransitioning ? 0.5 : 1,
             transform: isTransitioning ? 'translateX(20px)' : 'translateX(0)'
@@ -623,7 +624,7 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
               <span style={styles.questionCategory}>{currentQuestion?.category}</span>
             </div>
 
-            <h2 style={styles.questionText}>{currentQuestion?.question_text}</h2>
+            <h2 className="assess-question-text" style={styles.questionText}>{currentQuestion?.question_text}</h2>
 
             <div style={styles.optionsContainer}>
               {currentQuestion?.options?.map((option, index) => (
@@ -693,7 +694,7 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
         </div>
 
         {/* Right Trait Panel */}
-        <aside style={styles.traitPanel}>
+        <aside className="assess-trait-panel" style={styles.traitPanel}>
           {lastTraitRecorded && (
             <div style={styles.infoPanelSection}>
               <h4 style={styles.infoPanelTitle}>
