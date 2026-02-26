@@ -196,8 +196,9 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
           else if (page === 'activity') onViewActivity();
         }}
         rightContent={
-          <div style={styles.userPillWrapper}>
+          <div className="dash-user-pill-wrapper" style={styles.userPillWrapper}>
             <div 
+              className="dash-user-pill"
               style={styles.userPill} 
               onClick={() => setShowUserMenu(!showUserMenu)}
             >
@@ -206,8 +207,8 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
               ) : (
                 <div style={styles.userAvatar}>{userName?.charAt(0)?.toUpperCase() || 'U'}</div>
               )}
-              <span style={styles.userName}>{userName}</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{marginLeft: '4px', opacity: 0.6}}>
+              <span className="dash-user-name" style={styles.userName}>{userName}</span>
+              <svg className="dash-user-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{marginLeft: '4px', opacity: 0.6}}>
                 <path d="M6 9l6 6 6-6"/>
               </svg>
             </div>
