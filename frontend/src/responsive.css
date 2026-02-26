@@ -39,6 +39,20 @@
     height: 36px !important;
   }
 
+  /* --- NAVBAR USER PILL (mobile) --- */
+  .dash-user-pill {
+    padding: 4px !important;
+    gap: 0 !important;
+  }
+
+  .dash-user-name {
+    display: none !important;
+  }
+
+  .dash-user-chevron {
+    display: none !important;
+  }
+
   /* --- LANDING PAGE --- */
   .landing-nav-container {
     padding: 0 16px !important;
