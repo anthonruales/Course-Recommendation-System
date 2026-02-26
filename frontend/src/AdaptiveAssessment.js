@@ -510,6 +510,8 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
                   const data = await res.json();
                   if (res.ok && data.success) {
                     alert('Email sent successfully to ' + userEmail + '!');
+                  } else if (res.status === 503) {
+                    alert('📧 Email service is currently in testing mode. Please use "Download PDF" to save your results instead.');
                   } else {
                     alert('Failed to send email: ' + (data.detail || data.message || 'Unknown error'));
                   }

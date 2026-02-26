@@ -2625,6 +2625,10 @@ from io import BytesIO
 import urllib.request
 import urllib.error
 
+class EmailDomainNotVerifiedError(Exception):
+    """Raised when Resend domain is not verified (free tier limitation)."""
+    pass
+
 def send_email_html(to_email: str, subject: str, html_content: str, from_name: str = "CoursePro"):
     """Send an HTML email using Resend HTTP API (preferred) or SMTP fallback."""
     
@@ -2652,6 +2656,12 @@ def send_email_html(to_email: str, subject: str, html_content: str, from_name: s
             if resp.status_code in (200, 201):
                 print(f"[EMAIL] Resend success: {resp.json()}")
                 return True
+            elif resp.status_code == 403 and "verify a domain" in resp.text:
+                print(f"[EMAIL] Resend domain not verified (free tier). Cannot send to {to_email}")
+                raise EmailDomainNotVerifiedError(
+                    "Email service is in testing mode. To enable sending emails to all users, "
+                    "a verified domain must be configured. Please download your results as PDF instead."
+                )
             else:
                 print(f"[EMAIL] Resend HTTP error {resp.status_code}: {resp.text}")
                 raise Exception(f"Resend API error ({resp.status_code}): {resp.text}")
@@ -2936,6 +2946,12 @@ def email_recommendations(data: EmailRequest, db: Session = Depends(get_db)):
             "message": f"Recommendations sent successfully to {data.email}"
         }
         
+    except EmailDomainNotVerifiedError as e:
+        print(f"[EMAIL] Domain not verified: {str(e)}")
+        raise HTTPException(
+            status_code=503,
+            detail="Email service is currently in testing mode and cannot send to external addresses. Please download your results as PDF instead."
+        )
     except Exception as e:
         print(f"[EMAIL] Failed to send recommendations: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Error sending email: {str(e)}")
@@ -3117,7 +3133,13 @@ def send_daily_digest(data: DailyDigestRequest, db: Session = Depends(get_db)):
             "digest_count": len(today_attempts),
             "email": user.email
         }
-        
+    
+    except EmailDomainNotVerifiedError as e:
+        print(f"[DAILY-DIGEST] Domain not verified: {str(e)}")
+        raise HTTPException(
+            status_code=503,
+            detail="Email service is currently in testing mode and cannot send to external addresses. Please download your results as PDF instead."
+        )
     except Exception as e:
         print(f"[DAILY-DIGEST] Failed: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Failed to send email: {str(e)}")
