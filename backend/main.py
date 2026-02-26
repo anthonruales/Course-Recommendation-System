@@ -93,6 +93,44 @@ async def lifespan(app: FastAPI):
         # SQLAlchemy will handle schema updates automatically via create_all()
         # This preserves all existing data including feedbacks
         models.Base.metadata.create_all(bind=database.engine)
+        
+        # --- AUTO-MIGRATE: Add missing columns to existing tables ---
+        from sqlalchemy import text as _text, inspect as _inspect
+        with database.engine.connect() as conn:
+            inspector = _inspect(database.engine)
+            
+            # Check user_test_attempts table for missing columns
+            if 'user_test_attempts' in inspector.get_table_names():
+                existing_cols = {c['name'] for c in inspector.get_columns('user_test_attempts')}
+                migrations = {
+                    'max_questions': 'INTEGER',
+                    'confidence_score': 'FLOAT',
+                    'traits_found': 'INTEGER',
+                }
+                for col_name, col_type in migrations.items():
+                    if col_name not in existing_cols:
+                        print(f"[MIGRATE] Adding column {col_name} to user_test_attempts")
+                        conn.execute(_text(f'ALTER TABLE user_test_attempts ADD COLUMN {col_name} {col_type}'))
+                conn.commit()
+            
+            # Check test_attempts table for missing columns
+            if 'test_attempts' in inspector.get_table_names():
+                existing_cols = {c['name'] for c in inspector.get_columns('test_attempts')}
+                migrations = {
+                    'max_questions': 'INTEGER',
+                    'questions_presented': 'INTEGER',
+                    'questions_answered': 'INTEGER',
+                    'confidence_score': 'FLOAT',
+                    'user_gwa': 'FLOAT',
+                    'user_strand': 'VARCHAR(50)',
+                }
+                for col_name, col_type in migrations.items():
+                    if col_name not in existing_cols:
+                        print(f"[MIGRATE] Adding column {col_name} to test_attempts")
+                        conn.execute(_text(f'ALTER TABLE test_attempts ADD COLUMN {col_name} {col_type}'))
+                conn.commit()
+        
+        print("[START] Schema migration complete")
         seed_database()
     except Exception as e:
         print(f"[ERROR] Error during startup: {e}")
