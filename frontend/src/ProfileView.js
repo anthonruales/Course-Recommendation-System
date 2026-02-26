@@ -153,24 +153,24 @@ function ProfileView({ profileData, onBack, onViewActivity, onSettings }) {
       />
 
       {/* MAIN CONTENT */}
-      <main style={styles.mainContent}>
+      <main className="profile-main-content" style={styles.mainContent}>
         {/* Profile Header Card */}
         <div style={styles.profileHeader}>
           <div style={styles.coverPhoto}></div>
-          <div style={styles.profileInfo}>
-            <div style={styles.avatarWrapper}>
+          <div className="profile-info" style={styles.profileInfo}>
+            <div className="profile-avatar" style={styles.avatarWrapper}>
               {profilePhoto ? (
-                <img src={profilePhoto} alt="Profile" style={styles.avatarImage} />
+                <img src={profilePhoto} alt="Profile" className="profile-avatar-img" style={styles.avatarImage} />
               ) : (
-                <div style={styles.avatarPlaceholder}>
+                <div className="profile-avatar-placeholder" style={styles.avatarPlaceholder}>
                   <span style={styles.avatarIcon}>{userName.charAt(0).toUpperCase()}</span>
                 </div>
               )}
               <div style={styles.onlineDot}></div>
             </div>
             
-            <div style={styles.profileDetails}>
-              <h1 style={styles.profileName}>{profileData?.fullname || userName}</h1>
+            <div className="profile-details" style={styles.profileDetails}>
+              <h1 className="profile-name" style={styles.profileName}>{profileData?.fullname || userName}</h1>
               <p style={styles.profileUsername}>@{userUsername}</p>
               <div style={styles.profileMeta}>
                 {profileData?.age && (
@@ -194,7 +194,7 @@ function ProfileView({ profileData, onBack, onViewActivity, onSettings }) {
               </div>
             </div>
 
-            <button onClick={onSettings} style={styles.editProfileBtn}>
+            <button onClick={onSettings} className="profile-edit-btn" style={styles.editProfileBtn}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/>
                 <path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
@@ -205,7 +205,7 @@ function ProfileView({ profileData, onBack, onViewActivity, onSettings }) {
         </div>
 
         {/* Stats Cards */}
-        <div style={styles.statsGrid}>
+        <div className="profile-stats-grid" style={styles.statsGrid}>
           <div style={styles.statCard}>
             <div style={styles.statIcon}>📊</div>
             <div style={styles.statValue}>{assessmentStats.total}</div>
@@ -229,7 +229,7 @@ function ProfileView({ profileData, onBack, onViewActivity, onSettings }) {
         </div>
 
         {/* Profile Content Grid */}
-        <div style={styles.contentGrid}>
+        <div className="profile-content-grid" style={styles.contentGrid}>
           {/* About Section */}
           <div style={styles.contentCard}>
             <div style={styles.cardHeader}>

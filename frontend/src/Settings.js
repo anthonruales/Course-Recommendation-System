@@ -457,22 +457,23 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
       />
 
       {/* MAIN CONTENT */}
-      <main style={styles.mainContent}>
+      <main className="settings-main-content" style={styles.mainContent}>
         <div style={styles.settingsHeader}>
-          <h1 style={styles.pageTitle}>
+          <h1 className="settings-page-title" style={styles.pageTitle}>
             <span style={styles.pageTitleIcon}>⚙️</span>
             Settings
           </h1>
           <p style={styles.pageSubtitle}>Manage your account settings and preferences</p>
         </div>
 
-        <div style={styles.settingsLayout}>
+        <div className="settings-layout" style={styles.settingsLayout}>
           {/* Sidebar Navigation */}
-          <div style={styles.sidebar}>
+          <div className="settings-sidebar" style={styles.sidebar}>
             {settingsSections.map(section => (
               <div
                 key={section.id}
                 onClick={() => setActiveSection(section.id)}
+                className="settings-sidebar-nav"
                 style={activeSection === section.id ? {
                   ...styles.sidebarItem,
                   ...styles.sidebarItemActive
@@ -493,7 +494,7 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
                 <p style={styles.sectionDesc}>Update your personal details, academic info, and preferences</p>
                 
                 {/* Profile Photo */}
-                <div style={styles.photoSection}>
+                <div className="settings-photo-section" style={styles.photoSection}>
                   <div style={styles.photoWrapper}>
                     {profilePhoto ? (
                       <img src={profilePhoto} alt="Profile" style={styles.photoImage} />
@@ -528,7 +529,7 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
 
                 {/* Basic Info Subsection */}
                 <div style={styles.subsectionTitle}>Basic Information</div>
-                <div style={styles.formGrid}>
+                <div className="settings-form-grid" style={styles.formGrid}>
                   <div style={styles.inputGroup}>
                     <label style={styles.label}>Username</label>
                     <div style={styles.readOnlyField}>
@@ -599,7 +600,7 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
 
                 {/* Academic Details Subsection */}
                 <div style={{...styles.subsectionTitle, marginTop: '32px'}}>Academic Details</div>
-                <div style={styles.formGrid}>
+                <div className="settings-form-grid" style={styles.formGrid}>
                   <div style={styles.inputGroup}>
                     <label style={styles.label}>SHS Strand</label>
                     <select

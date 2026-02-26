@@ -648,13 +648,13 @@ function MyActivity({ onBack, onViewProfile }) {
       />
 
       {/* MAIN CONTENT */}
-      <main style={styles.mainContent}>
+      <main className="activity-main-content" style={styles.mainContent}>
         {/* Hero Header */}
         <div style={styles.heroHeader}>
           <div style={styles.heroBadge}>
             <span>📂</span> Assessment History
           </div>
-          <h1 style={styles.heroTitle}>
+          <h1 className="activity-hero-title" style={styles.heroTitle}>
             My <span style={styles.heroGradient}>Activity</span>
           </h1>
           <p style={styles.heroSubtitle}>
@@ -663,7 +663,7 @@ function MyActivity({ onBack, onViewProfile }) {
         </div>
 
         {/* Stats Bar */}
-        <div style={styles.statsBar}>
+        <div className="activity-stats-bar" style={styles.statsBar}>
           <div style={styles.statCard}>
             <span style={styles.statValue}>{activityHistory.length}</span>
             <span style={styles.statLabel}>Total Assessments</span>
@@ -764,6 +764,7 @@ function MyActivity({ onBack, onViewProfile }) {
                 
                 {/* CARD HEADER */}
                 <div 
+                  className="activity-card-header"
                   style={styles.activityCardHeader}
                   onClick={() => handleActivityClick(activity.attempt_id)}
                 >
@@ -878,7 +879,7 @@ function MyActivity({ onBack, onViewProfile }) {
                 {/* EXPANDED CONTENT */}
                 {expandedAttempt === activity.attempt_id && (
                   <div style={styles.expandedContent}>
-                    <div style={styles.tabsNav}>
+                    <div className="activity-tabs-nav" style={styles.tabsNav}>
                       <button 
                         style={{...styles.tabBtn, ...(expandedTab[activity.attempt_id] !== 'results' ? styles.tabBtnActive : {})}}
                         onClick={() => setExpandedTab({...expandedTab, [activity.attempt_id]: 'answers'})}

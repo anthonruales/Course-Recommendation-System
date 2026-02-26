@@ -216,7 +216,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
             {showUserMenu && (
               <>
                 <div style={styles.menuBackdrop} onClick={() => setShowUserMenu(false)}></div>
-                <div style={styles.userMenu}>
+                <div className="dash-user-menu" style={styles.userMenu}>
                   <div style={styles.userMenuHeader}>
                     <div style={styles.userMenuAvatar}>
                       {profilePhoto ? (
@@ -279,16 +279,16 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
         }
       />
       {/* HERO SECTION */}
-      <main style={styles.mainContent}>
+      <main className="dash-main-content" style={styles.mainContent}>
         <section style={styles.heroSection}>
           <div style={styles.heroContent}>
-            <h1 style={styles.heroTitle}>
+            <h1 className="dash-hero-title" style={styles.heroTitle}>
               <span style={styles.heroLine1}>Welcome back,</span>
               <span className="gradient-text" style={styles.heroLine2}>{userName}</span>
             </h1>
 
             {!checkingProfile && !hasAcademicInfo && (
-              <div style={styles.warningCard}>
+              <div className="dash-warning-card" style={styles.warningCard}>
                 <div style={styles.warningIcon}>⚠️</div>
                 <div style={styles.warningText}>
                   <strong>Complete your profile</strong>
@@ -301,9 +301,9 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
         </section>
 
         {/* BENTO GRID SECTION */}
-        <section style={styles.bentoGrid}>
+        <section className="dash-bento-grid" style={styles.bentoGrid}>
           {/* Assessment Card - Large - MAIN CTA */}
-          <div style={styles.bentoCardLarge}>
+          <div className="dash-bento-large" style={styles.bentoCardLarge}>
             <div style={styles.cardGlow}></div>
             <div style={styles.cardContent}>
               <div style={styles.cardHeader}>
@@ -314,7 +314,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
               <p style={styles.cardDescLarge}>Answer questions and get personalized course recommendations based on your interests and skills.</p>
               
               <div style={styles.quizLengthLabel}>Select Quiz Length:</div>
-              <div style={styles.assessmentOptions}>
+              <div className="dash-assessment-options" style={styles.assessmentOptions}>
                 {[
                   { count: 30, label: 'Quick', icon: '⚡', color: '#22c55e' },
                   { count: 50, label: 'Standard', icon: '📊', color: '#6366f1' },
@@ -391,7 +391,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
 
           {/* Recent Activity Card */}
           {history && history.length > 0 && (
-          <div style={styles.bentoCardActivity}>
+          <div className="dash-activity-card dash-bento-large" style={styles.bentoCardActivity}>
             <div style={styles.activityHeader}>
               <h3 style={styles.activityTitle}>Recent Activity</h3>
               {history.length > 3 && (

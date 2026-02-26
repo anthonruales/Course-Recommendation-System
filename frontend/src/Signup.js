@@ -126,8 +126,8 @@ function Signup({ onSwitch, onBack }) {
     <div style={styles.authWrapper}>
       <div style={styles.bgGradient1}></div>
       <div style={styles.bgGradient2}></div>
-      <div style={styles.glassCard}>
-        <img src="/logo.png" alt="CoursePro" style={styles.brandIcon} />
+      <div className="auth-glass-card" style={styles.glassCard}>
+        <img src="/logo.png" alt="CoursePro" className="auth-brand-icon" style={styles.brandIcon} />
         
         <h2 style={styles.title}>Create Account</h2>
         <p style={styles.subtitle}>Get personalized course recommendations</p>
