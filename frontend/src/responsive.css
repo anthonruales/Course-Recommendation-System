@@ -152,8 +152,16 @@
   }
 
   /* --- DASHBOARD --- */
+  .dash-page-wrapper {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+  }
+
   .dash-main-content {
-    padding: 0 16px 24px !important;
+    padding: 0 12px 24px !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .dash-hero-title {
@@ -166,23 +174,40 @@
 
   .dash-bento-grid {
     grid-template-columns: 1fr !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    gap: 14px !important;
   }
 
   .dash-bento-large {
     grid-column: span 1 !important;
+    padding: 20px 16px !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .dash-bento-small {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 20px 16px !important;
   }
 
   .dash-assessment-options {
     flex-direction: column !important;
+    gap: 10px !important;
   }
 
   .dash-assessment-option {
     min-width: unset !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .dash-warning-card {
     flex-direction: column !important;
     text-align: center !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .dash-activity-card {

@@ -182,7 +182,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
   }, []);
 
   return (
-    <div style={styles.pageWrapper}>
+    <div className="dash-page-wrapper" style={styles.pageWrapper}>
       {/* Animated background elements */}
       <div style={styles.bgGradient1}></div>
       <div style={styles.bgGradient2}></div>
@@ -323,6 +323,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
                 ].map((option) => (
                   <div
                     key={option.count}
+                    className="dash-assessment-option"
                     style={selectedQuestionCount === option.count ? {
                       ...styles.assessmentOption,
                       ...styles.assessmentOptionActive,
@@ -369,6 +370,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
 
           {/* Profile Card */}
           <div 
+            className="dash-bento-small"
             style={styles.bentoCardSmall}
             onClick={onViewProfile}
           >
@@ -380,6 +382,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
 
           {/* Activity Card */}
           <div 
+            className="dash-bento-small"
             style={styles.bentoCardSmall}
             onClick={onViewActivity}
           >
