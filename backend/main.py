@@ -2633,35 +2633,30 @@ def send_email_html(to_email: str, subject: str, html_content: str, from_name: s
     resend_from = os.getenv("RESEND_FROM", "CoursePro <onboarding@resend.dev>")
     
     if resend_api_key:
-        import json as _json
-        payload = _json.dumps({
-            "from": resend_from,
-            "to": [to_email],
-            "subject": subject,
-            "html": html_content
-        }).encode("utf-8")
-        
-        req = urllib.request.Request(
-            "https://api.resend.com/emails",
-            data=payload,
-            headers={
-                "Authorization": f"Bearer {resend_api_key}",
-                "Content-Type": "application/json"
-            },
-            method="POST"
-        )
-        
+        import requests as _requests
         try:
-            with urllib.request.urlopen(req, timeout=30) as resp:
-                result = _json.loads(resp.read().decode())
-                print(f"[EMAIL] Resend success: {result}")
+            resp = _requests.post(
+                "https://api.resend.com/emails",
+                headers={
+                    "Authorization": f"Bearer {resend_api_key}",
+                    "Content-Type": "application/json",
+                },
+                json={
+                    "from": resend_from,
+                    "to": [to_email],
+                    "subject": subject,
+                    "html": html_content
+                },
+                timeout=30
+            )
+            if resp.status_code in (200, 201):
+                print(f"[EMAIL] Resend success: {resp.json()}")
                 return True
-        except urllib.error.HTTPError as e:
-            body = e.read().decode()
-            print(f"[EMAIL] Resend HTTP error {e.code}: {body}")
-            raise Exception(f"Resend API error ({e.code}): {body}")
-        except Exception as e:
-            print(f"[EMAIL] Resend error: {e}")
+            else:
+                print(f"[EMAIL] Resend HTTP error {resp.status_code}: {resp.text}")
+                raise Exception(f"Resend API error ({resp.status_code}): {resp.text}")
+        except _requests.exceptions.RequestException as e:
+            print(f"[EMAIL] Resend request error: {e}")
             raise Exception(f"Resend API error: {str(e)}")
     
     # Fallback: SMTP (works locally, may be blocked on some cloud platforms)
