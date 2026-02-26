@@ -501,6 +501,8 @@ function ResultsView({ recommendation, profileData, onRetake, onBack, onViewProf
       const result = await response.json();
       if (response.ok) {
         setExportMessage({ type: 'success', text: result.message || `Email sent to ${userEmail}!` });
+      } else if (response.status === 503) {
+        setExportMessage({ type: 'error', text: '📧 Email service is in testing mode. Please use "Download PDF" to save your results instead.' });
       } else {
         setExportMessage({ type: 'error', text: result.detail || 'Failed to send email' });
       }

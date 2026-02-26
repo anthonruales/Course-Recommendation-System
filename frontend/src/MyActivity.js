@@ -621,6 +621,8 @@ function MyActivity({ onBack, onViewProfile }) {
 
       if (response.ok && data.success) {
         showToast(`📧 ${data.message}`, 'success');
+      } else if (response.status === 503) {
+        showToast('📧 Email service is in testing mode. Please download PDF instead.', 'error');
       } else {
         showToast(data.detail || data.message || 'Failed to send daily digest', 'error');
       }
