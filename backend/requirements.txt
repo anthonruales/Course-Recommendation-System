@@ -10,3 +10,4 @@ email-validator
 pydantic
 pydantic[email]
 reportlab
+requests
