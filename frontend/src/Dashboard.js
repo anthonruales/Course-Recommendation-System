@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { authFetch } from './api';
 import NavBar from './components/NavBar';
 
 // Add CSS keyframes for smooth animations
@@ -83,7 +84,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
   useEffect(() => {
     const userId = localStorage.getItem('userId');
     if (userId) {
-      fetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`)
+      authFetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`)
         .then(res => res.json())
         .then(data => {
           setHasAcademicInfo(data.has_academic_info || false);
@@ -95,7 +96,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
         });
       
       // Fetch actual activity count from API and calculate unseen
-      fetch(`${process.env.REACT_APP_API_URL}/user/${userId}/assessment-history`)
+      authFetch(`${process.env.REACT_APP_API_URL}/user/${userId}/assessment-history`)
         .then(res => res.json())
         .then(data => {
           const totalAttempts = data.total_attempts || 0;
@@ -123,7 +124,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
     // Update activity immediately on mount
     const updateActivity = async () => {
       try {
-        await fetch(`${process.env.REACT_APP_API_URL}/user/${userId}/update-activity`, {
+        await authFetch(`${process.env.REACT_APP_API_URL}/user/${userId}/update-activity`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' }
         });
@@ -148,7 +149,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
     // Call logout endpoint to mark user as offline
     if (userId) {
       try {
-        await fetch(`${process.env.REACT_APP_API_URL}/logout`, {
+        await authFetch(`${process.env.REACT_APP_API_URL}/logout`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ user_id: userId })

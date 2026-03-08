@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { authFetch } from './api';
 import Toast from './Toast';
 import NavBar from './components/NavBar';
 
@@ -311,7 +312,7 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
       }
       
       try {
-        const emailRes = await fetch(`${process.env.REACT_APP_API_URL}/user/${userId}/change-email`, {
+        const emailRes = await authFetch(`${process.env.REACT_APP_API_URL}/user/${userId}/change-email`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ new_email: newEmail })
@@ -336,7 +337,7 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
       }
     }
     
-    fetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`, {
+    authFetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -407,7 +408,7 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
     }
     
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/user/${userId}/change-password`, {
+      const response = await authFetch(`${process.env.REACT_APP_API_URL}/user/${userId}/change-password`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

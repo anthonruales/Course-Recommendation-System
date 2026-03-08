@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { authFetch } from './api';
 import NavBar from './components/NavBar';
 
 // Add keyframes for pulse animation
@@ -534,7 +535,7 @@ function MyActivity({ onBack, onViewProfile }) {
       const savedSeen = JSON.parse(localStorage.getItem(`seenActivities_${userId}`) || '[]');
       setSeenActivities(savedSeen);
       
-      fetch(`${process.env.REACT_APP_API_URL}/user/${userId}/assessment-history`)
+      authFetch(`${process.env.REACT_APP_API_URL}/user/${userId}/assessment-history`)
         .then(res => res.json())
         .then(data => {
           setActivityHistory(data.history || []);
@@ -609,7 +610,7 @@ function MyActivity({ onBack, onViewProfile }) {
 
     setSendingDigest(true);
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/send-daily-digest`, {
+      const response = await authFetch(`${process.env.REACT_APP_API_URL}/send-daily-digest`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -799,7 +800,7 @@ function MyActivity({ onBack, onViewProfile }) {
                          
                          if (userGwa === null || userGwa === undefined || userStrand === null || userStrand === undefined) {
                            try {
-                             const res = await fetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`);
+                             const res = await authFetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`);
                              const userData = await res.json();
                              userGwa = userGwa ?? userData.academic_info?.gwa;
                              userStrand = userStrand ?? userData.academic_info?.strand;
@@ -809,7 +810,7 @@ function MyActivity({ onBack, onViewProfile }) {
                          }
                          
                          try {
-                           const response = await fetch(`${process.env.REACT_APP_API_URL}/export/pdf`, {
+                           const response = await authFetch(`${process.env.REACT_APP_API_URL}/export/pdf`, {
                              method: 'POST',
                              headers: { 'Content-Type': 'application/json' },
                              body: JSON.stringify({

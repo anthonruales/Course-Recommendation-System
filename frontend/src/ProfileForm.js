@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { authFetch } from './api';
 import Toast from './Toast';
 
 // Bad words filter list (common inappropriate words)
@@ -354,7 +355,7 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
     const changedFields = getChangedFields();
     
     // Save to backend - include all profile fields
-    fetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`, {
+    authFetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
