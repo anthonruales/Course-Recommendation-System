@@ -41,12 +41,13 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
           localStorage.setItem('userId', backendRes.data.user_id);
           localStorage.setItem('userUsername', backendRes.data.username || '');
           localStorage.setItem('userEmail', backendRes.data.email || '');
+          localStorage.setItem('accessToken', backendRes.data.access_token || '');
           
           // Ensure last_active is updated on login
           try {
             await fetch(`${process.env.REACT_APP_API_URL}/refresh-user-activity/${backendRes.data.user_id}`, {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' }
+              headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${backendRes.data.access_token}` }
             });
           } catch (err) {
             console.warn('Could not refresh user activity:', err);
@@ -88,13 +89,14 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
       localStorage.setItem('userId', res.data.user_id);
       localStorage.setItem('userUsername', googleUsername);
       localStorage.setItem('userEmail', googleUserData.email || '');
+      localStorage.setItem('accessToken', res.data.access_token || '');
       setShowUsernameModal(false);
       
       // Ensure last_active is updated on new registration
       try {
         await fetch(`${process.env.REACT_APP_API_URL}/refresh-user-activity/${res.data.user_id}`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' }
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${res.data.access_token}` }
         });
       } catch (err) {
         console.warn('Could not refresh user activity:', err);
@@ -116,12 +118,13 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
       localStorage.setItem('userId', res.data.user_id);
       localStorage.setItem('userUsername', res.data.username || usernameOrEmail);
       localStorage.setItem('userEmail', res.data.email || '');
+      localStorage.setItem('accessToken', res.data.access_token || '');
       
       // Ensure last_active is updated on login
       try {
         await fetch(`${process.env.REACT_APP_API_URL}/refresh-user-activity/${res.data.user_id}`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' }
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${res.data.access_token}` }
         });
       } catch (err) {
         console.warn('Could not refresh user activity:', err);

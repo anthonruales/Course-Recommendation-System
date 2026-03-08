@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { authFetch } from './api';
 import NavBar from './components/NavBar';
 
 // Predefined options for Academic Interests
@@ -92,7 +93,7 @@ function ProfileView({ profileData, onBack, onViewActivity, onSettings }) {
       }
       
       // Fetch assessment history stats
-      fetch(`${process.env.REACT_APP_API_URL}/user/${userId}/assessment-history`)
+      authFetch(`${process.env.REACT_APP_API_URL}/user/${userId}/assessment-history`)
         .then(res => res.json())
         .then(data => {
           setAssessmentStats({

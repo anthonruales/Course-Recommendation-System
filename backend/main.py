@@ -8,7 +8,10 @@ from pydantic import BaseModel
 from typing import List, Optional
 from dotenv import load_dotenv
 import models, database
-from security import hash_password, verify_password
+from security import (
+    hash_password, verify_password, create_access_token,
+    get_current_user, require_admin, require_self_or_admin
+)
 
 # Bad words filter list (common inappropriate words)
 BAD_WORDS = [
@@ -129,6 +132,14 @@ async def lifespan(app: FastAPI):
                         print(f"[MIGRATE] Adding column {col_name} to test_attempts")
                         conn.execute(_text(f'ALTER TABLE test_attempts ADD COLUMN {col_name} {col_type}'))
                 conn.commit()
+            
+            # Check users table for is_admin column
+            if 'users' in inspector.get_table_names():
+                existing_cols = {c['name'] for c in inspector.get_columns('users')}
+                if 'is_admin' not in existing_cols:
+                    print("[MIGRATE] Adding column is_admin to users")
+                    conn.execute(_text('ALTER TABLE users ADD COLUMN is_admin INTEGER DEFAULT 0'))
+                    conn.commit()
         
         print("[START] Schema migration complete")
         seed_database()
@@ -140,7 +151,20 @@ async def lifespan(app: FastAPI):
     yield
 
 app = FastAPI(lifespan=lifespan)
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
+
+# CORS — only allow your actual frontends to call this API
+allowed_origins = [
+    "https://coursepro.ildf.site",   # deployed frontend
+    "http://localhost:3000",          # local React dev server
+    "http://localhost:5173",          # local Vite dev server (admin)
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allowed_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 def seed_database():
     db = database.SessionLocal()
@@ -406,7 +430,18 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
     db.commit()
     print(f"[LOGIN] Updated last_active to: {db_user.last_active}")
     
-    return {"user": db_user.fullname, "user_id": db_user.user_id, "username": db_user.username, "email": db_user.email}
+    # Generate JWT token
+    token = create_access_token({
+        "user_id": db_user.user_id,
+        "username": db_user.username,
+        "is_admin": bool(getattr(db_user, 'is_admin', 0))
+    })
+    
+    return {
+        "user": db_user.fullname, "user_id": db_user.user_id,
+        "username": db_user.username, "email": db_user.email,
+        "access_token": token, "token_type": "bearer"
+    }
 
 @app.post("/google-login")
 def google_login(user: dict, db: Session = Depends(get_db)):
@@ -431,7 +466,20 @@ def google_login(user: dict, db: Session = Depends(get_db)):
         db_user.last_active = datetime.datetime.now()
         db.commit()
         print(f"[GOOGLE-LOGIN] Updated last_active to: {db_user.last_active}")
-        return {"user": db_user.fullname, "user_id": db_user.user_id, "username": db_user.username, "email": db_user.email, "needs_username": False}
+        
+        # Generate JWT token for Google login
+        token = create_access_token({
+            "user_id": db_user.user_id,
+            "username": db_user.username,
+            "is_admin": bool(getattr(db_user, 'is_admin', 0))
+        })
+        
+        return {
+            "user": db_user.fullname, "user_id": db_user.user_id,
+            "username": db_user.username, "email": db_user.email,
+            "needs_username": False,
+            "access_token": token, "token_type": "bearer"
+        }
     else:
         # New user - they need to choose a username
         print(f"\n[GOOGLE-LOGIN] New user: {email}")
@@ -479,10 +527,21 @@ def google_register(user: dict, db: Session = Depends(get_db)):
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-    return {"user": new_user.fullname, "user_id": new_user.user_id}
+    
+    # Generate JWT token for newly registered Google user
+    token = create_access_token({
+        "user_id": new_user.user_id,
+        "username": new_user.username,
+        "is_admin": False
+    })
+    
+    return {
+        "user": new_user.fullname, "user_id": new_user.user_id,
+        "access_token": token, "token_type": "bearer"
+    }
 
 @app.post("/user/{user_id}/update-activity")
-def update_activity(user_id: int, db: Session = Depends(get_db)):
+def update_activity(user_id: int, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Update user online status only - DO NOT update last_active (only login should update that)"""
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
@@ -495,7 +554,7 @@ def update_activity(user_id: int, db: Session = Depends(get_db)):
     return {"message": "Online status updated"}
 
 @app.post("/logout")
-def logout(data: dict, db: Session = Depends(get_db)):
+def logout(data: dict, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Handle user logout - mark user as offline"""
     user_id = data.get("user_id")
     
@@ -513,7 +572,7 @@ def logout(data: dict, db: Session = Depends(get_db)):
     return {"message": "Logged out successfully", "user_id": user_id}
 
 @app.get("/verify-session/{user_id}")
-def verify_session(user_id: int, db: Session = Depends(get_db)):
+def verify_session(user_id: int, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Verify if a user's session is still valid (account is active)"""
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     
@@ -527,7 +586,7 @@ def verify_session(user_id: int, db: Session = Depends(get_db)):
     return {"valid": True, "user_id": user_id, "username": user.username, "fullname": user.fullname}
 
 @app.post("/refresh-user-activity/{user_id}")
-def refresh_user_activity(user_id: int, db: Session = Depends(get_db)):
+def refresh_user_activity(user_id: int, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Force refresh user's last_active timestamp on login"""
     print(f"\n[REFRESH-ACTIVITY] Endpoint called for user_id: {user_id}")
     
@@ -556,7 +615,7 @@ def refresh_user_activity(user_id: int, db: Session = Depends(get_db)):
 
 
 @app.get("/user/{user_id}/academic-info")
-def get_academic_info(user_id: int, db: Session = Depends(get_db)):
+def get_academic_info(user_id: int, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Get user's academic info including GWA, Strand, and personal info"""
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
@@ -570,7 +629,7 @@ def get_academic_info(user_id: int, db: Session = Depends(get_db)):
     }
 
 @app.put("/user/{user_id}/academic-info")
-def update_academic_info(user_id: int, info: AcademicInfoUpdate, db: Session = Depends(get_db)):
+def update_academic_info(user_id: int, info: AcademicInfoUpdate, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Update user's academic info (GWA, Strand, and personal info) for recommendation accuracy"""
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
@@ -607,7 +666,7 @@ class PasswordChangeRequest(BaseModel):
     new_password: str
 
 @app.put("/user/{user_id}/change-password")
-def change_password(user_id: int, request: PasswordChangeRequest, db: Session = Depends(get_db)):
+def change_password(user_id: int, request: PasswordChangeRequest, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Change user's password after verifying current password"""
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
@@ -634,7 +693,7 @@ class EmailChangeRequest(BaseModel):
     new_email: str
 
 @app.put("/user/{user_id}/change-email")
-def change_email(user_id: int, request: EmailChangeRequest, db: Session = Depends(get_db)):
+def change_email(user_id: int, request: EmailChangeRequest, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Change user's email address"""
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
@@ -670,7 +729,7 @@ recommendation_engine = HybridRecommendationEngine()
 
 # OLD RECOMMENDATION ENDPOINT DEPRECATED - Use adaptive assessment instead
 @app.post("/recommend_deprecated")
-def recommend_deprecated(data: AssessmentSubmit, db: Session = Depends(get_db)):
+def recommend_deprecated(data: AssessmentSubmit, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """
     ================================================================================
     COURSE RECOMMENDATION SYSTEM - THESIS IMPLEMENTATION
@@ -977,7 +1036,7 @@ def recommend_deprecated(data: AssessmentSubmit, db: Session = Depends(get_db)):
     }
 
 @app.get("/questions", response_model=List[QuestionSchema])
-def get_questions(db: Session = Depends(get_db)):
+def get_questions(current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     # Using func.random() (for SQLite/Postgres) or func.rand() (for MySQL) 
     # to pull 20 random questions from the database
     questions = db.query(models.Question)\
@@ -1199,13 +1258,13 @@ def get_public_stats(db: Session = Depends(get_db)):
 # ========== ADMIN: COURSE MANAGEMENT ==========
 
 @app.get("/admin/courses")
-def get_all_courses(db: Session = Depends(get_db)):
+def get_all_courses(admin_user: models.User = Depends(require_admin), db: Session = Depends(get_db)):
     """Admin: Get all courses with full details"""
     courses = db.query(models.Course).all()
     return {"courses": courses}
 
 @app.get("/admin/courses/{course_id}")
-def get_course(course_id: int, db: Session = Depends(get_db)):
+def get_course(course_id: int, admin_user: models.User = Depends(require_admin), db: Session = Depends(get_db)):
     """Admin: Get specific course details"""
     course = db.query(models.Course).filter(models.Course.course_id == course_id).first()
     if not course:
@@ -1213,7 +1272,7 @@ def get_course(course_id: int, db: Session = Depends(get_db)):
     return course
 
 @app.post("/admin/courses")
-def create_course(course: CourseCreate, db: Session = Depends(get_db)):
+def create_course(course: CourseCreate, admin_user: models.User = Depends(require_admin), db: Session = Depends(get_db)):
     """Admin: Create new course (D3 - Course Database)"""
     new_course = models.Course(
         course_name=course.course_name,
@@ -1228,7 +1287,7 @@ def create_course(course: CourseCreate, db: Session = Depends(get_db)):
     return {"message": "Course created successfully", "course": new_course}
 
 @app.put("/admin/courses/{course_id}")
-def update_course(course_id: int, course: CourseUpdate, db: Session = Depends(get_db)):
+def update_course(course_id: int, course: CourseUpdate, admin_user: models.User = Depends(require_admin), db: Session = Depends(get_db)):
     """Admin: Update existing course (D3 - Course Database)"""
     db_course = db.query(models.Course).filter(models.Course.course_id == course_id).first()
     if not db_course:
@@ -1250,7 +1309,7 @@ def update_course(course_id: int, course: CourseUpdate, db: Session = Depends(ge
     return {"message": "Course updated successfully", "course": db_course}
 
 @app.delete("/admin/courses/{course_id}")
-def delete_course(course_id: int, db: Session = Depends(get_db)):
+def delete_course(course_id: int, admin_user: models.User = Depends(require_admin), db: Session = Depends(get_db)):
     """Admin: Delete course"""
     course = db.query(models.Course).filter(models.Course.course_id == course_id).first()
     if not course:
@@ -1263,13 +1322,13 @@ def delete_course(course_id: int, db: Session = Depends(get_db)):
 # ========== ADMIN: QUESTION MANAGEMENT ==========
 
 @app.get("/admin/questions")
-def get_all_questions_admin(db: Session = Depends(get_db)):
+def get_all_questions_admin(admin_user: models.User = Depends(require_admin), db: Session = Depends(get_db)):
     """Admin: Get all questions with options"""
     questions = db.query(models.Question).options(joinedload(models.Question.options)).all()
     return {"questions": questions}
 
 @app.get("/admin/questions/{question_id}")
-def get_question_admin(question_id: int, db: Session = Depends(get_db)):
+def get_question_admin(question_id: int, admin_user: models.User = Depends(require_admin), db: Session = Depends(get_db)):
     """Admin: Get specific question with options"""
     question = db.query(models.Question).options(joinedload(models.Question.options))\
         .filter(models.Question.question_id == question_id).first()
@@ -1278,7 +1337,7 @@ def get_question_admin(question_id: int, db: Session = Depends(get_db)):
     return question
 
 @app.post("/admin/questions")
-def create_question(question: QuestionCreate, db: Session = Depends(get_db)):
+def create_question(question: QuestionCreate, admin_user: models.User = Depends(require_admin), db: Session = Depends(get_db)):
     """Admin: Create new question with options"""
     new_question = models.Question(
         question_text=question.question_text,
@@ -1301,7 +1360,7 @@ def create_question(question: QuestionCreate, db: Session = Depends(get_db)):
     return {"message": "Question created successfully", "question_id": new_question.question_id}
 
 @app.put("/admin/questions/{question_id}")
-def update_question(question_id: int, question: QuestionUpdate, db: Session = Depends(get_db)):
+def update_question(question_id: int, question: QuestionUpdate, admin_user: models.User = Depends(require_admin), db: Session = Depends(get_db)):
     """Admin: Update question text/category"""
     db_question = db.query(models.Question).filter(models.Question.question_id == question_id).first()
     if not db_question:
@@ -1316,7 +1375,7 @@ def update_question(question_id: int, question: QuestionUpdate, db: Session = De
     return {"message": "Question updated successfully"}
 
 @app.delete("/admin/questions/{question_id}")
-def delete_question(question_id: int, db: Session = Depends(get_db)):
+def delete_question(question_id: int, admin_user: models.User = Depends(require_admin), db: Session = Depends(get_db)):
     """Admin: Delete question (cascades to options)"""
     question = db.query(models.Question).filter(models.Question.question_id == question_id).first()
     if not question:
@@ -1329,7 +1388,7 @@ def delete_question(question_id: int, db: Session = Depends(get_db)):
 # ========== ADMIN: OPTION MANAGEMENT ==========
 
 @app.post("/admin/questions/{question_id}/options")
-def add_option(question_id: int, option: OptionCreate, db: Session = Depends(get_db)):
+def add_option(question_id: int, option: OptionCreate, admin_user: models.User = Depends(require_admin), db: Session = Depends(get_db)):
     """Admin: Add option to existing question"""
     question = db.query(models.Question).filter(models.Question.question_id == question_id).first()
     if not question:
@@ -1346,7 +1405,7 @@ def add_option(question_id: int, option: OptionCreate, db: Session = Depends(get
     return {"message": "Option added successfully", "option": new_option}
 
 @app.put("/admin/options/{option_id}")
-def update_option(option_id: int, option: OptionUpdate, db: Session = Depends(get_db)):
+def update_option(option_id: int, option: OptionUpdate, admin_user: models.User = Depends(require_admin), db: Session = Depends(get_db)):
     """Admin: Update option"""
     db_option = db.query(models.Option).filter(models.Option.option_id == option_id).first()
     if not db_option:
@@ -1361,7 +1420,7 @@ def update_option(option_id: int, option: OptionUpdate, db: Session = Depends(ge
     return {"message": "Option updated successfully"}
 
 @app.delete("/admin/options/{option_id}")
-def delete_option(option_id: int, db: Session = Depends(get_db)):
+def delete_option(option_id: int, admin_user: models.User = Depends(require_admin), db: Session = Depends(get_db)):
     """Admin: Delete option"""
     option = db.query(models.Option).filter(models.Option.option_id == option_id).first()
     if not option:
@@ -1374,7 +1433,7 @@ def delete_option(option_id: int, db: Session = Depends(get_db)):
 # ========== ADMIN: USER MANAGEMENT ==========
 
 @app.get("/admin/users")
-def get_all_users(db: Session = Depends(get_db)):
+def get_all_users(admin_user: models.User = Depends(require_admin), db: Session = Depends(get_db)):
     """Admin: Get all users with their info and online status"""
     try:
         users = db.query(models.User).all()
@@ -1408,7 +1467,7 @@ def get_all_users(db: Session = Depends(get_db)):
     return {"users": user_list}
 
 @app.get("/admin/users/{user_id}")
-def get_user_details(user_id: int, db: Session = Depends(get_db)):
+def get_user_details(user_id: int, admin_user: models.User = Depends(require_admin), db: Session = Depends(get_db)):
     """Admin: Get specific user details with assessment history"""
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
@@ -1444,7 +1503,7 @@ def get_user_details(user_id: int, db: Session = Depends(get_db)):
     }
 
 @app.put("/admin/users/{user_id}/toggle-status")
-def toggle_user_status(user_id: int, db: Session = Depends(get_db)):
+def toggle_user_status(user_id: int, admin_user: models.User = Depends(require_admin), db: Session = Depends(get_db)):
     """Admin: Toggle user active status (activate/deactivate)"""
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
@@ -1464,7 +1523,7 @@ def toggle_user_status(user_id: int, db: Session = Depends(get_db)):
     }
 
 @app.delete("/admin/users/{user_id}")
-def delete_user(user_id: int, db: Session = Depends(get_db)):
+def delete_user(user_id: int, admin_user: models.User = Depends(require_admin), db: Session = Depends(get_db)):
     """Admin: Delete user and all related data"""
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
@@ -1486,7 +1545,7 @@ def delete_user(user_id: int, db: Session = Depends(get_db)):
 # ========== ADMIN: REPORTS & ANALYTICS ==========
 
 @app.get("/admin/reports/overview")
-def get_system_overview(db: Session = Depends(get_db)):
+def get_system_overview(admin_user: models.User = Depends(require_admin), db: Session = Depends(get_db)):
     """Admin: Get system-wide statistics"""
     total_users = db.query(models.User).count()
     total_courses = db.query(models.Course).count()
@@ -1505,7 +1564,7 @@ def get_system_overview(db: Session = Depends(get_db)):
     }
 
 @app.get("/admin/reports/popular-courses")
-def get_popular_courses(db: Session = Depends(get_db)):
+def get_popular_courses(admin_user: models.User = Depends(require_admin), db: Session = Depends(get_db)):
     """Admin: Get most recommended courses"""
     from sqlalchemy import func as sql_func
     
@@ -1534,7 +1593,7 @@ def get_popular_courses(db: Session = Depends(get_db)):
     }
 
 @app.get("/admin/reports/trait-distribution")
-def get_trait_distribution(db: Session = Depends(get_db)):
+def get_trait_distribution(admin_user: models.User = Depends(require_admin), db: Session = Depends(get_db)):
     """Admin: Get distribution of personality traits from assessments"""
     from sqlalchemy import func as sql_func
     
@@ -1564,7 +1623,7 @@ def get_trait_distribution(db: Session = Depends(get_db)):
     }
 
 @app.get("/admin/reports/user-activity")
-def get_user_activity(db: Session = Depends(get_db)):
+def get_user_activity(admin_user: models.User = Depends(require_admin), db: Session = Depends(get_db)):
     """Admin: Get recent user activity based on test attempts"""
     from sqlalchemy import func as sql_func
     
@@ -1598,7 +1657,7 @@ def get_user_activity(db: Session = Depends(get_db)):
 # ========== USER: VIEW HISTORY ==========
 
 @app.get("/user/{user_id}/recommendations")
-def get_user_recommendations(user_id: int, db: Session = Depends(get_db)):
+def get_user_recommendations(user_id: int, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Get user's saved recommendations"""
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
@@ -1627,7 +1686,7 @@ def get_user_recommendations(user_id: int, db: Session = Depends(get_db)):
     return {"user_id": user_id, "recommendations": result}
 
 @app.get("/user/{user_id}/assessment-history")
-def get_assessment_history(user_id: int, db: Session = Depends(get_db)):
+def get_assessment_history(user_id: int, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Get user's test attempts history with recommendations and answered questions (D5 - Test Attempt Database)"""
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
@@ -1770,13 +1829,13 @@ def get_assessment_history(user_id: int, db: Session = Depends(get_db)):
 # ========== ADMIN: TEST MANAGEMENT ==========
 
 @app.get("/admin/tests")
-def get_all_tests(db: Session = Depends(get_db)):
+def get_all_tests(admin_user: models.User = Depends(require_admin), db: Session = Depends(get_db)):
     """Admin: Get all tests"""
     tests = db.query(models.Test).all()
     return {"tests": tests}
 
 @app.get("/admin/test-attempts")
-def get_all_test_attempts(db: Session = Depends(get_db)):
+def get_all_test_attempts(admin_user: models.User = Depends(require_admin), db: Session = Depends(get_db)):
     """Admin: Get all test attempts with user info"""
     attempts = db.query(models.TestAttempt).order_by(models.TestAttempt.taken_at.desc()).limit(50).all()
     
@@ -1800,6 +1859,7 @@ def get_all_test_attempts(db: Session = Depends(get_db)):
 @app.post("/feedback/submit")
 def submit_recommendation_feedback(
     feedback: FeedbackSubmit,
+    current_user: models.User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
     """User: Submit feedback/rating on a recommendation or overall recommendations"""
@@ -1890,6 +1950,7 @@ def submit_recommendation_feedback(
 @app.get("/feedback/recommendation/{recommendation_id}")
 def get_recommendation_feedback(
     recommendation_id: int,
+    current_user: models.User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
     """Get all feedback for a specific recommendation"""
@@ -1929,6 +1990,7 @@ def get_recommendation_feedback(
 @app.get("/user/{user_id}/feedback")
 def get_user_feedback_history(
     user_id: int,
+    current_user: models.User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
     """Get all feedback submitted by a user"""
@@ -1962,7 +2024,7 @@ def get_user_feedback_history(
 
 
 @app.get("/admin/feedback/stats")
-def get_feedback_statistics(db: Session = Depends(get_db)):
+def get_feedback_statistics(admin_user: models.User = Depends(require_admin), db: Session = Depends(get_db)):
     """Admin: Get overall feedback statistics"""
     
     total_feedbacks = db.query(models.RecommendationFeedback).count()
@@ -2016,6 +2078,7 @@ def get_feedback_statistics(db: Session = Depends(get_db)):
 @app.get("/admin/feedback/courses/{course_id}")
 def get_course_feedback_detailed(
     course_id: int,
+    admin_user: models.User = Depends(require_admin),
     db: Session = Depends(get_db)
 ):
     """Admin: Get detailed feedback for a specific course"""
@@ -2063,6 +2126,7 @@ def get_course_feedback_detailed(
 @app.get("/admin/feedback/low-rated")
 def get_low_rated_recommendations(
     min_rating: int = 3,
+    admin_user: models.User = Depends(require_admin),
     db: Session = Depends(get_db)
 ):
     """Admin: Get recommendations that received ratings below threshold (alerts for improvement)"""
@@ -2095,6 +2159,7 @@ def get_low_rated_recommendations(
 @app.delete("/admin/feedback/{feedback_id}")
 def delete_feedback(
     feedback_id: int,
+    admin_user: models.User = Depends(require_admin),
     db: Session = Depends(get_db)
 ):
     """Admin: Delete a feedback entry"""
@@ -2178,7 +2243,7 @@ class AdaptiveAnswerSubmit(BaseModel):
 
 
 @app.post("/adaptive/start")
-def start_adaptive_assessment(data: AdaptiveSessionStart, db: Session = Depends(get_db)):
+def start_adaptive_assessment(data: AdaptiveSessionStart, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """
     [BRAIN] SMART ASSESSMENT - Start Session
     
@@ -2421,7 +2486,7 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
 
 
 @app.post("/adaptive/answer")
-def submit_adaptive_answer(data: AdaptiveAnswerSubmit, db: Session = Depends(get_db)):
+def submit_adaptive_answer(data: AdaptiveAnswerSubmit, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """
     [BRAIN] AKINATOR-STYLE ASSESSMENT - Submit Answer & Get Next Question
     
@@ -2526,7 +2591,7 @@ def submit_adaptive_answer(data: AdaptiveAnswerSubmit, db: Session = Depends(get
 
 
 @app.post("/adaptive/finish")
-def finish_adaptive_early(data: dict, db: Session = Depends(get_db)):
+def finish_adaptive_early(data: dict, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """
     [BRAIN] AKINATOR-STYLE ASSESSMENT - Finish Early
     
@@ -2568,7 +2633,7 @@ def finish_adaptive_early(data: dict, db: Session = Depends(get_db)):
 
 
 @app.post("/adaptive/previous")
-def go_to_previous_question(data: dict, db: Session = Depends(get_db)):
+def go_to_previous_question(data: dict, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """
     [BRAIN] AKINATOR-STYLE ASSESSMENT - Go to Previous Question
     
@@ -2598,7 +2663,7 @@ def go_to_previous_question(data: dict, db: Session = Depends(get_db)):
 
 
 @app.get("/adaptive/status/{session_id}")
-def get_adaptive_status(session_id: str, db: Session = Depends(get_db)):
+def get_adaptive_status(session_id: str, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Get current status of an adaptive assessment session"""
     engine = get_or_init_adaptive_engine(db)
     
@@ -2713,7 +2778,7 @@ class EmailRequest(BaseModel):
 
 
 @app.post("/export/pdf")
-def export_recommendations_pdf(data: ExportRequest):
+def export_recommendations_pdf(data: ExportRequest, current_user: models.User = Depends(get_current_user)):
     """Generate a PDF with the user's course recommendations"""
     try:
         from reportlab.lib import colors
@@ -2873,7 +2938,7 @@ def export_recommendations_pdf(data: ExportRequest):
 
 
 @app.post("/export/email")
-def email_recommendations(data: EmailRequest, db: Session = Depends(get_db)):
+def email_recommendations(data: EmailRequest, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Send course recommendations to user's email"""
     
     try:
@@ -2962,7 +3027,7 @@ class DailyDigestRequest(BaseModel):
     user_id: int
 
 @app.post("/send-daily-digest")
-def send_daily_digest(data: DailyDigestRequest, db: Session = Depends(get_db)):
+def send_daily_digest(data: DailyDigestRequest, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Send a daily digest email containing all assessments and course recommendations from today"""
     
     # Get user info

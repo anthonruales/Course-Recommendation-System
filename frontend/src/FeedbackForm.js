@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { authFetch } from './api';
 import './FeedbackForm.css';
 import Toast from './Toast';
 
@@ -46,7 +47,7 @@ function FeedbackForm({ recommendation, userId, onSubmit, onClose }) {
 
       console.log('Sending feedback payload:', payload);
 
-      const response = await fetch(`${process.env.REACT_APP_API_URL}${endpoint}`, {
+      const response = await authFetch(`${process.env.REACT_APP_API_URL}${endpoint}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
