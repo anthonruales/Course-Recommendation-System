@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { authFetch } from './api';
+import { authFetch, getUserFromToken } from './api';
 import NavBar from './components/NavBar';
 
 /**
@@ -41,7 +41,8 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
 
   // Check academic profile on mount
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
+    const tokenData = getUserFromToken();
+    const userId = tokenData?.user_id;
     if (userId) {
       authFetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`)
         .then(res => res.json())
@@ -62,7 +63,8 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
 
   // Start the adaptive assessment
   const startAssessment = async () => {
-    const userId = localStorage.getItem('userId');
+    const tokenData = getUserFromToken();
+    const userId = tokenData?.user_id;
     if (!userId) {
       alert('User ID not found. Please log in again.');
       return;
@@ -412,8 +414,8 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
           }}>
             <button 
               onClick={async () => {
-                const userName = localStorage.getItem('userName') || 'Student';
-                const userId = localStorage.getItem('userId');
+                const userName = getUserFromToken()?.name || 'Student';
+                const userId = getUserFromToken()?.user_id;
                 try {
                   // Fetch user's GWA and Strand from backend
                   const userRes = await authFetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`);
@@ -476,13 +478,13 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
             </button>
             <button 
               onClick={async () => {
-                const userEmail = localStorage.getItem('userEmail') || '';
+                const userEmail = getUserFromToken()?.email || '';
                 if (!userEmail || !userEmail.includes('@')) {
                   alert('No email address found on your account. Please add one in Settings.');
                   return;
                 }
-                const userName = localStorage.getItem('userName') || 'Student';
-                const userId = localStorage.getItem('userId');
+                const userName = getUserFromToken()?.name || 'Student';
+                const userId = getUserFromToken()?.user_id;
                 try {
                   // Fetch user's GWA and Strand from backend
                   const userRes = await authFetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`);

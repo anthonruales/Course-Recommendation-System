@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { authFetch } from './api';
+import { authFetch, getUserFromToken } from './api';
 import Toast from './Toast';
 
 // Bad words filter list (common inappropriate words)
@@ -142,7 +142,7 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
   
   // Load saved profile photo from localStorage on mount (user-specific)
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
+    const userId = getUserFromToken()?.user_id;
     if (userId) {
       const savedPhoto = localStorage.getItem(`profilePhoto_${userId}`);
       if (savedPhoto) {
@@ -176,7 +176,7 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
       const reader = new FileReader();
       reader.onloadend = () => {
         const base64String = reader.result;
-        const userId = localStorage.getItem('userId');
+        const userId = getUserFromToken()?.user_id;
         setProfilePhoto(base64String);
         if (userId) {
           localStorage.setItem(`profilePhoto_${userId}`, base64String);
@@ -188,7 +188,7 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
   };
   
   const removePhoto = () => {
-    const userId = localStorage.getItem('userId');
+    const userId = getUserFromToken()?.user_id;
     setProfilePhoto(null);
     if (userId) {
       localStorage.removeItem(`profilePhoto_${userId}`);
@@ -343,7 +343,7 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
       return;
     }
     
-    const userId = localStorage.getItem('userId');
+    const userId = getUserFromToken()?.user_id;
     if (!userId) {
       showToast('User ID not found. Please log in again.', 'error');
       return;
@@ -485,7 +485,7 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
                 gap: '10px'
               }}>
                 <span style={{ color: 'rgba(139, 92, 246, 0.8)' }}>@</span>
-                <span>{localStorage.getItem('userUsername') || 'Unknown'}</span>
+                <span>{getUserFromToken()?.username || 'Unknown'}</span>
                 <span style={{ 
                   marginLeft: 'auto', 
                   fontSize: '11px', 

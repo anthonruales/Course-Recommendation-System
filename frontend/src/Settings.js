@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { authFetch } from './api';
+import { authFetch, getUserFromToken } from './api';
 import Toast from './Toast';
 import NavBar from './components/NavBar';
 
@@ -126,14 +126,15 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
   
   // Load saved profile photo and email
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
+    const userId = getUserFromToken()?.user_id;
     if (userId) {
       const savedPhoto = localStorage.getItem(`profilePhoto_${userId}`);
       if (savedPhoto) {
         setProfilePhoto(savedPhoto);
       }
     }
-    const savedEmail = localStorage.getItem('userEmail');
+    const tokenData = getUserFromToken();
+    const savedEmail = tokenData?.email;
     if (savedEmail) {
       setNewEmail(savedEmail);
     }
@@ -293,14 +294,14 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
       return;
     }
     
-    const userId = localStorage.getItem('userId');
+    const userId = getUserFromToken()?.user_id;
     if (!userId) {
       showToast('User ID not found. Please log in again.', 'error');
       return;
     }
     
     const changedFields = getChangedFields();
-    const currentEmail = localStorage.getItem('userEmail') || '';
+    const currentEmail = getUserFromToken()?.email || '';
     
     // Check if email was changed
     if (newEmail && newEmail !== currentEmail) {
@@ -326,8 +327,7 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
           return;
         }
         
-        // Update localStorage with new email
-        localStorage.setItem('userEmail', newEmail);
+        // Email updated on backend — token will have new email on next login
         changedFields.push('Email');
         setEmailError('');
       } catch (err) {
@@ -401,7 +401,7 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
       return;
     }
     
-    const userId = localStorage.getItem('userId');
+    const userId = getUserFromToken()?.user_id;
     if (!userId) {
       showToast('User ID not found. Please log in again.', 'error');
       return;
@@ -432,8 +432,9 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
     }
   };
 
-  const userName = localStorage.getItem('userName') || 'User';
-    const userUsername = localStorage.getItem('userUsername') || '';
+  const tokenData = getUserFromToken();
+  const userName = tokenData?.name || 'User';
+    const userUsername = tokenData?.username || '';
 
   const settingsSections = [
     { id: 'profile', label: 'Profile Information', icon: '👤' },

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { authFetch } from './api';
+import { authFetch, getUserFromToken } from './api';
 import LandingPage from './LandingPage';
 import Login from './Login';
 import Signup from './Signup';
@@ -53,7 +53,8 @@ const LoadingFallback = () => (
 );
 
 function App() {
-  const isLoggedIn = !!localStorage.getItem('userName');
+  const tokenUser = getUserFromToken();
+  const isLoggedIn = !!tokenUser;
   
   // Initialize view from URL hash so refresh preserves the page
   const initialHash = getViewFromHash();
@@ -70,7 +71,7 @@ function App() {
     }
     return 'dashboard';
   });
-  const [user, setUser] = useState(localStorage.getItem('userName') || null);
+  const [user, setUser] = useState(tokenUser ? (tokenUser.name || tokenUser.username) : null);
   const [recommendationData, setRecommendationData] = useState(null);
   const [selectedQuestionCount, setSelectedQuestionCount] = useState(30);
   
@@ -137,7 +138,8 @@ function App() {
   useEffect(() => {
     if (user && user !== 'Admin User') {
       // Load profile from backend
-      const userId = localStorage.getItem('userId');
+      const tokenData = getUserFromToken();
+      const userId = tokenData?.user_id;
       if (userId) {
         authFetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`)
           .then(res => res.json())
@@ -175,7 +177,6 @@ function App() {
   }, [user]);
 
   const handleLoginSuccess = (name, email) => {
-    localStorage.setItem('userName', name);
     setUser(name);
     setViewState('dashboard');
     window.history.replaceState(null, '', '#/dashboard');
@@ -183,7 +184,8 @@ function App() {
 
   const handleLogout = () => {
     // Call backend logout with auth header
-    const userId = localStorage.getItem('userId');
+    const tokenData = getUserFromToken();
+    const userId = tokenData?.user_id;
     if (userId) {
       authFetch(`${process.env.REACT_APP_API_URL}/logout`, {
         method: 'POST',
@@ -191,11 +193,7 @@ function App() {
         body: JSON.stringify({ user_id: parseInt(userId) })
       }).catch(() => {});
     }
-    localStorage.removeItem('userName');
-    localStorage.removeItem('userId');
     localStorage.removeItem('accessToken');
-    localStorage.removeItem('userUsername');
-    localStorage.removeItem('userEmail');
     setUser(null);
     setRecommendationData(null);
     setProfileData({}); // Clear state on logout
@@ -281,7 +279,8 @@ function App() {
                   setHistory([updateLog, ...history]);
                   
                   // Re-fetch profile data to sync state with backend
-                  const userId = localStorage.getItem('userId');
+                  const tokenData = getUserFromToken();
+                  const userId = tokenData?.user_id;
                   if (userId) {
                     authFetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`)
                       .then(res => res.json())

@@ -434,6 +434,8 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
     token = create_access_token({
         "user_id": db_user.user_id,
         "username": db_user.username,
+        "email": db_user.email,
+        "name": db_user.fullname,
         "is_admin": bool(getattr(db_user, 'is_admin', 0))
     })
     
@@ -471,6 +473,8 @@ def google_login(user: dict, db: Session = Depends(get_db)):
         token = create_access_token({
             "user_id": db_user.user_id,
             "username": db_user.username,
+            "email": db_user.email,
+            "name": db_user.fullname,
             "is_admin": bool(getattr(db_user, 'is_admin', 0))
         })
         
@@ -532,6 +536,8 @@ def google_register(user: dict, db: Session = Depends(get_db)):
     token = create_access_token({
         "user_id": new_user.user_id,
         "username": new_user.username,
+        "email": new_user.email,
+        "name": new_user.fullname,
         "is_admin": False
     })
     
@@ -543,6 +549,8 @@ def google_register(user: dict, db: Session = Depends(get_db)):
 @app.post("/user/{user_id}/update-activity")
 def update_activity(user_id: int, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Update user online status only - DO NOT update last_active (only login should update that)"""
+    if current_user.user_id != user_id and not getattr(current_user, 'is_admin', False):
+        raise HTTPException(status_code=403, detail="Access denied: you can only access your own data")
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
@@ -556,10 +564,8 @@ def update_activity(user_id: int, current_user: models.User = Depends(get_curren
 @app.post("/logout")
 def logout(data: dict, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Handle user logout - mark user as offline"""
-    user_id = data.get("user_id")
-    
-    if not user_id:
-        raise HTTPException(status_code=400, detail="user_id is required")
+    # Ignore client-provided user_id, use JWT identity
+    user_id = current_user.user_id
     
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
@@ -574,6 +580,8 @@ def logout(data: dict, current_user: models.User = Depends(get_current_user), db
 @app.get("/verify-session/{user_id}")
 def verify_session(user_id: int, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Verify if a user's session is still valid (account is active)"""
+    if current_user.user_id != user_id and not getattr(current_user, 'is_admin', False):
+        raise HTTPException(status_code=403, detail="Access denied: you can only access your own data")
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     
     if not user:
@@ -588,6 +596,8 @@ def verify_session(user_id: int, current_user: models.User = Depends(get_current
 @app.post("/refresh-user-activity/{user_id}")
 def refresh_user_activity(user_id: int, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Force refresh user's last_active timestamp on login"""
+    if current_user.user_id != user_id and not getattr(current_user, 'is_admin', False):
+        raise HTTPException(status_code=403, detail="Access denied: you can only access your own data")
     print(f"\n[REFRESH-ACTIVITY] Endpoint called for user_id: {user_id}")
     
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
@@ -617,6 +627,8 @@ def refresh_user_activity(user_id: int, current_user: models.User = Depends(get_
 @app.get("/user/{user_id}/academic-info")
 def get_academic_info(user_id: int, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Get user's academic info including GWA, Strand, and personal info"""
+    if current_user.user_id != user_id and not getattr(current_user, 'is_admin', False):
+        raise HTTPException(status_code=403, detail="Access denied: you can only access your own data")
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
@@ -631,6 +643,8 @@ def get_academic_info(user_id: int, current_user: models.User = Depends(get_curr
 @app.put("/user/{user_id}/academic-info")
 def update_academic_info(user_id: int, info: AcademicInfoUpdate, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Update user's academic info (GWA, Strand, and personal info) for recommendation accuracy"""
+    if current_user.user_id != user_id and not getattr(current_user, 'is_admin', False):
+        raise HTTPException(status_code=403, detail="Access denied: you can only access your own data")
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
@@ -668,6 +682,8 @@ class PasswordChangeRequest(BaseModel):
 @app.put("/user/{user_id}/change-password")
 def change_password(user_id: int, request: PasswordChangeRequest, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Change user's password after verifying current password"""
+    if current_user.user_id != user_id and not getattr(current_user, 'is_admin', False):
+        raise HTTPException(status_code=403, detail="Access denied: you can only access your own data")
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
@@ -695,6 +711,8 @@ class EmailChangeRequest(BaseModel):
 @app.put("/user/{user_id}/change-email")
 def change_email(user_id: int, request: EmailChangeRequest, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Change user's email address"""
+    if current_user.user_id != user_id and not getattr(current_user, 'is_admin', False):
+        raise HTTPException(status_code=403, detail="Access denied: you can only access your own data")
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
@@ -763,6 +781,9 @@ def recommend_deprecated(data: AssessmentSubmit, current_user: models.User = Dep
     print("🎓 COURSE RECOMMENDATION SYSTEM - THESIS IMPLEMENTATION")
     print("=" * 80)
     print(f"[NOTE] Processing recommendation for user {data.userId} with {len(data.answers)} answers")
+    
+    # Enforce JWT identity — ignore client-provided userId
+    data.userId = current_user.user_id
     
     # ==================== STEP 1: FETCH USER DATA ====================
     # D4 - Personal & Academic Database
@@ -1659,6 +1680,8 @@ def get_user_activity(admin_user: models.User = Depends(require_admin), db: Sess
 @app.get("/user/{user_id}/recommendations")
 def get_user_recommendations(user_id: int, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Get user's saved recommendations"""
+    if current_user.user_id != user_id and not getattr(current_user, 'is_admin', False):
+        raise HTTPException(status_code=403, detail="Access denied: you can only access your own data")
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
@@ -1688,6 +1711,8 @@ def get_user_recommendations(user_id: int, current_user: models.User = Depends(g
 @app.get("/user/{user_id}/assessment-history")
 def get_assessment_history(user_id: int, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Get user's test attempts history with recommendations and answered questions (D5 - Test Attempt Database)"""
+    if current_user.user_id != user_id and not getattr(current_user, 'is_admin', False):
+        raise HTTPException(status_code=403, detail="Access denied: you can only access your own data")
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
@@ -1866,6 +1891,9 @@ def submit_recommendation_feedback(
     
     print(f"[FEEDBACK] Received feedback: recommendation_id={feedback.recommendation_id}, user_id={feedback.user_id}, rating={feedback.rating}")
     
+    # Enforce JWT identity — ignore client-provided user_id
+    feedback.user_id = current_user.user_id
+    
     # Validate rating is 1-5
     if feedback.rating < 1 or feedback.rating > 5:
         raise HTTPException(status_code=400, detail="Rating must be between 1 and 5")
@@ -1994,6 +2022,8 @@ def get_user_feedback_history(
     db: Session = Depends(get_db)
 ):
     """Get all feedback submitted by a user"""
+    if current_user.user_id != user_id and not getattr(current_user, 'is_admin', False):
+        raise HTTPException(status_code=403, detail="Access denied: you can only access your own data")
     
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
@@ -2254,6 +2284,8 @@ def start_adaptive_assessment(data: AdaptiveSessionStart, current_user: models.U
     Returns: session_id and first question
     """
     # Get user info for initial scoring
+    # Enforce JWT identity — ignore client-provided userId
+    data.userId = current_user.user_id
     user = db.query(models.User).filter(models.User.user_id == data.userId).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
@@ -2495,6 +2527,11 @@ def submit_adaptive_answer(data: AdaptiveAnswerSubmit, current_user: models.User
     """
     engine = get_or_init_adaptive_engine(db)
     
+    # Verify session ownership
+    session = engine.sessions.get(data.sessionId)
+    if session and session.user_id != current_user.user_id:
+        raise HTTPException(status_code=403, detail="Access denied: this is not your assessment session")
+    
     # Process the answer
     result = engine.process_answer(data.sessionId, data.questionId, data.chosenOptionId)
     print(f"[DEBUG] DEBUG /adaptive/answer: status={result.get('status')}, session_id={data.sessionId}")
@@ -2603,6 +2640,12 @@ def finish_adaptive_early(data: dict, current_user: models.User = Depends(get_cu
         raise HTTPException(status_code=400, detail="Session ID required")
     
     engine = get_or_init_adaptive_engine(db)
+    
+    # Verify session ownership
+    session = engine.sessions.get(session_id)
+    if session and session.user_id != current_user.user_id:
+        raise HTTPException(status_code=403, detail="Access denied: this is not your assessment session")
+    
     result = engine.finish_early(session_id)
     
     if "error" in result:
@@ -2644,6 +2687,12 @@ def go_to_previous_question(data: dict, current_user: models.User = Depends(get_
         raise HTTPException(status_code=400, detail="Session ID required")
     
     engine = get_or_init_adaptive_engine(db)
+    
+    # Verify session ownership
+    session = engine.sessions.get(session_id)
+    if session and session.user_id != current_user.user_id:
+        raise HTTPException(status_code=403, detail="Access denied: this is not your assessment session")
+    
     result = engine.go_to_previous_question(session_id)
     
     if "error" in result:
@@ -2671,6 +2720,10 @@ def get_adaptive_status(session_id: str, current_user: models.User = Depends(get
         raise HTTPException(status_code=404, detail="Session not found")
     
     session = engine.sessions[session_id]
+    
+    # Verify session ownership
+    if session.user_id != current_user.user_id:
+        raise HTTPException(status_code=403, detail="Access denied: this is not your assessment session")
     
     return {
         "session_id": session_id,
@@ -3029,6 +3082,9 @@ class DailyDigestRequest(BaseModel):
 @app.post("/send-daily-digest")
 def send_daily_digest(data: DailyDigestRequest, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Send a daily digest email containing all assessments and course recommendations from today"""
+    
+    # Enforce JWT identity — ignore client-provided user_id
+    data.user_id = current_user.user_id
     
     # Get user info
     user = db.query(models.User).filter(models.User.user_id == data.user_id).first()

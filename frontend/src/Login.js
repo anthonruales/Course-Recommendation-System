@@ -37,10 +37,7 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
           setGoogleUsername(backendRes.data.email.split('@')[0]);
           setShowUsernameModal(true);
         } else {
-          // Existing user - login directly
-          localStorage.setItem('userId', backendRes.data.user_id);
-          localStorage.setItem('userUsername', backendRes.data.username || '');
-          localStorage.setItem('userEmail', backendRes.data.email || '');
+          // Existing user - login directly (only store JWT token)
           localStorage.setItem('accessToken', backendRes.data.access_token || '');
           
           // Ensure last_active is updated on login
@@ -86,9 +83,6 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
         username: googleUsername
       });
       
-      localStorage.setItem('userId', res.data.user_id);
-      localStorage.setItem('userUsername', googleUsername);
-      localStorage.setItem('userEmail', googleUserData.email || '');
       localStorage.setItem('accessToken', res.data.access_token || '');
       setShowUsernameModal(false);
       
@@ -115,9 +109,6 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
     setLoading(true);
     try {
       const res = await axios.post(`${process.env.REACT_APP_API_URL}/login`, { username: usernameOrEmail, password });
-      localStorage.setItem('userId', res.data.user_id);
-      localStorage.setItem('userUsername', res.data.username || usernameOrEmail);
-      localStorage.setItem('userEmail', res.data.email || '');
       localStorage.setItem('accessToken', res.data.access_token || '');
       
       // Ensure last_active is updated on login

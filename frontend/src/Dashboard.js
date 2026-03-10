@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { authFetch } from './api';
+import { authFetch, getUserFromToken } from './api';
 import NavBar from './components/NavBar';
 
 // Add CSS keyframes for smooth animations
@@ -69,7 +69,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
 
   // Load profile photo from localStorage (user-specific)
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
+    const userId = getUserFromToken()?.user_id;
     if (userId) {
       const savedPhoto = localStorage.getItem(`profilePhoto_${userId}`);
       if (savedPhoto) {
@@ -82,7 +82,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
 
   // Check if user has filled academic info and fetch activity count
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
+    const userId = getUserFromToken()?.user_id;
     if (userId) {
       authFetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`)
         .then(res => res.json())
@@ -118,7 +118,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
 
   // Periodically update activity to keep user marked as online
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
+    const userId = getUserFromToken()?.user_id;
     if (!userId) return;
 
     // Update activity immediately on mount
@@ -144,7 +144,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
 
   // Handle logout with activity tracking - memoized to prevent re-renders
   const handleLogout = useCallback(async () => {
-    const userId = localStorage.getItem('userId');
+    const userId = getUserFromToken()?.user_id;
     
     // Call logout endpoint to mark user as offline
     if (userId) {
@@ -229,7 +229,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
                     </div>
                     <div style={styles.userMenuInfo}>
                       <span style={styles.userMenuName}>{userName}</span>
-                      <span style={styles.userMenuEmail}>{localStorage.getItem('userEmail') || ''}</span>
+                      <span style={styles.userMenuEmail}>{getUserFromToken()?.email || ''}</span>
                     </div>
                   </div>
                   <div style={styles.userMenuDivider}></div>

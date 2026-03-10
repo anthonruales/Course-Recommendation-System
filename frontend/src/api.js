@@ -1,12 +1,25 @@
 import axios from 'axios';
 
 /**
+ * Decode the JWT payload without a library.
+ * JWTs are base64url-encoded JSON — we just parse the middle segment.
+ * Returns { user_id, username, email, name, is_admin, exp } or null.
+ */
+export function getUserFromToken() {
+  const token = localStorage.getItem('accessToken');
+  if (!token) return null;
+  try {
+    const payload = token.split('.')[1];
+    const json = atob(payload.replace(/-/g, '+').replace(/_/g, '/'));
+    return JSON.parse(json);
+  } catch {
+    return null;
+  }
+}
+
+/**
  * Pre-configured Axios instance that automatically attaches the JWT
  * Authorization header to every request.
- *
- * Usage:
- *   import api from './api';
- *   const res = await api.get('/user/1/academic-info');
  */
 const api = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -26,13 +39,7 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response && error.response.status === 401) {
-      // Token expired or invalid — clear auth state and redirect to login
       localStorage.removeItem('accessToken');
-      localStorage.removeItem('userName');
-      localStorage.removeItem('userId');
-      localStorage.removeItem('userUsername');
-      localStorage.removeItem('userEmail');
-      // Only reload if we're not already on the landing/login page
       if (window.location.hash !== '#/landing' && window.location.hash !== '#/login') {
         window.location.hash = '#/landing';
         window.location.reload();
@@ -44,7 +51,6 @@ api.interceptors.response.use(
 
 /**
  * Helper for native fetch() calls that need auth headers.
- * Returns a headers object with Authorization included.
  */
 export function authHeaders(extra = {}) {
   const token = localStorage.getItem('accessToken');

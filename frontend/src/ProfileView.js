@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { authFetch } from './api';
+import { authFetch, getUserFromToken } from './api';
 import NavBar from './components/NavBar';
 
 // Predefined options for Academic Interests
@@ -85,7 +85,7 @@ function ProfileView({ profileData, onBack, onViewActivity, onSettings }) {
   
   // Load profile photo and stats
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
+    const userId = getUserFromToken()?.user_id;
     if (userId) {
       const savedPhoto = localStorage.getItem(`profilePhoto_${userId}`);
       if (savedPhoto) {
@@ -124,9 +124,10 @@ function ProfileView({ profileData, onBack, onViewActivity, onSettings }) {
     ? profileData.skills.split(',').map(s => s.trim()).filter(s => s) 
     : [];
 
-  const userName = localStorage.getItem('userName') || 'User';
-  const userEmail = localStorage.getItem('userEmail') || '';
-  const userUsername = localStorage.getItem('userUsername') || '';
+  const tokenData = getUserFromToken();
+  const userName = tokenData?.name || 'User';
+  const userEmail = tokenData?.email || '';
+  const userUsername = tokenData?.username || '';
 
   return (
     <div style={styles.pageWrapper}>

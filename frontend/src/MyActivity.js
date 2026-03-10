@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { authFetch } from './api';
+import { authFetch, getUserFromToken } from './api';
 import NavBar from './components/NavBar';
 
 // Add keyframes for pulse animation
@@ -529,7 +529,7 @@ function MyActivity({ onBack, onViewProfile }) {
   const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
 
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
+    const userId = getUserFromToken()?.user_id;
     if (userId) {
       // Load previously seen activities
       const savedSeen = JSON.parse(localStorage.getItem(`seenActivities_${userId}`) || '[]');
@@ -552,7 +552,7 @@ function MyActivity({ onBack, onViewProfile }) {
 
   // Mark an activity as seen when clicked/expanded
   const markAsSeen = (attemptId) => {
-    const userId = localStorage.getItem('userId');
+    const userId = getUserFromToken()?.user_id;
     if (!userId) return;
     
     if (!seenActivities.includes(attemptId)) {
@@ -596,7 +596,7 @@ function MyActivity({ onBack, onViewProfile }) {
 
   // Send Daily Digest email
   const handleSendDailyDigest = async () => {
-    const userId = localStorage.getItem('userId');
+    const userId = getUserFromToken()?.user_id;
     if (!userId) {
       showToast('Please log in to send daily digest', 'error');
       return;
@@ -786,8 +786,8 @@ function MyActivity({ onBack, onViewProfile }) {
                      <button
                        onClick={async (e) => {
                          e.stopPropagation();
-                         const userName = localStorage.getItem('userName') || 'Student';
-                         const userId = localStorage.getItem('userId');
+                         const userName = getUserFromToken()?.name || 'Student';
+                         const userId = getUserFromToken()?.user_id;
                          const courses = activity.recommended_courses || [];
                          if (courses.length === 0) {
                            alert('No courses to export for this assessment');
