@@ -1442,6 +1442,18 @@ def invalidate_cache(admin_user: models.User = Depends(require_admin)):
     reset_adaptive_engine()
     return {"message": "Cache invalidated successfully - questions/options will reload from database on next request"}
 
+# Public cache invalidation endpoint (called by Admin Panel)
+# Protected by API key instead of user auth
+@app.post("/cache/invalidate")
+def public_invalidate_cache(api_key: str = None):
+    """Public endpoint for Admin Panel to invalidate cache"""
+    expected_key = os.getenv('CACHE_INVALIDATION_KEY', 'your-secret-key-here')
+    if api_key != expected_key:
+        raise HTTPException(status_code=401, detail="Invalid API key")
+    
+    reset_adaptive_engine()
+    return {"message": "Cache invalidated successfully"}
+
 # ========== ADMIN: USER MANAGEMENT ==========
 
 @app.get("/admin/users")
