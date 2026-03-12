@@ -1357,6 +1357,7 @@ def create_question(question: QuestionCreate, admin_user: models.User = Depends(
     
     db.commit()
     db.refresh(new_question)
+    reset_adaptive_engine()  # Clear cache so new questions are picked up
     return {"message": "Question created successfully", "question_id": new_question.question_id}
 
 @app.put("/admin/questions/{question_id}")
@@ -1372,6 +1373,7 @@ def update_question(question_id: int, question: QuestionUpdate, admin_user: mode
         db_question.category = question.category
     
     db.commit()
+    reset_adaptive_engine()  # Clear cache so updates are picked up
     return {"message": "Question updated successfully"}
 
 @app.delete("/admin/questions/{question_id}")
@@ -1383,6 +1385,7 @@ def delete_question(question_id: int, admin_user: models.User = Depends(require_
     
     db.delete(question)
     db.commit()
+    reset_adaptive_engine()  # Clear cache so deletions are picked up
     return {"message": "Question deleted successfully"}
 
 # ========== ADMIN: OPTION MANAGEMENT ==========
@@ -1402,6 +1405,7 @@ def add_option(question_id: int, option: OptionCreate, admin_user: models.User =
     db.add(new_option)
     db.commit()
     db.refresh(new_option)
+    reset_adaptive_engine()  # Clear cache so new options are picked up
     return {"message": "Option added successfully", "option": new_option}
 
 @app.put("/admin/options/{option_id}")
@@ -1417,6 +1421,7 @@ def update_option(option_id: int, option: OptionUpdate, admin_user: models.User 
         db_option.trait_tag = option.trait_tag
     
     db.commit()
+    reset_adaptive_engine()  # Clear cache so updates are picked up
     return {"message": "Option updated successfully"}
 
 @app.delete("/admin/options/{option_id}")
@@ -1428,7 +1433,14 @@ def delete_option(option_id: int, admin_user: models.User = Depends(require_admi
     
     db.delete(option)
     db.commit()
+    reset_adaptive_engine()  # Clear cache so deletions are picked up
     return {"message": "Option deleted successfully"}
+
+@app.post("/admin/cache/invalidate")
+def invalidate_cache(admin_user: models.User = Depends(require_admin)):
+    """Admin: Manually invalidate the adaptive engine cache"""
+    reset_adaptive_engine()
+    return {"message": "Cache invalidated successfully - questions/options will reload from database on next request"}
 
 # ========== ADMIN: USER MANAGEMENT ==========
 
@@ -2188,6 +2200,12 @@ if __name__ == "__main__":
 
 # Global adaptive engine (initialized after database is seeded)
 _adaptive_engine: AdaptiveAssessmentEngine = None
+
+def reset_adaptive_engine():
+    """Reset the adaptive engine cache - called when admin edits questions/options"""
+    global _adaptive_engine
+    _adaptive_engine = None
+    print("[CACHE] Adaptive engine cache cleared - will reload on next request")
 
 def get_or_init_adaptive_engine(db: Session) -> AdaptiveAssessmentEngine:
     """Get or initialize the adaptive engine with courses and questions from DB"""
