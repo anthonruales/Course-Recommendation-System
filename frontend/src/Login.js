@@ -132,7 +132,8 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
       
       onLoginSuccess(res.data.user, usernameOrEmail); 
     } catch (err) { 
-      alert(err.response?.data?.detail || "Invalid login credentials."); 
+      alert(err.response?.data?.detail || "Invalid login credentials.");
+      setPassword('');
     } finally {
       setLoading(false);
     }
