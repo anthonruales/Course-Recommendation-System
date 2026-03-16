@@ -142,17 +142,17 @@ function App() {
         authFetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`)
           .then(res => res.json())
           .then(data => {
-            if (data.academic_info) {
-              setProfileData({
-                fullname: data.fullname || '',
-                gwa: data.academic_info.gwa || '',
-                strand: data.academic_info.strand || '',
-                age: data.academic_info.age || '',
-                gender: data.academic_info.gender || '',
-                interests: data.academic_info.interests || '',
-                skills: data.academic_info.skills || ''
-              });
-            }
+            const rawAge = data.academic_info?.age;
+            const sanitizedAge = rawAge ? Math.abs(parseInt(rawAge)) || '' : '';
+            setProfileData({
+              fullname: data.fullname || '',
+              gwa: data.academic_info?.gwa || '',
+              strand: data.academic_info?.strand || '',
+              age: sanitizedAge,
+              gender: data.academic_info?.gender || '',
+              interests: data.academic_info?.interests || '',
+              skills: data.academic_info?.skills || ''
+            });
           })
           .catch(err => {
             console.error('Error loading profile:', err);
@@ -286,19 +286,22 @@ function App() {
                     authFetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`)
                       .then(res => res.json())
                       .then(data => {
-                        if (data.academic_info) {
-                          setProfileData({
-                            fullname: data.fullname || '',
-                            gwa: data.academic_info.gwa || '',
-                            strand: data.academic_info.strand || '',
-                            age: data.academic_info.age || '',
-                            gender: data.academic_info.gender || '',
-                            interests: data.academic_info.interests || '',
-                            skills: data.academic_info.skills || ''
-                          });
-                        }
+                        const rawAge = data.academic_info?.age;
+                        const sanitizedAge = rawAge ? Math.abs(parseInt(rawAge)) || '' : '';
+                        setProfileData({
+                          fullname: data.fullname || '',
+                          gwa: data.academic_info?.gwa || '',
+                          strand: data.academic_info?.strand || '',
+                          age: sanitizedAge,
+                          gender: data.academic_info?.gender || '',
+                          interests: data.academic_info?.interests || '',
+                          skills: data.academic_info?.skills || ''
+                        });
                       })
+                      .then(() => setView('dashboard'))
                       .catch(err => console.error('Error re-fetching profile:', err));
+                  } else {
+                    setView('dashboard');
                   }
                 }} 
                 formData={profileData} 

@@ -211,6 +211,14 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
       return;
     }
     
+    if (name === 'age') {
+      const ageValue = parseInt(value, 10);
+      if (value && ageValue < 0) {
+        setFormData(prev => ({ ...prev, age: 0 }));
+        return;
+      }
+    }
+
     if (name === 'gwa') {
       const gwaValue = parseFloat(value);
       if (value && gwaValue > 100) {
@@ -578,8 +586,10 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
                       style={styles.input}
                       type="number"
                       name="age"
+                      min="0"
                       value={formData?.age || ''}
                       onChange={handleChange}
+                      onKeyDown={(e) => { if (e.key === '-' || e.key === '+') e.preventDefault(); }}
                       placeholder="Enter your age"
                     />
                   </div>

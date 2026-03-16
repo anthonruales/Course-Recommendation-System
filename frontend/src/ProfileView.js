@@ -177,7 +177,7 @@ function ProfileView({ profileData, onBack, onViewActivity, onSettings }) {
                 {profileData?.age && (
                   <span style={styles.metaItem}>
                     <span style={styles.metaIcon}>🎂</span>
-                    {profileData.age} years old
+                    {Math.abs(profileData.age)} years old
                   </span>
                 )}
                 {profileData?.gender && (
@@ -250,7 +250,7 @@ function ProfileView({ profileData, onBack, onViewActivity, onSettings }) {
               </div>
               <div style={styles.aboutItem}>
                 <span style={styles.aboutLabel}>Age</span>
-                <span style={styles.aboutValue}>{profileData?.age ? `${profileData.age} years old` : 'Not set'}</span>
+                <span style={styles.aboutValue}>{profileData?.age ? `${Math.abs(profileData.age)} years old` : 'Not set'}</span>
               </div>
               <div style={styles.aboutItem}>
                 <span style={styles.aboutLabel}>Gender</span>

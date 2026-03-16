@@ -248,6 +248,18 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
       return;
     }
     
+    // Age validation - only allow positive digits
+    if (name === 'age') {
+      const digitsOnly = value.replace(/[^0-9]/g, '');
+      if (digitsOnly !== value) {
+        setFormData(prev => ({ ...prev, age: digitsOnly }));
+        return;
+      }
+      if (digitsOnly && parseInt(digitsOnly) < 1) {
+        return;
+      }
+    }
+
     // GWA validation
     if (name === 'gwa') {
       const gwaValue = parseFloat(value);
@@ -516,12 +528,15 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
               {/* AGE */}
               <div style={styles.inputGroup}>
                 <label style={styles.label}>Age</label>
-                <input 
-                  style={styles.input} 
-                  type="number" 
+                <input
+                  style={styles.input}
+                  type="text"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
                   name="age"
-                  value={formData?.age || ''} 
+                  value={String(formData?.age || '').replace(/[^0-9]/g, '')}
                   onChange={handleChange}
+                  onKeyDown={(e) => { if (e.key === '-' || e.key === '+' || e.key === 'e' || e.key === '.') e.preventDefault(); }}
                   placeholder=""
                 />
               </div>
