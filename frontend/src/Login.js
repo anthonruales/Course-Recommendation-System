@@ -219,12 +219,13 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
           <div style={styles.inputWrapper}>
             <label style={styles.label}>Password</label>
             <div style={{ position: 'relative' }}>
-              <input 
-                style={styles.input} 
-                type={showPassword ? "text" : "password"} 
+              <input
+                style={styles.input}
+                type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
+                value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                required 
+                required
               />
               <button 
                 type="button" 
