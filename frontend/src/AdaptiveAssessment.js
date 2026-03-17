@@ -571,11 +571,6 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 50, onViewPr
           </div>
 
           <div style={styles.navRight}>
-            {canFinishEarly && (
-              <button onClick={finishEarly} style={styles.finishBtn}>
-                ✅ Finish Early
-              </button>
-            )}
             <button onClick={onBack} style={styles.exitBtn}>← Exit</button>
           </div>
         </div>
@@ -679,17 +674,6 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 50, onViewPr
                 }}
               >
                 ← Previous Question
-              </button>
-              <button
-                onClick={finishEarly}
-                disabled={isLoading || currentRound < minRounds}
-                style={{
-                  ...styles.finishButton,
-                  opacity: currentRound < minRounds ? 0.5 : 1,
-                  cursor: currentRound < minRounds ? 'not-allowed' : 'pointer'
-                }}
-              >
-                Finish Early ✓
               </button>
             </div>
           </div>

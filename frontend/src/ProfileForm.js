@@ -615,6 +615,7 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
                   <option value="HUMSS">HUMSS</option>
                   <option value="GAS">GAS</option>
                   <option value="TVL">TVL</option>
+                  <option value="None">None</option>
                 </select>
               </div>
 

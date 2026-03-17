@@ -85,8 +85,15 @@ from assessment_service import AssessmentService
 from recommendation_engine import HybridRecommendationEngine
 from adaptive_assessment import AdaptiveAssessmentEngine, initialize_adaptive_engine, get_adaptive_engine
 import json
+import secrets
+import hashlib
+import time as _time
 
 load_dotenv()
+
+# ========== OTP STORE (in-memory, keyed by email) ==========
+# Each entry: {"otp_hash": str, "expires": float, "verified": bool, "token": str|None}
+_otp_store: dict = {}
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -400,6 +407,16 @@ class UserCreate(BaseModel):
     fullname: str
     email: str
     password: str
+    otp_token: Optional[str] = None  # Required: token from OTP verification
+
+class OTPRequest(BaseModel):
+    email: str
+    username: str
+    fullname: str
+
+class OTPVerify(BaseModel):
+    email: str
+    otp: str
 
 class UserLogin(BaseModel): 
     username: str  # Can be username OR email
@@ -493,6 +510,105 @@ class FeedbackStats(BaseModel):
     feedback_breakdown: dict  # {1: count, 2: count, ...}
 
 
+@app.post("/send-otp")
+def send_otp(data: OTPRequest, db: Session = Depends(get_db)):
+    """Send a 6-digit OTP to the user's email for signup verification."""
+    # Validate email
+    is_valid_email, email_error = validate_email(data.email)
+    if not is_valid_email:
+        raise HTTPException(status_code=400, detail=email_error)
+    
+    email = data.email.strip().lower()
+    
+    # Check for duplicate username
+    if db.query(models.User).filter(models.User.username == data.username).first():
+        raise HTTPException(status_code=400, detail="Username already exists")
+    
+    # Check for duplicate email
+    if db.query(models.User).filter(models.User.email == email).first():
+        raise HTTPException(status_code=400, detail="Email already exists")
+    
+    # Validate fullname
+    is_valid, error_msg, _ = validate_name(data.fullname)
+    if not is_valid:
+        raise HTTPException(status_code=400, detail=error_msg)
+    
+    # Rate limit: prevent sending another OTP within 60 seconds
+    existing = _otp_store.get(email)
+    if existing and _time.time() - (existing["expires"] - 300) < 60:
+        raise HTTPException(status_code=429, detail="Please wait before requesting another OTP.")
+    
+    # Generate 6-digit OTP
+    otp = "{:06d}".format(secrets.randbelow(1000000))
+    otp_hash = hashlib.sha256(otp.encode()).hexdigest()
+    
+    # Store OTP (expires in 5 minutes)
+    _otp_store[email] = {
+        "otp_hash": otp_hash,
+        "expires": _time.time() + 300,
+        "verified": False,
+        "token": None
+    }
+    
+    # Send OTP email
+    html_content = f"""
+    <div style="font-family: Arial, sans-serif; max-width: 480px; margin: 0 auto; padding: 32px; background: #0f172a; border-radius: 16px; color: #e2e8f0;">
+        <div style="text-align: center; margin-bottom: 24px;">
+            <h1 style="color: #a78bfa; margin: 0;">CoursePro</h1>
+            <p style="color: #94a3b8; font-size: 14px;">Email Verification</p>
+        </div>
+        <p>Hello <strong>{data.fullname}</strong>,</p>
+        <p>Your verification code is:</p>
+        <div style="text-align: center; margin: 24px 0;">
+            <span style="display: inline-block; font-size: 36px; font-weight: 700; letter-spacing: 8px; color: #a78bfa; background: rgba(139,92,246,0.1); padding: 16px 32px; border-radius: 12px; border: 1px solid rgba(139,92,246,0.3);">{otp}</span>
+        </div>
+        <p style="color: #94a3b8; font-size: 13px;">This code expires in <strong>5 minutes</strong>. Do not share it with anyone.</p>
+        <hr style="border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 24px 0;">
+        <p style="color: #64748b; font-size: 12px; text-align: center;">If you didn't request this, you can safely ignore this email.</p>
+    </div>
+    """
+    
+    try:
+        send_email_html(email, "CoursePro - Verify Your Email", html_content)
+    except Exception as e:
+        print(f"[OTP] Failed to send OTP email to {email}: {e}")
+        # Clean up stored OTP on failure
+        _otp_store.pop(email, None)
+        raise HTTPException(status_code=503, detail="Failed to send verification email. Please check your email address or try again later.")
+    
+    print(f"[OTP] Sent OTP to {email}")
+    return {"success": True, "message": "Verification code sent to your email."}
+
+
+@app.post("/verify-otp")
+def verify_otp(data: OTPVerify):
+    """Verify the OTP and return a one-time token for signup."""
+    email = data.email.strip().lower()
+    otp = data.otp.strip()
+    
+    entry = _otp_store.get(email)
+    if not entry:
+        raise HTTPException(status_code=400, detail="No verification code found. Please request a new one.")
+    
+    if _time.time() > entry["expires"]:
+        _otp_store.pop(email, None)
+        raise HTTPException(status_code=400, detail="Verification code has expired. Please request a new one.")
+    
+    otp_hash = hashlib.sha256(otp.encode()).hexdigest()
+    if otp_hash != entry["otp_hash"]:
+        raise HTTPException(status_code=400, detail="Invalid verification code. Please try again.")
+    
+    # Mark as verified and generate a token for signup
+    token = secrets.token_urlsafe(32)
+    entry["verified"] = True
+    entry["token"] = token
+    # Extend expiry by 5 more minutes for completing signup
+    entry["expires"] = _time.time() + 300
+    
+    print(f"[OTP] Verified OTP for {email}")
+    return {"success": True, "otp_token": token, "message": "Email verified successfully!"}
+
+
 @app.post("/signup")
 def signup(user: UserCreate, db: Session = Depends(get_db)):
     # Validate email format first
@@ -500,12 +616,29 @@ def signup(user: UserCreate, db: Session = Depends(get_db)):
     if not is_valid_email:
         raise HTTPException(status_code=400, detail=email_error)
     
+    email = user.email.strip().lower()
+    
+    # Verify OTP token
+    if not user.otp_token:
+        raise HTTPException(status_code=400, detail="Email verification is required. Please verify your email first.")
+    
+    entry = _otp_store.get(email)
+    if not entry or not entry.get("verified") or entry.get("token") != user.otp_token:
+        raise HTTPException(status_code=400, detail="Invalid or expired verification. Please verify your email again.")
+    
+    if _time.time() > entry["expires"]:
+        _otp_store.pop(email, None)
+        raise HTTPException(status_code=400, detail="Verification expired. Please verify your email again.")
+    
+    # Clean up OTP entry
+    _otp_store.pop(email, None)
+    
     # Check for duplicate username
     if db.query(models.User).filter(models.User.username == user.username).first():
         raise HTTPException(status_code=400, detail="Username already exists")
     
     # Check for duplicate email
-    if db.query(models.User).filter(models.User.email == user.email.strip().lower()).first():
+    if db.query(models.User).filter(models.User.email == email).first():
         raise HTTPException(status_code=400, detail="Email already exists")
     
     # Validate and sanitize fullname
@@ -522,7 +655,7 @@ def signup(user: UserCreate, db: Session = Depends(get_db)):
         username=user.username,
         first_name=first_name,
         last_name=last_name,
-        email=user.email.strip().lower(),
+        email=email,
         password_hash=hash_password(user.password)
     )
     db.add(new_user)
