@@ -297,6 +297,10 @@ function App() {
                           interests: data.academic_info?.interests || '',
                           skills: data.academic_info?.skills || ''
                         });
+                        // Update userName state if fullname changed
+                        if (data.fullname) {
+                          setUser(data.fullname);
+                        }
                       })
                       .then(() => setView('dashboard'))
                       .catch(err => console.error('Error re-fetching profile:', err));

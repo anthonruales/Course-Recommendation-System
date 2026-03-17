@@ -53,6 +53,20 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
   const [selectedQuestionCount, setSelectedQuestionCount] = useState(30);
   const [showHelpCenter, setShowHelpCenter] = useState(false);
   const [activityCount, setActivityCount] = useState(0);
+  const [isReturningUser, setIsReturningUser] = useState(false);
+
+  // Detect if this is a returning user
+  useEffect(() => {
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      const hasVisited = localStorage.getItem(`hasVisitedDashboard_${userId}`);
+      if (hasVisited) {
+        setIsReturningUser(true);
+      } else {
+        localStorage.setItem(`hasVisitedDashboard_${userId}`, 'true');
+      }
+    }
+  }, []);
 
   // Lock body scroll when Help Center modal is open
   useEffect(() => {
@@ -285,7 +299,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
         <section style={styles.heroSection}>
           <div style={styles.heroContent}>
             <h1 className="dash-hero-title" style={styles.heroTitle}>
-              <span style={styles.heroLine1}>Welcome back,</span>
+              <span style={styles.heroLine1}>{isReturningUser ? 'Welcome back,' : 'Welcome,'}</span>
               <span className="gradient-text" style={styles.heroLine2}>{userName}</span>
             </h1>
 
