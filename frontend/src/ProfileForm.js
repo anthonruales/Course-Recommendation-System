@@ -38,7 +38,14 @@ const INTEREST_OPTIONS = [
   { id: 'physics', label: 'Physics', category: 'Science' },
   { id: 'environment', label: 'Environment & Nature', category: 'Science' },
   { id: 'earth_science', label: 'Earth Science & Geology', category: 'Science' },
-  
+  { id: 'marine_science', label: 'Marine Science & Oceanography', category: 'Science' },
+  { id: 'biotechnology', label: 'Biotechnology & Genetics', category: 'Science' },
+  { id: 'meteorology', label: 'Weather & Atmospheric Science', category: 'Science' },
+  { id: 'statistics', label: 'Statistics & Probability', category: 'Science' },
+  { id: 'food_science', label: 'Food Science & Safety', category: 'Science' },
+  { id: 'forensic_science', label: 'Forensic Science', category: 'Science' },
+  { id: 'env_planning', label: 'Environmental Planning & Sustainability', category: 'Science' },
+
   // Technology
   { id: 'programming', label: 'Programming & Coding', category: 'Technology' },
   { id: 'computer', label: 'Computers & IT', category: 'Technology' },
@@ -47,7 +54,13 @@ const INTEREST_OPTIONS = [
   { id: 'cybersecurity', label: 'Cybersecurity', category: 'Technology' },
   { id: 'robotics', label: 'Robotics & Automation', category: 'Technology' },
   { id: 'game_dev', label: 'Game Development', category: 'Technology' },
-  
+  { id: 'web_tech', label: 'Web & Mobile Technologies', category: 'Technology' },
+  { id: 'multimedia', label: 'Multimedia & Digital Entertainment', category: 'Technology' },
+  { id: 'networking', label: 'Computer Networking', category: 'Technology' },
+  { id: 'software_eng', label: 'Software Engineering', category: 'Technology' },
+  { id: 'database', label: 'Database & Information Systems', category: 'Technology' },
+  { id: 'health_info', label: 'Health Information Technology', category: 'Technology' },
+
   // Engineering
   { id: 'engineering', label: 'Engineering (General)', category: 'Engineering' },
   { id: 'mechanical', label: 'Mechanical Systems', category: 'Engineering' },
@@ -55,7 +68,13 @@ const INTEREST_OPTIONS = [
   { id: 'civil', label: 'Civil & Construction', category: 'Engineering' },
   { id: 'architecture', label: 'Architecture & Interior Design', category: 'Engineering' },
   { id: 'industrial', label: 'Industrial & Manufacturing', category: 'Engineering' },
-  
+  { id: 'aeronautical', label: 'Aeronautical & Aerospace', category: 'Engineering' },
+  { id: 'geodetic', label: 'Geodetic & Surveying', category: 'Engineering' },
+  { id: 'landscape', label: 'Landscape Architecture', category: 'Engineering' },
+  { id: 'industrial_design', label: 'Product & Industrial Design', category: 'Engineering' },
+  { id: 'aircraft_maint', label: 'Aircraft Maintenance & Avionics', category: 'Engineering' },
+  { id: 'marine_eng', label: 'Marine Engineering', category: 'Engineering' },
+
   // Business & Finance
   { id: 'business', label: 'Business & Entrepreneurship', category: 'Business' },
   { id: 'finance', label: 'Finance & Banking', category: 'Business' },
@@ -64,7 +83,13 @@ const INTEREST_OPTIONS = [
   { id: 'economics', label: 'Economics', category: 'Business' },
   { id: 'management', label: 'Management & Administration', category: 'Business' },
   { id: 'real_estate', label: 'Real Estate & Property', category: 'Business' },
-  
+  { id: 'human_resource', label: 'Human Resource Management', category: 'Business' },
+  { id: 'operations', label: 'Operations & Supply Chain', category: 'Business' },
+  { id: 'customs', label: 'Customs & International Trade', category: 'Business' },
+  { id: 'agribusiness', label: 'Agribusiness', category: 'Business' },
+  { id: 'office_admin', label: 'Office Administration', category: 'Business' },
+  { id: 'startup', label: 'Startup & Innovation', category: 'Business' },
+
   // Arts & Creative
   { id: 'art', label: 'Arts & Design', category: 'Arts' },
   { id: 'music', label: 'Music & Performance', category: 'Arts' },
@@ -73,7 +98,12 @@ const INTEREST_OPTIONS = [
   { id: 'photography', label: 'Photography & Visual Arts', category: 'Arts' },
   { id: 'animation', label: 'Animation & Multimedia', category: 'Arts' },
   { id: 'fashion', label: 'Fashion & Textile Design', category: 'Arts' },
-  
+  { id: 'theater', label: 'Theater & Performing Arts', category: 'Arts' },
+  { id: 'advertising_arts', label: 'Advertising & Graphic Arts', category: 'Arts' },
+  { id: 'music_production', label: 'Music Production & Audio', category: 'Arts' },
+  { id: 'fine_arts', label: 'Fine Arts & Painting', category: 'Arts' },
+  { id: 'clothing_tech', label: 'Clothing & Textile Technology', category: 'Arts' },
+
   // Healthcare
   { id: 'medical', label: 'Medicine & Healthcare', category: 'Healthcare' },
   { id: 'nursing', label: 'Nursing & Patient Care', category: 'Healthcare' },
@@ -83,7 +113,14 @@ const INTEREST_OPTIONS = [
   { id: 'nutrition', label: 'Nutrition & Dietetics', category: 'Healthcare' },
   { id: 'medical_tech', label: 'Medical Technology & Lab Science', category: 'Healthcare' },
   { id: 'dentistry', label: 'Dentistry & Oral Health', category: 'Healthcare' },
-  
+  { id: 'occupational_therapy', label: 'Occupational Therapy', category: 'Healthcare' },
+  { id: 'speech_therapy', label: 'Speech-Language Pathology', category: 'Healthcare' },
+  { id: 'respiratory', label: 'Respiratory Therapy', category: 'Healthcare' },
+  { id: 'radiology', label: 'Radiology & Imaging', category: 'Healthcare' },
+  { id: 'optometry', label: 'Optometry & Vision Care', category: 'Healthcare' },
+  { id: 'midwifery', label: 'Midwifery & Maternal Health', category: 'Healthcare' },
+  { id: 'public_health', label: 'Public Health', category: 'Healthcare' },
+
   // Social & Humanities
   { id: 'education', label: 'Education & Teaching', category: 'Social' },
   { id: 'law', label: 'Law & Justice', category: 'Social' },
@@ -93,12 +130,23 @@ const INTEREST_OPTIONS = [
   { id: 'communication', label: 'Communication & Journalism', category: 'Social' },
   { id: 'philosophy', label: 'Philosophy & Ethics', category: 'Social' },
   { id: 'criminology', label: 'Criminology & Public Safety', category: 'Social' },
-  
+  { id: 'early_childhood', label: 'Early Childhood Education', category: 'Social' },
+  { id: 'special_education', label: 'Special Needs Education', category: 'Social' },
+  { id: 'library_science', label: 'Library & Information Science', category: 'Social' },
+  { id: 'public_admin', label: 'Public Administration', category: 'Social' },
+  { id: 'intl_studies', label: 'International Studies & Diplomacy', category: 'Social' },
+  { id: 'sociology', label: 'Sociology', category: 'Social' },
+  { id: 'linguistics', label: 'Linguistics & Languages', category: 'Social' },
+  { id: 'dev_communication', label: 'Development Communication', category: 'Social' },
+  { id: 'community_dev', label: 'Community Development', category: 'Social' },
+  { id: 'legal_mgmt', label: 'Legal Management', category: 'Social' },
+
   // Maritime & Transportation
   { id: 'maritime', label: 'Maritime & Seafaring', category: 'Maritime' },
   { id: 'aviation', label: 'Aviation & Aerospace', category: 'Maritime' },
   { id: 'logistics', label: 'Logistics & Supply Chain', category: 'Maritime' },
-  
+  { id: 'marine_transport', label: 'Marine Transportation & Navigation', category: 'Maritime' },
+
   // Others
   { id: 'sports', label: 'Sports & Fitness', category: 'Others' },
   { id: 'tourism', label: 'Tourism & Hospitality', category: 'Others' },
@@ -106,6 +154,12 @@ const INTEREST_OPTIONS = [
   { id: 'agriculture', label: 'Agriculture & Farming', category: 'Others' },
   { id: 'veterinary', label: 'Veterinary & Animal Science', category: 'Others' },
   { id: 'military', label: 'Military & Defense', category: 'Others' },
+  { id: 'forestry', label: 'Forestry & Natural Resources', category: 'Others' },
+  { id: 'fisheries', label: 'Fisheries & Aquaculture', category: 'Others' },
+  { id: 'hotel_mgmt', label: 'Hotel & Resort Management', category: 'Others' },
+  { id: 'exercise_science', label: 'Exercise & Sports Science', category: 'Others' },
+  { id: 'tvet', label: 'Technical-Vocational Training', category: 'Others' },
+  { id: 'culinary_mgmt', label: 'Culinary Management', category: 'Others' },
 ];
 
 // Predefined options for Skills
@@ -121,7 +175,22 @@ const SKILL_OPTIONS = [
   { id: 'technical_writing', label: 'Technical Writing', category: 'Technical' },
   { id: 'electronics', label: 'Electronics / Circuit Design', category: 'Technical' },
   { id: 'drafting', label: 'Drafting / CAD / Blueprint Reading', category: 'Technical' },
-  
+  { id: 'accounting_skill', label: 'Bookkeeping & Accounting', category: 'Technical' },
+  { id: 'networking_skill', label: 'Computer Networking & Troubleshooting', category: 'Technical' },
+  { id: 'database_skill', label: 'Database Management', category: 'Technical' },
+  { id: 'statistical_analysis', label: 'Statistical Analysis', category: 'Technical' },
+  { id: 'surveying', label: 'Surveying & Mapping', category: 'Technical' },
+  { id: 'lab_equipment', label: 'Medical / Lab Equipment Operation', category: 'Technical' },
+  { id: 'machine_operation', label: 'Machine & Equipment Operation', category: 'Technical' },
+  { id: 'quality_control', label: 'Quality Control & Testing', category: 'Technical' },
+  { id: 'mobile_dev', label: 'Mobile App Development', category: 'Technical' },
+  { id: 'ux_ui', label: 'UX / UI Design', category: 'Technical' },
+  { id: 'audio_production', label: 'Audio / Sound Production', category: 'Technical' },
+  { id: 'film_editing', label: 'Film Editing & Cinematography', category: 'Technical' },
+  { id: 'navigation', label: 'Navigation & Seamanship', category: 'Technical' },
+  { id: 'flight_ops', label: 'Flight Operations & Instruments', category: 'Technical' },
+  { id: 'env_assessment', label: 'Environmental Impact Assessment', category: 'Technical' },
+
   // Communication Skills
   { id: 'public_speaking', label: 'Public Speaking', category: 'Communication' },
   { id: 'writing_skill', label: 'Writing & Composition', category: 'Communication' },
@@ -130,7 +199,12 @@ const SKILL_OPTIONS = [
   { id: 'foreign_language', label: 'Foreign Languages', category: 'Communication' },
   { id: 'filipino_language', label: 'Filipino / Tagalog Communication', category: 'Communication' },
   { id: 'social_media', label: 'Social Media & Digital Communication', category: 'Communication' },
-  
+  { id: 'journalism_skill', label: 'Journalism & News Writing', category: 'Communication' },
+  { id: 'persuasion', label: 'Persuasion & Advocacy', category: 'Communication' },
+  { id: 'interviewing', label: 'Interviewing & Questioning', category: 'Communication' },
+  { id: 'report_writing', label: 'Report & Academic Writing', category: 'Communication' },
+  { id: 'sign_language', label: 'Sign Language / Braille', category: 'Communication' },
+
   // Leadership & Management
   { id: 'leadership', label: 'Leadership', category: 'Leadership' },
   { id: 'project_management', label: 'Project Management', category: 'Leadership' },
@@ -138,7 +212,11 @@ const SKILL_OPTIONS = [
   { id: 'decision_making', label: 'Decision Making', category: 'Leadership' },
   { id: 'planning', label: 'Planning & Organization', category: 'Leadership' },
   { id: 'time_management', label: 'Time Management', category: 'Leadership' },
-  
+  { id: 'event_management', label: 'Event Planning & Management', category: 'Leadership' },
+  { id: 'budgeting', label: 'Budgeting & Financial Planning', category: 'Leadership' },
+  { id: 'strategic_thinking', label: 'Strategic Thinking', category: 'Leadership' },
+  { id: 'delegation', label: 'Delegation & Task Assignment', category: 'Leadership' },
+
   // Interpersonal Skills
   { id: 'teamwork', label: 'Teamwork & Collaboration', category: 'Interpersonal' },
   { id: 'empathy', label: 'Empathy & Compassion', category: 'Interpersonal' },
@@ -146,14 +224,24 @@ const SKILL_OPTIONS = [
   { id: 'mentoring', label: 'Mentoring & Teaching', category: 'Interpersonal' },
   { id: 'conflict_resolution', label: 'Conflict Resolution', category: 'Interpersonal' },
   { id: 'counseling', label: 'Counseling & Active Listening', category: 'Interpersonal' },
-  
+  { id: 'patient_care', label: 'Patient Care & Bedside Manner', category: 'Interpersonal' },
+  { id: 'cultural_sensitivity', label: 'Cultural Sensitivity & Diversity', category: 'Interpersonal' },
+  { id: 'networking_people', label: 'Professional Networking', category: 'Interpersonal' },
+  { id: 'child_interaction', label: 'Working with Children', category: 'Interpersonal' },
+  { id: 'elderly_care', label: 'Working with Elderly / PWDs', category: 'Interpersonal' },
+
   // Analytical Skills
   { id: 'critical_thinking', label: 'Critical Thinking', category: 'Analytical' },
   { id: 'problem_solving', label: 'Problem Solving', category: 'Analytical' },
   { id: 'research', label: 'Research & Investigation', category: 'Analytical' },
   { id: 'attention_detail', label: 'Attention to Detail', category: 'Analytical' },
   { id: 'logical_reasoning', label: 'Logical Reasoning', category: 'Analytical' },
-  
+  { id: 'case_analysis', label: 'Case Study / Scenario Analysis', category: 'Analytical' },
+  { id: 'scientific_method', label: 'Scientific Method & Experimentation', category: 'Analytical' },
+  { id: 'financial_analysis', label: 'Financial Analysis & Forecasting', category: 'Analytical' },
+  { id: 'risk_assessment', label: 'Risk Assessment & Management', category: 'Analytical' },
+  { id: 'policy_analysis', label: 'Policy Analysis', category: 'Analytical' },
+
   // Creative Skills
   { id: 'creativity', label: 'Creativity & Innovation', category: 'Creative' },
   { id: 'artistic', label: 'Artistic Ability', category: 'Creative' },
@@ -161,7 +249,13 @@ const SKILL_OPTIONS = [
   { id: 'storytelling', label: 'Storytelling', category: 'Creative' },
   { id: 'design_thinking', label: 'Design Thinking', category: 'Creative' },
   { id: 'photography_skill', label: 'Photography / Videography', category: 'Creative' },
-  
+  { id: 'acting', label: 'Acting & Stage Performance', category: 'Creative' },
+  { id: 'illustration', label: 'Drawing & Illustration', category: 'Creative' },
+  { id: 'fashion_design', label: 'Fashion & Apparel Design', category: 'Creative' },
+  { id: 'animation_skill', label: 'Animation & Motion Graphics', category: 'Creative' },
+  { id: 'interior_styling', label: 'Interior Styling & Space Design', category: 'Creative' },
+  { id: 'content_creation', label: 'Content Creation & Blogging', category: 'Creative' },
+
   // Practical & Physical Skills
   { id: 'cooking', label: 'Cooking & Food Preparation', category: 'Practical' },
   { id: 'first_aid', label: 'First Aid & Basic Healthcare', category: 'Practical' },
@@ -169,6 +263,13 @@ const SKILL_OPTIONS = [
   { id: 'driving', label: 'Driving & Vehicle Operation', category: 'Practical' },
   { id: 'gardening', label: 'Gardening & Plant Care', category: 'Practical' },
   { id: 'repair_maintenance', label: 'Repair & Maintenance (Tools/Equipment)', category: 'Practical' },
+  { id: 'swimming', label: 'Swimming & Water Safety', category: 'Practical' },
+  { id: 'animal_handling', label: 'Animal Handling & Care', category: 'Practical' },
+  { id: 'carpentry', label: 'Carpentry & Woodworking', category: 'Practical' },
+  { id: 'farming', label: 'Farming & Crop Management', category: 'Practical' },
+  { id: 'fishing', label: 'Fishing & Aquaculture', category: 'Practical' },
+  { id: 'sewing', label: 'Sewing & Textile Craft', category: 'Practical' },
+  { id: 'coaching', label: 'Sports Coaching & Training', category: 'Practical' },
 ];
 
 function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
