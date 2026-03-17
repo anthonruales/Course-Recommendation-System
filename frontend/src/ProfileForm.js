@@ -37,6 +37,7 @@ const INTEREST_OPTIONS = [
   { id: 'chemistry', label: 'Chemistry', category: 'Science' },
   { id: 'physics', label: 'Physics', category: 'Science' },
   { id: 'environment', label: 'Environment & Nature', category: 'Science' },
+  { id: 'earth_science', label: 'Earth Science & Geology', category: 'Science' },
   
   // Technology
   { id: 'programming', label: 'Programming & Coding', category: 'Technology' },
@@ -44,12 +45,16 @@ const INTEREST_OPTIONS = [
   { id: 'data', label: 'Data & Analytics', category: 'Technology' },
   { id: 'ai', label: 'AI & Machine Learning', category: 'Technology' },
   { id: 'cybersecurity', label: 'Cybersecurity', category: 'Technology' },
+  { id: 'robotics', label: 'Robotics & Automation', category: 'Technology' },
+  { id: 'game_dev', label: 'Game Development', category: 'Technology' },
   
   // Engineering
-  { id: 'engineering', label: 'Engineering', category: 'Engineering' },
+  { id: 'engineering', label: 'Engineering (General)', category: 'Engineering' },
   { id: 'mechanical', label: 'Mechanical Systems', category: 'Engineering' },
   { id: 'electrical', label: 'Electrical & Electronics', category: 'Engineering' },
   { id: 'civil', label: 'Civil & Construction', category: 'Engineering' },
+  { id: 'architecture', label: 'Architecture & Interior Design', category: 'Engineering' },
+  { id: 'industrial', label: 'Industrial & Manufacturing', category: 'Engineering' },
   
   // Business & Finance
   { id: 'business', label: 'Business & Entrepreneurship', category: 'Business' },
@@ -57,6 +62,8 @@ const INTEREST_OPTIONS = [
   { id: 'marketing', label: 'Marketing & Advertising', category: 'Business' },
   { id: 'accounting', label: 'Accounting', category: 'Business' },
   { id: 'economics', label: 'Economics', category: 'Business' },
+  { id: 'management', label: 'Management & Administration', category: 'Business' },
+  { id: 'real_estate', label: 'Real Estate & Property', category: 'Business' },
   
   // Arts & Creative
   { id: 'art', label: 'Arts & Design', category: 'Arts' },
@@ -64,11 +71,18 @@ const INTEREST_OPTIONS = [
   { id: 'film', label: 'Film & Media Production', category: 'Arts' },
   { id: 'writing', label: 'Writing & Literature', category: 'Arts' },
   { id: 'photography', label: 'Photography & Visual Arts', category: 'Arts' },
+  { id: 'animation', label: 'Animation & Multimedia', category: 'Arts' },
+  { id: 'fashion', label: 'Fashion & Textile Design', category: 'Arts' },
   
   // Healthcare
   { id: 'medical', label: 'Medicine & Healthcare', category: 'Healthcare' },
   { id: 'nursing', label: 'Nursing & Patient Care', category: 'Healthcare' },
   { id: 'psychology', label: 'Psychology & Mental Health', category: 'Healthcare' },
+  { id: 'pharmacy', label: 'Pharmacy & Pharmaceutical Science', category: 'Healthcare' },
+  { id: 'physical_therapy', label: 'Physical Therapy & Rehabilitation', category: 'Healthcare' },
+  { id: 'nutrition', label: 'Nutrition & Dietetics', category: 'Healthcare' },
+  { id: 'medical_tech', label: 'Medical Technology & Lab Science', category: 'Healthcare' },
+  { id: 'dentistry', label: 'Dentistry & Oral Health', category: 'Healthcare' },
   
   // Social & Humanities
   { id: 'education', label: 'Education & Teaching', category: 'Social' },
@@ -76,12 +90,22 @@ const INTEREST_OPTIONS = [
   { id: 'politics', label: 'Politics & Government', category: 'Social' },
   { id: 'social', label: 'Social Work & Community', category: 'Social' },
   { id: 'history', label: 'History & Culture', category: 'Social' },
+  { id: 'communication', label: 'Communication & Journalism', category: 'Social' },
+  { id: 'philosophy', label: 'Philosophy & Ethics', category: 'Social' },
+  { id: 'criminology', label: 'Criminology & Public Safety', category: 'Social' },
+  
+  // Maritime & Transportation
+  { id: 'maritime', label: 'Maritime & Seafaring', category: 'Maritime' },
+  { id: 'aviation', label: 'Aviation & Aerospace', category: 'Maritime' },
+  { id: 'logistics', label: 'Logistics & Supply Chain', category: 'Maritime' },
   
   // Others
   { id: 'sports', label: 'Sports & Fitness', category: 'Others' },
   { id: 'tourism', label: 'Tourism & Hospitality', category: 'Others' },
   { id: 'food', label: 'Culinary & Food Science', category: 'Others' },
   { id: 'agriculture', label: 'Agriculture & Farming', category: 'Others' },
+  { id: 'veterinary', label: 'Veterinary & Animal Science', category: 'Others' },
+  { id: 'military', label: 'Military & Defense', category: 'Others' },
 ];
 
 // Predefined options for Skills
@@ -95,6 +119,8 @@ const SKILL_OPTIONS = [
   { id: 'math_skills', label: 'Mathematics', category: 'Technical' },
   { id: 'laboratory', label: 'Laboratory Work', category: 'Technical' },
   { id: 'technical_writing', label: 'Technical Writing', category: 'Technical' },
+  { id: 'electronics', label: 'Electronics / Circuit Design', category: 'Technical' },
+  { id: 'drafting', label: 'Drafting / CAD / Blueprint Reading', category: 'Technical' },
   
   // Communication Skills
   { id: 'public_speaking', label: 'Public Speaking', category: 'Communication' },
@@ -102,6 +128,8 @@ const SKILL_OPTIONS = [
   { id: 'presentation', label: 'Presentation Skills', category: 'Communication' },
   { id: 'negotiation', label: 'Negotiation', category: 'Communication' },
   { id: 'foreign_language', label: 'Foreign Languages', category: 'Communication' },
+  { id: 'filipino_language', label: 'Filipino / Tagalog Communication', category: 'Communication' },
+  { id: 'social_media', label: 'Social Media & Digital Communication', category: 'Communication' },
   
   // Leadership & Management
   { id: 'leadership', label: 'Leadership', category: 'Leadership' },
@@ -109,6 +137,7 @@ const SKILL_OPTIONS = [
   { id: 'team_management', label: 'Team Management', category: 'Leadership' },
   { id: 'decision_making', label: 'Decision Making', category: 'Leadership' },
   { id: 'planning', label: 'Planning & Organization', category: 'Leadership' },
+  { id: 'time_management', label: 'Time Management', category: 'Leadership' },
   
   // Interpersonal Skills
   { id: 'teamwork', label: 'Teamwork & Collaboration', category: 'Interpersonal' },
@@ -116,6 +145,7 @@ const SKILL_OPTIONS = [
   { id: 'customer_service', label: 'Customer Service', category: 'Interpersonal' },
   { id: 'mentoring', label: 'Mentoring & Teaching', category: 'Interpersonal' },
   { id: 'conflict_resolution', label: 'Conflict Resolution', category: 'Interpersonal' },
+  { id: 'counseling', label: 'Counseling & Active Listening', category: 'Interpersonal' },
   
   // Analytical Skills
   { id: 'critical_thinking', label: 'Critical Thinking', category: 'Analytical' },
@@ -130,6 +160,15 @@ const SKILL_OPTIONS = [
   { id: 'music_skill', label: 'Musical Ability', category: 'Creative' },
   { id: 'storytelling', label: 'Storytelling', category: 'Creative' },
   { id: 'design_thinking', label: 'Design Thinking', category: 'Creative' },
+  { id: 'photography_skill', label: 'Photography / Videography', category: 'Creative' },
+  
+  // Practical & Physical Skills
+  { id: 'cooking', label: 'Cooking & Food Preparation', category: 'Practical' },
+  { id: 'first_aid', label: 'First Aid & Basic Healthcare', category: 'Practical' },
+  { id: 'sports_fitness', label: 'Sports & Physical Fitness', category: 'Practical' },
+  { id: 'driving', label: 'Driving & Vehicle Operation', category: 'Practical' },
+  { id: 'gardening', label: 'Gardening & Plant Care', category: 'Practical' },
+  { id: 'repair_maintenance', label: 'Repair & Maintenance (Tools/Equipment)', category: 'Practical' },
 ];
 
 function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
@@ -324,8 +363,13 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
 
   const handleSaveProfile = () => {
     // Validate required fields
-    if (!formData.gwa || !formData.strand) {
-      showToast('Please fill in both GWA and SHS Strand to save your profile', 'warning');
+    const missing = [];
+    if (!formData.gwa) missing.push('GWA');
+    if (!formData.strand) missing.push('SHS Strand');
+    if (selectedInterests.length === 0) missing.push('Academic Interests');
+    if (selectedSkills.length === 0) missing.push('Skills');
+    if (missing.length > 0) {
+      showToast(`Please fill in: ${missing.join(', ')}`, 'warning');
       return;
     }
     

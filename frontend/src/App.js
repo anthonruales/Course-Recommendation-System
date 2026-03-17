@@ -72,7 +72,7 @@ function App() {
   });
   const [user, setUser] = useState(localStorage.getItem('userName') || null);
   const [recommendationData, setRecommendationData] = useState(null);
-  const [selectedQuestionCount, setSelectedQuestionCount] = useState(30);
+  const [selectedQuestionCount] = useState(50);
   
   // Initialize as empty object to prevent "is not a function" errors
   const [profileData, setProfileData] = useState({});
@@ -230,8 +230,7 @@ function App() {
               <Dashboard 
                 userName={user} 
                 onLogout={handleLogout} 
-                onStartAssessment={(questionCount) => {
-                  setSelectedQuestionCount(questionCount || 30);
+                onStartAssessment={() => {
                   setView('assessment');
                 }}
                 onViewProfile={() => setView('profile')}

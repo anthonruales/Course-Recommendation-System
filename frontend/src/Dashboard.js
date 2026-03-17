@@ -50,7 +50,7 @@ const keyframes = `
 function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfile, onViewActivity, onViewSettings, history }) {
   const [hasAcademicInfo, setHasAcademicInfo] = useState(false);
   const [checkingProfile, setCheckingProfile] = useState(true);
-  const [selectedQuestionCount, setSelectedQuestionCount] = useState(30);
+  const [selectedQuestionCount] = useState(50);
   const [showHelpCenter, setShowHelpCenter] = useState(false);
   const [activityCount, setActivityCount] = useState(0);
   const [isReturningUser, setIsReturningUser] = useState(false);
@@ -180,13 +180,12 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
   // Memoized handler for starting assessment
   const handleStartAdaptive = useCallback(() => {
     if (!hasAcademicInfo) {
-      alert('⚠️ Please complete your Academic Profile first!\n\nYou need to fill in your GWA and SHS Strand before taking the assessment.');
+      alert('⚠️ Please complete your Academic Profile first!\n\nYou need to fill in your GWA, SHS Strand, Academic Interests, and Skills before taking the assessment.');
       onViewProfile();
       return;
     }
-    // Pass the selected question count to the assessment
-    onStartAssessment(selectedQuestionCount);
-  }, [hasAcademicInfo, onViewProfile, onStartAssessment, selectedQuestionCount]);
+    onStartAssessment(50);
+  }, [hasAcademicInfo, onViewProfile, onStartAssessment]);
 
   // Inject keyframes into document
   useEffect(() => {
@@ -327,39 +326,14 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
                 <span style={styles.cardTagHighlight}>TAKE ASSESSMENT</span>
               </div>
               <h2 style={styles.cardTitleLarge}>Find Your Perfect Course</h2>
-              <p style={styles.cardDescLarge}>Answer questions and get personalized course recommendations based on your interests and skills.</p>
+              <p style={styles.cardDescLarge}>Answer 50 questions and get personalized course recommendations based on your interests and skills.</p>
               
-              <div style={styles.quizLengthLabel}>Select Quiz Length:</div>
-              <div className="dash-assessment-options" style={styles.assessmentOptions}>
-                {[
-                  { count: 30, label: 'Quick', icon: '⚡', color: '#22c55e' },
-                  { count: 50, label: 'Standard', icon: '📊', color: '#6366f1' },
-                  { count: 60, label: 'Comprehensive', icon: '🎯', color: '#f59e0b' }
-                ].map((option) => (
-                  <div
-                    key={option.count}
-                    className="dash-assessment-option"
-                    style={selectedQuestionCount === option.count ? {
-                      ...styles.assessmentOption,
-                      ...styles.assessmentOptionActive,
-                      borderColor: option.color,
-                      boxShadow: `0 0 30px ${option.color}30`
-                    } : {
-                      ...styles.assessmentOption,
-                      borderColor: 'rgba(255, 255, 255, 0.08)',
-                      boxShadow: 'none'
-                    }}
-                    onClick={() => setSelectedQuestionCount(option.count)}
-                  >
-                    <span style={styles.optionEmoji}>{option.icon}</span>
-                    <div style={styles.optionInfo}>
-                      <strong style={styles.optionName}>{option.label}</strong>
-                    </div>
-                    {selectedQuestionCount === option.count && (
-                      <div style={{...styles.checkMark, background: option.color}}>✓</div>
-                    )}
-                  </div>
-                ))}
+              <div style={styles.assessmentInfoBox}>
+                <span style={{fontSize: '1.5rem'}}>📋</span>
+                <div style={{flex: 1}}>
+                  <strong style={{color: '#e2e8f0'}}>Career Assessment</strong>
+                  <p style={{margin: '4px 0 0', fontSize: '0.85rem', color: '#94a3b8'}}>50 questions · ~15-20 min · Personalized to your strand</p>
+                </div>
               </div>
 
               <button 
@@ -470,7 +444,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
                 <h3 style={styles.helpSectionTitle}>🚀 Getting Started</h3>
                 <div style={styles.helpItem}>
                   <strong>1. Complete Your Profile</strong>
-                  <p>Fill in your Academic Profile with your GWA and SHS Strand.</p>
+                  <p>Fill in your Academic Profile with your GWA, SHS Strand, Academic Interests, and Skills.</p>
                 </div>
                 <div style={styles.helpItem}>
                   <strong>2. Take the Assessment</strong>
@@ -483,18 +457,10 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
               </div>
 
               <div style={styles.helpSection}>
-                <h3 style={styles.helpSectionTitle}>📋 Assessment Types</h3>
+                <h3 style={styles.helpSectionTitle}>📋 About the Assessment</h3>
                 <div style={styles.helpItem}>
-                  <strong>Quick (30 questions) ~10 min</strong>
-                  <p>Fast overview of your interests and skills.</p>
-                </div>
-                <div style={styles.helpItem}>
-                  <strong>Standard (50 questions) ~15 min</strong>
-                  <p>Balanced assessment for better accuracy.</p>
-                </div>
-                <div style={styles.helpItem}>
-                  <strong>Deep (60 questions) ~20 min</strong>
-                  <p>Most thorough analysis for best results.</p>
+                  <strong>Career Assessment (50 questions) ~15-20 min</strong>
+                  <p>Answer 50 questions personalized to your strand for accurate course recommendations.</p>
                 </div>
               </div>
             </div>
@@ -1026,6 +992,16 @@ const styles = {
     marginBottom: '10px',
     textTransform: 'uppercase',
     letterSpacing: '1px'
+  },
+  assessmentInfoBox: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '14px',
+    padding: '16px 20px',
+    background: 'rgba(99, 102, 241, 0.08)',
+    border: '1px solid rgba(99, 102, 241, 0.2)',
+    borderRadius: '14px',
+    marginBottom: '20px',
   },
 
   // Assessment Options

@@ -142,316 +142,8 @@ QUESTIONS_POOL_ENHANCED = [
         ]
     },
 
-    # ==================== HEALTHCARE SPECIALIZATION ====================
-    {
-        "question_id": 6,
-        "question_text": "In HEALTHCARE, which specific role appeals to you most?",
-        "category": "Healthcare Career",
-        "options": [
-            {"option_id": 51, "option_text": "Registered Nurse - bedside care, medication, patient monitoring", "trait_tag": "Patient-Care"},
-            {"option_id": 52, "option_text": "Midwife - assisting mothers during pregnancy and childbirth", "trait_tag": "Patient-Care"},
-            {"option_id": 53, "option_text": "Medical Technologist - lab tests, blood analysis, diagnostics", "trait_tag": "Medical-Lab"},
-            {"option_id": 54, "option_text": "Pharmacist - preparing medicines and advising on drugs", "trait_tag": "Medical-Lab"},
-            {"option_id": 55, "option_text": "Physical Therapist - rehabilitation exercises for recovery", "trait_tag": "Rehab-Therapy"},
-            {"option_id": 56, "option_text": "Occupational Therapist - helping with daily living skills", "trait_tag": "Rehab-Therapy"},
-            {"option_id": 57, "option_text": "Radiologic Technologist - X-rays and medical imaging", "trait_tag": "Medical-Lab"},
-            {"option_id": 58, "option_text": "Nutritionist/Dietitian - meal planning and nutrition", "trait_tag": "Patient-Care"},
-            {"option_id": 59, "option_text": "Health Information Manager - medical records systems", "trait_tag": "Health-Admin"},
-            {"option_id": 60, "option_text": "None - I'm not interested in healthcare", "trait_tag": "Software-Dev"}
-        ]
-    },
-    {
-        "question_id": 7,
-        "question_text": "Which healthcare scenario sounds most rewarding to you?",
-        "category": "Healthcare Scenario",
-        "options": [
-            {"option_id": 61, "option_text": "Holding a patient's hand and monitoring their recovery", "trait_tag": "Patient-Care"},
-            {"option_id": 62, "option_text": "Analyzing a blood sample to diagnose an illness", "trait_tag": "Medical-Lab"},
-            {"option_id": 63, "option_text": "Helping an accident victim walk again through therapy", "trait_tag": "Rehab-Therapy"},
-            {"option_id": 64, "option_text": "Delivering a baby and supporting the new mother", "trait_tag": "Patient-Care"},
-            {"option_id": 65, "option_text": "Operating an X-ray machine to detect fractures", "trait_tag": "Medical-Lab"},
-            {"option_id": 66, "option_text": "Creating a diet plan for a diabetic patient", "trait_tag": "Patient-Care"},
-            {"option_id": 67, "option_text": "Managing a hospital's electronic records system", "trait_tag": "Health-Admin"},
-            {"option_id": 68, "option_text": "Dispensing the right medication at a pharmacy", "trait_tag": "Medical-Lab"},
-            {"option_id": 69, "option_text": "Teaching a stroke patient to use utensils again", "trait_tag": "Rehab-Therapy"},
-            {"option_id": 70, "option_text": "None of these interest me", "trait_tag": "Finance-Acct"}
-        ]
-    },
 
-    # ==================== TECHNOLOGY SPECIALIZATION ====================
-    {
-        "question_id": 8,
-        "question_text": "In TECHNOLOGY, which specific role appeals to you most?",
-        "category": "Technology Career",
-        "options": [
-            {"option_id": 71, "option_text": "Software Developer - building apps, websites, systems", "trait_tag": "Software-Dev"},
-            {"option_id": 72, "option_text": "Web Developer - creating and maintaining websites", "trait_tag": "Software-Dev"},
-            {"option_id": 73, "option_text": "Computer Engineer - designing computer hardware", "trait_tag": "Hardware-Systems"},
-            {"option_id": 74, "option_text": "Network Administrator - managing IT infrastructure", "trait_tag": "Hardware-Systems"},
-            {"option_id": 75, "option_text": "Data Scientist - analyzing big data and AI", "trait_tag": "Data-Analytics"},
-            {"option_id": 76, "option_text": "Cybersecurity Analyst - protecting against hackers", "trait_tag": "Cyber-Defense"},
-            {"option_id": 77, "option_text": "Game Developer - creating video games", "trait_tag": "Digital-Media"},
-            {"option_id": 78, "option_text": "UI/UX Designer - designing user interfaces", "trait_tag": "Digital-Media"},
-            {"option_id": 79, "option_text": "Database Administrator - managing data systems", "trait_tag": "Data-Analytics"},
-            {"option_id": 80, "option_text": "None - I prefer non-technology careers", "trait_tag": "Patient-Care"}
-        ]
-    },
-    {
-        "question_id": 9,
-        "question_text": "Which tech project would you most enjoy working on?",
-        "category": "Technology Project",
-        "options": [
-            {"option_id": 81, "option_text": "Building a mobile app from scratch", "trait_tag": "Software-Dev"},
-            {"option_id": 82, "option_text": "Creating an e-commerce website", "trait_tag": "Software-Dev"},
-            {"option_id": 83, "option_text": "Assembling and configuring a server system", "trait_tag": "Hardware-Systems"},
-            {"option_id": 84, "option_text": "Designing a circuit board or robot", "trait_tag": "Hardware-Systems"},
-            {"option_id": 85, "option_text": "Creating an AI model that predicts trends", "trait_tag": "Data-Analytics"},
-            {"option_id": 86, "option_text": "Penetration testing to find security vulnerabilities", "trait_tag": "Cyber-Defense"},
-            {"option_id": 87, "option_text": "Developing a 3D video game", "trait_tag": "Digital-Media"},
-            {"option_id": 88, "option_text": "Creating animated videos or visual effects", "trait_tag": "Digital-Media"},
-            {"option_id": 89, "option_text": "Building a dashboard to visualize data", "trait_tag": "Data-Analytics"},
-            {"option_id": 90, "option_text": "None of these interest me", "trait_tag": "Teaching-Ed"}
-        ]
-    },
-
-    # ==================== ENGINEERING SPECIALIZATION ====================
-    {
-        "question_id": 10,
-        "question_text": "In ENGINEERING, which specific field appeals to you most?",
-        "category": "Engineering Career",
-        "options": [
-            {"option_id": 91, "option_text": "Civil Engineer - bridges, roads, buildings", "trait_tag": "Civil-Build"},
-            {"option_id": 92, "option_text": "Structural Engineer - building foundations and frames", "trait_tag": "Civil-Build"},
-            {"option_id": 93, "option_text": "Mechanical Engineer - machines and systems", "trait_tag": "Mechanical-Design"},
-            {"option_id": 94, "option_text": "Automotive Engineer - vehicles and transportation", "trait_tag": "Mechanical-Design"},
-            {"option_id": 95, "option_text": "Electrical Engineer - power systems", "trait_tag": "Electrical-Power"},
-            {"option_id": 96, "option_text": "Electronics Engineer - circuits and devices", "trait_tag": "Electrical-Power"},
-            {"option_id": 97, "option_text": "Industrial Engineer - optimizing processes", "trait_tag": "Industrial-Ops"},
-            {"option_id": 98, "option_text": "Chemical Engineer - chemical processes", "trait_tag": "Lab-Research"},
-            {"option_id": 99, "option_text": "Architect - designing buildings and spaces", "trait_tag": "Spatial-Design"},
-            {"option_id": 100, "option_text": "None - I prefer non-engineering careers", "trait_tag": "Teaching-Ed"}
-        ]
-    },
-    {
-        "question_id": 11,
-        "question_text": "Which engineering project would excite you the most?",
-        "category": "Engineering Project",
-        "options": [
-            {"option_id": 101, "option_text": "Designing a new highway or bridge", "trait_tag": "Civil-Build"},
-            {"option_id": 102, "option_text": "Building a new shopping mall or office tower", "trait_tag": "Civil-Build"},
-            {"option_id": 103, "option_text": "Creating a new engine design for vehicles", "trait_tag": "Mechanical-Design"},
-            {"option_id": 104, "option_text": "Developing an HVAC system for a building", "trait_tag": "Mechanical-Design"},
-            {"option_id": 105, "option_text": "Setting up a solar power plant", "trait_tag": "Electrical-Power"},
-            {"option_id": 106, "option_text": "Designing the electrical system for a factory", "trait_tag": "Electrical-Power"},
-            {"option_id": 107, "option_text": "Optimizing a manufacturing production line", "trait_tag": "Industrial-Ops"},
-            {"option_id": 108, "option_text": "Designing the interior of a luxury home", "trait_tag": "Spatial-Design"},
-            {"option_id": 109, "option_text": "Creating floor plans for a resort", "trait_tag": "Spatial-Design"},
-            {"option_id": 110, "option_text": "None of these interest me", "trait_tag": "Patient-Care"}
-        ]
-    },
-
-    # ==================== BUSINESS SPECIALIZATION ====================
-    {
-        "question_id": 12,
-        "question_text": "In BUSINESS, which specific role appeals to you most?",
-        "category": "Business Career",
-        "options": [
-            {"option_id": 111, "option_text": "Accountant - financial statements, auditing, taxes", "trait_tag": "Finance-Acct"},
-            {"option_id": 112, "option_text": "Financial Analyst - investment analysis", "trait_tag": "Finance-Acct"},
-            {"option_id": 113, "option_text": "Bank Manager - banking operations", "trait_tag": "Finance-Acct"},
-            {"option_id": 114, "option_text": "Marketing Manager - advertising campaigns", "trait_tag": "Marketing-Sales"},
-            {"option_id": 115, "option_text": "Sales Manager - selling products/services", "trait_tag": "Marketing-Sales"},
-            {"option_id": 116, "option_text": "Entrepreneur - starting my own business", "trait_tag": "Startup-Venture"},
-            {"option_id": 117, "option_text": "Operations Manager - managing workflows", "trait_tag": "Industrial-Ops"},
-            {"option_id": 118, "option_text": "HR Manager - hiring and employee relations", "trait_tag": "People-Skill"},
-            {"option_id": 119, "option_text": "Real Estate Agent - buying/selling properties", "trait_tag": "Marketing-Sales"},
-            {"option_id": 120, "option_text": "None - I prefer non-business careers", "trait_tag": "Patient-Care"}
-        ]
-    },
-    {
-        "question_id": 13,
-        "question_text": "Which business activity would you enjoy most?",
-        "category": "Business Activity",
-        "options": [
-            {"option_id": 121, "option_text": "Preparing monthly financial reports", "trait_tag": "Finance-Acct"},
-            {"option_id": 122, "option_text": "Auditing a company's financial records", "trait_tag": "Finance-Acct"},
-            {"option_id": 123, "option_text": "Creating a viral marketing campaign", "trait_tag": "Marketing-Sales"},
-            {"option_id": 124, "option_text": "Closing a big sales deal with a client", "trait_tag": "Marketing-Sales"},
-            {"option_id": 125, "option_text": "Pitching a startup idea to investors", "trait_tag": "Startup-Venture"},
-            {"option_id": 126, "option_text": "Building a business plan from scratch", "trait_tag": "Startup-Venture"},
-            {"option_id": 127, "option_text": "Improving factory efficiency by 30%", "trait_tag": "Industrial-Ops"},
-            {"option_id": 128, "option_text": "Negotiating a property sale", "trait_tag": "Marketing-Sales"},
-            {"option_id": 129, "option_text": "Conducting job interviews", "trait_tag": "People-Skill"},
-            {"option_id": 130, "option_text": "None of these interest me", "trait_tag": "Visual-Design"}
-        ]
-    },
-
-    # ==================== PUBLIC SERVICE SPECIALIZATION ====================
-    {
-        "question_id": 14,
-        "question_text": "In PUBLIC SERVICE, which specific role appeals to you most?",
-        "category": "Public Service Career",
-        "options": [
-            {"option_id": 131, "option_text": "Police Officer - patrolling, maintaining peace", "trait_tag": "Law-Enforce"},
-            {"option_id": 132, "option_text": "Detective - investigating crimes", "trait_tag": "Law-Enforce"},
-            {"option_id": 133, "option_text": "Forensic Scientist - analyzing crime evidence", "trait_tag": "Law-Enforce"},
-            {"option_id": 134, "option_text": "Lawyer - representing clients in court", "trait_tag": "Admin-Skill"},
-            {"option_id": 135, "option_text": "Social Worker - helping families in need", "trait_tag": "Community-Serve"},
-            {"option_id": 136, "option_text": "Government Employee - public administration", "trait_tag": "Community-Serve"},
-            {"option_id": 137, "option_text": "Politician - creating policies and laws", "trait_tag": "Community-Serve"},
-            {"option_id": 138, "option_text": "NGO Worker - humanitarian assistance", "trait_tag": "Community-Serve"},
-            {"option_id": 139, "option_text": "Military Officer - national defense", "trait_tag": "Law-Enforce"},
-            {"option_id": 140, "option_text": "None - I prefer private sector careers", "trait_tag": "Finance-Acct"}
-        ]
-    },
-    {
-        "question_id": 15,
-        "question_text": "Which public service scenario appeals to you most?",
-        "category": "Public Service Scenario",
-        "options": [
-            {"option_id": 141, "option_text": "Arresting a criminal and protecting victims", "trait_tag": "Law-Enforce"},
-            {"option_id": 142, "option_text": "Solving a murder case through investigation", "trait_tag": "Law-Enforce"},
-            {"option_id": 143, "option_text": "Analyzing DNA evidence in a crime lab", "trait_tag": "Law-Enforce"},
-            {"option_id": 144, "option_text": "Helping a poor family get housing assistance", "trait_tag": "Community-Serve"},
-            {"option_id": 145, "option_text": "Developing a government program for farmers", "trait_tag": "Community-Serve"},
-            {"option_id": 146, "option_text": "Representing a client in a court trial", "trait_tag": "Admin-Skill"},
-            {"option_id": 147, "option_text": "Providing disaster relief to typhoon victims", "trait_tag": "Community-Serve"},
-            {"option_id": 148, "option_text": "Training new police recruits", "trait_tag": "Law-Enforce"},
-            {"option_id": 149, "option_text": "Counseling a troubled teenager", "trait_tag": "People-Skill"},
-            {"option_id": 150, "option_text": "None of these interest me", "trait_tag": "Software-Dev"}
-        ]
-    },
-
-    # ==================== EDUCATION SPECIALIZATION ====================
-    {
-        "question_id": 16,
-        "question_text": "In EDUCATION, which teaching role appeals to you most?",
-        "category": "Education Career",
-        "options": [
-            {"option_id": 151, "option_text": "Elementary Teacher - teaching young children", "trait_tag": "Teaching-Ed"},
-            {"option_id": 152, "option_text": "High School Teacher - teaching teenagers", "trait_tag": "Teaching-Ed"},
-            {"option_id": 153, "option_text": "College Professor - teaching adults", "trait_tag": "Teaching-Ed"},
-            {"option_id": 154, "option_text": "Special Education Teacher - students with disabilities", "trait_tag": "Teaching-Ed"},
-            {"option_id": 155, "option_text": "Preschool Teacher - early childhood education", "trait_tag": "Teaching-Ed"},
-            {"option_id": 156, "option_text": "Vocational Trainer - teaching technical skills", "trait_tag": "Technical-Skill"},
-            {"option_id": 157, "option_text": "School Guidance Counselor - student counseling", "trait_tag": "People-Skill"},
-            {"option_id": 158, "option_text": "School Administrator - managing schools", "trait_tag": "Admin-Skill"},
-            {"option_id": 159, "option_text": "Corporate Trainer - training employees", "trait_tag": "Teaching-Ed"},
-            {"option_id": 160, "option_text": "None - I don't want to teach", "trait_tag": "Software-Dev"}
-        ]
-    },
-    {
-        "question_id": 17,
-        "question_text": "Which subject would you most enjoy teaching?",
-        "category": "Teaching Subject",
-        "options": [
-            {"option_id": 161, "option_text": "Mathematics - algebra, calculus, geometry", "trait_tag": "Data-Analytics"},
-            {"option_id": 162, "option_text": "Science - biology, chemistry, physics", "trait_tag": "Lab-Research"},
-            {"option_id": 163, "option_text": "English - grammar, literature, writing", "trait_tag": "Teaching-Ed"},
-            {"option_id": 164, "option_text": "Filipino - language and literature", "trait_tag": "Teaching-Ed"},
-            {"option_id": 165, "option_text": "Social Studies - history, economics", "trait_tag": "Community-Serve"},
-            {"option_id": 166, "option_text": "Computer/Technology - IT skills", "trait_tag": "Software-Dev"},
-            {"option_id": 167, "option_text": "Arts - visual arts, music, drama", "trait_tag": "Visual-Design"},
-            {"option_id": 168, "option_text": "Physical Education - sports, fitness", "trait_tag": "Physical-Skill"},
-            {"option_id": 169, "option_text": "TLE - technical/vocational skills", "trait_tag": "Technical-Skill"},
-            {"option_id": 170, "option_text": "I don't want to teach any subject", "trait_tag": "Finance-Acct"}
-        ]
-    },
-
-    # ==================== ARTS & DESIGN SPECIALIZATION ====================
-    {
-        "question_id": 18,
-        "question_text": "In ARTS & DESIGN, which specific role appeals to you most?",
-        "category": "Arts Career",
-        "options": [
-            {"option_id": 171, "option_text": "Graphic Designer - logos, posters, branding", "trait_tag": "Visual-Design"},
-            {"option_id": 172, "option_text": "Fine Artist - paintings, sculptures", "trait_tag": "Visual-Design"},
-            {"option_id": 173, "option_text": "Animator - 2D/3D animation", "trait_tag": "Digital-Media"},
-            {"option_id": 174, "option_text": "Video Editor - film and video production", "trait_tag": "Digital-Media"},
-            {"option_id": 175, "option_text": "Interior Designer - room and space design", "trait_tag": "Spatial-Design"},
-            {"option_id": 176, "option_text": "Fashion Designer - clothing and accessories", "trait_tag": "Visual-Design"},
-            {"option_id": 177, "option_text": "Musician - performing or composing music", "trait_tag": "Creative-Skill"},
-            {"option_id": 178, "option_text": "Actor/Performer - theater, film, TV", "trait_tag": "Creative-Skill"},
-            {"option_id": 179, "option_text": "Photographer - capturing images", "trait_tag": "Visual-Design"},
-            {"option_id": 180, "option_text": "None - I prefer non-creative careers", "trait_tag": "Finance-Acct"}
-        ]
-    },
-    {
-        "question_id": 19,
-        "question_text": "Which creative project would you most enjoy working on?",
-        "category": "Creative Project",
-        "options": [
-            {"option_id": 181, "option_text": "Designing a company logo and brand identity", "trait_tag": "Visual-Design"},
-            {"option_id": 182, "option_text": "Creating a painting for an art gallery", "trait_tag": "Visual-Design"},
-            {"option_id": 183, "option_text": "Making an animated short film", "trait_tag": "Digital-Media"},
-            {"option_id": 184, "option_text": "Editing a music video", "trait_tag": "Digital-Media"},
-            {"option_id": 185, "option_text": "Redesigning a living room interior", "trait_tag": "Spatial-Design"},
-            {"option_id": 186, "option_text": "Designing a fashion collection", "trait_tag": "Visual-Design"},
-            {"option_id": 187, "option_text": "Composing music for a film", "trait_tag": "Creative-Skill"},
-            {"option_id": 188, "option_text": "Acting in a theater production", "trait_tag": "Creative-Skill"},
-            {"option_id": 189, "option_text": "Shooting a wedding photography session", "trait_tag": "Visual-Design"},
-            {"option_id": 190, "option_text": "None of these interest me", "trait_tag": "Civil-Build"}
-        ]
-    },
-
-    # ==================== MARITIME SPECIALIZATION ====================
-    {
-        "question_id": 20,
-        "question_text": "In MARITIME careers, which role appeals to you most?",
-        "category": "Maritime Career",
-        "options": [
-            {"option_id": 191, "option_text": "Ship Captain - navigating vessels across oceans", "trait_tag": "Maritime-Sea"},
-            {"option_id": 192, "option_text": "Deck Officer - ship operations and safety", "trait_tag": "Maritime-Sea"},
-            {"option_id": 193, "option_text": "Marine Engineer - ship engine and machinery", "trait_tag": "Maritime-Sea"},
-            {"option_id": 194, "option_text": "Port Manager - harbor and dock operations", "trait_tag": "Maritime-Sea"},
-            {"option_id": 195, "option_text": "Ship Electrician - maritime electrical systems", "trait_tag": "Electrical-Power"},
-            {"option_id": 196, "option_text": "Cruise Ship Staff - hospitality at sea", "trait_tag": "Hospitality-Svc"},
-            {"option_id": 197, "option_text": "Coast Guard Officer - maritime safety and rescue", "trait_tag": "Law-Enforce"},
-            {"option_id": 198, "option_text": "Marine Biologist - ocean life research", "trait_tag": "Field-Research"},
-            {"option_id": 199, "option_text": "Fisheries Manager - fishing operations", "trait_tag": "Agri-Nature"},
-            {"option_id": 200, "option_text": "None - I prefer land-based careers", "trait_tag": "Software-Dev"}
-        ]
-    },
-
-    # ==================== AGRICULTURE SPECIALIZATION ====================
-    {
-        "question_id": 21,
-        "question_text": "In AGRICULTURE, which role appeals to you most?",
-        "category": "Agriculture Career",
-        "options": [
-            {"option_id": 201, "option_text": "Farm Manager - crop and livestock management", "trait_tag": "Agri-Nature"},
-            {"option_id": 202, "option_text": "Agronomist - soil and crop science", "trait_tag": "Agri-Nature"},
-            {"option_id": 203, "option_text": "Veterinarian - animal healthcare", "trait_tag": "Patient-Care"},
-            {"option_id": 204, "option_text": "Forester - forest conservation and management", "trait_tag": "Agri-Nature"},
-            {"option_id": 205, "option_text": "Agricultural Engineer - farm machinery", "trait_tag": "Mechanical-Design"},
-            {"option_id": 206, "option_text": "Food Technologist - food processing", "trait_tag": "Lab-Research"},
-            {"option_id": 207, "option_text": "Environmental Scientist - ecology research", "trait_tag": "Field-Research"},
-            {"option_id": 208, "option_text": "Aquaculturist - fish farming", "trait_tag": "Agri-Nature"},
-            {"option_id": 209, "option_text": "Agricultural Extension Worker - farmer training", "trait_tag": "Teaching-Ed"},
-            {"option_id": 210, "option_text": "None - I prefer urban careers", "trait_tag": "Software-Dev"}
-        ]
-    },
-
-    # ==================== HOSPITALITY SPECIALIZATION ====================
-    {
-        "question_id": 22,
-        "question_text": "In HOSPITALITY & TOURISM, which role appeals to you most?",
-        "category": "Hospitality Career",
-        "options": [
-            {"option_id": 211, "option_text": "Hotel Manager - hotel operations", "trait_tag": "Hospitality-Svc"},
-            {"option_id": 212, "option_text": "Tour Guide - showing tourists around", "trait_tag": "Hospitality-Svc"},
-            {"option_id": 213, "option_text": "Event Planner - organizing events and weddings", "trait_tag": "Hospitality-Svc"},
-            {"option_id": 214, "option_text": "Chef - cooking in restaurants", "trait_tag": "Hospitality-Svc"},
-            {"option_id": 215, "option_text": "Restaurant Manager - food service management", "trait_tag": "Hospitality-Svc"},
-            {"option_id": 216, "option_text": "Travel Agent - booking trips and vacations", "trait_tag": "Hospitality-Svc"},
-            {"option_id": 217, "option_text": "Flight Attendant - airline cabin crew", "trait_tag": "Hospitality-Svc"},
-            {"option_id": 218, "option_text": "Resort Activities Coordinator - guest entertainment", "trait_tag": "Hospitality-Svc"},
-            {"option_id": 219, "option_text": "Bartender/Barista - beverage service", "trait_tag": "Hospitality-Svc"},
-            {"option_id": 220, "option_text": "None - I prefer other industries", "trait_tag": "Software-Dev"}
-        ]
-    },
-
-    # ==================== SITUATIONAL QUESTIONS ====================
+        # ==================== SITUATIONAL QUESTIONS ====================
     {
         "question_id": 23,
         "question_text": "SITUATION: Someone collapses in front of you. What's your first instinct?",
@@ -517,7 +209,7 @@ QUESTIONS_POOL_ENHANCED = [
             {"option_id": 255, "option_text": "Somewhat Disagree - Math is challenging", "trait_tag": "Teaching-Ed"},
             {"option_id": 256, "option_text": "Disagree - I prefer other subjects", "trait_tag": "Visual-Design"},
             {"option_id": 257, "option_text": "Strongly Disagree - I avoid math", "trait_tag": "Creative-Skill"},
-            {"option_id": 258, "option_text": "I prefer applied math (like accounting)", "trait_tag": "Finance-Acct"},
+            {"option_id": 258, "option_text": "I prefer applied math in real-world scenarios", "trait_tag": "Finance-Acct"},
             {"option_id": 259, "option_text": "I prefer physics/engineering math", "trait_tag": "Electrical-Power"},
             {"option_id": 260, "option_text": "I prefer statistics and data math", "trait_tag": "Data-Analytics"}
         ]
@@ -597,14 +289,14 @@ QUESTIONS_POOL_ENHANCED = [
         "question_text": "Which subject do you enjoy MOST in school?",
         "category": "Academic - Favorite",
         "options": [
-            {"option_id": 301, "option_text": "Science (Biology, Chemistry, Physics)", "trait_tag": "Lab-Research"},
-            {"option_id": 302, "option_text": "Mathematics (Algebra, Calculus, Statistics)", "trait_tag": "Data-Analytics"},
-            {"option_id": 303, "option_text": "English (Literature, Writing, Grammar)", "trait_tag": "Teaching-Ed"},
-            {"option_id": 304, "option_text": "Filipino (Panitikan, Wika)", "trait_tag": "Teaching-Ed"},
-            {"option_id": 305, "option_text": "Social Studies (History, Economics, Politics)", "trait_tag": "Community-Serve"},
-            {"option_id": 306, "option_text": "Computer/TLE (Technology, Programming)", "trait_tag": "Software-Dev"},
-            {"option_id": 307, "option_text": "Arts (Drawing, Music, Theater)", "trait_tag": "Visual-Design"},
-            {"option_id": 308, "option_text": "PE (Sports, Physical Activities)", "trait_tag": "Physical-Skill"},
+            {"option_id": 301, "option_text": "Science", "trait_tag": "Lab-Research"},
+            {"option_id": 302, "option_text": "Mathematics", "trait_tag": "Data-Analytics"},
+            {"option_id": 303, "option_text": "English", "trait_tag": "Teaching-Ed"},
+            {"option_id": 304, "option_text": "Filipino", "trait_tag": "Teaching-Ed"},
+            {"option_id": 305, "option_text": "Social Studies", "trait_tag": "Community-Serve"},
+            {"option_id": 306, "option_text": "Computer/TLE", "trait_tag": "Software-Dev"},
+            {"option_id": 307, "option_text": "Arts", "trait_tag": "Visual-Design"},
+            {"option_id": 308, "option_text": "PE", "trait_tag": "Physical-Skill"},
             {"option_id": 309, "option_text": "Accounting/Business subjects", "trait_tag": "Finance-Acct"},
             {"option_id": 310, "option_text": "Research/Practical Research", "trait_tag": "Lab-Research"}
         ]
@@ -650,14 +342,14 @@ QUESTIONS_POOL_ENHANCED = [
         "question_text": "What work-life balance do you prefer?",
         "category": "Lifestyle",
         "options": [
-            {"option_id": 331, "option_text": "Willing to work long shifts if meaningful (healthcare)", "trait_tag": "Patient-Care"},
-            {"option_id": 332, "option_text": "Willing to be away for months (maritime)", "trait_tag": "Maritime-Sea"},
-            {"option_id": 333, "option_text": "Flexible hours, can work from home (tech)", "trait_tag": "Software-Dev"},
-            {"option_id": 334, "option_text": "Regular 9-5 office hours (corporate)", "trait_tag": "Finance-Acct"},
-            {"option_id": 335, "option_text": "School schedule with holidays (education)", "trait_tag": "Teaching-Ed"},
-            {"option_id": 336, "option_text": "Shift work including nights (police/hospital)", "trait_tag": "Law-Enforce"},
+            {"option_id": 331, "option_text": "Willing to work long shifts if the work is meaningful", "trait_tag": "Patient-Care"},
+            {"option_id": 332, "option_text": "Willing to be away from home for months", "trait_tag": "Maritime-Sea"},
+            {"option_id": 333, "option_text": "Flexible hours, can work from home", "trait_tag": "Software-Dev"},
+            {"option_id": 334, "option_text": "Regular 9-5 office hours", "trait_tag": "Finance-Acct"},
+            {"option_id": 335, "option_text": "School schedule with holidays off", "trait_tag": "Teaching-Ed"},
+            {"option_id": 336, "option_text": "Shift work including nights and weekends", "trait_tag": "Law-Enforce"},
             {"option_id": 337, "option_text": "Freelance - choose my own hours", "trait_tag": "Visual-Design"},
-            {"option_id": 338, "option_text": "Outdoor work following seasons (agriculture)", "trait_tag": "Agri-Nature"},
+            {"option_id": 338, "option_text": "Outdoor work following seasons", "trait_tag": "Agri-Nature"},
             {"option_id": 339, "option_text": "Hospitality hours including weekends", "trait_tag": "Hospitality-Svc"},
             {"option_id": 340, "option_text": "Project-based with varying schedules", "trait_tag": "Civil-Build"}
         ]
@@ -667,16 +359,16 @@ QUESTIONS_POOL_ENHANCED = [
         "question_text": "What salary priority do you have?",
         "category": "Career Values",
         "options": [
-            {"option_id": 341, "option_text": "High salary is most important (accounting/engineering)", "trait_tag": "Finance-Acct"},
-            {"option_id": 342, "option_text": "High salary abroad (maritime/nursing)", "trait_tag": "Maritime-Sea"},
-            {"option_id": 343, "option_text": "Stable salary with benefits (government)", "trait_tag": "Community-Serve"},
-            {"option_id": 344, "option_text": "Job satisfaction over salary (teaching/social work)", "trait_tag": "Teaching-Ed"},
+            {"option_id": 341, "option_text": "High salary is most important", "trait_tag": "Finance-Acct"},
+            {"option_id": 342, "option_text": "High salary working abroad", "trait_tag": "Maritime-Sea"},
+            {"option_id": 343, "option_text": "Stable salary with government benefits", "trait_tag": "Community-Serve"},
+            {"option_id": 344, "option_text": "Job satisfaction matters more than salary", "trait_tag": "Teaching-Ed"},
             {"option_id": 345, "option_text": "Growth potential more than starting salary", "trait_tag": "Software-Dev"},
             {"option_id": 346, "option_text": "Entrepreneurship - unlimited potential", "trait_tag": "Startup-Venture"},
             {"option_id": 347, "option_text": "Balanced salary and work-life", "trait_tag": "Admin-Skill"},
-            {"option_id": 348, "option_text": "Tips and commissions (sales/hospitality)", "trait_tag": "Hospitality-Svc"},
-            {"option_id": 349, "option_text": "Hazard pay for risky work (police)", "trait_tag": "Law-Enforce"},
-            {"option_id": 350, "option_text": "Project-based high fees (freelance)", "trait_tag": "Visual-Design"}
+            {"option_id": 348, "option_text": "Tips and commissions on top of base pay", "trait_tag": "Hospitality-Svc"},
+            {"option_id": 349, "option_text": "Hazard pay for risky work", "trait_tag": "Law-Enforce"},
+            {"option_id": 350, "option_text": "Project-based high fees as a freelancer", "trait_tag": "Visual-Design"}
         ]
     },
 
@@ -695,7 +387,7 @@ QUESTIONS_POOL_ENHANCED = [
             {"option_id": 357, "option_text": "Pharmacy Board Exam", "trait_tag": "Medical-Lab"},
             {"option_id": 358, "option_text": "Physical/Occupational Therapy Board", "trait_tag": "Rehab-Therapy"},
             {"option_id": 359, "option_text": "Architecture Board Exam", "trait_tag": "Spatial-Design"},
-            {"option_id": 360, "option_text": "I prefer careers without board exams (IT/Business)", "trait_tag": "Software-Dev"}
+            {"option_id": 360, "option_text": "I prefer careers without board exams", "trait_tag": "Software-Dev"}
         ]
     },
 
@@ -705,16 +397,16 @@ QUESTIONS_POOL_ENHANCED = [
         "question_text": "Which activity would you choose on a free Saturday?",
         "category": "Interest Type",
         "options": [
-            {"option_id": 361, "option_text": "Fixing or building something (Realistic)", "trait_tag": "Technical-Skill"},
-            {"option_id": 362, "option_text": "Reading about science or doing experiments (Investigative)", "trait_tag": "Lab-Research"},
-            {"option_id": 363, "option_text": "Creating art, music, or writing (Artistic)", "trait_tag": "Visual-Design"},
-            {"option_id": 364, "option_text": "Volunteering to help others (Social)", "trait_tag": "Community-Serve"},
-            {"option_id": 365, "option_text": "Working on a business idea (Enterprising)", "trait_tag": "Startup-Venture"},
-            {"option_id": 366, "option_text": "Organizing my room or files (Conventional)", "trait_tag": "Admin-Skill"},
-            {"option_id": 367, "option_text": "Coding a personal project (Tech)", "trait_tag": "Software-Dev"},
-            {"option_id": 368, "option_text": "Playing sports or exercising (Physical)", "trait_tag": "Physical-Skill"},
-            {"option_id": 369, "option_text": "Cooking or trying new recipes (Hospitality)", "trait_tag": "Hospitality-Svc"},
-            {"option_id": 370, "option_text": "Watching true crime or mystery shows (Investigative)", "trait_tag": "Law-Enforce"}
+            {"option_id": 361, "option_text": "Fixing or building something", "trait_tag": "Technical-Skill"},
+            {"option_id": 362, "option_text": "Reading about science or doing experiments", "trait_tag": "Lab-Research"},
+            {"option_id": 363, "option_text": "Creating art, music, or writing", "trait_tag": "Visual-Design"},
+            {"option_id": 364, "option_text": "Volunteering to help others", "trait_tag": "Community-Serve"},
+            {"option_id": 365, "option_text": "Working on a business idea", "trait_tag": "Startup-Venture"},
+            {"option_id": 366, "option_text": "Organizing my room or files", "trait_tag": "Admin-Skill"},
+            {"option_id": 367, "option_text": "Coding a personal project", "trait_tag": "Software-Dev"},
+            {"option_id": 368, "option_text": "Playing sports or exercising", "trait_tag": "Physical-Skill"},
+            {"option_id": 369, "option_text": "Cooking or trying new recipes", "trait_tag": "Hospitality-Svc"},
+            {"option_id": 370, "option_text": "Watching true crime or mystery shows", "trait_tag": "Law-Enforce"}
         ]
     },
     {
@@ -856,94 +548,8 @@ QUESTIONS_POOL_ENHANCED = [
         ]
     },
 
-    # ==================== SECTION 3: DEEP CAREER SPECIALIZATION ====================
-    {
-        "question_id": 46,
-        "question_text": "In NURSING specifically, which area interests you most?",
-        "category": "Nursing Specialization",
-        "options": [
-            {"option_id": 451, "option_text": "Emergency Room (ER) - fast-paced trauma care", "trait_tag": "Patient-Care"},
-            {"option_id": 452, "option_text": "Operating Room (OR) - surgical assistance", "trait_tag": "Patient-Care"},
-            {"option_id": 453, "option_text": "Pediatrics - caring for children", "trait_tag": "Patient-Care"},
-            {"option_id": 454, "option_text": "Geriatrics - caring for elderly patients", "trait_tag": "Patient-Care"},
-            {"option_id": 455, "option_text": "Psychiatric nursing - mental health care", "trait_tag": "People-Skill"},
-            {"option_id": 456, "option_text": "Community health nursing - public health", "trait_tag": "Community-Serve"},
-            {"option_id": 457, "option_text": "ICU/Critical care - intensive monitoring", "trait_tag": "Patient-Care"},
-            {"option_id": 458, "option_text": "OB-GYN - maternal and newborn care", "trait_tag": "Patient-Care"},
-            {"option_id": 459, "option_text": "Oncology - cancer patient care", "trait_tag": "Patient-Care"},
-            {"option_id": 460, "option_text": "I'm not interested in nursing", "trait_tag": "Software-Dev"}
-        ]
-    },
-    {
-        "question_id": 47,
-        "question_text": "In PROGRAMMING specifically, which area interests you most?",
-        "category": "Programming Specialization",
-        "options": [
-            {"option_id": 461, "option_text": "Web development - websites and web apps", "trait_tag": "Software-Dev"},
-            {"option_id": 462, "option_text": "Mobile development - Android/iOS apps", "trait_tag": "Software-Dev"},
-            {"option_id": 463, "option_text": "Game development - video games", "trait_tag": "Digital-Media"},
-            {"option_id": 464, "option_text": "AI/Machine Learning - intelligent systems", "trait_tag": "Data-Analytics"},
-            {"option_id": 465, "option_text": "Cybersecurity - ethical hacking, security", "trait_tag": "Cyber-Defense"},
-            {"option_id": 466, "option_text": "DevOps - infrastructure and deployment", "trait_tag": "Hardware-Systems"},
-            {"option_id": 467, "option_text": "Data engineering - big data pipelines", "trait_tag": "Data-Analytics"},
-            {"option_id": 468, "option_text": "Embedded systems - IoT and hardware programming", "trait_tag": "Hardware-Systems"},
-            {"option_id": 469, "option_text": "Backend development - servers and APIs", "trait_tag": "Software-Dev"},
-            {"option_id": 470, "option_text": "I'm not interested in programming", "trait_tag": "Patient-Care"}
-        ]
-    },
-    {
-        "question_id": 48,
-        "question_text": "In ACCOUNTING specifically, which area interests you most?",
-        "category": "Accounting Specialization",
-        "options": [
-            {"option_id": 471, "option_text": "Auditing - examining financial records", "trait_tag": "Finance-Acct"},
-            {"option_id": 472, "option_text": "Tax accounting - preparing tax returns", "trait_tag": "Finance-Acct"},
-            {"option_id": 473, "option_text": "Management accounting - internal company finance", "trait_tag": "Finance-Acct"},
-            {"option_id": 474, "option_text": "Forensic accounting - investigating fraud", "trait_tag": "Law-Enforce"},
-            {"option_id": 475, "option_text": "Government accounting - public sector", "trait_tag": "Community-Serve"},
-            {"option_id": 476, "option_text": "Cost accounting - manufacturing costs", "trait_tag": "Industrial-Ops"},
-            {"option_id": 477, "option_text": "Financial planning - wealth management", "trait_tag": "Finance-Acct"},
-            {"option_id": 478, "option_text": "Bookkeeping - day-to-day transactions", "trait_tag": "Admin-Skill"},
-            {"option_id": 479, "option_text": "Investment analysis - stocks and bonds", "trait_tag": "Data-Analytics"},
-            {"option_id": 480, "option_text": "I'm not interested in accounting", "trait_tag": "Visual-Design"}
-        ]
-    },
-    {
-        "question_id": 49,
-        "question_text": "In CRIMINOLOGY specifically, which area interests you most?",
-        "category": "Criminology Specialization",
-        "options": [
-            {"option_id": 481, "option_text": "Law enforcement - police officer, SWAT", "trait_tag": "Law-Enforce"},
-            {"option_id": 482, "option_text": "Criminal investigation - detective work", "trait_tag": "Law-Enforce"},
-            {"option_id": 483, "option_text": "Forensic science - crime scene analysis", "trait_tag": "Lab-Research"},
-            {"option_id": 484, "option_text": "Corrections - prison/jail management", "trait_tag": "Law-Enforce"},
-            {"option_id": 485, "option_text": "Cybercrime investigation - digital forensics", "trait_tag": "Cyber-Defense"},
-            {"option_id": 486, "option_text": "Traffic management - road safety", "trait_tag": "Law-Enforce"},
-            {"option_id": 487, "option_text": "Intelligence - NBI, NICA type work", "trait_tag": "Law-Enforce"},
-            {"option_id": 488, "option_text": "Crime prevention - community programs", "trait_tag": "Community-Serve"},
-            {"option_id": 489, "option_text": "Private security - bodyguard, VIP protection", "trait_tag": "Physical-Skill"},
-            {"option_id": 490, "option_text": "I'm not interested in criminology", "trait_tag": "Teaching-Ed"}
-        ]
-    },
-    {
-        "question_id": 50,
-        "question_text": "In EDUCATION specifically, which level/type interests you most?",
-        "category": "Education Specialization",
-        "options": [
-            {"option_id": 491, "option_text": "Kindergarten/Preschool teacher", "trait_tag": "Teaching-Ed"},
-            {"option_id": 492, "option_text": "Elementary school teacher", "trait_tag": "Teaching-Ed"},
-            {"option_id": 493, "option_text": "High school teacher", "trait_tag": "Teaching-Ed"},
-            {"option_id": 494, "option_text": "College professor", "trait_tag": "Lab-Research"},
-            {"option_id": 495, "option_text": "Special education (SPED) teacher", "trait_tag": "People-Skill"},
-            {"option_id": 496, "option_text": "School administrator/principal", "trait_tag": "Admin-Skill"},
-            {"option_id": 497, "option_text": "Guidance counselor", "trait_tag": "People-Skill"},
-            {"option_id": 498, "option_text": "Corporate trainer", "trait_tag": "Startup-Venture"},
-            {"option_id": 499, "option_text": "Online educator/content creator", "trait_tag": "Digital-Media"},
-            {"option_id": 500, "option_text": "I'm not interested in education", "trait_tag": "Finance-Acct"}
-        ]
-    },
 
-    # ==================== SECTION 4: PHILIPPINE-SPECIFIC QUESTIONS ====================
+        # ==================== SECTION 4: PHILIPPINE-SPECIFIC QUESTIONS ====================
     {
         "question_id": 51,
         "question_text": "Which Philippine industry would you like to work in?",
@@ -1033,19 +639,19 @@ QUESTIONS_POOL_ENHANCED = [
     },
     {
         "question_id": 56,
-        "question_text": "Rate your COMPUTER/TECHNOLOGY skills:",
+        "question_text": "What technology activity are you most comfortable with?",
         "category": "Tech Skill",
         "options": [
-            {"option_id": 551, "option_text": "Expert - can code, build systems", "trait_tag": "Software-Dev"},
-            {"option_id": 552, "option_text": "Advanced - comfortable with most software", "trait_tag": "Data-Analytics"},
-            {"option_id": 553, "option_text": "Intermediate - know MS Office, can learn new tools", "trait_tag": "Admin-Skill"},
-            {"option_id": 554, "option_text": "Basic - can browse, email, social media", "trait_tag": "Marketing-Sales"},
-            {"option_id": 555, "option_text": "Minimal - prefer manual/hands-on work", "trait_tag": "Agri-Nature"},
-            {"option_id": 556, "option_text": "Good at hardware - fixing computers", "trait_tag": "Hardware-Systems"},
-            {"option_id": 557, "option_text": "Good at design software - Photoshop, Canva", "trait_tag": "Visual-Design"},
-            {"option_id": 558, "option_text": "Good at spreadsheets - Excel, Google Sheets", "trait_tag": "Finance-Acct"},
-            {"option_id": 559, "option_text": "Good at video editing - Premiere, CapCut", "trait_tag": "Digital-Media"},
-            {"option_id": 560, "option_text": "Good at medical software - hospital systems", "trait_tag": "Health-Admin"}
+            {"option_id": 551, "option_text": "Coding or building programs and websites", "trait_tags": ["Software-Dev", "Web-Dev"]},
+            {"option_id": 552, "option_text": "Gaming - I know my way around PC specs, mods, and setups", "trait_tags": ["Game-Dev", "Hardware-Systems"]},
+            {"option_id": 553, "option_text": "Working with spreadsheets and organizing data", "trait_tags": ["Data-Analytics", "Finance-Acct"]},
+            {"option_id": 554, "option_text": "Editing photos, videos, or creating digital content", "trait_tags": ["Digital-Media", "Visual-Design"]},
+            {"option_id": 555, "option_text": "Troubleshooting hardware or setting up networks", "trait_tags": ["Hardware-Systems", "Cloud-Systems"]},
+            {"option_id": 556, "option_text": "Browsing social media and online communication", "trait_tags": ["Marketing-Sales", "People-Skill"]},
+            {"option_id": 557, "option_text": "Using apps for design - Canva, Photoshop, Figma", "trait_tags": ["Visual-Design", "Animation-3D"]},
+            {"option_id": 558, "option_text": "Exploring AI tools, chatbots, or automation", "trait_tags": ["AI-ML", "Software-Dev"]},
+            {"option_id": 559, "option_text": "Managing files, records, or hospital/office systems", "trait_tags": ["Admin-Skill", "Health-Admin"]},
+            {"option_id": 560, "option_text": "I mostly use my phone/computer for basic tasks only", "trait_tags": ["Agri-Nature", "Physical-Skill"]}
         ]
     },
     {
@@ -1297,14 +903,14 @@ QUESTIONS_POOL_ENHANCED = [
         "question_text": "What's your FAVORITE subject in school?",
         "category": "Favorite Subject",
         "options": [
-            {"option_id": 701, "option_text": "Math (Algebra, Calculus, Statistics)", "trait_tag": "Data-Analytics"},
-            {"option_id": 702, "option_text": "Science (Biology, Chemistry, Physics)", "trait_tag": "Lab-Research"},
-            {"option_id": 703, "option_text": "English (Literature, Writing)", "trait_tag": "Teaching-Ed"},
-            {"option_id": 704, "option_text": "Filipino (Panitikan, Wika)", "trait_tag": "Teaching-Ed"},
-            {"option_id": 705, "option_text": "Social Studies (History, Economics)", "trait_tag": "Community-Serve"},
+            {"option_id": 701, "option_text": "Math", "trait_tag": "Data-Analytics"},
+            {"option_id": 702, "option_text": "Science", "trait_tag": "Lab-Research"},
+            {"option_id": 703, "option_text": "English", "trait_tag": "Teaching-Ed"},
+            {"option_id": 704, "option_text": "Filipino", "trait_tag": "Teaching-Ed"},
+            {"option_id": 705, "option_text": "Social Studies", "trait_tag": "Community-Serve"},
             {"option_id": 706, "option_text": "Computer/ICT/TLE", "trait_tag": "Software-Dev"},
-            {"option_id": 707, "option_text": "Arts (Drawing, Music)", "trait_tag": "Visual-Design"},
-            {"option_id": 708, "option_text": "PE (Sports, Physical Education)", "trait_tag": "Physical-Skill"},
+            {"option_id": 707, "option_text": "Arts", "trait_tag": "Visual-Design"},
+            {"option_id": 708, "option_text": "PE", "trait_tag": "Physical-Skill"},
             {"option_id": 709, "option_text": "Accounting/Business subjects", "trait_tag": "Finance-Acct"},
             {"option_id": 710, "option_text": "Research/Practical Research", "trait_tag": "Lab-Research"}
         ]
@@ -2128,8 +1734,1371 @@ QUESTIONS_POOL_ENHANCED = [
             {"option_id": 1199, "option_text": "A shipping company or port authority", "trait_tag": "Maritime-Sea"},
             {"option_id": 1200, "option_text": "A resort, hotel, or travel company", "trait_tag": "Hospitality-Svc"}
         ]
+    },
+
+    # ==================== DOMAIN-SPECIFIC ENTRY QUESTIONS (Q121-Q133) ====================
+    # Each domain gets a UNIQUE opener that directly relates to that field
+    # These replace the generic Q1/Q4 as entry points
+
+    # --- TECHNOLOGY ENTRY ---
+    {
+        "question_id": 121,
+        "question_text": "When you use your computer or phone, what do you enjoy doing the most?",
+        "category": "Domain Entry - Technology",
+        "options": [
+            {"option_id": 1201, "option_text": "Building websites or coding small programs", "trait_tags": ["Web-Dev", "Software-Dev"]},
+            {"option_id": 1202, "option_text": "Playing and analyzing video games", "trait_tags": ["Game-Dev", "Digital-Media"]},
+            {"option_id": 1203, "option_text": "Setting up networks or fixing hardware issues", "trait_tags": ["Cloud-Systems", "Hardware-Systems"]},
+            {"option_id": 1204, "option_text": "Analyzing data or making spreadsheets", "trait_tags": ["Data-Analytics", "AI-ML"]},
+            {"option_id": 1205, "option_text": "Creating digital art or editing videos", "trait_tags": ["Digital-Media", "Animation-3D"]},
+            {"option_id": 1206, "option_text": "Learning about hacking and online security", "trait_tags": ["Cyber-Defense", "Software-Dev"]},
+            {"option_id": 1207, "option_text": "Developing mobile apps or chatbots", "trait_tags": ["Mobile-Dev", "AI-ML"]},
+            {"option_id": 1208, "option_text": "Managing cloud servers or databases", "trait_tags": ["Cloud-Systems", "Data-Analytics"]},
+            {"option_id": 1209, "option_text": "Automating tasks with scripts", "trait_tags": ["Software-Dev", "Data-Analytics"]},
+            {"option_id": 1210, "option_text": "None of these interest me", "trait_tags": []}
+        ]
+    },
+    # --- HEALTHCARE ENTRY ---
+    {
+        "question_id": 122,
+        "question_text": "In a hospital setting, what would you most want to do?",
+        "category": "Domain Entry - Healthcare",
+        "options": [
+            {"option_id": 1211, "option_text": "Directly care for patients at their bedside", "trait_tags": ["Patient-Care", "People-Skill"]},
+            {"option_id": 1212, "option_text": "Analyze blood and tissue samples in the lab", "trait_tags": ["Medical-Lab", "Lab-Research"]},
+            {"option_id": 1213, "option_text": "Help patients recover through physical exercises", "trait_tags": ["Rehab-Therapy", "Physical-Skill"]},
+            {"option_id": 1214, "option_text": "Prepare and dispense medications", "trait_tags": ["Pharmacy", "Medical-Lab"]},
+            {"option_id": 1215, "option_text": "Manage hospital records and health data", "trait_tags": ["Health-Admin", "Admin-Skill"]},
+            {"option_id": 1216, "option_text": "Promote health programs for communities", "trait_tags": ["Public-Health", "Community-Serve"]},
+            {"option_id": 1217, "option_text": "Plan nutritious diets for patients", "trait_tags": ["Nutrition-Diet", "Patient-Care"]},
+            {"option_id": 1218, "option_text": "Help people with speech or mental health issues", "trait_tags": ["Rehab-Therapy", "Counseling"]},
+            {"option_id": 1219, "option_text": "Operate medical imaging equipment (X-ray, MRI)", "trait_tags": ["Medical-Lab", "Technical-Skill"]},
+            {"option_id": 1220, "option_text": "None of these interest me", "trait_tags": []}
+        ]
+    },
+    # --- ENGINEERING ENTRY ---
+    {
+        "question_id": 123,
+        "question_text": "When you see a construction site or factory, what interests you most?",
+        "category": "Domain Entry - Engineering",
+        "options": [
+            {"option_id": 1221, "option_text": "How buildings and bridges are designed to be strong", "trait_tags": ["Civil-Build", "Spatial-Design"]},
+            {"option_id": 1222, "option_text": "The machines and engines that power everything", "trait_tags": ["Mechanical-Design", "Industrial-Ops"]},
+            {"option_id": 1223, "option_text": "The electrical systems and power grids", "trait_tags": ["Electrical-Power", "Hardware-Systems"]},
+            {"option_id": 1224, "option_text": "How factories optimize their production process", "trait_tags": ["Industrial-Ops", "Mechanical-Design"]},
+            {"option_id": 1225, "option_text": "The environmental impact and sustainability", "trait_tags": ["Environmental-Eng", "Environmental-Sci"]},
+            {"option_id": 1226, "option_text": "The mapping and surveying of the land", "trait_tags": ["Civil-Build", "Field-Research"]},
+            {"option_id": 1227, "option_text": "The architecture and visual design of the buildings", "trait_tags": ["Spatial-Design", "Visual-Design"]},
+            {"option_id": 1228, "option_text": "How aircraft and vehicles are engineered", "trait_tags": ["Mechanical-Design", "Hardware-Systems"]},
+            {"option_id": 1229, "option_text": "The electronics and embedded computer systems", "trait_tags": ["Hardware-Systems", "Software-Dev"]},
+            {"option_id": 1230, "option_text": "None of these interest me", "trait_tags": []}
+        ]
+    },
+    # --- BUSINESS ENTRY ---
+    {
+        "question_id": 124,
+        "question_text": "When you think about money and business, what excites you most?",
+        "category": "Domain Entry - Business",
+        "options": [
+            {"option_id": 1231, "option_text": "Managing budgets and analyzing financial reports", "trait_tags": ["Finance-Acct", "Analytical-Skill"]},
+            {"option_id": 1232, "option_text": "Creating ads and marketing campaigns", "trait_tags": ["Marketing-Sales", "Creative-Skill"]},
+            {"option_id": 1233, "option_text": "Starting my own business from scratch", "trait_tags": ["Startup-Venture", "Marketing-Sales"]},
+            {"option_id": 1234, "option_text": "Hiring and managing employees", "trait_tags": ["HR-Management", "People-Skill"]},
+            {"option_id": 1235, "option_text": "Trading stocks and making investments", "trait_tags": ["Finance-Acct", "Startup-Venture"]},
+            {"option_id": 1236, "option_text": "Selling products and negotiating deals", "trait_tags": ["Marketing-Sales", "People-Skill"]},
+            {"option_id": 1237, "option_text": "Managing real estate properties", "trait_tags": ["Marketing-Sales", "Admin-Skill"]},
+            {"option_id": 1238, "option_text": "Running logistics and supply chains", "trait_tags": ["Industrial-Ops", "Admin-Skill"]},
+            {"option_id": 1239, "option_text": "Analyzing economic trends and policies", "trait_tags": ["Finance-Acct", "Analytical-Skill"]},
+            {"option_id": 1240, "option_text": "None of these interest me", "trait_tags": []}
+        ]
+    },
+    # --- CREATIVE ENTRY ---
+    {
+        "question_id": 125,
+        "question_text": "Which form of creative expression speaks to you the most?",
+        "category": "Domain Entry - Creative",
+        "options": [
+            {"option_id": 1241, "option_text": "Drawing, painting, or graphic design", "trait_tags": ["Visual-Design", "Creative-Skill"]},
+            {"option_id": 1242, "option_text": "3D modeling and animation", "trait_tags": ["Animation-3D", "Digital-Media"]},
+            {"option_id": 1243, "option_text": "Making short films or video content", "trait_tags": ["Film-Broadcast", "Digital-Media"]},
+            {"option_id": 1244, "option_text": "Acting, dancing, or performing on stage", "trait_tags": ["Performing-Arts", "People-Skill"]},
+            {"option_id": 1245, "option_text": "Music production and sound design", "trait_tags": ["Performing-Arts", "Digital-Media"]},
+            {"option_id": 1246, "option_text": "Interior decorating or space design", "trait_tags": ["Spatial-Design", "Creative-Skill"]},
+            {"option_id": 1247, "option_text": "Fashion design and clothing", "trait_tags": ["Spatial-Design", "Visual-Design"]},
+            {"option_id": 1248, "option_text": "Photography and visual storytelling", "trait_tags": ["Visual-Design", "Film-Broadcast"]},
+            {"option_id": 1249, "option_text": "Game design and interactive media", "trait_tags": ["Game-Dev", "Animation-3D"]},
+            {"option_id": 1250, "option_text": "None of these interest me", "trait_tags": []}
+        ]
+    },
+    # --- EDUCATION ENTRY ---
+    {
+        "question_id": 126,
+        "question_text": "What draws you most to sharing knowledge with others?",
+        "category": "Domain Entry - Education",
+        "options": [
+            {"option_id": 1251, "option_text": "Teaching young children how to read and write", "trait_tags": ["Teaching-Ed", "People-Skill"]},
+            {"option_id": 1252, "option_text": "Coaching students through difficult subjects", "trait_tags": ["Teaching-Ed", "Analytical-Skill"]},
+            {"option_id": 1253, "option_text": "Guiding students with personal and career problems", "trait_tags": ["Counseling", "People-Skill"]},
+            {"option_id": 1254, "option_text": "Training athletes and coaching sports teams", "trait_tags": ["Sports-Ed", "Physical-Skill"]},
+            {"option_id": 1255, "option_text": "Teaching technical and vocational skills", "trait_tags": ["Teaching-Ed", "Technical-Skill"]},
+            {"option_id": 1256, "option_text": "Helping special needs children learn", "trait_tags": ["Teaching-Ed", "Counseling"]},
+            {"option_id": 1257, "option_text": "Organizing library resources and research tools", "trait_tags": ["Teaching-Ed", "Admin-Skill"]},
+            {"option_id": 1258, "option_text": "Developing educational programs and curricula", "trait_tags": ["Teaching-Ed", "Creative-Skill"]},
+            {"option_id": 1259, "option_text": "Mentoring youth in the community", "trait_tags": ["Community-Serve", "People-Skill"]},
+            {"option_id": 1260, "option_text": "None of these interest me", "trait_tags": []}
+        ]
+    },
+    # --- PUBLIC SERVICE ENTRY ---
+    {
+        "question_id": 127,
+        "question_text": "How would you most like to serve your community?",
+        "category": "Domain Entry - Public Service",
+        "options": [
+            {"option_id": 1261, "option_text": "Protecting people as a police officer or detective", "trait_tags": ["Law-Enforce", "Physical-Skill"]},
+            {"option_id": 1262, "option_text": "Fighting for justice as a lawyer", "trait_tags": ["Legal-Practice", "Analytical-Skill"]},
+            {"option_id": 1263, "option_text": "Analyzing forensic evidence at crime scenes", "trait_tags": ["Forensic-Sci", "Lab-Research"]},
+            {"option_id": 1264, "option_text": "Helping families through social work", "trait_tags": ["Social-Work", "People-Skill"]},
+            {"option_id": 1265, "option_text": "Working in government to create public policy", "trait_tags": ["Community-Serve", "Admin-Skill"]},
+            {"option_id": 1266, "option_text": "Organizing community development programs", "trait_tags": ["Community-Serve", "Social-Work"]},
+            {"option_id": 1267, "option_text": "Advocating for human rights and social justice", "trait_tags": ["Legal-Practice", "Community-Serve"]},
+            {"option_id": 1268, "option_text": "Serving as a diplomat or in international relations", "trait_tags": ["Community-Serve", "People-Skill"]},
+            {"option_id": 1269, "option_text": "Managing disaster relief and emergency response", "trait_tags": ["Community-Serve", "Physical-Skill"]},
+            {"option_id": 1270, "option_text": "None of these interest me", "trait_tags": []}
+        ]
+    },
+    # --- SCIENCE ENTRY ---
+    {
+        "question_id": 128,
+        "question_text": "What kind of scientific discovery excites you the most?",
+        "category": "Domain Entry - Science",
+        "options": [
+            {"option_id": 1271, "option_text": "Finding a cure for diseases in a laboratory", "trait_tags": ["Lab-Research", "Medical-Lab"]},
+            {"option_id": 1272, "option_text": "Discovering new species in the wild", "trait_tags": ["Field-Research", "Environmental-Sci"]},
+            {"option_id": 1273, "option_text": "Developing new food products and preserving food safely", "trait_tags": ["Food-Science", "Lab-Research"]},
+            {"option_id": 1274, "option_text": "Analyzing crime scene evidence in a lab", "trait_tags": ["Forensic-Sci", "Analytical-Skill"]},
+            {"option_id": 1275, "option_text": "Studying climate change and protecting the environment", "trait_tags": ["Environmental-Sci", "Field-Research"]},
+            {"option_id": 1276, "option_text": "Exploring the ocean floor and marine life", "trait_tags": ["Field-Research", "Physical-Skill"]},
+            {"option_id": 1277, "option_text": "Inventing new materials through chemistry", "trait_tags": ["Lab-Research", "Analytical-Skill"]},
+            {"option_id": 1278, "option_text": "Understanding the universe through physics", "trait_tags": ["Lab-Research", "Analytical-Skill"]},
+            {"option_id": 1279, "option_text": "Using statistics and math to solve real-world problems", "trait_tags": ["Data-Analytics", "Analytical-Skill"]},
+            {"option_id": 1280, "option_text": "None of these interest me", "trait_tags": []}
+        ]
+    },
+    # --- AGRICULTURE ENTRY ---
+    {
+        "question_id": 129,
+        "question_text": "What aspect of nature and farming interests you most?",
+        "category": "Domain Entry - Agriculture",
+        "options": [
+            {"option_id": 1281, "option_text": "Growing crops and managing farmland", "trait_tags": ["Agri-Nature", "Physical-Skill"]},
+            {"option_id": 1282, "option_text": "Raising animals and livestock", "trait_tags": ["Agri-Nature", "Field-Research"]},
+            {"option_id": 1283, "option_text": "Protecting forests and natural resources", "trait_tags": ["Agri-Nature", "Environmental-Sci"]},
+            {"option_id": 1284, "option_text": "Fish farming and aquaculture", "trait_tags": ["Agri-Nature", "Maritime-Sea"]},
+            {"option_id": 1285, "option_text": "Developing agricultural technology", "trait_tags": ["Agri-Nature", "Technical-Skill"]},
+            {"option_id": 1286, "option_text": "Soil science and land management", "trait_tags": ["Agri-Nature", "Lab-Research"]},
+            {"option_id": 1287, "option_text": "Agricultural business and farm marketing", "trait_tags": ["Agri-Nature", "Startup-Venture"]},
+            {"option_id": 1288, "option_text": "Studying plant genetics and breeding", "trait_tags": ["Agri-Nature", "Lab-Research"]},
+            {"option_id": 1289, "option_text": "None of these interest me", "trait_tags": []}
+        ]
+    },
+    # --- MARITIME ENTRY ---
+    {
+        "question_id": 130,
+        "question_text": "What draws you to the sea and maritime industry?",
+        "category": "Domain Entry - Maritime",
+        "options": [
+            {"option_id": 1291, "option_text": "Navigating ships across the ocean", "trait_tags": ["Maritime-Sea", "Physical-Skill"]},
+            {"option_id": 1292, "option_text": "Maintaining and repairing ship engines", "trait_tags": ["Maritime-Sea", "Mechanical-Design"]},
+            {"option_id": 1293, "option_text": "Working at a seaport managing cargo", "trait_tags": ["Maritime-Sea", "Admin-Skill"]},
+            {"option_id": 1294, "option_text": "Studying marine ecosystems and biology", "trait_tags": ["Field-Research", "Environmental-Sci"]},
+            {"option_id": 1295, "option_text": "Building and designing ships or boats", "trait_tags": ["Maritime-Sea", "Mechanical-Design"]},
+            {"option_id": 1296, "option_text": "The adventure of traveling to different countries", "trait_tags": ["Maritime-Sea", "Tourism-Travel"]},
+            {"option_id": 1297, "option_text": "Fishing industry and aquatic resources", "trait_tags": ["Maritime-Sea", "Agri-Nature"]},
+            {"option_id": 1298, "option_text": "None of these interest me", "trait_tags": []}
+        ]
+    },
+    # --- HOSPITALITY ENTRY ---
+    {
+        "question_id": 131,
+        "question_text": "What do you enjoy most about serving and hosting people?",
+        "category": "Domain Entry - Hospitality",
+        "options": [
+            {"option_id": 1301, "option_text": "Managing a hotel and making guests feel welcome", "trait_tags": ["Hospitality-Svc", "People-Skill"]},
+            {"option_id": 1302, "option_text": "Planning travel itineraries and tour packages", "trait_tags": ["Tourism-Travel", "Marketing-Sales"]},
+            {"option_id": 1303, "option_text": "Cooking and creating new dishes", "trait_tags": ["Culinary-Arts", "Creative-Skill"]},
+            {"option_id": 1304, "option_text": "Organizing events and conferences", "trait_tags": ["Hospitality-Svc", "Admin-Skill"]},
+            {"option_id": 1305, "option_text": "Running a restaurant or food business", "trait_tags": ["Culinary-Arts", "Startup-Venture"]},
+            {"option_id": 1306, "option_text": "Being a tour guide and sharing culture", "trait_tags": ["Tourism-Travel", "People-Skill"]},
+            {"option_id": 1307, "option_text": "Managing a resort or spa", "trait_tags": ["Hospitality-Svc", "Admin-Skill"]},
+            {"option_id": 1308, "option_text": "Food photography and culinary content creation", "trait_tags": ["Culinary-Arts", "Digital-Media"]},
+            {"option_id": 1309, "option_text": "None of these interest me", "trait_tags": []}
+        ]
+    },
+    # --- PHYSICAL/SPORTS ENTRY ---
+    {
+        "question_id": 132,
+        "question_text": "What physical activity or career excites you most?",
+        "category": "Domain Entry - Physical",
+        "options": [
+            {"option_id": 1311, "option_text": "Coaching athletes and training sports teams", "trait_tags": ["Sports-Ed", "Teaching-Ed"]},
+            {"option_id": 1312, "option_text": "Helping injured athletes recover", "trait_tags": ["Rehab-Therapy", "Sports-Ed"]},
+            {"option_id": 1313, "option_text": "Working as a fitness trainer", "trait_tags": ["Physical-Skill", "Sports-Ed"]},
+            {"option_id": 1314, "option_text": "Becoming a professional athlete", "trait_tags": ["Physical-Skill", "Sports-Ed"]},
+            {"option_id": 1315, "option_text": "Sports management and event organizing", "trait_tags": ["Sports-Ed", "Admin-Skill"]},
+            {"option_id": 1316, "option_text": "Outdoor adventure sports and recreation", "trait_tags": ["Physical-Skill", "Tourism-Travel"]},
+            {"option_id": 1317, "option_text": "Military or law enforcement fitness", "trait_tags": ["Physical-Skill", "Law-Enforce"]},
+            {"option_id": 1318, "option_text": "None of these interest me", "trait_tags": []}
+        ]
+    },
+    # --- SOCIAL/HUMANITIES ENTRY ---
+    {
+        "question_id": 133,
+        "question_text": "How do you most enjoy connecting with and understanding people?",
+        "category": "Domain Entry - Social",
+        "options": [
+            {"option_id": 1321, "option_text": "Counseling people through emotional problems", "trait_tags": ["Counseling", "People-Skill"]},
+            {"option_id": 1322, "option_text": "Writing stories and creative content", "trait_tags": ["Creative-Skill", "Film-Broadcast"]},
+            {"option_id": 1323, "option_text": "Studying how societies and cultures work", "trait_tags": ["Community-Serve", "Analytical-Skill"]},
+            {"option_id": 1324, "option_text": "Helping underprivileged communities", "trait_tags": ["Social-Work", "Community-Serve"]},
+            {"option_id": 1325, "option_text": "Researching psychology and human behavior", "trait_tags": ["Counseling", "Analytical-Skill"]},
+            {"option_id": 1326, "option_text": "News reporting and investigative journalism", "trait_tags": ["Film-Broadcast", "Analytical-Skill"]},
+            {"option_id": 1327, "option_text": "Understanding languages and communication", "trait_tags": ["Teaching-Ed", "People-Skill"]},
+            {"option_id": 1328, "option_text": "Political activism and civic engagement", "trait_tags": ["Community-Serve", "Legal-Practice"]},
+            {"option_id": 1329, "option_text": "None of these interest me", "trait_tags": []}
+        ]
+    },
+
+    # ==================== EXPANDED SITUATIONAL QUESTIONS (Q134-Q200+) ====================
+    # Multi-trait options, deeper domain coverage, Philippine context
+
+    # --- TECHNOLOGY SITUATIONAL (Q134-Q148) ---
+    {
+        "question_id": 134,
+        "question_text": "Your school asks you to build their new website. What excites you most about the project?",
+        "category": "Situational - Web Development",
+        "options": [
+            {"option_id": 1341, "option_text": "Designing the visual layout and user interface", "trait_tags": ["Web-Dev", "Visual-Design"]},
+            {"option_id": 1342, "option_text": "Writing the backend code and database", "trait_tags": ["Web-Dev", "Software-Dev"]},
+            {"option_id": 1343, "option_text": "Setting up the server and hosting", "trait_tags": ["Cloud-Systems", "Web-Dev"]},
+            {"option_id": 1344, "option_text": "Making sure it's secure from hackers", "trait_tags": ["Cyber-Defense", "Web-Dev"]},
+            {"option_id": 1345, "option_text": "Adding interactive features and animations", "trait_tags": ["Web-Dev", "Animation-3D"]},
+            {"option_id": 1346, "option_text": "Testing it on different devices and browsers", "trait_tags": ["Mobile-Dev", "Web-Dev"]},
+            {"option_id": 1347, "option_text": "Analyzing user data to improve the site", "trait_tags": ["Data-Analytics", "Web-Dev"]},
+            {"option_id": 1348, "option_text": "Managing the project team and timeline", "trait_tags": ["Admin-Skill", "Software-Dev"]}
+        ]
+    },
+    {
+        "question_id": 135,
+        "question_text": "You're part of a hackathon team. Which project would you choose?",
+        "category": "Situational - Tech Competition",
+        "options": [
+            {"option_id": 1351, "option_text": "An AI chatbot that helps students study", "trait_tags": ["AI-ML", "Software-Dev"]},
+            {"option_id": 1352, "option_text": "A mobile app for local businesses", "trait_tags": ["Mobile-Dev", "Startup-Venture"]},
+            {"option_id": 1353, "option_text": "A cybersecurity tool to detect phishing", "trait_tags": ["Cyber-Defense", "Software-Dev"]},
+            {"option_id": 1354, "option_text": "A data dashboard tracking COVID cases", "trait_tags": ["Data-Analytics", "Public-Health"]},
+            {"option_id": 1355, "option_text": "A VR game set in Philippine history", "trait_tags": ["Game-Dev", "Animation-3D"]},
+            {"option_id": 1356, "option_text": "An IoT system for smart farming", "trait_tags": ["Hardware-Systems", "Agri-Nature"]},
+            {"option_id": 1357, "option_text": "A cloud platform for school management", "trait_tags": ["Cloud-Systems", "Admin-Skill"]},
+            {"option_id": 1358, "option_text": "A machine learning model to predict floods", "trait_tags": ["AI-ML", "Environmental-Sci"]}
+        ]
+    },
+    {
+        "question_id": 136,
+        "question_text": "If you could create any app, what would it do?",
+        "category": "Situational - App Development",
+        "options": [
+            {"option_id": 1361, "option_text": "Help people find the best doctors nearby", "trait_tags": ["Mobile-Dev", "Patient-Care"]},
+            {"option_id": 1362, "option_text": "Track personal finances and budgets", "trait_tags": ["Mobile-Dev", "Finance-Acct"]},
+            {"option_id": 1363, "option_text": "Connect local farmers to buyers directly", "trait_tags": ["Mobile-Dev", "Agri-Nature"]},
+            {"option_id": 1364, "option_text": "An AI tutor that adapts to student learning", "trait_tags": ["AI-ML", "Teaching-Ed"]},
+            {"option_id": 1365, "option_text": "A social platform for Filipino artists", "trait_tags": ["Mobile-Dev", "Visual-Design"]},
+            {"option_id": 1366, "option_text": "A fitness tracker with workout plans", "trait_tags": ["Mobile-Dev", "Sports-Ed"]},
+            {"option_id": 1367, "option_text": "A disaster alert system using real-time data", "trait_tags": ["Mobile-Dev", "Environmental-Sci"]},
+            {"option_id": 1368, "option_text": "A game that teaches children about science", "trait_tags": ["Game-Dev", "Teaching-Ed"]}
+        ]
+    },
+    {
+        "question_id": 137,
+        "question_text": "Your company is hit by a ransomware attack. What's your role in the response?",
+        "category": "Situational - Cybersecurity",
+        "options": [
+            {"option_id": 1371, "option_text": "Leading the technical incident response team", "trait_tags": ["Cyber-Defense", "Cloud-Systems"]},
+            {"option_id": 1372, "option_text": "Analyzing the malware to find its source", "trait_tags": ["Cyber-Defense", "Forensic-Sci"]},
+            {"option_id": 1373, "option_text": "Restoring systems from backup servers", "trait_tags": ["Cloud-Systems", "Software-Dev"]},
+            {"option_id": 1374, "option_text": "Communicating with stakeholders about the breach", "trait_tags": ["Admin-Skill", "People-Skill"]},
+            {"option_id": 1375, "option_text": "Working with law enforcement to catch the hackers", "trait_tags": ["Cyber-Defense", "Law-Enforce"]},
+            {"option_id": 1376, "option_text": "Training employees to prevent future attacks", "trait_tags": ["Teaching-Ed", "Cyber-Defense"]},
+            {"option_id": 1377, "option_text": "Developing better security protocols", "trait_tags": ["Cyber-Defense", "Software-Dev"]},
+            {"option_id": 1378, "option_text": "Assessing the financial damage and filing insurance", "trait_tags": ["Finance-Acct", "Admin-Skill"]}
+        ]
+    },
+    {
+        "question_id": 138,
+        "question_text": "You're asked to create an AI system for your school. What would it do?",
+        "category": "Situational - AI/ML",
+        "options": [
+            {"option_id": 1381, "option_text": "Predict which students need extra tutoring", "trait_tags": ["AI-ML", "Teaching-Ed"]},
+            {"option_id": 1382, "option_text": "Automate grading of essays and exams", "trait_tags": ["AI-ML", "Data-Analytics"]},
+            {"option_id": 1383, "option_text": "Detect cheating in online exams", "trait_tags": ["AI-ML", "Cyber-Defense"]},
+            {"option_id": 1384, "option_text": "Generate personalized study materials", "trait_tags": ["AI-ML", "Teaching-Ed"]},
+            {"option_id": 1385, "option_text": "Analyze campus safety through security cameras", "trait_tags": ["AI-ML", "Law-Enforce"]},
+            {"option_id": 1386, "option_text": "Optimize class schedules and room assignments", "trait_tags": ["AI-ML", "Admin-Skill"]},
+            {"option_id": 1387, "option_text": "Create a virtual campus tour using AR", "trait_tags": ["AI-ML", "Animation-3D"]},
+            {"option_id": 1388, "option_text": "Monitor campus energy usage to save electricity", "trait_tags": ["AI-ML", "Environmental-Eng"]}
+        ]
+    },
+    {
+        "question_id": 139,
+        "question_text": "A friend asks you to help make their indie video game. What role do you want?",
+        "category": "Situational - Game Development",
+        "options": [
+            {"option_id": 1391, "option_text": "Programming the game mechanics and physics", "trait_tags": ["Game-Dev", "Software-Dev"]},
+            {"option_id": 1392, "option_text": "Creating the 3D character models and environments", "trait_tags": ["Animation-3D", "Visual-Design"]},
+            {"option_id": 1393, "option_text": "Writing the storyline and dialogue", "trait_tags": ["Creative-Skill", "Game-Dev"]},
+            {"option_id": 1394, "option_text": "Composing the music and sound effects", "trait_tags": ["Performing-Arts", "Digital-Media"]},
+            {"option_id": 1395, "option_text": "Testing and finding bugs", "trait_tags": ["Software-Dev", "Analytical-Skill"]},
+            {"option_id": 1396, "option_text": "Marketing and publishing the game online", "trait_tags": ["Marketing-Sales", "Digital-Media"]},
+            {"option_id": 1397, "option_text": "Designing the UI and menu systems", "trait_tags": ["Web-Dev", "Visual-Design"]},
+            {"option_id": 1398, "option_text": "Managing the project schedule and budget", "trait_tags": ["Admin-Skill", "Startup-Venture"]}
+        ]
+    },
+    {
+        "question_id": 140,
+        "question_text": "Your barangay wants a tech solution for a local problem. What would you build?",
+        "category": "Situational - Community Tech",
+        "options": [
+            {"option_id": 1401, "option_text": "A database to track residents and health records", "trait_tags": ["Software-Dev", "Public-Health"]},
+            {"option_id": 1402, "option_text": "A CCTV monitoring system with smart alerts", "trait_tags": ["Hardware-Systems", "Law-Enforce"]},
+            {"option_id": 1403, "option_text": "A Wi-Fi hotspot for students without internet", "trait_tags": ["Cloud-Systems", "Community-Serve"]},
+            {"option_id": 1404, "option_text": "An app for reporting emergencies and crimes", "trait_tags": ["Mobile-Dev", "Law-Enforce"]},
+            {"option_id": 1405, "option_text": "A system to track garbage collection schedules", "trait_tags": ["Software-Dev", "Environmental-Eng"]},
+            {"option_id": 1406, "option_text": "A digital marketplace for local vendors", "trait_tags": ["Web-Dev", "Marketing-Sales"]},
+            {"option_id": 1407, "option_text": "An SMS alert system for typhoon warnings", "trait_tags": ["Mobile-Dev", "Environmental-Sci"]},
+            {"option_id": 1408, "option_text": "None — I'd focus on non-tech solutions", "trait_tags": ["Community-Serve", "People-Skill"]}
+        ]
+    },
+
+    # --- HEALTHCARE SITUATIONAL (Q141-Q152) ---
+    {
+        "question_id": 141,
+        "question_text": "A typhoon hits your province. As a healthcare worker, what's your priority?",
+        "category": "Situational - Disaster Healthcare",
+        "options": [
+            {"option_id": 1411, "option_text": "Treating injured victims at the evacuation center", "trait_tags": ["Patient-Care", "Physical-Skill"]},
+            {"option_id": 1412, "option_text": "Setting up a temporary pharmacy for medicine distribution", "trait_tags": ["Pharmacy", "Public-Health"]},
+            {"option_id": 1413, "option_text": "Running water and food quality tests", "trait_tags": ["Medical-Lab", "Food-Science"]},
+            {"option_id": 1414, "option_text": "Organizing mental health support for survivors", "trait_tags": ["Counseling", "Rehab-Therapy"]},
+            {"option_id": 1415, "option_text": "Coordinating health teams and supply logistics", "trait_tags": ["Health-Admin", "Admin-Skill"]},
+            {"option_id": 1416, "option_text": "Providing nutritional support and meal planning", "trait_tags": ["Nutrition-Diet", "Public-Health"]},
+            {"option_id": 1417, "option_text": "Helping injured people with physical rehabilitation", "trait_tags": ["Rehab-Therapy", "Physical-Skill"]},
+            {"option_id": 1418, "option_text": "Preventing disease outbreaks through sanitation", "trait_tags": ["Public-Health", "Environmental-Sci"]}
+        ]
+    },
+    {
+        "question_id": 142,
+        "question_text": "A patient comes in with an unknown illness. What would you want to do?",
+        "category": "Situational - Medical Mystery",
+        "options": [
+            {"option_id": 1421, "option_text": "Take their vital signs and comfort them", "trait_tags": ["Patient-Care", "People-Skill"]},
+            {"option_id": 1422, "option_text": "Run lab tests on their blood and tissue samples", "trait_tags": ["Medical-Lab", "Lab-Research"]},
+            {"option_id": 1423, "option_text": "Research the symptoms and possible diseases", "trait_tags": ["Lab-Research", "Analytical-Skill"]},
+            {"option_id": 1424, "option_text": "Check if the right medications are available", "trait_tags": ["Pharmacy", "Medical-Lab"]},
+            {"option_id": 1425, "option_text": "Operate the imaging machines for diagnosis", "trait_tags": ["Medical-Lab", "Technical-Skill"]},
+            {"option_id": 1426, "option_text": "Track if others in the community have the same illness", "trait_tags": ["Public-Health", "Data-Analytics"]},
+            {"option_id": 1427, "option_text": "Update the patient's medical records accurately", "trait_tags": ["Health-Admin", "Admin-Skill"]},
+            {"option_id": 1428, "option_text": "Call a team meeting to discuss the case", "trait_tags": ["People-Skill", "Analytical-Skill"]}
+        ]
+    },
+    {
+        "question_id": 143,
+        "question_text": "Your barangay health center needs improvements. What would you focus on?",
+        "category": "Situational - Community Health",
+        "options": [
+            {"option_id": 1431, "option_text": "Training midwives for safer childbirth", "trait_tags": ["Patient-Care", "Teaching-Ed"]},
+            {"option_id": 1432, "option_text": "Adding a small lab for basic diagnostics", "trait_tags": ["Medical-Lab", "Lab-Research"]},
+            {"option_id": 1433, "option_text": "Starting a vaccination and immunization drive", "trait_tags": ["Public-Health", "Community-Serve"]},
+            {"option_id": 1434, "option_text": "Setting up a rehabilitation room for PT", "trait_tags": ["Rehab-Therapy", "Physical-Skill"]},
+            {"option_id": 1435, "option_text": "Creating a nutrition program for malnourished children", "trait_tags": ["Nutrition-Diet", "Public-Health"]},
+            {"option_id": 1436, "option_text": "Digitalizing patient records for better tracking", "trait_tags": ["Health-Admin", "Software-Dev"]},
+            {"option_id": 1437, "option_text": "Adding mental health counseling services", "trait_tags": ["Counseling", "People-Skill"]},
+            {"option_id": 1438, "option_text": "Stocking essential medicines properly", "trait_tags": ["Pharmacy", "Admin-Skill"]}
+        ]
+    },
+    {
+        "question_id": 144,
+        "question_text": "At a health fair, which booth would you volunteer at?",
+        "category": "Situational - Health Fair",
+        "options": [
+            {"option_id": 1441, "option_text": "Free blood pressure and sugar level testing", "trait_tags": ["Patient-Care", "Medical-Lab"]},
+            {"option_id": 1442, "option_text": "Nutrition advice and healthy cooking demos", "trait_tags": ["Nutrition-Diet", "Culinary-Arts"]},
+            {"option_id": 1443, "option_text": "Physical fitness testing and exercise tips", "trait_tags": ["Sports-Ed", "Rehab-Therapy"]},
+            {"option_id": 1444, "option_text": "Mental health awareness and stress management", "trait_tags": ["Counseling", "People-Skill"]},
+            {"option_id": 1445, "option_text": "Free eye exams and vision screening", "trait_tags": ["Medical-Lab", "Patient-Care"]},
+            {"option_id": 1446, "option_text": "First aid training demonstrations", "trait_tags": ["Patient-Care", "Teaching-Ed"]},
+            {"option_id": 1447, "option_text": "Distributing medicine and explaining dosages", "trait_tags": ["Pharmacy", "People-Skill"]},
+            {"option_id": 1448, "option_text": "Organizing the event logistics and schedule", "trait_tags": ["Admin-Skill", "Health-Admin"]}
+        ]
+    },
+
+    # --- ENGINEERING SITUATIONAL (Q145-Q155) ---
+    {
+        "question_id": 145,
+        "question_text": "Your city needs a new bridge. What aspect of the project would you handle?",
+        "category": "Situational - Bridge Project",
+        "options": [
+            {"option_id": 1451, "option_text": "Designing the structural framework", "trait_tags": ["Civil-Build", "Analytical-Skill"]},
+            {"option_id": 1452, "option_text": "Planning the electrical and lighting systems", "trait_tags": ["Electrical-Power", "Civil-Build"]},
+            {"option_id": 1453, "option_text": "Setting up the construction machinery", "trait_tags": ["Mechanical-Design", "Physical-Skill"]},
+            {"option_id": 1454, "option_text": "Assessing environmental impact of the bridge", "trait_tags": ["Environmental-Eng", "Environmental-Sci"]},
+            {"option_id": 1455, "option_text": "Surveying and mapping the terrain", "trait_tags": ["Civil-Build", "Field-Research"]},
+            {"option_id": 1456, "option_text": "Making the bridge aesthetically beautiful", "trait_tags": ["Spatial-Design", "Visual-Design"]},
+            {"option_id": 1457, "option_text": "Managing the construction timeline and budget", "trait_tags": ["Industrial-Ops", "Admin-Skill"]},
+            {"option_id": 1458, "option_text": "Installing smart sensors for structural monitoring", "trait_tags": ["Hardware-Systems", "Civil-Build"]}
+        ]
+    },
+    {
+        "question_id": 146,
+        "question_text": "A factory manager asks you to improve production efficiency. What's your approach?",
+        "category": "Situational - Factory Optimization",
+        "options": [
+            {"option_id": 1461, "option_text": "Redesigning the assembly line layout", "trait_tags": ["Industrial-Ops", "Mechanical-Design"]},
+            {"option_id": 1462, "option_text": "Automating processes with robotics", "trait_tags": ["Mechanical-Design", "Software-Dev"]},
+            {"option_id": 1463, "option_text": "Upgrading the electrical power systems", "trait_tags": ["Electrical-Power", "Technical-Skill"]},
+            {"option_id": 1464, "option_text": "Analyzing data to find bottlenecks", "trait_tags": ["Industrial-Ops", "Data-Analytics"]},
+            {"option_id": 1465, "option_text": "Reducing waste and environmental impact", "trait_tags": ["Environmental-Eng", "Industrial-Ops"]},
+            {"option_id": 1466, "option_text": "Training workers on new equipment", "trait_tags": ["Teaching-Ed", "Industrial-Ops"]},
+            {"option_id": 1467, "option_text": "Building custom machines for specific tasks", "trait_tags": ["Mechanical-Design", "Hardware-Systems"]},
+            {"option_id": 1468, "option_text": "Implementing quality control systems", "trait_tags": ["Industrial-Ops", "Analytical-Skill"]}
+        ]
+    },
+    {
+        "question_id": 147,
+        "question_text": "An earthquake damaged several buildings in your area. What would you inspect first?",
+        "category": "Situational - Structural Assessment",
+        "options": [
+            {"option_id": 1471, "option_text": "The structural integrity of the foundations", "trait_tags": ["Civil-Build", "Analytical-Skill"]},
+            {"option_id": 1472, "option_text": "The electrical wiring and fire hazards", "trait_tags": ["Electrical-Power", "Technical-Skill"]},
+            {"option_id": 1473, "option_text": "The water and plumbing systems", "trait_tags": ["Mechanical-Design", "Civil-Build"]},
+            {"option_id": 1474, "option_text": "Environmental contamination from damaged facilities", "trait_tags": ["Environmental-Eng", "Lab-Research"]},
+            {"option_id": 1475, "option_text": "Whether the building design followed earthquake codes", "trait_tags": ["Spatial-Design", "Civil-Build"]},
+            {"option_id": 1476, "option_text": "The seismic data to predict aftershocks", "trait_tags": ["Data-Analytics", "Field-Research"]},
+            {"option_id": 1477, "option_text": "Whether machinery and elevators are safe", "trait_tags": ["Mechanical-Design", "Industrial-Ops"]},
+            {"option_id": 1478, "option_text": "I'd focus on helping rescue trapped people", "trait_tags": ["Physical-Skill", "Community-Serve"]}
+        ]
+    },
+
+    # --- BUSINESS SITUATIONAL (Q148-Q157) ---
+    {
+        "question_id": 148,
+        "question_text": "You're launching a food business in your town. What's your first priority?",
+        "category": "Situational - Food Business",
+        "options": [
+            {"option_id": 1481, "option_text": "Creating a unique menu and recipes", "trait_tags": ["Culinary-Arts", "Creative-Skill"]},
+            {"option_id": 1482, "option_text": "Managing the budget and financial projections", "trait_tags": ["Finance-Acct", "Startup-Venture"]},
+            {"option_id": 1483, "option_text": "Marketing on social media to attract customers", "trait_tags": ["Marketing-Sales", "Digital-Media"]},
+            {"option_id": 1484, "option_text": "Hiring and training the right staff", "trait_tags": ["HR-Management", "People-Skill"]},
+            {"option_id": 1485, "option_text": "Ensuring food safety and proper storage", "trait_tags": ["Food-Science", "Nutrition-Diet"]},
+            {"option_id": 1486, "option_text": "Designing the restaurant layout and ambiance", "trait_tags": ["Spatial-Design", "Visual-Design"]},
+            {"option_id": 1487, "option_text": "Negotiating with suppliers for best prices", "trait_tags": ["Startup-Venture", "Finance-Acct"]},
+            {"option_id": 1488, "option_text": "Building a delivery app or online ordering system", "trait_tags": ["Web-Dev", "Startup-Venture"]}
+        ]
+    },
+    {
+        "question_id": 149,
+        "question_text": "Your friend's sari-sari store is struggling. How would you help?",
+        "category": "Situational - Small Business",
+        "options": [
+            {"option_id": 1491, "option_text": "Analyze their sales data to find what sells best", "trait_tags": ["Data-Analytics", "Finance-Acct"]},
+            {"option_id": 1492, "option_text": "Create a Facebook page and promote online", "trait_tags": ["Marketing-Sales", "Digital-Media"]},
+            {"option_id": 1493, "option_text": "Redesign the store layout to attract customers", "trait_tags": ["Spatial-Design", "Marketing-Sales"]},
+            {"option_id": 1494, "option_text": "Help them manage inventory and expenses", "trait_tags": ["Admin-Skill", "Finance-Acct"]},
+            {"option_id": 1495, "option_text": "Introduce new products based on neighborhood needs", "trait_tags": ["Startup-Venture", "Community-Serve"]},
+            {"option_id": 1496, "option_text": "Train them on customer service skills", "trait_tags": ["HR-Management", "People-Skill"]},
+            {"option_id": 1497, "option_text": "Set up a simple POS or accounting system", "trait_tags": ["Software-Dev", "Finance-Acct"]},
+            {"option_id": 1498, "option_text": "Look into franchise or cooperative options", "trait_tags": ["Startup-Venture", "Admin-Skill"]}
+        ]
+    },
+    {
+        "question_id": 150,
+        "question_text": "You're managing a company's HR department. What task do you enjoy most?",
+        "category": "Situational - Human Resources",
+        "options": [
+            {"option_id": 1501, "option_text": "Interviewing and selecting the best candidates", "trait_tags": ["HR-Management", "People-Skill"]},
+            {"option_id": 1502, "option_text": "Designing training programs for new employees", "trait_tags": ["HR-Management", "Teaching-Ed"]},
+            {"option_id": 1503, "option_text": "Resolving workplace conflicts between team members", "trait_tags": ["HR-Management", "Counseling"]},
+            {"option_id": 1504, "option_text": "Managing payroll and employee benefits", "trait_tags": ["Finance-Acct", "Admin-Skill"]},
+            {"option_id": 1505, "option_text": "Creating team-building activities and events", "trait_tags": ["HR-Management", "Creative-Skill"]},
+            {"option_id": 1506, "option_text": "Ensuring the company follows labor laws", "trait_tags": ["Legal-Practice", "Admin-Skill"]},
+            {"option_id": 1507, "option_text": "Analyzing employee performance data", "trait_tags": ["Data-Analytics", "HR-Management"]},
+            {"option_id": 1508, "option_text": "Building the company culture and values", "trait_tags": ["HR-Management", "Community-Serve"]}
+        ]
+    },
+
+    # --- CREATIVE SITUATIONAL (Q151-Q158) ---
+    {
+        "question_id": 151,
+        "question_text": "Your school is putting on a big cultural show. What role would you take?",
+        "category": "Situational - Cultural Event",
+        "options": [
+            {"option_id": 1511, "option_text": "Directing the play or dance performance", "trait_tags": ["Performing-Arts", "People-Skill"]},
+            {"option_id": 1512, "option_text": "Designing the stage set and costumes", "trait_tags": ["Visual-Design", "Spatial-Design"]},
+            {"option_id": 1513, "option_text": "Filming and editing the event highlights", "trait_tags": ["Film-Broadcast", "Digital-Media"]},
+            {"option_id": 1514, "option_text": "Composing or selecting the music", "trait_tags": ["Performing-Arts", "Creative-Skill"]},
+            {"option_id": 1515, "option_text": "Creating promotional posters and social media content", "trait_tags": ["Visual-Design", "Marketing-Sales"]},
+            {"option_id": 1516, "option_text": "Managing the budget and sponsorships", "trait_tags": ["Finance-Acct", "Admin-Skill"]},
+            {"option_id": 1517, "option_text": "Operating the lights, sound, and tech equipment", "trait_tags": ["Technical-Skill", "Hardware-Systems"]},
+            {"option_id": 1518, "option_text": "Acting or performing on stage", "trait_tags": ["Performing-Arts", "Creative-Skill"]}
+        ]
+    },
+    {
+        "question_id": 152,
+        "question_text": "A local museum asks you to create a digital exhibit. What would you make?",
+        "category": "Situational - Digital Art",
+        "options": [
+            {"option_id": 1521, "option_text": "A 3D virtual tour of Philippine heritage sites", "trait_tags": ["Animation-3D", "Tourism-Travel"]},
+            {"option_id": 1522, "option_text": "Interactive animations of historical events", "trait_tags": ["Animation-3D", "Film-Broadcast"]},
+            {"option_id": 1523, "option_text": "A documentary film about local traditions", "trait_tags": ["Film-Broadcast", "Community-Serve"]},
+            {"option_id": 1524, "option_text": "Digital paintings and visual art installations", "trait_tags": ["Visual-Design", "Creative-Skill"]},
+            {"option_id": 1525, "option_text": "An interactive game that teaches Philippine history", "trait_tags": ["Game-Dev", "Teaching-Ed"]},
+            {"option_id": 1526, "option_text": "A music and sound experience of Philippine instruments", "trait_tags": ["Performing-Arts", "Digital-Media"]},
+            {"option_id": 1527, "option_text": "A mobile app as a museum guide", "trait_tags": ["Mobile-Dev", "Tourism-Travel"]},
+            {"option_id": 1528, "option_text": "Fashion display of traditional Filipino clothing", "trait_tags": ["Spatial-Design", "Creative-Skill"]}
+        ]
+    },
+    {
+        "question_id": 153,
+        "question_text": "You're hired to redesign a local park. What's most important to you?",
+        "category": "Situational - Design Project",
+        "options": [
+            {"option_id": 1531, "option_text": "The landscape architecture and garden layout", "trait_tags": ["Spatial-Design", "Environmental-Sci"]},
+            {"option_id": 1532, "option_text": "Installing public art and sculptures", "trait_tags": ["Visual-Design", "Creative-Skill"]},
+            {"option_id": 1533, "option_text": "Making it eco-friendly with solar lighting", "trait_tags": ["Environmental-Eng", "Electrical-Power"]},
+            {"option_id": 1534, "option_text": "Adding a sports area and fitness equipment", "trait_tags": ["Sports-Ed", "Physical-Skill"]},
+            {"option_id": 1535, "option_text": "Creating a children's playground with interactive features", "trait_tags": ["Creative-Skill", "Teaching-Ed"]},
+            {"option_id": 1536, "option_text": "Designing accessible pathways for disabled visitors", "trait_tags": ["Civil-Build", "Community-Serve"]},
+            {"option_id": 1537, "option_text": "Adding a food stall area and gathering space", "trait_tags": ["Hospitality-Svc", "Culinary-Arts"]},
+            {"option_id": 1538, "option_text": "Installing security cameras and lighting", "trait_tags": ["Hardware-Systems", "Law-Enforce"]}
+        ]
+    },
+
+    # --- SCIENCE SITUATIONAL (Q154-Q161) ---
+    {
+        "question_id": 154,
+        "question_text": "A river in your town is getting polluted. How would you help as a scientist?",
+        "category": "Situational - Environmental Crisis",
+        "options": [
+            {"option_id": 1541, "option_text": "Collect and analyze water samples in the lab", "trait_tags": ["Lab-Research", "Environmental-Sci"]},
+            {"option_id": 1542, "option_text": "Track the pollution source using field surveys", "trait_tags": ["Field-Research", "Environmental-Sci"]},
+            {"option_id": 1543, "option_text": "Study the impact on fish and aquatic life", "trait_tags": ["Field-Research", "Agri-Nature"]},
+            {"option_id": 1544, "option_text": "Test food safety in crops irrigated by the river", "trait_tags": ["Food-Science", "Lab-Research"]},
+            {"option_id": 1545, "option_text": "Use data modeling to predict pollution spread", "trait_tags": ["Data-Analytics", "Environmental-Sci"]},
+            {"option_id": 1546, "option_text": "Design a water filtration system", "trait_tags": ["Environmental-Eng", "Mechanical-Design"]},
+            {"option_id": 1547, "option_text": "Organize a community cleanup and awareness campaign", "trait_tags": ["Community-Serve", "Public-Health"]},
+            {"option_id": 1548, "option_text": "Work with the government to enforce pollution laws", "trait_tags": ["Legal-Practice", "Environmental-Sci"]}
+        ]
+    },
+    {
+        "question_id": 155,
+        "question_text": "A new food product needs testing before it goes to market. What's your job?",
+        "category": "Situational - Food Science",
+        "options": [
+            {"option_id": 1551, "option_text": "Testing for bacteria and contaminants in the lab", "trait_tags": ["Food-Science", "Lab-Research"]},
+            {"option_id": 1552, "option_text": "Analyzing the nutritional content and labeling", "trait_tags": ["Nutrition-Diet", "Food-Science"]},
+            {"option_id": 1553, "option_text": "Improving the taste and texture through experiments", "trait_tags": ["Food-Science", "Culinary-Arts"]},
+            {"option_id": 1554, "option_text": "Designing the packaging and branding", "trait_tags": ["Visual-Design", "Marketing-Sales"]},
+            {"option_id": 1555, "option_text": "Calculating the cost and setting the price", "trait_tags": ["Finance-Acct", "Industrial-Ops"]},
+            {"option_id": 1556, "option_text": "Checking if it meets government food safety rules", "trait_tags": ["Food-Science", "Legal-Practice"]},
+            {"option_id": 1557, "option_text": "Running consumer taste tests and focus groups", "trait_tags": ["Marketing-Sales", "People-Skill"]},
+            {"option_id": 1558, "option_text": "Developing the production process for mass manufacturing", "trait_tags": ["Industrial-Ops", "Food-Science"]}
+        ]
+    },
+    {
+        "question_id": 156,
+        "question_text": "You're working at a forensic science lab. What's your favorite task?",
+        "category": "Situational - Forensics",
+        "options": [
+            {"option_id": 1561, "option_text": "Analyzing DNA evidence from crime scenes", "trait_tags": ["Forensic-Sci", "Lab-Research"]},
+            {"option_id": 1562, "option_text": "Examining fingerprints and trace evidence", "trait_tags": ["Forensic-Sci", "Analytical-Skill"]},
+            {"option_id": 1563, "option_text": "Performing toxicology tests for poison detection", "trait_tags": ["Forensic-Sci", "Medical-Lab"]},
+            {"option_id": 1564, "option_text": "Using digital forensics to analyze computer evidence", "trait_tags": ["Forensic-Sci", "Cyber-Defense"]},
+            {"option_id": 1565, "option_text": "Testifying as an expert witness in court", "trait_tags": ["Forensic-Sci", "Legal-Practice"]},
+            {"option_id": 1566, "option_text": "Reconstructing how a crime happened", "trait_tags": ["Forensic-Sci", "Law-Enforce"]},
+            {"option_id": 1567, "option_text": "Taking photographs and documenting evidence", "trait_tags": ["Visual-Design", "Law-Enforce"]},
+            {"option_id": 1568, "option_text": "Processing evidence at the actual crime scene", "trait_tags": ["Forensic-Sci", "Physical-Skill"]}
+        ]
+    },
+
+    # --- EDUCATION SITUATIONAL (Q157-Q162) ---
+    {
+        "question_id": 157,
+        "question_text": "A struggling student asks for your help. How would you assist them?",
+        "category": "Situational - Student Support",
+        "options": [
+            {"option_id": 1571, "option_text": "Tutor them one-on-one in their weak subject", "trait_tags": ["Teaching-Ed", "People-Skill"]},
+            {"option_id": 1572, "option_text": "Talk to them about their personal problems first", "trait_tags": ["Counseling", "People-Skill"]},
+            {"option_id": 1573, "option_text": "Create fun study materials and visual aids", "trait_tags": ["Teaching-Ed", "Creative-Skill"]},
+            {"option_id": 1574, "option_text": "Organize a study group for peer support", "trait_tags": ["Teaching-Ed", "Community-Serve"]},
+            {"option_id": 1575, "option_text": "Use sports or games as motivation", "trait_tags": ["Sports-Ed", "Teaching-Ed"]},
+            {"option_id": 1576, "option_text": "Recommend an online tutorial or learning app", "trait_tags": ["Teaching-Ed", "Software-Dev"]},
+            {"option_id": 1577, "option_text": "Talk to their parents about the issue", "trait_tags": ["Counseling", "Social-Work"]},
+            {"option_id": 1578, "option_text": "Create a structured study plan and schedule", "trait_tags": ["Teaching-Ed", "Admin-Skill"]}
+        ]
+    },
+    {
+        "question_id": 158,
+        "question_text": "You're a guidance counselor and a student is being bullied. What do you do first?",
+        "category": "Situational - School Counseling",
+        "options": [
+            {"option_id": 1581, "option_text": "Listen to the student's feelings and give emotional support", "trait_tags": ["Counseling", "People-Skill"]},
+            {"option_id": 1582, "option_text": "Investigate the bullying situation thoroughly", "trait_tags": ["Law-Enforce", "Analytical-Skill"]},
+            {"option_id": 1583, "option_text": "Mediate between the bully and the victim", "trait_tags": ["Counseling", "People-Skill"]},
+            {"option_id": 1584, "option_text": "Inform the school administration and parents", "trait_tags": ["Admin-Skill", "Community-Serve"]},
+            {"option_id": 1585, "option_text": "Start an anti-bullying awareness program", "trait_tags": ["Teaching-Ed", "Community-Serve"]},
+            {"option_id": 1586, "option_text": "Refer them to a professional therapist", "trait_tags": ["Counseling", "Rehab-Therapy"]},
+            {"option_id": 1587, "option_text": "Teach the student coping and self-defense strategies", "trait_tags": ["Sports-Ed", "Counseling"]},
+            {"option_id": 1588, "option_text": "Document everything for potential legal action", "trait_tags": ["Legal-Practice", "Admin-Skill"]}
+        ]
+    },
+
+    # --- PUBLIC SERVICE SITUATIONAL (Q159-Q164) ---
+    {
+        "question_id": 159,
+        "question_text": "You discover illegal dumping in a local river. What action do you take?",
+        "category": "Situational - Environmental Law",
+        "options": [
+            {"option_id": 1591, "option_text": "Gather evidence and file a case with the DENR", "trait_tags": ["Legal-Practice", "Environmental-Sci"]},
+            {"option_id": 1592, "option_text": "Organize a community protest and cleanup", "trait_tags": ["Community-Serve", "Social-Work"]},
+            {"option_id": 1593, "option_text": "Interview witnesses and investigate the source", "trait_tags": ["Law-Enforce", "Analytical-Skill"]},
+            {"option_id": 1594, "option_text": "Write a news report to bring public attention", "trait_tags": ["Film-Broadcast", "Community-Serve"]},
+            {"option_id": 1595, "option_text": "Test water samples to document contamination", "trait_tags": ["Lab-Research", "Environmental-Sci"]},
+            {"option_id": 1596, "option_text": "Lobby the barangay council for stricter enforcement", "trait_tags": ["Community-Serve", "Legal-Practice"]},
+            {"option_id": 1597, "option_text": "Design a monitoring system using cameras and sensors", "trait_tags": ["Hardware-Systems", "Environmental-Eng"]},
+            {"option_id": 1598, "option_text": "Educate the community about proper waste disposal", "trait_tags": ["Teaching-Ed", "Public-Health"]}
+        ]
+    },
+    {
+        "question_id": 160,
+        "question_text": "You work at a social welfare office. A family lost their home to a fire. What's your role?",
+        "category": "Situational - Social Welfare",
+        "options": [
+            {"option_id": 1601, "option_text": "Process their emergency assistance paperwork", "trait_tags": ["Social-Work", "Admin-Skill"]},
+            {"option_id": 1602, "option_text": "Provide counseling for the traumatized family", "trait_tags": ["Counseling", "Social-Work"]},
+            {"option_id": 1603, "option_text": "Coordinate temporary housing and donations", "trait_tags": ["Community-Serve", "Admin-Skill"]},
+            {"option_id": 1604, "option_text": "Assess the fire's cause for legal investigation", "trait_tags": ["Forensic-Sci", "Law-Enforce"]},
+            {"option_id": 1605, "option_text": "Enroll their children in a nearby school", "trait_tags": ["Teaching-Ed", "Social-Work"]},
+            {"option_id": 1606, "option_text": "Help them find new jobs or livelihood programs", "trait_tags": ["HR-Management", "Social-Work"]},
+            {"option_id": 1607, "option_text": "Ensure they get proper medical checkups", "trait_tags": ["Public-Health", "Patient-Care"]},
+            {"option_id": 1608, "option_text": "Raise funds through the community or online", "trait_tags": ["Marketing-Sales", "Community-Serve"]}
+        ]
+    },
+
+    # --- AGRICULTURE/MARITIME/HOSPITALITY SITUATIONAL (Q161-Q170) ---
+    {
+        "question_id": 161,
+        "question_text": "A farmer in your province wants to modernize their farm. How would you help?",
+        "category": "Situational - Modern Farming",
+        "options": [
+            {"option_id": 1611, "option_text": "Introduce drone technology for crop monitoring", "trait_tags": ["Agri-Nature", "Hardware-Systems"]},
+            {"option_id": 1612, "option_text": "Set up an irrigation system for better water use", "trait_tags": ["Agri-Nature", "Mechanical-Design"]},
+            {"option_id": 1613, "option_text": "Test soil quality to recommend the right fertilizer", "trait_tags": ["Agri-Nature", "Lab-Research"]},
+            {"option_id": 1614, "option_text": "Help them sell products online or in markets", "trait_tags": ["Agri-Nature", "Marketing-Sales"]},
+            {"option_id": 1615, "option_text": "Teach organic farming techniques", "trait_tags": ["Agri-Nature", "Environmental-Sci"]},
+            {"option_id": 1616, "option_text": "Process and package their harvest for retail", "trait_tags": ["Food-Science", "Industrial-Ops"]},
+            {"option_id": 1617, "option_text": "Set up a fishpond alongside the farmland", "trait_tags": ["Agri-Nature", "Field-Research"]},
+            {"option_id": 1618, "option_text": "Build a simple app to track planting schedules", "trait_tags": ["Mobile-Dev", "Agri-Nature"]}
+        ]
+    },
+    {
+        "question_id": 162,
+        "question_text": "You're on a cargo ship and the engine breaks down at sea. What's your role?",
+        "category": "Situational - Maritime Emergency",
+        "options": [
+            {"option_id": 1621, "option_text": "Diagnose and repair the engine problem", "trait_tags": ["Maritime-Sea", "Mechanical-Design"]},
+            {"option_id": 1622, "option_text": "Navigate to the nearest port for repairs", "trait_tags": ["Maritime-Sea", "Physical-Skill"]},
+            {"option_id": 1623, "option_text": "Radio for help and coordinate with coast guard", "trait_tags": ["Maritime-Sea", "Community-Serve"]},
+            {"option_id": 1624, "option_text": "Check the electrical systems for faults", "trait_tags": ["Electrical-Power", "Maritime-Sea"]},
+            {"option_id": 1625, "option_text": "Manage the crew to keep calm and organized", "trait_tags": ["People-Skill", "Admin-Skill"]},
+            {"option_id": 1626, "option_text": "Assess cargo damage and safety protocols", "trait_tags": ["Industrial-Ops", "Maritime-Sea"]},
+            {"option_id": 1627, "option_text": "Document the incident for insurance and legal records", "trait_tags": ["Legal-Practice", "Admin-Skill"]},
+            {"option_id": 1628, "option_text": "Provide first aid to any injured crew members", "trait_tags": ["Patient-Care", "Physical-Skill"]}
+        ]
+    },
+    {
+        "question_id": 163,
+        "question_text": "A Boracay resort asks you to improve their guest experience. What do you focus on?",
+        "category": "Situational - Resort Management",
+        "options": [
+            {"option_id": 1631, "option_text": "Revamp the menu with local Filipino cuisine", "trait_tags": ["Culinary-Arts", "Hospitality-Svc"]},
+            {"option_id": 1632, "option_text": "Create exciting tour packages and activities", "trait_tags": ["Tourism-Travel", "Hospitality-Svc"]},
+            {"option_id": 1633, "option_text": "Train staff for world-class customer service", "trait_tags": ["HR-Management", "Hospitality-Svc"]},
+            {"option_id": 1634, "option_text": "Design a beautiful website for online bookings", "trait_tags": ["Web-Dev", "Marketing-Sales"]},
+            {"option_id": 1635, "option_text": "Manage the resort's finances and operations", "trait_tags": ["Admin-Skill", "Finance-Acct"]},
+            {"option_id": 1636, "option_text": "Ensure environmental sustainability of the resort", "trait_tags": ["Environmental-Sci", "Hospitality-Svc"]},
+            {"option_id": 1637, "option_text": "Create Instagram-worthy interiors and spaces", "trait_tags": ["Spatial-Design", "Visual-Design"]},
+            {"option_id": 1638, "option_text": "Set up a spa and wellness program", "trait_tags": ["Rehab-Therapy", "Hospitality-Svc"]}
+        ]
+    },
+    {
+        "question_id": 164,
+        "question_text": "You're organizing a Philippine food festival. What's your main responsibility?",
+        "category": "Situational - Festival Planning",
+        "options": [
+            {"option_id": 1641, "option_text": "Curating the food stalls and menu selection", "trait_tags": ["Culinary-Arts", "Hospitality-Svc"]},
+            {"option_id": 1642, "option_text": "Marketing the event through flyers and social media", "trait_tags": ["Marketing-Sales", "Film-Broadcast"]},
+            {"option_id": 1643, "option_text": "Managing the event budget and vendor payments", "trait_tags": ["Finance-Acct", "Admin-Skill"]},
+            {"option_id": 1644, "option_text": "Coordinating live entertainment and performances", "trait_tags": ["Performing-Arts", "Admin-Skill"]},
+            {"option_id": 1645, "option_text": "Setting up the venue layout and decorations", "trait_tags": ["Spatial-Design", "Creative-Skill"]},
+            {"option_id": 1646, "option_text": "Ensuring food safety and hygiene standards", "trait_tags": ["Food-Science", "Public-Health"]},
+            {"option_id": 1647, "option_text": "Selling tickets and managing the entrance", "trait_tags": ["Admin-Skill", "Marketing-Sales"]},
+            {"option_id": 1648, "option_text": "Filming and live-streaming the event", "trait_tags": ["Film-Broadcast", "Digital-Media"]}
+        ]
+    },
+
+    # --- CROSS-DOMAIN & PERSONALITY QUESTIONS (Q165-Q185) ---
+    {
+        "question_id": 165,
+        "question_text": "If you could start any online business tomorrow, what would it be?",
+        "category": "Entrepreneurship Vision",
+        "options": [
+            {"option_id": 1651, "option_text": "An e-commerce store selling Filipino products", "trait_tags": ["Startup-Venture", "Web-Dev"]},
+            {"option_id": 1652, "option_text": "A freelance graphic design service", "trait_tags": ["Visual-Design", "Startup-Venture"]},
+            {"option_id": 1653, "option_text": "An online tutoring platform", "trait_tags": ["Teaching-Ed", "Web-Dev"]},
+            {"option_id": 1654, "option_text": "A food delivery service for home-cooked meals", "trait_tags": ["Culinary-Arts", "Startup-Venture"]},
+            {"option_id": 1655, "option_text": "A tech consulting company", "trait_tags": ["Software-Dev", "Startup-Venture"]},
+            {"option_id": 1656, "option_text": "A travel vlog and tourism promotion channel", "trait_tags": ["Tourism-Travel", "Film-Broadcast"]},
+            {"option_id": 1657, "option_text": "A fitness coaching and workout plan service", "trait_tags": ["Sports-Ed", "Startup-Venture"]},
+            {"option_id": 1658, "option_text": "A virtual mental health counseling platform", "trait_tags": ["Counseling", "Web-Dev"]}
+        ]
+    },
+    {
+        "question_id": 166,
+        "question_text": "What kind of volunteer work appeals to you the most?",
+        "category": "Values - Volunteering",
+        "options": [
+            {"option_id": 1661, "option_text": "Teaching in remote areas with no schools", "trait_tags": ["Teaching-Ed", "Community-Serve"]},
+            {"option_id": 1662, "option_text": "Medical missions in underserved communities", "trait_tags": ["Patient-Care", "Public-Health"]},
+            {"option_id": 1663, "option_text": "Building houses through Habitat for Humanity", "trait_tags": ["Civil-Build", "Community-Serve"]},
+            {"option_id": 1664, "option_text": "Environmental cleanup and tree planting", "trait_tags": ["Environmental-Sci", "Agri-Nature"]},
+            {"option_id": 1665, "option_text": "Feeding programs for malnourished children", "trait_tags": ["Nutrition-Diet", "Social-Work"]},
+            {"option_id": 1666, "option_text": "Teaching computer literacy to senior citizens", "trait_tags": ["Software-Dev", "Teaching-Ed"]},
+            {"option_id": 1667, "option_text": "Legal aid for those who can't afford lawyers", "trait_tags": ["Legal-Practice", "Social-Work"]},
+            {"option_id": 1668, "option_text": "Organizing sports clinics for youth", "trait_tags": ["Sports-Ed", "Community-Serve"]}
+        ]
+    },
+    {
+        "question_id": 167,
+        "question_text": "What would you study about the Philippines if you could do research?",
+        "category": "Research Interest",
+        "options": [
+            {"option_id": 1671, "option_text": "How to make Filipino agriculture more productive", "trait_tags": ["Agri-Nature", "Lab-Research"]},
+            {"option_id": 1672, "option_text": "How social media affects Filipino youth mental health", "trait_tags": ["Counseling", "Data-Analytics"]},
+            {"option_id": 1673, "option_text": "How to combat plastic pollution in Philippine seas", "trait_tags": ["Environmental-Sci", "Field-Research"]},
+            {"option_id": 1674, "option_text": "How AI can improve healthcare access in rural areas", "trait_tags": ["AI-ML", "Public-Health"]},
+            {"option_id": 1675, "option_text": "How to make Philippine businesses globally competitive", "trait_tags": ["Startup-Venture", "Marketing-Sales"]},
+            {"option_id": 1676, "option_text": "The history and preservation of Filipino indigenous cultures", "trait_tags": ["Community-Serve", "Field-Research"]},
+            {"option_id": 1677, "option_text": "How to reduce traffic congestion in Metro Manila", "trait_tags": ["Civil-Build", "Data-Analytics"]},
+            {"option_id": 1678, "option_text": "Developing Filipino language technology and NLP", "trait_tags": ["AI-ML", "Teaching-Ed"]}
+        ]
+    },
+    {
+        "question_id": 168,
+        "question_text": "Your group project is about climate change. Which part do you want to handle?",
+        "category": "Situational - Group Research",
+        "options": [
+            {"option_id": 1681, "option_text": "Collecting data and running statistical analysis", "trait_tags": ["Data-Analytics", "Environmental-Sci"]},
+            {"option_id": 1682, "option_text": "Doing field research and environmental surveys", "trait_tags": ["Field-Research", "Environmental-Sci"]},
+            {"option_id": 1683, "option_text": "Creating the visual presentation and infographics", "trait_tags": ["Visual-Design", "Digital-Media"]},
+            {"option_id": 1684, "option_text": "Writing the research paper and conclusions", "trait_tags": ["Analytical-Skill", "Teaching-Ed"]},
+            {"option_id": 1685, "option_text": "Presenting and defending the findings", "trait_tags": ["People-Skill", "Performing-Arts"]},
+            {"option_id": 1686, "option_text": "Building a working prototype solution", "trait_tags": ["Environmental-Eng", "Hardware-Systems"]},
+            {"option_id": 1687, "option_text": "Recording a documentary video about the topic", "trait_tags": ["Film-Broadcast", "Environmental-Sci"]},
+            {"option_id": 1688, "option_text": "Organizing the group tasks and deadlines", "trait_tags": ["Admin-Skill", "People-Skill"]}
+        ]
+    },
+    {
+        "question_id": 169,
+        "question_text": "If your LGU gave you a budget to improve your barangay, what would you prioritize?",
+        "category": "Situational - Community Development",
+        "options": [
+            {"option_id": 1691, "option_text": "Build a community health center", "trait_tags": ["Public-Health", "Civil-Build"]},
+            {"option_id": 1692, "option_text": "Set up free Wi-Fi and a computer lab", "trait_tags": ["Cloud-Systems", "Teaching-Ed"]},
+            {"option_id": 1693, "option_text": "Create a livelihood training center", "trait_tags": ["Startup-Venture", "Teaching-Ed"]},
+            {"option_id": 1694, "option_text": "Improve the roads and drainage system", "trait_tags": ["Civil-Build", "Environmental-Eng"]},
+            {"option_id": 1695, "option_text": "Build a basketball court and sports facilities", "trait_tags": ["Sports-Ed", "Physical-Skill"]},
+            {"option_id": 1696, "option_text": "Create a daycare and after-school program", "trait_tags": ["Teaching-Ed", "Social-Work"]},
+            {"option_id": 1697, "option_text": "Install streetlights and CCTV for safety", "trait_tags": ["Electrical-Power", "Law-Enforce"]},
+            {"option_id": 1698, "option_text": "Start a community garden and food program", "trait_tags": ["Agri-Nature", "Nutrition-Diet"]}
+        ]
+    },
+    {
+        "question_id": 170,
+        "question_text": "What kind of YouTube channel would you create?",
+        "category": "Content Creation Interest",
+        "options": [
+            {"option_id": 1701, "option_text": "Coding tutorials and tech reviews", "trait_tags": ["Software-Dev", "Film-Broadcast"]},
+            {"option_id": 1702, "option_text": "Cooking shows featuring Filipino recipes", "trait_tags": ["Culinary-Arts", "Film-Broadcast"]},
+            {"option_id": 1703, "option_text": "Science experiments and educational content", "trait_tags": ["Lab-Research", "Teaching-Ed"]},
+            {"option_id": 1704, "option_text": "True crime and forensic analysis", "trait_tags": ["Forensic-Sci", "Film-Broadcast"]},
+            {"option_id": 1705, "option_text": "Travel vlogs of Philippine destinations", "trait_tags": ["Tourism-Travel", "Film-Broadcast"]},
+            {"option_id": 1706, "option_text": "Fitness workouts and health tips", "trait_tags": ["Sports-Ed", "Film-Broadcast"]},
+            {"option_id": 1707, "option_text": "Art tutorials and design process videos", "trait_tags": ["Visual-Design", "Film-Broadcast"]},
+            {"option_id": 1708, "option_text": "Business advice and entrepreneurship tips", "trait_tags": ["Startup-Venture", "Film-Broadcast"]}
+        ]
+    },
+    {
+        "question_id": 171,
+        "question_text": "What makes you feel most accomplished at the end of a day?",
+        "category": "Values - Accomplishment",
+        "options": [
+            {"option_id": 1711, "option_text": "Solving a difficult technical problem", "trait_tags": ["Software-Dev", "Analytical-Skill"]},
+            {"option_id": 1712, "option_text": "Helping someone feel better emotionally or physically", "trait_tags": ["Patient-Care", "Counseling"]},
+            {"option_id": 1713, "option_text": "Creating something beautiful or artistic", "trait_tags": ["Visual-Design", "Creative-Skill"]},
+            {"option_id": 1714, "option_text": "Closing a deal or making a sale", "trait_tags": ["Marketing-Sales", "Startup-Venture"]},
+            {"option_id": 1715, "option_text": "Teaching someone something they finally understand", "trait_tags": ["Teaching-Ed", "People-Skill"]},
+            {"option_id": 1716, "option_text": "Discovering new facts through research", "trait_tags": ["Lab-Research", "Field-Research"]},
+            {"option_id": 1717, "option_text": "Completing a physical challenge or workout", "trait_tags": ["Physical-Skill", "Sports-Ed"]},
+            {"option_id": 1718, "option_text": "Organizing a messy situation into order", "trait_tags": ["Admin-Skill", "Industrial-Ops"]}
+        ]
+    },
+    {
+        "question_id": 172,
+        "question_text": "Which school subject combination do you enjoy the most?",
+        "category": "Academic Interest",
+        "options": [
+            {"option_id": 1721, "option_text": "Biology and Chemistry", "trait_tags": ["Lab-Research", "Medical-Lab"]},
+            {"option_id": 1722, "option_text": "Mathematics and Physics", "trait_tags": ["Data-Analytics", "Mechanical-Design"]},
+            {"option_id": 1723, "option_text": "Computer Science and Math", "trait_tags": ["Software-Dev", "AI-ML"]},
+            {"option_id": 1724, "option_text": "History and Social Studies", "trait_tags": ["Community-Serve", "Teaching-Ed"]},
+            {"option_id": 1725, "option_text": "Art and Music", "trait_tags": ["Visual-Design", "Performing-Arts"]},
+            {"option_id": 1726, "option_text": "English and Filipino Literature", "trait_tags": ["Creative-Skill", "Teaching-Ed"]},
+            {"option_id": 1727, "option_text": "Physical Education and Health", "trait_tags": ["Sports-Ed", "Public-Health"]},
+            {"option_id": 1728, "option_text": "Business and Economics", "trait_tags": ["Finance-Acct", "Startup-Venture"]}
+        ]
+    },
+    {
+        "question_id": 173,
+        "question_text": "What kind of leader are you in a group project?",
+        "category": "Leadership Style",
+        "options": [
+            {"option_id": 1731, "option_text": "The organizer who makes checklists and timelines", "trait_tags": ["Admin-Skill", "Industrial-Ops"]},
+            {"option_id": 1732, "option_text": "The creative one with all the ideas", "trait_tags": ["Creative-Skill", "Startup-Venture"]},
+            {"option_id": 1733, "option_text": "The researcher who digs deep into the topic", "trait_tags": ["Lab-Research", "Analytical-Skill"]},
+            {"option_id": 1734, "option_text": "The tech person handling presentations and tools", "trait_tags": ["Software-Dev", "Digital-Media"]},
+            {"option_id": 1735, "option_text": "The motivator who keeps everyone going", "trait_tags": ["People-Skill", "Teaching-Ed"]},
+            {"option_id": 1736, "option_text": "The negotiator who deals with disagreements", "trait_tags": ["HR-Management", "Counseling"]},
+            {"option_id": 1737, "option_text": "The presenter who speaks in front of the class", "trait_tags": ["People-Skill", "Performing-Arts"]},
+            {"option_id": 1738, "option_text": "The hands-on builder who makes the prototype", "trait_tags": ["Hardware-Systems", "Mechanical-Design"]}
+        ]
+    },
+    {
+        "question_id": 174,
+        "question_text": "What career do you imagine yourself in 10 years from now?",
+        "category": "Future Vision",
+        "options": [
+            {"option_id": 1741, "option_text": "Running my own tech startup", "trait_tags": ["Startup-Venture", "Software-Dev"]},
+            {"option_id": 1742, "option_text": "A doctor or specialist in a hospital", "trait_tags": ["Patient-Care", "Medical-Lab"]},
+            {"option_id": 1743, "option_text": "A licensed engineer on major projects", "trait_tags": ["Civil-Build", "Mechanical-Design"]},
+            {"option_id": 1744, "option_text": "A teacher or professor at a university", "trait_tags": ["Teaching-Ed", "Lab-Research"]},
+            {"option_id": 1745, "option_text": "A famous artist or content creator", "trait_tags": ["Visual-Design", "Film-Broadcast"]},
+            {"option_id": 1746, "option_text": "A lawyer or judge fighting for justice", "trait_tags": ["Legal-Practice", "Law-Enforce"]},
+            {"option_id": 1747, "option_text": "A scientist making groundbreaking discoveries", "trait_tags": ["Lab-Research", "Environmental-Sci"]},
+            {"option_id": 1748, "option_text": "A successful business executive or CEO", "trait_tags": ["Finance-Acct", "Startup-Venture"]},
+            {"option_id": 1749, "option_text": "A chef or restaurant owner", "trait_tags": ["Culinary-Arts", "Startup-Venture"]},
+            {"option_id": 1750, "option_text": "A sports coach or fitness expert", "trait_tags": ["Sports-Ed", "Teaching-Ed"]}
+        ]
+    },
+    {
+        "question_id": 175,
+        "question_text": "What problem in the Philippines do you most want to help solve?",
+        "category": "Philippine Issues",
+        "options": [
+            {"option_id": 1751, "option_text": "Poverty and unemployment", "trait_tags": ["Social-Work", "Startup-Venture"]},
+            {"option_id": 1752, "option_text": "Climate change and typhoon damage", "trait_tags": ["Environmental-Sci", "Environmental-Eng"]},
+            {"option_id": 1753, "option_text": "Poor access to quality education", "trait_tags": ["Teaching-Ed", "Software-Dev"]},
+            {"option_id": 1754, "option_text": "Corruption and poor governance", "trait_tags": ["Legal-Practice", "Community-Serve"]},
+            {"option_id": 1755, "option_text": "Food insecurity and hunger", "trait_tags": ["Agri-Nature", "Nutrition-Diet"]},
+            {"option_id": 1756, "option_text": "Lack of access to healthcare in rural areas", "trait_tags": ["Public-Health", "Patient-Care"]},
+            {"option_id": 1757, "option_text": "Traffic and poor transportation systems", "trait_tags": ["Civil-Build", "Industrial-Ops"]},
+            {"option_id": 1758, "option_text": "Cybercrime and online fraud", "trait_tags": ["Cyber-Defense", "Law-Enforce"]},
+            {"option_id": 1759, "option_text": "Drug abuse and addiction", "trait_tags": ["Counseling", "Public-Health"]},
+            {"option_id": 1760, "option_text": "Environmental destruction and deforestation", "trait_tags": ["Environmental-Sci", "Agri-Nature"]}
+        ]
+    },
+    {
+        "question_id": 176,
+        "question_text": "If you receive a scholarship abroad, what would you study?",
+        "category": "Study Abroad Interest",
+        "options": [
+            {"option_id": 1761, "option_text": "Computer science or artificial intelligence", "trait_tags": ["AI-ML", "Software-Dev"]},
+            {"option_id": 1762, "option_text": "Medicine or public health", "trait_tags": ["Patient-Care", "Public-Health"]},
+            {"option_id": 1763, "option_text": "Engineering or architecture", "trait_tags": ["Civil-Build", "Spatial-Design"]},
+            {"option_id": 1764, "option_text": "Business administration or finance", "trait_tags": ["Finance-Acct", "Startup-Venture"]},
+            {"option_id": 1765, "option_text": "Film, animation, or digital arts", "trait_tags": ["Film-Broadcast", "Animation-3D"]},
+            {"option_id": 1766, "option_text": "Law or political science", "trait_tags": ["Legal-Practice", "Community-Serve"]},
+            {"option_id": 1767, "option_text": "Environmental science or marine biology", "trait_tags": ["Environmental-Sci", "Field-Research"]},
+            {"option_id": 1768, "option_text": "Culinary arts or hospitality management", "trait_tags": ["Culinary-Arts", "Tourism-Travel"]},
+            {"option_id": 1769, "option_text": "Psychology or counseling", "trait_tags": ["Counseling", "Rehab-Therapy"]},
+            {"option_id": 1770, "option_text": "Sports science or physical therapy", "trait_tags": ["Sports-Ed", "Rehab-Therapy"]}
+        ]
+    },
+    {
+        "question_id": 177,
+        "question_text": "What's your favorite way to learn something new?",
+        "category": "Learning Style",
+        "options": [
+            {"option_id": 1771, "option_text": "Building something hands-on and experimenting", "trait_tags": ["Hardware-Systems", "Mechanical-Design"]},
+            {"option_id": 1772, "option_text": "Reading books and articles about the topic", "trait_tags": ["Lab-Research", "Analytical-Skill"]},
+            {"option_id": 1773, "option_text": "Watching YouTube tutorials and demo videos", "trait_tags": ["Film-Broadcast", "Digital-Media"]},
+            {"option_id": 1774, "option_text": "Asking an expert and learning through conversation", "trait_tags": ["People-Skill", "Teaching-Ed"]},
+            {"option_id": 1775, "option_text": "Practicing by coding or creating projects", "trait_tags": ["Software-Dev", "Web-Dev"]},
+            {"option_id": 1776, "option_text": "Drawing diagrams and visual notes", "trait_tags": ["Visual-Design", "Spatial-Design"]},
+            {"option_id": 1777, "option_text": "Going outdoors and experiencing firsthand", "trait_tags": ["Field-Research", "Physical-Skill"]},
+            {"option_id": 1778, "option_text": "Taking online courses and quizzes", "trait_tags": ["Teaching-Ed", "Software-Dev"]}
+        ]
+    },
+    {
+        "question_id": 178,
+        "question_text": "What type of news story catches your attention most?",
+        "category": "News Interest",
+        "options": [
+            {"option_id": 1781, "option_text": "New technology and gadget launches", "trait_tags": ["Hardware-Systems", "Software-Dev"]},
+            {"option_id": 1782, "option_text": "Medical breakthroughs and health news", "trait_tags": ["Patient-Care", "Lab-Research"]},
+            {"option_id": 1783, "option_text": "Stock market and business news", "trait_tags": ["Finance-Acct", "Marketing-Sales"]},
+            {"option_id": 1784, "option_text": "Crime investigations and court cases", "trait_tags": ["Law-Enforce", "Forensic-Sci"]},
+            {"option_id": 1785, "option_text": "Environmental issues and climate reports", "trait_tags": ["Environmental-Sci", "Field-Research"]},
+            {"option_id": 1786, "option_text": "Sports results and athlete interviews", "trait_tags": ["Sports-Ed", "Physical-Skill"]},
+            {"option_id": 1787, "option_text": "Celebrity and entertainment news", "trait_tags": ["Performing-Arts", "Film-Broadcast"]},
+            {"option_id": 1788, "option_text": "Political news and government policies", "trait_tags": ["Community-Serve", "Legal-Practice"]}
+        ]
+    },
+    {
+        "question_id": 179,
+        "question_text": "What's your biggest strength in a team?",
+        "category": "Team Strength",
+        "options": [
+            {"option_id": 1791, "option_text": "I fix technical problems quickly", "trait_tags": ["Software-Dev", "Technical-Skill"]},
+            {"option_id": 1792, "option_text": "I support my teammates emotionally", "trait_tags": ["Counseling", "People-Skill"]},
+            {"option_id": 1793, "option_text": "I come up with creative solutions", "trait_tags": ["Creative-Skill", "Startup-Venture"]},
+            {"option_id": 1794, "option_text": "I keep everything organized and on schedule", "trait_tags": ["Admin-Skill", "Industrial-Ops"]},
+            {"option_id": 1795, "option_text": "I do thorough research and fact-checking", "trait_tags": ["Lab-Research", "Analytical-Skill"]},
+            {"option_id": 1796, "option_text": "I persuade others and build consensus", "trait_tags": ["Marketing-Sales", "People-Skill"]},
+            {"option_id": 1797, "option_text": "I do the physical work and hands-on tasks", "trait_tags": ["Physical-Skill", "Mechanical-Design"]},
+            {"option_id": 1798, "option_text": "I present our work confidently to others", "trait_tags": ["Performing-Arts", "People-Skill"]}
+        ]
+    },
+    {
+        "question_id": 180,
+        "question_text": "What would you invent if you had unlimited resources?",
+        "category": "Innovation Vision",
+        "options": [
+            {"option_id": 1801, "option_text": "A robot nurse that helps hospital patients", "trait_tags": ["AI-ML", "Patient-Care"]},
+            {"option_id": 1802, "option_text": "A machine that converts ocean plastic to fuel", "trait_tags": ["Environmental-Eng", "Mechanical-Design"]},
+            {"option_id": 1803, "option_text": "A virtual reality classroom for any subject", "trait_tags": ["Game-Dev", "Teaching-Ed"]},
+            {"option_id": 1804, "option_text": "A bulletproof emergency shelter for typhoons", "trait_tags": ["Civil-Build", "Community-Serve"]},
+            {"option_id": 1805, "option_text": "An app that translates all Filipino dialects", "trait_tags": ["AI-ML", "Mobile-Dev"]},
+            {"option_id": 1806, "option_text": "Vertical farms in cities to end hunger", "trait_tags": ["Agri-Nature", "Environmental-Eng"]},
+            {"option_id": 1807, "option_text": "A drone system for delivering medicine to remote areas", "trait_tags": ["Hardware-Systems", "Public-Health"]},
+            {"option_id": 1808, "option_text": "Smart clothes that monitor your health", "trait_tags": ["Hardware-Systems", "Patient-Care"]}
+        ]
+    },
+    {
+        "question_id": 181,
+        "question_text": "What type of work environment makes you most productive?",
+        "category": "Work Style",
+        "options": [
+            {"option_id": 1811, "option_text": "A quiet laboratory or research room", "trait_tags": ["Lab-Research", "Analytical-Skill"]},
+            {"option_id": 1812, "option_text": "A busy hospital or clinic", "trait_tags": ["Patient-Care", "People-Skill"]},
+            {"option_id": 1813, "option_text": "An open-plan tech office", "trait_tags": ["Software-Dev", "Web-Dev"]},
+            {"option_id": 1814, "option_text": "An outdoor construction or field site", "trait_tags": ["Civil-Build", "Physical-Skill"]},
+            {"option_id": 1815, "option_text": "A creative studio with art supplies", "trait_tags": ["Visual-Design", "Creative-Skill"]},
+            {"option_id": 1816, "option_text": "A classroom full of students", "trait_tags": ["Teaching-Ed", "People-Skill"]},
+            {"option_id": 1817, "option_text": "A corporate office with meetings", "trait_tags": ["Finance-Acct", "Admin-Skill"]},
+            {"option_id": 1818, "option_text": "A kitchen or food production area", "trait_tags": ["Culinary-Arts", "Food-Science"]}
+        ]
+    },
+    {
+        "question_id": 182,
+        "question_text": "What motivates you most to work hard?",
+        "category": "Values - Motivation",
+        "options": [
+            {"option_id": 1821, "option_text": "Discovering something new or innovative", "trait_tags": ["Lab-Research", "AI-ML"]},
+            {"option_id": 1822, "option_text": "Helping people who are suffering", "trait_tags": ["Patient-Care", "Social-Work"]},
+            {"option_id": 1823, "option_text": "Earning money and financial success", "trait_tags": ["Finance-Acct", "Startup-Venture"]},
+            {"option_id": 1824, "option_text": "Creating something beautiful", "trait_tags": ["Visual-Design", "Performing-Arts"]},
+            {"option_id": 1825, "option_text": "Teaching the next generation", "trait_tags": ["Teaching-Ed", "Community-Serve"]},
+            {"option_id": 1826, "option_text": "Protecting the environment", "trait_tags": ["Environmental-Sci", "Agri-Nature"]},
+            {"option_id": 1827, "option_text": "Being respected as an expert", "trait_tags": ["Lab-Research", "Legal-Practice"]},
+            {"option_id": 1828, "option_text": "The thrill of competition and winning", "trait_tags": ["Sports-Ed", "Marketing-Sales"]}
+        ]
+    },
+    {
+        "question_id": 183,
+        "question_text": "How do you handle stress and pressure?",
+        "category": "Stress Management",
+        "options": [
+            {"option_id": 1831, "option_text": "Exercise, play sports, or go to the gym", "trait_tags": ["Sports-Ed", "Physical-Skill"]},
+            {"option_id": 1832, "option_text": "Draw, paint, or work on creative projects", "trait_tags": ["Visual-Design", "Creative-Skill"]},
+            {"option_id": 1833, "option_text": "Talk to friends or family about my feelings", "trait_tags": ["People-Skill", "Counseling"]},
+            {"option_id": 1834, "option_text": "Organize and plan to feel in control", "trait_tags": ["Admin-Skill", "Industrial-Ops"]},
+            {"option_id": 1835, "option_text": "Code, tinker, or work on a tech project", "trait_tags": ["Software-Dev", "Hardware-Systems"]},
+            {"option_id": 1836, "option_text": "Cook or bake something delicious", "trait_tags": ["Culinary-Arts", "Creative-Skill"]},
+            {"option_id": 1837, "option_text": "Go outdoors and be in nature", "trait_tags": ["Field-Research", "Agri-Nature"]},
+            {"option_id": 1838, "option_text": "Watch documentaries or read educational content", "trait_tags": ["Lab-Research", "Film-Broadcast"]}
+        ]
+    },
+    {
+        "question_id": 184,
+        "question_text": "Which after-school club would you join or start?",
+        "category": "Extracurricular Interest",
+        "options": [
+            {"option_id": 1841, "option_text": "Robotics or computer science club", "trait_tags": ["Hardware-Systems", "Software-Dev"]},
+            {"option_id": 1842, "option_text": "Red Cross or medical volunteer club", "trait_tags": ["Patient-Care", "Community-Serve"]},
+            {"option_id": 1843, "option_text": "Business and entrepreneurship club", "trait_tags": ["Startup-Venture", "Finance-Acct"]},
+            {"option_id": 1844, "option_text": "Art, photography, or film club", "trait_tags": ["Visual-Design", "Film-Broadcast"]},
+            {"option_id": 1845, "option_text": "Debate and public speaking club", "trait_tags": ["Legal-Practice", "People-Skill"]},
+            {"option_id": 1846, "option_text": "Environmental or science club", "trait_tags": ["Environmental-Sci", "Lab-Research"]},
+            {"option_id": 1847, "option_text": "Theater or dance troupe", "trait_tags": ["Performing-Arts", "Creative-Skill"]},
+            {"option_id": 1848, "option_text": "Student government or community service", "trait_tags": ["Community-Serve", "Legal-Practice"]},
+            {"option_id": 1849, "option_text": "Sports team or fitness club", "trait_tags": ["Sports-Ed", "Physical-Skill"]},
+            {"option_id": 1850, "option_text": "Cooking or food appreciation club", "trait_tags": ["Culinary-Arts", "Nutrition-Diet"]}
+        ]
+    },
+    {
+        "question_id": 185,
+        "question_text": "What kind of problem do you most enjoy solving?",
+        "category": "Problem-Solving Style",
+        "options": [
+            {"option_id": 1851, "option_text": "Debugging code or fixing software errors", "trait_tags": ["Software-Dev", "Web-Dev"]},
+            {"option_id": 1852, "option_text": "Diagnosing a medical condition", "trait_tags": ["Patient-Care", "Medical-Lab"]},
+            {"option_id": 1853, "option_text": "Calculating the best financial strategy", "trait_tags": ["Finance-Acct", "Data-Analytics"]},
+            {"option_id": 1854, "option_text": "Figuring out how a machine broke down", "trait_tags": ["Mechanical-Design", "Hardware-Systems"]},
+            {"option_id": 1855, "option_text": "Understanding why someone is upset", "trait_tags": ["Counseling", "People-Skill"]},
+            {"option_id": 1856, "option_text": "Designing a better layout or structure", "trait_tags": ["Spatial-Design", "Civil-Build"]},
+            {"option_id": 1857, "option_text": "Solving a scientific mystery through experiments", "trait_tags": ["Lab-Research", "Forensic-Sci"]},
+            {"option_id": 1858, "option_text": "Finding the right ingredients for a perfect recipe", "trait_tags": ["Culinary-Arts", "Food-Science"]}
+        ]
+    },
+
+    # --- MORE SITUATIONAL - DEEPER EXPLORATION (Q186-Q200) ---
+    {
+        "question_id": 186,
+        "question_text": "A local NGO needs a social media campaign. What's your contribution?",
+        "category": "Situational - Digital Marketing",
+        "options": [
+            {"option_id": 1861, "option_text": "Writing compelling stories about their cause", "trait_tags": ["Creative-Skill", "Community-Serve"]},
+            {"option_id": 1862, "option_text": "Designing graphics and posters", "trait_tags": ["Visual-Design", "Digital-Media"]},
+            {"option_id": 1863, "option_text": "Filming and editing a short documentary", "trait_tags": ["Film-Broadcast", "Digital-Media"]},
+            {"option_id": 1864, "option_text": "Analyzing which posts get the most engagement", "trait_tags": ["Data-Analytics", "Marketing-Sales"]},
+            {"option_id": 1865, "option_text": "Managing the social media accounts daily", "trait_tags": ["Marketing-Sales", "Admin-Skill"]},
+            {"option_id": 1866, "option_text": "Reaching out to corporate sponsors", "trait_tags": ["Startup-Venture", "People-Skill"]},
+            {"option_id": 1867, "option_text": "Building a fundraising website", "trait_tags": ["Web-Dev", "Community-Serve"]},
+            {"option_id": 1868, "option_text": "Organizing real-world events to complement the campaign", "trait_tags": ["Admin-Skill", "Community-Serve"]}
+        ]
+    },
+    {
+        "question_id": 187,
+        "question_text": "Your school's science fair is coming up. What's your project?",
+        "category": "Situational - Science Fair",
+        "options": [
+            {"option_id": 1871, "option_text": "Testing which fertilizer helps plants grow fastest", "trait_tags": ["Agri-Nature", "Lab-Research"]},
+            {"option_id": 1872, "option_text": "Building a simple robot that follows a line", "trait_tags": ["Hardware-Systems", "Software-Dev"]},
+            {"option_id": 1873, "option_text": "Studying bacteria levels in local water sources", "trait_tags": ["Lab-Research", "Environmental-Sci"]},
+            {"option_id": 1874, "option_text": "Creating a solar-powered phone charger", "trait_tags": ["Electrical-Power", "Environmental-Eng"]},
+            {"option_id": 1875, "option_text": "Analyzing the nutritional value of local street food", "trait_tags": ["Nutrition-Diet", "Food-Science"]},
+            {"option_id": 1876, "option_text": "Building a bridge model that holds the most weight", "trait_tags": ["Civil-Build", "Mechanical-Design"]},
+            {"option_id": 1877, "option_text": "An AI program that recognizes Filipino sign language", "trait_tags": ["AI-ML", "Counseling"]},
+            {"option_id": 1878, "option_text": "A survey of mental health among SHS students", "trait_tags": ["Counseling", "Data-Analytics"]}
+        ]
+    },
+    {
+        "question_id": 188,
+        "question_text": "You're assigned to a rural health unit for immersion. What task do you choose?",
+        "category": "Situational - Rural Health",
+        "options": [
+            {"option_id": 1881, "option_text": "Assisting the nurse with check-ups and injections", "trait_tags": ["Patient-Care", "Public-Health"]},
+            {"option_id": 1882, "option_text": "Helping the pharmacy sort and distribute medicines", "trait_tags": ["Pharmacy", "Admin-Skill"]},
+            {"option_id": 1883, "option_text": "Teaching mothers about proper child nutrition", "trait_tags": ["Nutrition-Diet", "Teaching-Ed"]},
+            {"option_id": 1884, "option_text": "Recording patient data in their health information system", "trait_tags": ["Health-Admin", "Software-Dev"]},
+            {"option_id": 1885, "option_text": "Running a mini fitness and exercise activity", "trait_tags": ["Sports-Ed", "Rehab-Therapy"]},
+            {"option_id": 1886, "option_text": "Conducting a dengue awareness campaign", "trait_tags": ["Public-Health", "Community-Serve"]},
+            {"option_id": 1887, "option_text": "Collecting and organizing health survey data", "trait_tags": ["Data-Analytics", "Health-Admin"]},
+            {"option_id": 1888, "option_text": "Helping with physical therapy for elderly patients", "trait_tags": ["Rehab-Therapy", "People-Skill"]}
+        ]
+    },
+    {
+        "question_id": 189,
+        "question_text": "Your professor asks you to lead a capstone project. What topic do you pick?",
+        "category": "Situational - Capstone Project",
+        "options": [
+            {"option_id": 1891, "option_text": "An automated grading system using machine learning", "trait_tags": ["AI-ML", "Software-Dev"]},
+            {"option_id": 1892, "option_text": "A mobile health app for rural barangays", "trait_tags": ["Mobile-Dev", "Public-Health"]},
+            {"option_id": 1893, "option_text": "A sustainable building design using local materials", "trait_tags": ["Civil-Build", "Environmental-Eng"]},
+            {"option_id": 1894, "option_text": "A marketing plan for a local cooperative", "trait_tags": ["Marketing-Sales", "Agri-Nature"]},
+            {"option_id": 1895, "option_text": "A documentary about endangered Philippine species", "trait_tags": ["Film-Broadcast", "Environmental-Sci"]},
+            {"option_id": 1896, "option_text": "A counseling intervention program for at-risk youth", "trait_tags": ["Counseling", "Social-Work"]},
+            {"option_id": 1897, "option_text": "A water quality monitoring system using IoT sensors", "trait_tags": ["Hardware-Systems", "Environmental-Eng"]},
+            {"option_id": 1898, "option_text": "A food processing facility plan for local farmers", "trait_tags": ["Food-Science", "Industrial-Ops"]}
+        ]
+    },
+    {
+        "question_id": 190,
+        "question_text": "If a company hired you right now, which department would you want to work in?",
+        "category": "Department Preference",
+        "options": [
+            {"option_id": 1901, "option_text": "IT / Software Engineering", "trait_tags": ["Software-Dev", "Cloud-Systems"]},
+            {"option_id": 1902, "option_text": "Marketing and Communications", "trait_tags": ["Marketing-Sales", "Film-Broadcast"]},
+            {"option_id": 1903, "option_text": "Finance and Accounting", "trait_tags": ["Finance-Acct", "Analytical-Skill"]},
+            {"option_id": 1904, "option_text": "Human Resources", "trait_tags": ["HR-Management", "People-Skill"]},
+            {"option_id": 1905, "option_text": "Research and Development", "trait_tags": ["Lab-Research", "AI-ML"]},
+            {"option_id": 1906, "option_text": "Operations and Logistics", "trait_tags": ["Industrial-Ops", "Admin-Skill"]},
+            {"option_id": 1907, "option_text": "Legal and Compliance", "trait_tags": ["Legal-Practice", "Admin-Skill"]},
+            {"option_id": 1908, "option_text": "Creative / Design", "trait_tags": ["Visual-Design", "Digital-Media"]},
+            {"option_id": 1909, "option_text": "Customer Service", "trait_tags": ["People-Skill", "Hospitality-Svc"]},
+            {"option_id": 1910, "option_text": "Health and Safety", "trait_tags": ["Public-Health", "Physical-Skill"]}
+        ]
+    },
+    {
+        "question_id": 191,
+        "question_text": "Your city is planning a new public transportation system. What's your role?",
+        "category": "Situational - Urban Planning",
+        "options": [
+            {"option_id": 1911, "option_text": "Designing the routes and schedules", "trait_tags": ["Civil-Build", "Data-Analytics"]},
+            {"option_id": 1912, "option_text": "Building the stations and infrastructure", "trait_tags": ["Civil-Build", "Spatial-Design"]},
+            {"option_id": 1913, "option_text": "Developing a mobile app for commuters", "trait_tags": ["Mobile-Dev", "Web-Dev"]},
+            {"option_id": 1914, "option_text": "Ensuring it's environmentally sustainable", "trait_tags": ["Environmental-Eng", "Environmental-Sci"]},
+            {"option_id": 1915, "option_text": "Managing the PR and public communication", "trait_tags": ["Marketing-Sales", "Community-Serve"]},
+            {"option_id": 1916, "option_text": "Handling the budget and financial projections", "trait_tags": ["Finance-Acct", "Admin-Skill"]},
+            {"option_id": 1917, "option_text": "Engineering the actual vehicles and systems", "trait_tags": ["Mechanical-Design", "Electrical-Power"]},
+            {"option_id": 1918, "option_text": "Studying the traffic data to optimize flow", "trait_tags": ["Data-Analytics", "Industrial-Ops"]}
+        ]
+    },
+    {
+        "question_id": 192,
+        "question_text": "A classmate faints during PE class. What do you instinctively do?",
+        "category": "Situational - Emergency Response",
+        "options": [
+            {"option_id": 1921, "option_text": "Check their pulse and do CPR if needed", "trait_tags": ["Patient-Care", "Physical-Skill"]},
+            {"option_id": 1922, "option_text": "Run and get the school nurse immediately", "trait_tags": ["People-Skill", "Physical-Skill"]},
+            {"option_id": 1923, "option_text": "Stay calm and keep the crowd back", "trait_tags": ["Admin-Skill", "People-Skill"]},
+            {"option_id": 1924, "option_text": "Document the incident for the school report", "trait_tags": ["Admin-Skill", "Legal-Practice"]},
+            {"option_id": 1925, "option_text": "Provide emotional support and reassurance", "trait_tags": ["Counseling", "People-Skill"]},
+            {"option_id": 1926, "option_text": "Think about what medical condition might cause this", "trait_tags": ["Medical-Lab", "Analytical-Skill"]},
+            {"option_id": 1927, "option_text": "Call 911 and provide location details", "trait_tags": ["Community-Serve", "Admin-Skill"]},
+            {"option_id": 1928, "option_text": "Check if it's heat-related and move them to shade", "trait_tags": ["Sports-Ed", "Patient-Care"]}
+        ]
+    },
+    {
+        "question_id": 193,
+        "question_text": "Which internship opportunity would you grab immediately?",
+        "category": "Internship Preference",
+        "options": [
+            {"option_id": 1931, "option_text": "A tech startup developing new apps", "trait_tags": ["Software-Dev", "Startup-Venture"]},
+            {"option_id": 1932, "option_text": "A hospital's research and clinical department", "trait_tags": ["Medical-Lab", "Patient-Care"]},
+            {"option_id": 1933, "option_text": "A construction company for a major project", "trait_tags": ["Civil-Build", "Mechanical-Design"]},
+            {"option_id": 1934, "option_text": "A bank's financial analysis department", "trait_tags": ["Finance-Acct", "Data-Analytics"]},
+            {"option_id": 1935, "option_text": "A TV or film production company", "trait_tags": ["Film-Broadcast", "Digital-Media"]},
+            {"option_id": 1936, "option_text": "A government environmental agency", "trait_tags": ["Environmental-Sci", "Community-Serve"]},
+            {"option_id": 1937, "option_text": "A hotel or resort chain", "trait_tags": ["Hospitality-Svc", "Tourism-Travel"]},
+            {"option_id": 1938, "option_text": "An NGO helping underprivileged communities", "trait_tags": ["Social-Work", "Community-Serve"]},
+            {"option_id": 1939, "option_text": "A law firm or legal aid organization", "trait_tags": ["Legal-Practice", "Law-Enforce"]},
+            {"option_id": 1940, "option_text": "A sports training facility", "trait_tags": ["Sports-Ed", "Rehab-Therapy"]}
+        ]
+    },
+    {
+        "question_id": 194,
+        "question_text": "Rate your confidence: 'I can explain complex science topics to anyone.'",
+        "category": "Scale - Communication",
+        "options": [
+            {"option_id": 1941, "option_text": "Strongly Agree - I love teaching and explaining", "trait_tags": ["Teaching-Ed", "Lab-Research"]},
+            {"option_id": 1942, "option_text": "Agree - I'm good at simplifying things", "trait_tags": ["Teaching-Ed", "People-Skill"]},
+            {"option_id": 1943, "option_text": "Neutral - I prefer doing rather than explaining", "trait_tags": ["Technical-Skill", "Analytical-Skill"]},
+            {"option_id": 1944, "option_text": "Disagree - I understand but can't explain well", "trait_tags": ["Lab-Research", "Analytical-Skill"]},
+            {"option_id": 1945, "option_text": "Strongly Disagree - Science isn't my area", "trait_tags": ["Creative-Skill", "People-Skill"]}
+        ]
+    },
+    {
+        "question_id": 195,
+        "question_text": "How comfortable are you working with numbers and calculations?",
+        "category": "Scale - Math Comfort",
+        "options": [
+            {"option_id": 1951, "option_text": "Very comfortable - I love math and statistics", "trait_tags": ["Data-Analytics", "Finance-Acct"]},
+            {"option_id": 1952, "option_text": "Comfortable - I use them for practical purposes", "trait_tags": ["Analytical-Skill", "Industrial-Ops"]},
+            {"option_id": 1953, "option_text": "Neutral - I can do them when needed", "trait_tags": ["Technical-Skill", "Admin-Skill"]},
+            {"option_id": 1954, "option_text": "Uncomfortable - I prefer words over numbers", "trait_tags": ["Creative-Skill", "Teaching-Ed"]},
+            {"option_id": 1955, "option_text": "Very uncomfortable - I avoid math whenever possible", "trait_tags": ["Performing-Arts", "People-Skill"]}
+        ]
+    },
+    {
+        "question_id": 196,
+        "question_text": "How do you feel about working outdoors in the sun and rain?",
+        "category": "Scale - Outdoor Work",
+        "options": [
+            {"option_id": 1961, "option_text": "Love it - I thrive outdoors", "trait_tags": ["Agri-Nature", "Field-Research"]},
+            {"option_id": 1962, "option_text": "I'm fine with it when needed", "trait_tags": ["Civil-Build", "Physical-Skill"]},
+            {"option_id": 1963, "option_text": "I prefer a mix of indoor and outdoor", "trait_tags": ["Maritime-Sea", "Environmental-Sci"]},
+            {"option_id": 1964, "option_text": "I'd rather stay indoors most of the time", "trait_tags": ["Software-Dev", "Lab-Research"]},
+            {"option_id": 1965, "option_text": "I strongly prefer air-conditioned office work", "trait_tags": ["Finance-Acct", "Admin-Skill"]}
+        ]
+    },
+    {
+        "question_id": 197,
+        "question_text": "How important is it for you to help other people in your career?",
+        "category": "Scale - Helping Others",
+        "options": [
+            {"option_id": 1971, "option_text": "Essential — my career should directly help people", "trait_tags": ["Patient-Care", "Social-Work"]},
+            {"option_id": 1972, "option_text": "Very important — I want to serve communities", "trait_tags": ["Community-Serve", "Teaching-Ed"]},
+            {"option_id": 1973, "option_text": "Somewhat important — I help through my work indirectly", "trait_tags": ["Lab-Research", "Environmental-Sci"]},
+            {"option_id": 1974, "option_text": "Not very important — I focus on the work itself", "trait_tags": ["Software-Dev", "Mechanical-Design"]},
+            {"option_id": 1975, "option_text": "Not really — I prefer working on things, not people", "trait_tags": ["Hardware-Systems", "Data-Analytics"]}
+        ]
+    },
+    {
+        "question_id": 198,
+        "question_text": "If your school had a hackathon for social good, what would your team create?",
+        "category": "Situational - Social Innovation",
+        "options": [
+            {"option_id": 1981, "option_text": "A telemedicine app for rural doctors", "trait_tags": ["Mobile-Dev", "Public-Health"]},
+            {"option_id": 1982, "option_text": "A disaster early warning system", "trait_tags": ["Hardware-Systems", "Environmental-Sci"]},
+            {"option_id": 1983, "option_text": "A crowdsourcing platform for community cleanup", "trait_tags": ["Web-Dev", "Environmental-Eng"]},
+            {"option_id": 1984, "option_text": "An AI tutor in Filipino for underprivileged students", "trait_tags": ["AI-ML", "Teaching-Ed"]},
+            {"option_id": 1985, "option_text": "A financial literacy game for young Filipinos", "trait_tags": ["Game-Dev", "Finance-Acct"]},
+            {"option_id": 1986, "option_text": "A GIS map tracking illegal logging", "trait_tags": ["Data-Analytics", "Agri-Nature"]},
+            {"option_id": 1987, "option_text": "A mental health chatbot for students", "trait_tags": ["AI-ML", "Counseling"]},
+            {"option_id": 1988, "option_text": "A platform connecting small farmers to buyers", "trait_tags": ["Web-Dev", "Agri-Nature"]}
+        ]
+    },
+    {
+        "question_id": 199,
+        "question_text": "Which TV show genre do you enjoy most?",
+        "category": "Media Preference",
+        "options": [
+            {"option_id": 1991, "option_text": "Sci-fi and technology (Black Mirror, Westworld)", "trait_tags": ["Software-Dev", "AI-ML"]},
+            {"option_id": 1992, "option_text": "Medical dramas (Grey's Anatomy, The Good Doctor)", "trait_tags": ["Patient-Care", "Medical-Lab"]},
+            {"option_id": 1993, "option_text": "Crime and legal (CSI, Suits)", "trait_tags": ["Forensic-Sci", "Legal-Practice"]},
+            {"option_id": 1994, "option_text": "Business and finance (Shark Tank, The Profit)", "trait_tags": ["Startup-Venture", "Finance-Acct"]},
+            {"option_id": 1995, "option_text": "Nature and wildlife (Planet Earth, Our Planet)", "trait_tags": ["Environmental-Sci", "Field-Research"]},
+            {"option_id": 1996, "option_text": "Reality competition (MasterChef, Amazing Race)", "trait_tags": ["Culinary-Arts", "Tourism-Travel"]},
+            {"option_id": 1997, "option_text": "Creative arts (Project Runway, Abstract)", "trait_tags": ["Visual-Design", "Performing-Arts"]},
+            {"option_id": 1998, "option_text": "Sports (ESPN, UFC)", "trait_tags": ["Sports-Ed", "Physical-Skill"]}
+        ]
+    },
+    {
+        "question_id": 200,
+        "question_text": "What section of a bookstore do you visit first?",
+        "category": "Reading Interest",
+        "options": [
+            {"option_id": 2001, "option_text": "Technology and programming books", "trait_tags": ["Software-Dev", "Web-Dev"]},
+            {"option_id": 2002, "option_text": "Medical and health references", "trait_tags": ["Patient-Care", "Pharmacy"]},
+            {"option_id": 2003, "option_text": "Engineering and science textbooks", "trait_tags": ["Mechanical-Design", "Lab-Research"]},
+            {"option_id": 2004, "option_text": "Business and self-improvement", "trait_tags": ["Startup-Venture", "Marketing-Sales"]},
+            {"option_id": 2005, "option_text": "Art, photography, and design books", "trait_tags": ["Visual-Design", "Film-Broadcast"]},
+            {"option_id": 2006, "option_text": "Cooking and recipe books", "trait_tags": ["Culinary-Arts", "Nutrition-Diet"]},
+            {"option_id": 2007, "option_text": "True crime and mystery novels", "trait_tags": ["Forensic-Sci", "Law-Enforce"]},
+            {"option_id": 2008, "option_text": "Psychology and social science", "trait_tags": ["Counseling", "Social-Work"]},
+            {"option_id": 2009, "option_text": "Travel and adventure books", "trait_tags": ["Tourism-Travel", "Field-Research"]},
+            {"option_id": 2010, "option_text": "Education and teaching guides", "trait_tags": ["Teaching-Ed", "Counseling"]}
+        ]
     }
 ]
+
+# ==================== MULTI-TRAIT WEIGHT ENRICHMENT ====================
+# Each option maps to multiple traits with weights so recommendations
+# aren't limited to a single dimension. Primary trait = 1.0, secondary
+# traits have lower weights reflecting partial relevance.
+
+TRAIT_SECONDARY_MAP = {
+    "Patient-Care":      [("People-Skill", 0.4), ("Rehab-Therapy", 0.2)],
+    "Medical-Lab":       [("Lab-Research", 0.4), ("Patient-Care", 0.2)],
+    "Rehab-Therapy":     [("Patient-Care", 0.4), ("People-Skill", 0.2)],
+    "Health-Admin":      [("Admin-Skill", 0.4), ("Patient-Care", 0.2)],
+    "Software-Dev":      [("Data-Analytics", 0.3), ("Hardware-Systems", 0.2)],
+    "Hardware-Systems":  [("Software-Dev", 0.3), ("Electrical-Power", 0.2)],
+    "Data-Analytics":    [("Software-Dev", 0.3), ("Lab-Research", 0.2)],
+    "Cyber-Defense":     [("Software-Dev", 0.3), ("Law-Enforce", 0.2)],
+    "Digital-Media":     [("Visual-Design", 0.4), ("Software-Dev", 0.2)],
+    "Civil-Build":       [("Spatial-Design", 0.3), ("Mechanical-Design", 0.2)],
+    "Mechanical-Design": [("Civil-Build", 0.3), ("Industrial-Ops", 0.2)],
+    "Electrical-Power":  [("Hardware-Systems", 0.3), ("Mechanical-Design", 0.2)],
+    "Industrial-Ops":    [("Mechanical-Design", 0.3), ("Admin-Skill", 0.2)],
+    "Spatial-Design":    [("Visual-Design", 0.3), ("Civil-Build", 0.2)],
+    "Finance-Acct":      [("Admin-Skill", 0.3), ("Data-Analytics", 0.2)],
+    "Marketing-Sales":   [("Startup-Venture", 0.3), ("People-Skill", 0.2)],
+    "Startup-Venture":   [("Marketing-Sales", 0.3), ("Finance-Acct", 0.2)],
+    "Admin-Skill":       [("Finance-Acct", 0.3), ("People-Skill", 0.2)],
+    "Teaching-Ed":       [("People-Skill", 0.4), ("Community-Serve", 0.2)],
+    "Visual-Design":     [("Digital-Media", 0.3), ("Creative-Skill", 0.2)],
+    "Creative-Skill":    [("Visual-Design", 0.3), ("Digital-Media", 0.2)],
+    "Law-Enforce":       [("Community-Serve", 0.3), ("Physical-Skill", 0.2)],
+    "Community-Serve":   [("People-Skill", 0.3), ("Teaching-Ed", 0.2)],
+    "Maritime-Sea":      [("Mechanical-Design", 0.3), ("Physical-Skill", 0.2)],
+    "Agri-Nature":       [("Field-Research", 0.3), ("Lab-Research", 0.2)],
+    "Hospitality-Svc":   [("People-Skill", 0.3), ("Admin-Skill", 0.2)],
+    "Lab-Research":      [("Data-Analytics", 0.3), ("Medical-Lab", 0.2)],
+    "Field-Research":    [("Lab-Research", 0.3), ("Agri-Nature", 0.2)],
+    "People-Skill":      [("Teaching-Ed", 0.3), ("Community-Serve", 0.2)],
+    "Technical-Skill":   [("Hardware-Systems", 0.3), ("Mechanical-Design", 0.2)],
+    "Physical-Skill":    [("Law-Enforce", 0.3), ("Maritime-Sea", 0.2)],
+    "Analytical-Skill":  [("Data-Analytics", 0.3), ("Lab-Research", 0.2)],
+    # --- New expanded traits ---
+    "Web-Dev":           [("Software-Dev", 0.4), ("Digital-Media", 0.2)],
+    "Mobile-Dev":        [("Software-Dev", 0.4), ("Web-Dev", 0.2)],
+    "Game-Dev":          [("Software-Dev", 0.3), ("Animation-3D", 0.3)],
+    "AI-ML":             [("Software-Dev", 0.3), ("Data-Analytics", 0.3)],
+    "Cloud-Systems":     [("Software-Dev", 0.3), ("Cyber-Defense", 0.2)],
+    "Pharmacy":          [("Medical-Lab", 0.4), ("Patient-Care", 0.2)],
+    "Public-Health":     [("Community-Serve", 0.3), ("Patient-Care", 0.2)],
+    "Nutrition-Diet":    [("Food-Science", 0.3), ("Patient-Care", 0.2)],
+    "Environmental-Eng": [("Environmental-Sci", 0.4), ("Civil-Build", 0.2)],
+    "HR-Management":     [("People-Skill", 0.4), ("Admin-Skill", 0.2)],
+    "Counseling":        [("People-Skill", 0.4), ("Rehab-Therapy", 0.2)],
+    "Sports-Ed":         [("Physical-Skill", 0.4), ("Teaching-Ed", 0.2)],
+    "Performing-Arts":   [("Creative-Skill", 0.4), ("Visual-Design", 0.2)],
+    "Film-Broadcast":    [("Digital-Media", 0.4), ("Creative-Skill", 0.2)],
+    "Animation-3D":      [("Digital-Media", 0.3), ("Visual-Design", 0.3)],
+    "Environmental-Sci": [("Field-Research", 0.3), ("Lab-Research", 0.2)],
+    "Food-Science":      [("Lab-Research", 0.3), ("Nutrition-Diet", 0.2)],
+    "Forensic-Sci":      [("Lab-Research", 0.3), ("Law-Enforce", 0.3)],
+    "Legal-Practice":    [("Law-Enforce", 0.3), ("Community-Serve", 0.2)],
+    "Social-Work":       [("Community-Serve", 0.3), ("Counseling", 0.3)],
+    "Tourism-Travel":    [("Hospitality-Svc", 0.4), ("People-Skill", 0.2)],
+    "Culinary-Arts":     [("Hospitality-Svc", 0.3), ("Food-Science", 0.2)],
+}
+
+
+def _enrich_options_with_traits():
+    """Add weighted multi-trait 'traits' dict to every option in the pool.
+    Handles both old format (trait_tag: str) and new format (trait_tags: list)."""
+    for question in QUESTIONS_POOL_ENHANCED:
+        for option in question.get("options", []):
+            # New format: trait_tags list
+            trait_tags = option.get("trait_tags", [])
+            if trait_tags:
+                traits = {}
+                for i, tag in enumerate(trait_tags):
+                    traits[tag] = 1.0 if i == 0 else 0.6
+                    # Also add secondary traits from the map
+                    for secondary_tag, weight in TRAIT_SECONDARY_MAP.get(tag, []):
+                        if secondary_tag not in traits:
+                            sec_weight = weight if i == 0 else weight * 0.5
+                            traits[secondary_tag] = sec_weight
+                option["traits"] = traits
+                # Set trait_tag to first tag for backward compatibility
+                if "trait_tag" not in option and trait_tags:
+                    option["trait_tag"] = trait_tags[0]
+                continue
+
+            # Old format: single trait_tag
+            primary = option.get("trait_tag")
+            if not primary:
+                continue
+            traits = {primary: 1.0}
+            for secondary_tag, weight in TRAIT_SECONDARY_MAP.get(primary, []):
+                traits[secondary_tag] = weight
+            option["traits"] = traits
+
+
+_enrich_options_with_traits()
+
 
 # Verify trait coverage
 if __name__ == "__main__":
@@ -2147,3 +3116,8 @@ if __name__ == "__main__":
         print(f"{trait}: {count} options")
     print(f"\nTotal: {len(trait_counts)} unique traits across {len(QUESTIONS_POOL_ENHANCED)} questions")
     print(f"Average options per question: {sum(len(q['options']) for q in QUESTIONS_POOL_ENHANCED) / len(QUESTIONS_POOL_ENHANCED):.1f}")
+    
+    # Show multi-trait example
+    example = QUESTIONS_POOL_ENHANCED[0]["options"][0]
+    print(f"\nExample multi-trait option: {example.get('option_text')}")
+    print(f"  traits: {example.get('traits')}")
