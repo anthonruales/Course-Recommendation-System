@@ -338,8 +338,8 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
       }
       
       // Check name only contains letters, spaces, hyphens, and apostrophes
-      if (!/^[a-zA-Z\s'-]+$/.test(formData.fullname.trim())) {
-        showToast('Name can only contain letters, spaces, hyphens, and apostrophes.', 'error');
+      if (!/^[a-zA-Z\s'.\-]+$/.test(formData.fullname.trim())) {
+        showToast('Name can only contain letters, spaces, hyphens, apostrophes, and dots.', 'error');
         return;
       }
     }

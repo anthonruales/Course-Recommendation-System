@@ -285,8 +285,8 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
         showToast('Please use an appropriate name.', 'error');
         return;
       }
-      if (!/^[a-zA-Z\s'-]+$/.test(formData.fullname.trim())) {
-        showToast('Name can only contain letters, spaces, hyphens, and apostrophes.', 'error');
+      if (!/^[a-zA-Z\s'.\-]+$/.test(formData.fullname.trim())) {
+        showToast('Name can only contain letters, spaces, hyphens, apostrophes, and dots.', 'error');
         return;
       }
     }
@@ -369,6 +369,10 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
         }
         changedFields.push('Profile Photo');
         pendingPhotoRef.current = { changed: false, value: null };
+      }
+      // Update localStorage userName if fullname changed
+      if (formData.fullname) {
+        localStorage.setItem('userName', formData.fullname);
       }
       showToast('Profile updated successfully!', 'success');
       // Reset original data ref so change tracking resets
