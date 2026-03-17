@@ -81,6 +81,27 @@ class AdaptiveSession:
     confidence: float = 0.0
     is_complete: bool = False
     final_recommendations: List[dict] = field(default_factory=list)
+    
+    # --- Topic continuity tracking ---
+    recent_traits: List[str] = field(default_factory=list)       # Last N traits chosen by user
+    current_topic_thread: str = ""                                # Dominant topic area (e.g. "Software-Dev")
+    topic_streak: int = 0                                        # How many consecutive Qs in same topic area
+    profile_seed_traits: List[str] = field(default_factory=list) # Traits derived from user profile at session start
+    
+    # --- Decision Tree State ---
+    branch_weights: Dict[str, float] = field(default_factory=dict)   # Weight of each branch (healthcare, technology, etc.)
+    current_depth: int = 0                                           # Current depth in the tree (0-3)
+    branch_history: List[str] = field(default_factory=list)          # Which branches were followed (for connection tracking)
+    question_weights_applied: Dict[int, float] = field(default_factory=dict)  # Track question weight used for each answered Q (for reversal)
+    
+    # --- Conversation Chain State ---
+    primary_domain: str = ""                        # Primary domain from profile (e.g. "technology")
+    domain_queue: List[str] = field(default_factory=list)  # Ordered domains to explore (profile -> adjacent -> rest)
+    current_chain_trait: str = ""                    # The trait driving the current follow-up chain
+    chain_queue: List[int] = field(default_factory=list)   # Ordered question IDs to ask next (from current chain)
+    explored_domains: Set[str] = field(default_factory=set)  # Domains that have had at least N questions asked
+    domain_question_count: Dict[str, int] = field(default_factory=dict)  # How many questions per domain
+    last_answer_trait: str = ""                      # Trait from the most recent answer (drives next question)
 
 
 # Maps SHS strand to prioritized traits for question selection
@@ -100,6 +121,730 @@ STRAND_PRIORITY_TRAITS = {
     "ARTS": ["Creative-Design", "Media-Production", "Artistic", "Creative",
              "Visual-Arts", "Performing-Arts", "Communication"]
 }
+
+# ==================== TOPIC ADJACENCY MAP ====================
+# Defines which traits are "related" or "adjacent" topics.
+# When the user is on a topic streak (e.g. 5 questions about computers),
+# the engine can smoothly transition to adjacent topics rather than jumping
+# to something completely unrelated.
+# This ensures the decision-tree "branching" feels natural.
+TOPIC_ADJACENCY = {
+    # Technology cluster
+    "Software-Dev":     ["Data-Analytics", "Hardware-Systems", "Cyber-Defense", "Digital-Media"],
+    "Hardware-Systems": ["Software-Dev", "Electrical-Power", "Cyber-Defense"],
+    "Data-Analytics":   ["Software-Dev", "Finance-Acct", "Lab-Research"],
+    "Cyber-Defense":    ["Software-Dev", "Hardware-Systems", "Law-Enforce"],
+    "Digital-Media":    ["Software-Dev", "Visual-Design", "Creative-Skill"],
+    # Engineering cluster
+    "Civil-Build":      ["Spatial-Design", "Mechanical-Design", "Electrical-Power", "Industrial-Ops"],
+    "Mechanical-Design":["Civil-Build", "Industrial-Ops", "Electrical-Power", "Hardware-Systems"],
+    "Electrical-Power": ["Mechanical-Design", "Hardware-Systems", "Civil-Build"],
+    "Industrial-Ops":   ["Mechanical-Design", "Finance-Acct", "Civil-Build", "Admin-Skill"],
+    "Spatial-Design":   ["Civil-Build", "Visual-Design", "Creative-Skill"],
+    # Healthcare cluster
+    "Patient-Care":     ["Medical-Lab", "Rehab-Therapy", "Health-Admin", "People-Skill"],
+    "Medical-Lab":      ["Patient-Care", "Lab-Research", "Rehab-Therapy"],
+    "Rehab-Therapy":    ["Patient-Care", "People-Skill", "Physical-Skill"],
+    "Health-Admin":     ["Patient-Care", "Admin-Skill", "Finance-Acct"],
+    # Business cluster
+    "Finance-Acct":     ["Marketing-Sales", "Startup-Venture", "Admin-Skill", "Data-Analytics"],
+    "Marketing-Sales":  ["Startup-Venture", "Finance-Acct", "People-Skill", "Digital-Media"],
+    "Startup-Venture":  ["Marketing-Sales", "Finance-Acct", "Industrial-Ops"],
+    # Education & Social cluster
+    "Teaching-Ed":      ["People-Skill", "Community-Serve", "Admin-Skill"],
+    "Community-Serve":  ["Teaching-Ed", "Law-Enforce", "People-Skill"],
+    "Law-Enforce":      ["Community-Serve", "Physical-Skill", "Cyber-Defense"],
+    # Arts cluster
+    "Visual-Design":    ["Digital-Media", "Creative-Skill", "Spatial-Design"],
+    "Creative-Skill":   ["Visual-Design", "Digital-Media", "Teaching-Ed"],
+    # Other
+    "Maritime-Sea":     ["Mechanical-Design", "Electrical-Power", "Physical-Skill"],
+    "Agri-Nature":      ["Field-Research", "Lab-Research", "Physical-Skill"],
+    "Field-Research":   ["Lab-Research", "Agri-Nature", "Community-Serve"],
+    "Lab-Research":     ["Medical-Lab", "Field-Research", "Data-Analytics"],
+    "Hospitality-Svc":  ["Marketing-Sales", "People-Skill", "Admin-Skill"],
+    # Skill traits adjacency
+    "Technical-Skill":  ["Software-Dev", "Hardware-Systems", "Mechanical-Design"],
+    "People-Skill":     ["Teaching-Ed", "Community-Serve", "Hospitality-Svc", "Patient-Care"],
+    "Creative-Skill":   ["Visual-Design", "Digital-Media", "Spatial-Design"],
+    "Analytical-Skill": ["Data-Analytics", "Lab-Research", "Finance-Acct"],
+    "Physical-Skill":   ["Law-Enforce", "Maritime-Sea", "Rehab-Therapy", "Agri-Nature"],
+    "Admin-Skill":      ["Finance-Acct", "Industrial-Ops", "Health-Admin"],
+}
+
+# ==================== QUESTION CATEGORY → TRAIT DOMAIN MAPPING ====================
+# Maps question categories to the primary trait domain they belong to.
+# Used for topic continuity: if user's current thread is "Software-Dev",
+# we know "Technology Career" and "Programming Specialization" categories are on-topic.
+CATEGORY_TRAIT_DOMAIN = {
+    # Broad discovery
+    "dream career": "broad", "work environment": "broad", "daily work": "broad",
+    "skill mastery": "broad", "career achievement": "broad",
+    # Situational
+    "situational - emergency": "Patient-Care", "situational - teamwork": "People-Skill",
+    "situational - accident": "Patient-Care", "situational - community": "Community-Serve",
+    "situational - leadership": "Admin-Skill", "situational - disaster response": "Community-Serve",
+    "situational - school event": "Creative-Skill", "situational - ethics": "Law-Enforce",
+    "situational - family business": "Finance-Acct", "situational - mental health": "Rehab-Therapy",
+    "situational - technology crisis": "Software-Dev", "situational - technology": "Software-Dev",
+    "situational - survival": "Physical-Skill", "situational - business": "Finance-Acct",
+    "situational - environmental": "Agri-Nature", "situational - event planning": "Hospitality-Svc",
+    "situational - cyberbullying": "Cyber-Defense", "situational - family health": "Patient-Care",
+    "situational - media": "Digital-Media", "situational - academic integrity": "Teaching-Ed",
+    "situational - financial decision": "Finance-Acct", "situational - career fair": "broad",
+    "situational - community problem": "Community-Serve", "situational - friend support": "People-Skill",
+    "situational - power outage": "Electrical-Power", "situational - accreditation": "Admin-Skill",
+    "situational - medical emergency": "Patient-Care", "situational - group research": "Lab-Research",
+    "situational - typhoon preparation": "Community-Serve", "situational - job shadow": "broad",
+    "situational - cyber attack": "Cyber-Defense", "situational - mall jobs": "broad",
+    "situational - sick pet": "Agri-Nature", "situational - environmental initiative": "Agri-Nature",
+    "situational - found wallet": "Community-Serve", "situational - factory pollution": "Industrial-Ops",
+    "situational - helping classmate": "People-Skill", "situational - family reunion": "Hospitality-Svc",
+    "situational - water shortage": "Community-Serve", "situational - dream internship": "broad",
+    # Scale-based self-assessment
+    "scale - math": "Data-Analytics", "scale - stress": "Patient-Care",
+    "scale - communication": "Marketing-Sales", "scale - physical": "Physical-Skill",
+    "scale - creativity": "Visual-Design",
+    # Academic
+    "academic - favorite": "broad", "academic - challenge": "broad",
+    "academic - study style": "broad",
+    # Lifestyle & Values
+    "lifestyle": "broad", "career values": "broad",
+    "career priority": "broad", "salary importance": "Finance-Acct",
+    "international work": "Hospitality-Svc", "work schedule": "broad",
+    # Professional
+    "professional licensure": "broad", "interest type": "broad",
+    "fun - role": "broad", "fun - superpower": "broad", "work lifestyle": "broad",
+    # Philippine-specific
+    "ph industry": "broad", "board exam preference": "broad",
+    "work location": "broad", "dream employer": "broad",
+    # Skills
+    "language skill": "People-Skill", "tech skill": "Software-Dev",
+    "leadership skill": "Admin-Skill", "stress management": "Patient-Care",
+    "math skill": "Data-Analytics", "science skill": "Lab-Research",
+    # Personality
+    "personality": "broad", "hobbies": "broad",
+    "entertainment preference": "broad", "role model": "broad",
+    # School
+    "school involvement": "broad", "project preference": "broad",
+    "favorite subject": "broad", "challenging subject": "broad",
+    # Future
+    "future vision": "broad", "life legacy": "broad", "career fear": "broad",
+    # Problem Solving
+    "problem solving": "broad", "decision making": "broad",
+    "learning style": "broad", "conflict resolution": "People-Skill",
+    "team role": "broad",
+    # Community/Disaster/Event
+    "community scenario": "Community-Serve", "survival scenario": "Physical-Skill",
+    "disaster response": "Community-Serve", "event planning": "Hospitality-Svc",
+    "emotional intelligence": "People-Skill",
+}
+
+
+# ==================== UNIFIED PROFILE-TO-TRAITS MAPPING ====================
+# Single source of truth for mapping user profile selections to trait tags.
+# Used by: _calculate_profile_bonus(), _get_profile_priority_traits(),
+#          _get_profile_priority_traits_ranked(), create_session()
+UNIFIED_PROFILE_TO_TRAITS = {
+    # Academic Interests
+    "science": ["Lab-Research", "Medical-Lab"],
+    "biology": ["Medical-Lab", "Lab-Research", "Patient-Care"],
+    "chemistry": ["Medical-Lab", "Lab-Research"],
+    "physics": ["Mechanical-Design", "Electrical-Power", "Civil-Build"],
+    "environment": ["Agri-Nature", "Field-Research"],
+    "earth_science": ["Field-Research", "Agri-Nature", "Lab-Research"],
+    "programming": ["Software-Dev", "Data-Analytics", "Cyber-Defense"],
+    "computer": ["Software-Dev", "Hardware-Systems", "Data-Analytics"],
+    "data": ["Data-Analytics", "Software-Dev"],
+    "ai": ["Software-Dev", "Data-Analytics"],
+    "cybersecurity": ["Cyber-Defense", "Software-Dev"],
+    "robotics": ["Hardware-Systems", "Software-Dev", "Mechanical-Design"],
+    "game_dev": ["Digital-Media", "Software-Dev"],
+    "engineering": ["Civil-Build", "Mechanical-Design", "Electrical-Power", "Industrial-Ops"],
+    "mechanical": ["Mechanical-Design", "Industrial-Ops"],
+    "electrical": ["Electrical-Power", "Hardware-Systems"],
+    "civil": ["Civil-Build", "Spatial-Design"],
+    "architecture": ["Spatial-Design", "Civil-Build", "Visual-Design"],
+    "industrial": ["Industrial-Ops", "Mechanical-Design"],
+    "business": ["Startup-Venture", "Marketing-Sales", "Finance-Acct"],
+    "finance": ["Finance-Acct", "Startup-Venture"],
+    "marketing": ["Marketing-Sales", "Startup-Venture"],
+    "accounting": ["Finance-Acct", "Admin-Skill"],
+    "economics": ["Finance-Acct"],
+    "management": ["Admin-Skill", "Startup-Venture", "Industrial-Ops"],
+    "real_estate": ["Marketing-Sales", "Finance-Acct"],
+    "art": ["Visual-Design", "Creative-Skill", "Digital-Media"],
+    "music": ["Creative-Skill"],
+    "film": ["Digital-Media", "Creative-Skill"],
+    "writing": ["Creative-Skill"],
+    "photography": ["Visual-Design", "Digital-Media"],
+    "animation": ["Digital-Media", "Visual-Design"],
+    "fashion": ["Visual-Design", "Creative-Skill"],
+    "medical": ["Patient-Care", "Medical-Lab", "Rehab-Therapy"],
+    "nursing": ["Patient-Care"],
+    "psychology": ["Rehab-Therapy", "Community-Serve", "People-Skill"],
+    "pharmacy": ["Medical-Lab", "Lab-Research"],
+    "physical_therapy": ["Rehab-Therapy", "Patient-Care", "Physical-Skill"],
+    "nutrition": ["Patient-Care", "Lab-Research"],
+    "medical_tech": ["Medical-Lab", "Lab-Research"],
+    "dentistry": ["Patient-Care", "Medical-Lab"],
+    "education": ["Teaching-Ed"],
+    "law": ["Law-Enforce"],
+    "politics": ["Community-Serve"],
+    "social": ["Community-Serve", "Rehab-Therapy"],
+    "history": ["Community-Serve"],
+    "communication": ["Marketing-Sales", "Teaching-Ed", "Admin-Skill"],
+    "philosophy": ["Community-Serve", "Teaching-Ed"],
+    "criminology": ["Law-Enforce", "Community-Serve"],
+    "maritime": ["Maritime-Sea", "Mechanical-Design"],
+    "aviation": ["Hardware-Systems", "Mechanical-Design"],
+    "logistics": ["Industrial-Ops", "Admin-Skill"],
+    "sports": ["Physical-Skill", "Rehab-Therapy", "Teaching-Ed"],
+    "tourism": ["Hospitality-Svc"],
+    "food": ["Hospitality-Svc"],
+    "agriculture": ["Agri-Nature", "Field-Research"],
+    "veterinary": ["Agri-Nature", "Patient-Care", "Lab-Research"],
+    "military": ["Law-Enforce", "Physical-Skill"],
+    # Skills
+    "programming_skill": ["Software-Dev", "Data-Analytics"],
+    "data_analysis": ["Data-Analytics", "Software-Dev"],
+    "web_development": ["Software-Dev", "Digital-Media"],
+    "graphic_design": ["Visual-Design", "Digital-Media"],
+    "video_editing": ["Digital-Media", "Creative-Skill"],
+    "math_skills": ["Data-Analytics", "Finance-Acct"],
+    "laboratory": ["Lab-Research", "Medical-Lab"],
+    "technical_writing": ["Admin-Skill", "Software-Dev"],
+    "electronics": ["Electrical-Power", "Hardware-Systems"],
+    "drafting": ["Spatial-Design", "Civil-Build", "Mechanical-Design"],
+    "public_speaking": ["Teaching-Ed", "Marketing-Sales"],
+    "writing_skill": ["Creative-Skill", "Admin-Skill"],
+    "presentation": ["Marketing-Sales", "Teaching-Ed"],
+    "negotiation": ["Marketing-Sales", "Startup-Venture"],
+    "foreign_language": ["Teaching-Ed", "Hospitality-Svc"],
+    "filipino_language": ["Teaching-Ed", "Community-Serve"],
+    "social_media": ["Digital-Media", "Marketing-Sales"],
+    "leadership": ["Startup-Venture", "Admin-Skill"],
+    "project_management": ["Admin-Skill", "Industrial-Ops"],
+    "team_management": ["Admin-Skill", "People-Skill"],
+    "decision_making": ["Startup-Venture", "Admin-Skill"],
+    "planning": ["Admin-Skill", "Industrial-Ops"],
+    "time_management": ["Admin-Skill", "Industrial-Ops"],
+    "teamwork": ["People-Skill", "Industrial-Ops"],
+    "empathy": ["Patient-Care", "Rehab-Therapy"],
+    "customer_service": ["Hospitality-Svc", "People-Skill"],
+    "mentoring": ["Teaching-Ed"],
+    "conflict_resolution": ["People-Skill", "Community-Serve"],
+    "counseling": ["Rehab-Therapy", "People-Skill", "Community-Serve"],
+    "critical_thinking": ["Data-Analytics", "Lab-Research"],
+    "problem_solving": ["Software-Dev", "Mechanical-Design", "Data-Analytics"],
+    "research": ["Lab-Research", "Field-Research"],
+    "attention_detail": ["Admin-Skill", "Finance-Acct"],
+    "logical_reasoning": ["Data-Analytics", "Software-Dev"],
+    "creativity": ["Creative-Skill", "Visual-Design", "Digital-Media"],
+    "artistic": ["Visual-Design", "Creative-Skill"],
+    "music_skill": ["Creative-Skill"],
+    "storytelling": ["Creative-Skill", "Digital-Media"],
+    "design_thinking": ["Visual-Design", "Creative-Skill"],
+    "photography_skill": ["Visual-Design", "Digital-Media"],
+    "cooking": ["Hospitality-Svc"],
+    "first_aid": ["Patient-Care", "Rehab-Therapy"],
+    "sports_fitness": ["Physical-Skill", "Rehab-Therapy"],
+    "driving": ["Maritime-Sea", "Industrial-Ops"],
+    "gardening": ["Agri-Nature", "Field-Research"],
+    "repair_maintenance": ["Mechanical-Design", "Electrical-Power"],
+    # Strand-related keywords (for free text matching)
+    "stem": ["Software-Dev", "Lab-Research", "Data-Analytics"],
+    "abm": ["Finance-Acct", "Marketing-Sales", "Startup-Venture"],
+    "humss": ["Teaching-Ed", "Community-Serve", "Law-Enforce"],
+    "tvl": ["Hospitality-Svc", "Mechanical-Design", "Software-Dev"],
+    "gas": ["Community-Serve", "Admin-Skill", "Teaching-Ed"],
+    # Common aliases
+    "fitness": ["Physical-Skill", "Rehab-Therapy"],
+    "sports & fitness": ["Physical-Skill", "Rehab-Therapy"],
+    "physical education": ["Physical-Skill", "Teaching-Ed"],
+    "musical": ["Creative-Skill"],
+    "musical ability": ["Creative-Skill"],
+    "singing": ["Creative-Skill"],
+    "instrument": ["Creative-Skill"],
+    "design": ["Visual-Design", "Spatial-Design", "Digital-Media"],
+    "graphic design": ["Visual-Design", "Digital-Media"],
+    "interior design": ["Spatial-Design", "Visual-Design"],
+    "game": ["Digital-Media", "Software-Dev"],
+    "seaman": ["Maritime-Sea"],
+    "hotel": ["Hospitality-Svc"],
+    "culinary": ["Hospitality-Svc"],
+    "sports and fitness": ["Physical-Skill", "Rehab-Therapy"],
+    "athletic": ["Physical-Skill"],
+}
+
+
+# ==================== TRAIT-TO-BRANCH MAPPING ====================
+# Maps individual trait tags to high-level "branch" domains in the decision tree.
+# Each branch represents a major career/interest cluster.
+# When a user picks options with a certain trait, that branch gets activated.
+TRAIT_TO_BRANCH = {
+    # Healthcare branch
+    "Patient-Care": "healthcare", "Medical-Lab": "healthcare",
+    "Rehab-Therapy": "healthcare", "Health-Admin": "healthcare",
+    "Pharmacy": "healthcare", "Public-Health": "healthcare",
+    "Nutrition-Diet": "healthcare",
+    # Technology branch
+    "Software-Dev": "technology", "Hardware-Systems": "technology",
+    "Data-Analytics": "technology", "Cyber-Defense": "technology",
+    "Web-Dev": "technology", "Mobile-Dev": "technology",
+    "Game-Dev": "technology", "AI-ML": "technology",
+    "Cloud-Systems": "technology",
+    # Engineering branch
+    "Civil-Build": "engineering", "Mechanical-Design": "engineering",
+    "Electrical-Power": "engineering", "Industrial-Ops": "engineering",
+    "Spatial-Design": "engineering", "Environmental-Eng": "engineering",
+    # Business branch
+    "Finance-Acct": "business", "Marketing-Sales": "business",
+    "Startup-Venture": "business", "Admin-Skill": "business",
+    "HR-Management": "business",
+    # Education & Social branch
+    "Teaching-Ed": "education", "Counseling": "education",
+    "Sports-Ed": "education",
+    "Community-Serve": "public_service",
+    "Law-Enforce": "public_service", "Legal-Practice": "public_service",
+    "Social-Work": "public_service",
+    "People-Skill": "social",
+    # Creative branch
+    "Visual-Design": "creative", "Creative-Skill": "creative",
+    "Digital-Media": "creative", "Performing-Arts": "creative",
+    "Film-Broadcast": "creative", "Animation-3D": "creative",
+    # Maritime branch
+    "Maritime-Sea": "maritime",
+    # Agriculture/Environment branch
+    "Agri-Nature": "agriculture", "Field-Research": "agriculture",
+    "Lab-Research": "science", "Environmental-Sci": "science",
+    "Food-Science": "science", "Forensic-Sci": "science",
+    # Hospitality branch
+    "Hospitality-Svc": "hospitality", "Tourism-Travel": "hospitality",
+    "Culinary-Arts": "hospitality",
+    # Physical/Practical branch
+    "Physical-Skill": "physical",
+    "Technical-Skill": "technology",
+    # RIASEC-style traits (from course trait_tags)
+    "Investigative": "science", "Realistic": "engineering",
+    "Artistic": "creative", "Social": "social",
+    "Enterprising": "business", "Conventional": "business",
+    "Analytical-Skill": "technology",
+}
+
+# Maps branch domains to their adjacent/related branches
+# Used for smooth transitions in the decision tree
+BRANCH_ADJACENCY = {
+    "healthcare": ["science", "social", "education"],
+    "technology": ["engineering", "science", "creative"],
+    "engineering": ["technology", "science", "business"],
+    "business": ["technology", "social", "hospitality"],
+    "education": ["social", "healthcare", "public_service"],
+    "public_service": ["social", "education", "healthcare"],
+    "social": ["education", "public_service", "healthcare"],
+    "creative": ["technology", "hospitality", "social"],
+    "maritime": ["engineering", "physical", "technology"],
+    "agriculture": ["science", "physical", "education"],
+    "science": ["healthcare", "technology", "agriculture"],
+    "hospitality": ["business", "creative", "social"],
+    "physical": ["healthcare", "maritime", "agriculture"],
+}
+
+
+# ==================== DECISION TREE: QUESTION NODE CLASSIFICATION ====================
+# Every question is classified as a node in the decision tree with:
+#   level  : Tree depth (0=root, 1=branch, 2=deep, 3=confirmation)
+#   weight : Scoring multiplier - deeper questions carry more weight
+#   branches: Which tree branches this question is relevant to
+#
+# The algorithm traverses deeper as the assessment progresses:
+#   Rounds  1-5  → Level 0 (Root: broad discovery)
+#   Rounds  6-15 → Level 0-1 (Branch exploration)
+#   Rounds 16-30 → Level 1-2 (Deep probing)
+#   Rounds 31-50 → Level 2-3 (Situational confirmation)
+
+QUESTION_TREE_NODES = {
+    # ===== LEVEL 0: ROOT - Broad Career Discovery (Weight 1.0) =====
+    # These are entry points. Profile determines which gets asked first.
+    1:  {"level": 0, "weight": 1.0, "branches": ["healthcare", "technology", "engineering", "business", "education", "public_service", "creative", "maritime", "hospitality", "agriculture"]},
+    2:  {"level": 0, "weight": 1.0, "branches": ["healthcare", "technology", "engineering", "business", "education", "creative", "agriculture"]},
+    3:  {"level": 0, "weight": 1.0, "branches": ["healthcare", "technology", "engineering", "business", "creative", "maritime", "hospitality", "agriculture"]},
+    4:  {"level": 0, "weight": 1.0, "branches": ["healthcare", "technology", "engineering", "business", "creative", "science"]},
+    5:  {"level": 0, "weight": 1.0, "branches": ["healthcare", "technology", "business", "education", "public_service", "creative"]},
+
+    # ===== LEVEL 1: BRANCH EXPLORATION (Weight 1.5) =====
+    # Self-assessment scales
+    26: {"level": 1, "weight": 1.5, "branches": ["technology", "engineering", "business", "science"]},  # Scale - Math
+    27: {"level": 1, "weight": 1.5, "branches": ["healthcare", "social", "science"]},                   # Scale - Stress
+    28: {"level": 1, "weight": 1.5, "branches": ["business", "social", "education"]},                   # Scale - Communication
+    29: {"level": 1, "weight": 1.5, "branches": ["healthcare", "physical", "agriculture"]},             # Scale - Physical
+    30: {"level": 1, "weight": 1.5, "branches": ["creative", "business", "technology"]},                # Scale - Creativity
+    # Academic background
+    31: {"level": 1, "weight": 1.5, "branches": ["technology", "science", "creative", "business", "social"]},  # Academic - Favorite
+    32: {"level": 1, "weight": 1.5, "branches": ["technology", "science", "healthcare", "business"]},          # Academic - Challenge
+    33: {"level": 1, "weight": 1.5, "branches": ["technology", "science", "creative"]},                        # Academic - Study Style
+    # Lifestyle & values
+    34: {"level": 1, "weight": 1.5, "branches": ["business", "healthcare", "creative", "agriculture"]},       # Lifestyle
+    35: {"level": 1, "weight": 1.5, "branches": ["business", "public_service", "creative"]},                  # Career Values
+    # Professional
+    36: {"level": 1, "weight": 1.5, "branches": ["healthcare", "engineering", "business", "education"]},       # Professional Licensure
+    37: {"level": 1, "weight": 1.2, "branches": ["healthcare", "technology", "engineering", "business", "creative", "science", "agriculture", "social"]},  # Interest Type
+    38: {"level": 1, "weight": 1.2, "branches": ["healthcare", "technology", "business", "science", "agriculture"]},  # Fun - Role
+    39: {"level": 1, "weight": 1.2, "branches": ["healthcare", "technology", "business", "creative", "science"]},     # Fun - Superpower
+    40: {"level": 1, "weight": 1.5, "branches": ["healthcare", "business", "education", "science", "creative", "agriculture"]},  # Work Lifestyle
+    # Philippine-specific
+    51: {"level": 1, "weight": 1.5, "branches": ["healthcare", "business", "hospitality", "agriculture", "engineering"]},  # PH Industry
+    52: {"level": 1, "weight": 1.5, "branches": ["healthcare", "engineering", "business", "education"]},                   # Board Exam
+    53: {"level": 1, "weight": 1.3, "branches": ["healthcare", "business", "hospitality", "agriculture"]},                 # Work Location
+    54: {"level": 1, "weight": 1.3, "branches": ["healthcare", "business", "hospitality", "education", "technology"]},     # Dream Employer
+
+    # ===== LEVEL 2: DEEP PROBING (Weight 2.0) =====
+    # Skill assessments
+    55: {"level": 2, "weight": 2.0, "branches": ["social", "business", "education"]},                  # Language Skill
+    56: {"level": 2, "weight": 2.0, "branches": ["technology", "business", "creative"]},                # Tech Skill
+    57: {"level": 2, "weight": 2.0, "branches": ["business", "education", "public_service", "social"]}, # Leadership Skill
+    58: {"level": 2, "weight": 2.0, "branches": ["healthcare", "business", "science"]},                 # Stress Management
+    59: {"level": 2, "weight": 2.0, "branches": ["technology", "engineering", "business", "science"]},  # Math Skill
+    60: {"level": 2, "weight": 2.0, "branches": ["healthcare", "science", "agriculture"]},              # Science Skill
+    # Career priorities
+    61: {"level": 2, "weight": 2.0, "branches": ["business", "healthcare", "public_service", "creative"]},  # Career Priority
+    62: {"level": 2, "weight": 2.0, "branches": ["business", "healthcare", "technology"]},                   # Salary Importance
+    63: {"level": 2, "weight": 2.0, "branches": ["healthcare", "hospitality", "maritime", "business"]},      # International Work
+    64: {"level": 2, "weight": 2.0, "branches": ["healthcare", "business", "hospitality", "creative"]},      # Work Schedule
+    # Personality & interests
+    65: {"level": 2, "weight": 2.0, "branches": ["business", "healthcare", "creative", "technology"]},       # Personality
+    66: {"level": 2, "weight": 2.0, "branches": ["creative", "science", "physical", "agriculture"]},         # Hobbies
+    67: {"level": 2, "weight": 1.8, "branches": ["creative", "healthcare", "business", "agriculture"]},      # Entertainment
+    68: {"level": 2, "weight": 1.8, "branches": ["healthcare", "science", "business", "public_service"]},    # Role Model
+    # School & academic deep
+    69: {"level": 2, "weight": 2.0, "branches": ["technology", "creative", "business", "public_service"]},   # School Involvement
+    70: {"level": 2, "weight": 2.0, "branches": ["science", "creative", "social", "technology"]},            # Project Preference
+    71: {"level": 2, "weight": 2.0, "branches": ["technology", "science", "creative", "business", "social"]}, # Favorite Subject
+    72: {"level": 2, "weight": 2.0, "branches": ["technology", "science", "healthcare", "business"]},        # Challenging Subject
+    # Future & philosophy
+    73: {"level": 2, "weight": 2.0, "branches": ["business", "healthcare", "public_service", "creative"]},   # Future Vision
+    74: {"level": 2, "weight": 1.8, "branches": ["healthcare", "public_service", "creative", "agriculture"]}, # Life Legacy
+    75: {"level": 2, "weight": 1.8, "branches": ["healthcare", "business", "creative", "public_service"]},   # Career Fear
+    # Problem solving & cognition
+    76: {"level": 2, "weight": 2.0, "branches": ["technology", "science", "healthcare", "business"]},        # Problem Solving
+    77: {"level": 2, "weight": 2.0, "branches": ["business", "healthcare", "science", "social"]},            # Decision Making
+    78: {"level": 2, "weight": 2.0, "branches": ["technology", "science", "creative", "healthcare"]},        # Learning Style
+    79: {"level": 2, "weight": 2.0, "branches": ["social", "healthcare", "business"]},                       # Conflict Resolution
+    80: {"level": 2, "weight": 2.0, "branches": ["business", "technology", "science", "social"]},            # Team Role
+
+    # ===== LEVEL 3: SITUATIONAL CONFIRMATION (Weight 2.5) =====
+    # These scenario questions validate trait patterns through real-world situations
+    23: {"level": 3, "weight": 2.5, "branches": ["healthcare", "technology", "public_service"]},          # Situational - Emergency
+    24: {"level": 3, "weight": 2.5, "branches": ["business", "social", "technology"]},                    # Situational - Teamwork
+    25: {"level": 3, "weight": 2.5, "branches": ["healthcare", "public_service", "business"]},            # Situational - Accident
+    41: {"level": 3, "weight": 2.5, "branches": ["healthcare", "business", "agriculture", "creative"]},   # Community Scenario
+    42: {"level": 3, "weight": 2.5, "branches": ["agriculture", "healthcare", "social", "business"]},     # Survival Scenario
+    43: {"level": 3, "weight": 2.5, "branches": ["healthcare", "engineering", "social", "business"]},     # Disaster Response
+    44: {"level": 3, "weight": 2.5, "branches": ["business", "creative", "hospitality"]},                 # Event Planning
+    45: {"level": 3, "weight": 2.5, "branches": ["social", "healthcare", "technology", "public_service"]}, # Emotional Intelligence
+    81: {"level": 3, "weight": 2.5, "branches": ["engineering", "healthcare", "public_service", "business"]},  # Sit - Emergency 2
+    82: {"level": 3, "weight": 2.5, "branches": ["business", "agriculture", "hospitality", "creative"]},      # Sit - Community
+    83: {"level": 3, "weight": 2.5, "branches": ["technology", "business", "science", "social"]},              # Sit - Leadership
+    84: {"level": 3, "weight": 2.5, "branches": ["public_service", "healthcare", "creative"]},                 # Sit - Disaster Response 2
+    85: {"level": 3, "weight": 2.5, "branches": ["creative", "hospitality", "agriculture", "science"]},       # Sit - School Event
+    86: {"level": 3, "weight": 2.5, "branches": ["public_service", "technology", "business"]},                 # Sit - Ethics
+    87: {"level": 3, "weight": 2.5, "branches": ["business", "hospitality", "creative"]},                      # Sit - Family Business
+    88: {"level": 3, "weight": 2.5, "branches": ["healthcare", "social", "science"]},                          # Sit - Mental Health
+    89: {"level": 3, "weight": 2.5, "branches": ["technology", "public_service", "business"]},                 # Sit - Technology Crisis
+    90: {"level": 3, "weight": 2.5, "branches": ["agriculture", "physical", "science", "business"]},           # Sit - Survival
+    91: {"level": 3, "weight": 2.5, "branches": ["business", "creative", "technology"]},                       # Sit - Business
+    92: {"level": 3, "weight": 2.5, "branches": ["agriculture", "engineering", "social"]},                     # Sit - Environmental
+    93: {"level": 3, "weight": 2.5, "branches": ["business", "hospitality", "creative"]},                      # Sit - Event Planning 2
+    94: {"level": 3, "weight": 2.5, "branches": ["technology", "social", "public_service"]},                   # Sit - Cyberbullying
+    95: {"level": 3, "weight": 2.5, "branches": ["healthcare", "business", "social"]},                         # Sit - Family Health
+    96: {"level": 3, "weight": 2.5, "branches": ["public_service", "social", "business"]},                     # Sit - Ethics 2
+    97: {"level": 3, "weight": 2.5, "branches": ["technology", "healthcare", "business"]},                     # Sit - Technology
+    98: {"level": 3, "weight": 2.5, "branches": ["agriculture", "hospitality", "public_service"]},             # Sit - Media
+    99: {"level": 3, "weight": 2.5, "branches": ["public_service", "technology", "education"]},                # Sit - Academic Integrity
+    100: {"level": 3, "weight": 2.5, "branches": ["business", "healthcare", "hospitality", "science"]},        # Sit - Financial Decision
+    101: {"level": 3, "weight": 2.0, "branches": ["healthcare", "education", "hospitality", "creative", "agriculture"]},  # Sit - Career Fair
+    102: {"level": 3, "weight": 2.5, "branches": ["education", "social", "healthcare", "agriculture"]},        # Sit - Community Problem
+    103: {"level": 3, "weight": 2.5, "branches": ["physical", "healthcare", "engineering", "social"]},         # Sit - Friend Support
+    104: {"level": 3, "weight": 2.5, "branches": ["business", "creative", "technology"]},                      # Sit - Family Business 2
+    105: {"level": 3, "weight": 2.5, "branches": ["engineering", "healthcare", "hospitality", "science"]},     # Sit - Power Outage
+    106: {"level": 3, "weight": 2.5, "branches": ["education", "healthcare", "hospitality", "science"]},       # Sit - Accreditation
+    107: {"level": 3, "weight": 2.5, "branches": ["healthcare", "education", "social"]},                       # Sit - Medical Emergency
+    108: {"level": 3, "weight": 2.5, "branches": ["science", "technology", "business"]},                       # Sit - Group Research
+    109: {"level": 3, "weight": 2.5, "branches": ["social", "healthcare", "agriculture", "education"]},        # Sit - Typhoon Preparation
+    110: {"level": 3, "weight": 2.0, "branches": ["technology", "public_service", "creative", "science"]},     # Sit - Job Shadow
+    111: {"level": 3, "weight": 2.5, "branches": ["technology", "public_service", "business"]},                # Sit - Cyber Attack
+    112: {"level": 3, "weight": 2.0, "branches": ["business", "healthcare", "education", "hospitality"]},      # Sit - Mall Jobs
+    113: {"level": 3, "weight": 2.5, "branches": ["agriculture", "healthcare", "science"]},                    # Sit - Sick Pet
+    114: {"level": 3, "weight": 2.5, "branches": ["agriculture", "education", "engineering", "social"]},       # Sit - Environmental Initiative
+    115: {"level": 3, "weight": 2.5, "branches": ["social", "public_service", "hospitality", "creative"]},     # Sit - Found Wallet
+    116: {"level": 3, "weight": 2.5, "branches": ["engineering", "science", "social"]},                        # Sit - Factory Pollution
+    117: {"level": 3, "weight": 2.5, "branches": ["social", "healthcare", "science", "education"]},            # Sit - Helping Classmate
+    118: {"level": 3, "weight": 2.0, "branches": ["hospitality", "creative", "engineering", "healthcare"]},    # Sit - Family Reunion
+    119: {"level": 3, "weight": 2.5, "branches": ["agriculture", "social", "healthcare", "science"]},          # Sit - Water Shortage
+    120: {"level": 3, "weight": 2.0, "branches": ["healthcare", "science", "creative", "public_service"]},     # Sit - Dream Internship
+
+    # ===== DOMAIN-SPECIFIC ENTRY QUESTIONS (Weight 1.0) =====
+    121: {"level": 0, "weight": 1.0, "branches": ["technology"]},                       # Entry - Technology
+    122: {"level": 0, "weight": 1.0, "branches": ["healthcare"]},                       # Entry - Healthcare
+    123: {"level": 0, "weight": 1.0, "branches": ["engineering"]},                      # Entry - Engineering
+    124: {"level": 0, "weight": 1.0, "branches": ["business"]},                         # Entry - Business
+    125: {"level": 0, "weight": 1.0, "branches": ["creative"]},                         # Entry - Creative
+    126: {"level": 0, "weight": 1.0, "branches": ["education"]},                        # Entry - Education
+    127: {"level": 0, "weight": 1.0, "branches": ["public_service"]},                   # Entry - Public Service
+    128: {"level": 0, "weight": 1.0, "branches": ["science"]},                          # Entry - Science
+    129: {"level": 0, "weight": 1.0, "branches": ["agriculture"]},                      # Entry - Agriculture
+    130: {"level": 0, "weight": 1.0, "branches": ["maritime"]},                         # Entry - Maritime
+    131: {"level": 0, "weight": 1.0, "branches": ["hospitality"]},                      # Entry - Hospitality
+    132: {"level": 0, "weight": 1.0, "branches": ["physical"]},                         # Entry - Physical
+    133: {"level": 0, "weight": 1.0, "branches": ["social"]},                           # Entry - Social
+
+    # ===== EXPANDED SITUATIONAL (Weight 2.0-2.5) =====
+    # Tech situational
+    134: {"level": 2, "weight": 2.0, "branches": ["technology", "creative"]},            # Sit - Website Build
+    135: {"level": 2, "weight": 2.0, "branches": ["technology", "science"]},             # Sit - Hackathon
+    136: {"level": 2, "weight": 2.0, "branches": ["technology", "healthcare", "business"]}, # Sit - App Creation
+    137: {"level": 3, "weight": 2.5, "branches": ["technology", "public_service"]},      # Sit - Ransomware
+    138: {"level": 2, "weight": 2.0, "branches": ["technology", "education"]},           # Sit - AI System
+    139: {"level": 2, "weight": 2.0, "branches": ["technology", "creative"]},            # Sit - Indie Game
+    140: {"level": 3, "weight": 2.5, "branches": ["technology", "public_service", "business"]}, # Sit - Barangay Tech
+    # Healthcare situational
+    141: {"level": 3, "weight": 2.5, "branches": ["healthcare", "public_service"]},      # Sit - Typhoon Healthcare
+    142: {"level": 2, "weight": 2.0, "branches": ["healthcare", "science"]},             # Sit - Unknown Illness
+    143: {"level": 2, "weight": 2.0, "branches": ["healthcare", "public_service"]},      # Sit - Health Center
+    144: {"level": 2, "weight": 2.0, "branches": ["healthcare", "education", "physical"]},# Sit - Health Fair
+    # Engineering situational
+    145: {"level": 2, "weight": 2.0, "branches": ["engineering", "creative"]},           # Sit - Bridge Project
+    146: {"level": 2, "weight": 2.0, "branches": ["engineering", "technology"]},         # Sit - Factory Optimize
+    147: {"level": 3, "weight": 2.5, "branches": ["engineering", "science"]},            # Sit - Earthquake Inspect
+    # Business situational
+    148: {"level": 2, "weight": 2.0, "branches": ["business", "hospitality", "creative"]},# Sit - Food Business
+    149: {"level": 2, "weight": 2.0, "branches": ["business", "technology"]},            # Sit - Sari-sari Store
+    150: {"level": 2, "weight": 2.0, "branches": ["business", "education", "social"]},   # Sit - HR Department
+    # Creative situational
+    151: {"level": 2, "weight": 2.0, "branches": ["creative", "business"]},              # Sit - Cultural Show
+    152: {"level": 2, "weight": 2.0, "branches": ["creative", "technology"]},            # Sit - Digital Exhibit
+    153: {"level": 2, "weight": 2.0, "branches": ["creative", "engineering", "physical"]},# Sit - Park Design
+    # Science situational
+    154: {"level": 3, "weight": 2.5, "branches": ["science", "engineering", "public_service"]}, # Sit - River Pollution
+    155: {"level": 2, "weight": 2.0, "branches": ["science", "business", "hospitality"]},# Sit - Food Testing
+    156: {"level": 3, "weight": 2.5, "branches": ["science", "public_service"]},         # Sit - Forensic Lab
+    # Education situational
+    157: {"level": 2, "weight": 2.0, "branches": ["education", "social"]},               # Sit - Struggling Student
+    158: {"level": 3, "weight": 2.5, "branches": ["education", "public_service", "social"]},# Sit - Bullying
+    # Public service situational
+    159: {"level": 3, "weight": 2.5, "branches": ["public_service", "science", "technology"]},# Sit - Illegal Dumping
+    160: {"level": 3, "weight": 2.5, "branches": ["public_service", "social", "healthcare"]}, # Sit - Fire Victim
+    # Agriculture/Maritime/Hospitality situational
+    161: {"level": 2, "weight": 2.0, "branches": ["agriculture", "technology"]},         # Sit - Modern Farm
+    162: {"level": 3, "weight": 2.5, "branches": ["maritime", "engineering"]},           # Sit - Ship Engine
+    163: {"level": 2, "weight": 2.0, "branches": ["hospitality", "business", "creative"]},# Sit - Resort Improve
+    164: {"level": 2, "weight": 2.0, "branches": ["hospitality", "creative", "business"]},# Sit - Food Festival
+
+    # ===== CROSS-DOMAIN & PERSONALITY (Weight 1.5-2.0) =====
+    165: {"level": 1, "weight": 1.5, "branches": ["business", "technology", "creative", "hospitality"]},# Online Business
+    166: {"level": 1, "weight": 1.5, "branches": ["education", "healthcare", "public_service", "science"]},# Volunteering
+    167: {"level": 1, "weight": 1.5, "branches": ["science", "technology", "agriculture", "social"]},# PH Research
+    168: {"level": 2, "weight": 2.0, "branches": ["science", "creative", "technology"]}, # Group Research
+    169: {"level": 2, "weight": 2.0, "branches": ["public_service", "healthcare", "technology", "physical"]},# Barangay Budget
+    170: {"level": 1, "weight": 1.5, "branches": ["creative", "technology", "hospitality", "science"]},# YouTube Channel
+    171: {"level": 1, "weight": 1.5, "branches": ["technology", "healthcare", "creative", "business", "education"]},# Accomplishment
+    172: {"level": 1, "weight": 1.5, "branches": ["science", "technology", "creative", "business"]},# School Subjects
+    173: {"level": 1, "weight": 1.5, "branches": ["business", "science", "technology", "creative"]},# Leadership Style
+    174: {"level": 1, "weight": 1.5, "branches": ["technology", "healthcare", "engineering", "education", "creative", "business"]},# Future Career
+    175: {"level": 1, "weight": 1.5, "branches": ["social", "science", "education", "public_service", "agriculture"]},# PH Problem
+    176: {"level": 1, "weight": 1.5, "branches": ["technology", "healthcare", "engineering", "business", "creative", "public_service"]},# Study Abroad
+    177: {"level": 1, "weight": 1.5, "branches": ["engineering", "science", "creative", "technology"]},# Learning Style
+    178: {"level": 1, "weight": 1.5, "branches": ["technology", "healthcare", "business", "public_service", "science"]},# News Interest
+    179: {"level": 1, "weight": 1.5, "branches": ["technology", "creative", "business", "science"]},# Team Strength
+    180: {"level": 2, "weight": 2.0, "branches": ["technology", "engineering", "science", "agriculture"]},# Invention
+    181: {"level": 1, "weight": 1.5, "branches": ["science", "healthcare", "technology", "creative", "business"]},# Work Environment
+    182: {"level": 1, "weight": 1.5, "branches": ["science", "healthcare", "business", "creative", "education"]},# Motivation
+    183: {"level": 1, "weight": 1.5, "branches": ["physical", "creative", "social", "technology"]},# Stress Handling
+    184: {"level": 1, "weight": 1.5, "branches": ["technology", "healthcare", "business", "creative", "science"]},# After-school Club
+    185: {"level": 2, "weight": 2.0, "branches": ["technology", "healthcare", "business", "engineering", "creative", "science"]},# Problem Solving
+    186: {"level": 2, "weight": 2.0, "branches": ["creative", "business", "technology"]},# NGO Campaign
+    187: {"level": 2, "weight": 2.0, "branches": ["science", "agriculture", "technology"]},# Science Fair
+    188: {"level": 2, "weight": 2.0, "branches": ["healthcare", "education"]},           # Rural Health
+    189: {"level": 2, "weight": 2.0, "branches": ["technology", "healthcare", "engineering", "business"]},# Capstone Project
+    190: {"level": 1, "weight": 1.5, "branches": ["technology", "business", "science", "creative", "healthcare"]},# Department Pref
+    191: {"level": 2, "weight": 2.0, "branches": ["engineering", "technology", "business"]},# Urban Planning
+    192: {"level": 3, "weight": 2.5, "branches": ["healthcare", "education", "social"]}, # Emergency Response
+    193: {"level": 1, "weight": 1.5, "branches": ["technology", "healthcare", "engineering", "business", "creative", "science", "hospitality"]},# Internship
+    194: {"level": 1, "weight": 1.5, "branches": ["education", "science"]},              # Scale - Communication
+    195: {"level": 1, "weight": 1.5, "branches": ["technology", "science", "business"]}, # Scale - Math Comfort
+    196: {"level": 1, "weight": 1.5, "branches": ["agriculture", "engineering", "science"]},# Scale - Outdoor Work
+    197: {"level": 1, "weight": 1.5, "branches": ["healthcare", "social", "education"]}, # Scale - Helping Others
+    198: {"level": 2, "weight": 2.0, "branches": ["technology", "healthcare", "science", "agriculture"]},# Social Innovation
+    199: {"level": 1, "weight": 1.5, "branches": ["technology", "healthcare", "business", "creative", "science"]},# TV Genre
+    200: {"level": 1, "weight": 1.5, "branches": ["technology", "healthcare", "business", "creative", "science", "education"]},# Bookstore
+}
+
+
+# ==================== CONVERSATION CHAIN: DOMAIN ENTRY QUESTIONS ====================
+# When a domain is activated (from profile or answers), these are the FIRST questions
+# to ask. Ordered by how well they introduce the domain's sub-areas.
+DOMAIN_ENTRY_QUESTIONS = {
+    "technology":    [121, 134, 135, 136, 56, 37, 1, 31],
+    "healthcare":    [122, 141, 142, 143, 36, 60, 29, 40],
+    "engineering":   [123, 145, 146, 147, 59, 26, 52],
+    "business":      [124, 148, 149, 150, 35, 28, 57, 61],
+    "creative":      [125, 151, 152, 153, 30, 37, 33, 66],
+    "education":     [126, 157, 158, 28, 57, 31, 71],
+    "public_service":[127, 159, 160, 5, 41, 57, 35, 61],
+    "science":       [128, 154, 155, 156, 60, 31, 76, 33],
+    "agriculture":   [129, 161, 187, 51, 40, 29, 66, 37],
+    "maritime":      [130, 162, 51, 29, 63, 34],
+    "hospitality":   [131, 163, 164, 51, 53, 63, 34],
+    "physical":      [132, 29, 66, 37, 64, 34],
+    "social":        [133, 28, 57, 45, 79, 80],
+}
+
+# ==================== CONVERSATION CHAIN: TRAIT FOLLOW-UP MAP ====================
+# After a user picks an option with trait X, these are the best follow-up questions.
+# The system picks the first unanswered one. When a chain runs out, accumulated
+# branch weights determine the next domain to explore.
+
+TRAIT_FOLLOWUP_MAP = {
+    # ═══════ TECHNOLOGY ═══════
+    "Software-Dev":    [134, 135, 97, 89, 111, 56, 70, 69, 83, 76, 108, 189],
+    "Hardware-Systems": [187, 89, 111, 56, 70, 105, 44, 84, 76, 140],
+    "Data-Analytics":  [135, 97, 108, 56, 76, 59, 80, 69, 91, 191],
+    "Cyber-Defense":   [137, 111, 89, 94, 97, 99, 56, 86, 178],
+    "Digital-Media":   [152, 93, 44, 98, 118, 30, 70, 78, 110, 186],
+    "Technical-Skill": [134, 56, 76, 70, 83, 80, 105, 109],
+    "Web-Dev":         [134, 140, 186, 97, 89, 56, 70, 148, 163],
+    "Mobile-Dev":      [136, 135, 140, 189, 97, 56, 191, 198],
+    "Game-Dev":        [139, 152, 135, 198, 70, 185, 180],
+    "AI-ML":           [138, 135, 136, 189, 198, 167, 187, 180],
+    "Cloud-Systems":   [137, 134, 140, 135, 97, 189, 191],
+    # ═══════ HEALTHCARE ═══════
+    "Patient-Care":    [141, 142, 107, 95, 36, 88, 81, 60, 29, 58, 103, 192],
+    "Medical-Lab":     [142, 60, 107, 95, 36, 108, 52, 113, 76, 156],
+    "Rehab-Therapy":   [143, 107, 88, 95, 103, 36, 29, 45, 113, 188],
+    "Health-Admin":    [143, 106, 56, 107, 95, 57, 61, 80, 188],
+    "Pharmacy":        [141, 142, 143, 188, 107, 95, 60, 155],
+    "Public-Health":   [141, 143, 188, 166, 169, 175, 198, 192],
+    "Nutrition-Diet":  [144, 155, 143, 188, 166, 187, 175],
+    # ═══════ ENGINEERING ═══════
+    "Civil-Build":     [145, 147, 84, 119, 59, 52, 109, 116, 90, 26, 105, 191],
+    "Mechanical-Design":[146, 105, 52, 59, 119, 90, 85, 84, 116, 162],
+    "Electrical-Power": [146, 105, 52, 109, 114, 43, 59, 116, 187],
+    "Industrial-Ops":  [146, 116, 51, 92, 105, 118, 44, 53, 155],
+    "Spatial-Design":  [153, 59, 118, 30, 112, 110, 67, 36, 104],
+    "Environmental-Eng":[147, 154, 159, 189, 169, 175, 187, 191],
+    # ═══════ BUSINESS ═══════
+    "Finance-Acct":    [149, 87, 104, 91, 100, 62, 35, 52, 61, 57, 190],
+    "Marketing-Sales": [148, 186, 91, 87, 104, 112, 65, 28, 62, 85, 163],
+    "Startup-Venture": [148, 149, 165, 87, 104, 91, 100, 85, 61, 65, 57],
+    "Admin-Skill":     [150, 106, 93, 87, 44, 80, 118, 57, 104, 190],
+    "HR-Management":   [150, 149, 160, 148, 106, 87, 190, 193],
+    # ═══════ CREATIVE ═══════
+    "Visual-Design":   [152, 153, 93, 44, 69, 30, 56, 78, 110, 118, 33, 186],
+    "Creative-Skill":  [151, 152, 30, 44, 93, 69, 75, 66, 88, 98, 153],
+    "Animation-3D":    [139, 152, 93, 44, 98, 135, 180, 189],
+    "Film-Broadcast":  [151, 152, 186, 170, 93, 44, 98, 167, 164],
+    "Performing-Arts": [151, 164, 44, 30, 66, 93, 152, 176],
+    # ═══════ EDUCATION ═══════
+    "Teaching-Ed":     [157, 158, 83, 88, 45, 31, 71, 81, 86, 99, 106, 117],
+    "Sports-Ed":       [157, 144, 166, 169, 193, 176, 183, 187],
+    "Counseling":      [158, 157, 160, 176, 192, 198, 187, 167],
+    # ═══════ PUBLIC SERVICE ═══════
+    "Law-Enforce":     [159, 92, 94, 96, 99, 86, 25, 43, 115, 84, 156],
+    "Community-Serve": [160, 159, 102, 41, 92, 94, 117, 114, 109, 74, 43, 169],
+    "Forensic-Sci":    [156, 159, 92, 94, 142, 108, 178, 193],
+    "Legal-Practice":  [159, 160, 92, 94, 96, 86, 175, 193, 190],
+    "Social-Work":     [160, 159, 166, 169, 175, 157, 193, 176],
+    # ═══════ SCIENCE ═══════
+    "Lab-Research":    [155, 154, 156, 187, 108, 60, 113, 92, 116, 76, 33, 78, 119],
+    "Field-Research":  [154, 161, 92, 113, 114, 108, 98, 90, 105, 119, 167],
+    "Environmental-Sci":[154, 159, 167, 175, 189, 187, 113, 114, 196],
+    "Food-Science":    [155, 164, 148, 187, 161, 108, 113],
+    # ═══════ AGRICULTURE ═══════
+    "Agri-Nature":     [161, 129, 92, 113, 114, 119, 51, 90, 98, 53, 66, 187],
+    # ═══════ MARITIME ═══════
+    "Maritime-Sea":    [162, 63, 51, 29, 34, 90, 85, 27, 39, 64],
+    # ═══════ HOSPITALITY ═══════
+    "Hospitality-Svc": [163, 164, 91, 112, 63, 53, 118, 85, 64, 51, 93],
+    "Tourism-Travel":  [163, 164, 152, 170, 176, 193, 199],
+    "Culinary-Arts":   [164, 163, 148, 155, 170, 176, 199],
+    # ═══════ OTHER ═══════
+    "People-Skill":    [150, 157, 83, 45, 79, 88, 94, 28, 117, 80],
+    "Physical-Skill":  [132, 29, 66, 90, 103, 37, 25, 64, 34, 192],
+    "Analytical-Skill":[194, 195, 172, 108, 80, 76, 56, 97],
+}
+
+# ==================== INTEREST KEYWORD → DOMAIN ====================
+INTEREST_DOMAIN_MAP = {
+    "computer": "technology", "programming": "technology", "coding": "technology",
+    "software": "technology", "web_development": "technology", "game_dev": "technology",
+    "ai": "technology", "data": "technology", "cybersecurity": "technology",
+    "robotics": "technology", "it": "technology", "tech": "technology",
+    "programming_skill": "technology", "data_analysis": "technology",
+    "electronics": "technology", "web_design": "technology", "mobile_app": "technology",
+    "machine_learning": "technology", "artificial_intelligence": "technology",
+    "cloud_computing": "technology", "database": "technology", "networking": "technology",
+    "game_development": "technology", "hacking": "technology", "app_development": "technology",
+    "medical": "healthcare", "nursing": "healthcare", "pharmacy": "healthcare",
+    "physical_therapy": "healthcare", "nutrition": "healthcare", "psychology": "healthcare",
+    "medical_tech": "healthcare", "dentistry": "healthcare", "health": "healthcare",
+    "first_aid": "healthcare", "counseling": "healthcare", "dietetics": "healthcare",
+    "mental_health": "healthcare", "public_health": "healthcare", "midwifery": "healthcare",
+    "radiologic": "healthcare", "occupational_therapy": "healthcare",
+    "engineering": "engineering", "mechanical": "engineering", "electrical": "engineering",
+    "civil": "engineering", "architecture": "engineering", "industrial": "engineering",
+    "drafting": "engineering", "repair_maintenance": "engineering",
+    "geodetic": "engineering", "surveying": "engineering", "environmental_engineering": "engineering",
+    "business": "business", "finance": "business", "marketing": "business",
+    "accounting": "business", "economics": "business", "management": "business",
+    "real_estate": "business", "entrepreneurship": "business",
+    "negotiation": "business", "project_management": "business",
+    "human_resources": "business", "banking": "business", "investing": "business",
+    "advertising": "business", "sales": "business", "startup": "business",
+    "art": "creative", "music": "creative", "film": "creative", "writing": "creative",
+    "photography": "creative", "animation": "creative", "fashion": "creative",
+    "graphic_design": "creative", "design": "creative", "creativity": "creative",
+    "artistic": "creative", "music_skill": "creative", "storytelling": "creative",
+    "design_thinking": "creative", "photography_skill": "creative", "video_editing": "creative",
+    "filmmaking": "creative", "theater": "creative", "performing_arts": "creative",
+    "dance": "creative", "interior_design": "creative", "game_art": "creative",
+    "3d_modeling": "creative", "painting": "creative", "drawing": "creative",
+    "education": "education", "teaching": "education", "mentoring": "education",
+    "public_speaking": "education", "presentation": "education",
+    "tutoring": "education", "coaching": "education", "special_education": "education",
+    "library_science": "education", "curriculum": "education",
+    "law": "public_service", "politics": "public_service", "criminology": "public_service",
+    "social": "public_service", "communication": "public_service",
+    "philosophy": "public_service", "history": "public_service",
+    "conflict_resolution": "public_service", "forensics": "public_service",
+    "social_work": "public_service", "human_rights": "public_service",
+    "diplomacy": "public_service", "public_policy": "public_service",
+    "science": "science", "biology": "science", "chemistry": "science",
+    "physics": "science", "environment": "science", "earth_science": "science",
+    "laboratory": "science", "research": "science",
+    "food_science": "science", "forensic_science": "science",
+    "environmental_science": "science", "marine_biology": "science",
+    "agriculture": "agriculture", "veterinary": "agriculture", "gardening": "agriculture",
+    "farming": "agriculture", "fishery": "agriculture", "forestry": "agriculture",
+    "aquaculture": "agriculture", "livestock": "agriculture",
+    "maritime": "maritime", "aviation": "maritime", "logistics": "maritime",
+    "shipping": "maritime", "navigation": "maritime", "seafaring": "maritime",
+    "tourism": "hospitality", "food": "hospitality", "cooking": "hospitality",
+    "customer_service": "hospitality", "hotel": "hospitality", "culinary": "hospitality",
+    "baking": "hospitality", "travel": "hospitality", "events": "hospitality",
+    "restaurant": "hospitality", "resort": "hospitality",
+    "sports": "physical", "sports_fitness": "physical", "military": "physical",
+    "driving": "physical", "fitness": "physical", "athletics": "physical",
+    "gym": "physical", "exercise": "physical", "martial_arts": "physical",
+}
+
+# Maps SHS strand to default domain
+STRAND_DOMAIN_MAP = {
+    "STEM": "technology", "ABM": "business", "HUMSS": "education",
+    "TVL": "technology", "GAS": None, "SPORTS": "physical", "ARTS": "creative",
+}
+
+# Minimum questions to ask in a domain before moving on
+DOMAIN_MIN_QUESTIONS = 3
 
 
 class AdaptiveAssessmentEngine:
@@ -138,7 +883,36 @@ class AdaptiveAssessmentEngine:
                 if trait:
                     self.trait_to_questions[trait].append(qid)
         
+        # Pre-compute question-trait affinity matrix for decision tree
+        # affinity[qid] = {trait: fraction_of_options_with_this_trait}
+        self.question_trait_affinity: Dict[int, Dict[str, float]] = {}
+        for qid, question in self.questions.items():
+            affinities = {}
+            options = question.get('options', [])
+            for opt in options:
+                trait = opt.get('trait_tag')
+                if trait:
+                    affinities[trait] = affinities.get(trait, 0) + 1
+            total = len(options)
+            if total > 0:
+                for trait in affinities:
+                    affinities[trait] /= total  # Normalize to 0-1
+            self.question_trait_affinity[qid] = affinities
+        
+        # Pre-compute question-branch affinity
+        # branch_affinity[qid] = {branch: max_trait_affinity_in_that_branch}
+        self.question_branch_affinity: Dict[int, Dict[str, float]] = {}
+        for qid, affinities in self.question_trait_affinity.items():
+            branch_scores = {}
+            for trait, score in affinities.items():
+                branch = TRAIT_TO_BRANCH.get(trait, "")
+                if branch:
+                    branch_scores[branch] = max(branch_scores.get(branch, 0), score)
+            self.question_branch_affinity[qid] = branch_scores
+        
         print(f"[ENGINE] Adaptive Engine initialized with {len(self.courses)} courses and {len(self.questions)} questions")
+        print(f"[ENGINE] Pre-computed trait affinity for {len(self.question_trait_affinity)} questions")
+        print(f"[ENGINE] Decision tree nodes classified: {len(QUESTION_TREE_NODES)} questions")
     
     def _parse_traits(self, trait_tag) -> Set[str]:
         """Parse trait_tag field into set of traits"""
@@ -153,92 +927,7 @@ class AdaptiveAssessmentEngine:
         if not interests and not skills:
             return 0.0
         
-        # Profile keyword to trait mapping - MUST use actual trait names from courses
-        PROFILE_TO_TRAITS = {
-            "science": ["Scientific", "Lab-Research", "Medical-Lab"],
-            "biology": ["Medical-Lab", "Lab-Research", "Patient-Care"],
-            "chemistry": ["Medical-Lab", "Lab-Research", "Scientific"],
-            "physics": ["Mechanical-Design", "Electrical-Power", "Civil-Build"],
-            "environment": ["Field-Research", "Agri-Nature"],
-            "programming": ["Software-Dev", "Data-Analytics", "Cyber-Defense"],
-            "computer": ["Software-Dev", "Hardware-Systems", "Data-Analytics"],
-            "data": ["Data-Analytics", "Software-Dev"],
-            "ai": ["Software-Dev", "Data-Analytics"],
-            "cybersecurity": ["Cyber-Defense", "Software-Dev"],
-            "engineering": ["Civil-Build", "Mechanical-Design", "Electrical-Power", "Industrial-Ops"],
-            "mechanical": ["Mechanical-Design", "Industrial-Ops"],
-            "electrical": ["Electrical-Power", "Hardware-Systems"],
-            "civil": ["Civil-Build", "Spatial-Design"],
-            "business": ["Startup-Venture", "Marketing-Sales", "Finance-Acct", "Admin-Skill"],
-            "finance": ["Finance-Acct", "Startup-Venture"],
-            "marketing": ["Marketing-Sales", "Startup-Venture"],
-            "accounting": ["Finance-Acct", "Admin-Skill"],
-            "economics": ["Finance-Acct"],
-            "art": ["Visual-Design", "Creative-Skill", "Digital-Media"],
-            "music": ["Creative-Skill"],
-            "film": ["Digital-Media", "Creative-Skill"],
-            "writing": ["Creative-Skill"],
-            "photography": ["Visual-Design", "Digital-Media"],
-            "medical": ["Patient-Care", "Medical-Lab", "Rehab-Therapy"],
-            "nursing": ["Patient-Care"],
-            "psychology": ["Rehab-Therapy", "Community-Serve"],
-            "education": ["Teaching-Ed"],
-            "law": ["Law-Enforce"],
-            "politics": ["Community-Serve"],
-            "social": ["Community-Serve", "Rehab-Therapy"],
-            "history": ["Community-Serve"],
-            # Sports & Fitness - CORRECT trait names
-            "sports": ["Physical-Skill", "Rehab-Therapy", "Teaching-Ed"],
-            "fitness": ["Physical-Skill", "Rehab-Therapy"],
-            "sports & fitness": ["Physical-Skill", "Rehab-Therapy", "Teaching-Ed"],
-            "sports and fitness": ["Physical-Skill", "Rehab-Therapy", "Teaching-Ed"],
-            "athletic": ["Physical-Skill"],
-            "physical education": ["Physical-Skill", "Teaching-Ed"],
-            "tourism": ["Hospitality-Svc"],
-            "food": ["Hospitality-Svc"],
-            "agriculture": ["Agri-Nature", "Field-Research"],
-            
-            # Skills - CORRECT trait names
-            "programming_skill": ["Software-Dev", "Data-Analytics"],
-            "data_analysis": ["Data-Analytics", "Software-Dev"],
-            "web_development": ["Software-Dev", "Digital-Media"],
-            "graphic_design": ["Visual-Design", "Digital-Media"],
-            "video_editing": ["Digital-Media", "Creative-Skill"],
-            "math_skills": ["Data-Analytics", "Finance-Acct"],
-            "laboratory": ["Lab-Research", "Medical-Lab"],
-            "technical_writing": ["Admin-Skill", "Software-Dev"],
-            "public_speaking": ["Teaching-Ed", "Marketing-Sales"],
-            "writing_skill": ["Creative-Skill", "Admin-Skill"],
-            "presentation": ["Marketing-Sales", "Teaching-Ed"],
-            "negotiation": ["Marketing-Sales", "Startup-Venture"],
-            "foreign_language": ["Teaching-Ed", "Hospitality-Svc"],
-            "leadership": ["Startup-Venture", "Admin-Skill"],
-            "project_management": ["Admin-Skill", "Industrial-Ops"],
-            "team_management": ["Admin-Skill", "People-Skill"],
-            "decision_making": ["Startup-Venture", "Admin-Skill"],
-            "planning": ["Admin-Skill", "Industrial-Ops"],
-            "teamwork": ["People-Skill", "Industrial-Ops"],
-            "empathy": ["Patient-Care", "Rehab-Therapy"],
-            "customer_service": ["Hospitality-Svc", "People-Skill"],
-            "mentoring": ["Teaching-Ed"],
-            "conflict_resolution": ["People-Skill", "Community-Serve"],
-            # Musical Ability - CORRECT trait names
-            "musical": ["Creative-Skill"],
-            "musical ability": ["Creative-Skill"],
-            "singing": ["Creative-Skill"],
-            "instrument": ["Creative-Skill"],
-            # Additional analytical skills
-            "critical_thinking": ["Data-Analytics", "Lab-Research"],
-            "problem_solving": ["Software-Dev", "Mechanical-Design", "Data-Analytics"],
-            "research": ["Lab-Research", "Field-Research"],
-            "attention_detail": ["Admin-Skill", "Finance-Acct"],
-            "logical_reasoning": ["Data-Analytics", "Software-Dev"],
-            "creativity": ["Creative-Skill", "Visual-Design", "Digital-Media"],
-            "artistic": ["Visual-Design", "Creative-Skill"],
-            "music_skill": ["Creative-Skill"],
-            "storytelling": ["Creative-Skill", "Digital-Media"],
-            "design_thinking": ["Visual-Design", "Creative-Skill"],
-        }
+        PROFILE_TO_TRAITS = UNIFIED_PROFILE_TO_TRAITS
         
         # Parse user's selections
         interest_list = [i.strip().lower() for i in (interests or "").split(",") if i.strip()]
@@ -438,78 +1127,7 @@ class AdaptiveAssessmentEngine:
         if not session.user_interests and not session.user_skills:
             return set()
         
-        # Reuse the PROFILE_TO_TRAITS mapping
-        PROFILE_TO_TRAITS = {
-            "science": ["Scientific", "Lab-Research", "Medical-Lab"],
-            "biology": ["Medical-Lab", "Lab-Research", "Patient-Care"],
-            "chemistry": ["Medical-Lab", "Lab-Research"],
-            "physics": ["Mechanical-Design", "Electrical-Power", "Civil-Build"],
-            "environment": ["Agri-Nature", "Field-Research"],
-            "programming": ["Software-Dev", "Data-Analytics", "Cyber-Defense"],
-            "computer": ["Software-Dev", "Hardware-Systems", "Data-Analytics"],
-            "data": ["Data-Analytics", "Software-Dev"],
-            "ai": ["Software-Dev", "Data-Analytics"],
-            "cybersecurity": ["Cyber-Defense", "Software-Dev"],
-            "engineering": ["Civil-Build", "Mechanical-Design", "Electrical-Power", "Industrial-Ops"],
-            "mechanical": ["Mechanical-Design", "Industrial-Ops"],
-            "electrical": ["Electrical-Power", "Hardware-Systems"],
-            "civil": ["Civil-Build", "Spatial-Design"],
-            "business": ["Startup-Venture", "Marketing-Sales", "Finance-Acct"],
-            "finance": ["Finance-Acct", "Startup-Venture"],
-            "marketing": ["Marketing-Sales", "Startup-Venture"],
-            "accounting": ["Finance-Acct", "Admin-Skill"],
-            "economics": ["Finance-Acct"],
-            "art": ["Visual-Design", "Creative-Skill", "Digital-Media"],
-            "music": ["Creative-Skill"],
-            "film": ["Digital-Media", "Creative-Skill"],
-            "writing": ["Creative-Skill"],
-            "photography": ["Visual-Design", "Digital-Media"],
-            "medical": ["Patient-Care", "Medical-Lab", "Rehab-Therapy"],
-            "nursing": ["Patient-Care"],
-            "psychology": ["Rehab-Therapy", "Community-Serve"],
-            "education": ["Teaching-Ed"],
-            "law": ["Law-Enforce"],
-            "politics": ["Community-Serve"],
-            "social": ["Community-Serve", "Rehab-Therapy"],
-            "tourism": ["Hospitality-Svc"],
-            "food": ["Hospitality-Svc"],
-            "agriculture": ["Agri-Nature"],
-            # Skills mapping
-            "programming_skill": ["Software-Dev", "Data-Analytics"],
-            "data_analysis": ["Data-Analytics", "Software-Dev"],
-            "web_development": ["Software-Dev", "Digital-Media"],
-            "graphic_design": ["Visual-Design", "Digital-Media"],
-            "video_editing": ["Digital-Media"],
-            "laboratory": ["Lab-Research", "Medical-Lab"],
-            "leadership": ["Startup-Venture", "Admin-Skill"],
-            "project_management": ["Admin-Skill", "Industrial-Ops"],
-            "empathy": ["Patient-Care", "Rehab-Therapy"],
-            "customer_service": ["Hospitality-Svc"],
-            "mentoring": ["Teaching-Ed"],
-            "research": ["Lab-Research", "Field-Research"],
-            "creativity": ["Visual-Design", "Creative-Skill", "Digital-Media"],
-            "artistic": ["Visual-Design", "Creative-Skill"],
-            # Additional common terms
-            "public_speaking": ["Teaching-Ed", "Marketing-Sales"],
-            "communication": ["Marketing-Sales", "Teaching-Ed", "Admin-Skill"],
-            "problem_solving": ["Software-Dev", "Mechanical-Design", "Data-Analytics"],
-            "critical_thinking": ["Scientific", "Lab-Research", "Data-Analytics"],
-            "teamwork": ["Industrial-Ops", "Admin-Skill", "Community-Serve"],
-            "writing_skill": ["Creative-Skill", "Admin-Skill"],
-            # Sports & Fitness
-            "sports": ["Physical-Skill", "Rehab-Therapy"],
-            "fitness": ["Physical-Skill", "Rehab-Therapy"],
-            "sports & fitness": ["Physical-Skill", "Rehab-Therapy"],
-            "sports and fitness": ["Physical-Skill", "Rehab-Therapy"],
-            "athletic": ["Physical-Skill"],
-            "physical education": ["Physical-Skill", "Teaching-Ed"],
-            # Musical Ability
-            "musical": ["Creative-Skill"],
-            "musical ability": ["Creative-Skill"],
-            "music": ["Creative-Skill"],
-            "singing": ["Creative-Skill"],
-            "instrument": ["Creative-Skill"],
-        }
+        PROFILE_TO_TRAITS = UNIFIED_PROFILE_TO_TRAITS
         
         # Count how often each trait appears across all selected interests/skills
         trait_counts = {}
@@ -545,6 +1163,69 @@ class AdaptiveAssessmentEngine:
     def _get_strand_priority_traits(self, strand: str) -> Set[str]:
         """Get traits prioritized by user's SHS strand."""
         return set(STRAND_PRIORITY_TRAITS.get(strand, []))
+
+    def _get_profile_priority_traits_ranked(self, interests: str, skills: str, strand: str) -> List[str]:
+        """
+        Build a RANKED list of traits from user profile (interests + skills + strand).
+        The first trait is the user's STRONGEST stated interest.
+        Used to seed the first questions of the assessment.
+        """
+        PROFILE_TO_TRAITS = UNIFIED_PROFILE_TO_TRAITS
+
+        # Count trait frequency across all profile inputs (interests come first = higher weight)
+        trait_counts: Dict[str, float] = {}
+
+        # Interests get weight 2.0 (these are what the user explicitly stated)
+        if interests:
+            for interest in interests.split(','):
+                interest = interest.strip().lower()
+                traits = PROFILE_TO_TRAITS.get(interest, [])
+                for i, trait in enumerate(traits):
+                    # First trait in list is most relevant
+                    trait_counts[trait] = trait_counts.get(trait, 0) + (2.0 - i * 0.3)
+
+        # Skills get weight 1.5
+        if skills:
+            for skill in skills.split(','):
+                skill = skill.strip().lower()
+                traits = PROFILE_TO_TRAITS.get(skill, [])
+                for i, trait in enumerate(traits):
+                    trait_counts[trait] = trait_counts.get(trait, 0) + (1.5 - i * 0.2)
+
+        # Strand traits get weight 1.0 (background context)
+        strand_traits = STRAND_PRIORITY_TRAITS.get(strand, [])
+        for i, trait in enumerate(strand_traits):
+            trait_counts[trait] = trait_counts.get(trait, 0) + max(1.0 - i * 0.1, 0.2)
+
+        # Sort by score descending, return ranked list
+        sorted_traits = sorted(trait_counts.items(), key=lambda x: x[1], reverse=True)
+        ranked = [trait for trait, score in sorted_traits]
+
+        print(f"[PROFILE-SEED] Ranked profile traits: {ranked[:10]}")
+        return ranked
+
+    def _get_current_topic_and_adjacent(self, session: AdaptiveSession) -> Tuple[str, Set[str]]:
+        """
+        Determine the user's current topic thread from their recent answers
+        and return (current_topic, set_of_adjacent_topics).
+        
+        Looks at the last 5 traits the user chose. The most frequent trait
+        among those is the "current thread".
+        """
+        if not session.recent_traits:
+            return ("", set())
+
+        # Count recent traits (last 5)
+        window = session.recent_traits[-5:]
+        counts: Dict[str, int] = {}
+        for t in window:
+            counts[t] = counts.get(t, 0) + 1
+
+        # Most frequent recent trait = current topic
+        current_topic = max(counts, key=counts.get)
+        adjacent = set(TOPIC_ADJACENCY.get(current_topic, []))
+
+        return current_topic, adjacent
 
     def create_session(self, user_id: int, user_gwa: float = None, user_strand: str = None, max_questions: int = 30, user_interests: str = None, user_skills: str = None) -> str:
         """Start a new assessment session. Returns session_id."""
@@ -582,26 +1263,129 @@ class AdaptiveAssessmentEngine:
                 profile_bonus = self._calculate_profile_bonus(user_interests, user_skills, course_traits)
                 course_scores[course_name] += profile_bonus
         
+        # Build initial branch weights from user profile
+        profile_ranked = list(self._get_profile_priority_traits_ranked(user_interests, user_skills, normalized_strand))
+        initial_branch_weights = {}
+        for i, trait in enumerate(profile_ranked):
+            branch = TRAIT_TO_BRANCH.get(trait, "")
+            if branch:
+                # Earlier traits in the ranked list get higher weight
+                weight = max(3.0 - i * 0.2, 0.5)
+                initial_branch_weights[branch] = initial_branch_weights.get(branch, 0) + weight
+        
+        # Ensure all branches have at least a minimal weight (exploration potential)
+        for branch in BRANCH_ADJACENCY.keys():
+            if branch not in initial_branch_weights:
+                initial_branch_weights[branch] = 0.1
+        
+        print(f"[TREE] Initial branch weights from profile: { {k: round(v, 1) for k, v in sorted(initial_branch_weights.items(), key=lambda x: x[1], reverse=True)[:6]} }")
+        
         session = AdaptiveSession(
             session_id=session_id,
             user_id=user_id,
-            user_gwa=user_gwa,  # Store GWA for PDF exports
-            user_strand=normalized_strand,  # Store strand for question selection
-            user_interests=user_interests,  # Store for later use
-            user_skills=user_skills,  # Store for later use
+            user_gwa=user_gwa,
+            user_strand=normalized_strand,
+            user_interests=user_interests,
+            user_skills=user_skills,
             max_questions=max_questions,
             min_questions=min_questions,
             course_scores=course_scores,
-            initial_course_scores=course_scores.copy(),  # Store initial scores with all profile bonuses
-            active_courses=set(self.courses.keys())
+            initial_course_scores=course_scores.copy(),
+            active_courses=set(self.courses.keys()),
+            profile_seed_traits=profile_ranked,
+            branch_weights=initial_branch_weights,
         )
+        
+        # ─── CONVERSATION CHAIN: Determine primary domain from profile ───
+        # Count how many interest/skill keywords map to each domain
+        domain_votes: Dict[str, int] = {}
+        all_keywords = []
+        if user_interests:
+            all_keywords.extend([kw.strip().lower().replace(" ", "_") for kw in user_interests.split(",")])
+        if user_skills:
+            all_keywords.extend([kw.strip().lower().replace(" ", "_") for kw in user_skills.split(",")])
+        
+        for kw in all_keywords:
+            domain = INTEREST_DOMAIN_MAP.get(kw)
+            if domain:
+                domain_votes[domain] = domain_votes.get(domain, 0) + 1
+        
+        # Primary domain: most voted, with strand as tiebreaker
+        strand_domain = STRAND_DOMAIN_MAP.get(normalized_strand)
+        if domain_votes:
+            # Sort by vote count descending
+            sorted_domains = sorted(domain_votes.items(), key=lambda x: x[1], reverse=True)
+            primary = sorted_domains[0][0]
+        elif strand_domain:
+            primary = strand_domain
+        else:
+            # No interests, no strand info → use strongest branch weight
+            primary = max(initial_branch_weights, key=initial_branch_weights.get) if initial_branch_weights else "technology"
+        
+        session.primary_domain = primary
+        
+        # Build domain exploration queue: primary → adjacent → other voted → rest
+        domain_queue = [primary]
+        # Add adjacent domains of primary
+        for adj in BRANCH_ADJACENCY.get(primary, []):
+            if adj not in domain_queue:
+                domain_queue.append(adj)
+        # Add other voted domains
+        for dom, _ in sorted(domain_votes.items(), key=lambda x: x[1], reverse=True):
+            if dom not in domain_queue:
+                domain_queue.append(dom)
+        # Add strand domain if not yet included
+        if strand_domain and strand_domain not in domain_queue:
+            domain_queue.append(strand_domain)
+        # Add remaining domains sorted by branch weight
+        for branch, _ in sorted(initial_branch_weights.items(), key=lambda x: x[1], reverse=True):
+            if branch not in domain_queue and branch in DOMAIN_ENTRY_QUESTIONS:
+                domain_queue.append(branch)
+        
+        session.domain_queue = domain_queue
+        
+        # Preload the first chain: entry questions for primary domain
+        entry_qs = DOMAIN_ENTRY_QUESTIONS.get(primary, [])
+        session.chain_queue = list(entry_qs)
+        session.domain_question_count = {primary: 0}
+        
+        print(f"[CHAIN] Primary domain: {primary} (votes: {domain_votes})")
+        print(f"[CHAIN] Domain queue: {domain_queue[:6]}...")
+        print(f"[CHAIN] Initial chain: {session.chain_queue[:5]}")
         
         self.sessions[session_id] = session
         print(f"[SESSION] Created adaptive session {session_id} for user {user_id} (strand: {normalized_strand}, questions: {max_questions}, interests: {bool(user_interests)}, skills: {bool(user_skills)})")
         return session_id
     
     def get_next_question(self, session_id: str) -> Optional[dict]:
-        """Select question based on profile relevance (early) and information gain (later)."""
+        """
+        ANSWER-DRIVEN CONVERSATION CHAIN ALGORITHM
+        
+        Questions are NOT randomly scored. Instead, the system follows a conversation
+        chain directly connected to the user's profile and answers:
+        
+        1. PROFILE ENTRY (Rounds 1-3):
+           User profile (strand + interests + skills) → primary domain
+           → ask domain entry questions to discover sub-interests
+           
+        2. ANSWER-DRIVEN FOLLOW-UP (Rounds 4+):
+           User picks option with trait X → TRAIT_FOLLOWUP_MAP[X] → next question
+           explores DEEPER into that specific area
+           
+        3. DOMAIN TRANSITION:
+           When current domain's chain is exhausted (or min questions met),
+           move to next domain in queue (adjacent → related → rest)
+           
+        4. FALLBACK SCORING:
+           If all chains exhausted, use information-gain scoring for remaining questions
+        
+        Example flow for TVL student interested in computers:
+          Q1: "What do you want to master?" → picks "programming/coding" (Software-Dev)
+          Q2: "Mobile app features?" → picks "data analytics" (Data-Analytics)  
+          Q3: "Group research role?" → picks "analyze data" (Data-Analytics)
+          Q4: "Rate your tech skills" → picks "spreadsheets" (Data-Analytics)
+          → System narrows toward data science / IT courses
+        """
         session = self.sessions.get(session_id)
         if not session or session.is_complete:
             return None
@@ -610,133 +1394,187 @@ class AdaptiveAssessmentEngine:
             self._finalize_session(session)
             return None
         
-        # Get user's profile traits (from interests, skills, strand)
-        profile_traits = self._get_profile_priority_traits(session)
-        strand_traits = self._get_strand_priority_traits(session.user_strand)
-        all_priority_traits = profile_traits | strand_traits
+        asked = session.excluded_question_ids
+        round_num = session.round_number + 1
         
-        # Calculate information gain for adaptive selection
-        trait_info_scores = self._calculate_trait_information_gain(session)
+        # ═══════════════════════════════════════════════════════════════════
+        # PHASE 1: Try to get the next question from the current chain
+        # ═══════════════════════════════════════════════════════════════════
         
-        best_question = None
-        best_score = -1
+        selected_qid = None
+        selection_reason = ""
         
-        question_ids = list(self.questions.keys())
-        random.shuffle(question_ids)
-        
-        for qid in question_ids:
-            if qid in session.excluded_question_ids:
-                continue
-            
-            question = self.questions[qid]
-            options = question.get('options', [])
-            
-            # Check how many options are about rejected topics
-            rejected_count = 0
-            profile_match_count = 0
-            
-            # Check if the question category matches a rejected topic
-            question_category = question.get('category', '').lower()
-            
-            # Map question categories to traits for complete exclusion
-            CATEGORY_TO_REJECTED_TRAIT = {
-                "education": "Teaching-Ed",
-                "teaching": "Teaching-Ed",
-                "healthcare": "Patient-Care",
-                "nursing": "Patient-Care",
-                "medical": "Medical-Lab",
-                "technology": "Software-Dev",
-                "programming": "Software-Dev",
-                "engineering": "Civil-Build",
-                "business": "Finance-Acct",
-                "accounting": "Finance-Acct",
-                "finance": "Finance-Acct",
-                "maritime": "Maritime-Sea",
-                "agriculture": "Agri-Nature",
-                "hospitality": "Hospitality-Svc",
-                "criminology": "Law-Enforce",
-                "law": "Law-Enforce",
-                "arts": "Visual-Design",
-                "creative": "Visual-Design",
-                "public service": "Community-Serve",
-            }
-            
-            # SKIP entire question if its category matches a rejected topic
-            category_rejected = False
-            for cat_keyword, rejected_trait in CATEGORY_TO_REJECTED_TRAIT.items():
-                if cat_keyword in question_category and rejected_trait in session.rejected_topics:
-                    category_rejected = True
+        # --- Step 1A: If we have a last_answer_trait, build a follow-up chain from it ---
+        if session.last_answer_trait and session.last_answer_trait in TRAIT_FOLLOWUP_MAP:
+            followups = TRAIT_FOLLOWUP_MAP[session.last_answer_trait]
+            for fq in followups:
+                if fq not in asked and fq in self.questions:
+                    selected_qid = fq
+                    selection_reason = f"follow-up from trait {session.last_answer_trait}"
+                    # Update chain tracking
+                    session.current_chain_trait = session.last_answer_trait
                     break
-            
-            if category_rejected:
-                continue  # Skip this question entirely
-            
-            for opt in options:
-                trait = opt.get('trait_tag')
-                if trait:
-                    if trait in session.rejected_topics:
-                        rejected_count += 1
-                    if trait in all_priority_traits:
-                        profile_match_count += 1
-            
-            # Skip questions where most options are about rejected topics (lowered threshold)
-            if len(options) > 0 and rejected_count / len(options) > 0.3:
-                continue
-            
-            # Calculate base score
-            question_score = self._score_question(question, trait_info_scores, session)
-            
-            # FIRST 5 QUESTIONS: Focus on profile-relevant questions
-            if session.round_number < 5:
-                # Strong bonus for questions matching user's profile
-                if profile_match_count >= 3:
-                    question_score += 3.0
-                elif profile_match_count >= 2:
-                    question_score += 2.0
-                elif profile_match_count >= 1:
-                    question_score += 1.0
-                
-                # Penalty for rejected topic presence (even partial)
-                if rejected_count > 0:
-                    question_score *= (1 - rejected_count / len(options) * 0.8)
-            
-            if question_score > best_score:
-                best_score = question_score
-                best_question = question
         
-        if best_question:
-            session.round_number += 1
-            print(f"[TARGET] Round {session.round_number}: Q{best_question.get('question_id')} (score: {best_score:.2f})")
-            
-            # Get top courses preview based on current scores (includes profile bonuses)
-            sorted_courses = sorted(
-                session.course_scores.items(),
+        # --- Step 1B: If no follow-up found, try the pre-loaded chain_queue ---
+        if not selected_qid and session.chain_queue:
+            for cq in list(session.chain_queue):
+                if cq not in asked and cq in self.questions:
+                    selected_qid = cq
+                    selection_reason = f"chain queue (domain entry)"
+                    break
+                else:
+                    # Remove already-asked questions from queue
+                    session.chain_queue = [q for q in session.chain_queue if q != cq]
+        
+        # ═══════════════════════════════════════════════════════════════════
+        # PHASE 2: If chain is exhausted, look at accumulated traits
+        # to find the strongest unexplored path
+        # ═══════════════════════════════════════════════════════════════════
+        
+        if not selected_qid:
+            # Find the strongest trait that still has unanswered follow-up questions
+            sorted_traits = sorted(
+                session.trait_scores.items(),
                 key=lambda x: x[1],
                 reverse=True
             )
-            top_courses = [
-                {
-                    "course_name": name,
-                    "current_score": round(score, 1),
-                    "traits_matched": len(self.course_traits.get(name, set()) & 
-                                        set(session.trait_scores.keys()))
-                }
-                for name, score in sorted_courses[:5]
-            ]
-            
-            return {
-                "session_id": session_id,
-                "round": session.round_number,
-                "total_max_rounds": session.max_questions,
-                "question": best_question,
-                "courses_remaining": len(session.active_courses),
-                "confidence": round(session.confidence * 100, 1),
-                "can_finish_early": session.round_number >= session.min_questions,
-                "top_courses_preview": top_courses  # Include initial top courses based on profile
-            }
+            for trait, score in sorted_traits:
+                if trait in TRAIT_FOLLOWUP_MAP:
+                    for fq in TRAIT_FOLLOWUP_MAP[trait]:
+                        if fq not in asked and fq in self.questions:
+                            selected_qid = fq
+                            selection_reason = f"strongest trait chain ({trait}, score={score:.1f})"
+                            session.current_chain_trait = trait
+                            break
+                if selected_qid:
+                    break
         
-        self._finalize_session(session)
-        return None
+        # ═══════════════════════════════════════════════════════════════════
+        # PHASE 3: If still nothing, move to the next domain in queue
+        # ═══════════════════════════════════════════════════════════════════
+        
+        if not selected_qid:
+            # Find next unexplored domain in queue
+            for domain in session.domain_queue:
+                domain_count = session.domain_question_count.get(domain, 0)
+                if domain_count < DOMAIN_MIN_QUESTIONS or domain not in session.explored_domains:
+                    entry_qs = DOMAIN_ENTRY_QUESTIONS.get(domain, [])
+                    for eq in entry_qs:
+                        if eq not in asked and eq in self.questions:
+                            selected_qid = eq
+                            selection_reason = f"new domain entry ({domain})"
+                            session.chain_queue = [q for q in entry_qs if q != eq and q not in asked]
+                            break
+                if selected_qid:
+                    break
+        
+        # ═══════════════════════════════════════════════════════════════════
+        # PHASE 4: FALLBACK — Score remaining questions by information gain
+        # + branch affinity (only if all chains are exhausted)
+        # ═══════════════════════════════════════════════════════════════════
+        
+        if not selected_qid:
+            trait_info_scores = self._calculate_trait_information_gain(session)
+            branch_weights = session.branch_weights
+            
+            candidates = []
+            for qid, question in self.questions.items():
+                if qid in asked:
+                    continue
+                node = QUESTION_TREE_NODES.get(qid)
+                if not node:
+                    continue
+                
+                q_branches = set(node["branches"])
+                options = question.get('options', [])
+                if not options:
+                    continue
+                
+                # Skip heavily rejected questions
+                rejected_count = sum(1 for opt in options
+                                    if opt.get('trait_tag') in session.rejected_topics)
+                if rejected_count / len(options) > 0.3:
+                    continue
+                
+                score = 0.0
+                
+                # Branch affinity
+                for branch, weight in branch_weights.items():
+                    if branch in q_branches:
+                        score += weight
+                if q_branches:
+                    score /= len(q_branches)
+                
+                # Information gain
+                for opt in options:
+                    t = opt.get('trait_tag')
+                    if t:
+                        score += trait_info_scores.get(t, 0)
+                
+                # Question weight from tree
+                score += node.get("weight", 1.0)
+                
+                candidates.append((score, qid))
+            
+            if candidates:
+                candidates.sort(reverse=True, key=lambda x: x[0])
+                selected_qid = candidates[0][1]
+                selection_reason = f"fallback scoring (score={candidates[0][0]:.1f})"
+        
+        # ═══════════════════════════════════════════════════════════════════
+        # NO QUESTION AVAILABLE — finalize
+        # ═══════════════════════════════════════════════════════════════════
+        
+        if not selected_qid:
+            self._finalize_session(session)
+            return None
+        
+        # ─── RECORD SELECTION ───
+        best_question = self.questions[selected_qid]
+        session.round_number = round_num
+        
+        # Track domain question count
+        node = QUESTION_TREE_NODES.get(selected_qid, {})
+        q_branches = node.get("branches", [])
+        for branch in q_branches:
+            session.domain_question_count[branch] = session.domain_question_count.get(branch, 0) + 1
+            if session.domain_question_count[branch] >= DOMAIN_MIN_QUESTIONS:
+                session.explored_domains.add(branch)
+        
+        # Determine phase label for logging
+        q_level = node.get("level", 0)
+        phase_labels = {0: "ENTRY", 1: "EXPLORE", 2: "DEEP", 3: "CONFIRM"}
+        phase = phase_labels.get(q_level, "?")
+        
+        print(f"[CHAIN-{phase}] Round {round_num}: Q{selected_qid} "
+              f"cat='{best_question.get('category')}' — {selection_reason}")
+        
+        # Get top courses preview
+        sorted_courses = sorted(
+            session.course_scores.items(),
+            key=lambda x: x[1],
+            reverse=True
+        )
+        top_courses = [
+            {
+                "course_name": name,
+                "current_score": round(score, 1),
+                "traits_matched": len(self.course_traits.get(name, set()) & 
+                                    set(session.trait_scores.keys()))
+            }
+            for name, score in sorted_courses[:5]
+        ]
+        
+        return {
+            "session_id": session_id,
+            "round": session.round_number,
+            "total_max_rounds": session.max_questions,
+            "question": best_question,
+            "courses_remaining": len(session.active_courses),
+            "confidence": round(session.confidence * 100, 1),
+            "can_finish_early": session.round_number >= session.min_questions,
+            "top_courses_preview": top_courses
+        }
     
     def _calculate_profile_question_bonus(self, question: dict, profile_traits: Set[str], bonus_multiplier: float) -> float:
         """Calculate bonus score for questions matching user's profile interests/skills."""
@@ -760,10 +1598,6 @@ class AdaptiveAssessmentEngine:
             return bonus_multiplier * 0.5
         
         return 0
-        
-        # No more questions available
-        self._finalize_session(session)
-        return None
     
     def _calculate_trait_information_gain(self, session: AdaptiveSession) -> Dict[str, float]:
         """
@@ -967,8 +1801,12 @@ class AdaptiveAssessmentEngine:
         # Store rejection data for this question (for reversal)
         session.answer_rejection_data[question_id] = rejection_data
         
-        # Extract trait from chosen option
-        chosen_trait = chosen_option.get('trait_tag')
+        # Extract trait from chosen option — supports multiple formats:
+        # 1. trait_tags: ["Software-Dev", "Data-Analytics"] (new multi-trait array)
+        # 2. traits: {"Software-Dev": 1.0, "Data-Analytics": 0.5} (weighted dict)
+        # 3. trait_tag: "Software-Dev" (legacy single trait)
+        chosen_trait_tags = chosen_option.get('trait_tags', [])
+        chosen_trait = chosen_trait_tags[0] if chosen_trait_tags else chosen_option.get('trait_tag')
         option_text = chosen_option.get('option_text', '').lower()
         
         # Track all trait changes for this question (for reversal with "Previous" button)
@@ -989,9 +1827,25 @@ class AdaptiveAssessmentEngine:
             # This prevents arbitrary traits from being added
             print(f"[NONE_OPTION] No traits added - user rejected this topic")
             chosen_trait = None
+        elif chosen_trait_tags and len(chosen_trait_tags) > 0:
+            # Multi-trait array format: first trait = primary (1.0), rest = secondary (0.6)
+            for idx, tag in enumerate(chosen_trait_tags):
+                weight = 1.0 if idx == 0 else 0.6
+                current = session.trait_scores.get(tag, 0)
+                session.trait_scores[tag] = current + weight
+                trait_changes[tag] = trait_changes.get(tag, 0) + weight
+                traits_to_boost.append(tag)
+            chosen_trait = chosen_trait_tags[0]  # Primary trait for chain routing
+        elif chosen_option.get('traits'):
+            # Multi-trait weighted option (new format)
+            weighted_traits = chosen_option['traits']
+            for trait, weight in weighted_traits.items():
+                current = session.trait_scores.get(trait, 0)
+                session.trait_scores[trait] = current + weight
+                trait_changes[trait] = trait_changes.get(trait, 0) + weight
+                traits_to_boost.append(trait)
         elif chosen_trait:
-            # Normal option - use the trait tag
-            # Increase student's affinity for this trait
+            # Fallback: single trait_tag (old format)
             current = session.trait_scores.get(chosen_trait, 0)
             session.trait_scores[chosen_trait] = current + 1.0
             trait_changes[chosen_trait] = 1.0
@@ -1011,6 +1865,58 @@ class AdaptiveAssessmentEngine:
         # Update course scores based on this answer - for all traits boosted
         for trait in traits_to_boost:
             self._update_course_scores(session, trait)
+        
+        # --- Track topic continuity for profile-driven question selection ---
+        if chosen_trait:
+            session.recent_traits.append(chosen_trait)
+            # Determine new current topic from recent window
+            new_topic, _ = self._get_current_topic_and_adjacent(session)
+            if new_topic == session.current_topic_thread and new_topic:
+                session.topic_streak += 1
+            else:
+                session.topic_streak = 1 if new_topic else 0
+            session.current_topic_thread = new_topic
+        
+        # --- Conversation Chain: Update last_answer_trait for next question routing ---
+        if chosen_trait and not is_none_option:
+            session.last_answer_trait = chosen_trait
+            # Build new chain queue from this trait's follow-ups
+            if chosen_trait in TRAIT_FOLLOWUP_MAP:
+                new_chain = [q for q in TRAIT_FOLLOWUP_MAP[chosen_trait]
+                             if q not in session.excluded_question_ids and q in self.questions]
+                session.chain_queue = new_chain
+                session.current_chain_trait = chosen_trait
+                print(f"[CHAIN] Answer trait={chosen_trait} → follow-up chain: {new_chain[:5]}")
+            else:
+                session.chain_queue = []
+                print(f"[CHAIN] Answer trait={chosen_trait} (no follow-up map)")
+        else:
+            session.last_answer_trait = ""
+        
+        # --- Decision Tree: Update branch weights based on answer ---
+        # When user picks a trait, BOOST the corresponding branch and adjacent branches
+        if chosen_trait and not is_none_option:
+            chosen_branch = TRAIT_TO_BRANCH.get(chosen_trait, "")
+            if chosen_branch:
+                # Strong boost to the chosen branch
+                session.branch_weights[chosen_branch] = session.branch_weights.get(chosen_branch, 0) + 2.0
+                # Moderate boost to adjacent branches
+                for adj_branch in BRANCH_ADJACENCY.get(chosen_branch, []):
+                    session.branch_weights[adj_branch] = session.branch_weights.get(adj_branch, 0) + 0.5
+                session.branch_history.append(chosen_branch)
+                
+                # Also boost from secondary traits (multi-trait options)
+                if chosen_option.get('traits'):
+                    for trait, weight in chosen_option['traits'].items():
+                        if trait != chosen_trait:
+                            sec_branch = TRAIT_TO_BRANCH.get(trait, "")
+                            if sec_branch:
+                                session.branch_weights[sec_branch] = session.branch_weights.get(sec_branch, 0) + weight * 0.5
+        
+        # Track question weight for this question (for scoring impact)
+        node = QUESTION_TREE_NODES.get(question_id, {})
+        q_weight = node.get("weight", 1.0)
+        session.question_weights_applied[question_id] = q_weight
         
         # Calculate confidence
         session.confidence = self._calculate_confidence(session)
@@ -1063,24 +1969,34 @@ class AdaptiveAssessmentEngine:
         return get_trait_similarity(trait1, trait2)
     
     def _update_course_scores(self, session: AdaptiveSession, chosen_trait: str):
-        """Boost course scores based on trait matches."""
+        """Boost course scores based on trait matches, weighted by question depth."""
         if not chosen_trait:
             return
         
-        # Early answers have MORE impact - user is actively making choices
-        # This ensures user's answers can override profile-based starting scores
+        # Get the question weight from the decision tree node
+        # Deeper questions (higher weight) have MORE impact on scoring
+        last_qid = session.question_history[-1] if session.question_history else None
+        question_weight = 1.0
+        if last_qid:
+            node = QUESTION_TREE_NODES.get(last_qid, {})
+            question_weight = node.get("weight", 1.0)
+        
+        # Early answers also have extra impact (profile confirmation)
         early_boost_multiplier = 1.0
         if session.round_number <= 3:
-            early_boost_multiplier = 2.5  # First 3 answers: 2.5x impact
+            early_boost_multiplier = 2.0  # First 3 answers: 2x impact
         elif session.round_number <= 7:
             early_boost_multiplier = 1.5  # Next 4 answers: 1.5x impact
+        
+        # Combined multiplier: question weight × early boost
+        total_multiplier = question_weight * early_boost_multiplier
         
         for course_name in list(session.active_courses):
             course_traits = self.course_traits.get(course_name, set())
             
             # Direct trait match - BIG BOOST (matches unique specialized trait)
             if chosen_trait in course_traits:
-                boost = 12.0 * early_boost_multiplier  # Base 12 points (was 8)
+                boost = 12.0 * total_multiplier  # Base 12 points × question weight × early boost
                 session.course_scores[course_name] += boost
             else:
                 # Check for similar traits using our SPECIALIZED trait system
@@ -1089,38 +2005,51 @@ class AdaptiveAssessmentEngine:
                     sim = self._get_specialized_similarity(chosen_trait, course_trait)
                     best_similarity = max(best_similarity, sim)
                 
-                # Similarity-based score boost (also scaled by early multiplier)
+                # Similarity-based score boost (tighter thresholds to prevent spillover)
                 if best_similarity > 0.7:
-                    session.course_scores[course_name] += 6.0 * early_boost_multiplier
+                    session.course_scores[course_name] += 5.0 * total_multiplier
                 elif best_similarity > 0.4:
-                    session.course_scores[course_name] += 3.0 * early_boost_multiplier
-                elif best_similarity > 0.2:
-                    session.course_scores[course_name] += 1.0 * early_boost_multiplier
+                    session.course_scores[course_name] += 2.0 * total_multiplier
     
     def _calculate_confidence(self, session: AdaptiveSession) -> float:
-        """Calculate recommendation confidence based on score separation."""
+        """Calculate recommendation confidence based on score separation and trait focus."""
         if len(session.active_courses) == 0:
             return 1.0
         
         sorted_scores = sorted(session.course_scores.values(), reverse=True)
+        n = len(sorted_scores)
         
-        if len(sorted_scores) < 2:
+        if n < 2:
             return 0.5
         
-        # Compare top 5 to the rest
-        top_5_avg = sum(sorted_scores[:5]) / 5
-        rest_avg = sum(sorted_scores[5:15]) / 10 if len(sorted_scores) > 5 else top_5_avg * 0.8
+        # ── Factor 1: Score separation (top 3 avg vs median) ──
+        # Using median instead of rest-10 gives much wider gap since
+        # median courses barely move while top courses accumulate boosts
+        top_3_avg = sum(sorted_scores[:min(3, n)]) / min(3, n)
+        median_score = sorted_scores[n // 2]
         
-        if rest_avg == 0:
-            return 1.0
+        if top_3_avg <= 0:
+            separation = 0.0
+        else:
+            separation = (top_3_avg - median_score) / top_3_avg
+        separation = min(max(separation, 0), 1)
         
-        # Confidence based on gap between top and rest
-        gap_ratio = (top_5_avg - rest_avg) / top_5_avg
+        # ── Factor 2: Top cluster tightness ──
+        # If top 3 courses have similar scores, we're more confident
+        # in a coherent recommendation group
+        top_3_min = sorted_scores[min(2, n - 1)]
+        if sorted_scores[0] > 0:
+            top_spread = (sorted_scores[0] - top_3_min) / sorted_scores[0]
+            cluster_tightness = 1.0 - top_spread
+        else:
+            cluster_tightness = 0.5
+        cluster_tightness = min(max(cluster_tightness, 0), 1)
         
-        # Also factor in number of questions answered
+        # ── Factor 3: Question progress ──
         question_factor = min(session.round_number / session.min_questions, 1.0)
         
-        confidence = gap_ratio * 0.7 + question_factor * 0.3
+        # Combined: separation dominates, progress and cluster tightness support
+        confidence = separation * 0.50 + question_factor * 0.30 + cluster_tightness * 0.20
         return min(max(confidence, 0), 1)
     
     def _should_stop(self, session: AdaptiveSession) -> bool:
@@ -1332,42 +2261,37 @@ class AdaptiveAssessmentEngine:
     def _get_interest_label(self, interest: str) -> str:
         """Map interest ID to display name."""
         INTEREST_LABELS = {
-            "science": "Science & Research",
-            "biology": "Biology",
-            "chemistry": "Chemistry",
-            "physics": "Physics",
-            "environment": "Environmental Science",
-            "programming": "Programming",
-            "computer": "Computers & IT",
-            "data": "Data Analytics",
-            "ai": "AI & Machine Learning",
-            "cybersecurity": "Cybersecurity",
-            "engineering": "Engineering",
-            "mechanical": "Mechanical Systems",
-            "electrical": "Electronics",
-            "civil": "Civil Engineering",
-            "business": "Business",
-            "finance": "Finance",
-            "marketing": "Marketing",
-            "accounting": "Accounting",
-            "economics": "Economics",
-            "art": "Arts & Design",
-            "music": "Music",
-            "film": "Film & Media",
-            "writing": "Writing",
-            "photography": "Photography",
-            "medical": "Medicine",
-            "nursing": "Nursing",
-            "psychology": "Psychology",
-            "education": "Education",
-            "law": "Law",
-            "politics": "Political Science",
-            "social": "Social Work",
-            "history": "History",
-            "sports": "Sports",
-            "tourism": "Tourism",
-            "food": "Culinary Arts",
-            "agriculture": "Agriculture",
+            "science": "Science & Research", "biology": "Biology",
+            "chemistry": "Chemistry", "physics": "Physics",
+            "environment": "Environmental Science", "earth_science": "Earth Science",
+            "programming": "Programming", "computer": "Computers & IT",
+            "data": "Data Analytics", "ai": "AI & Machine Learning",
+            "cybersecurity": "Cybersecurity", "robotics": "Robotics",
+            "game_dev": "Game Development",
+            "engineering": "Engineering", "mechanical": "Mechanical Systems",
+            "electrical": "Electronics", "civil": "Civil Engineering",
+            "architecture": "Architecture", "industrial": "Industrial Engineering",
+            "business": "Business", "finance": "Finance",
+            "marketing": "Marketing", "accounting": "Accounting",
+            "economics": "Economics", "management": "Management",
+            "real_estate": "Real Estate",
+            "art": "Arts & Design", "music": "Music",
+            "film": "Film & Media", "writing": "Writing",
+            "photography": "Photography", "animation": "Animation",
+            "fashion": "Fashion Design",
+            "medical": "Medicine", "nursing": "Nursing",
+            "psychology": "Psychology", "pharmacy": "Pharmacy",
+            "physical_therapy": "Physical Therapy", "nutrition": "Nutrition",
+            "medical_tech": "Medical Technology", "dentistry": "Dentistry",
+            "education": "Education", "law": "Law",
+            "politics": "Political Science", "social": "Social Work",
+            "history": "History", "communication": "Communication",
+            "philosophy": "Philosophy", "criminology": "Criminology",
+            "maritime": "Maritime", "aviation": "Aviation",
+            "logistics": "Logistics",
+            "sports": "Sports", "tourism": "Tourism",
+            "food": "Culinary Arts", "agriculture": "Agriculture",
+            "veterinary": "Veterinary Science", "military": "Military",
         }
         return INTEREST_LABELS.get(interest.lower(), "")
     
@@ -1388,39 +2312,33 @@ class AdaptiveAssessmentEngine:
     def _get_skill_label(self, skill: str) -> str:
         """Map skill ID to display name."""
         SKILL_LABELS = {
-            "programming_skill": "Programming",
-            "data_analysis": "Data Analysis",
-            "web_development": "Web Development",
-            "graphic_design": "Graphic Design",
-            "video_editing": "Video Editing",
-            "math_skills": "Mathematics",
-            "laboratory": "Laboratory Work",
-            "technical_writing": "Technical Writing",
-            "public_speaking": "Public Speaking",
-            "writing_skill": "Writing",
-            "presentation": "Presentation",
-            "negotiation": "Negotiation",
+            "programming_skill": "Programming", "data_analysis": "Data Analysis",
+            "web_development": "Web Development", "graphic_design": "Graphic Design",
+            "video_editing": "Video Editing", "math_skills": "Mathematics",
+            "laboratory": "Laboratory Work", "technical_writing": "Technical Writing",
+            "electronics": "Electronics", "drafting": "Drafting & CAD",
+            "public_speaking": "Public Speaking", "writing_skill": "Writing",
+            "presentation": "Presentation", "negotiation": "Negotiation",
             "foreign_language": "Foreign Languages",
-            "leadership": "Leadership",
-            "project_management": "Project Management",
-            "team_management": "Team Management",
-            "decision_making": "Decision Making",
-            "planning": "Planning & Organization",
-            "teamwork": "Teamwork",
-            "empathy": "Empathy",
-            "customer_service": "Customer Service",
-            "mentoring": "Mentoring",
+            "filipino_language": "Filipino Communication",
+            "social_media": "Social Media",
+            "leadership": "Leadership", "project_management": "Project Management",
+            "team_management": "Team Management", "decision_making": "Decision Making",
+            "planning": "Planning & Organization", "time_management": "Time Management",
+            "teamwork": "Teamwork", "empathy": "Empathy",
+            "customer_service": "Customer Service", "mentoring": "Mentoring",
             "conflict_resolution": "Conflict Resolution",
-            "critical_thinking": "Critical Thinking",
-            "problem_solving": "Problem Solving",
-            "research": "Research",
-            "attention_detail": "Attention to Detail",
+            "counseling": "Counseling",
+            "critical_thinking": "Critical Thinking", "problem_solving": "Problem Solving",
+            "research": "Research", "attention_detail": "Attention to Detail",
             "logical_reasoning": "Logical Reasoning",
-            "creativity": "Creativity",
-            "artistic": "Artistic Ability",
-            "music_skill": "Musical Ability",
-            "storytelling": "Storytelling",
+            "creativity": "Creativity", "artistic": "Artistic Ability",
+            "music_skill": "Musical Ability", "storytelling": "Storytelling",
             "design_thinking": "Design Thinking",
+            "photography_skill": "Photography",
+            "cooking": "Cooking", "first_aid": "First Aid",
+            "sports_fitness": "Sports & Fitness", "driving": "Driving",
+            "gardening": "Gardening", "repair_maintenance": "Repair & Maintenance",
         }
         return SKILL_LABELS.get(skill.lower(), "")
     
@@ -1552,6 +2470,79 @@ class AdaptiveAssessmentEngine:
         
         # Decrement round
         session.round_number -= 1
+        
+        # Reverse decision tree branch tracking
+        if session.branch_history:
+            session.branch_history.pop()
+        if session.recent_traits:
+            session.recent_traits.pop()
+        # Remove question weight tracking
+        session.question_weights_applied.pop(previous_question_id, None)
+        # Rebuild topic thread from remaining recent_traits
+        if session.recent_traits:
+            new_topic, _ = self._get_current_topic_and_adjacent(session)
+            session.current_topic_thread = new_topic
+            # Recalculate streak
+            streak = 0
+            for t in reversed(session.recent_traits):
+                branch = TRAIT_TO_BRANCH.get(t, "")
+                if branch == TRAIT_TO_BRANCH.get(session.recent_traits[-1], ""):
+                    streak += 1
+                else:
+                    break
+            session.topic_streak = streak
+        else:
+            session.current_topic_thread = ""
+            session.topic_streak = 0
+        
+        # Reverse conversation chain state
+        # Set last_answer_trait to the previous answer's trait (if any remain)
+        if session.recent_traits:
+            session.last_answer_trait = session.recent_traits[-1]
+            # Rebuild chain_queue from this trait
+            if session.last_answer_trait in TRAIT_FOLLOWUP_MAP:
+                session.chain_queue = [q for q in TRAIT_FOLLOWUP_MAP[session.last_answer_trait]
+                                       if q not in session.excluded_question_ids and q in self.questions]
+                session.current_chain_trait = session.last_answer_trait
+            else:
+                session.chain_queue = []
+                session.current_chain_trait = ""
+        else:
+            session.last_answer_trait = ""
+            session.current_chain_trait = ""
+            # Restore initial chain from primary domain
+            entry_qs = DOMAIN_ENTRY_QUESTIONS.get(session.primary_domain, [])
+            session.chain_queue = [q for q in entry_qs
+                                   if q not in session.excluded_question_ids and q in self.questions]
+        
+        # Rebuild domain_question_count from remaining answered questions
+        session.domain_question_count = {}
+        session.explored_domains = set()
+        for answered_qid in session.answered_questions:
+            node = QUESTION_TREE_NODES.get(answered_qid, {})
+            for branch in node.get("branches", []):
+                session.domain_question_count[branch] = session.domain_question_count.get(branch, 0) + 1
+                if session.domain_question_count[branch] >= DOMAIN_MIN_QUESTIONS:
+                    session.explored_domains.add(branch)
+        
+        # Rebuild branch_weights from scratch: profile baseline + remaining answers
+        # Start from initial profile-based weights
+        profile_ranked = session.profile_seed_traits[:10]
+        rebuilt_weights = {}
+        for i, trait in enumerate(profile_ranked):
+            branch = TRAIT_TO_BRANCH.get(trait, "")
+            if branch:
+                weight = max(3.0 - i * 0.2, 0.5)
+                rebuilt_weights[branch] = rebuilt_weights.get(branch, 0) + weight
+        for branch in BRANCH_ADJACENCY.keys():
+            if branch not in rebuilt_weights:
+                rebuilt_weights[branch] = 0.1
+        # Replay remaining answers
+        for b in session.branch_history:
+            rebuilt_weights[b] = rebuilt_weights.get(b, 0) + 2.0
+            for adj in BRANCH_ADJACENCY.get(b, []):
+                rebuilt_weights[adj] = rebuilt_weights.get(adj, 0) + 0.5
+        session.branch_weights = rebuilt_weights
         
         # Recalculate course scores based on current trait scores
         self._recalculate_all_course_scores(session)

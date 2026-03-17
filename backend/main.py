@@ -143,6 +143,7 @@ async def lifespan(app: FastAPI):
         
         print("[START] Schema migration complete")
         seed_database()
+        sync_questions_db()
     except Exception as e:
         print(f"[ERROR] Error during startup: {e}")
         import traceback
@@ -266,6 +267,129 @@ def seed_database():
     finally:
         db.close()
 
+
+def sync_questions_db():
+    """Sync DB questions/options with source data: insert missing questions, update changed text, clean hints."""
+    db = database.SessionLocal()
+    try:
+        # 0) Get the default test_id for new questions
+        default_test = db.query(models.Test).filter(models.Test.test_type == "assessment").first()
+        test_id = default_test.test_id if default_test else 1
+
+        # 1) Strip parenthetical RIASEC/trait hints from option text
+        riasec_labels = [
+            "Realistic", "Investigative", "Artistic", "Social", "Enterprising",
+            "Conventional", "Tech", "Physical", "Hospitality",
+        ]
+        cleaned = 0
+        all_options = db.query(models.Option).all()
+        for opt in all_options:
+            if not opt.option_text:
+                continue
+            original = opt.option_text
+            new_text = re.sub(
+                r'\s*\((' + '|'.join(riasec_labels) + r')\)\s*$',
+                '', original
+            )
+            if new_text != original:
+                opt.option_text = new_text
+                cleaned += 1
+        if cleaned:
+            db.commit()
+            print(f"[SYNC] Cleaned {cleaned} option(s) with parenthetical hints")
+
+        # 2) Insert missing questions and update changed ones
+        db_questions = {q.question_id: q for q in db.query(models.Question).all()}
+        db_options = {}
+        for opt in db.query(models.Option).all():
+            db_options.setdefault(opt.question_id, {})[opt.option_id] = opt
+
+        source_ids = set()
+        inserted = 0
+        updated = 0
+        for q in QUESTIONS_POOL:
+            qid = q['question_id']
+            source_ids.add(qid)
+            question_text = q.get("question_text") or q.get("question")
+            question_type = q.get("question_type", "standard")
+
+            if qid not in db_questions:
+                # Insert missing question with explicit question_id
+                new_q = models.Question(
+                    question_id=qid,
+                    test_id=test_id,
+                    question_text=question_text,
+                    category=q.get("category"),
+                    question_type=question_type
+                )
+                db.add(new_q)
+                db.flush()
+
+                # Insert all options for this question
+                for opt in q.get("options", []):
+                    option_text = opt.get("option_text") or opt.get("text")
+                    trait_tag = opt.get("trait_tag") or opt.get("tag")
+                    # For new multi-trait questions, store primary trait in trait_tag
+                    trait_tags_list = opt.get("trait_tags", [])
+                    if not trait_tag and trait_tags_list:
+                        trait_tag = trait_tags_list[0]
+                    trait_tags_json = json.dumps(trait_tags_list) if trait_tags_list else None
+                    recommended_courses_json = json.dumps(opt.get("recommended_courses", [])) if opt.get("recommended_courses") else None
+
+                    db.add(models.Option(
+                        option_id=opt.get("option_id"),
+                        question_id=qid,
+                        option_text=option_text,
+                        trait_tag=trait_tag,
+                        weight=opt.get("weight", 1),
+                        trait_tags_json=trait_tags_json,
+                        recommended_courses_json=recommended_courses_json
+                    ))
+                inserted += 1
+            else:
+                # Update question text if changed
+                db_q = db_questions[qid]
+                if db_q.question_text != question_text:
+                    db_q.question_text = question_text
+                    updated += 1
+                # Update options text and traits if changed
+                existing_opts = db_options.get(qid, {})
+                for opt in q.get("options", []):
+                    oid = opt.get("option_id")
+                    option_text = opt.get("option_text") or opt.get("text")
+                    trait_tag = opt.get("trait_tag") or opt.get("tag")
+                    trait_tags_list = opt.get("trait_tags", [])
+                    if not trait_tag and trait_tags_list:
+                        trait_tag = trait_tags_list[0]
+                    if oid and oid in existing_opts:
+                        db_opt = existing_opts[oid]
+                        if db_opt.option_text != option_text:
+                            db_opt.option_text = option_text
+                        if db_opt.trait_tag != trait_tag:
+                            db_opt.trait_tag = trait_tag
+
+        if inserted or updated:
+            db.commit()
+            # Reset engine cache so new questions are loaded
+            reset_adaptive_engine()
+            print(f"[SYNC] Inserted {inserted} new question(s), updated {updated} existing question(s)")
+        
+        # 3) Log stale questions (can't delete due to foreign keys from student_answers)
+        stale_ids = [qid for qid in db_questions if qid not in source_ids]
+        if stale_ids:
+            print(f"[SYNC] {len(stale_ids)} stale question(s) in DB (IDs: {stale_ids}) — skipped by engine via QUESTION_TREE_NODES")
+
+        if not cleaned and not inserted and not updated and not stale_ids:
+            print("[SYNC] Questions database is already in sync")
+    except Exception as e:
+        print(f"[SYNC ERROR] {e}")
+        import traceback
+        traceback.print_exc()
+        db.rollback()
+    finally:
+        db.close()
+
+
 def get_db():
     db = database.SessionLocal()
     try: yield db
@@ -306,8 +430,8 @@ class AcademicInfoUpdate(BaseModel):
     fullname: Optional[str] = None
     age: Optional[int] = None
     gender: Optional[str] = None
-    interests: Optional[str] = None
-    skills: Optional[str] = None
+    interests: str
+    skills: str
 
 class CourseCreate(BaseModel):
     course_name: str
@@ -625,7 +749,7 @@ def get_academic_info(user_id: int, current_user: models.User = Depends(get_curr
         "user_id": user_id,
         "fullname": user.fullname,
         "academic_info": user.academic_info,
-        "has_academic_info": user.academic_info is not None and user.academic_info.get("gwa") is not None and user.academic_info.get("strand") is not None
+        "has_academic_info": user.academic_info is not None and user.academic_info.get("gwa") is not None and user.academic_info.get("strand") is not None and bool(user.academic_info.get("interests")) and bool(user.academic_info.get("skills"))
     }
 
 @app.put("/user/{user_id}/academic-info")
@@ -634,6 +758,20 @@ def update_academic_info(user_id: int, info: AcademicInfoUpdate, current_user: m
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
+    
+    # Validate required fields
+    missing = []
+    if not info.gwa or not info.strand:
+        if not info.gwa:
+            missing.append("GWA")
+        if not info.strand:
+            missing.append("SHS Strand")
+    if not info.interests or not info.interests.strip():
+        missing.append("Academic Interests")
+    if not info.skills or not info.skills.strip():
+        missing.append("Skills")
+    if missing:
+        raise HTTPException(status_code=400, detail=f"Please fill in: {', '.join(missing)}")
     
     # Update fullname if provided (validate, sanitize, parse into first_name and last_name)
     if info.fullname:
@@ -2224,6 +2362,8 @@ def get_or_init_adaptive_engine(db: Session) -> AdaptiveAssessmentEngine:
     global _adaptive_engine
     
     if _adaptive_engine is None:
+        from questions_enhanced import TRAIT_SECONDARY_MAP
+        
         # Load courses from database
         courses = db.query(models.Course).all()
         courses_data = [
@@ -2237,24 +2377,31 @@ def get_or_init_adaptive_engine(db: Session) -> AdaptiveAssessmentEngine:
             for c in courses
         ]
         
-        # Load questions from database
+        # Load questions from database and enrich with multi-trait weights
         questions = db.query(models.Question).options(joinedload(models.Question.options)).all()
-        questions_data = [
-            {
+        questions_data = []
+        for q in questions:
+            options_list = []
+            for opt in q.options:
+                primary = opt.trait_tag
+                # Build multi-trait dict from TRAIT_SECONDARY_MAP
+                traits = {}
+                if primary:
+                    traits[primary] = 1.0
+                    for secondary_tag, weight in TRAIT_SECONDARY_MAP.get(primary, []):
+                        traits[secondary_tag] = weight
+                options_list.append({
+                    "option_id": opt.option_id,
+                    "option_text": opt.option_text,
+                    "trait_tag": opt.trait_tag,
+                    "traits": traits
+                })
+            questions_data.append({
                 "question_id": q.question_id,
                 "question_text": q.question_text,
                 "category": q.category,
-                "options": [
-                    {
-                        "option_id": opt.option_id,
-                        "option_text": opt.option_text,
-                        "trait_tag": opt.trait_tag
-                    }
-                    for opt in q.options
-                ]
-            }
-            for q in questions
-        ]
+                "options": options_list
+            })
         
         _adaptive_engine = AdaptiveAssessmentEngine(courses_data, questions_data)
     
@@ -2302,9 +2449,7 @@ def start_adaptive_assessment(data: AdaptiveSessionStart, current_user: models.U
     engine = get_or_init_adaptive_engine(db)
     
     # Update engine settings based on user selection
-    max_questions = data.maxQuestions
-    if max_questions not in [30, 50, 60]:
-        max_questions = 30  # Default to 30 if invalid
+    max_questions = 50  # Fixed at 50 questions
     
     # Create session with custom max questions and profile data (interests/skills)
     session_id = engine.create_session(data.userId, user_gwa, user_strand, max_questions, user_interests, user_skills)

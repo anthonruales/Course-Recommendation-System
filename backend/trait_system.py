@@ -19,18 +19,22 @@ SPECIALIZED_TRAITS = {
         "Realistic", "Investigative", "Artistic", "Social", "Enterprising", "Conventional"
     ],
     
-    # 22 Specialized Path Traits (UNIQUE per career field)
-    "HEALTHCARE_PATH_TRAITS": ["Patient-Care", "Medical-Lab", "Rehab-Therapy", "Health-Admin"],
-    "TECHNOLOGY_PATH_TRAITS": ["Software-Dev", "Hardware-Systems", "Data-Analytics", "Cyber-Defense"],
-    "ENGINEERING_PATH_TRAITS": ["Civil-Build", "Electrical-Power", "Mechanical-Design", "Industrial-Ops"],
-    "BUSINESS_PATH_TRAITS": ["Finance-Acct", "Marketing-Sales", "Startup-Venture"],
-    "EDUCATION_PATH_TRAITS": ["Teaching-Ed"],
-    "ARTS_PATH_TRAITS": ["Visual-Design", "Digital-Media", "Spatial-Design"],
-    "SCIENCE_PATH_TRAITS": ["Lab-Research", "Field-Research"],
-    "PUBLIC_SERVICE_PATH_TRAITS": ["Law-Enforce", "Community-Serve"],
+    # 22+20 = 42 Specialized Path Traits (UNIQUE per career field)
+    "HEALTHCARE_PATH_TRAITS": ["Patient-Care", "Medical-Lab", "Rehab-Therapy", "Health-Admin",
+                                "Pharmacy", "Public-Health", "Nutrition-Diet"],
+    "TECHNOLOGY_PATH_TRAITS": ["Software-Dev", "Hardware-Systems", "Data-Analytics", "Cyber-Defense",
+                                "Web-Dev", "Mobile-Dev", "Game-Dev", "AI-ML", "Cloud-Systems"],
+    "ENGINEERING_PATH_TRAITS": ["Civil-Build", "Electrical-Power", "Mechanical-Design", "Industrial-Ops",
+                                 "Environmental-Eng"],
+    "BUSINESS_PATH_TRAITS": ["Finance-Acct", "Marketing-Sales", "Startup-Venture", "HR-Management"],
+    "EDUCATION_PATH_TRAITS": ["Teaching-Ed", "Counseling", "Sports-Ed"],
+    "ARTS_PATH_TRAITS": ["Visual-Design", "Digital-Media", "Spatial-Design",
+                          "Performing-Arts", "Film-Broadcast", "Animation-3D"],
+    "SCIENCE_PATH_TRAITS": ["Lab-Research", "Field-Research", "Environmental-Sci", "Food-Science", "Forensic-Sci"],
+    "PUBLIC_SERVICE_PATH_TRAITS": ["Law-Enforce", "Community-Serve", "Legal-Practice", "Social-Work"],
     "MARITIME_PATH_TRAITS": ["Maritime-Sea"],
     "AGRICULTURE_PATH_TRAITS": ["Agri-Nature"],
-    "HOSPITALITY_PATH_TRAITS": ["Hospitality-Svc"],
+    "HOSPITALITY_PATH_TRAITS": ["Hospitality-Svc", "Tourism-Travel", "Culinary-Arts"],
     
     # 6 Skill Traits
     "SKILL_TRAITS": [
@@ -159,7 +163,116 @@ SPECIALIZED_TRAIT_RELATIONSHIPS: Dict[str, Dict[str, float]] = {
     },
     "Hospitality-Svc": {
         "Enterprising": 0.7, "People-Skill": 0.9, "Marketing-Sales": 0.4,
-        "Community-Serve": 0.3, "Admin-Skill": 0.4
+        "Community-Serve": 0.3, "Admin-Skill": 0.4, "Tourism-Travel": 0.8,
+        "Culinary-Arts": 0.6
+    },
+    
+    # ═══════ NEW EXPANDED TRAITS ═══════
+    
+    # Technology expansions
+    "Web-Dev": {
+        "Investigative": 0.7, "Technical-Skill": 0.9, "Software-Dev": 0.9,
+        "Digital-Media": 0.5, "Creative-Skill": 0.4, "Mobile-Dev": 0.6
+    },
+    "Mobile-Dev": {
+        "Investigative": 0.7, "Technical-Skill": 0.9, "Software-Dev": 0.9,
+        "Web-Dev": 0.6, "Game-Dev": 0.4
+    },
+    "Game-Dev": {
+        "Artistic": 0.6, "Technical-Skill": 0.8, "Software-Dev": 0.8,
+        "Creative-Skill": 0.7, "Animation-3D": 0.7, "Digital-Media": 0.5
+    },
+    "AI-ML": {
+        "Investigative": 0.9, "Analytical-Skill": 0.9, "Data-Analytics": 0.8,
+        "Software-Dev": 0.7, "Lab-Research": 0.4
+    },
+    "Cloud-Systems": {
+        "Investigative": 0.6, "Technical-Skill": 0.9, "Software-Dev": 0.7,
+        "Cyber-Defense": 0.6, "Hardware-Systems": 0.5
+    },
+    
+    # Healthcare expansions
+    "Pharmacy": {
+        "Investigative": 0.8, "Analytical-Skill": 0.8, "Medical-Lab": 0.7,
+        "Patient-Care": 0.5, "Lab-Research": 0.5
+    },
+    "Public-Health": {
+        "Social": 0.8, "Analytical-Skill": 0.7, "Community-Serve": 0.7,
+        "Patient-Care": 0.5, "Teaching-Ed": 0.4
+    },
+    "Nutrition-Diet": {
+        "Social": 0.6, "Analytical-Skill": 0.6, "Patient-Care": 0.5,
+        "Food-Science": 0.7, "Rehab-Therapy": 0.4
+    },
+    
+    # Engineering expansion
+    "Environmental-Eng": {
+        "Realistic": 0.8, "Technical-Skill": 0.7, "Civil-Build": 0.5,
+        "Environmental-Sci": 0.7, "Field-Research": 0.5
+    },
+    
+    # Business expansion
+    "HR-Management": {
+        "Social": 0.7, "Enterprising": 0.7, "People-Skill": 0.8,
+        "Admin-Skill": 0.7, "Teaching-Ed": 0.3
+    },
+    
+    # Education expansions
+    "Counseling": {
+        "Social": 0.9, "People-Skill": 0.9, "Teaching-Ed": 0.6,
+        "Rehab-Therapy": 0.5, "Community-Serve": 0.4
+    },
+    "Sports-Ed": {
+        "Social": 0.7, "Physical-Skill": 0.9, "Teaching-Ed": 0.7,
+        "Rehab-Therapy": 0.4
+    },
+    
+    # Creative expansions
+    "Performing-Arts": {
+        "Artistic": 0.9, "Creative-Skill": 0.9, "People-Skill": 0.6,
+        "Visual-Design": 0.4, "Film-Broadcast": 0.5
+    },
+    "Film-Broadcast": {
+        "Artistic": 0.8, "Creative-Skill": 0.8, "Digital-Media": 0.8,
+        "Visual-Design": 0.5, "Technical-Skill": 0.4
+    },
+    "Animation-3D": {
+        "Artistic": 0.8, "Creative-Skill": 0.8, "Digital-Media": 0.8,
+        "Software-Dev": 0.5, "Game-Dev": 0.7, "Visual-Design": 0.6
+    },
+    
+    # Science expansions
+    "Environmental-Sci": {
+        "Investigative": 0.9, "Field-Research": 0.8, "Lab-Research": 0.5,
+        "Agri-Nature": 0.5, "Environmental-Eng": 0.6
+    },
+    "Food-Science": {
+        "Investigative": 0.8, "Lab-Research": 0.7, "Nutrition-Diet": 0.7,
+        "Agri-Nature": 0.4, "Analytical-Skill": 0.6
+    },
+    "Forensic-Sci": {
+        "Investigative": 0.9, "Lab-Research": 0.7, "Law-Enforce": 0.7,
+        "Analytical-Skill": 0.8, "Medical-Lab": 0.4
+    },
+    
+    # Public service expansions
+    "Legal-Practice": {
+        "Enterprising": 0.7, "Analytical-Skill": 0.7, "People-Skill": 0.6,
+        "Law-Enforce": 0.5, "Community-Serve": 0.4
+    },
+    "Social-Work": {
+        "Social": 0.9, "People-Skill": 0.9, "Community-Serve": 0.8,
+        "Teaching-Ed": 0.5, "Counseling": 0.6
+    },
+    
+    # Hospitality expansions
+    "Tourism-Travel": {
+        "Enterprising": 0.7, "People-Skill": 0.8, "Hospitality-Svc": 0.8,
+        "Marketing-Sales": 0.5, "Admin-Skill": 0.4
+    },
+    "Culinary-Arts": {
+        "Artistic": 0.6, "Creative-Skill": 0.7, "Hospitality-Svc": 0.7,
+        "Nutrition-Diet": 0.5, "Physical-Skill": 0.4
     },
     
     # Skill trait relationships
@@ -217,7 +330,7 @@ TRAIT_CATEGORIES = {
         "core_traits": ["Tech-savvy", "Hands-on", "Technical", "Laboratory", "Precision-oriented"],
         "related_traits": ["Algorithm-focused", "Mechanical-minded", "Circuit-design", "Practical", "Detail-focused"],
         "description": "Traits for technical and hands-on work"
-    },
+    }, 
     "HEALTHCARE": {
         "core_traits": ["Patient-focused", "Clinical-setting", "Empathetic", "Helping-others", "Health-conscious"],
         "related_traits": ["Compassionate", "Resilient", "Crisis-management", "Detail-focused", "Service-oriented"],

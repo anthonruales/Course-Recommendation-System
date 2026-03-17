@@ -275,8 +275,13 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
   };
 
   const handleSaveProfile = async () => {
-    if (!formData.gwa || !formData.strand) {
-      showToast('Please fill in both GWA and SHS Strand to save your profile', 'warning');
+    const missing = [];
+    if (!formData.gwa) missing.push('GWA');
+    if (!formData.strand) missing.push('SHS Strand');
+    if (selectedInterests.length === 0) missing.push('Academic Interests');
+    if (selectedSkills.length === 0) missing.push('Skills');
+    if (missing.length > 0) {
+      showToast(`Please fill in: ${missing.join(', ')}`, 'warning');
       return;
     }
     

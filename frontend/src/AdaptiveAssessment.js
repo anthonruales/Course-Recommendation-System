@@ -11,7 +11,7 @@ import NavBar from './components/NavBar';
  * - You can see courses narrowing down in real-time
  * - User selects 30, 50, or 60 questions
  */
-function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewProfile, onViewActivity }) {
+function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 50, onViewProfile, onViewActivity }) {
   // Session state
   const [sessionId, setSessionId] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(null);

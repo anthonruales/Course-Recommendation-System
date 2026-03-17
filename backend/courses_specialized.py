@@ -144,12 +144,12 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BS Computer Science", 
      "description": "Study of algorithms, programming, AI, and software development.", 
      "minimum_gwa": 85, "required_strand": "STEM",
-     "trait_tag": ["Investigative", "Software-Dev", "Technical-Skill"]},
+     "trait_tag": ["Investigative", "Software-Dev", "Technical-Skill", "AI-ML", "Web-Dev"]},
     
     {"course_name": "BS Information Technology", 
      "description": "IT infrastructure, networking, systems administration, and web development.", 
      "minimum_gwa": 82, "required_strand": "STEM",
-     "trait_tag": ["Realistic", "Software-Dev", "Technical-Skill"]},
+     "trait_tag": ["Realistic", "Software-Dev", "Technical-Skill", "Web-Dev", "Cloud-Systems"]},
     
     {"course_name": "BS Computer Engineering", 
      "description": "Hardware-software integration, embedded systems, and computer architecture.", 
@@ -164,17 +164,17 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BS Data Science", 
      "description": "Big data analytics, machine learning, and statistical modeling.", 
      "minimum_gwa": 85, "required_strand": "STEM",
-     "trait_tag": ["Investigative", "Data-Analytics", "Analytical-Skill"]},
+     "trait_tag": ["Investigative", "Data-Analytics", "Analytical-Skill", "AI-ML"]},
     
     {"course_name": "BS Cybersecurity", 
      "description": "Information security, ethical hacking, and network defense.", 
      "minimum_gwa": 85, "required_strand": "STEM",
-     "trait_tag": ["Investigative", "Cyber-Defense", "Technical-Skill"]},
+     "trait_tag": ["Investigative", "Cyber-Defense", "Technical-Skill", "Cloud-Systems"]},
     
     {"course_name": "BS Entertainment and Multimedia Computing", 
      "description": "Game development, interactive media, and digital entertainment.", 
      "minimum_gwa": 82, "required_strand": "STEM",
-     "trait_tag": ["Artistic", "Digital-Media", "Creative-Skill"]},
+     "trait_tag": ["Artistic", "Digital-Media", "Creative-Skill", "Game-Dev", "Animation-3D"]},
     
     # ============== ENGINEERING ==============
     {"course_name": "BS Civil Engineering", 
@@ -227,7 +227,7 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BS Pharmacy", 
      "description": "Drug formulation, dispensing, and pharmaceutical care.", 
      "minimum_gwa": 85, "required_strand": "STEM",
-     "trait_tag": ["Investigative", "Medical-Lab", "Analytical-Skill"]},
+     "trait_tag": ["Investigative", "Medical-Lab", "Analytical-Skill", "Pharmacy"]},
     
     {"course_name": "BS Radiologic Technology", 
      "description": "Operating medical imaging equipment like X-rays, CT scans, and MRI.", 
@@ -259,7 +259,7 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BS Nutrition and Dietetics", 
      "description": "Study of food science and the role of nutrition in health and disease management.", 
      "minimum_gwa": 83, "required_strand": "STEM",
-     "trait_tag": ["Social", "Patient-Care", "Analytical-Skill"]},
+     "trait_tag": ["Social", "Patient-Care", "Analytical-Skill", "Nutrition-Diet", "Food-Science"]},
     
     {"course_name": "BS Optometry", 
      "description": "Examining eyes for defects and prescribing corrective lenses.", 
@@ -316,7 +316,7 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BS Business Administration major in Human Resource Management", 
      "description": "Recruitment, training, and employee relations.", 
      "minimum_gwa": 82, "required_strand": "ABM",
-     "trait_tag": ["Social", "Marketing-Sales", "People-Skill"]},
+     "trait_tag": ["Social", "Marketing-Sales", "People-Skill", "HR-Management"]},
     
     {"course_name": "BS Real Estate Management", 
      "description": "Property development, sales, and real estate investments.", 
@@ -363,7 +363,7 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "Bachelor of Physical Education", 
      "description": "Physical fitness instruction and sports coaching.", 
      "minimum_gwa": 80, "required_strand": "GAS",
-     "trait_tag": ["Social", "Teaching-Ed", "Physical-Skill"]},
+     "trait_tag": ["Social", "Teaching-Ed", "Physical-Skill", "Sports-Ed"]},
     
     {"course_name": "Bachelor of Technical-Vocational Teacher Education", 
      "description": "Training for teachers in technical and vocational fields.", 
@@ -400,22 +400,22 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BA in Animation", 
      "description": "2D/3D animation, motion graphics, and visual effects.", 
      "minimum_gwa": 80, "required_strand": "HUMSS",
-     "trait_tag": ["Artistic", "Digital-Media", "Technical-Skill"]},
+     "trait_tag": ["Artistic", "Digital-Media", "Technical-Skill", "Animation-3D"]},
     
     {"course_name": "BA in Game Art and Design", 
      "description": "Game graphics, character design, and interactive media.", 
      "minimum_gwa": 80, "required_strand": "HUMSS",
-     "trait_tag": ["Artistic", "Digital-Media", "Technical-Skill"]},
+     "trait_tag": ["Artistic", "Digital-Media", "Technical-Skill", "Game-Dev", "Animation-3D"]},
     
     {"course_name": "BA in Digital Filmmaking", 
      "description": "Video production, cinematography, and film editing.", 
      "minimum_gwa": 80, "required_strand": "HUMSS",
-     "trait_tag": ["Artistic", "Digital-Media", "Technical-Skill"]},
+     "trait_tag": ["Artistic", "Digital-Media", "Technical-Skill", "Film-Broadcast"]},
     
     {"course_name": "BA in Music Production", 
      "description": "Audio engineering, music composition, and sound design.", 
      "minimum_gwa": 80, "required_strand": "HUMSS",
-     "trait_tag": ["Artistic", "Digital-Media", "Creative-Skill"]},
+     "trait_tag": ["Artistic", "Digital-Media", "Creative-Skill", "Performing-Arts"]},
     
     # ============== ARTS & DESIGN - SPATIAL ==============
     {"course_name": "BS Architecture", 
@@ -482,13 +482,13 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BS Food Technology", 
      "description": "Food processing, preservation, and quality control.", 
      "minimum_gwa": 83, "required_strand": "STEM",
-     "trait_tag": ["Investigative", "Lab-Research", "Technical-Skill"]},
+     "trait_tag": ["Investigative", "Lab-Research", "Technical-Skill", "Food-Science"]},
     
     # ============== SCIENCE - FIELD RESEARCH ==============
     {"course_name": "BS Environmental Science", 
      "description": "Environmental conservation, pollution control, and sustainability.", 
      "minimum_gwa": 83, "required_strand": "STEM",
-     "trait_tag": ["Investigative", "Field-Research", "Analytical-Skill"]},
+     "trait_tag": ["Investigative", "Field-Research", "Analytical-Skill", "Environmental-Sci"]},
     
     {"course_name": "BS Marine Biology", 
      "description": "Study of marine organisms and ocean ecosystems.", 
@@ -508,7 +508,7 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BS Environmental Planning", 
      "description": "Land use planning, urban development, and environmental policy.", 
      "minimum_gwa": 83, "required_strand": "STEM",
-     "trait_tag": ["Investigative", "Field-Research", "Admin-Skill"]},
+     "trait_tag": ["Investigative", "Field-Research", "Admin-Skill", "Environmental-Eng"]},
     
     # ============== PUBLIC SERVICE - LAW ENFORCEMENT ==============
     {"course_name": "BS Criminology", 
@@ -519,12 +519,12 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BS Forensic Science", 
      "description": "Scientific analysis of evidence for criminal investigations.", 
      "minimum_gwa": 85, "required_strand": "STEM",
-     "trait_tag": ["Investigative", "Law-Enforce", "Analytical-Skill"]},
+     "trait_tag": ["Investigative", "Law-Enforce", "Analytical-Skill", "Forensic-Sci"]},
     
     {"course_name": "BS Legal Management", 
      "description": "Legal procedures, paralegal work, and law office management.", 
      "minimum_gwa": 83, "required_strand": "ABM",
-     "trait_tag": ["Conventional", "Law-Enforce", "Admin-Skill"]},
+     "trait_tag": ["Conventional", "Law-Enforce", "Admin-Skill", "Legal-Practice"]},
     
     # ============== PUBLIC SERVICE - COMMUNITY ==============
     {"course_name": "Bachelor of Public Administration", 
@@ -535,7 +535,7 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BS Social Work", 
      "description": "Community welfare, counseling, and social services.", 
      "minimum_gwa": 80, "required_strand": "HUMSS",
-     "trait_tag": ["Social", "Community-Serve", "People-Skill"]},
+     "trait_tag": ["Social", "Community-Serve", "People-Skill", "Social-Work", "Counseling"]},
     
     {"course_name": "BS Community Development", 
      "description": "Community organizing, development programs, and social change.", 
@@ -588,12 +588,12 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BS Tourism Management", 
      "description": "Travel planning, tour operations, and destination management.", 
      "minimum_gwa": 80, "required_strand": "TVL",
-     "trait_tag": ["Enterprising", "Hospitality-Svc", "People-Skill"]},
+     "trait_tag": ["Enterprising", "Hospitality-Svc", "People-Skill", "Tourism-Travel"]},
     
     {"course_name": "BS Culinary Management", 
      "description": "Culinary arts, restaurant management, and food service.", 
      "minimum_gwa": 80, "required_strand": "TVL",
-     "trait_tag": ["Artistic", "Hospitality-Svc", "Creative-Skill"]},
+     "trait_tag": ["Artistic", "Hospitality-Svc", "Creative-Skill", "Culinary-Arts"]},
     
     {"course_name": "BS Office Administration", 
      "description": "Office management, administrative support, and business communication.", 
@@ -609,7 +609,7 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BA in Journalism", 
      "description": "News writing, investigative reporting, and broadcast journalism.", 
      "minimum_gwa": 82, "required_strand": "HUMSS",
-     "trait_tag": ["Investigative", "Marketing-Sales", "Analytical-Skill"]},
+     "trait_tag": ["Investigative", "Marketing-Sales", "Analytical-Skill", "Film-Broadcast"]},
     
     {"course_name": "BS Development Communication", 
      "description": "Communication for social development and community engagement.", 
@@ -620,7 +620,7 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BS Psychology", 
      "description": "Human behavior, mental processes, and psychological assessment.", 
      "minimum_gwa": 85, "required_strand": "HUMSS",
-     "trait_tag": ["Investigative", "Rehab-Therapy", "Analytical-Skill"]},
+     "trait_tag": ["Investigative", "Rehab-Therapy", "Analytical-Skill", "Counseling"]},
     
     {"course_name": "BA in Sociology", 
      "description": "Social structures, human interactions, and societal patterns.", 
@@ -641,13 +641,13 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BA in Theater Arts", 
      "description": "Acting, stage production, and dramatic arts.", 
      "minimum_gwa": 80, "required_strand": "HUMSS",
-     "trait_tag": ["Artistic", "Visual-Design", "Creative-Skill"]},
+     "trait_tag": ["Artistic", "Visual-Design", "Creative-Skill", "Performing-Arts"]},
     
     # ============== EXERCISE & SPORTS ==============
     {"course_name": "BS Exercise and Sports Science", 
      "description": "Exercise physiology, sports training, and athletic performance.", 
      "minimum_gwa": 82, "required_strand": "STEM",
-     "trait_tag": ["Investigative", "Rehab-Therapy", "Physical-Skill"]},
+     "trait_tag": ["Investigative", "Rehab-Therapy", "Physical-Skill", "Sports-Ed"]},
     
     # ============== AVIATION ==============
     {"course_name": "BS Aircraft Maintenance Technology", 
