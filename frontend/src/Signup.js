@@ -48,6 +48,25 @@ function Signup({ onSwitch, onBack }) {
   const [showPassword, setShowPassword] = useState(false);
   const [toast, setToast] = useState(null);
   const [emailError, setEmailError] = useState('');
+  
+  // OTP verification state
+  const [otpStep, setOtpStep] = useState(false); // true = showing OTP input
+  const [otp, setOtp] = useState(['', '', '', '', '', '']);
+  const [otpToken, setOtpToken] = useState(null);
+  const [otpLoading, setOtpLoading] = useState(false);
+  const [otpTimer, setOtpTimer] = useState(0);
+  const [otpError, setOtpError] = useState('');
+  const otpRefs = [
+    React.useRef(null), React.useRef(null), React.useRef(null),
+    React.useRef(null), React.useRef(null), React.useRef(null)
+  ];
+
+  // Countdown timer for resend
+  React.useEffect(() => {
+    if (otpTimer <= 0) return;
+    const interval = setInterval(() => setOtpTimer(t => t - 1), 1000);
+    return () => clearInterval(interval);
+  }, [otpTimer]);
 
   const showToast = (message, type = 'info') => {
     setToast({ message, type });
@@ -102,25 +121,215 @@ function Signup({ onSwitch, onBack }) {
       return;
     }
 
+    // Step 1: Send OTP to email
     setLoading(true);
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/signup`, {
-        username: formData.username,
-        fullname: formData.fullname,
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/send-otp`, {
         email: formData.email,
-        password: formData.password
+        username: formData.username,
+        fullname: formData.fullname
       });
 
-      if (response.status === 200 || response.status === 201) {
-        showToast("✓ Account created successfully! Redirecting to sign in...", "success");
-        setTimeout(() => onSwitch(), 2000);
+      if (response.data.success) {
+        setOtpStep(true);
+        setOtpTimer(60);
+        setOtp(['', '', '', '', '', '']);
+        setOtpError('');
+        showToast("Verification code sent to your email!", "success");
+        setTimeout(() => otpRefs[0].current?.focus(), 100);
       }
     } catch (err) {
-      showToast(err.response?.data?.detail || "Registration failed. Please try again.", "error");
+      showToast(err.response?.data?.detail || "Failed to send verification code. Please try again.", "error");
     } finally {
       setLoading(false);
     }
   };
+
+  const handleOtpChange = (index, value) => {
+    if (!/^\d*$/.test(value)) return; // Only digits
+    const newOtp = [...otp];
+    newOtp[index] = value.slice(-1); // Only keep last digit
+    setOtp(newOtp);
+    setOtpError('');
+    
+    // Auto-focus next input
+    if (value && index < 5) {
+      otpRefs[index + 1].current?.focus();
+    }
+    
+    // Auto-verify when all 6 digits are entered
+    if (value && index === 5) {
+      const fullOtp = newOtp.join('');
+      if (fullOtp.length === 6) {
+        verifyOtp(fullOtp);
+      }
+    }
+  };
+
+  const handleOtpKeyDown = (index, e) => {
+    if (e.key === 'Backspace' && !otp[index] && index > 0) {
+      otpRefs[index - 1].current?.focus();
+    }
+  };
+
+  const handleOtpPaste = (e) => {
+    e.preventDefault();
+    const paste = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, 6);
+    if (paste.length > 0) {
+      const newOtp = [...otp];
+      for (let i = 0; i < 6; i++) {
+        newOtp[i] = paste[i] || '';
+      }
+      setOtp(newOtp);
+      if (paste.length === 6) {
+        verifyOtp(paste);
+      } else {
+        otpRefs[Math.min(paste.length, 5)].current?.focus();
+      }
+    }
+  };
+
+  const verifyOtp = async (otpCode) => {
+    setOtpLoading(true);
+    setOtpError('');
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/verify-otp`, {
+        email: formData.email,
+        otp: otpCode
+      });
+
+      if (response.data.success) {
+        // OTP verified, now complete signup
+        const token = response.data.otp_token;
+        setOtpToken(token);
+        
+        const signupResponse = await axios.post(`${process.env.REACT_APP_API_URL}/signup`, {
+          username: formData.username,
+          fullname: formData.fullname,
+          email: formData.email,
+          password: formData.password,
+          otp_token: token
+        });
+
+        if (signupResponse.status === 200 || signupResponse.status === 201) {
+          showToast("✓ Account created successfully! Redirecting to sign in...", "success");
+          setTimeout(() => onSwitch(), 2000);
+        }
+      }
+    } catch (err) {
+      setOtpError(err.response?.data?.detail || "Verification failed. Please try again.");
+    } finally {
+      setOtpLoading(false);
+    }
+  };
+
+  const resendOtp = async () => {
+    if (otpTimer > 0) return;
+    setOtpLoading(true);
+    setOtpError('');
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/send-otp`, {
+        email: formData.email,
+        username: formData.username,
+        fullname: formData.fullname
+      });
+      if (response.data.success) {
+        setOtpTimer(60);
+        setOtp(['', '', '', '', '', '']);
+        showToast("New verification code sent!", "success");
+        setTimeout(() => otpRefs[0].current?.focus(), 100);
+      }
+    } catch (err) {
+      showToast(err.response?.data?.detail || "Failed to resend code.", "error");
+    } finally {
+      setOtpLoading(false);
+    }
+  };
+
+  // OTP Verification Screen
+  if (otpStep) {
+    return (
+      <div style={styles.authWrapper}>
+        <div style={styles.bgGradient1}></div>
+        <div style={styles.bgGradient2}></div>
+        <div className="auth-glass-card" style={styles.glassCard}>
+          <div style={styles.otpIconWrapper}>
+            <span style={styles.otpIcon}>✉️</span>
+          </div>
+          
+          <h2 style={styles.title}>Verify Your Email</h2>
+          <p style={styles.subtitle}>
+            We sent a 6-digit code to<br/>
+            <strong style={{ color: '#a5b4fc' }}>{formData.email}</strong>
+          </p>
+
+          <div style={styles.otpContainer} onPaste={handleOtpPaste}>
+            {otp.map((digit, index) => (
+              <input
+                key={index}
+                ref={otpRefs[index]}
+                type="text"
+                inputMode="numeric"
+                maxLength={1}
+                value={digit}
+                onChange={(e) => handleOtpChange(index, e.target.value)}
+                onKeyDown={(e) => handleOtpKeyDown(index, e)}
+                style={{
+                  ...styles.otpInput,
+                  borderColor: otpError ? '#ef4444' : digit ? '#6366f1' : 'rgba(255,255,255,0.08)',
+                  background: digit ? 'rgba(99, 102, 241, 0.08)' : 'rgba(15, 23, 42, 0.5)'
+                }}
+                disabled={otpLoading}
+              />
+            ))}
+          </div>
+
+          {otpError && <p style={styles.otpErrorText}>{otpError}</p>}
+
+          {otpLoading && (
+            <p style={{ color: '#a5b4fc', fontSize: '14px', marginTop: '16px' }}>
+              Verifying...
+            </p>
+          )}
+
+          <div style={styles.otpActions}>
+            <p style={{ color: '#64748b', fontSize: '14px', margin: '0' }}>
+              Didn't receive the code?{' '}
+              {otpTimer > 0 ? (
+                <span style={{ color: '#94a3b8' }}>Resend in {otpTimer}s</span>
+              ) : (
+                <span 
+                  onClick={resendOtp} 
+                  style={{ color: '#a5b4fc', fontWeight: '600', cursor: 'pointer' }}
+                >
+                  Resend Code
+                </span>
+              )}
+            </p>
+          </div>
+
+          <button 
+            onClick={() => {
+              setOtpStep(false);
+              setOtp(['', '', '', '', '', '']);
+              setOtpError('');
+            }} 
+            style={styles.otpBackBtn}
+          >
+            ← Back to Registration
+          </button>
+        </div>
+
+        {toast && (
+          <Toast 
+            message={toast.message} 
+            type={toast.type} 
+            onClose={() => setToast(null)}
+          />
+        )}
+      </div>
+    );
+  }
 
   return (
     <div style={styles.authWrapper}>
@@ -406,7 +615,61 @@ const styles = {
     fontSize: '12px',
     marginTop: '6px',
     textAlign: 'left'
-  }
+  },
+  // OTP Verification Styles
+  otpIconWrapper: {
+    width: '80px',
+    height: '80px',
+    margin: '0 auto 20px',
+    background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%)',
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    border: '1px solid rgba(139, 92, 246, 0.3)',
+  },
+  otpIcon: {
+    fontSize: '36px',
+  },
+  otpContainer: {
+    display: 'flex',
+    gap: '10px',
+    justifyContent: 'center',
+    margin: '28px 0 16px',
+  },
+  otpInput: {
+    width: '48px',
+    height: '56px',
+    textAlign: 'center',
+    fontSize: '22px',
+    fontWeight: '700',
+    color: '#f1f5f9',
+    border: '1.5px solid rgba(255,255,255,0.08)',
+    borderRadius: '12px',
+    outline: 'none',
+    transition: 'all 0.2s ease',
+    boxSizing: 'border-box',
+    caretColor: '#6366f1',
+  },
+  otpErrorText: {
+    color: '#ef4444',
+    fontSize: '13px',
+    marginTop: '8px',
+    textAlign: 'center',
+  },
+  otpActions: {
+    marginTop: '20px',
+    textAlign: 'center',
+  },
+  otpBackBtn: {
+    marginTop: '24px',
+    background: 'none',
+    border: 'none',
+    color: '#64748b',
+    fontSize: '14px',
+    cursor: 'pointer',
+    transition: 'color 0.2s ease',
+  },
 };
 
 export default Signup;
