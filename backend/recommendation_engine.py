@@ -1,8 +1,8 @@
 # recommendation_engine.py
-# ================================================================================
+
 # COLLEGE COURSE RECOMMENDATION SYSTEM
 # Using Rule-Based Logic and Decision Tree Algorithm
-# ================================================================================
+
 # 
 # This module implements the hybrid recommendation system as described in the thesis:
 # 
@@ -15,7 +15,7 @@
 # - Ranks and prioritizes courses based on identified patterns from student data
 # - Based on Decision Tree Algorithm Theory (Quinlan, 1986)
 # 
-# ================================================================================
+
 
 from typing import List, Dict, Any, Optional, Tuple, Set
 from dataclasses import dataclass, field
@@ -48,6 +48,14 @@ QUALITATIVE_KEYWORD_MAPPING = {
     "chemistry": ["Scientific", "Analytical", "Research", "Laboratory", "Technical"],
     "physics": ["Scientific", "Analytical", "Engineering", "Technical", "Mathematical"],
     "environment": ["Environmental", "Scientific", "Sustainable", "Natural", "Research"],
+    "earth_science": ["Scientific", "Environmental", "Research", "Geological", "Natural"],
+    "marine_science": ["Scientific", "Maritime", "Environmental", "Research", "Marine"],
+    "biotechnology": ["Scientific", "Medical", "Research", "Laboratory", "Technical"],
+    "meteorology": ["Scientific", "Environmental", "Analytical", "Research", "Technical"],
+    "statistics": ["Statistical", "Analytical", "Mathematical", "Computational", "Research"],
+    "food_science": ["Scientific", "Culinary", "Laboratory", "Technical", "Research"],
+    "forensic_science": ["Scientific", "Legal", "Analytical", "Laboratory", "Research"],
+    "env_planning": ["Environmental", "Sustainable", "Infrastructure", "Management", "Research"],
     
     # Technology
     "programming": ["Technical", "Computational", "Software", "IT", "Analytical"],
@@ -55,12 +63,28 @@ QUALITATIVE_KEYWORD_MAPPING = {
     "data": ["Analytical", "Technical", "Computational", "Research", "Statistical"],
     "ai": ["Technical", "Computational", "Innovation", "Research", "Analytical"],
     "cybersecurity": ["Technical", "IT", "Security", "Analytical"],
+    "robotics": ["Technical", "Engineering", "Mechanical", "Computational", "Innovation"],
+    "game_dev": ["Technical", "Creative", "Digital", "Software", "Design"],
+    "web_tech": ["Technical", "Digital", "Software", "IT", "Creative"],
+    "multimedia": ["Creative", "Digital", "Media", "Technical", "Design"],
+    "networking": ["Technical", "IT", "Computational", "Infrastructure", "Security"],
+    "software_eng": ["Technical", "Computational", "Software", "Engineering", "Analytical"],
+    "database": ["Technical", "IT", "Computational", "Analytical", "Software"],
+    "health_info": ["Healthcare", "IT", "Technical", "Management", "Analytical"],
     
     # Engineering
     "engineering": ["Engineering", "Technical", "Analytical", "Problem-Solving", "STEM"],
     "mechanical": ["Engineering", "Technical", "Mechanical", "Analytical"],
     "electrical": ["Engineering", "Technical", "Electrical", "Analytical"],
     "civil": ["Engineering", "Technical", "Infrastructure", "Analytical"],
+    "architecture": ["Engineering", "Creative", "Design", "Infrastructure", "Visual"],
+    "industrial": ["Engineering", "Technical", "Management", "Analytical", "Mechanical"],
+    "aeronautical": ["Engineering", "Technical", "Mechanical", "Analytical", "Aviation"],
+    "geodetic": ["Engineering", "Technical", "Infrastructure", "Research", "Analytical"],
+    "landscape": ["Creative", "Environmental", "Design", "Infrastructure", "Artistic"],
+    "industrial_design": ["Creative", "Design", "Engineering", "Technical", "Artistic"],
+    "aircraft_maint": ["Technical", "Engineering", "Mechanical", "Aviation", "Analytical"],
+    "marine_eng": ["Engineering", "Maritime", "Mechanical", "Technical", "Marine"],
     
     # Business & Finance
     "business": ["Business", "Entrepreneurial", "Fiscal", "Management", "Commercial"],
@@ -68,6 +92,14 @@ QUALITATIVE_KEYWORD_MAPPING = {
     "marketing": ["Business", "Commercial", "Creative", "Communication", "Social"],
     "accounting": ["Fiscal", "Analytical", "Business", "Quantitative", "Financial"],
     "economics": ["Fiscal", "Analytical", "Business", "Quantitative", "Social"],
+    "management": ["Business", "Management", "Organizational", "Leadership", "Administrative"],
+    "real_estate": ["Business", "Fiscal", "Commercial", "Management", "Marketing"],
+    "human_resource": ["Management", "Social", "Communication", "Leadership", "Organizational"],
+    "operations": ["Management", "Engineering", "Analytical", "Organizational", "Technical"],
+    "customs": ["Business", "Fiscal", "Management", "International", "Administrative"],
+    "agribusiness": ["Business", "Agricultural", "Management", "Fiscal", "Sustainable"],
+    "office_admin": ["Administrative", "Management", "Organizational", "Communication", "Business"],
+    "startup": ["Business", "Entrepreneurial", "Innovation", "Leadership", "Creative"],
     
     # Arts & Creative
     "art": ["Creative", "Artistic", "Visual", "Design", "Expressive"],
@@ -75,11 +107,30 @@ QUALITATIVE_KEYWORD_MAPPING = {
     "film": ["Creative", "Cinematic", "Visual", "Media", "Storytelling"],
     "writing": ["Literary", "Communication", "Creative", "Expressive", "Journalism"],
     "photography": ["Creative", "Visual", "Artistic", "Media", "Design"],
+    "animation": ["Creative", "Digital", "Visual", "Technical", "Design"],
+    "fashion": ["Creative", "Artistic", "Design", "Visual", "Expressive"],
+    "theater": ["Creative", "Performance", "Artistic", "Expressive", "Communication"],
+    "advertising_arts": ["Creative", "Visual", "Design", "Business", "Communication"],
+    "music_production": ["Creative", "Musical", "Technical", "Digital", "Media"],
+    "fine_arts": ["Creative", "Artistic", "Visual", "Expressive", "Design"],
+    "clothing_tech": ["Creative", "Technical", "Design", "Artistic", "Manufacturing"],
     
     # Healthcare
     "medical": ["Medical", "Healthcare", "Scientific", "Helping", "Clinical"],
     "nursing": ["Healthcare", "Helping", "Medical", "Caregiving", "Clinical"],
     "psychology": ["Psychological", "Healthcare", "Helping", "Counseling", "Behavioral"],
+    "pharmacy": ["Healthcare", "Scientific", "Medical", "Laboratory", "Clinical"],
+    "physical_therapy": ["Healthcare", "Helping", "Physical", "Rehabilitation", "Medical"],
+    "nutrition": ["Healthcare", "Scientific", "Helping", "Medical", "Culinary"],
+    "medical_tech": ["Healthcare", "Scientific", "Laboratory", "Technical", "Analytical"],
+    "dentistry": ["Healthcare", "Medical", "Clinical", "Scientific", "Helping"],
+    "occupational_therapy": ["Healthcare", "Helping", "Rehabilitation", "Medical", "Social"],
+    "speech_therapy": ["Healthcare", "Helping", "Rehabilitation", "Communication", "Medical"],
+    "respiratory": ["Healthcare", "Medical", "Technical", "Clinical", "Helping"],
+    "radiology": ["Healthcare", "Technical", "Medical", "Scientific", "Laboratory"],
+    "optometry": ["Healthcare", "Medical", "Scientific", "Technical", "Clinical"],
+    "midwifery": ["Healthcare", "Helping", "Medical", "Caregiving", "Clinical"],
+    "public_health": ["Healthcare", "Community", "Social", "Management", "Research"],
     
     # Social & Humanities
     "education": ["Educational", "Academic", "Helping", "Communication", "Mentoring"],
@@ -87,12 +138,39 @@ QUALITATIVE_KEYWORD_MAPPING = {
     "politics": ["Political", "Public Administration", "Leadership", "Advocacy", "Social"],
     "social": ["Social", "Community", "Helping", "Interpersonal", "Humanitarian"],
     "history": ["Historical", "Cultural", "Research", "Academic", "Humanities"],
+    "communication": ["Communication", "Media", "Journalism", "Social", "Creative"],
+    "philosophy": ["Analytical", "Research", "Academic", "Humanities", "Communication"],
+    "criminology": ["Legal", "Physical", "Justice", "Analytical", "Research"],
+    "early_childhood": ["Educational", "Helping", "Caregiving", "Creative", "Communication"],
+    "special_education": ["Educational", "Helping", "Caregiving", "Communication", "Social"],
+    "library_science": ["Academic", "Research", "Organizational", "Communication", "Management"],
+    "public_admin": ["Political", "Public Administration", "Management", "Leadership", "Social"],
+    "intl_studies": ["International", "Political", "Cultural", "Communication", "Research"],
+    "sociology": ["Social", "Research", "Analytical", "Humanities", "Community"],
+    "linguistics": ["Communication", "Research", "Academic", "Cultural", "Analytical"],
+    "dev_communication": ["Communication", "Social", "Community", "Media", "Helping"],
+    "community_dev": ["Social", "Community", "Helping", "Leadership", "Humanitarian"],
+    "legal_mgmt": ["Legal", "Business", "Management", "Administrative", "Analytical"],
+    
+    # Maritime & Aviation
+    "maritime": ["Maritime", "Marine", "Navigation", "Physical", "Technical"],
+    "aviation": ["Aviation", "Technical", "Engineering", "Mechanical", "Physical"],
+    "logistics": ["Management", "Business", "Organizational", "Technical", "Analytical"],
+    "marine_transport": ["Maritime", "Marine", "Navigation", "Physical", "Technical"],
     
     # Others
     "sports": ["Athletic", "Physical", "Competitive", "Health", "Fitness"],
     "tourism": ["Tourism", "Hospitality", "Cultural", "Service", "Management"],
     "food": ["Culinary", "Hospitality", "Creative", "Service", "Management"],
     "agriculture": ["Agricultural", "Environmental", "Scientific", "Sustainable", "Natural"],
+    "veterinary": ["Medical", "Scientific", "Healthcare", "Agricultural", "Research"],
+    "military": ["Physical", "Leadership", "Technical", "Discipline", "Strategic"],
+    "forestry": ["Environmental", "Scientific", "Natural", "Sustainable", "Research"],
+    "fisheries": ["Agricultural", "Environmental", "Marine", "Scientific", "Natural"],
+    "hotel_mgmt": ["Hospitality", "Service", "Management", "Tourism", "Communication"],
+    "exercise_science": ["Physical", "Healthcare", "Scientific", "Athletic", "Fitness"],
+    "tvet": ["Technical", "Practical", "Engineering", "Mechanical", "Hands-on"],
+    "culinary_mgmt": ["Culinary", "Hospitality", "Management", "Creative", "Service"],
     
     # ============================================
     # SKILLS (matches frontend options)
@@ -107,6 +185,23 @@ QUALITATIVE_KEYWORD_MAPPING = {
     "math_skills": ["Mathematical", "Analytical", "Logical", "Computational", "Quantitative"],
     "laboratory": ["Scientific", "Research", "Technical", "Analytical"],
     "technical_writing": ["Communication", "Technical", "Analytical", "Documentation"],
+    "electronics": ["Technical", "Engineering", "Electrical", "Analytical", "Mechanical"],
+    "drafting": ["Technical", "Engineering", "Design", "Infrastructure", "Creative"],
+    "accounting_skill": ["Fiscal", "Analytical", "Business", "Quantitative", "Financial"],
+    "networking_skill": ["Technical", "IT", "Infrastructure", "Computational", "Security"],
+    "database_skill": ["Technical", "IT", "Computational", "Analytical", "Software"],
+    "statistical_analysis": ["Statistical", "Analytical", "Mathematical", "Research", "Computational"],
+    "surveying": ["Technical", "Engineering", "Infrastructure", "Analytical", "Environmental"],
+    "lab_equipment": ["Scientific", "Healthcare", "Technical", "Laboratory", "Analytical"],
+    "machine_operation": ["Technical", "Mechanical", "Engineering", "Physical", "Manufacturing"],
+    "quality_control": ["Analytical", "Technical", "Engineering", "Manufacturing", "Precision"],
+    "mobile_dev": ["Technical", "Computational", "Software", "Digital", "Creative"],
+    "ux_ui": ["Creative", "Design", "Digital", "Technical", "Visual"],
+    "audio_production": ["Creative", "Musical", "Technical", "Digital", "Media"],
+    "film_editing": ["Creative", "Media", "Cinematic", "Visual", "Technical"],
+    "navigation": ["Maritime", "Technical", "Physical", "Marine", "Navigation"],
+    "flight_ops": ["Aviation", "Technical", "Engineering", "Analytical", "Physical"],
+    "env_assessment": ["Environmental", "Scientific", "Research", "Analytical", "Technical"],
     
     # Communication Skills
     "public_speaking": ["Communication", "Public Speaking", "Leadership", "Confidence"],
@@ -114,6 +209,13 @@ QUALITATIVE_KEYWORD_MAPPING = {
     "presentation": ["Communication", "Leadership", "Public Speaking", "Professional"],
     "negotiation": ["Communication", "Business", "Interpersonal", "Persuasion"],
     "foreign_language": ["Communication", "Cultural", "International", "Linguistic"],
+    "filipino_language": ["Communication", "Cultural", "Educational", "Linguistic"],
+    "social_media": ["Communication", "Digital", "Creative", "Media", "Marketing"],
+    "journalism_skill": ["Communication", "Journalism", "Media", "Research", "Analytical"],
+    "persuasion": ["Communication", "Business", "Leadership", "Interpersonal", "Marketing"],
+    "interviewing": ["Communication", "Research", "Interpersonal", "Journalism", "Analytical"],
+    "report_writing": ["Communication", "Technical", "Analytical", "Academic", "Documentation"],
+    "sign_language": ["Communication", "Helping", "Healthcare", "Educational", "Social"],
     
     # Leadership & Management
     "leadership": ["Leadership", "Management", "Decision-Making", "Organizational"],
@@ -121,6 +223,11 @@ QUALITATIVE_KEYWORD_MAPPING = {
     "team_management": ["Leadership", "Management", "Interpersonal", "Organizational"],
     "decision_making": ["Leadership", "Analytical", "Management", "Strategic"],
     "planning": ["Organizational", "Management", "Strategic", "Analytical"],
+    "time_management": ["Organizational", "Management", "Discipline", "Planning"],
+    "event_management": ["Management", "Hospitality", "Creative", "Communication", "Organizational"],
+    "budgeting": ["Fiscal", "Management", "Analytical", "Quantitative", "Business"],
+    "strategic_thinking": ["Strategic", "Analytical", "Leadership", "Management", "Business"],
+    "delegation": ["Leadership", "Management", "Organizational", "Communication", "Interpersonal"],
     
     # Interpersonal Skills
     "teamwork": ["Interpersonal", "Collaborative", "Social", "Communication"],
@@ -128,6 +235,12 @@ QUALITATIVE_KEYWORD_MAPPING = {
     "customer_service": ["Service", "Communication", "Hospitality", "Interpersonal"],
     "mentoring": ["Educational", "Helping", "Leadership", "Communication", "Mentoring"],
     "conflict_resolution": ["Interpersonal", "Communication", "Leadership", "Mediation"],
+    "counseling": ["Helping", "Healthcare", "Communication", "Psychological", "Social"],
+    "patient_care": ["Healthcare", "Helping", "Medical", "Caregiving", "Clinical"],
+    "cultural_sensitivity": ["Cultural", "Social", "Communication", "International", "Interpersonal"],
+    "networking_people": ["Business", "Communication", "Social", "Interpersonal", "Professional"],
+    "child_interaction": ["Educational", "Helping", "Caregiving", "Communication", "Social"],
+    "elderly_care": ["Healthcare", "Helping", "Caregiving", "Social", "Communication"],
     
     # Analytical Skills
     "critical_thinking": ["Analytical", "Problem-Solving", "Logical", "Research"],
@@ -135,6 +248,11 @@ QUALITATIVE_KEYWORD_MAPPING = {
     "research": ["Research", "Analytical", "Scientific", "Academic"],
     "attention_detail": ["Analytical", "Technical", "Quality", "Precision"],
     "logical_reasoning": ["Analytical", "Mathematical", "Logical", "Computational"],
+    "case_analysis": ["Analytical", "Legal", "Research", "Problem-Solving", "Academic"],
+    "scientific_method": ["Scientific", "Research", "Analytical", "Laboratory", "Technical"],
+    "financial_analysis": ["Fiscal", "Analytical", "Business", "Quantitative", "Financial"],
+    "risk_assessment": ["Analytical", "Management", "Strategic", "Business", "Engineering"],
+    "policy_analysis": ["Analytical", "Political", "Research", "Public Administration", "Social"],
     
     # Creative Skills
     "creativity": ["Creative", "Innovation", "Artistic", "Design"],
@@ -142,6 +260,13 @@ QUALITATIVE_KEYWORD_MAPPING = {
     "music_skill": ["Creative", "Musical", "Artistic", "Expressive", "Performance"],
     "storytelling": ["Creative", "Communication", "Literary", "Media"],
     "design_thinking": ["Creative", "Design", "Innovation", "Problem-Solving"],
+    "photography_skill": ["Creative", "Visual", "Artistic", "Media", "Design"],
+    "cooking": ["Culinary", "Creative", "Hospitality", "Service"],
+    "first_aid": ["Healthcare", "Helping", "Medical", "Physical"],
+    "sports_fitness": ["Athletic", "Physical", "Health", "Fitness"],
+    "driving": ["Technical", "Physical", "Maritime", "Mechanical"],
+    "gardening": ["Agricultural", "Environmental", "Natural", "Physical"],
+    "repair_maintenance": ["Technical", "Mechanical", "Engineering", "Physical"],
 }
 
 
