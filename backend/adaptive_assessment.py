@@ -773,6 +773,114 @@ QUESTION_TREE_NODES = {
     203: {"level": 3, "weight": 2.5, "branches": ["maritime", "engineering"]},               # Sit - Typhoon at Sea
     204: {"level": 1, "weight": 1.5, "branches": ["maritime", "hospitality", "business"]},   # Maritime Motivation
     205: {"level": 2, "weight": 2.0, "branches": ["maritime", "engineering"]},               # Maritime Academy Choice
+    # Game Development dedicated
+    206: {"level": 2, "weight": 2.0, "branches": ["technology", "creative"]},               # Game Genre Choice
+    207: {"level": 2, "weight": 2.0, "branches": ["technology", "creative"]},               # Game Dev Parts
+    208: {"level": 3, "weight": 2.5, "branches": ["technology", "creative"]},               # Game Jam Competition
+    209: {"level": 2, "weight": 2.0, "branches": ["technology", "creative"]},               # Game Engine Choice
+    210: {"level": 2, "weight": 2.0, "branches": ["technology", "creative", "business"]},    # Game Industry Internship
+    # Web Development dedicated
+    211: {"level": 2, "weight": 2.0, "branches": ["technology", "business"]},               # Web App Build
+    212: {"level": 3, "weight": 2.5, "branches": ["technology", "business"]},               # Startup Website
+    # Animation dedicated
+    213: {"level": 2, "weight": 2.0, "branches": ["creative", "technology"]},               # 3D Animation Roles
+    # Mobile Dev dedicated
+    214: {"level": 2, "weight": 2.0, "branches": ["technology", "creative"]},               # Mobile App Type
+    # AI/ML dedicated
+    215: {"level": 2, "weight": 2.0, "branches": ["technology", "science"]},                # AI Applications
+    # Cybersecurity dedicated
+    216: {"level": 2, "weight": 2.0, "branches": ["technology", "public_service"]},          # Cyber Internship
+    # Cloud dedicated
+    217: {"level": 2, "weight": 2.0, "branches": ["technology", "engineering"]},             # Cloud Computing Interest
+    # Data Analytics dedicated
+    218: {"level": 2, "weight": 2.0, "branches": ["technology", "science", "business"]},     # Dataset Analysis
+    # Digital Media dedicated
+    219: {"level": 2, "weight": 2.0, "branches": ["creative", "technology", "business"]},    # Brand Creative Project
+    # Cross-domain tech
+    220: {"level": 2, "weight": 2.0, "branches": ["technology", "creative", "business"]},    # Tech Startup Focus
+    221: {"level": 1, "weight": 1.5, "branches": ["technology", "creative"]},               # YouTube Channel Topic
+    222: {"level": 2, "weight": 2.0, "branches": ["technology", "education"]},              # School Tech Project
+
+    # ===== BATCH 3: Massive trait coverage expansion (Q223-Q278) =====
+    # Hospitality & Tourism
+    223: {"level": 2, "weight": 2.0, "branches": ["hospitality", "business"]},              # Resort Department
+    224: {"level": 2, "weight": 2.0, "branches": ["hospitality", "creative"]},              # Tourism Planning
+    225: {"level": 2, "weight": 2.0, "branches": ["hospitality", "business"]},              # Hotel Management
+    226: {"level": 2, "weight": 2.0, "branches": ["hospitality", "creative", "technology"]},# Tourism Marketing
+    # Health & Medical
+    227: {"level": 2, "weight": 2.0, "branches": ["healthcare", "science"]},                # Hospital Department
+    228: {"level": 2, "weight": 2.0, "branches": ["healthcare", "science"]},                # Pharmacy Career
+    229: {"level": 2, "weight": 2.0, "branches": ["healthcare"]},                           # Rehabilitation
+    230: {"level": 2, "weight": 2.0, "branches": ["healthcare", "business"]},               # Health Admin
+    231: {"level": 2, "weight": 2.0, "branches": ["healthcare", "science"]},                # Nutrition Science
+    232: {"level": 2, "weight": 2.0, "branches": ["healthcare", "education"]},              # Public Health Crisis
+    233: {"level": 2, "weight": 2.0, "branches": ["healthcare", "science"]},                # Medical Laboratory
+    # Law Enforcement & Forensics
+    234: {"level": 2, "weight": 2.0, "branches": ["law", "science"]},                       # Crime Response
+    235: {"level": 2, "weight": 2.0, "branches": ["law"]},                                  # Criminology Spec
+    236: {"level": 2, "weight": 2.0, "branches": ["law", "science"]},                       # Forensic Science
+    # Engineering
+    237: {"level": 2, "weight": 2.0, "branches": ["engineering", "technology"]},             # Engineering Career
+    238: {"level": 2, "weight": 2.0, "branches": ["engineering"]},                          # Electrical Engineering
+    239: {"level": 2, "weight": 2.0, "branches": ["engineering"]},                          # Mechanical Design
+    240: {"level": 2, "weight": 2.0, "branches": ["engineering", "business"]},              # Industrial Engineering
+    241: {"level": 2, "weight": 2.0, "branches": ["engineering"]},                          # Civil Engineering
+    242: {"level": 2, "weight": 2.0, "branches": ["engineering", "science"]},               # Environmental Eng
+    # Social Work & Community
+    243: {"level": 2, "weight": 2.0, "branches": ["education", "healthcare"]},              # Social Work
+    244: {"level": 2, "weight": 2.0, "branches": ["education"]},                            # Community Dev
+    # HR & Business
+    245: {"level": 2, "weight": 2.0, "branches": ["business"]},                             # HR Management
+    246: {"level": 2, "weight": 2.0, "branches": ["business"]},                             # Business Skills
+    # Digital Media & Creative
+    247: {"level": 2, "weight": 2.0, "branches": ["creative", "business"]},                 # Brand Identity
+    248: {"level": 2, "weight": 2.0, "branches": ["creative"]},                             # Creative Specialization
+    249: {"level": 2, "weight": 2.0, "branches": ["creative", "technology"]},               # Animation Career
+    250: {"level": 2, "weight": 2.0, "branches": ["creative"]},                             # Performing Arts
+    251: {"level": 2, "weight": 2.0, "branches": ["creative", "engineering"]},              # Architecture Design
+    # Agriculture & Environment
+    252: {"level": 2, "weight": 2.0, "branches": ["science", "engineering"]},               # Agriculture
+    253: {"level": 2, "weight": 2.0, "branches": ["science"]},                              # Environmental Science
+    254: {"level": 2, "weight": 2.0, "branches": ["science"]},                              # Field Research
+    # Cybersecurity & Cloud
+    255: {"level": 2, "weight": 2.0, "branches": ["technology"]},                           # Cybersecurity Response
+    256: {"level": 2, "weight": 2.0, "branches": ["technology"]},                           # Cloud Engineering
+    # AI/ML & Data
+    257: {"level": 2, "weight": 2.0, "branches": ["technology", "science"]},                # AI Development
+    258: {"level": 2, "weight": 2.0, "branches": ["technology", "business"]},               # Data Analytics
+    # Food Science
+    259: {"level": 2, "weight": 2.0, "branches": ["science", "healthcare"]},                # Food Science Lab
+    # Game Dev (more)
+    260: {"level": 2, "weight": 2.0, "branches": ["technology"]},                           # Game Bug Fixing
+    261: {"level": 2, "weight": 2.0, "branches": ["technology"]},                           # Multiplayer Game
+    262: {"level": 2, "weight": 2.0, "branches": ["technology", "creative"]},               # Dream Game Project
+    # Web Dev
+    263: {"level": 2, "weight": 2.0, "branches": ["technology"]},                           # Web Dev Client
+    264: {"level": 2, "weight": 2.0, "branches": ["technology"]},                           # Web Dev Spec
+    # Mobile Dev
+    265: {"level": 2, "weight": 2.0, "branches": ["technology"]},                           # Mobile App Ideas
+    # Software Dev
+    266: {"level": 2, "weight": 2.0, "branches": ["technology"]},                           # Software Dev Path
+    # Digital Media (more)
+    267: {"level": 2, "weight": 2.0, "branches": ["creative", "technology"]},               # Content Creation
+    268: {"level": 2, "weight": 2.0, "branches": ["creative", "education"]},                # Digital Media Ed
+    # Physical Skill & Sports
+    269: {"level": 2, "weight": 2.0, "branches": ["education", "healthcare"]},              # Sports Career
+    270: {"level": 2, "weight": 2.0, "branches": ["education"]},                            # Sports Event
+    # Technical & Analytical
+    271: {"level": 2, "weight": 2.0, "branches": ["technology", "science"]},                # Analytical Thinking
+    272: {"level": 2, "weight": 2.0, "branches": ["engineering", "technology"]},            # Technical Skills
+    273: {"level": 2, "weight": 2.0, "branches": ["engineering", "technology"]},            # Technical Project
+    # Film & Broadcast
+    274: {"level": 2, "weight": 2.0, "branches": ["creative"]},                             # Film Broadcast Career
+    # Legal Practice
+    275: {"level": 2, "weight": 2.0, "branches": ["law", "business"]},                      # Legal Specialization
+    # Counseling
+    276: {"level": 2, "weight": 2.0, "branches": ["education", "healthcare"]},              # Counseling Approach
+    # Culinary
+    277: {"level": 2, "weight": 2.0, "branches": ["hospitality"]},                          # Culinary Concept
+    # People Skill
+    278: {"level": 2, "weight": 2.0, "branches": ["education", "business"]},                # Leadership
 }
 
 
@@ -780,19 +888,20 @@ QUESTION_TREE_NODES = {
 # When a domain is activated (from profile or answers), these are the FIRST questions
 # to ask. Ordered by how well they introduce the domain's sub-areas.
 DOMAIN_ENTRY_QUESTIONS = {
-    "technology":    [121, 134, 135, 136, 56, 37, 1, 31],
-    "healthcare":    [122, 141, 142, 143, 36, 60, 29, 40],
-    "engineering":   [123, 145, 146, 147, 59, 26, 52],
-    "business":      [124, 148, 149, 150, 35, 28, 57, 61],
-    "creative":      [125, 151, 152, 153, 30, 37, 33, 66],
-    "education":     [126, 157, 158, 28, 57, 31, 71],
-    "public_service":[127, 159, 160, 5, 41, 57, 35, 61],
-    "science":       [128, 154, 155, 156, 60, 31, 76, 33],
-    "agriculture":   [129, 161, 187, 51, 40, 29, 66, 37],
+    "technology":    [121, 220, 134, 135, 136, 266, 56, 37, 1, 31],
+    "healthcare":    [122, 227, 141, 142, 143, 36, 60, 29, 40],
+    "engineering":   [123, 237, 145, 146, 147, 59, 26, 52],
+    "business":      [124, 245, 148, 149, 150, 35, 28, 57, 61],
+    "creative":      [125, 248, 219, 151, 213, 152, 153, 30, 37, 33, 66],
+    "education":     [126, 157, 158, 269, 28, 57, 31, 71],
+    "public_service":[127, 234, 159, 160, 5, 41, 57, 35, 61],
+    "science":       [128, 253, 154, 155, 156, 60, 31, 76, 33],
+    "agriculture":   [129, 252, 161, 187, 51, 40, 29, 66, 37],
     "maritime":      [130, 201, 202, 162, 203, 204, 205, 51, 29, 63, 34],
-    "hospitality":   [131, 163, 164, 51, 53, 63, 34],
-    "physical":      [132, 29, 66, 37, 64, 34],
-    "social":        [133, 28, 57, 45, 79, 80],
+    "hospitality":   [131, 223, 224, 163, 164, 51, 53, 63, 34],
+    "physical":      [132, 269, 29, 66, 37, 64, 34],
+    "social":        [133, 243, 28, 57, 45, 79, 80],
+    "law":           [234, 235, 275, 159, 160, 127],
 }
 
 # ==================== CONVERSATION CHAIN: TRAIT FOLLOW-UP MAP ====================
@@ -802,71 +911,71 @@ DOMAIN_ENTRY_QUESTIONS = {
 
 TRAIT_FOLLOWUP_MAP = {
     # ═══════ TECHNOLOGY ═══════
-    "Software-Dev":    [134, 135, 97, 89, 111, 56, 70, 69, 83, 76, 108, 189],
-    "Hardware-Systems": [187, 89, 111, 56, 70, 105, 44, 84, 76, 140],
-    "Data-Analytics":  [135, 97, 108, 56, 76, 59, 80, 69, 91, 191],
-    "Cyber-Defense":   [137, 111, 89, 94, 97, 99, 56, 86, 178],
-    "Digital-Media":   [152, 93, 44, 98, 118, 30, 70, 78, 110, 186],
-    "Technical-Skill": [134, 56, 76, 70, 83, 80, 105, 109],
-    "Web-Dev":         [134, 140, 186, 97, 89, 56, 70, 148, 163],
-    "Mobile-Dev":      [136, 135, 140, 189, 97, 56, 191, 198],
-    "Game-Dev":        [139, 152, 135, 198, 70, 185, 180],
-    "AI-ML":           [138, 135, 136, 189, 198, 167, 187, 180],
-    "Cloud-Systems":   [137, 134, 140, 135, 97, 189, 191],
+    "Software-Dev":    [266, 222, 134, 135, 97, 89, 111, 56, 70, 69, 83, 76, 108, 189],
+    "Hardware-Systems": [272, 237, 187, 89, 111, 56, 70, 105, 44, 84, 76, 140],
+    "Data-Analytics":  [258, 218, 135, 97, 108, 56, 76, 59, 80, 69, 91, 191],
+    "Cyber-Defense":   [255, 216, 137, 111, 89, 94, 97, 99, 56, 86, 178],
+    "Digital-Media":   [267, 268, 219, 221, 152, 93, 44, 98, 118, 30, 70, 78, 110, 186],
+    "Technical-Skill": [272, 273, 134, 56, 76, 70, 83, 80, 105, 109],
+    "Web-Dev":         [263, 264, 211, 212, 222, 134, 140, 186, 97, 89, 56, 70, 148, 163],
+    "Mobile-Dev":      [265, 214, 136, 135, 140, 189, 97, 56, 191, 198],
+    "Game-Dev":        [260, 261, 262, 206, 207, 208, 209, 210, 139, 221, 220, 152, 135, 198, 70, 185, 180],
+    "AI-ML":           [257, 215, 138, 135, 136, 189, 198, 167, 187, 180],
+    "Cloud-Systems":   [256, 217, 137, 134, 140, 135, 97, 189, 191],
     # ═══════ HEALTHCARE ═══════
-    "Patient-Care":    [141, 142, 107, 95, 36, 88, 81, 60, 29, 58, 103, 192],
-    "Medical-Lab":     [142, 60, 107, 95, 36, 108, 52, 113, 76, 156],
-    "Rehab-Therapy":   [143, 107, 88, 95, 103, 36, 29, 45, 113, 188],
-    "Health-Admin":    [143, 106, 56, 107, 95, 57, 61, 80, 188],
-    "Pharmacy":        [141, 142, 143, 188, 107, 95, 60, 155],
-    "Public-Health":   [141, 143, 188, 166, 169, 175, 198, 192],
-    "Nutrition-Diet":  [144, 155, 143, 188, 166, 187, 175],
+    "Patient-Care":    [227, 141, 142, 107, 95, 36, 88, 81, 60, 29, 58, 103, 192],
+    "Medical-Lab":     [233, 142, 60, 107, 95, 36, 108, 52, 113, 76, 156],
+    "Rehab-Therapy":   [229, 143, 107, 88, 95, 103, 36, 29, 45, 113, 188],
+    "Health-Admin":    [230, 143, 106, 56, 107, 95, 57, 61, 80, 188],
+    "Pharmacy":        [228, 141, 142, 143, 188, 107, 95, 60, 155],
+    "Public-Health":   [232, 141, 143, 188, 166, 169, 175, 198, 192],
+    "Nutrition-Diet":  [231, 144, 155, 143, 188, 166, 187, 175],
     # ═══════ ENGINEERING ═══════
-    "Civil-Build":     [145, 147, 84, 119, 59, 52, 109, 116, 90, 26, 105, 191],
-    "Mechanical-Design":[146, 105, 52, 59, 119, 90, 85, 84, 116, 162],
-    "Electrical-Power": [146, 105, 52, 109, 114, 43, 59, 116, 187],
-    "Industrial-Ops":  [146, 116, 51, 92, 105, 118, 44, 53, 155],
-    "Spatial-Design":  [153, 59, 118, 30, 112, 110, 67, 36, 104],
-    "Environmental-Eng":[147, 154, 159, 189, 169, 175, 187, 191],
+    "Civil-Build":     [241, 145, 147, 84, 119, 59, 52, 109, 116, 90, 26, 105, 191],
+    "Mechanical-Design":[239, 146, 105, 52, 59, 119, 90, 85, 84, 116, 162],
+    "Electrical-Power": [238, 146, 105, 52, 109, 114, 43, 59, 116, 187],
+    "Industrial-Ops":  [240, 146, 116, 51, 92, 105, 118, 44, 53, 155],
+    "Spatial-Design":  [251, 153, 59, 118, 30, 112, 110, 67, 36, 104],
+    "Environmental-Eng":[242, 147, 154, 159, 189, 169, 175, 187, 191],
     # ═══════ BUSINESS ═══════
-    "Finance-Acct":    [149, 87, 104, 91, 100, 62, 35, 52, 61, 57, 190],
-    "Marketing-Sales": [148, 186, 91, 87, 104, 112, 65, 28, 62, 85, 163],
-    "Startup-Venture": [148, 149, 165, 87, 104, 91, 100, 85, 61, 65, 57],
-    "Admin-Skill":     [150, 106, 93, 87, 44, 80, 118, 57, 104, 190],
-    "HR-Management":   [150, 149, 160, 148, 106, 87, 190, 193],
+    "Finance-Acct":    [246, 149, 87, 104, 91, 100, 62, 35, 52, 61, 57, 190],
+    "Marketing-Sales": [246, 148, 186, 91, 87, 104, 112, 65, 28, 62, 85, 163],
+    "Startup-Venture": [246, 148, 149, 165, 87, 104, 91, 100, 85, 61, 65, 57],
+    "Admin-Skill":     [245, 150, 106, 93, 87, 44, 80, 118, 57, 104, 190],
+    "HR-Management":   [245, 150, 149, 160, 148, 106, 87, 190, 193],
     # ═══════ CREATIVE ═══════
-    "Visual-Design":   [152, 153, 93, 44, 69, 30, 56, 78, 110, 118, 33, 186],
-    "Creative-Skill":  [151, 152, 30, 44, 93, 69, 75, 66, 88, 98, 153],
-    "Animation-3D":    [139, 152, 93, 44, 98, 135, 180, 189],
-    "Film-Broadcast":  [151, 152, 186, 170, 93, 44, 98, 167, 164],
-    "Performing-Arts": [151, 164, 44, 30, 66, 93, 152, 176],
+    "Visual-Design":   [248, 247, 219, 152, 153, 221, 93, 44, 69, 30, 56, 78, 110, 118, 33, 186],
+    "Creative-Skill":  [248, 151, 219, 152, 30, 44, 93, 69, 75, 66, 88, 98, 153],
+    "Animation-3D":    [249, 213, 139, 209, 152, 221, 93, 44, 98, 135, 180, 189],
+    "Film-Broadcast":  [274, 151, 219, 152, 186, 170, 93, 44, 98, 167, 164],
+    "Performing-Arts": [250, 151, 164, 44, 30, 66, 93, 152, 176],
     # ═══════ EDUCATION ═══════
     "Teaching-Ed":     [157, 158, 83, 88, 45, 31, 71, 81, 86, 99, 106, 117],
-    "Sports-Ed":       [157, 144, 166, 169, 193, 176, 183, 187],
-    "Counseling":      [158, 157, 160, 176, 192, 198, 187, 167],
+    "Sports-Ed":       [269, 270, 157, 144, 166, 169, 193, 176, 183, 187],
+    "Counseling":      [276, 158, 157, 160, 176, 192, 198, 187, 167],
     # ═══════ PUBLIC SERVICE ═══════
-    "Law-Enforce":     [159, 92, 94, 96, 99, 86, 25, 43, 115, 84, 156],
-    "Community-Serve": [160, 159, 102, 41, 92, 94, 117, 114, 109, 74, 43, 169],
-    "Forensic-Sci":    [156, 159, 92, 94, 142, 108, 178, 193],
-    "Legal-Practice":  [159, 160, 92, 94, 96, 86, 175, 193, 190],
-    "Social-Work":     [160, 159, 166, 169, 175, 157, 193, 176],
+    "Law-Enforce":     [234, 235, 159, 92, 94, 96, 99, 86, 25, 43, 115, 84, 156],
+    "Community-Serve": [244, 160, 159, 102, 41, 92, 94, 117, 114, 109, 74, 43, 169],
+    "Forensic-Sci":    [236, 156, 159, 92, 94, 142, 108, 178, 193],
+    "Legal-Practice":  [275, 159, 160, 92, 94, 96, 86, 175, 193, 190],
+    "Social-Work":     [243, 160, 159, 166, 169, 175, 157, 193, 176],
     # ═══════ SCIENCE ═══════
     "Lab-Research":    [155, 154, 156, 187, 108, 60, 113, 92, 116, 76, 33, 78, 119],
-    "Field-Research":  [154, 161, 92, 113, 114, 108, 98, 90, 105, 119, 167],
-    "Environmental-Sci":[154, 159, 167, 175, 189, 187, 113, 114, 196],
-    "Food-Science":    [155, 164, 148, 187, 161, 108, 113],
+    "Field-Research":  [254, 154, 161, 92, 113, 114, 108, 98, 90, 105, 119, 167],
+    "Environmental-Sci":[253, 154, 159, 167, 175, 189, 187, 113, 114, 196],
+    "Food-Science":    [259, 155, 164, 148, 187, 161, 108, 113],
     # ═══════ AGRICULTURE ═══════
-    "Agri-Nature":     [161, 129, 92, 113, 114, 119, 51, 90, 98, 53, 66, 187],
+    "Agri-Nature":     [252, 161, 129, 92, 113, 114, 119, 51, 90, 98, 53, 66, 187],
     # ═══════ MARITIME ═══════
     "Maritime-Sea":    [201, 202, 162, 203, 204, 205, 63, 51, 29, 34, 90, 85, 27, 39, 64],
     # ═══════ HOSPITALITY ═══════
-    "Hospitality-Svc": [163, 164, 91, 112, 63, 53, 118, 85, 64, 51, 93],
-    "Tourism-Travel":  [163, 164, 152, 170, 176, 193, 199],
-    "Culinary-Arts":   [164, 163, 148, 155, 170, 176, 199],
+    "Hospitality-Svc": [223, 225, 163, 164, 91, 112, 63, 53, 118, 85, 64, 51, 93],
+    "Tourism-Travel":  [224, 226, 163, 164, 152, 170, 176, 193, 199],
+    "Culinary-Arts":   [277, 164, 163, 148, 155, 170, 176, 199],
     # ═══════ OTHER ═══════
-    "People-Skill":    [150, 157, 83, 45, 79, 88, 94, 28, 117, 80],
-    "Physical-Skill":  [132, 29, 66, 90, 103, 37, 25, 64, 34, 192],
-    "Analytical-Skill":[194, 195, 172, 108, 80, 76, 56, 97],
+    "People-Skill":    [278, 150, 157, 83, 45, 79, 88, 94, 28, 117, 80],
+    "Physical-Skill":  [269, 132, 29, 66, 90, 103, 37, 25, 64, 34, 192],
+    "Analytical-Skill":[271, 194, 195, 172, 108, 80, 76, 56, 97],
 }
 
 # ==================== INTEREST KEYWORD → DOMAIN ====================
@@ -2136,6 +2245,7 @@ class AdaptiveAssessmentEngine:
             "session_id": session_id,
             "round": session.round_number,
             "trait_recorded": chosen_trait,
+            "all_traits": chosen_trait_tags if chosen_trait_tags else ([chosen_trait] if chosen_trait else []),
             "courses_remaining": len(self.courses),  # All courses remain in consideration
             "confidence": round(session.confidence * 100, 1),
             "top_courses_preview": top_courses,

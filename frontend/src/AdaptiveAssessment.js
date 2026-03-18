@@ -31,6 +31,7 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 50, onViewPr
   // Preview of top courses (updates after each answer)
   const [topCoursesPreview, setTopCoursesPreview] = useState([]);
   const [lastTraitRecorded, setLastTraitRecorded] = useState(null);
+  const [allTraits, setAllTraits] = useState([]);
   
   // Animation state
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -137,6 +138,7 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 50, onViewPr
       } else {
         // Update state with new info
         setLastTraitRecorded(data.trait_recorded);
+        setAllTraits(data.all_traits || []);
         setCurrentRound(data.current_round);
         setCoursesRemaining(data.courses_remaining);
         setConfidence(data.confidence);
@@ -689,9 +691,18 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 50, onViewPr
                 <span style={{fontSize: '14px'}}>✨</span> Trait Recorded
               </h4>
               <div style={styles.traitDisplayContainer}>
-                <div style={styles.traitDisplay}>
-                  {lastTraitRecorded}
-                </div>
+                {allTraits.length > 0 ? allTraits.map((trait, idx) => (
+                  <div key={idx} style={{
+                    ...styles.traitDisplay,
+                    ...(idx > 0 ? { opacity: 0.7, fontSize: '12px' } : {})
+                  }}>
+                    {idx === 0 ? '🎯 ' : '🔗 '}{trait}
+                  </div>
+                )) : (
+                  <div style={styles.traitDisplay}>
+                    🎯 {lastTraitRecorded}
+                  </div>
+                )}
               </div>
             </div>
           )}
@@ -1058,6 +1069,8 @@ const styles = {
     backdropFilter: 'blur(10px)',
     animation: 'fadeIn 0.4s ease',
     textAlign: 'center',
+    overflow: 'visible',
+    whiteSpace: 'nowrap',
   },
   
   // Question Area (Main Content)
