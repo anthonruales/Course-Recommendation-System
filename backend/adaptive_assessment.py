@@ -96,7 +96,8 @@ class AdaptiveSession:
     
     # --- Conversation Chain State ---
     primary_domain: str = ""                        # Primary domain from profile (e.g. "technology")
-    domain_queue: List[str] = field(default_factory=list)  # Ordered domains to explore (profile -> adjacent -> rest)
+    domain_queue: List[str] = field(default_factory=list)  # Ordered domains to explore (profile -> adjacent only)
+    relevant_domains: Set[str] = field(default_factory=set)  # Domains allowed based on profile (no unrelated domains)
     current_chain_trait: str = ""                    # The trait driving the current follow-up chain
     chain_queue: List[int] = field(default_factory=list)   # Ordered question IDs to ask next (from current chain)
     explored_domains: Set[str] = field(default_factory=set)  # Domains that have had at least N questions asked
@@ -990,7 +991,7 @@ class AdaptiveAssessmentEngine:
     # Configuration
     MAX_QUESTIONS = 25  # Maximum questions to ask
     MIN_QUESTIONS = 10  # Minimum before allowing early stop
-    CONFIDENCE_THRESHOLD = 0.75  # Stop when top courses are this far ahead
+    CONFIDENCE_THRESHOLD = 0.85  # Stop when top courses are clearly ahead (raised to prevent premature stops)
     TOP_N_RECOMMENDATIONS = 6  # Number of courses to recommend
     
     def __init__(self, courses: List[dict], questions: List[dict]):
@@ -1458,25 +1459,33 @@ class AdaptiveAssessmentEngine:
         
         session.primary_domain = primary
         
-        # Build domain exploration queue: primary → adjacent → other voted → rest
+        # Build domain exploration queue: ONLY profile-relevant domains
+        # (primary → adjacent → voted → strand-related). Never add unrelated domains.
         domain_queue = [primary]
+        relevant_domains = {primary}
         # Add adjacent domains of primary
         for adj in BRANCH_ADJACENCY.get(primary, []):
             if adj not in domain_queue:
                 domain_queue.append(adj)
-        # Add other voted domains
+            relevant_domains.add(adj)
+        # Add other voted domains (from interests/skills)
         for dom, _ in sorted(domain_votes.items(), key=lambda x: x[1], reverse=True):
             if dom not in domain_queue:
                 domain_queue.append(dom)
+            relevant_domains.add(dom)
+            # Also add adjacents of voted domains
+            for adj in BRANCH_ADJACENCY.get(dom, []):
+                relevant_domains.add(adj)
         # Add strand domain if not yet included
         if strand_domain and strand_domain not in domain_queue:
             domain_queue.append(strand_domain)
-        # Add remaining domains sorted by branch weight
-        for branch, _ in sorted(initial_branch_weights.items(), key=lambda x: x[1], reverse=True):
-            if branch not in domain_queue and branch in DOMAIN_ENTRY_QUESTIONS:
-                domain_queue.append(branch)
+            relevant_domains.add(strand_domain)
+            for adj in BRANCH_ADJACENCY.get(strand_domain, []):
+                relevant_domains.add(adj)
+        # DO NOT add remaining unrelated domains — keep questions focused on profile
         
         session.domain_queue = domain_queue
+        session.relevant_domains = relevant_domains
         
         # Preload the first chain: entry questions for primary domain
         entry_qs = DOMAIN_ENTRY_QUESTIONS.get(primary, [])
@@ -1484,7 +1493,8 @@ class AdaptiveAssessmentEngine:
         session.domain_question_count = {primary: 0}
         
         print(f"[CHAIN] Primary domain: {primary} (votes: {domain_votes})")
-        print(f"[CHAIN] Domain queue: {domain_queue[:6]}...")
+        print(f"[CHAIN] Relevant domains: {sorted(relevant_domains)}")
+        print(f"[CHAIN] Domain queue: {domain_queue[:6]}")
         print(f"[CHAIN] Initial chain: {session.chain_queue[:5]}")
         
         self.sessions[session_id] = session
@@ -1533,16 +1543,25 @@ class AdaptiveAssessmentEngine:
         
         # ═══════════════════════════════════════════════════════════════════
         # PHASE 1: Try to get the next question from the current chain
+        # All follow-ups must belong to profile-relevant branches.
         # ═══════════════════════════════════════════════════════════════════
         
         selected_qid = None
         selection_reason = ""
+        relevant = session.relevant_domains
+        
+        def _is_relevant_question(qid):
+            """Check if a question belongs to at least one profile-relevant branch."""
+            node = QUESTION_TREE_NODES.get(qid)
+            if not node:
+                return True  # Questions without node classification are broad/general — allow
+            return bool(set(node["branches"]) & relevant)
         
         # --- Step 1A: If we have a last_answer_trait, build a follow-up chain from it ---
         if session.last_answer_trait and session.last_answer_trait in TRAIT_FOLLOWUP_MAP:
             followups = TRAIT_FOLLOWUP_MAP[session.last_answer_trait]
             for fq in followups:
-                if fq not in asked and fq in self.questions:
+                if fq not in asked and fq in self.questions and _is_relevant_question(fq):
                     selected_qid = fq
                     selection_reason = f"follow-up from trait {session.last_answer_trait}"
                     # Update chain tracking
@@ -1552,12 +1571,12 @@ class AdaptiveAssessmentEngine:
         # --- Step 1B: If no follow-up found, try the pre-loaded chain_queue ---
         if not selected_qid and session.chain_queue:
             for cq in list(session.chain_queue):
-                if cq not in asked and cq in self.questions:
+                if cq not in asked and cq in self.questions and _is_relevant_question(cq):
                     selected_qid = cq
                     selection_reason = f"chain queue (domain entry)"
                     break
                 else:
-                    # Remove already-asked questions from queue
+                    # Remove already-asked or irrelevant questions from queue
                     session.chain_queue = [q for q in session.chain_queue if q != cq]
         
         # ═══════════════════════════════════════════════════════════════════
@@ -1567,6 +1586,7 @@ class AdaptiveAssessmentEngine:
         
         if not selected_qid:
             # Find the strongest trait that still has unanswered follow-up questions
+            # Only follow traits whose follow-ups are in relevant branches
             sorted_traits = sorted(
                 session.trait_scores.items(),
                 key=lambda x: x[1],
@@ -1575,7 +1595,7 @@ class AdaptiveAssessmentEngine:
             for trait, score in sorted_traits:
                 if trait in TRAIT_FOLLOWUP_MAP:
                     for fq in TRAIT_FOLLOWUP_MAP[trait]:
-                        if fq not in asked and fq in self.questions:
+                        if fq not in asked and fq in self.questions and _is_relevant_question(fq):
                             selected_qid = fq
                             selection_reason = f"strongest trait chain ({trait}, score={score:.1f})"
                             session.current_chain_trait = trait
@@ -1585,11 +1605,15 @@ class AdaptiveAssessmentEngine:
         
         # ═══════════════════════════════════════════════════════════════════
         # PHASE 3: If still nothing, move to the next domain in queue
+        # Only transition to domains that are relevant to the user's profile
         # ═══════════════════════════════════════════════════════════════════
         
         if not selected_qid:
-            # Find next unexplored domain in queue
+            # Find next unexplored domain in queue (already filtered to relevant domains)
             for domain in session.domain_queue:
+                # Double-check: skip domains not in relevant set
+                if domain not in session.relevant_domains:
+                    continue
                 domain_count = session.domain_question_count.get(domain, 0)
                 if domain_count < DOMAIN_MIN_QUESTIONS or domain not in session.explored_domains:
                     entry_qs = DOMAIN_ENTRY_QUESTIONS.get(domain, [])
@@ -1604,12 +1628,13 @@ class AdaptiveAssessmentEngine:
         
         # ═══════════════════════════════════════════════════════════════════
         # PHASE 4: FALLBACK — Score remaining questions by information gain
-        # + branch affinity (only if all chains are exhausted)
+        # + branch affinity. ONLY consider questions from profile-relevant branches.
         # ═══════════════════════════════════════════════════════════════════
         
         if not selected_qid:
             trait_info_scores = self._calculate_trait_information_gain(session)
             branch_weights = session.branch_weights
+            relevant = session.relevant_domains
             
             candidates = []
             for qid, question in self.questions.items():
@@ -1624,6 +1649,10 @@ class AdaptiveAssessmentEngine:
                 if not options:
                     continue
                 
+                # STRICT: Only consider questions that touch at least one relevant branch
+                if not q_branches & relevant:
+                    continue
+                
                 # Skip heavily rejected questions
                 rejected_count = sum(1 for opt in options
                                     if opt.get('trait_tag') in session.rejected_topics)
@@ -1632,7 +1661,10 @@ class AdaptiveAssessmentEngine:
                 
                 score = 0.0
                 
-                # Branch affinity
+                # Branch affinity — boost questions whose branches overlap with profile
+                relevant_overlap = len(q_branches & relevant)
+                score += relevant_overlap * 2.0
+                
                 for branch, weight in branch_weights.items():
                     if branch in q_branches:
                         score += weight
@@ -1654,6 +1686,20 @@ class AdaptiveAssessmentEngine:
                 candidates.sort(reverse=True, key=lambda x: x[0])
                 selected_qid = candidates[0][1]
                 selection_reason = f"fallback scoring (score={candidates[0][0]:.1f})"
+        
+        # ═══════════════════════════════════════════════════════════════════
+        # PHASE 5: SAFETY NET — If strict filtering found nothing but we
+        # haven't reached max_questions, allow ANY unanswered question
+        # rather than ending the assessment prematurely
+        # ═══════════════════════════════════════════════════════════════════
+        
+        if not selected_qid and session.round_number < session.max_questions:
+            for qid, question in self.questions.items():
+                if qid not in asked:
+                    selected_qid = qid
+                    selection_reason = "safety net (relaxed filter)"
+                    print(f"[SAFETY] Relaxed filter to avoid premature end at round {round_num}")
+                    break
         
         # ═══════════════════════════════════════════════════════════════════
         # NO QUESTION AVAILABLE — finalize
@@ -2046,6 +2092,18 @@ class AdaptiveAssessmentEngine:
                             sec_branch = TRAIT_TO_BRANCH.get(trait, "")
                             if sec_branch:
                                 session.branch_weights[sec_branch] = session.branch_weights.get(sec_branch, 0) + weight * 0.5
+                
+                # Dynamically expand relevant_domains if user consistently picks a new domain
+                # (allows natural discovery while keeping profile focus)
+                if chosen_branch not in session.relevant_domains:
+                    branch_count = session.branch_history.count(chosen_branch)
+                    if branch_count >= 2:  # User picked this domain at least twice
+                        session.relevant_domains.add(chosen_branch)
+                        if chosen_branch not in session.domain_queue:
+                            session.domain_queue.append(chosen_branch)
+                        for adj in BRANCH_ADJACENCY.get(chosen_branch, []):
+                            session.relevant_domains.add(adj)
+                        print(f"[EXPAND] Domain '{chosen_branch}' added to relevant domains (picked {branch_count}x)")
         
         # Track question weight for this question (for scoring impact)
         node = QUESTION_TREE_NODES.get(question_id, {})
@@ -2196,8 +2254,11 @@ class AdaptiveAssessmentEngine:
         if session.round_number >= session.max_questions:
             return True
         
-        # Stop if confidence is high enough
-        if session.confidence >= self.CONFIDENCE_THRESHOLD:
+        # Stop if confidence is high enough AND we've answered well past minimum
+        # Require at least 60% of max_questions before allowing confidence-based stop
+        min_for_confidence = int(session.max_questions * 0.6)
+        if session.round_number >= min_for_confidence and session.confidence >= self.CONFIDENCE_THRESHOLD:
+            print(f"[STOP] Confidence-based stop at round {session.round_number}: confidence={session.confidence:.2f}")
             return True
         
         return False
