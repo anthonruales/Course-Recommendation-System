@@ -1,4 +1,4 @@
-# questions_enhanced.py - Enhanced Questions with 8-10 Options Each
+﻿# questions_enhanced.py - Enhanced Questions with 8-10 Options Each
 """
 ================================================================================
 ENHANCED QUESTIONS - Course-Specific Options (8-10 options per question)
@@ -3073,6 +3073,1161 @@ QUESTIONS_POOL_ENHANCED = [
             {"option_id": 2056, "option_text": "Additional certifications like GMDSS, STCW", "trait_tags": ["Maritime-Sea", "Technical-Skill"]},
             {"option_id": 2057, "option_text": "Focus on marine environmental protection", "trait_tags": ["Maritime-Sea", "Environmental-Sci"]},
             {"option_id": 2058, "option_text": "Dual degree option with business or management", "trait_tags": ["Maritime-Sea", "Admin-Skill"]}
+        ]
+    },
+    # ═══════ GAME DEVELOPMENT DEDICATED QUESTIONS ═══════
+    {
+        "question_id": 206,
+        "question_text": "You're designing your own video game. What genre would you choose?",
+        "category": "Interest - Game Development",
+        "options": [
+            {"option_id": 2061, "option_text": "An action RPG with complex combat mechanics", "trait_tags": ["Game-Dev", "Software-Dev"]},
+            {"option_id": 2062, "option_text": "A puzzle game with AI-generated levels", "trait_tags": ["Game-Dev", "AI-ML"]},
+            {"option_id": 2063, "option_text": "A story-driven adventure with cinematic cutscenes", "trait_tags": ["Game-Dev", "Film-Broadcast"]},
+            {"option_id": 2064, "option_text": "A competitive multiplayer esports game", "trait_tags": ["Game-Dev", "Cloud-Systems"]},
+            {"option_id": 2065, "option_text": "A mobile casual game with simple but addictive gameplay", "trait_tags": ["Game-Dev", "Mobile-Dev"]},
+            {"option_id": 2066, "option_text": "A VR simulation with realistic 3D environments", "trait_tags": ["Game-Dev", "Animation-3D"]},
+            {"option_id": 2067, "option_text": "An educational game that teaches Filipino history", "trait_tags": ["Game-Dev", "Teaching-Ed"]},
+            {"option_id": 2068, "option_text": "A pixel art indie game with retro style", "trait_tags": ["Game-Dev", "Visual-Design"]}
+        ]
+    },
+    {
+        "question_id": 207,
+        "question_text": "What part of building a video game excites you the most?",
+        "category": "Preference - Game Development",
+        "options": [
+            {"option_id": 2071, "option_text": "Writing game physics and collision detection code", "trait_tags": ["Game-Dev", "Software-Dev"]},
+            {"option_id": 2072, "option_text": "Creating character sprites and environment art", "trait_tags": ["Game-Dev", "Animation-3D"]},
+            {"option_id": 2073, "option_text": "Designing levels and balancing difficulty curves", "trait_tags": ["Game-Dev", "Data-Analytics"]},
+            {"option_id": 2074, "option_text": "Building multiplayer networking and servers", "trait_tags": ["Game-Dev", "Cloud-Systems"]},
+            {"option_id": 2075, "option_text": "Composing music and creating sound effects", "trait_tags": ["Game-Dev", "Performing-Arts"]},
+            {"option_id": 2076, "option_text": "Writing the storyline, quests, and dialogue", "trait_tags": ["Game-Dev", "Creative-Skill"]},
+            {"option_id": 2077, "option_text": "Designing the UI, menus, and HUD elements", "trait_tags": ["Game-Dev", "Visual-Design"]},
+            {"option_id": 2078, "option_text": "Marketing the game and building a community", "trait_tags": ["Game-Dev", "Marketing-Sales"]}
+        ]
+    },
+    {
+        "question_id": 208,
+        "question_text": "Your game studio is entering a game jam competition. What's your team strategy?",
+        "category": "Situational - Game Development Team",
+        "options": [
+            {"option_id": 2081, "option_text": "Focus on solid gameplay mechanics - make it fun first", "trait_tags": ["Game-Dev", "Software-Dev"]},
+            {"option_id": 2082, "option_text": "Create stunning visuals that stand out from other entries", "trait_tags": ["Game-Dev", "Animation-3D"]},
+            {"option_id": 2083, "option_text": "Build a deep narrative that judges will remember", "trait_tags": ["Game-Dev", "Creative-Skill"]},
+            {"option_id": 2084, "option_text": "Use innovative tech like AR or procedural generation", "trait_tags": ["Game-Dev", "AI-ML"]},
+            {"option_id": 2085, "option_text": "Make a polished mobile version anyone can try", "trait_tags": ["Game-Dev", "Mobile-Dev"]},
+            {"option_id": 2086, "option_text": "Add online multiplayer so players can compete", "trait_tags": ["Game-Dev", "Cloud-Systems"]},
+            {"option_id": 2087, "option_text": "Design an unforgettable soundtrack", "trait_tags": ["Game-Dev", "Performing-Arts"]},
+            {"option_id": 2088, "option_text": "Create a game trailer and social media hype", "trait_tags": ["Game-Dev", "Digital-Media"]}
+        ]
+    },
+    {
+        "question_id": 209,
+        "question_text": "Which game development tool or engine would you most want to master?",
+        "category": "Technical Preference - Game Dev",
+        "options": [
+            {"option_id": 2091, "option_text": "Unity - it powers most indie and mobile games", "trait_tags": ["Game-Dev", "Software-Dev"]},
+            {"option_id": 2092, "option_text": "Unreal Engine - for AAA-quality 3D graphics", "trait_tags": ["Game-Dev", "Animation-3D"]},
+            {"option_id": 2093, "option_text": "Godot - the open-source engine for 2D games", "trait_tags": ["Game-Dev", "Software-Dev"]},
+            {"option_id": 2094, "option_text": "Blender - for 3D modeling and game assets", "trait_tags": ["Animation-3D", "Game-Dev"]},
+            {"option_id": 2095, "option_text": "Photoshop/Aseprite - for game sprites and pixel art", "trait_tags": ["Visual-Design", "Game-Dev"]},
+            {"option_id": 2096, "option_text": "FL Studio/FMOD - for game audio and music", "trait_tags": ["Performing-Arts", "Game-Dev"]},
+            {"option_id": 2097, "option_text": "Python/C++ - raw programming for game logic", "trait_tags": ["Software-Dev", "Game-Dev"]},
+            {"option_id": 2098, "option_text": "Figma - for designing game UI/UX mockups", "trait_tags": ["Visual-Design", "Web-Dev"]}
+        ]
+    },
+    {
+        "question_id": 210,
+        "question_text": "A game company offers you an internship. Which department do you pick?",
+        "category": "Situational - Game Industry Career",
+        "options": [
+            {"option_id": 2101, "option_text": "Game programming - working on core engine code", "trait_tags": ["Game-Dev", "Software-Dev"]},
+            {"option_id": 2102, "option_text": "3D art - creating characters and worlds", "trait_tags": ["Animation-3D", "Game-Dev"]},
+            {"option_id": 2103, "option_text": "Game design - planning mechanics and levels", "trait_tags": ["Game-Dev", "Creative-Skill"]},
+            {"option_id": 2104, "option_text": "QA testing - finding and reporting bugs", "trait_tags": ["Game-Dev", "Analytical-Skill"]},
+            {"option_id": 2105, "option_text": "Community management - engaging with players", "trait_tags": ["Game-Dev", "People-Skill"]},
+            {"option_id": 2106, "option_text": "UI/UX design - making interfaces player-friendly", "trait_tags": ["Visual-Design", "Game-Dev"]},
+            {"option_id": 2107, "option_text": "Network engineering - building multiplayer systems", "trait_tags": ["Cloud-Systems", "Game-Dev"]},
+            {"option_id": 2108, "option_text": "Marketing - creating trailers and campaigns", "trait_tags": ["Digital-Media", "Marketing-Sales"]}
+        ]
+    },
+    # ═══════ WEB DEVELOPMENT DEDICATED QUESTIONS ═══════
+    {
+        "question_id": 211,
+        "question_text": "You're building a web application from scratch. What feature do you tackle first?",
+        "category": "Situational - Web Development",
+        "options": [
+            {"option_id": 2111, "option_text": "The responsive frontend design with React or Vue", "trait_tags": ["Web-Dev", "Visual-Design"]},
+            {"option_id": 2112, "option_text": "The backend API with proper database architecture", "trait_tags": ["Web-Dev", "Software-Dev"]},
+            {"option_id": 2113, "option_text": "User authentication and security features", "trait_tags": ["Web-Dev", "Cyber-Defense"]},
+            {"option_id": 2114, "option_text": "The mobile-responsive layout for all devices", "trait_tags": ["Web-Dev", "Mobile-Dev"]},
+            {"option_id": 2115, "option_text": "SEO optimization and analytics dashboard", "trait_tags": ["Web-Dev", "Data-Analytics"]},
+            {"option_id": 2116, "option_text": "Payment integration and e-commerce features", "trait_tags": ["Web-Dev", "Finance-Acct"]},
+            {"option_id": 2117, "option_text": "Real-time notifications and chat system", "trait_tags": ["Web-Dev", "Cloud-Systems"]},
+            {"option_id": 2118, "option_text": "Content management system for easy updates", "trait_tags": ["Web-Dev", "Admin-Skill"]}
+        ]
+    },
+    {
+        "question_id": 212,
+        "question_text": "A startup founder asks you to build their website. What matters most to you?",
+        "category": "Situational - Web Dev Project",
+        "options": [
+            {"option_id": 2121, "option_text": "Clean, modern UI that users will love", "trait_tags": ["Web-Dev", "Visual-Design"]},
+            {"option_id": 2122, "option_text": "Fast loading speed and server performance", "trait_tags": ["Web-Dev", "Cloud-Systems"]},
+            {"option_id": 2123, "option_text": "Scalable code architecture for future growth", "trait_tags": ["Web-Dev", "Software-Dev"]},
+            {"option_id": 2124, "option_text": "SEO and marketing tools to attract visitors", "trait_tags": ["Web-Dev", "Marketing-Sales"]},
+            {"option_id": 2125, "option_text": "Security against hacking and data breaches", "trait_tags": ["Web-Dev", "Cyber-Defense"]},
+            {"option_id": 2126, "option_text": "Mobile app version alongside the website", "trait_tags": ["Mobile-Dev", "Web-Dev"]},
+            {"option_id": 2127, "option_text": "Data analytics to track user behavior", "trait_tags": ["Data-Analytics", "Web-Dev"]},
+            {"option_id": 2128, "option_text": "AI-powered chatbot for customer support", "trait_tags": ["AI-ML", "Web-Dev"]}
+        ]
+    },
+    # ═══════ ANIMATION & 3D DEDICATED QUESTIONS ═══════
+    {
+        "question_id": 213,
+        "question_text": "You're creating a 3D animated short film. What role do you want?",
+        "category": "Situational - Animation Production",
+        "options": [
+            {"option_id": 2131, "option_text": "3D character modeler - sculpting characters", "trait_tags": ["Animation-3D", "Visual-Design"]},
+            {"option_id": 2132, "option_text": "Animator - bringing characters to life with motion", "trait_tags": ["Animation-3D", "Creative-Skill"]},
+            {"option_id": 2133, "option_text": "Environment artist - building the world and scenes", "trait_tags": ["Animation-3D", "Spatial-Design"]},
+            {"option_id": 2134, "option_text": "Lighting and rendering specialist", "trait_tags": ["Animation-3D", "Digital-Media"]},
+            {"option_id": 2135, "option_text": "Technical director - rigging and pipeline tools", "trait_tags": ["Animation-3D", "Software-Dev"]},
+            {"option_id": 2136, "option_text": "Storyboard artist - planning shot compositions", "trait_tags": ["Animation-3D", "Film-Broadcast"]},
+            {"option_id": 2137, "option_text": "Texture and material artist - making surfaces realistic", "trait_tags": ["Animation-3D", "Visual-Design"]},
+            {"option_id": 2138, "option_text": "VFX artist - explosions, magic, weather effects", "trait_tags": ["Animation-3D", "Game-Dev"]}
+        ]
+    },
+    # ═══════ MOBILE DEVELOPMENT DEDICATED QUESTIONS ═══════
+    {
+        "question_id": 214,
+        "question_text": "You're developing a mobile app. What kind of app would you build?",
+        "category": "Interest - Mobile Development",
+        "options": [
+            {"option_id": 2141, "option_text": "A social media app connecting Filipino communities", "trait_tags": ["Mobile-Dev", "Web-Dev"]},
+            {"option_id": 2142, "option_text": "A mobile game with leaderboards and achievements", "trait_tags": ["Mobile-Dev", "Game-Dev"]},
+            {"option_id": 2143, "option_text": "A fitness tracker with health monitoring", "trait_tags": ["Mobile-Dev", "Patient-Care"]},
+            {"option_id": 2144, "option_text": "An e-commerce app for local businesses", "trait_tags": ["Mobile-Dev", "Marketing-Sales"]},
+            {"option_id": 2145, "option_text": "An AI-powered personal assistant", "trait_tags": ["Mobile-Dev", "AI-ML"]},
+            {"option_id": 2146, "option_text": "A news aggregator with smart recommendations", "trait_tags": ["Mobile-Dev", "Data-Analytics"]},
+            {"option_id": 2147, "option_text": "A creative tool for digital drawing or music", "trait_tags": ["Mobile-Dev", "Creative-Skill"]},
+            {"option_id": 2148, "option_text": "A security app with encryption and VPN", "trait_tags": ["Mobile-Dev", "Cyber-Defense"]}
+        ]
+    },
+    # ═══════ AI/ML DEDICATED QUESTIONS ═══════
+    {
+        "question_id": 215,
+        "question_text": "Which AI application fascinates you the most?",
+        "category": "Interest - Artificial Intelligence",
+        "options": [
+            {"option_id": 2151, "option_text": "ChatGPT-style language models that talk like humans", "trait_tags": ["AI-ML", "Software-Dev"]},
+            {"option_id": 2152, "option_text": "AI that generates art, music, or videos", "trait_tags": ["AI-ML", "Digital-Media"]},
+            {"option_id": 2153, "option_text": "Self-driving cars and autonomous robots", "trait_tags": ["AI-ML", "Hardware-Systems"]},
+            {"option_id": 2154, "option_text": "AI that detects diseases from medical scans", "trait_tags": ["AI-ML", "Medical-Lab"]},
+            {"option_id": 2155, "option_text": "AI for stock market prediction and trading", "trait_tags": ["AI-ML", "Finance-Acct"]},
+            {"option_id": 2156, "option_text": "Game AI that learns and adapts to players", "trait_tags": ["AI-ML", "Game-Dev"]},
+            {"option_id": 2157, "option_text": "AI for cybersecurity threat detection", "trait_tags": ["AI-ML", "Cyber-Defense"]},
+            {"option_id": 2158, "option_text": "AI that helps farmers predict crop yields", "trait_tags": ["AI-ML", "Agri-Nature"]}
+        ]
+    },
+    # ═══════ CYBERSECURITY DEDICATED QUESTIONS ═══════
+    {
+        "question_id": 216,
+        "question_text": "A company hires you as their cybersecurity intern. What do you want to work on?",
+        "category": "Situational - Cybersecurity",
+        "options": [
+            {"option_id": 2161, "option_text": "Penetration testing - finding system vulnerabilities", "trait_tags": ["Cyber-Defense", "Software-Dev"]},
+            {"option_id": 2162, "option_text": "Security monitoring - watching for live threats", "trait_tags": ["Cyber-Defense", "Data-Analytics"]},
+            {"option_id": 2163, "option_text": "Digital forensics - investigating hack incidents", "trait_tags": ["Cyber-Defense", "Forensic-Sci"]},
+            {"option_id": 2164, "option_text": "Network security - protecting firewalls and servers", "trait_tags": ["Cyber-Defense", "Cloud-Systems"]},
+            {"option_id": 2165, "option_text": "Security awareness training for employees", "trait_tags": ["Cyber-Defense", "Teaching-Ed"]},
+            {"option_id": 2166, "option_text": "Developing encryption and secure protocols", "trait_tags": ["Cyber-Defense", "Software-Dev"]},
+            {"option_id": 2167, "option_text": "Compliance and policy - ensuring legal standards", "trait_tags": ["Cyber-Defense", "Legal-Practice"]},
+            {"option_id": 2168, "option_text": "Bug bounty hunting - finding flaws for rewards", "trait_tags": ["Cyber-Defense", "Analytical-Skill"]}
+        ]
+    },
+    # ═══════ CLOUD/INFRASTRUCTURE QUESTIONS ═══════
+    {
+        "question_id": 217,
+        "question_text": "What interests you most about cloud computing and servers?",
+        "category": "Interest - Cloud Computing",
+        "options": [
+            {"option_id": 2171, "option_text": "Building scalable websites that handle millions of users", "trait_tags": ["Cloud-Systems", "Web-Dev"]},
+            {"option_id": 2172, "option_text": "Setting up game servers for multiplayer games", "trait_tags": ["Cloud-Systems", "Game-Dev"]},
+            {"option_id": 2173, "option_text": "Managing databases and data warehouses", "trait_tags": ["Cloud-Systems", "Data-Analytics"]},
+            {"option_id": 2174, "option_text": "DevOps and automating software deployment", "trait_tags": ["Cloud-Systems", "Software-Dev"]},
+            {"option_id": 2175, "option_text": "Cloud security and access control", "trait_tags": ["Cloud-Systems", "Cyber-Defense"]},
+            {"option_id": 2176, "option_text": "IoT systems connecting physical devices to the cloud", "trait_tags": ["Cloud-Systems", "Hardware-Systems"]},
+            {"option_id": 2177, "option_text": "Running AI and machine learning models on cloud GPUs", "trait_tags": ["Cloud-Systems", "AI-ML"]},
+            {"option_id": 2178, "option_text": "Hosting and streaming platforms like Netflix or Spotify", "trait_tags": ["Cloud-Systems", "Digital-Media"]}
+        ]
+    },
+    # ═══════ DATA ANALYTICS DEDICATED QUESTIONS ═══════
+    {
+        "question_id": 218,
+        "question_text": "You have a massive dataset to analyze. What would you do with it?",
+        "category": "Situational - Data Analytics",
+        "options": [
+            {"option_id": 2181, "option_text": "Build interactive dashboards and visualizations", "trait_tags": ["Data-Analytics", "Visual-Design"]},
+            {"option_id": 2182, "option_text": "Train a machine learning model to find patterns", "trait_tags": ["Data-Analytics", "AI-ML"]},
+            {"option_id": 2183, "option_text": "Write SQL queries to extract business insights", "trait_tags": ["Data-Analytics", "Software-Dev"]},
+            {"option_id": 2184, "option_text": "Create automated reports for decision-makers", "trait_tags": ["Data-Analytics", "Admin-Skill"]},
+            {"option_id": 2185, "option_text": "Analyze player behavior data to improve a game", "trait_tags": ["Data-Analytics", "Game-Dev"]},
+            {"option_id": 2186, "option_text": "Study health data to predict disease outbreaks", "trait_tags": ["Data-Analytics", "Public-Health"]},
+            {"option_id": 2187, "option_text": "Analyze social media trends for marketing", "trait_tags": ["Data-Analytics", "Marketing-Sales"]},
+            {"option_id": 2188, "option_text": "Map environmental data using GIS", "trait_tags": ["Data-Analytics", "Environmental-Sci"]}
+        ]
+    },
+    # ═══════ DIGITAL MEDIA / GRAPHIC DESIGN QUESTIONS ═══════
+    {
+        "question_id": 219,
+        "question_text": "A brand hires you for a creative project. What would you produce?",
+        "category": "Situational - Digital Media",
+        "options": [
+            {"option_id": 2191, "option_text": "A logo and complete brand identity design", "trait_tags": ["Visual-Design", "Digital-Media"]},
+            {"option_id": 2192, "option_text": "A promotional video with motion graphics", "trait_tags": ["Digital-Media", "Film-Broadcast"]},
+            {"option_id": 2193, "option_text": "Social media content and Instagram reels", "trait_tags": ["Digital-Media", "Marketing-Sales"]},
+            {"option_id": 2194, "option_text": "An animated explainer video", "trait_tags": ["Animation-3D", "Digital-Media"]},
+            {"option_id": 2195, "option_text": "A professional website with eye-catching design", "trait_tags": ["Web-Dev", "Visual-Design"]},
+            {"option_id": 2196, "option_text": "Product packaging and print materials", "trait_tags": ["Visual-Design", "Creative-Skill"]},
+            {"option_id": 2197, "option_text": "A podcast series with professional audio", "trait_tags": ["Digital-Media", "Performing-Arts"]},
+            {"option_id": 2198, "option_text": "A mobile app with beautiful UI design", "trait_tags": ["Mobile-Dev", "Visual-Design"]}
+        ]
+    },
+    # ═══════ ADDITIONAL CROSS-DOMAIN BRANCHING QUESTIONS ═══════
+    {
+        "question_id": 220,
+        "question_text": "You're starting a tech company with friends. What would the company focus on?",
+        "category": "Situational - Tech Startup",
+        "options": [
+            {"option_id": 2201, "option_text": "A game development studio making Filipino games", "trait_tags": ["Game-Dev", "Startup-Venture"]},
+            {"option_id": 2202, "option_text": "A web development agency for local businesses", "trait_tags": ["Web-Dev", "Startup-Venture"]},
+            {"option_id": 2203, "option_text": "A cybersecurity consulting firm", "trait_tags": ["Cyber-Defense", "Startup-Venture"]},
+            {"option_id": 2204, "option_text": "An AI and data analytics company", "trait_tags": ["AI-ML", "Startup-Venture"]},
+            {"option_id": 2205, "option_text": "A mobile app development company", "trait_tags": ["Mobile-Dev", "Startup-Venture"]},
+            {"option_id": 2206, "option_text": "A graphic design and branding studio", "trait_tags": ["Visual-Design", "Startup-Venture"]},
+            {"option_id": 2207, "option_text": "A cloud hosting and IT services company", "trait_tags": ["Cloud-Systems", "Startup-Venture"]},
+            {"option_id": 2208, "option_text": "An animation and video production house", "trait_tags": ["Animation-3D", "Startup-Venture"]}
+        ]
+    },
+    {
+        "question_id": 221,
+        "question_text": "Which YouTube channel topic would you most want to create?",
+        "category": "Interest - Content Creation",
+        "options": [
+            {"option_id": 2211, "option_text": "Game walkthroughs and esports commentary", "trait_tags": ["Game-Dev", "Digital-Media"]},
+            {"option_id": 2212, "option_text": "Coding tutorials and tech reviews", "trait_tags": ["Software-Dev", "Digital-Media"]},
+            {"option_id": 2213, "option_text": "Digital art speedpaints and design tips", "trait_tags": ["Visual-Design", "Digital-Media"]},
+            {"option_id": 2214, "option_text": "3D animation and VFX breakdowns", "trait_tags": ["Animation-3D", "Film-Broadcast"]},
+            {"option_id": 2215, "option_text": "Cybersecurity and hacking tutorials", "trait_tags": ["Cyber-Defense", "Digital-Media"]},
+            {"option_id": 2216, "option_text": "Science experiments and tech innovations", "trait_tags": ["Lab-Research", "Digital-Media"]},
+            {"option_id": 2217, "option_text": "Business and finance advice for students", "trait_tags": ["Finance-Acct", "Digital-Media"]},
+            {"option_id": 2218, "option_text": "Cooking shows and food reviews", "trait_tags": ["Culinary-Arts", "Film-Broadcast"]}
+        ]
+    },
+    {
+        "question_id": 222,
+        "question_text": "Your school needs a system built. Which would you volunteer to create?",
+        "category": "Situational - School Tech Project",
+        "options": [
+            {"option_id": 2221, "option_text": "An online enrollment and grading system", "trait_tags": ["Web-Dev", "Software-Dev"]},
+            {"option_id": 2222, "option_text": "A student information management database", "trait_tags": ["Software-Dev", "Data-Analytics"]},
+            {"option_id": 2223, "option_text": "A school mobile app with announcements and schedules", "trait_tags": ["Mobile-Dev", "Software-Dev"]},
+            {"option_id": 2224, "option_text": "The school website with an attractive design", "trait_tags": ["Web-Dev", "Visual-Design"]},
+            {"option_id": 2225, "option_text": "A library management and book tracking system", "trait_tags": ["Software-Dev", "Admin-Skill"]},
+            {"option_id": 2226, "option_text": "Network security for the school Wi-Fi", "trait_tags": ["Cyber-Defense", "Cloud-Systems"]},
+            {"option_id": 2227, "option_text": "An interactive game for students to learn math", "trait_tags": ["Game-Dev", "Teaching-Ed"]},
+            {"option_id": 2228, "option_text": "School social media pages and video content", "trait_tags": ["Digital-Media", "Marketing-Sales"]}
+        ]
+    },
+
+    # ==================== BATCH 3: MASSIVE TRAIT COVERAGE EXPANSION (Q223-Q300) ====================
+
+    # ---------- HOSPITALITY & TOURISM ----------
+    {
+        "question_id": 223,
+        "question_text": "A luxury resort is hiring. Which department would you want to work in?",
+        "category": "Situational - Hospitality Career",
+        "options": [
+            {"option_id": 2231, "option_text": "Front desk and guest relations — welcoming visitors", "trait_tags": ["Hospitality-Svc", "People-Skill"]},
+            {"option_id": 2232, "option_text": "The kitchen — preparing gourmet dishes", "trait_tags": ["Culinary-Arts", "Food-Science"]},
+            {"option_id": 2233, "option_text": "Tour coordination — planning trips for guests", "trait_tags": ["Tourism-Travel", "Hospitality-Svc"]},
+            {"option_id": 2234, "option_text": "Event management — organizing weddings and parties", "trait_tags": ["Hospitality-Svc", "Admin-Skill"]},
+            {"option_id": 2235, "option_text": "Housekeeping management — ensuring quality standards", "trait_tags": ["Hospitality-Svc", "HR-Management"]},
+            {"option_id": 2236, "option_text": "Resort marketing — attracting guests through social media", "trait_tags": ["Marketing-Sales", "Digital-Media"]},
+            {"option_id": 2237, "option_text": "Resort finance — managing budgets and revenue", "trait_tags": ["Finance-Acct", "Admin-Skill"]},
+            {"option_id": 2238, "option_text": "Spa and wellness — helping guests relax and recover", "trait_tags": ["Rehab-Therapy", "Hospitality-Svc"]}
+        ]
+    },
+    {
+        "question_id": 224,
+        "question_text": "You're planning the perfect travel experience for tourists visiting the Philippines. What would you focus on?",
+        "category": "Situational - Tourism Planning",
+        "options": [
+            {"option_id": 2241, "option_text": "Island hopping tours with local guides", "trait_tags": ["Tourism-Travel", "Hospitality-Svc"]},
+            {"option_id": 2242, "option_text": "Cultural heritage walking tours in historic cities", "trait_tags": ["Tourism-Travel", "Teaching-Ed"]},
+            {"option_id": 2243, "option_text": "Adventure and eco-tourism in mountain regions", "trait_tags": ["Tourism-Travel", "Environmental-Sci"]},
+            {"option_id": 2244, "option_text": "Food and culinary tours featuring regional cuisine", "trait_tags": ["Culinary-Arts", "Tourism-Travel"]},
+            {"option_id": 2245, "option_text": "Luxury resort experiences and spa packages", "trait_tags": ["Hospitality-Svc", "Marketing-Sales"]},
+            {"option_id": 2246, "option_text": "Building a travel booking app for tourists", "trait_tags": ["Web-Dev", "Software-Dev"]},
+            {"option_id": 2247, "option_text": "Creating travel vlogs and destination videos", "trait_tags": ["Film-Broadcast", "Digital-Media"]},
+            {"option_id": 2248, "option_text": "Sustainable tourism that protects local communities", "trait_tags": ["Tourism-Travel", "Community-Serve"]}
+        ]
+    },
+    {
+        "question_id": 225,
+        "question_text": "A hotel chain offers you a management trainee position. What area interests you most?",
+        "category": "Preference - Hotel Management",
+        "options": [
+            {"option_id": 2251, "option_text": "Guest services — making sure every visitor is happy", "trait_tags": ["Hospitality-Svc", "People-Skill"]},
+            {"option_id": 2252, "option_text": "Food and beverage management — running restaurants", "trait_tags": ["Culinary-Arts", "Hospitality-Svc"]},
+            {"option_id": 2253, "option_text": "Revenue management — pricing rooms for profit", "trait_tags": ["Finance-Acct", "Hospitality-Svc"]},
+            {"option_id": 2254, "option_text": "Human resources — hiring and training hotel staff", "trait_tags": ["HR-Management", "People-Skill"]},
+            {"option_id": 2255, "option_text": "Housekeeping operations — quality and cleanliness", "trait_tags": ["Hospitality-Svc", "Admin-Skill"]},
+            {"option_id": 2256, "option_text": "Convention and banquet management — big events", "trait_tags": ["Hospitality-Svc", "Marketing-Sales"]},
+            {"option_id": 2257, "option_text": "Hotel technology systems — property management software", "trait_tags": ["Software-Dev", "Hospitality-Svc"]},
+            {"option_id": 2258, "option_text": "Sustainability officer — making the hotel eco-friendly", "trait_tags": ["Environmental-Sci", "Hospitality-Svc"]}
+        ]
+    },
+    {
+        "question_id": 226,
+        "question_text": "You're creating a tourism campaign for your province. What would you do?",
+        "category": "Situational - Tourism Marketing",
+        "options": [
+            {"option_id": 2261, "option_text": "Design brochures and travel guides with beautiful photos", "trait_tags": ["Tourism-Travel", "Visual-Design"]},
+            {"option_id": 2262, "option_text": "Create a social media campaign with influencer partnerships", "trait_tags": ["Marketing-Sales", "Digital-Media"]},
+            {"option_id": 2263, "option_text": "Build a tourism website with online booking features", "trait_tags": ["Web-Dev", "Tourism-Travel"]},
+            {"option_id": 2264, "option_text": "Produce a documentary about local culture and traditions", "trait_tags": ["Film-Broadcast", "Tourism-Travel"]},
+            {"option_id": 2265, "option_text": "Organize a food festival showcasing regional dishes", "trait_tags": ["Culinary-Arts", "Tourism-Travel"]},
+            {"option_id": 2266, "option_text": "Develop an AR app showing historical landmarks", "trait_tags": ["Mobile-Dev", "Tourism-Travel"]},
+            {"option_id": 2267, "option_text": "Create adventure tour packages for thrill-seekers", "trait_tags": ["Tourism-Travel", "Physical-Skill"]},
+            {"option_id": 2268, "option_text": "Work with local communities to promote homestay programs", "trait_tags": ["Tourism-Travel", "Community-Serve"]}
+        ]
+    },
+
+    # ---------- HEALTH & MEDICAL ----------
+    {
+        "question_id": 227,
+        "question_text": "You're volunteering at a hospital. Which department would you choose?",
+        "category": "Situational - Healthcare Career",
+        "options": [
+            {"option_id": 2271, "option_text": "Emergency room — helping in critical situations", "trait_tags": ["Patient-Care", "Physical-Skill"]},
+            {"option_id": 2272, "option_text": "Laboratory — running diagnostic tests on samples", "trait_tags": ["Medical-Lab", "Lab-Research"]},
+            {"option_id": 2273, "option_text": "Pharmacy — dispensing and managing medications", "trait_tags": ["Pharmacy", "Patient-Care"]},
+            {"option_id": 2274, "option_text": "Physical therapy — helping patients recover movement", "trait_tags": ["Rehab-Therapy", "Physical-Skill"]},
+            {"option_id": 2275, "option_text": "Hospital administration — managing operations and records", "trait_tags": ["Health-Admin", "Admin-Skill"]},
+            {"option_id": 2276, "option_text": "Nutrition department — planning patient meal programs", "trait_tags": ["Nutrition-Diet", "Patient-Care"]},
+            {"option_id": 2277, "option_text": "Public health outreach — community vaccination drives", "trait_tags": ["Public-Health", "Community-Serve"]},
+            {"option_id": 2278, "option_text": "Medical records and health informatics — digital systems", "trait_tags": ["Health-Admin", "Software-Dev"]}
+        ]
+    },
+    {
+        "question_id": 228,
+        "question_text": "A pharmaceutical company offers you an internship. What role excites you?",
+        "category": "Situational - Pharmacy Career",
+        "options": [
+            {"option_id": 2281, "option_text": "Drug formulation research — creating new medicines", "trait_tags": ["Pharmacy", "Lab-Research"]},
+            {"option_id": 2282, "option_text": "Quality control — testing drug safety and purity", "trait_tags": ["Pharmacy", "Medical-Lab"]},
+            {"option_id": 2283, "option_text": "Clinical trials — testing medicines on patients", "trait_tags": ["Pharmacy", "Patient-Care"]},
+            {"option_id": 2284, "option_text": "Pharmacovigilance — monitoring drug side effects", "trait_tags": ["Pharmacy", "Public-Health"]},
+            {"option_id": 2285, "option_text": "Pharmaceutical sales — marketing medicines to doctors", "trait_tags": ["Marketing-Sales", "Pharmacy"]},
+            {"option_id": 2286, "option_text": "Regulatory affairs — ensuring FDA compliance", "trait_tags": ["Pharmacy", "Legal-Practice"]},
+            {"option_id": 2287, "option_text": "Natural product research — studying herbal remedies", "trait_tags": ["Pharmacy", "Field-Research"]},
+            {"option_id": 2288, "option_text": "Hospital pharmacy — dispensing prescriptions to patients", "trait_tags": ["Pharmacy", "Patient-Care"]}
+        ]
+    },
+    {
+        "question_id": 229,
+        "question_text": "You want to help people with health issues. What approach appeals to you?",
+        "category": "Interest - Rehabilitation",
+        "options": [
+            {"option_id": 2291, "option_text": "Physical therapy — helping people walk and move again", "trait_tags": ["Rehab-Therapy", "Physical-Skill"]},
+            {"option_id": 2292, "option_text": "Occupational therapy — helping people do daily tasks", "trait_tags": ["Rehab-Therapy", "Patient-Care"]},
+            {"option_id": 2293, "option_text": "Speech therapy — helping people communicate better", "trait_tags": ["Rehab-Therapy", "Teaching-Ed"]},
+            {"option_id": 2294, "option_text": "Sports rehabilitation — getting athletes back in the game", "trait_tags": ["Rehab-Therapy", "Sports-Ed"]},
+            {"option_id": 2295, "option_text": "Mental health counseling — supporting emotional recovery", "trait_tags": ["Counseling", "Patient-Care"]},
+            {"option_id": 2296, "option_text": "Nutritional therapy — using food to heal the body", "trait_tags": ["Nutrition-Diet", "Rehab-Therapy"]},
+            {"option_id": 2297, "option_text": "Medical technology — developing rehabilitation devices", "trait_tags": ["Medical-Lab", "Hardware-Systems"]},
+            {"option_id": 2298, "option_text": "Community health programs — preventing illness in barangays", "trait_tags": ["Public-Health", "Community-Serve"]}
+        ]
+    },
+    {
+        "question_id": 230,
+        "question_text": "A health clinic needs help improving patient care. What would you focus on?",
+        "category": "Situational - Health Admin",
+        "options": [
+            {"option_id": 2301, "option_text": "Streamlining patient records with a digital system", "trait_tags": ["Health-Admin", "Software-Dev"]},
+            {"option_id": 2302, "option_text": "Training nurses and staff on better care protocols", "trait_tags": ["Health-Admin", "Teaching-Ed"]},
+            {"option_id": 2303, "option_text": "Managing the clinic budget and resource allocation", "trait_tags": ["Health-Admin", "Finance-Acct"]},
+            {"option_id": 2304, "option_text": "Running lab diagnostics to catch diseases early", "trait_tags": ["Medical-Lab", "Lab-Research"]},
+            {"option_id": 2305, "option_text": "Creating public health campaigns for disease prevention", "trait_tags": ["Public-Health", "Marketing-Sales"]},
+            {"option_id": 2306, "option_text": "Setting up a community pharmacy with affordable meds", "trait_tags": ["Pharmacy", "Community-Serve"]},
+            {"option_id": 2307, "option_text": "Designing meal plans for patients with special diets", "trait_tags": ["Nutrition-Diet", "Food-Science"]},
+            {"option_id": 2308, "option_text": "Building emergency response protocols for disasters", "trait_tags": ["Health-Admin", "Public-Health"]}
+        ]
+    },
+    {
+        "question_id": 231,
+        "question_text": "What aspect of nutrition and food science interests you most?",
+        "category": "Interest - Nutrition Science",
+        "options": [
+            {"option_id": 2311, "option_text": "Creating personalized diet plans based on health conditions", "trait_tags": ["Nutrition-Diet", "Patient-Care"]},
+            {"option_id": 2312, "option_text": "Researching how nutrients affect the human body", "trait_tags": ["Nutrition-Diet", "Lab-Research"]},
+            {"option_id": 2313, "option_text": "Food product development and testing new recipes", "trait_tags": ["Food-Science", "Culinary-Arts"]},
+            {"option_id": 2314, "option_text": "Food safety inspection and quality control", "trait_tags": ["Food-Science", "Health-Admin"]},
+            {"option_id": 2315, "option_text": "Sports nutrition — optimizing athlete performance", "trait_tags": ["Nutrition-Diet", "Sports-Ed"]},
+            {"option_id": 2316, "option_text": "Community nutrition programs for malnourished children", "trait_tags": ["Nutrition-Diet", "Public-Health"]},
+            {"option_id": 2317, "option_text": "Food technology — preserving food for longer shelf life", "trait_tags": ["Food-Science", "Lab-Research"]},
+            {"option_id": 2318, "option_text": "Restaurant menu design combining taste and health", "trait_tags": ["Culinary-Arts", "Nutrition-Diet"]}
+        ]
+    },
+    {
+        "question_id": 232,
+        "question_text": "Your barangay is dealing with a health crisis. What would you do to help?",
+        "category": "Situational - Public Health",
+        "options": [
+            {"option_id": 2321, "option_text": "Organize vaccination drives and health screenings", "trait_tags": ["Public-Health", "Community-Serve"]},
+            {"option_id": 2322, "option_text": "Analyze disease data to identify outbreak patterns", "trait_tags": ["Public-Health", "Data-Analytics"]},
+            {"option_id": 2323, "option_text": "Train community health workers on first aid", "trait_tags": ["Public-Health", "Teaching-Ed"]},
+            {"option_id": 2324, "option_text": "Set up a temporary clinic with basic medical services", "trait_tags": ["Patient-Care", "Health-Admin"]},
+            {"option_id": 2325, "option_text": "Create educational materials about disease prevention", "trait_tags": ["Public-Health", "Visual-Design"]},
+            {"option_id": 2326, "option_text": "Distribute food and nutrition supplements to families", "trait_tags": ["Nutrition-Diet", "Community-Serve"]},
+            {"option_id": 2327, "option_text": "Counsel affected families on mental health and coping", "trait_tags": ["Counseling", "Social-Work"]},
+            {"option_id": 2328, "option_text": "Test water and food samples for contamination", "trait_tags": ["Medical-Lab", "Environmental-Sci"]}
+        ]
+    },
+    {
+        "question_id": 233,
+        "question_text": "You're working in a medical laboratory. What type of testing interests you most?",
+        "category": "Interest - Medical Laboratory",
+        "options": [
+            {"option_id": 2331, "option_text": "Blood analysis and hematology testing", "trait_tags": ["Medical-Lab", "Lab-Research"]},
+            {"option_id": 2332, "option_text": "Microbiology — identifying bacteria and viruses", "trait_tags": ["Medical-Lab", "Lab-Research"]},
+            {"option_id": 2333, "option_text": "Clinical chemistry — analyzing body fluids", "trait_tags": ["Medical-Lab", "Pharmacy"]},
+            {"option_id": 2334, "option_text": "Histopathology — examining tissue samples for disease", "trait_tags": ["Medical-Lab", "Patient-Care"]},
+            {"option_id": 2335, "option_text": "Immunology — studying the immune system response", "trait_tags": ["Medical-Lab", "Lab-Research"]},
+            {"option_id": 2336, "option_text": "Forensic laboratory — analyzing evidence for crimes", "trait_tags": ["Forensic-Sci", "Medical-Lab"]},
+            {"option_id": 2337, "option_text": "Food and drug testing — ensuring product safety", "trait_tags": ["Food-Science", "Medical-Lab"]},
+            {"option_id": 2338, "option_text": "Molecular diagnostics — DNA and genetic testing", "trait_tags": ["Medical-Lab", "Lab-Research"]}
+        ]
+    },
+
+    # ---------- LAW ENFORCEMENT & FORENSICS ----------
+    {
+        "question_id": 234,
+        "question_text": "A crime has been committed in your area. What role would you want to play?",
+        "category": "Situational - Law Enforcement",
+        "options": [
+            {"option_id": 2341, "option_text": "Investigating the crime scene and collecting evidence", "trait_tags": ["Law-Enforce", "Forensic-Sci"]},
+            {"option_id": 2342, "option_text": "Interviewing witnesses and analyzing testimonies", "trait_tags": ["Law-Enforce", "People-Skill"]},
+            {"option_id": 2343, "option_text": "Running forensic lab tests on physical evidence", "trait_tags": ["Forensic-Sci", "Medical-Lab"]},
+            {"option_id": 2344, "option_text": "Analyzing digital evidence — phones, computers, CCTV", "trait_tags": ["Forensic-Sci", "Cyber-Defense"]},
+            {"option_id": 2345, "option_text": "Prosecuting the case in court as a lawyer", "trait_tags": ["Legal-Practice", "Law-Enforce"]},
+            {"option_id": 2346, "option_text": "Community policing — building trust with residents", "trait_tags": ["Law-Enforce", "Community-Serve"]},
+            {"option_id": 2347, "option_text": "Crime data analysis — finding patterns in criminal activity", "trait_tags": ["Law-Enforce", "Data-Analytics"]},
+            {"option_id": 2348, "option_text": "Victim support — counseling people affected by crime", "trait_tags": ["Counseling", "Social-Work"]}
+        ]
+    },
+    {
+        "question_id": 235,
+        "question_text": "You're studying criminology. What specialization would you choose?",
+        "category": "Interest - Criminology Specialization",
+        "options": [
+            {"option_id": 2351, "option_text": "Criminal investigation and detective work", "trait_tags": ["Law-Enforce", "Analytical-Skill"]},
+            {"option_id": 2352, "option_text": "Forensic science — using science to solve crimes", "trait_tags": ["Forensic-Sci", "Lab-Research"]},
+            {"option_id": 2353, "option_text": "Cybercrime investigation — tracking hackers online", "trait_tags": ["Law-Enforce", "Cyber-Defense"]},
+            {"option_id": 2354, "option_text": "Corrections and rehabilitation — reforming offenders", "trait_tags": ["Law-Enforce", "Counseling"]},
+            {"option_id": 2355, "option_text": "Crime prevention through community programs", "trait_tags": ["Law-Enforce", "Community-Serve"]},
+            {"option_id": 2356, "option_text": "Drug enforcement and narcotics investigation", "trait_tags": ["Law-Enforce", "Forensic-Sci"]},
+            {"option_id": 2357, "option_text": "Traffic management and road safety enforcement", "trait_tags": ["Law-Enforce", "Admin-Skill"]},
+            {"option_id": 2358, "option_text": "Industrial security and private investigation", "trait_tags": ["Law-Enforce", "People-Skill"]}
+        ]
+    },
+    {
+        "question_id": 236,
+        "question_text": "What type of forensic work fascinates you?",
+        "category": "Interest - Forensic Science",
+        "options": [
+            {"option_id": 2361, "option_text": "DNA analysis and genetic profiling", "trait_tags": ["Forensic-Sci", "Lab-Research"]},
+            {"option_id": 2362, "option_text": "Fingerprint and ballistics analysis", "trait_tags": ["Forensic-Sci", "Medical-Lab"]},
+            {"option_id": 2363, "option_text": "Toxicology — detecting poisons and drugs in the body", "trait_tags": ["Forensic-Sci", "Pharmacy"]},
+            {"option_id": 2364, "option_text": "Digital forensics — recovering deleted computer files", "trait_tags": ["Forensic-Sci", "Cyber-Defense"]},
+            {"option_id": 2365, "option_text": "Crime scene photography and documentation", "trait_tags": ["Forensic-Sci", "Visual-Design"]},
+            {"option_id": 2366, "option_text": "Forensic accounting — tracking financial crimes", "trait_tags": ["Forensic-Sci", "Finance-Acct"]},
+            {"option_id": 2367, "option_text": "Forensic psychology — profiling criminal behavior", "trait_tags": ["Forensic-Sci", "Counseling"]},
+            {"option_id": 2368, "option_text": "Environmental forensics — investigating pollution crimes", "trait_tags": ["Forensic-Sci", "Environmental-Sci"]}
+        ]
+    },
+
+    # ---------- ENGINEERING ----------
+    {
+        "question_id": 237,
+        "question_text": "An engineering company offers you an apprenticeship. Which department would you choose?",
+        "category": "Situational - Engineering Career",
+        "options": [
+            {"option_id": 2371, "option_text": "Structural design — buildings and bridges", "trait_tags": ["Civil-Build", "Spatial-Design"]},
+            {"option_id": 2372, "option_text": "Electrical systems — power grids and circuits", "trait_tags": ["Electrical-Power", "Hardware-Systems"]},
+            {"option_id": 2373, "option_text": "Industrial automation — robots and factory systems", "trait_tags": ["Industrial-Ops", "Mechanical-Design"]},
+            {"option_id": 2374, "option_text": "Mechanical design — engines and machinery", "trait_tags": ["Mechanical-Design", "Technical-Skill"]},
+            {"option_id": 2375, "option_text": "Environmental engineering — water treatment and waste", "trait_tags": ["Environmental-Eng", "Environmental-Sci"]},
+            {"option_id": 2376, "option_text": "Electronics and embedded systems — circuit boards", "trait_tags": ["Electrical-Power", "Hardware-Systems"]},
+            {"option_id": 2377, "option_text": "Computer engineering — hardware-software integration", "trait_tags": ["Hardware-Systems", "Software-Dev"]},
+            {"option_id": 2378, "option_text": "Mining and geological engineering", "trait_tags": ["Civil-Build", "Field-Research"]}
+        ]
+    },
+    {
+        "question_id": 238,
+        "question_text": "Your team needs to solve a power problem in a remote province. What do you suggest?",
+        "category": "Situational - Electrical Engineering",
+        "options": [
+            {"option_id": 2381, "option_text": "Design a solar panel system for the community", "trait_tags": ["Electrical-Power", "Environmental-Eng"]},
+            {"option_id": 2382, "option_text": "Build a micro-hydroelectric power plant on a river", "trait_tags": ["Electrical-Power", "Civil-Build"]},
+            {"option_id": 2383, "option_text": "Set up a wind turbine farm in a hilly area", "trait_tags": ["Electrical-Power", "Mechanical-Design"]},
+            {"option_id": 2384, "option_text": "Install a diesel generator with smart grid management", "trait_tags": ["Electrical-Power", "Industrial-Ops"]},
+            {"option_id": 2385, "option_text": "Design an IoT system to monitor and optimize power usage", "trait_tags": ["Hardware-Systems", "Cloud-Systems"]},
+            {"option_id": 2386, "option_text": "Extend the main power grid with new transmission lines", "trait_tags": ["Electrical-Power", "Civil-Build"]},
+            {"option_id": 2387, "option_text": "Create a battery storage system for reliable backup", "trait_tags": ["Electrical-Power", "Technical-Skill"]},
+            {"option_id": 2388, "option_text": "Develop a mobile app for residents to monitor electricity use", "trait_tags": ["Mobile-Dev", "Electrical-Power"]}
+        ]
+    },
+    {
+        "question_id": 239,
+        "question_text": "What kind of machine or system would you love to design?",
+        "category": "Interest - Mechanical Design",
+        "options": [
+            {"option_id": 2391, "option_text": "A fuel-efficient engine for Filipino-made vehicles", "trait_tags": ["Mechanical-Design", "Industrial-Ops"]},
+            {"option_id": 2392, "option_text": "A robotic arm for automated assembly lines", "trait_tags": ["Mechanical-Design", "Industrial-Ops"]},
+            {"option_id": 2393, "option_text": "An HVAC system for energy-efficient buildings", "trait_tags": ["Mechanical-Design", "Environmental-Eng"]},
+            {"option_id": 2394, "option_text": "A water purification machine for rural areas", "trait_tags": ["Mechanical-Design", "Environmental-Eng"]},
+            {"option_id": 2395, "option_text": "Agricultural machinery for Filipino farmers", "trait_tags": ["Mechanical-Design", "Agri-Nature"]},
+            {"option_id": 2396, "option_text": "A 3D printer that can build house components", "trait_tags": ["Mechanical-Design", "Civil-Build"]},
+            {"option_id": 2397, "option_text": "Medical equipment like prosthetic limbs", "trait_tags": ["Mechanical-Design", "Rehab-Therapy"]},
+            {"option_id": 2398, "option_text": "Ship engines and marine propulsion systems", "trait_tags": ["Mechanical-Design", "Maritime-Sea"]}
+        ]
+    },
+    {
+        "question_id": 240,
+        "question_text": "A factory needs to improve its production line. What would you focus on?",
+        "category": "Situational - Industrial Engineering",
+        "options": [
+            {"option_id": 2401, "option_text": "Automating repetitive tasks with robotic systems", "trait_tags": ["Industrial-Ops", "Mechanical-Design"]},
+            {"option_id": 2402, "option_text": "Optimizing workflow to reduce waste and costs", "trait_tags": ["Industrial-Ops", "Analytical-Skill"]},
+            {"option_id": 2403, "option_text": "Implementing quality control testing procedures", "trait_tags": ["Industrial-Ops", "Lab-Research"]},
+            {"option_id": 2404, "option_text": "Designing the factory layout for safety and efficiency", "trait_tags": ["Industrial-Ops", "Spatial-Design"]},
+            {"option_id": 2405, "option_text": "Installing smart sensors for real-time monitoring", "trait_tags": ["Industrial-Ops", "Hardware-Systems"]},
+            {"option_id": 2406, "option_text": "Managing supply chain logistics and inventory", "trait_tags": ["Industrial-Ops", "Admin-Skill"]},
+            {"option_id": 2407, "option_text": "Training workers on new equipment and safety protocols", "trait_tags": ["Industrial-Ops", "Teaching-Ed"]},
+            {"option_id": 2408, "option_text": "Reducing environmental impact of manufacturing", "trait_tags": ["Environmental-Eng", "Industrial-Ops"]}
+        ]
+    },
+    {
+        "question_id": 241,
+        "question_text": "Your city is building new infrastructure. What project would you want to work on?",
+        "category": "Situational - Civil Engineering",
+        "options": [
+            {"option_id": 2411, "option_text": "Designing earthquake-resistant buildings", "trait_tags": ["Civil-Build", "Spatial-Design"]},
+            {"option_id": 2412, "option_text": "Building a flood control system for low-lying areas", "trait_tags": ["Civil-Build", "Environmental-Eng"]},
+            {"option_id": 2413, "option_text": "Constructing a modern highway and bridge network", "trait_tags": ["Civil-Build", "Mechanical-Design"]},
+            {"option_id": 2414, "option_text": "Designing the water supply and sewage system", "trait_tags": ["Civil-Build", "Environmental-Eng"]},
+            {"option_id": 2415, "option_text": "Building schools and hospitals in underserved areas", "trait_tags": ["Civil-Build", "Community-Serve"]},
+            {"option_id": 2416, "option_text": "Creating smart traffic management systems", "trait_tags": ["Civil-Build", "Software-Dev"]},
+            {"option_id": 2417, "option_text": "Developing sustainable and green buildings", "trait_tags": ["Civil-Build", "Environmental-Sci"]},
+            {"option_id": 2418, "option_text": "Port and harbor construction for maritime trade", "trait_tags": ["Civil-Build", "Maritime-Sea"]}
+        ]
+    },
+    {
+        "question_id": 242,
+        "question_text": "What environmental engineering challenge would you want to solve?",
+        "category": "Interest - Environmental Engineering",
+        "options": [
+            {"option_id": 2421, "option_text": "Cleaning polluted rivers and waterways", "trait_tags": ["Environmental-Eng", "Environmental-Sci"]},
+            {"option_id": 2422, "option_text": "Designing waste-to-energy systems for cities", "trait_tags": ["Environmental-Eng", "Electrical-Power"]},
+            {"option_id": 2423, "option_text": "Building sustainable drainage to prevent flooding", "trait_tags": ["Environmental-Eng", "Civil-Build"]},
+            {"option_id": 2424, "option_text": "Developing air quality monitoring systems", "trait_tags": ["Environmental-Eng", "Hardware-Systems"]},
+            {"option_id": 2425, "option_text": "Creating sewage treatment plants for communities", "trait_tags": ["Environmental-Eng", "Civil-Build"]},
+            {"option_id": 2426, "option_text": "Reducing carbon emissions from industrial sites", "trait_tags": ["Environmental-Eng", "Industrial-Ops"]},
+            {"option_id": 2427, "option_text": "Designing recyclable packaging for food products", "trait_tags": ["Environmental-Eng", "Food-Science"]},
+            {"option_id": 2428, "option_text": "Soil remediation for contaminated farmland", "trait_tags": ["Environmental-Eng", "Agri-Nature"]}
+        ]
+    },
+
+    # ---------- SOCIAL WORK & COMMUNITY ----------
+    {
+        "question_id": 243,
+        "question_text": "You see a family in your community struggling with poverty. How would you help?",
+        "category": "Situational - Social Work",
+        "options": [
+            {"option_id": 2431, "option_text": "Connect them with government assistance programs", "trait_tags": ["Social-Work", "Community-Serve"]},
+            {"option_id": 2432, "option_text": "Provide counseling for the parents dealing with stress", "trait_tags": ["Counseling", "Social-Work"]},
+            {"option_id": 2433, "option_text": "Help their children with tutoring and school supplies", "trait_tags": ["Teaching-Ed", "Social-Work"]},
+            {"option_id": 2434, "option_text": "Organize a livelihood training program for the parents", "trait_tags": ["Social-Work", "HR-Management"]},
+            {"option_id": 2435, "option_text": "Set up a community feeding program for their children", "trait_tags": ["Social-Work", "Nutrition-Diet"]},
+            {"option_id": 2436, "option_text": "Advocate for better housing policies at the local government", "trait_tags": ["Social-Work", "Legal-Practice"]},
+            {"option_id": 2437, "option_text": "Document their situation for a fundraising campaign", "trait_tags": ["Social-Work", "Digital-Media"]},
+            {"option_id": 2438, "option_text": "Help them start a small home-based business", "trait_tags": ["Social-Work", "Startup-Venture"]}
+        ]
+    },
+    {
+        "question_id": 244,
+        "question_text": "You're organizing a community development project. What would it be?",
+        "category": "Situational - Community Development",
+        "options": [
+            {"option_id": 2441, "option_text": "A skills training center for out-of-school youth", "trait_tags": ["Community-Serve", "Teaching-Ed"]},
+            {"option_id": 2442, "option_text": "A free legal aid clinic for residents", "trait_tags": ["Community-Serve", "Legal-Practice"]},
+            {"option_id": 2443, "option_text": "A community garden and urban farming project", "trait_tags": ["Community-Serve", "Agri-Nature"]},
+            {"option_id": 2444, "option_text": "A mental health support group for teenagers", "trait_tags": ["Counseling", "Community-Serve"]},
+            {"option_id": 2445, "option_text": "A sports and recreation program for at-risk youth", "trait_tags": ["Sports-Ed", "Community-Serve"]},
+            {"option_id": 2446, "option_text": "A cooperative business for local artisans and producers", "trait_tags": ["Startup-Venture", "Community-Serve"]},
+            {"option_id": 2447, "option_text": "A health and sanitation awareness campaign", "trait_tags": ["Public-Health", "Community-Serve"]},
+            {"option_id": 2448, "option_text": "A disaster preparedness and rescue training program", "trait_tags": ["Community-Serve", "Physical-Skill"]}
+        ]
+    },
+
+    # ---------- HR & BUSINESS MANAGEMENT ----------
+    {
+        "question_id": 245,
+        "question_text": "You're the HR manager of a growing company. What's your first priority?",
+        "category": "Situational - HR Management",
+        "options": [
+            {"option_id": 2451, "option_text": "Designing a fair and competitive salary structure", "trait_tags": ["HR-Management", "Finance-Acct"]},
+            {"option_id": 2452, "option_text": "Creating employee training and development programs", "trait_tags": ["HR-Management", "Teaching-Ed"]},
+            {"option_id": 2453, "option_text": "Building a positive and inclusive workplace culture", "trait_tags": ["HR-Management", "People-Skill"]},
+            {"option_id": 2454, "option_text": "Streamlining the recruitment and hiring process", "trait_tags": ["HR-Management", "Admin-Skill"]},
+            {"option_id": 2455, "option_text": "Setting up employee wellness and mental health programs", "trait_tags": ["HR-Management", "Counseling"]},
+            {"option_id": 2456, "option_text": "Implementing HR management software systems", "trait_tags": ["HR-Management", "Software-Dev"]},
+            {"option_id": 2457, "option_text": "Handling labor disputes and employee relations", "trait_tags": ["HR-Management", "Legal-Practice"]},
+            {"option_id": 2458, "option_text": "Measuring employee performance with data analytics", "trait_tags": ["HR-Management", "Data-Analytics"]}
+        ]
+    },
+    {
+        "question_id": 246,
+        "question_text": "What kind of business skill do you think is most valuable?",
+        "category": "Interest - Business Skills",
+        "options": [
+            {"option_id": 2461, "option_text": "Financial analysis — understanding where money goes", "trait_tags": ["Finance-Acct", "Analytical-Skill"]},
+            {"option_id": 2462, "option_text": "People management — leading and motivating teams", "trait_tags": ["People-Skill", "HR-Management"]},
+            {"option_id": 2463, "option_text": "Marketing strategy — knowing how to sell products", "trait_tags": ["Marketing-Sales", "Analytical-Skill"]},
+            {"option_id": 2464, "option_text": "Negotiation — getting the best deals for your company", "trait_tags": ["People-Skill", "Legal-Practice"]},
+            {"option_id": 2465, "option_text": "Project management — keeping teams and timelines on track", "trait_tags": ["Admin-Skill", "Analytical-Skill"]},
+            {"option_id": 2466, "option_text": "Entrepreneurship — starting and growing your own business", "trait_tags": ["Startup-Venture", "People-Skill"]},
+            {"option_id": 2467, "option_text": "Data-driven decisions — using numbers to guide choices", "trait_tags": ["Analytical-Skill", "Data-Analytics"]},
+            {"option_id": 2468, "option_text": "Public speaking — presenting ideas to stakeholders", "trait_tags": ["People-Skill", "Teaching-Ed"]}
+        ]
+    },
+
+    # ---------- DIGITAL MEDIA & CREATIVE ----------
+    {
+        "question_id": 247,
+        "question_text": "A company asks you to create their brand identity. What do you focus on?",
+        "category": "Situational - Digital Media Career",
+        "options": [
+            {"option_id": 2471, "option_text": "Designing their logo and visual brand guidelines", "trait_tags": ["Visual-Design", "Creative-Skill"]},
+            {"option_id": 2472, "option_text": "Creating promotional videos and motion graphics", "trait_tags": ["Film-Broadcast", "Animation-3D"]},
+            {"option_id": 2473, "option_text": "Managing their social media presence and content", "trait_tags": ["Digital-Media", "Marketing-Sales"]},
+            {"option_id": 2474, "option_text": "Building their website with interactive elements", "trait_tags": ["Web-Dev", "Visual-Design"]},
+            {"option_id": 2475, "option_text": "Writing compelling copy for ads and campaigns", "trait_tags": ["Digital-Media", "Creative-Skill"]},
+            {"option_id": 2476, "option_text": "Photography and product shots for their catalog", "trait_tags": ["Visual-Design", "Creative-Skill"]},
+            {"option_id": 2477, "option_text": "Creating 3D product visualizations and renders", "trait_tags": ["Animation-3D", "Visual-Design"]},
+            {"option_id": 2478, "option_text": "Developing a mobile app for their customers", "trait_tags": ["Mobile-Dev", "Software-Dev"]}
+        ]
+    },
+    {
+        "question_id": 248,
+        "question_text": "You're starting a creative career. What would you specialize in?",
+        "category": "Interest - Creative Specialization",
+        "options": [
+            {"option_id": 2481, "option_text": "Graphic design — creating visuals for print and digital", "trait_tags": ["Visual-Design", "Creative-Skill"]},
+            {"option_id": 2482, "option_text": "3D modeling and animation for films or games", "trait_tags": ["Animation-3D", "Game-Dev"]},
+            {"option_id": 2483, "option_text": "Video production and cinematography", "trait_tags": ["Film-Broadcast", "Creative-Skill"]},
+            {"option_id": 2484, "option_text": "UI/UX design — making apps and websites user-friendly", "trait_tags": ["Visual-Design", "Web-Dev"]},
+            {"option_id": 2485, "option_text": "Photography — capturing moments and telling stories", "trait_tags": ["Creative-Skill", "Visual-Design"]},
+            {"option_id": 2486, "option_text": "Music production and sound design", "trait_tags": ["Performing-Arts", "Creative-Skill"]},
+            {"option_id": 2487, "option_text": "Interior design and spatial planning", "trait_tags": ["Spatial-Design", "Creative-Skill"]},
+            {"option_id": 2488, "option_text": "Fashion design and clothing illustration", "trait_tags": ["Creative-Skill", "Visual-Design"]}
+        ]
+    },
+    {
+        "question_id": 249,
+        "question_text": "A Filipino movie studio needs help with their new animated film. What role do you want?",
+        "category": "Situational - Animation Career",
+        "options": [
+            {"option_id": 2491, "option_text": "3D character modeler — sculpting characters digitally", "trait_tags": ["Animation-3D", "Visual-Design"]},
+            {"option_id": 2492, "option_text": "Animator — bringing characters to life with movement", "trait_tags": ["Animation-3D", "Creative-Skill"]},
+            {"option_id": 2493, "option_text": "Visual effects artist — creating explosions and magic", "trait_tags": ["Animation-3D", "Film-Broadcast"]},
+            {"option_id": 2494, "option_text": "Storyboard artist — planning each scene visually", "trait_tags": ["Animation-3D", "Visual-Design"]},
+            {"option_id": 2495, "option_text": "Rigging specialist — building character skeletons for animation", "trait_tags": ["Animation-3D", "Software-Dev"]},
+            {"option_id": 2496, "option_text": "Background and environment artist — creating worlds", "trait_tags": ["Animation-3D", "Spatial-Design"]},
+            {"option_id": 2497, "option_text": "Motion capture technician — recording actor movements", "trait_tags": ["Animation-3D", "Hardware-Systems"]},
+            {"option_id": 2498, "option_text": "Sound design — creating audio effects for the film", "trait_tags": ["Film-Broadcast", "Performing-Arts"]}
+        ]
+    },
+    {
+        "question_id": 250,
+        "question_text": "What type of performance or performing arts excites you?",
+        "category": "Interest - Performing Arts",
+        "options": [
+            {"option_id": 2501, "option_text": "Theater acting and stage performance", "trait_tags": ["Performing-Arts", "Creative-Skill"]},
+            {"option_id": 2502, "option_text": "Dance choreography and performance", "trait_tags": ["Performing-Arts", "Physical-Skill"]},
+            {"option_id": 2503, "option_text": "Music composition and live performance", "trait_tags": ["Performing-Arts", "Creative-Skill"]},
+            {"option_id": 2504, "option_text": "Film and TV acting — being in front of the camera", "trait_tags": ["Performing-Arts", "Film-Broadcast"]},
+            {"option_id": 2505, "option_text": "Voice acting and dubbing for animation", "trait_tags": ["Performing-Arts", "Animation-3D"]},
+            {"option_id": 2506, "option_text": "Stage direction and production management", "trait_tags": ["Performing-Arts", "Admin-Skill"]},
+            {"option_id": 2507, "option_text": "Musical theater — combining singing, acting, and dance", "trait_tags": ["Performing-Arts", "Physical-Skill"]},
+            {"option_id": 2508, "option_text": "Stand-up comedy and improv performance", "trait_tags": ["Performing-Arts", "People-Skill"]}
+        ]
+    },
+
+    # ---------- ARCHITECTURE & SPATIAL DESIGN ----------
+    {
+        "question_id": 251,
+        "question_text": "You're designing a new building. What's most important to you?",
+        "category": "Interest - Architecture Design",
+        "options": [
+            {"option_id": 2511, "option_text": "Making it earthquake-proof with strong structural design", "trait_tags": ["Spatial-Design", "Civil-Build"]},
+            {"option_id": 2512, "option_text": "Creating a beautiful and iconic exterior design", "trait_tags": ["Spatial-Design", "Creative-Skill"]},
+            {"option_id": 2513, "option_text": "Designing efficient interior layouts for people", "trait_tags": ["Spatial-Design", "Visual-Design"]},
+            {"option_id": 2514, "option_text": "Using sustainable and eco-friendly materials", "trait_tags": ["Spatial-Design", "Environmental-Eng"]},
+            {"option_id": 2515, "option_text": "Integrating smart home technology throughout", "trait_tags": ["Spatial-Design", "Hardware-Systems"]},
+            {"option_id": 2516, "option_text": "Designing accessible spaces for persons with disabilities", "trait_tags": ["Spatial-Design", "Community-Serve"]},
+            {"option_id": 2517, "option_text": "Creating 3D models and virtual walkthroughs", "trait_tags": ["Spatial-Design", "Animation-3D"]},
+            {"option_id": 2518, "option_text": "Urban planning — designing entire neighborhoods", "trait_tags": ["Spatial-Design", "Civil-Build"]}
+        ]
+    },
+
+    # ---------- AGRICULTURE & ENVIRONMENT ----------
+    {
+        "question_id": 252,
+        "question_text": "A local farm needs help modernizing. What would you focus on?",
+        "category": "Situational - Agriculture",
+        "options": [
+            {"option_id": 2521, "option_text": "Installing smart irrigation systems using sensors", "trait_tags": ["Agri-Nature", "Hardware-Systems"]},
+            {"option_id": 2522, "option_text": "Soil testing and crop rotation planning", "trait_tags": ["Agri-Nature", "Field-Research"]},
+            {"option_id": 2523, "option_text": "Organic farming techniques and natural pest control", "trait_tags": ["Agri-Nature", "Environmental-Sci"]},
+            {"option_id": 2524, "option_text": "Setting up a farm-to-table business model", "trait_tags": ["Agri-Nature", "Startup-Venture"]},
+            {"option_id": 2525, "option_text": "Aquaculture and fish farming in ponds", "trait_tags": ["Agri-Nature", "Maritime-Sea"]},
+            {"option_id": 2526, "option_text": "Developing a farm management app for tracking crops", "trait_tags": ["Mobile-Dev", "Agri-Nature"]},
+            {"option_id": 2527, "option_text": "Processing and packaging farm products for sale", "trait_tags": ["Food-Science", "Agri-Nature"]},
+            {"option_id": 2528, "option_text": "Training farmers on modern agricultural techniques", "trait_tags": ["Agri-Nature", "Teaching-Ed"]}
+        ]
+    },
+    {
+        "question_id": 253,
+        "question_text": "What environmental issue would you most want to solve in the Philippines?",
+        "category": "Interest - Environmental Science",
+        "options": [
+            {"option_id": 2531, "option_text": "Coral reef and marine ecosystem restoration", "trait_tags": ["Environmental-Sci", "Maritime-Sea"]},
+            {"option_id": 2532, "option_text": "Deforestation and reforestation programs", "trait_tags": ["Environmental-Sci", "Agri-Nature"]},
+            {"option_id": 2533, "option_text": "Air and water pollution monitoring in cities", "trait_tags": ["Environmental-Sci", "Environmental-Eng"]},
+            {"option_id": 2534, "option_text": "Wildlife conservation and protected area management", "trait_tags": ["Environmental-Sci", "Field-Research"]},
+            {"option_id": 2535, "option_text": "Climate change research and disaster preparedness", "trait_tags": ["Environmental-Sci", "Data-Analytics"]},
+            {"option_id": 2536, "option_text": "Solid waste management and recycling programs", "trait_tags": ["Environmental-Sci", "Community-Serve"]},
+            {"option_id": 2537, "option_text": "Renewable energy development for rural areas", "trait_tags": ["Environmental-Sci", "Electrical-Power"]},
+            {"option_id": 2538, "option_text": "Environmental impact assessment for new projects", "trait_tags": ["Environmental-Sci", "Legal-Practice"]}
+        ]
+    },
+    {
+        "question_id": 254,
+        "question_text": "You're doing field research in a national park. What would you study?",
+        "category": "Interest - Field Research",
+        "options": [
+            {"option_id": 2541, "option_text": "Cataloging and studying endemic plant species", "trait_tags": ["Field-Research", "Environmental-Sci"]},
+            {"option_id": 2542, "option_text": "Tracking and observing wildlife behavior", "trait_tags": ["Field-Research", "Agri-Nature"]},
+            {"option_id": 2543, "option_text": "Testing soil and water quality samples", "trait_tags": ["Field-Research", "Lab-Research"]},
+            {"option_id": 2544, "option_text": "Mapping terrain using GPS and drone technology", "trait_tags": ["Field-Research", "Hardware-Systems"]},
+            {"option_id": 2545, "option_text": "Studying weather patterns and climate data", "trait_tags": ["Field-Research", "Data-Analytics"]},
+            {"option_id": 2546, "option_text": "Documenting indigenous communities and their practices", "trait_tags": ["Field-Research", "Community-Serve"]},
+            {"option_id": 2547, "option_text": "Collecting mineral and geological samples", "trait_tags": ["Field-Research", "Civil-Build"]},
+            {"option_id": 2548, "option_text": "Marine biology research in coastal areas", "trait_tags": ["Field-Research", "Maritime-Sea"]}
+        ]
+    },
+
+    # ---------- CYBERSECURITY & CLOUD ----------
+    {
+        "question_id": 255,
+        "question_text": "A company's website has been hacked. What would you do first?",
+        "category": "Situational - Cybersecurity Response",
+        "options": [
+            {"option_id": 2551, "option_text": "Analyze server logs to find how the attacker got in", "trait_tags": ["Cyber-Defense", "Analytical-Skill"]},
+            {"option_id": 2552, "option_text": "Isolate compromised systems to prevent further damage", "trait_tags": ["Cyber-Defense", "Cloud-Systems"]},
+            {"option_id": 2553, "option_text": "Run malware analysis on suspicious files found", "trait_tags": ["Cyber-Defense", "Forensic-Sci"]},
+            {"option_id": 2554, "option_text": "Check if customer data was stolen and notify them", "trait_tags": ["Cyber-Defense", "Legal-Practice"]},
+            {"option_id": 2555, "option_text": "Patch the vulnerability and strengthen the firewall", "trait_tags": ["Cyber-Defense", "Software-Dev"]},
+            {"option_id": 2556, "option_text": "Set up an intrusion detection system to prevent future attacks", "trait_tags": ["Cyber-Defense", "Hardware-Systems"]},
+            {"option_id": 2557, "option_text": "Train employees on security awareness", "trait_tags": ["Cyber-Defense", "Teaching-Ed"]},
+            {"option_id": 2558, "option_text": "Document the incident and create a response report", "trait_tags": ["Cyber-Defense", "Admin-Skill"]}
+        ]
+    },
+    {
+        "question_id": 256,
+        "question_text": "You're building a cloud infrastructure for a startup. What's your priority?",
+        "category": "Situational - Cloud Engineering",
+        "options": [
+            {"option_id": 2561, "option_text": "Setting up auto-scaling servers to handle traffic spikes", "trait_tags": ["Cloud-Systems", "Software-Dev"]},
+            {"option_id": 2562, "option_text": "Implementing secure authentication and encryption", "trait_tags": ["Cloud-Systems", "Cyber-Defense"]},
+            {"option_id": 2563, "option_text": "Creating CI/CD pipelines for automated deployment", "trait_tags": ["Cloud-Systems", "Software-Dev"]},
+            {"option_id": 2564, "option_text": "Monitoring system performance with dashboards", "trait_tags": ["Cloud-Systems", "Data-Analytics"]},
+            {"option_id": 2565, "option_text": "Setting up database backups and disaster recovery", "trait_tags": ["Cloud-Systems", "Admin-Skill"]},
+            {"option_id": 2566, "option_text": "Container orchestration with Docker and Kubernetes", "trait_tags": ["Cloud-Systems", "Software-Dev"]},
+            {"option_id": 2567, "option_text": "Cost optimization — choosing the right cloud services", "trait_tags": ["Cloud-Systems", "Finance-Acct"]},
+            {"option_id": 2568, "option_text": "API gateway and microservices architecture", "trait_tags": ["Cloud-Systems", "Web-Dev"]}
+        ]
+    },
+
+    # ---------- AI/ML & DATA ----------
+    {
+        "question_id": 257,
+        "question_text": "You're building an AI project for a thesis. What would you create?",
+        "category": "Situational - AI Development",
+        "options": [
+            {"option_id": 2571, "option_text": "A chatbot that helps students with enrollment questions", "trait_tags": ["AI-ML", "Software-Dev"]},
+            {"option_id": 2572, "option_text": "An image recognition system for plant disease detection", "trait_tags": ["AI-ML", "Agri-Nature"]},
+            {"option_id": 2573, "option_text": "A recommendation engine for course selection", "trait_tags": ["AI-ML", "Data-Analytics"]},
+            {"option_id": 2574, "option_text": "A sentiment analysis tool for Filipino social media posts", "trait_tags": ["AI-ML", "Data-Analytics"]},
+            {"option_id": 2575, "option_text": "A predictive model for natural disaster risk", "trait_tags": ["AI-ML", "Environmental-Sci"]},
+            {"option_id": 2576, "option_text": "A voice assistant that understands Filipino languages", "trait_tags": ["AI-ML", "Software-Dev"]},
+            {"option_id": 2577, "option_text": "A fraud detection system for online banking", "trait_tags": ["AI-ML", "Cyber-Defense"]},
+            {"option_id": 2578, "option_text": "A computer vision system for traffic monitoring", "trait_tags": ["AI-ML", "Hardware-Systems"]}
+        ]
+    },
+    {
+        "question_id": 258,
+        "question_text": "You have a large dataset about Filipino consumers. What would you analyze?",
+        "category": "Situational - Data Analytics",
+        "options": [
+            {"option_id": 2581, "option_text": "Shopping patterns to help businesses target customers", "trait_tags": ["Data-Analytics", "Marketing-Sales"]},
+            {"option_id": 2582, "option_text": "Health trends to predict disease outbreaks", "trait_tags": ["Data-Analytics", "Public-Health"]},
+            {"option_id": 2583, "option_text": "Social media behavior to understand public opinion", "trait_tags": ["Data-Analytics", "Digital-Media"]},
+            {"option_id": 2584, "option_text": "Financial data to detect fraud and money laundering", "trait_tags": ["Data-Analytics", "Finance-Acct"]},
+            {"option_id": 2585, "option_text": "Educational performance to improve school programs", "trait_tags": ["Data-Analytics", "Teaching-Ed"]},
+            {"option_id": 2586, "option_text": "Transportation data to optimize public transit routes", "trait_tags": ["Data-Analytics", "Civil-Build"]},
+            {"option_id": 2587, "option_text": "Environmental sensor data to track pollution levels", "trait_tags": ["Data-Analytics", "Environmental-Sci"]},
+            {"option_id": 2588, "option_text": "Game player statistics to balance game difficulty", "trait_tags": ["Data-Analytics", "Game-Dev"]}
+        ]
+    },
+
+    # ---------- FOOD SCIENCE & CULINARY ----------
+    {
+        "question_id": 259,
+        "question_text": "You're working in a food laboratory. What project interests you most?",
+        "category": "Interest - Food Science",
+        "options": [
+            {"option_id": 2591, "option_text": "Developing new food preservation techniques", "trait_tags": ["Food-Science", "Lab-Research"]},
+            {"option_id": 2592, "option_text": "Testing food products for safety and nutrition content", "trait_tags": ["Food-Science", "Medical-Lab"]},
+            {"option_id": 2593, "option_text": "Creating plant-based meat alternatives", "trait_tags": ["Food-Science", "Agri-Nature"]},
+            {"option_id": 2594, "option_text": "Improving the flavor and texture of packaged snacks", "trait_tags": ["Food-Science", "Culinary-Arts"]},
+            {"option_id": 2595, "option_text": "Designing healthy school lunch menus", "trait_tags": ["Nutrition-Diet", "Food-Science"]},
+            {"option_id": 2596, "option_text": "Quality control for a beverage manufacturing plant", "trait_tags": ["Food-Science", "Industrial-Ops"]},
+            {"option_id": 2597, "option_text": "Researching traditional Filipino fermented foods", "trait_tags": ["Food-Science", "Field-Research"]},
+            {"option_id": 2598, "option_text": "Developing sustainable food packaging solutions", "trait_tags": ["Food-Science", "Environmental-Eng"]}
+        ]
+    },
+
+    # ---------- MORE GAME DEV & TECH ----------
+    {
+        "question_id": 260,
+        "question_text": "You're playing a video game and you notice a bug. What would you want to do about it?",
+        "category": "Interest - Game Dev Problem Solving",
+        "options": [
+            {"option_id": 2601, "option_text": "Debug the code and fix the game logic error", "trait_tags": ["Game-Dev", "Software-Dev"]},
+            {"option_id": 2602, "option_text": "Report it to the developer with detailed reproduction steps", "trait_tags": ["Game-Dev", "Analytical-Skill"]},
+            {"option_id": 2603, "option_text": "Make a YouTube video showing the bug and how to exploit it", "trait_tags": ["Digital-Media", "Game-Dev"]},
+            {"option_id": 2604, "option_text": "Redesign the game mechanic so the bug can't happen", "trait_tags": ["Game-Dev", "Software-Dev"]},
+            {"option_id": 2605, "option_text": "Check if it's a graphics rendering issue and fix the shader", "trait_tags": ["Game-Dev", "Animation-3D"]},
+            {"option_id": 2606, "option_text": "Test other parts of the game to find more bugs", "trait_tags": ["Game-Dev", "Analytical-Skill"]},
+            {"option_id": 2607, "option_text": "Check the server connection — might be a network issue", "trait_tags": ["Cloud-Systems", "Game-Dev"]},
+            {"option_id": 2608, "option_text": "Mod the game to add a workaround for the bug", "trait_tags": ["Game-Dev", "Software-Dev"]}
+        ]
+    },
+    {
+        "question_id": 261,
+        "question_text": "You're creating a multiplayer game. What feature do you build first?",
+        "category": "Interest - Game Dev Multiplayer",
+        "options": [
+            {"option_id": 2611, "option_text": "Real-time multiplayer networking and matchmaking", "trait_tags": ["Game-Dev", "Cloud-Systems"]},
+            {"option_id": 2612, "option_text": "Character customization with unique skins and outfits", "trait_tags": ["Game-Dev", "Visual-Design"]},
+            {"option_id": 2613, "option_text": "A ranking and leaderboard system for competitive play", "trait_tags": ["Game-Dev", "Data-Analytics"]},
+            {"option_id": 2614, "option_text": "Anti-cheat system to keep the game fair", "trait_tags": ["Game-Dev", "Cyber-Defense"]},
+            {"option_id": 2615, "option_text": "Voice chat and team communication features", "trait_tags": ["Game-Dev", "Software-Dev"]},
+            {"option_id": 2616, "option_text": "In-game economy with virtual currency and shops", "trait_tags": ["Game-Dev", "Finance-Acct"]},
+            {"option_id": 2617, "option_text": "Level design with multiple maps and environments", "trait_tags": ["Game-Dev", "Spatial-Design"]},
+            {"option_id": 2618, "option_text": "A seasonal battle pass with rewards and challenges", "trait_tags": ["Game-Dev", "Marketing-Sales"]}
+        ]
+    },
+    {
+        "question_id": 262,
+        "question_text": "What type of game would you love to make as your dream project?",
+        "category": "Interest - Game Dev Dream Project",
+        "options": [
+            {"option_id": 2621, "option_text": "An open-world RPG set in Philippine mythology", "trait_tags": ["Game-Dev", "Creative-Skill"]},
+            {"option_id": 2622, "option_text": "A competitive esports game like Valorant or DOTA", "trait_tags": ["Game-Dev", "Software-Dev"]},
+            {"option_id": 2623, "option_text": "A mobile puzzle game anyone can enjoy", "trait_tags": ["Game-Dev", "Mobile-Dev"]},
+            {"option_id": 2624, "option_text": "A VR horror experience with immersive environments", "trait_tags": ["Game-Dev", "Animation-3D"]},
+            {"option_id": 2625, "option_text": "An educational game that teaches Filipino history", "trait_tags": ["Game-Dev", "Teaching-Ed"]},
+            {"option_id": 2626, "option_text": "A simulation game like city-building or farming", "trait_tags": ["Game-Dev", "Data-Analytics"]},
+            {"option_id": 2627, "option_text": "A rhythm and music game with original Filipino music", "trait_tags": ["Game-Dev", "Performing-Arts"]},
+            {"option_id": 2628, "option_text": "A retro-style pixel art platformer game", "trait_tags": ["Game-Dev", "Visual-Design"]}
+        ]
+    },
+
+    # ---------- WEB DEV ----------
+    {
+        "question_id": 263,
+        "question_text": "A client needs a website. What kind of site would you enjoy building most?",
+        "category": "Interest - Web Development",
+        "options": [
+            {"option_id": 2631, "option_text": "An e-commerce store with shopping cart and payments", "trait_tags": ["Web-Dev", "Software-Dev"]},
+            {"option_id": 2632, "option_text": "A portfolio website with stunning visual design", "trait_tags": ["Web-Dev", "Visual-Design"]},
+            {"option_id": 2633, "option_text": "A social media platform for local communities", "trait_tags": ["Web-Dev", "Software-Dev"]},
+            {"option_id": 2634, "option_text": "A learning management system for schools", "trait_tags": ["Web-Dev", "Teaching-Ed"]},
+            {"option_id": 2635, "option_text": "A dashboard for data visualization and analytics", "trait_tags": ["Web-Dev", "Data-Analytics"]},
+            {"option_id": 2636, "option_text": "A booking system for hotels and restaurants", "trait_tags": ["Web-Dev", "Hospitality-Svc"]},
+            {"option_id": 2637, "option_text": "A news and blog platform with content management", "trait_tags": ["Web-Dev", "Digital-Media"]},
+            {"option_id": 2638, "option_text": "A real-time multiplayer game in the browser", "trait_tags": ["Web-Dev", "Game-Dev"]}
+        ]
+    },
+    {
+        "question_id": 264,
+        "question_text": "What part of web development excites you the most?",
+        "category": "Interest - Web Dev Specialization",
+        "options": [
+            {"option_id": 2641, "option_text": "Frontend design — making pages look beautiful and responsive", "trait_tags": ["Web-Dev", "Visual-Design"]},
+            {"option_id": 2642, "option_text": "Backend logic — building APIs and server-side systems", "trait_tags": ["Web-Dev", "Software-Dev"]},
+            {"option_id": 2643, "option_text": "Database design — organizing and managing data efficiently", "trait_tags": ["Web-Dev", "Data-Analytics"]},
+            {"option_id": 2644, "option_text": "DevOps — deploying and managing servers in the cloud", "trait_tags": ["Cloud-Systems", "Web-Dev"]},
+            {"option_id": 2645, "option_text": "Security — protecting websites from hackers", "trait_tags": ["Cyber-Defense", "Web-Dev"]},
+            {"option_id": 2646, "option_text": "Accessibility — making websites usable for everyone", "trait_tags": ["Web-Dev", "Community-Serve"]},
+            {"option_id": 2647, "option_text": "Performance optimization — making sites load blazing fast", "trait_tags": ["Web-Dev", "Analytical-Skill"]},
+            {"option_id": 2648, "option_text": "Full-stack development — building everything end to end", "trait_tags": ["Web-Dev", "Software-Dev"]}
+        ]
+    },
+
+    # ---------- MOBILE DEV ----------
+    {
+        "question_id": 265,
+        "question_text": "You're building a mobile app for Filipinos. What would it do?",
+        "category": "Interest - Mobile App Ideas",
+        "options": [
+            {"option_id": 2651, "option_text": "A ride-sharing app like Grab for local tricycles", "trait_tags": ["Mobile-Dev", "Software-Dev"]},
+            {"option_id": 2652, "option_text": "A health tracker app with diet and exercise logs", "trait_tags": ["Mobile-Dev", "Nutrition-Diet"]},
+            {"option_id": 2653, "option_text": "A local marketplace for buying and selling goods", "trait_tags": ["Mobile-Dev", "Marketing-Sales"]},
+            {"option_id": 2654, "option_text": "An emergency alert app for typhoons and disasters", "trait_tags": ["Mobile-Dev", "Public-Health"]},
+            {"option_id": 2655, "option_text": "A budgeting and savings app for students", "trait_tags": ["Mobile-Dev", "Finance-Acct"]},
+            {"option_id": 2656, "option_text": "A Filipino language learning app for foreigners", "trait_tags": ["Mobile-Dev", "Teaching-Ed"]},
+            {"option_id": 2657, "option_text": "A mobile game with Filipino culture themes", "trait_tags": ["Mobile-Dev", "Game-Dev"]},
+            {"option_id": 2658, "option_text": "A barangay services and reporting app", "trait_tags": ["Mobile-Dev", "Community-Serve"]}
+        ]
+    },
+
+    # ---------- SOFTWARE DEV ----------
+    {
+        "question_id": 266,
+        "question_text": "What kind of programmer do you want to become?",
+        "category": "Interest - Software Dev Path",
+        "options": [
+            {"option_id": 2661, "option_text": "A game developer making AAA or indie games", "trait_tags": ["Software-Dev", "Game-Dev"]},
+            {"option_id": 2662, "option_text": "A web developer building modern websites and apps", "trait_tags": ["Software-Dev", "Web-Dev"]},
+            {"option_id": 2663, "option_text": "A mobile app developer for iOS and Android", "trait_tags": ["Software-Dev", "Mobile-Dev"]},
+            {"option_id": 2664, "option_text": "An AI/ML engineer building intelligent systems", "trait_tags": ["Software-Dev", "AI-ML"]},
+            {"option_id": 2665, "option_text": "A cybersecurity expert protecting systems from threats", "trait_tags": ["Software-Dev", "Cyber-Defense"]},
+            {"option_id": 2666, "option_text": "A systems programmer working on operating systems", "trait_tags": ["Software-Dev", "Hardware-Systems"]},
+            {"option_id": 2667, "option_text": "A data engineer building pipelines and analytics tools", "trait_tags": ["Software-Dev", "Data-Analytics"]},
+            {"option_id": 2668, "option_text": "A DevOps engineer managing cloud infrastructure", "trait_tags": ["Software-Dev", "Cloud-Systems"]}
+        ]
+    },
+
+    # ---------- DIGITAL MEDIA (more) ----------
+    {
+        "question_id": 267,
+        "question_text": "You're starting a content creation channel. What's your niche?",
+        "category": "Interest - Digital Media Content",
+        "options": [
+            {"option_id": 2671, "option_text": "Tech reviews and gadget unboxing", "trait_tags": ["Digital-Media", "Hardware-Systems"]},
+            {"option_id": 2672, "option_text": "Gaming streams and esports commentary", "trait_tags": ["Digital-Media", "Game-Dev"]},
+            {"option_id": 2673, "option_text": "Cooking tutorials and food reviews", "trait_tags": ["Digital-Media", "Culinary-Arts"]},
+            {"option_id": 2674, "option_text": "Educational content for students", "trait_tags": ["Digital-Media", "Teaching-Ed"]},
+            {"option_id": 2675, "option_text": "Travel vlogs showcasing Philippine destinations", "trait_tags": ["Digital-Media", "Tourism-Travel"]},
+            {"option_id": 2676, "option_text": "Design tutorials for graphic design and art", "trait_tags": ["Digital-Media", "Visual-Design"]},
+            {"option_id": 2677, "option_text": "Fitness and wellness lifestyle content", "trait_tags": ["Digital-Media", "Sports-Ed"]},
+            {"option_id": 2678, "option_text": "Business and entrepreneurship tips for young Filipinos", "trait_tags": ["Digital-Media", "Startup-Venture"]}
+        ]
+    },
+    {
+        "question_id": 268,
+        "question_text": "A school asks you to create digital learning content. What do you make?",
+        "category": "Situational - Digital Media Education",
+        "options": [
+            {"option_id": 2681, "option_text": "Animated explainer videos for science topics", "trait_tags": ["Digital-Media", "Animation-3D"]},
+            {"option_id": 2682, "option_text": "Interactive online quizzes and learning games", "trait_tags": ["Digital-Media", "Game-Dev"]},
+            {"option_id": 2683, "option_text": "A podcast series interviewing experts", "trait_tags": ["Digital-Media", "Performing-Arts"]},
+            {"option_id": 2684, "option_text": "Infographics and visual study guides", "trait_tags": ["Digital-Media", "Visual-Design"]},
+            {"option_id": 2685, "option_text": "A YouTube channel with recorded lectures", "trait_tags": ["Digital-Media", "Teaching-Ed"]},
+            {"option_id": 2686, "option_text": "An e-learning website with course modules", "trait_tags": ["Web-Dev", "Digital-Media"]},
+            {"option_id": 2687, "option_text": "VR field trips to historical places", "trait_tags": ["Digital-Media", "Animation-3D"]},
+            {"option_id": 2688, "option_text": "Social media campaigns to promote literacy", "trait_tags": ["Digital-Media", "Marketing-Sales"]}
+        ]
+    },
+
+    # ---------- PHYSICAL SKILL & SPORTS ----------
+    {
+        "question_id": 269,
+        "question_text": "What physical activity or sport-related career interests you?",
+        "category": "Interest - Physical Sports Career",
+        "options": [
+            {"option_id": 2691, "option_text": "Being a PE teacher and coaching school teams", "trait_tags": ["Sports-Ed", "Teaching-Ed"]},
+            {"option_id": 2692, "option_text": "Athletic training and sports conditioning", "trait_tags": ["Sports-Ed", "Physical-Skill"]},
+            {"option_id": 2693, "option_text": "Sports nutrition and fitness planning", "trait_tags": ["Sports-Ed", "Nutrition-Diet"]},
+            {"option_id": 2694, "option_text": "Physical therapy for injured athletes", "trait_tags": ["Rehab-Therapy", "Physical-Skill"]},
+            {"option_id": 2695, "option_text": "Sports events management and organization", "trait_tags": ["Sports-Ed", "Admin-Skill"]},
+            {"option_id": 2696, "option_text": "Martial arts or self-defense instruction", "trait_tags": ["Physical-Skill", "Teaching-Ed"]},
+            {"option_id": 2697, "option_text": "Outdoor recreation and adventure sports guiding", "trait_tags": ["Physical-Skill", "Tourism-Travel"]},
+            {"option_id": 2698, "option_text": "Sports broadcasting and commentary", "trait_tags": ["Sports-Ed", "Film-Broadcast"]}
+        ]
+    },
+    {
+        "question_id": 270,
+        "question_text": "Your school is hosting a sports event. What role would you take?",
+        "category": "Situational - Sports Event",
+        "options": [
+            {"option_id": 2701, "option_text": "Head coach — training and strategizing with the team", "trait_tags": ["Sports-Ed", "People-Skill"]},
+            {"option_id": 2702, "option_text": "Event organizer — planning logistics and schedules", "trait_tags": ["Admin-Skill", "Sports-Ed"]},
+            {"option_id": 2703, "option_text": "Team medic — providing first aid to injured players", "trait_tags": ["Patient-Care", "Physical-Skill"]},
+            {"option_id": 2704, "option_text": "Sports photographer/videographer", "trait_tags": ["Film-Broadcast", "Visual-Design"]},
+            {"option_id": 2705, "option_text": "Data analyst — tracking team performance statistics", "trait_tags": ["Data-Analytics", "Sports-Ed"]},
+            {"option_id": 2706, "option_text": "Referee — ensuring fair play and enforcing rules", "trait_tags": ["Physical-Skill", "Law-Enforce"]},
+            {"option_id": 2707, "option_text": "Announcer and live commentator", "trait_tags": ["Performing-Arts", "Sports-Ed"]},
+            {"option_id": 2708, "option_text": "Nutritionist — preparing meal plans for athletes", "trait_tags": ["Nutrition-Diet", "Sports-Ed"]}
+        ]
+    },
+
+    # ---------- TECHNICAL SKILL & ANALYTICAL ----------
+    {
+        "question_id": 271,
+        "question_text": "What approach do you use when solving a complex problem?",
+        "category": "Interest - Analytical Thinking",
+        "options": [
+            {"option_id": 2711, "option_text": "Break it down into smaller parts and solve step by step", "trait_tags": ["Analytical-Skill", "Software-Dev"]},
+            {"option_id": 2712, "option_text": "Gather all the data first and look for patterns", "trait_tags": ["Analytical-Skill", "Data-Analytics"]},
+            {"option_id": 2713, "option_text": "Research how others solved similar problems", "trait_tags": ["Analytical-Skill", "Lab-Research"]},
+            {"option_id": 2714, "option_text": "Brainstorm creative and unconventional solutions", "trait_tags": ["Creative-Skill", "Analytical-Skill"]},
+            {"option_id": 2715, "option_text": "Build a prototype and test it immediately", "trait_tags": ["Technical-Skill", "Analytical-Skill"]},
+            {"option_id": 2716, "option_text": "Consult experts and collaborate with a team", "trait_tags": ["People-Skill", "Analytical-Skill"]},
+            {"option_id": 2717, "option_text": "Use mathematical models and calculations", "trait_tags": ["Analytical-Skill", "Finance-Acct"]},
+            {"option_id": 2718, "option_text": "Create a flowchart or diagram to visualize the problem", "trait_tags": ["Analytical-Skill", "Visual-Design"]}
+        ]
+    },
+    {
+        "question_id": 272,
+        "question_text": "What hands-on technical activity do you enjoy most?",
+        "category": "Interest - Technical Skills",
+        "options": [
+            {"option_id": 2721, "option_text": "Building and repairing electronic circuits", "trait_tags": ["Technical-Skill", "Electrical-Power"]},
+            {"option_id": 2722, "option_text": "Assembling and upgrading computer hardware", "trait_tags": ["Technical-Skill", "Hardware-Systems"]},
+            {"option_id": 2723, "option_text": "Woodworking and furniture making", "trait_tags": ["Technical-Skill", "Mechanical-Design"]},
+            {"option_id": 2724, "option_text": "Automotive repair and engine maintenance", "trait_tags": ["Technical-Skill", "Mechanical-Design"]},
+            {"option_id": 2725, "option_text": "Welding and metal fabrication", "trait_tags": ["Technical-Skill", "Industrial-Ops"]},
+            {"option_id": 2726, "option_text": "Plumbing and electrical wiring installation", "trait_tags": ["Technical-Skill", "Civil-Build"]},
+            {"option_id": 2727, "option_text": "3D printing and prototype fabrication", "trait_tags": ["Technical-Skill", "Mechanical-Design"]},
+            {"option_id": 2728, "option_text": "Network cable installation and server setup", "trait_tags": ["Technical-Skill", "Cloud-Systems"]}
+        ]
+    },
+    {
+        "question_id": 273,
+        "question_text": "You're doing a hands-on technical project for school. What do you choose?",
+        "category": "Situational - Technical Project",
+        "options": [
+            {"option_id": 2731, "option_text": "Build a working robot from scratch", "trait_tags": ["Technical-Skill", "Hardware-Systems"]},
+            {"option_id": 2732, "option_text": "Create a functioning solar-powered device", "trait_tags": ["Technical-Skill", "Electrical-Power"]},
+            {"option_id": 2733, "option_text": "Wire an entire model house with electricity", "trait_tags": ["Technical-Skill", "Electrical-Power"]},
+            {"option_id": 2734, "option_text": "Build a water filtration system from local materials", "trait_tags": ["Technical-Skill", "Environmental-Eng"]},
+            {"option_id": 2735, "option_text": "Construct a scale model bridge that supports weight", "trait_tags": ["Technical-Skill", "Civil-Build"]},
+            {"option_id": 2736, "option_text": "Program an Arduino-based sensor project", "trait_tags": ["Technical-Skill", "Software-Dev"]},
+            {"option_id": 2737, "option_text": "Build a home automation system with smart controls", "trait_tags": ["Technical-Skill", "Cloud-Systems"]},
+            {"option_id": 2738, "option_text": "Fabricate a mechanical device using 3D printing", "trait_tags": ["Technical-Skill", "Mechanical-Design"]}
+        ]
+    },
+
+    # ---------- FILM & BROADCAST ----------
+    {
+        "question_id": 274,
+        "question_text": "A TV network offers you a production job. Which role do you pick?",
+        "category": "Situational - Film Broadcast Career",
+        "options": [
+            {"option_id": 2741, "option_text": "Camera operator — shooting scenes and live events", "trait_tags": ["Film-Broadcast", "Creative-Skill"]},
+            {"option_id": 2742, "option_text": "Video editor — cutting and assembling footage", "trait_tags": ["Film-Broadcast", "Visual-Design"]},
+            {"option_id": 2743, "option_text": "Director — leading the creative vision of a show", "trait_tags": ["Film-Broadcast", "Creative-Skill"]},
+            {"option_id": 2744, "option_text": "Scriptwriter — writing stories for TV series", "trait_tags": ["Film-Broadcast", "Creative-Skill"]},
+            {"option_id": 2745, "option_text": "Production manager — coordinating crews and schedules", "trait_tags": ["Film-Broadcast", "Admin-Skill"]},
+            {"option_id": 2746, "option_text": "Audio engineer — recording and mixing sound", "trait_tags": ["Film-Broadcast", "Performing-Arts"]},
+            {"option_id": 2747, "option_text": "VFX artist — adding visual effects in post-production", "trait_tags": ["Film-Broadcast", "Animation-3D"]},
+            {"option_id": 2748, "option_text": "News reporter — covering stories in the field", "trait_tags": ["Film-Broadcast", "People-Skill"]}
+        ]
+    },
+
+    # ---------- LEGAL PRACTICE ----------
+    {
+        "question_id": 275,
+        "question_text": "What area of law interests you the most?",
+        "category": "Interest - Legal Specialization",
+        "options": [
+            {"option_id": 2751, "option_text": "Criminal law — prosecuting or defending in court", "trait_tags": ["Legal-Practice", "Law-Enforce"]},
+            {"option_id": 2752, "option_text": "Corporate law — advising businesses on legal matters", "trait_tags": ["Legal-Practice", "Finance-Acct"]},
+            {"option_id": 2753, "option_text": "Labor law — protecting workers' rights", "trait_tags": ["Legal-Practice", "HR-Management"]},
+            {"option_id": 2754, "option_text": "Environmental law — holding polluters accountable", "trait_tags": ["Legal-Practice", "Environmental-Sci"]},
+            {"option_id": 2755, "option_text": "Family law — helping with custody and domestic cases", "trait_tags": ["Legal-Practice", "Social-Work"]},
+            {"option_id": 2756, "option_text": "Cyber law — dealing with online crimes and digital rights", "trait_tags": ["Legal-Practice", "Cyber-Defense"]},
+            {"option_id": 2757, "option_text": "Public interest law — fighting for social justice", "trait_tags": ["Legal-Practice", "Community-Serve"]},
+            {"option_id": 2758, "option_text": "Intellectual property — protecting inventions and creative works", "trait_tags": ["Legal-Practice", "Creative-Skill"]}
+        ]
+    },
+
+    # ---------- COUNSELING & PSYCHOLOGY ----------
+    {
+        "question_id": 276,
+        "question_text": "A friend comes to you with a personal problem. How do you help?",
+        "category": "Situational - Counseling Approach",
+        "options": [
+            {"option_id": 2761, "option_text": "Listen carefully and help them process their feelings", "trait_tags": ["Counseling", "People-Skill"]},
+            {"option_id": 2762, "option_text": "Give them practical advice based on similar situations", "trait_tags": ["Counseling", "Analytical-Skill"]},
+            {"option_id": 2763, "option_text": "Encourage them to see a professional therapist", "trait_tags": ["Counseling", "Patient-Care"]},
+            {"option_id": 2764, "option_text": "Research the issue together to find solutions", "trait_tags": ["Counseling", "Lab-Research"]},
+            {"option_id": 2765, "option_text": "Do something fun together to take their mind off it", "trait_tags": ["People-Skill", "Performing-Arts"]},
+            {"option_id": 2766, "option_text": "Help them create a concrete action plan", "trait_tags": ["Counseling", "Admin-Skill"]},
+            {"option_id": 2767, "option_text": "Share a relevant experience to make them feel understood", "trait_tags": ["Counseling", "Teaching-Ed"]},
+            {"option_id": 2768, "option_text": "Check on them regularly until they feel better", "trait_tags": ["Counseling", "Social-Work"]}
+        ]
+    },
+
+    # ---------- MORE CULINARY / HOSPITALITY ----------
+    {
+        "question_id": 277,
+        "question_text": "You're opening your own restaurant. What's your concept?",
+        "category": "Interest - Culinary Concept",
+        "options": [
+            {"option_id": 2771, "option_text": "A modern Filipino fusion restaurant with creative dishes", "trait_tags": ["Culinary-Arts", "Creative-Skill"]},
+            {"option_id": 2772, "option_text": "A fast-food chain with affordable prices for students", "trait_tags": ["Culinary-Arts", "Startup-Venture"]},
+            {"option_id": 2773, "option_text": "A health-focused cafe with organic and vegan options", "trait_tags": ["Culinary-Arts", "Nutrition-Diet"]},
+            {"option_id": 2774, "option_text": "A bakery and pastry shop with artisan breads", "trait_tags": ["Culinary-Arts", "Food-Science"]},
+            {"option_id": 2775, "option_text": "A food truck serving street food with a twist", "trait_tags": ["Culinary-Arts", "Startup-Venture"]},
+            {"option_id": 2776, "option_text": "A hotel restaurant with five-star dining experience", "trait_tags": ["Culinary-Arts", "Hospitality-Svc"]},
+            {"option_id": 2777, "option_text": "A cooking school where people learn Filipino dishes", "trait_tags": ["Culinary-Arts", "Teaching-Ed"]},
+            {"option_id": 2778, "option_text": "A catering business for events and parties", "trait_tags": ["Culinary-Arts", "Hospitality-Svc"]}
+        ]
+    },
+
+    # ---------- PEOPLE SKILL & LEADERSHIP ----------
+    {
+        "question_id": 278,
+        "question_text": "You've been elected class president. What's your first project?",
+        "category": "Situational - Leadership",
+        "options": [
+            {"option_id": 2781, "option_text": "Organize team-building activities for classmates", "trait_tags": ["People-Skill", "Sports-Ed"]},
+            {"option_id": 2782, "option_text": "Set up a student council to address school issues", "trait_tags": ["People-Skill", "Admin-Skill"]},
+            {"option_id": 2783, "option_text": "Create a student mentorship program for freshmen", "trait_tags": ["People-Skill", "Teaching-Ed"]},
+            {"option_id": 2784, "option_text": "Launch a fundraiser for school improvements", "trait_tags": ["People-Skill", "Marketing-Sales"]},
+            {"option_id": 2785, "option_text": "Advocate for better school facilities and resources", "trait_tags": ["People-Skill", "Community-Serve"]},
+            {"option_id": 2786, "option_text": "Plan a school fair or cultural festival", "trait_tags": ["People-Skill", "Performing-Arts"]},
+            {"option_id": 2787, "option_text": "Start a peer counseling program for students in need", "trait_tags": ["Counseling", "People-Skill"]},
+            {"option_id": 2788, "option_text": "Create a class website and social media page", "trait_tags": ["Digital-Media", "People-Skill"]}
         ]
     }
 ]
