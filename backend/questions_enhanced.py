@@ -2998,6 +2998,82 @@ QUESTIONS_POOL_ENHANCED = [
             {"option_id": 2009, "option_text": "Travel and adventure books", "trait_tags": ["Tourism-Travel", "Field-Research"]},
             {"option_id": 2010, "option_text": "Education and teaching guides", "trait_tags": ["Teaching-Ed", "Counseling"]}
         ]
+    },
+    # ═══════ MARITIME DEDICATED QUESTIONS ═══════
+    {
+        "question_id": 201,
+        "question_text": "You're assigned to a merchant vessel for your first voyage. What department do you want to join?",
+        "category": "Situational - Maritime Career Path",
+        "options": [
+            {"option_id": 2011, "option_text": "Deck department - navigation and watchkeeping", "trait_tags": ["Maritime-Sea", "Physical-Skill"]},
+            {"option_id": 2012, "option_text": "Engine department - maintaining propulsion systems", "trait_tags": ["Maritime-Sea", "Mechanical-Design"]},
+            {"option_id": 2013, "option_text": "Electrical officer - managing ship electronics", "trait_tags": ["Maritime-Sea", "Electrical-Power"]},
+            {"option_id": 2014, "option_text": "Radio officer - communications and safety signals", "trait_tags": ["Maritime-Sea", "Hardware-Systems"]},
+            {"option_id": 2015, "option_text": "Steward department - hospitality on cruise ships", "trait_tags": ["Maritime-Sea", "Hospitality-Svc"]},
+            {"option_id": 2016, "option_text": "Port operations - managing cargo loading/unloading", "trait_tags": ["Maritime-Sea", "Industrial-Ops"]},
+            {"option_id": 2017, "option_text": "Safety officer - emergency procedures and drills", "trait_tags": ["Maritime-Sea", "Community-Serve"]},
+            {"option_id": 2018, "option_text": "None of these appeal to me", "trait_tags": []}
+        ]
+    },
+    {
+        "question_id": 202,
+        "question_text": "What aspect of maritime studies interests you most?",
+        "category": "Interest - Maritime Studies",
+        "options": [
+            {"option_id": 2021, "option_text": "Celestial and electronic navigation", "trait_tags": ["Maritime-Sea", "Physical-Skill"]},
+            {"option_id": 2022, "option_text": "Marine diesel engines and ship machinery", "trait_tags": ["Maritime-Sea", "Mechanical-Design"]},
+            {"option_id": 2023, "option_text": "International maritime law and regulations", "trait_tags": ["Maritime-Sea", "Legal-Practice"]},
+            {"option_id": 2024, "option_text": "Ship stability, construction, and naval architecture", "trait_tags": ["Maritime-Sea", "Civil-Build"]},
+            {"option_id": 2025, "option_text": "Cargo handling and logistics management", "trait_tags": ["Maritime-Sea", "Industrial-Ops"]},
+            {"option_id": 2026, "option_text": "Marine environmental protection", "trait_tags": ["Maritime-Sea", "Environmental-Sci"]},
+            {"option_id": 2027, "option_text": "Meteorology and weather routing at sea", "trait_tags": ["Maritime-Sea", "Field-Research"]},
+            {"option_id": 2028, "option_text": "Seamanship and survival at sea", "trait_tags": ["Maritime-Sea", "Physical-Skill"]}
+        ]
+    },
+    {
+        "question_id": 203,
+        "question_text": "A typhoon is approaching while your ship is in Philippine waters. What do you focus on?",
+        "category": "Situational - Maritime Safety",
+        "options": [
+            {"option_id": 2031, "option_text": "Plot an alternative course to avoid the typhoon", "trait_tags": ["Maritime-Sea", "Physical-Skill"]},
+            {"option_id": 2032, "option_text": "Secure the engine room and check all machinery", "trait_tags": ["Maritime-Sea", "Mechanical-Design"]},
+            {"option_id": 2033, "option_text": "Coordinate with MARINA and coast guard for updates", "trait_tags": ["Maritime-Sea", "Community-Serve"]},
+            {"option_id": 2034, "option_text": "Organize the crew for emergency procedures", "trait_tags": ["Maritime-Sea", "People-Skill"]},
+            {"option_id": 2035, "option_text": "Check all safety equipment - lifeboats, life jackets", "trait_tags": ["Maritime-Sea", "Physical-Skill"]},
+            {"option_id": 2036, "option_text": "Monitor weather radar and satellite data", "trait_tags": ["Maritime-Sea", "Data-Analytics"]},
+            {"option_id": 2037, "option_text": "Secure all cargo to prevent shifting", "trait_tags": ["Maritime-Sea", "Industrial-Ops"]},
+            {"option_id": 2038, "option_text": "Prepare medical supplies for potential injuries", "trait_tags": ["Patient-Care", "Maritime-Sea"]}
+        ]
+    },
+    {
+        "question_id": 204,
+        "question_text": "Why does a career at sea appeal to you?",
+        "category": "Motivation - Maritime",
+        "options": [
+            {"option_id": 2041, "option_text": "Traveling to different countries and seeing the world", "trait_tags": ["Maritime-Sea", "Tourism-Travel"]},
+            {"option_id": 2042, "option_text": "High salary potential especially working abroad", "trait_tags": ["Maritime-Sea", "Physical-Skill"]},
+            {"option_id": 2043, "option_text": "Challenging work that tests my physical and mental limits", "trait_tags": ["Maritime-Sea", "Physical-Skill"]},
+            {"option_id": 2044, "option_text": "Following a family tradition of seafaring", "trait_tags": ["Maritime-Sea", "Community-Serve"]},
+            {"option_id": 2045, "option_text": "Working with advanced ship technology and systems", "trait_tags": ["Maritime-Sea", "Hardware-Systems"]},
+            {"option_id": 2046, "option_text": "Being part of global trade and shipping industry", "trait_tags": ["Maritime-Sea", "Industrial-Ops"]},
+            {"option_id": 2047, "option_text": "The discipline and structured life on a ship", "trait_tags": ["Maritime-Sea", "Admin-Skill"]},
+            {"option_id": 2048, "option_text": "A career at sea doesn't really appeal to me", "trait_tags": []}
+        ]
+    },
+    {
+        "question_id": 205,
+        "question_text": "You're choosing between two maritime academies. Which program feature matters most?",
+        "category": "Preference - Maritime Training",
+        "options": [
+            {"option_id": 2051, "option_text": "More time on training ships with real sea experience", "trait_tags": ["Maritime-Sea", "Physical-Skill"]},
+            {"option_id": 2052, "option_text": "Strong engine room simulation and workshop facilities", "trait_tags": ["Maritime-Sea", "Mechanical-Design"]},
+            {"option_id": 2053, "option_text": "Modern bridge simulator for navigation training", "trait_tags": ["Maritime-Sea", "Hardware-Systems"]},
+            {"option_id": 2054, "option_text": "Good connections with international shipping companies", "trait_tags": ["Maritime-Sea", "Marketing-Sales"]},
+            {"option_id": 2055, "option_text": "Strong MARINA board exam pass rate", "trait_tags": ["Maritime-Sea", "Analytical-Skill"]},
+            {"option_id": 2056, "option_text": "Additional certifications like GMDSS, STCW", "trait_tags": ["Maritime-Sea", "Technical-Skill"]},
+            {"option_id": 2057, "option_text": "Focus on marine environmental protection", "trait_tags": ["Maritime-Sea", "Environmental-Sci"]},
+            {"option_id": 2058, "option_text": "Dual degree option with business or management", "trait_tags": ["Maritime-Sea", "Admin-Skill"]}
+        ]
     }
 ]
 
