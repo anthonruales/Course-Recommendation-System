@@ -1183,7 +1183,15 @@ class AdaptiveAssessmentEngine:
         return set(t.strip() for t in str(trait_tag).split(',') if t.strip())
     
     def _calculate_profile_bonus(self, interests: str, skills: str, course_traits: Set[str]) -> float:
-        """Calculate bonus points (0-15) for courses matching user's profile interests/skills."""
+        """Calculate bonus points (0-20) for courses matching user's profile interests/skills.
+        
+        Scoring strategy:
+        - Count each UNIQUE course trait only once (prevents generic traits like Creative-Skill
+          from being counted multiple times across different profile selections)
+        - Weight specific/path traits higher (e.g. Visual-Design, Digital-Media = 4pts)
+          vs generic skill traits (e.g. Creative-Skill = 2pts)
+        - Award a breadth bonus when a high fraction of the course's traits are matched
+        """
         if not interests and not skills:
             return 0.0
         
@@ -1194,27 +1202,50 @@ class AdaptiveAssessmentEngine:
         skill_list = [s.strip().lower() for s in (skills or "").split(",") if s.strip()]
         user_selections = set(interest_list + skill_list)
         
+        # Collect ALL unique traits the user's profile maps to
+        user_profile_traits: Set[str] = set()
+        for selection in user_selections:
+            related_traits = PROFILE_TO_TRAITS.get(selection, [])
+            for trait in related_traits:
+                user_profile_traits.add(trait.lower())
+        
+        if not user_profile_traits:
+            return 0.0
+        
         # Normalize course traits for matching
         course_traits_lower = {t.lower() for t in course_traits}
         
+        # Generic/broad traits get lower weight; specific path traits get higher weight
+        GENERIC_TRAITS = {"creative-skill", "technical-skill", "people-skill",
+                          "analytical-skill", "physical-skill", "admin-skill",
+                          "artistic", "realistic", "investigative", "social",
+                          "enterprising", "conventional"}
+        
+        # Find unique course traits that match the user's profile traits
         bonus = 0.0
-        matched_count = 0
+        matched_course_traits = set()
         
-        for selection in user_selections:
-            # Get related traits for this selection
-            related_traits = PROFILE_TO_TRAITS.get(selection, [])
-            
-            for trait in related_traits:
-                trait_lower = trait.lower()
-                # Check if any course trait matches
-                for course_trait in course_traits_lower:
-                    if trait_lower in course_trait or course_trait in trait_lower:
-                        matched_count += 1
-                        bonus += 3.0  # 3 points per match
-                        break
+        for course_trait in course_traits_lower:
+            for user_trait in user_profile_traits:
+                if user_trait == course_trait or user_trait in course_trait or course_trait in user_trait:
+                    matched_course_traits.add(course_trait)
+                    # Specific path traits score higher than generic ones
+                    if course_trait in GENERIC_TRAITS:
+                        bonus += 2.0
+                    else:
+                        bonus += 4.0
+                    break  # Don't double-count this course trait
         
-        # Cap bonus at 15 points (5 strong matches)
-        return min(bonus, 15.0)
+        # Breadth bonus: reward courses where MOST of their traits match the profile
+        if len(course_traits_lower) > 0:
+            match_ratio = len(matched_course_traits) / len(course_traits_lower)
+            if match_ratio >= 0.8:
+                bonus += 4.0  # Almost all course traits match the profile
+            elif match_ratio >= 0.6:
+                bonus += 2.0  # Majority of course traits match
+        
+        # Cap bonus at 20 points
+        return min(bonus, 20.0)
     
     def _determine_rejected_topic(self, question: dict, chosen_option: dict) -> Optional[str]:
         """Figure out which topic the user rejected when they selected 'none'."""

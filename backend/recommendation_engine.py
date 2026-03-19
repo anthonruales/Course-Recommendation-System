@@ -1928,13 +1928,20 @@ class HybridRecommendationEngine:
         scored_courses: List[Dict],
         top_n: int
     ) -> List[Dict]:
-        """Select top recommendations while ensuring diversity"""
+        """
+        Select top recommendations prioritizing relevance over diversity.
+        
+        Uses a soft diversity approach: allow up to 4 courses per strand,
+        but always prefer higher-scoring courses. This ensures the top
+        recommendations genuinely match the user's profile rather than
+        padding with low-scoring courses from unrelated strands.
+        """
         
         selected = []
         used_strands = {}
-        max_per_strand = 2  # Allow max 2 courses per strand
+        max_per_strand = 4  # Allow more courses from dominant strand
         
-        # First pass: prioritize EXCELLENT and GOOD courses
+        # Single pass: select top-scoring courses with soft strand cap
         for course_data in scored_courses:
             if len(selected) >= top_n:
                 break
@@ -1943,21 +1950,7 @@ class HybridRecommendationEngine:
             strand = course.required_strand or "General"
             
             if used_strands.get(strand, 0) < max_per_strand:
-                if course_data["priority"] in ["EXCELLENT", "GOOD"]:
-                    selected.append(course_data)
-                    used_strands[strand] = used_strands.get(strand, 0) + 1
-        
-        # Second pass: fill remaining slots
-        for course_data in scored_courses:
-            if len(selected) >= top_n:
-                break
-            
-            if course_data not in selected:
-                course = course_data["course"]
-                strand = course.required_strand or "General"
-                
-                if used_strands.get(strand, 0) < max_per_strand:
-                    selected.append(course_data)
-                    used_strands[strand] = used_strands.get(strand, 0) + 1
+                selected.append(course_data)
+                used_strands[strand] = used_strands.get(strand, 0) + 1
         
         return selected
