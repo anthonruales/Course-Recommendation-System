@@ -4229,6 +4229,432 @@ QUESTIONS_POOL_ENHANCED = [
             {"option_id": 2787, "option_text": "Start a peer counseling program for students in need", "trait_tags": ["Counseling", "People-Skill"]},
             {"option_id": 2788, "option_text": "Create a class website and social media page", "trait_tags": ["Digital-Media", "People-Skill"]}
         ]
+    },
+
+    # ==================== EXPANDED COVERAGE QUESTIONS (Q279-Q310) ====================
+    # Targeted questions to ensure every course has 20+ dedicated question options
+    # Focus: Pharmacy, Health-Admin, HR-Management, Forensic-Sci, Tourism-Travel,
+    #        Social-Work, Food-Science
+
+    # --- PHARMACY & PHARMACEUTICAL ---
+    {
+        "question_id": 279,
+        "question_text": "What aspect of medicine and drugs interests you the most?",
+        "category": "Domain - Pharmacy",
+        "options": [
+            {"option_id": 2791, "option_text": "Learning how drugs interact with the human body", "trait_tags": ["Pharmacy", "Medical-Lab"]},
+            {"option_id": 2792, "option_text": "Formulating new medicines in a laboratory", "trait_tags": ["Pharmacy", "Lab-Research"]},
+            {"option_id": 2793, "option_text": "Dispensing correct prescriptions to patients", "trait_tags": ["Pharmacy", "Patient-Care"]},
+            {"option_id": 2794, "option_text": "Checking for drug allergies and side effects", "trait_tags": ["Pharmacy", "Analytical-Skill"]},
+            {"option_id": 2795, "option_text": "Managing a pharmacy and its inventory", "trait_tags": ["Pharmacy", "Admin-Skill"]},
+            {"option_id": 2796, "option_text": "Researching herbal and traditional Filipino medicine", "trait_tags": ["Pharmacy", "Field-Research"]},
+            {"option_id": 2797, "option_text": "Quality control testing of pharmaceutical products", "trait_tags": ["Pharmacy", "Lab-Research"]},
+            {"option_id": 2798, "option_text": "Educating patients on how to take their medications properly", "trait_tags": ["Pharmacy", "Teaching-Ed"]}
+        ]
+    },
+    {
+        "question_id": 280,
+        "question_text": "SCENARIO: A patient brings in multiple prescriptions from different doctors. What concerns you most?",
+        "category": "Situational - Pharmacy",
+        "options": [
+            {"option_id": 2801, "option_text": "Checking if any of the drugs interact dangerously", "trait_tags": ["Pharmacy", "Analytical-Skill"]},
+            {"option_id": 2802, "option_text": "Verifying the correct dosages for the patient's condition", "trait_tags": ["Pharmacy", "Medical-Lab"]},
+            {"option_id": 2803, "option_text": "Counseling the patient on how to take each medication", "trait_tags": ["Pharmacy", "Patient-Care"]},
+            {"option_id": 2804, "option_text": "Contacting the doctors to coordinate the treatment plan", "trait_tags": ["Pharmacy", "People-Skill"]},
+            {"option_id": 2805, "option_text": "Recording all prescriptions in the patient's file accurately", "trait_tags": ["Pharmacy", "Health-Admin"]},
+            {"option_id": 2806, "option_text": "Suggesting cheaper generic alternatives to save money", "trait_tags": ["Pharmacy", "Finance-Acct"]},
+            {"option_id": 2807, "option_text": "Looking up the latest clinical research on the drugs", "trait_tags": ["Pharmacy", "Lab-Research"]},
+            {"option_id": 2808, "option_text": "Ensuring the pharmacy has all the medicines in stock", "trait_tags": ["Pharmacy", "Admin-Skill"]}
+        ]
+    },
+    {
+        "question_id": 281,
+        "question_text": "Which pharmacy career path appeals to you most?",
+        "category": "Career - Pharmacy",
+        "options": [
+            {"option_id": 2811, "option_text": "Community pharmacist helping patients daily", "trait_tags": ["Pharmacy", "Patient-Care"]},
+            {"option_id": 2812, "option_text": "Hospital pharmacist working with doctors on treatment plans", "trait_tags": ["Pharmacy", "Medical-Lab"]},
+            {"option_id": 2813, "option_text": "Pharmaceutical researcher developing new drugs", "trait_tags": ["Pharmacy", "Lab-Research"]},
+            {"option_id": 2814, "option_text": "Regulatory affairs specialist ensuring drug safety", "trait_tags": ["Pharmacy", "Analytical-Skill"]},
+            {"option_id": 2815, "option_text": "Pharmaceutical sales representative", "trait_tags": ["Pharmacy", "Marketing-Sales"]},
+            {"option_id": 2816, "option_text": "Clinical trial coordinator testing new medicines", "trait_tags": ["Pharmacy", "Lab-Research"]},
+            {"option_id": 2817, "option_text": "Pharmacy owner running my own drugstore", "trait_tags": ["Pharmacy", "Startup-Venture"]},
+            {"option_id": 2818, "option_text": "Industrial pharmacist in drug manufacturing", "trait_tags": ["Pharmacy", "Industrial-Ops"]}
+        ]
+    },
+
+    # --- HEALTH ADMINISTRATION ---
+    {
+        "question_id": 282,
+        "question_text": "What aspect of hospital management interests you most?",
+        "category": "Domain - Health Admin",
+        "options": [
+            {"option_id": 2821, "option_text": "Managing patient records and electronic health systems", "trait_tags": ["Health-Admin", "Software-Dev"]},
+            {"option_id": 2822, "option_text": "Ensuring patient data privacy and security compliance", "trait_tags": ["Health-Admin", "Cyber-Defense"]},
+            {"option_id": 2823, "option_text": "Coordinating hospital departments and staff schedules", "trait_tags": ["Health-Admin", "Admin-Skill"]},
+            {"option_id": 2824, "option_text": "Managing hospital budgets and healthcare financing", "trait_tags": ["Health-Admin", "Finance-Acct"]},
+            {"option_id": 2825, "option_text": "Implementing health information technology systems", "trait_tags": ["Health-Admin", "Software-Dev"]},
+            {"option_id": 2826, "option_text": "Coding medical procedures for insurance billing", "trait_tags": ["Health-Admin", "Analytical-Skill"]},
+            {"option_id": 2827, "option_text": "Analyzing healthcare data to improve patient outcomes", "trait_tags": ["Health-Admin", "Data-Analytics"]},
+            {"option_id": 2828, "option_text": "Ensuring hospital compliance with government regulations", "trait_tags": ["Health-Admin", "Admin-Skill"]}
+        ]
+    },
+    {
+        "question_id": 283,
+        "question_text": "SCENARIO: A hospital wants to go paperless. What role would you take?",
+        "category": "Situational - Health Admin",
+        "options": [
+            {"option_id": 2831, "option_text": "Leading the digital transformation project", "trait_tags": ["Health-Admin", "Admin-Skill"]},
+            {"option_id": 2832, "option_text": "Training hospital staff on the new electronic system", "trait_tags": ["Health-Admin", "Teaching-Ed"]},
+            {"option_id": 2833, "option_text": "Migrating patient records to the digital database", "trait_tags": ["Health-Admin", "Data-Analytics"]},
+            {"option_id": 2834, "option_text": "Ensuring data security and HIPAA-like compliance", "trait_tags": ["Health-Admin", "Cyber-Defense"]},
+            {"option_id": 2835, "option_text": "Setting up the IT infrastructure and servers", "trait_tags": ["Health-Admin", "Hardware-Systems"]},
+            {"option_id": 2836, "option_text": "Designing user-friendly interfaces for doctors and nurses", "trait_tags": ["Health-Admin", "Software-Dev"]},
+            {"option_id": 2837, "option_text": "Managing the budget for the system upgrade", "trait_tags": ["Health-Admin", "Finance-Acct"]},
+            {"option_id": 2838, "option_text": "Creating reports on how the new system improves efficiency", "trait_tags": ["Health-Admin", "Analytical-Skill"]}
+        ]
+    },
+    {
+        "question_id": 284,
+        "question_text": "Which health information career sounds most appealing?",
+        "category": "Career - Health Admin",
+        "options": [
+            {"option_id": 2841, "option_text": "Health information manager at a large hospital", "trait_tags": ["Health-Admin", "Admin-Skill"]},
+            {"option_id": 2842, "option_text": "Medical coder translating diagnoses into billing codes", "trait_tags": ["Health-Admin", "Analytical-Skill"]},
+            {"option_id": 2843, "option_text": "Healthcare data analyst improving patient care quality", "trait_tags": ["Health-Admin", "Data-Analytics"]},
+            {"option_id": 2844, "option_text": "PhilHealth or HMO claims processor", "trait_tags": ["Health-Admin", "Finance-Acct"]},
+            {"option_id": 2845, "option_text": "Health IT specialist maintaining hospital software", "trait_tags": ["Health-Admin", "Software-Dev"]},
+            {"option_id": 2846, "option_text": "Clinical research coordinator managing study data", "trait_tags": ["Health-Admin", "Lab-Research"]},
+            {"option_id": 2847, "option_text": "Hospital administrator overseeing daily operations", "trait_tags": ["Health-Admin", "Admin-Skill"]},
+            {"option_id": 2848, "option_text": "Public health records officer for DOH or LGU", "trait_tags": ["Health-Admin", "Community-Serve"]}
+        ]
+    },
+
+    # --- HR MANAGEMENT ---
+    {
+        "question_id": 285,
+        "question_text": "What aspect of managing people and employees excites you?",
+        "category": "Domain - HR Management",
+        "options": [
+            {"option_id": 2851, "option_text": "Interviewing and hiring the best candidates", "trait_tags": ["HR-Management", "People-Skill"]},
+            {"option_id": 2852, "option_text": "Designing training programs for employee development", "trait_tags": ["HR-Management", "Teaching-Ed"]},
+            {"option_id": 2853, "option_text": "Resolving workplace conflicts and employee grievances", "trait_tags": ["HR-Management", "People-Skill"]},
+            {"option_id": 2854, "option_text": "Managing payroll, benefits, and compensation packages", "trait_tags": ["HR-Management", "Finance-Acct"]},
+            {"option_id": 2855, "option_text": "Creating company culture and team-building activities", "trait_tags": ["HR-Management", "Creative-Skill"]},
+            {"option_id": 2856, "option_text": "Ensuring compliance with labor laws and regulations", "trait_tags": ["HR-Management", "Admin-Skill"]},
+            {"option_id": 2857, "option_text": "Analyzing employee performance data and productivity", "trait_tags": ["HR-Management", "Data-Analytics"]},
+            {"option_id": 2858, "option_text": "Planning career paths and succession for employees", "trait_tags": ["HR-Management", "Admin-Skill"]}
+        ]
+    },
+    {
+        "question_id": 286,
+        "question_text": "SCENARIO: An employee files a complaint about unfair treatment. What do you do?",
+        "category": "Situational - HR",
+        "options": [
+            {"option_id": 2861, "option_text": "Interview both parties privately to understand the situation", "trait_tags": ["HR-Management", "People-Skill"]},
+            {"option_id": 2862, "option_text": "Review company policies and labor law for proper procedures", "trait_tags": ["HR-Management", "Legal-Practice"]},
+            {"option_id": 2863, "option_text": "Document everything carefully for official records", "trait_tags": ["HR-Management", "Admin-Skill"]},
+            {"option_id": 2864, "option_text": "Mediate a meeting between the parties to resolve it", "trait_tags": ["HR-Management", "Counseling"]},
+            {"option_id": 2865, "option_text": "Consult with management on disciplinary actions", "trait_tags": ["HR-Management", "Admin-Skill"]},
+            {"option_id": 2866, "option_text": "Create a training program to prevent future incidents", "trait_tags": ["HR-Management", "Teaching-Ed"]},
+            {"option_id": 2867, "option_text": "Conduct a workplace survey to check team morale", "trait_tags": ["HR-Management", "Data-Analytics"]},
+            {"option_id": 2868, "option_text": "Ensure emotional support is available for the affected employee", "trait_tags": ["HR-Management", "Counseling"]}
+        ]
+    },
+    {
+        "question_id": 287,
+        "question_text": "Which HR career role appeals to you most?",
+        "category": "Career - HR",
+        "options": [
+            {"option_id": 2871, "option_text": "Recruitment specialist finding top talent", "trait_tags": ["HR-Management", "Marketing-Sales"]},
+            {"option_id": 2872, "option_text": "Training and development manager", "trait_tags": ["HR-Management", "Teaching-Ed"]},
+            {"option_id": 2873, "option_text": "Compensation and benefits administrator", "trait_tags": ["HR-Management", "Finance-Acct"]},
+            {"option_id": 2874, "option_text": "Employee relations specialist", "trait_tags": ["HR-Management", "People-Skill"]},
+            {"option_id": 2875, "option_text": "Organizational development consultant", "trait_tags": ["HR-Management", "Startup-Venture"]},
+            {"option_id": 2876, "option_text": "HR analytics and workforce planning specialist", "trait_tags": ["HR-Management", "Data-Analytics"]},
+            {"option_id": 2877, "option_text": "Labor compliance and legal affairs officer", "trait_tags": ["HR-Management", "Legal-Practice"]},
+            {"option_id": 2878, "option_text": "HR director overseeing all human resource functions", "trait_tags": ["HR-Management", "Admin-Skill"]}
+        ]
+    },
+
+    # --- FORENSIC SCIENCE ---
+    {
+        "question_id": 288,
+        "question_text": "What aspect of forensic investigation fascinates you most?",
+        "category": "Domain - Forensic Science",
+        "options": [
+            {"option_id": 2881, "option_text": "Analyzing DNA and biological evidence in a crime lab", "trait_tags": ["Forensic-Sci", "Lab-Research"]},
+            {"option_id": 2882, "option_text": "Examining fingerprints and trace evidence at crime scenes", "trait_tags": ["Forensic-Sci", "Analytical-Skill"]},
+            {"option_id": 2883, "option_text": "Using chemistry to detect poisons and toxins", "trait_tags": ["Forensic-Sci", "Medical-Lab"]},
+            {"option_id": 2884, "option_text": "Analyzing digital evidence from computers and phones", "trait_tags": ["Forensic-Sci", "Cyber-Defense"]},
+            {"option_id": 2885, "option_text": "Reconstructing crime scenes to determine what happened", "trait_tags": ["Forensic-Sci", "Analytical-Skill"]},
+            {"option_id": 2886, "option_text": "Testifying in court as an expert witness", "trait_tags": ["Forensic-Sci", "Legal-Practice"]},
+            {"option_id": 2887, "option_text": "Identifying victims through dental or skeletal analysis", "trait_tags": ["Forensic-Sci", "Medical-Lab"]},
+            {"option_id": 2888, "option_text": "Studying ballistics and firearms evidence", "trait_tags": ["Forensic-Sci", "Law-Enforce"]}
+        ]
+    },
+    {
+        "question_id": 289,
+        "question_text": "SCENARIO: Police find an unidentified substance at a crime scene. How would you help?",
+        "category": "Situational - Forensics",
+        "options": [
+            {"option_id": 2891, "option_text": "Run chemical tests to identify the substance", "trait_tags": ["Forensic-Sci", "Lab-Research"]},
+            {"option_id": 2892, "option_text": "Compare it against known drug databases", "trait_tags": ["Forensic-Sci", "Pharmacy"]},
+            {"option_id": 2893, "option_text": "Document the chain of custody for court use", "trait_tags": ["Forensic-Sci", "Admin-Skill"]},
+            {"option_id": 2894, "option_text": "Analyze it under a microscope for trace elements", "trait_tags": ["Forensic-Sci", "Medical-Lab"]},
+            {"option_id": 2895, "option_text": "Check if it matches substances from other cases", "trait_tags": ["Forensic-Sci", "Data-Analytics"]},
+            {"option_id": 2896, "option_text": "Determine if it poses a health risk to first responders", "trait_tags": ["Forensic-Sci", "Patient-Care"]},
+            {"option_id": 2897, "option_text": "Prepare a detailed report for the investigating officers", "trait_tags": ["Forensic-Sci", "Law-Enforce"]},
+            {"option_id": 2898, "option_text": "Use advanced spectroscopy equipment for precise identification", "trait_tags": ["Forensic-Sci", "Technical-Skill"]}
+        ]
+    },
+
+    # --- TOURISM & TRAVEL ---
+    {
+        "question_id": 290,
+        "question_text": "What excites you most about the tourism and travel industry?",
+        "category": "Domain - Tourism",
+        "options": [
+            {"option_id": 2901, "option_text": "Planning dream vacations and travel itineraries for clients", "trait_tags": ["Tourism-Travel", "People-Skill"]},
+            {"option_id": 2902, "option_text": "Being a tour guide sharing Philippine history and culture", "trait_tags": ["Tourism-Travel", "Teaching-Ed"]},
+            {"option_id": 2903, "option_text": "Managing a travel agency or booking office", "trait_tags": ["Tourism-Travel", "Startup-Venture"]},
+            {"option_id": 2904, "option_text": "Marketing tourist destinations through social media", "trait_tags": ["Tourism-Travel", "Marketing-Sales"]},
+            {"option_id": 2905, "option_text": "Developing eco-tourism programs for local communities", "trait_tags": ["Tourism-Travel", "Environmental-Sci"]},
+            {"option_id": 2906, "option_text": "Working at an airline or cruise ship company", "trait_tags": ["Tourism-Travel", "Hospitality-Svc"]},
+            {"option_id": 2907, "option_text": "Creating travel content as a vlogger or photographer", "trait_tags": ["Tourism-Travel", "Digital-Media"]},
+            {"option_id": 2908, "option_text": "Organizing conventions and large-scale tourism events", "trait_tags": ["Tourism-Travel", "Admin-Skill"]}
+        ]
+    },
+    {
+        "question_id": 291,
+        "question_text": "SCENARIO: Your province wants to boost tourism. What would you propose?",
+        "category": "Situational - Tourism",
+        "options": [
+            {"option_id": 2911, "option_text": "Create travel packages highlighting local attractions", "trait_tags": ["Tourism-Travel", "Marketing-Sales"]},
+            {"option_id": 2912, "option_text": "Train locals as professional tour guides", "trait_tags": ["Tourism-Travel", "Teaching-Ed"]},
+            {"option_id": 2913, "option_text": "Build a tourism website and social media campaign", "trait_tags": ["Tourism-Travel", "Web-Dev"]},
+            {"option_id": 2914, "option_text": "Develop homestay and Airbnb programs for visitors", "trait_tags": ["Tourism-Travel", "Hospitality-Svc"]},
+            {"option_id": 2915, "option_text": "Organize a food and cultural festival", "trait_tags": ["Tourism-Travel", "Culinary-Arts"]},
+            {"option_id": 2916, "option_text": "Partner with airlines for discounted travel deals", "trait_tags": ["Tourism-Travel", "Finance-Acct"]},
+            {"option_id": 2917, "option_text": "Promote adventure tourism like hiking and diving", "trait_tags": ["Tourism-Travel", "Physical-Skill"]},
+            {"option_id": 2918, "option_text": "Ensure tourist safety and coordinate with local police", "trait_tags": ["Tourism-Travel", "Law-Enforce"]}
+        ]
+    },
+
+    # --- SOCIAL WORK ---
+    {
+        "question_id": 292,
+        "question_text": "What aspect of helping vulnerable communities appeals to you most?",
+        "category": "Domain - Social Work",
+        "options": [
+            {"option_id": 2921, "option_text": "Counseling families dealing with abuse or neglect", "trait_tags": ["Social-Work", "Counseling"]},
+            {"option_id": 2922, "option_text": "Connecting underprivileged families to government aid programs", "trait_tags": ["Social-Work", "Community-Serve"]},
+            {"option_id": 2923, "option_text": "Working with street children and youth at risk", "trait_tags": ["Social-Work", "People-Skill"]},
+            {"option_id": 2924, "option_text": "Advocating for policy changes to reduce poverty", "trait_tags": ["Social-Work", "Legal-Practice"]},
+            {"option_id": 2925, "option_text": "Running rehabilitation programs for substance abuse", "trait_tags": ["Social-Work", "Rehab-Therapy"]},
+            {"option_id": 2926, "option_text": "Organizing livelihood programs for displaced workers", "trait_tags": ["Social-Work", "Startup-Venture"]},
+            {"option_id": 2927, "option_text": "Supporting elderly care and senior citizen welfare", "trait_tags": ["Social-Work", "Patient-Care"]},
+            {"option_id": 2928, "option_text": "Crisis intervention during disasters and emergencies", "trait_tags": ["Social-Work", "Community-Serve"]}
+        ]
+    },
+    {
+        "question_id": 293,
+        "question_text": "SCENARIO: A family is about to be evicted from their home. As a social worker, what do you do first?",
+        "category": "Situational - Social Work",
+        "options": [
+            {"option_id": 2931, "option_text": "Assess the family's immediate needs and provide emotional support", "trait_tags": ["Social-Work", "Counseling"]},
+            {"option_id": 2932, "option_text": "Connect them with legal aid for tenant rights", "trait_tags": ["Social-Work", "Legal-Practice"]},
+            {"option_id": 2933, "option_text": "Find temporary housing or shelter options", "trait_tags": ["Social-Work", "Community-Serve"]},
+            {"option_id": 2934, "option_text": "Help them apply for government financial assistance", "trait_tags": ["Social-Work", "Admin-Skill"]},
+            {"option_id": 2935, "option_text": "Coordinate with the barangay for community support", "trait_tags": ["Social-Work", "People-Skill"]},
+            {"option_id": 2936, "option_text": "Help the parents find employment opportunities", "trait_tags": ["Social-Work", "HR-Management"]},
+            {"option_id": 2937, "option_text": "Ensure the children can continue attending school", "trait_tags": ["Social-Work", "Teaching-Ed"]},
+            {"option_id": 2938, "option_text": "Document the case for DSWD follow-up", "trait_tags": ["Social-Work", "Admin-Skill"]}
+        ]
+    },
+
+    # --- FOOD SCIENCE ---
+    {
+        "question_id": 294,
+        "question_text": "What aspect of food science and technology excites you most?",
+        "category": "Domain - Food Science",
+        "options": [
+            {"option_id": 2941, "option_text": "Developing new food products and flavors", "trait_tags": ["Food-Science", "Creative-Skill"]},
+            {"option_id": 2942, "option_text": "Testing food for safety and quality in a laboratory", "trait_tags": ["Food-Science", "Lab-Research"]},
+            {"option_id": 2943, "option_text": "Learning how food is preserved and processed industrially", "trait_tags": ["Food-Science", "Industrial-Ops"]},
+            {"option_id": 2944, "option_text": "Understanding the chemistry behind cooking and baking", "trait_tags": ["Food-Science", "Lab-Research"]},
+            {"option_id": 2945, "option_text": "Ensuring food products meet FDA and DOH standards", "trait_tags": ["Food-Science", "Admin-Skill"]},
+            {"option_id": 2946, "option_text": "Studying nutrition labels and dietary guidelines", "trait_tags": ["Food-Science", "Nutrition-Diet"]},
+            {"option_id": 2947, "option_text": "Running a food manufacturing or packaging company", "trait_tags": ["Food-Science", "Startup-Venture"]},
+            {"option_id": 2948, "option_text": "Researching food allergies and intolerances", "trait_tags": ["Food-Science", "Medical-Lab"]}
+        ]
+    },
+
+    # --- ADDITIONAL CROSS-DOMAIN QUESTIONS FOR BROADER COVERAGE ---
+    {
+        "question_id": 295,
+        "question_text": "SCENARIO: A new hospital is being built in your town. Which department would you want to work in?",
+        "category": "Situational - Hospital Dept",
+        "options": [
+            {"option_id": 2951, "option_text": "The pharmacy - dispensing and managing medications", "trait_tags": ["Pharmacy", "Patient-Care"]},
+            {"option_id": 2952, "option_text": "Health Information Management - digitalizing patient records", "trait_tags": ["Health-Admin", "Software-Dev"]},
+            {"option_id": 2953, "option_text": "Human Resources - hiring doctors, nurses, and staff", "trait_tags": ["HR-Management", "People-Skill"]},
+            {"option_id": 2954, "option_text": "The forensic laboratory - analyzing evidence for police cases", "trait_tags": ["Forensic-Sci", "Lab-Research"]},
+            {"option_id": 2955, "option_text": "The nutrition department - planning patient meal programs", "trait_tags": ["Nutrition-Diet", "Food-Science"]},
+            {"option_id": 2956, "option_text": "The emergency room - treating patients in critical condition", "trait_tags": ["Patient-Care", "Physical-Skill"]},
+            {"option_id": 2957, "option_text": "The rehabilitation center - helping patients recover", "trait_tags": ["Rehab-Therapy", "People-Skill"]},
+            {"option_id": 2958, "option_text": "Administration - managing hospital operations and budgets", "trait_tags": ["Health-Admin", "Finance-Acct"]}
+        ]
+    },
+    {
+        "question_id": 296,
+        "question_text": "Which Philippine industry trend do you find most promising for your future career?",
+        "category": "PH Industry Trends",
+        "options": [
+            {"option_id": 2961, "option_text": "Growing demand for pharmacists in drugstore chains (Mercury, Watsons)", "trait_tags": ["Pharmacy", "Marketing-Sales"]},
+            {"option_id": 2962, "option_text": "Digital health records mandated by PhilHealth", "trait_tags": ["Health-Admin", "Software-Dev"]},
+            {"option_id": 2963, "option_text": "BPO companies needing HR professionals", "trait_tags": ["HR-Management", "People-Skill"]},
+            {"option_id": 2964, "option_text": "NBI and PNP investing in forensic laboratories", "trait_tags": ["Forensic-Sci", "Law-Enforce"]},
+            {"option_id": 2965, "option_text": "Philippines becoming a top tourist destination in Asia", "trait_tags": ["Tourism-Travel", "Hospitality-Svc"]},
+            {"option_id": 2966, "option_text": "DSWD expanding social welfare programs nationwide", "trait_tags": ["Social-Work", "Community-Serve"]},
+            {"option_id": 2967, "option_text": "FDA requiring more food safety testing for local products", "trait_tags": ["Food-Science", "Lab-Research"]},
+            {"option_id": 2968, "option_text": "Telemedicine and online healthcare consultations growing", "trait_tags": ["Health-Admin", "Software-Dev"]}
+        ]
+    },
+    {
+        "question_id": 297,
+        "question_text": "If you could shadow a professional for a week, which would you pick?",
+        "category": "Career Shadow Extended",
+        "options": [
+            {"option_id": 2971, "option_text": "A pharmacist at a busy hospital pharmacy", "trait_tags": ["Pharmacy", "Patient-Care"]},
+            {"option_id": 2972, "option_text": "A health IT specialist managing hospital systems", "trait_tags": ["Health-Admin", "Software-Dev"]},
+            {"option_id": 2973, "option_text": "An HR director at a major corporation", "trait_tags": ["HR-Management", "Admin-Skill"]},
+            {"option_id": 2974, "option_text": "A forensic scientist at the NBI crime lab", "trait_tags": ["Forensic-Sci", "Lab-Research"]},
+            {"option_id": 2975, "option_text": "A tourism officer at the Department of Tourism", "trait_tags": ["Tourism-Travel", "Community-Serve"]},
+            {"option_id": 2976, "option_text": "A social worker at DSWD helping families", "trait_tags": ["Social-Work", "People-Skill"]},
+            {"option_id": 2977, "option_text": "A food scientist at a manufacturing company", "trait_tags": ["Food-Science", "Lab-Research"]},
+            {"option_id": 2978, "option_text": "A nutritionist at a fitness center or hospital", "trait_tags": ["Nutrition-Diet", "Patient-Care"]}
+        ]
+    },
+    {
+        "question_id": 298,
+        "question_text": "SCENARIO: Your school cafeteria had a food poisoning outbreak. How would you help investigate?",
+        "category": "Situational - Food Safety",
+        "options": [
+            {"option_id": 2981, "option_text": "Collect food samples and test them in the laboratory", "trait_tags": ["Food-Science", "Lab-Research"]},
+            {"option_id": 2982, "option_text": "Check if proper food handling procedures were followed", "trait_tags": ["Food-Science", "Admin-Skill"]},
+            {"option_id": 2983, "option_text": "Treat students who got sick and monitor symptoms", "trait_tags": ["Patient-Care", "Medical-Lab"]},
+            {"option_id": 2984, "option_text": "Interview cafeteria staff about food preparation", "trait_tags": ["Forensic-Sci", "People-Skill"]},
+            {"option_id": 2985, "option_text": "Review supplier records and ingredient sources", "trait_tags": ["Food-Science", "Finance-Acct"]},
+            {"option_id": 2986, "option_text": "Check if the cafeteria has proper DOH permits", "trait_tags": ["Health-Admin", "Admin-Skill"]},
+            {"option_id": 2987, "option_text": "Create a report to prevent future incidents", "trait_tags": ["Food-Science", "Analytical-Skill"]},
+            {"option_id": 2988, "option_text": "Coordinate with the local health office for proper investigation", "trait_tags": ["Health-Admin", "Community-Serve"]}
+        ]
+    },
+    {
+        "question_id": 299,
+        "question_text": "Which work environment would make you happiest?",
+        "category": "Work Environment Extended",
+        "options": [
+            {"option_id": 2991, "option_text": "A clean pharmaceutical lab developing medicines", "trait_tags": ["Pharmacy", "Lab-Research"]},
+            {"option_id": 2992, "option_text": "A hospital records office with digital health systems", "trait_tags": ["Health-Admin", "Admin-Skill"]},
+            {"option_id": 2993, "option_text": "A corporate HR office interviewing and training employees", "trait_tags": ["HR-Management", "People-Skill"]},
+            {"option_id": 2994, "option_text": "A forensic crime lab analyzing evidence", "trait_tags": ["Forensic-Sci", "Lab-Research"]},
+            {"option_id": 2995, "option_text": "A travel agency or tourist information center", "trait_tags": ["Tourism-Travel", "Hospitality-Svc"]},
+            {"option_id": 2996, "option_text": "A DSWD field office helping communities", "trait_tags": ["Social-Work", "Community-Serve"]},
+            {"option_id": 2997, "option_text": "A food processing plant ensuring quality standards", "trait_tags": ["Food-Science", "Industrial-Ops"]},
+            {"option_id": 2998, "option_text": "A beautiful resort or hotel welcoming guests", "trait_tags": ["Tourism-Travel", "Hospitality-Svc"]}
+        ]
+    },
+    {
+        "question_id": 300,
+        "question_text": "SCENARIO: A new government policy requires all businesses to have trained HR staff. What appeals to you about this field?",
+        "category": "Situational - HR Policy",
+        "options": [
+            {"option_id": 3001, "option_text": "Ensuring fair hiring practices and equal opportunity", "trait_tags": ["HR-Management", "Legal-Practice"]},
+            {"option_id": 3002, "option_text": "Building employee wellness and mental health programs", "trait_tags": ["HR-Management", "Counseling"]},
+            {"option_id": 3003, "option_text": "Managing employee benefits and insurance", "trait_tags": ["HR-Management", "Finance-Acct"]},
+            {"option_id": 3004, "option_text": "Creating onboarding and orientation programs", "trait_tags": ["HR-Management", "Teaching-Ed"]},
+            {"option_id": 3005, "option_text": "Handling workplace safety and OSHA compliance", "trait_tags": ["HR-Management", "Admin-Skill"]},
+            {"option_id": 3006, "option_text": "Conducting employee satisfaction surveys and analysis", "trait_tags": ["HR-Management", "Data-Analytics"]},
+            {"option_id": 3007, "option_text": "Developing diversity and inclusion initiatives", "trait_tags": ["HR-Management", "Community-Serve"]},
+            {"option_id": 3008, "option_text": "Implementing HR software and automation tools", "trait_tags": ["HR-Management", "Software-Dev"]}
+        ]
+    },
+    {
+        "question_id": 301,
+        "question_text": "Which board exam or certification would you prepare for?",
+        "category": "Licensure Extended",
+        "options": [
+            {"option_id": 3011, "option_text": "Pharmacy Licensure Exam", "trait_tags": ["Pharmacy", "Medical-Lab"]},
+            {"option_id": 3012, "option_text": "Registered Health Information Administrator (RHIA)", "trait_tags": ["Health-Admin", "Admin-Skill"]},
+            {"option_id": 3013, "option_text": "Professional in Human Resources (PHR)", "trait_tags": ["HR-Management", "Admin-Skill"]},
+            {"option_id": 3014, "option_text": "Forensic Science Board Exam", "trait_tags": ["Forensic-Sci", "Lab-Research"]},
+            {"option_id": 3015, "option_text": "Tourism Professional Certification", "trait_tags": ["Tourism-Travel", "Hospitality-Svc"]},
+            {"option_id": 3016, "option_text": "Registered Social Worker Licensure", "trait_tags": ["Social-Work", "Community-Serve"]},
+            {"option_id": 3017, "option_text": "Food Technologist Board Exam", "trait_tags": ["Food-Science", "Lab-Research"]},
+            {"option_id": 3018, "option_text": "Registered Nutritionist-Dietitian Exam", "trait_tags": ["Nutrition-Diet", "Patient-Care"]}
+        ]
+    },
+    {
+        "question_id": 302,
+        "question_text": "SCENARIO: Your LGU wants to attract more tourists to your town. What project would you lead?",
+        "category": "Situational - Local Tourism",
+        "options": [
+            {"option_id": 3021, "option_text": "Create a heritage walking tour showcasing historical sites", "trait_tags": ["Tourism-Travel", "Teaching-Ed"]},
+            {"option_id": 3022, "option_text": "Develop a food tourism trail featuring local delicacies", "trait_tags": ["Tourism-Travel", "Culinary-Arts"]},
+            {"option_id": 3023, "option_text": "Build a tourism center with maps and information booths", "trait_tags": ["Tourism-Travel", "Admin-Skill"]},
+            {"option_id": 3024, "option_text": "Certify local accommodations for quality standards", "trait_tags": ["Tourism-Travel", "Hospitality-Svc"]},
+            {"option_id": 3025, "option_text": "Launch social media campaigns showing scenic spots", "trait_tags": ["Tourism-Travel", "Digital-Media"]},
+            {"option_id": 3026, "option_text": "Partner with travel agencies for package deals", "trait_tags": ["Tourism-Travel", "Marketing-Sales"]},
+            {"option_id": 3027, "option_text": "Train locals in hospitality and customer service", "trait_tags": ["Tourism-Travel", "Teaching-Ed"]},
+            {"option_id": 3028, "option_text": "Develop sustainable eco-tourism activities", "trait_tags": ["Tourism-Travel", "Environmental-Sci"]}
+        ]
+    },
+    {
+        "question_id": 303,
+        "question_text": "SCENARIO: A suspicious death occurs and police need scientific help. What forensic role would you take?",
+        "category": "Situational - Forensic Investigation",
+        "options": [
+            {"option_id": 3031, "option_text": "Toxicology analysis to check for poisoning", "trait_tags": ["Forensic-Sci", "Pharmacy"]},
+            {"option_id": 3032, "option_text": "DNA profiling to identify the victim and suspects", "trait_tags": ["Forensic-Sci", "Lab-Research"]},
+            {"option_id": 3033, "option_text": "Digital forensics examining computers and phones", "trait_tags": ["Forensic-Sci", "Cyber-Defense"]},
+            {"option_id": 3034, "option_text": "Blood pattern analysis at the scene", "trait_tags": ["Forensic-Sci", "Medical-Lab"]},
+            {"option_id": 3035, "option_text": "Document analysis to check for forged records", "trait_tags": ["Forensic-Sci", "Analytical-Skill"]},
+            {"option_id": 3036, "option_text": "Ballistics testing on recovered firearms", "trait_tags": ["Forensic-Sci", "Law-Enforce"]},
+            {"option_id": 3037, "option_text": "Crime scene photography and evidence cataloging", "trait_tags": ["Forensic-Sci", "Digital-Media"]},
+            {"option_id": 3038, "option_text": "Psychological profiling of the suspect", "trait_tags": ["Forensic-Sci", "Counseling"]}
+        ]
+    },
+    {
+        "question_id": 304,
+        "question_text": "SCENARIO: An abandoned child is found at the barangay hall. As a social worker, what steps do you take?",
+        "category": "Situational - Child Welfare",
+        "options": [
+            {"option_id": 3041, "option_text": "Ensure the child's immediate safety and basic needs", "trait_tags": ["Social-Work", "Patient-Care"]},
+            {"option_id": 3042, "option_text": "Coordinate with DSWD for proper custody procedures", "trait_tags": ["Social-Work", "Admin-Skill"]},
+            {"option_id": 3043, "option_text": "Counsel the child and assess their emotional state", "trait_tags": ["Social-Work", "Counseling"]},
+            {"option_id": 3044, "option_text": "Investigate to find the child's parents or relatives", "trait_tags": ["Social-Work", "Law-Enforce"]},
+            {"option_id": 3045, "option_text": "Arrange temporary foster care placement", "trait_tags": ["Social-Work", "Community-Serve"]},
+            {"option_id": 3046, "option_text": "Document the case for legal proceedings", "trait_tags": ["Social-Work", "Legal-Practice"]},
+            {"option_id": 3047, "option_text": "Ensure the child gets medical check-up and vaccinations", "trait_tags": ["Social-Work", "Patient-Care"]},
+            {"option_id": 3048, "option_text": "Connect the child with educational support services", "trait_tags": ["Social-Work", "Teaching-Ed"]}
+        ]
+    },
+    {
+        "question_id": 305,
+        "question_text": "What food industry career interests you most?",
+        "category": "Career - Food Science",
+        "options": [
+            {"option_id": 3051, "option_text": "Food scientist developing new products for companies like Jollibee or Monde", "trait_tags": ["Food-Science", "Creative-Skill"]},
+            {"option_id": 3052, "option_text": "Quality control inspector at a food manufacturing plant", "trait_tags": ["Food-Science", "Analytical-Skill"]},
+            {"option_id": 3053, "option_text": "Food safety officer for FDA Philippines", "trait_tags": ["Food-Science", "Admin-Skill"]},
+            {"option_id": 3054, "option_text": "Research and development chef combining science and cooking", "trait_tags": ["Food-Science", "Culinary-Arts"]},
+            {"option_id": 3055, "option_text": "Food packaging engineer designing shelf-stable products", "trait_tags": ["Food-Science", "Industrial-Ops"]},
+            {"option_id": 3056, "option_text": "Microbiologist testing food for bacteria and contamination", "trait_tags": ["Food-Science", "Lab-Research"]},
+            {"option_id": 3057, "option_text": "Sensory evaluator testing taste, texture, and appearance", "trait_tags": ["Food-Science", "Analytical-Skill"]},
+            {"option_id": 3058, "option_text": "Food supply chain manager for a grocery chain", "trait_tags": ["Food-Science", "Admin-Skill"]}
+        ]
     }
 ]
 
