@@ -2521,7 +2521,8 @@ def get_or_init_adaptive_engine(db: Session) -> AdaptiveAssessmentEngine:
     global _adaptive_engine
     
     if _adaptive_engine is None:
-        from questions_enhanced import TRAIT_SECONDARY_MAP
+        from questions_enhanced import QUESTIONS_POOL_ENHANCED
+        from curated_trait_map import build_multi_trait
         
         # Load courses from database
         courses = db.query(models.Course).all()
@@ -2536,24 +2537,29 @@ def get_or_init_adaptive_engine(db: Session) -> AdaptiveAssessmentEngine:
             for c in courses
         ]
         
-        # Load questions from database and enrich with multi-trait weights
+        # Build lookup from QUESTIONS_POOL_ENHANCED for per-option trait_tags
+        enhanced_trait_lookup = {}
+        for eq in QUESTIONS_POOL_ENHANCED:
+            for eopt in eq.get('options', []):
+                key = (eq['question_id'], eopt['option_id'])
+                enhanced_trait_lookup[key] = eopt.get('trait_tags', {})
+        
+        # Load questions from database and use curated per-option traits
         questions = db.query(models.Question).options(joinedload(models.Question.options)).all()
         questions_data = []
         for q in questions:
             options_list = []
             for opt in q.options:
-                primary = opt.trait_tag
-                # Build multi-trait dict from TRAIT_SECONDARY_MAP
-                traits = {}
-                if primary:
-                    traits[primary] = 1.0
-                    for secondary_tag, weight in TRAIT_SECONDARY_MAP.get(primary, []):
-                        traits[secondary_tag] = weight
+                # Use curated trait_tags from QUESTIONS_POOL_ENHANCED
+                trait_tags = enhanced_trait_lookup.get((q.question_id, opt.option_id), {})
+                if not trait_tags and opt.trait_tag:
+                    # Fallback: build multi-trait from curated domain map
+                    trait_tags = build_multi_trait(opt.trait_tag)
                 options_list.append({
                     "option_id": opt.option_id,
                     "option_text": opt.option_text,
                     "trait_tag": opt.trait_tag,
-                    "traits": traits
+                    "trait_tags": trait_tags
                 })
             questions_data.append({
                 "question_id": q.question_id,
@@ -2915,6 +2921,7 @@ def submit_adaptive_answer(data: AdaptiveAnswerSubmit, current_user: models.User
         "is_complete": False,
         "current_round": next_question["round"],
         "trait_recorded": result.get("trait_recorded"),
+        "all_traits": result.get("all_traits", []),
         "courses_remaining": result["courses_remaining"],
         "confidence": result["confidence"],
         "top_courses_preview": result.get("top_courses_preview", []),
