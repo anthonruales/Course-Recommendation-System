@@ -2297,8 +2297,9 @@ class AdaptiveAssessmentEngine:
                 session.branch_history.append(chosen_branch)
                 
                 # Also boost from secondary traits (multi-trait options)
-                if chosen_option.get('traits'):
-                    for trait, weight in chosen_option['traits'].items():
+                secondary_traits = chosen_option.get('trait_tags') or chosen_option.get('traits') or {}
+                if isinstance(secondary_traits, dict) and secondary_traits:
+                    for trait, weight in secondary_traits.items():
                         if trait != chosen_trait:
                             sec_branch = TRAIT_TO_BRANCH.get(trait, "")
                             if sec_branch:
@@ -2342,12 +2343,22 @@ class AdaptiveAssessmentEngine:
             for name, score in sorted_courses[:5]
         ]
         
+        # Build all_traits as a list of trait names (sorted by weight descending for dicts)
+        if isinstance(chosen_trait_tags, dict) and chosen_trait_tags:
+            all_traits_list = sorted(chosen_trait_tags.keys(), key=lambda t: chosen_trait_tags[t], reverse=True)
+        elif isinstance(chosen_trait_tags, list) and chosen_trait_tags:
+            all_traits_list = list(chosen_trait_tags)
+        elif chosen_trait:
+            all_traits_list = [chosen_trait]
+        else:
+            all_traits_list = []
+        
         return {
             "status": "continue",
             "session_id": session_id,
             "round": session.round_number,
             "trait_recorded": chosen_trait,
-            "all_traits": chosen_trait_tags if chosen_trait_tags else ([chosen_trait] if chosen_trait else []),
+            "all_traits": all_traits_list,
             "courses_remaining": len(self.courses),  # All courses remain in consideration
             "confidence": round(session.confidence * 100, 1),
             "top_courses_preview": top_courses,
