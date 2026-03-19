@@ -248,12 +248,23 @@ def seed_database():
                         
                         # For career_path, extracurricular, and situational_mapped questions
                         if question_type in ["career_path", "extracurricular", "situational_mapped"]:
-                            trait_tags_json = json.dumps(opt.get("trait_tags", []))
+                            trait_tags_json = json.dumps(opt.get("trait_tags", {}))
                             recommended_courses_json = json.dumps(opt.get("recommended_courses", []))
                         
                         # Support both old format ("text"/"tag") and new format ("option_text"/"trait_tag")
                         option_text = opt.get("option_text") or opt.get("text")
-                        trait_tag = opt.get("trait_tag") or opt.get("tag")
+                        # Extract primary trait from weighted dict or legacy field
+                        trait_tags = opt.get("trait_tags", {})
+                        if isinstance(trait_tags, dict) and trait_tags:
+                            trait_tag = max(trait_tags, key=trait_tags.get)
+                            if trait_tags_json is None:
+                                trait_tags_json = json.dumps(trait_tags)
+                        elif isinstance(trait_tags, list) and trait_tags:
+                            trait_tag = trait_tags[0]
+                            if trait_tags_json is None:
+                                trait_tags_json = json.dumps(trait_tags)
+                        else:
+                            trait_tag = opt.get("trait_tag") or opt.get("tag")
                         
                         db.add(models.Option(
                             question_id=new_q.question_id, 
@@ -336,11 +347,18 @@ def sync_questions_db():
                 for opt in q.get("options", []):
                     option_text = opt.get("option_text") or opt.get("text")
                     trait_tag = opt.get("trait_tag") or opt.get("tag")
-                    # For new multi-trait questions, store primary trait in trait_tag
-                    trait_tags_list = opt.get("trait_tags", [])
-                    if not trait_tag and trait_tags_list:
-                        trait_tag = trait_tags_list[0]
-                    trait_tags_json = json.dumps(trait_tags_list) if trait_tags_list else None
+                    # Handle weighted dict trait_tags format
+                    trait_tags_data = opt.get("trait_tags", {})
+                    if isinstance(trait_tags_data, dict) and trait_tags_data:
+                        if not trait_tag:
+                            trait_tag = max(trait_tags_data, key=trait_tags_data.get)
+                        trait_tags_json = json.dumps(trait_tags_data)
+                    elif isinstance(trait_tags_data, list) and trait_tags_data:
+                        if not trait_tag:
+                            trait_tag = trait_tags_data[0]
+                        trait_tags_json = json.dumps(trait_tags_data)
+                    else:
+                        trait_tags_json = None
                     recommended_courses_json = json.dumps(opt.get("recommended_courses", [])) if opt.get("recommended_courses") else None
 
                     db.add(models.Option(
@@ -365,9 +383,13 @@ def sync_questions_db():
                     oid = opt.get("option_id")
                     option_text = opt.get("option_text") or opt.get("text")
                     trait_tag = opt.get("trait_tag") or opt.get("tag")
-                    trait_tags_list = opt.get("trait_tags", [])
-                    if not trait_tag and trait_tags_list:
-                        trait_tag = trait_tags_list[0]
+                    trait_tags_data = opt.get("trait_tags", {})
+                    if isinstance(trait_tags_data, dict) and trait_tags_data:
+                        if not trait_tag:
+                            trait_tag = max(trait_tags_data, key=trait_tags_data.get)
+                    elif isinstance(trait_tags_data, list) and trait_tags_data:
+                        if not trait_tag:
+                            trait_tag = trait_tags_data[0]
                     if oid and oid in existing_opts:
                         db_opt = existing_opts[oid]
                         if db_opt.option_text != option_text:
@@ -1104,12 +1126,16 @@ def recommend_deprecated(data: AssessmentSubmit, current_user: models.User = Dep
             
             # === CAREER PATH / EXTRACURRICULAR / SITUATIONAL QUESTIONS ===
             elif question_type in ["career_path", "extracurricular", "situational_mapped"]:
-                # Process multiple trait tags
+                # Process trait tags (supports weighted dict or legacy list)
                 if option.trait_tags_json:
                     try:
                         trait_tags = json.loads(option.trait_tags_json)
-                        for tag in trait_tags:
-                            trait_scores[tag] = trait_scores.get(tag, 0) + 1.5
+                        if isinstance(trait_tags, dict):
+                            for tag, weight in trait_tags.items():
+                                trait_scores[tag] = trait_scores.get(tag, 0) + 1.5 * weight
+                        elif isinstance(trait_tags, list):
+                            for tag in trait_tags:
+                                trait_scores[tag] = trait_scores.get(tag, 0) + 1.5
                     except json.JSONDecodeError:
                         pass
                 

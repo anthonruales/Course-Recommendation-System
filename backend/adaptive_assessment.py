@@ -1123,24 +1123,40 @@ class AdaptiveAssessmentEngine:
         self.trait_to_questions: Dict[str, List[int]] = defaultdict(list)
         for qid, question in self.questions.items():
             for opt in question.get('options', []):
-                trait = opt.get('trait_tag')
-                if trait:
-                    self.trait_to_questions[trait].append(qid)
+                trait_tags = opt.get('trait_tags', {})
+                if isinstance(trait_tags, dict):
+                    for trait in trait_tags:
+                        self.trait_to_questions[trait].append(qid)
+                elif isinstance(trait_tags, list):
+                    for trait in trait_tags:
+                        self.trait_to_questions[trait].append(qid)
+                else:
+                    trait = opt.get('trait_tag')
+                    if trait:
+                        self.trait_to_questions[trait].append(qid)
         
         # Pre-compute question-trait affinity matrix for decision tree
-        # affinity[qid] = {trait: fraction_of_options_with_this_trait}
+        # affinity[qid] = {trait: max_weight_across_options}
         self.question_trait_affinity: Dict[int, Dict[str, float]] = {}
         for qid, question in self.questions.items():
             affinities = {}
             options = question.get('options', [])
             for opt in options:
-                trait = opt.get('trait_tag')
-                if trait:
-                    affinities[trait] = affinities.get(trait, 0) + 1
+                trait_tags = opt.get('trait_tags', {})
+                if isinstance(trait_tags, dict):
+                    for trait, weight in trait_tags.items():
+                        affinities[trait] = affinities.get(trait, 0) + weight
+                elif isinstance(trait_tags, list):
+                    for trait in trait_tags:
+                        affinities[trait] = affinities.get(trait, 0) + 1
+                else:
+                    trait = opt.get('trait_tag')
+                    if trait:
+                        affinities[trait] = affinities.get(trait, 0) + 1
             total = len(options)
             if total > 0:
                 for trait in affinities:
-                    affinities[trait] /= total  # Normalize to 0-1
+                    affinities[trait] /= total  # Normalize
             self.question_trait_affinity[qid] = affinities
         
         # Pre-compute question-branch affinity
@@ -1349,9 +1365,19 @@ class AdaptiveAssessmentEngine:
         trait_counts: Dict[str, int] = {}
         for opt in question.get('options', []):
             if opt.get('option_id') != chosen_option.get('option_id'):
-                trait = opt.get('trait_tag')
-                if trait:
-                    trait_counts[trait] = trait_counts.get(trait, 0) + 1
+                trait_tags = opt.get('trait_tags', {})
+                if isinstance(trait_tags, dict):
+                    # Use the highest-weighted trait as primary
+                    if trait_tags:
+                        primary_trait = max(trait_tags, key=trait_tags.get)
+                        trait_counts[primary_trait] = trait_counts.get(primary_trait, 0) + 1
+                elif isinstance(trait_tags, list):
+                    for trait in trait_tags:
+                        trait_counts[trait] = trait_counts.get(trait, 0) + 1
+                else:
+                    trait = opt.get('trait_tag')
+                    if trait:
+                        trait_counts[trait] = trait_counts.get(trait, 0) + 1
         
         # Return the most common trait from other options (what user rejected)
         if trait_counts:
@@ -1763,8 +1789,15 @@ class AdaptiveAssessmentEngine:
                     continue
                 
                 # Skip heavily rejected questions
+                def _opt_has_rejected(opt, rejected):
+                    tt = opt.get('trait_tags', {})
+                    if isinstance(tt, dict):
+                        return any(t in rejected for t in tt)
+                    elif isinstance(tt, list):
+                        return any(t in rejected for t in tt)
+                    return opt.get('trait_tag') in rejected
                 rejected_count = sum(1 for opt in options
-                                    if opt.get('trait_tag') in session.rejected_topics)
+                                    if _opt_has_rejected(opt, session.rejected_topics))
                 if rejected_count / len(options) > 0.3:
                     continue
                 
@@ -1782,9 +1815,17 @@ class AdaptiveAssessmentEngine:
                 
                 # Information gain
                 for opt in options:
-                    t = opt.get('trait_tag')
-                    if t:
-                        score += trait_info_scores.get(t, 0)
+                    tt = opt.get('trait_tags', {})
+                    if isinstance(tt, dict):
+                        for t, w in tt.items():
+                            score += trait_info_scores.get(t, 0) * w
+                    elif isinstance(tt, list):
+                        for t in tt:
+                            score += trait_info_scores.get(t, 0)
+                    else:
+                        t = opt.get('trait_tag')
+                        if t:
+                            score += trait_info_scores.get(t, 0)
                 
                 # Question weight from tree
                 score += node.get("weight", 1.0)
@@ -1874,9 +1915,17 @@ class AdaptiveAssessmentEngine:
         matching_options = 0
         
         for opt in options:
-            trait = opt.get('trait_tag')
-            if trait and trait in profile_traits:
-                matching_options += 1
+            trait_tags = opt.get('trait_tags', {})
+            if isinstance(trait_tags, dict):
+                if any(t in profile_traits for t in trait_tags):
+                    matching_options += 1
+            elif isinstance(trait_tags, list):
+                if any(t in profile_traits for t in trait_tags):
+                    matching_options += 1
+            else:
+                trait = opt.get('trait_tag')
+                if trait and trait in profile_traits:
+                    matching_options += 1
         
         # Bonus based on how many options match profile traits
         if matching_options >= 3:
@@ -1939,25 +1988,44 @@ class AdaptiveAssessmentEngine:
         total_options = len(options)
         
         for opt in options:
-            trait = opt.get('trait_tag')
-            if trait:
-                # Check if this option's trait is in rejected topics
-                if trait in session.rejected_topics:
-                    rejected_option_count += 1
-                
-                # Direct trait value
-                score += trait_values.get(trait, 0)
-                
-                # Strand relevance bonus
-                if trait in strand_priority_traits:
-                    score += 0.5
-                
-                # Also consider mapped traits from our trait system
-                mapped_traits = EXPANDED_TRAIT_MAPPING.get(trait, [])
-                for mapped_trait in mapped_traits:
-                    score += trait_values.get(mapped_trait, 0) * 0.5
-                    if mapped_trait in strand_priority_traits:
-                        score += 0.25
+            trait_tags = opt.get('trait_tags', {})
+            if isinstance(trait_tags, dict) and trait_tags:
+                for trait, weight in trait_tags.items():
+                    if trait in session.rejected_topics:
+                        rejected_option_count += weight
+                    score += trait_values.get(trait, 0) * weight
+                    if trait in strand_priority_traits:
+                        score += 0.5 * weight
+                    mapped_traits = EXPANDED_TRAIT_MAPPING.get(trait, [])
+                    for mapped_trait in mapped_traits:
+                        score += trait_values.get(mapped_trait, 0) * 0.5 * weight
+                        if mapped_trait in strand_priority_traits:
+                            score += 0.25 * weight
+            elif isinstance(trait_tags, list) and trait_tags:
+                for trait in trait_tags:
+                    if trait in session.rejected_topics:
+                        rejected_option_count += 1
+                    score += trait_values.get(trait, 0)
+                    if trait in strand_priority_traits:
+                        score += 0.5
+                    mapped_traits = EXPANDED_TRAIT_MAPPING.get(trait, [])
+                    for mapped_trait in mapped_traits:
+                        score += trait_values.get(mapped_trait, 0) * 0.5
+                        if mapped_trait in strand_priority_traits:
+                            score += 0.25
+            else:
+                trait = opt.get('trait_tag')
+                if trait:
+                    if trait in session.rejected_topics:
+                        rejected_option_count += 1
+                    score += trait_values.get(trait, 0)
+                    if trait in strand_priority_traits:
+                        score += 0.5
+                    mapped_traits = EXPANDED_TRAIT_MAPPING.get(trait, [])
+                    for mapped_trait in mapped_traits:
+                        score += trait_values.get(mapped_trait, 0) * 0.5
+                        if mapped_trait in strand_priority_traits:
+                            score += 0.25
                     # Check mapped traits for rejection too
                     if mapped_trait in session.rejected_topics:
                         rejected_option_count += 0.5
@@ -2090,12 +2158,15 @@ class AdaptiveAssessmentEngine:
         # Store rejection data for this question (for reversal)
         session.answer_rejection_data[question_id] = rejection_data
         
-        # Extract trait from chosen option — supports multiple formats:
-        # 1. trait_tags: ["Software-Dev", "Data-Analytics"] (new multi-trait array)
-        # 2. traits: {"Software-Dev": 1.0, "Data-Analytics": 0.5} (weighted dict)
-        # 3. trait_tag: "Software-Dev" (legacy single trait)
-        chosen_trait_tags = chosen_option.get('trait_tags', [])
-        chosen_trait = chosen_trait_tags[0] if chosen_trait_tags else chosen_option.get('trait_tag')
+        # Extract trait from chosen option — supports weighted dict format:
+        # trait_tags: {"Software-Dev": 1.0, "Data-Analytics": 0.5} (weighted dict)
+        chosen_trait_tags = chosen_option.get('trait_tags', {})
+        if isinstance(chosen_trait_tags, dict) and chosen_trait_tags:
+            chosen_trait = max(chosen_trait_tags, key=chosen_trait_tags.get)
+        elif isinstance(chosen_trait_tags, list) and chosen_trait_tags:
+            chosen_trait = chosen_trait_tags[0]
+        else:
+            chosen_trait = chosen_option.get('trait_tag')
         option_text = chosen_option.get('option_text', '').lower()
         
         # Track all trait changes for this question (for reversal with "Previous" button)
@@ -2116,23 +2187,23 @@ class AdaptiveAssessmentEngine:
             # This prevents arbitrary traits from being added
             print(f"[NONE_OPTION] No traits added - user rejected this topic")
             chosen_trait = None
-        elif chosen_trait_tags and len(chosen_trait_tags) > 0:
-            # Multi-trait array format: first trait = primary (1.0), rest = secondary (0.6)
+        elif isinstance(chosen_trait_tags, dict) and chosen_trait_tags:
+            # Weighted dict format: apply each trait with its weight
+            for trait, weight in chosen_trait_tags.items():
+                current = session.trait_scores.get(trait, 0)
+                session.trait_scores[trait] = current + weight
+                trait_changes[trait] = trait_changes.get(trait, 0) + weight
+                traits_to_boost.append(trait)
+            chosen_trait = max(chosen_trait_tags, key=chosen_trait_tags.get)
+        elif isinstance(chosen_trait_tags, list) and chosen_trait_tags:
+            # Legacy list format
             for idx, tag in enumerate(chosen_trait_tags):
                 weight = 1.0 if idx == 0 else 0.6
                 current = session.trait_scores.get(tag, 0)
                 session.trait_scores[tag] = current + weight
                 trait_changes[tag] = trait_changes.get(tag, 0) + weight
                 traits_to_boost.append(tag)
-            chosen_trait = chosen_trait_tags[0]  # Primary trait for chain routing
-        elif chosen_option.get('traits'):
-            # Multi-trait weighted option (new format)
-            weighted_traits = chosen_option['traits']
-            for trait, weight in weighted_traits.items():
-                current = session.trait_scores.get(trait, 0)
-                session.trait_scores[trait] = current + weight
-                trait_changes[trait] = trait_changes.get(trait, 0) + weight
-                traits_to_boost.append(trait)
+            chosen_trait = chosen_trait_tags[0]
         elif chosen_trait:
             # Fallback: single trait_tag (old format)
             current = session.trait_scores.get(chosen_trait, 0)

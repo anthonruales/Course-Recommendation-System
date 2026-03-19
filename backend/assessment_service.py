@@ -146,9 +146,15 @@ class AssessmentService:
         for q in QUESTIONS_POOL:
             question_traits = set()
             for opt in q.get("options", []):
-                trait = opt.get("trait_tag")
-                if trait:
-                    question_traits.add(trait)
+                trait_tags = opt.get("trait_tags", {})
+                if isinstance(trait_tags, dict):
+                    question_traits.update(trait_tags.keys())
+                elif isinstance(trait_tags, list):
+                    question_traits.update(trait_tags)
+                else:
+                    trait = opt.get("trait_tag")
+                    if trait:
+                        question_traits.add(trait)
             
             # Check if question has traits matching the strand
             priority_match = question_traits & priority_traits
