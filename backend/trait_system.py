@@ -145,7 +145,8 @@ SPECIALIZED_TRAIT_RELATIONSHIPS: Dict[str, Dict[str, float]] = {
     # Public service relationships
     "Law-Enforce": {
         "Realistic": 0.7, "Physical-Skill": 0.7, "Community-Serve": 0.4,
-        "Cyber-Defense": 0.3
+        "Cyber-Defense": 0.3, "Legal-Practice": 0.7, "Forensic-Sci": 0.5,
+        "Admin-Skill": 0.4
     },
     "Community-Serve": {
         "Social": 0.9, "People-Skill": 0.8, "Teaching-Ed": 0.5,
@@ -258,7 +259,8 @@ SPECIALIZED_TRAIT_RELATIONSHIPS: Dict[str, Dict[str, float]] = {
     # Public service expansions
     "Legal-Practice": {
         "Enterprising": 0.7, "Analytical-Skill": 0.7, "People-Skill": 0.6,
-        "Law-Enforce": 0.5, "Community-Serve": 0.4
+        "Law-Enforce": 0.7, "Community-Serve": 0.4, "Admin-Skill": 0.6,
+        "Conventional": 0.5, "Social-Work": 0.5
     },
     "Social-Work": {
         "Social": 0.9, "People-Skill": 0.9, "Community-Serve": 0.8,
@@ -290,7 +292,8 @@ SPECIALIZED_TRAIT_RELATIONSHIPS: Dict[str, Dict[str, float]] = {
     },
     "Analytical-Skill": {
         "Investigative": 0.9, "Data-Analytics": 0.8, "Lab-Research": 0.7,
-        "Finance-Acct": 0.7, "Medical-Lab": 0.6
+        "Finance-Acct": 0.7, "Medical-Lab": 0.6, "Legal-Practice": 0.5,
+        "Forensic-Sci": 0.5
     },
     "Physical-Skill": {
         "Realistic": 0.8, "Maritime-Sea": 0.7, "Agri-Nature": 0.7,
@@ -298,7 +301,26 @@ SPECIALIZED_TRAIT_RELATIONSHIPS: Dict[str, Dict[str, float]] = {
     },
     "Admin-Skill": {
         "Conventional": 0.9, "Finance-Acct": 0.6, "Health-Admin": 0.7,
-        "Hospitality-Svc": 0.4, "Industrial-Ops": 0.4
+        "Hospitality-Svc": 0.4, "Industrial-Ops": 0.4, "Legal-Practice": 0.5
+    },
+    
+    # RIASEC-style traits
+    "Conventional": {
+        "Admin-Skill": 0.9, "Finance-Acct": 0.7, "Legal-Practice": 0.5,
+        "Health-Admin": 0.6, "Industrial-Ops": 0.4
+    },
+    "Enterprising": {
+        "Marketing-Sales": 0.8, "Startup-Venture": 0.8, "Legal-Practice": 0.6,
+        "People-Skill": 0.6, "Finance-Acct": 0.5, "Admin-Skill": 0.4
+    },
+    "Investigative": {
+        "Analytical-Skill": 0.9, "Lab-Research": 0.8, "Data-Analytics": 0.8,
+        "Forensic-Sci": 0.7, "Medical-Lab": 0.6, "Field-Research": 0.6,
+        "Legal-Practice": 0.4
+    },
+    "Social": {
+        "People-Skill": 0.9, "Teaching-Ed": 0.8, "Community-Serve": 0.8,
+        "Social-Work": 0.8, "Counseling": 0.7, "Patient-Care": 0.6
     }
 }
 
