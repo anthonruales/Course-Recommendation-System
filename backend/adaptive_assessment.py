@@ -900,6 +900,441 @@ QUESTION_TREE_NODES = {
     277: {"level": 2, "weight": 2.0, "branches": ["hospitality"]},                          # Culinary Concept
     # People Skill
     278: {"level": 2, "weight": 2.0, "branches": ["education", "business"]},                # Leadership
+    # Maritime expansion
+    356: {"level": 1, "weight": 1.7, "branches": ["maritime", "engineering", "hospitality"]},
+    357: {"level": 2, "weight": 2.1, "branches": ["maritime", "engineering"]},
+    358: {"level": 2, "weight": 2.2, "branches": ["maritime", "engineering"]},
+    359: {"level": 2, "weight": 2.1, "branches": ["maritime", "science"]},
+    360: {"level": 3, "weight": 2.6, "branches": ["maritime", "physical", "healthcare"]},
+    361: {"level": 2, "weight": 2.1, "branches": ["maritime", "business", "engineering"]},
+    362: {"level": 2, "weight": 2.2, "branches": ["maritime", "engineering", "technology"]},
+    363: {"level": 1, "weight": 1.8, "branches": ["maritime", "physical", "hospitality"]},
+    364: {"level": 2, "weight": 2.0, "branches": ["maritime", "hospitality", "science"]},
+    365: {"level": 3, "weight": 2.5, "branches": ["maritime", "physical", "science"]},
+    366: {"level": 2, "weight": 2.1, "branches": ["maritime", "business", "education"]},
+    367: {"level": 2, "weight": 2.2, "branches": ["maritime", "engineering", "business", "hospitality"]},
+    # Social expansion (368-383)
+    368: {"level": 1, "weight": 1.8, "branches": ["social", "education", "healthcare"]},
+    369: {"level": 1, "weight": 1.8, "branches": ["social", "public_service"]},
+    370: {"level": 2, "weight": 2.0, "branches": ["social", "education", "healthcare"]},
+    371: {"level": 2, "weight": 2.0, "branches": ["social", "public_service", "education"]},
+    372: {"level": 2, "weight": 2.0, "branches": ["social", "healthcare", "education"]},
+    373: {"level": 2, "weight": 2.0, "branches": ["social", "education"]},
+    374: {"level": 2, "weight": 2.1, "branches": ["social", "education", "healthcare"]},
+    375: {"level": 2, "weight": 2.1, "branches": ["social", "education", "healthcare"]},
+    376: {"level": 2, "weight": 2.1, "branches": ["social", "healthcare"]},
+    377: {"level": 2, "weight": 2.0, "branches": ["social", "education"]},
+    378: {"level": 2, "weight": 2.1, "branches": ["social", "public_service"]},
+    379: {"level": 2, "weight": 2.1, "branches": ["social", "education", "healthcare"]},
+    380: {"level": 3, "weight": 2.3, "branches": ["social", "healthcare"]},
+    381: {"level": 2, "weight": 2.2, "branches": ["social", "healthcare", "education"]},
+    382: {"level": 2, "weight": 2.1, "branches": ["social", "science"]},
+    383: {"level": 3, "weight": 2.3, "branches": ["social", "public_service", "education"]},
+    # Physical/Sports expansion (384-399)
+    384: {"level": 1, "weight": 1.8, "branches": ["physical", "education"]},
+    385: {"level": 2, "weight": 2.1, "branches": ["physical", "education", "healthcare"]},
+    386: {"level": 2, "weight": 2.1, "branches": ["physical", "science", "healthcare"]},
+    387: {"level": 2, "weight": 2.1, "branches": ["physical", "education", "healthcare"]},
+    388: {"level": 2, "weight": 2.0, "branches": ["physical", "education"]},
+    389: {"level": 2, "weight": 2.0, "branches": ["physical", "education"]},
+    390: {"level": 2, "weight": 2.1, "branches": ["physical", "healthcare"]},
+    391: {"level": 2, "weight": 2.0, "branches": ["physical", "education"]},
+    392: {"level": 2, "weight": 2.1, "branches": ["physical", "education"]},
+    393: {"level": 2, "weight": 2.2, "branches": ["physical", "science", "healthcare"]},
+    394: {"level": 2, "weight": 2.1, "branches": ["physical", "healthcare"]},
+    395: {"level": 2, "weight": 2.0, "branches": ["physical", "education"]},
+    396: {"level": 3, "weight": 2.3, "branches": ["physical", "education"]},
+    397: {"level": 2, "weight": 2.1, "branches": ["physical", "education"]},
+    398: {"level": 2, "weight": 2.1, "branches": ["physical", "education", "healthcare"]},
+    399: {"level": 2, "weight": 2.0, "branches": ["physical", "education"]},
+    # Agriculture expansion (400-413)
+    400: {"level": 1, "weight": 1.8, "branches": ["agriculture", "science", "engineering"]},
+    401: {"level": 2, "weight": 2.0, "branches": ["agriculture", "science"]},
+    402: {"level": 2, "weight": 2.1, "branches": ["agriculture", "science", "healthcare"]},
+    403: {"level": 2, "weight": 2.1, "branches": ["agriculture", "science"]},
+    404: {"level": 2, "weight": 2.1, "branches": ["agriculture", "engineering", "science"]},
+    405: {"level": 2, "weight": 2.0, "branches": ["agriculture", "physical"]},
+    406: {"level": 2, "weight": 2.1, "branches": ["agriculture", "science", "business"]},
+    407: {"level": 2, "weight": 2.1, "branches": ["agriculture", "science"]},
+    408: {"level": 2, "weight": 2.0, "branches": ["agriculture", "business"]},
+    409: {"level": 2, "weight": 2.1, "branches": ["agriculture", "science"]},
+    410: {"level": 2, "weight": 2.1, "branches": ["agriculture", "science", "healthcare"]},
+    411: {"level": 2, "weight": 2.2, "branches": ["agriculture", "science"]},
+    412: {"level": 2, "weight": 2.0, "branches": ["agriculture", "science", "engineering"]},
+    413: {"level": 2, "weight": 2.1, "branches": ["agriculture", "engineering"]},
+    # Law expansion (414-423)
+    414: {"level": 1, "weight": 1.8, "branches": ["law", "public_service"]},
+    415: {"level": 2, "weight": 2.1, "branches": ["law", "public_service", "science"]},
+    416: {"level": 2, "weight": 2.1, "branches": ["law", "public_service"]},
+    417: {"level": 2, "weight": 2.1, "branches": ["law", "public_service"]},
+    418: {"level": 2, "weight": 2.1, "branches": ["law", "public_service"]},
+    419: {"level": 2, "weight": 2.0, "branches": ["law", "public_service", "social"]},
+    420: {"level": 2, "weight": 2.2, "branches": ["law", "science"]},
+    421: {"level": 2, "weight": 2.1, "branches": ["law", "public_service", "social"]},
+    422: {"level": 2, "weight": 2.2, "branches": ["law", "science"]},
+    423: {"level": 2, "weight": 2.0, "branches": ["law", "public_service"]},
+
+    # Gap-fill questions (424-442)
+    424: {"branches": ['hospitality', 'creative'], "depth": 2},
+    425: {"branches": ['engineering', 'science'], "depth": 2},
+    426: {"branches": ['business', 'public_service'], "depth": 2},
+    427: {"branches": ['business', 'public_service'], "depth": 2},
+    428: {"branches": ['business', 'education'], "depth": 2},
+    429: {"branches": ['healthcare', 'public_service'], "depth": 2},
+    430: {"branches": ['healthcare', 'business'], "depth": 2},
+    431: {"branches": ['healthcare', 'public_service'], "depth": 2},
+    432: {"branches": ['technology', 'creative'], "depth": 2},
+    433: {"branches": ['technology', 'engineering'], "depth": 2},
+    434: {"branches": ['healthcare', 'science'], "depth": 2},
+    435: {"branches": ['healthcare', 'science'], "depth": 2},
+    436: {"branches": ['healthcare', 'public_service'], "depth": 2},
+    437: {"branches": ['healthcare', 'science', 'technology'], "depth": 2},
+    438: {"branches": ['hospitality', 'business'], "depth": 2},
+    439: {"branches": ['hospitality', 'business', 'creative'], "depth": 2},
+    440: {"branches": ['hospitality', 'business'], "depth": 2},
+    441: {"branches": ['hospitality', 'creative'], "depth": 2},
+    442: {"branches": ['hospitality', 'technology'], "depth": 2},
+
+    443: {"level": 2, "weight": 1.5, "branches": ['maritime']},
+    444: {"level": 2, "weight": 1.5, "branches": ['maritime']},
+    445: {"level": 2, "weight": 1.5, "branches": ['maritime', 'physical']},
+    446: {"level": 2, "weight": 1.5, "branches": ['maritime', 'technology']},
+    447: {"level": 2, "weight": 1.5, "branches": ['maritime']},
+    448: {"level": 2, "weight": 1.5, "branches": ['maritime', 'law']},
+    449: {"level": 2, "weight": 1.5, "branches": ['maritime', 'engineering']},
+    450: {"level": 2, "weight": 1.5, "branches": ['maritime']},
+    451: {"level": 2, "weight": 1.5, "branches": ['maritime']},
+    452: {"level": 2, "weight": 1.5, "branches": ['maritime', 'technology']},
+    453: {"level": 2, "weight": 1.5, "branches": ['maritime', 'business']},
+    454: {"level": 2, "weight": 1.5, "branches": ['maritime', 'law']},
+    455: {"level": 2, "weight": 1.5, "branches": ['maritime', 'science']},
+    456: {"level": 2, "weight": 1.5, "branches": ['maritime']},
+
+    457: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    458: {"level": 2, "weight": 1.5, "branches": ['healthcare', 'technology']},
+    459: {"level": 2, "weight": 1.5, "branches": ['healthcare', 'social']},
+    460: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    461: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    462: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    463: {"level": 2, "weight": 1.5, "branches": ['healthcare', 'technology']},
+    464: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    465: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    466: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    467: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    468: {"level": 2, "weight": 1.5, "branches": ['healthcare', 'science']},
+    469: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    470: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    471: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    472: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    473: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    474: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    475: {"level": 2, "weight": 1.5, "branches": ['healthcare', 'science']},
+    476: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    477: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    478: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    479: {"level": 2, "weight": 1.5, "branches": ['healthcare', 'social']},
+    480: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    481: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    482: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    483: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    484: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    485: {"level": 2, "weight": 1.5, "branches": ['healthcare', 'science']},
+    486: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    487: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    488: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    489: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    490: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    491: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    492: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    493: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    494: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    495: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    496: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    497: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    498: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    499: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    500: {"level": 2, "weight": 1.5, "branches": ['healthcare', 'science']},
+    501: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    502: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    503: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+
+    504: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    505: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    506: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    507: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    508: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    509: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    510: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    511: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    512: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    513: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    514: {"level": 2, "weight": 1.5, "branches": ['technology', 'creative']},
+    515: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    516: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    517: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    518: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    519: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    520: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    521: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    522: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    523: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    524: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    525: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    526: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    527: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    528: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    529: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    530: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    531: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    532: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    533: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    534: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    535: {"level": 2, "weight": 1.5, "branches": ['technology', 'education']},
+    536: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    537: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    538: {"level": 2, "weight": 1.5, "branches": ['technology', 'creative']},
+    539: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    540: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    541: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    542: {"level": 2, "weight": 1.5, "branches": ['technology', 'creative']},
+    543: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    544: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    545: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    546: {"level": 2, "weight": 1.5, "branches": ['technology']},
+
+    547: {"level": 2, "weight": 1.5, "branches": ['engineering']},
+    548: {"level": 2, "weight": 1.5, "branches": ['engineering']},
+    549: {"level": 2, "weight": 1.5, "branches": ['engineering', 'public_service']},
+    550: {"level": 2, "weight": 1.5, "branches": ['engineering', 'science']},
+    551: {"level": 2, "weight": 1.5, "branches": ['engineering', 'technology']},
+    552: {"level": 2, "weight": 1.5, "branches": ['engineering']},
+    553: {"level": 2, "weight": 1.5, "branches": ['engineering', 'technology']},
+    554: {"level": 2, "weight": 1.5, "branches": ['engineering', 'science']},
+    555: {"level": 2, "weight": 1.5, "branches": ['engineering']},
+    556: {"level": 2, "weight": 1.5, "branches": ['engineering']},
+    557: {"level": 2, "weight": 1.5, "branches": ['engineering', 'science']},
+    558: {"level": 2, "weight": 1.5, "branches": ['engineering', 'technology']},
+    559: {"level": 2, "weight": 1.5, "branches": ['engineering']},
+    560: {"level": 2, "weight": 1.5, "branches": ['engineering', 'science']},
+    561: {"level": 2, "weight": 1.5, "branches": ['engineering', 'science']},
+    562: {"level": 2, "weight": 1.5, "branches": ['engineering', 'public_service']},
+    563: {"level": 2, "weight": 1.5, "branches": ['engineering', 'technology']},
+    564: {"level": 2, "weight": 1.5, "branches": ['engineering', 'business']},
+    565: {"level": 2, "weight": 1.5, "branches": ['engineering', 'technology']},
+    566: {"level": 2, "weight": 1.5, "branches": ['engineering', 'business']},
+    567: {"level": 2, "weight": 1.5, "branches": ['engineering', 'technology']},
+    568: {"level": 2, "weight": 1.5, "branches": ['business']},
+    569: {"level": 2, "weight": 1.5, "branches": ['business', 'technology']},
+    570: {"level": 2, "weight": 1.5, "branches": ['business']},
+    571: {"level": 2, "weight": 1.5, "branches": ['business']},
+    572: {"level": 2, "weight": 1.5, "branches": ['business']},
+    573: {"level": 2, "weight": 1.5, "branches": ['business', 'technology']},
+    574: {"level": 2, "weight": 1.5, "branches": ['business']},
+    575: {"level": 2, "weight": 1.5, "branches": ['business']},
+    576: {"level": 2, "weight": 1.5, "branches": ['business']},
+    577: {"level": 2, "weight": 1.5, "branches": ['business', 'technology']},
+    578: {"level": 2, "weight": 1.5, "branches": ['business', 'social']},
+    579: {"level": 2, "weight": 1.5, "branches": ['business']},
+    580: {"level": 2, "weight": 1.5, "branches": ['business', 'technology']},
+    581: {"level": 2, "weight": 1.5, "branches": ['business']},
+    582: {"level": 2, "weight": 1.5, "branches": ['business']},
+    583: {"level": 2, "weight": 1.5, "branches": ['business']},
+    584: {"level": 2, "weight": 1.5, "branches": ['business', 'technology']},
+    585: {"level": 2, "weight": 1.5, "branches": ['business']},
+    586: {"level": 2, "weight": 1.5, "branches": ['business']},
+    587: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    588: {"level": 2, "weight": 1.5, "branches": ['creative', 'technology']},
+    589: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    590: {"level": 2, "weight": 1.5, "branches": ['creative', 'technology']},
+    591: {"level": 2, "weight": 1.5, "branches": ['creative', 'technology']},
+    592: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    593: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    594: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    595: {"level": 2, "weight": 1.5, "branches": ['creative', 'technology']},
+    596: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    597: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    598: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    599: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    600: {"level": 2, "weight": 1.5, "branches": ['creative', 'education']},
+    601: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    602: {"level": 2, "weight": 1.5, "branches": ['creative', 'engineering']},
+    603: {"level": 2, "weight": 1.5, "branches": ['creative', 'technology']},
+    604: {"level": 2, "weight": 1.5, "branches": ['creative', 'engineering']},
+    605: {"level": 2, "weight": 1.5, "branches": ['science']},
+    606: {"level": 2, "weight": 1.5, "branches": ['science']},
+    607: {"level": 2, "weight": 1.5, "branches": ['science']},
+    608: {"level": 2, "weight": 1.5, "branches": ['science']},
+    609: {"level": 2, "weight": 1.5, "branches": ['science', 'agriculture']},
+    610: {"level": 2, "weight": 1.5, "branches": ['science']},
+    611: {"level": 2, "weight": 1.5, "branches": ['science']},
+    612: {"level": 2, "weight": 1.5, "branches": ['science']},
+    613: {"level": 2, "weight": 1.5, "branches": ['science', 'public_service']},
+    614: {"level": 2, "weight": 1.5, "branches": ['science', 'technology']},
+    615: {"level": 2, "weight": 1.5, "branches": ['science']},
+    616: {"level": 2, "weight": 1.5, "branches": ['science', 'agriculture']},
+    617: {"level": 2, "weight": 1.5, "branches": ['science']},
+    618: {"level": 2, "weight": 1.5, "branches": ['science', 'law']},
+    619: {"level": 2, "weight": 1.5, "branches": ['science', 'law']},
+    620: {"level": 2, "weight": 1.5, "branches": ['science']},
+    621: {"level": 2, "weight": 1.5, "branches": ['education']},
+    622: {"level": 2, "weight": 1.5, "branches": ['education']},
+    623: {"level": 2, "weight": 1.5, "branches": ['education', 'public_service']},
+    624: {"level": 2, "weight": 1.5, "branches": ['education']},
+    625: {"level": 2, "weight": 1.5, "branches": ['public_service', 'social']},
+    626: {"level": 2, "weight": 1.5, "branches": ['public_service', 'social']},
+    627: {"level": 2, "weight": 1.5, "branches": ['public_service', 'social']},
+    628: {"level": 2, "weight": 1.5, "branches": ['social', 'public_service']},
+    629: {"level": 2, "weight": 1.5, "branches": ['social', 'public_service']},
+    630: {"level": 2, "weight": 1.5, "branches": ['law', 'public_service']},
+    631: {"level": 2, "weight": 1.5, "branches": ['law', 'physical']},
+    632: {"level": 2, "weight": 1.5, "branches": ['law', 'public_service']},
+    633: {"level": 2, "weight": 1.5, "branches": ['law']},
+    634: {"level": 2, "weight": 1.5, "branches": ['law']},
+    635: {"level": 2, "weight": 1.5, "branches": ['law']},
+    636: {"level": 2, "weight": 1.5, "branches": ['hospitality']},
+    637: {"level": 2, "weight": 1.5, "branches": ['hospitality']},
+    638: {"level": 2, "weight": 1.5, "branches": ['hospitality']},
+    639: {"level": 2, "weight": 1.5, "branches": ['hospitality']},
+    640: {"level": 2, "weight": 1.5, "branches": ['hospitality', 'business']},
+    641: {"level": 2, "weight": 1.5, "branches": ['hospitality', 'public_service']},
+    642: {"level": 2, "weight": 1.5, "branches": ['hospitality']},
+    643: {"level": 2, "weight": 1.5, "branches": ['hospitality']},
+    644: {"level": 2, "weight": 1.5, "branches": ['hospitality']},
+    645: {"level": 2, "weight": 1.5, "branches": ['physical', 'education']},
+    646: {"level": 2, "weight": 1.5, "branches": ['physical', 'education']},
+    647: {"level": 2, "weight": 1.5, "branches": ['agriculture']},
+    648: {"level": 2, "weight": 1.5, "branches": ['agriculture', 'public_service']},
+
+    649: {"level": 2, "weight": 1.5, "branches": ['business']},
+    650: {"level": 2, "weight": 1.5, "branches": ['business']},
+    651: {"level": 2, "weight": 1.5, "branches": ['business']},
+    652: {"level": 2, "weight": 1.5, "branches": ['business']},
+    653: {"level": 2, "weight": 1.5, "branches": ['business']},
+    654: {"level": 2, "weight": 1.5, "branches": ['business']},
+    655: {"level": 2, "weight": 1.5, "branches": ['business']},
+    656: {"level": 2, "weight": 1.5, "branches": ['science', 'technology']},
+    657: {"level": 2, "weight": 1.5, "branches": ['science']},
+    658: {"level": 2, "weight": 1.5, "branches": ['science']},
+    659: {"level": 2, "weight": 1.5, "branches": ['science', 'business']},
+    660: {"level": 2, "weight": 1.5, "branches": ['science']},
+    661: {"level": 2, "weight": 1.5, "branches": ['science', 'business']},
+    662: {"level": 2, "weight": 1.5, "branches": ['science', 'technology']},
+    663: {"level": 2, "weight": 1.5, "branches": ['science']},
+    664: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    665: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    666: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    667: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    668: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    669: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    670: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    671: {"level": 2, "weight": 1.5, "branches": ['technology', 'engineering']},
+    672: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    673: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    674: {"level": 2, "weight": 1.5, "branches": ['technology', 'engineering']},
+    675: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    676: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    677: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    678: {"level": 2, "weight": 1.5, "branches": ['social']},
+    679: {"level": 2, "weight": 1.5, "branches": ['social', 'business']},
+    680: {"level": 2, "weight": 1.5, "branches": ['social']},
+    681: {"level": 2, "weight": 1.5, "branches": ['social']},
+    682: {"level": 2, "weight": 1.5, "branches": ['social', 'education']},
+    683: {"level": 2, "weight": 1.5, "branches": ['physical']},
+    684: {"level": 2, "weight": 1.5, "branches": ['physical']},
+    685: {"level": 2, "weight": 1.5, "branches": ['physical']},
+    686: {"level": 2, "weight": 1.5, "branches": ['physical']},
+    687: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    688: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    689: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    690: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    691: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    692: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    693: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    694: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    695: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    696: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    697: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    698: {"level": 2, "weight": 1.5, "branches": ['technology', 'engineering']},
+    699: {"level": 2, "weight": 1.5, "branches": ['technology']},
+    700: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    701: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    702: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    703: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    704: {"level": 2, "weight": 1.5, "branches": ['public_service']},
+    705: {"level": 2, "weight": 1.5, "branches": ['public_service', 'social']},
+    706: {"level": 2, "weight": 1.5, "branches": ['public_service']},
+    707: {"level": 2, "weight": 1.5, "branches": ['public_service', 'social']},
+    708: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    709: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    710: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    711: {"level": 2, "weight": 1.5, "branches": ['creative', 'business']},
+    712: {"level": 2, "weight": 1.5, "branches": ['engineering']},
+    713: {"level": 2, "weight": 1.5, "branches": ['engineering']},
+    714: {"level": 2, "weight": 1.5, "branches": ['engineering', 'technology']},
+    715: {"level": 2, "weight": 1.5, "branches": ['engineering']},
+    716: {"level": 2, "weight": 1.5, "branches": ['engineering']},
+    717: {"level": 2, "weight": 1.5, "branches": ['engineering']},
+    718: {"level": 2, "weight": 1.5, "branches": ['engineering', 'technology']},
+    719: {"level": 2, "weight": 1.5, "branches": ['engineering']},
+    720: {"level": 2, "weight": 1.5, "branches": ['science']},
+    721: {"level": 2, "weight": 1.5, "branches": ['science']},
+    722: {"level": 2, "weight": 1.5, "branches": ['science']},
+    723: {"level": 2, "weight": 1.5, "branches": ['science']},
+    724: {"level": 2, "weight": 1.5, "branches": ['science']},
+    725: {"level": 2, "weight": 1.5, "branches": ['science']},
+    726: {"level": 2, "weight": 1.5, "branches": ['science']},
+    727: {"level": 2, "weight": 1.5, "branches": ['science']},
+    728: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    729: {"level": 2, "weight": 1.5, "branches": ['creative', 'technology']},
+    730: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    731: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    732: {"level": 2, "weight": 1.5, "branches": ['science']},
+    733: {"level": 2, "weight": 1.5, "branches": ['science']},
+    734: {"level": 2, "weight": 1.5, "branches": ['science']},
+    735: {"level": 2, "weight": 1.5, "branches": ['science']},
+    736: {"level": 2, "weight": 1.5, "branches": ['hospitality']},
+    737: {"level": 2, "weight": 1.5, "branches": ['hospitality']},
+    738: {"level": 2, "weight": 1.5, "branches": ['hospitality']},
+    739: {"level": 2, "weight": 1.5, "branches": ['hospitality']},
+    740: {"level": 2, "weight": 1.5, "branches": ['engineering']},
+    741: {"level": 2, "weight": 1.5, "branches": ['engineering']},
+    742: {"level": 2, "weight": 1.5, "branches": ['engineering', 'business']},
+    743: {"level": 2, "weight": 1.5, "branches": ['science']},
+    744: {"level": 2, "weight": 1.5, "branches": ['science']},
+    745: {"level": 2, "weight": 1.5, "branches": ['science']},
+    746: {"level": 2, "weight": 1.5, "branches": ['business']},
+    747: {"level": 2, "weight": 1.5, "branches": ['business']},
+    748: {"level": 2, "weight": 1.5, "branches": ['business']},
+    749: {"level": 2, "weight": 1.5, "branches": ['business']},
+    750: {"level": 2, "weight": 1.5, "branches": ['engineering']},
+    751: {"level": 2, "weight": 1.5, "branches": ['engineering']},
+    752: {"level": 2, "weight": 1.5, "branches": ['engineering']},
+    753: {"level": 2, "weight": 1.5, "branches": ['engineering']},
+    754: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    755: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    756: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    757: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    758: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    759: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    760: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    761: {"level": 2, "weight": 1.5, "branches": ['creative', 'engineering']},
+    762: {"level": 2, "weight": 1.5, "branches": ['business']},
+    763: {"level": 2, "weight": 1.5, "branches": ['business']},
+    764: {"level": 2, "weight": 1.5, "branches": ['business']},
+    765: {"level": 2, "weight": 1.5, "branches": ['education']},
+    766: {"level": 2, "weight": 1.5, "branches": ['education']},
+    767: {"level": 2, "weight": 1.5, "branches": ['education']},
+    768: {"level": 2, "weight": 1.5, "branches": ['education']},
+    769: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    770: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    771: {"level": 2, "weight": 1.5, "branches": ['creative']},
+    772: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    773: {"level": 2, "weight": 1.5, "branches": ['healthcare', 'science']},
+    774: {"level": 2, "weight": 1.5, "branches": ['healthcare']},
+    775: {"level": 2, "weight": 1.5, "branches": ['science', 'public_service']},
+    776: {"level": 2, "weight": 1.5, "branches": ['science', 'public_service']},
+    777: {"level": 2, "weight": 1.5, "branches": ['public_service']},
+    778: {"level": 2, "weight": 1.5, "branches": ['public_service']},
 }
 
 
@@ -907,20 +1342,20 @@ QUESTION_TREE_NODES = {
 # When a domain is activated (from profile or answers), these are the FIRST questions
 # to ask. Ordered by how well they introduce the domain's sub-areas.
 DOMAIN_ENTRY_QUESTIONS = {
-    "technology":    [121, 220, 134, 135, 136, 266, 56, 37, 1, 31],
-    "healthcare":    [122, 227, 141, 142, 143, 36, 60, 29, 40],
-    "engineering":   [123, 237, 145, 146, 147, 59, 26, 52],
-    "business":      [124, 245, 148, 149, 150, 35, 28, 57, 61],
-    "creative":      [125, 248, 219, 151, 213, 152, 153, 30, 37, 33, 66],
-    "education":     [126, 157, 158, 269, 28, 57, 31, 71],
-    "public_service":[127, 234, 159, 160, 5, 41, 57, 35, 61],
-    "science":       [128, 253, 154, 155, 156, 60, 31, 76, 33],
-    "agriculture":   [129, 252, 161, 187, 51, 40, 29, 66, 37],
-    "maritime":      [130, 201, 202, 162, 203, 204, 205, 51, 29, 63, 34],
-    "hospitality":   [131, 223, 224, 163, 164, 51, 53, 63, 34],
-    "physical":      [132, 269, 29, 66, 37, 64, 34],
-    "social":        [133, 243, 28, 57, 45, 79, 80],
-    "law":           [234, 235, 275, 159, 160, 127],
+    "agriculture": [129, 252, 400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 161, 187, 51, 40, 29, 66, 37, 1, 2, 3, 34, 38, 41, 42],
+    "business": [124, 245, 148, 149, 150, 35, 28, 57, 61, 1, 2, 3, 4, 5, 24, 25, 26, 30, 31, 32, 34, 36, 37, 38, 39, 40, 41, 42, 43, 44],
+    "creative": [125, 248, 219, 151, 213, 152, 153, 30, 37, 33, 66, 1, 2, 3, 4, 5, 31, 34, 35, 39, 40, 41, 44, 56, 61, 64, 65, 67, 69, 70],
+    "education": [126, 157, 158, 269, 28, 57, 31, 71, 1, 2, 5, 36, 40, 52, 54, 55, 99, 101, 102, 106, 107, 109, 112, 114, 117, 138, 144, 150, 166, 171],
+    "engineering": [123, 237, 145, 146, 147, 59, 26, 52, 1, 2, 3, 4, 36, 37, 43, 51, 81, 92, 103, 105, 114, 116, 118, 153, 154, 162, 174, 176, 177, 180],
+    "healthcare": [122, 227, 141, 142, 143, 36, 60, 29, 40, 1, 2, 3, 4, 5, 23, 25, 27, 32, 34, 37, 38, 39, 41, 42, 43, 45, 51, 52, 53, 54],
+    "hospitality": [131, 223, 224, 163, 164, 51, 53, 63, 34, 1, 3, 44, 54, 64, 82, 85, 87, 93, 98, 100, 101, 105, 106, 112, 115, 118, 148, 155, 165, 170],
+    "law": [234, 235, 414, 415, 416, 417, 418, 419, 420, 421, 422, 423, 275, 159, 160, 127, 236],
+    "maritime": [130, 356, 201, 202, 357, 358, 359, 360, 361, 362, 363, 364, 365, 366, 367, 162, 203, 204, 205, 63, 51, 29, 34, 1, 3],
+    "physical": [132, 269, 384, 385, 386, 387, 388, 389, 390, 391, 392, 393, 394, 395, 396, 397, 398, 399, 29, 66, 37, 64, 34, 90, 103, 144, 153, 169, 183, 360],
+    "public_service": [127, 234, 159, 160, 5, 41, 57, 35, 61, 1, 23, 25, 45, 68, 69, 73, 74, 75, 81, 84, 86, 89, 94, 96, 98, 99, 110, 111, 115, 120],
+    "science": [128, 253, 154, 155, 156, 60, 31, 76, 33, 4, 26, 27, 32, 37, 38, 39, 40, 58, 59, 66, 68, 70, 71, 72, 77, 78, 80, 83, 85, 88],
+    "social": [133, 243, 368, 369, 370, 371, 372, 373, 374, 375, 376, 377, 378, 379, 380, 381, 382, 383, 28, 57, 45, 79, 80, 24, 27, 31, 37, 42, 43, 55],
+    "technology": [121, 220, 134, 135, 136, 266, 56, 37, 1, 31, 2, 3, 4, 5, 23, 24, 26, 30, 32, 33, 38, 39, 45, 54, 59, 62, 65, 69, 70, 71],
 }
 
 # ==================== CONVERSATION CHAIN: TRAIT FOLLOW-UP MAP ====================
@@ -929,72 +1364,60 @@ DOMAIN_ENTRY_QUESTIONS = {
 # branch weights determine the next domain to explore.
 
 TRAIT_FOLLOWUP_MAP = {
-    # ═══════ TECHNOLOGY ═══════
-    "Software-Dev":    [266, 222, 134, 135, 97, 89, 111, 56, 70, 69, 83, 76, 108, 189],
-    "Hardware-Systems": [272, 237, 187, 89, 111, 56, 70, 105, 44, 84, 76, 140],
-    "Data-Analytics":  [258, 218, 135, 97, 108, 56, 76, 59, 80, 69, 91, 191],
-    "Cyber-Defense":   [255, 216, 137, 111, 89, 94, 97, 99, 56, 86, 178],
-    "Digital-Media":   [267, 268, 219, 221, 152, 93, 44, 98, 118, 30, 70, 78, 110, 186],
-    "Technical-Skill": [272, 273, 134, 56, 76, 70, 83, 80, 105, 109],
-    "Web-Dev":         [263, 264, 211, 212, 222, 134, 140, 186, 97, 89, 56, 70, 148, 163],
-    "Mobile-Dev":      [265, 214, 136, 135, 140, 189, 97, 56, 191, 198],
-    "Game-Dev":        [260, 261, 262, 206, 207, 208, 209, 210, 139, 221, 220, 152, 135, 198, 70, 185, 180],
-    "AI-ML":           [257, 215, 138, 135, 136, 189, 198, 167, 187, 180],
-    "Cloud-Systems":   [256, 217, 137, 134, 140, 135, 97, 189, 191],
-    # ═══════ HEALTHCARE ═══════
-    "Patient-Care":    [227, 141, 142, 107, 95, 36, 88, 81, 60, 29, 58, 103, 192],
-    "Medical-Lab":     [233, 142, 60, 107, 95, 36, 108, 52, 113, 76, 156],
-    "Rehab-Therapy":   [229, 143, 107, 88, 95, 103, 36, 29, 45, 113, 188],
-    "Health-Admin":    [230, 143, 106, 56, 107, 95, 57, 61, 80, 188],
-    "Pharmacy":        [228, 141, 142, 143, 188, 107, 95, 60, 155],
-    "Public-Health":   [232, 141, 143, 188, 166, 169, 175, 198, 192],
-    "Nutrition-Diet":  [231, 144, 155, 143, 188, 166, 187, 175],
-    # ═══════ ENGINEERING ═══════
-    "Civil-Build":     [241, 145, 147, 84, 119, 59, 52, 109, 116, 90, 26, 105, 191],
-    "Mechanical-Design":[239, 146, 105, 52, 59, 119, 90, 85, 84, 116, 162],
-    "Electrical-Power": [238, 146, 105, 52, 109, 114, 43, 59, 116, 187],
-    "Industrial-Ops":  [240, 146, 116, 51, 92, 105, 118, 44, 53, 155],
-    "Spatial-Design":  [251, 153, 59, 118, 30, 112, 110, 67, 36, 104],
-    "Environmental-Eng":[242, 147, 154, 159, 189, 169, 175, 187, 191],
-    # ═══════ BUSINESS ═══════
-    "Finance-Acct":    [246, 149, 87, 104, 91, 100, 62, 35, 52, 61, 57, 190],
-    "Marketing-Sales": [246, 148, 186, 91, 87, 104, 112, 65, 28, 62, 85, 163],
-    "Startup-Venture": [246, 148, 149, 165, 87, 104, 91, 100, 85, 61, 65, 57],
-    "Admin-Skill":     [245, 150, 106, 93, 87, 44, 80, 118, 57, 104, 190],
-    "HR-Management":   [245, 150, 149, 160, 148, 106, 87, 190, 193],
-    # ═══════ CREATIVE ═══════
-    "Visual-Design":   [248, 247, 219, 152, 153, 221, 93, 44, 69, 30, 56, 78, 110, 118, 33, 186],
-    "Creative-Skill":  [248, 151, 219, 152, 30, 44, 93, 69, 75, 66, 88, 98, 153],
-    "Animation-3D":    [249, 213, 139, 209, 152, 221, 93, 44, 98, 135, 180, 189],
-    "Film-Broadcast":  [274, 151, 219, 152, 186, 170, 93, 44, 98, 167, 164],
-    "Performing-Arts": [250, 151, 164, 44, 30, 66, 93, 152, 176],
-    # ═══════ EDUCATION ═══════
-    "Teaching-Ed":     [157, 158, 83, 88, 45, 31, 71, 81, 86, 99, 106, 117],
-    "Sports-Ed":       [269, 270, 157, 144, 166, 169, 193, 176, 183, 187],
-    "Counseling":      [276, 158, 157, 160, 176, 192, 198, 187, 167],
-    # ═══════ PUBLIC SERVICE ═══════
-    "Law-Enforce":     [234, 235, 159, 92, 94, 96, 99, 86, 25, 43, 115, 84, 156],
-    "Community-Serve": [244, 160, 159, 102, 41, 92, 94, 117, 114, 109, 74, 43, 169],
-    "Forensic-Sci":    [236, 156, 159, 92, 94, 142, 108, 178, 193],
-    "Legal-Practice":  [275, 159, 160, 92, 94, 96, 86, 175, 193, 190],
-    "Social-Work":     [243, 160, 159, 166, 169, 175, 157, 193, 176],
-    # ═══════ SCIENCE ═══════
-    "Lab-Research":    [155, 154, 156, 187, 108, 60, 113, 92, 116, 76, 33, 78, 119],
-    "Field-Research":  [254, 154, 161, 92, 113, 114, 108, 98, 90, 105, 119, 167],
-    "Environmental-Sci":[253, 154, 159, 167, 175, 189, 187, 113, 114, 196],
-    "Food-Science":    [259, 155, 164, 148, 187, 161, 108, 113],
-    # ═══════ AGRICULTURE ═══════
-    "Agri-Nature":     [252, 161, 129, 92, 113, 114, 119, 51, 90, 98, 53, 66, 187],
-    # ═══════ MARITIME ═══════
-    "Maritime-Sea":    [201, 202, 162, 203, 204, 205, 63, 51, 29, 34, 90, 85, 27, 39, 64],
-    # ═══════ HOSPITALITY ═══════
-    "Hospitality-Svc": [223, 225, 163, 164, 91, 112, 63, 53, 118, 85, 64, 51, 93],
-    "Tourism-Travel":  [224, 226, 163, 164, 152, 170, 176, 193, 199],
-    "Culinary-Arts":   [277, 164, 163, 148, 155, 170, 176, 199],
-    # ═══════ OTHER ═══════
-    "People-Skill":    [278, 150, 157, 83, 45, 79, 88, 94, 28, 117, 80],
-    "Physical-Skill":  [269, 132, 29, 66, 90, 103, 37, 25, 64, 34, 192],
-    "Analytical-Skill":[271, 194, 195, 172, 108, 80, 76, 56, 97],
+    "AI-ML": [257, 215, 138, 516, 517, 518, 519, 520, 135, 180, 189, 176, 198, 167, 312, 316, 121, 524, 136, 187, 212, 220, 56, 172, 182, 199, 206, 208, 214, 217, 218, 266, 307, 309, 314, 472, 528, 190, 577, 718, 508, 552, 567, 569, 765],
+    "Admin-Skill": [649, 650, 579, 580, 582, 651, 653, 654, 655, 652, 581, 150, 245, 636, 190, 471, 494, 106, 638, 26, 72, 44, 118, 529, 568, 613, 493, 503, 564, 565, 624, 627, 635, 93, 87, 80, 57, 104, 24, 25, 32, 35, 43, 61, 76, 460, 461, 498, 508, 523, 528, 531, 546, 569, 572, 577, 23, 27, 28, 37, 45, 56, 63, 66, 69, 79, 469, 496, 534, 562, 576, 486, 492, 535, 548, 570, 578, 600, 626, 631, 634, 639, 645, 467, 472, 502, 506, 507, 527, 532, 543, 566, 575, 596, 630, 637, 640, 737, 739, 745, 458, 459, 463, 464, 465, 474, 476, 491, 495, 499, 505, 510, 511, 522, 525, 533, 536, 544, 547, 549, 567, 571, 583, 586, 588, 598, 604, 607, 623, 632, 633, 641, 642, 643, 658, 677, 678, 679, 680, 688, 692, 693, 715, 717, 719, 729, 731, 736, 741, 742, 758, 763],
+    "Agri-Nature": [252, 647, 648, 129, 402, 410, 409, 401, 407, 413, 161, 411, 400, 403, 405, 404, 412, 408, 406, 187, 92, 66, 29, 609, 113, 114, 90, 98, 119, 51, 53, 2, 3, 519, 584, 611, 617, 684, 470, 499, 500, 563, 612, 698, 718, 750, 752, 475, 477, 561, 602, 616, 642, 643, 716, 723, 734, 762],
+    "Analytical-Skill": [656, 658, 663, 657, 660, 661, 662, 271, 659, 128, 571, 246, 142, 156, 194, 567, 517, 568, 509, 133, 195, 524, 550, 585, 619, 159, 554, 146, 490, 505, 518, 564, 172, 147, 124, 467, 507, 527, 190, 168, 471, 484, 504, 547, 565, 635, 751, 108, 171, 492, 606, 463, 488, 521, 540, 553, 573, 582, 127, 181, 498, 510, 545, 548, 608, 694, 741, 145, 158, 177, 173, 179, 469, 477, 478, 493, 514, 523, 552, 570, 583, 586, 615, 621, 630, 634, 744, 80, 76, 468, 530, 651, 655, 669, 692, 770, 97, 139, 465, 500, 531, 533, 535, 558, 569, 576, 581, 596, 605, 631, 756, 766, 56, 460, 501, 522, 542, 555, 579, 601, 622, 624, 126, 458, 466, 485, 520, 528, 557, 560, 645, 697, 740, 742, 746, 768, 461, 473, 487, 495, 497, 513, 526, 538, 551, 559, 562, 572, 575, 577, 587, 593, 597, 599, 602, 607, 614, 617, 623, 626, 632, 633, 640, 646, 653, 654, 664, 665, 676, 689, 690, 696, 713, 714, 732, 738, 748, 753, 763, 771, 747],
+    "Animation-3D": [213, 590, 591, 700, 701, 702, 703, 592, 249, 152, 208, 209, 206, 207, 260, 262, 247, 210, 125, 139, 221, 603, 219, 220, 248, 56, 121, 135, 134, 138, 250, 251, 542, 595, 666, 728, 176, 514, 540, 541, 587, 597, 670, 536, 588, 761, 93, 44, 98, 180, 189],
+    "Civil-Build": [241, 547, 548, 549, 550, 551, 145, 147, 191, 90, 563, 602, 603, 59, 560, 30, 36, 119, 52, 25, 752, 84, 109, 26, 1, 2, 4, 5, 23, 34, 38, 39, 40, 41, 42, 43, 51, 54, 604, 751, 557, 566, 684, 519, 559, 561, 674, 683, 716, 717, 719, 552, 553, 556, 592, 648, 675, 705, 712, 713, 715, 761, 105, 116],
+    "Cloud-Systems": [256, 217, 526, 527, 528, 529, 530, 687, 688, 689, 690, 691, 544, 137, 121, 539, 675, 523, 134, 140, 135, 169, 210, 220, 260, 264, 543, 673, 699, 206, 207, 208, 211, 212, 216, 222, 238, 255, 261, 266, 272, 273, 515, 504, 509, 517, 520, 546, 56, 190, 510, 692, 696, 697, 506, 512, 532, 533, 545, 672, 694, 695, 712, 97, 189, 191],
+    "Community-Serve": [704, 705, 706, 707, 625, 627, 244, 626, 369, 371, 378, 383, 368, 379, 372, 375, 160, 159, 382, 641, 464, 457, 538, 629, 92, 94, 102, 41, 74, 5, 479, 628, 117, 114, 109, 31, 42, 459, 549, 43, 24, 35, 45, 474, 562, 612, 51, 37, 560, 630, 519, 525, 597, 608, 611, 730, 169, 460, 462, 473, 475, 476, 477, 482, 491, 494, 497, 510, 535, 575, 584, 623, 634, 648, 682, 723, 506, 508, 511, 513, 536, 557, 578, 581, 604, 607, 613, 616, 679, 684, 685, 714, 767, 774, 461, 463, 487, 488, 489, 492, 514, 542, 559, 563, 586, 598, 602, 609, 617, 621, 622, 632, 639, 640, 647, 652, 667, 692, 709, 712, 719, 720, 722, 731, 736, 738, 747, 752, 754, 755, 758, 541, 770],
+    "Counseling": [487, 490, 488, 489, 491, 492, 276, 380, 158, 374, 379, 133, 375, 370, 371, 376, 381, 368, 157, 187, 629, 501, 126, 200, 383, 474, 628, 160, 678, 578, 192, 167, 141, 143, 144, 165, 179, 185, 189, 176, 198, 175, 458, 461, 476, 479, 481, 600, 621, 624, 634, 680, 477, 576, 623, 633, 635, 679, 681, 682, 704, 766, 457, 462, 478, 480, 483, 484, 485, 570, 574, 622, 627, 631, 637, 747, 756, 767, 772],
+    "Creative-Skill": [664, 665, 666, 667, 668, 669, 670, 186, 248, 219, 151, 152, 599, 139, 153, 587, 195, 590, 594, 596, 642, 30, 588, 597, 93, 194, 600, 602, 771, 44, 591, 593, 172, 179, 59, 271, 540, 601, 173, 69, 133, 488, 589, 604, 703, 75, 26, 572, 758, 88, 94, 98, 77, 90, 511, 514, 592, 759, 766, 45, 103, 124, 595, 622, 640, 657, 760, 516, 541, 542, 583, 644, 701, 730, 553, 555, 615, 621, 639, 682, 700, 708, 728, 746, 748, 770, 477, 486, 503, 505, 508, 509, 513, 522, 538, 574, 575, 579, 585, 586, 598, 603, 608, 609, 617, 624, 636, 643, 653, 662, 676, 679, 702, 711, 735, 754, 755, 767, 768, 66, 725, 616],
+    "Culinary-Arts": [277, 642, 644, 643, 424, 163, 164, 148, 131, 231, 223, 224, 477, 225, 291, 302, 170, 199, 165, 181, 183, 185, 221, 226, 155, 176, 174, 184, 200, 144, 153, 259, 267, 305, 616, 617, 639, 665, 636, 637, 736, 739],
+    "Cyber-Defense": [255, 216, 532, 533, 534, 535, 531, 137, 89, 111, 529, 691, 256, 217, 94, 99, 134, 264, 97, 222, 121, 135, 220, 221, 175, 138, 156, 211, 212, 214, 215, 234, 235, 236, 496, 507, 515, 545, 618, 620, 630, 518, 528, 502, 519, 650, 690, 698, 56, 86, 178],
+    "Data-Analytics": [258, 218, 522, 524, 521, 525, 523, 26, 71, 97, 76, 59, 77, 463, 573, 458, 135, 614, 191, 567, 571, 31, 56, 517, 569, 91, 108, 28, 32, 33, 38, 72, 496, 662, 478, 495, 520, 539, 565, 656, 663, 768, 69, 4, 29, 30, 39, 45, 80, 27, 466, 472, 577, 689, 741, 24, 42, 65, 475, 477, 610, 612, 457, 493, 506, 507, 514, 515, 516, 526, 533, 570, 572, 576, 606, 613, 645, 658, 659, 459, 462, 464, 502, 530, 556, 580, 585, 624, 626, 660, 688, 717, 721, 724, 727, 742, 749, 764, 468, 470, 471, 473, 486, 490, 492, 498, 504, 505, 512, 513, 518, 519, 528, 542, 545, 550, 560, 563, 566, 568, 575, 579, 593, 621, 636, 647, 650, 653, 657, 687, 694, 696, 697, 737, 709],
+    "Digital-Media": [267, 268, 708, 709, 710, 711, 593, 594, 595, 221, 219, 247, 152, 186, 121, 588, 210, 30, 93, 44, 640, 222, 572, 592, 56, 118, 70, 78, 33, 86, 89, 92, 96, 769, 110, 23, 25, 84, 115, 116, 120, 459, 511, 521, 573, 575, 587, 590, 591, 596, 598, 601, 622, 623, 642, 643, 512, 515, 589, 664, 665, 728, 729, 748, 749, 754, 765, 460, 516, 520, 541, 583, 619, 637, 644, 666, 693, 707, 746, 98],
+    "Electrical-Power": [556, 557, 558, 559, 712, 713, 714, 715, 238, 362, 316, 237, 308, 315, 309, 313, 314, 306, 312, 311, 310, 307, 543, 187, 145, 146, 123, 147, 563, 43, 162, 169, 105, 52, 699, 109, 114, 26, 60, 560, 674, 544, 546, 552, 554, 671, 672, 675, 685, 695, 698, 549, 677, 697, 716, 719, 745, 759, 116, 59],
+    "Environmental-Eng": [242, 560, 561, 563, 716, 717, 718, 719, 562, 425, 253, 180, 189, 239, 241, 407, 557, 547, 549, 612, 147, 154, 191, 145, 146, 153, 168, 237, 240, 175, 159, 169, 187, 123, 138, 140, 198, 238, 251, 259, 273, 745, 750, 404, 457, 556, 559, 648, 554, 604, 611, 613, 647, 712, 743, 658, 704, 715, 722, 725, 740, 759, 760],
+    "Environmental-Sci": [253, 612, 614, 720, 721, 722, 723, 613, 154, 611, 609, 159, 175, 648, 128, 196, 561, 725, 153, 189, 187, 610, 726, 167, 163, 166, 178, 182, 199, 225, 647, 724, 176, 184, 193, 130, 135, 136, 140, 141, 145, 161, 129, 458, 462, 519, 521, 560, 605, 607, 625, 639, 641, 705, 123, 461, 602, 633, 685, 704, 465, 467, 468, 522, 549, 562, 615, 616, 638, 667, 713, 727, 732, 737, 760, 113, 114],
+    "Field-Research": [254, 610, 724, 725, 726, 727, 609, 611, 92, 154, 128, 129, 196, 612, 161, 167, 720, 168, 177, 113, 38, 130, 145, 551, 114, 108, 98, 90, 105, 116, 183, 686, 123, 84, 110, 147, 171, 178, 199, 522, 550, 613, 614, 622, 721, 176, 561, 562, 597, 671, 717, 119, 457, 458, 460, 462, 469, 475, 519, 521, 524, 547, 605, 607, 618, 619, 620, 683, 722],
+    "Film-Broadcast": [274, 597, 728, 729, 730, 731, 596, 598, 170, 152, 164, 249, 125, 133, 590, 151, 186, 159, 168, 177, 189, 224, 226, 247, 248, 270, 700, 701, 708, 219, 176, 193, 165, 178, 183, 591, 595, 174, 184, 592, 593, 594, 599, 666, 668, 702, 703, 757, 601, 664, 671, 673, 709, 746, 749, 93, 44, 98, 167],
+    "Finance-Acct": [568, 571, 569, 570, 246, 104, 87, 35, 61, 62, 100, 149, 26, 91, 498, 24, 57, 32, 4, 30, 494, 525, 737, 25, 1, 5, 29, 31, 33, 39, 524, 626, 761, 763, 764, 52, 190, 2, 3, 34, 36, 40, 41, 493, 495, 496, 497, 519, 521, 548, 576, 577, 582, 584, 585, 586, 618, 636, 659, 660, 461, 511, 515, 522, 527, 534, 536, 539, 567, 575, 581, 596, 633, 640, 643, 649, 652, 662, 693, 762, 463, 477, 506, 508, 564, 574, 579, 580, 583, 627, 634, 635, 638, 644, 653, 656, 661, 663, 687, 690, 706, 709, 711, 715, 739, 742, 747, 748],
+    "Food-Science": [294, 305, 259, 616, 732, 733, 734, 735, 615, 617, 155, 298, 231, 406, 297, 301, 141, 277, 642, 164, 148, 161, 154, 189, 233, 252, 296, 299, 187, 128, 181, 185, 223, 230, 242, 295, 473, 476, 475, 566, 643, 644, 647, 738, 774, 499, 742, 752, 108, 113],
+    "Forensic-Sci": [236, 288, 289, 303, 422, 618, 619, 620, 156, 415, 234, 235, 420, 630, 632, 160, 170, 199, 233, 295, 296, 297, 298, 299, 301, 178, 127, 128, 200, 470, 500, 531, 534, 631, 663, 713, 734, 159, 92, 94, 142, 108, 193, 775, 776],
+    "Game-Dev": [261, 262, 206, 207, 208, 260, 542, 540, 541, 210, 209, 139, 221, 220, 213, 152, 125, 56, 121, 135, 198, 180, 136, 222, 214, 215, 217, 218, 248, 258, 263, 536, 591, 592, 668, 701, 703, 622, 518, 590, 657, 696, 765, 70, 185],
+    "HR-Management": [245, 285, 286, 287, 300, 576, 577, 578, 426, 427, 428, 150, 149, 160, 148, 163, 173, 225, 295, 296, 297, 299, 301, 190, 124, 223, 243, 246, 275, 293, 493, 461, 487, 491, 497, 586, 633, 489, 495, 569, 583, 649, 651, 739, 582, 585, 106, 87, 193],
+    "Hardware-Systems": [543, 545, 695, 696, 697, 698, 699, 544, 546, 177, 178, 184, 272, 237, 123, 180, 197, 56, 187, 145, 111, 89, 526, 672, 674, 675, 135, 533, 43, 140, 96, 153, 159, 173, 189, 70, 54, 714, 44, 84, 90, 93, 116, 505, 516, 518, 532, 556, 531, 558, 563, 671, 673, 76, 469, 481, 523, 529, 542, 559, 565, 566, 601, 608, 610, 688, 710, 740, 743, 105],
+    "Health-Admin": [282, 283, 284, 493, 494, 496, 497, 498, 495, 429, 431, 430, 230, 106, 227, 295, 296, 298, 188, 143, 141, 142, 297, 299, 301, 107, 122, 144, 231, 232, 280, 506, 521, 56, 492, 604, 693, 774, 463, 476, 482, 503, 584, 628, 712, 758, 95, 57, 61, 80],
+    "Hospitality-Svc": [736, 737, 738, 739, 636, 638, 637, 225, 223, 163, 43, 45, 91, 51, 363, 367, 164, 112, 63, 53, 118, 93, 35, 37, 44, 66, 579, 85, 64, 1, 3, 29, 34, 38, 41, 54, 58, 364, 639, 644, 642, 652, 574, 650, 575, 600, 645, 731, 754, 762],
+    "Industrial-Ops": [240, 564, 565, 566, 567, 740, 741, 742, 146, 361, 155, 123, 555, 237, 562, 367, 195, 145, 162, 502, 559, 580, 81, 549, 556, 615, 734, 147, 191, 92, 581, 661, 663, 51, 116, 118, 44, 53, 103, 124, 190, 161, 171, 173, 179, 183, 189, 460, 485, 495, 496, 499, 521, 543, 546, 547, 552, 553, 582, 584, 659, 735, 175, 458, 480, 483, 548, 558, 560, 561, 579, 587, 608, 643, 654, 677, 712, 715, 719, 733, 750, 752, 471, 472, 484, 493, 497, 508, 510, 550, 568, 571, 607, 613, 616, 617, 623, 644, 647, 650, 655, 658, 693, 713, 717, 105],
+    "Lab-Research": [605, 606, 743, 744, 745, 607, 608, 154, 31, 60, 70, 468, 465, 500, 156, 466, 187, 155, 475, 503, 499, 617, 71, 615, 470, 108, 648, 721, 753, 773, 472, 485, 610, 614, 619, 38, 33, 616, 618, 732, 113, 57, 458, 473, 561, 620, 116, 76, 27, 28, 32, 72, 77, 79, 80, 462, 554, 716, 733, 119, 40, 58, 66, 78, 37, 68, 467, 469, 522, 550, 613, 718, 459, 464, 486, 502, 508, 524, 525, 547, 548, 551, 557, 621, 460, 623, 656, 659, 660, 661, 672, 723, 735, 92, 457, 476, 478, 506, 518, 520, 532, 555, 560, 563, 564, 566, 609, 612, 632, 634, 635, 642, 643, 647, 658, 751, 767],
+    "Law-Enforce": [630, 631, 235, 632, 234, 423, 99, 419, 96, 86, 115, 415, 156, 418, 420, 25, 618, 23, 620, 94, 414, 92, 534, 27, 29, 159, 43, 5, 24, 35, 84, 1, 2, 3, 4, 34, 498, 559, 562, 570, 628, 633, 684, 461, 470, 531, 532, 548, 568, 613, 619, 641, 649, 686, 722, 735, 738],
+    "Legal-Practice": [275, 634, 635, 416, 417, 414, 633, 421, 418, 420, 159, 419, 127, 184, 415, 150, 154, 158, 162, 166, 234, 461, 493, 498, 175, 193, 190, 174, 176, 155, 570, 629, 133, 499, 503, 531, 576, 578, 586, 652, 459, 523, 568, 581, 625, 658, 659, 705, 471, 496, 497, 529, 560, 571, 582, 617, 619, 620, 624, 626, 627, 628, 691, 707, 713, 717, 722, 734, 761, 160, 92, 94, 96, 86, 777, 778],
+    "Maritime-Sea": [202, 205, 203, 455, 443, 444, 445, 446, 448, 451, 452, 454, 447, 449, 450, 356, 357, 359, 456, 201, 204, 360, 364, 363, 366, 367, 453, 365, 162, 63, 361, 685, 29, 27, 720, 51, 34, 90, 85, 39, 64, 1, 2, 3, 35, 40, 632, 612, 638, 647, 724, 725, 549, 609, 611, 683, 686, 718, 722, 723, 481, 646],
+    "Marketing-Sales": [572, 573, 574, 746, 747, 748, 749, 575, 28, 124, 149, 186, 155, 164, 91, 594, 87, 112, 223, 589, 104, 65, 62, 53, 521, 592, 595, 163, 246, 148, 139, 160, 171, 179, 189, 191, 226, 586, 711, 769, 4, 30, 55, 56, 190, 587, 661, 513, 525, 583, 588, 593, 598, 637, 640, 498, 538, 580, 643, 648, 660, 665, 668, 670, 680, 709, 739, 763, 85, 459, 503, 512, 514, 516, 524, 542, 585, 616, 626, 638, 639, 641, 655, 678, 681, 701, 703, 707, 728, 764, 770, 501],
+    "Mechanical-Design": [239, 552, 554, 555, 750, 751, 752, 753, 553, 358, 146, 310, 306, 312, 307, 308, 311, 123, 147, 309, 237, 145, 367, 313, 90, 485, 52, 566, 185, 191, 105, 59, 119, 25, 674, 85, 162, 200, 547, 550, 481, 548, 549, 556, 557, 563, 672, 116, 486, 516, 545, 561, 564, 605, 615, 657, 660, 671, 673, 676, 695, 697, 698, 714, 718, 740, 743, 84, 760, 362],
+    "Medical-Lab": [233, 465, 466, 468, 469, 471, 472, 467, 470, 33, 142, 122, 144, 60, 36, 52, 605, 141, 143, 227, 95, 81, 606, 108, 156, 57, 192, 229, 107, 2, 3, 4, 5, 23, 75, 45, 55, 193, 460, 478, 619, 620, 660, 671, 743, 113, 76, 464, 475, 479, 495, 499, 516, 607, 614, 618, 677, 698, 772, 773, 491],
+    "Mobile-Dev": [265, 214, 537, 538, 539, 536, 433, 432, 136, 198, 140, 212, 211, 134, 222, 121, 135, 189, 191, 152, 161, 219, 220, 226, 238, 247, 252, 180, 206, 208, 262, 266, 513, 542, 641, 541, 670, 690, 97, 56],
+    "Nutrition-Diet": [474, 479, 477, 772, 773, 774, 473, 475, 478, 476, 231, 394, 259, 294, 155, 616, 297, 301, 141, 386, 144, 143, 188, 166, 187, 227, 229, 230, 232, 270, 295, 122, 148, 169, 243, 265, 269, 277, 457, 615, 645, 735, 175, 184, 200, 462, 705, 732, 734, 459, 643, 566],
+    "Patient-Care": [227, 192, 142, 95, 107, 23, 36, 103, 141, 42, 81, 43, 5, 27, 25, 39, 2, 3, 4, 41, 58, 1, 34, 40, 38, 501, 480, 483, 482, 88, 474, 490, 60, 32, 469, 473, 486, 487, 494, 457, 467, 478, 484, 485, 491, 499, 772, 465, 488, 28, 29, 468, 464, 476, 516, 519, 607, 628, 629, 705, 466, 470, 471, 477, 479, 489, 500, 503, 536, 584, 620, 639, 652, 681, 472, 481, 492, 495, 506, 554, 605, 606, 625, 704, 738, 743, 762, 773, 723],
+    "People-Skill": [278, 678, 679, 680, 681, 682, 373, 368, 381, 377, 45, 24, 369, 157, 370, 372, 383, 150, 371, 375, 380, 492, 88, 489, 379, 574, 627, 637, 79, 94, 487, 117, 23, 460, 581, 626, 635, 80, 83, 488, 497, 510, 576, 578, 646, 579, 599, 624, 634, 644, 374, 490, 572, 585, 622, 28, 382, 486, 501, 636, 655, 707, 25, 546, 570, 583, 586, 598, 631, 654, 669, 464, 483, 509, 580, 589, 593, 628, 638, 757, 767, 491, 494, 538, 600, 625, 747, 495, 499, 504, 582, 595, 610, 630, 643, 706, 727, 738, 748, 756, 766, 378, 459, 467, 469, 482, 498, 517, 532, 535, 541, 565, 568, 573, 577, 608, 629, 632, 645, 650, 651, 653, 677, 708, 726, 728, 761, 763, 479, 493, 507, 508, 511, 513, 516, 518, 534, 536, 544, 575, 594, 596, 615, 621, 633, 640, 649, 692, 709, 744, 746, 754, 764, 768, 376],
+    "Performing-Arts": [250, 599, 754, 755, 756, 757, 600, 601, 151, 125, 195, 164, 152, 139, 178, 179, 209, 248, 270, 593, 184, 168, 172, 173, 182, 199, 207, 208, 219, 249, 262, 268, 274, 488, 540, 597, 594, 595, 596, 598, 602, 664, 666, 667, 683, 710, 728, 731, 585, 635, 669, 680, 702, 708, 759, 744, 44, 30, 66, 93, 176],
+    "Pharmacy": [279, 280, 281, 228, 501, 500, 502, 499, 435, 503, 434, 436, 437, 295, 296, 297, 299, 301, 605, 141, 142, 143, 188, 144, 227, 230, 122, 233, 236, 289, 303, 461, 462, 470, 566, 607, 743, 200, 606, 618, 465, 616, 733, 107, 95, 60, 155],
+    "Physical-Skill": [683, 684, 685, 686, 391, 397, 393, 386, 398, 395, 385, 29, 389, 384, 387, 269, 132, 394, 396, 646, 388, 390, 392, 399, 481, 192, 484, 631, 360, 632, 365, 66, 25, 480, 645, 555, 727, 755, 363, 103, 37, 756, 483, 625, 647, 726, 64, 34, 90, 610, 630, 486, 599, 600, 639, 745, 473, 482, 485, 545, 548, 558, 564, 757, 471, 474, 476, 478, 525, 542, 543, 550, 552, 554, 556, 565, 574, 590, 597, 601, 609, 611, 614, 618, 621, 622, 636, 638, 649, 654, 664, 676, 697, 729, 740, 741, 768],
+    "Public-Health": [458, 463, 457, 462, 464, 459, 460, 461, 232, 169, 141, 479, 143, 188, 230, 175, 475, 497, 142, 160, 227, 229, 244, 166, 198, 122, 190, 135, 140, 154, 159, 164, 167, 172, 180, 189, 218, 228, 231, 470, 478, 495, 525, 608, 609, 611, 625, 725, 773, 176, 473, 476, 524, 706, 494, 500, 519, 521, 578, 629, 192],
+    "Rehab-Therapy": [484, 480, 481, 482, 483, 485, 486, 229, 390, 88, 94, 95, 387, 188, 141, 122, 176, 132, 103, 143, 227, 295, 269, 107, 36, 113, 110, 99, 144, 84, 96, 163, 223, 158, 115, 491, 554, 645, 494, 623, 629, 29, 564, 600, 636, 641, 646, 736, 750, 45],
+    "Social-Work": [292, 293, 304, 243, 628, 629, 376, 378, 160, 383, 175, 374, 380, 379, 381, 368, 375, 372, 370, 166, 127, 489, 296, 297, 299, 301, 487, 133, 159, 169, 157, 193, 182, 627, 704, 462, 464, 584, 597, 625, 680, 681, 479, 482, 491, 575, 623, 626, 633, 634, 730, 731, 176],
+    "Software-Dev": [266, 504, 509, 506, 510, 692, 693, 694, 505, 507, 508, 56, 222, 134, 135, 512, 537, 515, 541, 523, 527, 530, 520, 526, 111, 89, 558, 689, 97, 33, 496, 502, 532, 539, 569, 83, 29, 76, 28, 32, 511, 536, 577, 189, 30, 528, 584, 70, 37, 516, 551, 687, 690, 69, 108, 4, 31, 23, 517, 544, 553, 662, 695, 1, 2, 3, 5, 34, 35, 36, 591, 688, 765, 462, 513, 514, 522, 531, 535, 540, 543, 583, 472, 518, 519, 529, 533, 542, 552, 565, 567, 580, 624, 657, 673, 702, 463, 534, 538, 546, 555, 556, 570, 582, 587, 588, 589, 603, 618, 620, 621, 622, 623, 633, 641, 656, 676, 691, 699, 701, 724, 740, 749, 762, 764, 698],
+    "Spatial-Design": [251, 603, 758, 759, 760, 761, 602, 604, 153, 248, 241, 125, 123, 59, 30, 152, 145, 551, 553, 237, 118, 112, 67, 36, 104, 147, 148, 149, 163, 164, 185, 110, 120, 151, 177, 191, 213, 240, 540, 548, 590, 592, 601, 643, 176, 547, 558, 564, 574, 665, 668, 670, 769, 485, 549, 557, 559, 563, 651, 703, 719, 742, 770, 771],
+    "Sports-Ed": [646, 645, 392, 269, 132, 388, 270, 384, 389, 399, 396, 387, 183, 398, 385, 394, 393, 395, 390, 391, 386, 684, 397, 157, 144, 166, 169, 153, 158, 683, 686, 193, 176, 126, 473, 474, 476, 480, 482, 483, 525, 621, 685, 774, 772, 481, 484, 536, 639, 682, 698, 710, 187],
+    "Startup-Venture": [583, 585, 586, 762, 763, 764, 584, 165, 57, 80, 148, 149, 91, 87, 104, 65, 62, 508, 534, 598, 28, 246, 100, 61, 1, 5, 24, 35, 54, 64, 73, 74, 77, 78, 85, 37, 38, 42, 63, 69, 570, 575, 626, 638, 644, 482, 491, 528, 562, 589, 604, 607, 608, 617, 620, 627, 711, 476, 546, 559, 572, 613, 625, 648, 659, 666, 668, 677, 678, 679, 755, 757, 774],
+    "Teaching-Ed": [624, 765, 766, 767, 768, 621, 622, 623, 157, 158, 535, 88, 99, 31, 71, 33, 83, 86, 459, 625, 45, 117, 24, 42, 489, 27, 32, 81, 5, 35, 41, 36, 682, 106, 1, 2, 3, 4, 26, 28, 30, 34, 40, 490, 503, 598, 457, 467, 469, 474, 476, 487, 491, 506, 511, 536, 542, 576, 577, 578, 584, 589, 592, 600, 613, 628, 632, 634, 637, 641, 644, 645, 679, 681, 704, 757, 479, 483, 495, 497, 507, 582, 607, 617, 652, 670, 676, 678, 705, 706, 707, 710, 711, 726, 735, 464, 470, 473, 480, 481, 482, 486, 488, 504, 510, 525, 532, 604, 608, 609, 620, 627, 639, 648, 693, 730, 748, 758, 762, 772, 774],
+    "Technical-Skill": [272, 273, 671, 672, 673, 674, 675, 676, 677, 37, 134, 530, 466, 545, 544, 603, 505, 507, 509, 537, 472, 504, 551, 606, 552, 109, 111, 526, 531, 533, 543, 553, 580, 729, 194, 195, 502, 513, 558, 601, 33, 56, 520, 527, 561, 83, 151, 29, 55, 271, 546, 555, 556, 610, 42, 78, 107, 481, 512, 528, 539, 557, 614, 76, 28, 32, 66, 72, 87, 100, 534, 535, 538, 582, 623, 744, 467, 510, 518, 541, 566, 579, 590, 595, 631, 696, 702, 733, 753, 70, 122, 80, 24, 529, 540, 559, 578, 105, 469, 471, 478, 486, 517, 550, 569, 605, 608, 621, 647, 654, 699, 724, 462, 480, 485, 496, 508, 523, 596, 598, 600, 624, 633, 637, 649, 650, 651, 667, 669, 687, 695, 700, 714, 716, 727, 731, 750, 754, 765, 470, 484, 493, 500, 503, 506, 515, 516, 522, 532, 548, 554, 560, 563, 564, 565, 572, 574, 581, 583, 584, 588, 591, 607, 611, 630, 640, 645, 653, 656, 706, 715, 721, 732, 737, 739, 755, 577, 662, 688],
+    "Tourism-Travel": [290, 291, 302, 640, 639, 641, 438, 440, 441, 226, 439, 442, 224, 131, 223, 299, 163, 152, 638, 736, 170, 165, 296, 297, 301, 199, 200, 130, 132, 204, 267, 269, 575, 176, 193, 604, 681, 710, 723, 730, 637, 642, 667, 680, 706, 760, 164],
+    "Visual-Design": [587, 769, 770, 771, 588, 589, 248, 219, 247, 30, 32, 514, 186, 56, 153, 93, 44, 152, 118, 69, 26, 591, 595, 602, 78, 33, 221, 700, 1, 2, 3, 4, 5, 24, 27, 28, 31, 34, 35, 37, 603, 511, 513, 538, 540, 593, 594, 596, 604, 664, 666, 708, 522, 619, 665, 668, 670, 710, 746, 759, 110, 541, 542, 590, 592, 597, 642, 667, 749],
+    "Web-Dev": [263, 211, 264, 515, 212, 511, 512, 513, 514, 134, 222, 121, 165, 198, 537, 140, 247, 506, 186, 148, 163, 139, 219, 220, 224, 226, 268, 573, 694, 177, 181, 185, 191, 209, 522, 532, 539, 574, 589, 594, 640, 56, 200, 504, 505, 533, 587, 588, 769, 525, 526, 687, 688, 709, 747, 749, 771, 97, 89, 70],
 }
 
 # ==================== INTEREST KEYWORD → DOMAIN ====================
@@ -1114,12 +1537,8 @@ STRAND_DOMAIN_MAP = {
 # Minimum questions to ask in a domain before moving on
 DOMAIN_MIN_QUESTIONS = 3
 
-# Maximum questions to spend in one domain before rotating to the next.
-# This ensures ALL of a user's selected interests get explored, not just the first one.
-# The actual cap is dynamically calculated as: max_questions / num_voted_domains
-# (so with 30 questions and 4 domains, each domain gets ~7 questions before rotation).
-# This constant is only a hard ceiling fallback.
-DOMAIN_MAX_QUESTIONS_HARD_CAP = 8
+# Hard cap per domain — set to 30 so a dominant domain can fill the full session.
+DOMAIN_MAX_QUESTIONS_HARD_CAP = 30
 
 
 class AdaptiveAssessmentEngine:
@@ -1212,6 +1631,69 @@ class AdaptiveAssessmentEngine:
         if isinstance(trait_tag, list):
             return set(trait_tag)
         return set(t.strip() for t in str(trait_tag).split(',') if t.strip())
+
+    def _profile_lookup_keys(self, selection: str) -> List[str]:
+        """Generate normalized lookup variants for profile selections."""
+        if not selection:
+            return []
+
+        raw = selection.strip().lower()
+        normalized_words = " ".join(
+            raw.replace("&", " ")
+               .replace("/", " ")
+               .replace("-", " ")
+               .replace("_", " ")
+               .split()
+        )
+        snake = normalized_words.replace(" ", "_")
+
+        candidates = [
+            raw,
+            raw.replace(" ", "_"),
+            raw.replace(" & ", "_").replace("&", "_").replace(" ", "_"),
+            snake,
+            normalized_words,
+        ]
+
+        if normalized_words:
+            candidates.extend(normalized_words.split())
+
+        ordered = []
+        seen = set()
+        for candidate in candidates:
+            if candidate and candidate not in seen:
+                ordered.append(candidate)
+                seen.add(candidate)
+        return ordered
+
+    def _get_profile_traits_for_selection(self, selection: str) -> List[str]:
+        """Resolve a profile selection to traits using tolerant key matching."""
+        traits = []
+        seen = set()
+        for key in self._profile_lookup_keys(selection):
+            for trait in UNIFIED_PROFILE_TO_TRAITS.get(key, []):
+                if trait not in seen:
+                    traits.append(trait)
+                    seen.add(trait)
+        return traits
+
+    def _get_profile_domain_for_selection(self, selection: str) -> Optional[str]:
+        """Resolve a profile selection to its most relevant domain."""
+        for key in self._profile_lookup_keys(selection):
+            domain = INTEREST_DOMAIN_MAP.get(key)
+            if domain:
+                return domain
+
+        branch_votes: Dict[str, int] = {}
+        for trait in self._get_profile_traits_for_selection(selection):
+            branch = TRAIT_TO_BRANCH.get(trait, "")
+            if branch:
+                branch_votes[branch] = branch_votes.get(branch, 0) + 1
+
+        if branch_votes:
+            return max(branch_votes.items(), key=lambda item: item[1])[0]
+
+        return None
     
     def _calculate_profile_bonus(self, interests: str, skills: str, course_traits: Set[str]) -> float:
         """Calculate bonus points (0-20) for courses matching user's profile interests/skills.
@@ -1236,7 +1718,7 @@ class AdaptiveAssessmentEngine:
         # Collect ALL unique traits the user's profile maps to
         user_profile_traits: Set[str] = set()
         for selection in user_selections:
-            related_traits = PROFILE_TO_TRAITS.get(selection) or PROFILE_TO_TRAITS.get(selection.replace(" ", "_")) or PROFILE_TO_TRAITS.get(selection.replace(" & ", "_").replace(" ", "_"), [])
+            related_traits = self._get_profile_traits_for_selection(selection)
             for trait in related_traits:
                 user_profile_traits.add(trait.lower())
         
@@ -1468,7 +1950,7 @@ class AdaptiveAssessmentEngine:
         if session.user_interests:
             for interest in session.user_interests.split(','):
                 interest = interest.strip().lower()
-                traits = PROFILE_TO_TRAITS.get(interest) or PROFILE_TO_TRAITS.get(interest.replace(" ", "_")) or PROFILE_TO_TRAITS.get(interest.replace(" & ", "_").replace(" ", "_"), [])
+                traits = self._get_profile_traits_for_selection(interest)
                 for trait in traits:
                     trait_counts[trait] = trait_counts.get(trait, 0) + 1
         
@@ -1476,7 +1958,7 @@ class AdaptiveAssessmentEngine:
         if session.user_skills:
             for skill in session.user_skills.split(','):
                 skill = skill.strip().lower()
-                traits = PROFILE_TO_TRAITS.get(skill) or PROFILE_TO_TRAITS.get(skill.replace(" ", "_")) or PROFILE_TO_TRAITS.get(skill.replace(" & ", "_").replace(" ", "_"), [])
+                traits = self._get_profile_traits_for_selection(skill)
                 for trait in traits:
                     trait_counts[trait] = trait_counts.get(trait, 0) + 1
         
@@ -1511,7 +1993,7 @@ class AdaptiveAssessmentEngine:
         if interests:
             for interest in interests.split(','):
                 interest = interest.strip().lower()
-                traits = PROFILE_TO_TRAITS.get(interest) or PROFILE_TO_TRAITS.get(interest.replace(" ", "_")) or PROFILE_TO_TRAITS.get(interest.replace(" & ", "_").replace(" ", "_"), [])
+                traits = self._get_profile_traits_for_selection(interest)
                 for i, trait in enumerate(traits):
                     # First trait in list is most relevant
                     trait_counts[trait] = trait_counts.get(trait, 0) + (2.0 - i * 0.3)
@@ -1520,7 +2002,7 @@ class AdaptiveAssessmentEngine:
         if skills:
             for skill in skills.split(','):
                 skill = skill.strip().lower()
-                traits = PROFILE_TO_TRAITS.get(skill) or PROFILE_TO_TRAITS.get(skill.replace(" ", "_")) or PROFILE_TO_TRAITS.get(skill.replace(" & ", "_").replace(" ", "_"), [])
+                traits = self._get_profile_traits_for_selection(skill)
                 for i, trait in enumerate(traits):
                     trait_counts[trait] = trait_counts.get(trait, 0) + (1.5 - i * 0.2)
 
@@ -1717,8 +2199,8 @@ class AdaptiveAssessmentEngine:
         if normalized_strand not in STRAND_PRIORITY_TRAITS:
             normalized_strand = "GAS"
         
-        # Calculate min questions (50% of max)
-        min_questions = int(max_questions * 0.5)
+        # Always run all questions — min equals max so no early stop
+        min_questions = max_questions
         
         # Initialize all courses with base score
         course_scores = {name: 50.0 for name in self.courses}
@@ -1786,25 +2268,13 @@ class AdaptiveAssessmentEngine:
             all_keywords.extend([kw.strip().lower().replace(" ", "_") for kw in user_skills.split(",")])
         
         for kw in all_keywords:
-            domain = INTEREST_DOMAIN_MAP.get(kw)
+            domain = self._get_profile_domain_for_selection(kw)
             if domain:
                 domain_votes[domain] = domain_votes.get(domain, 0) + 1
-            else:
-                # Try individual words from multi-word phrases
-                # e.g. "architecture_&_interior_design" → try "architecture", "interior_design"
-                for word in kw.replace("&", " ").replace("_", " ").split():
-                    word = word.strip()
-                    if word:
-                        domain = INTEREST_DOMAIN_MAP.get(word)
-                        if domain:
-                            domain_votes[domain] = domain_votes.get(domain, 0) + 1
-                            break
-        
-        # Also derive domains from profile seed traits (catches phrases like
-        # "Architecture & Interior Design" that UNIFIED_PROFILE_TO_TRAITS handles)
+
         for trait in profile_ranked:
             branch = TRAIT_TO_BRANCH.get(trait, "")
-            if branch and branch not in domain_votes:
+            if branch:
                 domain_votes[branch] = domain_votes.get(branch, 0) + 1
         
         # Primary domain: most voted, with strand as tiebreaker
@@ -1902,50 +2372,49 @@ class AdaptiveAssessmentEngine:
         
         asked = session.excluded_question_ids
         round_num = session.round_number + 1
-        
-        # ═══════════════════════════════════════════════════════════════════
-        # DOMAIN ROTATION: Ensure all user interests get explored
-        # If the current domain has used its fair share of questions,
-        # skip the follow-up chain (Phase 1/2) and jump to Phase 3
-        # to rotate to the next domain in the queue.
-        # ═══════════════════════════════════════════════════════════════════
-        
-        # Calculate per-domain question budget
+
         num_voted_domains = max(len(session.domain_queue), 1)
         domain_budget = max(session.max_questions // num_voted_domains, DOMAIN_MIN_QUESTIONS)
         domain_budget = min(domain_budget, DOMAIN_MAX_QUESTIONS_HARD_CAP)
-        
-        # Check if the current chain's domain has exceeded its budget
+
         current_chain_domain = ""
         if session.current_chain_trait:
             current_chain_domain = TRAIT_TO_BRANCH.get(session.current_chain_trait, "")
         elif session.last_answer_trait:
             current_chain_domain = TRAIT_TO_BRANCH.get(session.last_answer_trait, "")
-        
-        # Are there still underserved domains in the queue?
-        # Because questions can belong to multiple branches, domain_question_count
-        # gets inflated (a question in ["science","healthcare"] increments both).
-        # So instead of requiring unexplored domains, just cap each domain and
-        # let Phase 3/4 naturally pick the next best question path.
-        
+
         current_domain_count = session.domain_question_count.get(current_chain_domain, 0)
+        sorted_branch_weights = sorted(session.branch_weights.values(), reverse=True)
+        dominant_branch = max(session.branch_weights, key=session.branch_weights.get) if session.branch_weights else ""
+        top_branch_weight = sorted_branch_weights[0] if sorted_branch_weights else 0.0
+        second_branch_weight = sorted_branch_weights[1] if len(sorted_branch_weights) > 1 else 0.0
+        recent_same_branch = session.branch_history[-4:].count(current_chain_domain) if current_chain_domain else 0
+        strong_branch_lock = (
+            current_chain_domain and
+            current_chain_domain == dominant_branch and
+            (
+                top_branch_weight >= second_branch_weight + 2.5 or
+                recent_same_branch >= 3
+            )
+        )
         force_domain_rotation = (
             current_chain_domain and
-            current_domain_count >= domain_budget
+            current_domain_count >= domain_budget and
+            not strong_branch_lock
         )
-        
+
+        if current_chain_domain and current_domain_count >= domain_budget and strong_branch_lock:
+            print(f"[ROTATE-BYPASS] Keeping domain '{current_chain_domain}' active because it remains strongly dominant.")
+
         if force_domain_rotation:
             print(f"[ROTATE] Domain '{current_chain_domain}' has {current_domain_count} questions "
                   f"(budget={domain_budget}). Skipping chain to rotate.")
-            # Clear the chain trait so next round detects the actual domain
-            # of whatever question Phase 3/4 picks
             session.current_chain_trait = ""
             session.chain_queue = []
         
         # ═══════════════════════════════════════════════════════════════════
         # PHASE 1: Try to get the next question from the current chain
         # All follow-ups must belong to profile-relevant branches.
-        # SKIPPED if domain rotation is forcing a transition.
         # ═══════════════════════════════════════════════════════════════════
         
         selected_qid = None
@@ -1971,7 +2440,6 @@ class AdaptiveAssessmentEngine:
         # user's dominant pattern. This prevents a single "off-topic" answer
         # (e.g., rating math as excellent when the user is art-focused) from
         # hijacking the entire question chain away from the user's core interests.
-        # ALSO SKIPPED when domain rotation is forcing a transition.
         if not force_domain_rotation and session.last_answer_trait and session.last_answer_trait in TRAIT_FOLLOWUP_MAP:
             trait_is_dominant = self._is_dominant_trait(session.last_answer_trait, session)
             # In early rounds (< 5 answers), allow any trait to drive chain (still discovering)
@@ -1993,7 +2461,6 @@ class AdaptiveAssessmentEngine:
                       f"(not in dominant pattern: {sorted(self._get_dominant_traits(session))[:5]})")
         
         # --- Step 1B: If no follow-up found, try the pre-loaded chain_queue ---
-        # ALSO SKIPPED when domain rotation is forcing a transition.
         if not force_domain_rotation and not selected_qid and session.chain_queue:
             for cq in list(session.chain_queue):
                 if cq not in asked and cq in self.questions and _is_relevant_question(cq):
@@ -2008,7 +2475,6 @@ class AdaptiveAssessmentEngine:
         # ═══════════════════════════════════════════════════════════════════
         # PHASE 2: If chain is exhausted, look at accumulated traits
         # to find the strongest unexplored path
-        # ALSO SKIPPED when domain rotation is forcing a transition.
         # ═══════════════════════════════════════════════════════════════════
         
         if not force_domain_rotation and not selected_qid:
@@ -2129,14 +2595,12 @@ class AdaptiveAssessmentEngine:
                 
                 # Question weight from tree
                 score += node.get("weight", 1.0)
-                
-                # Domain rotation penalty — discourage questions from domains
-                # that already exceeded their budget, favoring underserved domains
+
                 if force_domain_rotation:
                     for branch in q_branches:
                         branch_count = session.domain_question_count.get(branch, 0)
                         if branch_count >= domain_budget:
-                            score *= 0.5  # Halve score for overbudget domains
+                            score *= 0.5
                             break
                 
                 candidates.append((score, qid))
@@ -2508,7 +2972,7 @@ class AdaptiveAssessmentEngine:
         
         # Track which traits to update course scores for: list of (trait, weight) tuples
         traits_to_boost = []
-        primary_trait = None  # The highest-weight trait in the option
+        primary_trait = None
         
         if is_none_option:
             # For "None" options, don't add any traits - the user is rejecting this topic
@@ -2554,11 +3018,9 @@ class AdaptiveAssessmentEngine:
         # Store the trait changes for this question (for reversal)
         session.answer_trait_changes[question_id] = trait_changes
         
-        # Update course scores based on this answer - for all traits boosted
-        # Each trait's boost is scaled by its weight from the option
-        # The primary trait (highest weight) gets an extra 1.3x bonus
+        # Update course scores based on this answer - preserve weighted influence for multi-trait options.
         for trait, weight in traits_to_boost:
-            is_primary = (trait == primary_trait)
+            is_primary = trait == primary_trait
             self._update_course_scores(session, trait, trait_weight=weight, is_primary=is_primary)
         
         # --- Track topic continuity for profile-driven question selection ---
@@ -2701,14 +3163,9 @@ class AdaptiveAssessmentEngine:
         # Fall back to old trait system for backward compatibility
         return get_trait_similarity(trait1, trait2)
     
-    def _update_course_scores(self, session: AdaptiveSession, chosen_trait: str, trait_weight: float = 1.0, is_primary: bool = True):
-        """Boost course scores based on trait matches, weighted by question depth and trait weight.
-        
-        trait_weight: The weight of this trait in the chosen option (e.g. 1.0 for primary, 0.3 for secondary).
-                      This prevents generic secondary traits (Analytical-Skill, Social) from giving
-                      the same boost as the domain-specific primary trait (Legal-Practice, Software-Dev).
-        is_primary:   True if this is the highest-weight trait in the option. Gets a 1.3x bonus.
-        """
+    def _update_course_scores(self, session: AdaptiveSession, chosen_trait: str,
+                             trait_weight: float = 1.0, is_primary: bool = True):
+        """Boost course scores based on trait matches, weighted by question depth and trait importance."""
         if not chosen_trait:
             return
         
@@ -2733,19 +3190,23 @@ class AdaptiveAssessmentEngine:
         early_stage = len(session.answered_questions) < 5
         dominance_multiplier = 1.0 if (is_dominant or early_stage) else 0.25
         
-        # Primary trait gets a bonus multiplier — the most relevant trait in the
-        # chosen option should dominate scoring over generic secondary traits
         primary_bonus = 1.3 if is_primary else 1.0
-        
+
         # Combined multiplier: question weight × early boost × dominance × trait weight × primary bonus
-        total_multiplier = question_weight * early_boost_multiplier * dominance_multiplier * trait_weight * primary_bonus
+        total_multiplier = (
+            question_weight *
+            early_boost_multiplier *
+            dominance_multiplier *
+            trait_weight *
+            primary_bonus
+        )
         
         for course_name in list(session.active_courses):
             course_traits = self.course_traits.get(course_name, set())
             
             # Direct trait match - BIG BOOST (matches unique specialized trait)
             if chosen_trait in course_traits:
-                boost = 12.0 * total_multiplier  # Base 12 points × all multipliers
+                boost = 12.0 * total_multiplier
                 session.course_scores[course_name] += boost
             else:
                 # Check for similar traits using our SPECIALIZED trait system
@@ -2802,23 +3263,8 @@ class AdaptiveAssessmentEngine:
         return min(max(confidence, 0), 1)
     
     def _should_stop(self, session: AdaptiveSession) -> bool:
-        """Determine if we should stop asking questions"""
-        # Must ask minimum questions (use session's min_questions)
-        if session.round_number < session.min_questions:
-            return False
-        
-        # Stop at max questions (use session's max_questions)
-        if session.round_number >= session.max_questions:
-            return True
-        
-        # Stop if confidence is high enough AND we've answered well past minimum
-        # Require at least 60% of max_questions before allowing confidence-based stop
-        min_for_confidence = int(session.max_questions * 0.6)
-        if session.round_number >= min_for_confidence and session.confidence >= self.CONFIDENCE_THRESHOLD:
-            print(f"[STOP] Confidence-based stop at round {session.round_number}: confidence={session.confidence:.2f}")
-            return True
-        
-        return False
+        """Determine if we should stop asking questions - always run all max_questions."""
+        return session.round_number >= session.max_questions
     
     def _finalize_session(self, session: AdaptiveSession):
         """Build final course recommendations."""

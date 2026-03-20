@@ -50,7 +50,7 @@ const keyframes = `
 function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfile, onViewActivity, onViewSettings, history }) {
   const [hasAcademicInfo, setHasAcademicInfo] = useState(false);
   const [checkingProfile, setCheckingProfile] = useState(true);
-  const [selectedQuestionCount] = useState(50);
+  const [selectedQuestionCount] = useState(30); // eslint-disable-line no-unused-vars
   const [showHelpCenter, setShowHelpCenter] = useState(false);
   const [activityCount, setActivityCount] = useState(0);
   const [isReturningUser, setIsReturningUser] = useState(false);
@@ -184,7 +184,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
       onViewProfile();
       return;
     }
-    onStartAssessment(50);
+    onStartAssessment(30);
   }, [hasAcademicInfo, onViewProfile, onStartAssessment]);
 
   // Inject keyframes into document
@@ -326,13 +326,13 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
                 <span style={styles.cardTagHighlight}>TAKE ASSESSMENT</span>
               </div>
               <h2 style={styles.cardTitleLarge}>Find Your Perfect Course</h2>
-              <p style={styles.cardDescLarge}>Answer 50 questions and get personalized course recommendations based on your interests and skills.</p>
+              <p style={styles.cardDescLarge}>Answer 30 questions and get personalized course recommendations based on your interests and skills.</p>
               
               <div style={styles.assessmentInfoBox}>
                 <span style={{fontSize: '1.5rem'}}>📋</span>
                 <div style={{flex: 1}}>
                   <strong style={{color: '#e2e8f0'}}>Career Assessment</strong>
-                  <p style={{margin: '4px 0 0', fontSize: '0.85rem', color: '#94a3b8'}}>50 questions · ~15-20 min · Personalized to your strand</p>
+                  <p style={{margin: '4px 0 0', fontSize: '0.85rem', color: '#94a3b8'}}>30 questions · ~10-12 min · Personalized to your profile</p>
                 </div>
               </div>
 
@@ -459,8 +459,8 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
               <div style={styles.helpSection}>
                 <h3 style={styles.helpSectionTitle}>📋 About the Assessment</h3>
                 <div style={styles.helpItem}>
-                  <strong>Career Assessment (50 questions) ~15-20 min</strong>
-                  <p>Answer 50 questions personalized to your strand for accurate course recommendations.</p>
+                  <strong>Career Assessment (30 questions) ~10-12 min</strong>
+                  <p>Answer 30 questions personalized to your strand for accurate course recommendations.</p>
                 </div>
               </div>
             </div>

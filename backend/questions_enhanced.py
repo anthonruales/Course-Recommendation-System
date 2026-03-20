@@ -16673,7 +16673,6481 @@ QUESTIONS_POOL_ENHANCED = [
                 "trait_tags": {"Hardware-Systems": 1.0, "Mechanical-Design": 0.8, "Electronics-Dev": 0.8, "Technical-Skill": 0.45, "Realistic": 0.4, "Electrical-Power": 0.3}
             }
         ]
-    }
+    },
+    {
+        "question_id": 356,
+        "question_text": "On a ship, which department would you be most excited to join?",
+        "category": "Maritime - Department Fit",
+        "options": [
+            {
+                "option_id": 3459,
+                "option_text": "Deck department - navigation, watchkeeping, and ship handling",
+                "trait_tags": {"Maritime-Sea": 1.0, "Technical-Skill": 0.45, "Physical-Skill": 0.35, "Realistic": 0.35, "Mechanical-Design": 0.2}
+            },
+            {
+                "option_id": 3460,
+                "option_text": "Engine department - maintaining engines and machinery at sea",
+                "trait_tags": {"Maritime-Sea": 1.0, "Mechanical-Design": 0.8, "Technical-Skill": 0.45, "Electrical-Power": 0.3, "Realistic": 0.35}
+            },
+            {
+                "option_id": 3461,
+                "option_text": "Electro-technical team - power systems, controls, and ship electronics",
+                "trait_tags": {"Electrical-Power": 1.0, "Maritime-Sea": 0.8, "Hardware-Systems": 0.6, "Technical-Skill": 0.45, "Mechanical-Design": 0.2}
+            },
+            {
+                "option_id": 3462,
+                "option_text": "Cargo operations - planning loading, unloading, and vessel stability",
+                "trait_tags": {"Maritime-Sea": 0.9, "Industrial-Ops": 0.7, "Analytical-Skill": 0.45, "Technical-Skill": 0.3, "Realistic": 0.25}
+            },
+            {
+                "option_id": 3463,
+                "option_text": "Safety team - drills, emergency readiness, and crew protection",
+                "trait_tags": {"Maritime-Sea": 0.9, "Physical-Skill": 0.7, "Law-Enforce": 0.3, "Technical-Skill": 0.3, "Realistic": 0.25}
+            },
+            {
+                "option_id": 3464,
+                "option_text": "Passenger service on cruise ships - guest experience and coordination",
+                "trait_tags": {"Hospitality-Svc": 0.8, "Maritime-Sea": 0.7, "People-Skill": 0.45, "Tourism-Travel": 0.4, "Enterprising": 0.2}
+            }
+        ]
+    },
+    {
+        "question_id": 357,
+        "question_text": "During your bridge watch, what task would you most want responsibility for?",
+        "category": "Maritime - Bridge Watch",
+        "options": [
+            {
+                "option_id": 3465,
+                "option_text": "Plotting the ship's route and checking the next waypoints",
+                "trait_tags": {"Maritime-Sea": 1.0, "Analytical-Skill": 0.45, "Technical-Skill": 0.35, "Realistic": 0.3}
+            },
+            {
+                "option_id": 3466,
+                "option_text": "Monitoring radar, AIS, and other navigation equipment",
+                "trait_tags": {"Maritime-Sea": 0.9, "Hardware-Systems": 0.5, "Technical-Skill": 0.45, "Analytical-Skill": 0.3}
+            },
+            {
+                "option_id": 3467,
+                "option_text": "Coordinating with the captain and crew for safe maneuvering",
+                "trait_tags": {"Maritime-Sea": 0.9, "People-Skill": 0.4, "Admin-Skill": 0.35, "Technical-Skill": 0.25}
+            },
+            {
+                "option_id": 3468,
+                "option_text": "Calculating speed, fuel use, and the most efficient route",
+                "trait_tags": {"Maritime-Sea": 0.8, "Data-Analytics": 0.5, "Analytical-Skill": 0.45, "Technical-Skill": 0.25}
+            },
+            {
+                "option_id": 3469,
+                "option_text": "Preparing for arrival, docking, and port entry procedures",
+                "trait_tags": {"Maritime-Sea": 0.9, "Industrial-Ops": 0.4, "Technical-Skill": 0.35, "Realistic": 0.25}
+            },
+            {
+                "option_id": 3470,
+                "option_text": "Leading safety checks and making sure all watch routines are followed",
+                "trait_tags": {"Maritime-Sea": 0.8, "Law-Enforce": 0.35, "Physical-Skill": 0.3, "Admin-Skill": 0.3, "Technical-Skill": 0.2}
+            }
+        ]
+    },
+    {
+        "question_id": 358,
+        "question_text": "Which engine-room challenge sounds most interesting to solve?",
+        "category": "Maritime - Engine Room",
+        "options": [
+            {
+                "option_id": 3471,
+                "option_text": "Diagnosing why the main engine is losing power during a voyage",
+                "trait_tags": {"Mechanical-Design": 1.0, "Maritime-Sea": 0.8, "Technical-Skill": 0.45, "Investigative": 0.35, "Realistic": 0.3}
+            },
+            {
+                "option_id": 3472,
+                "option_text": "Maintaining pumps, valves, and shipboard mechanical systems",
+                "trait_tags": {"Mechanical-Design": 0.9, "Maritime-Sea": 0.8, "Technical-Skill": 0.4, "Realistic": 0.35}
+            },
+            {
+                "option_id": 3473,
+                "option_text": "Improving fuel efficiency and reducing engine waste",
+                "trait_tags": {"Mechanical-Design": 0.8, "Maritime-Sea": 0.8, "Data-Analytics": 0.4, "Analytical-Skill": 0.35, "Industrial-Ops": 0.25}
+            },
+            {
+                "option_id": 3474,
+                "option_text": "Handling repairs quickly during rough sea conditions",
+                "trait_tags": {"Maritime-Sea": 0.9, "Mechanical-Design": 0.8, "Physical-Skill": 0.35, "Technical-Skill": 0.35, "Realistic": 0.3}
+            },
+            {
+                "option_id": 3475,
+                "option_text": "Working on ship refrigeration and auxiliary systems",
+                "trait_tags": {"Mechanical-Design": 0.8, "Maritime-Sea": 0.7, "Electrical-Power": 0.4, "Technical-Skill": 0.35}
+            },
+            {
+                "option_id": 3476,
+                "option_text": "Inspecting machinery to prevent breakdowns before they happen",
+                "trait_tags": {"Mechanical-Design": 0.8, "Maritime-Sea": 0.7, "Analytical-Skill": 0.35, "Technical-Skill": 0.35, "Industrial-Ops": 0.25}
+            }
+        ]
+    },
+    {
+        "question_id": 359,
+        "question_text": "What part of navigation planning would you enjoy the most before a voyage?",
+        "category": "Maritime - Voyage Planning",
+        "options": [
+            {
+                "option_id": 3477,
+                "option_text": "Studying charts and choosing the safest route",
+                "trait_tags": {"Maritime-Sea": 1.0, "Analytical-Skill": 0.45, "Technical-Skill": 0.3, "Investigative": 0.25}
+            },
+            {
+                "option_id": 3478,
+                "option_text": "Checking tides, currents, and weather systems",
+                "trait_tags": {"Maritime-Sea": 0.9, "Field-Research": 0.35, "Analytical-Skill": 0.35, "Investigative": 0.3, "Environmental-Sci": 0.25}
+            },
+            {
+                "option_id": 3479,
+                "option_text": "Planning schedules to reach ports efficiently",
+                "trait_tags": {"Maritime-Sea": 0.8, "Industrial-Ops": 0.45, "Admin-Skill": 0.35, "Analytical-Skill": 0.25}
+            },
+            {
+                "option_id": 3480,
+                "option_text": "Calculating cargo limits, stability, and ship balance",
+                "trait_tags": {"Maritime-Sea": 0.9, "Industrial-Ops": 0.5, "Analytical-Skill": 0.35, "Technical-Skill": 0.25}
+            },
+            {
+                "option_id": 3481,
+                "option_text": "Preparing contingency plans in case of bad weather or equipment issues",
+                "trait_tags": {"Maritime-Sea": 0.9, "Law-Enforce": 0.25, "Analytical-Skill": 0.35, "Technical-Skill": 0.3, "Physical-Skill": 0.2}
+            },
+            {
+                "option_id": 3482,
+                "option_text": "Using navigation software and electronic bridge systems",
+                "trait_tags": {"Maritime-Sea": 0.8, "Hardware-Systems": 0.45, "Technical-Skill": 0.4, "Data-Analytics": 0.25}
+            }
+        ]
+    },
+    {
+        "question_id": 360,
+        "question_text": "If an emergency happened at sea, what role would fit you best?",
+        "category": "Maritime - Emergency Response",
+        "options": [
+            {
+                "option_id": 3483,
+                "option_text": "Leading a calm evacuation and directing people to safety",
+                "trait_tags": {"Maritime-Sea": 1.0, "People-Skill": 0.45, "Physical-Skill": 0.35, "Admin-Skill": 0.3, "Law-Enforce": 0.2}
+            },
+            {
+                "option_id": 3484,
+                "option_text": "Responding to engine-room damage and keeping systems running",
+                "trait_tags": {"Mechanical-Design": 0.9, "Maritime-Sea": 0.8, "Technical-Skill": 0.4, "Physical-Skill": 0.25}
+            },
+            {
+                "option_id": 3485,
+                "option_text": "Using communication systems to coordinate with authorities and nearby ships",
+                "trait_tags": {"Maritime-Sea": 0.9, "Hardware-Systems": 0.35, "People-Skill": 0.3, "Technical-Skill": 0.35, "Admin-Skill": 0.2}
+            },
+            {
+                "option_id": 3486,
+                "option_text": "Handling firefighting equipment and emergency drills",
+                "trait_tags": {"Maritime-Sea": 0.9, "Physical-Skill": 0.45, "Technical-Skill": 0.35, "Law-Enforce": 0.25}
+            },
+            {
+                "option_id": 3487,
+                "option_text": "Assessing risks quickly and deciding the safest next action",
+                "trait_tags": {"Maritime-Sea": 0.8, "Analytical-Skill": 0.4, "Law-Enforce": 0.25, "Technical-Skill": 0.3}
+            },
+            {
+                "option_id": 3488,
+                "option_text": "Helping injured crew members until more support arrives",
+                "trait_tags": {"Maritime-Sea": 0.8, "Patient-Care": 0.45, "People-Skill": 0.35, "Physical-Skill": 0.25}
+            }
+        ]
+    },
+    {
+        "question_id": 361,
+        "question_text": "Which port-side responsibility sounds most appealing to you?",
+        "category": "Maritime - Port Operations",
+        "options": [
+            {
+                "option_id": 3489,
+                "option_text": "Coordinating cargo loading so everything is balanced and efficient",
+                "trait_tags": {"Industrial-Ops": 1.0, "Maritime-Sea": 0.8, "Analytical-Skill": 0.35, "Admin-Skill": 0.3, "Technical-Skill": 0.25}
+            },
+            {
+                "option_id": 3490,
+                "option_text": "Communicating with pilots, tugboats, and port authorities",
+                "trait_tags": {"Maritime-Sea": 0.9, "People-Skill": 0.4, "Admin-Skill": 0.35, "Technical-Skill": 0.25}
+            },
+            {
+                "option_id": 3491,
+                "option_text": "Inspecting equipment and making sure deck gear is ready",
+                "trait_tags": {"Maritime-Sea": 0.8, "Mechanical-Design": 0.5, "Technical-Skill": 0.35, "Realistic": 0.3}
+            },
+            {
+                "option_id": 3492,
+                "option_text": "Managing ship schedules, turnaround time, and operations planning",
+                "trait_tags": {"Maritime-Sea": 0.8, "Industrial-Ops": 0.45, "Admin-Skill": 0.4, "Analytical-Skill": 0.25}
+            },
+            {
+                "option_id": 3493,
+                "option_text": "Checking manifests and documentation for compliance",
+                "trait_tags": {"Admin-Skill": 0.8, "Maritime-Sea": 0.7, "Conventional": 0.4, "Industrial-Ops": 0.3}
+            },
+            {
+                "option_id": 3494,
+                "option_text": "Improving port workflows using technology and tracking systems",
+                "trait_tags": {"Maritime-Sea": 0.7, "Industrial-Ops": 0.5, "Software-Dev": 0.3, "Data-Analytics": 0.3, "Technical-Skill": 0.25}
+            }
+        ]
+    },
+    {
+        "question_id": 362,
+        "question_text": "Which shipboard electrical or electronic task would you rather handle?",
+        "category": "Maritime - Electro Technical",
+        "options": [
+            {
+                "option_id": 3495,
+                "option_text": "Maintaining the ship's generators and power distribution",
+                "trait_tags": {"Electrical-Power": 1.0, "Maritime-Sea": 0.8, "Technical-Skill": 0.45, "Realistic": 0.25}
+            },
+            {
+                "option_id": 3496,
+                "option_text": "Troubleshooting navigation sensors and control panels",
+                "trait_tags": {"Hardware-Systems": 0.9, "Electrical-Power": 0.8, "Maritime-Sea": 0.7, "Technical-Skill": 0.4}
+            },
+            {
+                "option_id": 3497,
+                "option_text": "Working on automation systems that monitor ship performance",
+                "trait_tags": {"Electrical-Power": 0.8, "Maritime-Sea": 0.7, "Software-Dev": 0.35, "Data-Analytics": 0.3, "Technical-Skill": 0.35}
+            },
+            {
+                "option_id": 3498,
+                "option_text": "Keeping communication and alarm systems reliable during long voyages",
+                "trait_tags": {"Electrical-Power": 0.8, "Maritime-Sea": 0.8, "Hardware-Systems": 0.4, "Technical-Skill": 0.35}
+            },
+            {
+                "option_id": 3499,
+                "option_text": "Testing backup systems so the ship is ready for failures",
+                "trait_tags": {"Electrical-Power": 0.8, "Maritime-Sea": 0.7, "Technical-Skill": 0.35, "Analytical-Skill": 0.25, "Law-Enforce": 0.15}
+            },
+            {
+                "option_id": 3500,
+                "option_text": "Documenting electrical maintenance and planning upgrades",
+                "trait_tags": {"Electrical-Power": 0.7, "Admin-Skill": 0.35, "Maritime-Sea": 0.6, "Technical-Skill": 0.3, "Conventional": 0.25}
+            }
+        ]
+    },
+    {
+        "question_id": 363,
+        "question_text": "What part of life at sea sounds most rewarding to you?",
+        "category": "Maritime - Life At Sea",
+        "options": [
+            {
+                "option_id": 3501,
+                "option_text": "Traveling across countries and experiencing different ports",
+                "trait_tags": {"Maritime-Sea": 1.0, "Tourism-Travel": 0.4, "Physical-Skill": 0.25, "People-Skill": 0.2}
+            },
+            {
+                "option_id": 3502,
+                "option_text": "Working in a disciplined team where everyone depends on each other",
+                "trait_tags": {"Maritime-Sea": 0.9, "People-Skill": 0.4, "Physical-Skill": 0.3, "Admin-Skill": 0.25}
+            },
+            {
+                "option_id": 3503,
+                "option_text": "Handling real equipment and doing practical technical work every day",
+                "trait_tags": {"Maritime-Sea": 0.9, "Mechanical-Design": 0.5, "Technical-Skill": 0.4, "Realistic": 0.3}
+            },
+            {
+                "option_id": 3504,
+                "option_text": "Being mentally sharp in changing sea and weather conditions",
+                "trait_tags": {"Maritime-Sea": 0.8, "Analytical-Skill": 0.35, "Physical-Skill": 0.3, "Investigative": 0.25}
+            },
+            {
+                "option_id": 3505,
+                "option_text": "Learning leadership and responsibility at a young age",
+                "trait_tags": {"Maritime-Sea": 0.8, "Admin-Skill": 0.35, "People-Skill": 0.35, "Enterprising": 0.2}
+            },
+            {
+                "option_id": 3506,
+                "option_text": "Working on cruise ships where service and operations meet",
+                "trait_tags": {"Hospitality-Svc": 0.8, "Maritime-Sea": 0.7, "People-Skill": 0.4, "Tourism-Travel": 0.35}
+            }
+        ]
+    },
+    {
+        "question_id": 364,
+        "question_text": "Which type of vessel would you most want to work on?",
+        "category": "Maritime - Vessel Preference",
+        "options": [
+            {
+                "option_id": 3507,
+                "option_text": "Container ship - large-scale global cargo transport",
+                "trait_tags": {"Maritime-Sea": 1.0, "Industrial-Ops": 0.4, "Analytical-Skill": 0.25, "Realistic": 0.25}
+            },
+            {
+                "option_id": 3508,
+                "option_text": "Tanker - high-responsibility operations with strict safety standards",
+                "trait_tags": {"Maritime-Sea": 0.9, "Physical-Skill": 0.25, "Law-Enforce": 0.25, "Technical-Skill": 0.25}
+            },
+            {
+                "option_id": 3509,
+                "option_text": "Passenger or cruise ship - combining marine operations and guest service",
+                "trait_tags": {"Maritime-Sea": 0.8, "Hospitality-Svc": 0.6, "People-Skill": 0.35, "Tourism-Travel": 0.3}
+            },
+            {
+                "option_id": 3510,
+                "option_text": "Research vessel - collecting data and supporting scientific missions",
+                "trait_tags": {"Maritime-Sea": 0.8, "Field-Research": 0.4, "Lab-Research": 0.3, "Investigative": 0.3}
+            },
+            {
+                "option_id": 3511,
+                "option_text": "Offshore support vessel - demanding technical work in harsh conditions",
+                "trait_tags": {"Maritime-Sea": 0.9, "Mechanical-Design": 0.4, "Physical-Skill": 0.35, "Technical-Skill": 0.3}
+            },
+            {
+                "option_id": 3512,
+                "option_text": "Coast guard or patrol vessel - maritime protection and response",
+                "trait_tags": {"Maritime-Sea": 0.8, "Law-Enforce": 0.4, "Physical-Skill": 0.35, "People-Skill": 0.2}
+            }
+        ]
+    },
+    {
+        "question_id": 365,
+        "question_text": "When the sea becomes rough and conditions get harder, what would you focus on first?",
+        "category": "Maritime - Rough Sea Judgment",
+        "options": [
+            {
+                "option_id": 3513,
+                "option_text": "Check the vessel's course and make sure navigation remains safe",
+                "trait_tags": {"Maritime-Sea": 1.0, "Analytical-Skill": 0.35, "Technical-Skill": 0.3, "Law-Enforce": 0.15}
+            },
+            {
+                "option_id": 3514,
+                "option_text": "Inspect machinery performance and listen for engine problems",
+                "trait_tags": {"Mechanical-Design": 0.9, "Maritime-Sea": 0.8, "Technical-Skill": 0.35, "Realistic": 0.3}
+            },
+            {
+                "option_id": 3515,
+                "option_text": "Make sure cargo and equipment are secured properly",
+                "trait_tags": {"Maritime-Sea": 0.9, "Industrial-Ops": 0.4, "Physical-Skill": 0.3, "Technical-Skill": 0.25}
+            },
+            {
+                "option_id": 3516,
+                "option_text": "Coordinate the crew so everyone knows their role immediately",
+                "trait_tags": {"Maritime-Sea": 0.8, "Admin-Skill": 0.35, "People-Skill": 0.35, "Law-Enforce": 0.15}
+            },
+            {
+                "option_id": 3517,
+                "option_text": "Track weather data and predict how the situation may change",
+                "trait_tags": {"Maritime-Sea": 0.8, "Environmental-Sci": 0.3, "Field-Research": 0.3, "Analytical-Skill": 0.35, "Investigative": 0.25}
+            },
+            {
+                "option_id": 3518,
+                "option_text": "Stay physically ready to respond wherever help is needed most",
+                "trait_tags": {"Physical-Skill": 0.8, "Maritime-Sea": 0.7, "People-Skill": 0.2, "Realistic": 0.2}
+            }
+        ]
+    },
+    {
+        "question_id": 366,
+        "question_text": "Which kind of shipboard leadership task would you enjoy most as you gain experience?",
+        "category": "Maritime - Leadership",
+        "options": [
+            {
+                "option_id": 3519,
+                "option_text": "Training junior crew members to become dependable officers",
+                "trait_tags": {"Maritime-Sea": 1.0, "Teaching-Ed": 0.35, "People-Skill": 0.35, "Admin-Skill": 0.25}
+            },
+            {
+                "option_id": 3520,
+                "option_text": "Planning watch schedules and keeping operations organized",
+                "trait_tags": {"Admin-Skill": 0.9, "Maritime-Sea": 0.8, "Conventional": 0.3, "Industrial-Ops": 0.25}
+            },
+            {
+                "option_id": 3521,
+                "option_text": "Leading drills so the crew stays prepared for emergencies",
+                "trait_tags": {"Maritime-Sea": 0.9, "Law-Enforce": 0.3, "Physical-Skill": 0.3, "People-Skill": 0.25}
+            },
+            {
+                "option_id": 3522,
+                "option_text": "Coordinating with engineers, officers, and port personnel to keep everything on time",
+                "trait_tags": {"Maritime-Sea": 0.8, "Industrial-Ops": 0.35, "People-Skill": 0.35, "Admin-Skill": 0.3}
+            },
+            {
+                "option_id": 3523,
+                "option_text": "Making tough safety decisions when conditions suddenly change",
+                "trait_tags": {"Maritime-Sea": 0.8, "Analytical-Skill": 0.35, "Law-Enforce": 0.25, "Admin-Skill": 0.25}
+            },
+            {
+                "option_id": 3524,
+                "option_text": "Improving systems so the whole vessel works more efficiently",
+                "trait_tags": {"Maritime-Sea": 0.8, "Industrial-Ops": 0.35, "Mechanical-Design": 0.3, "Data-Analytics": 0.25, "Technical-Skill": 0.2}
+            }
+        ]
+    },
+    {
+        "question_id": 367,
+        "question_text": "If you specialized further after maritime studies, which path sounds strongest to you?",
+        "category": "Maritime - Specialization",
+        "options": [
+            {
+                "option_id": 3525,
+                "option_text": "Marine transportation - command, navigation, and vessel operations",
+                "trait_tags": {"Maritime-Sea": 1.0, "Technical-Skill": 0.35, "Analytical-Skill": 0.25, "People-Skill": 0.2}
+            },
+            {
+                "option_id": 3526,
+                "option_text": "Marine engineering - propulsion, machinery, and ship systems",
+                "trait_tags": {"Mechanical-Design": 0.9, "Maritime-Sea": 0.8, "Electrical-Power": 0.3, "Technical-Skill": 0.35}
+            },
+            {
+                "option_id": 3527,
+                "option_text": "Electro-technical officer work - power, automation, and electronics",
+                "trait_tags": {"Electrical-Power": 0.9, "Maritime-Sea": 0.8, "Hardware-Systems": 0.5, "Technical-Skill": 0.35}
+            },
+            {
+                "option_id": 3528,
+                "option_text": "Port and logistics management - shipping operations on land and sea",
+                "trait_tags": {"Industrial-Ops": 0.8, "Maritime-Sea": 0.8, "Admin-Skill": 0.35, "Analytical-Skill": 0.25}
+            },
+            {
+                "option_id": 3529,
+                "option_text": "Cruise and passenger vessel operations - maritime service leadership",
+                "trait_tags": {"Hospitality-Svc": 0.8, "Maritime-Sea": 0.8, "People-Skill": 0.35, "Tourism-Travel": 0.3}
+            },
+            {
+                "option_id": 3530,
+                "option_text": "Offshore energy and specialized maritime operations",
+                "trait_tags": {"Maritime-Sea": 0.9, "Mechanical-Design": 0.35, "Physical-Skill": 0.3, "Industrial-Ops": 0.25, "Technical-Skill": 0.25}
+            }
+        ]
+    },
+
+    # ==================== SOCIAL DOMAIN (368-383) ====================
+    {
+        "question_id": 368,
+        "question_text": "What aspect of working with people motivates you most?",
+        "category": "Social - Core Motivation",
+        "options": [
+            {"option_id": 3531, "option_text": "Helping clients overcome personal challenges", "trait_tags": {"People-Skill": 1.0, "Counseling": 0.6, "Social-Work": 0.5}},
+            {"option_id": 3532, "option_text": "Advocating for community rights and welfare", "trait_tags": {"Community-Serve": 0.9, "People-Skill": 0.7, "Social-Work": 0.6}},
+            {"option_id": 3533, "option_text": "Organizing programs that connect people", "trait_tags": {"Community-Serve": 0.8, "People-Skill": 0.7, "Admin-Skill": 0.5}},
+            {"option_id": 3534, "option_text": "Teaching life skills for better living", "trait_tags": {"Teaching-Ed": 0.8, "People-Skill": 0.7, "Community-Serve": 0.5}},
+            {"option_id": 3755, "option_text": "Counseling individuals through personal crises and life transitions", "trait_tags": {"Counseling": 1.0, "People-Skill": 0.7, "Social-Work": 0.5}},
+            {"option_id": 3756, "option_text": "Leading outreach programs that uplift underserved communities", "trait_tags": {"Community-Serve": 0.9, "Admin-Skill": 0.5, "Social-Work": 0.4}}
+        ]
+    },
+    {
+        "question_id": 369,
+        "question_text": "When you see someone being treated unfairly, what is your typical reaction?",
+        "category": "Social - Advocacy",
+        "options": [
+            {"option_id": 3535, "option_text": "Speak up directly and defend them", "trait_tags": {"Community-Serve": 0.9, "People-Skill": 0.7, "Social-Work": 0.5}},
+            {"option_id": 3536, "option_text": "Report it to the proper authority", "trait_tags": {"Law-Enforce": 0.6, "Community-Serve": 0.7, "Admin-Skill": 0.4}},
+            {"option_id": 3537, "option_text": "Listen and offer emotional support", "trait_tags": {"Counseling": 0.9, "People-Skill": 0.8, "Social-Work": 0.5}},
+            {"option_id": 3538, "option_text": "Research the issue and raise awareness", "trait_tags": {"Community-Serve": 0.7, "Analytical-Skill": 0.5, "People-Skill": 0.5}},
+            {"option_id": 3757, "option_text": "Connect them with legal aid or social services they may not know about", "trait_tags": {"Legal-Practice": 0.4, "People-Skill": 0.7, "Community-Serve": 0.8}},
+            {"option_id": 3758, "option_text": "Rally others to address the issue collectively as a community", "trait_tags": {"Community-Serve": 0.9, "People-Skill": 0.6, "Social-Work": 0.5}}
+        ]
+    },
+    {
+        "question_id": 370,
+        "question_text": "Which social science subject interests you most?",
+        "category": "Social - Academic Interest",
+        "options": [
+            {"option_id": 3539, "option_text": "Psychology and human behavior", "trait_tags": {"Counseling": 1.0, "People-Skill": 0.6, "Social-Work": 0.5}},
+            {"option_id": 3540, "option_text": "Sociology and social systems", "trait_tags": {"Social-Work": 0.9, "Community-Serve": 0.7, "People-Skill": 0.5}},
+            {"option_id": 3541, "option_text": "Political science and public policy", "trait_tags": {"Community-Serve": 0.8, "Legal-Practice": 0.5, "Admin-Skill": 0.4}},
+            {"option_id": 3542, "option_text": "Anthropology and cultural studies", "trait_tags": {"People-Skill": 0.7, "Field-Research": 0.6, "Teaching-Ed": 0.4}},
+            {"option_id": 3759, "option_text": "Communication and media studies focusing on social issues", "trait_tags": {"People-Skill": 0.7, "Creative-Skill": 0.5, "Community-Serve": 0.5}},
+            {"option_id": 3760, "option_text": "History, philosophy, and ethics of social justice", "trait_tags": {"Teaching-Ed": 0.7, "People-Skill": 0.5, "Legal-Practice": 0.3}}
+        ]
+    },
+    {
+        "question_id": 371,
+        "question_text": "How do you prefer to create positive change in society?",
+        "category": "Social - Change Method",
+        "options": [
+            {"option_id": 3543, "option_text": "One-on-one counseling and therapy sessions", "trait_tags": {"Counseling": 1.0, "Rehab-Therapy": 0.5, "People-Skill": 0.6}},
+            {"option_id": 3544, "option_text": "Community organizing and grassroots advocacy", "trait_tags": {"Community-Serve": 0.9, "Social-Work": 0.7, "People-Skill": 0.5}},
+            {"option_id": 3545, "option_text": "Policy research and legislative reform", "trait_tags": {"Legal-Practice": 0.6, "Community-Serve": 0.7, "Analytical-Skill": 0.5}},
+            {"option_id": 3546, "option_text": "Education and awareness campaigns", "trait_tags": {"Teaching-Ed": 0.8, "Community-Serve": 0.6, "People-Skill": 0.5}},
+            {"option_id": 3761, "option_text": "Volunteering directly with grassroots community organizations", "trait_tags": {"Community-Serve": 0.9, "People-Skill": 0.6, "Social-Work": 0.5}},
+            {"option_id": 3762, "option_text": "Writing advocacy content and raising public awareness through media", "trait_tags": {"Community-Serve": 0.8, "Creative-Skill": 0.5, "Analytical-Skill": 0.4}}
+        ]
+    },
+    {
+        "question_id": 372,
+        "question_text": "Which type of organization would you most like to work for?",
+        "category": "Social - Work Setting",
+        "options": [
+            {"option_id": 3547, "option_text": "Non-profit focused on marginalized communities", "trait_tags": {"Social-Work": 0.9, "Community-Serve": 0.8, "People-Skill": 0.5}},
+            {"option_id": 3548, "option_text": "Government social welfare agency", "trait_tags": {"Admin-Skill": 0.7, "Community-Serve": 0.8, "HR-Management": 0.4}},
+            {"option_id": 3549, "option_text": "Mental health center or clinic", "trait_tags": {"Counseling": 1.0, "Patient-Care": 0.5, "People-Skill": 0.6}},
+            {"option_id": 3550, "option_text": "School or youth development program", "trait_tags": {"Teaching-Ed": 0.9, "People-Skill": 0.7, "Counseling": 0.4}},
+            {"option_id": 3763, "option_text": "International development or humanitarian aid organization", "trait_tags": {"Community-Serve": 0.9, "Social-Work": 0.7, "People-Skill": 0.5}},
+            {"option_id": 3764, "option_text": "Community-based rehabilitation and recovery support center", "trait_tags": {"Rehab-Therapy": 0.8, "Counseling": 0.7, "People-Skill": 0.5}}
+        ]
+    },
+    {
+        "question_id": 373,
+        "question_text": "How do you communicate with people from different backgrounds?",
+        "category": "Social - Communication",
+        "options": [
+            {"option_id": 3551, "option_text": "Adapt my style to match their background", "trait_tags": {"People-Skill": 1.0, "Counseling": 0.5, "Community-Serve": 0.5}},
+            {"option_id": 3552, "option_text": "Listen carefully before speaking", "trait_tags": {"Counseling": 0.8, "People-Skill": 0.9, "Social-Work": 0.5}},
+            {"option_id": 3553, "option_text": "Use data and evidence to find common ground", "trait_tags": {"Analytical-Skill": 0.7, "People-Skill": 0.5, "Teaching-Ed": 0.4}},
+            {"option_id": 3554, "option_text": "Focus on shared values and goals", "trait_tags": {"Community-Serve": 0.8, "People-Skill": 0.8, "Social-Work": 0.5}},
+            {"option_id": 3765, "option_text": "Build trust through consistent follow-through on commitments", "trait_tags": {"Counseling": 0.7, "People-Skill": 0.9, "Social-Work": 0.5}},
+            {"option_id": 3766, "option_text": "Ask thoughtful questions before offering my own perspective", "trait_tags": {"People-Skill": 0.8, "Counseling": 0.7, "Teaching-Ed": 0.4}}
+        ]
+    },
+    {
+        "question_id": 374,
+        "question_text": "Which aspect of human development interests you most?",
+        "category": "Social - Human Development",
+        "options": [
+            {"option_id": 3555, "option_text": "Child and adolescent psychology", "trait_tags": {"Counseling": 0.9, "Teaching-Ed": 0.7, "People-Skill": 0.5}},
+            {"option_id": 3556, "option_text": "Family dynamics and relationships", "trait_tags": {"Social-Work": 0.9, "Counseling": 0.8, "People-Skill": 0.6}},
+            {"option_id": 3557, "option_text": "Community growth and social mobility", "trait_tags": {"Community-Serve": 0.9, "Social-Work": 0.7, "Analytical-Skill": 0.4}},
+            {"option_id": 3558, "option_text": "Aging and elderly care support", "trait_tags": {"Social-Work": 0.8, "Patient-Care": 0.7, "Counseling": 0.5}},
+            {"option_id": 3767, "option_text": "Early childhood development and parenting support programs", "trait_tags": {"Teaching-Ed": 0.8, "Social-Work": 0.7, "Counseling": 0.5}},
+            {"option_id": 3768, "option_text": "Social reintegration support for formerly justice-involved individuals", "trait_tags": {"Social-Work": 0.9, "Community-Serve": 0.6, "Legal-Practice": 0.3}}
+        ]
+    },
+    {
+        "question_id": 375,
+        "question_text": "When you volunteer, which activity feels most fulfilling?",
+        "category": "Social - Volunteer Preference",
+        "options": [
+            {"option_id": 3559, "option_text": "Tutoring or mentoring young people", "trait_tags": {"Teaching-Ed": 0.9, "People-Skill": 0.7, "Counseling": 0.4}},
+            {"option_id": 3560, "option_text": "Visiting and supporting the elderly", "trait_tags": {"Social-Work": 0.8, "Patient-Care": 0.5, "People-Skill": 0.8}},
+            {"option_id": 3561, "option_text": "Running food or livelihood programs", "trait_tags": {"Community-Serve": 0.9, "Social-Work": 0.6, "Admin-Skill": 0.4}},
+            {"option_id": 3562, "option_text": "Crisis counseling and emotional support", "trait_tags": {"Counseling": 1.0, "Social-Work": 0.5, "People-Skill": 0.7}},
+            {"option_id": 3769, "option_text": "Environmental cleanup and community beautification projects", "trait_tags": {"Community-Serve": 0.8, "Agri-Nature": 0.4, "Physical-Skill": 0.4}},
+            {"option_id": 3770, "option_text": "Fundraising and resource mobilization for community programs", "trait_tags": {"Community-Serve": 0.8, "Admin-Skill": 0.5, "Marketing-Sales": 0.4}}
+        ]
+    },
+    {
+        "question_id": 376,
+        "question_text": "Which client population would you most like to serve?",
+        "category": "Social - Client Population",
+        "options": [
+            {"option_id": 3563, "option_text": "At-risk youth and street children", "trait_tags": {"Social-Work": 0.9, "Community-Serve": 0.7, "Counseling": 0.5}},
+            {"option_id": 3564, "option_text": "Persons with mental illness", "trait_tags": {"Counseling": 1.0, "Social-Work": 0.7, "Patient-Care": 0.4}},
+            {"option_id": 3565, "option_text": "Survivors of abuse or violence", "trait_tags": {"Social-Work": 1.0, "Counseling": 0.8, "Law-Enforce": 0.3}},
+            {"option_id": 3566, "option_text": "Elderly persons and their families", "trait_tags": {"Social-Work": 0.8, "Patient-Care": 0.6, "Counseling": 0.5}},
+            {"option_id": 3771, "option_text": "Indigenous peoples and cultural minority communities", "trait_tags": {"Community-Serve": 0.9, "Social-Work": 0.7, "Field-Research": 0.4}},
+            {"option_id": 3772, "option_text": "Persons with disabilities and special needs", "trait_tags": {"Rehab-Therapy": 0.7, "Social-Work": 0.9, "Counseling": 0.4}}
+        ]
+    },
+    {
+        "question_id": 377,
+        "question_text": "How do you feel about writing case reports and keeping detailed client records?",
+        "category": "Social - Documentation",
+        "options": [
+            {"option_id": 3567, "option_text": "I enjoy it — documentation ensures accountability", "trait_tags": {"Admin-Skill": 0.8, "Analytical-Skill": 0.6, "Social-Work": 0.4}},
+            {"option_id": 3568, "option_text": "Fine with it when it helps the client", "trait_tags": {"Social-Work": 0.7, "People-Skill": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 3569, "option_text": "Challenging but necessary in social work", "trait_tags": {"Counseling": 0.6, "Social-Work": 0.6, "People-Skill": 0.5}},
+            {"option_id": 3570, "option_text": "I strongly prefer face-to-face work over paperwork", "trait_tags": {"People-Skill": 1.0, "Counseling": 0.7, "Community-Serve": 0.4}},
+            {"option_id": 3773, "option_text": "I use documentation to track patterns and improve service quality", "trait_tags": {"Analytical-Skill": 0.7, "Admin-Skill": 0.6, "Social-Work": 0.5}},
+            {"option_id": 3774, "option_text": "I treat it as a professional reflection and growth tool", "trait_tags": {"Teaching-Ed": 0.5, "Social-Work": 0.7, "Counseling": 0.5}}
+        ]
+    },
+    {
+        "question_id": 378,
+        "question_text": "Which social issue do you feel most passionate about?",
+        "category": "Social - Issue Focus",
+        "options": [
+            {"option_id": 3571, "option_text": "Child welfare and family support", "trait_tags": {"Social-Work": 1.0, "Counseling": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 3572, "option_text": "Poverty alleviation and livelihood programs", "trait_tags": {"Community-Serve": 0.9, "Social-Work": 0.6, "Admin-Skill": 0.4}},
+            {"option_id": 3573, "option_text": "Mental health awareness and access", "trait_tags": {"Counseling": 0.9, "Public-Health": 0.6, "Social-Work": 0.5}},
+            {"option_id": 3574, "option_text": "Gender equality and social inclusion", "trait_tags": {"Community-Serve": 0.8, "Social-Work": 0.7, "Legal-Practice": 0.4}},
+            {"option_id": 3775, "option_text": "Disability inclusion and accessible community programs", "trait_tags": {"Community-Serve": 0.8, "Social-Work": 0.7, "Rehab-Therapy": 0.3}},
+            {"option_id": 3776, "option_text": "Housing insecurity and support for homeless families", "trait_tags": {"Community-Serve": 0.8, "Social-Work": 0.9, "People-Skill": 0.4}}
+        ]
+    },
+    {
+        "question_id": 379,
+        "question_text": "What kind of group sessions do you feel comfortable facilitating?",
+        "category": "Social - Group Work",
+        "options": [
+            {"option_id": 3575, "option_text": "Support groups for trauma survivors", "trait_tags": {"Counseling": 1.0, "Social-Work": 0.7, "People-Skill": 0.5}},
+            {"option_id": 3576, "option_text": "Community dialogue and conflict resolution", "trait_tags": {"Community-Serve": 0.9, "People-Skill": 0.8, "Social-Work": 0.4}},
+            {"option_id": 3577, "option_text": "Livelihood and skills training workshops", "trait_tags": {"Teaching-Ed": 0.8, "Community-Serve": 0.7, "People-Skill": 0.5}},
+            {"option_id": 3578, "option_text": "Parent education and family counseling sessions", "trait_tags": {"Teaching-Ed": 0.8, "Social-Work": 0.6, "Counseling": 0.5}},
+            {"option_id": 3777, "option_text": "Peer-led recovery circles for addiction and personal crisis", "trait_tags": {"Counseling": 0.9, "Social-Work": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 3778, "option_text": "Civic engagement workshops and community decision-making forums", "trait_tags": {"Community-Serve": 0.9, "Teaching-Ed": 0.5, "Legal-Practice": 0.4}}
+        ]
+    },
+    {
+        "question_id": 380,
+        "question_text": "When a client makes very slow progress, how do you respond?",
+        "category": "Social - Resilience",
+        "options": [
+            {"option_id": 3579, "option_text": "Adjust the intervention plan and keep going", "trait_tags": {"Counseling": 0.9, "Social-Work": 0.8, "Analytical-Skill": 0.4}},
+            {"option_id": 3580, "option_text": "Seek supervision and collaborate with the team", "trait_tags": {"Social-Work": 0.8, "People-Skill": 0.6, "Teaching-Ed": 0.4}},
+            {"option_id": 3581, "option_text": "Look for untapped strengths in the client", "trait_tags": {"Counseling": 0.8, "Social-Work": 0.7, "People-Skill": 0.7}},
+            {"option_id": 3582, "option_text": "Evaluate barriers and advocate for more resources", "trait_tags": {"Community-Serve": 0.8, "Social-Work": 0.7, "Admin-Skill": 0.4}},
+            {"option_id": 3779, "option_text": "Celebrate small wins to maintain the client's motivation and hope", "trait_tags": {"People-Skill": 0.8, "Counseling": 0.7, "Social-Work": 0.5}},
+            {"option_id": 3780, "option_text": "Reconsider the theory and try an entirely different approach", "trait_tags": {"Analytical-Skill": 0.7, "Counseling": 0.7, "Teaching-Ed": 0.4}}
+        ]
+    },
+    {
+        "question_id": 381,
+        "question_text": "Which describes your biggest personal strength in social interactions?",
+        "category": "Social - Strength",
+        "options": [
+            {"option_id": 3583, "option_text": "Empathy — I genuinely feel what others feel", "trait_tags": {"People-Skill": 1.0, "Counseling": 0.9, "Social-Work": 0.5}},
+            {"option_id": 3584, "option_text": "Problem-solving — I find practical solutions quickly", "trait_tags": {"Analytical-Skill": 0.7, "Community-Serve": 0.7, "Admin-Skill": 0.4}},
+            {"option_id": 3585, "option_text": "Inspiration — I motivate people to take action", "trait_tags": {"People-Skill": 0.8, "Teaching-Ed": 0.8, "Community-Serve": 0.5}},
+            {"option_id": 3586, "option_text": "Patience — I stay consistent with difficult clients", "trait_tags": {"Social-Work": 0.9, "Counseling": 0.7, "People-Skill": 0.6}},
+            {"option_id": 3781, "option_text": "Professional boundaries — I balance deep care with healthy objectivity", "trait_tags": {"Social-Work": 0.9, "Counseling": 0.6, "Admin-Skill": 0.4}},
+            {"option_id": 3782, "option_text": "Creativity — I find unexpected ways to reach and connect with people", "trait_tags": {"Creative-Skill": 0.5, "People-Skill": 0.9, "Community-Serve": 0.5}}
+        ]
+    },
+    {
+        "question_id": 382,
+        "question_text": "Which social research method interests you most?",
+        "category": "Social - Research",
+        "options": [
+            {"option_id": 3587, "option_text": "In-depth interviews and psychological assessments", "trait_tags": {"Counseling": 0.9, "Analytical-Skill": 0.5, "Social-Work": 0.5}},
+            {"option_id": 3588, "option_text": "Community surveys and needs assessments", "trait_tags": {"Community-Serve": 0.9, "Analytical-Skill": 0.6, "Admin-Skill": 0.4}},
+            {"option_id": 3589, "option_text": "Ethnographic field observation", "trait_tags": {"Field-Research": 0.8, "People-Skill": 0.5, "Social-Work": 0.5}},
+            {"option_id": 3590, "option_text": "Program evaluation and impact measurement", "trait_tags": {"Analytical-Skill": 0.8, "Admin-Skill": 0.5, "Teaching-Ed": 0.4}},
+            {"option_id": 3783, "option_text": "Focus groups and participatory action research with communities", "trait_tags": {"Community-Serve": 0.8, "Field-Research": 0.6, "People-Skill": 0.4}},
+            {"option_id": 3784, "option_text": "Case studies and personal narrative analysis of lived experience", "trait_tags": {"Counseling": 0.8, "Analytical-Skill": 0.5, "Social-Work": 0.4}}
+        ]
+    },
+    {
+        "question_id": 383,
+        "question_text": "In a social welfare team, which role suits you best?",
+        "category": "Social - Team Role",
+        "options": [
+            {"option_id": 3591, "option_text": "Case manager overseeing individual client needs", "trait_tags": {"Social-Work": 1.0, "Admin-Skill": 0.5, "People-Skill": 0.5}},
+            {"option_id": 3592, "option_text": "Community organizer leading grassroots initiatives", "trait_tags": {"Community-Serve": 1.0, "People-Skill": 0.7, "Admin-Skill": 0.4}},
+            {"option_id": 3593, "option_text": "Clinical counselor providing therapy", "trait_tags": {"Counseling": 1.0, "Social-Work": 0.5, "People-Skill": 0.6}},
+            {"option_id": 3594, "option_text": "Program coordinator running social interventions", "trait_tags": {"Admin-Skill": 0.8, "Community-Serve": 0.7, "Social-Work": 0.5}},
+            {"option_id": 3785, "option_text": "Policy advocate driving institutional social change", "trait_tags": {"Legal-Practice": 0.5, "Community-Serve": 0.8, "Admin-Skill": 0.5}},
+            {"option_id": 3786, "option_text": "Community outreach worker building trust at the grassroots level", "trait_tags": {"People-Skill": 0.8, "Community-Serve": 0.9, "Social-Work": 0.4}}
+        ]
+    },
+
+    # ==================== PHYSICAL/SPORTS DOMAIN (384-399) ====================
+    {
+        "question_id": 384,
+        "question_text": "Which physical education activity interests you most?",
+        "category": "Physical - PE Focus",
+        "options": [
+            {"option_id": 3595, "option_text": "Team sports coaching and game strategy", "trait_tags": {"Sports-Ed": 1.0, "Teaching-Ed": 0.5, "People-Skill": 0.4}},
+            {"option_id": 3596, "option_text": "Individual athletic training and performance", "trait_tags": {"Physical-Skill": 1.0, "Sports-Ed": 0.6, "Teaching-Ed": 0.4}},
+            {"option_id": 3597, "option_text": "Fitness and wellness program design", "trait_tags": {"Physical-Skill": 0.9, "Teaching-Ed": 0.6, "Nutrition-Diet": 0.4}},
+            {"option_id": 3598, "option_text": "Dance, gymnastics, and movement arts", "trait_tags": {"Physical-Skill": 0.9, "Performing-Arts": 0.7, "Creative-Skill": 0.4}},
+            {"option_id": 3787, "option_text": "Strength and conditioning for competitive performance sports", "trait_tags": {"Physical-Skill": 0.9, "Sports-Ed": 0.8, "Nutrition-Diet": 0.4}},
+            {"option_id": 3788, "option_text": "Outdoor and adventure education programs", "trait_tags": {"Physical-Skill": 0.8, "Field-Research": 0.4, "Teaching-Ed": 0.7}}
+        ]
+    },
+    {
+        "question_id": 385,
+        "question_text": "When training an athlete, what is your top priority?",
+        "category": "Physical - Training Priority",
+        "options": [
+            {"option_id": 3599, "option_text": "Physical conditioning and strength development", "trait_tags": {"Physical-Skill": 1.0, "Sports-Ed": 0.7, "Nutrition-Diet": 0.3}},
+            {"option_id": 3600, "option_text": "Mental toughness and competitive resilience", "trait_tags": {"Sports-Ed": 0.8, "Counseling": 0.5, "People-Skill": 0.5}},
+            {"option_id": 3601, "option_text": "Technical skill development and biomechanics", "trait_tags": {"Sports-Ed": 0.9, "Teaching-Ed": 0.6, "Physical-Skill": 0.5}},
+            {"option_id": 3602, "option_text": "Injury prevention and long-term health", "trait_tags": {"Rehab-Therapy": 0.8, "Physical-Skill": 0.7, "Patient-Care": 0.4}},
+            {"option_id": 3789, "option_text": "Speed, agility, and explosive power development", "trait_tags": {"Physical-Skill": 0.9, "Sports-Ed": 0.7, "Teaching-Ed": 0.4}},
+            {"option_id": 3790, "option_text": "Game intelligence and tactical decision-making skills", "trait_tags": {"Sports-Ed": 0.9, "Analytical-Skill": 0.5, "Teaching-Ed": 0.4}}
+        ]
+    },
+    {
+        "question_id": 386,
+        "question_text": "Which sports science topic do you find most engaging?",
+        "category": "Physical - Sports Science",
+        "options": [
+            {"option_id": 3603, "option_text": "Exercise physiology and energy systems", "trait_tags": {"Physical-Skill": 0.9, "Lab-Research": 0.5, "Patient-Care": 0.4}},
+            {"option_id": 3604, "option_text": "Biomechanics and movement analysis", "trait_tags": {"Physical-Skill": 0.9, "Mechanical-Design": 0.4, "Analytical-Skill": 0.5}},
+            {"option_id": 3605, "option_text": "Sports psychology and performance mindset", "trait_tags": {"Counseling": 0.6, "Sports-Ed": 0.9, "People-Skill": 0.4}},
+            {"option_id": 3606, "option_text": "Sports nutrition and recovery dietetics", "trait_tags": {"Nutrition-Diet": 0.9, "Physical-Skill": 0.5, "Patient-Care": 0.4}},
+            {"option_id": 3791, "option_text": "Sports medicine and injury prevention assessment", "trait_tags": {"Rehab-Therapy": 0.8, "Physical-Skill": 0.7, "Patient-Care": 0.4}},
+            {"option_id": 3792, "option_text": "Performance analytics and data-driven training methods", "trait_tags": {"Data-Analytics": 0.7, "Sports-Ed": 0.8, "Physical-Skill": 0.4}}
+        ]
+    },
+    {
+        "question_id": 387,
+        "question_text": "What type of fitness or physical program would you enjoy designing?",
+        "category": "Physical - Program Design",
+        "options": [
+            {"option_id": 3607, "option_text": "Youth PE curriculum for school students", "trait_tags": {"Teaching-Ed": 0.9, "Physical-Skill": 0.7, "Sports-Ed": 0.6}},
+            {"option_id": 3608, "option_text": "Professional athlete periodization plan", "trait_tags": {"Sports-Ed": 1.0, "Physical-Skill": 0.8, "Analytical-Skill": 0.4}},
+            {"option_id": 3609, "option_text": "Community wellness and recreational fitness", "trait_tags": {"Physical-Skill": 0.8, "Community-Serve": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 3610, "option_text": "Rehabilitation exercise plan for injured clients", "trait_tags": {"Rehab-Therapy": 0.9, "Physical-Skill": 0.7, "Patient-Care": 0.5}},
+            {"option_id": 3793, "option_text": "Corporate wellness and employee fitness programs", "trait_tags": {"Physical-Skill": 0.8, "Admin-Skill": 0.5, "Teaching-Ed": 0.6}},
+            {"option_id": 3794, "option_text": "Adapted physical education for persons with disabilities", "trait_tags": {"Rehab-Therapy": 0.8, "Teaching-Ed": 0.7, "Physical-Skill": 0.5}}
+        ]
+    },
+    {
+        "question_id": 388,
+        "question_text": "How do you prefer to track athletic and fitness improvements?",
+        "category": "Physical - Performance Tracking",
+        "options": [
+            {"option_id": 3611, "option_text": "Performance testing and statistical analysis", "trait_tags": {"Analytical-Skill": 0.8, "Sports-Ed": 0.7, "Physical-Skill": 0.5}},
+            {"option_id": 3612, "option_text": "Observation and experienced coaching intuition", "trait_tags": {"Sports-Ed": 0.9, "People-Skill": 0.5, "Teaching-Ed": 0.4}},
+            {"option_id": 3613, "option_text": "Digital tools and fitness tracking apps", "trait_tags": {"Technical-Skill": 0.7, "Physical-Skill": 0.6, "Data-Analytics": 0.5}},
+            {"option_id": 3614, "option_text": "Client feedback and self-assessment reports", "trait_tags": {"People-Skill": 0.7, "Counseling": 0.5, "Physical-Skill": 0.6}},
+            {"option_id": 3795, "option_text": "Video analysis and movement review sessions", "trait_tags": {"Sports-Ed": 0.8, "Technical-Skill": 0.5, "Physical-Skill": 0.5}},
+            {"option_id": 3796, "option_text": "Periodization logs and structured training journals", "trait_tags": {"Analytical-Skill": 0.7, "Sports-Ed": 0.8, "Physical-Skill": 0.4}}
+        ]
+    },
+    {
+        "question_id": 389,
+        "question_text": "Which sports or athletic event would you most enjoy being part of?",
+        "category": "Physical - Event Preference",
+        "options": [
+            {"option_id": 3615, "option_text": "Competitive team sports (basketball, volleyball)", "trait_tags": {"Sports-Ed": 1.0, "Physical-Skill": 0.8, "People-Skill": 0.4}},
+            {"option_id": 3616, "option_text": "Individual sports (swimming, track, tennis)", "trait_tags": {"Physical-Skill": 1.0, "Sports-Ed": 0.7, "Teaching-Ed": 0.4}},
+            {"option_id": 3617, "option_text": "Outdoor and adventure sports events", "trait_tags": {"Physical-Skill": 0.9, "Field-Research": 0.4, "Agri-Nature": 0.3}},
+            {"option_id": 3618, "option_text": "Recreational and community leisure events", "trait_tags": {"Physical-Skill": 0.8, "Community-Serve": 0.5, "People-Skill": 0.5}},
+            {"option_id": 3797, "option_text": "Martial arts and combat sports tournaments", "trait_tags": {"Physical-Skill": 0.9, "Sports-Ed": 0.6, "Teaching-Ed": 0.3}},
+            {"option_id": 3798, "option_text": "Health and wellness expos and community fitness events", "trait_tags": {"Physical-Skill": 0.7, "Community-Serve": 0.6, "People-Skill": 0.5}}
+        ]
+    },
+    {
+        "question_id": 390,
+        "question_text": "When an athlete is recovering from injury, what role do you prefer?",
+        "category": "Physical - Injury Recovery",
+        "options": [
+            {"option_id": 3619, "option_text": "Physical rehabilitation and therapeutic exercise", "trait_tags": {"Rehab-Therapy": 1.0, "Physical-Skill": 0.6, "Patient-Care": 0.5}},
+            {"option_id": 3620, "option_text": "Mental support and psychological recovery", "trait_tags": {"Counseling": 0.8, "People-Skill": 0.7, "Sports-Ed": 0.5}},
+            {"option_id": 3621, "option_text": "Return-to-play planning and fitness testing", "trait_tags": {"Sports-Ed": 0.8, "Physical-Skill": 0.7, "Analytical-Skill": 0.4}},
+            {"option_id": 3622, "option_text": "Nutritional support and recovery planning", "trait_tags": {"Nutrition-Diet": 0.8, "Physical-Skill": 0.5, "Patient-Care": 0.4}},
+            {"option_id": 3799, "option_text": "Coordinating the full rehabilitation team for the athlete", "trait_tags": {"Admin-Skill": 0.6, "Sports-Ed": 0.7, "Rehab-Therapy": 0.6}},
+            {"option_id": 3800, "option_text": "Teaching injury prevention and safe movement habits", "trait_tags": {"Teaching-Ed": 0.7, "Physical-Skill": 0.7, "Rehab-Therapy": 0.5}}
+        ]
+    },
+    {
+        "question_id": 391,
+        "question_text": "Which physical environment do you thrive in most?",
+        "category": "Physical - Environment",
+        "options": [
+            {"option_id": 3623, "option_text": "Indoor gym or sports facility", "trait_tags": {"Physical-Skill": 1.0, "Sports-Ed": 0.6, "Teaching-Ed": 0.4}},
+            {"option_id": 3624, "option_text": "Outdoor field, court, or running track", "trait_tags": {"Physical-Skill": 0.9, "Agri-Nature": 0.4, "Field-Research": 0.3}},
+            {"option_id": 3625, "option_text": "Swimming pool or aquatic center", "trait_tags": {"Physical-Skill": 0.9, "Sports-Ed": 0.5, "Maritime-Sea": 0.3}},
+            {"option_id": 3626, "option_text": "Community recreation center or park", "trait_tags": {"Physical-Skill": 0.7, "Community-Serve": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 3801, "option_text": "University or national sports training complex", "trait_tags": {"Physical-Skill": 0.9, "Sports-Ed": 0.7, "Teaching-Ed": 0.4}},
+            {"option_id": 3802, "option_text": "Open-water or beach sports environment", "trait_tags": {"Physical-Skill": 0.8, "Maritime-Sea": 0.3, "Agri-Nature": 0.3}}
+        ]
+    },
+    {
+        "question_id": 392,
+        "question_text": "How do you feel about coaching youth sports?",
+        "category": "Physical - Youth Coaching",
+        "options": [
+            {"option_id": 3627, "option_text": "It is my top aspiration — shaping young athletes", "trait_tags": {"Sports-Ed": 1.0, "Teaching-Ed": 0.7, "People-Skill": 0.5}},
+            {"option_id": 3628, "option_text": "I enjoy it — combines sports and human development", "trait_tags": {"Sports-Ed": 0.9, "Teaching-Ed": 0.7, "People-Skill": 0.5}},
+            {"option_id": 3629, "option_text": "I prefer coaching older or collegiate athletes", "trait_tags": {"Physical-Skill": 0.8, "Sports-Ed": 0.7, "Teaching-Ed": 0.3}},
+            {"option_id": 3630, "option_text": "I would rather focus on elite or professional coaching", "trait_tags": {"Sports-Ed": 0.9, "Physical-Skill": 0.8, "Analytical-Skill": 0.4}},
+            {"option_id": 3803, "option_text": "Balance winning culture with athlete wellbeing and development", "trait_tags": {"Sports-Ed": 0.8, "Teaching-Ed": 0.7, "Counseling": 0.4}},
+            {"option_id": 3804, "option_text": "Support underprivileged youth through sports programs", "trait_tags": {"Community-Serve": 0.7, "Sports-Ed": 0.7, "Physical-Skill": 0.5}}
+        ]
+    },
+    {
+        "question_id": 393,
+        "question_text": "Which kinesiology topic interests you most?",
+        "category": "Physical - Kinesiology",
+        "options": [
+            {"option_id": 3631, "option_text": "Motor learning and sports skill acquisition", "trait_tags": {"Sports-Ed": 0.9, "Teaching-Ed": 0.6, "Physical-Skill": 0.5}},
+            {"option_id": 3632, "option_text": "Neuromuscular physiology and movement science", "trait_tags": {"Physical-Skill": 0.9, "Lab-Research": 0.5, "Patient-Care": 0.4}},
+            {"option_id": 3633, "option_text": "Adapted physical activity for special populations", "trait_tags": {"Teaching-Ed": 0.8, "Rehab-Therapy": 0.7, "Physical-Skill": 0.5}},
+            {"option_id": 3634, "option_text": "Strength and conditioning science", "trait_tags": {"Physical-Skill": 1.0, "Sports-Ed": 0.7, "Nutrition-Diet": 0.3}},
+            {"option_id": 3805, "option_text": "Balance and coordination testing for sports performance", "trait_tags": {"Physical-Skill": 0.9, "Sports-Ed": 0.7, "Analytical-Skill": 0.4}},
+            {"option_id": 3806, "option_text": "Biomechanical lab analysis using motion capture tools", "trait_tags": {"Physical-Skill": 0.8, "Lab-Research": 0.6, "Mechanical-Design": 0.3}}
+        ]
+    },
+    {
+        "question_id": 394,
+        "question_text": "How important is nutrition knowledge to athletic performance?",
+        "category": "Physical - Nutrition",
+        "options": [
+            {"option_id": 3635, "option_text": "Extremely important — it is half of performance", "trait_tags": {"Nutrition-Diet": 0.9, "Physical-Skill": 0.6, "Sports-Ed": 0.5}},
+            {"option_id": 3636, "option_text": "Important but secondary to training intensity", "trait_tags": {"Physical-Skill": 0.9, "Sports-Ed": 0.7, "Nutrition-Diet": 0.4}},
+            {"option_id": 3637, "option_text": "Key primarily for recovery and injury prevention", "trait_tags": {"Rehab-Therapy": 0.7, "Nutrition-Diet": 0.7, "Physical-Skill": 0.5}},
+            {"option_id": 3638, "option_text": "Mostly handled by dietitians rather than coaches", "trait_tags": {"Sports-Ed": 0.8, "Physical-Skill": 0.7, "Teaching-Ed": 0.4}},
+            {"option_id": 3807, "option_text": "Nutrition forms the foundation before training even begins", "trait_tags": {"Nutrition-Diet": 0.9, "Physical-Skill": 0.5, "Sports-Ed": 0.5}},
+            {"option_id": 3808, "option_text": "A balance of training, rest, and nutrition drives real progress", "trait_tags": {"Sports-Ed": 0.8, "Nutrition-Diet": 0.6, "Physical-Skill": 0.5}}
+        ]
+    },
+    {
+        "question_id": 395,
+        "question_text": "Which sport competition format do you prefer?",
+        "category": "Physical - Competition Format",
+        "options": [
+            {"option_id": 3639, "option_text": "Team-based with complex tactical strategies", "trait_tags": {"Sports-Ed": 0.9, "People-Skill": 0.5, "Analytical-Skill": 0.5}},
+            {"option_id": 3640, "option_text": "Individual performance and personal records", "trait_tags": {"Physical-Skill": 1.0, "Sports-Ed": 0.5, "Analytical-Skill": 0.3}},
+            {"option_id": 3641, "option_text": "Recreational leagues and community leagues", "trait_tags": {"Physical-Skill": 0.7, "Community-Serve": 0.6, "People-Skill": 0.5}},
+            {"option_id": 3642, "option_text": "Fitness challenges and endurance events", "trait_tags": {"Physical-Skill": 0.9, "Field-Research": 0.3, "Community-Serve": 0.4}},
+            {"option_id": 3809, "option_text": "Sport-for-development and cross-cultural programs", "trait_tags": {"Community-Serve": 0.7, "People-Skill": 0.5, "Teaching-Ed": 0.5}},
+            {"option_id": 3810, "option_text": "National championships and high-performance competitions", "trait_tags": {"Sports-Ed": 0.9, "Physical-Skill": 0.7, "Analytical-Skill": 0.3}}
+        ]
+    },
+    {
+        "question_id": 396,
+        "question_text": "If you designed a PE curriculum for a school, what would you prioritize?",
+        "category": "Physical - Curriculum Design",
+        "options": [
+            {"option_id": 3643, "option_text": "Fundamental movement skills and motor development", "trait_tags": {"Teaching-Ed": 0.9, "Physical-Skill": 0.8, "Sports-Ed": 0.5}},
+            {"option_id": 3644, "option_text": "Teamwork, sportsmanship, and social skills", "trait_tags": {"Teaching-Ed": 0.8, "People-Skill": 0.7, "Sports-Ed": 0.6}},
+            {"option_id": 3645, "option_text": "Lifelong fitness habits and wellness literacy", "trait_tags": {"Physical-Skill": 0.8, "Teaching-Ed": 0.7, "Nutrition-Diet": 0.4}},
+            {"option_id": 3646, "option_text": "Preparation for competitive sports", "trait_tags": {"Sports-Ed": 1.0, "Physical-Skill": 0.7, "Teaching-Ed": 0.5}},
+            {"option_id": 3811, "option_text": "Interdisciplinary connections between PE and health science", "trait_tags": {"Teaching-Ed": 0.8, "Nutrition-Diet": 0.5, "Physical-Skill": 0.5}},
+            {"option_id": 3812, "option_text": "Traditional and indigenous games as cultural heritage", "trait_tags": {"Teaching-Ed": 0.7, "Physical-Skill": 0.7, "People-Skill": 0.4}}
+        ]
+    },
+    {
+        "question_id": 397,
+        "question_text": "Which aquatic activity would you most want to coach or lead?",
+        "category": "Physical - Aquatics",
+        "options": [
+            {"option_id": 3647, "option_text": "Competitive swimming or water polo", "trait_tags": {"Physical-Skill": 0.9, "Sports-Ed": 0.8, "Teaching-Ed": 0.4}},
+            {"option_id": 3648, "option_text": "Lifesaving and water safety programs", "trait_tags": {"Physical-Skill": 0.8, "Patient-Care": 0.4, "Community-Serve": 0.5}},
+            {"option_id": 3649, "option_text": "Aqua fitness and water aerobics", "trait_tags": {"Physical-Skill": 0.8, "Rehab-Therapy": 0.5, "Teaching-Ed": 0.5}},
+            {"option_id": 3650, "option_text": "Open-water swimming and ocean events", "trait_tags": {"Physical-Skill": 0.9, "Maritime-Sea": 0.3, "Field-Research": 0.3}},
+            {"option_id": 3813, "option_text": "Beach volleyball and coastal recreational sports", "trait_tags": {"Physical-Skill": 0.8, "Community-Serve": 0.4, "Field-Research": 0.3}},
+            {"option_id": 3814, "option_text": "Scuba diving and underwater sports activities", "trait_tags": {"Physical-Skill": 0.8, "Field-Research": 0.4, "Maritime-Sea": 0.3}}
+        ]
+    },
+    {
+        "question_id": 398,
+        "question_text": "How important is the mental side of athletic performance to you?",
+        "category": "Physical - Mental Performance",
+        "options": [
+            {"option_id": 3651, "option_text": "Very important — sports psychology is crucial", "trait_tags": {"Counseling": 0.7, "Sports-Ed": 0.9, "People-Skill": 0.5}},
+            {"option_id": 3652, "option_text": "Equally as important as physical conditioning", "trait_tags": {"Sports-Ed": 0.8, "Physical-Skill": 0.7, "Analytical-Skill": 0.4}},
+            {"option_id": 3653, "option_text": "Important at elite level, less so recreationally", "trait_tags": {"Physical-Skill": 0.9, "Sports-Ed": 0.7, "Teaching-Ed": 0.3}},
+            {"option_id": 3654, "option_text": "Secondary — physical training always comes first", "trait_tags": {"Physical-Skill": 1.0, "Sports-Ed": 0.6, "Teaching-Ed": 0.3}},
+            {"option_id": 3815, "option_text": "Mental readiness is a core sports skill like any other", "trait_tags": {"Counseling": 0.6, "Sports-Ed": 0.9, "People-Skill": 0.4}},
+            {"option_id": 3816, "option_text": "Mind and body training must be integrated for peak output", "trait_tags": {"Physical-Skill": 0.8, "Sports-Ed": 0.8, "Counseling": 0.4}}
+        ]
+    },
+    {
+        "question_id": 399,
+        "question_text": "Which aspect of recreational sports management appeals to you most?",
+        "category": "Physical - Recreation Management",
+        "options": [
+            {"option_id": 3655, "option_text": "Planning and organizing sports events", "trait_tags": {"Admin-Skill": 0.8, "Sports-Ed": 0.7, "Physical-Skill": 0.5}},
+            {"option_id": 3656, "option_text": "Managing sports facilities and equipment", "trait_tags": {"Admin-Skill": 0.7, "Physical-Skill": 0.7, "Technical-Skill": 0.4}},
+            {"option_id": 3657, "option_text": "Coordinating leagues and player development", "trait_tags": {"Sports-Ed": 0.9, "Admin-Skill": 0.5, "People-Skill": 0.5}},
+            {"option_id": 3658, "option_text": "Promoting sports participation in the community", "trait_tags": {"Community-Serve": 0.7, "Sports-Ed": 0.7, "People-Skill": 0.5}},
+            {"option_id": 3817, "option_text": "Designing recreation and wellness policies for institutions", "trait_tags": {"Admin-Skill": 0.8, "Teaching-Ed": 0.5, "Physical-Skill": 0.4}},
+            {"option_id": 3818, "option_text": "Expanding sports access for underserved communities", "trait_tags": {"Community-Serve": 0.8, "Physical-Skill": 0.5, "Admin-Skill": 0.4}}
+        ]
+    },
+
+    # ==================== AGRICULTURE DOMAIN (400-413) ====================
+    {
+        "question_id": 400,
+        "question_text": "Which area of agriculture are you most excited about?",
+        "category": "Agriculture - Core Interest",
+        "options": [
+            {"option_id": 3659, "option_text": "Crop production and agronomy", "trait_tags": {"Agri-Nature": 1.0, "Field-Research": 0.5, "Environmental-Sci": 0.3}},
+            {"option_id": 3660, "option_text": "Animal science and livestock management", "trait_tags": {"Agri-Nature": 0.9, "Field-Research": 0.4, "Patient-Care": 0.3}},
+            {"option_id": 3661, "option_text": "Agricultural technology and mechanization", "trait_tags": {"Agri-Nature": 0.7, "Mechanical-Design": 0.5, "Technical-Skill": 0.5}},
+            {"option_id": 3662, "option_text": "Agribusiness and farm enterprise management", "trait_tags": {"Agri-Nature": 0.7, "Startup-Venture": 0.5, "Admin-Skill": 0.5}},
+            {"option_id": 3819, "option_text": "Soil science and land resource conservation", "trait_tags": {"Agri-Nature": 0.9, "Environmental-Sci": 0.7, "Lab-Research": 0.4}},
+            {"option_id": 3820, "option_text": "Food and nutrition security at the community level", "trait_tags": {"Agri-Nature": 0.7, "Food-Science": 0.5, "Nutrition-Diet": 0.6}}
+        ]
+    },
+    {
+        "question_id": 401,
+        "question_text": "What farming system appeals to you most?",
+        "category": "Agriculture - Farming System",
+        "options": [
+            {"option_id": 3663, "option_text": "Organic and sustainable farming", "trait_tags": {"Agri-Nature": 1.0, "Environmental-Sci": 0.7, "Field-Research": 0.4}},
+            {"option_id": 3664, "option_text": "High-technology greenhouse or vertical farming", "trait_tags": {"Agri-Nature": 0.7, "Technical-Skill": 0.6, "Mechanical-Design": 0.4}},
+            {"option_id": 3665, "option_text": "Traditional mixed farming with diversified crops", "trait_tags": {"Agri-Nature": 0.9, "Field-Research": 0.5, "Physical-Skill": 0.3}},
+            {"option_id": 3666, "option_text": "Commercial large-scale production farming", "trait_tags": {"Agri-Nature": 0.8, "Industrial-Ops": 0.5, "Admin-Skill": 0.4}},
+            {"option_id": 3821, "option_text": "Permaculture and regenerative land management", "trait_tags": {"Agri-Nature": 0.9, "Environmental-Sci": 0.8, "Physical-Skill": 0.3}},
+            {"option_id": 3822, "option_text": "Aquaculture and integrated fish-farming systems", "trait_tags": {"Agri-Nature": 0.8, "Maritime-Sea": 0.3, "Field-Research": 0.5}}
+        ]
+    },
+    {
+        "question_id": 402,
+        "question_text": "Which animal science topic interests you most?",
+        "category": "Agriculture - Animal Science",
+        "options": [
+            {"option_id": 3667, "option_text": "Breeding, genetics, and livestock improvement", "trait_tags": {"Agri-Nature": 1.0, "Lab-Research": 0.6, "Field-Research": 0.4}},
+            {"option_id": 3668, "option_text": "Animal nutrition and feed management", "trait_tags": {"Agri-Nature": 0.9, "Nutrition-Diet": 0.5, "Field-Research": 0.4}},
+            {"option_id": 3669, "option_text": "Veterinary health and disease prevention", "trait_tags": {"Agri-Nature": 0.8, "Patient-Care": 0.5, "Lab-Research": 0.5}},
+            {"option_id": 3670, "option_text": "Poultry, aquaculture, or swine production", "trait_tags": {"Agri-Nature": 0.9, "Industrial-Ops": 0.4, "Field-Research": 0.4}},
+            {"option_id": 3823, "option_text": "Milk, egg, and fiber production efficiency", "trait_tags": {"Agri-Nature": 0.9, "Industrial-Ops": 0.4, "Field-Research": 0.4}},
+            {"option_id": 3824, "option_text": "Small animal and companion animal production systems", "trait_tags": {"Agri-Nature": 0.8, "Patient-Care": 0.4, "Field-Research": 0.4}}
+        ]
+    },
+    {
+        "question_id": 403,
+        "question_text": "When facing a crop disease or pest problem, what is your preferred approach?",
+        "category": "Agriculture - Problem Solving",
+        "options": [
+            {"option_id": 3671, "option_text": "Integrated pest management with eco-friendly solutions", "trait_tags": {"Agri-Nature": 0.9, "Environmental-Sci": 0.7, "Field-Research": 0.4}},
+            {"option_id": 3672, "option_text": "Analyze soil and plant data to find root causes", "trait_tags": {"Agri-Nature": 0.8, "Lab-Research": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 3673, "option_text": "Apply recommended agronomist protocols", "trait_tags": {"Agri-Nature": 0.7, "Analytical-Skill": 0.5, "Field-Research": 0.5}},
+            {"option_id": 3674, "option_text": "Apply targeted chemical treatments per disease type", "trait_tags": {"Agri-Nature": 0.7, "Lab-Research": 0.5, "Technical-Skill": 0.3}},
+            {"option_id": 3825, "option_text": "Consult local farmers and draw on indigenous knowledge", "trait_tags": {"Agri-Nature": 0.8, "People-Skill": 0.5, "Community-Serve": 0.5}},
+            {"option_id": 3826, "option_text": "Design a crop rotation and intercropping system", "trait_tags": {"Agri-Nature": 0.9, "Environmental-Sci": 0.6, "Analytical-Skill": 0.4}}
+        ]
+    },
+    {
+        "question_id": 404,
+        "question_text": "Which agricultural technology excites you most?",
+        "category": "Agriculture - Technology",
+        "options": [
+            {"option_id": 3675, "option_text": "Precision agriculture using drones and GPS sensors", "trait_tags": {"Agri-Nature": 0.7, "Technical-Skill": 0.7, "Data-Analytics": 0.5}},
+            {"option_id": 3676, "option_text": "Hydroponic and aeroponic growing systems", "trait_tags": {"Agri-Nature": 0.8, "Technical-Skill": 0.5, "Environmental-Sci": 0.5}},
+            {"option_id": 3677, "option_text": "Smart irrigation and water conservation technology", "trait_tags": {"Agri-Nature": 0.8, "Environmental-Eng": 0.5, "Technical-Skill": 0.4}},
+            {"option_id": 3678, "option_text": "Biotechnology and genetically improved crops", "trait_tags": {"Agri-Nature": 0.7, "Lab-Research": 0.7, "Environmental-Sci": 0.4}},
+            {"option_id": 3827, "option_text": "Remote sensing and satellite crop monitoring systems", "trait_tags": {"Agri-Nature": 0.7, "Data-Analytics": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 3828, "option_text": "AI and machine learning for crop yield prediction", "trait_tags": {"Agri-Nature": 0.6, "AI-ML": 0.5, "Data-Analytics": 0.6}}
+        ]
+    },
+    {
+        "question_id": 405,
+        "question_text": "How do you feel about spending long hours working in the field outdoors?",
+        "category": "Agriculture - Field Work",
+        "options": [
+            {"option_id": 3679, "option_text": "Love it — field work is the heart of agriculture", "trait_tags": {"Agri-Nature": 1.0, "Physical-Skill": 0.6, "Field-Research": 0.5}},
+            {"option_id": 3680, "option_text": "Fine with it — I adapt to outdoor conditions well", "trait_tags": {"Agri-Nature": 0.8, "Physical-Skill": 0.5, "Field-Research": 0.4}},
+            {"option_id": 3681, "option_text": "Prefer a mix of field and office or lab work", "trait_tags": {"Agri-Nature": 0.7, "Lab-Research": 0.4, "Analytical-Skill": 0.4}},
+            {"option_id": 3682, "option_text": "Prefer indoor research or analytical work", "trait_tags": {"Lab-Research": 0.8, "Agri-Nature": 0.5, "Analytical-Skill": 0.5}},
+            {"option_id": 3829, "option_text": "Seasonal fieldwork is fulfilling despite the challenges", "trait_tags": {"Agri-Nature": 0.9, "Physical-Skill": 0.5, "Field-Research": 0.4}},
+            {"option_id": 3830, "option_text": "Prefer managing teams and farming operations from an oversight role", "trait_tags": {"Agri-Nature": 0.7, "Admin-Skill": 0.6, "People-Skill": 0.4}}
+        ]
+    },
+    {
+        "question_id": 406,
+        "question_text": "Which aspect of food production interests you most?",
+        "category": "Agriculture - Food Production",
+        "options": [
+            {"option_id": 3683, "option_text": "Growing food sustainably and reducing waste", "trait_tags": {"Agri-Nature": 0.9, "Environmental-Sci": 0.7, "Field-Research": 0.4}},
+            {"option_id": 3684, "option_text": "Food safety testing and quality control", "trait_tags": {"Food-Science": 0.9, "Lab-Research": 0.6, "Agri-Nature": 0.5}},
+            {"option_id": 3685, "option_text": "Food processing and value-added products", "trait_tags": {"Food-Science": 0.8, "Industrial-Ops": 0.5, "Agri-Nature": 0.5}},
+            {"option_id": 3686, "option_text": "Marketing and exporting agricultural produce", "trait_tags": {"Agri-Nature": 0.6, "Marketing-Sales": 0.7, "Startup-Venture": 0.5}},
+            {"option_id": 3831, "option_text": "Connecting smallholder farmers to premium markets", "trait_tags": {"Agri-Nature": 0.7, "Marketing-Sales": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 3832, "option_text": "Developing functional foods with health and wellness benefits", "trait_tags": {"Food-Science": 0.8, "Nutrition-Diet": 0.6, "Lab-Research": 0.4}}
+        ]
+    },
+    {
+        "question_id": 407,
+        "question_text": "Which sustainable agriculture practice do you find most important?",
+        "category": "Agriculture - Sustainability",
+        "options": [
+            {"option_id": 3687, "option_text": "Crop rotation and soil health management", "trait_tags": {"Agri-Nature": 1.0, "Environmental-Sci": 0.6, "Field-Research": 0.4}},
+            {"option_id": 3688, "option_text": "Water harvesting and efficient irrigation", "trait_tags": {"Agri-Nature": 0.8, "Environmental-Eng": 0.6, "Field-Research": 0.4}},
+            {"option_id": 3689, "option_text": "Composting and organic waste management", "trait_tags": {"Agri-Nature": 0.9, "Environmental-Sci": 0.7, "Physical-Skill": 0.3}},
+            {"option_id": 3690, "option_text": "Agroforestry and biodiversity preservation", "trait_tags": {"Agri-Nature": 0.8, "Environmental-Sci": 0.8, "Field-Research": 0.4}},
+            {"option_id": 3833, "option_text": "Seed banking and heritage crop variety preservation", "trait_tags": {"Agri-Nature": 0.9, "Field-Research": 0.5, "Lab-Research": 0.4}},
+            {"option_id": 3834, "option_text": "Integrating renewable energy and solar irrigation on farms", "trait_tags": {"Agri-Nature": 0.7, "Environmental-Eng": 0.6, "Technical-Skill": 0.4}}
+        ]
+    },
+    {
+        "question_id": 408,
+        "question_text": "Which agricultural business activity interests you most?",
+        "category": "Agriculture - Agribusiness",
+        "options": [
+            {"option_id": 3691, "option_text": "Running a farm enterprise as an agripreneur", "trait_tags": {"Agri-Nature": 0.8, "Startup-Venture": 0.7, "Admin-Skill": 0.4}},
+            {"option_id": 3692, "option_text": "Agricultural extension and farmer training", "trait_tags": {"Agri-Nature": 0.8, "Teaching-Ed": 0.7, "Community-Serve": 0.4}},
+            {"option_id": 3693, "option_text": "Import or export of agricultural commodities", "trait_tags": {"Agri-Nature": 0.6, "Marketing-Sales": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 3694, "option_text": "Agricultural lending and rural finance", "trait_tags": {"Agri-Nature": 0.5, "Finance-Acct": 0.7, "Admin-Skill": 0.5}},
+            {"option_id": 3835, "option_text": "Farmer cooperative development and rural organizations", "trait_tags": {"Agri-Nature": 0.8, "Community-Serve": 0.6, "Admin-Skill": 0.4}},
+            {"option_id": 3836, "option_text": "Digital platforms connecting farmers directly to buyers", "trait_tags": {"Agri-Nature": 0.7, "Marketing-Sales": 0.5, "Technical-Skill": 0.4}}
+        ]
+    },
+    {
+        "question_id": 409,
+        "question_text": "How do you approach soil health management?",
+        "category": "Agriculture - Soil Science",
+        "options": [
+            {"option_id": 3695, "option_text": "Soil testing and analytical nutrient management", "trait_tags": {"Agri-Nature": 0.9, "Lab-Research": 0.6, "Analytical-Skill": 0.4}},
+            {"option_id": 3696, "option_text": "Organic amendments and natural soil inputs", "trait_tags": {"Agri-Nature": 1.0, "Environmental-Sci": 0.7, "Field-Research": 0.3}},
+            {"option_id": 3697, "option_text": "Conservation tillage and erosion control", "trait_tags": {"Agri-Nature": 0.9, "Field-Research": 0.5, "Environmental-Sci": 0.5}},
+            {"option_id": 3698, "option_text": "Technology-based soil monitoring tools", "trait_tags": {"Agri-Nature": 0.7, "Technical-Skill": 0.6, "Data-Analytics": 0.4}},
+            {"option_id": 3837, "option_text": "Biochar and biostimulant application for soil health", "trait_tags": {"Agri-Nature": 0.9, "Lab-Research": 0.5, "Environmental-Sci": 0.5}},
+            {"option_id": 3838, "option_text": "Erosion mapping and watershed restoration planning", "trait_tags": {"Agri-Nature": 0.8, "Environmental-Sci": 0.7, "Field-Research": 0.4}}
+        ]
+    },
+    {
+        "question_id": 410,
+        "question_text": "Which animal health topic interests you most?",
+        "category": "Agriculture - Animal Health",
+        "options": [
+            {"option_id": 3699, "option_text": "Diagnosing and treating farm animal diseases", "trait_tags": {"Patient-Care": 0.6, "Agri-Nature": 0.9, "Lab-Research": 0.5}},
+            {"option_id": 3700, "option_text": "Animal behavior, welfare, and enrichment", "trait_tags": {"Agri-Nature": 0.9, "Field-Research": 0.5, "Social-Work": 0.3}},
+            {"option_id": 3701, "option_text": "Reproductive management and livestock breeding", "trait_tags": {"Agri-Nature": 1.0, "Lab-Research": 0.5, "Field-Research": 0.4}},
+            {"option_id": 3702, "option_text": "Livestock nutrition and production performance", "trait_tags": {"Agri-Nature": 0.9, "Nutrition-Diet": 0.5, "Field-Research": 0.4}},
+            {"option_id": 3839, "option_text": "Zoo and wildlife management practices", "trait_tags": {"Agri-Nature": 0.8, "Field-Research": 0.5, "Environmental-Sci": 0.4}},
+            {"option_id": 3840, "option_text": "Animal biosecurity, quarantine, and import protocols", "trait_tags": {"Agri-Nature": 0.8, "Law-Enforce": 0.3, "Lab-Research": 0.4}}
+        ]
+    },
+    {
+        "question_id": 411,
+        "question_text": "What type of agricultural research would you like to conduct?",
+        "category": "Agriculture - Research",
+        "options": [
+            {"option_id": 3703, "option_text": "Developing new crop varieties and hybrids", "trait_tags": {"Agri-Nature": 0.9, "Lab-Research": 0.7, "Environmental-Sci": 0.4}},
+            {"option_id": 3704, "option_text": "Studying climate change impacts on food systems", "trait_tags": {"Agri-Nature": 0.8, "Environmental-Sci": 0.8, "Field-Research": 0.5}},
+            {"option_id": 3705, "option_text": "Testing new pest and disease control methods", "trait_tags": {"Agri-Nature": 0.8, "Lab-Research": 0.6, "Field-Research": 0.5}},
+            {"option_id": 3706, "option_text": "Evaluating yield improvement techniques", "trait_tags": {"Agri-Nature": 0.9, "Field-Research": 0.6, "Analytical-Skill": 0.4}},
+            {"option_id": 3841, "option_text": "Soil microbiome research and beneficial bacteria studies", "trait_tags": {"Agri-Nature": 0.8, "Lab-Research": 0.7, "Environmental-Sci": 0.4}},
+            {"option_id": 3842, "option_text": "Participatory research with smallholder farming communities", "trait_tags": {"Agri-Nature": 0.8, "Community-Serve": 0.6, "Field-Research": 0.4}}
+        ]
+    },
+    {
+        "question_id": 412,
+        "question_text": "Which post-harvest activity interests you most?",
+        "category": "Agriculture - Post-Harvest",
+        "options": [
+            {"option_id": 3707, "option_text": "Grain drying, milling, and safe storage", "trait_tags": {"Agri-Nature": 0.8, "Industrial-Ops": 0.5, "Mechanical-Design": 0.4}},
+            {"option_id": 3708, "option_text": "Fruit and vegetable processing and preservation", "trait_tags": {"Food-Science": 0.8, "Agri-Nature": 0.7, "Industrial-Ops": 0.4}},
+            {"option_id": 3709, "option_text": "Cold chain logistics for fresh produce", "trait_tags": {"Agri-Nature": 0.7, "Industrial-Ops": 0.5, "Admin-Skill": 0.4}},
+            {"option_id": 3710, "option_text": "Quality grading and export preparation", "trait_tags": {"Agri-Nature": 0.7, "Marketing-Sales": 0.5, "Analytical-Skill": 0.4}},
+            {"option_id": 3843, "option_text": "Sustainable packaging and eco-friendly storage materials", "trait_tags": {"Agri-Nature": 0.7, "Environmental-Sci": 0.6, "Industrial-Ops": 0.4}},
+            {"option_id": 3844, "option_text": "Crop insurance programs and post-harvest loss reduction", "trait_tags": {"Agri-Nature": 0.7, "Admin-Skill": 0.5, "Analytical-Skill": 0.4}}
+        ]
+    },
+    {
+        "question_id": 413,
+        "question_text": "How do you feel about using precision agriculture technology on the farm?",
+        "category": "Agriculture - Precision Farming",
+        "options": [
+            {"option_id": 3711, "option_text": "Very excited — technology is the future of farming", "trait_tags": {"Agri-Nature": 0.7, "Technical-Skill": 0.7, "Data-Analytics": 0.5}},
+            {"option_id": 3712, "option_text": "Open to it when it improves productivity", "trait_tags": {"Agri-Nature": 0.8, "Technical-Skill": 0.5, "Analytical-Skill": 0.4}},
+            {"option_id": 3713, "option_text": "Prefer traditional methods with selective technology", "trait_tags": {"Agri-Nature": 0.9, "Field-Research": 0.5, "Physical-Skill": 0.3}},
+            {"option_id": 3714, "option_text": "Technology is a tool — the farmer's judgment matters most", "trait_tags": {"Agri-Nature": 1.0, "Field-Research": 0.5, "Analytical-Skill": 0.3}},
+            {"option_id": 3845, "option_text": "Technology is most useful after mastering traditional farming", "trait_tags": {"Agri-Nature": 0.9, "Field-Research": 0.5, "Physical-Skill": 0.3}},
+            {"option_id": 3846, "option_text": "Selective use of technology based on actual farm needs and data", "trait_tags": {"Agri-Nature": 0.8, "Data-Analytics": 0.4, "Technical-Skill": 0.4}}
+        ]
+    },
+
+    # ==================== LAW DOMAIN (414-423) ====================
+    {
+        "question_id": 414,
+        "question_text": "Which area of law interests you most?",
+        "category": "Law - Area of Interest",
+        "options": [
+            {"option_id": 3715, "option_text": "Criminal law and prosecution", "trait_tags": {"Law-Enforce": 0.9, "Legal-Practice": 0.8, "Forensic-Sci": 0.4}},
+            {"option_id": 3716, "option_text": "Civil law and private rights", "trait_tags": {"Legal-Practice": 1.0, "Admin-Skill": 0.4, "Analytical-Skill": 0.4}},
+            {"option_id": 3717, "option_text": "Constitutional and human rights law", "trait_tags": {"Legal-Practice": 0.9, "Community-Serve": 0.6, "Social-Work": 0.4}},
+            {"option_id": 3718, "option_text": "International or maritime law", "trait_tags": {"Legal-Practice": 0.8, "Maritime-Sea": 0.4, "Community-Serve": 0.3}},
+            {"option_id": 3847, "option_text": "Labor and employment law protecting workers rights", "trait_tags": {"Legal-Practice": 0.9, "Community-Serve": 0.5, "Admin-Skill": 0.3}},
+            {"option_id": 3848, "option_text": "Environmental and natural resources law", "trait_tags": {"Legal-Practice": 0.8, "Environmental-Sci": 0.5, "Community-Serve": 0.4}}
+        ]
+    },
+    {
+        "question_id": 415,
+        "question_text": "When investigating a case, which aspect do you find most engaging?",
+        "category": "Law - Investigation",
+        "options": [
+            {"option_id": 3719, "option_text": "Collecting and analyzing physical evidence", "trait_tags": {"Forensic-Sci": 1.0, "Lab-Research": 0.5, "Law-Enforce": 0.5}},
+            {"option_id": 3720, "option_text": "Interviewing witnesses and building timelines", "trait_tags": {"Law-Enforce": 0.9, "People-Skill": 0.5, "Analytical-Skill": 0.4}},
+            {"option_id": 3721, "option_text": "Researching legal precedent and statutes", "trait_tags": {"Legal-Practice": 0.9, "Analytical-Skill": 0.6, "Admin-Skill": 0.3}},
+            {"option_id": 3722, "option_text": "Coordinating with agencies on operations", "trait_tags": {"Law-Enforce": 0.8, "Admin-Skill": 0.5, "Community-Serve": 0.4}},
+            {"option_id": 3849, "option_text": "Profiling suspect behavior through psychological analysis", "trait_tags": {"Forensic-Sci": 0.8, "Counseling": 0.4, "Law-Enforce": 0.6}},
+            {"option_id": 3850, "option_text": "Conducting surveillance and monitoring operations", "trait_tags": {"Law-Enforce": 0.9, "Technical-Skill": 0.4, "Admin-Skill": 0.3}}
+        ]
+    },
+    {
+        "question_id": 416,
+        "question_text": "Which court proceeding or legal process interests you most?",
+        "category": "Law - Legal Process",
+        "options": [
+            {"option_id": 3723, "option_text": "Criminal trials and cross-examination", "trait_tags": {"Legal-Practice": 1.0, "Law-Enforce": 0.6, "People-Skill": 0.4}},
+            {"option_id": 3724, "option_text": "Mediation and alternative dispute resolution", "trait_tags": {"Legal-Practice": 0.8, "People-Skill": 0.7, "Counseling": 0.4}},
+            {"option_id": 3725, "option_text": "Administrative hearings and regulatory cases", "trait_tags": {"Legal-Practice": 0.8, "Admin-Skill": 0.6, "Analytical-Skill": 0.4}},
+            {"option_id": 3726, "option_text": "Public interest litigation on social issues", "trait_tags": {"Legal-Practice": 0.8, "Community-Serve": 0.7, "Social-Work": 0.4}},
+            {"option_id": 3851, "option_text": "Contract drafting and transactional legal work", "trait_tags": {"Legal-Practice": 0.9, "Admin-Skill": 0.5, "Finance-Acct": 0.4}},
+            {"option_id": 3852, "option_text": "Supreme Court appeals and constitutional interpretation", "trait_tags": {"Legal-Practice": 1.0, "Analytical-Skill": 0.6, "Teaching-Ed": 0.3}}
+        ]
+    },
+    {
+        "question_id": 417,
+        "question_text": "How do you approach a complex ethical dilemma in law?",
+        "category": "Law - Ethics",
+        "options": [
+            {"option_id": 3727, "option_text": "Apply legal principles strictly as written", "trait_tags": {"Legal-Practice": 1.0, "Analytical-Skill": 0.6, "Admin-Skill": 0.3}},
+            {"option_id": 3728, "option_text": "Consider the broader impact on justice and fairness", "trait_tags": {"Legal-Practice": 0.8, "Social-Work": 0.5, "Community-Serve": 0.5}},
+            {"option_id": 3729, "option_text": "Consult precedent and consult senior legal experts", "trait_tags": {"Legal-Practice": 0.9, "Analytical-Skill": 0.5, "Teaching-Ed": 0.3}},
+            {"option_id": 3730, "option_text": "Balance client interests with the public good", "trait_tags": {"Legal-Practice": 0.9, "People-Skill": 0.5, "Community-Serve": 0.4}},
+            {"option_id": 3853, "option_text": "Prioritize the fundamental rights and dignity of all involved", "trait_tags": {"Social-Work": 0.5, "Legal-Practice": 0.8, "Community-Serve": 0.5}},
+            {"option_id": 3854, "option_text": "Apply universal ethical principles that transcend local law", "trait_tags": {"Legal-Practice": 0.9, "Community-Serve": 0.5, "Analytical-Skill": 0.4}}
+        ]
+    },
+    {
+        "question_id": 418,
+        "question_text": "Which legal career path appeals to you most?",
+        "category": "Law - Career Path",
+        "options": [
+            {"option_id": 3731, "option_text": "Defense attorney protecting individual rights", "trait_tags": {"Legal-Practice": 1.0, "People-Skill": 0.5, "Community-Serve": 0.4}},
+            {"option_id": 3732, "option_text": "Prosecutor or public attorney", "trait_tags": {"Law-Enforce": 0.8, "Legal-Practice": 0.8, "Community-Serve": 0.5}},
+            {"option_id": 3733, "option_text": "Police officer or criminal investigator", "trait_tags": {"Law-Enforce": 1.0, "Physical-Skill": 0.4, "Community-Serve": 0.5}},
+            {"option_id": 3734, "option_text": "Forensic scientist or crime analyst", "trait_tags": {"Forensic-Sci": 1.0, "Lab-Research": 0.6, "Law-Enforce": 0.5}},
+            {"option_id": 3855, "option_text": "Human rights lawyer or non-profit legal advocate", "trait_tags": {"Legal-Practice": 0.8, "Community-Serve": 0.7, "Social-Work": 0.4}},
+            {"option_id": 3856, "option_text": "Corporate counsel or legal compliance officer", "trait_tags": {"Legal-Practice": 0.9, "Finance-Acct": 0.4, "Admin-Skill": 0.5}}
+        ]
+    },
+    {
+        "question_id": 419,
+        "question_text": "What criminal justice reform do you think is most important?",
+        "category": "Law - Justice Reform",
+        "options": [
+            {"option_id": 3735, "option_text": "Rehabilitation and reintegration programs for offenders", "trait_tags": {"Social-Work": 0.8, "Community-Serve": 0.7, "Counseling": 0.4}},
+            {"option_id": 3736, "option_text": "Stronger community policing and public safety", "trait_tags": {"Law-Enforce": 0.9, "Community-Serve": 0.7, "People-Skill": 0.4}},
+            {"option_id": 3737, "option_text": "Restorative justice and victim-centered support", "trait_tags": {"Social-Work": 0.8, "Legal-Practice": 0.6, "Counseling": 0.5}},
+            {"option_id": 3738, "option_text": "Evidence-based policy and criminal law reform", "trait_tags": {"Legal-Practice": 0.8, "Analytical-Skill": 0.6, "Community-Serve": 0.4}},
+            {"option_id": 3857, "option_text": "Stronger support systems for crime victims and survivors", "trait_tags": {"Social-Work": 0.7, "Counseling": 0.5, "Community-Serve": 0.7}},
+            {"option_id": 3858, "option_text": "Judicial independence, transparency, and anti-corruption measures", "trait_tags": {"Legal-Practice": 0.8, "Community-Serve": 0.5, "Analytical-Skill": 0.4}}
+        ]
+    },
+    {
+        "question_id": 420,
+        "question_text": "Which legal or criminological research method do you prefer?",
+        "category": "Law - Research Method",
+        "options": [
+            {"option_id": 3739, "option_text": "Case analysis and legal writing", "trait_tags": {"Legal-Practice": 1.0, "Analytical-Skill": 0.6, "Admin-Skill": 0.3}},
+            {"option_id": 3740, "option_text": "Field observation and criminological studies", "trait_tags": {"Law-Enforce": 0.7, "Field-Research": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 3741, "option_text": "Forensic lab analysis and crime scene processing", "trait_tags": {"Forensic-Sci": 1.0, "Lab-Research": 0.6, "Law-Enforce": 0.4}},
+            {"option_id": 3742, "option_text": "Quantitative crime data and statistical analysis", "trait_tags": {"Analytical-Skill": 0.8, "Law-Enforce": 0.6, "Data-Analytics": 0.5}},
+            {"option_id": 3859, "option_text": "Legal technology and AI-assisted legal research", "trait_tags": {"Legal-Practice": 0.8, "Data-Analytics": 0.5, "Technical-Skill": 0.4}},
+            {"option_id": 3860, "option_text": "Comparative law and international legal frameworks", "trait_tags": {"Legal-Practice": 0.9, "Analytical-Skill": 0.5, "Teaching-Ed": 0.3}}
+        ]
+    },
+    {
+        "question_id": 421,
+        "question_text": "When representing or supporting a client in a legal matter, what matters most?",
+        "category": "Law - Client Representation",
+        "options": [
+            {"option_id": 3743, "option_text": "Achieving the best possible legal outcome for them", "trait_tags": {"Legal-Practice": 1.0, "Analytical-Skill": 0.5, "People-Skill": 0.4}},
+            {"option_id": 3744, "option_text": "Ensuring they fully understand their rights", "trait_tags": {"Legal-Practice": 0.8, "People-Skill": 0.7, "Teaching-Ed": 0.4}},
+            {"option_id": 3745, "option_text": "Protecting them from injustice or systemic bias", "trait_tags": {"Legal-Practice": 0.7, "Community-Serve": 0.7, "Social-Work": 0.4}},
+            {"option_id": 3746, "option_text": "Building trust through honest communication", "trait_tags": {"People-Skill": 0.8, "Legal-Practice": 0.7, "Counseling": 0.4}},
+            {"option_id": 3861, "option_text": "Making the legal process accessible and easy to understand", "trait_tags": {"Teaching-Ed": 0.5, "Legal-Practice": 0.8, "People-Skill": 0.6}},
+            {"option_id": 3862, "option_text": "Providing emotional reassurance throughout the legal process", "trait_tags": {"Counseling": 0.5, "People-Skill": 0.8, "Legal-Practice": 0.5}}
+        ]
+    },
+    {
+        "question_id": 422,
+        "question_text": "Which forensic science area interests you most?",
+        "category": "Law - Forensic Science",
+        "options": [
+            {"option_id": 3747, "option_text": "DNA analysis and molecular forensics", "trait_tags": {"Forensic-Sci": 1.0, "Lab-Research": 0.7, "Medical-Lab": 0.4}},
+            {"option_id": 3748, "option_text": "Digital forensics and cybercrime investigation", "trait_tags": {"Forensic-Sci": 0.9, "Cyber-Defense": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 3749, "option_text": "Crime scene investigation and evidence collection", "trait_tags": {"Forensic-Sci": 1.0, "Law-Enforce": 0.5, "Field-Research": 0.4}},
+            {"option_id": 3750, "option_text": "Toxicology and cause-of-death investigation", "trait_tags": {"Forensic-Sci": 0.9, "Medical-Lab": 0.6, "Lab-Research": 0.5}},
+            {"option_id": 3863, "option_text": "Ballistics evidence and firearms examination", "trait_tags": {"Forensic-Sci": 0.9, "Mechanical-Design": 0.3, "Law-Enforce": 0.5}},
+            {"option_id": 3864, "option_text": "Questioned documents and handwriting analysis", "trait_tags": {"Forensic-Sci": 0.9, "Analytical-Skill": 0.5, "Admin-Skill": 0.3}}
+        ]
+    },
+    {
+        "question_id": 423,
+        "question_text": "How do you feel about working directly with law enforcement agencies?",
+        "category": "Law - Enforcement Collaboration",
+        "options": [
+            {"option_id": 3751, "option_text": "Ideal for me — I want to be in the field", "trait_tags": {"Law-Enforce": 1.0, "Physical-Skill": 0.4, "Community-Serve": 0.4}},
+            {"option_id": 3752, "option_text": "I enjoy it for the mission of public safety", "trait_tags": {"Law-Enforce": 0.8, "Community-Serve": 0.7, "People-Skill": 0.4}},
+            {"option_id": 3753, "option_text": "I prefer legal or forensic support roles over patrol", "trait_tags": {"Legal-Practice": 0.7, "Forensic-Sci": 0.6, "Analytical-Skill": 0.4}},
+            {"option_id": 3754, "option_text": "I want to work in policy and criminal justice reform", "trait_tags": {"Community-Serve": 0.7, "Legal-Practice": 0.6, "Social-Work": 0.5}},
+            {"option_id": 3865, "option_text": "Prefer community prevention and social crime programs", "trait_tags": {"Community-Serve": 0.8, "Teaching-Ed": 0.5, "Social-Work": 0.5}},
+            {"option_id": 3866, "option_text": "Serve as a civilian researcher or policy consultant", "trait_tags": {"Analytical-Skill": 0.7, "Legal-Practice": 0.5, "Forensic-Sci": 0.4}}
+        ]
+    },
+
+    # ==================== GAP-FILL QUESTIONS (424-442) ====================
+    {
+        "question_id": 424,
+        "question_text": "Which culinary specialization appeals to you most?",
+        "category": "Culinary - Specialization",
+        "options": [
+            {"option_id": 3867, "option_text": "Pastry arts and dessert innovation", "trait_tags": {"Culinary-Arts": 1.0, "Creative-Skill": 0.7, "Food-Science": 0.4}},
+            {"option_id": 3868, "option_text": "International cuisine and fusion cooking", "trait_tags": {"Culinary-Arts": 0.9, "Tourism-Travel": 0.5, "Creative-Skill": 0.5}},
+            {"option_id": 3869, "option_text": "Farm-to-table and sustainable gastronomy", "trait_tags": {"Culinary-Arts": 0.9, "Agri-Nature": 0.5, "Environmental-Sci": 0.4}},
+            {"option_id": 3870, "option_text": "Food styling, photography, and media", "trait_tags": {"Culinary-Arts": 0.7, "Digital-Media": 0.6, "Visual-Design": 0.5}},
+            {"option_id": 3871, "option_text": "Restaurant management and kitchen leadership", "trait_tags": {"Culinary-Arts": 0.8, "Hospitality-Svc": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 3872, "option_text": "Food science research and recipe development", "trait_tags": {"Food-Science": 0.8, "Culinary-Arts": 0.7, "Lab-Research": 0.4}}
+        ]
+    },
+    {
+        "question_id": 425,
+        "question_text": "Which environmental engineering project excites you most?",
+        "category": "Environmental Engineering - Project",
+        "options": [
+            {"option_id": 3873, "option_text": "Designing wastewater treatment systems for communities", "trait_tags": {"Environmental-Eng": 1.0, "Civil-Build": 0.5, "Community-Serve": 0.4}},
+            {"option_id": 3874, "option_text": "Developing air quality monitoring and pollution control", "trait_tags": {"Environmental-Eng": 0.9, "Lab-Research": 0.5, "Environmental-Sci": 0.5}},
+            {"option_id": 3875, "option_text": "Building renewable energy systems for rural areas", "trait_tags": {"Environmental-Eng": 0.8, "Electrical-Power": 0.6, "Community-Serve": 0.4}},
+            {"option_id": 3876, "option_text": "Creating sustainable waste management solutions", "trait_tags": {"Environmental-Eng": 0.9, "Industrial-Ops": 0.5, "Agri-Nature": 0.3}},
+            {"option_id": 3877, "option_text": "Remediation of contaminated soil and groundwater", "trait_tags": {"Environmental-Eng": 0.9, "Environmental-Sci": 0.6, "Field-Research": 0.4}},
+            {"option_id": 3878, "option_text": "Green building design and energy-efficient infrastructure", "trait_tags": {"Environmental-Eng": 0.8, "Civil-Build": 0.6, "Spatial-Design": 0.4}}
+        ]
+    },
+    {
+        "question_id": 426,
+        "question_text": "Which HR function do you find most rewarding?",
+        "category": "HR - Function",
+        "options": [
+            {"option_id": 3879, "option_text": "Talent acquisition and recruitment strategy", "trait_tags": {"HR-Management": 1.0, "People-Skill": 0.7, "Admin-Skill": 0.4}},
+            {"option_id": 3880, "option_text": "Employee training and professional development", "trait_tags": {"HR-Management": 0.9, "Teaching-Ed": 0.7, "People-Skill": 0.5}},
+            {"option_id": 3881, "option_text": "Compensation, benefits, and payroll management", "trait_tags": {"HR-Management": 0.8, "Finance-Acct": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 3882, "option_text": "Organizational development and change management", "trait_tags": {"HR-Management": 0.9, "Admin-Skill": 0.6, "Analytical-Skill": 0.4}},
+            {"option_id": 3883, "option_text": "Employee relations and workplace conflict mediation", "trait_tags": {"HR-Management": 0.8, "Counseling": 0.5, "People-Skill": 0.6}},
+            {"option_id": 3884, "option_text": "Workforce analytics and data-driven HR decisions", "trait_tags": {"HR-Management": 0.8, "Data-Analytics": 0.6, "Analytical-Skill": 0.5}}
+        ]
+    },
+    {
+        "question_id": 427,
+        "question_text": "How do you handle a workplace culture issue?",
+        "category": "HR - Culture",
+        "options": [
+            {"option_id": 3885, "option_text": "Conduct employee surveys and listen to feedback", "trait_tags": {"HR-Management": 0.9, "People-Skill": 0.7, "Analytical-Skill": 0.4}},
+            {"option_id": 3886, "option_text": "Run team-building workshops and engagement programs", "trait_tags": {"HR-Management": 0.8, "Teaching-Ed": 0.5, "Community-Serve": 0.4}},
+            {"option_id": 3887, "option_text": "Review policies and update the employee handbook", "trait_tags": {"HR-Management": 0.8, "Legal-Practice": 0.4, "Admin-Skill": 0.5}},
+            {"option_id": 3888, "option_text": "Coach leaders on effective management practices", "trait_tags": {"HR-Management": 0.9, "Counseling": 0.5, "Teaching-Ed": 0.5}},
+            {"option_id": 3889, "option_text": "Use data to identify trends and root causes", "trait_tags": {"HR-Management": 0.7, "Data-Analytics": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 3890, "option_text": "Implement diversity, equity, and inclusion initiatives", "trait_tags": {"HR-Management": 0.8, "Community-Serve": 0.5, "Social-Work": 0.4}}
+        ]
+    },
+    {
+        "question_id": 428,
+        "question_text": "Which aspect of employee development interests you most?",
+        "category": "HR - Development",
+        "options": [
+            {"option_id": 3891, "option_text": "Leadership pipeline and succession planning", "trait_tags": {"HR-Management": 0.9, "Admin-Skill": 0.6, "Analytical-Skill": 0.4}},
+            {"option_id": 3892, "option_text": "Skills assessment and competency mapping", "trait_tags": {"HR-Management": 0.8, "Analytical-Skill": 0.6, "Teaching-Ed": 0.4}},
+            {"option_id": 3893, "option_text": "Mentoring programs and career coaching", "trait_tags": {"HR-Management": 0.8, "Counseling": 0.6, "People-Skill": 0.5}},
+            {"option_id": 3894, "option_text": "Digital learning platforms and e-training tools", "trait_tags": {"HR-Management": 0.7, "Technical-Skill": 0.5, "Teaching-Ed": 0.5}},
+            {"option_id": 3895, "option_text": "Performance review systems and goal tracking", "trait_tags": {"HR-Management": 0.8, "Admin-Skill": 0.6, "Data-Analytics": 0.4}},
+            {"option_id": 3896, "option_text": "Employee wellness and mental health support programs", "trait_tags": {"HR-Management": 0.7, "Social-Work": 0.5, "Counseling": 0.5}}
+        ]
+    },
+    {
+        "question_id": 429,
+        "question_text": "Which healthcare management area interests you most?",
+        "category": "Health Admin - Area",
+        "options": [
+            {"option_id": 3897, "option_text": "Hospital operations and clinical workflow management", "trait_tags": {"Health-Admin": 1.0, "Admin-Skill": 0.6, "Patient-Care": 0.4}},
+            {"option_id": 3898, "option_text": "Health information systems and electronic medical records", "trait_tags": {"Health-Admin": 0.9, "Technical-Skill": 0.5, "Data-Analytics": 0.4}},
+            {"option_id": 3899, "option_text": "Healthcare policy and government health programs", "trait_tags": {"Health-Admin": 0.8, "Community-Serve": 0.6, "Legal-Practice": 0.3}},
+            {"option_id": 3900, "option_text": "Medical supply chain and procurement", "trait_tags": {"Health-Admin": 0.8, "Industrial-Ops": 0.5, "Admin-Skill": 0.5}},
+            {"option_id": 3901, "option_text": "Quality improvement and patient safety programs", "trait_tags": {"Health-Admin": 0.9, "Patient-Care": 0.5, "Analytical-Skill": 0.4}},
+            {"option_id": 3902, "option_text": "Healthcare finance, billing, and insurance management", "trait_tags": {"Health-Admin": 0.8, "Finance-Acct": 0.7, "Admin-Skill": 0.4}}
+        ]
+    },
+    {
+        "question_id": 430,
+        "question_text": "How would you improve a hospital's efficiency?",
+        "category": "Health Admin - Efficiency",
+        "options": [
+            {"option_id": 3903, "option_text": "Implement digital scheduling and patient flow systems", "trait_tags": {"Health-Admin": 0.9, "Technical-Skill": 0.5, "Admin-Skill": 0.5}},
+            {"option_id": 3904, "option_text": "Optimize staffing patterns based on patient demand data", "trait_tags": {"Health-Admin": 0.9, "Data-Analytics": 0.6, "Analytical-Skill": 0.4}},
+            {"option_id": 3905, "option_text": "Streamline procurement and reduce waste in supplies", "trait_tags": {"Health-Admin": 0.8, "Industrial-Ops": 0.5, "Finance-Acct": 0.4}},
+            {"option_id": 3906, "option_text": "Improve interdepartmental communication and teamwork", "trait_tags": {"Health-Admin": 0.7, "People-Skill": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 3907, "option_text": "Train staff on lean healthcare management practices", "trait_tags": {"Health-Admin": 0.8, "Teaching-Ed": 0.5, "Industrial-Ops": 0.4}},
+            {"option_id": 3908, "option_text": "Audit processes and implement evidence-based protocols", "trait_tags": {"Health-Admin": 0.8, "Analytical-Skill": 0.6, "Lab-Research": 0.3}}
+        ]
+    },
+    {
+        "question_id": 431,
+        "question_text": "Which healthcare leadership role appeals to you?",
+        "category": "Health Admin - Leadership",
+        "options": [
+            {"option_id": 3909, "option_text": "Medical center director or hospital administrator", "trait_tags": {"Health-Admin": 1.0, "Admin-Skill": 0.7, "People-Skill": 0.4}},
+            {"option_id": 3910, "option_text": "Public health program manager", "trait_tags": {"Health-Admin": 0.8, "Public-Health": 0.7, "Community-Serve": 0.4}},
+            {"option_id": 3911, "option_text": "Health informatics and technology officer", "trait_tags": {"Health-Admin": 0.8, "Technical-Skill": 0.6, "Data-Analytics": 0.4}},
+            {"option_id": 3912, "option_text": "Clinical research coordinator", "trait_tags": {"Health-Admin": 0.7, "Lab-Research": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 3913, "option_text": "Healthcare compliance and regulatory officer", "trait_tags": {"Health-Admin": 0.8, "Legal-Practice": 0.5, "Admin-Skill": 0.5}},
+            {"option_id": 3914, "option_text": "Community health center manager", "trait_tags": {"Health-Admin": 0.8, "Community-Serve": 0.6, "Patient-Care": 0.4}}
+        ]
+    },
+    {
+        "question_id": 432,
+        "question_text": "Which mobile app category would you most enjoy building?",
+        "category": "Mobile Dev - Category",
+        "options": [
+            {"option_id": 3915, "option_text": "Health and fitness tracking applications", "trait_tags": {"Mobile-Dev": 0.9, "Physical-Skill": 0.4, "Patient-Care": 0.3}},
+            {"option_id": 3916, "option_text": "E-commerce and fintech payment platforms", "trait_tags": {"Mobile-Dev": 0.9, "Finance-Acct": 0.5, "Startup-Venture": 0.4}},
+            {"option_id": 3917, "option_text": "Social networking and communication tools", "trait_tags": {"Mobile-Dev": 0.8, "People-Skill": 0.4, "Creative-Skill": 0.4}},
+            {"option_id": 3918, "option_text": "Educational and e-learning platforms", "trait_tags": {"Mobile-Dev": 0.8, "Teaching-Ed": 0.6, "Creative-Skill": 0.4}},
+            {"option_id": 3919, "option_text": "Gaming and interactive entertainment apps", "trait_tags": {"Mobile-Dev": 0.8, "Game-Dev": 0.7, "Creative-Skill": 0.4}},
+            {"option_id": 3920, "option_text": "IoT and smart device controller applications", "trait_tags": {"Mobile-Dev": 0.8, "Hardware-Systems": 0.5, "Technical-Skill": 0.5}}
+        ]
+    },
+    {
+        "question_id": 433,
+        "question_text": "Which mobile development skill do you want to master?",
+        "category": "Mobile Dev - Skill",
+        "options": [
+            {"option_id": 3921, "option_text": "Cross-platform development (React Native, Flutter)", "trait_tags": {"Mobile-Dev": 1.0, "Software-Dev": 0.6, "Web-Dev": 0.4}},
+            {"option_id": 3922, "option_text": "Native iOS or Android development", "trait_tags": {"Mobile-Dev": 1.0, "Software-Dev": 0.7, "Technical-Skill": 0.4}},
+            {"option_id": 3923, "option_text": "Mobile UI/UX design and user research", "trait_tags": {"Mobile-Dev": 0.8, "Visual-Design": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 3924, "option_text": "Mobile security and secure coding practices", "trait_tags": {"Mobile-Dev": 0.8, "Cyber-Defense": 0.7, "Software-Dev": 0.4}},
+            {"option_id": 3925, "option_text": "Backend APIs and cloud integration for mobile", "trait_tags": {"Mobile-Dev": 0.8, "Cloud-Systems": 0.6, "Software-Dev": 0.5}},
+            {"option_id": 3926, "option_text": "Mobile analytics, performance tuning, and testing", "trait_tags": {"Mobile-Dev": 0.8, "Data-Analytics": 0.5, "Analytical-Skill": 0.4}}
+        ]
+    },
+    {
+        "question_id": 434,
+        "question_text": "Which pharmacy practice setting appeals to you most?",
+        "category": "Pharmacy - Setting",
+        "options": [
+            {"option_id": 3927, "option_text": "Hospital clinical pharmacy and patient rounds", "trait_tags": {"Pharmacy": 1.0, "Patient-Care": 0.7, "Medical-Lab": 0.3}},
+            {"option_id": 3928, "option_text": "Community retail pharmacy and patient counseling", "trait_tags": {"Pharmacy": 0.9, "People-Skill": 0.6, "Community-Serve": 0.4}},
+            {"option_id": 3929, "option_text": "Pharmaceutical industry and drug manufacturing", "trait_tags": {"Pharmacy": 0.8, "Industrial-Ops": 0.6, "Lab-Research": 0.4}},
+            {"option_id": 3930, "option_text": "Research pharmacy and clinical drug trials", "trait_tags": {"Pharmacy": 0.8, "Lab-Research": 0.7, "Analytical-Skill": 0.4}},
+            {"option_id": 3931, "option_text": "Government regulatory and drug approval roles", "trait_tags": {"Pharmacy": 0.7, "Legal-Practice": 0.5, "Admin-Skill": 0.5}},
+            {"option_id": 3932, "option_text": "Specialty pharmacy for complex medications", "trait_tags": {"Pharmacy": 0.9, "Patient-Care": 0.5, "Analytical-Skill": 0.5}}
+        ]
+    },
+    {
+        "question_id": 435,
+        "question_text": "Which pharmacology topic fascinates you most?",
+        "category": "Pharmacy - Pharmacology",
+        "options": [
+            {"option_id": 3933, "option_text": "Drug interactions and adverse effect management", "trait_tags": {"Pharmacy": 1.0, "Analytical-Skill": 0.6, "Patient-Care": 0.4}},
+            {"option_id": 3934, "option_text": "Herbal medicine and natural product pharmacology", "trait_tags": {"Pharmacy": 0.8, "Agri-Nature": 0.4, "Food-Science": 0.4}},
+            {"option_id": 3935, "option_text": "Pharmacogenomics and personalized medicine", "trait_tags": {"Pharmacy": 0.9, "Lab-Research": 0.6, "Medical-Lab": 0.5}},
+            {"option_id": 3936, "option_text": "Antibiotic resistance and infectious disease drugs", "trait_tags": {"Pharmacy": 0.9, "Lab-Research": 0.5, "Public-Health": 0.4}},
+            {"option_id": 3937, "option_text": "Toxicology and poison control pharmacotherapy", "trait_tags": {"Pharmacy": 0.8, "Forensic-Sci": 0.4, "Medical-Lab": 0.4}},
+            {"option_id": 3938, "option_text": "Pediatric and geriatric dosing and care", "trait_tags": {"Pharmacy": 0.9, "Patient-Care": 0.6, "People-Skill": 0.3}}
+        ]
+    },
+    {
+        "question_id": 436,
+        "question_text": "How do you feel about patient counseling as a pharmacist?",
+        "category": "Pharmacy - Counseling",
+        "options": [
+            {"option_id": 3939, "option_text": "Love it — educating patients is my priority", "trait_tags": {"Pharmacy": 0.9, "People-Skill": 0.7, "Teaching-Ed": 0.5}},
+            {"option_id": 3940, "option_text": "Enjoy it when combined with clinical decision-making", "trait_tags": {"Pharmacy": 0.9, "Analytical-Skill": 0.5, "Patient-Care": 0.5}},
+            {"option_id": 3941, "option_text": "Prefer behind-the-scenes compounding and dispensing", "trait_tags": {"Pharmacy": 0.8, "Lab-Research": 0.5, "Medical-Lab": 0.4}},
+            {"option_id": 3942, "option_text": "I focus on accuracy and medication safety systems", "trait_tags": {"Pharmacy": 0.8, "Admin-Skill": 0.5, "Analytical-Skill": 0.5}},
+            {"option_id": 3943, "option_text": "Prefer drug research over direct patient interaction", "trait_tags": {"Pharmacy": 0.7, "Lab-Research": 0.7, "Analytical-Skill": 0.4}},
+            {"option_id": 3944, "option_text": "Enjoy public health campaigns on medication awareness", "trait_tags": {"Pharmacy": 0.7, "Public-Health": 0.6, "Community-Serve": 0.5}}
+        ]
+    },
+    {
+        "question_id": 437,
+        "question_text": "Which pharmaceutical innovation excites you most?",
+        "category": "Pharmacy - Innovation",
+        "options": [
+            {"option_id": 3945, "option_text": "New drug delivery systems and nanotechnology", "trait_tags": {"Pharmacy": 0.9, "Lab-Research": 0.6, "Technical-Skill": 0.4}},
+            {"option_id": 3946, "option_text": "Digital health and telepharmacy services", "trait_tags": {"Pharmacy": 0.7, "Technical-Skill": 0.5, "Community-Serve": 0.5}},
+            {"option_id": 3947, "option_text": "Vaccine development and immunotherapy", "trait_tags": {"Pharmacy": 0.8, "Lab-Research": 0.7, "Public-Health": 0.4}},
+            {"option_id": 3948, "option_text": "Compounding custom medications for special needs", "trait_tags": {"Pharmacy": 0.9, "Patient-Care": 0.5, "Creative-Skill": 0.3}},
+            {"option_id": 3949, "option_text": "AI-powered drug discovery and molecular design", "trait_tags": {"Pharmacy": 0.7, "AI-ML": 0.5, "Lab-Research": 0.5}},
+            {"option_id": 3950, "option_text": "Pharmacovigilance and post-market drug surveillance", "trait_tags": {"Pharmacy": 0.8, "Analytical-Skill": 0.5, "Admin-Skill": 0.4}}
+        ]
+    },
+    {
+        "question_id": 438,
+        "question_text": "Which tourism sector excites you most?",
+        "category": "Tourism - Sector",
+        "options": [
+            {"option_id": 3951, "option_text": "Eco-tourism and nature-based travel experiences", "trait_tags": {"Tourism-Travel": 1.0, "Environmental-Sci": 0.5, "Agri-Nature": 0.4}},
+            {"option_id": 3952, "option_text": "Luxury hospitality and resort management", "trait_tags": {"Tourism-Travel": 0.9, "Hospitality-Svc": 0.7, "Admin-Skill": 0.4}},
+            {"option_id": 3953, "option_text": "Cultural heritage tourism and museum curation", "trait_tags": {"Tourism-Travel": 0.9, "Creative-Skill": 0.5, "Teaching-Ed": 0.4}},
+            {"option_id": 3954, "option_text": "Adventure tourism and outdoor expedition guiding", "trait_tags": {"Tourism-Travel": 0.9, "Physical-Skill": 0.6, "Field-Research": 0.3}},
+            {"option_id": 3955, "option_text": "Event tourism and convention management", "trait_tags": {"Tourism-Travel": 0.8, "Admin-Skill": 0.6, "Marketing-Sales": 0.4}},
+            {"option_id": 3956, "option_text": "Medical and wellness tourism coordination", "trait_tags": {"Tourism-Travel": 0.7, "Patient-Care": 0.4, "Hospitality-Svc": 0.5}}
+        ]
+    },
+    {
+        "question_id": 439,
+        "question_text": "How would you promote a travel destination?",
+        "category": "Tourism - Marketing",
+        "options": [
+            {"option_id": 3957, "option_text": "Social media campaigns and influencer partnerships", "trait_tags": {"Tourism-Travel": 0.8, "Digital-Media": 0.7, "Marketing-Sales": 0.6}},
+            {"option_id": 3958, "option_text": "Documentary-style video content and storytelling", "trait_tags": {"Tourism-Travel": 0.8, "Film-Broadcast": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 3959, "option_text": "Data-driven targeting and travel analytics", "trait_tags": {"Tourism-Travel": 0.7, "Data-Analytics": 0.6, "Marketing-Sales": 0.5}},
+            {"option_id": 3960, "option_text": "Community-based tourism and local partnerships", "trait_tags": {"Tourism-Travel": 0.8, "Community-Serve": 0.6, "People-Skill": 0.5}},
+            {"option_id": 3961, "option_text": "Print brochures, travel expos, and trade shows", "trait_tags": {"Tourism-Travel": 0.8, "Admin-Skill": 0.4, "Marketing-Sales": 0.5}},
+            {"option_id": 3962, "option_text": "Creating immersive virtual tours and online experiences", "trait_tags": {"Tourism-Travel": 0.7, "Technical-Skill": 0.5, "Digital-Media": 0.5}}
+        ]
+    },
+    {
+        "question_id": 440,
+        "question_text": "What aspect of travel operations interests you most?",
+        "category": "Tourism - Operations",
+        "options": [
+            {"option_id": 3963, "option_text": "Tour package design and itinerary planning", "trait_tags": {"Tourism-Travel": 1.0, "Admin-Skill": 0.5, "Creative-Skill": 0.4}},
+            {"option_id": 3964, "option_text": "Airline and transportation logistics management", "trait_tags": {"Tourism-Travel": 0.8, "Industrial-Ops": 0.5, "Admin-Skill": 0.5}},
+            {"option_id": 3965, "option_text": "Hotel and accommodation management", "trait_tags": {"Tourism-Travel": 0.8, "Hospitality-Svc": 0.7, "Admin-Skill": 0.4}},
+            {"option_id": 3966, "option_text": "Tourist safety, insurance, and risk management", "trait_tags": {"Tourism-Travel": 0.8, "Law-Enforce": 0.3, "Admin-Skill": 0.5}},
+            {"option_id": 3967, "option_text": "Sustainable tourism policy and environmental impact", "trait_tags": {"Tourism-Travel": 0.8, "Environmental-Sci": 0.6, "Community-Serve": 0.4}},
+            {"option_id": 3968, "option_text": "Tour guiding and cross-cultural guest engagement", "trait_tags": {"Tourism-Travel": 0.9, "People-Skill": 0.7, "Teaching-Ed": 0.4}}
+        ]
+    },
+    {
+        "question_id": 441,
+        "question_text": "Which type of tourist experience would you create?",
+        "category": "Tourism - Experience Design",
+        "options": [
+            {"option_id": 3969, "option_text": "Food and culinary tourism trails", "trait_tags": {"Tourism-Travel": 0.8, "Culinary-Arts": 0.7, "Creative-Skill": 0.4}},
+            {"option_id": 3970, "option_text": "Wildlife safari and nature photography tours", "trait_tags": {"Tourism-Travel": 0.8, "Agri-Nature": 0.5, "Field-Research": 0.4}},
+            {"option_id": 3971, "option_text": "Historical walking tours and architectural excursions", "trait_tags": {"Tourism-Travel": 0.8, "Teaching-Ed": 0.5, "Spatial-Design": 0.3}},
+            {"option_id": 3972, "option_text": "Extreme sports and adrenaline-fueled adventures", "trait_tags": {"Tourism-Travel": 0.7, "Physical-Skill": 0.7, "Sports-Ed": 0.3}},
+            {"option_id": 3973, "option_text": "Wellness retreats and spa tourism packages", "trait_tags": {"Tourism-Travel": 0.8, "Patient-Care": 0.3, "Hospitality-Svc": 0.5}},
+            {"option_id": 3974, "option_text": "Festival tourism and live entertainment events", "trait_tags": {"Tourism-Travel": 0.8, "Performing-Arts": 0.5, "People-Skill": 0.4}}
+        ]
+    },
+    {
+        "question_id": 442,
+        "question_text": "What is your view on technology in the tourism industry?",
+        "category": "Tourism - Technology",
+        "options": [
+            {"option_id": 3975, "option_text": "Essential — online booking platforms drive tourism", "trait_tags": {"Tourism-Travel": 0.8, "Web-Dev": 0.5, "Technical-Skill": 0.4}},
+            {"option_id": 3976, "option_text": "VR and AR enhance destination previews", "trait_tags": {"Tourism-Travel": 0.7, "Technical-Skill": 0.5, "Digital-Media": 0.5}},
+            {"option_id": 3977, "option_text": "Big data helps personalize travel recommendations", "trait_tags": {"Tourism-Travel": 0.7, "Data-Analytics": 0.6, "AI-ML": 0.3}},
+            {"option_id": 3978, "option_text": "Mobile apps are key for on-the-go traveler support", "trait_tags": {"Tourism-Travel": 0.7, "Mobile-Dev": 0.5, "Technical-Skill": 0.4}},
+            {"option_id": 3979, "option_text": "Technology supplements but personal touch matters most", "trait_tags": {"Tourism-Travel": 0.8, "People-Skill": 0.6, "Hospitality-Svc": 0.4}},
+            {"option_id": 3980, "option_text": "Social media and content creation attract modern travelers", "trait_tags": {"Tourism-Travel": 0.7, "Digital-Media": 0.6, "Marketing-Sales": 0.5}}
+        ]
+    },
+    # ==================== MARITIME DEDICATED QUESTIONS (Q443-Q456) ====================
+    {
+        "question_id": 443,
+        "question_text": 'Which maritime subject are you most eager to study?',
+"category": "Interest - Maritime",
+        "weight": 1.5,
+        "trait_tags": {'Maritime-Sea': 0.9},
+        "options": [
+            {"option_id": 3981, "option_text": 'Celestial and electronic navigation', "trait_tags": {'Maritime-Sea': 1.0, 'Technical-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 3982, "option_text": 'Marine diesel engineering and propulsion systems', "trait_tags": {'Maritime-Sea': 0.9, 'Mechanical-Design': 0.6, 'Technical-Skill': 0.4}},
+            {"option_id": 3983, "option_text": 'Ship construction and naval architecture', "trait_tags": {'Maritime-Sea': 0.9, 'Spatial-Design': 0.5, 'Mechanical-Design': 0.4}},
+            {"option_id": 3984, "option_text": 'Maritime law and international conventions', "trait_tags": {'Maritime-Sea': 0.8, 'Legal-Practice': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 3985, "option_text": 'Cargo handling and stowage planning', "trait_tags": {'Maritime-Sea': 1.0, 'Industrial-Ops': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 3986, "option_text": 'Maritime safety and survival procedures', "trait_tags": {'Maritime-Sea': 0.9, 'Physical-Skill': 0.5, 'People-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 444,
+        "question_text": 'What type of cargo operation would you most want to oversee?',
+"category": "Interest - Maritime",
+        "weight": 1.5,
+        "trait_tags": {'Maritime-Sea': 0.9, 'Industrial-Ops': 0.3},
+        "options": [
+            {"option_id": 3987, "option_text": 'Container ship loading and logistics', "trait_tags": {'Maritime-Sea': 1.0, 'Industrial-Ops': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 3988, "option_text": 'Bulk carrier grain and ore handling', "trait_tags": {'Maritime-Sea': 0.9, 'Physical-Skill': 0.4, 'Industrial-Ops': 0.4}},
+            {"option_id": 3989, "option_text": 'Oil and chemical tanker safety management', "trait_tags": {'Maritime-Sea': 0.9, 'Environmental-Sci': 0.4, 'Technical-Skill': 0.4}},
+            {"option_id": 3990, "option_text": 'Roll-on/roll-off vehicle transport coordination', "trait_tags": {'Maritime-Sea': 0.8, 'Industrial-Ops': 0.5, 'Mechanical-Design': 0.3}},
+            {"option_id": 3991, "option_text": 'Refrigerated cargo temperature monitoring', "trait_tags": {'Maritime-Sea': 0.9, 'Technical-Skill': 0.5, 'Food-Science': 0.3}},
+            {"option_id": 3992, "option_text": 'General break-bulk and heavy-lift project cargo', "trait_tags": {'Maritime-Sea': 1.0, 'Physical-Skill': 0.4, 'Industrial-Ops': 0.3}},
+        ]
+    },
+    {
+        "question_id": 445,
+        "question_text": 'During a maritime emergency drill, which station would you gravitate toward?',
+"category": "Interest - Maritime",
+        "weight": 1.5,
+        "trait_tags": {'Maritime-Sea': 0.9, 'Physical-Skill': 0.3},
+        "options": [
+            {"option_id": 3993, "option_text": 'Bridge command and overall coordination', "trait_tags": {'Maritime-Sea': 1.0, 'People-Skill': 0.5, 'Analytical-Skill': 0.4}},
+            {"option_id": 3994, "option_text": 'Engine room emergency shutdown procedures', "trait_tags": {'Maritime-Sea': 0.9, 'Mechanical-Design': 0.5, 'Technical-Skill': 0.4}},
+            {"option_id": 3995, "option_text": 'Fire fighting team with hoses and extinguishers', "trait_tags": {'Maritime-Sea': 0.9, 'Physical-Skill': 0.6, 'People-Skill': 0.3}},
+            {"option_id": 3996, "option_text": 'Rescue boat launching and man-overboard recovery', "trait_tags": {'Maritime-Sea': 1.0, 'Physical-Skill': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 3997, "option_text": 'First aid and onboard medical response', "trait_tags": {'Maritime-Sea': 0.8, 'Patient-Care': 0.6, 'People-Skill': 0.4}},
+            {"option_id": 3998, "option_text": 'Emergency communications and distress calling', "trait_tags": {'Maritime-Sea': 0.9, 'Technical-Skill': 0.5, 'Hardware-Systems': 0.3}},
+        ]
+    },
+    {
+        "question_id": 446,
+        "question_text": 'Which maritime technology advancement excites you most?',
+"category": "Interest - Maritime",
+        "weight": 1.5,
+        "trait_tags": {'Maritime-Sea': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 3999, "option_text": 'Electronic Chart Display (ECDIS) navigation', "trait_tags": {'Maritime-Sea': 0.9, 'Technical-Skill': 0.6, 'Software-Dev': 0.3}},
+            {"option_id": 4000, "option_text": 'Smart engine monitoring with IoT sensors', "trait_tags": {'Maritime-Sea': 0.8, 'Mechanical-Design': 0.5, 'Data-Analytics': 0.4}},
+            {"option_id": 4001, "option_text": 'Automatic Identification System (AIS) vessel tracking', "trait_tags": {'Maritime-Sea': 1.0, 'Technical-Skill': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4002, "option_text": 'GMDSS satellite communication systems', "trait_tags": {'Maritime-Sea': 1.0, 'Hardware-Systems': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4003, "option_text": 'Autonomous and remote-controlled vessel tech', "trait_tags": {'Maritime-Sea': 0.9, 'AI-ML': 0.5, 'Software-Dev': 0.4}},
+            {"option_id": 4004, "option_text": 'Advanced ballast water treatment systems', "trait_tags": {'Maritime-Sea': 0.9, 'Environmental-Sci': 0.5, 'Technical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 447,
+        "question_text": 'What aspect of port and harbor operations would you want to manage?',
+"category": "Interest - Maritime",
+        "weight": 1.5,
+        "trait_tags": {'Maritime-Sea': 0.9, 'Admin-Skill': 0.3},
+        "options": [
+            {"option_id": 4005, "option_text": 'Vessel traffic management and channel safety', "trait_tags": {'Maritime-Sea': 1.0, 'Analytical-Skill': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4006, "option_text": 'Container terminal scheduling and logistics', "trait_tags": {'Maritime-Sea': 0.8, 'Industrial-Ops': 0.6, 'Admin-Skill': 0.4}},
+            {"option_id": 4007, "option_text": 'Harbor pilotage and ship berthing guidance', "trait_tags": {'Maritime-Sea': 1.0, 'Physical-Skill': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 4008, "option_text": 'Customs documentation and port clearance', "trait_tags": {'Maritime-Sea': 0.8, 'Admin-Skill': 0.5, 'Legal-Practice': 0.4}},
+            {"option_id": 4009, "option_text": 'Cargo surveying and quality inspection', "trait_tags": {'Maritime-Sea': 0.9, 'Industrial-Ops': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4010, "option_text": 'Port security and maritime law enforcement', "trait_tags": {'Maritime-Sea': 0.9, 'Law-Enforce': 0.5, 'Admin-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 448,
+        "question_text": 'As a maritime professional, which regulation area would you champion?',
+"category": "Interest - Maritime",
+        "weight": 1.5,
+        "trait_tags": {'Maritime-Sea': 0.9, 'Legal-Practice': 0.3},
+        "options": [
+            {"option_id": 4011, "option_text": 'SOLAS — Safety of Life at Sea standards', "trait_tags": {'Maritime-Sea': 1.0, 'People-Skill': 0.4, 'Legal-Practice': 0.3}},
+            {"option_id": 4012, "option_text": 'MARPOL — Marine pollution prevention rules', "trait_tags": {'Maritime-Sea': 0.9, 'Environmental-Sci': 0.5, 'Legal-Practice': 0.3}},
+            {"option_id": 4013, "option_text": 'STCW — Seafarer training and competency', "trait_tags": {'Maritime-Sea': 0.9, 'Teaching-Ed': 0.5, 'People-Skill': 0.4}},
+            {"option_id": 4014, "option_text": 'ISM Code — Safety management systems', "trait_tags": {'Maritime-Sea': 0.9, 'Admin-Skill': 0.5, 'Industrial-Ops': 0.3}},
+            {"option_id": 4015, "option_text": 'MLC — Maritime Labour Convention crew welfare', "trait_tags": {'Maritime-Sea': 0.8, 'HR-Management': 0.6, 'People-Skill': 0.4}},
+            {"option_id": 4016, "option_text": 'Port State Control inspection procedures', "trait_tags": {'Maritime-Sea': 1.0, 'Law-Enforce': 0.4, 'Analytical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 449,
+        "question_text": 'What type of ship maintenance work would you find most satisfying?',
+"category": "Situational - Maritime",
+        "weight": 1.5,
+        "trait_tags": {'Maritime-Sea': 0.9, 'Mechanical-Design': 0.3},
+        "options": [
+            {"option_id": 4017, "option_text": 'Main engine overhaul and repair', "trait_tags": {'Maritime-Sea': 0.9, 'Mechanical-Design': 0.7, 'Physical-Skill': 0.3}},
+            {"option_id": 4018, "option_text": 'Hull cleaning, inspection, and protective coating', "trait_tags": {'Maritime-Sea': 0.9, 'Physical-Skill': 0.5, 'Environmental-Eng': 0.3}},
+            {"option_id": 4019, "option_text": 'Electrical wiring and shipboard power systems', "trait_tags": {'Maritime-Sea': 0.8, 'Electrical-Power': 0.6, 'Technical-Skill': 0.4}},
+            {"option_id": 4020, "option_text": 'Radar, GPS, and navigation equipment calibration', "trait_tags": {'Maritime-Sea': 1.0, 'Technical-Skill': 0.5, 'Hardware-Systems': 0.3}},
+            {"option_id": 4021, "option_text": 'Life raft, EPIRB, and safety equipment servicing', "trait_tags": {'Maritime-Sea': 0.9, 'Physical-Skill': 0.4, 'Industrial-Ops': 0.3}},
+            {"option_id": 4022, "option_text": 'Deck crane, winch, and anchor windlass maintenance', "trait_tags": {'Maritime-Sea': 0.9, 'Mechanical-Design': 0.5, 'Physical-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 450,
+        "question_text": 'Which maritime career path sounds most fulfilling to you?',
+"category": "Interest - Maritime",
+        "weight": 1.5,
+        "trait_tags": {'Maritime-Sea': 0.9},
+        "options": [
+            {"option_id": 4023, "option_text": 'Ship captain commanding worldwide voyages', "trait_tags": {'Maritime-Sea': 1.0, 'People-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4024, "option_text": 'Chief engineer managing vessel propulsion', "trait_tags": {'Maritime-Sea': 0.9, 'Mechanical-Design': 0.6, 'Technical-Skill': 0.4}},
+            {"option_id": 4025, "option_text": 'Harbor pilot guiding ships through tight channels', "trait_tags": {'Maritime-Sea': 1.0, 'Physical-Skill': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 4026, "option_text": 'Maritime surveyor inspecting vessel safety', "trait_tags": {'Maritime-Sea': 0.9, 'Analytical-Skill': 0.5, 'Law-Enforce': 0.3}},
+            {"option_id": 4027, "option_text": 'Maritime instructor at a Philippine academy', "trait_tags": {'Maritime-Sea': 0.8, 'Teaching-Ed': 0.6, 'People-Skill': 0.4}},
+            {"option_id": 4028, "option_text": 'Shipping operations manager at a manning agency', "trait_tags": {'Maritime-Sea': 0.8, 'Admin-Skill': 0.5, 'Finance-Acct': 0.4}},
+        ]
+    },
+    {
+        "question_id": 451,
+        "question_text": 'On a long ocean crossing, what would you focus on most?',
+"category": "Interest - Maritime",
+        "weight": 1.5,
+        "trait_tags": {'Maritime-Sea': 0.9},
+        "options": [
+            {"option_id": 4029, "option_text": 'Plotting the most fuel-efficient sea route', "trait_tags": {'Maritime-Sea': 1.0, 'Analytical-Skill': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4030, "option_text": 'Monitoring engine gauges and fuel consumption', "trait_tags": {'Maritime-Sea': 0.9, 'Mechanical-Design': 0.5, 'Technical-Skill': 0.4}},
+            {"option_id": 4031, "option_text": 'Keeping crew morale high during extended voyages', "trait_tags": {'Maritime-Sea': 0.8, 'People-Skill': 0.6, 'HR-Management': 0.3}},
+            {"option_id": 4032, "option_text": 'Tracking weather systems and avoiding storms', "trait_tags": {'Maritime-Sea': 1.0, 'Environmental-Sci': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 4033, "option_text": 'Maintaining accurate ship logs and records', "trait_tags": {'Maritime-Sea': 0.9, 'Admin-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4034, "option_text": 'Ensuring all cargo remains secure and stable', "trait_tags": {'Maritime-Sea': 0.9, 'Industrial-Ops': 0.4, 'Physical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 452,
+        "question_text": 'Which shipboard communication duty appeals to you most?',
+"category": "Interest - Maritime",
+        "weight": 1.5,
+        "trait_tags": {'Maritime-Sea': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 4035, "option_text": 'Managing distress and urgency signal protocols', "trait_tags": {'Maritime-Sea': 1.0, 'Technical-Skill': 0.4, 'People-Skill': 0.3}},
+            {"option_id": 4036, "option_text": 'Transmitting weather observations to stations', "trait_tags": {'Maritime-Sea': 0.9, 'Environmental-Sci': 0.4, 'Data-Analytics': 0.3}},
+            {"option_id": 4037, "option_text": 'Coordinating with port control for docking', "trait_tags": {'Maritime-Sea': 1.0, 'Admin-Skill': 0.4, 'People-Skill': 0.3}},
+            {"option_id": 4038, "option_text": 'Ship-to-ship coordination in congested waters', "trait_tags": {'Maritime-Sea': 0.9, 'People-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4039, "option_text": 'Operating and maintaining satellite comm systems', "trait_tags": {'Maritime-Sea': 0.8, 'Hardware-Systems': 0.6, 'Technical-Skill': 0.4}},
+            {"option_id": 4040, "option_text": 'Testing and maintaining EPIRB emergency beacons', "trait_tags": {'Maritime-Sea': 0.9, 'Technical-Skill': 0.5, 'Physical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 453,
+        "question_text": 'Which area of the maritime business world interests you most?',
+"category": "Interest - Maritime",
+        "weight": 1.5,
+        "trait_tags": {'Maritime-Sea': 0.8, 'Finance-Acct': 0.3},
+        "options": [
+            {"option_id": 4041, "option_text": 'Ship chartering and freight rate negotiations', "trait_tags": {'Maritime-Sea': 0.9, 'Finance-Acct': 0.5, 'People-Skill': 0.4}},
+            {"option_id": 4042, "option_text": 'Marine insurance and claims assessment', "trait_tags": {'Maritime-Sea': 0.8, 'Finance-Acct': 0.5, 'Analytical-Skill': 0.4}},
+            {"option_id": 4043, "option_text": 'Ship brokering and vessel sales', "trait_tags": {'Maritime-Sea': 0.8, 'Marketing-Sales': 0.6, 'People-Skill': 0.4}},
+            {"option_id": 4044, "option_text": 'Port authority administration and development', "trait_tags": {'Maritime-Sea': 0.9, 'Admin-Skill': 0.5, 'Industrial-Ops': 0.3}},
+            {"option_id": 4045, "option_text": 'Maritime logistics and freight forwarding', "trait_tags": {'Maritime-Sea': 0.9, 'Industrial-Ops': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4046, "option_text": 'Crew manning and Filipino seafarer recruitment', "trait_tags": {'Maritime-Sea': 0.8, 'HR-Management': 0.6, 'People-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 454,
+        "question_text": 'How would you most want to improve maritime safety in the Philippines?',
+"category": "Interest - Maritime",
+        "weight": 1.5,
+        "trait_tags": {'Maritime-Sea': 0.9, 'Law-Enforce': 0.3},
+        "options": [
+            {"option_id": 4047, "option_text": 'Conducting thorough vessel safety inspections', "trait_tags": {'Maritime-Sea': 1.0, 'Analytical-Skill': 0.5, 'Law-Enforce': 0.3}},
+            {"option_id": 4048, "option_text": 'Training crews in advanced safety and rescue', "trait_tags": {'Maritime-Sea': 0.9, 'Teaching-Ed': 0.5, 'People-Skill': 0.4}},
+            {"option_id": 4049, "option_text": 'Designing better safety management protocols', "trait_tags": {'Maritime-Sea': 0.9, 'Admin-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4050, "option_text": 'Investigating maritime accidents and finding causes', "trait_tags": {'Maritime-Sea': 0.9, 'Forensic-Sci': 0.4, 'Analytical-Skill': 0.4}},
+            {"option_id": 4051, "option_text": 'Upgrading lifesaving and firefighting equipment', "trait_tags": {'Maritime-Sea': 0.8, 'Technical-Skill': 0.5, 'Mechanical-Design': 0.3}},
+            {"option_id": 4052, "option_text": 'Leading realistic emergency drills on board', "trait_tags": {'Maritime-Sea': 1.0, 'People-Skill': 0.5, 'Physical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 455,
+        "question_text": 'Which maritime environmental concern would you want to address?',
+"category": "Interest - Maritime",
+        "weight": 1.5,
+        "trait_tags": {'Maritime-Sea': 0.9, 'Environmental-Sci': 0.4},
+        "options": [
+            {"option_id": 4053, "option_text": 'Preventing oil spills and chemical leaks at sea', "trait_tags": {'Maritime-Sea': 0.9, 'Environmental-Sci': 0.6, 'Technical-Skill': 0.3}},
+            {"option_id": 4054, "option_text": 'Managing ballast water to stop invasive species', "trait_tags": {'Maritime-Sea': 1.0, 'Environmental-Sci': 0.5, 'Lab-Research': 0.3}},
+            {"option_id": 4055, "option_text": 'Reducing ship emissions and carbon footprint', "trait_tags": {'Maritime-Sea': 0.9, 'Environmental-Eng': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4056, "option_text": 'Protecting marine wildlife from shipping traffic', "trait_tags": {'Maritime-Sea': 0.9, 'Environmental-Sci': 0.5, 'Field-Research': 0.3}},
+            {"option_id": 4057, "option_text": 'Proper waste and sewage disposal at sea', "trait_tags": {'Maritime-Sea': 1.0, 'Environmental-Sci': 0.4, 'Industrial-Ops': 0.3}},
+            {"option_id": 4058, "option_text": 'Protecting Philippine coral reefs near ports', "trait_tags": {'Maritime-Sea': 0.9, 'Environmental-Sci': 0.5, 'Community-Serve': 0.3}},
+        ]
+    },
+    {
+        "question_id": 456,
+        "question_text": 'What maritime leadership role do you aspire to long-term?',
+"category": "Interest - Maritime",
+        "weight": 1.5,
+        "trait_tags": {'Maritime-Sea': 0.9, 'People-Skill': 0.3},
+        "options": [
+            {"option_id": 4059, "option_text": 'Commanding your own vessel as ship master', "trait_tags": {'Maritime-Sea': 1.0, 'People-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4060, "option_text": 'Managing a ship’s entire engineering department', "trait_tags": {'Maritime-Sea': 0.9, 'Mechanical-Design': 0.5, 'Admin-Skill': 0.4}},
+            {"option_id": 4061, "option_text": 'Directing operations at a major Philippine port', "trait_tags": {'Maritime-Sea': 0.9, 'Admin-Skill': 0.5, 'Industrial-Ops': 0.4}},
+            {"option_id": 4062, "option_text": 'Leading a Philippine maritime training academy', "trait_tags": {'Maritime-Sea': 0.8, 'Teaching-Ed': 0.6, 'Admin-Skill': 0.4}},
+            {"option_id": 4063, "option_text": 'Heading a Philippine Coast Guard division', "trait_tags": {'Maritime-Sea': 0.9, 'Law-Enforce': 0.5, 'People-Skill': 0.4}},
+            {"option_id": 4064, "option_text": 'Running a maritime regulatory or classification agency', "trait_tags": {'Maritime-Sea': 0.8, 'Legal-Practice': 0.5, 'Admin-Skill': 0.5}},
+        ]
+    },
+    # ==================== HEALTHCARE DEDICATED QUESTIONS ====================
+    {
+        "question_id": 457,
+        "question_text": 'What public health initiative would you most want to lead?',
+"category": "Interest - Public Health",
+        "weight": 1.5,
+        "trait_tags": {'Public-Health': 0.9},
+        "options": [
+            {"option_id": 4065, "option_text": 'Vaccination and immunization campaigns', "trait_tags": {'Public-Health': 1.0, 'Community-Serve': 0.5, 'Patient-Care': 0.3}},
+            {"option_id": 4066, "option_text": 'Disease surveillance and outbreak response', "trait_tags": {'Public-Health': 1.0, 'Data-Analytics': 0.5, 'Lab-Research': 0.3}},
+            {"option_id": 4067, "option_text": 'Health education and awareness programs', "trait_tags": {'Public-Health': 0.9, 'Teaching-Ed': 0.5, 'Community-Serve': 0.4}},
+            {"option_id": 4068, "option_text": 'Water quality and sanitation improvement', "trait_tags": {'Public-Health': 0.9, 'Environmental-Eng': 0.5, 'Field-Research': 0.3}},
+            {"option_id": 4069, "option_text": 'Maternal and child health services', "trait_tags": {'Public-Health': 0.9, 'Patient-Care': 0.5, 'Counseling': 0.3}},
+            {"option_id": 4070, "option_text": 'Nutrition programs for underserved communities', "trait_tags": {'Public-Health': 0.8, 'Nutrition-Diet': 0.6, 'Community-Serve': 0.4}},
+        ]
+    },
+    {
+        "question_id": 458,
+        "question_text": 'Which epidemiology topic interests you most?',
+"category": "Interest - Public Health",
+        "weight": 1.5,
+        "trait_tags": {'Public-Health': 0.9, 'Data-Analytics': 0.3},
+        "options": [
+            {"option_id": 4071, "option_text": 'Tracking infectious disease spread patterns', "trait_tags": {'Public-Health': 1.0, 'Data-Analytics': 0.5, 'Lab-Research': 0.3}},
+            {"option_id": 4072, "option_text": 'Chronic disease risk factor analysis', "trait_tags": {'Public-Health': 0.9, 'Data-Analytics': 0.5, 'Analytical-Skill': 0.4}},
+            {"option_id": 4073, "option_text": 'Environmental health hazard assessment', "trait_tags": {'Public-Health': 0.9, 'Environmental-Sci': 0.5, 'Field-Research': 0.3}},
+            {"option_id": 4074, "option_text": 'Occupational health and workplace safety', "trait_tags": {'Public-Health': 0.9, 'Industrial-Ops': 0.4, 'Admin-Skill': 0.3}},
+            {"option_id": 4075, "option_text": 'Mental health prevalence studies', "trait_tags": {'Public-Health': 0.9, 'Counseling': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4076, "option_text": 'Vaccine efficacy and population impact', "trait_tags": {'Public-Health': 1.0, 'Lab-Research': 0.5, 'Data-Analytics': 0.3}},
+        ]
+    },
+    {
+        "question_id": 459,
+        "question_text": 'What health promotion strategy appeals to you most?',
+"category": "Interest - Public Health",
+        "weight": 1.5,
+        "trait_tags": {'Public-Health': 0.9, 'Community-Serve': 0.3},
+        "options": [
+            {"option_id": 4077, "option_text": 'Community health worker training programs', "trait_tags": {'Public-Health': 1.0, 'Teaching-Ed': 0.5, 'Community-Serve': 0.4}},
+            {"option_id": 4078, "option_text": 'Social media health awareness campaigns', "trait_tags": {'Public-Health': 0.9, 'Digital-Media': 0.5, 'Marketing-Sales': 0.3}},
+            {"option_id": 4079, "option_text": 'School-based health education curricula', "trait_tags": {'Public-Health': 0.9, 'Teaching-Ed': 0.5, 'Nutrition-Diet': 0.3}},
+            {"option_id": 4080, "option_text": 'Barangay health center capacity building', "trait_tags": {'Public-Health': 0.9, 'Community-Serve': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4081, "option_text": 'Policy advocacy for health legislation', "trait_tags": {'Public-Health': 0.9, 'Legal-Practice': 0.4, 'People-Skill': 0.4}},
+            {"option_id": 4082, "option_text": 'Research-based intervention design', "trait_tags": {'Public-Health': 0.8, 'Lab-Research': 0.5, 'Data-Analytics': 0.4}},
+        ]
+    },
+    {
+        "question_id": 460,
+        "question_text": 'Which public health emergency response role suits you?',
+"category": "Interest - Public Health",
+        "weight": 1.5,
+        "trait_tags": {'Public-Health': 0.9, 'People-Skill': 0.3},
+        "options": [
+            {"option_id": 4083, "option_text": 'Epidemiological investigation team lead', "trait_tags": {'Public-Health': 1.0, 'Analytical-Skill': 0.5, 'Field-Research': 0.3}},
+            {"option_id": 4084, "option_text": 'Contact tracing and quarantine coordinator', "trait_tags": {'Public-Health': 0.9, 'People-Skill': 0.5, 'Admin-Skill': 0.4}},
+            {"option_id": 4085, "option_text": 'Laboratory testing and sample management', "trait_tags": {'Public-Health': 0.8, 'Medical-Lab': 0.6, 'Lab-Research': 0.4}},
+            {"option_id": 4086, "option_text": 'Risk communication and media briefing', "trait_tags": {'Public-Health': 0.9, 'People-Skill': 0.5, 'Digital-Media': 0.3}},
+            {"option_id": 4087, "option_text": 'Logistics for medical supply distribution', "trait_tags": {'Public-Health': 0.9, 'Industrial-Ops': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4088, "option_text": 'Community health volunteer coordination', "trait_tags": {'Public-Health': 0.9, 'Community-Serve': 0.5, 'People-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 461,
+        "question_text": 'What aspect of healthcare policy would you want to shape?',
+"category": "Interest - Public Health",
+        "weight": 1.5,
+        "trait_tags": {'Public-Health': 0.9, 'Legal-Practice': 0.3},
+        "options": [
+            {"option_id": 4089, "option_text": 'Universal health coverage implementation', "trait_tags": {'Public-Health': 1.0, 'Admin-Skill': 0.4, 'Community-Serve': 0.3}},
+            {"option_id": 4090, "option_text": 'Disease prevention funding allocation', "trait_tags": {'Public-Health': 0.9, 'Finance-Acct': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 4091, "option_text": 'Healthcare worker deployment policies', "trait_tags": {'Public-Health': 0.9, 'HR-Management': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4092, "option_text": 'Pharmaceutical regulation and access', "trait_tags": {'Public-Health': 0.8, 'Pharmacy': 0.5, 'Legal-Practice': 0.4}},
+            {"option_id": 4093, "option_text": 'Environmental health standards enforcement', "trait_tags": {'Public-Health': 0.9, 'Environmental-Sci': 0.4, 'Law-Enforce': 0.3}},
+            {"option_id": 4094, "option_text": 'Mental health legislation and programs', "trait_tags": {'Public-Health': 0.9, 'Counseling': 0.5, 'Legal-Practice': 0.3}},
+        ]
+    },
+    {
+        "question_id": 462,
+        "question_text": 'Which global health concern motivates you most?',
+"category": "Interest - Public Health",
+        "weight": 1.5,
+        "trait_tags": {'Public-Health': 0.9},
+        "options": [
+            {"option_id": 4095, "option_text": 'Pandemic preparedness and response systems', "trait_tags": {'Public-Health': 1.0, 'Data-Analytics': 0.4, 'Lab-Research': 0.3}},
+            {"option_id": 4096, "option_text": 'Antimicrobial resistance prevention', "trait_tags": {'Public-Health': 0.9, 'Pharmacy': 0.5, 'Lab-Research': 0.4}},
+            {"option_id": 4097, "option_text": 'Climate change effects on health', "trait_tags": {'Public-Health': 0.9, 'Environmental-Sci': 0.5, 'Field-Research': 0.3}},
+            {"option_id": 4098, "option_text": 'Health equity and access in rural areas', "trait_tags": {'Public-Health': 0.9, 'Community-Serve': 0.5, 'Social-Work': 0.4}},
+            {"option_id": 4099, "option_text": 'Non-communicable disease prevention', "trait_tags": {'Public-Health': 1.0, 'Nutrition-Diet': 0.4, 'Counseling': 0.3}},
+            {"option_id": 4100, "option_text": 'Digital health and telemedicine expansion', "trait_tags": {'Public-Health': 0.8, 'Software-Dev': 0.5, 'Technical-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 463,
+        "question_text": 'What public health data analysis task excites you?',
+"category": "Interest - Public Health",
+        "weight": 1.5,
+        "trait_tags": {'Public-Health': 0.9, 'Data-Analytics': 0.4},
+        "options": [
+            {"option_id": 4101, "option_text": 'Mapping disease hotspots with GIS', "trait_tags": {'Public-Health': 1.0, 'Data-Analytics': 0.6, 'Software-Dev': 0.3}},
+            {"option_id": 4102, "option_text": 'Analyzing hospital admission trends', "trait_tags": {'Public-Health': 0.9, 'Data-Analytics': 0.5, 'Health-Admin': 0.3}},
+            {"option_id": 4103, "option_text": 'Monitoring vaccination coverage rates', "trait_tags": {'Public-Health': 1.0, 'Data-Analytics': 0.5, 'Community-Serve': 0.3}},
+            {"option_id": 4104, "option_text": 'Studying demographic health survey results', "trait_tags": {'Public-Health': 0.9, 'Analytical-Skill': 0.5, 'Data-Analytics': 0.4}},
+            {"option_id": 4105, "option_text": 'Evaluating health program effectiveness', "trait_tags": {'Public-Health': 0.9, 'Analytical-Skill': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4106, "option_text": 'Forecasting disease burden for budget planning', "trait_tags": {'Public-Health': 0.9, 'Data-Analytics': 0.5, 'Finance-Acct': 0.3}},
+        ]
+    },
+    {
+        "question_id": 464,
+        "question_text": 'Where would you most want to practice public health?',
+"category": "Interest - Public Health",
+        "weight": 1.5,
+        "trait_tags": {'Public-Health': 0.9},
+        "options": [
+            {"option_id": 4107, "option_text": 'DOH regional epidemiology office', "trait_tags": {'Public-Health': 1.0, 'Data-Analytics': 0.4, 'Admin-Skill': 0.3}},
+            {"option_id": 4108, "option_text": 'WHO or UNICEF international programs', "trait_tags": {'Public-Health': 1.0, 'Community-Serve': 0.4, 'People-Skill': 0.3}},
+            {"option_id": 4109, "option_text": 'Municipal or barangay health unit', "trait_tags": {'Public-Health': 0.9, 'Community-Serve': 0.5, 'People-Skill': 0.4}},
+            {"option_id": 4110, "option_text": 'University public health research center', "trait_tags": {'Public-Health': 0.9, 'Lab-Research': 0.5, 'Teaching-Ed': 0.3}},
+            {"option_id": 4111, "option_text": 'NGO running health outreach programs', "trait_tags": {'Public-Health': 0.9, 'Community-Serve': 0.5, 'Social-Work': 0.4}},
+            {"option_id": 4112, "option_text": 'Hospital infection prevention department', "trait_tags": {'Public-Health': 0.8, 'Patient-Care': 0.5, 'Medical-Lab': 0.3}},
+        ]
+    },
+    {
+        "question_id": 465,
+        "question_text": 'Which medical laboratory specialization excites you most?',
+"category": "Interest - Medical Laboratory",
+        "weight": 1.5,
+        "trait_tags": {'Medical-Lab': 0.9},
+        "options": [
+            {"option_id": 4113, "option_text": 'Clinical chemistry and blood analysis', "trait_tags": {'Medical-Lab': 1.0, 'Lab-Research': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4114, "option_text": 'Hematology and blood cell examination', "trait_tags": {'Medical-Lab': 1.0, 'Lab-Research': 0.4, 'Patient-Care': 0.3}},
+            {"option_id": 4115, "option_text": 'Microbiology and culture identification', "trait_tags": {'Medical-Lab': 0.9, 'Lab-Research': 0.6, 'Environmental-Sci': 0.3}},
+            {"option_id": 4116, "option_text": 'Histopathology and tissue analysis', "trait_tags": {'Medical-Lab': 0.9, 'Lab-Research': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4117, "option_text": 'Immunology and serology testing', "trait_tags": {'Medical-Lab': 0.9, 'Lab-Research': 0.5, 'Pharmacy': 0.3}},
+            {"option_id": 4118, "option_text": 'Blood banking and transfusion services', "trait_tags": {'Medical-Lab': 1.0, 'Patient-Care': 0.4, 'Admin-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 466,
+        "question_text": 'What lab equipment would you most want to master?',
+"category": "Interest - Medical Laboratory",
+        "weight": 1.5,
+        "trait_tags": {'Medical-Lab': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 4119, "option_text": 'Automated chemistry analyzer', "trait_tags": {'Medical-Lab': 1.0, 'Technical-Skill': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4120, "option_text": 'Microscope for cell morphology studies', "trait_tags": {'Medical-Lab': 0.9, 'Lab-Research': 0.5, 'Analytical-Skill': 0.4}},
+            {"option_id": 4121, "option_text": 'Flow cytometry cell counter', "trait_tags": {'Medical-Lab': 0.9, 'Technical-Skill': 0.5, 'Data-Analytics': 0.4}},
+            {"option_id": 4122, "option_text": 'PCR machine for molecular diagnostics', "trait_tags": {'Medical-Lab': 0.9, 'Lab-Research': 0.6, 'Technical-Skill': 0.4}},
+            {"option_id": 4123, "option_text": 'Blood gas analyzer for critical care', "trait_tags": {'Medical-Lab': 1.0, 'Patient-Care': 0.4, 'Technical-Skill': 0.3}},
+            {"option_id": 4124, "option_text": 'Culture incubator and identification system', "trait_tags": {'Medical-Lab': 0.9, 'Lab-Research': 0.5, 'Technical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 467,
+        "question_text": 'What role would you play in a diagnostic laboratory?',
+"category": "Career - Medical Laboratory",
+        "weight": 1.5,
+        "trait_tags": {'Medical-Lab': 0.9},
+        "options": [
+            {"option_id": 4125, "option_text": 'Running routine patient sample tests', "trait_tags": {'Medical-Lab': 1.0, 'Patient-Care': 0.4, 'Technical-Skill': 0.3}},
+            {"option_id": 4126, "option_text": 'Quality control and instrument calibration', "trait_tags": {'Medical-Lab': 0.9, 'Analytical-Skill': 0.5, 'Technical-Skill': 0.4}},
+            {"option_id": 4127, "option_text": 'Interpreting abnormal results and flagging', "trait_tags": {'Medical-Lab': 0.9, 'Analytical-Skill': 0.5, 'Patient-Care': 0.4}},
+            {"option_id": 4128, "option_text": 'Research and method development', "trait_tags": {'Medical-Lab': 0.8, 'Lab-Research': 0.6, 'Analytical-Skill': 0.4}},
+            {"option_id": 4129, "option_text": 'Lab safety and biohazard management', "trait_tags": {'Medical-Lab': 0.9, 'Admin-Skill': 0.4, 'Environmental-Sci': 0.3}},
+            {"option_id": 4130, "option_text": 'Supervising and training lab technicians', "trait_tags": {'Medical-Lab': 0.8, 'Teaching-Ed': 0.5, 'People-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 468,
+        "question_text": 'Which sample type would you prefer working with?',
+"category": "Preference - Medical Laboratory",
+        "weight": 1.5,
+        "trait_tags": {'Medical-Lab': 0.9, 'Lab-Research': 0.3},
+        "options": [
+            {"option_id": 4131, "option_text": 'Blood specimens for hematology profiles', "trait_tags": {'Medical-Lab': 1.0, 'Lab-Research': 0.4, 'Patient-Care': 0.3}},
+            {"option_id": 4132, "option_text": 'Urine for chemical and microscopic analysis', "trait_tags": {'Medical-Lab': 0.9, 'Lab-Research': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4133, "option_text": 'Tissue biopsies for pathology review', "trait_tags": {'Medical-Lab': 0.9, 'Lab-Research': 0.5, 'Analytical-Skill': 0.4}},
+            {"option_id": 4134, "option_text": 'Bacterial cultures from wound or throat swabs', "trait_tags": {'Medical-Lab': 0.9, 'Lab-Research': 0.5, 'Environmental-Sci': 0.3}},
+            {"option_id": 4135, "option_text": 'Cerebrospinal fluid for neurological tests', "trait_tags": {'Medical-Lab': 1.0, 'Lab-Research': 0.5, 'Patient-Care': 0.3}},
+            {"option_id": 4136, "option_text": 'Genetic samples for molecular analysis', "trait_tags": {'Medical-Lab': 0.8, 'Lab-Research': 0.6, 'Data-Analytics': 0.3}},
+        ]
+    },
+    {
+        "question_id": 469,
+        "question_text": 'What motivates you most about medical lab work?',
+"category": "Interest - Medical Laboratory",
+        "weight": 1.5,
+        "trait_tags": {'Medical-Lab': 0.9},
+        "options": [
+            {"option_id": 4137, "option_text": 'Helping doctors diagnose diseases accurately', "trait_tags": {'Medical-Lab': 1.0, 'Patient-Care': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4138, "option_text": 'Working with precision instruments and technology', "trait_tags": {'Medical-Lab': 0.9, 'Technical-Skill': 0.5, 'Hardware-Systems': 0.3}},
+            {"option_id": 4139, "option_text": 'Discovering new pathogens or biomarkers', "trait_tags": {'Medical-Lab': 0.9, 'Lab-Research': 0.6, 'Field-Research': 0.3}},
+            {"option_id": 4140, "option_text": 'Ensuring blood supply safety through screening', "trait_tags": {'Medical-Lab': 1.0, 'Patient-Care': 0.4, 'Admin-Skill': 0.3}},
+            {"option_id": 4141, "option_text": 'Performing quality assurance on test results', "trait_tags": {'Medical-Lab': 0.9, 'Analytical-Skill': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4142, "option_text": 'Training the next generation of med techs', "trait_tags": {'Medical-Lab': 0.8, 'Teaching-Ed': 0.5, 'People-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 470,
+        "question_text": 'Where would you most want to work as a medical technologist?',
+"category": "Interest - Medical Laboratory",
+        "weight": 1.5,
+        "trait_tags": {'Medical-Lab': 0.9},
+        "options": [
+            {"option_id": 4143, "option_text": 'Hospital clinical laboratory', "trait_tags": {'Medical-Lab': 1.0, 'Patient-Care': 0.4, 'Technical-Skill': 0.3}},
+            {"option_id": 4144, "option_text": 'Research university laboratory', "trait_tags": {'Medical-Lab': 0.9, 'Lab-Research': 0.5, 'Teaching-Ed': 0.3}},
+            {"option_id": 4145, "option_text": 'Public health reference laboratory', "trait_tags": {'Medical-Lab': 0.9, 'Public-Health': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4146, "option_text": 'Forensic and crime laboratory', "trait_tags": {'Medical-Lab': 0.8, 'Forensic-Sci': 0.6, 'Law-Enforce': 0.3}},
+            {"option_id": 4147, "option_text": 'Pharmaceutical testing laboratory', "trait_tags": {'Medical-Lab': 0.9, 'Pharmacy': 0.5, 'Lab-Research': 0.3}},
+            {"option_id": 4148, "option_text": 'Veterinary diagnostic laboratory', "trait_tags": {'Medical-Lab': 0.8, 'Agri-Nature': 0.4, 'Lab-Research': 0.4}},
+        ]
+    },
+    {
+        "question_id": 471,
+        "question_text": 'What lab quality practice matters most to you?',
+"category": "Interest - Medical Laboratory",
+        "weight": 1.5,
+        "trait_tags": {'Medical-Lab': 0.9, 'Analytical-Skill': 0.3},
+        "options": [
+            {"option_id": 4149, "option_text": 'Daily calibration of analyzers', "trait_tags": {'Medical-Lab': 1.0, 'Technical-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4150, "option_text": 'Proficiency testing and external QA', "trait_tags": {'Medical-Lab': 0.9, 'Analytical-Skill': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4151, "option_text": 'Standard operating procedure compliance', "trait_tags": {'Medical-Lab': 0.9, 'Admin-Skill': 0.5, 'Legal-Practice': 0.3}},
+            {"option_id": 4152, "option_text": 'Specimen collection and handling protocols', "trait_tags": {'Medical-Lab': 1.0, 'Patient-Care': 0.4, 'Physical-Skill': 0.3}},
+            {"option_id": 4153, "option_text": 'Result verification and validation', "trait_tags": {'Medical-Lab': 0.9, 'Analytical-Skill': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4154, "option_text": 'Inventory and reagent management', "trait_tags": {'Medical-Lab': 0.8, 'Admin-Skill': 0.5, 'Industrial-Ops': 0.3}},
+        ]
+    },
+    {
+        "question_id": 472,
+        "question_text": 'Which emerging lab technology fascinates you?',
+"category": "Interest - Medical Laboratory",
+        "weight": 1.5,
+        "trait_tags": {'Medical-Lab': 0.9, 'Technical-Skill': 0.4},
+        "options": [
+            {"option_id": 4155, "option_text": 'Point-of-care rapid testing devices', "trait_tags": {'Medical-Lab': 1.0, 'Technical-Skill': 0.5, 'Patient-Care': 0.3}},
+            {"option_id": 4156, "option_text": 'Next-generation DNA sequencing platforms', "trait_tags": {'Medical-Lab': 0.9, 'Lab-Research': 0.6, 'Data-Analytics': 0.3}},
+            {"option_id": 4157, "option_text": 'Mass spectrometry for clinical diagnostics', "trait_tags": {'Medical-Lab': 0.9, 'Technical-Skill': 0.5, 'Lab-Research': 0.4}},
+            {"option_id": 4158, "option_text": 'Digital pathology and AI-assisted analysis', "trait_tags": {'Medical-Lab': 0.8, 'AI-ML': 0.5, 'Data-Analytics': 0.4}},
+            {"option_id": 4159, "option_text": 'Automated liquid handling robots', "trait_tags": {'Medical-Lab': 0.9, 'Technical-Skill': 0.5, 'Industrial-Ops': 0.3}},
+            {"option_id": 4160, "option_text": 'Lab information management systems', "trait_tags": {'Medical-Lab': 0.9, 'Software-Dev': 0.4, 'Admin-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 473,
+        "question_text": 'What area of nutrition science interests you most?',
+"category": "Interest - Nutrition & Dietetics",
+        "weight": 1.5,
+        "trait_tags": {'Nutrition-Diet': 0.9},
+        "options": [
+            {"option_id": 4161, "option_text": 'Clinical nutrition and therapeutic diets', "trait_tags": {'Nutrition-Diet': 1.0, 'Patient-Care': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4162, "option_text": 'Sports nutrition and athletic performance', "trait_tags": {'Nutrition-Diet': 0.9, 'Sports-Ed': 0.5, 'Physical-Skill': 0.4}},
+            {"option_id": 4163, "option_text": 'Community nutrition and public feeding programs', "trait_tags": {'Nutrition-Diet': 0.9, 'Community-Serve': 0.5, 'Public-Health': 0.4}},
+            {"option_id": 4164, "option_text": 'Food science and product development', "trait_tags": {'Nutrition-Diet': 0.8, 'Food-Science': 0.6, 'Lab-Research': 0.3}},
+            {"option_id": 4165, "option_text": 'Pediatric nutrition and child growth', "trait_tags": {'Nutrition-Diet': 1.0, 'Patient-Care': 0.4, 'Teaching-Ed': 0.3}},
+            {"option_id": 4166, "option_text": 'Nutrition research and dietary studies', "trait_tags": {'Nutrition-Diet': 0.9, 'Lab-Research': 0.5, 'Data-Analytics': 0.3}},
+        ]
+    },
+    {
+        "question_id": 474,
+        "question_text": 'Which nutrition counseling scenario excites you?',
+"category": "Situational - Nutrition & Dietetics",
+        "weight": 1.5,
+        "trait_tags": {'Nutrition-Diet': 0.9, 'Counseling': 0.3},
+        "options": [
+            {"option_id": 4167, "option_text": 'Helping a diabetic patient plan their meals', "trait_tags": {'Nutrition-Diet': 1.0, 'Patient-Care': 0.5, 'Counseling': 0.4}},
+            {"option_id": 4168, "option_text": 'Designing a meal plan for an athlete', "trait_tags": {'Nutrition-Diet': 0.9, 'Sports-Ed': 0.5, 'Physical-Skill': 0.3}},
+            {"option_id": 4169, "option_text": 'Guiding pregnant women on prenatal nutrition', "trait_tags": {'Nutrition-Diet': 1.0, 'Patient-Care': 0.5, 'Counseling': 0.3}},
+            {"option_id": 4170, "option_text": 'Planning menus for school feeding programs', "trait_tags": {'Nutrition-Diet': 0.9, 'Community-Serve': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4171, "option_text": 'Teaching children about healthy food choices', "trait_tags": {'Nutrition-Diet': 0.9, 'Teaching-Ed': 0.5, 'Community-Serve': 0.3}},
+            {"option_id": 4172, "option_text": 'Advising elderly patients on bone-health diets', "trait_tags": {'Nutrition-Diet': 1.0, 'Patient-Care': 0.5, 'Counseling': 0.3}},
+        ]
+    },
+    {
+        "question_id": 475,
+        "question_text": 'What nutrition-related research would you pursue?',
+"category": "Interest - Nutrition & Dietetics",
+        "weight": 1.5,
+        "trait_tags": {'Nutrition-Diet': 0.9, 'Lab-Research': 0.3},
+        "options": [
+            {"option_id": 4173, "option_text": 'Impact of Filipino diet on chronic disease', "trait_tags": {'Nutrition-Diet': 1.0, 'Public-Health': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4174, "option_text": 'Micronutrient deficiency in rural communities', "trait_tags": {'Nutrition-Diet': 0.9, 'Community-Serve': 0.5, 'Field-Research': 0.3}},
+            {"option_id": 4175, "option_text": 'Food fortification effectiveness studies', "trait_tags": {'Nutrition-Diet': 0.9, 'Food-Science': 0.5, 'Lab-Research': 0.4}},
+            {"option_id": 4176, "option_text": 'Gut microbiome and nutritional health links', "trait_tags": {'Nutrition-Diet': 0.8, 'Lab-Research': 0.6, 'Medical-Lab': 0.3}},
+            {"option_id": 4177, "option_text": 'Herbal and traditional food nutrient analysis', "trait_tags": {'Nutrition-Diet': 0.9, 'Lab-Research': 0.5, 'Agri-Nature': 0.3}},
+            {"option_id": 4178, "option_text": 'Obesity prevention program evaluation', "trait_tags": {'Nutrition-Diet': 1.0, 'Public-Health': 0.5, 'Data-Analytics': 0.3}},
+        ]
+    },
+    {
+        "question_id": 476,
+        "question_text": 'Where would you most want to practice nutrition?',
+"category": "Interest - Nutrition & Dietetics",
+        "weight": 1.5,
+        "trait_tags": {'Nutrition-Diet': 0.9},
+        "options": [
+            {"option_id": 4179, "option_text": 'Hospital dietetics department', "trait_tags": {'Nutrition-Diet': 1.0, 'Patient-Care': 0.5, 'Health-Admin': 0.3}},
+            {"option_id": 4180, "option_text": 'Sports team nutritionist', "trait_tags": {'Nutrition-Diet': 0.9, 'Sports-Ed': 0.5, 'Physical-Skill': 0.3}},
+            {"option_id": 4181, "option_text": 'Community health center', "trait_tags": {'Nutrition-Diet': 0.9, 'Community-Serve': 0.5, 'Public-Health': 0.4}},
+            {"option_id": 4182, "option_text": 'Food manufacturing quality lab', "trait_tags": {'Nutrition-Diet': 0.8, 'Food-Science': 0.6, 'Lab-Research': 0.3}},
+            {"option_id": 4183, "option_text": 'School nutrition program coordinator', "trait_tags": {'Nutrition-Diet': 0.9, 'Teaching-Ed': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4184, "option_text": 'Private wellness and diet clinic', "trait_tags": {'Nutrition-Diet': 0.9, 'Counseling': 0.5, 'Startup-Venture': 0.3}},
+        ]
+    },
+    {
+        "question_id": 477,
+        "question_text": 'What aspect of meal planning do you find most rewarding?',
+"category": "Situational - Nutrition & Dietetics",
+        "weight": 1.5,
+        "trait_tags": {'Nutrition-Diet': 0.9},
+        "options": [
+            {"option_id": 4185, "option_text": 'Calculating exact macro and micro nutrients', "trait_tags": {'Nutrition-Diet': 1.0, 'Analytical-Skill': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4186, "option_text": 'Creating delicious yet therapeutic recipes', "trait_tags": {'Nutrition-Diet': 0.9, 'Culinary-Arts': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4187, "option_text": 'Accommodating food allergies and restrictions', "trait_tags": {'Nutrition-Diet': 1.0, 'Patient-Care': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 4188, "option_text": 'Planning cost-effective community meals', "trait_tags": {'Nutrition-Diet': 0.9, 'Community-Serve': 0.5, 'Finance-Acct': 0.3}},
+            {"option_id": 4189, "option_text": 'Adapting local Filipino ingredients for health', "trait_tags": {'Nutrition-Diet': 0.9, 'Culinary-Arts': 0.5, 'Agri-Nature': 0.3}},
+            {"option_id": 4190, "option_text": 'Tracking patient dietary compliance', "trait_tags": {'Nutrition-Diet': 0.9, 'Counseling': 0.4, 'Data-Analytics': 0.3}},
+        ]
+    },
+    {
+        "question_id": 478,
+        "question_text": 'Which nutrition assessment method interests you most?',
+"category": "Interest - Nutrition & Dietetics",
+        "weight": 1.5,
+        "trait_tags": {'Nutrition-Diet': 0.9, 'Analytical-Skill': 0.3},
+        "options": [
+            {"option_id": 4191, "option_text": 'Anthropometric measurements and growth charts', "trait_tags": {'Nutrition-Diet': 1.0, 'Analytical-Skill': 0.5, 'Patient-Care': 0.3}},
+            {"option_id": 4192, "option_text": 'Dietary recall and food diary analysis', "trait_tags": {'Nutrition-Diet': 0.9, 'Data-Analytics': 0.5, 'Counseling': 0.3}},
+            {"option_id": 4193, "option_text": 'Biochemical nutrient level testing', "trait_tags": {'Nutrition-Diet': 0.8, 'Medical-Lab': 0.6, 'Lab-Research': 0.3}},
+            {"option_id": 4194, "option_text": 'Body composition analysis technology', "trait_tags": {'Nutrition-Diet': 0.9, 'Technical-Skill': 0.5, 'Physical-Skill': 0.3}},
+            {"option_id": 4195, "option_text": 'Clinical nutrition physical examination', "trait_tags": {'Nutrition-Diet': 1.0, 'Patient-Care': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4196, "option_text": 'Community nutrition survey methods', "trait_tags": {'Nutrition-Diet': 0.9, 'Public-Health': 0.5, 'Data-Analytics': 0.3}},
+        ]
+    },
+    {
+        "question_id": 479,
+        "question_text": 'What nutrition challenge would you most want to solve?',
+"category": "Interest - Nutrition & Dietetics",
+        "weight": 1.5,
+        "trait_tags": {'Nutrition-Diet': 0.9, 'Community-Serve': 0.3},
+        "options": [
+            {"option_id": 4197, "option_text": 'Child malnutrition in underserved areas', "trait_tags": {'Nutrition-Diet': 1.0, 'Community-Serve': 0.5, 'Public-Health': 0.4}},
+            {"option_id": 4198, "option_text": 'Rising diabetes rates from poor diet', "trait_tags": {'Nutrition-Diet': 1.0, 'Patient-Care': 0.4, 'Public-Health': 0.3}},
+            {"option_id": 4199, "option_text": 'Food insecurity in disaster-prone regions', "trait_tags": {'Nutrition-Diet': 0.9, 'Community-Serve': 0.5, 'Social-Work': 0.3}},
+            {"option_id": 4200, "option_text": 'Iron deficiency anemia in Filipino women', "trait_tags": {'Nutrition-Diet': 0.9, 'Public-Health': 0.5, 'Medical-Lab': 0.3}},
+            {"option_id": 4201, "option_text": 'Promoting breastfeeding in working mothers', "trait_tags": {'Nutrition-Diet': 0.9, 'Counseling': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 4202, "option_text": 'Junk food and obesity in Filipino youth', "trait_tags": {'Nutrition-Diet': 1.0, 'Teaching-Ed': 0.4, 'Public-Health': 0.3}},
+        ]
+    },
+    {
+        "question_id": 480,
+        "question_text": 'What type of rehabilitation patient would you most want to help?',
+"category": "Interest - Rehabilitation",
+        "weight": 1.5,
+        "trait_tags": {'Rehab-Therapy': 0.9},
+        "options": [
+            {"option_id": 4203, "option_text": 'Stroke survivors regaining motor function', "trait_tags": {'Rehab-Therapy': 1.0, 'Patient-Care': 0.5, 'Physical-Skill': 0.3}},
+            {"option_id": 4204, "option_text": 'Athletes recovering from sports injuries', "trait_tags": {'Rehab-Therapy': 0.9, 'Sports-Ed': 0.5, 'Physical-Skill': 0.4}},
+            {"option_id": 4205, "option_text": 'Children with developmental delays', "trait_tags": {'Rehab-Therapy': 0.9, 'Patient-Care': 0.5, 'Teaching-Ed': 0.3}},
+            {"option_id": 4206, "option_text": 'Workers with repetitive strain injuries', "trait_tags": {'Rehab-Therapy': 0.9, 'Industrial-Ops': 0.4, 'Physical-Skill': 0.3}},
+            {"option_id": 4207, "option_text": 'Elderly patients maintaining independence', "trait_tags": {'Rehab-Therapy': 1.0, 'Patient-Care': 0.5, 'Counseling': 0.3}},
+            {"option_id": 4208, "option_text": 'Amputees learning to use prosthetics', "trait_tags": {'Rehab-Therapy': 0.9, 'Technical-Skill': 0.4, 'Patient-Care': 0.4}},
+        ]
+    },
+    {
+        "question_id": 481,
+        "question_text": 'Which rehabilitation therapy technique interests you?',
+"category": "Interest - Rehabilitation",
+        "weight": 1.5,
+        "trait_tags": {'Rehab-Therapy': 0.9, 'Physical-Skill': 0.3},
+        "options": [
+            {"option_id": 4209, "option_text": 'Therapeutic exercise and strength training', "trait_tags": {'Rehab-Therapy': 1.0, 'Physical-Skill': 0.6, 'Sports-Ed': 0.3}},
+            {"option_id": 4210, "option_text": 'Electrotherapy and ultrasound treatment', "trait_tags": {'Rehab-Therapy': 0.9, 'Technical-Skill': 0.5, 'Hardware-Systems': 0.3}},
+            {"option_id": 4211, "option_text": 'Hydrotherapy and aquatic rehabilitation', "trait_tags": {'Rehab-Therapy': 0.9, 'Physical-Skill': 0.5, 'Maritime-Sea': 0.2}},
+            {"option_id": 4212, "option_text": 'Manual therapy and joint mobilization', "trait_tags": {'Rehab-Therapy': 1.0, 'Physical-Skill': 0.5, 'Patient-Care': 0.3}},
+            {"option_id": 4213, "option_text": 'Cognitive rehabilitation exercises', "trait_tags": {'Rehab-Therapy': 0.9, 'Counseling': 0.5, 'Teaching-Ed': 0.3}},
+            {"option_id": 4214, "option_text": 'Assistive device and orthotics fitting', "trait_tags": {'Rehab-Therapy': 0.9, 'Mechanical-Design': 0.4, 'Technical-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 482,
+        "question_text": 'Where would you most want to practice rehabilitation?',
+"category": "Interest - Rehabilitation",
+        "weight": 1.5,
+        "trait_tags": {'Rehab-Therapy': 0.9},
+        "options": [
+            {"option_id": 4215, "option_text": 'Hospital rehabilitation department', "trait_tags": {'Rehab-Therapy': 1.0, 'Patient-Care': 0.5, 'Health-Admin': 0.3}},
+            {"option_id": 4216, "option_text": 'Sports medicine and athletic clinic', "trait_tags": {'Rehab-Therapy': 0.9, 'Sports-Ed': 0.5, 'Physical-Skill': 0.4}},
+            {"option_id": 4217, "option_text": 'Pediatric developmental therapy center', "trait_tags": {'Rehab-Therapy': 0.9, 'Patient-Care': 0.5, 'Teaching-Ed': 0.3}},
+            {"option_id": 4218, "option_text": 'Community-based rehabilitation program', "trait_tags": {'Rehab-Therapy': 0.9, 'Community-Serve': 0.5, 'Social-Work': 0.3}},
+            {"option_id": 4219, "option_text": 'Private physical therapy clinic', "trait_tags": {'Rehab-Therapy': 1.0, 'Startup-Venture': 0.4, 'Patient-Care': 0.3}},
+            {"option_id": 4220, "option_text": 'Home health rehabilitation services', "trait_tags": {'Rehab-Therapy': 0.9, 'Patient-Care': 0.5, 'People-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 483,
+        "question_text": 'What rehabilitation outcome is most rewarding to you?',
+"category": "Interest - Rehabilitation",
+        "weight": 1.5,
+        "trait_tags": {'Rehab-Therapy': 0.9, 'Patient-Care': 0.3},
+        "options": [
+            {"option_id": 4221, "option_text": 'Patient walking again after surgery', "trait_tags": {'Rehab-Therapy': 1.0, 'Patient-Care': 0.5, 'Physical-Skill': 0.3}},
+            {"option_id": 4222, "option_text": 'Athlete returning to competitive play', "trait_tags": {'Rehab-Therapy': 0.9, 'Sports-Ed': 0.5, 'Physical-Skill': 0.4}},
+            {"option_id": 4223, "option_text": 'Child reaching developmental milestones', "trait_tags": {'Rehab-Therapy': 1.0, 'Teaching-Ed': 0.4, 'Patient-Care': 0.4}},
+            {"option_id": 4224, "option_text": 'Elderly patient regaining daily independence', "trait_tags": {'Rehab-Therapy': 0.9, 'Patient-Care': 0.5, 'Counseling': 0.3}},
+            {"option_id": 4225, "option_text": 'Worker returning safely to their job', "trait_tags": {'Rehab-Therapy': 0.9, 'Industrial-Ops': 0.4, 'People-Skill': 0.3}},
+            {"option_id": 4226, "option_text": 'Speech patient communicating clearly again', "trait_tags": {'Rehab-Therapy': 0.9, 'Patient-Care': 0.5, 'People-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 484,
+        "question_text": 'Which rehabilitation assessment skill would you master first?',
+"category": "Interest - Rehabilitation",
+        "weight": 1.5,
+        "trait_tags": {'Rehab-Therapy': 0.9, 'Analytical-Skill': 0.3},
+        "options": [
+            {"option_id": 4227, "option_text": 'Range of motion and flexibility testing', "trait_tags": {'Rehab-Therapy': 1.0, 'Physical-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4228, "option_text": 'Muscle strength grading and evaluation', "trait_tags": {'Rehab-Therapy': 1.0, 'Physical-Skill': 0.5, 'Patient-Care': 0.3}},
+            {"option_id": 4229, "option_text": 'Gait analysis and walking pattern assessment', "trait_tags": {'Rehab-Therapy': 0.9, 'Analytical-Skill': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4230, "option_text": 'Pain assessment and management planning', "trait_tags": {'Rehab-Therapy': 0.9, 'Patient-Care': 0.5, 'Counseling': 0.3}},
+            {"option_id": 4231, "option_text": 'Functional capacity evaluation for work', "trait_tags": {'Rehab-Therapy': 0.9, 'Analytical-Skill': 0.5, 'Industrial-Ops': 0.3}},
+            {"option_id": 4232, "option_text": 'Balance and coordination testing', "trait_tags": {'Rehab-Therapy': 1.0, 'Physical-Skill': 0.5, 'Sports-Ed': 0.3}},
+        ]
+    },
+    {
+        "question_id": 485,
+        "question_text": 'What aspect of rehabilitation science excites you?',
+"category": "Interest - Rehabilitation",
+        "weight": 1.5,
+        "trait_tags": {'Rehab-Therapy': 0.9, 'Lab-Research': 0.3},
+        "options": [
+            {"option_id": 4233, "option_text": 'Exercise physiology and tissue healing', "trait_tags": {'Rehab-Therapy': 0.9, 'Lab-Research': 0.5, 'Physical-Skill': 0.4}},
+            {"option_id": 4234, "option_text": 'Biomechanics of human movement', "trait_tags": {'Rehab-Therapy': 0.9, 'Mechanical-Design': 0.4, 'Analytical-Skill': 0.4}},
+            {"option_id": 4235, "option_text": 'Neuroplasticity and brain recovery', "trait_tags": {'Rehab-Therapy': 1.0, 'Lab-Research': 0.5, 'Patient-Care': 0.3}},
+            {"option_id": 4236, "option_text": 'Ergonomics and injury prevention design', "trait_tags": {'Rehab-Therapy': 0.8, 'Industrial-Ops': 0.5, 'Spatial-Design': 0.3}},
+            {"option_id": 4237, "option_text": 'Prosthetic and orthotic technology advances', "trait_tags": {'Rehab-Therapy': 0.9, 'Mechanical-Design': 0.5, 'Technical-Skill': 0.4}},
+            {"option_id": 4238, "option_text": 'Pain science and chronic pain management', "trait_tags": {'Rehab-Therapy': 1.0, 'Patient-Care': 0.5, 'Counseling': 0.3}},
+        ]
+    },
+    {
+        "question_id": 486,
+        "question_text": 'Which rehabilitation team role suits you best?',
+"category": "Interest - Rehabilitation",
+        "weight": 1.5,
+        "trait_tags": {'Rehab-Therapy': 0.9, 'People-Skill': 0.3},
+        "options": [
+            {"option_id": 4239, "option_text": 'Physical therapist doing hands-on treatment', "trait_tags": {'Rehab-Therapy': 1.0, 'Physical-Skill': 0.5, 'Patient-Care': 0.4}},
+            {"option_id": 4240, "option_text": 'Occupational therapist improving daily living', "trait_tags": {'Rehab-Therapy': 1.0, 'Patient-Care': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4241, "option_text": 'Speech-language pathologist restoring communication', "trait_tags": {'Rehab-Therapy': 0.9, 'People-Skill': 0.5, 'Teaching-Ed': 0.3}},
+            {"option_id": 4242, "option_text": 'Rehab program coordinator and scheduler', "trait_tags": {'Rehab-Therapy': 0.8, 'Admin-Skill': 0.5, 'People-Skill': 0.4}},
+            {"option_id": 4243, "option_text": 'Rehab research assistant conducting studies', "trait_tags": {'Rehab-Therapy': 0.9, 'Lab-Research': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4244, "option_text": 'Rehab equipment specialist and advisor', "trait_tags": {'Rehab-Therapy': 0.9, 'Technical-Skill': 0.5, 'Mechanical-Design': 0.3}},
+        ]
+    },
+    {
+        "question_id": 487,
+        "question_text": 'What type of counseling practice appeals to you most?',
+"category": "Interest - Counseling",
+        "weight": 1.5,
+        "trait_tags": {'Counseling': 0.9},
+        "options": [
+            {"option_id": 4245, "option_text": 'Individual therapy for anxiety and depression', "trait_tags": {'Counseling': 1.0, 'Patient-Care': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 4246, "option_text": 'Marriage and family relationship counseling', "trait_tags": {'Counseling': 1.0, 'People-Skill': 0.5, 'Social-Work': 0.3}},
+            {"option_id": 4247, "option_text": 'School guidance and student career advising', "trait_tags": {'Counseling': 0.9, 'Teaching-Ed': 0.5, 'People-Skill': 0.4}},
+            {"option_id": 4248, "option_text": 'Substance abuse and addiction recovery', "trait_tags": {'Counseling': 0.9, 'Patient-Care': 0.5, 'Community-Serve': 0.3}},
+            {"option_id": 4249, "option_text": 'Trauma and crisis intervention', "trait_tags": {'Counseling': 1.0, 'People-Skill': 0.4, 'Social-Work': 0.4}},
+            {"option_id": 4250, "option_text": 'Workplace employee assistance programs', "trait_tags": {'Counseling': 0.9, 'HR-Management': 0.5, 'People-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 488,
+        "question_text": 'Which counseling approach resonates with you?',
+"category": "Interest - Counseling",
+        "weight": 1.5,
+        "trait_tags": {'Counseling': 0.9, 'Analytical-Skill': 0.3},
+        "options": [
+            {"option_id": 4251, "option_text": 'Cognitive-behavioral therapy (CBT) techniques', "trait_tags": {'Counseling': 1.0, 'Analytical-Skill': 0.5, 'Patient-Care': 0.3}},
+            {"option_id": 4252, "option_text": 'Person-centered humanistic approach', "trait_tags": {'Counseling': 0.9, 'People-Skill': 0.5, 'Patient-Care': 0.4}},
+            {"option_id": 4253, "option_text": 'Play therapy for children and adolescents', "trait_tags": {'Counseling': 0.9, 'Creative-Skill': 0.5, 'Teaching-Ed': 0.3}},
+            {"option_id": 4254, "option_text": 'Group therapy and support facilitation', "trait_tags": {'Counseling': 1.0, 'People-Skill': 0.5, 'Community-Serve': 0.3}},
+            {"option_id": 4255, "option_text": 'Art and music therapy integration', "trait_tags": {'Counseling': 0.9, 'Performing-Arts': 0.5, 'Creative-Skill': 0.4}},
+            {"option_id": 4256, "option_text": 'Solution-focused brief counseling', "trait_tags": {'Counseling': 0.9, 'Analytical-Skill': 0.5, 'People-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 489,
+        "question_text": 'What counseling population would you focus on?',
+"category": "Interest - Counseling",
+        "weight": 1.5,
+        "trait_tags": {'Counseling': 0.9, 'People-Skill': 0.3},
+        "options": [
+            {"option_id": 4257, "option_text": 'Children and adolescents in schools', "trait_tags": {'Counseling': 1.0, 'Teaching-Ed': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 4258, "option_text": 'College students navigating transitions', "trait_tags": {'Counseling': 0.9, 'Teaching-Ed': 0.4, 'People-Skill': 0.4}},
+            {"option_id": 4259, "option_text": 'Adults facing workplace stress and burnout', "trait_tags": {'Counseling': 0.9, 'HR-Management': 0.4, 'People-Skill': 0.4}},
+            {"option_id": 4260, "option_text": 'Families in conflict or crisis situations', "trait_tags": {'Counseling': 1.0, 'Social-Work': 0.5, 'People-Skill': 0.4}},
+            {"option_id": 4261, "option_text": 'Disaster survivors and trauma victims', "trait_tags": {'Counseling': 0.9, 'Social-Work': 0.5, 'Community-Serve': 0.3}},
+            {"option_id": 4262, "option_text": 'Senior citizens coping with loss or isolation', "trait_tags": {'Counseling': 0.9, 'Patient-Care': 0.4, 'People-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 490,
+        "question_text": 'Which mental health assessment tool would you want to learn?',
+"category": "Interest - Counseling",
+        "weight": 1.5,
+        "trait_tags": {'Counseling': 0.9, 'Analytical-Skill': 0.3},
+        "options": [
+            {"option_id": 4263, "option_text": 'Standardized psychological testing instruments', "trait_tags": {'Counseling': 1.0, 'Analytical-Skill': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4264, "option_text": 'Clinical interview and intake assessment', "trait_tags": {'Counseling': 0.9, 'People-Skill': 0.5, 'Patient-Care': 0.4}},
+            {"option_id": 4265, "option_text": 'Behavioral observation and rating scales', "trait_tags": {'Counseling': 0.9, 'Analytical-Skill': 0.5, 'Teaching-Ed': 0.3}},
+            {"option_id": 4266, "option_text": 'Personality and career interest inventories', "trait_tags": {'Counseling': 1.0, 'Analytical-Skill': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 4267, "option_text": 'Risk and suicide assessment protocols', "trait_tags": {'Counseling': 1.0, 'Patient-Care': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 4268, "option_text": 'Child developmental screening tools', "trait_tags": {'Counseling': 0.9, 'Patient-Care': 0.5, 'Teaching-Ed': 0.3}},
+        ]
+    },
+    {
+        "question_id": 491,
+        "question_text": 'Where would you most want to practice counseling?',
+"category": "Interest - Counseling",
+        "weight": 1.5,
+        "trait_tags": {'Counseling': 0.9},
+        "options": [
+            {"option_id": 4269, "option_text": 'School or university guidance office', "trait_tags": {'Counseling': 1.0, 'Teaching-Ed': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 4270, "option_text": 'Hospital psychiatric or behavioral health unit', "trait_tags": {'Counseling': 0.9, 'Patient-Care': 0.5, 'Medical-Lab': 0.2}},
+            {"option_id": 4271, "option_text": 'Community mental health center', "trait_tags": {'Counseling': 0.9, 'Community-Serve': 0.5, 'Social-Work': 0.3}},
+            {"option_id": 4272, "option_text": 'Private counseling or therapy practice', "trait_tags": {'Counseling': 1.0, 'Startup-Venture': 0.4, 'People-Skill': 0.3}},
+            {"option_id": 4273, "option_text": 'Rehabilitation or addiction recovery center', "trait_tags": {'Counseling': 0.9, 'Rehab-Therapy': 0.5, 'Patient-Care': 0.3}},
+            {"option_id": 4274, "option_text": 'Corporate wellness and EAP provider', "trait_tags": {'Counseling': 0.9, 'HR-Management': 0.5, 'Admin-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 492,
+        "question_text": 'What counseling skill do you most want to develop?',
+"category": "Interest - Counseling",
+        "weight": 1.5,
+        "trait_tags": {'Counseling': 0.9, 'People-Skill': 0.4},
+        "options": [
+            {"option_id": 4275, "option_text": 'Active listening and reflective questioning', "trait_tags": {'Counseling': 1.0, 'People-Skill': 0.6, 'Analytical-Skill': 0.3}},
+            {"option_id": 4276, "option_text": 'Crisis de-escalation techniques', "trait_tags": {'Counseling': 1.0, 'People-Skill': 0.5, 'Patient-Care': 0.3}},
+            {"option_id": 4277, "option_text": 'Cultural sensitivity and diversity competence', "trait_tags": {'Counseling': 0.9, 'People-Skill': 0.5, 'Community-Serve': 0.3}},
+            {"option_id": 4278, "option_text": 'Psychometric test administration', "trait_tags": {'Counseling': 0.9, 'Analytical-Skill': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4279, "option_text": 'Case documentation and treatment planning', "trait_tags": {'Counseling': 0.9, 'Admin-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4280, "option_text": 'Referral networking with other professionals', "trait_tags": {'Counseling': 0.8, 'People-Skill': 0.5, 'Health-Admin': 0.4}},
+        ]
+    },
+    {
+        "question_id": 493,
+        "question_text": 'Which healthcare administration function interests you most?',
+"category": "Interest - Health Administration",
+        "weight": 1.5,
+        "trait_tags": {'Health-Admin': 0.9},
+        "options": [
+            {"option_id": 4281, "option_text": 'Hospital operations and department management', "trait_tags": {'Health-Admin': 1.0, 'Admin-Skill': 0.5, 'Industrial-Ops': 0.3}},
+            {"option_id": 4282, "option_text": 'Healthcare budget and financial planning', "trait_tags": {'Health-Admin': 0.9, 'Finance-Acct': 0.6, 'Analytical-Skill': 0.3}},
+            {"option_id": 4283, "option_text": 'Patient records and health information systems', "trait_tags": {'Health-Admin': 0.9, 'Data-Analytics': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4284, "option_text": 'Healthcare quality accreditation standards', "trait_tags": {'Health-Admin': 0.9, 'Analytical-Skill': 0.5, 'Legal-Practice': 0.3}},
+            {"option_id": 4285, "option_text": 'Human resources and medical staff recruitment', "trait_tags": {'Health-Admin': 0.9, 'HR-Management': 0.6, 'People-Skill': 0.3}},
+            {"option_id": 4286, "option_text": 'Healthcare policy and regulatory compliance', "trait_tags": {'Health-Admin': 1.0, 'Legal-Practice': 0.4, 'Admin-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 494,
+        "question_text": 'What type of healthcare facility would you manage?',
+"category": "Interest - Health Administration",
+        "weight": 1.5,
+        "trait_tags": {'Health-Admin': 0.9},
+        "options": [
+            {"option_id": 4287, "option_text": 'Large tertiary hospital', "trait_tags": {'Health-Admin': 1.0, 'Admin-Skill': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 4288, "option_text": 'Community health center or rural clinic', "trait_tags": {'Health-Admin': 0.9, 'Community-Serve': 0.5, 'Public-Health': 0.3}},
+            {"option_id": 4289, "option_text": 'Specialty outpatient surgical center', "trait_tags": {'Health-Admin': 0.9, 'Patient-Care': 0.4, 'Finance-Acct': 0.3}},
+            {"option_id": 4290, "option_text": 'Long-term care or nursing facility', "trait_tags": {'Health-Admin': 0.9, 'Patient-Care': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 4291, "option_text": 'Health maintenance organization (HMO)', "trait_tags": {'Health-Admin': 1.0, 'Finance-Acct': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4292, "option_text": 'Rehabilitation and wellness center', "trait_tags": {'Health-Admin': 0.9, 'Rehab-Therapy': 0.4, 'Admin-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 495,
+        "question_text": 'What healthcare quality metric would you prioritize?',
+"category": "Interest - Health Administration",
+        "weight": 1.5,
+        "trait_tags": {'Health-Admin': 0.9, 'Analytical-Skill': 0.3},
+        "options": [
+            {"option_id": 4293, "option_text": 'Patient satisfaction and experience scores', "trait_tags": {'Health-Admin': 1.0, 'People-Skill': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4294, "option_text": 'Clinical outcome and recovery rate tracking', "trait_tags": {'Health-Admin': 0.9, 'Data-Analytics': 0.5, 'Patient-Care': 0.3}},
+            {"option_id": 4295, "option_text": 'Wait time reduction and scheduling efficiency', "trait_tags": {'Health-Admin': 0.9, 'Industrial-Ops': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4296, "option_text": 'Infection prevention and control rates', "trait_tags": {'Health-Admin': 0.9, 'Public-Health': 0.5, 'Medical-Lab': 0.3}},
+            {"option_id": 4297, "option_text": 'Staff competency and continuing education', "trait_tags": {'Health-Admin': 0.9, 'Teaching-Ed': 0.4, 'HR-Management': 0.4}},
+            {"option_id": 4298, "option_text": 'Billing accuracy and insurance claim processing', "trait_tags": {'Health-Admin': 0.9, 'Finance-Acct': 0.5, 'Admin-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 496,
+        "question_text": 'Which healthcare information system challenge interests you?',
+"category": "Interest - Health Administration",
+        "weight": 1.5,
+        "trait_tags": {'Health-Admin': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 4299, "option_text": 'Electronic medical records implementation', "trait_tags": {'Health-Admin': 1.0, 'Software-Dev': 0.4, 'Data-Analytics': 0.3}},
+            {"option_id": 4300, "option_text": 'Patient data privacy and security', "trait_tags": {'Health-Admin': 0.9, 'Cyber-Defense': 0.5, 'Legal-Practice': 0.3}},
+            {"option_id": 4301, "option_text": 'Telemedicine platform management', "trait_tags": {'Health-Admin': 0.9, 'Software-Dev': 0.4, 'Technical-Skill': 0.4}},
+            {"option_id": 4302, "option_text": 'Health analytics and reporting dashboards', "trait_tags": {'Health-Admin': 0.9, 'Data-Analytics': 0.6, 'Software-Dev': 0.3}},
+            {"option_id": 4303, "option_text": 'Insurance and PhilHealth claims integration', "trait_tags": {'Health-Admin': 0.9, 'Finance-Acct': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4304, "option_text": 'Hospital supply chain management system', "trait_tags": {'Health-Admin': 1.0, 'Industrial-Ops': 0.5, 'Admin-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 497,
+        "question_text": 'What healthcare leadership challenge would you tackle?',
+"category": "Interest - Health Administration",
+        "weight": 1.5,
+        "trait_tags": {'Health-Admin': 0.9, 'People-Skill': 0.3},
+        "options": [
+            {"option_id": 4305, "option_text": 'Retaining skilled healthcare workers', "trait_tags": {'Health-Admin': 1.0, 'HR-Management': 0.5, 'People-Skill': 0.4}},
+            {"option_id": 4306, "option_text": 'Expanding PhilHealth coverage and access', "trait_tags": {'Health-Admin': 0.9, 'Public-Health': 0.5, 'Legal-Practice': 0.3}},
+            {"option_id": 4307, "option_text": 'Managing hospital during disaster response', "trait_tags": {'Health-Admin': 0.9, 'People-Skill': 0.5, 'Industrial-Ops': 0.3}},
+            {"option_id": 4308, "option_text": 'Improving rural healthcare delivery', "trait_tags": {'Health-Admin': 0.9, 'Community-Serve': 0.5, 'Public-Health': 0.3}},
+            {"option_id": 4309, "option_text": 'Balancing budget while improving patient care', "trait_tags": {'Health-Admin': 1.0, 'Finance-Acct': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4310, "option_text": 'Building partnerships with medical schools', "trait_tags": {'Health-Admin': 0.9, 'Teaching-Ed': 0.4, 'People-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 498,
+        "question_text": 'Which PhilHealth or HMO administrative area interests you?',
+"category": "Interest - Health Administration",
+        "weight": 1.5,
+        "trait_tags": {'Health-Admin': 0.9, 'Finance-Acct': 0.3},
+        "options": [
+            {"option_id": 4311, "option_text": 'Claims processing and benefit management', "trait_tags": {'Health-Admin': 1.0, 'Finance-Acct': 0.5, 'Admin-Skill': 0.4}},
+            {"option_id": 4312, "option_text": 'Provider network and hospital accreditation', "trait_tags": {'Health-Admin': 0.9, 'Analytical-Skill': 0.5, 'Legal-Practice': 0.3}},
+            {"option_id": 4313, "option_text": 'Member enrollment and outreach', "trait_tags": {'Health-Admin': 0.9, 'Marketing-Sales': 0.4, 'People-Skill': 0.4}},
+            {"option_id": 4314, "option_text": 'Fraud detection and compliance auditing', "trait_tags": {'Health-Admin': 0.9, 'Law-Enforce': 0.4, 'Analytical-Skill': 0.4}},
+            {"option_id": 4315, "option_text": 'Cost analysis and rate setting', "trait_tags": {'Health-Admin': 0.9, 'Finance-Acct': 0.6, 'Data-Analytics': 0.3}},
+            {"option_id": 4316, "option_text": 'Policy development and program design', "trait_tags": {'Health-Admin': 1.0, 'Legal-Practice': 0.4, 'Admin-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 499,
+        "question_text": 'Which pharmacy practice area excites you most?',
+"category": "Interest - Pharmacy",
+        "weight": 1.5,
+        "trait_tags": {'Pharmacy': 0.9},
+        "options": [
+            {"option_id": 4317, "option_text": 'Community pharmacy patient consultations', "trait_tags": {'Pharmacy': 1.0, 'People-Skill': 0.5, 'Patient-Care': 0.3}},
+            {"option_id": 4318, "option_text": 'Hospital clinical pharmacy rounds', "trait_tags": {'Pharmacy': 0.9, 'Patient-Care': 0.5, 'Medical-Lab': 0.3}},
+            {"option_id": 4319, "option_text": 'Pharmaceutical manufacturing quality control', "trait_tags": {'Pharmacy': 0.9, 'Industrial-Ops': 0.5, 'Lab-Research': 0.3}},
+            {"option_id": 4320, "option_text": 'Drug research and formulation development', "trait_tags": {'Pharmacy': 0.9, 'Lab-Research': 0.6, 'Food-Science': 0.3}},
+            {"option_id": 4321, "option_text": 'Regulatory affairs and drug approval process', "trait_tags": {'Pharmacy': 0.9, 'Legal-Practice': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4322, "option_text": 'Herbal and traditional medicine analysis', "trait_tags": {'Pharmacy': 0.8, 'Lab-Research': 0.5, 'Agri-Nature': 0.4}},
+        ]
+    },
+    {
+        "question_id": 500,
+        "question_text": 'What pharmaceutical science topic fascinates you?',
+"category": "Interest - Pharmacy",
+        "weight": 1.5,
+        "trait_tags": {'Pharmacy': 0.9, 'Lab-Research': 0.3},
+        "options": [
+            {"option_id": 4323, "option_text": 'Pharmacokinetics — how drugs move in the body', "trait_tags": {'Pharmacy': 1.0, 'Lab-Research': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4324, "option_text": 'Drug interactions and safety monitoring', "trait_tags": {'Pharmacy': 1.0, 'Patient-Care': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 4325, "option_text": 'Natural product chemistry from Philippine plants', "trait_tags": {'Pharmacy': 0.9, 'Lab-Research': 0.5, 'Agri-Nature': 0.4}},
+            {"option_id": 4326, "option_text": 'Compounding and specialized formulations', "trait_tags": {'Pharmacy': 0.9, 'Lab-Research': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4327, "option_text": 'Biopharmaceuticals and vaccine production', "trait_tags": {'Pharmacy': 0.9, 'Lab-Research': 0.5, 'Public-Health': 0.3}},
+            {"option_id": 4328, "option_text": 'Toxicology and poison control', "trait_tags": {'Pharmacy': 0.9, 'Forensic-Sci': 0.5, 'Lab-Research': 0.3}},
+        ]
+    },
+    {
+        "question_id": 501,
+        "question_text": 'What pharmacy counseling scenario appeals to you?',
+"category": "Situational - Pharmacy",
+        "weight": 1.5,
+        "trait_tags": {'Pharmacy': 0.9, 'People-Skill': 0.3},
+        "options": [
+            {"option_id": 4329, "option_text": 'Advising patients on proper medication use', "trait_tags": {'Pharmacy': 1.0, 'Patient-Care': 0.5, 'People-Skill': 0.4}},
+            {"option_id": 4330, "option_text": 'Explaining drug side effects and precautions', "trait_tags": {'Pharmacy': 1.0, 'Patient-Care': 0.4, 'Counseling': 0.3}},
+            {"option_id": 4331, "option_text": 'Helping doctors choose optimal drug therapy', "trait_tags": {'Pharmacy': 0.9, 'Analytical-Skill': 0.5, 'Patient-Care': 0.4}},
+            {"option_id": 4332, "option_text": 'Guiding chronic disease medication management', "trait_tags": {'Pharmacy': 0.9, 'Patient-Care': 0.5, 'Counseling': 0.3}},
+            {"option_id": 4333, "option_text": 'Counseling on over-the-counter product selection', "trait_tags": {'Pharmacy': 1.0, 'People-Skill': 0.5, 'Marketing-Sales': 0.2}},
+            {"option_id": 4334, "option_text": 'Promoting medication adherence for elderly patients', "trait_tags": {'Pharmacy': 0.9, 'Counseling': 0.5, 'Patient-Care': 0.4}},
+        ]
+    },
+    {
+        "question_id": 502,
+        "question_text": 'Which pharmacy technology interests you?',
+"category": "Interest - Pharmacy",
+        "weight": 1.5,
+        "trait_tags": {'Pharmacy': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 4335, "option_text": 'Automated dispensing machines and robotics', "trait_tags": {'Pharmacy': 0.9, 'Technical-Skill': 0.5, 'Industrial-Ops': 0.3}},
+            {"option_id": 4336, "option_text": 'Pharmacy information management systems', "trait_tags": {'Pharmacy': 0.9, 'Software-Dev': 0.4, 'Admin-Skill': 0.4}},
+            {"option_id": 4337, "option_text": 'Drug dissolution and stability testing equipment', "trait_tags": {'Pharmacy': 1.0, 'Lab-Research': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4338, "option_text": 'Electronic prescribing and verification', "trait_tags": {'Pharmacy': 0.9, 'Software-Dev': 0.4, 'Cyber-Defense': 0.3}},
+            {"option_id": 4339, "option_text": 'Pharmaceutical production line automation', "trait_tags": {'Pharmacy': 0.8, 'Industrial-Ops': 0.6, 'Technical-Skill': 0.4}},
+            {"option_id": 4340, "option_text": 'Drug database and interaction checking tools', "trait_tags": {'Pharmacy': 1.0, 'Data-Analytics': 0.4, 'Software-Dev': 0.3}},
+        ]
+    },
+    {
+        "question_id": 503,
+        "question_text": 'Where would you like to practice pharmacy in the Philippines?',
+"category": "Interest - Pharmacy",
+        "weight": 1.5,
+        "trait_tags": {'Pharmacy': 0.9},
+        "options": [
+            {"option_id": 4341, "option_text": 'Major hospital pharmacy department', "trait_tags": {'Pharmacy': 1.0, 'Patient-Care': 0.4, 'Health-Admin': 0.3}},
+            {"option_id": 4342, "option_text": 'Community drugstore chain management', "trait_tags": {'Pharmacy': 0.9, 'Admin-Skill': 0.5, 'Marketing-Sales': 0.3}},
+            {"option_id": 4343, "option_text": 'Pharmaceutical company R&D lab', "trait_tags": {'Pharmacy': 0.9, 'Lab-Research': 0.6, 'Technical-Skill': 0.3}},
+            {"option_id": 4344, "option_text": 'FDA Philippines regulatory office', "trait_tags": {'Pharmacy': 0.9, 'Legal-Practice': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4345, "option_text": 'University pharmacy teaching and research', "trait_tags": {'Pharmacy': 0.8, 'Teaching-Ed': 0.6, 'Lab-Research': 0.4}},
+            {"option_id": 4346, "option_text": 'Cosmetics and personal care formulation lab', "trait_tags": {'Pharmacy': 0.8, 'Lab-Research': 0.5, 'Creative-Skill': 0.3}},
+        ]
+    },
+    # ==================== TECHNOLOGY DEDICATED QUESTIONS ====================
+    {
+        "question_id": 504,
+        "question_text": 'What software development practice interests you most?',
+"category": "Interest - Software Development",
+        "weight": 1.5,
+        "trait_tags": {'Software-Dev': 0.9},
+        "options": [
+            {"option_id": 4347, "option_text": 'Designing clean software architecture and patterns', "trait_tags": {'Software-Dev': 1.0, 'Analytical-Skill': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4348, "option_text": 'Writing automated tests and CI/CD pipelines', "trait_tags": {'Software-Dev': 0.9, 'Technical-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4349, "option_text": 'Building APIs and backend service layers', "trait_tags": {'Software-Dev': 1.0, 'Web-Dev': 0.4, 'Data-Analytics': 0.3}},
+            {"option_id": 4350, "option_text": 'Code review and mentoring junior developers', "trait_tags": {'Software-Dev': 0.9, 'People-Skill': 0.5, 'Teaching-Ed': 0.3}},
+            {"option_id": 4351, "option_text": 'DevOps and deployment automation', "trait_tags": {'Software-Dev': 0.9, 'Cloud-Systems': 0.5, 'Technical-Skill': 0.4}},
+            {"option_id": 4352, "option_text": 'Debugging complex production issues', "trait_tags": {'Software-Dev': 1.0, 'Analytical-Skill': 0.5, 'Technical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 505,
+        "question_text": 'Which programming paradigm excites you most?',
+"category": "Interest - Software Development",
+        "weight": 1.5,
+        "trait_tags": {'Software-Dev': 0.9, 'Analytical-Skill': 0.3},
+        "options": [
+            {"option_id": 4353, "option_text": 'Object-oriented design with inheritance and polymorphism', "trait_tags": {'Software-Dev': 1.0, 'Analytical-Skill': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4354, "option_text": 'Functional programming with immutable data', "trait_tags": {'Software-Dev': 0.9, 'Analytical-Skill': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4355, "option_text": 'Event-driven and reactive programming', "trait_tags": {'Software-Dev': 0.9, 'Web-Dev': 0.4, 'Technical-Skill': 0.4}},
+            {"option_id": 4356, "option_text": 'Low-level systems programming close to hardware', "trait_tags": {'Software-Dev': 0.9, 'Hardware-Systems': 0.5, 'Technical-Skill': 0.4}},
+            {"option_id": 4357, "option_text": 'Scripting and automation for productivity', "trait_tags": {'Software-Dev': 0.8, 'Technical-Skill': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4358, "option_text": 'Domain-specific language design', "trait_tags": {'Software-Dev': 1.0, 'Analytical-Skill': 0.5, 'Creative-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 506,
+        "question_text": 'What software project type would you enjoy building?',
+"category": "Interest - Software Development",
+        "weight": 1.5,
+        "trait_tags": {'Software-Dev': 0.9},
+        "options": [
+            {"option_id": 4359, "option_text": 'Enterprise business management system', "trait_tags": {'Software-Dev': 1.0, 'Admin-Skill': 0.4, 'Finance-Acct': 0.3}},
+            {"option_id": 4360, "option_text": 'Real-time communication platform', "trait_tags": {'Software-Dev': 0.9, 'Web-Dev': 0.5, 'Cloud-Systems': 0.3}},
+            {"option_id": 4361, "option_text": 'Scientific simulation and modeling tool', "trait_tags": {'Software-Dev': 0.9, 'Data-Analytics': 0.5, 'Lab-Research': 0.3}},
+            {"option_id": 4362, "option_text": 'Educational learning management system', "trait_tags": {'Software-Dev': 0.9, 'Teaching-Ed': 0.5, 'Web-Dev': 0.3}},
+            {"option_id": 4363, "option_text": 'Healthcare patient records system', "trait_tags": {'Software-Dev': 0.9, 'Health-Admin': 0.5, 'Patient-Care': 0.3}},
+            {"option_id": 4364, "option_text": 'Open-source developer tools and libraries', "trait_tags": {'Software-Dev': 1.0, 'Community-Serve': 0.4, 'Technical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 507,
+        "question_text": 'What software engineering skill would you develop first?',
+"category": "Interest - Software Development",
+        "weight": 1.5,
+        "trait_tags": {'Software-Dev': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 4365, "option_text": 'Database design and query optimization', "trait_tags": {'Software-Dev': 1.0, 'Data-Analytics': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4366, "option_text": 'Algorithm design and data structures', "trait_tags": {'Software-Dev': 1.0, 'Analytical-Skill': 0.6, 'Technical-Skill': 0.3}},
+            {"option_id": 4367, "option_text": 'Git version control and collaboration workflows', "trait_tags": {'Software-Dev': 0.9, 'Technical-Skill': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 4368, "option_text": 'Software security and vulnerability prevention', "trait_tags": {'Software-Dev': 0.9, 'Cyber-Defense': 0.5, 'Technical-Skill': 0.4}},
+            {"option_id": 4369, "option_text": 'Performance profiling and optimization', "trait_tags": {'Software-Dev': 0.9, 'Analytical-Skill': 0.5, 'Technical-Skill': 0.4}},
+            {"option_id": 4370, "option_text": 'Documentation and technical writing', "trait_tags": {'Software-Dev': 0.8, 'Admin-Skill': 0.4, 'Teaching-Ed': 0.4}},
+        ]
+    },
+    {
+        "question_id": 508,
+        "question_text": 'Where would you most want to work as a software developer?',
+"category": "Interest - Software Development",
+        "weight": 1.5,
+        "trait_tags": {'Software-Dev': 0.9},
+        "options": [
+            {"option_id": 4371, "option_text": 'Tech startup building innovative products', "trait_tags": {'Software-Dev': 1.0, 'Startup-Venture': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4372, "option_text": 'Large enterprise IT department', "trait_tags": {'Software-Dev': 0.9, 'Admin-Skill': 0.4, 'Industrial-Ops': 0.3}},
+            {"option_id": 4373, "option_text": 'BPO or outsourcing company in the Philippines', "trait_tags": {'Software-Dev': 0.9, 'People-Skill': 0.3, 'Technical-Skill': 0.4}},
+            {"option_id": 4374, "option_text": 'Government digital transformation office', "trait_tags": {'Software-Dev': 0.9, 'Community-Serve': 0.4, 'Admin-Skill': 0.3}},
+            {"option_id": 4375, "option_text": 'Remote freelance software consulting', "trait_tags": {'Software-Dev': 0.9, 'Startup-Venture': 0.4, 'Finance-Acct': 0.3}},
+            {"option_id": 4376, "option_text": 'Research lab developing experimental tools', "trait_tags": {'Software-Dev': 0.9, 'Lab-Research': 0.5, 'AI-ML': 0.3}},
+        ]
+    },
+    {
+        "question_id": 509,
+        "question_text": 'What part of the software development lifecycle excites you?',
+"category": "Interest - Software Development",
+        "weight": 1.5,
+        "trait_tags": {'Software-Dev': 0.9},
+        "options": [
+            {"option_id": 4377, "option_text": 'Requirements gathering and system design', "trait_tags": {'Software-Dev': 1.0, 'Analytical-Skill': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 4378, "option_text": 'Writing production code and features', "trait_tags": {'Software-Dev': 1.0, 'Technical-Skill': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4379, "option_text": 'Testing, QA, and quality assurance', "trait_tags": {'Software-Dev': 0.9, 'Analytical-Skill': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4380, "option_text": 'Deployment, monitoring, and operations', "trait_tags": {'Software-Dev': 0.9, 'Cloud-Systems': 0.5, 'Technical-Skill': 0.4}},
+            {"option_id": 4381, "option_text": 'Maintenance and legacy code modernization', "trait_tags": {'Software-Dev': 0.9, 'Analytical-Skill': 0.4, 'Technical-Skill': 0.4}},
+            {"option_id": 4382, "option_text": 'Technical leadership and architecture decisions', "trait_tags": {'Software-Dev': 1.0, 'People-Skill': 0.4, 'Analytical-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 510,
+        "question_text": 'Which software development methodology appeals to you?',
+"category": "Interest - Software Development",
+        "weight": 1.5,
+        "trait_tags": {'Software-Dev': 0.9, 'People-Skill': 0.3},
+        "options": [
+            {"option_id": 4383, "option_text": 'Agile Scrum with sprints and standups', "trait_tags": {'Software-Dev': 1.0, 'People-Skill': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4384, "option_text": 'Kanban continuous flow and visual boards', "trait_tags": {'Software-Dev': 0.9, 'Analytical-Skill': 0.4, 'Industrial-Ops': 0.3}},
+            {"option_id": 4385, "option_text": 'Test-driven development writing tests first', "trait_tags": {'Software-Dev': 1.0, 'Analytical-Skill': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4386, "option_text": 'Pair programming and collaborative coding', "trait_tags": {'Software-Dev': 0.9, 'People-Skill': 0.5, 'Teaching-Ed': 0.3}},
+            {"option_id": 4387, "option_text": 'Continuous integration and rapid deployment', "trait_tags": {'Software-Dev': 0.9, 'Cloud-Systems': 0.4, 'Technical-Skill': 0.4}},
+            {"option_id": 4388, "option_text": 'Open-source community-driven development', "trait_tags": {'Software-Dev': 0.9, 'Community-Serve': 0.5, 'People-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 511,
+        "question_text": 'What type of website would you most enjoy building?',
+"category": "Interest - Web Development",
+        "weight": 1.5,
+        "trait_tags": {'Web-Dev': 0.9},
+        "options": [
+            {"option_id": 4389, "option_text": 'E-commerce platform with payment integration', "trait_tags": {'Web-Dev': 1.0, 'Finance-Acct': 0.4, 'Software-Dev': 0.3}},
+            {"option_id": 4390, "option_text": 'Social media or community forum platform', "trait_tags": {'Web-Dev': 0.9, 'People-Skill': 0.3, 'Software-Dev': 0.4}},
+            {"option_id": 4391, "option_text": 'Content management system for news or blogs', "trait_tags": {'Web-Dev': 0.9, 'Digital-Media': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4392, "option_text": 'Interactive educational or e-learning site', "trait_tags": {'Web-Dev': 0.9, 'Teaching-Ed': 0.5, 'Software-Dev': 0.3}},
+            {"option_id": 4393, "option_text": 'Government services portal for citizens', "trait_tags": {'Web-Dev': 0.9, 'Community-Serve': 0.4, 'Admin-Skill': 0.3}},
+            {"option_id": 4394, "option_text": 'Portfolio or creative showcase website', "trait_tags": {'Web-Dev': 0.9, 'Visual-Design': 0.5, 'Creative-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 512,
+        "question_text": 'Which web development technology stack interests you?',
+"category": "Interest - Web Development",
+        "weight": 1.5,
+        "trait_tags": {'Web-Dev': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 4395, "option_text": 'React or Vue frontend with Node.js backend', "trait_tags": {'Web-Dev': 1.0, 'Software-Dev': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4396, "option_text": 'Python Django or Flask full-stack development', "trait_tags": {'Web-Dev': 0.9, 'Software-Dev': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4397, "option_text": 'PHP Laravel for rapid web application building', "trait_tags": {'Web-Dev': 0.9, 'Software-Dev': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4398, "option_text": 'WordPress and CMS customization', "trait_tags": {'Web-Dev': 0.8, 'Digital-Media': 0.4, 'Marketing-Sales': 0.3}},
+            {"option_id": 4399, "option_text": 'JAMstack with static site generators', "trait_tags": {'Web-Dev': 0.9, 'Software-Dev': 0.4, 'Cloud-Systems': 0.3}},
+            {"option_id": 4400, "option_text": 'Ruby on Rails convention-over-configuration', "trait_tags": {'Web-Dev': 1.0, 'Software-Dev': 0.5, 'Technical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 513,
+        "question_text": 'What web development challenge excites you most?',
+"category": "Interest - Web Development",
+        "weight": 1.5,
+        "trait_tags": {'Web-Dev': 0.9},
+        "options": [
+            {"option_id": 4401, "option_text": 'Responsive design that works on all screen sizes', "trait_tags": {'Web-Dev': 1.0, 'Visual-Design': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4402, "option_text": 'Web performance optimization and fast load times', "trait_tags": {'Web-Dev': 0.9, 'Technical-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4403, "option_text": 'Web accessibility for users with disabilities', "trait_tags": {'Web-Dev': 0.9, 'Community-Serve': 0.4, 'People-Skill': 0.3}},
+            {"option_id": 4404, "option_text": 'Real-time features with WebSockets', "trait_tags": {'Web-Dev': 0.9, 'Software-Dev': 0.5, 'Technical-Skill': 0.4}},
+            {"option_id": 4405, "option_text": 'SEO optimization and search ranking', "trait_tags": {'Web-Dev': 0.8, 'Marketing-Sales': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4406, "option_text": 'Progressive Web App offline capabilities', "trait_tags": {'Web-Dev': 1.0, 'Mobile-Dev': 0.5, 'Technical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 514,
+        "question_text": 'Which web design approach appeals to you?',
+"category": "Interest - Web Development",
+        "weight": 1.5,
+        "trait_tags": {'Web-Dev': 0.9, 'Visual-Design': 0.3},
+        "options": [
+            {"option_id": 4407, "option_text": 'Clean minimalist UI with modern typography', "trait_tags": {'Web-Dev': 0.9, 'Visual-Design': 0.6, 'Creative-Skill': 0.3}},
+            {"option_id": 4408, "option_text": 'Data-driven dashboards with charts and graphs', "trait_tags": {'Web-Dev': 0.9, 'Data-Analytics': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4409, "option_text": 'Interactive animations and micro-interactions', "trait_tags": {'Web-Dev': 0.9, 'Animation-3D': 0.4, 'Creative-Skill': 0.4}},
+            {"option_id": 4410, "option_text": 'User-centered design with A/B testing', "trait_tags": {'Web-Dev': 0.9, 'Analytical-Skill': 0.5, 'Marketing-Sales': 0.3}},
+            {"option_id": 4411, "option_text": 'Component-based design systems', "trait_tags": {'Web-Dev': 1.0, 'Software-Dev': 0.5, 'Visual-Design': 0.3}},
+            {"option_id": 4412, "option_text": 'Dark mode and accessibility-first theming', "trait_tags": {'Web-Dev': 0.9, 'Visual-Design': 0.5, 'Community-Serve': 0.3}},
+        ]
+    },
+    {
+        "question_id": 515,
+        "question_text": 'What backend web development area interests you?',
+"category": "Interest - Web Development",
+        "weight": 1.5,
+        "trait_tags": {'Web-Dev': 0.9, 'Software-Dev': 0.3},
+        "options": [
+            {"option_id": 4413, "option_text": 'RESTful API design and documentation', "trait_tags": {'Web-Dev': 1.0, 'Software-Dev': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4414, "option_text": 'Database schema design and optimization', "trait_tags": {'Web-Dev': 0.9, 'Data-Analytics': 0.5, 'Software-Dev': 0.3}},
+            {"option_id": 4415, "option_text": 'Authentication and authorization systems', "trait_tags": {'Web-Dev': 0.9, 'Cyber-Defense': 0.5, 'Software-Dev': 0.3}},
+            {"option_id": 4416, "option_text": 'Server-side rendering and caching strategies', "trait_tags": {'Web-Dev': 0.9, 'Software-Dev': 0.5, 'Cloud-Systems': 0.3}},
+            {"option_id": 4417, "option_text": 'File upload and media processing pipelines', "trait_tags": {'Web-Dev': 0.9, 'Digital-Media': 0.4, 'Cloud-Systems': 0.3}},
+            {"option_id": 4418, "option_text": 'Payment gateway and e-commerce integration', "trait_tags": {'Web-Dev': 1.0, 'Finance-Acct': 0.4, 'Software-Dev': 0.3}},
+        ]
+    },
+    {
+        "question_id": 516,
+        "question_text": 'Which AI/ML application area excites you most?',
+"category": "Interest - Artificial Intelligence",
+        "weight": 1.5,
+        "trait_tags": {'AI-ML': 0.9},
+        "options": [
+            {"option_id": 4419, "option_text": 'Computer vision and image recognition', "trait_tags": {'AI-ML': 1.0, 'Software-Dev': 0.4, 'Technical-Skill': 0.3}},
+            {"option_id": 4420, "option_text": 'Natural language processing and chatbots', "trait_tags": {'AI-ML': 1.0, 'Software-Dev': 0.4, 'People-Skill': 0.3}},
+            {"option_id": 4421, "option_text": 'Recommendation systems for content or products', "trait_tags": {'AI-ML': 0.9, 'Data-Analytics': 0.5, 'Marketing-Sales': 0.3}},
+            {"option_id": 4422, "option_text": 'Autonomous vehicles and robotics', "trait_tags": {'AI-ML': 0.9, 'Hardware-Systems': 0.5, 'Mechanical-Design': 0.3}},
+            {"option_id": 4423, "option_text": 'Healthcare AI for diagnosis assistance', "trait_tags": {'AI-ML': 0.9, 'Patient-Care': 0.5, 'Medical-Lab': 0.3}},
+            {"option_id": 4424, "option_text": 'Generative AI for creative content', "trait_tags": {'AI-ML': 0.9, 'Creative-Skill': 0.5, 'Digital-Media': 0.3}},
+        ]
+    },
+    {
+        "question_id": 517,
+        "question_text": 'What ML workflow step interests you most?',
+"category": "Interest - Artificial Intelligence",
+        "weight": 1.5,
+        "trait_tags": {'AI-ML': 0.9, 'Data-Analytics': 0.3},
+        "options": [
+            {"option_id": 4425, "option_text": 'Data collection and feature engineering', "trait_tags": {'AI-ML': 0.9, 'Data-Analytics': 0.6, 'Analytical-Skill': 0.3}},
+            {"option_id": 4426, "option_text": 'Model architecture design and selection', "trait_tags": {'AI-ML': 1.0, 'Analytical-Skill': 0.5, 'Software-Dev': 0.3}},
+            {"option_id": 4427, "option_text": 'Training and hyperparameter tuning', "trait_tags": {'AI-ML': 1.0, 'Technical-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4428, "option_text": 'Model evaluation and validation testing', "trait_tags": {'AI-ML': 0.9, 'Analytical-Skill': 0.5, 'Data-Analytics': 0.4}},
+            {"option_id": 4429, "option_text": 'Production deployment and MLOps pipelines', "trait_tags": {'AI-ML': 0.9, 'Cloud-Systems': 0.5, 'Software-Dev': 0.4}},
+            {"option_id": 4430, "option_text": 'Ethical AI and bias detection', "trait_tags": {'AI-ML': 0.9, 'Analytical-Skill': 0.4, 'People-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 518,
+        "question_text": 'Which AI research direction fascinates you?',
+"category": "Interest - Artificial Intelligence",
+        "weight": 1.5,
+        "trait_tags": {'AI-ML': 0.9},
+        "options": [
+            {"option_id": 4431, "option_text": 'Deep learning and neural network architectures', "trait_tags": {'AI-ML': 1.0, 'Analytical-Skill': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4432, "option_text": 'Reinforcement learning for autonomous agents', "trait_tags": {'AI-ML': 1.0, 'Software-Dev': 0.4, 'Game-Dev': 0.3}},
+            {"option_id": 4433, "option_text": 'Transfer learning and few-shot adaptation', "trait_tags": {'AI-ML': 0.9, 'Analytical-Skill': 0.5, 'Lab-Research': 0.3}},
+            {"option_id": 4434, "option_text": 'Explainable AI and interpretable models', "trait_tags": {'AI-ML': 0.9, 'Analytical-Skill': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 4435, "option_text": 'Edge AI running models on IoT devices', "trait_tags": {'AI-ML': 0.9, 'Hardware-Systems': 0.5, 'Technical-Skill': 0.4}},
+            {"option_id": 4436, "option_text": 'Federated learning for privacy-preserving ML', "trait_tags": {'AI-ML': 0.9, 'Cyber-Defense': 0.4, 'Data-Analytics': 0.3}},
+        ]
+    },
+    {
+        "question_id": 519,
+        "question_text": 'Where would you apply AI in the Philippines?',
+"category": "Interest - Artificial Intelligence",
+        "weight": 1.5,
+        "trait_tags": {'AI-ML': 0.9},
+        "options": [
+            {"option_id": 4437, "option_text": 'Agriculture crop disease detection', "trait_tags": {'AI-ML': 0.9, 'Agri-Nature': 0.5, 'Field-Research': 0.3}},
+            {"option_id": 4438, "option_text": 'Traffic management and smart city planning', "trait_tags": {'AI-ML': 0.9, 'Civil-Build': 0.4, 'Data-Analytics': 0.3}},
+            {"option_id": 4439, "option_text": 'Filipino language NLP and translation tools', "trait_tags": {'AI-ML': 1.0, 'Software-Dev': 0.4, 'Community-Serve': 0.3}},
+            {"option_id": 4440, "option_text": 'Healthcare diagnostics for underserved areas', "trait_tags": {'AI-ML': 0.9, 'Patient-Care': 0.5, 'Public-Health': 0.3}},
+            {"option_id": 4441, "option_text": 'Financial fraud detection for banks', "trait_tags": {'AI-ML': 0.9, 'Finance-Acct': 0.5, 'Cyber-Defense': 0.3}},
+            {"option_id": 4442, "option_text": 'Disaster prediction and early warning systems', "trait_tags": {'AI-ML': 0.9, 'Environmental-Sci': 0.5, 'Community-Serve': 0.3}},
+        ]
+    },
+    {
+        "question_id": 520,
+        "question_text": 'What AI development tool would you master?',
+"category": "Interest - Artificial Intelligence",
+        "weight": 1.5,
+        "trait_tags": {'AI-ML': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 4443, "option_text": 'TensorFlow or PyTorch deep learning frameworks', "trait_tags": {'AI-ML': 1.0, 'Software-Dev': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4444, "option_text": 'Jupyter notebooks for research and experiments', "trait_tags": {'AI-ML': 0.9, 'Data-Analytics': 0.5, 'Lab-Research': 0.3}},
+            {"option_id": 4445, "option_text": 'Cloud ML platforms like AWS SageMaker', "trait_tags": {'AI-ML': 0.9, 'Cloud-Systems': 0.5, 'Technical-Skill': 0.4}},
+            {"option_id": 4446, "option_text": 'Computer vision libraries like OpenCV', "trait_tags": {'AI-ML': 0.9, 'Software-Dev': 0.5, 'Digital-Media': 0.3}},
+            {"option_id": 4447, "option_text": 'NLP tools like spaCy or Hugging Face', "trait_tags": {'AI-ML': 1.0, 'Software-Dev': 0.4, 'Data-Analytics': 0.3}},
+            {"option_id": 4448, "option_text": 'AutoML and no-code AI platforms', "trait_tags": {'AI-ML': 0.8, 'Technical-Skill': 0.4, 'Analytical-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 521,
+        "question_text": 'What type of data analysis project excites you?',
+"category": "Interest - Data Analytics",
+        "weight": 1.5,
+        "trait_tags": {'Data-Analytics': 0.9},
+        "options": [
+            {"option_id": 4449, "option_text": 'Customer behavior and market research analysis', "trait_tags": {'Data-Analytics': 1.0, 'Marketing-Sales': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4450, "option_text": 'Healthcare outcomes and patient data mining', "trait_tags": {'Data-Analytics': 0.9, 'Health-Admin': 0.5, 'Public-Health': 0.3}},
+            {"option_id": 4451, "option_text": 'Financial risk modeling and forecasting', "trait_tags": {'Data-Analytics': 0.9, 'Finance-Acct': 0.5, 'Analytical-Skill': 0.4}},
+            {"option_id": 4452, "option_text": 'Social media sentiment and trend analysis', "trait_tags": {'Data-Analytics': 0.9, 'Digital-Media': 0.5, 'Marketing-Sales': 0.3}},
+            {"option_id": 4453, "option_text": 'Supply chain optimization and logistics', "trait_tags": {'Data-Analytics': 0.9, 'Industrial-Ops': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4454, "option_text": 'Environmental data and climate pattern analysis', "trait_tags": {'Data-Analytics': 0.9, 'Environmental-Sci': 0.5, 'Field-Research': 0.3}},
+        ]
+    },
+    {
+        "question_id": 522,
+        "question_text": 'Which data visualization tool would you master?',
+"category": "Interest - Data Analytics",
+        "weight": 1.5,
+        "trait_tags": {'Data-Analytics': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 4455, "option_text": 'Tableau interactive dashboards', "trait_tags": {'Data-Analytics': 1.0, 'Visual-Design': 0.4, 'Technical-Skill': 0.3}},
+            {"option_id": 4456, "option_text": 'Python matplotlib and seaborn for research', "trait_tags": {'Data-Analytics': 0.9, 'Software-Dev': 0.5, 'Lab-Research': 0.3}},
+            {"option_id": 4457, "option_text": 'Power BI for business intelligence reports', "trait_tags": {'Data-Analytics': 0.9, 'Finance-Acct': 0.4, 'Admin-Skill': 0.3}},
+            {"option_id": 4458, "option_text": 'R and ggplot2 for statistical visualization', "trait_tags": {'Data-Analytics': 1.0, 'Analytical-Skill': 0.5, 'Lab-Research': 0.3}},
+            {"option_id": 4459, "option_text": 'D3.js for custom web-based data graphics', "trait_tags": {'Data-Analytics': 0.9, 'Web-Dev': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4460, "option_text": 'Geographic Information Systems (GIS) mapping', "trait_tags": {'Data-Analytics': 0.9, 'Field-Research': 0.5, 'Environmental-Sci': 0.3}},
+        ]
+    },
+    {
+        "question_id": 523,
+        "question_text": 'What data engineering challenge interests you?',
+"category": "Interest - Data Analytics",
+        "weight": 1.5,
+        "trait_tags": {'Data-Analytics': 0.9, 'Software-Dev': 0.3},
+        "options": [
+            {"option_id": 4461, "option_text": 'Building data pipelines and ETL workflows', "trait_tags": {'Data-Analytics': 1.0, 'Software-Dev': 0.5, 'Cloud-Systems': 0.3}},
+            {"option_id": 4462, "option_text": 'Data warehouse design and optimization', "trait_tags": {'Data-Analytics': 0.9, 'Software-Dev': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4463, "option_text": 'Real-time streaming data processing', "trait_tags": {'Data-Analytics': 0.9, 'Software-Dev': 0.5, 'Technical-Skill': 0.4}},
+            {"option_id": 4464, "option_text": 'Data quality and cleansing automation', "trait_tags": {'Data-Analytics': 0.9, 'Analytical-Skill': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4465, "option_text": 'Big data infrastructure management', "trait_tags": {'Data-Analytics': 0.9, 'Cloud-Systems': 0.5, 'Hardware-Systems': 0.3}},
+            {"option_id": 4466, "option_text": 'Data governance and compliance frameworks', "trait_tags": {'Data-Analytics': 0.8, 'Legal-Practice': 0.4, 'Admin-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 524,
+        "question_text": 'Which statistical method would you study deeply?',
+"category": "Interest - Data Analytics",
+        "weight": 1.5,
+        "trait_tags": {'Data-Analytics': 0.9, 'Analytical-Skill': 0.3},
+        "options": [
+            {"option_id": 4467, "option_text": 'Regression analysis for prediction', "trait_tags": {'Data-Analytics': 1.0, 'Analytical-Skill': 0.5, 'Finance-Acct': 0.3}},
+            {"option_id": 4468, "option_text": 'Hypothesis testing and experimental design', "trait_tags": {'Data-Analytics': 0.9, 'Lab-Research': 0.5, 'Analytical-Skill': 0.4}},
+            {"option_id": 4469, "option_text": 'Time series forecasting and trend analysis', "trait_tags": {'Data-Analytics': 1.0, 'Finance-Acct': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 4470, "option_text": 'Clustering and segmentation techniques', "trait_tags": {'Data-Analytics': 0.9, 'AI-ML': 0.4, 'Marketing-Sales': 0.3}},
+            {"option_id": 4471, "option_text": 'Bayesian inference and probabilistic models', "trait_tags": {'Data-Analytics': 0.9, 'AI-ML': 0.4, 'Analytical-Skill': 0.5}},
+            {"option_id": 4472, "option_text": 'Survey design and sampling methodology', "trait_tags": {'Data-Analytics': 0.9, 'Public-Health': 0.4, 'Field-Research': 0.3}},
+        ]
+    },
+    {
+        "question_id": 525,
+        "question_text": 'Where would you apply data analytics skills?',
+"category": "Interest - Data Analytics",
+        "weight": 1.5,
+        "trait_tags": {'Data-Analytics': 0.9},
+        "options": [
+            {"option_id": 4473, "option_text": 'Business intelligence for Philippine companies', "trait_tags": {'Data-Analytics': 1.0, 'Finance-Acct': 0.4, 'Admin-Skill': 0.3}},
+            {"option_id": 4474, "option_text": 'Public health disease monitoring and response', "trait_tags": {'Data-Analytics': 0.9, 'Public-Health': 0.5, 'Community-Serve': 0.3}},
+            {"option_id": 4475, "option_text": 'E-commerce and digital marketing optimization', "trait_tags": {'Data-Analytics': 0.9, 'Marketing-Sales': 0.5, 'Web-Dev': 0.3}},
+            {"option_id": 4476, "option_text": 'Sports analytics and team performance tracking', "trait_tags": {'Data-Analytics': 0.9, 'Sports-Ed': 0.5, 'Physical-Skill': 0.3}},
+            {"option_id": 4477, "option_text": 'Government policy evaluation and budgeting', "trait_tags": {'Data-Analytics': 0.9, 'Finance-Acct': 0.4, 'Community-Serve': 0.3}},
+            {"option_id": 4478, "option_text": 'Academic research data analysis', "trait_tags": {'Data-Analytics': 0.9, 'Lab-Research': 0.5, 'Teaching-Ed': 0.3}},
+        ]
+    },
+    {
+        "question_id": 526,
+        "question_text": 'Which cloud computing service model interests you?',
+"category": "Interest - Cloud Computing",
+        "weight": 1.5,
+        "trait_tags": {'Cloud-Systems': 0.9},
+        "options": [
+            {"option_id": 4479, "option_text": 'Infrastructure as a Service (IaaS) management', "trait_tags": {'Cloud-Systems': 1.0, 'Hardware-Systems': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4480, "option_text": 'Platform as a Service (PaaS) for app deployment', "trait_tags": {'Cloud-Systems': 0.9, 'Software-Dev': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4481, "option_text": 'Serverless functions and event-driven computing', "trait_tags": {'Cloud-Systems': 0.9, 'Software-Dev': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4482, "option_text": 'Managed database and storage services', "trait_tags": {'Cloud-Systems': 0.9, 'Data-Analytics': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4483, "option_text": 'Container orchestration with Kubernetes', "trait_tags": {'Cloud-Systems': 1.0, 'Software-Dev': 0.4, 'Technical-Skill': 0.4}},
+            {"option_id": 4484, "option_text": 'Cloud networking and content delivery', "trait_tags": {'Cloud-Systems': 0.9, 'Hardware-Systems': 0.4, 'Web-Dev': 0.3}},
+        ]
+    },
+    {
+        "question_id": 527,
+        "question_text": 'What cloud architecture challenge excites you?',
+"category": "Interest - Cloud Computing",
+        "weight": 1.5,
+        "trait_tags": {'Cloud-Systems': 0.9, 'Software-Dev': 0.3},
+        "options": [
+            {"option_id": 4485, "option_text": 'Designing highly available distributed systems', "trait_tags": {'Cloud-Systems': 1.0, 'Software-Dev': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4486, "option_text": 'Auto-scaling for traffic spikes', "trait_tags": {'Cloud-Systems': 0.9, 'Technical-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4487, "option_text": 'Multi-region disaster recovery planning', "trait_tags": {'Cloud-Systems': 0.9, 'Admin-Skill': 0.4, 'Analytical-Skill': 0.4}},
+            {"option_id": 4488, "option_text": 'Cost optimization and resource right-sizing', "trait_tags": {'Cloud-Systems': 0.9, 'Finance-Acct': 0.4, 'Analytical-Skill': 0.4}},
+            {"option_id": 4489, "option_text": 'Microservices communication patterns', "trait_tags": {'Cloud-Systems': 0.9, 'Software-Dev': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4490, "option_text": 'Infrastructure as code with Terraform', "trait_tags": {'Cloud-Systems': 1.0, 'Software-Dev': 0.5, 'Technical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 528,
+        "question_text": 'Which cloud platform would you specialize in?',
+"category": "Interest - Cloud Computing",
+        "weight": 1.5,
+        "trait_tags": {'Cloud-Systems': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 4491, "option_text": 'AWS cloud solutions architecture', "trait_tags": {'Cloud-Systems': 1.0, 'Technical-Skill': 0.5, 'Software-Dev': 0.3}},
+            {"option_id": 4492, "option_text": 'Microsoft Azure enterprise integration', "trait_tags": {'Cloud-Systems': 0.9, 'Admin-Skill': 0.4, 'Software-Dev': 0.3}},
+            {"option_id": 4493, "option_text": 'Google Cloud Platform data and AI services', "trait_tags": {'Cloud-Systems': 0.9, 'AI-ML': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4494, "option_text": 'DigitalOcean for startup-scale deployments', "trait_tags": {'Cloud-Systems': 0.9, 'Startup-Venture': 0.4, 'Software-Dev': 0.3}},
+            {"option_id": 4495, "option_text": 'Multi-cloud hybrid architecture design', "trait_tags": {'Cloud-Systems': 1.0, 'Analytical-Skill': 0.4, 'Technical-Skill': 0.4}},
+            {"option_id": 4496, "option_text": 'Private cloud for Philippine government agencies', "trait_tags": {'Cloud-Systems': 0.9, 'Cyber-Defense': 0.4, 'Admin-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 529,
+        "question_text": 'What cloud security concern would you tackle?',
+"category": "Interest - Cloud Computing",
+        "weight": 1.5,
+        "trait_tags": {'Cloud-Systems': 0.9, 'Cyber-Defense': 0.3},
+        "options": [
+            {"option_id": 4497, "option_text": 'Identity and access management policies', "trait_tags": {'Cloud-Systems': 0.9, 'Cyber-Defense': 0.5, 'Admin-Skill': 0.4}},
+            {"option_id": 4498, "option_text": 'Data encryption at rest and in transit', "trait_tags": {'Cloud-Systems': 0.9, 'Cyber-Defense': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4499, "option_text": 'Network security groups and firewalls', "trait_tags": {'Cloud-Systems': 1.0, 'Cyber-Defense': 0.5, 'Hardware-Systems': 0.3}},
+            {"option_id": 4500, "option_text": 'Compliance and audit logging', "trait_tags": {'Cloud-Systems': 0.9, 'Admin-Skill': 0.5, 'Legal-Practice': 0.3}},
+            {"option_id": 4501, "option_text": 'Container security scanning', "trait_tags": {'Cloud-Systems': 0.9, 'Software-Dev': 0.4, 'Cyber-Defense': 0.4}},
+            {"option_id": 4502, "option_text": 'DDoS protection and traffic filtering', "trait_tags": {'Cloud-Systems': 1.0, 'Cyber-Defense': 0.5, 'Technical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 530,
+        "question_text": 'What cloud DevOps practice would you champion?',
+"category": "Interest - Cloud Computing",
+        "weight": 1.5,
+        "trait_tags": {'Cloud-Systems': 0.9, 'Software-Dev': 0.3},
+        "options": [
+            {"option_id": 4503, "option_text": 'CI/CD pipeline automation with cloud tools', "trait_tags": {'Cloud-Systems': 1.0, 'Software-Dev': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4504, "option_text": 'Infrastructure monitoring and alerting', "trait_tags": {'Cloud-Systems': 0.9, 'Technical-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4505, "option_text": 'Log aggregation and observability platforms', "trait_tags": {'Cloud-Systems': 0.9, 'Data-Analytics': 0.4, 'Technical-Skill': 0.4}},
+            {"option_id": 4506, "option_text": 'GitOps and declarative deployments', "trait_tags": {'Cloud-Systems': 0.9, 'Software-Dev': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4507, "option_text": 'Chaos engineering and resilience testing', "trait_tags": {'Cloud-Systems': 1.0, 'Analytical-Skill': 0.4, 'Technical-Skill': 0.4}},
+            {"option_id": 4508, "option_text": 'Service mesh for microservices management', "trait_tags": {'Cloud-Systems': 0.9, 'Software-Dev': 0.5, 'Technical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 531,
+        "question_text": 'Which cybersecurity domain interests you most?',
+"category": "Interest - Cybersecurity",
+        "weight": 1.5,
+        "trait_tags": {'Cyber-Defense': 0.9},
+        "options": [
+            {"option_id": 4509, "option_text": 'Network security and intrusion detection', "trait_tags": {'Cyber-Defense': 1.0, 'Hardware-Systems': 0.4, 'Technical-Skill': 0.3}},
+            {"option_id": 4510, "option_text": 'Application security and code auditing', "trait_tags": {'Cyber-Defense': 0.9, 'Software-Dev': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4511, "option_text": 'Digital forensics and incident investigation', "trait_tags": {'Cyber-Defense': 0.9, 'Forensic-Sci': 0.5, 'Law-Enforce': 0.3}},
+            {"option_id": 4512, "option_text": 'Ethical hacking and penetration testing', "trait_tags": {'Cyber-Defense': 1.0, 'Technical-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4513, "option_text": 'Security operations center (SOC) monitoring', "trait_tags": {'Cyber-Defense': 0.9, 'Technical-Skill': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4514, "option_text": 'Governance, risk, and compliance management', "trait_tags": {'Cyber-Defense': 0.8, 'Legal-Practice': 0.5, 'Admin-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 532,
+        "question_text": 'What cybersecurity threat would you specialize in defending?',
+"category": "Interest - Cybersecurity",
+        "weight": 1.5,
+        "trait_tags": {'Cyber-Defense': 0.9},
+        "options": [
+            {"option_id": 4515, "option_text": 'Ransomware and malware attacks', "trait_tags": {'Cyber-Defense': 1.0, 'Software-Dev': 0.4, 'Technical-Skill': 0.3}},
+            {"option_id": 4516, "option_text": 'Phishing and social engineering scams', "trait_tags": {'Cyber-Defense': 0.9, 'People-Skill': 0.4, 'Teaching-Ed': 0.3}},
+            {"option_id": 4517, "option_text": 'SQL injection and web application attacks', "trait_tags": {'Cyber-Defense': 0.9, 'Web-Dev': 0.5, 'Software-Dev': 0.3}},
+            {"option_id": 4518, "option_text": 'Insider threats and data leaks', "trait_tags": {'Cyber-Defense': 0.9, 'Admin-Skill': 0.4, 'Law-Enforce': 0.3}},
+            {"option_id": 4519, "option_text": 'DDoS and network-level attacks', "trait_tags": {'Cyber-Defense': 1.0, 'Hardware-Systems': 0.5, 'Cloud-Systems': 0.3}},
+            {"option_id": 4520, "option_text": 'Zero-day vulnerabilities and exploits', "trait_tags": {'Cyber-Defense': 1.0, 'Software-Dev': 0.4, 'Lab-Research': 0.3}},
+        ]
+    },
+    {
+        "question_id": 533,
+        "question_text": 'What cybersecurity tool would you master?',
+"category": "Interest - Cybersecurity",
+        "weight": 1.5,
+        "trait_tags": {'Cyber-Defense': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 4521, "option_text": 'Wireshark for network traffic analysis', "trait_tags": {'Cyber-Defense': 1.0, 'Hardware-Systems': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 4522, "option_text": 'Kali Linux penetration testing toolkit', "trait_tags": {'Cyber-Defense': 1.0, 'Software-Dev': 0.4, 'Technical-Skill': 0.4}},
+            {"option_id": 4523, "option_text": 'SIEM platforms for threat detection', "trait_tags": {'Cyber-Defense': 0.9, 'Data-Analytics': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4524, "option_text": 'Vulnerability scanners like Nessus', "trait_tags": {'Cyber-Defense': 0.9, 'Technical-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4525, "option_text": 'Endpoint detection and response tools', "trait_tags": {'Cyber-Defense': 0.9, 'Hardware-Systems': 0.4, 'Technical-Skill': 0.4}},
+            {"option_id": 4526, "option_text": 'Web application firewalls and proxies', "trait_tags": {'Cyber-Defense': 0.9, 'Web-Dev': 0.4, 'Cloud-Systems': 0.3}},
+        ]
+    },
+    {
+        "question_id": 534,
+        "question_text": 'Where would you practice cybersecurity?',
+"category": "Interest - Cybersecurity",
+        "weight": 1.5,
+        "trait_tags": {'Cyber-Defense': 0.9},
+        "options": [
+            {"option_id": 4527, "option_text": 'DICT or Philippine government cyber unit', "trait_tags": {'Cyber-Defense': 1.0, 'Law-Enforce': 0.4, 'Admin-Skill': 0.3}},
+            {"option_id": 4528, "option_text": 'Bank or financial institution security team', "trait_tags": {'Cyber-Defense': 0.9, 'Finance-Acct': 0.4, 'Technical-Skill': 0.3}},
+            {"option_id": 4529, "option_text": 'Cybersecurity consulting firm', "trait_tags": {'Cyber-Defense': 0.9, 'Startup-Venture': 0.4, 'People-Skill': 0.3}},
+            {"option_id": 4530, "option_text": 'Enterprise SOC for a large company', "trait_tags": {'Cyber-Defense': 0.9, 'Technical-Skill': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4531, "option_text": 'Bug bounty and freelance security research', "trait_tags": {'Cyber-Defense': 1.0, 'Startup-Venture': 0.4, 'Software-Dev': 0.3}},
+            {"option_id": 4532, "option_text": 'Cyber forensics and law enforcement support', "trait_tags": {'Cyber-Defense': 0.9, 'Forensic-Sci': 0.5, 'Law-Enforce': 0.4}},
+        ]
+    },
+    {
+        "question_id": 535,
+        "question_text": 'What cybersecurity awareness effort would you lead?',
+"category": "Interest - Cybersecurity",
+        "weight": 1.5,
+        "trait_tags": {'Cyber-Defense': 0.9, 'Teaching-Ed': 0.3},
+        "options": [
+            {"option_id": 4533, "option_text": 'Training employees on phishing prevention', "trait_tags": {'Cyber-Defense': 0.9, 'Teaching-Ed': 0.5, 'People-Skill': 0.4}},
+            {"option_id": 4534, "option_text": 'Developing secure coding guidelines for devs', "trait_tags": {'Cyber-Defense': 0.9, 'Software-Dev': 0.5, 'Teaching-Ed': 0.3}},
+            {"option_id": 4535, "option_text": 'Running capture-the-flag competitions', "trait_tags": {'Cyber-Defense': 1.0, 'Teaching-Ed': 0.4, 'Technical-Skill': 0.3}},
+            {"option_id": 4536, "option_text": 'Building security incident response playbooks', "trait_tags": {'Cyber-Defense': 0.9, 'Admin-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4537, "option_text": 'Educating Filipinos on online safety', "trait_tags": {'Cyber-Defense': 0.9, 'Community-Serve': 0.5, 'Teaching-Ed': 0.3}},
+            {"option_id": 4538, "option_text": 'Performing red team simulation exercises', "trait_tags": {'Cyber-Defense': 1.0, 'Technical-Skill': 0.5, 'Analytical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 536,
+        "question_text": 'What type of mobile app would you build?',
+"category": "Interest - Mobile Development",
+        "weight": 1.5,
+        "trait_tags": {'Mobile-Dev': 0.9},
+        "options": [
+            {"option_id": 4539, "option_text": 'FinTech payment or banking app', "trait_tags": {'Mobile-Dev': 1.0, 'Finance-Acct': 0.4, 'Software-Dev': 0.3}},
+            {"option_id": 4540, "option_text": 'Social networking or messaging platform', "trait_tags": {'Mobile-Dev': 0.9, 'People-Skill': 0.3, 'Software-Dev': 0.4}},
+            {"option_id": 4541, "option_text": 'Health and fitness tracking app', "trait_tags": {'Mobile-Dev': 0.9, 'Patient-Care': 0.4, 'Sports-Ed': 0.3}},
+            {"option_id": 4542, "option_text": 'Educational learning and quiz app', "trait_tags": {'Mobile-Dev': 0.9, 'Teaching-Ed': 0.5, 'Software-Dev': 0.3}},
+            {"option_id": 4543, "option_text": 'Local government services app for Filipinos', "trait_tags": {'Mobile-Dev': 0.9, 'Community-Serve': 0.4, 'Admin-Skill': 0.3}},
+            {"option_id": 4544, "option_text": 'Augmented reality entertainment app', "trait_tags": {'Mobile-Dev': 0.9, 'Game-Dev': 0.5, 'Animation-3D': 0.3}},
+        ]
+    },
+    {
+        "question_id": 537,
+        "question_text": 'Which mobile development framework interests you?',
+"category": "Interest - Mobile Development",
+        "weight": 1.5,
+        "trait_tags": {'Mobile-Dev': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 4545, "option_text": 'Flutter for cross-platform with Dart', "trait_tags": {'Mobile-Dev': 1.0, 'Software-Dev': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4546, "option_text": 'React Native with JavaScript', "trait_tags": {'Mobile-Dev': 0.9, 'Web-Dev': 0.5, 'Software-Dev': 0.4}},
+            {"option_id": 4547, "option_text": 'Native Android with Kotlin', "trait_tags": {'Mobile-Dev': 1.0, 'Software-Dev': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4548, "option_text": 'Native iOS with Swift', "trait_tags": {'Mobile-Dev': 1.0, 'Software-Dev': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4549, "option_text": 'Kotlin Multiplatform for shared logic', "trait_tags": {'Mobile-Dev': 0.9, 'Software-Dev': 0.5, 'Technical-Skill': 0.4}},
+            {"option_id": 4550, "option_text": 'Progressive Web Apps as mobile alternative', "trait_tags": {'Mobile-Dev': 0.8, 'Web-Dev': 0.6, 'Technical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 538,
+        "question_text": 'What mobile UX challenge interests you?',
+"category": "Interest - Mobile Development",
+        "weight": 1.5,
+        "trait_tags": {'Mobile-Dev': 0.9, 'Visual-Design': 0.3},
+        "options": [
+            {"option_id": 4551, "option_text": 'Offline-first design for low-connectivity areas', "trait_tags": {'Mobile-Dev': 1.0, 'Community-Serve': 0.4, 'Technical-Skill': 0.3}},
+            {"option_id": 4552, "option_text": 'Gesture-based navigation and touch interactions', "trait_tags": {'Mobile-Dev': 0.9, 'Visual-Design': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4553, "option_text": 'Push notifications and user engagement', "trait_tags": {'Mobile-Dev': 0.9, 'Marketing-Sales': 0.4, 'People-Skill': 0.3}},
+            {"option_id": 4554, "option_text": 'Accessibility for elderly and disabled users', "trait_tags": {'Mobile-Dev': 0.9, 'Community-Serve': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 4555, "option_text": 'Battery and data usage optimization', "trait_tags": {'Mobile-Dev': 1.0, 'Technical-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4556, "option_text": 'Multi-language support including Filipino', "trait_tags": {'Mobile-Dev': 0.9, 'Community-Serve': 0.4, 'Software-Dev': 0.3}},
+        ]
+    },
+    {
+        "question_id": 539,
+        "question_text": 'What mobile backend integration interests you?',
+"category": "Interest - Mobile Development",
+        "weight": 1.5,
+        "trait_tags": {'Mobile-Dev': 0.9, 'Cloud-Systems': 0.3},
+        "options": [
+            {"option_id": 4557, "option_text": 'Firebase or Supabase real-time database', "trait_tags": {'Mobile-Dev': 1.0, 'Cloud-Systems': 0.5, 'Software-Dev': 0.3}},
+            {"option_id": 4558, "option_text": 'RESTful and GraphQL API consumption', "trait_tags": {'Mobile-Dev': 0.9, 'Web-Dev': 0.5, 'Software-Dev': 0.3}},
+            {"option_id": 4559, "option_text": 'Mobile payment gateway integration', "trait_tags": {'Mobile-Dev': 0.9, 'Finance-Acct': 0.4, 'Technical-Skill': 0.3}},
+            {"option_id": 4560, "option_text": 'Local SQLite and device storage management', "trait_tags": {'Mobile-Dev': 0.9, 'Software-Dev': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4561, "option_text": 'Cloud messaging and notification services', "trait_tags": {'Mobile-Dev': 1.0, 'Cloud-Systems': 0.4, 'Technical-Skill': 0.3}},
+            {"option_id": 4562, "option_text": 'Mobile analytics and crash reporting', "trait_tags": {'Mobile-Dev': 0.9, 'Data-Analytics': 0.5, 'Technical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 540,
+        "question_text": 'What game development role appeals to you?',
+"category": "Interest - Game Development",
+        "weight": 1.5,
+        "trait_tags": {'Game-Dev': 0.9},
+        "options": [
+            {"option_id": 4563, "option_text": 'Game programmer writing gameplay systems', "trait_tags": {'Game-Dev': 1.0, 'Software-Dev': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4564, "option_text": 'Level designer building game worlds', "trait_tags": {'Game-Dev': 0.9, 'Spatial-Design': 0.5, 'Creative-Skill': 0.4}},
+            {"option_id": 4565, "option_text": 'Game artist creating characters and assets', "trait_tags": {'Game-Dev': 0.9, 'Visual-Design': 0.5, 'Animation-3D': 0.4}},
+            {"option_id": 4566, "option_text": 'Sound designer composing game audio', "trait_tags": {'Game-Dev': 0.9, 'Performing-Arts': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4567, "option_text": 'Game designer crafting mechanics and rules', "trait_tags": {'Game-Dev': 1.0, 'Analytical-Skill': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4568, "option_text": 'QA tester finding bugs and balance issues', "trait_tags": {'Game-Dev': 0.8, 'Analytical-Skill': 0.5, 'Technical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 541,
+        "question_text": 'Which game engine would you specialize in?',
+"category": "Interest - Game Development",
+        "weight": 1.5,
+        "trait_tags": {'Game-Dev': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 4569, "option_text": 'Unity for cross-platform and mobile games', "trait_tags": {'Game-Dev': 1.0, 'Software-Dev': 0.5, 'Mobile-Dev': 0.3}},
+            {"option_id": 4570, "option_text": 'Unreal Engine for AAA-quality graphics', "trait_tags": {'Game-Dev': 1.0, 'Animation-3D': 0.4, 'Technical-Skill': 0.3}},
+            {"option_id": 4571, "option_text": 'Godot for open-source lightweight games', "trait_tags": {'Game-Dev': 0.9, 'Software-Dev': 0.5, 'Community-Serve': 0.2}},
+            {"option_id": 4572, "option_text": 'RPG Maker for story-driven experiences', "trait_tags": {'Game-Dev': 0.8, 'Creative-Skill': 0.5, 'Visual-Design': 0.3}},
+            {"option_id": 4573, "option_text": 'Custom engine built from scratch', "trait_tags": {'Game-Dev': 0.9, 'Software-Dev': 0.6, 'Technical-Skill': 0.4}},
+            {"option_id": 4574, "option_text": 'Roblox Studio for social gaming platforms', "trait_tags": {'Game-Dev': 0.8, 'People-Skill': 0.4, 'Digital-Media': 0.3}},
+        ]
+    },
+    {
+        "question_id": 542,
+        "question_text": 'What game genre would you create?',
+"category": "Interest - Game Development",
+        "weight": 1.5,
+        "trait_tags": {'Game-Dev': 0.9, 'Creative-Skill': 0.3},
+        "options": [
+            {"option_id": 4575, "option_text": 'RPG with deep story and character progression', "trait_tags": {'Game-Dev': 1.0, 'Creative-Skill': 0.5, 'Visual-Design': 0.3}},
+            {"option_id": 4576, "option_text": 'Strategy game with complex resource management', "trait_tags": {'Game-Dev': 0.9, 'Analytical-Skill': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4577, "option_text": 'Action game with precise controls and physics', "trait_tags": {'Game-Dev': 1.0, 'Software-Dev': 0.4, 'Physical-Skill': 0.3}},
+            {"option_id": 4578, "option_text": 'Educational game teaching Filipino youth', "trait_tags": {'Game-Dev': 0.9, 'Teaching-Ed': 0.5, 'Community-Serve': 0.3}},
+            {"option_id": 4579, "option_text": 'VR/AR immersive experience', "trait_tags": {'Game-Dev': 0.9, 'Animation-3D': 0.5, 'Hardware-Systems': 0.3}},
+            {"option_id": 4580, "option_text": 'Mobile casual game for mass market', "trait_tags": {'Game-Dev': 0.9, 'Mobile-Dev': 0.5, 'Marketing-Sales': 0.3}},
+        ]
+    },
+    {
+        "question_id": 543,
+        "question_text": 'What hardware systems area interests you most?',
+"category": "Interest - Hardware & Systems",
+        "weight": 1.5,
+        "trait_tags": {'Hardware-Systems': 0.9},
+        "options": [
+            {"option_id": 4581, "option_text": 'Computer networking and router configuration', "trait_tags": {'Hardware-Systems': 1.0, 'Technical-Skill': 0.5, 'Cloud-Systems': 0.3}},
+            {"option_id": 4582, "option_text": 'Server rack setup and data center management', "trait_tags": {'Hardware-Systems': 0.9, 'Admin-Skill': 0.4, 'Cloud-Systems': 0.4}},
+            {"option_id": 4583, "option_text": 'IoT sensors and embedded systems programming', "trait_tags": {'Hardware-Systems': 0.9, 'Software-Dev': 0.5, 'Electrical-Power': 0.3}},
+            {"option_id": 4584, "option_text": 'PC assembly, troubleshooting, and repair', "trait_tags": {'Hardware-Systems': 1.0, 'Technical-Skill': 0.5, 'Physical-Skill': 0.3}},
+            {"option_id": 4585, "option_text": 'Telecommunications and wireless systems', "trait_tags": {'Hardware-Systems': 0.9, 'Electrical-Power': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4586, "option_text": 'Industrial control systems (SCADA/PLC)', "trait_tags": {'Hardware-Systems': 0.9, 'Industrial-Ops': 0.5, 'Electrical-Power': 0.3}},
+        ]
+    },
+    {
+        "question_id": 544,
+        "question_text": 'Which hardware certification would you pursue?',
+"category": "Interest - Hardware & Systems",
+        "weight": 1.5,
+        "trait_tags": {'Hardware-Systems': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 4587, "option_text": 'Cisco CCNA networking certification', "trait_tags": {'Hardware-Systems': 1.0, 'Cloud-Systems': 0.4, 'Technical-Skill': 0.4}},
+            {"option_id": 4588, "option_text": 'CompTIA A+ for hardware support', "trait_tags": {'Hardware-Systems': 1.0, 'Technical-Skill': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 4589, "option_text": 'AWS Solutions Architect for cloud infra', "trait_tags": {'Hardware-Systems': 0.8, 'Cloud-Systems': 0.6, 'Software-Dev': 0.3}},
+            {"option_id": 4590, "option_text": 'CompTIA Network+ for network administration', "trait_tags": {'Hardware-Systems': 0.9, 'Technical-Skill': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4591, "option_text": 'Arduino/Raspberry Pi IoT specialization', "trait_tags": {'Hardware-Systems': 0.9, 'Electrical-Power': 0.4, 'Software-Dev': 0.4}},
+            {"option_id": 4592, "option_text": 'VMware or Hyper-V virtualization expert', "trait_tags": {'Hardware-Systems': 0.9, 'Cloud-Systems': 0.5, 'Technical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 545,
+        "question_text": 'What hardware troubleshooting scenario excites you?',
+"category": "Situational - Hardware & Systems",
+        "weight": 1.5,
+        "trait_tags": {'Hardware-Systems': 0.9},
+        "options": [
+            {"option_id": 4593, "option_text": 'Diagnosing network connectivity failures', "trait_tags": {'Hardware-Systems': 1.0, 'Analytical-Skill': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4594, "option_text": 'Recovering data from failing storage drives', "trait_tags": {'Hardware-Systems': 0.9, 'Data-Analytics': 0.3, 'Technical-Skill': 0.5}},
+            {"option_id": 4595, "option_text": 'Fixing overheating servers in a data center', "trait_tags": {'Hardware-Systems': 0.9, 'Physical-Skill': 0.4, 'Technical-Skill': 0.4}},
+            {"option_id": 4596, "option_text": 'Setting up secure wireless access points', "trait_tags": {'Hardware-Systems': 0.9, 'Cyber-Defense': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4597, "option_text": 'Configuring RAID and storage solutions', "trait_tags": {'Hardware-Systems': 1.0, 'Analytical-Skill': 0.4, 'Cloud-Systems': 0.3}},
+            {"option_id": 4598, "option_text": 'Building custom workstations for specific tasks', "trait_tags": {'Hardware-Systems': 0.9, 'Mechanical-Design': 0.3, 'Technical-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 546,
+        "question_text": 'Where would you work in hardware systems?',
+"category": "Interest - Hardware & Systems",
+        "weight": 1.5,
+        "trait_tags": {'Hardware-Systems': 0.9},
+        "options": [
+            {"option_id": 4599, "option_text": 'Enterprise IT department managing infrastructure', "trait_tags": {'Hardware-Systems': 1.0, 'Admin-Skill': 0.4, 'Technical-Skill': 0.3}},
+            {"option_id": 4600, "option_text": 'Internet service provider or telco company', "trait_tags": {'Hardware-Systems': 0.9, 'Electrical-Power': 0.4, 'Technical-Skill': 0.3}},
+            {"option_id": 4601, "option_text": 'Data center operations and management', "trait_tags": {'Hardware-Systems': 0.9, 'Cloud-Systems': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4602, "option_text": 'IoT development lab or smart factory', "trait_tags": {'Hardware-Systems': 0.9, 'Industrial-Ops': 0.5, 'Software-Dev': 0.3}},
+            {"option_id": 4603, "option_text": 'IT consulting for small and medium businesses', "trait_tags": {'Hardware-Systems': 0.9, 'People-Skill': 0.4, 'Startup-Venture': 0.3}},
+            {"option_id": 4604, "option_text": 'Computer repair and tech support shop', "trait_tags": {'Hardware-Systems': 0.9, 'People-Skill': 0.4, 'Technical-Skill': 0.4}},
+        ]
+    },
+    # ==================== ENGINEERING+BUSINESS+CREATIVE+SCIENCE+SERVICE QUESTIONS ====================
+    {
+        "question_id": 547,
+        "question_text": 'What civil engineering project excites you most?',
+"category": "Interest - Civil Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Civil-Build': 0.9},
+        "options": [
+            {"option_id": 4605, "option_text": 'Bridge design and structural analysis', "trait_tags": {'Civil-Build': 1.0, 'Analytical-Skill': 0.5, 'Mechanical-Design': 0.3}},
+            {"option_id": 4606, "option_text": 'High-rise building construction management', "trait_tags": {'Civil-Build': 0.9, 'Industrial-Ops': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4607, "option_text": 'Road and highway infrastructure development', "trait_tags": {'Civil-Build': 1.0, 'Spatial-Design': 0.4, 'Environmental-Eng': 0.3}},
+            {"option_id": 4608, "option_text": 'Water supply and drainage system design', "trait_tags": {'Civil-Build': 0.9, 'Environmental-Eng': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4609, "option_text": 'Earthquake-resistant building design', "trait_tags": {'Civil-Build': 0.9, 'Analytical-Skill': 0.5, 'Mechanical-Design': 0.3}},
+            {"option_id": 4610, "option_text": 'Geotechnical investigation and soil analysis', "trait_tags": {'Civil-Build': 0.9, 'Lab-Research': 0.5, 'Field-Research': 0.3}},
+        ]
+    },
+    {
+        "question_id": 548,
+        "question_text": 'What construction management task appeals to you?',
+"category": "Interest - Civil Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Civil-Build': 0.9, 'Industrial-Ops': 0.3},
+        "options": [
+            {"option_id": 4611, "option_text": 'Project scheduling and timeline management', "trait_tags": {'Civil-Build': 1.0, 'Admin-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4612, "option_text": 'Cost estimation and budget control', "trait_tags": {'Civil-Build': 0.9, 'Finance-Acct': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4613, "option_text": 'Site safety and worker protection', "trait_tags": {'Civil-Build': 0.9, 'Physical-Skill': 0.4, 'Law-Enforce': 0.3}},
+            {"option_id": 4614, "option_text": 'Quality control of materials and concrete', "trait_tags": {'Civil-Build': 0.9, 'Lab-Research': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4615, "option_text": 'Blueprint reading and structural drafting', "trait_tags": {'Civil-Build': 1.0, 'Spatial-Design': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4616, "option_text": 'Equipment and heavy machinery coordination', "trait_tags": {'Civil-Build': 0.9, 'Mechanical-Design': 0.4, 'Industrial-Ops': 0.4}},
+        ]
+    },
+    {
+        "question_id": 549,
+        "question_text": 'Where in the Philippines would you build?',
+"category": "Interest - Civil Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Civil-Build': 0.9},
+        "options": [
+            {"option_id": 4617, "option_text": 'Metro Manila infrastructure modernization', "trait_tags": {'Civil-Build': 1.0, 'Industrial-Ops': 0.4, 'Admin-Skill': 0.3}},
+            {"option_id": 4618, "option_text": 'Provincial road and bridge networks', "trait_tags": {'Civil-Build': 0.9, 'Community-Serve': 0.4, 'Environmental-Eng': 0.3}},
+            {"option_id": 4619, "option_text": 'Flood control and coastal protection projects', "trait_tags": {'Civil-Build': 0.9, 'Environmental-Eng': 0.5, 'Environmental-Sci': 0.3}},
+            {"option_id": 4620, "option_text": 'Port and airport expansion', "trait_tags": {'Civil-Build': 0.9, 'Maritime-Sea': 0.3, 'Industrial-Ops': 0.4}},
+            {"option_id": 4621, "option_text": 'Affordable housing for Filipino families', "trait_tags": {'Civil-Build': 0.9, 'Community-Serve': 0.5, 'Spatial-Design': 0.3}},
+            {"option_id": 4622, "option_text": 'Railway and mass transit systems', "trait_tags": {'Civil-Build': 1.0, 'Mechanical-Design': 0.4, 'Electrical-Power': 0.3}},
+        ]
+    },
+    {
+        "question_id": 550,
+        "question_text": 'What structural engineering topic fascinates you?',
+"category": "Interest - Civil Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Civil-Build': 0.9, 'Analytical-Skill': 0.3},
+        "options": [
+            {"option_id": 4623, "option_text": 'Reinforced concrete design and analysis', "trait_tags": {'Civil-Build': 1.0, 'Analytical-Skill': 0.5, 'Lab-Research': 0.3}},
+            {"option_id": 4624, "option_text": 'Steel structure connections and fabrication', "trait_tags": {'Civil-Build': 0.9, 'Mechanical-Design': 0.5, 'Industrial-Ops': 0.3}},
+            {"option_id": 4625, "option_text": 'Foundation design for challenging soil', "trait_tags": {'Civil-Build': 0.9, 'Field-Research': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4626, "option_text": 'Wind and earthquake load calculations', "trait_tags": {'Civil-Build': 1.0, 'Analytical-Skill': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4627, "option_text": 'Pre-stressed and post-tensioned concrete', "trait_tags": {'Civil-Build': 0.9, 'Technical-Skill': 0.5, 'Lab-Research': 0.3}},
+            {"option_id": 4628, "option_text": 'Inspection and retrofitting of old structures', "trait_tags": {'Civil-Build': 0.9, 'Analytical-Skill': 0.4, 'Physical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 551,
+        "question_text": 'What civil engineering technology interests you?',
+"category": "Interest - Civil Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Civil-Build': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 4629, "option_text": 'BIM (Building Information Modeling) software', "trait_tags": {'Civil-Build': 1.0, 'Software-Dev': 0.4, 'Spatial-Design': 0.3}},
+            {"option_id": 4630, "option_text": 'GPS and surveying equipment operation', "trait_tags": {'Civil-Build': 0.9, 'Field-Research': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4631, "option_text": 'CAD drafting and 3D structural modeling', "trait_tags": {'Civil-Build': 0.9, 'Spatial-Design': 0.5, 'Technical-Skill': 0.4}},
+            {"option_id": 4632, "option_text": 'Drone surveying for site mapping', "trait_tags": {'Civil-Build': 0.9, 'Technical-Skill': 0.5, 'Field-Research': 0.3}},
+            {"option_id": 4633, "option_text": 'Structural analysis simulation software', "trait_tags": {'Civil-Build': 1.0, 'Software-Dev': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 4634, "option_text": 'Material testing laboratory equipment', "trait_tags": {'Civil-Build': 0.9, 'Lab-Research': 0.5, 'Technical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 552,
+        "question_text": 'What mechanical engineering work excites you?',
+"category": "Interest - Mechanical Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Mechanical-Design': 0.9},
+        "options": [
+            {"option_id": 4635, "option_text": 'Machine and mechanism design', "trait_tags": {'Mechanical-Design': 1.0, 'Analytical-Skill': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4636, "option_text": 'HVAC and refrigeration systems', "trait_tags": {'Mechanical-Design': 0.9, 'Electrical-Power': 0.4, 'Technical-Skill': 0.3}},
+            {"option_id": 4637, "option_text": 'Automotive engine and powertrain engineering', "trait_tags": {'Mechanical-Design': 0.9, 'Technical-Skill': 0.5, 'Physical-Skill': 0.3}},
+            {"option_id": 4638, "option_text": 'Manufacturing process and tooling design', "trait_tags": {'Mechanical-Design': 0.9, 'Industrial-Ops': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4639, "option_text": 'Robotics and automation systems', "trait_tags": {'Mechanical-Design': 0.9, 'Software-Dev': 0.4, 'AI-ML': 0.3}},
+            {"option_id": 4640, "option_text": 'Piping and fluid system design', "trait_tags": {'Mechanical-Design': 1.0, 'Civil-Build': 0.3, 'Analytical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 553,
+        "question_text": 'Which CAD/design tool would you master?',
+"category": "Interest - Mechanical Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Mechanical-Design': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 4641, "option_text": 'SolidWorks for 3D mechanical parts', "trait_tags": {'Mechanical-Design': 1.0, 'Technical-Skill': 0.5, 'Spatial-Design': 0.3}},
+            {"option_id": 4642, "option_text": 'AutoCAD for technical drawing and layouts', "trait_tags": {'Mechanical-Design': 0.9, 'Spatial-Design': 0.5, 'Civil-Build': 0.3}},
+            {"option_id": 4643, "option_text": 'ANSYS for finite element stress analysis', "trait_tags": {'Mechanical-Design': 1.0, 'Analytical-Skill': 0.5, 'Software-Dev': 0.3}},
+            {"option_id": 4644, "option_text": 'Fusion 360 for prototyping and 3D printing', "trait_tags": {'Mechanical-Design': 0.9, 'Creative-Skill': 0.4, 'Technical-Skill': 0.4}},
+            {"option_id": 4645, "option_text": 'MATLAB for engineering calculations', "trait_tags": {'Mechanical-Design': 0.8, 'Analytical-Skill': 0.5, 'Software-Dev': 0.4}},
+            {"option_id": 4646, "option_text": 'CNC programming for precision manufacturing', "trait_tags": {'Mechanical-Design': 0.9, 'Industrial-Ops': 0.5, 'Technical-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 554,
+        "question_text": 'What mechanical systems problem would you solve?',
+"category": "Interest - Mechanical Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Mechanical-Design': 0.9},
+        "options": [
+            {"option_id": 4647, "option_text": 'Reducing friction and wear in machine parts', "trait_tags": {'Mechanical-Design': 1.0, 'Lab-Research': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 4648, "option_text": 'Improving energy efficiency in engines', "trait_tags": {'Mechanical-Design': 0.9, 'Environmental-Eng': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 4649, "option_text": 'Designing safer vehicle crash structures', "trait_tags": {'Mechanical-Design': 0.9, 'Analytical-Skill': 0.5, 'Physical-Skill': 0.3}},
+            {"option_id": 4650, "option_text": 'Vibration control in rotating machinery', "trait_tags": {'Mechanical-Design': 1.0, 'Analytical-Skill': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4651, "option_text": 'Heat transfer optimization in cooling systems', "trait_tags": {'Mechanical-Design': 0.9, 'Electrical-Power': 0.4, 'Lab-Research': 0.3}},
+            {"option_id": 4652, "option_text": 'Designing prosthetics and medical devices', "trait_tags": {'Mechanical-Design': 0.9, 'Rehab-Therapy': 0.5, 'Patient-Care': 0.3}},
+        ]
+    },
+    {
+        "question_id": 555,
+        "question_text": 'What type of manufacturing fascinates you?',
+"category": "Interest - Mechanical Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Mechanical-Design': 0.9, 'Industrial-Ops': 0.3},
+        "options": [
+            {"option_id": 4653, "option_text": 'CNC machining and precision fabrication', "trait_tags": {'Mechanical-Design': 1.0, 'Industrial-Ops': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4654, "option_text": '3D printing and additive manufacturing', "trait_tags": {'Mechanical-Design': 0.9, 'Creative-Skill': 0.4, 'Technical-Skill': 0.4}},
+            {"option_id": 4655, "option_text": 'Welding and metal joining techniques', "trait_tags": {'Mechanical-Design': 0.9, 'Physical-Skill': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4656, "option_text": 'Quality control and dimensional inspection', "trait_tags": {'Mechanical-Design': 0.9, 'Analytical-Skill': 0.5, 'Lab-Research': 0.3}},
+            {"option_id": 4657, "option_text": 'Assembly line design and automation', "trait_tags": {'Mechanical-Design': 0.9, 'Industrial-Ops': 0.5, 'Software-Dev': 0.3}},
+            {"option_id": 4658, "option_text": 'Casting and forging processes', "trait_tags": {'Mechanical-Design': 1.0, 'Physical-Skill': 0.4, 'Industrial-Ops': 0.3}},
+        ]
+    },
+    {
+        "question_id": 556,
+        "question_text": 'What electrical engineering area excites you?',
+"category": "Interest - Electrical Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Electrical-Power': 0.9},
+        "options": [
+            {"option_id": 4659, "option_text": 'Power generation and distribution systems', "trait_tags": {'Electrical-Power': 1.0, 'Industrial-Ops': 0.4, 'Technical-Skill': 0.3}},
+            {"option_id": 4660, "option_text": 'Renewable energy: solar and wind systems', "trait_tags": {'Electrical-Power': 0.9, 'Environmental-Eng': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4661, "option_text": 'Motor control and industrial automation', "trait_tags": {'Electrical-Power': 0.9, 'Mechanical-Design': 0.4, 'Industrial-Ops': 0.4}},
+            {"option_id": 4662, "option_text": 'Electronics circuit design and PCB layout', "trait_tags": {'Electrical-Power': 0.9, 'Hardware-Systems': 0.5, 'Technical-Skill': 0.4}},
+            {"option_id": 4663, "option_text": 'Building electrical wiring and installation', "trait_tags": {'Electrical-Power': 1.0, 'Civil-Build': 0.3, 'Physical-Skill': 0.3}},
+            {"option_id": 4664, "option_text": 'Smart grid and energy management', "trait_tags": {'Electrical-Power': 0.9, 'Data-Analytics': 0.4, 'Software-Dev': 0.3}},
+        ]
+    },
+    {
+        "question_id": 557,
+        "question_text": 'What power systems challenge would you solve?',
+"category": "Interest - Electrical Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Electrical-Power': 0.9, 'Environmental-Eng': 0.3},
+        "options": [
+            {"option_id": 4665, "option_text": 'Reducing power outages in Philippine provinces', "trait_tags": {'Electrical-Power': 1.0, 'Community-Serve': 0.4, 'Technical-Skill': 0.3}},
+            {"option_id": 4666, "option_text": 'Integrating solar panels into the power grid', "trait_tags": {'Electrical-Power': 0.9, 'Environmental-Eng': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4667, "option_text": 'Improving transformer and substation efficiency', "trait_tags": {'Electrical-Power': 1.0, 'Analytical-Skill': 0.4, 'Technical-Skill': 0.3}},
+            {"option_id": 4668, "option_text": 'Designing electrical systems for tall buildings', "trait_tags": {'Electrical-Power': 0.9, 'Civil-Build': 0.5, 'Spatial-Design': 0.3}},
+            {"option_id": 4669, "option_text": 'Electric vehicle charging infrastructure', "trait_tags": {'Electrical-Power': 0.9, 'Mechanical-Design': 0.4, 'Environmental-Eng': 0.3}},
+            {"option_id": 4670, "option_text": 'Energy storage and battery technology', "trait_tags": {'Electrical-Power': 0.9, 'Lab-Research': 0.5, 'Environmental-Eng': 0.3}},
+        ]
+    },
+    {
+        "question_id": 558,
+        "question_text": 'Which electrical tool or instrument would you master?',
+"category": "Interest - Electrical Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Electrical-Power': 0.9, 'Technical-Skill': 0.4},
+        "options": [
+            {"option_id": 4671, "option_text": 'Oscilloscope for signal analysis', "trait_tags": {'Electrical-Power': 1.0, 'Technical-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4672, "option_text": 'PLC programming for factory automation', "trait_tags": {'Electrical-Power': 0.9, 'Software-Dev': 0.4, 'Industrial-Ops': 0.4}},
+            {"option_id": 4673, "option_text": 'Power system simulation software (ETAP)', "trait_tags": {'Electrical-Power': 1.0, 'Software-Dev': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 4674, "option_text": 'Circuit simulation with SPICE or Proteus', "trait_tags": {'Electrical-Power': 0.9, 'Software-Dev': 0.4, 'Hardware-Systems': 0.4}},
+            {"option_id": 4675, "option_text": 'Multimeter and clamp meter diagnostics', "trait_tags": {'Electrical-Power': 0.9, 'Physical-Skill': 0.4, 'Technical-Skill': 0.4}},
+            {"option_id": 4676, "option_text": 'AutoCAD Electrical for wiring diagrams', "trait_tags": {'Electrical-Power': 0.9, 'Spatial-Design': 0.4, 'Technical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 559,
+        "question_text": 'What electrical engineering career path appeals to you?',
+"category": "Career - Electrical Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Electrical-Power': 0.9},
+        "options": [
+            {"option_id": 4677, "option_text": 'Power plant operations engineer', "trait_tags": {'Electrical-Power': 1.0, 'Industrial-Ops': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4678, "option_text": 'Building systems electrical designer', "trait_tags": {'Electrical-Power': 0.9, 'Civil-Build': 0.4, 'Spatial-Design': 0.3}},
+            {"option_id": 4679, "option_text": 'Renewable energy project developer', "trait_tags": {'Electrical-Power': 0.9, 'Environmental-Eng': 0.5, 'Startup-Venture': 0.3}},
+            {"option_id": 4680, "option_text": 'Electronics engineer in manufacturing', "trait_tags": {'Electrical-Power': 0.9, 'Industrial-Ops': 0.4, 'Hardware-Systems': 0.3}},
+            {"option_id": 4681, "option_text": 'Meralco or utility company engineer', "trait_tags": {'Electrical-Power': 1.0, 'Community-Serve': 0.3, 'Technical-Skill': 0.3}},
+            {"option_id": 4682, "option_text": 'Electrical safety inspector', "trait_tags": {'Electrical-Power': 0.9, 'Law-Enforce': 0.4, 'Analytical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 560,
+        "question_text": 'What environmental engineering project motivates you?',
+"category": "Interest - Environmental Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Environmental-Eng': 0.9},
+        "options": [
+            {"option_id": 4683, "option_text": 'Wastewater treatment plant design', "trait_tags": {'Environmental-Eng': 1.0, 'Civil-Build': 0.4, 'Lab-Research': 0.3}},
+            {"option_id": 4684, "option_text": 'Air quality monitoring and pollution control', "trait_tags": {'Environmental-Eng': 0.9, 'Environmental-Sci': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4685, "option_text": 'Solid waste management and recycling systems', "trait_tags": {'Environmental-Eng': 0.9, 'Industrial-Ops': 0.4, 'Community-Serve': 0.3}},
+            {"option_id": 4686, "option_text": 'Clean water supply for rural communities', "trait_tags": {'Environmental-Eng': 0.9, 'Civil-Build': 0.4, 'Community-Serve': 0.4}},
+            {"option_id": 4687, "option_text": 'Renewable energy integration projects', "trait_tags": {'Environmental-Eng': 0.9, 'Electrical-Power': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4688, "option_text": 'Environmental impact assessment for developments', "trait_tags": {'Environmental-Eng': 1.0, 'Analytical-Skill': 0.4, 'Legal-Practice': 0.3}},
+        ]
+    },
+    {
+        "question_id": 561,
+        "question_text": 'What environmental remediation method interests you?',
+"category": "Interest - Environmental Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Environmental-Eng': 0.9, 'Lab-Research': 0.3},
+        "options": [
+            {"option_id": 4689, "option_text": 'Bioremediation using microorganisms', "trait_tags": {'Environmental-Eng': 0.9, 'Lab-Research': 0.5, 'Environmental-Sci': 0.4}},
+            {"option_id": 4690, "option_text": 'Soil contamination cleanup technology', "trait_tags": {'Environmental-Eng': 1.0, 'Field-Research': 0.4, 'Technical-Skill': 0.3}},
+            {"option_id": 4691, "option_text": 'Membrane filtration for water purification', "trait_tags": {'Environmental-Eng': 0.9, 'Technical-Skill': 0.5, 'Lab-Research': 0.3}},
+            {"option_id": 4692, "option_text": 'Industrial emission scrubbing systems', "trait_tags": {'Environmental-Eng': 0.9, 'Industrial-Ops': 0.4, 'Mechanical-Design': 0.3}},
+            {"option_id": 4693, "option_text": 'Constructed wetlands for natural treatment', "trait_tags": {'Environmental-Eng': 1.0, 'Environmental-Sci': 0.5, 'Agri-Nature': 0.3}},
+            {"option_id": 4694, "option_text": 'Landfill engineering and gas capture', "trait_tags": {'Environmental-Eng': 0.9, 'Civil-Build': 0.4, 'Technical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 562,
+        "question_text": 'Where would you work as an environmental engineer?',
+"category": "Interest - Environmental Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Environmental-Eng': 0.9},
+        "options": [
+            {"option_id": 4695, "option_text": 'DENR environmental compliance and monitoring', "trait_tags": {'Environmental-Eng': 1.0, 'Law-Enforce': 0.4, 'Admin-Skill': 0.3}},
+            {"option_id": 4696, "option_text": 'Water district treatment operations', "trait_tags": {'Environmental-Eng': 0.9, 'Industrial-Ops': 0.4, 'Community-Serve': 0.3}},
+            {"option_id": 4697, "option_text": 'Mining company environmental management', "trait_tags": {'Environmental-Eng': 0.9, 'Field-Research': 0.4, 'Industrial-Ops': 0.3}},
+            {"option_id": 4698, "option_text": 'Environmental consulting firm', "trait_tags": {'Environmental-Eng': 0.9, 'Startup-Venture': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 4699, "option_text": 'NGO working on climate change adaptation', "trait_tags": {'Environmental-Eng': 0.9, 'Community-Serve': 0.5, 'Environmental-Sci': 0.3}},
+            {"option_id": 4700, "option_text": 'Manufacturing company sustainability officer', "trait_tags": {'Environmental-Eng': 0.9, 'Industrial-Ops': 0.5, 'Admin-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 563,
+        "question_text": 'What green technology fascinates you?',
+"category": "Interest - Environmental Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Environmental-Eng': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 4701, "option_text": 'Solar panel efficiency and installation', "trait_tags": {'Environmental-Eng': 0.9, 'Electrical-Power': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4702, "option_text": 'Electric vehicle and battery technology', "trait_tags": {'Environmental-Eng': 0.9, 'Mechanical-Design': 0.4, 'Electrical-Power': 0.4}},
+            {"option_id": 4703, "option_text": 'Green building design and LEED certification', "trait_tags": {'Environmental-Eng': 1.0, 'Civil-Build': 0.5, 'Spatial-Design': 0.3}},
+            {"option_id": 4704, "option_text": 'Rainwater harvesting and greywater recycling', "trait_tags": {'Environmental-Eng': 0.9, 'Civil-Build': 0.4, 'Community-Serve': 0.3}},
+            {"option_id": 4705, "option_text": 'Biogas and biomass energy from waste', "trait_tags": {'Environmental-Eng': 0.9, 'Agri-Nature': 0.4, 'Lab-Research': 0.3}},
+            {"option_id": 4706, "option_text": 'Smart environmental monitoring sensors', "trait_tags": {'Environmental-Eng': 1.0, 'Hardware-Systems': 0.4, 'Data-Analytics': 0.3}},
+        ]
+    },
+    {
+        "question_id": 564,
+        "question_text": 'What industrial operations role suits you?',
+"category": "Interest - Industrial Operations",
+        "weight": 1.5,
+        "trait_tags": {'Industrial-Ops': 0.9},
+        "options": [
+            {"option_id": 4707, "option_text": 'Production planning and scheduling', "trait_tags": {'Industrial-Ops': 1.0, 'Analytical-Skill': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4708, "option_text": 'Quality assurance and control systems', "trait_tags": {'Industrial-Ops': 0.9, 'Analytical-Skill': 0.5, 'Lab-Research': 0.3}},
+            {"option_id": 4709, "option_text": 'Supply chain and logistics management', "trait_tags": {'Industrial-Ops': 0.9, 'Admin-Skill': 0.5, 'Finance-Acct': 0.3}},
+            {"option_id": 4710, "option_text": 'Workplace safety and ergonomics', "trait_tags": {'Industrial-Ops': 0.9, 'Physical-Skill': 0.4, 'Rehab-Therapy': 0.3}},
+            {"option_id": 4711, "option_text": 'Lean manufacturing and process improvement', "trait_tags": {'Industrial-Ops': 1.0, 'Analytical-Skill': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4712, "option_text": 'Facility layout and plant design', "trait_tags": {'Industrial-Ops': 0.9, 'Spatial-Design': 0.4, 'Mechanical-Design': 0.3}},
+        ]
+    },
+    {
+        "question_id": 565,
+        "question_text": 'What manufacturing improvement method interests you?',
+"category": "Interest - Industrial Operations",
+        "weight": 1.5,
+        "trait_tags": {'Industrial-Ops': 0.9, 'Analytical-Skill': 0.3},
+        "options": [
+            {"option_id": 4713, "option_text": 'Six Sigma quality and defect reduction', "trait_tags": {'Industrial-Ops': 1.0, 'Analytical-Skill': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4714, "option_text": 'Kaizen continuous improvement culture', "trait_tags": {'Industrial-Ops': 0.9, 'People-Skill': 0.4, 'Admin-Skill': 0.3}},
+            {"option_id": 4715, "option_text": '5S workplace organization method', "trait_tags": {'Industrial-Ops': 0.9, 'Admin-Skill': 0.5, 'Physical-Skill': 0.3}},
+            {"option_id": 4716, "option_text": 'Value stream mapping for waste elimination', "trait_tags": {'Industrial-Ops': 1.0, 'Analytical-Skill': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4717, "option_text": 'Statistical process control with data', "trait_tags": {'Industrial-Ops': 0.9, 'Data-Analytics': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4718, "option_text": 'Automation and Industry 4.0 integration', "trait_tags": {'Industrial-Ops': 0.9, 'Software-Dev': 0.4, 'Hardware-Systems': 0.3}},
+        ]
+    },
+    {
+        "question_id": 566,
+        "question_text": 'Which industry would you optimize operations for?',
+"category": "Interest - Industrial Operations",
+        "weight": 1.5,
+        "trait_tags": {'Industrial-Ops': 0.9},
+        "options": [
+            {"option_id": 4719, "option_text": 'Semiconductor manufacturing in the Philippines', "trait_tags": {'Industrial-Ops': 1.0, 'Technical-Skill': 0.4, 'Hardware-Systems': 0.3}},
+            {"option_id": 4720, "option_text": 'Food and beverage production', "trait_tags": {'Industrial-Ops': 0.9, 'Food-Science': 0.5, 'Nutrition-Diet': 0.2}},
+            {"option_id": 4721, "option_text": 'Pharmaceutical manufacturing', "trait_tags": {'Industrial-Ops': 0.9, 'Pharmacy': 0.5, 'Lab-Research': 0.3}},
+            {"option_id": 4722, "option_text": 'Automotive parts and assembly', "trait_tags": {'Industrial-Ops': 0.9, 'Mechanical-Design': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4723, "option_text": 'Logistics and warehouse operations', "trait_tags": {'Industrial-Ops': 1.0, 'Admin-Skill': 0.4, 'Data-Analytics': 0.3}},
+            {"option_id": 4724, "option_text": 'Construction material production', "trait_tags": {'Industrial-Ops': 0.9, 'Civil-Build': 0.5, 'Mechanical-Design': 0.3}},
+        ]
+    },
+    {
+        "question_id": 567,
+        "question_text": 'What operations research technique would you apply?',
+"category": "Interest - Industrial Operations",
+        "weight": 1.5,
+        "trait_tags": {'Industrial-Ops': 0.9, 'Data-Analytics': 0.3},
+        "options": [
+            {"option_id": 4725, "option_text": 'Linear programming for resource allocation', "trait_tags": {'Industrial-Ops': 1.0, 'Analytical-Skill': 0.5, 'Data-Analytics': 0.4}},
+            {"option_id": 4726, "option_text": 'Simulation modeling for process design', "trait_tags": {'Industrial-Ops': 0.9, 'Software-Dev': 0.4, 'Analytical-Skill': 0.4}},
+            {"option_id": 4727, "option_text": 'Queuing theory for service optimization', "trait_tags": {'Industrial-Ops': 0.9, 'Analytical-Skill': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4728, "option_text": 'Inventory management and EOQ modeling', "trait_tags": {'Industrial-Ops': 1.0, 'Finance-Acct': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 4729, "option_text": 'Network analysis for project scheduling', "trait_tags": {'Industrial-Ops': 0.9, 'Analytical-Skill': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4730, "option_text": 'Forecasting demand with time series data', "trait_tags": {'Industrial-Ops': 0.9, 'Data-Analytics': 0.5, 'AI-ML': 0.3}},
+        ]
+    },
+    {
+        "question_id": 568,
+        "question_text": 'What financial management area interests you?',
+"category": "Interest - Finance & Accounting",
+        "weight": 1.5,
+        "trait_tags": {'Finance-Acct': 0.9},
+        "options": [
+            {"option_id": 4731, "option_text": 'Corporate accounting and financial reporting', "trait_tags": {'Finance-Acct': 1.0, 'Admin-Skill': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 4732, "option_text": 'Investment analysis and portfolio management', "trait_tags": {'Finance-Acct': 0.9, 'Analytical-Skill': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4733, "option_text": 'Tax compliance and planning', "trait_tags": {'Finance-Acct': 0.9, 'Legal-Practice': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 4734, "option_text": 'Auditing and internal controls', "trait_tags": {'Finance-Acct': 1.0, 'Analytical-Skill': 0.5, 'Law-Enforce': 0.3}},
+            {"option_id": 4735, "option_text": 'Budgeting and cost management', "trait_tags": {'Finance-Acct': 0.9, 'Admin-Skill': 0.5, 'Industrial-Ops': 0.3}},
+            {"option_id": 4736, "option_text": 'Banking and loan evaluation', "trait_tags": {'Finance-Acct': 0.9, 'People-Skill': 0.4, 'Analytical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 569,
+        "question_text": 'Which accounting technology would you learn?',
+"category": "Interest - Finance & Accounting",
+        "weight": 1.5,
+        "trait_tags": {'Finance-Acct': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 4737, "option_text": 'QuickBooks or SAP accounting software', "trait_tags": {'Finance-Acct': 1.0, 'Software-Dev': 0.3, 'Admin-Skill': 0.3}},
+            {"option_id": 4738, "option_text": 'Excel advanced financial modeling', "trait_tags": {'Finance-Acct': 0.9, 'Data-Analytics': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4739, "option_text": 'Blockchain and cryptocurrency accounting', "trait_tags": {'Finance-Acct': 0.8, 'Technical-Skill': 0.5, 'Software-Dev': 0.4}},
+            {"option_id": 4740, "option_text": 'Data analytics for financial insights', "trait_tags": {'Finance-Acct': 0.9, 'Data-Analytics': 0.5, 'AI-ML': 0.3}},
+            {"option_id": 4741, "option_text": 'Payroll and HR information systems', "trait_tags": {'Finance-Acct': 0.9, 'HR-Management': 0.4, 'Admin-Skill': 0.4}},
+            {"option_id": 4742, "option_text": 'Automated audit and compliance tools', "trait_tags": {'Finance-Acct': 0.9, 'Software-Dev': 0.4, 'Analytical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 570,
+        "question_text": 'What financial career path appeals to you?',
+"category": "Career - Finance & Accounting",
+        "weight": 1.5,
+        "trait_tags": {'Finance-Acct': 0.9},
+        "options": [
+            {"option_id": 4743, "option_text": 'CPA in a major audit firm', "trait_tags": {'Finance-Acct': 1.0, 'Analytical-Skill': 0.5, 'Legal-Practice': 0.3}},
+            {"option_id": 4744, "option_text": 'CFO of a growing Philippine company', "trait_tags": {'Finance-Acct': 0.9, 'Admin-Skill': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 4745, "option_text": 'Stock market analyst or trader', "trait_tags": {'Finance-Acct': 0.9, 'Data-Analytics': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4746, "option_text": 'Government BIR tax examiner', "trait_tags": {'Finance-Acct': 0.9, 'Law-Enforce': 0.4, 'Legal-Practice': 0.3}},
+            {"option_id": 4747, "option_text": 'Financial planner for families', "trait_tags": {'Finance-Acct': 0.9, 'People-Skill': 0.5, 'Counseling': 0.3}},
+            {"option_id": 4748, "option_text": 'Fintech startup founder', "trait_tags": {'Finance-Acct': 0.8, 'Startup-Venture': 0.5, 'Software-Dev': 0.3}},
+        ]
+    },
+    {
+        "question_id": 571,
+        "question_text": 'What financial analysis task excites you?',
+"category": "Interest - Finance & Accounting",
+        "weight": 1.5,
+        "trait_tags": {'Finance-Acct': 0.9, 'Analytical-Skill': 0.3},
+        "options": [
+            {"option_id": 4749, "option_text": 'Ratio analysis to assess company health', "trait_tags": {'Finance-Acct': 1.0, 'Analytical-Skill': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4750, "option_text": 'Cash flow forecasting and projections', "trait_tags": {'Finance-Acct': 0.9, 'Data-Analytics': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4751, "option_text": 'Variance analysis comparing budget vs actual', "trait_tags": {'Finance-Acct': 0.9, 'Analytical-Skill': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4752, "option_text": 'Loan risk assessment and credit scoring', "trait_tags": {'Finance-Acct': 0.9, 'Data-Analytics': 0.4, 'Analytical-Skill': 0.4}},
+            {"option_id": 4753, "option_text": 'Merger and acquisition valuation', "trait_tags": {'Finance-Acct': 1.0, 'Analytical-Skill': 0.5, 'Legal-Practice': 0.3}},
+            {"option_id": 4754, "option_text": 'Cost-benefit analysis for projects', "trait_tags": {'Finance-Acct': 0.9, 'Analytical-Skill': 0.5, 'Industrial-Ops': 0.3}},
+        ]
+    },
+    {
+        "question_id": 572,
+        "question_text": 'What marketing strategy interests you most?',
+"category": "Interest - Marketing & Sales",
+        "weight": 1.5,
+        "trait_tags": {'Marketing-Sales': 0.9},
+        "options": [
+            {"option_id": 4755, "option_text": 'Social media marketing and content creation', "trait_tags": {'Marketing-Sales': 1.0, 'Digital-Media': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4756, "option_text": 'Brand strategy and positioning', "trait_tags": {'Marketing-Sales': 0.9, 'Creative-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4757, "option_text": 'Data-driven digital advertising campaigns', "trait_tags": {'Marketing-Sales': 0.9, 'Data-Analytics': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4758, "option_text": 'Customer relationship management (CRM)', "trait_tags": {'Marketing-Sales': 0.9, 'People-Skill': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4759, "option_text": 'Product launch and go-to-market planning', "trait_tags": {'Marketing-Sales': 1.0, 'Admin-Skill': 0.4, 'Startup-Venture': 0.3}},
+            {"option_id": 4760, "option_text": 'Influencer marketing and partnerships', "trait_tags": {'Marketing-Sales': 0.9, 'People-Skill': 0.5, 'Digital-Media': 0.4}},
+        ]
+    },
+    {
+        "question_id": 573,
+        "question_text": 'Which marketing analytics method would you use?',
+"category": "Interest - Marketing & Sales",
+        "weight": 1.5,
+        "trait_tags": {'Marketing-Sales': 0.9, 'Data-Analytics': 0.3},
+        "options": [
+            {"option_id": 4761, "option_text": 'Customer segmentation and persona building', "trait_tags": {'Marketing-Sales': 1.0, 'Data-Analytics': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4762, "option_text": 'A/B testing and conversion optimization', "trait_tags": {'Marketing-Sales': 0.9, 'Data-Analytics': 0.5, 'Web-Dev': 0.3}},
+            {"option_id": 4763, "option_text": 'SEO and keyword research analysis', "trait_tags": {'Marketing-Sales': 0.9, 'Web-Dev': 0.4, 'Data-Analytics': 0.4}},
+            {"option_id": 4764, "option_text": 'Social media engagement analytics', "trait_tags": {'Marketing-Sales': 0.9, 'Digital-Media': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4765, "option_text": 'Sales funnel tracking and optimization', "trait_tags": {'Marketing-Sales': 1.0, 'Data-Analytics': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4766, "option_text": 'Market research surveys and focus groups', "trait_tags": {'Marketing-Sales': 0.9, 'People-Skill': 0.4, 'Analytical-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 574,
+        "question_text": 'What sales approach suits you best?',
+"category": "Interest - Marketing & Sales",
+        "weight": 1.5,
+        "trait_tags": {'Marketing-Sales': 0.9, 'People-Skill': 0.3},
+        "options": [
+            {"option_id": 4767, "option_text": 'Consultative selling with deep client relationships', "trait_tags": {'Marketing-Sales': 1.0, 'People-Skill': 0.5, 'Counseling': 0.3}},
+            {"option_id": 4768, "option_text": 'E-commerce and online store management', "trait_tags": {'Marketing-Sales': 0.9, 'Web-Dev': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4769, "option_text": 'B2B enterprise sales and negotiations', "trait_tags": {'Marketing-Sales': 0.9, 'People-Skill': 0.5, 'Finance-Acct': 0.3}},
+            {"option_id": 4770, "option_text": 'Retail merchandising and store layout', "trait_tags": {'Marketing-Sales': 0.9, 'Spatial-Design': 0.4, 'Creative-Skill': 0.3}},
+            {"option_id": 4771, "option_text": 'Event marketing and trade show management', "trait_tags": {'Marketing-Sales': 1.0, 'Hospitality-Svc': 0.4, 'People-Skill': 0.3}},
+            {"option_id": 4772, "option_text": 'Direct sales and field marketing teams', "trait_tags": {'Marketing-Sales': 0.9, 'People-Skill': 0.5, 'Physical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 575,
+        "question_text": 'Where would you apply marketing skills in the Philippines?',
+"category": "Interest - Marketing & Sales",
+        "weight": 1.5,
+        "trait_tags": {'Marketing-Sales': 0.9},
+        "options": [
+            {"option_id": 4773, "option_text": 'Digital marketing agency for local brands', "trait_tags": {'Marketing-Sales': 1.0, 'Digital-Media': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4774, "option_text": 'FMCG company brand management', "trait_tags": {'Marketing-Sales': 0.9, 'Admin-Skill': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 4775, "option_text": 'Tourism and destination marketing', "trait_tags": {'Marketing-Sales': 0.9, 'Tourism-Travel': 0.5, 'Hospitality-Svc': 0.3}},
+            {"option_id": 4776, "option_text": 'Real estate sales and property marketing', "trait_tags": {'Marketing-Sales': 0.9, 'Finance-Acct': 0.4, 'People-Skill': 0.3}},
+            {"option_id": 4777, "option_text": 'Tech startup growth marketing', "trait_tags": {'Marketing-Sales': 0.9, 'Startup-Venture': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4778, "option_text": 'NGO fundraising and advocacy campaigns', "trait_tags": {'Marketing-Sales': 0.8, 'Community-Serve': 0.5, 'Social-Work': 0.3}},
+        ]
+    },
+    {
+        "question_id": 576,
+        "question_text": 'Which HR function excites you most?',
+"category": "Interest - Human Resources",
+        "weight": 1.5,
+        "trait_tags": {'HR-Management': 0.9},
+        "options": [
+            {"option_id": 4779, "option_text": 'Talent acquisition and recruitment strategy', "trait_tags": {'HR-Management': 1.0, 'People-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4780, "option_text": 'Training and employee development programs', "trait_tags": {'HR-Management': 0.9, 'Teaching-Ed': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 4781, "option_text": 'Compensation and benefits administration', "trait_tags": {'HR-Management': 0.9, 'Finance-Acct': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4782, "option_text": 'Employee relations and conflict resolution', "trait_tags": {'HR-Management': 0.9, 'People-Skill': 0.5, 'Counseling': 0.4}},
+            {"option_id": 4783, "option_text": 'HR analytics and workforce planning', "trait_tags": {'HR-Management': 0.9, 'Data-Analytics': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4784, "option_text": 'Labor law compliance (DOLE regulations)', "trait_tags": {'HR-Management': 1.0, 'Legal-Practice': 0.5, 'Admin-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 577,
+        "question_text": 'What HR technology would you implement?',
+"category": "Interest - Human Resources",
+        "weight": 1.5,
+        "trait_tags": {'HR-Management': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 4785, "option_text": 'HRIS and employee self-service portals', "trait_tags": {'HR-Management': 1.0, 'Software-Dev': 0.4, 'Admin-Skill': 0.3}},
+            {"option_id": 4786, "option_text": 'Applicant tracking and AI resume screening', "trait_tags": {'HR-Management': 0.9, 'AI-ML': 0.4, 'Data-Analytics': 0.3}},
+            {"option_id": 4787, "option_text": 'E-learning and LMS platforms for training', "trait_tags": {'HR-Management': 0.9, 'Teaching-Ed': 0.5, 'Software-Dev': 0.3}},
+            {"option_id": 4788, "option_text": 'Employee engagement survey platforms', "trait_tags": {'HR-Management': 0.9, 'Data-Analytics': 0.4, 'People-Skill': 0.4}},
+            {"option_id": 4789, "option_text": 'Payroll automation and compliance systems', "trait_tags": {'HR-Management': 0.9, 'Finance-Acct': 0.5, 'Software-Dev': 0.3}},
+            {"option_id": 4790, "option_text": 'Performance management and OKR tools', "trait_tags": {'HR-Management': 1.0, 'Admin-Skill': 0.4, 'Analytical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 578,
+        "question_text": 'What HR leadership challenge would you tackle?',
+"category": "Interest - Human Resources",
+        "weight": 1.5,
+        "trait_tags": {'HR-Management': 0.9, 'People-Skill': 0.3},
+        "options": [
+            {"option_id": 4791, "option_text": 'Reducing employee turnover and improving retention', "trait_tags": {'HR-Management': 1.0, 'People-Skill': 0.5, 'Counseling': 0.3}},
+            {"option_id": 4792, "option_text": 'Building inclusive and diverse workplace culture', "trait_tags": {'HR-Management': 0.9, 'Community-Serve': 0.4, 'People-Skill': 0.4}},
+            {"option_id": 4793, "option_text": 'Managing remote and hybrid work transitions', "trait_tags": {'HR-Management': 0.9, 'Admin-Skill': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4794, "option_text": 'Upskilling workers for Industry 4.0', "trait_tags": {'HR-Management': 0.9, 'Teaching-Ed': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4795, "option_text": 'Handling labor disputes and union negotiations', "trait_tags": {'HR-Management': 0.9, 'Legal-Practice': 0.5, 'People-Skill': 0.4}},
+            {"option_id": 4796, "option_text": 'Designing employee wellness programs', "trait_tags": {'HR-Management': 0.9, 'Counseling': 0.5, 'Public-Health': 0.3}},
+        ]
+    },
+    {
+        "question_id": 579,
+        "question_text": 'What administrative function do you excel at?',
+"category": "Interest - Administration",
+        "weight": 1.5,
+        "trait_tags": {'Admin-Skill': 0.9},
+        "options": [
+            {"option_id": 4797, "option_text": 'Organizing files, documents, and databases', "trait_tags": {'Admin-Skill': 1.0, 'Technical-Skill': 0.4, 'Data-Analytics': 0.3}},
+            {"option_id": 4798, "option_text": 'Scheduling meetings and managing calendars', "trait_tags": {'Admin-Skill': 0.9, 'People-Skill': 0.4, 'Technical-Skill': 0.3}},
+            {"option_id": 4799, "option_text": 'Preparing reports and presentations', "trait_tags": {'Admin-Skill': 0.9, 'Analytical-Skill': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4800, "option_text": 'Office supply and resource management', "trait_tags": {'Admin-Skill': 0.9, 'Industrial-Ops': 0.4, 'Finance-Acct': 0.3}},
+            {"option_id": 4801, "option_text": 'Travel coordination and event planning', "trait_tags": {'Admin-Skill': 0.9, 'Hospitality-Svc': 0.4, 'People-Skill': 0.3}},
+            {"option_id": 4802, "option_text": 'Customer and visitor reception management', "trait_tags": {'Admin-Skill': 1.0, 'People-Skill': 0.5, 'Hospitality-Svc': 0.3}},
+        ]
+    },
+    {
+        "question_id": 580,
+        "question_text": 'What office technology would you master?',
+"category": "Interest - Administration",
+        "weight": 1.5,
+        "trait_tags": {'Admin-Skill': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 4803, "option_text": 'Advanced Microsoft Office and spreadsheet skills', "trait_tags": {'Admin-Skill': 1.0, 'Data-Analytics': 0.4, 'Technical-Skill': 0.3}},
+            {"option_id": 4804, "option_text": 'Project management tools like Trello or Asana', "trait_tags": {'Admin-Skill': 0.9, 'Industrial-Ops': 0.4, 'Technical-Skill': 0.3}},
+            {"option_id": 4805, "option_text": 'Enterprise resource planning (ERP) systems', "trait_tags": {'Admin-Skill': 0.9, 'Industrial-Ops': 0.5, 'Finance-Acct': 0.3}},
+            {"option_id": 4806, "option_text": 'Digital document and workflow automation', "trait_tags": {'Admin-Skill': 0.9, 'Software-Dev': 0.4, 'Technical-Skill': 0.4}},
+            {"option_id": 4807, "option_text": 'Customer relationship management (CRM) platforms', "trait_tags": {'Admin-Skill': 0.9, 'Marketing-Sales': 0.4, 'People-Skill': 0.3}},
+            {"option_id": 4808, "option_text": 'Business communication and video conferencing', "trait_tags": {'Admin-Skill': 1.0, 'People-Skill': 0.4, 'Technical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 581,
+        "question_text": 'Which administrative leadership role appeals to you?',
+"category": "Interest - Administration",
+        "weight": 1.5,
+        "trait_tags": {'Admin-Skill': 0.9, 'People-Skill': 0.3},
+        "options": [
+            {"option_id": 4809, "option_text": 'Executive assistant to a CEO', "trait_tags": {'Admin-Skill': 1.0, 'People-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4810, "option_text": 'Office manager overseeing daily operations', "trait_tags": {'Admin-Skill': 0.9, 'Industrial-Ops': 0.4, 'People-Skill': 0.4}},
+            {"option_id": 4811, "option_text": 'Records and compliance manager', "trait_tags": {'Admin-Skill': 0.9, 'Legal-Practice': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 4812, "option_text": 'Government bureau administrative officer', "trait_tags": {'Admin-Skill': 0.3, 'Community-Serve': 0.4}},
+            {"option_id": 4813, "option_text": 'BPO operations coordinator', "trait_tags": {'Admin-Skill': 0.9, 'People-Skill': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4814, "option_text": 'Procurement and purchasing specialist', "trait_tags": {'Admin-Skill': 1.0, 'Finance-Acct': 0.4, 'Industrial-Ops': 0.3}},
+        ]
+    },
+    {
+        "question_id": 582,
+        "question_text": 'What administrative improvement would you prioritize?',
+"category": "Interest - Administration",
+        "weight": 1.5,
+        "trait_tags": {'Admin-Skill': 0.9},
+        "options": [
+            {"option_id": 4815, "option_text": 'Paperless office and digital transformation', "trait_tags": {'Admin-Skill': 1.0, 'Technical-Skill': 0.5, 'Software-Dev': 0.3}},
+            {"option_id": 4816, "option_text": 'Streamlining approval and processing workflows', "trait_tags": {'Admin-Skill': 0.9, 'Industrial-Ops': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4817, "option_text": 'Improving interdepartmental communication', "trait_tags": {'Admin-Skill': 0.9, 'People-Skill': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4818, "option_text": 'Organizing training schedules for all staff', "trait_tags": {'Admin-Skill': 0.9, 'Teaching-Ed': 0.4, 'HR-Management': 0.3}},
+            {"option_id": 4819, "option_text": 'Creating standard operating procedures', "trait_tags": {'Admin-Skill': 1.0, 'Analytical-Skill': 0.4, 'Legal-Practice': 0.3}},
+            {"option_id": 4820, "option_text": 'Managing office budget and expenses', "trait_tags": {'Admin-Skill': 0.9, 'Finance-Acct': 0.5, 'Analytical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 583,
+        "question_text": 'What stage of startup building excites you?',
+"category": "Interest - Entrepreneurship",
+        "weight": 1.5,
+        "trait_tags": {'Startup-Venture': 0.9},
+        "options": [
+            {"option_id": 4821, "option_text": 'Brainstorming business ideas and validation', "trait_tags": {'Startup-Venture': 1.0, 'Creative-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4822, "option_text": 'Building the MVP (minimum viable product)', "trait_tags": {'Startup-Venture': 0.9, 'Software-Dev': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4823, "option_text": 'Pitching to investors and fundraising', "trait_tags": {'Startup-Venture': 0.9, 'People-Skill': 0.5, 'Finance-Acct': 0.3}},
+            {"option_id": 4824, "option_text": 'Scaling operations and hiring the team', "trait_tags": {'Startup-Venture': 0.9, 'HR-Management': 0.4, 'Admin-Skill': 0.3}},
+            {"option_id": 4825, "option_text": 'Growth marketing and user acquisition', "trait_tags": {'Startup-Venture': 0.9, 'Marketing-Sales': 0.5, 'Digital-Media': 0.3}},
+            {"option_id": 4826, "option_text": 'Product-market fit iteration and pivoting', "trait_tags": {'Startup-Venture': 1.0, 'Analytical-Skill': 0.5, 'People-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 584,
+        "question_text": 'What Philippine startup sector interests you?',
+"category": "Interest - Entrepreneurship",
+        "weight": 1.5,
+        "trait_tags": {'Startup-Venture': 0.9},
+        "options": [
+            {"option_id": 4827, "option_text": 'Fintech and digital payments', "trait_tags": {'Startup-Venture': 0.9, 'Finance-Acct': 0.5, 'Software-Dev': 0.3}},
+            {"option_id": 4828, "option_text": 'Agritech for Filipino farmers', "trait_tags": {'Startup-Venture': 0.9, 'Agri-Nature': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4829, "option_text": 'Edtech for Philippine education', "trait_tags": {'Startup-Venture': 0.9, 'Teaching-Ed': 0.5, 'Software-Dev': 0.3}},
+            {"option_id": 4830, "option_text": 'Healthtech and telemedicine', "trait_tags": {'Startup-Venture': 0.9, 'Patient-Care': 0.4, 'Health-Admin': 0.3}},
+            {"option_id": 4831, "option_text": 'Logistics and last-mile delivery', "trait_tags": {'Startup-Venture': 0.9, 'Industrial-Ops': 0.5, 'Software-Dev': 0.3}},
+            {"option_id": 4832, "option_text": 'Social enterprise for underserved communities', "trait_tags": {'Startup-Venture': 0.8, 'Community-Serve': 0.5, 'Social-Work': 0.4}},
+        ]
+    },
+    {
+        "question_id": 585,
+        "question_text": 'What entrepreneurship skill would you build first?',
+"category": "Interest - Entrepreneurship",
+        "weight": 1.5,
+        "trait_tags": {'Startup-Venture': 0.9, 'People-Skill': 0.3},
+        "options": [
+            {"option_id": 4833, "option_text": 'Financial modeling and runway planning', "trait_tags": {'Startup-Venture': 1.0, 'Finance-Acct': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4834, "option_text": 'Public speaking and investor pitch delivery', "trait_tags": {'Startup-Venture': 0.9, 'People-Skill': 0.5, 'Performing-Arts': 0.3}},
+            {"option_id": 4835, "option_text": 'Team leadership and culture building', "trait_tags": {'Startup-Venture': 0.9, 'People-Skill': 0.5, 'HR-Management': 0.3}},
+            {"option_id": 4836, "option_text": 'Customer discovery and user research', "trait_tags": {'Startup-Venture': 0.9, 'Analytical-Skill': 0.5, 'Marketing-Sales': 0.3}},
+            {"option_id": 4837, "option_text": 'Business model canvas and strategy design', "trait_tags": {'Startup-Venture': 1.0, 'Analytical-Skill': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4838, "option_text": 'Lean startup experimentation and testing', "trait_tags": {'Startup-Venture': 0.9, 'Data-Analytics': 0.4, 'Analytical-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 586,
+        "question_text": 'What startup challenge would you solve?',
+"category": "Interest - Entrepreneurship",
+        "weight": 1.5,
+        "trait_tags": {'Startup-Venture': 0.9},
+        "options": [
+            {"option_id": 4839, "option_text": 'Finding product-market fit before funding runs out', "trait_tags": {'Startup-Venture': 1.0, 'Analytical-Skill': 0.5, 'Marketing-Sales': 0.3}},
+            {"option_id": 4840, "option_text": 'Competing with larger established companies', "trait_tags": {'Startup-Venture': 0.9, 'Marketing-Sales': 0.4, 'Creative-Skill': 0.3}},
+            {"option_id": 4841, "option_text": 'Navigating Philippine business regulations', "trait_tags": {'Startup-Venture': 0.9, 'Legal-Practice': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4842, "option_text": 'Building a loyal customer community', "trait_tags": {'Startup-Venture': 0.9, 'People-Skill': 0.5, 'Community-Serve': 0.3}},
+            {"option_id": 4843, "option_text": 'Managing cash flow in early stages', "trait_tags": {'Startup-Venture': 0.9, 'Finance-Acct': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4844, "option_text": 'Hiring talent without big company budgets', "trait_tags": {'Startup-Venture': 1.0, 'HR-Management': 0.5, 'People-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 587,
+        "question_text": 'What visual design discipline interests you most?',
+"category": "Interest - Visual Design",
+        "weight": 1.5,
+        "trait_tags": {'Visual-Design': 0.9},
+        "options": [
+            {"option_id": 4845, "option_text": 'Graphic design for branding and logos', "trait_tags": {'Visual-Design': 1.0, 'Creative-Skill': 0.5, 'Marketing-Sales': 0.3}},
+            {"option_id": 4846, "option_text": 'UI/UX design for apps and websites', "trait_tags": {'Visual-Design': 0.9, 'Web-Dev': 0.4, 'Software-Dev': 0.3}},
+            {"option_id": 4847, "option_text": 'Typography and layout design', "trait_tags": {'Visual-Design': 1.0, 'Creative-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4848, "option_text": 'Photography and photo editing', "trait_tags": {'Visual-Design': 0.9, 'Digital-Media': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4849, "option_text": 'Packaging and product design', "trait_tags": {'Visual-Design': 0.9, 'Industrial-Ops': 0.4, 'Marketing-Sales': 0.3}},
+            {"option_id": 4850, "option_text": 'Illustration and concept art', "trait_tags": {'Visual-Design': 0.9, 'Animation-3D': 0.4, 'Creative-Skill': 0.5}},
+        ]
+    },
+    {
+        "question_id": 588,
+        "question_text": 'Which design tool would you specialize in?',
+"category": "Interest - Visual Design",
+        "weight": 1.5,
+        "trait_tags": {'Visual-Design': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 4851, "option_text": 'Adobe Photoshop for image editing', "trait_tags": {'Visual-Design': 1.0, 'Digital-Media': 0.4, 'Creative-Skill': 0.3}},
+            {"option_id": 4852, "option_text": 'Figma for collaborative UI/UX design', "trait_tags": {'Visual-Design': 0.9, 'Web-Dev': 0.4, 'Software-Dev': 0.3}},
+            {"option_id": 4853, "option_text": 'Adobe Illustrator for vector graphics', "trait_tags": {'Visual-Design': 1.0, 'Creative-Skill': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4854, "option_text": 'InDesign for publication layout design', "trait_tags": {'Visual-Design': 0.9, 'Digital-Media': 0.4, 'Admin-Skill': 0.3}},
+            {"option_id": 4855, "option_text": 'Canva for rapid social media content', "trait_tags": {'Visual-Design': 0.8, 'Marketing-Sales': 0.5, 'Digital-Media': 0.3}},
+            {"option_id": 4856, "option_text": 'Procreate for digital illustration', "trait_tags": {'Visual-Design': 0.9, 'Creative-Skill': 0.5, 'Animation-3D': 0.3}},
+        ]
+    },
+    {
+        "question_id": 589,
+        "question_text": 'What design career path appeals to you?',
+"category": "Career - Visual Design",
+        "weight": 1.5,
+        "trait_tags": {'Visual-Design': 0.9},
+        "options": [
+            {"option_id": 4857, "option_text": 'Art director at an advertising agency', "trait_tags": {'Visual-Design': 1.0, 'Marketing-Sales': 0.4, 'People-Skill': 0.3}},
+            {"option_id": 4858, "option_text": 'Freelance graphic designer', "trait_tags": {'Visual-Design': 0.9, 'Startup-Venture': 0.4, 'Creative-Skill': 0.3}},
+            {"option_id": 4859, "option_text": 'UX/UI designer at a tech company', "trait_tags": {'Visual-Design': 0.9, 'Web-Dev': 0.5, 'Software-Dev': 0.3}},
+            {"option_id": 4860, "option_text": 'Publication designer for magazines or books', "trait_tags": {'Visual-Design': 0.9, 'Digital-Media': 0.4, 'Creative-Skill': 0.3}},
+            {"option_id": 4861, "option_text": 'Brand identity specialist', "trait_tags": {'Visual-Design': 1.0, 'Marketing-Sales': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4862, "option_text": 'Design educator and mentor', "trait_tags": {'Visual-Design': 0.8, 'Teaching-Ed': 0.5, 'People-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 590,
+        "question_text": 'What animation style would you specialize in?',
+"category": "Interest - Animation & 3D",
+        "weight": 1.5,
+        "trait_tags": {'Animation-3D': 0.9},
+        "options": [
+            {"option_id": 4863, "option_text": '3D character animation and rigging', "trait_tags": {'Animation-3D': 1.0, 'Creative-Skill': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4864, "option_text": '2D frame-by-frame traditional animation', "trait_tags": {'Animation-3D': 0.9, 'Creative-Skill': 0.5, 'Visual-Design': 0.3}},
+            {"option_id": 4865, "option_text": 'Motion graphics for video content', "trait_tags": {'Animation-3D': 0.9, 'Digital-Media': 0.5, 'Film-Broadcast': 0.3}},
+            {"option_id": 4866, "option_text": 'VFX and compositing for film', "trait_tags": {'Animation-3D': 0.9, 'Film-Broadcast': 0.5, 'Technical-Skill': 0.4}},
+            {"option_id": 4867, "option_text": 'Environment and world building in 3D', "trait_tags": {'Animation-3D': 1.0, 'Spatial-Design': 0.5, 'Game-Dev': 0.3}},
+            {"option_id": 4868, "option_text": 'Stop-motion and practical effects', "trait_tags": {'Animation-3D': 0.9, 'Creative-Skill': 0.5, 'Physical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 591,
+        "question_text": 'Which animation software would you master?',
+"category": "Interest - Animation & 3D",
+        "weight": 1.5,
+        "trait_tags": {'Animation-3D': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 4869, "option_text": 'Blender for open-source 3D creation', "trait_tags": {'Animation-3D': 1.0, 'Software-Dev': 0.3, 'Creative-Skill': 0.3}},
+            {"option_id": 4870, "option_text": 'Maya for professional character animation', "trait_tags": {'Animation-3D': 1.0, 'Film-Broadcast': 0.3, 'Technical-Skill': 0.3}},
+            {"option_id": 4871, "option_text": 'After Effects for motion graphics', "trait_tags": {'Animation-3D': 0.9, 'Digital-Media': 0.5, 'Visual-Design': 0.3}},
+            {"option_id": 4872, "option_text": 'ZBrush for digital sculpting', "trait_tags": {'Animation-3D': 0.9, 'Visual-Design': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4873, "option_text": 'Unity or Unreal for real-time animation', "trait_tags": {'Animation-3D': 0.9, 'Game-Dev': 0.5, 'Software-Dev': 0.3}},
+            {"option_id": 4874, "option_text": 'Toon Boom for 2D production animation', "trait_tags": {'Animation-3D': 0.9, 'Creative-Skill': 0.5, 'Film-Broadcast': 0.3}},
+        ]
+    },
+    {
+        "question_id": 592,
+        "question_text": 'What animation project would you create?',
+"category": "Interest - Animation & 3D",
+        "weight": 1.5,
+        "trait_tags": {'Animation-3D': 0.9, 'Creative-Skill': 0.3},
+        "options": [
+            {"option_id": 4875, "option_text": 'Filipino folklore animated short film', "trait_tags": {'Animation-3D': 1.0, 'Film-Broadcast': 0.4, 'Creative-Skill': 0.4}},
+            {"option_id": 4876, "option_text": 'Educational animated explainer videos', "trait_tags": {'Animation-3D': 0.9, 'Teaching-Ed': 0.5, 'Digital-Media': 0.3}},
+            {"option_id": 4877, "option_text": 'Game cinematic trailer and cutscenes', "trait_tags": {'Animation-3D': 0.9, 'Game-Dev': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4878, "option_text": 'Product visualization and advertisement', "trait_tags": {'Animation-3D': 0.9, 'Marketing-Sales': 0.5, 'Visual-Design': 0.3}},
+            {"option_id": 4879, "option_text": 'Architectural walkthrough and visualization', "trait_tags": {'Animation-3D': 0.9, 'Spatial-Design': 0.5, 'Civil-Build': 0.3}},
+            {"option_id": 4880, "option_text": 'Social media animated content', "trait_tags": {'Animation-3D': 0.8, 'Digital-Media': 0.5, 'Marketing-Sales': 0.3}},
+        ]
+    },
+    {
+        "question_id": 593,
+        "question_text": 'What digital media content would you produce?',
+"category": "Interest - Digital Media",
+        "weight": 1.5,
+        "trait_tags": {'Digital-Media': 0.9},
+        "options": [
+            {"option_id": 4881, "option_text": 'YouTube video production and editing', "trait_tags": {'Digital-Media': 1.0, 'Film-Broadcast': 0.4, 'Creative-Skill': 0.3}},
+            {"option_id": 4882, "option_text": 'Podcast creation and audio storytelling', "trait_tags": {'Digital-Media': 0.9, 'Performing-Arts': 0.4, 'People-Skill': 0.3}},
+            {"option_id": 4883, "option_text": 'Social media content strategy and creation', "trait_tags": {'Digital-Media': 0.9, 'Marketing-Sales': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4884, "option_text": 'Blog and online journalism', "trait_tags": {'Digital-Media': 0.9, 'Creative-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4885, "option_text": 'Livestreaming and interactive content', "trait_tags": {'Digital-Media': 0.9, 'People-Skill': 0.4, 'Performing-Arts': 0.3}},
+            {"option_id": 4886, "option_text": 'Infographic and data visualization design', "trait_tags": {'Digital-Media': 0.9, 'Visual-Design': 0.5, 'Data-Analytics': 0.3}},
+        ]
+    },
+    {
+        "question_id": 594,
+        "question_text": 'Which digital media platform would you focus on?',
+"category": "Interest - Digital Media",
+        "weight": 1.5,
+        "trait_tags": {'Digital-Media': 0.9, 'Marketing-Sales': 0.3},
+        "options": [
+            {"option_id": 4887, "option_text": 'YouTube for long-form video content', "trait_tags": {'Digital-Media': 1.0, 'Film-Broadcast': 0.4, 'Creative-Skill': 0.3}},
+            {"option_id": 4888, "option_text": 'TikTok and Reels for short-form video', "trait_tags": {'Digital-Media': 0.9, 'Creative-Skill': 0.5, 'Marketing-Sales': 0.3}},
+            {"option_id": 4889, "option_text": 'Website and blog content management', "trait_tags": {'Digital-Media': 0.9, 'Web-Dev': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4890, "option_text": 'Spotify and Apple Podcasts audio content', "trait_tags": {'Digital-Media': 0.9, 'Performing-Arts': 0.4, 'People-Skill': 0.3}},
+            {"option_id": 4891, "option_text": 'Instagram and Pinterest visual storytelling', "trait_tags": {'Digital-Media': 0.9, 'Visual-Design': 0.5, 'Marketing-Sales': 0.3}},
+            {"option_id": 4892, "option_text": 'Newsletter and email media publishing', "trait_tags": {'Digital-Media': 0.9, 'Creative-Skill': 0.4, 'Marketing-Sales': 0.4}},
+        ]
+    },
+    {
+        "question_id": 595,
+        "question_text": 'What digital media skill would you develop?',
+"category": "Interest - Digital Media",
+        "weight": 1.5,
+        "trait_tags": {'Digital-Media': 0.9, 'Creative-Skill': 0.3},
+        "options": [
+            {"option_id": 4893, "option_text": 'Video editing with Premiere Pro or DaVinci', "trait_tags": {'Digital-Media': 1.0, 'Film-Broadcast': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4894, "option_text": 'Photography and photo manipulation', "trait_tags": {'Digital-Media': 0.9, 'Visual-Design': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4895, "option_text": 'Copywriting and content strategy', "trait_tags": {'Digital-Media': 0.9, 'Marketing-Sales': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4896, "option_text": 'Audio production and sound engineering', "trait_tags": {'Digital-Media': 0.9, 'Performing-Arts': 0.4, 'Technical-Skill': 0.4}},
+            {"option_id": 4897, "option_text": 'Motion graphics and visual effects', "trait_tags": {'Digital-Media': 0.9, 'Animation-3D': 0.5, 'Visual-Design': 0.3}},
+            {"option_id": 4898, "option_text": 'Community management and engagement', "trait_tags": {'Digital-Media': 0.8, 'People-Skill': 0.5, 'Marketing-Sales': 0.3}},
+        ]
+    },
+    {
+        "question_id": 596,
+        "question_text": 'What film/broadcast production role excites you?',
+"category": "Interest - Film & Broadcast",
+        "weight": 1.5,
+        "trait_tags": {'Film-Broadcast': 0.9},
+        "options": [
+            {"option_id": 4899, "option_text": 'Director controlling the creative vision', "trait_tags": {'Film-Broadcast': 1.0, 'Creative-Skill': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 4900, "option_text": 'Cinematographer framing beautiful shots', "trait_tags": {'Film-Broadcast': 0.9, 'Visual-Design': 0.5, 'Creative-Skill': 0.4}},
+            {"option_id": 4901, "option_text": 'Screenwriter crafting compelling stories', "trait_tags": {'Film-Broadcast': 0.9, 'Creative-Skill': 0.6, 'Analytical-Skill': 0.3}},
+            {"option_id": 4902, "option_text": 'Film editor shaping the final narrative', "trait_tags": {'Film-Broadcast': 0.9, 'Digital-Media': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4903, "option_text": 'Producer managing budget and logistics', "trait_tags": {'Film-Broadcast': 0.9, 'Finance-Acct': 0.4, 'Admin-Skill': 0.4}},
+            {"option_id": 4904, "option_text": 'Sound designer creating audio atmosphere', "trait_tags": {'Film-Broadcast': 0.9, 'Performing-Arts': 0.4, 'Technical-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 597,
+        "question_text": 'What film genre would you work in?',
+"category": "Interest - Film & Broadcast",
+        "weight": 1.5,
+        "trait_tags": {'Film-Broadcast': 0.9, 'Creative-Skill': 0.3},
+        "options": [
+            {"option_id": 4905, "option_text": 'Drama exploring Filipino social issues', "trait_tags": {'Film-Broadcast': 1.0, 'Social-Work': 0.4, 'Community-Serve': 0.3}},
+            {"option_id": 4906, "option_text": 'Documentary capturing real Philippine stories', "trait_tags": {'Film-Broadcast': 0.9, 'Field-Research': 0.4, 'Community-Serve': 0.3}},
+            {"option_id": 4907, "option_text": 'Action film with practical and visual effects', "trait_tags": {'Film-Broadcast': 0.9, 'Animation-3D': 0.4, 'Physical-Skill': 0.3}},
+            {"option_id": 4908, "option_text": 'Comedy bringing joy to Filipino audiences', "trait_tags": {'Film-Broadcast': 0.9, 'Performing-Arts': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4909, "option_text": 'Horror or thriller with suspenseful storytelling', "trait_tags": {'Film-Broadcast': 1.0, 'Creative-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4910, "option_text": 'Short film or indie experimental cinema', "trait_tags": {'Film-Broadcast': 0.9, 'Creative-Skill': 0.5, 'Visual-Design': 0.3}},
+        ]
+    },
+    {
+        "question_id": 598,
+        "question_text": 'What broadcast media career path appeals to you?',
+"category": "Career - Film & Broadcast",
+        "weight": 1.5,
+        "trait_tags": {'Film-Broadcast': 0.9},
+        "options": [
+            {"option_id": 4911, "option_text": 'Television news producer or reporter', "trait_tags": {'Film-Broadcast': 1.0, 'People-Skill': 0.5, 'Community-Serve': 0.3}},
+            {"option_id": 4912, "option_text": 'Film production company founder', "trait_tags": {'Film-Broadcast': 0.9, 'Startup-Venture': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 4913, "option_text": 'Commercial and advertising director', "trait_tags": {'Film-Broadcast': 0.9, 'Marketing-Sales': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4914, "option_text": 'Live event and concert broadcast engineer', "trait_tags": {'Film-Broadcast': 0.9, 'Performing-Arts': 0.4, 'Technical-Skill': 0.4}},
+            {"option_id": 4915, "option_text": 'Streaming platform content creator', "trait_tags": {'Film-Broadcast': 0.9, 'Digital-Media': 0.5, 'Startup-Venture': 0.3}},
+            {"option_id": 4916, "option_text": 'Film school instructor sharing knowledge', "trait_tags": {'Film-Broadcast': 0.8, 'Teaching-Ed': 0.6, 'People-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 599,
+        "question_text": 'What performing arts discipline appeals to you?',
+"category": "Interest - Performing Arts",
+        "weight": 1.5,
+        "trait_tags": {'Performing-Arts': 0.9},
+        "options": [
+            {"option_id": 4917, "option_text": 'Theater acting and stage performance', "trait_tags": {'Performing-Arts': 1.0, 'People-Skill': 0.4, 'Creative-Skill': 0.3}},
+            {"option_id": 4918, "option_text": 'Music performance and composition', "trait_tags": {'Performing-Arts': 0.9, 'Creative-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4919, "option_text": 'Dance choreography and movement', "trait_tags": {'Performing-Arts': 0.9, 'Physical-Skill': 0.5, 'Creative-Skill': 0.4}},
+            {"option_id": 4920, "option_text": 'Voice acting and dubbing', "trait_tags": {'Performing-Arts': 0.9, 'Film-Broadcast': 0.4, 'Creative-Skill': 0.3}},
+            {"option_id": 4921, "option_text": 'Musical theater combining all art forms', "trait_tags": {'Performing-Arts': 1.0, 'Creative-Skill': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 4922, "option_text": 'Stand-up comedy and improv performance', "trait_tags": {'Performing-Arts': 0.9, 'People-Skill': 0.5, 'Creative-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 600,
+        "question_text": 'What performing arts career interests you?',
+"category": "Career - Performing Arts",
+        "weight": 1.5,
+        "trait_tags": {'Performing-Arts': 0.9, 'People-Skill': 0.3},
+        "options": [
+            {"option_id": 4923, "option_text": 'Professional stage actor in Filipino theater', "trait_tags": {'Performing-Arts': 1.0, 'Creative-Skill': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 4924, "option_text": 'Music teacher and conductor', "trait_tags": {'Performing-Arts': 0.9, 'Teaching-Ed': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 4925, "option_text": 'Concert or event production manager', "trait_tags": {'Performing-Arts': 0.9, 'Admin-Skill': 0.5, 'Hospitality-Svc': 0.3}},
+            {"option_id": 4926, "option_text": 'Recording artist or studio musician', "trait_tags": {'Performing-Arts': 0.9, 'Technical-Skill': 0.4, 'Creative-Skill': 0.4}},
+            {"option_id": 4927, "option_text": 'Dance troupe director or choreographer', "trait_tags": {'Performing-Arts': 0.9, 'Physical-Skill': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4928, "option_text": 'Arts therapy practitioner', "trait_tags": {'Performing-Arts': 0.8, 'Counseling': 0.5, 'Rehab-Therapy': 0.3}},
+        ]
+    },
+    {
+        "question_id": 601,
+        "question_text": 'What performing arts skill would you develop?',
+"category": "Interest - Performing Arts",
+        "weight": 1.5,
+        "trait_tags": {'Performing-Arts': 0.9, 'Creative-Skill': 0.3},
+        "options": [
+            {"option_id": 4929, "option_text": 'Vocal training and singing technique', "trait_tags": {'Performing-Arts': 1.0, 'Physical-Skill': 0.3, 'Creative-Skill': 0.3}},
+            {"option_id": 4930, "option_text": 'Musical instrument mastery', "trait_tags": {'Performing-Arts': 0.9, 'Technical-Skill': 0.4, 'Creative-Skill': 0.4}},
+            {"option_id": 4931, "option_text": 'Script analysis and character development', "trait_tags": {'Performing-Arts': 0.9, 'Analytical-Skill': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4932, "option_text": 'Stage design and lighting direction', "trait_tags": {'Performing-Arts': 0.9, 'Spatial-Design': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4933, "option_text": 'Sound engineering for live performance', "trait_tags": {'Performing-Arts': 0.8, 'Technical-Skill': 0.5, 'Hardware-Systems': 0.3}},
+            {"option_id": 4934, "option_text": 'Video and livestream production for arts', "trait_tags": {'Performing-Arts': 0.9, 'Digital-Media': 0.5, 'Film-Broadcast': 0.3}},
+        ]
+    },
+    {
+        "question_id": 602,
+        "question_text": 'What spatial design discipline interests you?',
+"category": "Interest - Architecture & Design",
+        "weight": 1.5,
+        "trait_tags": {'Spatial-Design': 0.9},
+        "options": [
+            {"option_id": 4935, "option_text": 'Interior design for residential spaces', "trait_tags": {'Spatial-Design': 1.0, 'Creative-Skill': 0.5, 'Visual-Design': 0.3}},
+            {"option_id": 4936, "option_text": 'Architecture and building design', "trait_tags": {'Spatial-Design': 0.9, 'Civil-Build': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4937, "option_text": 'Landscape architecture and outdoor spaces', "trait_tags": {'Spatial-Design': 0.9, 'Environmental-Sci': 0.4, 'Agri-Nature': 0.3}},
+            {"option_id": 4938, "option_text": 'Urban planning and city development', "trait_tags": {'Spatial-Design': 0.9, 'Civil-Build': 0.4, 'Community-Serve': 0.3}},
+            {"option_id": 4939, "option_text": 'Exhibition and museum display design', "trait_tags": {'Spatial-Design': 0.9, 'Visual-Design': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4940, "option_text": 'Stage and set design for events', "trait_tags": {'Spatial-Design': 0.9, 'Performing-Arts': 0.4, 'Creative-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 603,
+        "question_text": 'Which spatial design tool would you learn?',
+"category": "Interest - Architecture & Design",
+        "weight": 1.5,
+        "trait_tags": {'Spatial-Design': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 4941, "option_text": 'SketchUp for 3D spatial modeling', "trait_tags": {'Spatial-Design': 1.0, 'Technical-Skill': 0.5, 'Visual-Design': 0.3}},
+            {"option_id": 4942, "option_text": 'Revit for BIM building design', "trait_tags": {'Spatial-Design': 0.9, 'Civil-Build': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 4943, "option_text": 'AutoCAD for floor plans and layouts', "trait_tags": {'Spatial-Design': 0.9, 'Civil-Build': 0.4, 'Technical-Skill': 0.4}},
+            {"option_id": 4944, "option_text": '3ds Max for photorealistic rendering', "trait_tags": {'Spatial-Design': 0.9, 'Animation-3D': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4945, "option_text": 'Lumion for walkthrough visualization', "trait_tags": {'Spatial-Design': 0.9, 'Animation-3D': 0.4, 'Visual-Design': 0.3}},
+            {"option_id": 4946, "option_text": 'VR tools for immersive spatial experience', "trait_tags": {'Spatial-Design': 1.0, 'Technical-Skill': 0.5, 'Software-Dev': 0.3}},
+        ]
+    },
+    {
+        "question_id": 604,
+        "question_text": 'What spatial design project excites you?',
+"category": "Interest - Architecture & Design",
+        "weight": 1.5,
+        "trait_tags": {'Spatial-Design': 0.9},
+        "options": [
+            {"option_id": 4947, "option_text": 'Designing a modern Filipino home', "trait_tags": {'Spatial-Design': 1.0, 'Creative-Skill': 0.5, 'Civil-Build': 0.3}},
+            {"option_id": 4948, "option_text": 'Planning a sustainable community park', "trait_tags": {'Spatial-Design': 0.9, 'Environmental-Eng': 0.4, 'Community-Serve': 0.4}},
+            {"option_id": 4949, "option_text": 'Creating an interactive museum exhibit', "trait_tags": {'Spatial-Design': 0.9, 'Visual-Design': 0.5, 'Teaching-Ed': 0.3}},
+            {"option_id": 4950, "option_text": 'Designing an efficient hospital layout', "trait_tags": {'Spatial-Design': 0.9, 'Health-Admin': 0.4, 'Civil-Build': 0.3}},
+            {"option_id": 4951, "option_text": 'Renovating heritage buildings in Vigan', "trait_tags": {'Spatial-Design': 0.9, 'Creative-Skill': 0.4, 'Tourism-Travel': 0.4}},
+            {"option_id": 4952, "option_text": 'Designing a co-working space for startups', "trait_tags": {'Spatial-Design': 0.9, 'Startup-Venture': 0.4, 'Admin-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 605,
+        "question_text": 'What laboratory research area fascinates you?',
+"category": "Interest - Laboratory Research",
+        "weight": 1.5,
+        "trait_tags": {'Lab-Research': 0.9},
+        "options": [
+            {"option_id": 4953, "option_text": 'Molecular biology and genetic engineering', "trait_tags": {'Lab-Research': 1.0, 'Medical-Lab': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 4954, "option_text": 'Materials science and nanotechnology', "trait_tags": {'Lab-Research': 0.9, 'Technical-Skill': 0.5, 'Mechanical-Design': 0.3}},
+            {"option_id": 4955, "option_text": 'Organic chemistry and synthesis', "trait_tags": {'Lab-Research': 0.9, 'Pharmacy': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 4956, "option_text": 'Cell culture and tissue engineering', "trait_tags": {'Lab-Research': 1.0, 'Medical-Lab': 0.4, 'Patient-Care': 0.3}},
+            {"option_id": 4957, "option_text": 'Environmental sample testing and analysis', "trait_tags": {'Lab-Research': 0.9, 'Environmental-Sci': 0.5, 'Field-Research': 0.3}},
+            {"option_id": 4958, "option_text": 'Pharmaceutical drug testing and validation', "trait_tags": {'Lab-Research': 0.9, 'Pharmacy': 0.5, 'Medical-Lab': 0.3}},
+        ]
+    },
+    {
+        "question_id": 606,
+        "question_text": 'What lab technique would you master?',
+"category": "Interest - Laboratory Research",
+        "weight": 1.5,
+        "trait_tags": {'Lab-Research': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 4959, "option_text": 'PCR and DNA amplification methods', "trait_tags": {'Lab-Research': 1.0, 'Medical-Lab': 0.4, 'Technical-Skill': 0.3}},
+            {"option_id": 4960, "option_text": 'Spectroscopy for chemical identification', "trait_tags": {'Lab-Research': 0.9, 'Analytical-Skill': 0.5, 'Technical-Skill': 0.4}},
+            {"option_id": 4961, "option_text": 'Chromatography for compound separation', "trait_tags": {'Lab-Research': 0.9, 'Pharmacy': 0.4, 'Technical-Skill': 0.3}},
+            {"option_id": 4962, "option_text": 'Electron microscopy for nanoscale imaging', "trait_tags": {'Lab-Research': 1.0, 'Technical-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 4963, "option_text": 'Cell counting and viability assays', "trait_tags": {'Lab-Research': 0.9, 'Medical-Lab': 0.5, 'Patient-Care': 0.3}},
+            {"option_id": 4964, "option_text": 'Statistical design of experiments', "trait_tags": {'Lab-Research': 0.9, 'Data-Analytics': 0.5, 'Analytical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 607,
+        "question_text": 'Where would you conduct research?',
+"category": "Interest - Laboratory Research",
+        "weight": 1.5,
+        "trait_tags": {'Lab-Research': 0.9},
+        "options": [
+            {"option_id": 4965, "option_text": 'University research laboratory', "trait_tags": {'Lab-Research': 1.0, 'Teaching-Ed': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 4966, "option_text": 'DOST Philippine government research institute', "trait_tags": {'Lab-Research': 0.9, 'Community-Serve': 0.4, 'Admin-Skill': 0.3}},
+            {"option_id": 4967, "option_text": 'Pharmaceutical company R&D department', "trait_tags": {'Lab-Research': 0.9, 'Pharmacy': 0.5, 'Industrial-Ops': 0.3}},
+            {"option_id": 4968, "option_text": 'Hospital clinical research unit', "trait_tags": {'Lab-Research': 0.9, 'Patient-Care': 0.5, 'Medical-Lab': 0.3}},
+            {"option_id": 4969, "option_text": 'Environmental testing laboratory', "trait_tags": {'Lab-Research': 0.9, 'Environmental-Sci': 0.5, 'Field-Research': 0.3}},
+            {"option_id": 4970, "option_text": 'Biotech startup research lab', "trait_tags": {'Lab-Research': 0.9, 'Startup-Venture': 0.4, 'Technical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 608,
+        "question_text": 'What motivates you about lab research?',
+"category": "Interest - Laboratory Research",
+        "weight": 1.5,
+        "trait_tags": {'Lab-Research': 0.9},
+        "options": [
+            {"option_id": 4971, "option_text": 'Discovering new knowledge through experiments', "trait_tags": {'Lab-Research': 1.0, 'Analytical-Skill': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 4972, "option_text": 'Developing solutions to Filipino health problems', "trait_tags": {'Lab-Research': 0.9, 'Public-Health': 0.5, 'Community-Serve': 0.3}},
+            {"option_id": 4973, "option_text": 'Publishing research papers in scientific journals', "trait_tags": {'Lab-Research': 0.9, 'Analytical-Skill': 0.4, 'Teaching-Ed': 0.3}},
+            {"option_id": 4974, "option_text": 'Working with precision instruments and technology', "trait_tags": {'Lab-Research': 0.9, 'Technical-Skill': 0.5, 'Hardware-Systems': 0.3}},
+            {"option_id": 4975, "option_text": 'Collaborating with international research teams', "trait_tags": {'Lab-Research': 0.9, 'People-Skill': 0.4, 'Community-Serve': 0.3}},
+            {"option_id": 4976, "option_text": 'Creating practical products from research findings', "trait_tags": {'Lab-Research': 0.8, 'Startup-Venture': 0.4, 'Industrial-Ops': 0.4}},
+        ]
+    },
+    {
+        "question_id": 609,
+        "question_text": 'What field research environment would you choose?',
+"category": "Interest - Field Research",
+        "weight": 1.5,
+        "trait_tags": {'Field-Research': 0.9},
+        "options": [
+            {"option_id": 4977, "option_text": 'Marine ecosystems and coral reef surveys', "trait_tags": {'Field-Research': 0.9, 'Environmental-Sci': 0.5, 'Maritime-Sea': 0.3}},
+            {"option_id": 4978, "option_text": 'Rainforest biodiversity documentation', "trait_tags": {'Field-Research': 1.0, 'Environmental-Sci': 0.5, 'Agri-Nature': 0.3}},
+            {"option_id": 4979, "option_text": 'Volcanic and geological field studies', "trait_tags": {'Field-Research': 0.9, 'Environmental-Sci': 0.4, 'Physical-Skill': 0.3}},
+            {"option_id": 4980, "option_text": 'Agricultural crop and soil field trials', "trait_tags": {'Field-Research': 0.9, 'Agri-Nature': 0.5, 'Lab-Research': 0.3}},
+            {"option_id": 4981, "option_text": 'Community health field surveys', "trait_tags": {'Field-Research': 0.9, 'Public-Health': 0.5, 'Community-Serve': 0.3}},
+            {"option_id": 4982, "option_text": 'Archaeological and cultural site documentation', "trait_tags": {'Field-Research': 0.9, 'Creative-Skill': 0.3, 'Teaching-Ed': 0.3}},
+        ]
+    },
+    {
+        "question_id": 610,
+        "question_text": 'What field research skill would you develop?',
+"category": "Interest - Field Research",
+        "weight": 1.5,
+        "trait_tags": {'Field-Research': 0.9, 'Physical-Skill': 0.3},
+        "options": [
+            {"option_id": 4983, "option_text": 'GPS mapping and spatial data collection', "trait_tags": {'Field-Research': 1.0, 'Technical-Skill': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4984, "option_text": 'Wildlife tracking and population counting', "trait_tags": {'Field-Research': 0.9, 'Environmental-Sci': 0.5, 'Physical-Skill': 0.3}},
+            {"option_id": 4985, "option_text": 'Water and soil sampling techniques', "trait_tags": {'Field-Research': 0.9, 'Lab-Research': 0.5, 'Environmental-Sci': 0.3}},
+            {"option_id": 4986, "option_text": 'Interview and survey data gathering', "trait_tags": {'Field-Research': 0.9, 'People-Skill': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 4987, "option_text": 'Drone operation for aerial surveying', "trait_tags": {'Field-Research': 0.9, 'Technical-Skill': 0.5, 'Hardware-Systems': 0.3}},
+            {"option_id": 4988, "option_text": 'Specimen collection and preservation', "trait_tags": {'Field-Research': 1.0, 'Lab-Research': 0.5, 'Physical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 611,
+        "question_text": 'Where in the Philippines would you do fieldwork?',
+"category": "Interest - Field Research",
+        "weight": 1.5,
+        "trait_tags": {'Field-Research': 0.9},
+        "options": [
+            {"option_id": 4989, "option_text": 'Tubbataha Reef marine protected area', "trait_tags": {'Field-Research': 1.0, 'Environmental-Sci': 0.5, 'Maritime-Sea': 0.3}},
+            {"option_id": 4990, "option_text": 'Sierra Madre mountain biodiversity study', "trait_tags": {'Field-Research': 0.9, 'Environmental-Sci': 0.5, 'Physical-Skill': 0.3}},
+            {"option_id": 4991, "option_text": 'Rice terraces agricultural research station', "trait_tags": {'Field-Research': 0.9, 'Agri-Nature': 0.5, 'Community-Serve': 0.3}},
+            {"option_id": 4992, "option_text": 'Manila Bay environmental monitoring', "trait_tags": {'Field-Research': 0.9, 'Environmental-Eng': 0.4, 'Environmental-Sci': 0.4}},
+            {"option_id": 4993, "option_text": 'Rural community health survey site', "trait_tags": {'Field-Research': 0.9, 'Public-Health': 0.5, 'Community-Serve': 0.3}},
+            {"option_id": 4994, "option_text": 'Taal Volcano geological monitoring station', "trait_tags": {'Field-Research': 0.9, 'Environmental-Sci': 0.4, 'Technical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 612,
+        "question_text": 'What environmental science topic interests you?',
+"category": "Interest - Environmental Science",
+        "weight": 1.5,
+        "trait_tags": {'Environmental-Sci': 0.9},
+        "options": [
+            {"option_id": 4995, "option_text": 'Climate change impacts on Philippine ecosystems', "trait_tags": {'Environmental-Sci': 1.0, 'Field-Research': 0.4, 'Data-Analytics': 0.3}},
+            {"option_id": 4996, "option_text": 'Marine conservation and reef protection', "trait_tags": {'Environmental-Sci': 0.9, 'Maritime-Sea': 0.4, 'Field-Research': 0.4}},
+            {"option_id": 4997, "option_text": 'Biodiversity conservation and endangered species', "trait_tags": {'Environmental-Sci': 0.9, 'Field-Research': 0.5, 'Community-Serve': 0.3}},
+            {"option_id": 4998, "option_text": 'Air and water pollution monitoring', "trait_tags": {'Environmental-Sci': 0.9, 'Environmental-Eng': 0.5, 'Lab-Research': 0.3}},
+            {"option_id": 4999, "option_text": 'Disaster risk reduction and resilience', "trait_tags": {'Environmental-Sci': 0.9, 'Community-Serve': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 5000, "option_text": 'Sustainable resource management', "trait_tags": {'Environmental-Sci': 1.0, 'Agri-Nature': 0.4, 'Environmental-Eng': 0.3}},
+        ]
+    },
+    {
+        "question_id": 613,
+        "question_text": 'What environmental career path appeals to you?',
+"category": "Career - Environmental Science",
+        "weight": 1.5,
+        "trait_tags": {'Environmental-Sci': 0.9},
+        "options": [
+            {"option_id": 5001, "option_text": 'DENR environmental management specialist', "trait_tags": {'Environmental-Sci': 1.0, 'Admin-Skill': 0.4, 'Law-Enforce': 0.3}},
+            {"option_id": 5002, "option_text": 'Wildlife biologist studying Philippine fauna', "trait_tags": {'Environmental-Sci': 0.9, 'Field-Research': 0.5, 'Lab-Research': 0.3}},
+            {"option_id": 5003, "option_text": 'Climate researcher analyzing weather data', "trait_tags": {'Environmental-Sci': 0.9, 'Data-Analytics': 0.5, 'Lab-Research': 0.3}},
+            {"option_id": 5004, "option_text": 'Environmental consultant for projects', "trait_tags": {'Environmental-Sci': 0.9, 'Environmental-Eng': 0.4, 'Startup-Venture': 0.3}},
+            {"option_id": 5005, "option_text": 'Sustainability officer at a corporation', "trait_tags": {'Environmental-Sci': 0.9, 'Admin-Skill': 0.5, 'Industrial-Ops': 0.3}},
+            {"option_id": 5006, "option_text": 'Environmental educator and advocate', "trait_tags": {'Environmental-Sci': 0.9, 'Teaching-Ed': 0.5, 'Community-Serve': 0.4}},
+        ]
+    },
+    {
+        "question_id": 614,
+        "question_text": 'What environmental research method interests you?',
+"category": "Interest - Environmental Science",
+        "weight": 1.5,
+        "trait_tags": {'Environmental-Sci': 0.9, 'Lab-Research': 0.3},
+        "options": [
+            {"option_id": 5007, "option_text": 'Remote sensing and satellite image analysis', "trait_tags": {'Environmental-Sci': 0.9, 'Data-Analytics': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 5008, "option_text": 'Water quality laboratory testing', "trait_tags": {'Environmental-Sci': 0.9, 'Lab-Research': 0.5, 'Medical-Lab': 0.3}},
+            {"option_id": 5009, "option_text": 'Ecological field transect surveys', "trait_tags": {'Environmental-Sci': 1.0, 'Field-Research': 0.5, 'Physical-Skill': 0.3}},
+            {"option_id": 5010, "option_text": 'Environmental DNA (eDNA) sampling', "trait_tags": {'Environmental-Sci': 0.9, 'Lab-Research': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 5011, "option_text": 'Carbon footprint calculation and modeling', "trait_tags": {'Environmental-Sci': 0.9, 'Data-Analytics': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 5012, "option_text": 'Geographic Information Systems (GIS) mapping', "trait_tags": {'Environmental-Sci': 1.0, 'Data-Analytics': 0.5, 'Technical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 615,
+        "question_text": 'What food science area interests you most?',
+"category": "Interest - Food Science",
+        "weight": 1.5,
+        "trait_tags": {'Food-Science': 0.9},
+        "options": [
+            {"option_id": 5013, "option_text": 'Food product development and innovation', "trait_tags": {'Food-Science': 1.0, 'Creative-Skill': 0.4, 'Lab-Research': 0.3}},
+            {"option_id": 5014, "option_text": 'Food safety and quality assurance', "trait_tags": {'Food-Science': 0.9, 'Lab-Research': 0.5, 'Industrial-Ops': 0.3}},
+            {"option_id": 5015, "option_text": 'Food microbiology and preservation', "trait_tags": {'Food-Science': 0.9, 'Lab-Research': 0.5, 'Environmental-Sci': 0.3}},
+            {"option_id": 5016, "option_text": 'Sensory evaluation and taste testing', "trait_tags": {'Food-Science': 0.9, 'Analytical-Skill': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 5017, "option_text": 'Food processing technology and equipment', "trait_tags": {'Food-Science': 0.9, 'Industrial-Ops': 0.5, 'Mechanical-Design': 0.3}},
+            {"option_id": 5018, "option_text": 'Nutritional analysis and labeling', "trait_tags": {'Food-Science': 0.9, 'Nutrition-Diet': 0.5, 'Analytical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 616,
+        "question_text": 'What food product would you develop?',
+"category": "Interest - Food Science",
+        "weight": 1.5,
+        "trait_tags": {'Food-Science': 0.9, 'Creative-Skill': 0.3},
+        "options": [
+            {"option_id": 5019, "option_text": 'Healthy snack from local Filipino ingredients', "trait_tags": {'Food-Science': 1.0, 'Nutrition-Diet': 0.5, 'Agri-Nature': 0.3}},
+            {"option_id": 5020, "option_text": 'Plant-based meat or dairy alternative', "trait_tags": {'Food-Science': 0.9, 'Lab-Research': 0.4, 'Environmental-Sci': 0.3}},
+            {"option_id": 5021, "option_text": 'Shelf-stable emergency food for disasters', "trait_tags": {'Food-Science': 0.9, 'Community-Serve': 0.4, 'Industrial-Ops': 0.3}},
+            {"option_id": 5022, "option_text": 'Fermented food with probiotic benefits', "trait_tags": {'Food-Science': 0.9, 'Lab-Research': 0.5, 'Nutrition-Diet': 0.3}},
+            {"option_id": 5023, "option_text": 'Functional food enriched with vitamins', "trait_tags": {'Food-Science': 1.0, 'Nutrition-Diet': 0.5, 'Pharmacy': 0.3}},
+            {"option_id": 5024, "option_text": 'Traditional Filipino delicacy scaled for export', "trait_tags": {'Food-Science': 0.9, 'Culinary-Arts': 0.5, 'Marketing-Sales': 0.3}},
+        ]
+    },
+    {
+        "question_id": 617,
+        "question_text": 'Where would you work in food science?',
+"category": "Interest - Food Science",
+        "weight": 1.5,
+        "trait_tags": {'Food-Science': 0.9},
+        "options": [
+            {"option_id": 5025, "option_text": 'Food manufacturing company R&D lab', "trait_tags": {'Food-Science': 1.0, 'Lab-Research': 0.5, 'Industrial-Ops': 0.3}},
+            {"option_id": 5026, "option_text": 'FDA Philippines food testing laboratory', "trait_tags": {'Food-Science': 0.9, 'Lab-Research': 0.5, 'Legal-Practice': 0.3}},
+            {"option_id": 5027, "option_text": 'University food technology department', "trait_tags": {'Food-Science': 0.9, 'Teaching-Ed': 0.4, 'Lab-Research': 0.4}},
+            {"option_id": 5028, "option_text": 'Restaurant chain recipe development', "trait_tags": {'Food-Science': 0.9, 'Culinary-Arts': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 5029, "option_text": 'Agricultural processing cooperative', "trait_tags": {'Food-Science': 0.9, 'Agri-Nature': 0.5, 'Community-Serve': 0.3}},
+            {"option_id": 5030, "option_text": 'Food safety consulting firm', "trait_tags": {'Food-Science': 0.9, 'Startup-Venture': 0.4, 'Analytical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 618,
+        "question_text": 'What forensic science specialization interests you?',
+"category": "Interest - Forensic Science",
+        "weight": 1.5,
+        "trait_tags": {'Forensic-Sci': 0.9},
+        "options": [
+            {"option_id": 5031, "option_text": 'DNA evidence analysis and profiling', "trait_tags": {'Forensic-Sci': 1.0, 'Lab-Research': 0.5, 'Medical-Lab': 0.3}},
+            {"option_id": 5032, "option_text": 'Crime scene investigation and evidence collection', "trait_tags": {'Forensic-Sci': 0.9, 'Law-Enforce': 0.5, 'Field-Research': 0.3}},
+            {"option_id": 5033, "option_text": 'Toxicology and drug testing', "trait_tags": {'Forensic-Sci': 0.9, 'Pharmacy': 0.4, 'Lab-Research': 0.4}},
+            {"option_id": 5034, "option_text": 'Digital forensics and cyber investigation', "trait_tags": {'Forensic-Sci': 0.9, 'Cyber-Defense': 0.5, 'Software-Dev': 0.3}},
+            {"option_id": 5035, "option_text": 'Forensic accounting and fraud investigation', "trait_tags": {'Forensic-Sci': 0.9, 'Finance-Acct': 0.5, 'Law-Enforce': 0.3}},
+            {"option_id": 5036, "option_text": 'Ballistics and firearms examination', "trait_tags": {'Forensic-Sci': 1.0, 'Law-Enforce': 0.5, 'Physical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 619,
+        "question_text": 'What forensic lab technique would you learn?',
+"category": "Interest - Forensic Science",
+        "weight": 1.5,
+        "trait_tags": {'Forensic-Sci': 0.9, 'Lab-Research': 0.3},
+        "options": [
+            {"option_id": 5037, "option_text": 'Fingerprint analysis and comparison', "trait_tags": {'Forensic-Sci': 1.0, 'Analytical-Skill': 0.5, 'Law-Enforce': 0.3}},
+            {"option_id": 5038, "option_text": 'Blood pattern analysis and reconstruction', "trait_tags": {'Forensic-Sci': 0.9, 'Medical-Lab': 0.4, 'Analytical-Skill': 0.4}},
+            {"option_id": 5039, "option_text": 'Trace evidence fiber and hair analysis', "trait_tags": {'Forensic-Sci': 0.9, 'Lab-Research': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 5040, "option_text": 'Document examination and forgery detection', "trait_tags": {'Forensic-Sci': 0.9, 'Analytical-Skill': 0.5, 'Legal-Practice': 0.3}},
+            {"option_id": 5041, "option_text": 'Forensic photography and documentation', "trait_tags": {'Forensic-Sci': 0.9, 'Visual-Design': 0.4, 'Digital-Media': 0.3}},
+            {"option_id": 5042, "option_text": 'Anthropological identification of remains', "trait_tags": {'Forensic-Sci': 1.0, 'Lab-Research': 0.5, 'Field-Research': 0.3}},
+        ]
+    },
+    {
+        "question_id": 620,
+        "question_text": 'Where would you apply forensic science?',
+"category": "Interest - Forensic Science",
+        "weight": 1.5,
+        "trait_tags": {'Forensic-Sci': 0.9},
+        "options": [
+            {"option_id": 5043, "option_text": 'NBI crime laboratory', "trait_tags": {'Forensic-Sci': 1.0, 'Law-Enforce': 0.5, 'Lab-Research': 0.3}},
+            {"option_id": 5044, "option_text": 'PNP forensics and crime scene unit', "trait_tags": {'Forensic-Sci': 0.9, 'Law-Enforce': 0.5, 'Field-Research': 0.3}},
+            {"option_id": 5045, "option_text": 'Private forensic consulting firm', "trait_tags": {'Forensic-Sci': 0.9, 'Startup-Venture': 0.4, 'Legal-Practice': 0.3}},
+            {"option_id": 5046, "option_text": 'Hospital forensic pathology department', "trait_tags": {'Forensic-Sci': 0.9, 'Patient-Care': 0.4, 'Medical-Lab': 0.4}},
+            {"option_id": 5047, "option_text": 'Digital forensics for corporate investigations', "trait_tags": {'Forensic-Sci': 0.9, 'Cyber-Defense': 0.5, 'Software-Dev': 0.3}},
+            {"option_id": 5048, "option_text": 'Academic forensic science research', "trait_tags": {'Forensic-Sci': 0.9, 'Lab-Research': 0.5, 'Teaching-Ed': 0.3}},
+        ]
+    },
+    {
+        "question_id": 621,
+        "question_text": 'What would you most enjoy teaching?',
+"category": "Interest - Teaching & Education",
+        "weight": 1.5,
+        "trait_tags": {'Teaching-Ed': 0.9},
+        "options": [
+            {"option_id": 5049, "option_text": 'Science experiments and lab activities', "trait_tags": {'Teaching-Ed': 0.9, 'Lab-Research': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 5050, "option_text": 'Mathematics and problem-solving strategies', "trait_tags": {'Teaching-Ed': 0.9, 'Analytical-Skill': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 5051, "option_text": 'English language and literature', "trait_tags": {'Teaching-Ed': 1.0, 'Creative-Skill': 0.4, 'People-Skill': 0.3}},
+            {"option_id": 5052, "option_text": 'Physical education and sports', "trait_tags": {'Teaching-Ed': 0.9, 'Sports-Ed': 0.5, 'Physical-Skill': 0.3}},
+            {"option_id": 5053, "option_text": 'ICT and computer literacy skills', "trait_tags": {'Teaching-Ed': 0.9, 'Technical-Skill': 0.5, 'Software-Dev': 0.3}},
+            {"option_id": 5054, "option_text": 'Values education and social-emotional learning', "trait_tags": {'Teaching-Ed': 0.9, 'Counseling': 0.5, 'Community-Serve': 0.3}},
+        ]
+    },
+    {
+        "question_id": 622,
+        "question_text": 'Which teaching approach appeals to you?',
+"category": "Interest - Teaching & Education",
+        "weight": 1.5,
+        "trait_tags": {'Teaching-Ed': 0.9, 'Creative-Skill': 0.3},
+        "options": [
+            {"option_id": 5055, "option_text": 'Project-based learning with real-world problems', "trait_tags": {'Teaching-Ed': 1.0, 'Analytical-Skill': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 5056, "option_text": 'Gamification and interactive digital lessons', "trait_tags": {'Teaching-Ed': 0.9, 'Game-Dev': 0.4, 'Software-Dev': 0.3}},
+            {"option_id": 5057, "option_text": 'Outdoor and experiential field learning', "trait_tags": {'Teaching-Ed': 0.9, 'Field-Research': 0.5, 'Physical-Skill': 0.3}},
+            {"option_id": 5058, "option_text": 'One-on-one mentoring and tutoring', "trait_tags": {'Teaching-Ed': 0.9, 'People-Skill': 0.5, 'Counseling': 0.3}},
+            {"option_id": 5059, "option_text": 'Collaborative group learning activities', "trait_tags": {'Teaching-Ed': 0.9, 'People-Skill': 0.5, 'Community-Serve': 0.3}},
+            {"option_id": 5060, "option_text": 'Flipped classroom with video content', "trait_tags": {'Teaching-Ed': 0.9, 'Digital-Media': 0.5, 'Creative-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 623,
+        "question_text": 'Where would you teach in the Philippines?',
+"category": "Interest - Teaching & Education",
+        "weight": 1.5,
+        "trait_tags": {'Teaching-Ed': 0.9},
+        "options": [
+            {"option_id": 5061, "option_text": 'Public elementary school in a rural area', "trait_tags": {'Teaching-Ed': 1.0, 'Community-Serve': 0.5, 'Social-Work': 0.3}},
+            {"option_id": 5062, "option_text": 'Private high school with modern facilities', "trait_tags": {'Teaching-Ed': 0.9, 'Technical-Skill': 0.3, 'Admin-Skill': 0.3}},
+            {"option_id": 5063, "option_text": 'University or college institution', "trait_tags": {'Teaching-Ed': 0.9, 'Lab-Research': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 5064, "option_text": 'Technical-vocational training center (TESDA)', "trait_tags": {'Teaching-Ed': 0.9, 'Technical-Skill': 0.5, 'Industrial-Ops': 0.3}},
+            {"option_id": 5065, "option_text": 'Online education platform reaching all Filipinos', "trait_tags": {'Teaching-Ed': 0.9, 'Digital-Media': 0.5, 'Software-Dev': 0.3}},
+            {"option_id": 5066, "option_text": 'Special education school for differently-abled', "trait_tags": {'Teaching-Ed': 0.9, 'Rehab-Therapy': 0.4, 'Counseling': 0.4}},
+        ]
+    },
+    {
+        "question_id": 624,
+        "question_text": 'What education leadership role would you pursue?',
+"category": "Interest - Teaching & Education",
+        "weight": 1.5,
+        "trait_tags": {'Teaching-Ed': 0.9, 'Admin-Skill': 0.3},
+        "options": [
+            {"option_id": 5067, "option_text": 'School principal managing faculty and programs', "trait_tags": {'Teaching-Ed': 1.0, 'Admin-Skill': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 5068, "option_text": 'Curriculum developer for DepEd', "trait_tags": {'Teaching-Ed': 0.9, 'Analytical-Skill': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 5069, "option_text": 'Education technology specialist', "trait_tags": {'Teaching-Ed': 0.9, 'Software-Dev': 0.4, 'Technical-Skill': 0.4}},
+            {"option_id": 5070, "option_text": 'Guidance counselor and student affairs', "trait_tags": {'Teaching-Ed': 0.9, 'Counseling': 0.5, 'People-Skill': 0.4}},
+            {"option_id": 5071, "option_text": 'Education researcher and policy advisor', "trait_tags": {'Teaching-Ed': 0.9, 'Data-Analytics': 0.4, 'Legal-Practice': 0.3}},
+            {"option_id": 5072, "option_text": 'Teacher training and professional development', "trait_tags": {'Teaching-Ed': 1.0, 'People-Skill': 0.5, 'Admin-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 625,
+        "question_text": 'What community service area motivates you?',
+"category": "Interest - Community Service",
+        "weight": 1.5,
+        "trait_tags": {'Community-Serve': 0.9},
+        "options": [
+            {"option_id": 5073, "option_text": 'Disaster relief and emergency response', "trait_tags": {'Community-Serve': 1.0, 'Physical-Skill': 0.4, 'People-Skill': 0.3}},
+            {"option_id": 5074, "option_text": 'Youth development and empowerment programs', "trait_tags": {'Community-Serve': 0.9, 'Teaching-Ed': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 5075, "option_text": 'Environmental cleanup and conservation', "trait_tags": {'Community-Serve': 0.9, 'Environmental-Sci': 0.5, 'Physical-Skill': 0.3}},
+            {"option_id": 5076, "option_text": 'Healthcare outreach in underserved areas', "trait_tags": {'Community-Serve': 0.9, 'Public-Health': 0.5, 'Patient-Care': 0.3}},
+            {"option_id": 5077, "option_text": 'Livelihood training for out-of-school youth', "trait_tags": {'Community-Serve': 0.9, 'Teaching-Ed': 0.5, 'Startup-Venture': 0.3}},
+            {"option_id": 5078, "option_text": "Advocacy for indigenous peoples' rights", "trait_tags": {'Community-Serve': 0.9, 'Legal-Practice': 0.4, 'Social-Work': 0.4}},
+        ]
+    },
+    {
+        "question_id": 626,
+        "question_text": 'What community development approach appeals to you?',
+"category": "Interest - Community Service",
+        "weight": 1.5,
+        "trait_tags": {'Community-Serve': 0.9, 'People-Skill': 0.3},
+        "options": [
+            {"option_id": 5079, "option_text": 'Grassroots organizing and barangay engagement', "trait_tags": {'Community-Serve': 1.0, 'People-Skill': 0.5, 'Social-Work': 0.3}},
+            {"option_id": 5080, "option_text": 'Grant writing and NGO fundraising', "trait_tags": {'Community-Serve': 0.9, 'Finance-Acct': 0.4, 'Marketing-Sales': 0.3}},
+            {"option_id": 5081, "option_text": 'Volunteer coordination and management', "trait_tags": {'Community-Serve': 0.9, 'Admin-Skill': 0.5, 'People-Skill': 0.4}},
+            {"option_id": 5082, "option_text": 'Community needs assessment and research', "trait_tags": {'Community-Serve': 0.9, 'Data-Analytics': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 5083, "option_text": 'Building partnerships with local government', "trait_tags": {'Community-Serve': 0.9, 'People-Skill': 0.5, 'Legal-Practice': 0.3}},
+            {"option_id": 5084, "option_text": 'Social enterprise development for communities', "trait_tags": {'Community-Serve': 0.8, 'Startup-Venture': 0.5, 'Finance-Acct': 0.3}},
+        ]
+    },
+    {
+        "question_id": 627,
+        "question_text": 'Where would you serve your community?',
+"category": "Interest - Community Service",
+        "weight": 1.5,
+        "trait_tags": {'Community-Serve': 0.9},
+        "options": [
+            {"option_id": 5085, "option_text": 'Local government unit (LGU) planning office', "trait_tags": {'Community-Serve': 1.0, 'Admin-Skill': 0.5, 'Legal-Practice': 0.3}},
+            {"option_id": 5086, "option_text": 'International NGO like Red Cross or Habitat', "trait_tags": {'Community-Serve': 0.9, 'People-Skill': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 5087, "option_text": 'DSWD social welfare programs', "trait_tags": {'Community-Serve': 0.9, 'Social-Work': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 5088, "option_text": 'Peace Corps or volunteer service abroad', "trait_tags": {'Community-Serve': 0.9, 'People-Skill': 0.4, 'Teaching-Ed': 0.3}},
+            {"option_id": 5089, "option_text": 'Church or religious organization outreach', "trait_tags": {'Community-Serve': 0.9, 'People-Skill': 0.5, 'Counseling': 0.3}},
+            {"option_id": 5090, "option_text": 'Community cooperative or livelihood project', "trait_tags": {'Community-Serve': 0.9, 'Startup-Venture': 0.4, 'Finance-Acct': 0.3}},
+        ]
+    },
+    {
+        "question_id": 628,
+        "question_text": 'What social work practice area interests you?',
+"category": "Interest - Social Work",
+        "weight": 1.5,
+        "trait_tags": {'Social-Work': 0.9},
+        "options": [
+            {"option_id": 5091, "option_text": 'Child welfare and protection services', "trait_tags": {'Social-Work': 1.0, 'Counseling': 0.4, 'Legal-Practice': 0.3}},
+            {"option_id": 5092, "option_text": 'Medical social work in hospitals', "trait_tags": {'Social-Work': 0.9, 'Patient-Care': 0.5, 'Health-Admin': 0.3}},
+            {"option_id": 5093, "option_text": 'School social work and student support', "trait_tags": {'Social-Work': 0.9, 'Teaching-Ed': 0.5, 'Counseling': 0.3}},
+            {"option_id": 5094, "option_text": 'Community organizing and development', "trait_tags": {'Social-Work': 0.9, 'Community-Serve': 0.5, 'People-Skill': 0.4}},
+            {"option_id": 5095, "option_text": 'Disaster response and crisis social work', "trait_tags": {'Social-Work': 0.9, 'Community-Serve': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 5096, "option_text": 'Correctional and rehabilitation social work', "trait_tags": {'Social-Work': 0.9, 'Law-Enforce': 0.4, 'Counseling': 0.3}},
+        ]
+    },
+    {
+        "question_id": 629,
+        "question_text": 'Which vulnerable population would you serve?',
+"category": "Interest - Social Work",
+        "weight": 1.5,
+        "trait_tags": {'Social-Work': 0.9, 'People-Skill': 0.3},
+        "options": [
+            {"option_id": 5097, "option_text": 'Abused and neglected children', "trait_tags": {'Social-Work': 1.0, 'Counseling': 0.5, 'Legal-Practice': 0.3}},
+            {"option_id": 5098, "option_text": 'Persons with disabilities seeking support', "trait_tags": {'Social-Work': 0.9, 'Rehab-Therapy': 0.4, 'Community-Serve': 0.3}},
+            {"option_id": 5099, "option_text": 'Homeless and street-connected individuals', "trait_tags": {'Social-Work': 0.9, 'Community-Serve': 0.5, 'Public-Health': 0.3}},
+            {"option_id": 5100, "option_text": 'Overseas Filipino worker families', "trait_tags": {'Social-Work': 0.9, 'Counseling': 0.5, 'People-Skill': 0.4}},
+            {"option_id": 5101, "option_text": 'Senior citizens needing care and support', "trait_tags": {'Social-Work': 0.9, 'Patient-Care': 0.5, 'Counseling': 0.3}},
+            {"option_id": 5102, "option_text": 'Indigenous communities facing displacement', "trait_tags": {'Social-Work': 0.9, 'Community-Serve': 0.5, 'Legal-Practice': 0.3}},
+        ]
+    },
+    {
+        "question_id": 630,
+        "question_text": 'Which law enforcement specialization appeals to you?',
+"category": "Interest - Law Enforcement",
+        "weight": 1.5,
+        "trait_tags": {'Law-Enforce': 0.9},
+        "options": [
+            {"option_id": 5103, "option_text": 'Criminal investigation and detective work', "trait_tags": {'Law-Enforce': 1.0, 'Forensic-Sci': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 5104, "option_text": 'Cybercrime prevention and digital policing', "trait_tags": {'Law-Enforce': 0.9, 'Cyber-Defense': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 5105, "option_text": 'Drug enforcement and anti-narcotics', "trait_tags": {'Law-Enforce': 0.9, 'Forensic-Sci': 0.4, 'Physical-Skill': 0.3}},
+            {"option_id": 5106, "option_text": 'Traffic management and road safety', "trait_tags": {'Law-Enforce': 0.9, 'Admin-Skill': 0.4, 'Community-Serve': 0.3}},
+            {"option_id": 5107, "option_text": 'Intelligence and counter-terrorism', "trait_tags": {'Law-Enforce': 1.0, 'Analytical-Skill': 0.5, 'Physical-Skill': 0.3}},
+            {"option_id": 5108, "option_text": 'Community policing and public relations', "trait_tags": {'Law-Enforce': 0.9, 'People-Skill': 0.5, 'Community-Serve': 0.4}},
+        ]
+    },
+    {
+        "question_id": 631,
+        "question_text": 'What law enforcement skill would you develop?',
+"category": "Interest - Law Enforcement",
+        "weight": 1.5,
+        "trait_tags": {'Law-Enforce': 0.9, 'Physical-Skill': 0.3},
+        "options": [
+            {"option_id": 5109, "option_text": 'Crime scene processing and evidence handling', "trait_tags": {'Law-Enforce': 1.0, 'Forensic-Sci': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 5110, "option_text": 'Interview and interrogation techniques', "trait_tags": {'Law-Enforce': 0.9, 'People-Skill': 0.5, 'Counseling': 0.3}},
+            {"option_id": 5111, "option_text": 'Emergency response and crisis management', "trait_tags": {'Law-Enforce': 0.9, 'Physical-Skill': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 5112, "option_text": 'Report writing and case documentation', "trait_tags": {'Law-Enforce': 0.9, 'Admin-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 5113, "option_text": 'Surveillance and undercover operations', "trait_tags": {'Law-Enforce': 0.9, 'Technical-Skill': 0.4, 'Physical-Skill': 0.4}},
+            {"option_id": 5114, "option_text": 'Firearms proficiency and tactical training', "trait_tags": {'Law-Enforce': 1.0, 'Physical-Skill': 0.5, 'Technical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 632,
+        "question_text": 'What law enforcement career path attracts you?',
+"category": "Career - Law Enforcement",
+        "weight": 1.5,
+        "trait_tags": {'Law-Enforce': 0.9},
+        "options": [
+            {"option_id": 5115, "option_text": 'PNP officer rising through the ranks', "trait_tags": {'Law-Enforce': 1.0, 'People-Skill': 0.4, 'Admin-Skill': 0.3}},
+            {"option_id": 5116, "option_text": 'NBI special agent and investigator', "trait_tags": {'Law-Enforce': 0.9, 'Forensic-Sci': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 5117, "option_text": 'Philippine Coast Guard officer', "trait_tags": {'Law-Enforce': 0.9, 'Maritime-Sea': 0.5, 'Physical-Skill': 0.3}},
+            {"option_id": 5118, "option_text": 'PDEA anti-drug enforcement agent', "trait_tags": {'Law-Enforce': 0.9, 'Physical-Skill': 0.4, 'Forensic-Sci': 0.3}},
+            {"option_id": 5119, "option_text": 'Bureau of Fire Protection officer', "trait_tags": {'Law-Enforce': 0.9, 'Physical-Skill': 0.5, 'Community-Serve': 0.3}},
+            {"option_id": 5120, "option_text": 'Criminology professor and researcher', "trait_tags": {'Law-Enforce': 0.8, 'Teaching-Ed': 0.5, 'Lab-Research': 0.3}},
+        ]
+    },
+    {
+        "question_id": 633,
+        "question_text": 'What area of law interests you most?',
+"category": "Interest - Legal Practice",
+        "weight": 1.5,
+        "trait_tags": {'Legal-Practice': 0.9},
+        "options": [
+            {"option_id": 5121, "option_text": 'Criminal law and prosecution/defense', "trait_tags": {'Legal-Practice': 1.0, 'Law-Enforce': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 5122, "option_text": 'Corporate and business law', "trait_tags": {'Legal-Practice': 0.9, 'Finance-Acct': 0.4, 'Admin-Skill': 0.3}},
+            {"option_id": 5123, "option_text": 'Family law and custody matters', "trait_tags": {'Legal-Practice': 0.9, 'Counseling': 0.4, 'Social-Work': 0.3}},
+            {"option_id": 5124, "option_text": 'Labor and employment law', "trait_tags": {'Legal-Practice': 0.9, 'HR-Management': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 5125, "option_text": 'Environmental and mining law', "trait_tags": {'Legal-Practice': 0.3, 'Environmental-Sci': 0.4}},
+            {"option_id": 5126, "option_text": 'Intellectual property and technology law', "trait_tags": {'Legal-Practice': 0.9, 'Technical-Skill': 0.4, 'Software-Dev': 0.3}},
+        ]
+    },
+    {
+        "question_id": 634,
+        "question_text": 'What legal career path appeals to you?',
+"category": "Career - Legal Practice",
+        "weight": 1.5,
+        "trait_tags": {'Legal-Practice': 0.9, 'People-Skill': 0.3},
+        "options": [
+            {"option_id": 5127, "option_text": 'Trial lawyer arguing cases in court', "trait_tags": {'Legal-Practice': 1.0, 'People-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 5128, "option_text": 'Public attorney helping indigent Filipinos', "trait_tags": {'Legal-Practice': 0.9, 'Community-Serve': 0.5, 'Social-Work': 0.3}},
+            {"option_id": 5129, "option_text": 'Corporate legal counsel for a company', "trait_tags": {'Legal-Practice': 0.9, 'Admin-Skill': 0.5, 'Finance-Acct': 0.3}},
+            {"option_id": 5130, "option_text": 'Judge or magistrate in the judiciary', "trait_tags": {'Legal-Practice': 1.0, 'Analytical-Skill': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 5131, "option_text": 'Legal researcher and law professor', "trait_tags": {'Legal-Practice': 0.9, 'Teaching-Ed': 0.5, 'Lab-Research': 0.3}},
+            {"option_id": 5132, "option_text": 'Mediator and alternative dispute resolution', "trait_tags": {'Legal-Practice': 0.9, 'Counseling': 0.5, 'People-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 635,
+        "question_text": 'What legal skill would you prioritize?',
+"category": "Interest - Legal Practice",
+        "weight": 1.5,
+        "trait_tags": {'Legal-Practice': 0.9, 'Analytical-Skill': 0.3},
+        "options": [
+            {"option_id": 5133, "option_text": 'Legal research and case analysis', "trait_tags": {'Legal-Practice': 1.0, 'Analytical-Skill': 0.5, 'Lab-Research': 0.3}},
+            {"option_id": 5134, "option_text": 'Contract drafting and negotiation', "trait_tags": {'Legal-Practice': 0.9, 'People-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 5135, "option_text": 'Courtroom advocacy and oral argument', "trait_tags": {'Legal-Practice': 0.9, 'People-Skill': 0.5, 'Performing-Arts': 0.3}},
+            {"option_id": 5136, "option_text": 'Regulatory compliance and auditing', "trait_tags": {'Legal-Practice': 0.9, 'Admin-Skill': 0.5, 'Finance-Acct': 0.3}},
+            {"option_id": 5137, "option_text": 'Legal writing and memorandum preparation', "trait_tags": {'Legal-Practice': 1.0, 'Analytical-Skill': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 5138, "option_text": 'Client counseling and case management', "trait_tags": {'Legal-Practice': 0.9, 'Counseling': 0.4, 'People-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 636,
+        "question_text": 'What hospitality management area excites you?',
+"category": "Interest - Hospitality",
+        "weight": 1.5,
+        "trait_tags": {'Hospitality-Svc': 0.9},
+        "options": [
+            {"option_id": 5139, "option_text": 'Hotel front office and guest relations', "trait_tags": {'Hospitality-Svc': 1.0, 'People-Skill': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 5140, "option_text": 'Food and beverage service management', "trait_tags": {'Hospitality-Svc': 0.9, 'Culinary-Arts': 0.4, 'Admin-Skill': 0.3}},
+            {"option_id": 5141, "option_text": 'Event and banquet coordination', "trait_tags": {'Hospitality-Svc': 0.9, 'Admin-Skill': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 5142, "option_text": 'Housekeeping and facility management', "trait_tags": {'Hospitality-Svc': 0.9, 'Admin-Skill': 0.5, 'Physical-Skill': 0.3}},
+            {"option_id": 5143, "option_text": 'Revenue management and room pricing', "trait_tags": {'Hospitality-Svc': 0.9, 'Finance-Acct': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 5144, "option_text": 'Resort and spa wellness operations', "trait_tags": {'Hospitality-Svc': 0.9, 'Rehab-Therapy': 0.3, 'People-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 637,
+        "question_text": 'What hospitality skill would you develop?',
+"category": "Interest - Hospitality",
+        "weight": 1.5,
+        "trait_tags": {'Hospitality-Svc': 0.9, 'People-Skill': 0.3},
+        "options": [
+            {"option_id": 5145, "option_text": 'Guest complaint resolution and service recovery', "trait_tags": {'Hospitality-Svc': 1.0, 'People-Skill': 0.5, 'Counseling': 0.3}},
+            {"option_id": 5146, "option_text": 'Reservation system and booking management', "trait_tags": {'Hospitality-Svc': 0.9, 'Technical-Skill': 0.4, 'Admin-Skill': 0.4}},
+            {"option_id": 5147, "option_text": 'Fine dining service and table management', "trait_tags": {'Hospitality-Svc': 0.9, 'Culinary-Arts': 0.4, 'People-Skill': 0.3}},
+            {"option_id": 5148, "option_text": 'Multilingual communication for foreign guests', "trait_tags": {'Hospitality-Svc': 0.9, 'People-Skill': 0.5, 'Tourism-Travel': 0.3}},
+            {"option_id": 5149, "option_text": 'Hospitality marketing and promotions', "trait_tags": {'Hospitality-Svc': 0.9, 'Marketing-Sales': 0.5, 'Digital-Media': 0.3}},
+            {"option_id": 5150, "option_text": 'Staff training and service excellence coaching', "trait_tags": {'Hospitality-Svc': 0.8, 'Teaching-Ed': 0.5, 'People-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 638,
+        "question_text": 'Where would you work in hospitality?',
+"category": "Interest - Hospitality",
+        "weight": 1.5,
+        "trait_tags": {'Hospitality-Svc': 0.9},
+        "options": [
+            {"option_id": 5151, "option_text": 'Five-star resort in Boracay or Palawan', "trait_tags": {'Hospitality-Svc': 1.0, 'Tourism-Travel': 0.4, 'People-Skill': 0.3}},
+            {"option_id": 5152, "option_text": 'International hotel chain management', "trait_tags": {'Hospitality-Svc': 0.9, 'Admin-Skill': 0.5, 'Finance-Acct': 0.3}},
+            {"option_id": 5153, "option_text": 'Cruise ship guest services', "trait_tags": {'Hospitality-Svc': 0.9, 'Maritime-Sea': 0.4, 'People-Skill': 0.4}},
+            {"option_id": 5154, "option_text": 'Airline cabin crew and in-flight service', "trait_tags": {'Hospitality-Svc': 0.9, 'Tourism-Travel': 0.4, 'Physical-Skill': 0.3}},
+            {"option_id": 5155, "option_text": 'Convention center and MICE operations', "trait_tags": {'Hospitality-Svc': 0.9, 'Admin-Skill': 0.5, 'Marketing-Sales': 0.3}},
+            {"option_id": 5156, "option_text": 'Eco-lodge or boutique hotel owner', "trait_tags": {'Hospitality-Svc': 0.9, 'Startup-Venture': 0.5, 'Environmental-Sci': 0.3}},
+        ]
+    },
+    {
+        "question_id": 639,
+        "question_text": 'What tourism sector excites you most?',
+"category": "Interest - Tourism & Travel",
+        "weight": 1.5,
+        "trait_tags": {'Tourism-Travel': 0.9},
+        "options": [
+            {"option_id": 5157, "option_text": 'Eco-tourism and sustainable travel', "trait_tags": {'Tourism-Travel': 1.0, 'Environmental-Sci': 0.5, 'Community-Serve': 0.3}},
+            {"option_id": 5158, "option_text": 'Cultural and heritage tourism', "trait_tags": {'Tourism-Travel': 0.9, 'Creative-Skill': 0.4, 'Teaching-Ed': 0.3}},
+            {"option_id": 5159, "option_text": 'Adventure tourism and outdoor activities', "trait_tags": {'Tourism-Travel': 0.9, 'Physical-Skill': 0.5, 'Sports-Ed': 0.3}},
+            {"option_id": 5160, "option_text": 'Medical and wellness tourism', "trait_tags": {'Tourism-Travel': 0.9, 'Patient-Care': 0.4, 'Hospitality-Svc': 0.3}},
+            {"option_id": 5161, "option_text": 'MICE (meetings, incentives, conventions)', "trait_tags": {'Tourism-Travel': 0.9, 'Admin-Skill': 0.5, 'Marketing-Sales': 0.3}},
+            {"option_id": 5162, "option_text": 'Food and culinary tourism tours', "trait_tags": {'Tourism-Travel': 0.9, 'Culinary-Arts': 0.5, 'Hospitality-Svc': 0.3}},
+        ]
+    },
+    {
+        "question_id": 640,
+        "question_text": 'What tourism marketing strategy would you use?',
+"category": "Interest - Tourism & Travel",
+        "weight": 1.5,
+        "trait_tags": {'Tourism-Travel': 0.9, 'Marketing-Sales': 0.3},
+        "options": [
+            {"option_id": 5163, "option_text": 'Social media travel content creation', "trait_tags": {'Tourism-Travel': 1.0, 'Digital-Media': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 5164, "option_text": 'Destination branding for Philippine provinces', "trait_tags": {'Tourism-Travel': 0.9, 'Marketing-Sales': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 5165, "option_text": 'Travel package bundling and pricing', "trait_tags": {'Tourism-Travel': 0.9, 'Finance-Acct': 0.4, 'Analytical-Skill': 0.3}},
+            {"option_id": 5166, "option_text": 'Partnership with DOT for national campaigns', "trait_tags": {'Tourism-Travel': 0.9, 'Admin-Skill': 0.4, 'Community-Serve': 0.3}},
+            {"option_id": 5167, "option_text": 'Online booking platform and website SEO', "trait_tags": {'Tourism-Travel': 0.9, 'Web-Dev': 0.5, 'Technical-Skill': 0.3}},
+            {"option_id": 5168, "option_text": 'Influencer and vlogger collaboration', "trait_tags": {'Tourism-Travel': 1.0, 'Digital-Media': 0.5, 'People-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 641,
+        "question_text": 'What Philippine tourism challenge would you solve?',
+"category": "Interest - Tourism & Travel",
+        "weight": 1.5,
+        "trait_tags": {'Tourism-Travel': 0.9, 'Community-Serve': 0.3},
+        "options": [
+            {"option_id": 5169, "option_text": 'Developing tourism in less-visited provinces', "trait_tags": {'Tourism-Travel': 1.0, 'Community-Serve': 0.5, 'Marketing-Sales': 0.3}},
+            {"option_id": 5170, "option_text": 'Protecting natural sites from over-tourism', "trait_tags": {'Tourism-Travel': 0.9, 'Environmental-Sci': 0.5, 'Community-Serve': 0.3}},
+            {"option_id": 5171, "option_text": 'Improving tourist safety and information', "trait_tags": {'Tourism-Travel': 0.9, 'Law-Enforce': 0.3, 'Admin-Skill': 0.3}},
+            {"option_id": 5172, "option_text": 'Training local communities for tourism jobs', "trait_tags": {'Tourism-Travel': 0.9, 'Teaching-Ed': 0.5, 'Community-Serve': 0.4}},
+            {"option_id": 5173, "option_text": 'Building accessible tourism for PWDs', "trait_tags": {'Tourism-Travel': 0.9, 'Rehab-Therapy': 0.3, 'Community-Serve': 0.4}},
+            {"option_id": 5174, "option_text": 'Creating digital tourism maps and apps', "trait_tags": {'Tourism-Travel': 0.9, 'Mobile-Dev': 0.5, 'Software-Dev': 0.3}},
+        ]
+    },
+    {
+        "question_id": 642,
+        "question_text": 'What culinary specialization appeals to you?',
+"category": "Interest - Culinary Arts",
+        "weight": 1.5,
+        "trait_tags": {'Culinary-Arts': 0.9},
+        "options": [
+            {"option_id": 5175, "option_text": 'Filipino cuisine and traditional cooking', "trait_tags": {'Culinary-Arts': 1.0, 'Creative-Skill': 0.4, 'Agri-Nature': 0.3}},
+            {"option_id": 5176, "option_text": 'Pastry arts and baking', "trait_tags": {'Culinary-Arts': 0.9, 'Creative-Skill': 0.5, 'Food-Science': 0.3}},
+            {"option_id": 5177, "option_text": 'International cuisine and fusion cooking', "trait_tags": {'Culinary-Arts': 0.9, 'Creative-Skill': 0.5, 'Tourism-Travel': 0.3}},
+            {"option_id": 5178, "option_text": 'Catering management and event food service', "trait_tags": {'Culinary-Arts': 0.9, 'Hospitality-Svc': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 5179, "option_text": 'Food styling and photography for media', "trait_tags": {'Culinary-Arts': 0.9, 'Digital-Media': 0.5, 'Visual-Design': 0.3}},
+            {"option_id": 5180, "option_text": 'Research and development for food products', "trait_tags": {'Culinary-Arts': 0.9, 'Food-Science': 0.5, 'Lab-Research': 0.3}},
+        ]
+    },
+    {
+        "question_id": 643,
+        "question_text": 'What kitchen management skill interests you?',
+"category": "Interest - Culinary Arts",
+        "weight": 1.5,
+        "trait_tags": {'Culinary-Arts': 0.9, 'Admin-Skill': 0.3},
+        "options": [
+            {"option_id": 5181, "option_text": 'Menu planning and recipe costing', "trait_tags": {'Culinary-Arts': 1.0, 'Finance-Acct': 0.4, 'Nutrition-Diet': 0.3}},
+            {"option_id": 5182, "option_text": 'Kitchen team leadership and brigade system', "trait_tags": {'Culinary-Arts': 0.9, 'People-Skill': 0.5, 'Admin-Skill': 0.3}},
+            {"option_id": 5183, "option_text": 'Food safety and sanitation (HACCP)', "trait_tags": {'Culinary-Arts': 0.9, 'Food-Science': 0.5, 'Lab-Research': 0.3}},
+            {"option_id": 5184, "option_text": 'Inventory and supply chain for fresh produce', "trait_tags": {'Culinary-Arts': 0.9, 'Industrial-Ops': 0.4, 'Agri-Nature': 0.3}},
+            {"option_id": 5185, "option_text": 'Restaurant concept and interior design', "trait_tags": {'Culinary-Arts': 0.9, 'Spatial-Design': 0.5, 'Creative-Skill': 0.3}},
+            {"option_id": 5186, "option_text": 'Social media presence and food blogging', "trait_tags": {'Culinary-Arts': 0.8, 'Digital-Media': 0.5, 'Marketing-Sales': 0.4}},
+        ]
+    },
+    {
+        "question_id": 644,
+        "question_text": 'What culinary career path excites you?',
+"category": "Career - Culinary Arts",
+        "weight": 1.5,
+        "trait_tags": {'Culinary-Arts': 0.9},
+        "options": [
+            {"option_id": 5187, "option_text": 'Executive chef at a top hotel restaurant', "trait_tags": {'Culinary-Arts': 1.0, 'People-Skill': 0.4, 'Hospitality-Svc': 0.3}},
+            {"option_id": 5188, "option_text": 'Restaurant owner and entrepreneur', "trait_tags": {'Culinary-Arts': 0.9, 'Startup-Venture': 0.5, 'Finance-Acct': 0.3}},
+            {"option_id": 5189, "option_text": 'Culinary instructor at a cooking school', "trait_tags": {'Culinary-Arts': 0.9, 'Teaching-Ed': 0.5, 'People-Skill': 0.3}},
+            {"option_id": 5190, "option_text": 'Food writer and recipe book author', "trait_tags": {'Culinary-Arts': 0.9, 'Creative-Skill': 0.5, 'Digital-Media': 0.3}},
+            {"option_id": 5191, "option_text": 'Private chef for VIP clients', "trait_tags": {'Culinary-Arts': 0.9, 'People-Skill': 0.5, 'Hospitality-Svc': 0.3}},
+            {"option_id": 5192, "option_text": 'Food product developer for a company', "trait_tags": {'Culinary-Arts': 0.9, 'Food-Science': 0.5, 'Industrial-Ops': 0.3}},
+        ]
+    },
+    {
+        "question_id": 645,
+        "question_text": 'What sports education role interests you?',
+"category": "Interest - Sports & Education",
+        "weight": 1.5,
+        "trait_tags": {'Sports-Ed': 0.9},
+        "options": [
+            {"option_id": 5193, "option_text": 'PE teacher designing fitness curricula', "trait_tags": {'Sports-Ed': 1.0, 'Teaching-Ed': 0.5, 'Physical-Skill': 0.3}},
+            {"option_id": 5194, "option_text": 'Team sports coach and strategist', "trait_tags": {'Sports-Ed': 0.9, 'Analytical-Skill': 0.4, 'People-Skill': 0.4}},
+            {"option_id": 5195, "option_text": 'Athletic trainer and injury prevention', "trait_tags": {'Sports-Ed': 0.9, 'Rehab-Therapy': 0.5, 'Physical-Skill': 0.4}},
+            {"option_id": 5196, "option_text": 'Sports nutritionist for athletes', "trait_tags": {'Sports-Ed': 0.9, 'Nutrition-Diet': 0.5, 'Physical-Skill': 0.3}},
+            {"option_id": 5197, "option_text": 'Sports event and competition organizer', "trait_tags": {'Sports-Ed': 0.9, 'Admin-Skill': 0.5, 'Hospitality-Svc': 0.3}},
+            {"option_id": 5198, "option_text": 'Sports analytics and performance tracking', "trait_tags": {'Sports-Ed': 0.8, 'Data-Analytics': 0.5, 'Technical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 646,
+        "question_text": 'Which sport would you coach or teach?',
+"category": "Interest - Sports & Education",
+        "weight": 1.5,
+        "trait_tags": {'Sports-Ed': 0.9, 'Physical-Skill': 0.3},
+        "options": [
+            {"option_id": 5199, "option_text": 'Basketball coaching and team development', "trait_tags": {'Sports-Ed': 1.0, 'People-Skill': 0.5, 'Physical-Skill': 0.3}},
+            {"option_id": 5200, "option_text": 'Swimming and aquatic sports instruction', "trait_tags": {'Sports-Ed': 0.9, 'Physical-Skill': 0.5, 'Maritime-Sea': 0.2}},
+            {"option_id": 5201, "option_text": 'Martial arts and self-defense training', "trait_tags": {'Sports-Ed': 0.9, 'Physical-Skill': 0.6, 'People-Skill': 0.3}},
+            {"option_id": 5202, "option_text": 'Track and field athletics coaching', "trait_tags": {'Sports-Ed': 0.9, 'Physical-Skill': 0.5, 'Analytical-Skill': 0.3}},
+            {"option_id": 5203, "option_text": 'Volleyball or badminton coaching', "trait_tags": {'Sports-Ed': 1.0, 'People-Skill': 0.5, 'Physical-Skill': 0.3}},
+            {"option_id": 5204, "option_text": 'Fitness and gym training program design', "trait_tags": {'Sports-Ed': 0.9, 'Rehab-Therapy': 0.3, 'Physical-Skill': 0.5}},
+        ]
+    },
+    {
+        "question_id": 647,
+        "question_text": 'What agricultural practice interests you most?',
+"category": "Interest - Agriculture",
+        "weight": 1.5,
+        "trait_tags": {'Agri-Nature': 0.9},
+        "options": [
+            {"option_id": 5205, "option_text": 'Crop production and sustainable farming', "trait_tags": {'Agri-Nature': 1.0, 'Environmental-Sci': 0.4, 'Physical-Skill': 0.3}},
+            {"option_id": 5206, "option_text": 'Animal husbandry and livestock management', "trait_tags": {'Agri-Nature': 0.9, 'Physical-Skill': 0.4, 'Lab-Research': 0.3}},
+            {"option_id": 5207, "option_text": 'Fisheries and aquaculture', "trait_tags": {'Agri-Nature': 0.9, 'Maritime-Sea': 0.4, 'Environmental-Sci': 0.3}},
+            {"option_id": 5208, "option_text": 'Agricultural technology and precision farming', "trait_tags": {'Agri-Nature': 0.9, 'Technical-Skill': 0.5, 'Data-Analytics': 0.3}},
+            {"option_id": 5209, "option_text": 'Organic farming and permaculture design', "trait_tags": {'Agri-Nature': 0.9, 'Environmental-Eng': 0.4, 'Community-Serve': 0.3}},
+            {"option_id": 5210, "option_text": 'Post-harvest handling and food storage', "trait_tags": {'Agri-Nature': 0.9, 'Food-Science': 0.5, 'Industrial-Ops': 0.3}},
+        ]
+    },
+    {
+        "question_id": 648,
+        "question_text": 'What Philippine agricultural problem would you solve?',
+"category": "Interest - Agriculture",
+        "weight": 1.5,
+        "trait_tags": {'Agri-Nature': 0.9, 'Community-Serve': 0.3},
+        "options": [
+            {"option_id": 5211, "option_text": 'Typhoon-resistant crop varieties for farmers', "trait_tags": {'Agri-Nature': 1.0, 'Lab-Research': 0.4, 'Environmental-Sci': 0.3}},
+            {"option_id": 5212, "option_text": 'Market access for smallholder farmers', "trait_tags": {'Agri-Nature': 0.9, 'Marketing-Sales': 0.4, 'Startup-Venture': 0.3}},
+            {"option_id": 5213, "option_text": 'Soil health and fertility restoration', "trait_tags": {'Agri-Nature': 0.9, 'Environmental-Sci': 0.5, 'Lab-Research': 0.3}},
+            {"option_id": 5214, "option_text": 'Irrigation and water management systems', "trait_tags": {'Agri-Nature': 0.9, 'Environmental-Eng': 0.5, 'Civil-Build': 0.3}},
+            {"option_id": 5215, "option_text": 'Pest and disease management without chemicals', "trait_tags": {'Agri-Nature': 0.9, 'Environmental-Sci': 0.4, 'Lab-Research': 0.4}},
+            {"option_id": 5216, "option_text": 'Youth engagement and farm succession planning', "trait_tags": {'Agri-Nature': 0.9, 'Community-Serve': 0.5, 'Teaching-Ed': 0.3}},
+        ]
+    },
+    # ==================== ROUND 2: TARGETED QUESTIONS FOR UNDER-10 TRAITS ====================
+    {
+        "question_id": 649,
+        "question_text": 'What office process would you improve?',
+"category": "Interest - Administration",
+        "weight": 1.5,
+        "trait_tags": {'Admin-Skill': 0.9},
+        "options": [
+            {"option_id": 5217, "option_text": 'Filing and document management system', "trait_tags": {'Admin-Skill': 1.0, 'Technical-Skill': 0.4}},
+            {"option_id": 5218, "option_text": 'Meeting minutes and correspondence tracking', "trait_tags": {'Admin-Skill': 1.0, 'People-Skill': 0.3}},
+            {"option_id": 5219, "option_text": 'Purchase order and procurement workflow', "trait_tags": {'Admin-Skill': 0.9, 'Finance-Acct': 0.4}},
+            {"option_id": 5220, "option_text": 'Employee attendance and leave tracking', "trait_tags": {'Admin-Skill': 0.9, 'HR-Management': 0.4}},
+            {"option_id": 5221, "option_text": 'Mail and courier handling procedures', "trait_tags": {'Admin-Skill': 0.9, 'Physical-Skill': 0.3}},
+            {"option_id": 5222, "option_text": 'Visitor log and access management', "trait_tags": {'Admin-Skill': 1.0, 'Law-Enforce': 0.3}},
+        ]
+    },
+    {
+        "question_id": 650,
+        "question_text": 'What administrative challenge motivates you?',
+"category": "Interest - Administration",
+        "weight": 1.5,
+        "trait_tags": {'Admin-Skill': 0.9},
+        "options": [
+            {"option_id": 5223, "option_text": 'Reducing paperwork and going digital', "trait_tags": {'Admin-Skill': 1.0, 'Technical-Skill': 0.4}},
+            {"option_id": 5224, "option_text": 'Coordinating between multiple departments', "trait_tags": {'Admin-Skill': 0.9, 'People-Skill': 0.4}},
+            {"option_id": 5225, "option_text": 'Maintaining accurate records and databases', "trait_tags": {'Admin-Skill': 1.0, 'Data-Analytics': 0.3}},
+            {"option_id": 5226, "option_text": 'Organizing company events and functions', "trait_tags": {'Admin-Skill': 0.9, 'Hospitality-Svc': 0.4}},
+            {"option_id": 5227, "option_text": 'Managing office supplies and inventory', "trait_tags": {'Admin-Skill': 0.9, 'Industrial-Ops': 0.3}},
+            {"option_id": 5228, "option_text": 'Handling confidential documents securely', "trait_tags": {'Admin-Skill': 1.0, 'Cyber-Defense': 0.3}},
+        ]
+    },
+    {
+        "question_id": 651,
+        "question_text": 'What type of administrative project interests you?',
+"category": "Interest - Administration",
+        "weight": 1.5,
+        "trait_tags": {'Admin-Skill': 0.9},
+        "options": [
+            {"option_id": 5229, "option_text": 'Implementing a new filing classification system', "trait_tags": {'Admin-Skill': 1.0, 'Analytical-Skill': 0.4}},
+            {"option_id": 5230, "option_text": 'Setting up a new office from scratch', "trait_tags": {'Admin-Skill': 0.9, 'Spatial-Design': 0.3}},
+            {"option_id": 5231, "option_text": 'Creating an employee onboarding handbook', "trait_tags": {'Admin-Skill': 0.9, 'HR-Management': 0.4}},
+            {"option_id": 5232, "option_text": 'Organizing a company-wide town hall meeting', "trait_tags": {'Admin-Skill': 0.9, 'People-Skill': 0.4}},
+            {"option_id": 5233, "option_text": 'Cleaning up and archiving old records', "trait_tags": {'Admin-Skill': 1.0, 'Analytical-Skill': 0.3}},
+            {"option_id": 5234, "option_text": 'Building a shared knowledge base wiki', "trait_tags": {'Admin-Skill': 0.9, 'Technical-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 652,
+        "question_text": 'What administrative support role appeals to you?',
+"category": "Interest - Administration",
+        "weight": 1.5,
+        "trait_tags": {'Admin-Skill': 0.9},
+        "options": [
+            {"option_id": 5235, "option_text": 'Legal secretary handling court documents', "trait_tags": {'Admin-Skill': 0.9, 'Legal-Practice': 0.5}},
+            {"option_id": 5236, "option_text": 'Medical office receptionist managing patients', "trait_tags": {'Admin-Skill': 0.9, 'Patient-Care': 0.4}},
+            {"option_id": 5237, "option_text": 'School registrar handling student records', "trait_tags": {'Admin-Skill': 0.9, 'Teaching-Ed': 0.4}},
+            {"option_id": 5238, "option_text": 'Bank teller processing transactions', "trait_tags": {'Admin-Skill': 0.9, 'Finance-Acct': 0.4}},
+            {"option_id": 5239, "option_text": 'Hotel concierge coordinating guest services', "trait_tags": {'Admin-Skill': 0.9, 'Hospitality-Svc': 0.5}},
+            {"option_id": 5240, "option_text": 'Government clerk processing permits', "trait_tags": {'Admin-Skill': 1.0, 'Community-Serve': 0.3}},
+        ]
+    },
+    {
+        "question_id": 653,
+        "question_text": 'What daily admin task do you enjoy most?',
+"category": "Interest - Administration",
+        "weight": 1.5,
+        "trait_tags": {'Admin-Skill': 0.9},
+        "options": [
+            {"option_id": 5241, "option_text": 'Sorting and prioritizing incoming requests', "trait_tags": {'Admin-Skill': 1.0, 'Analytical-Skill': 0.3}},
+            {"option_id": 5242, "option_text": 'Drafting professional emails and letters', "trait_tags": {'Admin-Skill': 0.9, 'Creative-Skill': 0.3}},
+            {"option_id": 5243, "option_text": 'Creating organized spreadsheets and reports', "trait_tags": {'Admin-Skill': 1.0, 'Data-Analytics': 0.3}},
+            {"option_id": 5244, "option_text": 'Answering phone calls and directing inquiries', "trait_tags": {'Admin-Skill': 0.9, 'People-Skill': 0.4}},
+            {"option_id": 5245, "option_text": 'Scheduling appointments and managing calendars', "trait_tags": {'Admin-Skill': 0.9, 'Technical-Skill': 0.3}},
+            {"option_id": 5246, "option_text": 'Filing expense reports and receipts', "trait_tags": {'Admin-Skill': 0.9, 'Finance-Acct': 0.3}},
+        ]
+    },
+    {
+        "question_id": 654,
+        "question_text": 'What office management certification would you pursue?',
+"category": "Interest - Administration",
+        "weight": 1.5,
+        "trait_tags": {'Admin-Skill': 0.9},
+        "options": [
+            {"option_id": 5247, "option_text": 'Certified Administrative Professional (CAP)', "trait_tags": {'Admin-Skill': 1.0, 'People-Skill': 0.3}},
+            {"option_id": 5248, "option_text": 'Microsoft Office Specialist (MOS)', "trait_tags": {'Admin-Skill': 0.9, 'Technical-Skill': 0.5}},
+            {"option_id": 5249, "option_text": 'Project Management Professional (PMP)', "trait_tags": {'Admin-Skill': 0.9, 'Industrial-Ops': 0.4}},
+            {"option_id": 5250, "option_text": 'Certified Records Manager (CRM)', "trait_tags": {'Admin-Skill': 1.0, 'Analytical-Skill': 0.3}},
+            {"option_id": 5251, "option_text": 'Business Communication certificate', "trait_tags": {'Admin-Skill': 0.9, 'People-Skill': 0.5}},
+            {"option_id": 5252, "option_text": 'Office Safety and Health certification', "trait_tags": {'Admin-Skill': 0.9, 'Physical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 655,
+        "question_text": 'What excites you about office administration?',
+"category": "Interest - Administration",
+        "weight": 1.5,
+        "trait_tags": {'Admin-Skill': 0.9},
+        "options": [
+            {"option_id": 5253, "option_text": 'Everything running smoothly and on time', "trait_tags": {'Admin-Skill': 1.0, 'Industrial-Ops': 0.3}},
+            {"option_id": 5254, "option_text": 'Being the person everyone comes to for help', "trait_tags": {'Admin-Skill': 0.9, 'People-Skill': 0.5}},
+            {"option_id": 5255, "option_text": 'Organizing chaos into structured systems', "trait_tags": {'Admin-Skill': 1.0, 'Analytical-Skill': 0.4}},
+            {"option_id": 5256, "option_text": 'Making a great first impression for the company', "trait_tags": {'Admin-Skill': 0.9, 'Marketing-Sales': 0.3}},
+            {"option_id": 5257, "option_text": 'Keeping accurate and reliable records', "trait_tags": {'Admin-Skill': 0.9, 'Analytical-Skill': 0.3}},
+            {"option_id": 5258, "option_text": 'Supporting leaders and helping them succeed', "trait_tags": {'Admin-Skill': 0.9, 'People-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 656,
+        "question_text": 'What analytical problem-solving approach suits you?',
+"category": "Interest - Analytical Skills",
+        "weight": 1.5,
+        "trait_tags": {'Analytical-Skill': 0.9},
+        "options": [
+            {"option_id": 5259, "option_text": 'Breaking complex problems into smaller parts', "trait_tags": {'Analytical-Skill': 1.0, 'Technical-Skill': 0.3}},
+            {"option_id": 5260, "option_text": 'Finding patterns in large datasets', "trait_tags": {'Analytical-Skill': 0.9, 'Data-Analytics': 0.4}},
+            {"option_id": 5261, "option_text": 'Creating logical flowcharts and diagrams', "trait_tags": {'Analytical-Skill': 1.0, 'Software-Dev': 0.3}},
+            {"option_id": 5262, "option_text": 'Testing hypotheses with controlled experiments', "trait_tags": {'Analytical-Skill': 0.9, 'Lab-Research': 0.4}},
+            {"option_id": 5263, "option_text": 'Comparing options with pros and cons analysis', "trait_tags": {'Analytical-Skill': 0.9, 'Finance-Acct': 0.3}},
+            {"option_id": 5264, "option_text": 'Using mathematical models to predict outcomes', "trait_tags": {'Analytical-Skill': 1.0, 'Data-Analytics': 0.4}},
+        ]
+    },
+    {
+        "question_id": 657,
+        "question_text": 'What type of puzzles or challenges do you enjoy?',
+"category": "Interest - Analytical Skills",
+        "weight": 1.5,
+        "trait_tags": {'Analytical-Skill': 0.9},
+        "options": [
+            {"option_id": 5265, "option_text": 'Logic puzzles and brain teasers', "trait_tags": {'Analytical-Skill': 1.0, 'Creative-Skill': 0.3}},
+            {"option_id": 5266, "option_text": 'Sudoku and number pattern games', "trait_tags": {'Analytical-Skill': 0.9, 'Data-Analytics': 0.3}},
+            {"option_id": 5267, "option_text": 'Strategy games requiring planning ahead', "trait_tags": {'Analytical-Skill': 0.9, 'Game-Dev': 0.3}},
+            {"option_id": 5268, "option_text": 'Debug a system by tracing errors step by step', "trait_tags": {'Analytical-Skill': 1.0, 'Software-Dev': 0.4}},
+            {"option_id": 5269, "option_text": 'Crossword puzzles and word association', "trait_tags": {'Analytical-Skill': 0.9, 'Creative-Skill': 0.3}},
+            {"option_id": 5270, "option_text": 'Mechanical puzzles and 3D assembly challenges', "trait_tags": {'Analytical-Skill': 0.9, 'Mechanical-Design': 0.3}},
+        ]
+    },
+    {
+        "question_id": 658,
+        "question_text": 'What critical thinking skill would you develop?',
+"category": "Interest - Analytical Skills",
+        "weight": 1.5,
+        "trait_tags": {'Analytical-Skill': 0.9},
+        "options": [
+            {"option_id": 5271, "option_text": 'Evaluating evidence and sources for credibility', "trait_tags": {'Analytical-Skill': 1.0, 'Lab-Research': 0.3}},
+            {"option_id": 5272, "option_text": 'Identifying logical fallacies in arguments', "trait_tags": {'Analytical-Skill': 0.9, 'Legal-Practice': 0.4}},
+            {"option_id": 5273, "option_text": 'Root cause analysis using the 5 Whys method', "trait_tags": {'Analytical-Skill': 1.0, 'Industrial-Ops': 0.3}},
+            {"option_id": 5274, "option_text": 'Statistical reasoning and probability assessment', "trait_tags": {'Analytical-Skill': 0.9, 'Data-Analytics': 0.5}},
+            {"option_id": 5275, "option_text": 'Systems thinking — seeing the big picture', "trait_tags": {'Analytical-Skill': 0.9, 'Environmental-Eng': 0.3}},
+            {"option_id": 5276, "option_text": 'Decision matrices for multi-criteria evaluation', "trait_tags": {'Analytical-Skill': 1.0, 'Admin-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 659,
+        "question_text": 'Where would you apply analytical skills?',
+"category": "Interest - Analytical Skills",
+        "weight": 1.5,
+        "trait_tags": {'Analytical-Skill': 0.9},
+        "options": [
+            {"option_id": 5277, "option_text": 'Financial audit examining company books', "trait_tags": {'Analytical-Skill': 0.9, 'Finance-Acct': 0.5}},
+            {"option_id": 5278, "option_text": 'Quality testing in a manufacturing lab', "trait_tags": {'Analytical-Skill': 0.9, 'Industrial-Ops': 0.5}},
+            {"option_id": 5279, "option_text": 'Data science for business intelligence', "trait_tags": {'Analytical-Skill': 0.9, 'Data-Analytics': 0.5}},
+            {"option_id": 5280, "option_text": 'Research methodology and experimental design', "trait_tags": {'Analytical-Skill': 1.0, 'Lab-Research': 0.4}},
+            {"option_id": 5281, "option_text": 'Strategic consulting for organizations', "trait_tags": {'Analytical-Skill': 0.9, 'Startup-Venture': 0.3}},
+            {"option_id": 5282, "option_text": 'Policy analysis for government agencies', "trait_tags": {'Analytical-Skill': 0.9, 'Legal-Practice': 0.4}},
+        ]
+    },
+    {
+        "question_id": 660,
+        "question_text": 'What data interpretation task interests you?',
+"category": "Interest - Analytical Skills",
+        "weight": 1.5,
+        "trait_tags": {'Analytical-Skill': 0.9, 'Data-Analytics': 0.3},
+        "options": [
+            {"option_id": 5283, "option_text": 'Reading financial statements and ratios', "trait_tags": {'Analytical-Skill': 1.0, 'Finance-Acct': 0.5}},
+            {"option_id": 5284, "option_text": 'Interpreting scientific research results', "trait_tags": {'Analytical-Skill': 0.9, 'Lab-Research': 0.4}},
+            {"option_id": 5285, "option_text": 'Analyzing survey responses for trends', "trait_tags": {'Analytical-Skill': 0.9, 'Data-Analytics': 0.4}},
+            {"option_id": 5286, "option_text": 'Evaluating engineering test measurements', "trait_tags": {'Analytical-Skill': 1.0, 'Mechanical-Design': 0.3}},
+            {"option_id": 5287, "option_text": 'Reviewing medical diagnostic reports', "trait_tags": {'Analytical-Skill': 0.9, 'Medical-Lab': 0.4}},
+            {"option_id": 5288, "option_text": 'Comparing market research data', "trait_tags": {'Analytical-Skill': 0.9, 'Marketing-Sales': 0.4}},
+        ]
+    },
+    {
+        "question_id": 661,
+        "question_text": 'What systematic approach appeals to you?',
+"category": "Interest - Analytical Skills",
+        "weight": 1.5,
+        "trait_tags": {'Analytical-Skill': 0.9},
+        "options": [
+            {"option_id": 5289, "option_text": 'Scientific method for testing ideas', "trait_tags": {'Analytical-Skill': 1.0, 'Lab-Research': 0.4}},
+            {"option_id": 5290, "option_text": 'SWOT analysis for strategy planning', "trait_tags": {'Analytical-Skill': 0.9, 'Marketing-Sales': 0.3}},
+            {"option_id": 5291, "option_text": 'Fishbone diagram for cause-effect analysis', "trait_tags": {'Analytical-Skill': 1.0, 'Industrial-Ops': 0.3}},
+            {"option_id": 5292, "option_text": 'Risk assessment and mitigation planning', "trait_tags": {'Analytical-Skill': 0.9, 'Finance-Acct': 0.3}},
+            {"option_id": 5293, "option_text": 'Process mapping and workflow optimization', "trait_tags": {'Analytical-Skill': 0.9, 'Industrial-Ops': 0.4}},
+            {"option_id": 5294, "option_text": 'Benchmarking and competitive comparison', "trait_tags": {'Analytical-Skill': 0.9, 'Marketing-Sales': 0.3}},
+        ]
+    },
+    {
+        "question_id": 662,
+        "question_text": 'What analytical tool would you learn?',
+"category": "Interest - Analytical Skills",
+        "weight": 1.5,
+        "trait_tags": {'Analytical-Skill': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 5295, "option_text": 'Spreadsheet formulas and pivot tables', "trait_tags": {'Analytical-Skill': 1.0, 'Data-Analytics': 0.4}},
+            {"option_id": 5296, "option_text": 'SPSS or R for statistical analysis', "trait_tags": {'Analytical-Skill': 0.9, 'Data-Analytics': 0.5}},
+            {"option_id": 5297, "option_text": 'Mind mapping software for organizing ideas', "trait_tags": {'Analytical-Skill': 0.9, 'Creative-Skill': 0.3}},
+            {"option_id": 5298, "option_text": 'Flowchart tools like Visio or Lucidchart', "trait_tags": {'Analytical-Skill': 1.0, 'Software-Dev': 0.3}},
+            {"option_id": 5299, "option_text": 'Financial analysis calculators and models', "trait_tags": {'Analytical-Skill': 0.9, 'Finance-Acct': 0.4}},
+            {"option_id": 5300, "option_text": 'SQL for querying and examining databases', "trait_tags": {'Analytical-Skill': 0.9, 'Software-Dev': 0.4}},
+        ]
+    },
+    {
+        "question_id": 663,
+        "question_text": 'What reasoning challenge would you tackle?',
+"category": "Interest - Analytical Skills",
+        "weight": 1.5,
+        "trait_tags": {'Analytical-Skill': 0.9},
+        "options": [
+            {"option_id": 5301, "option_text": 'Solving a mystery using clues and evidence', "trait_tags": {'Analytical-Skill': 1.0, 'Forensic-Sci': 0.3}},
+            {"option_id": 5302, "option_text": 'Optimizing a route or schedule for efficiency', "trait_tags": {'Analytical-Skill': 0.9, 'Industrial-Ops': 0.4}},
+            {"option_id": 5303, "option_text": 'Detecting inconsistencies in data or reports', "trait_tags": {'Analytical-Skill': 1.0, 'Finance-Acct': 0.3}},
+            {"option_id": 5304, "option_text": 'Predicting outcomes from historical trends', "trait_tags": {'Analytical-Skill': 0.9, 'Data-Analytics': 0.5}},
+            {"option_id": 5305, "option_text": 'Designing a fair scoring or ranking system', "trait_tags": {'Analytical-Skill': 0.9, 'Data-Analytics': 0.3}},
+            {"option_id": 5306, "option_text": 'Finding the root cause of a recurring problem', "trait_tags": {'Analytical-Skill': 1.0, 'Industrial-Ops': 0.3}},
+        ]
+    },
+    {
+        "question_id": 664,
+        "question_text": 'What creative activity do you enjoy most?',
+"category": "Interest - Creative Skills",
+        "weight": 1.5,
+        "trait_tags": {'Creative-Skill': 0.9},
+        "options": [
+            {"option_id": 5307, "option_text": 'Drawing, painting, or sketching', "trait_tags": {'Creative-Skill': 1.0, 'Visual-Design': 0.5}},
+            {"option_id": 5308, "option_text": 'Writing stories, poems, or scripts', "trait_tags": {'Creative-Skill': 0.9, 'Film-Broadcast': 0.3}},
+            {"option_id": 5309, "option_text": 'Composing music or writing songs', "trait_tags": {'Creative-Skill': 0.9, 'Performing-Arts': 0.4}},
+            {"option_id": 5310, "option_text": 'Crafting handmade items and DIY projects', "trait_tags": {'Creative-Skill': 0.9, 'Physical-Skill': 0.3}},
+            {"option_id": 5311, "option_text": 'Photography and visual storytelling', "trait_tags": {'Creative-Skill': 0.9, 'Digital-Media': 0.4}},
+            {"option_id": 5312, "option_text": 'Brainstorming unique solutions to problems', "trait_tags": {'Creative-Skill': 1.0, 'Analytical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 665,
+        "question_text": 'How do you express creativity at work?',
+"category": "Interest - Creative Skills",
+        "weight": 1.5,
+        "trait_tags": {'Creative-Skill': 0.9},
+        "options": [
+            {"option_id": 5313, "option_text": 'Designing visually appealing presentations', "trait_tags": {'Creative-Skill': 1.0, 'Visual-Design': 0.4}},
+            {"option_id": 5314, "option_text": 'Thinking of innovative marketing campaigns', "trait_tags": {'Creative-Skill': 0.9, 'Marketing-Sales': 0.4}},
+            {"option_id": 5315, "option_text": 'Finding unconventional solutions to challenges', "trait_tags": {'Creative-Skill': 1.0, 'Analytical-Skill': 0.3}},
+            {"option_id": 5316, "option_text": 'Decorating and arranging spaces beautifully', "trait_tags": {'Creative-Skill': 0.9, 'Spatial-Design': 0.4}},
+            {"option_id": 5317, "option_text": 'Creating engaging social media content', "trait_tags": {'Creative-Skill': 0.9, 'Digital-Media': 0.4}},
+            {"option_id": 5318, "option_text": 'Developing new recipes or food presentations', "trait_tags": {'Creative-Skill': 0.9, 'Culinary-Arts': 0.5}},
+        ]
+    },
+    {
+        "question_id": 666,
+        "question_text": 'What creative skill would you develop?',
+"category": "Interest - Creative Skills",
+        "weight": 1.5,
+        "trait_tags": {'Creative-Skill': 0.9},
+        "options": [
+            {"option_id": 5319, "option_text": 'Digital illustration and graphic design', "trait_tags": {'Creative-Skill': 1.0, 'Visual-Design': 0.5}},
+            {"option_id": 5320, "option_text": 'Video production and filmmaking', "trait_tags": {'Creative-Skill': 0.9, 'Film-Broadcast': 0.4}},
+            {"option_id": 5321, "option_text": 'Creative writing and storytelling', "trait_tags": {'Creative-Skill': 0.9, 'Digital-Media': 0.3}},
+            {"option_id": 5322, "option_text": 'Improvisation and thinking on your feet', "trait_tags": {'Creative-Skill': 0.9, 'Performing-Arts': 0.4}},
+            {"option_id": 5323, "option_text": '3D modeling and character creation', "trait_tags": {'Creative-Skill': 0.9, 'Animation-3D': 0.5}},
+            {"option_id": 5324, "option_text": 'Innovation and design thinking methodology', "trait_tags": {'Creative-Skill': 1.0, 'Startup-Venture': 0.3}},
+        ]
+    },
+    {
+        "question_id": 667,
+        "question_text": 'What inspires your creativity?',
+"category": "Motivation - Creative Skills",
+        "weight": 1.5,
+        "trait_tags": {'Creative-Skill': 0.9},
+        "options": [
+            {"option_id": 5325, "option_text": 'Philippine culture and indigenous art forms', "trait_tags": {'Creative-Skill': 1.0, 'Visual-Design': 0.3}},
+            {"option_id": 5326, "option_text": 'Nature and the environment around you', "trait_tags": {'Creative-Skill': 0.9, 'Environmental-Sci': 0.3}},
+            {"option_id": 5327, "option_text": "Technology and what's possible with new tools", "trait_tags": {'Creative-Skill': 0.9, 'Technical-Skill': 0.4}},
+            {"option_id": 5328, "option_text": 'Music, film, and contemporary media', "trait_tags": {'Creative-Skill': 0.9, 'Performing-Arts': 0.4}},
+            {"option_id": 5329, "option_text": 'Social issues and the desire for change', "trait_tags": {'Creative-Skill': 0.9, 'Community-Serve': 0.3}},
+            {"option_id": 5330, "option_text": 'Travel experiences and different cultures', "trait_tags": {'Creative-Skill': 1.0, 'Tourism-Travel': 0.3}},
+        ]
+    },
+    {
+        "question_id": 668,
+        "question_text": 'Where would you apply creativity professionally?',
+"category": "Interest - Creative Skills",
+        "weight": 1.5,
+        "trait_tags": {'Creative-Skill': 0.9},
+        "options": [
+            {"option_id": 5331, "option_text": 'Advertising and creative agency', "trait_tags": {'Creative-Skill': 1.0, 'Marketing-Sales': 0.4}},
+            {"option_id": 5332, "option_text": 'Game design and entertainment studio', "trait_tags": {'Creative-Skill': 0.9, 'Game-Dev': 0.5}},
+            {"option_id": 5333, "option_text": 'Architectural and interior design firm', "trait_tags": {'Creative-Skill': 0.9, 'Spatial-Design': 0.4}},
+            {"option_id": 5334, "option_text": 'Fashion and textile design', "trait_tags": {'Creative-Skill': 0.9, 'Visual-Design': 0.4}},
+            {"option_id": 5335, "option_text": 'Film production and broadcasting', "trait_tags": {'Creative-Skill': 0.9, 'Film-Broadcast': 0.4}},
+            {"option_id": 5336, "option_text": 'Product innovation and R&D department', "trait_tags": {'Creative-Skill': 1.0, 'Startup-Venture': 0.3}},
+        ]
+    },
+    {
+        "question_id": 669,
+        "question_text": 'What design thinking phase excites you most?',
+"category": "Interest - Creative Skills",
+        "weight": 1.5,
+        "trait_tags": {'Creative-Skill': 0.9},
+        "options": [
+            {"option_id": 5337, "option_text": 'Empathize: understanding users and their needs', "trait_tags": {'Creative-Skill': 0.9, 'People-Skill': 0.5}},
+            {"option_id": 5338, "option_text": 'Define: framing the right problem to solve', "trait_tags": {'Creative-Skill': 0.9, 'Analytical-Skill': 0.4}},
+            {"option_id": 5339, "option_text": 'Ideate: generating tons of wild ideas', "trait_tags": {'Creative-Skill': 1.0, 'Analytical-Skill': 0.3}},
+            {"option_id": 5340, "option_text": 'Prototype: building quick mockups to test', "trait_tags": {'Creative-Skill': 0.9, 'Technical-Skill': 0.4}},
+            {"option_id": 5341, "option_text": 'Test: getting feedback and iterating', "trait_tags": {'Creative-Skill': 1.0, 'People-Skill': 0.3}},
+            {"option_id": 5342, "option_text": 'Storytelling: presenting the final concept', "trait_tags": {'Creative-Skill': 0.9, 'Performing-Arts': 0.3}},
+        ]
+    },
+    {
+        "question_id": 670,
+        "question_text": 'What creative challenge would you tackle?',
+"category": "Interest - Creative Skills",
+        "weight": 1.5,
+        "trait_tags": {'Creative-Skill': 0.9},
+        "options": [
+            {"option_id": 5343, "option_text": 'Rebranding a local Filipino product for export', "trait_tags": {'Creative-Skill': 1.0, 'Marketing-Sales': 0.4}},
+            {"option_id": 5344, "option_text": 'Creating art installations for public spaces', "trait_tags": {'Creative-Skill': 0.9, 'Spatial-Design': 0.4}},
+            {"option_id": 5345, "option_text": 'Designing educational games for children', "trait_tags": {'Creative-Skill': 0.9, 'Teaching-Ed': 0.4}},
+            {"option_id": 5346, "option_text": "Illustrating a children's book", "trait_tags": {'Creative-Skill': 1.0, 'Visual-Design': 0.4}},
+            {"option_id": 5347, "option_text": 'Creating an animated series pilot episode', "trait_tags": {'Creative-Skill': 0.9, 'Animation-3D': 0.4}},
+            {"option_id": 5348, "option_text": 'Designing a mobile app user experience', "trait_tags": {'Creative-Skill': 0.9, 'Mobile-Dev': 0.3}},
+        ]
+    },
+    {
+        "question_id": 671,
+        "question_text": 'What technical equipment do you prefer working with?',
+"category": "Preference - Technical Skills",
+        "weight": 1.5,
+        "trait_tags": {'Technical-Skill': 0.9},
+        "options": [
+            {"option_id": 5349, "option_text": 'Computers and IT hardware setup', "trait_tags": {'Technical-Skill': 1.0, 'Hardware-Systems': 0.4}},
+            {"option_id": 5350, "option_text": 'Electronic instruments and multimeters', "trait_tags": {'Technical-Skill': 0.9, 'Electrical-Power': 0.4}},
+            {"option_id": 5351, "option_text": 'Power tools and workshop equipment', "trait_tags": {'Technical-Skill': 0.9, 'Mechanical-Design': 0.3}},
+            {"option_id": 5352, "option_text": 'Medical devices and diagnostic equipment', "trait_tags": {'Technical-Skill': 0.9, 'Medical-Lab': 0.4}},
+            {"option_id": 5353, "option_text": 'Audio-visual and broadcast equipment', "trait_tags": {'Technical-Skill': 0.9, 'Film-Broadcast': 0.3}},
+            {"option_id": 5354, "option_text": 'Survey instruments and GPS devices', "trait_tags": {'Technical-Skill': 1.0, 'Field-Research': 0.4}},
+        ]
+    },
+    {
+        "question_id": 672,
+        "question_text": 'What hands-on technical skill would you learn?',
+"category": "Interest - Technical Skills",
+        "weight": 1.5,
+        "trait_tags": {'Technical-Skill': 0.9},
+        "options": [
+            {"option_id": 5355, "option_text": 'Computer assembly and troubleshooting', "trait_tags": {'Technical-Skill': 1.0, 'Hardware-Systems': 0.5}},
+            {"option_id": 5356, "option_text": 'Electrical wiring and panel installation', "trait_tags": {'Technical-Skill': 0.9, 'Electrical-Power': 0.4}},
+            {"option_id": 5357, "option_text": 'Soldering electronic components on boards', "trait_tags": {'Technical-Skill': 0.9, 'Hardware-Systems': 0.4}},
+            {"option_id": 5358, "option_text": 'Operating CNC and precision machinery', "trait_tags": {'Technical-Skill': 0.9, 'Mechanical-Design': 0.4}},
+            {"option_id": 5359, "option_text": 'Network cabling and infrastructure setup', "trait_tags": {'Technical-Skill': 1.0, 'Cloud-Systems': 0.3}},
+            {"option_id": 5360, "option_text": 'Calibrating laboratory instruments', "trait_tags": {'Technical-Skill': 0.9, 'Lab-Research': 0.4}},
+        ]
+    },
+    {
+        "question_id": 673,
+        "question_text": 'What technical problem do you enjoy solving?',
+"category": "Interest - Technical Skills",
+        "weight": 1.5,
+        "trait_tags": {'Technical-Skill': 0.9},
+        "options": [
+            {"option_id": 5361, "option_text": 'Fixing devices and equipment that stopped working', "trait_tags": {'Technical-Skill': 1.0, 'Hardware-Systems': 0.4}},
+            {"option_id": 5362, "option_text": 'Debugging software or system errors', "trait_tags": {'Technical-Skill': 0.9, 'Software-Dev': 0.4}},
+            {"option_id": 5363, "option_text": 'Installing and configuring new systems', "trait_tags": {'Technical-Skill': 0.9, 'Cloud-Systems': 0.3}},
+            {"option_id": 5364, "option_text": 'Maintaining and servicing machinery', "trait_tags": {'Technical-Skill': 0.9, 'Mechanical-Design': 0.3}},
+            {"option_id": 5365, "option_text": 'Connecting and setting up AV equipment', "trait_tags": {'Technical-Skill': 1.0, 'Film-Broadcast': 0.3}},
+            {"option_id": 5366, "option_text": 'Troubleshooting network connectivity issues', "trait_tags": {'Technical-Skill': 0.9, 'Cloud-Systems': 0.4}},
+        ]
+    },
+    {
+        "question_id": 674,
+        "question_text": 'What TESDA technical-vocational course interests you?',
+"category": "Interest - Technical Skills",
+        "weight": 1.5,
+        "trait_tags": {'Technical-Skill': 0.9},
+        "options": [
+            {"option_id": 5367, "option_text": 'Computer hardware servicing (CHS)', "trait_tags": {'Technical-Skill': 1.0, 'Hardware-Systems': 0.5}},
+            {"option_id": 5368, "option_text": 'Electrical installation and maintenance', "trait_tags": {'Technical-Skill': 0.9, 'Electrical-Power': 0.5}},
+            {"option_id": 5369, "option_text": 'Automotive servicing and repair', "trait_tags": {'Technical-Skill': 0.9, 'Mechanical-Design': 0.4}},
+            {"option_id": 5370, "option_text": 'Welding technology (SMAW/GMAW)', "trait_tags": {'Technical-Skill': 0.9, 'Mechanical-Design': 0.3}},
+            {"option_id": 5371, "option_text": 'Electronics product assembly and servicing', "trait_tags": {'Technical-Skill': 1.0, 'Hardware-Systems': 0.4}},
+            {"option_id": 5372, "option_text": 'Plumbing installation and maintenance', "trait_tags": {'Technical-Skill': 0.9, 'Civil-Build': 0.4}},
+        ]
+    },
+    {
+        "question_id": 675,
+        "question_text": 'What technical certification would you earn?',
+"category": "Interest - Technical Skills",
+        "weight": 1.5,
+        "trait_tags": {'Technical-Skill': 0.9},
+        "options": [
+            {"option_id": 5373, "option_text": 'CompTIA A+ for IT technician', "trait_tags": {'Technical-Skill': 1.0, 'Hardware-Systems': 0.5}},
+            {"option_id": 5374, "option_text": 'Cisco CCNA for networking', "trait_tags": {'Technical-Skill': 0.9, 'Cloud-Systems': 0.4}},
+            {"option_id": 5375, "option_text": 'AWS or Azure cloud certifications', "trait_tags": {'Technical-Skill': 0.9, 'Cloud-Systems': 0.5}},
+            {"option_id": 5376, "option_text": 'PLC programming certification', "trait_tags": {'Technical-Skill': 0.9, 'Electrical-Power': 0.4}},
+            {"option_id": 5377, "option_text": 'AutoCAD certified user', "trait_tags": {'Technical-Skill': 0.9, 'Civil-Build': 0.3}},
+            {"option_id": 5378, "option_text": 'TESDA National Certificate in electronics', "trait_tags": {'Technical-Skill': 1.0, 'Hardware-Systems': 0.4}},
+        ]
+    },
+    {
+        "question_id": 676,
+        "question_text": 'What motivates you about technical work?',
+"category": "Interest - Technical Skills",
+        "weight": 1.5,
+        "trait_tags": {'Technical-Skill': 0.9},
+        "options": [
+            {"option_id": 5379, "option_text": 'Seeing something you built actually work', "trait_tags": {'Technical-Skill': 1.0, 'Creative-Skill': 0.3}},
+            {"option_id": 5380, "option_text": 'Understanding how systems and machines operate', "trait_tags": {'Technical-Skill': 0.9, 'Mechanical-Design': 0.3}},
+            {"option_id": 5381, "option_text": 'The satisfaction of fixing what was broken', "trait_tags": {'Technical-Skill': 1.0, 'Analytical-Skill': 0.3}},
+            {"option_id": 5382, "option_text": 'Staying current with the latest technologies', "trait_tags": {'Technical-Skill': 0.9, 'Software-Dev': 0.3}},
+            {"option_id": 5383, "option_text": 'Teaching others how to use tools and equipment', "trait_tags": {'Technical-Skill': 0.9, 'Teaching-Ed': 0.4}},
+            {"option_id": 5384, "option_text": 'Earning practical skills that are always in demand', "trait_tags": {'Technical-Skill': 0.9, 'Physical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 677,
+        "question_text": 'Where would you apply your technical skills?',
+"category": "Interest - Technical Skills",
+        "weight": 1.5,
+        "trait_tags": {'Technical-Skill': 0.9},
+        "options": [
+            {"option_id": 5385, "option_text": 'IT support department of a company', "trait_tags": {'Technical-Skill': 1.0, 'Admin-Skill': 0.3}},
+            {"option_id": 5386, "option_text": 'BPO technical support center', "trait_tags": {'Technical-Skill': 0.9, 'People-Skill': 0.4}},
+            {"option_id": 5387, "option_text": 'Industrial plant maintenance team', "trait_tags": {'Technical-Skill': 0.9, 'Industrial-Ops': 0.4}},
+            {"option_id": 5388, "option_text": 'Telecommunications company field technician', "trait_tags": {'Technical-Skill': 0.9, 'Electrical-Power': 0.3}},
+            {"option_id": 5389, "option_text": 'Hospital biomedical equipment department', "trait_tags": {'Technical-Skill': 0.9, 'Medical-Lab': 0.3}},
+            {"option_id": 5390, "option_text": 'Self-employed technical repair shop', "trait_tags": {'Technical-Skill': 1.0, 'Startup-Venture': 0.3}},
+        ]
+    },
+    {
+        "question_id": 678,
+        "question_text": 'What interpersonal situation do you handle best?',
+"category": "Interest - People Skills",
+        "weight": 1.5,
+        "trait_tags": {'People-Skill': 0.9},
+        "options": [
+            {"option_id": 5391, "option_text": 'Mediating a disagreement between teammates', "trait_tags": {'People-Skill': 1.0, 'Counseling': 0.4}},
+            {"option_id": 5392, "option_text": 'Motivating a group toward a shared goal', "trait_tags": {'People-Skill': 0.9, 'Admin-Skill': 0.3}},
+            {"option_id": 5393, "option_text": 'Explaining complex ideas in simple terms', "trait_tags": {'People-Skill': 0.9, 'Teaching-Ed': 0.4}},
+            {"option_id": 5394, "option_text": 'Building rapport with new acquaintances quickly', "trait_tags": {'People-Skill': 1.0, 'Marketing-Sales': 0.3}},
+            {"option_id": 5395, "option_text": 'Listening deeply to someone who needs support', "trait_tags": {'People-Skill': 0.9, 'Counseling': 0.5}},
+            {"option_id": 5396, "option_text": 'Networking and making professional connections', "trait_tags": {'People-Skill': 0.9, 'Startup-Venture': 0.3}},
+        ]
+    },
+    {
+        "question_id": 679,
+        "question_text": 'What team leadership style suits you?',
+"category": "Interest - People Skills",
+        "weight": 1.5,
+        "trait_tags": {'People-Skill': 0.9},
+        "options": [
+            {"option_id": 5397, "option_text": "Democratic: getting everyone's input before deciding", "trait_tags": {'People-Skill': 1.0, 'Admin-Skill': 0.3}},
+            {"option_id": 5398, "option_text": "Coaching: developing each team member's strengths", "trait_tags": {'People-Skill': 0.9, 'Teaching-Ed': 0.5}},
+            {"option_id": 5399, "option_text": 'Servant: putting team needs ahead of your own', "trait_tags": {'People-Skill': 0.9, 'Community-Serve': 0.4}},
+            {"option_id": 5400, "option_text": 'Collaborative: working alongside the team as equals', "trait_tags": {'People-Skill': 1.0, 'Creative-Skill': 0.3}},
+            {"option_id": 5401, "option_text": 'Visionary: inspiring others with a compelling goal', "trait_tags": {'People-Skill': 0.9, 'Startup-Venture': 0.3}},
+            {"option_id": 5402, "option_text": 'Mentoring: guiding through experience and wisdom', "trait_tags": {'People-Skill': 0.9, 'Counseling': 0.4}},
+        ]
+    },
+    {
+        "question_id": 680,
+        "question_text": 'What communication skill would you strengthen?',
+"category": "Interest - People Skills",
+        "weight": 1.5,
+        "trait_tags": {'People-Skill': 0.9},
+        "options": [
+            {"option_id": 5403, "option_text": 'Public speaking and presentation delivery', "trait_tags": {'People-Skill': 1.0, 'Performing-Arts': 0.3}},
+            {"option_id": 5404, "option_text": 'Active listening and empathetic responses', "trait_tags": {'People-Skill': 0.9, 'Counseling': 0.5}},
+            {"option_id": 5405, "option_text": 'Persuasion and influential negotiation', "trait_tags": {'People-Skill': 0.9, 'Marketing-Sales': 0.4}},
+            {"option_id": 5406, "option_text": 'Written communication and professional emails', "trait_tags": {'People-Skill': 0.9, 'Admin-Skill': 0.3}},
+            {"option_id": 5407, "option_text": 'Cross-cultural communication and sensitivity', "trait_tags": {'People-Skill': 1.0, 'Tourism-Travel': 0.3}},
+            {"option_id": 5408, "option_text": 'Conflict resolution and peace-building', "trait_tags": {'People-Skill': 0.9, 'Social-Work': 0.4}},
+        ]
+    },
+    {
+        "question_id": 681,
+        "question_text": 'Who would you most enjoy helping?',
+"category": "Interest - People Skills",
+        "weight": 1.5,
+        "trait_tags": {'People-Skill': 0.9},
+        "options": [
+            {"option_id": 5409, "option_text": 'Customers with product questions and concerns', "trait_tags": {'People-Skill': 1.0, 'Marketing-Sales': 0.3}},
+            {"option_id": 5410, "option_text": 'Students struggling to understand lessons', "trait_tags": {'People-Skill': 0.9, 'Teaching-Ed': 0.5}},
+            {"option_id": 5411, "option_text": 'Patients recovering from illness or injury', "trait_tags": {'People-Skill': 0.9, 'Patient-Care': 0.4}},
+            {"option_id": 5412, "option_text": 'Colleagues dealing with workplace stress', "trait_tags": {'People-Skill': 0.9, 'Counseling': 0.4}},
+            {"option_id": 5413, "option_text": 'Community members facing social challenges', "trait_tags": {'People-Skill': 1.0, 'Social-Work': 0.4}},
+            {"option_id": 5414, "option_text": 'Tourists navigating an unfamiliar place', "trait_tags": {'People-Skill': 0.9, 'Tourism-Travel': 0.4}},
+        ]
+    },
+    {
+        "question_id": 682,
+        "question_text": 'What group activity do you enjoy facilitating?',
+"category": "Interest - People Skills",
+        "weight": 1.5,
+        "trait_tags": {'People-Skill': 0.9},
+        "options": [
+            {"option_id": 5415, "option_text": 'Team-building games and icebreakers', "trait_tags": {'People-Skill': 1.0, 'Sports-Ed': 0.3}},
+            {"option_id": 5416, "option_text": 'Brainstorming sessions for new ideas', "trait_tags": {'People-Skill': 0.9, 'Creative-Skill': 0.4}},
+            {"option_id": 5417, "option_text": 'Group discussions and roundtable forums', "trait_tags": {'People-Skill': 0.9, 'Teaching-Ed': 0.3}},
+            {"option_id": 5418, "option_text": 'Community organizing and town hall meetings', "trait_tags": {'People-Skill': 0.9, 'Community-Serve': 0.5}},
+            {"option_id": 5419, "option_text": 'Mentoring circles and peer support groups', "trait_tags": {'People-Skill': 1.0, 'Counseling': 0.4}},
+            {"option_id": 5420, "option_text": 'Training workshops and skills seminars', "trait_tags": {'People-Skill': 0.9, 'Teaching-Ed': 0.4}},
+        ]
+    },
+    {
+        "question_id": 683,
+        "question_text": 'What physical skill interests you most?',
+"category": "Interest - Physical Skills",
+        "weight": 1.5,
+        "trait_tags": {'Physical-Skill': 0.9},
+        "options": [
+            {"option_id": 5421, "option_text": 'Strength training and weight lifting', "trait_tags": {'Physical-Skill': 1.0, 'Sports-Ed': 0.4}},
+            {"option_id": 5422, "option_text": 'Swimming and water sports', "trait_tags": {'Physical-Skill': 0.9, 'Maritime-Sea': 0.3}},
+            {"option_id": 5423, "option_text": 'Outdoor hiking and mountaineering', "trait_tags": {'Physical-Skill': 0.9, 'Field-Research': 0.3}},
+            {"option_id": 5424, "option_text": 'Construction and hands-on building', "trait_tags": {'Physical-Skill': 0.9, 'Civil-Build': 0.4}},
+            {"option_id": 5425, "option_text": 'Martial arts discipline and self-defense', "trait_tags": {'Physical-Skill': 1.0, 'Sports-Ed': 0.3}},
+            {"option_id": 5426, "option_text": 'Dance movement and body coordination', "trait_tags": {'Physical-Skill': 0.9, 'Performing-Arts': 0.4}},
+        ]
+    },
+    {
+        "question_id": 684,
+        "question_text": 'Where would you apply physical fitness?',
+"category": "Interest - Physical Skills",
+        "weight": 1.5,
+        "trait_tags": {'Physical-Skill': 0.9},
+        "options": [
+            {"option_id": 5427, "option_text": 'Military or ROTC officer training', "trait_tags": {'Physical-Skill': 1.0, 'Law-Enforce': 0.4}},
+            {"option_id": 5428, "option_text": 'Construction site operations and labor', "trait_tags": {'Physical-Skill': 0.9, 'Civil-Build': 0.5}},
+            {"option_id": 5429, "option_text": 'Athletic coaching for competitive sports', "trait_tags": {'Physical-Skill': 0.9, 'Sports-Ed': 0.5}},
+            {"option_id": 5430, "option_text": 'Farm work and agricultural operations', "trait_tags": {'Physical-Skill': 0.9, 'Agri-Nature': 0.5}},
+            {"option_id": 5431, "option_text": 'Rescue and disaster emergency response', "trait_tags": {'Physical-Skill': 0.9, 'Community-Serve': 0.4}},
+            {"option_id": 5432, "option_text": 'Fitness instructor and personal trainer', "trait_tags": {'Physical-Skill': 1.0, 'Sports-Ed': 0.4}},
+        ]
+    },
+    {
+        "question_id": 685,
+        "question_text": 'What physically demanding job appeals to you?',
+"category": "Interest - Physical Skills",
+        "weight": 1.5,
+        "trait_tags": {'Physical-Skill': 0.9},
+        "options": [
+            {"option_id": 5433, "option_text": 'Firefighter combating blazes and rescuing people', "trait_tags": {'Physical-Skill': 1.0, 'Community-Serve': 0.4}},
+            {"option_id": 5434, "option_text": 'Maritime crew working on ships', "trait_tags": {'Physical-Skill': 0.9, 'Maritime-Sea': 0.5}},
+            {"option_id": 5435, "option_text": 'Lineman maintaining power lines', "trait_tags": {'Physical-Skill': 0.9, 'Electrical-Power': 0.4}},
+            {"option_id": 5436, "option_text": 'Park ranger protecting natural reserves', "trait_tags": {'Physical-Skill': 0.9, 'Environmental-Sci': 0.4}},
+            {"option_id": 5437, "option_text": 'Professional athlete competing nationally', "trait_tags": {'Physical-Skill': 0.9, 'Sports-Ed': 0.5}},
+            {"option_id": 5438, "option_text": 'Underwater diver for inspection or research', "trait_tags": {'Physical-Skill': 1.0, 'Maritime-Sea': 0.4}},
+        ]
+    },
+    {
+        "question_id": 686,
+        "question_text": 'What physical endurance challenge would you take on?',
+"category": "Interest - Physical Skills",
+        "weight": 1.5,
+        "trait_tags": {'Physical-Skill': 0.9},
+        "options": [
+            {"option_id": 5439, "option_text": 'Marathon or long-distance running event', "trait_tags": {'Physical-Skill': 1.0, 'Sports-Ed': 0.3}},
+            {"option_id": 5440, "option_text": 'Mountain climbing expedition (Mt. Apo, Mt. Pulag)', "trait_tags": {'Physical-Skill': 0.9, 'Field-Research': 0.3}},
+            {"option_id": 5441, "option_text": 'Ocean swimming or open water competition', "trait_tags": {'Physical-Skill': 0.9, 'Maritime-Sea': 0.3}},
+            {"option_id": 5442, "option_text": 'Military-style obstacle course challenge', "trait_tags": {'Physical-Skill': 1.0, 'Law-Enforce': 0.3}},
+            {"option_id": 5443, "option_text": 'Multi-sport triathlon or adventure race', "trait_tags": {'Physical-Skill': 0.9, 'Sports-Ed': 0.4}},
+            {"option_id": 5444, "option_text": 'Week-long wilderness survival experience', "trait_tags": {'Physical-Skill': 0.9, 'Field-Research': 0.4}},
+        ]
+    },
+    {
+        "question_id": 687,
+        "question_text": 'What cloud computing task interests you?',
+"category": "Interest - Cloud Computing",
+        "weight": 1.5,
+        "trait_tags": {'Cloud-Systems': 0.9},
+        "options": [
+            {"option_id": 5445, "option_text": 'Setting up virtual servers and infrastructure', "trait_tags": {'Cloud-Systems': 1.0, 'Technical-Skill': 0.4}},
+            {"option_id": 5446, "option_text": 'Container orchestration with Kubernetes', "trait_tags": {'Cloud-Systems': 0.9, 'Software-Dev': 0.4}},
+            {"option_id": 5447, "option_text": 'Cloud database management and optimization', "trait_tags": {'Cloud-Systems': 0.9, 'Data-Analytics': 0.3}},
+            {"option_id": 5448, "option_text": 'CDN and load balancer configuration', "trait_tags": {'Cloud-Systems': 1.0, 'Web-Dev': 0.3}},
+            {"option_id": 5449, "option_text": 'Serverless function development (AWS Lambda)', "trait_tags": {'Cloud-Systems': 0.9, 'Software-Dev': 0.4}},
+            {"option_id": 5450, "option_text": 'Cloud cost optimization and billing management', "trait_tags": {'Cloud-Systems': 0.9, 'Finance-Acct': 0.3}},
+        ]
+    },
+    {
+        "question_id": 688,
+        "question_text": 'What cloud platform would you specialize in?',
+"category": "Interest - Cloud Computing",
+        "weight": 1.5,
+        "trait_tags": {'Cloud-Systems': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 5451, "option_text": 'Amazon Web Services (AWS) ecosystem', "trait_tags": {'Cloud-Systems': 1.0, 'Software-Dev': 0.3}},
+            {"option_id": 5452, "option_text": 'Microsoft Azure cloud services', "trait_tags": {'Cloud-Systems': 0.9, 'Software-Dev': 0.3}},
+            {"option_id": 5453, "option_text": 'Google Cloud Platform (GCP)', "trait_tags": {'Cloud-Systems': 0.9, 'Data-Analytics': 0.4}},
+            {"option_id": 5454, "option_text": 'DigitalOcean for simple deployments', "trait_tags": {'Cloud-Systems': 0.9, 'Web-Dev': 0.3}},
+            {"option_id": 5455, "option_text": 'Hybrid cloud with on-premise integration', "trait_tags": {'Cloud-Systems': 1.0, 'Hardware-Systems': 0.3}},
+            {"option_id": 5456, "option_text": 'Multi-cloud strategy and management', "trait_tags": {'Cloud-Systems': 0.9, 'Admin-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 689,
+        "question_text": 'What DevOps practice excites you?',
+"category": "Interest - Cloud Computing",
+        "weight": 1.5,
+        "trait_tags": {'Cloud-Systems': 0.9, 'Software-Dev': 0.3},
+        "options": [
+            {"option_id": 5457, "option_text": 'CI/CD pipelines for automated deployment', "trait_tags": {'Cloud-Systems': 1.0, 'Software-Dev': 0.4}},
+            {"option_id": 5458, "option_text": 'Infrastructure as Code using Terraform', "trait_tags": {'Cloud-Systems': 0.9, 'Software-Dev': 0.4}},
+            {"option_id": 5459, "option_text": 'Monitoring and alerting with Prometheus/Grafana', "trait_tags": {'Cloud-Systems': 0.9, 'Data-Analytics': 0.3}},
+            {"option_id": 5460, "option_text": 'Log management and analysis (ELK stack)', "trait_tags": {'Cloud-Systems': 0.9, 'Data-Analytics': 0.4}},
+            {"option_id": 5461, "option_text": 'Automated testing and deployment validation', "trait_tags": {'Cloud-Systems': 1.0, 'Software-Dev': 0.4}},
+            {"option_id": 5462, "option_text": 'Site reliability engineering (SRE) practices', "trait_tags": {'Cloud-Systems': 0.9, 'Analytical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 690,
+        "question_text": 'What cloud architecture challenge would you solve?',
+"category": "Interest - Cloud Computing",
+        "weight": 1.5,
+        "trait_tags": {'Cloud-Systems': 0.9},
+        "options": [
+            {"option_id": 5463, "option_text": 'Scaling a Filipino app to millions of users', "trait_tags": {'Cloud-Systems': 1.0, 'Mobile-Dev': 0.3}},
+            {"option_id": 5464, "option_text": 'Ensuring 99.99% uptime for critical systems', "trait_tags": {'Cloud-Systems': 0.9, 'Analytical-Skill': 0.3}},
+            {"option_id": 5465, "option_text": 'Designing disaster recovery across regions', "trait_tags": {'Cloud-Systems': 0.9, 'Cyber-Defense': 0.3}},
+            {"option_id": 5466, "option_text": 'Migrating legacy systems to the cloud', "trait_tags": {'Cloud-Systems': 1.0, 'Software-Dev': 0.3}},
+            {"option_id": 5467, "option_text": 'Optimizing cloud spending for a startup', "trait_tags": {'Cloud-Systems': 0.9, 'Finance-Acct': 0.3}},
+            {"option_id": 5468, "option_text": 'Building microservices architecture', "trait_tags": {'Cloud-Systems': 0.9, 'Software-Dev': 0.5}},
+        ]
+    },
+    {
+        "question_id": 691,
+        "question_text": 'What cloud security concern interests you most?',
+"category": "Interest - Cloud Computing",
+        "weight": 1.5,
+        "trait_tags": {'Cloud-Systems': 0.9, 'Cyber-Defense': 0.3},
+        "options": [
+            {"option_id": 5469, "option_text": 'Identity and access management (IAM)', "trait_tags": {'Cloud-Systems': 1.0, 'Cyber-Defense': 0.4}},
+            {"option_id": 5470, "option_text": 'Data encryption at rest and in transit', "trait_tags": {'Cloud-Systems': 0.9, 'Cyber-Defense': 0.5}},
+            {"option_id": 5471, "option_text": 'Network security groups and firewalls', "trait_tags": {'Cloud-Systems': 0.9, 'Cyber-Defense': 0.4}},
+            {"option_id": 5472, "option_text": 'Compliance and regulatory requirements', "trait_tags": {'Cloud-Systems': 0.9, 'Legal-Practice': 0.3}},
+            {"option_id": 5473, "option_text": 'Container security scanning', "trait_tags": {'Cloud-Systems': 1.0, 'Software-Dev': 0.3}},
+            {"option_id": 5474, "option_text": 'Secrets management and key rotation', "trait_tags": {'Cloud-Systems': 0.9, 'Cyber-Defense': 0.4}},
+        ]
+    },
+    {
+        "question_id": 692,
+        "question_text": 'What software development methodology interests you?',
+"category": "Interest - Software Development",
+        "weight": 1.5,
+        "trait_tags": {'Software-Dev': 0.9},
+        "options": [
+            {"option_id": 5475, "option_text": 'Agile Scrum with sprints and stand-ups', "trait_tags": {'Software-Dev': 1.0, 'Admin-Skill': 0.3}},
+            {"option_id": 5476, "option_text": 'Test-driven development writing tests first', "trait_tags": {'Software-Dev': 0.9, 'Analytical-Skill': 0.4}},
+            {"option_id": 5477, "option_text": 'Pair programming and code review culture', "trait_tags": {'Software-Dev': 0.9, 'People-Skill': 0.3}},
+            {"option_id": 5478, "option_text": 'DevOps continuous integration and delivery', "trait_tags": {'Software-Dev': 0.9, 'Cloud-Systems': 0.4}},
+            {"option_id": 5479, "option_text": 'Open source contribution and community', "trait_tags": {'Software-Dev': 1.0, 'Community-Serve': 0.3}},
+            {"option_id": 5480, "option_text": 'Clean code and refactoring practices', "trait_tags": {'Software-Dev': 0.9, 'Analytical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 693,
+        "question_text": 'What type of software would you build?',
+"category": "Interest - Software Development",
+        "weight": 1.5,
+        "trait_tags": {'Software-Dev': 0.9},
+        "options": [
+            {"option_id": 5481, "option_text": 'Enterprise management system for companies', "trait_tags": {'Software-Dev': 1.0, 'Admin-Skill': 0.3}},
+            {"option_id": 5482, "option_text": 'Healthcare information system for hospitals', "trait_tags": {'Software-Dev': 0.9, 'Health-Admin': 0.4}},
+            {"option_id": 5483, "option_text": 'Educational platform for Filipino students', "trait_tags": {'Software-Dev': 0.9, 'Teaching-Ed': 0.3}},
+            {"option_id": 5484, "option_text": 'Financial transaction processing system', "trait_tags": {'Software-Dev': 0.9, 'Finance-Acct': 0.4}},
+            {"option_id": 5485, "option_text": 'Social media or communication app', "trait_tags": {'Software-Dev': 0.9, 'Digital-Media': 0.3}},
+            {"option_id": 5486, "option_text": 'Automation tools to reduce manual work', "trait_tags": {'Software-Dev': 1.0, 'Industrial-Ops': 0.3}},
+        ]
+    },
+    {
+        "question_id": 694,
+        "question_text": 'What programming challenge excites you?',
+"category": "Interest - Software Development",
+        "weight": 1.5,
+        "trait_tags": {'Software-Dev': 0.9},
+        "options": [
+            {"option_id": 5487, "option_text": 'Algorithm optimization for speed', "trait_tags": {'Software-Dev': 1.0, 'Analytical-Skill': 0.5}},
+            {"option_id": 5488, "option_text": 'Integrating multiple APIs into one platform', "trait_tags": {'Software-Dev': 0.9, 'Web-Dev': 0.4}},
+            {"option_id": 5489, "option_text": 'Building real-time collaborative features', "trait_tags": {'Software-Dev': 0.9, 'Web-Dev': 0.3}},
+            {"option_id": 5490, "option_text": 'Database design and query optimisation', "trait_tags": {'Software-Dev': 0.9, 'Data-Analytics': 0.3}},
+            {"option_id": 5491, "option_text": 'Version control and branching strategies', "trait_tags": {'Software-Dev': 1.0, 'Cloud-Systems': 0.3}},
+            {"option_id": 5492, "option_text": 'Debugging and fixing complex legacy code', "trait_tags": {'Software-Dev': 0.9, 'Analytical-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 695,
+        "question_text": 'What hardware project would you build?',
+"category": "Interest - Hardware & Systems",
+        "weight": 1.5,
+        "trait_tags": {'Hardware-Systems': 0.9},
+        "options": [
+            {"option_id": 5493, "option_text": 'Custom PC build for gaming or work', "trait_tags": {'Hardware-Systems': 1.0, 'Technical-Skill': 0.4}},
+            {"option_id": 5494, "option_text": 'IoT sensor network for monitoring', "trait_tags": {'Hardware-Systems': 0.9, 'Software-Dev': 0.3}},
+            {"option_id": 5495, "option_text": 'Arduino or Raspberry Pi automation project', "trait_tags": {'Hardware-Systems': 0.9, 'Software-Dev': 0.4}},
+            {"option_id": 5496, "option_text": 'Home server and network attached storage', "trait_tags": {'Hardware-Systems': 0.9, 'Cloud-Systems': 0.3}},
+            {"option_id": 5497, "option_text": 'RC drone or robot assembly', "trait_tags": {'Hardware-Systems': 1.0, 'Mechanical-Design': 0.3}},
+            {"option_id": 5498, "option_text": 'Solar-powered charging station', "trait_tags": {'Hardware-Systems': 0.9, 'Electrical-Power': 0.4}},
+        ]
+    },
+    {
+        "question_id": 696,
+        "question_text": 'What computer hardware component interests you most?',
+"category": "Interest - Hardware & Systems",
+        "weight": 1.5,
+        "trait_tags": {'Hardware-Systems': 0.9},
+        "options": [
+            {"option_id": 5499, "option_text": 'CPU architecture and processor design', "trait_tags": {'Hardware-Systems': 1.0, 'Analytical-Skill': 0.3}},
+            {"option_id": 5500, "option_text": 'GPU and graphics card technology', "trait_tags": {'Hardware-Systems': 0.9, 'Game-Dev': 0.3}},
+            {"option_id": 5501, "option_text": 'SSD and storage technology advancement', "trait_tags": {'Hardware-Systems': 0.9, 'Data-Analytics': 0.3}},
+            {"option_id": 5502, "option_text": 'Network switches and router configuration', "trait_tags": {'Hardware-Systems': 0.9, 'Cloud-Systems': 0.4}},
+            {"option_id": 5503, "option_text": 'RAM and memory management hardware', "trait_tags": {'Hardware-Systems': 1.0, 'Technical-Skill': 0.3}},
+            {"option_id": 5504, "option_text": 'Motherboard and chipset compatibility', "trait_tags": {'Hardware-Systems': 0.9, 'Technical-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 697,
+        "question_text": 'What hardware troubleshooting do you enjoy?',
+"category": "Interest - Hardware & Systems",
+        "weight": 1.5,
+        "trait_tags": {'Hardware-Systems': 0.9},
+        "options": [
+            {"option_id": 5505, "option_text": 'Diagnosing boot failures and blue screens', "trait_tags": {'Hardware-Systems': 1.0, 'Analytical-Skill': 0.4}},
+            {"option_id": 5506, "option_text": 'Replacing laptop screens and keyboards', "trait_tags": {'Hardware-Systems': 0.9, 'Physical-Skill': 0.3}},
+            {"option_id": 5507, "option_text": 'Resolving overheating and cooling issues', "trait_tags": {'Hardware-Systems': 0.9, 'Mechanical-Design': 0.3}},
+            {"option_id": 5508, "option_text": 'Recovering data from damaged drives', "trait_tags": {'Hardware-Systems': 0.9, 'Data-Analytics': 0.3}},
+            {"option_id": 5509, "option_text": 'Cable management and signal integrity', "trait_tags": {'Hardware-Systems': 1.0, 'Electrical-Power': 0.3}},
+            {"option_id": 5510, "option_text": 'Network latency and connectivity debugging', "trait_tags": {'Hardware-Systems': 0.9, 'Cloud-Systems': 0.4}},
+        ]
+    },
+    {
+        "question_id": 698,
+        "question_text": 'What embedded systems application interests you?',
+"category": "Interest - Hardware & Systems",
+        "weight": 1.5,
+        "trait_tags": {'Hardware-Systems': 0.9, 'Software-Dev': 0.3},
+        "options": [
+            {"option_id": 5511, "option_text": 'Smart agriculture sensors and controllers', "trait_tags": {'Hardware-Systems': 0.9, 'Agri-Nature': 0.4}},
+            {"option_id": 5512, "option_text": 'Medical device embedded firmware', "trait_tags": {'Hardware-Systems': 0.9, 'Medical-Lab': 0.3}},
+            {"option_id": 5513, "option_text": 'Automotive electronics and ECU programming', "trait_tags": {'Hardware-Systems': 1.0, 'Mechanical-Design': 0.3}},
+            {"option_id": 5514, "option_text": 'Wearable fitness tracker design', "trait_tags": {'Hardware-Systems': 0.9, 'Sports-Ed': 0.3}},
+            {"option_id": 5515, "option_text": 'Home automation and smart lighting', "trait_tags": {'Hardware-Systems': 0.9, 'Electrical-Power': 0.4}},
+            {"option_id": 5516, "option_text": 'Security camera and alarm system module', "trait_tags": {'Hardware-Systems': 1.0, 'Cyber-Defense': 0.3}},
+        ]
+    },
+    {
+        "question_id": 699,
+        "question_text": 'What hardware certification would you pursue?',
+"category": "Interest - Hardware & Systems",
+        "weight": 1.5,
+        "trait_tags": {'Hardware-Systems': 0.9},
+        "options": [
+            {"option_id": 5517, "option_text": 'CompTIA A+ hardware and troubleshooting', "trait_tags": {'Hardware-Systems': 1.0, 'Technical-Skill': 0.5}},
+            {"option_id": 5518, "option_text": 'Cisco CCNA for network hardware', "trait_tags": {'Hardware-Systems': 0.9, 'Cloud-Systems': 0.4}},
+            {"option_id": 5519, "option_text": 'CompTIA Server+ for server administration', "trait_tags": {'Hardware-Systems': 0.9, 'Cloud-Systems': 0.3}},
+            {"option_id": 5520, "option_text": 'AWS IoT certification', "trait_tags": {'Hardware-Systems': 0.9, 'Software-Dev': 0.3}},
+            {"option_id": 5521, "option_text": 'BICSI cabling and infrastructure', "trait_tags": {'Hardware-Systems': 1.0, 'Electrical-Power': 0.3}},
+            {"option_id": 5522, "option_text": 'Certified Electronics Technician (CET)', "trait_tags": {'Hardware-Systems': 0.9, 'Electrical-Power': 0.4}},
+        ]
+    },
+    {
+        "question_id": 700,
+        "question_text": 'What animation production pipeline stage interests you?',
+"category": "Interest - Animation & 3D",
+        "weight": 1.5,
+        "trait_tags": {'Animation-3D': 0.9},
+        "options": [
+            {"option_id": 5523, "option_text": 'Storyboarding and pre-visualization', "trait_tags": {'Animation-3D': 1.0, 'Film-Broadcast': 0.3}},
+            {"option_id": 5524, "option_text": '3D modeling and texturing assets', "trait_tags": {'Animation-3D': 0.9, 'Visual-Design': 0.4}},
+            {"option_id": 5525, "option_text": 'Character rigging and joint setup', "trait_tags": {'Animation-3D': 1.0, 'Technical-Skill': 0.4}},
+            {"option_id": 5526, "option_text": 'Animation timing and movement polish', "trait_tags": {'Animation-3D': 0.9, 'Creative-Skill': 0.4}},
+            {"option_id": 5527, "option_text": 'Lighting and rendering the final scene', "trait_tags": {'Animation-3D': 0.9, 'Visual-Design': 0.3}},
+            {"option_id": 5528, "option_text": 'Compositing and post-production effects', "trait_tags": {'Animation-3D': 0.9, 'Film-Broadcast': 0.4}},
+        ]
+    },
+    {
+        "question_id": 701,
+        "question_text": 'What Philippine animation opportunity excites you?',
+"category": "Interest - Animation & 3D",
+        "weight": 1.5,
+        "trait_tags": {'Animation-3D': 0.9},
+        "options": [
+            {"option_id": 5529, "option_text": "Working in Manila's growing animation studios", "trait_tags": {'Animation-3D': 1.0, 'Film-Broadcast': 0.3}},
+            {"option_id": 5530, "option_text": 'Outsourced animation for Hollywood projects', "trait_tags": {'Animation-3D': 0.9, 'Film-Broadcast': 0.4}},
+            {"option_id": 5531, "option_text": 'Creating Filipino animated characters/shows', "trait_tags": {'Animation-3D': 0.9, 'Creative-Skill': 0.5}},
+            {"option_id": 5532, "option_text": 'Game asset creation for international studios', "trait_tags": {'Animation-3D': 0.9, 'Game-Dev': 0.5}},
+            {"option_id": 5533, "option_text": 'AR/VR content creation for tech companies', "trait_tags": {'Animation-3D': 1.0, 'Software-Dev': 0.3}},
+            {"option_id": 5534, "option_text": 'Freelance motion graphics for ads', "trait_tags": {'Animation-3D': 0.9, 'Marketing-Sales': 0.3}},
+        ]
+    },
+    {
+        "question_id": 702,
+        "question_text": 'What animation technique would you perfect?',
+"category": "Interest - Animation & 3D",
+        "weight": 1.5,
+        "trait_tags": {'Animation-3D': 0.9},
+        "options": [
+            {"option_id": 5535, "option_text": 'Walk cycle and character locomotion', "trait_tags": {'Animation-3D': 1.0, 'Creative-Skill': 0.3}},
+            {"option_id": 5536, "option_text": 'Facial animation and lip sync', "trait_tags": {'Animation-3D': 0.9, 'Performing-Arts': 0.3}},
+            {"option_id": 5537, "option_text": 'Particle effects: fire, water, smoke', "trait_tags": {'Animation-3D': 1.0, 'Technical-Skill': 0.3}},
+            {"option_id": 5538, "option_text": 'Camera animation and cinematic shots', "trait_tags": {'Animation-3D': 0.9, 'Film-Broadcast': 0.4}},
+            {"option_id": 5539, "option_text": 'Cloth and hair simulation physics', "trait_tags": {'Animation-3D': 0.9, 'Technical-Skill': 0.4}},
+            {"option_id": 5540, "option_text": 'Procedural animation and scripting', "trait_tags": {'Animation-3D': 0.9, 'Software-Dev': 0.4}},
+        ]
+    },
+    {
+        "question_id": 703,
+        "question_text": 'What animated content do you watch and admire?',
+"category": "Interest - Animation & 3D",
+        "weight": 1.5,
+        "trait_tags": {'Animation-3D': 0.9},
+        "options": [
+            {"option_id": 5541, "option_text": 'Pixar and Disney feature film quality', "trait_tags": {'Animation-3D': 1.0, 'Film-Broadcast': 0.4}},
+            {"option_id": 5542, "option_text": 'Japanese anime art style and storytelling', "trait_tags": {'Animation-3D': 0.9, 'Creative-Skill': 0.4}},
+            {"option_id": 5543, "option_text": 'Motion graphics in commercials and explainers', "trait_tags": {'Animation-3D': 0.9, 'Marketing-Sales': 0.3}},
+            {"option_id": 5544, "option_text": 'Game cinematics and real-time cutscenes', "trait_tags": {'Animation-3D': 0.9, 'Game-Dev': 0.5}},
+            {"option_id": 5545, "option_text": 'Independent and experimental animation', "trait_tags": {'Animation-3D': 0.9, 'Creative-Skill': 0.5}},
+            {"option_id": 5546, "option_text": 'Architectural and product visualization', "trait_tags": {'Animation-3D': 1.0, 'Spatial-Design': 0.3}},
+        ]
+    },
+    {
+        "question_id": 704,
+        "question_text": 'What Filipino community issue would you address?',
+"category": "Interest - Community Service",
+        "weight": 1.5,
+        "trait_tags": {'Community-Serve': 0.9},
+        "options": [
+            {"option_id": 5547, "option_text": 'Poverty and hunger in urban poor areas', "trait_tags": {'Community-Serve': 1.0, 'Social-Work': 0.5}},
+            {"option_id": 5548, "option_text": 'Lack of access to quality education', "trait_tags": {'Community-Serve': 0.9, 'Teaching-Ed': 0.5}},
+            {"option_id": 5549, "option_text": 'Environmental pollution in waterways', "trait_tags": {'Community-Serve': 0.9, 'Environmental-Sci': 0.4}},
+            {"option_id": 5550, "option_text": 'Drug abuse prevention programs for youth', "trait_tags": {'Community-Serve': 0.9, 'Counseling': 0.4}},
+            {"option_id": 5551, "option_text": 'Senior citizen welfare and care programs', "trait_tags": {'Community-Serve': 0.9, 'Patient-Care': 0.3}},
+            {"option_id": 5552, "option_text": 'Disaster preparedness in typhoon-prone areas', "trait_tags": {'Community-Serve': 1.0, 'Environmental-Eng': 0.3}},
+        ]
+    },
+    {
+        "question_id": 705,
+        "question_text": 'What volunteer role would you take?',
+"category": "Interest - Community Service",
+        "weight": 1.5,
+        "trait_tags": {'Community-Serve': 0.9},
+        "options": [
+            {"option_id": 5553, "option_text": 'Teaching computer literacy to barangay residents', "trait_tags": {'Community-Serve': 1.0, 'Teaching-Ed': 0.4}},
+            {"option_id": 5554, "option_text": 'Organizing feeding programs for malnourished kids', "trait_tags": {'Community-Serve': 0.9, 'Nutrition-Diet': 0.4}},
+            {"option_id": 5555, "option_text": 'Medical mission volunteer in remote areas', "trait_tags": {'Community-Serve': 0.9, 'Patient-Care': 0.5}},
+            {"option_id": 5556, "option_text": 'Tree planting and mangrove restoration', "trait_tags": {'Community-Serve': 0.9, 'Environmental-Sci': 0.5}},
+            {"option_id": 5557, "option_text": 'Habitat building for families in need', "trait_tags": {'Community-Serve': 0.9, 'Civil-Build': 0.3}},
+            {"option_id": 5558, "option_text": 'Legal aid for indigent community members', "trait_tags": {'Community-Serve': 1.0, 'Legal-Practice': 0.4}},
+        ]
+    },
+    {
+        "question_id": 706,
+        "question_text": 'What community empowerment approach would you use?',
+"category": "Interest - Community Service",
+        "weight": 1.5,
+        "trait_tags": {'Community-Serve': 0.9},
+        "options": [
+            {"option_id": 5559, "option_text": 'Skills training for livelihood generation', "trait_tags": {'Community-Serve': 1.0, 'Teaching-Ed': 0.4}},
+            {"option_id": 5560, "option_text": 'Cooperative formation for economic growth', "trait_tags": {'Community-Serve': 0.9, 'Finance-Acct': 0.3}},
+            {"option_id": 5561, "option_text": 'Youth leadership and civic engagement', "trait_tags": {'Community-Serve': 0.9, 'People-Skill': 0.5}},
+            {"option_id": 5562, "option_text": 'Health education and disease prevention', "trait_tags": {'Community-Serve': 0.9, 'Public-Health': 0.4}},
+            {"option_id": 5563, "option_text": 'Cultural preservation and heritage programs', "trait_tags": {'Community-Serve': 0.9, 'Tourism-Travel': 0.3}},
+            {"option_id": 5564, "option_text": 'Technology access and digital literacy', "trait_tags": {'Community-Serve': 1.0, 'Technical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 707,
+        "question_text": 'What community organizing strategy would you lead?',
+"category": "Interest - Community Service",
+        "weight": 1.5,
+        "trait_tags": {'Community-Serve': 0.9},
+        "options": [
+            {"option_id": 5565, "option_text": 'Door-to-door outreach and needs assessment', "trait_tags": {'Community-Serve': 1.0, 'People-Skill': 0.5}},
+            {"option_id": 5566, "option_text": 'Social media campaigns for local causes', "trait_tags": {'Community-Serve': 0.9, 'Digital-Media': 0.3}},
+            {"option_id": 5567, "option_text": 'Barangay assembly and community meetings', "trait_tags": {'Community-Serve': 0.9, 'People-Skill': 0.4}},
+            {"option_id": 5568, "option_text": 'Partnership with local government units', "trait_tags": {'Community-Serve': 0.9, 'Legal-Practice': 0.3}},
+            {"option_id": 5569, "option_text": 'Fundraising events and donation drives', "trait_tags": {'Community-Serve': 1.0, 'Marketing-Sales': 0.3}},
+            {"option_id": 5570, "option_text": 'Mentoring and coaching community leaders', "trait_tags": {'Community-Serve': 0.9, 'Teaching-Ed': 0.4}},
+        ]
+    },
+    {
+        "question_id": 708,
+        "question_text": 'What digital content creation process excites you?',
+"category": "Interest - Digital Media",
+        "weight": 1.5,
+        "trait_tags": {'Digital-Media': 0.9},
+        "options": [
+            {"option_id": 5571, "option_text": 'Filming and editing vlogs and tutorials', "trait_tags": {'Digital-Media': 1.0, 'Film-Broadcast': 0.4}},
+            {"option_id": 5572, "option_text": 'Designing social media graphics and carousels', "trait_tags": {'Digital-Media': 0.9, 'Visual-Design': 0.5}},
+            {"option_id": 5573, "option_text": 'Writing scripts and captions for posts', "trait_tags": {'Digital-Media': 0.9, 'Creative-Skill': 0.4}},
+            {"option_id": 5574, "option_text": 'Recording and editing podcast episodes', "trait_tags": {'Digital-Media': 1.0, 'Performing-Arts': 0.3}},
+            {"option_id": 5575, "option_text": 'Creating reels and short-form video content', "trait_tags": {'Digital-Media': 0.9, 'Film-Broadcast': 0.3}},
+            {"option_id": 5576, "option_text": 'Managing and growing online communities', "trait_tags": {'Digital-Media': 0.9, 'People-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 709,
+        "question_text": 'What digital media metric matters most to you?',
+"category": "Interest - Digital Media",
+        "weight": 1.5,
+        "trait_tags": {'Digital-Media': 0.9, 'Data-Analytics': 0.3},
+        "options": [
+            {"option_id": 5577, "option_text": 'Follower growth and audience building', "trait_tags": {'Digital-Media': 1.0, 'Marketing-Sales': 0.4}},
+            {"option_id": 5578, "option_text": 'Engagement rate and comments quality', "trait_tags": {'Digital-Media': 0.9, 'People-Skill': 0.3}},
+            {"option_id": 5579, "option_text": 'Video views and watch time', "trait_tags": {'Digital-Media': 0.9, 'Film-Broadcast': 0.3}},
+            {"option_id": 5580, "option_text": 'Click-through rate and traffic to website', "trait_tags": {'Digital-Media': 0.9, 'Web-Dev': 0.3}},
+            {"option_id": 5581, "option_text": 'Revenue and monetization from content', "trait_tags": {'Digital-Media': 0.9, 'Finance-Acct': 0.3}},
+            {"option_id": 5582, "option_text": 'Social impact and awareness created', "trait_tags": {'Digital-Media': 1.0, 'Community-Serve': 0.3}},
+        ]
+    },
+    {
+        "question_id": 710,
+        "question_text": 'What content niche would you build?',
+"category": "Interest - Digital Media",
+        "weight": 1.5,
+        "trait_tags": {'Digital-Media': 0.9},
+        "options": [
+            {"option_id": 5583, "option_text": 'Tech reviews and gadget unboxing', "trait_tags": {'Digital-Media': 1.0, 'Hardware-Systems': 0.3}},
+            {"option_id": 5584, "option_text": 'Travel and food vlogging across Philippines', "trait_tags": {'Digital-Media': 0.9, 'Tourism-Travel': 0.4}},
+            {"option_id": 5585, "option_text": 'Educational content and study tips', "trait_tags": {'Digital-Media': 0.9, 'Teaching-Ed': 0.4}},
+            {"option_id": 5586, "option_text": 'Fitness and wellness lifestyle content', "trait_tags": {'Digital-Media': 0.9, 'Sports-Ed': 0.3}},
+            {"option_id": 5587, "option_text": 'Art and creative process behind-the-scenes', "trait_tags": {'Digital-Media': 0.9, 'Visual-Design': 0.4}},
+            {"option_id": 5588, "option_text": 'Comedy sketches and entertainment', "trait_tags": {'Digital-Media': 1.0, 'Performing-Arts': 0.4}},
+        ]
+    },
+    {
+        "question_id": 711,
+        "question_text": 'What digital media business model appeals to you?',
+"category": "Interest - Digital Media",
+        "weight": 1.5,
+        "trait_tags": {'Digital-Media': 0.9, 'Startup-Venture': 0.3},
+        "options": [
+            {"option_id": 5589, "option_text": 'YouTube ad revenue and brand sponsorships', "trait_tags": {'Digital-Media': 1.0, 'Finance-Acct': 0.3}},
+            {"option_id": 5590, "option_text": 'Freelance content creation agency', "trait_tags": {'Digital-Media': 0.9, 'Startup-Venture': 0.4}},
+            {"option_id": 5591, "option_text": 'Online course and membership platform', "trait_tags": {'Digital-Media': 0.9, 'Teaching-Ed': 0.4}},
+            {"option_id": 5592, "option_text": 'Print-on-demand and merchandise sales', "trait_tags": {'Digital-Media': 0.9, 'Marketing-Sales': 0.3}},
+            {"option_id": 5593, "option_text": 'Newsletter and premium content subscription', "trait_tags": {'Digital-Media': 0.9, 'Creative-Skill': 0.3}},
+            {"option_id": 5594, "option_text": 'Social media management for brands', "trait_tags": {'Digital-Media': 1.0, 'Marketing-Sales': 0.4}},
+        ]
+    },
+    {
+        "question_id": 712,
+        "question_text": 'What electrical system would you design?',
+"category": "Interest - Electrical Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Electrical-Power': 0.9},
+        "options": [
+            {"option_id": 5595, "option_text": 'Solar farm power generation system', "trait_tags": {'Electrical-Power': 1.0, 'Environmental-Eng': 0.4}},
+            {"option_id": 5596, "option_text": 'Industrial factory power distribution', "trait_tags": {'Electrical-Power': 0.9, 'Industrial-Ops': 0.4}},
+            {"option_id": 5597, "option_text": 'Hospital emergency backup power system', "trait_tags": {'Electrical-Power': 0.9, 'Health-Admin': 0.3}},
+            {"option_id": 5598, "option_text": 'Data center uninterruptible power supply', "trait_tags": {'Electrical-Power': 0.9, 'Cloud-Systems': 0.3}},
+            {"option_id": 5599, "option_text": 'Residential electrical panel and circuitry', "trait_tags": {'Electrical-Power': 1.0, 'Civil-Build': 0.3}},
+            {"option_id": 5600, "option_text": 'Streetlight and public lighting automation', "trait_tags": {'Electrical-Power': 0.9, 'Community-Serve': 0.3}},
+        ]
+    },
+    {
+        "question_id": 713,
+        "question_text": 'What electrical safety practice interests you?',
+"category": "Interest - Electrical Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Electrical-Power': 0.9},
+        "options": [
+            {"option_id": 5601, "option_text": 'Lockout/tagout procedures for maintenance', "trait_tags": {'Electrical-Power': 1.0, 'Industrial-Ops': 0.3}},
+            {"option_id": 5602, "option_text": 'Grounding and earthing system design', "trait_tags": {'Electrical-Power': 0.9, 'Civil-Build': 0.3}},
+            {"option_id": 5603, "option_text": 'Arc flash hazard analysis and prevention', "trait_tags": {'Electrical-Power': 1.0, 'Analytical-Skill': 0.3}},
+            {"option_id": 5604, "option_text": 'Philippine Electrical Code compliance', "trait_tags": {'Electrical-Power': 0.9, 'Legal-Practice': 0.3}},
+            {"option_id": 5605, "option_text": 'Surge protection and lightning design', "trait_tags": {'Electrical-Power': 0.9, 'Environmental-Sci': 0.3}},
+            {"option_id": 5606, "option_text": 'Electrical fire investigation and prevention', "trait_tags": {'Electrical-Power': 0.9, 'Forensic-Sci': 0.3}},
+        ]
+    },
+    {
+        "question_id": 714,
+        "question_text": 'What electrical innovation excites you?',
+"category": "Interest - Electrical Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Electrical-Power': 0.9},
+        "options": [
+            {"option_id": 5607, "option_text": 'Wireless power transfer technology', "trait_tags": {'Electrical-Power': 1.0, 'Technical-Skill': 0.4}},
+            {"option_id": 5608, "option_text": 'Microgrids for island communities', "trait_tags": {'Electrical-Power': 0.9, 'Community-Serve': 0.4}},
+            {"option_id": 5609, "option_text": 'Smart meters and IoT energy monitoring', "trait_tags": {'Electrical-Power': 0.9, 'Hardware-Systems': 0.4}},
+            {"option_id": 5610, "option_text": 'High-voltage direct current (HVDC) transmission', "trait_tags": {'Electrical-Power': 1.0, 'Analytical-Skill': 0.3}},
+            {"option_id": 5611, "option_text": 'Battery management systems for EVs', "trait_tags": {'Electrical-Power': 0.9, 'Mechanical-Design': 0.3}},
+            {"option_id": 5612, "option_text": 'Power electronics and inverter design', "trait_tags": {'Electrical-Power': 0.9, 'Hardware-Systems': 0.3}},
+        ]
+    },
+    {
+        "question_id": 715,
+        "question_text": 'What power engineering role would you pursue?',
+"category": "Interest - Electrical Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Electrical-Power': 0.9},
+        "options": [
+            {"option_id": 5613, "option_text": 'Licensed Professional Electrical Engineer', "trait_tags": {'Electrical-Power': 1.0, 'Technical-Skill': 0.3}},
+            {"option_id": 5614, "option_text": 'Substation and transmission line engineer', "trait_tags": {'Electrical-Power': 0.9, 'Civil-Build': 0.3}},
+            {"option_id": 5615, "option_text": 'Control systems engineer in a power plant', "trait_tags": {'Electrical-Power': 0.9, 'Industrial-Ops': 0.4}},
+            {"option_id": 5616, "option_text": 'Energy auditor for buildings and factories', "trait_tags": {'Electrical-Power': 0.9, 'Environmental-Eng': 0.3}},
+            {"option_id": 5617, "option_text": 'Renewable energy project manager', "trait_tags": {'Electrical-Power': 0.9, 'Admin-Skill': 0.3}},
+            {"option_id": 5618, "option_text": 'Electrical estimator and project bidder', "trait_tags": {'Electrical-Power': 1.0, 'Finance-Acct': 0.3}},
+        ]
+    },
+    {
+        "question_id": 716,
+        "question_text": 'What pollution control technology interests you?',
+"category": "Interest - Environmental Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Environmental-Eng': 0.9},
+        "options": [
+            {"option_id": 5619, "option_text": 'Activated sludge process for sewage treatment', "trait_tags": {'Environmental-Eng': 1.0, 'Lab-Research': 0.3}},
+            {"option_id": 5620, "option_text": 'Electrostatic precipitators for factory emissions', "trait_tags": {'Environmental-Eng': 0.9, 'Electrical-Power': 0.3}},
+            {"option_id": 5621, "option_text": 'Reverse osmosis desalination plants', "trait_tags": {'Environmental-Eng': 0.9, 'Technical-Skill': 0.4}},
+            {"option_id": 5622, "option_text": 'Biogas capture from organic waste', "trait_tags": {'Environmental-Eng': 1.0, 'Agri-Nature': 0.3}},
+            {"option_id": 5623, "option_text": 'Noise pollution barriers and engineering', "trait_tags": {'Environmental-Eng': 0.9, 'Civil-Build': 0.4}},
+            {"option_id": 5624, "option_text": 'Hazardous waste containment and disposal', "trait_tags": {'Environmental-Eng': 0.9, 'Lab-Research': 0.4}},
+        ]
+    },
+    {
+        "question_id": 717,
+        "question_text": 'What environmental compliance task appeals to you?',
+"category": "Interest - Environmental Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Environmental-Eng': 0.9},
+        "options": [
+            {"option_id": 5625, "option_text": 'Writing environmental management plans', "trait_tags": {'Environmental-Eng': 1.0, 'Admin-Skill': 0.3}},
+            {"option_id": 5626, "option_text": 'Conducting environmental monitoring sampling', "trait_tags": {'Environmental-Eng': 0.9, 'Field-Research': 0.4}},
+            {"option_id": 5627, "option_text": 'Calculating carbon emissions and offsets', "trait_tags": {'Environmental-Eng': 0.9, 'Data-Analytics': 0.4}},
+            {"option_id": 5628, "option_text": 'Reviewing EIA documents for DENR submission', "trait_tags": {'Environmental-Eng': 1.0, 'Legal-Practice': 0.3}},
+            {"option_id": 5629, "option_text": 'Designing stormwater management systems', "trait_tags": {'Environmental-Eng': 0.9, 'Civil-Build': 0.4}},
+            {"option_id": 5630, "option_text": 'Implementing ISO 14001 environmental standards', "trait_tags": {'Environmental-Eng': 0.9, 'Industrial-Ops': 0.3}},
+        ]
+    },
+    {
+        "question_id": 718,
+        "question_text": 'What environmental engineering innovation interests you?',
+"category": "Interest - Environmental Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Environmental-Eng': 0.9},
+        "options": [
+            {"option_id": 5631, "option_text": 'Plastic-to-fuel pyrolysis technology', "trait_tags": {'Environmental-Eng': 1.0, 'Lab-Research': 0.3}},
+            {"option_id": 5632, "option_text": 'Vertical farming and controlled environment agriculture', "trait_tags": {'Environmental-Eng': 0.9, 'Agri-Nature': 0.4}},
+            {"option_id": 5633, "option_text": 'Atmospheric water generators for arid areas', "trait_tags": {'Environmental-Eng': 0.9, 'Mechanical-Design': 0.3}},
+            {"option_id": 5634, "option_text": 'Ocean plastic cleanup technology', "trait_tags": {'Environmental-Eng': 1.0, 'Maritime-Sea': 0.3}},
+            {"option_id": 5635, "option_text": 'Carbon capture and storage systems', "trait_tags": {'Environmental-Eng': 0.9, 'Lab-Research': 0.3}},
+            {"option_id": 5636, "option_text": 'Smart waste sorting using AI vision', "trait_tags": {'Environmental-Eng': 0.9, 'AI-ML': 0.4}},
+        ]
+    },
+    {
+        "question_id": 719,
+        "question_text": 'What environmental project would you manage?',
+"category": "Interest - Environmental Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Environmental-Eng': 0.9},
+        "options": [
+            {"option_id": 5637, "option_text": 'Municipal sewage treatment plant upgrade', "trait_tags": {'Environmental-Eng': 1.0, 'Civil-Build': 0.4}},
+            {"option_id": 5638, "option_text": 'Factory air quality improvement project', "trait_tags": {'Environmental-Eng': 0.9, 'Industrial-Ops': 0.4}},
+            {"option_id": 5639, "option_text": 'River rehabilitation and cleanup program', "trait_tags": {'Environmental-Eng': 0.9, 'Community-Serve': 0.3}},
+            {"option_id": 5640, "option_text": 'Green building certification project', "trait_tags": {'Environmental-Eng': 0.9, 'Spatial-Design': 0.3}},
+            {"option_id": 5641, "option_text": 'Renewable energy feasibility study', "trait_tags": {'Environmental-Eng': 1.0, 'Electrical-Power': 0.3}},
+            {"option_id": 5642, "option_text": 'Solid waste reduction plan for a city', "trait_tags": {'Environmental-Eng': 0.9, 'Admin-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 720,
+        "question_text": 'What Philippine ecosystem would you study?',
+"category": "Interest - Environmental Science",
+        "weight": 1.5,
+        "trait_tags": {'Environmental-Sci': 0.9},
+        "options": [
+            {"option_id": 5643, "option_text": 'Coral reef systems of Tubbataha', "trait_tags": {'Environmental-Sci': 1.0, 'Maritime-Sea': 0.4}},
+            {"option_id": 5644, "option_text": 'Mangrove forests along coastlines', "trait_tags": {'Environmental-Sci': 0.9, 'Maritime-Sea': 0.3}},
+            {"option_id": 5645, "option_text": 'Rainforest canopy in Sierra Madre', "trait_tags": {'Environmental-Sci': 0.9, 'Field-Research': 0.5}},
+            {"option_id": 5646, "option_text": 'Freshwater lake ecosystems like Laguna de Bay', "trait_tags": {'Environmental-Sci': 1.0, 'Field-Research': 0.3}},
+            {"option_id": 5647, "option_text": 'Volcanic soil ecosystems near Mt. Pinatubo', "trait_tags": {'Environmental-Sci': 0.9, 'Field-Research': 0.4}},
+            {"option_id": 5648, "option_text": 'Urban ecosystems in Metro Manila', "trait_tags": {'Environmental-Sci': 0.9, 'Community-Serve': 0.3}},
+        ]
+    },
+    {
+        "question_id": 721,
+        "question_text": 'What environmental data would you collect?',
+"category": "Interest - Environmental Science",
+        "weight": 1.5,
+        "trait_tags": {'Environmental-Sci': 0.9, 'Data-Analytics': 0.3},
+        "options": [
+            {"option_id": 5649, "option_text": 'Air quality index measurements', "trait_tags": {'Environmental-Sci': 1.0, 'Lab-Research': 0.3}},
+            {"option_id": 5650, "option_text": 'Water pH and dissolved oxygen levels', "trait_tags": {'Environmental-Sci': 0.9, 'Lab-Research': 0.4}},
+            {"option_id": 5651, "option_text": 'Species population and biodiversity counts', "trait_tags": {'Environmental-Sci': 0.9, 'Field-Research': 0.5}},
+            {"option_id": 5652, "option_text": 'Soil composition and contaminant levels', "trait_tags": {'Environmental-Sci': 1.0, 'Lab-Research': 0.4}},
+            {"option_id": 5653, "option_text": 'Weather patterns and climate trends', "trait_tags": {'Environmental-Sci': 0.9, 'Data-Analytics': 0.4}},
+            {"option_id": 5654, "option_text": 'Noise and light pollution measurements', "trait_tags": {'Environmental-Sci': 0.9, 'Technical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 722,
+        "question_text": 'What environmental policy issue concerns you?',
+"category": "Interest - Environmental Science",
+        "weight": 1.5,
+        "trait_tags": {'Environmental-Sci': 0.9},
+        "options": [
+            {"option_id": 5655, "option_text": 'Deforestation and illegal logging', "trait_tags": {'Environmental-Sci': 1.0, 'Law-Enforce': 0.3}},
+            {"option_id": 5656, "option_text": 'Plastic pollution in Philippine oceans', "trait_tags": {'Environmental-Sci': 0.9, 'Maritime-Sea': 0.3}},
+            {"option_id": 5657, "option_text": 'Air pollution from vehicles and factories', "trait_tags": {'Environmental-Sci': 0.9, 'Environmental-Eng': 0.3}},
+            {"option_id": 5658, "option_text": 'Loss of endemic Philippine species', "trait_tags": {'Environmental-Sci': 1.0, 'Field-Research': 0.3}},
+            {"option_id": 5659, "option_text": 'Mining damage to mountain ecosystems', "trait_tags": {'Environmental-Sci': 0.9, 'Legal-Practice': 0.3}},
+            {"option_id": 5660, "option_text": 'Sea level rise threatening coastal communities', "trait_tags": {'Environmental-Sci': 0.9, 'Community-Serve': 0.3}},
+        ]
+    },
+    {
+        "question_id": 723,
+        "question_text": 'What environmental conservation method would you support?',
+"category": "Interest - Environmental Science",
+        "weight": 1.5,
+        "trait_tags": {'Environmental-Sci': 0.9},
+        "options": [
+            {"option_id": 5661, "option_text": 'Marine protected areas and no-take zones', "trait_tags": {'Environmental-Sci': 1.0, 'Maritime-Sea': 0.3}},
+            {"option_id": 5662, "option_text": 'Reforestation and native tree planting', "trait_tags": {'Environmental-Sci': 0.9, 'Agri-Nature': 0.3}},
+            {"option_id": 5663, "option_text": 'Wildlife rescue and rehabilitation centers', "trait_tags": {'Environmental-Sci': 0.9, 'Patient-Care': 0.2}},
+            {"option_id": 5664, "option_text": 'Community-based ecosystem management', "trait_tags": {'Environmental-Sci': 0.9, 'Community-Serve': 0.5}},
+            {"option_id": 5665, "option_text": 'Ecotourism as conservation incentive', "trait_tags": {'Environmental-Sci': 0.9, 'Tourism-Travel': 0.4}},
+            {"option_id": 5666, "option_text": 'Scientific breeding programs for rare species', "trait_tags": {'Environmental-Sci': 1.0, 'Lab-Research': 0.4}},
+        ]
+    },
+    {
+        "question_id": 724,
+        "question_text": 'What field data collection technology would you use?',
+"category": "Interest - Field Research",
+        "weight": 1.5,
+        "trait_tags": {'Field-Research': 0.9},
+        "options": [
+            {"option_id": 5667, "option_text": 'GIS mapping with ArcGIS or QGIS software', "trait_tags": {'Field-Research': 1.0, 'Data-Analytics': 0.4}},
+            {"option_id": 5668, "option_text": 'Drone photography for terrain mapping', "trait_tags": {'Field-Research': 0.9, 'Technical-Skill': 0.5}},
+            {"option_id": 5669, "option_text": 'GPS tracking collars for wildlife', "trait_tags": {'Field-Research': 0.9, 'Environmental-Sci': 0.4}},
+            {"option_id": 5670, "option_text": 'Mobile data collection apps (KoBoToolbox)', "trait_tags": {'Field-Research': 0.9, 'Software-Dev': 0.3}},
+            {"option_id": 5671, "option_text": 'Camera traps for nocturnal wildlife', "trait_tags": {'Field-Research': 1.0, 'Environmental-Sci': 0.3}},
+            {"option_id": 5672, "option_text": 'Underwater acoustic monitoring devices', "trait_tags": {'Field-Research': 0.9, 'Maritime-Sea': 0.4}},
+        ]
+    },
+    {
+        "question_id": 725,
+        "question_text": 'What type of field survey would you conduct?',
+"category": "Interest - Field Research",
+        "weight": 1.5,
+        "trait_tags": {'Field-Research': 0.9},
+        "options": [
+            {"option_id": 5673, "option_text": 'Forest plot inventory and tree measurement', "trait_tags": {'Field-Research': 1.0, 'Environmental-Sci': 0.4}},
+            {"option_id": 5674, "option_text": 'Bird counting and migration tracking', "trait_tags": {'Field-Research': 0.9, 'Environmental-Sci': 0.5}},
+            {"option_id": 5675, "option_text": 'Community health baseline survey', "trait_tags": {'Field-Research': 0.9, 'Public-Health': 0.5}},
+            {"option_id": 5676, "option_text": 'Soil erosion and land degradation assessment', "trait_tags": {'Field-Research': 0.9, 'Environmental-Eng': 0.3}},
+            {"option_id": 5677, "option_text": 'Archaeological site excavation', "trait_tags": {'Field-Research': 1.0, 'Creative-Skill': 0.2}},
+            {"option_id": 5678, "option_text": 'Marine invertebrate diversity transect', "trait_tags": {'Field-Research': 0.9, 'Maritime-Sea': 0.4}},
+        ]
+    },
+    {
+        "question_id": 726,
+        "question_text": 'What motivates you about field work?',
+"category": "Interest - Field Research",
+        "weight": 1.5,
+        "trait_tags": {'Field-Research': 0.9},
+        "options": [
+            {"option_id": 5679, "option_text": 'Working outdoors instead of in an office', "trait_tags": {'Field-Research': 1.0, 'Physical-Skill': 0.4}},
+            {"option_id": 5680, "option_text": 'Discovering new species or habitats', "trait_tags": {'Field-Research': 0.9, 'Environmental-Sci': 0.5}},
+            {"option_id": 5681, "option_text": 'Interacting with local and indigenous communities', "trait_tags": {'Field-Research': 0.9, 'People-Skill': 0.4}},
+            {"option_id": 5682, "option_text": 'The adventure and unpredictability of fieldwork', "trait_tags": {'Field-Research': 0.9, 'Physical-Skill': 0.3}},
+            {"option_id": 5683, "option_text": 'Collecting data that directly helps conservation', "trait_tags": {'Field-Research': 1.0, 'Environmental-Sci': 0.3}},
+            {"option_id": 5684, "option_text": 'Training local volunteers in research methods', "trait_tags": {'Field-Research': 0.9, 'Teaching-Ed': 0.4}},
+        ]
+    },
+    {
+        "question_id": 727,
+        "question_text": 'What field research challenge would you overcome?',
+"category": "Interest - Field Research",
+        "weight": 1.5,
+        "trait_tags": {'Field-Research': 0.9},
+        "options": [
+            {"option_id": 5685, "option_text": 'Working in extreme weather conditions', "trait_tags": {'Field-Research': 1.0, 'Physical-Skill': 0.5}},
+            {"option_id": 5686, "option_text": 'Reaching very remote and inaccessible areas', "trait_tags": {'Field-Research': 0.9, 'Physical-Skill': 0.4}},
+            {"option_id": 5687, "option_text": 'Getting community permission and cooperation', "trait_tags": {'Field-Research': 0.9, 'People-Skill': 0.5}},
+            {"option_id": 5688, "option_text": 'Maintaining equipment in harsh environments', "trait_tags": {'Field-Research': 0.9, 'Technical-Skill': 0.4}},
+            {"option_id": 5689, "option_text": 'Processing large volumes of field data quickly', "trait_tags": {'Field-Research': 1.0, 'Data-Analytics': 0.4}},
+            {"option_id": 5690, "option_text": 'Working safely with dangerous wildlife', "trait_tags": {'Field-Research': 0.9, 'Environmental-Sci': 0.3}},
+        ]
+    },
+    {
+        "question_id": 728,
+        "question_text": 'What film production stage excites you most?',
+"category": "Interest - Film & Broadcast",
+        "weight": 1.5,
+        "trait_tags": {'Film-Broadcast': 0.9},
+        "options": [
+            {"option_id": 5691, "option_text": 'Pre-production: scripting and location scouting', "trait_tags": {'Film-Broadcast': 1.0, 'Creative-Skill': 0.4}},
+            {"option_id": 5692, "option_text": 'Production: directing actors on set', "trait_tags": {'Film-Broadcast': 0.9, 'People-Skill': 0.4}},
+            {"option_id": 5693, "option_text": 'Post-production: editing and color grading', "trait_tags": {'Film-Broadcast': 0.9, 'Digital-Media': 0.4}},
+            {"option_id": 5694, "option_text": 'Sound design and music scoring', "trait_tags": {'Film-Broadcast': 0.9, 'Performing-Arts': 0.4}},
+            {"option_id": 5695, "option_text": 'Distribution and film festival submission', "trait_tags": {'Film-Broadcast': 1.0, 'Marketing-Sales': 0.3}},
+            {"option_id": 5696, "option_text": 'VFX and CGI integration', "trait_tags": {'Film-Broadcast': 0.9, 'Animation-3D': 0.5}},
+        ]
+    },
+    {
+        "question_id": 729,
+        "question_text": 'What broadcast technology would you operate?',
+"category": "Interest - Film & Broadcast",
+        "weight": 1.5,
+        "trait_tags": {'Film-Broadcast': 0.9, 'Technical-Skill': 0.3},
+        "options": [
+            {"option_id": 5697, "option_text": 'Professional cinema cameras (RED, ARRI)', "trait_tags": {'Film-Broadcast': 1.0, 'Technical-Skill': 0.4}},
+            {"option_id": 5698, "option_text": 'Live broadcast switchers and control rooms', "trait_tags": {'Film-Broadcast': 0.9, 'Technical-Skill': 0.5}},
+            {"option_id": 5699, "option_text": 'Studio lighting rigs and grip equipment', "trait_tags": {'Film-Broadcast': 0.9, 'Physical-Skill': 0.3}},
+            {"option_id": 5700, "option_text": 'Teleprompter and live feed management', "trait_tags": {'Film-Broadcast': 0.9, 'Admin-Skill': 0.3}},
+            {"option_id": 5701, "option_text": 'Drone cameras for aerial cinematography', "trait_tags": {'Film-Broadcast': 1.0, 'Technical-Skill': 0.4}},
+            {"option_id": 5702, "option_text": 'Live streaming encoder and setup', "trait_tags": {'Film-Broadcast': 0.9, 'Digital-Media': 0.4}},
+        ]
+    },
+    {
+        "question_id": 730,
+        "question_text": 'What kind of Filipino story would you tell through film?',
+"category": "Interest - Film & Broadcast",
+        "weight": 1.5,
+        "trait_tags": {'Film-Broadcast': 0.9},
+        "options": [
+            {"option_id": 5703, "option_text": 'OFW experience and family sacrifice', "trait_tags": {'Film-Broadcast': 1.0, 'Social-Work': 0.3}},
+            {"option_id": 5704, "option_text": 'Filipino heroism and historical events', "trait_tags": {'Film-Broadcast': 0.9, 'Teaching-Ed': 0.3}},
+            {"option_id": 5705, "option_text": 'Urban poverty and social inequality', "trait_tags": {'Film-Broadcast': 0.9, 'Community-Serve': 0.3}},
+            {"option_id": 5706, "option_text": 'Philippine natural beauty and travel', "trait_tags": {'Film-Broadcast': 0.9, 'Tourism-Travel': 0.4}},
+            {"option_id": 5707, "option_text": 'Coming-of-age story of a Filipino youth', "trait_tags": {'Film-Broadcast': 1.0, 'Community-Serve': 0.3}},
+            {"option_id": 5708, "option_text": 'Science fiction set in future Philippines', "trait_tags": {'Film-Broadcast': 0.9, 'Creative-Skill': 0.5}},
+        ]
+    },
+    {
+        "question_id": 731,
+        "question_text": 'What film/media industry role would you take?',
+"category": "Interest - Film & Broadcast",
+        "weight": 1.5,
+        "trait_tags": {'Film-Broadcast': 0.9},
+        "options": [
+            {"option_id": 5709, "option_text": 'TV or film production assistant', "trait_tags": {'Film-Broadcast': 1.0, 'Admin-Skill': 0.3}},
+            {"option_id": 5710, "option_text": 'Freelance videographer for events and weddings', "trait_tags": {'Film-Broadcast': 0.9, 'Hospitality-Svc': 0.3}},
+            {"option_id": 5711, "option_text": 'News cameraman covering current events', "trait_tags": {'Film-Broadcast': 0.9, 'Community-Serve': 0.3}},
+            {"option_id": 5712, "option_text": 'Music video director', "trait_tags": {'Film-Broadcast': 0.9, 'Performing-Arts': 0.4}},
+            {"option_id": 5713, "option_text": 'Documentary filmmaker for social causes', "trait_tags": {'Film-Broadcast': 1.0, 'Social-Work': 0.3}},
+            {"option_id": 5714, "option_text": 'Film editor for a post-production house', "trait_tags": {'Film-Broadcast': 0.9, 'Technical-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 732,
+        "question_text": 'What food testing method interests you?',
+"category": "Interest - Food Science",
+        "weight": 1.5,
+        "trait_tags": {'Food-Science': 0.9},
+        "options": [
+            {"option_id": 5715, "option_text": 'Microbiological testing for pathogens', "trait_tags": {'Food-Science': 1.0, 'Lab-Research': 0.5}},
+            {"option_id": 5716, "option_text": 'Proximate analysis for nutrient content', "trait_tags": {'Food-Science': 0.9, 'Nutrition-Diet': 0.4}},
+            {"option_id": 5717, "option_text": 'Shelf-life stability testing', "trait_tags": {'Food-Science': 0.9, 'Analytical-Skill': 0.3}},
+            {"option_id": 5718, "option_text": 'Food allergen detection and labeling', "trait_tags": {'Food-Science': 0.9, 'Lab-Research': 0.4}},
+            {"option_id": 5719, "option_text": 'Water activity and moisture measurement', "trait_tags": {'Food-Science': 1.0, 'Technical-Skill': 0.3}},
+            {"option_id": 5720, "option_text": 'Pesticide residue analysis in produce', "trait_tags": {'Food-Science': 0.9, 'Environmental-Sci': 0.3}},
+        ]
+    },
+    {
+        "question_id": 733,
+        "question_text": 'What food processing technology fascinates you?',
+"category": "Interest - Food Science",
+        "weight": 1.5,
+        "trait_tags": {'Food-Science': 0.9},
+        "options": [
+            {"option_id": 5721, "option_text": 'High-pressure processing for fresh foods', "trait_tags": {'Food-Science': 1.0, 'Technical-Skill': 0.4}},
+            {"option_id": 5722, "option_text": 'Freeze-drying for space and emergency food', "trait_tags": {'Food-Science': 0.9, 'Technical-Skill': 0.3}},
+            {"option_id": 5723, "option_text": 'Fermentation science for yogurt and tempeh', "trait_tags": {'Food-Science': 0.9, 'Lab-Research': 0.4}},
+            {"option_id": 5724, "option_text": 'Extrusion technology for snack production', "trait_tags": {'Food-Science': 0.9, 'Industrial-Ops': 0.4}},
+            {"option_id": 5725, "option_text": 'Pasteurization and sterilization methods', "trait_tags": {'Food-Science': 1.0, 'Lab-Research': 0.3}},
+            {"option_id": 5726, "option_text": 'Encapsulation of vitamins and probiotics', "trait_tags": {'Food-Science': 0.9, 'Pharmacy': 0.3}},
+        ]
+    },
+    {
+        "question_id": 734,
+        "question_text": 'What food quality challenge would you tackle?',
+"category": "Interest - Food Science",
+        "weight": 1.5,
+        "trait_tags": {'Food-Science': 0.9, 'Industrial-Ops': 0.3},
+        "options": [
+            {"option_id": 5727, "option_text": 'Reducing food waste in supply chains', "trait_tags": {'Food-Science': 1.0, 'Industrial-Ops': 0.4}},
+            {"option_id": 5728, "option_text": 'Ensuring halal and organic food certification', "trait_tags": {'Food-Science': 0.9, 'Legal-Practice': 0.3}},
+            {"option_id": 5729, "option_text": 'Detecting food adulteration and fake products', "trait_tags": {'Food-Science': 0.9, 'Forensic-Sci': 0.3}},
+            {"option_id": 5730, "option_text": 'Extending shelf life of tropical fruits', "trait_tags": {'Food-Science': 1.0, 'Agri-Nature': 0.3}},
+            {"option_id": 5731, "option_text": 'Improving taste while reducing sugar and salt', "trait_tags": {'Food-Science': 0.9, 'Nutrition-Diet': 0.4}},
+            {"option_id": 5732, "option_text": 'Scaling artisanal food for mass production', "trait_tags": {'Food-Science': 0.9, 'Industrial-Ops': 0.4}},
+        ]
+    },
+    {
+        "question_id": 735,
+        "question_text": 'What food industry career appeals to you?',
+"category": "Career - Food Science",
+        "weight": 1.5,
+        "trait_tags": {'Food-Science': 0.9},
+        "options": [
+            {"option_id": 5733, "option_text": 'Food researcher in a tech company lab', "trait_tags": {'Food-Science': 1.0, 'Lab-Research': 0.4}},
+            {"option_id": 5734, "option_text": 'Quality assurance manager in a food factory', "trait_tags": {'Food-Science': 0.9, 'Industrial-Ops': 0.5}},
+            {"option_id": 5735, "option_text": 'Food safety inspector for government (FDA)', "trait_tags": {'Food-Science': 0.9, 'Law-Enforce': 0.3}},
+            {"option_id": 5736, "option_text": 'Product developer for a snack company', "trait_tags": {'Food-Science': 0.9, 'Creative-Skill': 0.3}},
+            {"option_id": 5737, "option_text": 'Nutritionist consultant for food brands', "trait_tags": {'Food-Science': 0.9, 'Nutrition-Diet': 0.5}},
+            {"option_id": 5738, "option_text": 'Food technology professor and researcher', "trait_tags": {'Food-Science': 1.0, 'Teaching-Ed': 0.4}},
+        ]
+    },
+    {
+        "question_id": 736,
+        "question_text": 'What guest experience would you create?',
+"category": "Interest - Hospitality",
+        "weight": 1.5,
+        "trait_tags": {'Hospitality-Svc': 0.9},
+        "options": [
+            {"option_id": 5739, "option_text": 'Welcome package for first-time resort guests', "trait_tags": {'Hospitality-Svc': 1.0, 'Tourism-Travel': 0.3}},
+            {"option_id": 5740, "option_text": 'Personalized dining experience for anniversaries', "trait_tags": {'Hospitality-Svc': 0.9, 'Culinary-Arts': 0.4}},
+            {"option_id": 5741, "option_text": 'Guided city tour for corporate retreat groups', "trait_tags": {'Hospitality-Svc': 0.9, 'Tourism-Travel': 0.5}},
+            {"option_id": 5742, "option_text": 'Spa and wellness relaxation package', "trait_tags": {'Hospitality-Svc': 0.9, 'Rehab-Therapy': 0.3}},
+            {"option_id": 5743, "option_text": 'VIP lounge and priority service program', "trait_tags": {'Hospitality-Svc': 1.0, 'Admin-Skill': 0.3}},
+            {"option_id": 5744, "option_text": 'Cultural immersion program for foreign visitors', "trait_tags": {'Hospitality-Svc': 0.9, 'Community-Serve': 0.3}},
+        ]
+    },
+    {
+        "question_id": 737,
+        "question_text": 'What hospitality management topic interests you?',
+"category": "Interest - Hospitality",
+        "weight": 1.5,
+        "trait_tags": {'Hospitality-Svc': 0.9, 'Admin-Skill': 0.3},
+        "options": [
+            {"option_id": 5745, "option_text": 'Hotel revenue management and yield pricing', "trait_tags": {'Hospitality-Svc': 1.0, 'Finance-Acct': 0.4}},
+            {"option_id": 5746, "option_text": 'Food and beverage cost control', "trait_tags": {'Hospitality-Svc': 0.9, 'Finance-Acct': 0.4}},
+            {"option_id": 5747, "option_text": 'Housekeeping operations and standards', "trait_tags": {'Hospitality-Svc': 0.9, 'Admin-Skill': 0.4}},
+            {"option_id": 5748, "option_text": 'Front desk operations and check-in systems', "trait_tags": {'Hospitality-Svc': 1.0, 'Technical-Skill': 0.3}},
+            {"option_id": 5749, "option_text": 'Guest satisfaction measurement and improvement', "trait_tags": {'Hospitality-Svc': 0.9, 'Data-Analytics': 0.3}},
+            {"option_id": 5750, "option_text": 'Sustainable hospitality and eco-friendly practices', "trait_tags": {'Hospitality-Svc': 0.9, 'Environmental-Sci': 0.3}},
+        ]
+    },
+    {
+        "question_id": 738,
+        "question_text": 'What hospitality emergency would you handle well?',
+"category": "Interest - Hospitality",
+        "weight": 1.5,
+        "trait_tags": {'Hospitality-Svc': 0.9},
+        "options": [
+            {"option_id": 5751, "option_text": 'Guest medical emergency at the hotel', "trait_tags": {'Hospitality-Svc': 1.0, 'Patient-Care': 0.3}},
+            {"option_id": 5752, "option_text": 'Overbooking situation during peak season', "trait_tags": {'Hospitality-Svc': 0.9, 'Analytical-Skill': 0.3}},
+            {"option_id": 5753, "option_text": 'VIP complaint about room or service quality', "trait_tags": {'Hospitality-Svc': 0.9, 'People-Skill': 0.5}},
+            {"option_id": 5754, "option_text": 'Natural disaster evacuation procedures', "trait_tags": {'Hospitality-Svc': 0.9, 'Community-Serve': 0.3}},
+            {"option_id": 5755, "option_text": 'Food safety incident in the restaurant', "trait_tags": {'Hospitality-Svc': 0.9, 'Food-Science': 0.4}},
+            {"option_id": 5756, "option_text": 'Security breach or theft in the property', "trait_tags": {'Hospitality-Svc': 1.0, 'Law-Enforce': 0.3}},
+        ]
+    },
+    {
+        "question_id": 739,
+        "question_text": 'What hotel department would you manage?',
+"category": "Interest - Hospitality",
+        "weight": 1.5,
+        "trait_tags": {'Hospitality-Svc': 0.9},
+        "options": [
+            {"option_id": 5757, "option_text": 'Rooms division and guest services', "trait_tags": {'Hospitality-Svc': 1.0, 'Admin-Skill': 0.4}},
+            {"option_id": 5758, "option_text": 'Food and beverage operations', "trait_tags": {'Hospitality-Svc': 0.9, 'Culinary-Arts': 0.4}},
+            {"option_id": 5759, "option_text": 'Sales and marketing department', "trait_tags": {'Hospitality-Svc': 0.9, 'Marketing-Sales': 0.4}},
+            {"option_id": 5760, "option_text": 'Engineering and facility maintenance', "trait_tags": {'Hospitality-Svc': 0.9, 'Technical-Skill': 0.3}},
+            {"option_id": 5761, "option_text": 'Human resources and employee training', "trait_tags": {'Hospitality-Svc': 0.9, 'HR-Management': 0.4}},
+            {"option_id": 5762, "option_text": 'Finance and accounting department', "trait_tags": {'Hospitality-Svc': 1.0, 'Finance-Acct': 0.3}},
+        ]
+    },
+    {
+        "question_id": 740,
+        "question_text": 'What factory floor improvement would you make?',
+"category": "Interest - Industrial Operations",
+        "weight": 1.5,
+        "trait_tags": {'Industrial-Ops': 0.9},
+        "options": [
+            {"option_id": 5763, "option_text": 'Reducing bottlenecks in the production line', "trait_tags": {'Industrial-Ops': 1.0, 'Analytical-Skill': 0.4}},
+            {"option_id": 5764, "option_text": 'Implementing automated quality checks', "trait_tags": {'Industrial-Ops': 0.9, 'Software-Dev': 0.3}},
+            {"option_id": 5765, "option_text": 'Optimizing raw material usage to reduce waste', "trait_tags": {'Industrial-Ops': 0.9, 'Environmental-Eng': 0.3}},
+            {"option_id": 5766, "option_text": 'Improving worker safety with better procedures', "trait_tags": {'Industrial-Ops': 0.9, 'Physical-Skill': 0.3}},
+            {"option_id": 5767, "option_text": 'Redesigning workflow for shorter cycle times', "trait_tags": {'Industrial-Ops': 1.0, 'Mechanical-Design': 0.3}},
+            {"option_id": 5768, "option_text": 'Installing IoT sensors for real-time monitoring', "trait_tags": {'Industrial-Ops': 0.9, 'Hardware-Systems': 0.3}},
+        ]
+    },
+    {
+        "question_id": 741,
+        "question_text": 'What industrial engineering tool would you apply?',
+"category": "Interest - Industrial Operations",
+        "weight": 1.5,
+        "trait_tags": {'Industrial-Ops': 0.9},
+        "options": [
+            {"option_id": 5769, "option_text": 'Time and motion study for productivity', "trait_tags": {'Industrial-Ops': 1.0, 'Analytical-Skill': 0.5}},
+            {"option_id": 5770, "option_text": 'Pareto analysis for problem prioritization', "trait_tags": {'Industrial-Ops': 0.9, 'Data-Analytics': 0.4}},
+            {"option_id": 5771, "option_text": 'Kanban boards for workflow visualization', "trait_tags": {'Industrial-Ops': 0.9, 'Admin-Skill': 0.3}},
+            {"option_id": 5772, "option_text": 'Overall Equipment Effectiveness (OEE) tracking', "trait_tags": {'Industrial-Ops': 1.0, 'Data-Analytics': 0.3}},
+            {"option_id": 5773, "option_text": 'Failure Mode and Effects Analysis (FMEA)', "trait_tags": {'Industrial-Ops': 0.9, 'Analytical-Skill': 0.4}},
+            {"option_id": 5774, "option_text": 'Work sampling and ergonomic assessment', "trait_tags": {'Industrial-Ops': 0.9, 'Physical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 742,
+        "question_text": 'What supply chain challenge would you solve?',
+"category": "Interest - Industrial Operations",
+        "weight": 1.5,
+        "trait_tags": {'Industrial-Ops': 0.9},
+        "options": [
+            {"option_id": 5775, "option_text": 'Reducing delivery lead times for Philippine logistics', "trait_tags": {'Industrial-Ops': 1.0, 'Admin-Skill': 0.3}},
+            {"option_id": 5776, "option_text": 'Warehouse layout optimization for faster picking', "trait_tags": {'Industrial-Ops': 0.9, 'Spatial-Design': 0.3}},
+            {"option_id": 5777, "option_text": 'Inventory control to prevent stockouts', "trait_tags": {'Industrial-Ops': 0.9, 'Finance-Acct': 0.3}},
+            {"option_id": 5778, "option_text": 'Supplier quality evaluation and management', "trait_tags": {'Industrial-Ops': 0.9, 'Analytical-Skill': 0.4}},
+            {"option_id": 5779, "option_text": 'Cold chain management for perishable goods', "trait_tags": {'Industrial-Ops': 1.0, 'Food-Science': 0.3}},
+            {"option_id": 5780, "option_text": 'Last-mile delivery optimization with routing', "trait_tags": {'Industrial-Ops': 0.9, 'Data-Analytics': 0.4}},
+        ]
+    },
+    {
+        "question_id": 743,
+        "question_text": 'What laboratory research breakthrough excites you?',
+"category": "Interest - Laboratory Research",
+        "weight": 1.5,
+        "trait_tags": {'Lab-Research': 0.9},
+        "options": [
+            {"option_id": 5781, "option_text": 'CRISPR gene editing for disease treatment', "trait_tags": {'Lab-Research': 1.0, 'Medical-Lab': 0.4}},
+            {"option_id": 5782, "option_text": 'Novel drug discovery for tropical diseases', "trait_tags": {'Lab-Research': 0.9, 'Pharmacy': 0.5}},
+            {"option_id": 5783, "option_text": 'New materials with extraordinary properties', "trait_tags": {'Lab-Research': 0.9, 'Mechanical-Design': 0.3}},
+            {"option_id": 5784, "option_text": 'Stem cell research for regenerative medicine', "trait_tags": {'Lab-Research': 1.0, 'Patient-Care': 0.3}},
+            {"option_id": 5785, "option_text": 'Bioplastics and sustainable materials', "trait_tags": {'Lab-Research': 0.9, 'Environmental-Eng': 0.4}},
+            {"option_id": 5786, "option_text": 'Quantum computing hardware development', "trait_tags": {'Lab-Research': 0.9, 'Hardware-Systems': 0.3}},
+        ]
+    },
+    {
+        "question_id": 744,
+        "question_text": 'What lab research routine would you enjoy?',
+"category": "Interest - Laboratory Research",
+        "weight": 1.5,
+        "trait_tags": {'Lab-Research': 0.9},
+        "options": [
+            {"option_id": 5787, "option_text": 'Preparing samples and running experiments daily', "trait_tags": {'Lab-Research': 1.0, 'Technical-Skill': 0.3}},
+            {"option_id": 5788, "option_text": 'Analyzing data and writing research papers', "trait_tags": {'Lab-Research': 0.9, 'Analytical-Skill': 0.5}},
+            {"option_id": 5789, "option_text": 'Calibrating and maintaining lab equipment', "trait_tags": {'Lab-Research': 0.9, 'Technical-Skill': 0.5}},
+            {"option_id": 5790, "option_text": 'Supervising lab assistants and interns', "trait_tags": {'Lab-Research': 0.9, 'People-Skill': 0.3}},
+            {"option_id": 5791, "option_text": 'Reading journals and planning new experiments', "trait_tags": {'Lab-Research': 1.0, 'Analytical-Skill': 0.3}},
+            {"option_id": 5792, "option_text": 'Presenting results at scientific conferences', "trait_tags": {'Lab-Research': 0.9, 'Performing-Arts': 0.2}},
+        ]
+    },
+    {
+        "question_id": 745,
+        "question_text": 'What lab safety practice is most important to you?',
+"category": "Interest - Laboratory Research",
+        "weight": 1.5,
+        "trait_tags": {'Lab-Research': 0.9},
+        "options": [
+            {"option_id": 5793, "option_text": 'Proper chemical handling and storage', "trait_tags": {'Lab-Research': 1.0, 'Environmental-Eng': 0.3}},
+            {"option_id": 5794, "option_text": 'Wearing appropriate PPE at all times', "trait_tags": {'Lab-Research': 0.9, 'Physical-Skill': 0.3}},
+            {"option_id": 5795, "option_text": 'Managing biological hazard waste disposal', "trait_tags": {'Lab-Research': 0.9, 'Environmental-Eng': 0.3}},
+            {"option_id": 5796, "option_text": 'Fire safety and emergency shower locations', "trait_tags": {'Lab-Research': 0.9, 'Physical-Skill': 0.2}},
+            {"option_id": 5797, "option_text": 'Equipment lockout and electrical safety', "trait_tags": {'Lab-Research': 1.0, 'Electrical-Power': 0.3}},
+            {"option_id": 5798, "option_text": 'Accurate labeling and record keeping', "trait_tags": {'Lab-Research': 0.9, 'Admin-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 746,
+        "question_text": 'What marketing content would you create?',
+"category": "Interest - Marketing & Sales",
+        "weight": 1.5,
+        "trait_tags": {'Marketing-Sales': 0.9},
+        "options": [
+            {"option_id": 5799, "option_text": 'Compelling product descriptions and ad copy', "trait_tags": {'Marketing-Sales': 1.0, 'Creative-Skill': 0.4}},
+            {"option_id": 5800, "option_text": 'Marketing email campaigns and newsletters', "trait_tags": {'Marketing-Sales': 0.9, 'Digital-Media': 0.3}},
+            {"option_id": 5801, "option_text": 'Video advertisements for social media', "trait_tags": {'Marketing-Sales': 0.9, 'Film-Broadcast': 0.3}},
+            {"option_id": 5802, "option_text": 'Infographics and visual marketing materials', "trait_tags": {'Marketing-Sales': 0.9, 'Visual-Design': 0.4}},
+            {"option_id": 5803, "option_text": 'Case studies and testimonial content', "trait_tags": {'Marketing-Sales': 1.0, 'People-Skill': 0.3}},
+            {"option_id": 5804, "option_text": 'Market research reports and presentations', "trait_tags": {'Marketing-Sales': 0.9, 'Analytical-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 747,
+        "question_text": 'What consumer behavior concept interests you?',
+"category": "Interest - Marketing & Sales",
+        "weight": 1.5,
+        "trait_tags": {'Marketing-Sales': 0.9, 'Analytical-Skill': 0.3},
+        "options": [
+            {"option_id": 5805, "option_text": 'Purchase decision psychology and triggers', "trait_tags": {'Marketing-Sales': 1.0, 'Counseling': 0.3}},
+            {"option_id": 5806, "option_text": 'Brand loyalty and repeat customer behavior', "trait_tags": {'Marketing-Sales': 0.9, 'People-Skill': 0.3}},
+            {"option_id": 5807, "option_text": 'Price sensitivity and value perception', "trait_tags": {'Marketing-Sales': 0.9, 'Finance-Acct': 0.3}},
+            {"option_id": 5808, "option_text": 'Social proof and peer influence on buying', "trait_tags": {'Marketing-Sales': 1.0, 'People-Skill': 0.3}},
+            {"option_id": 5809, "option_text": 'Digital shopping habits and cart abandonment', "trait_tags": {'Marketing-Sales': 0.9, 'Web-Dev': 0.3}},
+            {"option_id": 5810, "option_text": 'Cultural factors in Filipino consumer choices', "trait_tags": {'Marketing-Sales': 0.9, 'Community-Serve': 0.3}},
+        ]
+    },
+    {
+        "question_id": 748,
+        "question_text": 'What sales achievement would motivate you most?',
+"category": "Interest - Marketing & Sales",
+        "weight": 1.5,
+        "trait_tags": {'Marketing-Sales': 0.9},
+        "options": [
+            {"option_id": 5811, "option_text": 'Closing the biggest deal in company history', "trait_tags": {'Marketing-Sales': 1.0, 'Finance-Acct': 0.3}},
+            {"option_id": 5812, "option_text": 'Building a loyal customer base from scratch', "trait_tags": {'Marketing-Sales': 0.9, 'People-Skill': 0.5}},
+            {"option_id": 5813, "option_text": 'Launching a viral marketing campaign', "trait_tags": {'Marketing-Sales': 0.9, 'Digital-Media': 0.4}},
+            {"option_id": 5814, "option_text": 'Winning a national advertising award', "trait_tags": {'Marketing-Sales': 0.9, 'Creative-Skill': 0.4}},
+            {"option_id": 5815, "option_text": 'Growing market share against competitors', "trait_tags": {'Marketing-Sales': 1.0, 'Analytical-Skill': 0.3}},
+            {"option_id": 5816, "option_text": 'Training a top-performing sales team', "trait_tags": {'Marketing-Sales': 0.9, 'Teaching-Ed': 0.3}},
+        ]
+    },
+    {
+        "question_id": 749,
+        "question_text": 'What marketing channel would you specialize in?',
+"category": "Interest - Marketing & Sales",
+        "weight": 1.5,
+        "trait_tags": {'Marketing-Sales': 0.9},
+        "options": [
+            {"option_id": 5817, "option_text": 'Google Ads and search engine marketing', "trait_tags": {'Marketing-Sales': 1.0, 'Data-Analytics': 0.4}},
+            {"option_id": 5818, "option_text": 'Facebook and Instagram paid advertising', "trait_tags": {'Marketing-Sales': 0.9, 'Digital-Media': 0.4}},
+            {"option_id": 5819, "option_text": 'Shopee and Lazada marketplace optimization', "trait_tags": {'Marketing-Sales': 0.9, 'Web-Dev': 0.3}},
+            {"option_id": 5820, "option_text": 'Email marketing automation', "trait_tags": {'Marketing-Sales': 0.9, 'Software-Dev': 0.3}},
+            {"option_id": 5821, "option_text": 'Outdoor and traditional print advertising', "trait_tags": {'Marketing-Sales': 0.9, 'Visual-Design': 0.3}},
+            {"option_id": 5822, "option_text": 'Radio and TV commercial production', "trait_tags": {'Marketing-Sales': 1.0, 'Film-Broadcast': 0.3}},
+        ]
+    },
+    {
+        "question_id": 750,
+        "question_text": 'What machine would you design?',
+"category": "Interest - Mechanical Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Mechanical-Design': 0.9},
+        "options": [
+            {"option_id": 5823, "option_text": 'Agricultural harvesting machine for rice', "trait_tags": {'Mechanical-Design': 1.0, 'Agri-Nature': 0.4}},
+            {"option_id": 5824, "option_text": 'Automated packaging and filling machine', "trait_tags": {'Mechanical-Design': 0.9, 'Industrial-Ops': 0.4}},
+            {"option_id": 5825, "option_text": 'Solar-powered water pump for rural areas', "trait_tags": {'Mechanical-Design': 0.9, 'Environmental-Eng': 0.3}},
+            {"option_id": 5826, "option_text": 'Medical rehabilitation exercise device', "trait_tags": {'Mechanical-Design': 0.9, 'Rehab-Therapy': 0.3}},
+            {"option_id": 5827, "option_text": 'Electric tricycle for Philippine transport', "trait_tags": {'Mechanical-Design': 1.0, 'Environmental-Eng': 0.3}},
+            {"option_id": 5828, "option_text": 'CNC router for small-scale fabrication', "trait_tags": {'Mechanical-Design': 0.9, 'Technical-Skill': 0.4}},
+        ]
+    },
+    {
+        "question_id": 751,
+        "question_text": 'What mechanical engineering principle fascinates you?',
+"category": "Interest - Mechanical Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Mechanical-Design': 0.9, 'Analytical-Skill': 0.3},
+        "options": [
+            {"option_id": 5829, "option_text": 'Thermodynamics and heat engine cycles', "trait_tags": {'Mechanical-Design': 1.0, 'Analytical-Skill': 0.4}},
+            {"option_id": 5830, "option_text": 'Fluid mechanics and hydraulic systems', "trait_tags": {'Mechanical-Design': 0.9, 'Civil-Build': 0.3}},
+            {"option_id": 5831, "option_text": 'Kinematics and mechanism linkage design', "trait_tags": {'Mechanical-Design': 1.0, 'Analytical-Skill': 0.4}},
+            {"option_id": 5832, "option_text": 'Strength of materials and stress analysis', "trait_tags": {'Mechanical-Design': 0.9, 'Civil-Build': 0.3}},
+            {"option_id": 5833, "option_text": 'Machine dynamics and vibration analysis', "trait_tags": {'Mechanical-Design': 0.9, 'Analytical-Skill': 0.5}},
+            {"option_id": 5834, "option_text": 'Tribology: friction, wear, and lubrication', "trait_tags": {'Mechanical-Design': 0.9, 'Lab-Research': 0.3}},
+        ]
+    },
+    {
+        "question_id": 752,
+        "question_text": 'What Philippine mechanical engineering need would you address?',
+"category": "Interest - Mechanical Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Mechanical-Design': 0.9},
+        "options": [
+            {"option_id": 5835, "option_text": 'Developing local automotive parts manufacturing', "trait_tags": {'Mechanical-Design': 1.0, 'Industrial-Ops': 0.4}},
+            {"option_id": 5836, "option_text": 'Designing flood-proof water pumping stations', "trait_tags": {'Mechanical-Design': 0.9, 'Civil-Build': 0.3}},
+            {"option_id": 5837, "option_text": 'Creating affordable farming equipment', "trait_tags": {'Mechanical-Design': 0.9, 'Agri-Nature': 0.4}},
+            {"option_id": 5838, "option_text": 'Improving public transportation vehicle design', "trait_tags": {'Mechanical-Design': 0.9, 'Community-Serve': 0.3}},
+            {"option_id": 5839, "option_text": 'Building industrial chillers for food storage', "trait_tags": {'Mechanical-Design': 1.0, 'Food-Science': 0.3}},
+            {"option_id": 5840, "option_text": 'Designing earthquake dampers for buildings', "trait_tags": {'Mechanical-Design': 0.9, 'Civil-Build': 0.4}},
+        ]
+    },
+    {
+        "question_id": 753,
+        "question_text": 'What mechanical testing method would you perform?',
+"category": "Interest - Mechanical Engineering",
+        "weight": 1.5,
+        "trait_tags": {'Mechanical-Design': 0.9, 'Lab-Research': 0.3},
+        "options": [
+            {"option_id": 5841, "option_text": 'Tensile and compression testing of metals', "trait_tags": {'Mechanical-Design': 1.0, 'Lab-Research': 0.4}},
+            {"option_id": 5842, "option_text": 'Hardness testing with Brinell and Rockwell', "trait_tags": {'Mechanical-Design': 0.9, 'Lab-Research': 0.4}},
+            {"option_id": 5843, "option_text": 'Fatigue testing for cyclic loading analysis', "trait_tags": {'Mechanical-Design': 0.9, 'Analytical-Skill': 0.3}},
+            {"option_id": 5844, "option_text": 'Impact testing for material toughness', "trait_tags": {'Mechanical-Design': 1.0, 'Lab-Research': 0.3}},
+            {"option_id": 5845, "option_text": 'Non-destructive testing (ultrasonic, X-ray)', "trait_tags": {'Mechanical-Design': 0.9, 'Technical-Skill': 0.4}},
+            {"option_id": 5846, "option_text": 'Vibration testing on rotating machinery', "trait_tags": {'Mechanical-Design': 0.9, 'Technical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 754,
+        "question_text": 'What performance venue would you prefer?',
+"category": "Preference - Performing Arts",
+        "weight": 1.5,
+        "trait_tags": {'Performing-Arts': 0.9},
+        "options": [
+            {"option_id": 5847, "option_text": 'CCP main theater stage', "trait_tags": {'Performing-Arts': 1.0, 'Creative-Skill': 0.3}},
+            {"option_id": 5848, "option_text": 'Open-air concert at an evening festival', "trait_tags": {'Performing-Arts': 0.9, 'Hospitality-Svc': 0.3}},
+            {"option_id": 5849, "option_text": 'Intimate acoustic cafe performance', "trait_tags": {'Performing-Arts': 0.9, 'People-Skill': 0.3}},
+            {"option_id": 5850, "option_text": 'Church or community hall for local shows', "trait_tags": {'Performing-Arts': 0.9, 'Community-Serve': 0.3}},
+            {"option_id": 5851, "option_text": 'Recording studio for professional production', "trait_tags": {'Performing-Arts': 0.9, 'Technical-Skill': 0.4}},
+            {"option_id": 5852, "option_text": 'Virtual livestream performance for global audience', "trait_tags": {'Performing-Arts': 1.0, 'Digital-Media': 0.4}},
+        ]
+    },
+    {
+        "question_id": 755,
+        "question_text": 'What performing arts tradition interests you?',
+"category": "Interest - Performing Arts",
+        "weight": 1.5,
+        "trait_tags": {'Performing-Arts': 0.9, 'Creative-Skill': 0.3},
+        "options": [
+            {"option_id": 5853, "option_text": 'Kundiman and Filipino operatic tradition', "trait_tags": {'Performing-Arts': 1.0, 'Creative-Skill': 0.3}},
+            {"option_id": 5854, "option_text": 'Tinikling and Filipino folk dance', "trait_tags": {'Performing-Arts': 0.9, 'Physical-Skill': 0.5}},
+            {"option_id": 5855, "option_text": 'Senakulo and religious dramatic presentations', "trait_tags": {'Performing-Arts': 0.9, 'Community-Serve': 0.3}},
+            {"option_id": 5856, "option_text": 'Rondalla ensemble music performance', "trait_tags": {'Performing-Arts': 0.9, 'Technical-Skill': 0.3}},
+            {"option_id": 5857, "option_text": 'Modern Filipino hip-hop dance culture', "trait_tags": {'Performing-Arts': 1.0, 'Physical-Skill': 0.4}},
+            {"option_id": 5858, "option_text": 'OPM rock and indie music scene', "trait_tags": {'Performing-Arts': 0.9, 'Startup-Venture': 0.3}},
+        ]
+    },
+    {
+        "question_id": 756,
+        "question_text": 'What performance skill would you focus on?',
+"category": "Interest - Performing Arts",
+        "weight": 1.5,
+        "trait_tags": {'Performing-Arts': 0.9},
+        "options": [
+            {"option_id": 5859, "option_text": 'Breath control and vocal projection', "trait_tags": {'Performing-Arts': 1.0, 'Physical-Skill': 0.3}},
+            {"option_id": 5860, "option_text": 'Stage presence and audience connection', "trait_tags": {'Performing-Arts': 0.9, 'People-Skill': 0.5}},
+            {"option_id": 5861, "option_text": 'Musical ear training and pitch accuracy', "trait_tags": {'Performing-Arts': 0.9, 'Analytical-Skill': 0.3}},
+            {"option_id": 5862, "option_text": 'Memorization and quick script learning', "trait_tags": {'Performing-Arts': 0.9, 'Analytical-Skill': 0.3}},
+            {"option_id": 5863, "option_text": 'Physical conditioning for dance endurance', "trait_tags": {'Performing-Arts': 0.9, 'Physical-Skill': 0.5}},
+            {"option_id": 5864, "option_text": 'Emotional expression and character depth', "trait_tags": {'Performing-Arts': 1.0, 'Counseling': 0.3}},
+        ]
+    },
+    {
+        "question_id": 757,
+        "question_text": 'What performing arts collaboration appeals to you?',
+"category": "Interest - Performing Arts",
+        "weight": 1.5,
+        "trait_tags": {'Performing-Arts': 0.9},
+        "options": [
+            {"option_id": 5865, "option_text": 'Joining a theater company ensemble', "trait_tags": {'Performing-Arts': 1.0, 'People-Skill': 0.4}},
+            {"option_id": 5866, "option_text": 'Forming a band and playing gigs', "trait_tags": {'Performing-Arts': 0.9, 'Startup-Venture': 0.3}},
+            {"option_id": 5867, "option_text": 'Dance crew competing in competitions', "trait_tags": {'Performing-Arts': 0.9, 'Physical-Skill': 0.4}},
+            {"option_id": 5868, "option_text": 'Choir and choral group harmonizing', "trait_tags": {'Performing-Arts': 0.9, 'People-Skill': 0.3}},
+            {"option_id": 5869, "option_text": 'Community theater teaching kids to perform', "trait_tags": {'Performing-Arts': 0.9, 'Teaching-Ed': 0.5}},
+            {"option_id": 5870, "option_text": 'Film scoring and composing for movies', "trait_tags": {'Performing-Arts': 1.0, 'Film-Broadcast': 0.4}},
+        ]
+    },
+    {
+        "question_id": 758,
+        "question_text": 'What space would you redesign?',
+"category": "Interest - Architecture & Design",
+        "weight": 1.5,
+        "trait_tags": {'Spatial-Design': 0.9},
+        "options": [
+            {"option_id": 5871, "option_text": 'A cramped studio apartment into a functional home', "trait_tags": {'Spatial-Design': 1.0, 'Creative-Skill': 0.4}},
+            {"option_id": 5872, "option_text": 'A traditional Filipino bahay kubo with modern touches', "trait_tags": {'Spatial-Design': 0.9, 'Creative-Skill': 0.4}},
+            {"option_id": 5873, "option_text": 'An office space for maximum productivity', "trait_tags": {'Spatial-Design': 0.9, 'Admin-Skill': 0.3}},
+            {"option_id": 5874, "option_text": 'A school classroom for better learning', "trait_tags": {'Spatial-Design': 0.9, 'Teaching-Ed': 0.3}},
+            {"option_id": 5875, "option_text": 'A hospital wing for patient comfort', "trait_tags": {'Spatial-Design': 0.9, 'Health-Admin': 0.3}},
+            {"option_id": 5876, "option_text": 'A public park with inclusive play areas', "trait_tags": {'Spatial-Design': 1.0, 'Community-Serve': 0.3}},
+        ]
+    },
+    {
+        "question_id": 759,
+        "question_text": 'What interior design element interests you most?',
+"category": "Interest - Architecture & Design",
+        "weight": 1.5,
+        "trait_tags": {'Spatial-Design': 0.9, 'Creative-Skill': 0.3},
+        "options": [
+            {"option_id": 5877, "option_text": 'Color theory and paint selection', "trait_tags": {'Spatial-Design': 1.0, 'Visual-Design': 0.4}},
+            {"option_id": 5878, "option_text": 'Furniture selection and space planning', "trait_tags": {'Spatial-Design': 0.9, 'Creative-Skill': 0.3}},
+            {"option_id": 5879, "option_text": 'Lighting design for mood and function', "trait_tags": {'Spatial-Design': 0.9, 'Electrical-Power': 0.3}},
+            {"option_id": 5880, "option_text": 'Material and texture combinations', "trait_tags": {'Spatial-Design': 1.0, 'Creative-Skill': 0.4}},
+            {"option_id": 5881, "option_text": 'Sustainable and eco-friendly design choices', "trait_tags": {'Spatial-Design': 0.9, 'Environmental-Eng': 0.3}},
+            {"option_id": 5882, "option_text": 'Space acoustics and sound management', "trait_tags": {'Spatial-Design': 0.9, 'Performing-Arts': 0.3}},
+        ]
+    },
+    {
+        "question_id": 760,
+        "question_text": 'What architectural style inspires you?',
+"category": "Interest - Architecture & Design",
+        "weight": 1.5,
+        "trait_tags": {'Spatial-Design': 0.9},
+        "options": [
+            {"option_id": 5883, "option_text": 'Minimalist modern with clean lines', "trait_tags": {'Spatial-Design': 1.0, 'Creative-Skill': 0.3}},
+            {"option_id": 5884, "option_text": 'Tropical contemporary suited for Philippines', "trait_tags": {'Spatial-Design': 0.9, 'Environmental-Eng': 0.3}},
+            {"option_id": 5885, "option_text": 'Heritage and colonial Filipino architecture', "trait_tags": {'Spatial-Design': 0.9, 'Tourism-Travel': 0.3}},
+            {"option_id": 5886, "option_text": 'Industrial loft with exposed materials', "trait_tags": {'Spatial-Design': 0.9, 'Mechanical-Design': 0.2}},
+            {"option_id": 5887, "option_text": 'Japanese-inspired zen and natural design', "trait_tags": {'Spatial-Design': 1.0, 'Creative-Skill': 0.3}},
+            {"option_id": 5888, "option_text": 'Biophilic design bringing nature indoors', "trait_tags": {'Spatial-Design': 0.9, 'Environmental-Sci': 0.3}},
+        ]
+    },
+    {
+        "question_id": 761,
+        "question_text": 'What spatial design project management skill interests you?',
+"category": "Interest - Architecture & Design",
+        "weight": 1.5,
+        "trait_tags": {'Spatial-Design': 0.9},
+        "options": [
+            {"option_id": 5889, "option_text": 'Client consultation and vision interpretation', "trait_tags": {'Spatial-Design': 1.0, 'People-Skill': 0.4}},
+            {"option_id": 5890, "option_text": 'Material sourcing and vendor negotiations', "trait_tags": {'Spatial-Design': 0.9, 'Finance-Acct': 0.3}},
+            {"option_id": 5891, "option_text": 'Construction supervision and site visits', "trait_tags": {'Spatial-Design': 0.9, 'Civil-Build': 0.3}},
+            {"option_id": 5892, "option_text": '3D rendering presentations for clients', "trait_tags": {'Spatial-Design': 0.9, 'Animation-3D': 0.3}},
+            {"option_id": 5893, "option_text": 'Budget management and cost estimation', "trait_tags": {'Spatial-Design': 0.9, 'Finance-Acct': 0.4}},
+            {"option_id": 5894, "option_text": 'Building code compliance and permits', "trait_tags": {'Spatial-Design': 1.0, 'Legal-Practice': 0.3}},
+        ]
+    },
+    {
+        "question_id": 762,
+        "question_text": 'What would your Filipino startup solve?',
+"category": "Interest - Entrepreneurship",
+        "weight": 1.5,
+        "trait_tags": {'Startup-Venture': 0.9},
+        "options": [
+            {"option_id": 5895, "option_text": 'Traffic congestion with ride-sharing innovation', "trait_tags": {'Startup-Venture': 1.0, 'Software-Dev': 0.3}},
+            {"option_id": 5896, "option_text": 'Access to affordable healthcare consultations', "trait_tags": {'Startup-Venture': 0.9, 'Patient-Care': 0.3}},
+            {"option_id": 5897, "option_text": 'Food delivery for underserved rural towns', "trait_tags": {'Startup-Venture': 0.9, 'Hospitality-Svc': 0.3}},
+            {"option_id": 5898, "option_text": 'Bank the unbanked with mobile wallet services', "trait_tags": {'Startup-Venture': 0.9, 'Finance-Acct': 0.4}},
+            {"option_id": 5899, "option_text": 'Connect farmers directly to consumers', "trait_tags": {'Startup-Venture': 1.0, 'Agri-Nature': 0.3}},
+            {"option_id": 5900, "option_text": 'Affordable online tutoring for DepEd students', "trait_tags": {'Startup-Venture': 0.9, 'Teaching-Ed': 0.3}},
+        ]
+    },
+    {
+        "question_id": 763,
+        "question_text": 'What startup funding strategy would you use?',
+"category": "Interest - Entrepreneurship",
+        "weight": 1.5,
+        "trait_tags": {'Startup-Venture': 0.9, 'Finance-Acct': 0.3},
+        "options": [
+            {"option_id": 5901, "option_text": 'Bootstrapping: building with personal savings', "trait_tags": {'Startup-Venture': 1.0, 'Finance-Acct': 0.3}},
+            {"option_id": 5902, "option_text": 'Angel investors from Philippine business leaders', "trait_tags": {'Startup-Venture': 0.9, 'People-Skill': 0.4}},
+            {"option_id": 5903, "option_text": 'Venture capital from local and international VCs', "trait_tags": {'Startup-Venture': 0.9, 'Finance-Acct': 0.4}},
+            {"option_id": 5904, "option_text": 'Crowdfunding on Kickstarter or local platforms', "trait_tags": {'Startup-Venture': 0.9, 'Marketing-Sales': 0.4}},
+            {"option_id": 5905, "option_text": 'Government grants from DOST or DTI programs', "trait_tags": {'Startup-Venture': 0.9, 'Admin-Skill': 0.3}},
+            {"option_id": 5906, "option_text": 'Revenue-first model: earning before raising', "trait_tags": {'Startup-Venture': 1.0, 'Analytical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 764,
+        "question_text": 'What startup metric would you track obsessively?',
+"category": "Interest - Entrepreneurship",
+        "weight": 1.5,
+        "trait_tags": {'Startup-Venture': 0.9, 'Data-Analytics': 0.3},
+        "options": [
+            {"option_id": 5907, "option_text": 'Monthly recurring revenue (MRR)', "trait_tags": {'Startup-Venture': 1.0, 'Finance-Acct': 0.4}},
+            {"option_id": 5908, "option_text": 'Customer acquisition cost (CAC)', "trait_tags": {'Startup-Venture': 0.9, 'Marketing-Sales': 0.3}},
+            {"option_id": 5909, "option_text": 'User retention and churn rate', "trait_tags": {'Startup-Venture': 0.9, 'Data-Analytics': 0.4}},
+            {"option_id": 5910, "option_text": 'Net promoter score (NPS) from customers', "trait_tags": {'Startup-Venture': 0.9, 'People-Skill': 0.3}},
+            {"option_id": 5911, "option_text": 'Runway: months of cash remaining', "trait_tags": {'Startup-Venture': 1.0, 'Finance-Acct': 0.3}},
+            {"option_id": 5912, "option_text": 'Daily active users (DAU)', "trait_tags": {'Startup-Venture': 0.9, 'Software-Dev': 0.3}},
+        ]
+    },
+    {
+        "question_id": 765,
+        "question_text": 'What teaching technology would you adopt?',
+"category": "Interest - Teaching & Education",
+        "weight": 1.5,
+        "trait_tags": {'Teaching-Ed': 0.9},
+        "options": [
+            {"option_id": 5913, "option_text": 'Interactive whiteboard and smart classroom', "trait_tags": {'Teaching-Ed': 1.0, 'Technical-Skill': 0.4}},
+            {"option_id": 5914, "option_text": 'Learning management system (Google Classroom)', "trait_tags": {'Teaching-Ed': 0.9, 'Software-Dev': 0.3}},
+            {"option_id": 5915, "option_text": 'Educational apps and gamified quizzes', "trait_tags": {'Teaching-Ed': 0.9, 'Game-Dev': 0.3}},
+            {"option_id": 5916, "option_text": 'Video lessons and flipped classroom model', "trait_tags": {'Teaching-Ed': 0.9, 'Digital-Media': 0.4}},
+            {"option_id": 5917, "option_text": 'AR/VR immersive educational experiences', "trait_tags": {'Teaching-Ed': 0.9, 'Software-Dev': 0.3}},
+            {"option_id": 5918, "option_text": 'Adaptive learning platforms using AI', "trait_tags": {'Teaching-Ed': 1.0, 'AI-ML': 0.3}},
+        ]
+    },
+    {
+        "question_id": 766,
+        "question_text": 'What makes a great teacher in your view?',
+"category": "Interest - Teaching & Education",
+        "weight": 1.5,
+        "trait_tags": {'Teaching-Ed': 0.9},
+        "options": [
+            {"option_id": 5919, "option_text": 'Patience and understanding of each student', "trait_tags": {'Teaching-Ed': 1.0, 'Counseling': 0.4}},
+            {"option_id": 5920, "option_text": "Passion for the subject that's contagious", "trait_tags": {'Teaching-Ed': 0.9, 'Creative-Skill': 0.3}},
+            {"option_id": 5921, "option_text": 'Clear communication and explanation skills', "trait_tags": {'Teaching-Ed': 0.9, 'People-Skill': 0.5}},
+            {"option_id": 5922, "option_text": 'Fairness and consistent discipline', "trait_tags": {'Teaching-Ed': 0.9, 'Analytical-Skill': 0.3}},
+            {"option_id": 5923, "option_text": 'Creativity in lesson planning and activities', "trait_tags": {'Teaching-Ed': 1.0, 'Creative-Skill': 0.4}},
+            {"option_id": 5924, "option_text": 'Dedication to continuous self-improvement', "trait_tags": {'Teaching-Ed': 0.9, 'Analytical-Skill': 0.3}},
+        ]
+    },
+    {
+        "question_id": 767,
+        "question_text": 'What student population would you serve?',
+"category": "Interest - Teaching & Education",
+        "weight": 1.5,
+        "trait_tags": {'Teaching-Ed': 0.9},
+        "options": [
+            {"option_id": 5925, "option_text": 'Kindergarten and early childhood learners', "trait_tags": {'Teaching-Ed': 1.0, 'Creative-Skill': 0.3}},
+            {"option_id": 5926, "option_text": 'Elementary students building foundations', "trait_tags": {'Teaching-Ed': 0.9, 'People-Skill': 0.3}},
+            {"option_id": 5927, "option_text": 'High school students preparing for college', "trait_tags": {'Teaching-Ed': 0.9, 'Counseling': 0.3}},
+            {"option_id": 5928, "option_text": 'College students in specialized subjects', "trait_tags": {'Teaching-Ed': 0.9, 'Lab-Research': 0.3}},
+            {"option_id": 5929, "option_text": 'Adult learners and continuing education', "trait_tags": {'Teaching-Ed': 0.9, 'People-Skill': 0.4}},
+            {"option_id": 5930, "option_text": 'Out-of-school youth needing alternative learning', "trait_tags": {'Teaching-Ed': 1.0, 'Community-Serve': 0.4}},
+        ]
+    },
+    {
+        "question_id": 768,
+        "question_text": 'What education assessment method would you use?',
+"category": "Interest - Teaching & Education",
+        "weight": 1.5,
+        "trait_tags": {'Teaching-Ed': 0.9, 'Analytical-Skill': 0.3},
+        "options": [
+            {"option_id": 5931, "option_text": 'Portfolio-based assessment of student work', "trait_tags": {'Teaching-Ed': 1.0, 'Creative-Skill': 0.3}},
+            {"option_id": 5932, "option_text": 'Performance tasks and practical exams', "trait_tags": {'Teaching-Ed': 0.9, 'Physical-Skill': 0.3}},
+            {"option_id": 5933, "option_text": 'Rubric-based evaluation for projects', "trait_tags": {'Teaching-Ed': 0.9, 'Analytical-Skill': 0.4}},
+            {"option_id": 5934, "option_text": 'Formative quizzes for ongoing feedback', "trait_tags": {'Teaching-Ed': 0.9, 'Data-Analytics': 0.3}},
+            {"option_id": 5935, "option_text": 'Peer assessment and self-evaluation', "trait_tags": {'Teaching-Ed': 1.0, 'People-Skill': 0.3}},
+            {"option_id": 5936, "option_text": 'Standardized testing with data analytics', "trait_tags": {'Teaching-Ed': 0.9, 'Data-Analytics': 0.5}},
+        ]
+    },
+    {
+        "question_id": 769,
+        "question_text": 'What visual design project would you take on?',
+"category": "Interest - Visual Design",
+        "weight": 1.5,
+        "trait_tags": {'Visual-Design': 0.9},
+        "options": [
+            {"option_id": 5937, "option_text": 'Complete brand identity for a local business', "trait_tags": {'Visual-Design': 1.0, 'Marketing-Sales': 0.4}},
+            {"option_id": 5938, "option_text": 'Magazine editorial layout and design', "trait_tags": {'Visual-Design': 0.9, 'Digital-Media': 0.3}},
+            {"option_id": 5939, "option_text": 'Website UI design with custom illustrations', "trait_tags": {'Visual-Design': 0.9, 'Web-Dev': 0.4}},
+            {"option_id": 5940, "option_text": 'Product packaging for Philippine exports', "trait_tags": {'Visual-Design': 0.9, 'Marketing-Sales': 0.3}},
+            {"option_id": 5941, "option_text": 'Environmental graphics and signage system', "trait_tags": {'Visual-Design': 1.0, 'Spatial-Design': 0.4}},
+            {"option_id": 5942, "option_text": 'Social media visual template library', "trait_tags": {'Visual-Design': 0.9, 'Digital-Media': 0.4}},
+        ]
+    },
+    {
+        "question_id": 770,
+        "question_text": 'What color and design principle matters most to you?',
+"category": "Interest - Visual Design",
+        "weight": 1.5,
+        "trait_tags": {'Visual-Design': 0.9, 'Creative-Skill': 0.3},
+        "options": [
+            {"option_id": 5943, "option_text": 'Color harmony and effective palette selection', "trait_tags": {'Visual-Design': 1.0, 'Creative-Skill': 0.4}},
+            {"option_id": 5944, "option_text": "Visual hierarchy guiding the viewer's eye", "trait_tags": {'Visual-Design': 0.9, 'Analytical-Skill': 0.3}},
+            {"option_id": 5945, "option_text": 'Whitespace and breathing room in layouts', "trait_tags": {'Visual-Design': 0.9, 'Spatial-Design': 0.3}},
+            {"option_id": 5946, "option_text": 'Grid systems for consistent proportions', "trait_tags": {'Visual-Design': 1.0, 'Analytical-Skill': 0.4}},
+            {"option_id": 5947, "option_text": 'Contrast and readability for accessibility', "trait_tags": {'Visual-Design': 0.9, 'Community-Serve': 0.2}},
+            {"option_id": 5948, "option_text": "Consistency across a brand's visual materials", "trait_tags": {'Visual-Design': 0.9, 'Marketing-Sales': 0.3}},
+        ]
+    },
+    {
+        "question_id": 771,
+        "question_text": 'What design movement inspires your style?',
+"category": "Interest - Visual Design",
+        "weight": 1.5,
+        "trait_tags": {'Visual-Design': 0.9},
+        "options": [
+            {"option_id": 5949, "option_text": 'Minimalism: less is more clean design', "trait_tags": {'Visual-Design': 1.0, 'Creative-Skill': 0.3}},
+            {"option_id": 5950, "option_text": 'Bauhaus: form follows function', "trait_tags": {'Visual-Design': 0.9, 'Spatial-Design': 0.3}},
+            {"option_id": 5951, "option_text": 'Art Nouveau: organic and decorative', "trait_tags": {'Visual-Design': 0.9, 'Creative-Skill': 0.5}},
+            {"option_id": 5952, "option_text": 'Swiss Design: clear typography and grids', "trait_tags": {'Visual-Design': 1.0, 'Analytical-Skill': 0.3}},
+            {"option_id": 5953, "option_text": 'Retro/vintage Filipino poster style', "trait_tags": {'Visual-Design': 0.9, 'Creative-Skill': 0.4}},
+            {"option_id": 5954, "option_text": 'Contemporary flat and material design', "trait_tags": {'Visual-Design': 0.9, 'Web-Dev': 0.3}},
+        ]
+    },
+    {
+        "question_id": 772,
+        "question_text": 'What nutritional health program would you create?',
+"category": "Interest - Nutrition & Dietetics",
+        "weight": 1.5,
+        "trait_tags": {'Nutrition-Diet': 0.9},
+        "options": [
+            {"option_id": 5955, "option_text": 'School feeding program with balanced meals', "trait_tags": {'Nutrition-Diet': 1.0, 'Teaching-Ed': 0.3}},
+            {"option_id": 5956, "option_text": 'Weight management plan for obese patients', "trait_tags": {'Nutrition-Diet': 0.9, 'Patient-Care': 0.4}},
+            {"option_id": 5957, "option_text": 'Senior citizen dietary guidance and counseling', "trait_tags": {'Nutrition-Diet': 0.9, 'Counseling': 0.3}},
+            {"option_id": 5958, "option_text": 'Prenatal nutrition plan for expecting mothers', "trait_tags": {'Nutrition-Diet': 0.9, 'Patient-Care': 0.4}},
+            {"option_id": 5959, "option_text": 'Diabetic meal planning and blood sugar control', "trait_tags": {'Nutrition-Diet': 1.0, 'Medical-Lab': 0.3}},
+            {"option_id": 5960, "option_text": 'Sports performance nutrition coaching', "trait_tags": {'Nutrition-Diet': 0.9, 'Sports-Ed': 0.4}},
+        ]
+    },
+    {
+        "question_id": 773,
+        "question_text": 'What nutrition science topic interests you?',
+"category": "Interest - Nutrition & Dietetics",
+        "weight": 1.5,
+        "trait_tags": {'Nutrition-Diet': 0.9, 'Lab-Research': 0.3},
+        "options": [
+            {"option_id": 5961, "option_text": 'Macronutrient balance and metabolism', "trait_tags": {'Nutrition-Diet': 1.0, 'Lab-Research': 0.3}},
+            {"option_id": 5962, "option_text": 'Micronutrient deficiency in Filipino children', "trait_tags": {'Nutrition-Diet': 0.9, 'Public-Health': 0.5}},
+            {"option_id": 5963, "option_text": 'Gut microbiome and its effect on health', "trait_tags": {'Nutrition-Diet': 0.9, 'Lab-Research': 0.4}},
+            {"option_id": 5964, "option_text": 'Food allergies and intolerance management', "trait_tags": {'Nutrition-Diet': 0.9, 'Medical-Lab': 0.3}},
+            {"option_id": 5965, "option_text": 'Anti-inflammatory diet and chronic disease', "trait_tags": {'Nutrition-Diet': 1.0, 'Patient-Care': 0.3}},
+            {"option_id": 5966, "option_text": 'Nutrigenomics: nutrition based on genetics', "trait_tags": {'Nutrition-Diet': 0.9, 'Lab-Research': 0.4}},
+        ]
+    },
+    {
+        "question_id": 774,
+        "question_text": 'Where would you work as a nutritionist?',
+"category": "Interest - Nutrition & Dietetics",
+        "weight": 1.5,
+        "trait_tags": {'Nutrition-Diet': 0.9},
+        "options": [
+            {"option_id": 5967, "option_text": 'Hospital dietary department', "trait_tags": {'Nutrition-Diet': 1.0, 'Health-Admin': 0.4}},
+            {"option_id": 5968, "option_text": 'Sports team nutritional support', "trait_tags": {'Nutrition-Diet': 0.9, 'Sports-Ed': 0.5}},
+            {"option_id": 5969, "option_text": 'Community health center nutrition clinic', "trait_tags": {'Nutrition-Diet': 0.9, 'Community-Serve': 0.4}},
+            {"option_id": 5970, "option_text": 'Food company product health claims team', "trait_tags": {'Nutrition-Diet': 0.9, 'Food-Science': 0.4}},
+            {"option_id": 5971, "option_text": 'Private nutrition consulting practice', "trait_tags": {'Nutrition-Diet': 0.9, 'Startup-Venture': 0.3}},
+            {"option_id": 5972, "option_text": 'School nutrition program coordinator', "trait_tags": {'Nutrition-Diet': 1.0, 'Teaching-Ed': 0.3}},
+        ]
+    },
+    {
+        "question_id": 775,
+        "question_text": "Which forensic science specialty would you pursue?",
+        "category": "Interest - Forensic Science",
+        "weight": 1.5,
+        "trait_tags": {"Forensic-Sci": 0.9},
+        "options": [
+            {"option_id": 5973, "option_text": "Crime scene reconstruction and bloodstain pattern analysis", "trait_tags": {"Forensic-Sci": 1.0, "Lab-Research": 0.4, "Analytical-Skill": 0.3}},
+            {"option_id": 5974, "option_text": "Digital forensics — recovering deleted data and tracing cyber criminals", "trait_tags": {"Forensic-Sci": 0.9, "Cyber-Defense": 0.5, "Technical-Skill": 0.3}},
+            {"option_id": 5975, "option_text": "Forensic toxicology — analyzing poisons, drugs, and chemicals in the body", "trait_tags": {"Forensic-Sci": 1.0, "Medical-Lab": 0.5, "Pharmacy": 0.3}},
+            {"option_id": 5976, "option_text": "Forensic anthropology — identifying remains from skeletal evidence", "trait_tags": {"Forensic-Sci": 1.0, "Field-Research": 0.4, "Lab-Research": 0.3}},
+            {"option_id": 5977, "option_text": "Forensic psychology — profiling criminals and understanding criminal behavior", "trait_tags": {"Forensic-Sci": 0.9, "Counseling": 0.5, "People-Skill": 0.3}},
+            {"option_id": 5978, "option_text": "Questioned document examination — detecting forgeries and handwriting analysis", "trait_tags": {"Forensic-Sci": 1.0, "Analytical-Skill": 0.5, "Legal-Practice": 0.3}},
+        ]
+    },
+    {
+        "question_id": 776,
+        "question_text": "What forensic evidence collection scenario excites you most?",
+        "category": "Situational - Forensic Science",
+        "weight": 1.5,
+        "trait_tags": {"Forensic-Sci": 0.9},
+        "options": [
+            {"option_id": 5979, "option_text": "Processing fingerprints, fibers, and trace evidence at a crime scene", "trait_tags": {"Forensic-Sci": 1.0, "Lab-Research": 0.4, "Physical-Skill": 0.3}},
+            {"option_id": 5980, "option_text": "Conducting DNA analysis to link suspects to evidence", "trait_tags": {"Forensic-Sci": 1.0, "Medical-Lab": 0.5, "Lab-Research": 0.4}},
+            {"option_id": 5981, "option_text": "Analyzing bullet trajectories and firearms evidence", "trait_tags": {"Forensic-Sci": 1.0, "Law-Enforce": 0.4, "Analytical-Skill": 0.3}},
+            {"option_id": 5982, "option_text": "Using entomology — studying insects to determine time of death", "trait_tags": {"Forensic-Sci": 0.9, "Field-Research": 0.5, "Environmental-Sci": 0.3}},
+            {"option_id": 5983, "option_text": "Recovering and analyzing data from damaged hard drives and phones", "trait_tags": {"Forensic-Sci": 0.9, "Cyber-Defense": 0.5, "Hardware-Systems": 0.3}},
+            {"option_id": 5984, "option_text": "Presenting forensic evidence as an expert witness in court", "trait_tags": {"Forensic-Sci": 0.9, "Legal-Practice": 0.5, "People-Skill": 0.4}},
+        ]
+    },
+    {
+        "question_id": 777,
+        "question_text": "Which area of legal practice would you specialize in?",
+        "category": "Interest - Legal Practice",
+        "weight": 1.5,
+        "trait_tags": {"Legal-Practice": 0.9},
+        "options": [
+            {"option_id": 5985, "option_text": "Criminal defense — protecting the rights of the accused in court", "trait_tags": {"Legal-Practice": 1.0, "People-Skill": 0.4, "Analytical-Skill": 0.3}},
+            {"option_id": 5986, "option_text": "Corporate law — advising businesses on contracts, mergers, and compliance", "trait_tags": {"Legal-Practice": 1.0, "Finance-Acct": 0.5, "Admin-Skill": 0.3}},
+            {"option_id": 5987, "option_text": "Environmental law — fighting for conservation and pollution regulations", "trait_tags": {"Legal-Practice": 0.9, "Environmental-Sci": 0.5, "Community-Serve": 0.3}},
+            {"option_id": 5988, "option_text": "Family law — handling custody, divorce, and adoption cases", "trait_tags": {"Legal-Practice": 1.0, "Counseling": 0.4, "Social-Work": 0.4}},
+            {"option_id": 5989, "option_text": "Intellectual property law — patents, trademarks, and copyright protection", "trait_tags": {"Legal-Practice": 1.0, "Creative-Skill": 0.4, "Technical-Skill": 0.3}},
+            {"option_id": 5990, "option_text": "International law and human rights advocacy", "trait_tags": {"Legal-Practice": 0.9, "Community-Serve": 0.5, "People-Skill": 0.4}},
+        ]
+    },
+    {
+        "question_id": 778,
+        "question_text": "What courtroom or legal scenario would you enjoy handling?",
+        "category": "Situational - Legal Practice",
+        "weight": 1.5,
+        "trait_tags": {"Legal-Practice": 0.9},
+        "options": [
+            {"option_id": 5991, "option_text": "Cross-examining witnesses and building a persuasive case for the jury", "trait_tags": {"Legal-Practice": 1.0, "People-Skill": 0.5, "Analytical-Skill": 0.3}},
+            {"option_id": 5992, "option_text": "Drafting legal contracts and reviewing business agreements for loopholes", "trait_tags": {"Legal-Practice": 1.0, "Admin-Skill": 0.4, "Finance-Acct": 0.3}},
+            {"option_id": 5993, "option_text": "Mediating disputes between parties to reach a fair settlement", "trait_tags": {"Legal-Practice": 0.9, "Counseling": 0.5, "People-Skill": 0.4}},
+            {"option_id": 5994, "option_text": "Researching case law and precedents for a landmark Supreme Court case", "trait_tags": {"Legal-Practice": 1.0, "Analytical-Skill": 0.5, "Lab-Research": 0.3}},
+            {"option_id": 5995, "option_text": "Providing free legal aid to underserved communities", "trait_tags": {"Legal-Practice": 0.9, "Community-Serve": 0.5, "Social-Work": 0.4}},
+            {"option_id": 5996, "option_text": "Advising a tech startup on data privacy and cybersecurity compliance law", "trait_tags": {"Legal-Practice": 0.9, "Cyber-Defense": 0.4, "Startup-Venture": 0.3}},
+        ]
+    },
 ]
 
 TRAIT_SECONDARY_MAP = {
