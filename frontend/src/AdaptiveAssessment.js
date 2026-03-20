@@ -22,11 +22,11 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 50, onViewPr
   // Progress tracking
   const [currentRound, setCurrentRound] = useState(0);
   const [maxRounds, setMaxRounds] = useState(maxQuestions);
-  const [minRounds, setMinRounds] = useState(Math.floor(maxQuestions * 0.5));
+  const [, setMinRounds] = useState(Math.floor(maxQuestions * 0.5));
   const [confidence, setConfidence] = useState(0);
   const [coursesRemaining, setCoursesRemaining] = useState(99);
   const [traitsDiscovered, setTraitsDiscovered] = useState(0);
-  const [canFinishEarly, setCanFinishEarly] = useState(false);
+  const [, setCanFinishEarly] = useState(false);
   
   // Preview of top courses (updates after each answer)
   const [topCoursesPreview, setTopCoursesPreview] = useState([]);
@@ -202,7 +202,7 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 50, onViewPr
   };
 
   // Finish early
-  const finishEarly = async () => {
+  const _finishEarly = async () => {
     if (!sessionId) return;
 
     setIsLoading(true);

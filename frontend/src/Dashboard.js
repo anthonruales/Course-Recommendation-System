@@ -50,7 +50,7 @@ const keyframes = `
 function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfile, onViewActivity, onViewSettings, history }) {
   const [hasAcademicInfo, setHasAcademicInfo] = useState(false);
   const [checkingProfile, setCheckingProfile] = useState(true);
-  const [selectedQuestionCount] = useState(50);
+  const [selectedQuestionCount] = useState(50); // eslint-disable-line no-unused-vars
   const [showHelpCenter, setShowHelpCenter] = useState(false);
   const [activityCount, setActivityCount] = useState(0);
   const [isReturningUser, setIsReturningUser] = useState(false);

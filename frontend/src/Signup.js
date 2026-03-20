@@ -52,7 +52,7 @@ function Signup({ onSwitch, onBack }) {
   // OTP verification state
   const [otpStep, setOtpStep] = useState(false); // true = showing OTP input
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
-  const [otpToken, setOtpToken] = useState(null);
+  const [, setOtpToken] = useState(null);
   const [otpLoading, setOtpLoading] = useState(false);
   const [otpTimer, setOtpTimer] = useState(0);
   const [otpError, setOtpError] = useState('');
