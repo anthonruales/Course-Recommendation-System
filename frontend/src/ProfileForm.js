@@ -381,10 +381,16 @@ function ProfileForm({ formData = {}, setFormData, onSave, onBack }) {
     // Auto-capitalize fullname and validate
     if (name === 'fullname') {
       const capitalizedName = capitalizeName(value);
+      const cursorPos = e.target.selectionStart;
+      const input = e.target;
       setFormData(prev => {
         const currentData = prev || {};
         return { ...currentData, fullname: capitalizedName };
       });
+      // Restore cursor position after React re-renders the controlled input
+      setTimeout(() => {
+        input.setSelectionRange(cursorPos, cursorPos);
+      }, 0);
       return;
     }
     
