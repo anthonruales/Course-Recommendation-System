@@ -202,7 +202,8 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 50, onViewPr
   };
 
   // Finish early
-  const _finishEarly = async () => {
+  // eslint-disable-next-line no-unused-vars
+  const finishEarly = async () => {
     if (!sessionId) return;
 
     setIsLoading(true);
