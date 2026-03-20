@@ -44,9 +44,9 @@ def validate_name(name: str) -> tuple:
     if contains_bad_words(name):
         return (False, "Please use an appropriate name", name)
     
-    # Only allow letters, spaces, hyphens, and apostrophes
-    if not re.match(r"^[a-zA-Z\s'-]+$", name.strip()):
-        return (False, "Name can only contain letters, spaces, hyphens, and apostrophes", name)
+    # Only allow letters, spaces, hyphens, apostrophes, and dots
+    if not re.match(r"^[a-zA-Z\s'.\-]+$", name.strip()):
+        return (False, "Name can only contain letters, spaces, hyphens, apostrophes, and dots", name)
     
     return (True, None, capitalize_name(name.strip()))
 
@@ -84,6 +84,7 @@ from trait_mapping import apply_trait_mapping
 from assessment_service import AssessmentService
 from recommendation_engine import HybridRecommendationEngine
 from adaptive_assessment import AdaptiveAssessmentEngine, initialize_adaptive_engine, get_adaptive_engine
+from decision_tree_questions import DECISION_TREE_QUESTIONS
 import json
 import secrets
 import hashlib
@@ -277,6 +278,33 @@ def seed_database():
                 else:
                     db.add(models.Option(question_id=new_q.question_id, option_text="Yes", trait_tag=q.get("tag")))
                     db.add(models.Option(question_id=new_q.question_id, option_text="No", trait_tag="None"))
+
+        # Seed decision tree questions
+        if DECISION_TREE_QUESTIONS:
+            print(f"[SEED] Seeding {len(DECISION_TREE_QUESTIONS)} decision tree questions...")
+            for q in DECISION_TREE_QUESTIONS:
+                new_q = models.Question(
+                    question_id=q["question_id"],
+                    test_id=default_test.test_id,
+                    question_text=q["question_text"],
+                    category=q.get("category"),
+                    question_type=q.get("question_type", "tree")
+                )
+                db.add(new_q)
+                db.flush()
+                for opt in q.get("options", []):
+                    trait_tags_data = opt.get("trait_tags", {})
+                    trait_tag = max(trait_tags_data, key=trait_tags_data.get) if trait_tags_data else None
+                    trait_tags_json = json.dumps(trait_tags_data) if trait_tags_data else None
+                    db.add(models.Option(
+                        option_id=opt.get("option_id"),
+                        question_id=q["question_id"],
+                        option_text=opt["option_text"],
+                        trait_tag=trait_tag,
+                        weight=1,
+                        trait_tags_json=trait_tags_json
+                    ))
+
         db.commit()
         print("[OK] DATABASE SUCCESSFULLY INITIALIZED AND SEEDED!")
         print("[DATA] All data is now permanent!")
@@ -397,6 +425,38 @@ def sync_questions_db():
                         if db_opt.trait_tag != trait_tag:
                             db_opt.trait_tag = trait_tag
 
+        # 2b) Sync decision tree questions into DB
+        tree_inserted = 0
+        for q in DECISION_TREE_QUESTIONS:
+            qid = q["question_id"]
+            source_ids.add(qid)
+            if qid not in db_questions:
+                new_q = models.Question(
+                    question_id=qid,
+                    test_id=test_id,
+                    question_text=q["question_text"],
+                    category=q.get("category"),
+                    question_type=q.get("question_type", "tree")
+                )
+                db.add(new_q)
+                db.flush()
+                for opt in q.get("options", []):
+                    trait_tags_data = opt.get("trait_tags", {})
+                    trait_tag = max(trait_tags_data, key=trait_tags_data.get) if trait_tags_data else None
+                    trait_tags_json = json.dumps(trait_tags_data) if trait_tags_data else None
+                    db.add(models.Option(
+                        option_id=opt.get("option_id"),
+                        question_id=qid,
+                        option_text=opt["option_text"],
+                        trait_tag=trait_tag,
+                        weight=1,
+                        trait_tags_json=trait_tags_json
+                    ))
+                tree_inserted += 1
+        inserted += tree_inserted
+        if tree_inserted:
+            print(f"[SYNC] Inserted {tree_inserted} decision tree question(s)")
+
         if inserted or updated:
             db.commit()
             # Reset engine cache so new questions are loaded
@@ -406,7 +466,7 @@ def sync_questions_db():
         # 3) Log stale questions (can't delete due to foreign keys from student_answers)
         stale_ids = [qid for qid in db_questions if qid not in source_ids]
         if stale_ids:
-            print(f"[SYNC] {len(stale_ids)} stale question(s) in DB (IDs: {stale_ids}) — skipped by engine via QUESTION_TREE_NODES")
+            print(f"[SYNC] {len(stale_ids)} stale question(s) in DB (IDs: {stale_ids}) — skipped by engine")
 
         if not cleaned and not inserted and not updated and not stale_ids:
             print("[SYNC] Questions database is already in sync")
@@ -2591,7 +2651,7 @@ def start_adaptive_assessment(data: AdaptiveSessionStart, current_user: models.U
     
     Starts an adaptive assessment that asks questions ONE AT A TIME.
     Each subsequent question is intelligently selected based on previous answers.
-    User can choose 30, 50, or 60 questions.
+    Assessment runs with 30 questions.
     
     Returns: session_id and first question
     """
@@ -2613,8 +2673,8 @@ def start_adaptive_assessment(data: AdaptiveSessionStart, current_user: models.U
     # Initialize adaptive engine
     engine = get_or_init_adaptive_engine(db)
     
-    # Update engine settings based on user selection
-    max_questions = 50  # Fixed at 50 questions
+    # Keep the assessment concise so niche paths do not run out of relevant questions.
+    max_questions = 30
     
     # Create session with custom max questions and profile data (interests/skills)
     session_id = engine.create_session(data.userId, user_gwa, user_strand, max_questions, user_interests, user_skills)
@@ -2665,7 +2725,7 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
         if session:
             user_id = session.user_id
             answered_questions = session.answered_questions
-            print(f"[DEBUG] Session found: round_number={session.round_number}, answered_questions={len(session.answered_questions)}, excluded_ids={len(session.excluded_question_ids)}")
+            print(f"[DEBUG] Session found: round_number={session.round_number}, answered_questions={len(session.answered_questions)}")
         
         # If we still don't have user_id, we can't save
         if not user_id:

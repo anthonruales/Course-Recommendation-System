@@ -9,9 +9,9 @@ import NavBar from './components/NavBar';
  * - Questions appear ONE AT A TIME
  * - Each question is intelligently selected based on your previous answers
  * - You can see courses narrowing down in real-time
- * - User selects 30, 50, or 60 questions
+ * - Assessment runs in a focused 30-question flow
  */
-function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 50, onViewProfile, onViewActivity }) {
+function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewProfile, onViewActivity }) {
   // Session state
   const [sessionId, setSessionId] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(null);
@@ -22,11 +22,11 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 50, onViewPr
   // Progress tracking
   const [currentRound, setCurrentRound] = useState(0);
   const [maxRounds, setMaxRounds] = useState(maxQuestions);
-  const [minRounds, setMinRounds] = useState(Math.floor(maxQuestions * 0.5));
+  const [, setMinRounds] = useState(Math.floor(maxQuestions * 0.5));
   const [confidence, setConfidence] = useState(0);
   const [coursesRemaining, setCoursesRemaining] = useState(99);
   const [traitsDiscovered, setTraitsDiscovered] = useState(0);
-  const [canFinishEarly, setCanFinishEarly] = useState(false);
+  const [, setCanFinishEarly] = useState(false);
   
   // Preview of top courses (updates after each answer)
   const [topCoursesPreview, setTopCoursesPreview] = useState([]);
@@ -202,6 +202,7 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 50, onViewPr
   };
 
   // Finish early
+  // eslint-disable-next-line no-unused-vars
   const finishEarly = async () => {
     if (!sessionId) return;
 

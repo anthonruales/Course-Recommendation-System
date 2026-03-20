@@ -72,7 +72,7 @@ function App() {
   });
   const [user, setUser] = useState(localStorage.getItem('userName') || null);
   const [recommendationData, setRecommendationData] = useState(null);
-  const [selectedQuestionCount] = useState(50);
+  const [selectedQuestionCount] = useState(30);
   
   // Initialize as empty object to prevent "is not a function" errors
   const [profileData, setProfileData] = useState({});
