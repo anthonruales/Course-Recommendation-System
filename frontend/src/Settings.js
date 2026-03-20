@@ -442,7 +442,7 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
         showToast('Please use an appropriate name.', 'error');
         return;
       }
-      if (!/^[a-zA-Z\s'.\-]+$/.test(formData.fullname.trim())) {
+      if (!/^[a-zA-Z\s'.-]+$/.test(formData.fullname.trim())) {
         showToast('Name can only contain letters, spaces, hyphens, apostrophes, and dots.', 'error');
         return;
       }
