@@ -1528,6 +1528,154 @@ class AdaptiveAssessmentEngine:
 
         return current_topic, adjacent
 
+    def _get_dominant_traits(self, session: AdaptiveSession, top_n: int = 5) -> Set[str]:
+        """
+        Return the user's dominant traits — the top N traits by accumulated score.
+        These represent the user's CONSISTENT pattern across multiple questions,
+        not just a single answer.
+        """
+        if not session.trait_scores:
+            return set(session.profile_seed_traits[:top_n])
+        
+        sorted_traits = sorted(
+            session.trait_scores.items(),
+            key=lambda x: x[1],
+            reverse=True
+        )
+        dominant = {t for t, s in sorted_traits[:top_n]}
+        # Always include top profile seeds as dominant context
+        dominant.update(session.profile_seed_traits[:3])
+        return dominant
+
+    def _is_dominant_trait(self, trait: str, session: AdaptiveSession) -> bool:
+        """
+        Check if a trait is part of the user's dominant pattern.
+        A trait is dominant ONLY if it is directly in the top 5 accumulated
+        traits by score OR among the top 3 profile seed traits.
+        
+        NO adjacency expansion — this prevents cross-cluster leakage
+        (e.g., Digital-Media being adjacent to Software-Dev should NOT
+        make Software-Dev count as dominant for an art-focused user).
+        """
+        dominant = self._get_dominant_traits(session)
+        return trait in dominant
+
+    def _has_dominant_trait_overlap(self, question: dict, session: AdaptiveSession) -> bool:
+        """
+        Check if a question has at least one option with a trait from the user's
+        DOMINANT pattern (top accumulated traits + profile seeds).
+        
+        This is STRICTER than _has_trait_continuity — it requires overlap with
+        the user's strongest traits, not just any trait ever encountered.
+        Used to prevent a single minority answer from hijacking the question chain.
+        
+        NO adjacency expansion — prevents cross-cluster leakage where
+        Digital-Media (dominant for art user) would expand to include Software-Dev.
+        """
+        dominant = self._get_dominant_traits(session)
+        if not dominant:
+            return True  # No dominant traits yet — allow anything
+        
+        options = question.get('options', [])
+        for opt in options:
+            trait_tags = opt.get('trait_tags', {})
+            if isinstance(trait_tags, dict):
+                for trait in trait_tags:
+                    if trait in dominant:
+                        return True
+            elif isinstance(trait_tags, list):
+                for trait in trait_tags:
+                    if trait in dominant:
+                        return True
+            else:
+                trait = opt.get('trait_tag')
+                if trait and trait in dominant:
+                    return True
+        return False
+
+    def _has_trait_continuity(self, question: dict, session: AdaptiveSession) -> bool:
+        """
+        Check if a question has at least one option that shares a trait with
+        the user's accumulated trait scores OR profile seed traits.
+        
+        This ensures every question is connected to what the user has already
+        expressed interest in, making the assessment feel like a coherent
+        conversation rather than random questions.
+        """
+        # Build the set of active traits: accumulated from answers + profile seeds
+        active_traits = set(session.trait_scores.keys())
+        active_traits.update(session.profile_seed_traits)
+        
+        # Also include adjacent/related traits for flexibility
+        expanded_active = set(active_traits)
+        for trait in active_traits:
+            adjacents = TOPIC_ADJACENCY.get(trait, [])
+            expanded_active.update(adjacents)
+        
+        if not expanded_active:
+            return True  # No traits yet (first question) — allow anything
+        
+        options = question.get('options', [])
+        for opt in options:
+            trait_tags = opt.get('trait_tags', {})
+            if isinstance(trait_tags, dict):
+                for trait in trait_tags:
+                    if trait in expanded_active:
+                        return True
+            elif isinstance(trait_tags, list):
+                for trait in trait_tags:
+                    if trait in expanded_active:
+                        return True
+            else:
+                trait = opt.get('trait_tag')
+                if trait and trait in expanded_active:
+                    return True
+        return False
+
+    def _question_profile_relevance_score(self, question: dict, session: AdaptiveSession) -> float:
+        """
+        Score how relevant a question is to the user's DOMINANT traits.
+        Returns a 0-1 score: higher means more options share traits with the user's
+        dominant pattern (not just any trait ever encountered).
+        
+        Used to rank questions so the most pattern-relevant ones are picked first.
+        """
+        dominant = self._get_dominant_traits(session)
+        if not dominant:
+            return 0.5  # No profile context yet
+        
+        options = question.get('options', [])
+        if not options:
+            return 0.0
+        
+        matching_options = 0
+        total_match_weight = 0.0
+        
+        for opt in options:
+            trait_tags = opt.get('trait_tags', {})
+            if isinstance(trait_tags, dict):
+                for trait, weight in trait_tags.items():
+                    if trait in dominant:
+                        matching_options += 1
+                        total_match_weight += weight
+                        break  # Count each option once
+            elif isinstance(trait_tags, list):
+                for trait in trait_tags:
+                    if trait in dominant:
+                        matching_options += 1
+                        total_match_weight += 1.0
+                        break
+            else:
+                trait = opt.get('trait_tag')
+                if trait and trait in dominant:
+                    matching_options += 1
+                    total_match_weight += 1.0
+        
+        # Score: ratio of matching options + weight bonus
+        option_ratio = matching_options / len(options)
+        weight_bonus = min(total_match_weight / len(options), 1.0)
+        return (option_ratio + weight_bonus) / 2.0
+
     def create_session(self, user_id: int, user_gwa: float = None, user_strand: str = None, max_questions: int = 30, user_interests: str = None, user_skills: str = None) -> str:
         """Start a new assessment session. Returns session_id."""
         import uuid
@@ -1723,27 +1871,49 @@ class AdaptiveAssessmentEngine:
                 return True  # Questions without node classification are broad/general — allow
             return bool(set(node["branches"]) & relevant)
         
+        def _passes_trait_continuity(qid):
+            """Check if question has trait overlap with user's accumulated/profile traits."""
+            q = self.questions.get(qid)
+            if not q:
+                return False
+            return self._has_trait_continuity(q, session)
+        
         # --- Step 1A: If we have a last_answer_trait, build a follow-up chain from it ---
+        # GUARD: Only follow the last answer's chain if the trait is part of the
+        # user's dominant pattern. This prevents a single "off-topic" answer
+        # (e.g., rating math as excellent when the user is art-focused) from
+        # hijacking the entire question chain away from the user's core interests.
         if session.last_answer_trait and session.last_answer_trait in TRAIT_FOLLOWUP_MAP:
-            followups = TRAIT_FOLLOWUP_MAP[session.last_answer_trait]
-            for fq in followups:
-                if fq not in asked and fq in self.questions and _is_relevant_question(fq):
-                    selected_qid = fq
-                    selection_reason = f"follow-up from trait {session.last_answer_trait}"
-                    # Update chain tracking
-                    session.current_chain_trait = session.last_answer_trait
-                    break
+            trait_is_dominant = self._is_dominant_trait(session.last_answer_trait, session)
+            # In early rounds (< 5 answers), allow any trait to drive chain (still discovering)
+            allow_chain = trait_is_dominant or len(session.answered_questions) < 5
+            
+            if allow_chain:
+                followups = TRAIT_FOLLOWUP_MAP[session.last_answer_trait]
+                for fq in followups:
+                    if fq not in asked and fq in self.questions and _is_relevant_question(fq):
+                        # EXTRA CHECK: the follow-up must also connect to dominant traits
+                        fq_question = self.questions[fq]
+                        if self._has_dominant_trait_overlap(fq_question, session):
+                            selected_qid = fq
+                            selection_reason = f"follow-up from trait {session.last_answer_trait}"
+                            session.current_chain_trait = session.last_answer_trait
+                            break
+            else:
+                print(f"[GUARD] Skipping chain for minority trait '{session.last_answer_trait}' "
+                      f"(not in dominant pattern: {sorted(self._get_dominant_traits(session))[:5]})")
         
         # --- Step 1B: If no follow-up found, try the pre-loaded chain_queue ---
         if not selected_qid and session.chain_queue:
             for cq in list(session.chain_queue):
                 if cq not in asked and cq in self.questions and _is_relevant_question(cq):
-                    selected_qid = cq
-                    selection_reason = f"chain queue (domain entry)"
-                    break
-                else:
-                    # Remove already-asked or irrelevant questions from queue
-                    session.chain_queue = [q for q in session.chain_queue if q != cq]
+                    cq_question = self.questions[cq]
+                    if self._has_dominant_trait_overlap(cq_question, session):
+                        selected_qid = cq
+                        selection_reason = f"chain queue (domain entry)"
+                        break
+                # Remove already-asked or non-qualifying questions from queue
+                session.chain_queue = [q for q in session.chain_queue if q != cq]
         
         # ═══════════════════════════════════════════════════════════════════
         # PHASE 2: If chain is exhausted, look at accumulated traits
@@ -1752,7 +1922,8 @@ class AdaptiveAssessmentEngine:
         
         if not selected_qid:
             # Find the strongest trait that still has unanswered follow-up questions
-            # Only follow traits whose follow-ups are in relevant branches
+            # Only follow traits whose follow-ups are in relevant branches AND
+            # connect back to the user's dominant traits
             sorted_traits = sorted(
                 session.trait_scores.items(),
                 key=lambda x: x[1],
@@ -1762,10 +1933,12 @@ class AdaptiveAssessmentEngine:
                 if trait in TRAIT_FOLLOWUP_MAP:
                     for fq in TRAIT_FOLLOWUP_MAP[trait]:
                         if fq not in asked and fq in self.questions and _is_relevant_question(fq):
-                            selected_qid = fq
-                            selection_reason = f"strongest trait chain ({trait}, score={score:.1f})"
-                            session.current_chain_trait = trait
-                            break
+                            fq_question = self.questions[fq]
+                            if self._has_dominant_trait_overlap(fq_question, session):
+                                selected_qid = fq
+                                selection_reason = f"strongest trait chain ({trait}, score={score:.1f})"
+                                session.current_chain_trait = trait
+                                break
                 if selected_qid:
                     break
         
@@ -1834,6 +2007,11 @@ class AdaptiveAssessmentEngine:
                 
                 score = 0.0
                 
+                # TRAIT CONTINUITY BONUS — strongly favor questions sharing traits
+                # with the user's accumulated trait profile and profile seeds
+                profile_relevance = self._question_profile_relevance_score(question, session)
+                score += profile_relevance * 10.0  # Strong bonus for trait-continuous questions
+                
                 # Branch affinity — boost questions whose branches overlap with profile
                 relevant_overlap = len(q_branches & relevant)
                 score += relevant_overlap * 2.0
@@ -1865,21 +2043,40 @@ class AdaptiveAssessmentEngine:
             
             if candidates:
                 candidates.sort(reverse=True, key=lambda x: x[0])
-                selected_qid = candidates[0][1]
-                selection_reason = f"fallback scoring (score={candidates[0][0]:.1f})"
+                # Prefer a candidate with trait continuity
+                selected_qid = None
+                for c_score, c_qid in candidates:
+                    if _passes_trait_continuity(c_qid):
+                        selected_qid = c_qid
+                        selection_reason = f"fallback scoring with continuity (score={c_score:.1f})"
+                        break
+                # If no trait-continuous candidate, take the top scorer anyway
+                if not selected_qid:
+                    selected_qid = candidates[0][1]
+                    selection_reason = f"fallback scoring (score={candidates[0][0]:.1f})"
         
         # ═══════════════════════════════════════════════════════════════════
         # PHASE 5: SAFETY NET — If strict filtering found nothing but we
-        # haven't reached max_questions, allow ANY unanswered question
-        # rather than ending the assessment prematurely
+        # haven't reached max_questions, prefer questions with trait continuity
+        # before falling back to any unanswered question
         # ═══════════════════════════════════════════════════════════════════
         
+        if not selected_qid and session.round_number < session.max_questions:
+            # First pass: look for any unanswered question with trait continuity
+            for qid, question in self.questions.items():
+                if qid not in asked and _passes_trait_continuity(qid):
+                    selected_qid = qid
+                    selection_reason = "safety net (trait-continuous)"
+                    print(f"[SAFETY] Trait-continuous fallback at round {round_num}")
+                    break
+        
+        # Last resort: any unanswered question to avoid premature end
         if not selected_qid and session.round_number < session.max_questions:
             for qid, question in self.questions.items():
                 if qid not in asked:
                     selected_qid = qid
-                    selection_reason = "safety net (relaxed filter)"
-                    print(f"[SAFETY] Relaxed filter to avoid premature end at round {round_num}")
+                    selection_reason = "safety net (last resort)"
+                    print(f"[SAFETY] Last resort fallback at round {round_num}")
                     break
         
         # ═══════════════════════════════════════════════════════════════════
@@ -2269,18 +2466,32 @@ class AdaptiveAssessmentEngine:
             session.current_topic_thread = new_topic
         
         # --- Conversation Chain: Update last_answer_trait for next question routing ---
+        # IMPORTANT: Only let the answer trait drive the chain if it's consistent
+        # with the user's dominant pattern. If the trait is a minority (one-off),
+        # keep the chain following the dominant trait instead.
         if chosen_trait and not is_none_option:
             session.last_answer_trait = chosen_trait
-            # Build new chain queue from this trait's follow-ups
-            if chosen_trait in TRAIT_FOLLOWUP_MAP:
-                new_chain = [q for q in TRAIT_FOLLOWUP_MAP[chosen_trait]
-                             if q not in session.excluded_question_ids and q in self.questions]
-                session.chain_queue = new_chain
-                session.current_chain_trait = chosen_trait
-                print(f"[CHAIN] Answer trait={chosen_trait} → follow-up chain: {new_chain[:5]}")
+            is_dominant = self._is_dominant_trait(chosen_trait, session)
+            early_stage = len(session.answered_questions) < 5
+            
+            if is_dominant or early_stage:
+                # Trait is part of user's dominant pattern — update chain normally
+                if chosen_trait in TRAIT_FOLLOWUP_MAP:
+                    new_chain = [q for q in TRAIT_FOLLOWUP_MAP[chosen_trait]
+                                 if q not in session.excluded_question_ids and q in self.questions]
+                    session.chain_queue = new_chain
+                    session.current_chain_trait = chosen_trait
+                    print(f"[CHAIN] Answer trait={chosen_trait} (dominant) -> follow-up chain: {new_chain[:5]}")
+                else:
+                    session.chain_queue = []
+                    print(f"[CHAIN] Answer trait={chosen_trait} (dominant, no follow-up map)")
             else:
-                session.chain_queue = []
-                print(f"[CHAIN] Answer trait={chosen_trait} (no follow-up map)")
+                # Trait is a minority one-off — do NOT replace the chain queue.
+                # Keep following the dominant trait's chain instead.
+                dominant = self._get_dominant_traits(session)
+                print(f"[CHAIN] Answer trait={chosen_trait} is MINORITY (dominant: {sorted(dominant)[:5]}). "
+                      f"Keeping existing chain for continuity.")
+                # Don't overwrite chain_queue — let Phase 2 pick up the strongest trait
         else:
             session.last_answer_trait = ""
         
@@ -2403,8 +2614,14 @@ class AdaptiveAssessmentEngine:
         elif session.round_number <= 7:
             early_boost_multiplier = 1.5  # Next 4 answers: 1.5x impact
         
-        # Combined multiplier: question weight × early boost
-        total_multiplier = question_weight * early_boost_multiplier
+        # Dampen boost for minority traits — prevents one off-topic answer
+        # from swinging course recommendations away from the user's pattern
+        is_dominant = self._is_dominant_trait(chosen_trait, session)
+        early_stage = len(session.answered_questions) < 5
+        dominance_multiplier = 1.0 if (is_dominant or early_stage) else 0.25
+        
+        # Combined multiplier: question weight × early boost × dominance
+        total_multiplier = question_weight * early_boost_multiplier * dominance_multiplier
         
         for course_name in list(session.active_courses):
             course_traits = self.course_traits.get(course_name, set())
@@ -2917,8 +3134,10 @@ class AdaptiveAssessmentEngine:
         # Set last_answer_trait to the previous answer's trait (if any remain)
         if session.recent_traits:
             session.last_answer_trait = session.recent_traits[-1]
-            # Rebuild chain_queue from this trait
-            if session.last_answer_trait in TRAIT_FOLLOWUP_MAP:
+            # Only rebuild chain from this trait if it's a dominant trait
+            is_dominant = self._is_dominant_trait(session.last_answer_trait, session)
+            early_stage = len(session.answered_questions) < 5
+            if (is_dominant or early_stage) and session.last_answer_trait in TRAIT_FOLLOWUP_MAP:
                 session.chain_queue = [q for q in TRAIT_FOLLOWUP_MAP[session.last_answer_trait]
                                        if q not in session.excluded_question_ids and q in self.questions]
                 session.current_chain_trait = session.last_answer_trait
