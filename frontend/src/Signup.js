@@ -46,6 +46,7 @@ function Signup({ onSwitch, onBack }) {
   });
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [toast, setToast] = useState(null);
   const [emailError, setEmailError] = useState('');
   
@@ -418,17 +419,17 @@ function Signup({ onSwitch, onBack }) {
             <div style={{ position: 'relative' }}>
               <input 
                 style={styles.input} 
-                type={showPassword ? "text" : "password"} 
+                type={showConfirmPassword ? "text" : "password"} 
                 placeholder="••••••••"
                 required
                 onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})} 
               />
                <button 
                 type="button" 
-                onClick={() => setShowPassword(!showPassword)}
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 style={styles.viewBtn}
               >
-                {showPassword ? "HIDE" : "SHOW"}
+                {showConfirmPassword ? "HIDE" : "SHOW"}
               </button>
             </div>
           </div>
