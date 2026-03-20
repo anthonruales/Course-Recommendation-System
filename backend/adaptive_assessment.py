@@ -341,6 +341,12 @@ UNIFIED_PROFILE_TO_TRAITS = {
     "aviation": ["Hardware-Systems", "Mechanical-Design"],
     "logistics": ["Industrial-Ops", "Admin-Skill"],
     "marine_transport": ["Maritime-Sea", "Physical-Skill"],
+    "biotechnology": ["Lab-Research", "Medical-Lab", "Field-Research"],
+    "meteorology": ["Field-Research", "Environmental-Sci", "Lab-Research"],
+    "statistics": ["Data-Analytics", "Lab-Research", "Finance-Acct"],
+    "food_science": ["Food-Science", "Lab-Research", "Culinary-Arts"],
+    "forensic_science": ["Forensic-Sci", "Lab-Research", "Law-Enforce"],
+    "env_planning": ["Environmental-Eng", "Environmental-Sci", "Field-Research"],
     "marine_science": ["Field-Research", "Maritime-Sea", "Lab-Research"],
     "sports": ["Physical-Skill", "Rehab-Therapy", "Teaching-Ed", "Sports-Ed"],
     "tourism": ["Hospitality-Svc", "Tourism-Travel"],
@@ -435,6 +441,19 @@ UNIFIED_PROFILE_TO_TRAITS = {
     "driving": ["Maritime-Sea", "Industrial-Ops"],
     "gardening": ["Agri-Nature", "Field-Research"],
     "repair_maintenance": ["Mechanical-Design", "Electrical-Power"],
+    "acting": ["Performing-Arts", "Creative-Skill", "Visual-Design"],
+    "illustration": ["Visual-Design", "Creative-Skill", "Digital-Media"],
+    "fashion_design": ["Visual-Design", "Creative-Skill", "Spatial-Design"],
+    "animation_skill": ["Animation-3D", "Digital-Media", "Creative-Skill"],
+    "interior_styling": ["Spatial-Design", "Visual-Design", "Creative-Skill"],
+    "content_creation": ["Digital-Media", "Marketing-Sales", "Creative-Skill"],
+    "swimming": ["Physical-Skill", "Maritime-Sea", "Sports-Ed"],
+    "animal_handling": ["Agri-Nature", "Patient-Care", "Field-Research"],
+    "carpentry": ["Mechanical-Design", "Spatial-Design", "Physical-Skill"],
+    "farming": ["Agri-Nature", "Field-Research", "Physical-Skill"],
+    "fishing": ["Agri-Nature", "Maritime-Sea", "Physical-Skill"],
+    "sewing": ["Creative-Skill", "Spatial-Design", "Technical-Skill"],
+    "coaching": ["Sports-Ed", "Teaching-Ed", "Physical-Skill"],
     # Strand-related keywords (for free text matching)
     "stem": ["Software-Dev", "Lab-Research", "Data-Analytics"],
     "abm": ["Finance-Acct", "Marketing-Sales", "Startup-Venture"],
@@ -1073,6 +1092,11 @@ INTEREST_DOMAIN_MAP = {
     "exercise_science": "physical", "swimming": "physical",
     "heavy_equipment": "physical", "carpentry": "physical", "plumbing": "physical",
     "welding": "physical", "auto_repair": "physical",
+    "acting": "creative", "illustration": "creative",
+    "fashion_design": "creative", "animation_skill": "creative",
+    "interior_styling": "creative", "content_creation": "creative",
+    "animal_handling": "agriculture", "fishing": "agriculture",
+    "sewing": "creative", "coaching": "education",
     "leadership": "business", "teamwork": "public_service",
     "critical_thinking": "science", "problem_solving": "technology",
     "time_management": "business", "organization": "business",
@@ -1089,6 +1113,13 @@ STRAND_DOMAIN_MAP = {
 
 # Minimum questions to ask in a domain before moving on
 DOMAIN_MIN_QUESTIONS = 3
+
+# Maximum questions to spend in one domain before rotating to the next.
+# This ensures ALL of a user's selected interests get explored, not just the first one.
+# The actual cap is dynamically calculated as: max_questions / num_voted_domains
+# (so with 30 questions and 4 domains, each domain gets ~7 questions before rotation).
+# This constant is only a hard ceiling fallback.
+DOMAIN_MAX_QUESTIONS_HARD_CAP = 8
 
 
 class AdaptiveAssessmentEngine:
@@ -1205,7 +1236,7 @@ class AdaptiveAssessmentEngine:
         # Collect ALL unique traits the user's profile maps to
         user_profile_traits: Set[str] = set()
         for selection in user_selections:
-            related_traits = PROFILE_TO_TRAITS.get(selection, [])
+            related_traits = PROFILE_TO_TRAITS.get(selection) or PROFILE_TO_TRAITS.get(selection.replace(" ", "_")) or PROFILE_TO_TRAITS.get(selection.replace(" & ", "_").replace(" ", "_"), [])
             for trait in related_traits:
                 user_profile_traits.add(trait.lower())
         
@@ -1437,7 +1468,7 @@ class AdaptiveAssessmentEngine:
         if session.user_interests:
             for interest in session.user_interests.split(','):
                 interest = interest.strip().lower()
-                traits = PROFILE_TO_TRAITS.get(interest, [])
+                traits = PROFILE_TO_TRAITS.get(interest) or PROFILE_TO_TRAITS.get(interest.replace(" ", "_")) or PROFILE_TO_TRAITS.get(interest.replace(" & ", "_").replace(" ", "_"), [])
                 for trait in traits:
                     trait_counts[trait] = trait_counts.get(trait, 0) + 1
         
@@ -1445,7 +1476,7 @@ class AdaptiveAssessmentEngine:
         if session.user_skills:
             for skill in session.user_skills.split(','):
                 skill = skill.strip().lower()
-                traits = PROFILE_TO_TRAITS.get(skill, [])
+                traits = PROFILE_TO_TRAITS.get(skill) or PROFILE_TO_TRAITS.get(skill.replace(" ", "_")) or PROFILE_TO_TRAITS.get(skill.replace(" & ", "_").replace(" ", "_"), [])
                 for trait in traits:
                     trait_counts[trait] = trait_counts.get(trait, 0) + 1
         
@@ -1480,7 +1511,7 @@ class AdaptiveAssessmentEngine:
         if interests:
             for interest in interests.split(','):
                 interest = interest.strip().lower()
-                traits = PROFILE_TO_TRAITS.get(interest, [])
+                traits = PROFILE_TO_TRAITS.get(interest) or PROFILE_TO_TRAITS.get(interest.replace(" ", "_")) or PROFILE_TO_TRAITS.get(interest.replace(" & ", "_").replace(" ", "_"), [])
                 for i, trait in enumerate(traits):
                     # First trait in list is most relevant
                     trait_counts[trait] = trait_counts.get(trait, 0) + (2.0 - i * 0.3)
@@ -1489,7 +1520,7 @@ class AdaptiveAssessmentEngine:
         if skills:
             for skill in skills.split(','):
                 skill = skill.strip().lower()
-                traits = PROFILE_TO_TRAITS.get(skill, [])
+                traits = PROFILE_TO_TRAITS.get(skill) or PROFILE_TO_TRAITS.get(skill.replace(" ", "_")) or PROFILE_TO_TRAITS.get(skill.replace(" & ", "_").replace(" ", "_"), [])
                 for i, trait in enumerate(traits):
                     trait_counts[trait] = trait_counts.get(trait, 0) + (1.5 - i * 0.2)
 
@@ -1758,6 +1789,23 @@ class AdaptiveAssessmentEngine:
             domain = INTEREST_DOMAIN_MAP.get(kw)
             if domain:
                 domain_votes[domain] = domain_votes.get(domain, 0) + 1
+            else:
+                # Try individual words from multi-word phrases
+                # e.g. "architecture_&_interior_design" → try "architecture", "interior_design"
+                for word in kw.replace("&", " ").replace("_", " ").split():
+                    word = word.strip()
+                    if word:
+                        domain = INTEREST_DOMAIN_MAP.get(word)
+                        if domain:
+                            domain_votes[domain] = domain_votes.get(domain, 0) + 1
+                            break
+        
+        # Also derive domains from profile seed traits (catches phrases like
+        # "Architecture & Interior Design" that UNIFIED_PROFILE_TO_TRAITS handles)
+        for trait in profile_ranked:
+            branch = TRAIT_TO_BRANCH.get(trait, "")
+            if branch and branch not in domain_votes:
+                domain_votes[branch] = domain_votes.get(branch, 0) + 1
         
         # Primary domain: most voted, with strand as tiebreaker
         strand_domain = STRAND_DOMAIN_MAP.get(normalized_strand)
@@ -1856,8 +1904,48 @@ class AdaptiveAssessmentEngine:
         round_num = session.round_number + 1
         
         # ═══════════════════════════════════════════════════════════════════
+        # DOMAIN ROTATION: Ensure all user interests get explored
+        # If the current domain has used its fair share of questions,
+        # skip the follow-up chain (Phase 1/2) and jump to Phase 3
+        # to rotate to the next domain in the queue.
+        # ═══════════════════════════════════════════════════════════════════
+        
+        # Calculate per-domain question budget
+        num_voted_domains = max(len(session.domain_queue), 1)
+        domain_budget = max(session.max_questions // num_voted_domains, DOMAIN_MIN_QUESTIONS)
+        domain_budget = min(domain_budget, DOMAIN_MAX_QUESTIONS_HARD_CAP)
+        
+        # Check if the current chain's domain has exceeded its budget
+        current_chain_domain = ""
+        if session.current_chain_trait:
+            current_chain_domain = TRAIT_TO_BRANCH.get(session.current_chain_trait, "")
+        elif session.last_answer_trait:
+            current_chain_domain = TRAIT_TO_BRANCH.get(session.last_answer_trait, "")
+        
+        # Are there still underserved domains in the queue?
+        # Because questions can belong to multiple branches, domain_question_count
+        # gets inflated (a question in ["science","healthcare"] increments both).
+        # So instead of requiring unexplored domains, just cap each domain and
+        # let Phase 3/4 naturally pick the next best question path.
+        
+        current_domain_count = session.domain_question_count.get(current_chain_domain, 0)
+        force_domain_rotation = (
+            current_chain_domain and
+            current_domain_count >= domain_budget
+        )
+        
+        if force_domain_rotation:
+            print(f"[ROTATE] Domain '{current_chain_domain}' has {current_domain_count} questions "
+                  f"(budget={domain_budget}). Skipping chain to rotate.")
+            # Clear the chain trait so next round detects the actual domain
+            # of whatever question Phase 3/4 picks
+            session.current_chain_trait = ""
+            session.chain_queue = []
+        
+        # ═══════════════════════════════════════════════════════════════════
         # PHASE 1: Try to get the next question from the current chain
         # All follow-ups must belong to profile-relevant branches.
+        # SKIPPED if domain rotation is forcing a transition.
         # ═══════════════════════════════════════════════════════════════════
         
         selected_qid = None
@@ -1883,7 +1971,8 @@ class AdaptiveAssessmentEngine:
         # user's dominant pattern. This prevents a single "off-topic" answer
         # (e.g., rating math as excellent when the user is art-focused) from
         # hijacking the entire question chain away from the user's core interests.
-        if session.last_answer_trait and session.last_answer_trait in TRAIT_FOLLOWUP_MAP:
+        # ALSO SKIPPED when domain rotation is forcing a transition.
+        if not force_domain_rotation and session.last_answer_trait and session.last_answer_trait in TRAIT_FOLLOWUP_MAP:
             trait_is_dominant = self._is_dominant_trait(session.last_answer_trait, session)
             # In early rounds (< 5 answers), allow any trait to drive chain (still discovering)
             allow_chain = trait_is_dominant or len(session.answered_questions) < 5
@@ -1904,7 +1993,8 @@ class AdaptiveAssessmentEngine:
                       f"(not in dominant pattern: {sorted(self._get_dominant_traits(session))[:5]})")
         
         # --- Step 1B: If no follow-up found, try the pre-loaded chain_queue ---
-        if not selected_qid and session.chain_queue:
+        # ALSO SKIPPED when domain rotation is forcing a transition.
+        if not force_domain_rotation and not selected_qid and session.chain_queue:
             for cq in list(session.chain_queue):
                 if cq not in asked and cq in self.questions and _is_relevant_question(cq):
                     cq_question = self.questions[cq]
@@ -1918,9 +2008,10 @@ class AdaptiveAssessmentEngine:
         # ═══════════════════════════════════════════════════════════════════
         # PHASE 2: If chain is exhausted, look at accumulated traits
         # to find the strongest unexplored path
+        # ALSO SKIPPED when domain rotation is forcing a transition.
         # ═══════════════════════════════════════════════════════════════════
         
-        if not selected_qid:
+        if not force_domain_rotation and not selected_qid:
             # Find the strongest trait that still has unanswered follow-up questions
             # Only follow traits whose follow-ups are in relevant branches AND
             # connect back to the user's dominant traits
@@ -2038,6 +2129,15 @@ class AdaptiveAssessmentEngine:
                 
                 # Question weight from tree
                 score += node.get("weight", 1.0)
+                
+                # Domain rotation penalty — discourage questions from domains
+                # that already exceeded their budget, favoring underserved domains
+                if force_domain_rotation:
+                    for branch in q_branches:
+                        branch_count = session.domain_question_count.get(branch, 0)
+                        if branch_count >= domain_budget:
+                            score *= 0.5  # Halve score for overbudget domains
+                            break
                 
                 candidates.append((score, qid))
             
@@ -2406,8 +2506,9 @@ class AdaptiveAssessmentEngine:
             'none of these', 'not for me', "i don't"
         ])
         
-        # Track which traits to update course scores for
+        # Track which traits to update course scores for: list of (trait, weight) tuples
         traits_to_boost = []
+        primary_trait = None  # The highest-weight trait in the option
         
         if is_none_option:
             # For "None" options, don't add any traits - the user is rejecting this topic
@@ -2417,27 +2518,30 @@ class AdaptiveAssessmentEngine:
             chosen_trait = None
         elif isinstance(chosen_trait_tags, dict) and chosen_trait_tags:
             # Weighted dict format: apply each trait with its weight
+            primary_trait = max(chosen_trait_tags, key=chosen_trait_tags.get)
             for trait, weight in chosen_trait_tags.items():
                 current = session.trait_scores.get(trait, 0)
                 session.trait_scores[trait] = current + weight
                 trait_changes[trait] = trait_changes.get(trait, 0) + weight
-                traits_to_boost.append(trait)
-            chosen_trait = max(chosen_trait_tags, key=chosen_trait_tags.get)
+                traits_to_boost.append((trait, weight))
+            chosen_trait = primary_trait
         elif isinstance(chosen_trait_tags, list) and chosen_trait_tags:
             # Legacy list format
+            primary_trait = chosen_trait_tags[0]
             for idx, tag in enumerate(chosen_trait_tags):
                 weight = 1.0 if idx == 0 else 0.6
                 current = session.trait_scores.get(tag, 0)
                 session.trait_scores[tag] = current + weight
                 trait_changes[tag] = trait_changes.get(tag, 0) + weight
-                traits_to_boost.append(tag)
+                traits_to_boost.append((tag, weight))
             chosen_trait = chosen_trait_tags[0]
         elif chosen_trait:
             # Fallback: single trait_tag (old format)
+            primary_trait = chosen_trait
             current = session.trait_scores.get(chosen_trait, 0)
             session.trait_scores[chosen_trait] = current + 1.0
             trait_changes[chosen_trait] = 1.0
-            traits_to_boost.append(chosen_trait)
+            traits_to_boost.append((chosen_trait, 1.0))
             
             # Also add mapped traits (from our enhanced trait system)
             mapped_traits = EXPANDED_TRAIT_MAPPING.get(chosen_trait, [])
@@ -2445,14 +2549,17 @@ class AdaptiveAssessmentEngine:
                 current = session.trait_scores.get(mapped_trait, 0)
                 session.trait_scores[mapped_trait] = current + 0.5
                 trait_changes[mapped_trait] = trait_changes.get(mapped_trait, 0) + 0.5
-                traits_to_boost.append(mapped_trait)
+                traits_to_boost.append((mapped_trait, 0.5))
         
         # Store the trait changes for this question (for reversal)
         session.answer_trait_changes[question_id] = trait_changes
         
         # Update course scores based on this answer - for all traits boosted
-        for trait in traits_to_boost:
-            self._update_course_scores(session, trait)
+        # Each trait's boost is scaled by its weight from the option
+        # The primary trait (highest weight) gets an extra 1.3x bonus
+        for trait, weight in traits_to_boost:
+            is_primary = (trait == primary_trait)
+            self._update_course_scores(session, trait, trait_weight=weight, is_primary=is_primary)
         
         # --- Track topic continuity for profile-driven question selection ---
         if chosen_trait:
@@ -2594,8 +2701,14 @@ class AdaptiveAssessmentEngine:
         # Fall back to old trait system for backward compatibility
         return get_trait_similarity(trait1, trait2)
     
-    def _update_course_scores(self, session: AdaptiveSession, chosen_trait: str):
-        """Boost course scores based on trait matches, weighted by question depth."""
+    def _update_course_scores(self, session: AdaptiveSession, chosen_trait: str, trait_weight: float = 1.0, is_primary: bool = True):
+        """Boost course scores based on trait matches, weighted by question depth and trait weight.
+        
+        trait_weight: The weight of this trait in the chosen option (e.g. 1.0 for primary, 0.3 for secondary).
+                      This prevents generic secondary traits (Analytical-Skill, Social) from giving
+                      the same boost as the domain-specific primary trait (Legal-Practice, Software-Dev).
+        is_primary:   True if this is the highest-weight trait in the option. Gets a 1.3x bonus.
+        """
         if not chosen_trait:
             return
         
@@ -2620,15 +2733,19 @@ class AdaptiveAssessmentEngine:
         early_stage = len(session.answered_questions) < 5
         dominance_multiplier = 1.0 if (is_dominant or early_stage) else 0.25
         
-        # Combined multiplier: question weight × early boost × dominance
-        total_multiplier = question_weight * early_boost_multiplier * dominance_multiplier
+        # Primary trait gets a bonus multiplier — the most relevant trait in the
+        # chosen option should dominate scoring over generic secondary traits
+        primary_bonus = 1.3 if is_primary else 1.0
+        
+        # Combined multiplier: question weight × early boost × dominance × trait weight × primary bonus
+        total_multiplier = question_weight * early_boost_multiplier * dominance_multiplier * trait_weight * primary_bonus
         
         for course_name in list(session.active_courses):
             course_traits = self.course_traits.get(course_name, set())
             
             # Direct trait match - BIG BOOST (matches unique specialized trait)
             if chosen_trait in course_traits:
-                boost = 12.0 * total_multiplier  # Base 12 points × question weight × early boost
+                boost = 12.0 * total_multiplier  # Base 12 points × all multipliers
                 session.course_scores[course_name] += boost
             else:
                 # Check for similar traits using our SPECIALIZED trait system
