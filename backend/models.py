@@ -75,7 +75,7 @@ class Question(Base):
     question_id = Column(Integer, primary_key=True, index=True)
     test_id = Column(Integer, ForeignKey("tests.test_id"), nullable=True)  # Links to which test this belongs
     question_text = Column(Text, nullable=False)
-    category = Column(String(50))  # e.g., "Situational", "Assessment", "Academic"
+    category = Column(String(100))  # e.g., "Academic Interest - Sports & Fitness"
     question_type = Column(String(30), default="standard")  # "standard", "scale", "career_path", "extracurricular", "situational_mapped"
     
     # Relationships
