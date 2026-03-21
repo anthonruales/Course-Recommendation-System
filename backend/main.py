@@ -347,8 +347,10 @@ def sync_questions_db():
         # 2) Insert missing questions and update changed ones
         db_questions = {q.question_id: q for q in db.query(models.Question).all()}
         db_options = {}
+        all_existing_option_ids = set()
         for opt in db.query(models.Option).all():
             db_options.setdefault(opt.question_id, {})[opt.option_id] = opt
+            all_existing_option_ids.add(opt.option_id)
 
         source_ids = set()
         inserted = 0
@@ -424,9 +426,25 @@ def sync_questions_db():
                             db_opt.option_text = option_text
                         if db_opt.trait_tag != trait_tag:
                             db_opt.trait_tag = trait_tag
+                    elif oid and oid not in all_existing_option_ids:
+                        # Option is in source but not in DB — insert it
+                        trait_tags_json = json.dumps(trait_tags_data) if trait_tags_data else None
+                        recommended_courses_json = json.dumps(opt.get("recommended_courses", [])) if opt.get("recommended_courses") else None
+                        db.add(models.Option(
+                            option_id=oid,
+                            question_id=qid,
+                            option_text=option_text,
+                            trait_tag=trait_tag,
+                            weight=opt.get("weight", 1),
+                            trait_tags_json=trait_tags_json,
+                            recommended_courses_json=recommended_courses_json
+                        ))
+                        all_existing_option_ids.add(oid)
+                        updated += 1
 
-        # 2b) Sync decision tree questions into DB
+        # 2b) Sync decision tree questions into DB (insert new, update existing)
         tree_inserted = 0
+        tree_updated = 0
         for q in DECISION_TREE_QUESTIONS:
             qid = q["question_id"]
             source_ids.add(qid)
@@ -443,19 +461,55 @@ def sync_questions_db():
                 for opt in q.get("options", []):
                     trait_tags_data = opt.get("trait_tags", {})
                     trait_tag = max(trait_tags_data, key=trait_tags_data.get) if trait_tags_data else None
-                    trait_tags_json = json.dumps(trait_tags_data) if trait_tags_data else None
                     db.add(models.Option(
                         option_id=opt.get("option_id"),
                         question_id=qid,
                         option_text=opt["option_text"],
                         trait_tag=trait_tag,
                         weight=1,
-                        trait_tags_json=trait_tags_json
+                        trait_tags_json=trait_tags_data
                     ))
                 tree_inserted += 1
+            else:
+                # Update existing decision tree options when trait_tags or text change
+                existing_opts = db_options.get(qid, {})
+                for opt in q.get("options", []):
+                    oid = opt.get("option_id")
+                    trait_tags_data = opt.get("trait_tags", {})
+                    new_primary = max(trait_tags_data, key=trait_tags_data.get) if trait_tags_data else None
+                    option_text = opt.get("option_text", "")
+                    if oid and oid in existing_opts:
+                        db_opt = existing_opts[oid]
+                        changed = False
+                        if db_opt.option_text != option_text:
+                            db_opt.option_text = option_text
+                            changed = True
+                        if db_opt.trait_tag != new_primary:
+                            db_opt.trait_tag = new_primary
+                            changed = True
+                        if db_opt.trait_tags_json != trait_tags_data:
+                            db_opt.trait_tags_json = trait_tags_data
+                            changed = True
+                        if changed:
+                            tree_updated += 1
+                    elif oid and oid not in all_existing_option_ids:
+                        # Option is new (question exists but this option was added)
+                        db.add(models.Option(
+                            option_id=oid,
+                            question_id=qid,
+                            option_text=option_text,
+                            trait_tag=new_primary,
+                            weight=1,
+                            trait_tags_json=trait_tags_data
+                        ))
+                        all_existing_option_ids.add(oid)
+                        tree_updated += 1
         inserted += tree_inserted
         if tree_inserted:
             print(f"[SYNC] Inserted {tree_inserted} decision tree question(s)")
+        if tree_updated:
+            updated += tree_updated
+            print(f"[SYNC] Updated {tree_updated} decision tree option(s)")
 
         if inserted or updated:
             db.commit()
@@ -1391,208 +1445,6 @@ def recommend_deprecated(data: AssessmentSubmit, current_user: models.User = Dep
             }
         }
     }
-
-@app.get("/questions", response_model=List[QuestionSchema])
-def get_questions(current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
-    # Using func.random() (for SQLite/Postgres) or func.rand() (for MySQL) 
-    # to pull 20 random questions from the database
-    questions = db.query(models.Question)\
-        .options(joinedload(models.Question.options))\
-        .order_by(func.random())\
-        .limit(20)\
-        .all()
-    
-    if not questions:
-        raise HTTPException(status_code=404, detail="No questions found")
-        
-    return questions
-
-# ==================== ASSESSMENT TIER ENDPOINTS ====================
-
-# OLD ASSESSMENT TIERS ENDPOINT REMOVED - Use adaptive assessment instead
-@app.get("/assessment/tiers_deprecated")
-def get_assessment_tiers_deprecated():
-    """Get all available assessment tiers with their details"""
-    try:
-        tiers = AssessmentService.get_available_tiers()
-        return {
-            "success": True,
-            "message": "Assessment tiers retrieved successfully",
-            "tiers": tiers,
-            "total_tiers": len(tiers)
-        }
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-# OLD ASSESSMENT STRANDS ENDPOINT REMOVED - Use adaptive assessment instead  
-@app.get("/assessment/strands_deprecated")
-def get_available_strands_deprecated():
-    """Get all available SHS strands with their focus areas"""
-    try:
-        from assessment_service import STRAND_TRAIT_MAPPING
-        strands = {
-            strand: {
-                "name": info["name"],
-                "focus_areas": info["priority_traits"][:5]
-            }
-            for strand, info in STRAND_TRAIT_MAPPING.items()
-        }
-        return {
-            "success": True,
-            "strands": strands
-        }
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-# OLD ASSESSMENT START ENDPOINT REMOVED - Use /adaptive/start instead
-@app.get("/assessment/start_deprecated/{tier}")
-def start_assessment_deprecated(tier: str, strand: str = None, db: Session = Depends(get_db)):
-    """
-    Start an assessment with a specific tier and fetch questions from database.
-    Questions are prioritized based on user's SHS strand.
-    
-    Args:
-        tier: Assessment tier (quick, standard, comprehensive)
-        strand: User's SHS strand (STEM, ABM, HUMSS, TVL, GAS, SPORTS, ARTS)
-    """
-    try:
-        # Validate tier
-        tier_config = AssessmentService.get_available_tiers()
-        if tier not in tier_config:
-            raise ValueError(f"Invalid tier. Must be one of: {list(tier_config.keys())}")
-        
-        question_count = tier_config[tier]["question_count"]
-        
-        # Fetch all questions from database
-        all_questions = db.query(models.Question)\
-            .options(joinedload(models.Question.options))\
-            .all()
-        
-        if not all_questions:
-            raise ValueError("No questions found in database")
-        
-        # Get strand-based trait priorities
-        from assessment_service import STRAND_TRAIT_MAPPING
-        strand_upper = strand.upper() if strand else "GAS"
-        if strand_upper not in STRAND_TRAIT_MAPPING:
-            strand_upper = "GAS"
-        
-        strand_config = STRAND_TRAIT_MAPPING[strand_upper]
-        priority_traits = set(strand_config["priority_traits"])
-        secondary_traits = set(strand_config.get("secondary_traits", []))
-        
-        # Categorize questions by relevance to strand
-        priority_questions = []
-        secondary_questions = []
-        general_questions = []
-        
-        for q in all_questions:
-            question_traits = set()
-            for opt in q.options:
-                if opt.trait_tag:
-                    question_traits.add(opt.trait_tag)
-            
-            priority_match = question_traits & priority_traits
-            secondary_match = question_traits & secondary_traits
-            
-            if priority_match:
-                priority_questions.append(q)
-            elif secondary_match:
-                secondary_questions.append(q)
-            else:
-                general_questions.append(q)
-        
-        # Calculate distribution
-        import random
-        if strand_upper == "GAS":
-            priority_count = question_count // 3
-            secondary_count = question_count // 3
-            general_count = question_count - priority_count - secondary_count
-        else:
-            priority_count = int(question_count * 0.50)
-            secondary_count = int(question_count * 0.30)
-            general_count = question_count - priority_count - secondary_count
-        
-        # Select questions
-        selected_questions = []
-        random.shuffle(priority_questions)
-        selected_questions.extend(priority_questions[:min(priority_count, len(priority_questions))])
-        
-        random.shuffle(secondary_questions)
-        selected_questions.extend(secondary_questions[:min(secondary_count, len(secondary_questions))])
-        
-        random.shuffle(general_questions)
-        selected_questions.extend(general_questions[:min(general_count, len(general_questions))])
-        
-        # Fill remaining if needed
-        all_remaining = [q for q in all_questions if q not in selected_questions]
-        random.shuffle(all_remaining)
-        while len(selected_questions) < question_count and all_remaining:
-            selected_questions.append(all_remaining.pop())
-        
-        # Shuffle final selection
-        random.shuffle(selected_questions)
-        
-        # Format questions with database IDs
-        formatted_questions = []
-        for q in selected_questions:
-            formatted_questions.append({
-                "question_id": q.question_id,
-                "question_text": q.question_text,
-                "category": q.category,
-                "options": [
-                    {
-                        "option_id": opt.option_id,
-                        "option_text": opt.option_text,
-                        "trait_tag": opt.trait_tag
-                    }
-                    for opt in q.options
-                ]
-            })
-        
-        return {
-            "success": True,
-            "message": f"{tier_config[tier]['name']} started successfully",
-            "tier": tier,
-            "name": tier_config[tier]['name'],
-            "description": tier_config[tier]['description'],
-            "question_count": len(formatted_questions),
-            "estimated_time": tier_config[tier]['estimated_time'],
-            "accuracy": tier_config[tier]['accuracy'],
-            "strand": strand_upper,
-            "strand_name": strand_config["name"],
-            "questions": formatted_questions
-        }
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-# OLD ASSESSMENT QUESTIONS ENDPOINT REMOVED - Use adaptive assessment instead
-@app.get("/assessment/questions_deprecated/{tier}")
-def get_assessment_questions_deprecated(tier: str, strand: str = None):
-    """
-    Get questions for a specific assessment tier without full assessment metadata.
-    Questions are prioritized based on user's SHS strand.
-    """
-    try:
-        questions = AssessmentService.get_specific_questions(tier, strand=strand)
-        from assessment_service import STRAND_TRAIT_MAPPING
-        strand_upper = strand.upper() if strand else "GAS"
-        strand_name = STRAND_TRAIT_MAPPING.get(strand_upper, {}).get("name", "General")
-        
-        return {
-            "success": True,
-            "tier": tier,
-            "strand": strand_upper if strand else None,
-            "strand_name": strand_name if strand else None,
-            "question_count": len(questions),
-            "questions": questions
-        }
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/")
 def home(): return {"status": "online"}
@@ -2603,6 +2455,13 @@ def get_or_init_adaptive_engine(db: Session) -> AdaptiveAssessmentEngine:
             for eopt in eq.get('options', []):
                 key = (eq['question_id'], eopt['option_id'])
                 enhanced_trait_lookup[key] = eopt.get('trait_tags', {})
+        # Also index decision-tree questions directly from source so their
+        # rich multi-trait definitions are used (not reconstructed from a single primary tag)
+        for dq in DECISION_TREE_QUESTIONS:
+            for dopt in dq.get('options', []):
+                key = (dq['question_id'], dopt['option_id'])
+                if key not in enhanced_trait_lookup:
+                    enhanced_trait_lookup[key] = dopt.get('trait_tags', {})
         
         # Load questions from database and use curated per-option traits
         questions = db.query(models.Question).options(joinedload(models.Question.options)).all()
@@ -2610,7 +2469,7 @@ def get_or_init_adaptive_engine(db: Session) -> AdaptiveAssessmentEngine:
         for q in questions:
             options_list = []
             for opt in q.options:
-                # Use curated trait_tags from QUESTIONS_POOL_ENHANCED
+                # Use curated trait_tags from source files (QUESTIONS_POOL_ENHANCED + DECISION_TREE_QUESTIONS)
                 trait_tags = enhanced_trait_lookup.get((q.question_id, opt.option_id), {})
                 if not trait_tags and opt.trait_tag:
                     # Fallback: build multi-trait from curated domain map

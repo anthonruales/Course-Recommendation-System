@@ -506,7 +506,9 @@ TRAIT_TO_BRANCH = {
     # Engineering branch
     "Civil-Build": "engineering", "Mechanical-Design": "engineering",
     "Electrical-Power": "engineering", "Industrial-Ops": "engineering",
-    "Spatial-Design": "engineering", "Environmental-Eng": "engineering",
+    "Aeronautical-Eng": "engineering", "Environmental-Eng": "engineering",
+    # Spatial-Design belongs to creative (3D environments, architecture as art, game worlds)
+    "Spatial-Design": "creative",
     # Business branch
     "Finance-Acct": "business", "Marketing-Sales": "business",
     "Startup-Venture": "business", "Admin-Skill": "business",
@@ -535,7 +537,7 @@ TRAIT_TO_BRANCH = {
     "Physical-Skill": "physical",
     "Technical-Skill": "technology",
     # RIASEC-style traits (from course trait_tags)
-    "Investigative": "science", "Realistic": "engineering",
+    "Investigative": "science", "Realistic": "physical",
     "Artistic": "creative", "Social": "social",
     "Enterprising": "business", "Conventional": "business",
     "Analytical-Skill": "technology",
@@ -1335,6 +1337,76 @@ QUESTION_TREE_NODES = {
     776: {"level": 2, "weight": 1.5, "branches": ['science', 'public_service']},
     777: {"level": 2, "weight": 1.5, "branches": ['public_service']},
     778: {"level": 2, "weight": 1.5, "branches": ['public_service']},
+
+    # ===== DECISION TREE QUESTIONS (Weight 0.8-0.9) =====
+    # These are domain-specific branching questions (Q1001–Q1910).
+    # Lower weight than broad questions to prevent a single domain-branch
+    # answer from over-riding an established preference pattern.
+
+    # Technology domain root + sub-branches
+    1001: {"level": 1, "weight": 0.9, "branches": ["technology"]},                          # Tech root — which area?
+    1002: {"level": 1, "weight": 0.8, "branches": ["technology"]},                          # Software sub-branch
+    1003: {"level": 1, "weight": 0.8, "branches": ["technology"]},                          # Hardware/networks
+    1004: {"level": 1, "weight": 0.8, "branches": ["technology", "science"]},               # Data sub-branch
+    1005: {"level": 1, "weight": 0.8, "branches": ["technology", "public_service"]},        # Cybersecurity
+    1006: {"level": 1, "weight": 0.8, "branches": ["technology", "creative"]},              # Digital media
+    1007: {"level": 1, "weight": 0.8, "branches": ["technology", "creative"]},              # Game dev
+    1008: {"level": 1, "weight": 0.8, "branches": ["technology"]},                          # Deep programming
+    1009: {"level": 1, "weight": 0.8, "branches": ["technology"]},                          # Web dev deeper
+    1010: {"level": 1, "weight": 0.8, "branches": ["technology", "creative"]},              # Creative tech env
+
+    # Healthcare domain root + sub-branches
+    1101: {"level": 1, "weight": 0.9, "branches": ["healthcare"]},                          # Healthcare root
+    1102: {"level": 1, "weight": 0.8, "branches": ["healthcare"]},                          # Patient care
+    1103: {"level": 1, "weight": 0.8, "branches": ["healthcare", "science"]},               # Medical lab
+    1104: {"level": 1, "weight": 0.8, "branches": ["healthcare"]},                          # Therapy/rehab
+    1105: {"level": 1, "weight": 0.8, "branches": ["healthcare", "science"]},               # Pharmacy
+    1106: {"level": 1, "weight": 0.8, "branches": ["healthcare", "business"]},              # Health admin
+
+    # Engineering domain root + sub-branches
+    1201: {"level": 1, "weight": 0.9, "branches": ["engineering"]},                         # Engineering root
+    1202: {"level": 1, "weight": 0.8, "branches": ["engineering", "science"]},              # Civil engineering
+    1203: {"level": 1, "weight": 0.8, "branches": ["engineering"]},                         # Mechanical engineering
+    1204: {"level": 1, "weight": 0.8, "branches": ["engineering", "creative"]},             # Architecture/design
+
+    # Business domain root + sub-branches
+    1301: {"level": 1, "weight": 0.9, "branches": ["business"]},                            # Business root
+    1302: {"level": 1, "weight": 0.8, "branches": ["business"]},                            # Finance sub-branch
+
+    # Arts domain root + sub-branches
+    1401: {"level": 1, "weight": 0.9, "branches": ["creative"]},                            # Arts root
+    1402: {"level": 1, "weight": 0.8, "branches": ["creative"]},                            # Visual arts
+    1403: {"level": 1, "weight": 0.8, "branches": ["creative", "technology"]},              # Digital arts
+    1404: {"level": 1, "weight": 0.8, "branches": ["creative"]},                            # Performing arts
+
+    # Education domain root
+    1501: {"level": 1, "weight": 0.9, "branches": ["education"]},                           # Education root
+
+    # Science domain root + sub-branches
+    1601: {"level": 1, "weight": 0.9, "branches": ["science"]},                             # Science root
+    1602: {"level": 1, "weight": 0.8, "branches": ["science", "healthcare"]},               # Biology deeper
+    1603: {"level": 1, "weight": 0.8, "branches": ["science"]},                             # Environmental sci
+
+    # Public service domain root + sub-branches
+    1701: {"level": 1, "weight": 0.9, "branches": ["public_service"]},                      # Public service root
+    1702: {"level": 1, "weight": 0.8, "branches": ["public_service"]},                      # Law enforcement
+
+    # Maritime, Agriculture, Hospitality roots
+    1801: {"level": 1, "weight": 0.9, "branches": ["maritime"]},                            # Maritime root
+    1802: {"level": 1, "weight": 0.9, "branches": ["agriculture"]},                         # Agriculture root
+    1803: {"level": 1, "weight": 0.9, "branches": ["hospitality"]},                         # Hospitality root
+
+    # Validation / cross-cutting questions (lower weight — generic, not domain-specific)
+    1901: {"level": 1, "weight": 0.6, "branches": ["technology", "healthcare", "engineering", "business", "creative", "science"]},
+    1902: {"level": 1, "weight": 0.6, "branches": ["technology", "science", "creative", "business"]},
+    1903: {"level": 1, "weight": 0.6, "branches": ["business", "healthcare", "creative", "public_service"]},
+    1904: {"level": 1, "weight": 0.6, "branches": ["technology", "healthcare", "science", "creative"]},
+    1905: {"level": 1, "weight": 0.6, "branches": ["technology", "science", "creative", "business"]},
+    1906: {"level": 1, "weight": 0.6, "branches": ["technology", "healthcare", "creative", "business"]},
+    1907: {"level": 1, "weight": 0.6, "branches": ["technology", "science", "creative", "business", "education"]},
+    1908: {"level": 1, "weight": 0.6, "branches": ["technology", "healthcare", "creative", "education"]},
+    1909: {"level": 1, "weight": 0.6, "branches": ["technology", "healthcare", "engineering", "business", "creative"]},
+    1910: {"level": 1, "weight": 0.6, "branches": ["technology", "healthcare", "engineering", "business", "creative", "science"]},
 }
 
 
@@ -3188,7 +3260,7 @@ class AdaptiveAssessmentEngine:
         # from swinging course recommendations away from the user's pattern
         is_dominant = self._is_dominant_trait(chosen_trait, session)
         early_stage = len(session.answered_questions) < 5
-        dominance_multiplier = 1.0 if (is_dominant or early_stage) else 0.25
+        dominance_multiplier = 1.0 if (is_dominant or early_stage) else 0.15
         
         primary_bonus = 1.3 if is_primary else 1.0
 

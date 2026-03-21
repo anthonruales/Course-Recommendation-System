@@ -56,32 +56,32 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 10011,
                 "option_text": "Writing code and building software applications",
-                "trait_tags": {"Software-Dev": 1.0, "Technical-Skill": 0.5, "Investigative": 0.3}
+                "trait_tags": {"Software-Dev": 1.0, "Technical-Skill": 0.5, "Investigative": 0.3, "Analytical-Skill": 0.25, "Web-Dev": 0.2}
             },
             {
                 "option_id": 10012,
                 "option_text": "Understanding how computer hardware and electronics work",
-                "trait_tags": {"Hardware-Systems": 1.0, "Technical-Skill": 0.5, "Realistic": 0.3}
+                "trait_tags": {"Hardware-Systems": 1.0, "Technical-Skill": 0.5, "Electrical-Power": 0.3, "Investigative": 0.25, "Realistic": 0.2}
             },
             {
                 "option_id": 10013,
                 "option_text": "Analyzing data and finding patterns or insights",
-                "trait_tags": {"Data-Analytics": 1.0, "Analytical-Skill": 0.5, "Investigative": 0.4}
+                "trait_tags": {"Data-Analytics": 1.0, "Analytical-Skill": 0.5, "Investigative": 0.4, "AI-ML": 0.25, "Lab-Research": 0.15}
             },
             {
                 "option_id": 10014,
                 "option_text": "Protecting systems and networks from cyber threats",
-                "trait_tags": {"Cyber-Defense": 1.0, "Technical-Skill": 0.5, "Investigative": 0.3}
+                "trait_tags": {"Cyber-Defense": 1.0, "Technical-Skill": 0.5, "Investigative": 0.3, "Analytical-Skill": 0.25, "Software-Dev": 0.2}
             },
             {
                 "option_id": 10015,
                 "option_text": "Creating digital art, graphics, or multimedia content using technology",
-                "trait_tags": {"Digital-Media": 1.0, "Creative-Skill": 0.6, "Visual-Design": 0.4}
+                "trait_tags": {"Digital-Media": 1.0, "Creative-Skill": 0.6, "Visual-Design": 0.4, "Artistic": 0.3, "Animation-3D": 0.2}
             },
             {
                 "option_id": 10016,
                 "option_text": "Designing and developing video games",
-                "trait_tags": {"Game-Dev": 1.0, "Software-Dev": 0.5, "Creative-Skill": 0.4}
+                "trait_tags": {"Game-Dev": 1.0, "Software-Dev": 0.5, "Creative-Skill": 0.4, "Animation-3D": 0.3, "Visual-Design": 0.2}
             },
         ]
     },
@@ -96,27 +96,27 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 10021,
                 "option_text": "Building intelligent systems that can learn and make decisions (AI / Machine Learning)",
-                "trait_tags": {"AI-ML": 1.0, "Data-Analytics": 0.5, "Software-Dev": 0.4, "Investigative": 0.3}
+                "trait_tags": {"AI-ML": 1.0, "Data-Analytics": 0.5, "Software-Dev": 0.4, "Investigative": 0.3, "Analytical-Skill": 0.2}
             },
             {
                 "option_id": 10022,
                 "option_text": "Creating mobile apps for phones and tablets",
-                "trait_tags": {"Mobile-Dev": 1.0, "Software-Dev": 0.6, "Web-Dev": 0.3, "Creative-Skill": 0.2}
+                "trait_tags": {"Mobile-Dev": 1.0, "Software-Dev": 0.6, "Web-Dev": 0.3, "Creative-Skill": 0.2, "Technical-Skill": 0.25}
             },
             {
                 "option_id": 10023,
                 "option_text": "Building websites and web applications",
-                "trait_tags": {"Web-Dev": 1.0, "Software-Dev": 0.6, "Creative-Skill": 0.2}
+                "trait_tags": {"Web-Dev": 1.0, "Software-Dev": 0.6, "Creative-Skill": 0.2, "Technical-Skill": 0.3, "Mobile-Dev": 0.15}
             },
             {
                 "option_id": 10024,
                 "option_text": "Developing large-scale enterprise and system software",
-                "trait_tags": {"Software-Dev": 1.0, "Technical-Skill": 0.5, "Investigative": 0.3, "Cloud-Systems": 0.2}
+                "trait_tags": {"Software-Dev": 1.0, "Technical-Skill": 0.5, "Investigative": 0.3, "Cloud-Systems": 0.2, "Analytical-Skill": 0.25}
             },
             {
                 "option_id": 10025,
                 "option_text": "Automating processes, robotics, and IoT devices",
-                "trait_tags": {"Hardware-Systems": 0.6, "Software-Dev": 0.8, "Mechanical-Design": 0.3, "Technical-Skill": 0.4}
+                "trait_tags": {"Hardware-Systems": 0.6, "Software-Dev": 0.8, "Mechanical-Design": 0.3, "Technical-Skill": 0.4, "Investigative": 0.2}
             },
         ]
     },
@@ -131,22 +131,22 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 10031,
                 "option_text": "Building and configuring computer systems and servers",
-                "trait_tags": {"Hardware-Systems": 1.0, "Technical-Skill": 0.6, "Cloud-Systems": 0.3}
+                "trait_tags": {"Hardware-Systems": 1.0, "Technical-Skill": 0.6, "Cloud-Systems": 0.3, "Investigative": 0.2, "Cyber-Defense": 0.15}
             },
             {
                 "option_id": 10032,
                 "option_text": "Designing electronic circuits and components",
-                "trait_tags": {"Hardware-Systems": 0.8, "Electrical-Power": 0.6, "Technical-Skill": 0.5}
+                "trait_tags": {"Hardware-Systems": 0.8, "Electrical-Power": 0.6, "Technical-Skill": 0.5, "Investigative": 0.2, "Realistic": 0.15}
             },
             {
                 "option_id": 10033,
                 "option_text": "Setting up and managing computer networks and cloud infrastructure",
-                "trait_tags": {"Cloud-Systems": 0.8, "Hardware-Systems": 0.5, "Technical-Skill": 0.5, "Cyber-Defense": 0.2}
+                "trait_tags": {"Cloud-Systems": 0.8, "Hardware-Systems": 0.5, "Technical-Skill": 0.5, "Cyber-Defense": 0.2, "Investigative": 0.15}
             },
             {
                 "option_id": 10034,
                 "option_text": "Programming embedded systems and microcontrollers",
-                "trait_tags": {"Hardware-Systems": 0.8, "Software-Dev": 0.6, "Technical-Skill": 0.5}
+                "trait_tags": {"Hardware-Systems": 0.8, "Software-Dev": 0.6, "Technical-Skill": 0.5, "Electrical-Power": 0.3, "Investigative": 0.2}
             },
         ]
     },
@@ -161,22 +161,22 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 10041,
                 "option_text": "Finding business insights to help companies make better decisions",
-                "trait_tags": {"Data-Analytics": 1.0, "Enterprising": 0.3, "Analytical-Skill": 0.5}
+                "trait_tags": {"Data-Analytics": 1.0, "Enterprising": 0.3, "Analytical-Skill": 0.5, "Marketing-Sales": 0.25, "Finance-Acct": 0.2}
             },
             {
                 "option_id": 10042,
                 "option_text": "Building AI models that predict outcomes and spot trends",
-                "trait_tags": {"AI-ML": 0.8, "Data-Analytics": 0.6, "Software-Dev": 0.4, "Investigative": 0.3}
+                "trait_tags": {"AI-ML": 0.8, "Data-Analytics": 0.6, "Software-Dev": 0.4, "Investigative": 0.3, "Analytical-Skill": 0.25}
             },
             {
                 "option_id": 10043,
                 "option_text": "Conducting statistical research and scientific data analysis",
-                "trait_tags": {"Data-Analytics": 0.8, "Lab-Research": 0.4, "Analytical-Skill": 0.6, "Investigative": 0.3}
+                "trait_tags": {"Data-Analytics": 0.8, "Lab-Research": 0.4, "Analytical-Skill": 0.6, "Investigative": 0.3, "Software-Dev": 0.2}
             },
             {
                 "option_id": 10044,
                 "option_text": "Managing and securing large-scale databases and information systems",
-                "trait_tags": {"Data-Analytics": 0.6, "Software-Dev": 0.5, "Cloud-Systems": 0.4, "Technical-Skill": 0.5}
+                "trait_tags": {"Data-Analytics": 0.6, "Software-Dev": 0.5, "Cloud-Systems": 0.4, "Technical-Skill": 0.5, "Cyber-Defense": 0.3}
             },
         ]
     },
@@ -191,22 +191,22 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 10051,
                 "option_text": "Finding vulnerabilities and ethical hacking / penetration testing",
-                "trait_tags": {"Cyber-Defense": 1.0, "Software-Dev": 0.3, "Investigative": 0.5}
+                "trait_tags": {"Cyber-Defense": 1.0, "Software-Dev": 0.3, "Investigative": 0.5, "Technical-Skill": 0.4, "Analytical-Skill": 0.3}
             },
             {
                 "option_id": 10052,
                 "option_text": "Building secure networks and defense systems",
-                "trait_tags": {"Cyber-Defense": 0.8, "Cloud-Systems": 0.5, "Technical-Skill": 0.5, "Hardware-Systems": 0.3}
+                "trait_tags": {"Cyber-Defense": 0.8, "Cloud-Systems": 0.5, "Technical-Skill": 0.5, "Hardware-Systems": 0.3, "Analytical-Skill": 0.2}
             },
             {
                 "option_id": 10053,
                 "option_text": "Digital forensics and investigating cyber crimes",
-                "trait_tags": {"Cyber-Defense": 0.6, "Forensic-Sci": 0.5, "Law-Enforce": 0.3, "Investigative": 0.5}
+                "trait_tags": {"Cyber-Defense": 0.6, "Forensic-Sci": 0.5, "Law-Enforce": 0.3, "Investigative": 0.5, "Analytical-Skill": 0.3}
             },
             {
                 "option_id": 10054,
                 "option_text": "Setting security policies and managing organizational risk",
-                "trait_tags": {"Cyber-Defense": 0.7, "Admin-Skill": 0.5, "Analytical-Skill": 0.4}
+                "trait_tags": {"Cyber-Defense": 0.7, "Admin-Skill": 0.5, "Analytical-Skill": 0.4, "Enterprising": 0.3, "Technical-Skill": 0.2}
             },
         ]
     },
@@ -221,27 +221,27 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 10061,
                 "option_text": "Graphic design and visual communication",
-                "trait_tags": {"Visual-Design": 1.0, "Creative-Skill": 0.6, "Digital-Media": 0.4}
+                "trait_tags": {"Visual-Design": 1.0, "Creative-Skill": 0.6, "Digital-Media": 0.4, "Artistic": 0.3, "Spatial-Design": 0.2}
             },
             {
                 "option_id": 10062,
                 "option_text": "Video production and digital filmmaking",
-                "trait_tags": {"Film-Broadcast": 1.0, "Digital-Media": 0.6, "Creative-Skill": 0.4}
+                "trait_tags": {"Film-Broadcast": 1.0, "Digital-Media": 0.6, "Creative-Skill": 0.4, "Performing-Arts": 0.3, "Artistic": 0.2}
             },
             {
                 "option_id": 10063,
                 "option_text": "Animation, 3D modeling, and motion graphics",
-                "trait_tags": {"Animation-3D": 1.0, "Digital-Media": 0.6, "Creative-Skill": 0.5}
+                "trait_tags": {"Animation-3D": 1.0, "Digital-Media": 0.6, "Creative-Skill": 0.5, "Spatial-Design": 0.35, "Visual-Design": 0.25}
             },
             {
                 "option_id": 10064,
                 "option_text": "Audio and music production using technology",
-                "trait_tags": {"Performing-Arts": 0.6, "Digital-Media": 0.7, "Creative-Skill": 0.5, "Technical-Skill": 0.3}
+                "trait_tags": {"Performing-Arts": 0.6, "Digital-Media": 0.7, "Creative-Skill": 0.5, "Technical-Skill": 0.3, "Artistic": 0.2}
             },
             {
                 "option_id": 10065,
                 "option_text": "Web design and UI/UX user experience",
-                "trait_tags": {"Visual-Design": 0.7, "Web-Dev": 0.5, "Creative-Skill": 0.6, "Software-Dev": 0.3}
+                "trait_tags": {"Visual-Design": 0.7, "Web-Dev": 0.5, "Creative-Skill": 0.6, "Software-Dev": 0.3, "Spatial-Design": 0.2}
             },
         ]
     },
@@ -256,22 +256,22 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 10071,
                 "option_text": "Programming game mechanics, physics, and systems",
-                "trait_tags": {"Game-Dev": 0.8, "Software-Dev": 0.8, "Technical-Skill": 0.4}
+                "trait_tags": {"Game-Dev": 0.8, "Software-Dev": 0.8, "Technical-Skill": 0.4, "Analytical-Skill": 0.3, "Investigative": 0.2}
             },
             {
                 "option_id": 10072,
                 "option_text": "Game art, character design, and visual world building",
-                "trait_tags": {"Game-Dev": 0.5, "Visual-Design": 0.7, "Animation-3D": 0.6, "Creative-Skill": 0.5}
+                "trait_tags": {"Game-Dev": 0.5, "Visual-Design": 0.7, "Animation-3D": 0.6, "Creative-Skill": 0.5, "Spatial-Design": 0.3}
             },
             {
                 "option_id": 10073,
                 "option_text": "Game design — stories, levels, and player experience",
-                "trait_tags": {"Game-Dev": 0.7, "Creative-Skill": 0.6, "Digital-Media": 0.3, "People-Skill": 0.2}
+                "trait_tags": {"Game-Dev": 0.7, "Creative-Skill": 0.6, "Digital-Media": 0.3, "People-Skill": 0.2, "Artistic": 0.25}
             },
             {
                 "option_id": 10074,
                 "option_text": "Game audio, music, and sound design",
-                "trait_tags": {"Game-Dev": 0.4, "Performing-Arts": 0.5, "Digital-Media": 0.5, "Creative-Skill": 0.4}
+                "trait_tags": {"Game-Dev": 0.4, "Performing-Arts": 0.5, "Digital-Media": 0.5, "Creative-Skill": 0.4, "Artistic": 0.3}
             },
         ]
     },
@@ -286,22 +286,22 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 10081,
                 "option_text": "Working on complex algorithms and mathematical problems",
-                "trait_tags": {"Software-Dev": 0.8, "Analytical-Skill": 0.7, "Investigative": 0.5, "AI-ML": 0.3}
+                "trait_tags": {"Software-Dev": 0.8, "Analytical-Skill": 0.7, "Investigative": 0.5, "AI-ML": 0.3, "Data-Analytics": 0.2}
             },
             {
                 "option_id": 10082,
                 "option_text": "Building user-friendly interfaces and visual experiences",
-                "trait_tags": {"Web-Dev": 0.6, "Visual-Design": 0.4, "Mobile-Dev": 0.5, "Creative-Skill": 0.3}
+                "trait_tags": {"Web-Dev": 0.6, "Visual-Design": 0.4, "Mobile-Dev": 0.5, "Creative-Skill": 0.3, "Spatial-Design": 0.2}
             },
             {
                 "option_id": 10083,
                 "option_text": "Optimizing systems for performance, reliability, and scalability",
-                "trait_tags": {"Software-Dev": 0.8, "Cloud-Systems": 0.5, "Technical-Skill": 0.6}
+                "trait_tags": {"Software-Dev": 0.8, "Cloud-Systems": 0.5, "Technical-Skill": 0.6, "Analytical-Skill": 0.35, "Investigative": 0.2}
             },
             {
                 "option_id": 10084,
                 "option_text": "Working with data to train AI models or analyze trends",
-                "trait_tags": {"Data-Analytics": 0.7, "AI-ML": 0.6, "Software-Dev": 0.4, "Analytical-Skill": 0.5}
+                "trait_tags": {"Data-Analytics": 0.7, "AI-ML": 0.6, "Software-Dev": 0.4, "Analytical-Skill": 0.5, "Investigative": 0.25}
             },
         ]
     },
@@ -316,22 +316,22 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 10091,
                 "option_text": "Frontend — making visually appealing, interactive websites",
-                "trait_tags": {"Web-Dev": 0.8, "Visual-Design": 0.5, "Creative-Skill": 0.4}
+                "trait_tags": {"Web-Dev": 0.8, "Visual-Design": 0.5, "Creative-Skill": 0.4, "Software-Dev": 0.3, "Spatial-Design": 0.2}
             },
             {
                 "option_id": 10092,
                 "option_text": "Backend — building server logic, APIs, and databases",
-                "trait_tags": {"Web-Dev": 0.6, "Software-Dev": 0.7, "Data-Analytics": 0.3, "Technical-Skill": 0.5}
+                "trait_tags": {"Web-Dev": 0.6, "Software-Dev": 0.7, "Data-Analytics": 0.3, "Technical-Skill": 0.5, "Cloud-Systems": 0.25}
             },
             {
                 "option_id": 10093,
                 "option_text": "Full-stack — doing both frontend and backend development",
-                "trait_tags": {"Web-Dev": 0.8, "Software-Dev": 0.6, "Technical-Skill": 0.4}
+                "trait_tags": {"Web-Dev": 0.8, "Software-Dev": 0.6, "Technical-Skill": 0.4, "Data-Analytics": 0.25, "Investigative": 0.2}
             },
             {
                 "option_id": 10094,
                 "option_text": "E-commerce and online business platforms",
-                "trait_tags": {"Web-Dev": 0.6, "Startup-Venture": 0.4, "Marketing-Sales": 0.3, "Software-Dev": 0.4}
+                "trait_tags": {"Web-Dev": 0.6, "Startup-Venture": 0.4, "Marketing-Sales": 0.3, "Software-Dev": 0.4, "Enterprising": 0.25}
             },
         ]
     },
@@ -346,27 +346,27 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 10101,
                 "option_text": "An advertising or marketing agency doing creative campaigns",
-                "trait_tags": {"Marketing-Sales": 0.5, "Visual-Design": 0.5, "Creative-Skill": 0.4, "Digital-Media": 0.3}
+                "trait_tags": {"Marketing-Sales": 0.5, "Visual-Design": 0.5, "Creative-Skill": 0.4, "Digital-Media": 0.3, "Enterprising": 0.25}
             },
             {
                 "option_id": 10102,
                 "option_text": "A film or TV production studio",
-                "trait_tags": {"Film-Broadcast": 0.7, "Digital-Media": 0.5, "Creative-Skill": 0.4}
+                "trait_tags": {"Film-Broadcast": 0.7, "Digital-Media": 0.5, "Creative-Skill": 0.4, "Performing-Arts": 0.3, "Artistic": 0.2}
             },
             {
                 "option_id": 10103,
                 "option_text": "A tech company's design and product team",
-                "trait_tags": {"Visual-Design": 0.5, "Software-Dev": 0.3, "Web-Dev": 0.4, "Creative-Skill": 0.5}
+                "trait_tags": {"Visual-Design": 0.5, "Software-Dev": 0.3, "Web-Dev": 0.4, "Creative-Skill": 0.5, "Spatial-Design": 0.2}
             },
             {
                 "option_id": 10104,
                 "option_text": "Freelance or running your own creative studio",
-                "trait_tags": {"Creative-Skill": 0.6, "Startup-Venture": 0.4, "Visual-Design": 0.4, "Enterprising": 0.3}
+                "trait_tags": {"Creative-Skill": 0.6, "Startup-Venture": 0.4, "Visual-Design": 0.4, "Enterprising": 0.3, "Marketing-Sales": 0.2}
             },
             {
                 "option_id": 10105,
                 "option_text": "A game or animation studio",
-                "trait_tags": {"Animation-3D": 0.6, "Game-Dev": 0.5, "Creative-Skill": 0.5, "Digital-Media": 0.4}
+                "trait_tags": {"Animation-3D": 0.6, "Game-Dev": 0.5, "Creative-Skill": 0.5, "Digital-Media": 0.4, "Artistic": 0.25}
             },
         ]
     },
@@ -384,32 +384,32 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 11011,
                 "option_text": "Directly caring for and treating patients in hospitals or clinics",
-                "trait_tags": {"Patient-Care": 1.0, "People-Skill": 0.5, "Social": 0.3}
+                "trait_tags": {"Patient-Care": 1.0, "People-Skill": 0.5, "Social": 0.3, "Community-Serve": 0.3, "Rehab-Therapy": 0.2}
             },
             {
                 "option_id": 11012,
                 "option_text": "Working in medical laboratories running tests and diagnostics",
-                "trait_tags": {"Medical-Lab": 1.0, "Lab-Research": 0.5, "Investigative": 0.3}
+                "trait_tags": {"Medical-Lab": 1.0, "Lab-Research": 0.5, "Investigative": 0.3, "Technical-Skill": 0.3, "Analytical-Skill": 0.2}
             },
             {
                 "option_id": 11013,
                 "option_text": "Helping people recover through therapy and rehabilitation",
-                "trait_tags": {"Rehab-Therapy": 1.0, "People-Skill": 0.5, "Physical-Skill": 0.3}
+                "trait_tags": {"Rehab-Therapy": 1.0, "People-Skill": 0.5, "Physical-Skill": 0.3, "Patient-Care": 0.3, "Community-Serve": 0.2}
             },
             {
                 "option_id": 11014,
                 "option_text": "Studying medicines, drugs, and pharmaceuticals",
-                "trait_tags": {"Pharmacy": 1.0, "Lab-Research": 0.4, "Medical-Lab": 0.3}
+                "trait_tags": {"Pharmacy": 1.0, "Lab-Research": 0.4, "Medical-Lab": 0.3, "Investigative": 0.3, "Analytical-Skill": 0.2}
             },
             {
                 "option_id": 11015,
                 "option_text": "Promoting public health and community wellness programs",
-                "trait_tags": {"Public-Health": 1.0, "Community-Serve": 0.5, "People-Skill": 0.3}
+                "trait_tags": {"Public-Health": 1.0, "Community-Serve": 0.5, "People-Skill": 0.3, "Social": 0.3, "Teaching-Ed": 0.2}
             },
             {
                 "option_id": 11016,
                 "option_text": "Nutrition, food science, and dietetics",
-                "trait_tags": {"Nutrition-Diet": 1.0, "Patient-Care": 0.3, "Lab-Research": 0.2}
+                "trait_tags": {"Nutrition-Diet": 1.0, "Patient-Care": 0.3, "Lab-Research": 0.2, "Public-Health": 0.3, "People-Skill": 0.2}
             },
         ]
     },
@@ -424,32 +424,32 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 11021,
                 "option_text": "General nursing — caring for patients across different departments",
-                "trait_tags": {"Patient-Care": 1.0, "People-Skill": 0.6, "Social": 0.4}
+                "trait_tags": {"Patient-Care": 1.0, "People-Skill": 0.6, "Social": 0.4, "Community-Serve": 0.3, "Rehab-Therapy": 0.2}
             },
             {
                 "option_id": 11022,
                 "option_text": "Midwifery — maternal, newborn, and reproductive health care",
-                "trait_tags": {"Patient-Care": 0.8, "People-Skill": 0.6, "Social": 0.4}
+                "trait_tags": {"Patient-Care": 0.8, "People-Skill": 0.6, "Social": 0.4, "Community-Serve": 0.3, "Public-Health": 0.2}
             },
             {
                 "option_id": 11023,
                 "option_text": "Emergency and critical care — handling urgent medical situations",
-                "trait_tags": {"Patient-Care": 0.8, "Physical-Skill": 0.5, "Technical-Skill": 0.3}
+                "trait_tags": {"Patient-Care": 0.8, "Physical-Skill": 0.5, "Technical-Skill": 0.3, "Medical-Lab": 0.3, "Realistic": 0.2}
             },
             {
                 "option_id": 11024,
                 "option_text": "Eye care and vision health (Optometry)",
-                "trait_tags": {"Patient-Care": 0.7, "Medical-Lab": 0.4, "Technical-Skill": 0.3}
+                "trait_tags": {"Patient-Care": 0.7, "Medical-Lab": 0.4, "Technical-Skill": 0.3, "Investigative": 0.3, "Analytical-Skill": 0.2}
             },
             {
                 "option_id": 11025,
                 "option_text": "Respiratory care and breathing therapy",
-                "trait_tags": {"Patient-Care": 0.7, "Rehab-Therapy": 0.5, "Technical-Skill": 0.4}
+                "trait_tags": {"Patient-Care": 0.7, "Rehab-Therapy": 0.5, "Technical-Skill": 0.4, "Medical-Lab": 0.3, "People-Skill": 0.2}
             },
             {
                 "option_id": 11026,
                 "option_text": "Healthcare administration and hospital management",
-                "trait_tags": {"Health-Admin": 1.0, "Admin-Skill": 0.5, "People-Skill": 0.3}
+                "trait_tags": {"Health-Admin": 1.0, "Admin-Skill": 0.5, "People-Skill": 0.3, "Analytical-Skill": 0.3, "Enterprising": 0.2}
             },
         ]
     },
@@ -464,22 +464,22 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 11031,
                 "option_text": "Analyzing blood, tissue, and body fluid samples",
-                "trait_tags": {"Medical-Lab": 1.0, "Lab-Research": 0.5, "Investigative": 0.4}
+                "trait_tags": {"Medical-Lab": 1.0, "Lab-Research": 0.5, "Investigative": 0.4, "Analytical-Skill": 0.3, "Technical-Skill": 0.2}
             },
             {
                 "option_id": 11032,
                 "option_text": "Medical imaging — X-rays, CT scans, and radiology",
-                "trait_tags": {"Medical-Lab": 0.8, "Technical-Skill": 0.6, "Patient-Care": 0.3}
+                "trait_tags": {"Medical-Lab": 0.8, "Technical-Skill": 0.6, "Patient-Care": 0.3, "Investigative": 0.3, "Analytical-Skill": 0.2}
             },
             {
                 "option_id": 11033,
                 "option_text": "Biotechnology and genetic laboratory research",
-                "trait_tags": {"Lab-Research": 0.8, "Medical-Lab": 0.5, "Investigative": 0.5}
+                "trait_tags": {"Lab-Research": 0.8, "Medical-Lab": 0.5, "Investigative": 0.5, "Analytical-Skill": 0.3, "Technical-Skill": 0.2}
             },
             {
                 "option_id": 11034,
                 "option_text": "Veterinary laboratory work and animal health diagnostics",
-                "trait_tags": {"Medical-Lab": 0.5, "Agri-Nature": 0.5, "Patient-Care": 0.4, "Lab-Research": 0.3}
+                "trait_tags": {"Medical-Lab": 0.5, "Agri-Nature": 0.5, "Patient-Care": 0.4, "Lab-Research": 0.3, "Investigative": 0.2}
             },
         ]
     },
@@ -494,22 +494,22 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 11041,
                 "option_text": "Physical therapy — helping patients with movement and recovery",
-                "trait_tags": {"Rehab-Therapy": 1.0, "Physical-Skill": 0.5, "Patient-Care": 0.4}
+                "trait_tags": {"Rehab-Therapy": 1.0, "Physical-Skill": 0.5, "Patient-Care": 0.4, "People-Skill": 0.3, "Community-Serve": 0.2}
             },
             {
                 "option_id": 11042,
                 "option_text": "Occupational therapy — helping people with daily living skills",
-                "trait_tags": {"Rehab-Therapy": 0.8, "People-Skill": 0.5, "Patient-Care": 0.5}
+                "trait_tags": {"Rehab-Therapy": 0.8, "People-Skill": 0.5, "Patient-Care": 0.5, "Community-Serve": 0.3, "Social": 0.2}
             },
             {
                 "option_id": 11043,
                 "option_text": "Speech-language therapy — helping with communication and swallowing",
-                "trait_tags": {"Rehab-Therapy": 0.8, "People-Skill": 0.6, "Patient-Care": 0.4}
+                "trait_tags": {"Rehab-Therapy": 0.8, "People-Skill": 0.6, "Patient-Care": 0.4, "Social": 0.3, "Teaching-Ed": 0.2}
             },
             {
                 "option_id": 11044,
                 "option_text": "Mental health counseling and psychological support",
-                "trait_tags": {"Counseling": 1.0, "People-Skill": 0.6, "Social": 0.4}
+                "trait_tags": {"Counseling": 1.0, "People-Skill": 0.6, "Social": 0.4, "Community-Serve": 0.3, "Patient-Care": 0.2}
             },
         ]
     },
@@ -524,17 +524,27 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 11051,
                 "option_text": "Dispensing medication and counseling patients about drug usage",
-                "trait_tags": {"Pharmacy": 1.0, "Patient-Care": 0.4, "People-Skill": 0.4}
+                "trait_tags": {"Pharmacy": 1.0, "Patient-Care": 0.45, "People-Skill": 0.4, "Community-Serve": 0.25, "Medical-Lab": 0.2}
             },
             {
                 "option_id": 11052,
                 "option_text": "Researching and developing new drugs and treatments",
-                "trait_tags": {"Pharmacy": 0.7, "Lab-Research": 0.7, "Investigative": 0.5}
+                "trait_tags": {"Pharmacy": 0.7, "Lab-Research": 0.7, "Investigative": 0.5, "Analytical-Skill": 0.35, "Medical-Lab": 0.25}
             },
             {
                 "option_id": 11053,
                 "option_text": "Clinical trials, drug testing, and quality assurance",
-                "trait_tags": {"Pharmacy": 0.6, "Lab-Research": 0.5, "Medical-Lab": 0.5, "Analytical-Skill": 0.3}
+                "trait_tags": {"Pharmacy": 0.6, "Lab-Research": 0.5, "Medical-Lab": 0.5, "Analytical-Skill": 0.4, "Investigative": 0.3}
+            },
+            {
+                "option_id": 11054,
+                "option_text": "Community pharmacy management and retail healthcare",
+                "trait_tags": {"Pharmacy": 0.8, "Admin-Skill": 0.45, "People-Skill": 0.4, "Community-Serve": 0.35, "Patient-Care": 0.2}
+            },
+            {
+                "option_id": 11055,
+                "option_text": "Pharmaceutical manufacturing and industrial drug production",
+                "trait_tags": {"Pharmacy": 0.8, "Industrial-Ops": 0.5, "Lab-Research": 0.4, "Technical-Skill": 0.35, "Analytical-Skill": 0.25}
             },
         ]
     },
@@ -549,17 +559,27 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 11061,
                 "option_text": "Managing patient records and health information systems",
-                "trait_tags": {"Health-Admin": 1.0, "Technical-Skill": 0.4, "Admin-Skill": 0.5}
+                "trait_tags": {"Health-Admin": 1.0, "Technical-Skill": 0.45, "Admin-Skill": 0.5, "Data-Analytics": 0.3, "Conventional": 0.2}
             },
             {
                 "option_id": 11062,
                 "option_text": "Hospital operations and healthcare facility management",
-                "trait_tags": {"Health-Admin": 0.8, "Admin-Skill": 0.6, "People-Skill": 0.4}
+                "trait_tags": {"Health-Admin": 0.8, "Admin-Skill": 0.6, "People-Skill": 0.45, "Enterprising": 0.3, "Community-Serve": 0.2}
             },
             {
                 "option_id": 11063,
                 "option_text": "Health policy and public health program coordination",
-                "trait_tags": {"Public-Health": 0.7, "Community-Serve": 0.5, "Admin-Skill": 0.4}
+                "trait_tags": {"Public-Health": 0.8, "Community-Serve": 0.55, "Admin-Skill": 0.4, "Social": 0.3, "People-Skill": 0.2}
+            },
+            {
+                "option_id": 11064,
+                "option_text": "Health information technology and electronic health records",
+                "trait_tags": {"Health-Admin": 0.7, "Software-Dev": 0.45, "Technical-Skill": 0.5, "Data-Analytics": 0.35, "Admin-Skill": 0.25}
+            },
+            {
+                "option_id": 11065,
+                "option_text": "Medical billing, coding, and health insurance administration",
+                "trait_tags": {"Health-Admin": 0.8, "Finance-Acct": 0.45, "Conventional": 0.45, "Admin-Skill": 0.4, "Analytical-Skill": 0.25}
             },
         ]
     },
@@ -577,32 +597,32 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 12011,
                 "option_text": "Designing and constructing buildings, roads, and bridges",
-                "trait_tags": {"Civil-Build": 1.0, "Spatial-Design": 0.4, "Realistic": 0.3}
+                "trait_tags": {"Civil-Build": 1.0, "Spatial-Design": 0.45, "Realistic": 0.4, "Technical-Skill": 0.3, "Analytical-Skill": 0.2}
             },
             {
                 "option_id": 12012,
                 "option_text": "Working with machines, engines, and mechanical systems",
-                "trait_tags": {"Mechanical-Design": 1.0, "Technical-Skill": 0.5, "Realistic": 0.4}
+                "trait_tags": {"Mechanical-Design": 1.0, "Technical-Skill": 0.5, "Realistic": 0.45, "Industrial-Ops": 0.3, "Analytical-Skill": 0.2}
             },
             {
                 "option_id": 12013,
                 "option_text": "Electrical systems, power generation, and electronics",
-                "trait_tags": {"Electrical-Power": 1.0, "Technical-Skill": 0.5, "Hardware-Systems": 0.3}
+                "trait_tags": {"Electrical-Power": 1.0, "Technical-Skill": 0.5, "Hardware-Systems": 0.4, "Realistic": 0.3, "Analytical-Skill": 0.2}
             },
             {
                 "option_id": 12014,
                 "option_text": "Optimizing industrial and manufacturing processes",
-                "trait_tags": {"Industrial-Ops": 1.0, "Analytical-Skill": 0.5, "Admin-Skill": 0.3}
+                "trait_tags": {"Industrial-Ops": 1.0, "Analytical-Skill": 0.5, "Admin-Skill": 0.4, "Mechanical-Design": 0.3, "Technical-Skill": 0.25}
             },
             {
                 "option_id": 12015,
                 "option_text": "Designing spaces — architecture, interiors, and landscapes",
-                "trait_tags": {"Spatial-Design": 1.0, "Creative-Skill": 0.6, "Artistic": 0.4}
+                "trait_tags": {"Spatial-Design": 1.0, "Creative-Skill": 0.6, "Artistic": 0.45, "Visual-Design": 0.35, "Civil-Build": 0.2}
             },
             {
                 "option_id": 12016,
                 "option_text": "Aircraft, aerospace, and aviation systems",
-                "trait_tags": {"Mechanical-Design": 0.8, "Technical-Skill": 0.6, "Investigative": 0.3}
+                "trait_tags": {"Aeronautical-Eng": 1.0, "Mechanical-Design": 0.5, "Technical-Skill": 0.45, "Investigative": 0.35, "Realistic": 0.2}
             },
         ]
     },
@@ -617,22 +637,27 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 12021,
                 "option_text": "Structural design and building construction",
-                "trait_tags": {"Civil-Build": 1.0, "Spatial-Design": 0.4, "Technical-Skill": 0.3}
+                "trait_tags": {"Civil-Build": 1.0, "Spatial-Design": 0.45, "Technical-Skill": 0.35, "Realistic": 0.25, "Analytical-Skill": 0.2}
             },
             {
                 "option_id": 12022,
                 "option_text": "Roads, bridges, and transportation infrastructure planning",
-                "trait_tags": {"Civil-Build": 0.8, "Community-Serve": 0.3, "Technical-Skill": 0.4}
+                "trait_tags": {"Civil-Build": 0.8, "Community-Serve": 0.45, "Admin-Skill": 0.4, "Technical-Skill": 0.3, "Spatial-Design": 0.2}
             },
             {
                 "option_id": 12023,
                 "option_text": "Surveying, land measurement, and geodetic engineering",
-                "trait_tags": {"Civil-Build": 0.6, "Field-Research": 0.5, "Technical-Skill": 0.5}
+                "trait_tags": {"Field-Research": 1.0, "Technical-Skill": 0.5, "Analytical-Skill": 0.45, "Civil-Build": 0.35, "Investigative": 0.25}
             },
             {
                 "option_id": 12024,
                 "option_text": "Environmental engineering — water treatment and waste management",
-                "trait_tags": {"Civil-Build": 0.5, "Environmental-Sci": 0.5, "Technical-Skill": 0.4}
+                "trait_tags": {"Environmental-Eng": 1.0, "Environmental-Sci": 0.5, "Field-Research": 0.4, "Technical-Skill": 0.35, "Civil-Build": 0.2}
+            },
+            {
+                "option_id": 12025,
+                "option_text": "Urban planning and city infrastructure development",
+                "trait_tags": {"Community-Serve": 0.8, "Civil-Build": 0.6, "Admin-Skill": 0.5, "Spatial-Design": 0.4, "Analytical-Skill": 0.3}
             },
         ]
     },
@@ -647,22 +672,27 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 12031,
                 "option_text": "Designing machines and mechanical components",
-                "trait_tags": {"Mechanical-Design": 1.0, "Technical-Skill": 0.5, "Creative-Skill": 0.2}
+                "trait_tags": {"Mechanical-Design": 1.0, "Technical-Skill": 0.5, "Realistic": 0.4, "Analytical-Skill": 0.3, "Industrial-Ops": 0.2}
             },
             {
                 "option_id": 12032,
                 "option_text": "Automotive and transportation system engineering",
-                "trait_tags": {"Mechanical-Design": 0.8, "Industrial-Ops": 0.4, "Technical-Skill": 0.5}
+                "trait_tags": {"Mechanical-Design": 0.8, "Industrial-Ops": 0.5, "Technical-Skill": 0.45, "Realistic": 0.3, "Analytical-Skill": 0.2}
             },
             {
                 "option_id": 12033,
                 "option_text": "Manufacturing processes and production engineering",
-                "trait_tags": {"Industrial-Ops": 0.7, "Mechanical-Design": 0.5, "Technical-Skill": 0.4}
+                "trait_tags": {"Industrial-Ops": 1.0, "Analytical-Skill": 0.5, "Technical-Skill": 0.4, "Admin-Skill": 0.35, "Mechanical-Design": 0.2}
             },
             {
                 "option_id": 12034,
                 "option_text": "Marine engineering and ship mechanical systems",
-                "trait_tags": {"Maritime-Sea": 0.6, "Mechanical-Design": 0.7, "Technical-Skill": 0.4}
+                "trait_tags": {"Maritime-Sea": 1.0, "Mechanical-Design": 0.5, "Technical-Skill": 0.45, "Physical-Skill": 0.3, "Realistic": 0.2}
+            },
+            {
+                "option_id": 12035,
+                "option_text": "Aerospace and aeronautical engineering systems",
+                "trait_tags": {"Aeronautical-Eng": 1.0, "Mechanical-Design": 0.45, "Technical-Skill": 0.4, "Investigative": 0.35, "Analytical-Skill": 0.25}
             },
         ]
     },
@@ -677,22 +707,27 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 12041,
                 "option_text": "Architecture — designing building exteriors and structures",
-                "trait_tags": {"Spatial-Design": 1.0, "Civil-Build": 0.4, "Creative-Skill": 0.4}
+                "trait_tags": {"Spatial-Design": 1.0, "Civil-Build": 0.45, "Creative-Skill": 0.4, "Artistic": 0.3, "Technical-Skill": 0.2}
             },
             {
                 "option_id": 12042,
                 "option_text": "Interior design — planning functional and aesthetic indoor spaces",
-                "trait_tags": {"Spatial-Design": 0.8, "Creative-Skill": 0.6, "Visual-Design": 0.3}
+                "trait_tags": {"Creative-Skill": 1.0, "Spatial-Design": 0.5, "Visual-Design": 0.45, "Artistic": 0.4, "People-Skill": 0.2}
             },
             {
                 "option_id": 12043,
                 "option_text": "Landscape architecture — designing parks and outdoor environments",
-                "trait_tags": {"Spatial-Design": 0.7, "Agri-Nature": 0.4, "Creative-Skill": 0.5}
+                "trait_tags": {"Agri-Nature": 0.8, "Spatial-Design": 0.6, "Creative-Skill": 0.5, "Environmental-Sci": 0.35, "Field-Research": 0.25}
             },
             {
                 "option_id": 12044,
                 "option_text": "Industrial and product design — creating everyday objects and products",
-                "trait_tags": {"Spatial-Design": 0.6, "Creative-Skill": 0.6, "Industrial-Ops": 0.3}
+                "trait_tags": {"Industrial-Ops": 0.7, "Creative-Skill": 0.7, "Visual-Design": 0.4, "Technical-Skill": 0.35, "Spatial-Design": 0.25}
+            },
+            {
+                "option_id": 12045,
+                "option_text": "Urban and environmental planning — designing sustainable communities",
+                "trait_tags": {"Community-Serve": 0.8, "Environmental-Sci": 0.6, "Civil-Build": 0.45, "Admin-Skill": 0.4, "Spatial-Design": 0.3}
             },
         ]
     },
@@ -710,32 +745,32 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 13011,
                 "option_text": "Finance, accounting, and money management",
-                "trait_tags": {"Finance-Acct": 1.0, "Analytical-Skill": 0.5, "Conventional": 0.3}
+                "trait_tags": {"Finance-Acct": 1.0, "Analytical-Skill": 0.5, "Conventional": 0.3, "Admin-Skill": 0.3, "Investigative": 0.2}
             },
             {
                 "option_id": 13012,
                 "option_text": "Marketing, sales, and brand building",
-                "trait_tags": {"Marketing-Sales": 1.0, "Creative-Skill": 0.4, "People-Skill": 0.3, "Enterprising": 0.3}
+                "trait_tags": {"Marketing-Sales": 1.0, "Creative-Skill": 0.4, "People-Skill": 0.3, "Enterprising": 0.3, "Digital-Media": 0.2}
             },
             {
                 "option_id": 13013,
                 "option_text": "Starting and managing your own business",
-                "trait_tags": {"Startup-Venture": 1.0, "Enterprising": 0.6, "People-Skill": 0.3}
+                "trait_tags": {"Startup-Venture": 1.0, "Enterprising": 0.6, "People-Skill": 0.3, "Marketing-Sales": 0.3, "Admin-Skill": 0.2}
             },
             {
                 "option_id": 13014,
                 "option_text": "Human resources and people management",
-                "trait_tags": {"HR-Management": 1.0, "People-Skill": 0.6, "Admin-Skill": 0.4}
+                "trait_tags": {"HR-Management": 1.0, "People-Skill": 0.6, "Admin-Skill": 0.4, "Social": 0.3, "Conventional": 0.2}
             },
             {
                 "option_id": 13015,
                 "option_text": "Operations, logistics, and supply chain management",
-                "trait_tags": {"Industrial-Ops": 0.7, "Admin-Skill": 0.6, "Analytical-Skill": 0.3}
+                "trait_tags": {"Industrial-Ops": 0.7, "Admin-Skill": 0.6, "Analytical-Skill": 0.3, "Finance-Acct": 0.3, "Conventional": 0.2}
             },
             {
                 "option_id": 13016,
                 "option_text": "Economics and business policy analysis",
-                "trait_tags": {"Finance-Acct": 0.6, "Analytical-Skill": 0.6, "Investigative": 0.4}
+                "trait_tags": {"Finance-Acct": 0.6, "Analytical-Skill": 0.6, "Investigative": 0.4, "Community-Serve": 0.3, "Data-Analytics": 0.2}
             },
         ]
     },
@@ -750,27 +785,27 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 13021,
                 "option_text": "Auditing, bookkeeping, and professional accounting practice",
-                "trait_tags": {"Finance-Acct": 1.0, "Conventional": 0.6, "Analytical-Skill": 0.4}
+                "trait_tags": {"Finance-Acct": 1.0, "Conventional": 0.6, "Analytical-Skill": 0.4, "Admin-Skill": 0.3, "Investigative": 0.2}
             },
             {
                 "option_id": 13022,
                 "option_text": "Financial analysis, investments, and banking",
-                "trait_tags": {"Finance-Acct": 0.8, "Analytical-Skill": 0.6, "Enterprising": 0.3}
+                "trait_tags": {"Finance-Acct": 0.8, "Analytical-Skill": 0.6, "Enterprising": 0.3, "Data-Analytics": 0.3, "Investigative": 0.2}
             },
             {
                 "option_id": 13023,
                 "option_text": "Management accounting and cost control systems",
-                "trait_tags": {"Finance-Acct": 0.8, "Admin-Skill": 0.4, "Analytical-Skill": 0.5}
+                "trait_tags": {"Finance-Acct": 0.8, "Admin-Skill": 0.4, "Analytical-Skill": 0.5, "Conventional": 0.3, "Industrial-Ops": 0.2}
             },
             {
                 "option_id": 13024,
                 "option_text": "Real estate management and property development",
-                "trait_tags": {"Finance-Acct": 0.5, "Marketing-Sales": 0.5, "Enterprising": 0.4}
+                "trait_tags": {"Finance-Acct": 0.5, "Marketing-Sales": 0.5, "Enterprising": 0.4, "Startup-Venture": 0.3, "Admin-Skill": 0.2}
             },
             {
                 "option_id": 13025,
                 "option_text": "Customs administration and international trade",
-                "trait_tags": {"Finance-Acct": 0.4, "Admin-Skill": 0.6, "Conventional": 0.4}
+                "trait_tags": {"Finance-Acct": 0.4, "Admin-Skill": 0.6, "Conventional": 0.4, "Analytical-Skill": 0.3, "Community-Serve": 0.2}
             },
         ]
     },
@@ -788,32 +823,32 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 14011,
                 "option_text": "Visual arts — painting, drawing, sculpture, and fine arts",
-                "trait_tags": {"Visual-Design": 1.0, "Artistic": 0.7, "Creative-Skill": 0.5}
+                "trait_tags": {"Visual-Design": 1.0, "Artistic": 0.7, "Creative-Skill": 0.5, "Spatial-Design": 0.3, "Performing-Arts": 0.2}
             },
             {
                 "option_id": 14012,
                 "option_text": "Digital arts — graphic design, multimedia, and digital content",
-                "trait_tags": {"Digital-Media": 1.0, "Creative-Skill": 0.6, "Visual-Design": 0.4}
+                "trait_tags": {"Digital-Media": 1.0, "Creative-Skill": 0.6, "Visual-Design": 0.4, "Animation-3D": 0.3, "Artistic": 0.2}
             },
             {
                 "option_id": 14013,
                 "option_text": "Performing arts — music, theater, and stage performance",
-                "trait_tags": {"Performing-Arts": 1.0, "Creative-Skill": 0.5, "People-Skill": 0.3}
+                "trait_tags": {"Performing-Arts": 1.0, "Creative-Skill": 0.5, "People-Skill": 0.3, "Artistic": 0.3, "Social": 0.2}
             },
             {
                 "option_id": 14014,
                 "option_text": "Film, video production, and broadcasting",
-                "trait_tags": {"Film-Broadcast": 1.0, "Digital-Media": 0.5, "Creative-Skill": 0.4}
+                "trait_tags": {"Film-Broadcast": 1.0, "Digital-Media": 0.5, "Creative-Skill": 0.4, "Artistic": 0.3, "Performing-Arts": 0.2}
             },
             {
                 "option_id": 14015,
                 "option_text": "Fashion design and textile arts",
-                "trait_tags": {"Visual-Design": 0.7, "Creative-Skill": 0.7, "Artistic": 0.4}
+                "trait_tags": {"Visual-Design": 0.7, "Creative-Skill": 0.7, "Artistic": 0.4, "Spatial-Design": 0.3, "Enterprising": 0.2}
             },
             {
                 "option_id": 14016,
                 "option_text": "Photography — capturing and editing visual stories",
-                "trait_tags": {"Visual-Design": 0.7, "Digital-Media": 0.5, "Creative-Skill": 0.5, "Artistic": 0.3}
+                "trait_tags": {"Visual-Design": 0.7, "Digital-Media": 0.5, "Creative-Skill": 0.5, "Artistic": 0.3, "Film-Broadcast": 0.2}
             },
         ]
     },
@@ -828,17 +863,27 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 14021,
                 "option_text": "Fine arts — painting, sculpture, and mixed media exhibitions",
-                "trait_tags": {"Visual-Design": 1.0, "Artistic": 0.8, "Creative-Skill": 0.5}
+                "trait_tags": {"Visual-Design": 1.0, "Artistic": 0.8, "Creative-Skill": 0.5, "Performing-Arts": 0.2, "Social": 0.15}
             },
             {
                 "option_id": 14022,
                 "option_text": "Advertising and commercial art for brands and companies",
-                "trait_tags": {"Visual-Design": 0.7, "Marketing-Sales": 0.5, "Creative-Skill": 0.5}
+                "trait_tags": {"Visual-Design": 0.7, "Marketing-Sales": 0.55, "Creative-Skill": 0.5, "Enterprising": 0.3, "Digital-Media": 0.2}
             },
             {
                 "option_id": 14023,
                 "option_text": "Art education and teaching art to students",
-                "trait_tags": {"Visual-Design": 0.5, "Teaching-Ed": 0.6, "Creative-Skill": 0.4, "People-Skill": 0.3}
+                "trait_tags": {"Visual-Design": 0.5, "Teaching-Ed": 0.7, "Creative-Skill": 0.45, "People-Skill": 0.4, "Social": 0.25}
+            },
+            {
+                "option_id": 14024,
+                "option_text": "Digital illustration and concept art for games or media",
+                "trait_tags": {"Visual-Design": 0.8, "Digital-Media": 0.55, "Animation-3D": 0.45, "Creative-Skill": 0.5, "Game-Dev": 0.2}
+            },
+            {
+                "option_id": 14025,
+                "option_text": "Photography and visual storytelling",
+                "trait_tags": {"Visual-Design": 0.7, "Artistic": 0.6, "Digital-Media": 0.45, "Creative-Skill": 0.4, "Film-Broadcast": 0.25}
             },
         ]
     },
@@ -853,22 +898,22 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 14031,
                 "option_text": "Animation, motion graphics, and visual effects",
-                "trait_tags": {"Animation-3D": 1.0, "Digital-Media": 0.6, "Creative-Skill": 0.5}
+                "trait_tags": {"Animation-3D": 1.0, "Digital-Media": 0.6, "Creative-Skill": 0.5, "Visual-Design": 0.35, "Artistic": 0.25}
             },
             {
                 "option_id": 14032,
                 "option_text": "Game art, 3D modeling, and virtual world design",
-                "trait_tags": {"Game-Dev": 0.6, "Animation-3D": 0.7, "Visual-Design": 0.5, "Creative-Skill": 0.4}
+                "trait_tags": {"Game-Dev": 0.6, "Animation-3D": 0.7, "Visual-Design": 0.5, "Creative-Skill": 0.4, "Spatial-Design": 0.3}
             },
             {
                 "option_id": 14033,
                 "option_text": "Graphic design, branding, and print media",
-                "trait_tags": {"Visual-Design": 0.8, "Digital-Media": 0.5, "Creative-Skill": 0.5, "Marketing-Sales": 0.3}
+                "trait_tags": {"Visual-Design": 0.8, "Digital-Media": 0.5, "Creative-Skill": 0.5, "Marketing-Sales": 0.3, "Artistic": 0.2}
             },
             {
                 "option_id": 14034,
                 "option_text": "Multimedia content — interactive media and web experiences",
-                "trait_tags": {"Digital-Media": 1.0, "Creative-Skill": 0.5, "Web-Dev": 0.3}
+                "trait_tags": {"Digital-Media": 1.0, "Creative-Skill": 0.5, "Web-Dev": 0.3, "Visual-Design": 0.3, "Animation-3D": 0.2}
             },
         ]
     },
@@ -883,17 +928,27 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 14041,
                 "option_text": "Theater acting, directing, and stage performance",
-                "trait_tags": {"Performing-Arts": 1.0, "Creative-Skill": 0.5, "People-Skill": 0.4}
+                "trait_tags": {"Performing-Arts": 1.0, "Creative-Skill": 0.5, "People-Skill": 0.45, "Artistic": 0.35, "Social": 0.2}
             },
             {
                 "option_id": 14042,
                 "option_text": "Music performance, composition, and musical studies",
-                "trait_tags": {"Performing-Arts": 0.9, "Creative-Skill": 0.5, "Artistic": 0.4}
+                "trait_tags": {"Performing-Arts": 0.9, "Creative-Skill": 0.55, "Artistic": 0.45, "Visual-Design": 0.2, "Social": 0.15}
             },
             {
                 "option_id": 14043,
                 "option_text": "Music production, recording, and audio engineering",
-                "trait_tags": {"Performing-Arts": 0.5, "Digital-Media": 0.6, "Technical-Skill": 0.4, "Creative-Skill": 0.4}
+                "trait_tags": {"Performing-Arts": 0.5, "Digital-Media": 0.65, "Technical-Skill": 0.45, "Creative-Skill": 0.45, "Software-Dev": 0.2}
+            },
+            {
+                "option_id": 14044,
+                "option_text": "Dance and physical performance arts",
+                "trait_tags": {"Performing-Arts": 0.9, "Physical-Skill": 0.55, "Creative-Skill": 0.5, "Artistic": 0.35, "People-Skill": 0.2}
+            },
+            {
+                "option_id": 14045,
+                "option_text": "Broadcasting, media presenting, and journalism",
+                "trait_tags": {"Film-Broadcast": 0.8, "Digital-Media": 0.55, "People-Skill": 0.5, "Creative-Skill": 0.35, "Performing-Arts": 0.25}
             },
         ]
     },
@@ -911,37 +966,37 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 15011,
                 "option_text": "Elementary school teaching — guiding young learners",
-                "trait_tags": {"Teaching-Ed": 1.0, "People-Skill": 0.6, "Social": 0.4}
+                "trait_tags": {"Teaching-Ed": 1.0, "People-Skill": 0.6, "Social": 0.4, "Community-Serve": 0.3, "Counseling": 0.2}
             },
             {
                 "option_id": 15012,
                 "option_text": "High school / secondary teaching — teaching specific subjects",
-                "trait_tags": {"Teaching-Ed": 0.9, "People-Skill": 0.5, "Analytical-Skill": 0.3}
+                "trait_tags": {"Teaching-Ed": 0.9, "People-Skill": 0.5, "Analytical-Skill": 0.3, "Community-Serve": 0.3, "Social": 0.2}
             },
             {
                 "option_id": 15013,
                 "option_text": "Early childhood education — nurturing preschool-age children",
-                "trait_tags": {"Teaching-Ed": 0.8, "People-Skill": 0.7, "Social": 0.4}
+                "trait_tags": {"Teaching-Ed": 0.8, "People-Skill": 0.7, "Social": 0.4, "Community-Serve": 0.3, "Counseling": 0.2}
             },
             {
                 "option_id": 15014,
                 "option_text": "Special education — supporting students with learning disabilities",
-                "trait_tags": {"Teaching-Ed": 0.8, "Counseling": 0.5, "People-Skill": 0.6}
+                "trait_tags": {"Teaching-Ed": 0.8, "Counseling": 0.5, "People-Skill": 0.6, "Social": 0.3, "Community-Serve": 0.2}
             },
             {
                 "option_id": 15015,
                 "option_text": "Physical education and sports coaching",
-                "trait_tags": {"Sports-Ed": 1.0, "Physical-Skill": 0.5, "Teaching-Ed": 0.4}
+                "trait_tags": {"Sports-Ed": 1.0, "Physical-Skill": 0.5, "Teaching-Ed": 0.4, "People-Skill": 0.3, "Realistic": 0.2}
             },
             {
                 "option_id": 15016,
                 "option_text": "Technical-vocational education — teaching practical skills and trades",
-                "trait_tags": {"Teaching-Ed": 0.7, "Technical-Skill": 0.6, "Realistic": 0.3}
+                "trait_tags": {"Teaching-Ed": 0.7, "Technical-Skill": 0.6, "Realistic": 0.3, "Community-Serve": 0.3, "People-Skill": 0.2}
             },
             {
                 "option_id": 15017,
                 "option_text": "Library and information science",
-                "trait_tags": {"Teaching-Ed": 0.5, "Admin-Skill": 0.6, "Investigative": 0.3}
+                "trait_tags": {"Teaching-Ed": 0.5, "Admin-Skill": 0.6, "Investigative": 0.3, "Analytical-Skill": 0.3, "Data-Analytics": 0.2}
             },
         ]
     },
@@ -959,32 +1014,32 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 16011,
                 "option_text": "Biology — studying life, organisms, and living systems",
-                "trait_tags": {"Lab-Research": 1.0, "Investigative": 0.5, "Medical-Lab": 0.3}
+                "trait_tags": {"Lab-Research": 1.0, "Investigative": 0.5, "Medical-Lab": 0.3, "Analytical-Skill": 0.3, "Field-Research": 0.2}
             },
             {
                 "option_id": 16012,
                 "option_text": "Chemistry — understanding materials, reactions, and molecular science",
-                "trait_tags": {"Lab-Research": 0.9, "Investigative": 0.5, "Technical-Skill": 0.3}
+                "trait_tags": {"Lab-Research": 0.9, "Investigative": 0.5, "Technical-Skill": 0.3, "Analytical-Skill": 0.3, "Pharmacy": 0.2}
             },
             {
                 "option_id": 16013,
                 "option_text": "Physics — exploring forces, energy, and the laws of nature",
-                "trait_tags": {"Lab-Research": 0.8, "Analytical-Skill": 0.6, "Investigative": 0.5}
+                "trait_tags": {"Lab-Research": 0.8, "Analytical-Skill": 0.6, "Investigative": 0.5, "Technical-Skill": 0.3, "Data-Analytics": 0.2}
             },
             {
                 "option_id": 16014,
                 "option_text": "Environmental and earth sciences — studying our planet",
-                "trait_tags": {"Environmental-Sci": 1.0, "Field-Research": 0.5, "Investigative": 0.3}
+                "trait_tags": {"Environmental-Sci": 1.0, "Field-Research": 0.5, "Investigative": 0.3, "Agri-Nature": 0.3, "Lab-Research": 0.2}
             },
             {
                 "option_id": 16015,
                 "option_text": "Mathematics and statistics — the language of patterns and data",
-                "trait_tags": {"Analytical-Skill": 1.0, "Data-Analytics": 0.5, "Investigative": 0.4}
+                "trait_tags": {"Analytical-Skill": 1.0, "Data-Analytics": 0.5, "Investigative": 0.4, "Software-Dev": 0.25, "Lab-Research": 0.2}
             },
             {
                 "option_id": 16016,
                 "option_text": "Food science and technology — the science behind what we eat",
-                "trait_tags": {"Food-Science": 1.0, "Lab-Research": 0.4, "Technical-Skill": 0.3}
+                "trait_tags": {"Food-Science": 1.0, "Lab-Research": 0.4, "Technical-Skill": 0.3, "Nutrition-Diet": 0.3, "Agri-Nature": 0.2}
             },
         ]
     },
@@ -999,22 +1054,22 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 16021,
                 "option_text": "Marine biology — studying ocean life and aquatic ecosystems",
-                "trait_tags": {"Field-Research": 0.7, "Lab-Research": 0.5, "Maritime-Sea": 0.4}
+                "trait_tags": {"Field-Research": 0.7, "Lab-Research": 0.5, "Maritime-Sea": 0.4, "Environmental-Sci": 0.3, "Investigative": 0.2}
             },
             {
                 "option_id": 16022,
                 "option_text": "Biotechnology and genetics — DNA, gene editing, and biotech applications",
-                "trait_tags": {"Lab-Research": 0.9, "Medical-Lab": 0.4, "Investigative": 0.5}
+                "trait_tags": {"Lab-Research": 0.9, "Medical-Lab": 0.4, "Investigative": 0.5, "Analytical-Skill": 0.3, "Technical-Skill": 0.2}
             },
             {
                 "option_id": 16023,
                 "option_text": "Ecology and wildlife — studying animals and natural habitats",
-                "trait_tags": {"Field-Research": 0.8, "Environmental-Sci": 0.5, "Agri-Nature": 0.3}
+                "trait_tags": {"Field-Research": 0.8, "Environmental-Sci": 0.5, "Agri-Nature": 0.3, "Investigative": 0.3, "Lab-Research": 0.2}
             },
             {
                 "option_id": 16024,
                 "option_text": "Microbiology and medical research — studying microorganisms and diseases",
-                "trait_tags": {"Lab-Research": 0.8, "Medical-Lab": 0.6, "Investigative": 0.4}
+                "trait_tags": {"Lab-Research": 0.8, "Medical-Lab": 0.6, "Investigative": 0.4, "Analytical-Skill": 0.3, "Technical-Skill": 0.2}
             },
         ]
     },
@@ -1029,22 +1084,22 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 16031,
                 "option_text": "Environmental conservation and policy making",
-                "trait_tags": {"Environmental-Sci": 0.8, "Community-Serve": 0.5, "Field-Research": 0.3}
+                "trait_tags": {"Environmental-Sci": 0.8, "Community-Serve": 0.5, "Field-Research": 0.3, "Admin-Skill": 0.3, "Investigative": 0.2}
             },
             {
                 "option_id": 16032,
                 "option_text": "Weather, climate, and atmospheric science (Meteorology)",
-                "trait_tags": {"Environmental-Sci": 0.6, "Data-Analytics": 0.5, "Field-Research": 0.4}
+                "trait_tags": {"Environmental-Sci": 0.6, "Data-Analytics": 0.5, "Field-Research": 0.4, "Analytical-Skill": 0.3, "Investigative": 0.2}
             },
             {
                 "option_id": 16033,
                 "option_text": "Geology — studying rocks, minerals, and earth processes",
-                "trait_tags": {"Field-Research": 0.8, "Lab-Research": 0.4, "Environmental-Sci": 0.4}
+                "trait_tags": {"Field-Research": 0.8, "Lab-Research": 0.4, "Environmental-Sci": 0.4, "Investigative": 0.3, "Technical-Skill": 0.2}
             },
             {
                 "option_id": 16034,
                 "option_text": "Environmental planning and urban sustainability",
-                "trait_tags": {"Environmental-Sci": 0.7, "Community-Serve": 0.5, "Admin-Skill": 0.3}
+                "trait_tags": {"Environmental-Sci": 0.7, "Community-Serve": 0.5, "Admin-Skill": 0.3, "Civil-Build": 0.3, "Spatial-Design": 0.2}
             },
         ]
     },
@@ -1062,27 +1117,27 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 17011,
                 "option_text": "Law enforcement, criminal justice, and keeping communities safe",
-                "trait_tags": {"Law-Enforce": 1.0, "Physical-Skill": 0.4, "Investigative": 0.3}
+                "trait_tags": {"Law-Enforce": 1.0, "Physical-Skill": 0.4, "Investigative": 0.3, "Community-Serve": 0.3, "People-Skill": 0.2}
             },
             {
                 "option_id": 17012,
                 "option_text": "Law, legal practice, and the justice system",
-                "trait_tags": {"Legal-Practice": 1.0, "Analytical-Skill": 0.5, "People-Skill": 0.3}
+                "trait_tags": {"Legal-Practice": 1.0, "Analytical-Skill": 0.5, "People-Skill": 0.3, "Investigative": 0.3, "Community-Serve": 0.2}
             },
             {
                 "option_id": 17013,
                 "option_text": "Social work and community development",
-                "trait_tags": {"Social-Work": 1.0, "Community-Serve": 0.6, "People-Skill": 0.5}
+                "trait_tags": {"Social-Work": 1.0, "Community-Serve": 0.6, "People-Skill": 0.5, "Social": 0.3, "Counseling": 0.2}
             },
             {
                 "option_id": 17014,
                 "option_text": "Government, public administration, and policy",
-                "trait_tags": {"Community-Serve": 0.8, "Admin-Skill": 0.6, "People-Skill": 0.3}
+                "trait_tags": {"Community-Serve": 0.8, "Admin-Skill": 0.6, "People-Skill": 0.3, "Analytical-Skill": 0.3, "Conventional": 0.2}
             },
             {
                 "option_id": 17015,
                 "option_text": "Politics, diplomacy, and international relations",
-                "trait_tags": {"Community-Serve": 0.7, "People-Skill": 0.5, "Analytical-Skill": 0.4}
+                "trait_tags": {"Community-Serve": 0.7, "People-Skill": 0.5, "Analytical-Skill": 0.4, "Legal-Practice": 0.3, "Social": 0.2}
             },
         ]
     },
@@ -1097,17 +1152,27 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 17021,
                 "option_text": "Patrol, community policing, and public safety",
-                "trait_tags": {"Law-Enforce": 1.0, "Physical-Skill": 0.5, "Community-Serve": 0.4}
+                "trait_tags": {"Law-Enforce": 1.0, "Physical-Skill": 0.5, "Community-Serve": 0.45, "People-Skill": 0.3, "Realistic": 0.2}
             },
             {
                 "option_id": 17022,
                 "option_text": "Criminal investigation, forensics, and crime scene analysis",
-                "trait_tags": {"Law-Enforce": 0.7, "Forensic-Sci": 0.7, "Investigative": 0.5}
+                "trait_tags": {"Law-Enforce": 0.7, "Forensic-Sci": 0.75, "Investigative": 0.55, "Analytical-Skill": 0.35, "Lab-Research": 0.2}
             },
             {
                 "option_id": 17023,
                 "option_text": "Cybercrime investigation and digital forensics",
-                "trait_tags": {"Law-Enforce": 0.5, "Cyber-Defense": 0.5, "Forensic-Sci": 0.4, "Technical-Skill": 0.4}
+                "trait_tags": {"Law-Enforce": 0.5, "Cyber-Defense": 0.55, "Forensic-Sci": 0.45, "Technical-Skill": 0.4, "Investigative": 0.3}
+            },
+            {
+                "option_id": 17024,
+                "option_text": "Military service, national defense, and tactical operations",
+                "trait_tags": {"Law-Enforce": 0.7, "Physical-Skill": 0.7, "Community-Serve": 0.35, "People-Skill": 0.25, "Admin-Skill": 0.2}
+            },
+            {
+                "option_id": 17025,
+                "option_text": "Corrections, rehabilitation, and prison management",
+                "trait_tags": {"Law-Enforce": 0.6, "Social-Work": 0.55, "Community-Serve": 0.45, "People-Skill": 0.4, "Counseling": 0.25}
             },
         ]
     },
@@ -1125,22 +1190,22 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 18011,
                 "option_text": "Ship navigation, captaining, and marine transportation",
-                "trait_tags": {"Maritime-Sea": 1.0, "Physical-Skill": 0.4, "Admin-Skill": 0.3}
+                "trait_tags": {"Maritime-Sea": 1.0, "Physical-Skill": 0.4, "Admin-Skill": 0.3, "Technical-Skill": 0.3, "Realistic": 0.2}
             },
             {
                 "option_id": 18012,
                 "option_text": "Marine engineering — ship engines and mechanical systems",
-                "trait_tags": {"Maritime-Sea": 0.7, "Mechanical-Design": 0.7, "Technical-Skill": 0.5}
+                "trait_tags": {"Maritime-Sea": 0.7, "Mechanical-Design": 0.7, "Technical-Skill": 0.5, "Physical-Skill": 0.3, "Realistic": 0.2}
             },
             {
                 "option_id": 18013,
                 "option_text": "Aircraft maintenance and aviation mechanics",
-                "trait_tags": {"Mechanical-Design": 0.7, "Technical-Skill": 0.7, "Hardware-Systems": 0.3}
+                "trait_tags": {"Mechanical-Design": 0.7, "Technical-Skill": 0.7, "Hardware-Systems": 0.3, "Realistic": 0.3, "Physical-Skill": 0.2}
             },
             {
                 "option_id": 18014,
                 "option_text": "Aviation electronics and avionics technology",
-                "trait_tags": {"Technical-Skill": 0.7, "Hardware-Systems": 0.5, "Electrical-Power": 0.4}
+                "trait_tags": {"Technical-Skill": 0.7, "Hardware-Systems": 0.5, "Electrical-Power": 0.4, "Investigative": 0.25, "Analytical-Skill": 0.2}
             },
         ]
     },
@@ -1158,22 +1223,22 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 18021,
                 "option_text": "Crop farming, agricultural science, and food production",
-                "trait_tags": {"Agri-Nature": 1.0, "Field-Research": 0.4, "Realistic": 0.3}
+                "trait_tags": {"Agri-Nature": 1.0, "Field-Research": 0.4, "Realistic": 0.3, "Food-Science": 0.3, "Environmental-Sci": 0.2}
             },
             {
                 "option_id": 18022,
                 "option_text": "Forestry and natural resource management",
-                "trait_tags": {"Agri-Nature": 0.7, "Environmental-Sci": 0.5, "Field-Research": 0.5}
+                "trait_tags": {"Agri-Nature": 0.7, "Environmental-Sci": 0.5, "Field-Research": 0.5, "Community-Serve": 0.3, "Realistic": 0.2}
             },
             {
                 "option_id": 18023,
                 "option_text": "Fisheries, aquaculture, and marine farming",
-                "trait_tags": {"Agri-Nature": 0.6, "Maritime-Sea": 0.4, "Field-Research": 0.4}
+                "trait_tags": {"Agri-Nature": 0.6, "Maritime-Sea": 0.4, "Field-Research": 0.4, "Environmental-Sci": 0.3, "Realistic": 0.2}
             },
             {
                 "option_id": 18024,
                 "option_text": "Veterinary medicine and animal care",
-                "trait_tags": {"Patient-Care": 0.5, "Agri-Nature": 0.5, "Lab-Research": 0.3}
+                "trait_tags": {"Patient-Care": 0.5, "Agri-Nature": 0.5, "Lab-Research": 0.3, "Medical-Lab": 0.3, "People-Skill": 0.2}
             },
         ]
     },
@@ -1191,22 +1256,22 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 18031,
                 "option_text": "Hotel and resort management",
-                "trait_tags": {"Hospitality-Svc": 1.0, "Admin-Skill": 0.5, "People-Skill": 0.4}
+                "trait_tags": {"Hospitality-Svc": 1.0, "Admin-Skill": 0.5, "People-Skill": 0.4, "Enterprising": 0.3, "Tourism-Travel": 0.2}
             },
             {
                 "option_id": 18032,
                 "option_text": "Tourism and travel management",
-                "trait_tags": {"Tourism-Travel": 1.0, "People-Skill": 0.5, "Enterprising": 0.3}
+                "trait_tags": {"Tourism-Travel": 1.0, "People-Skill": 0.5, "Enterprising": 0.3, "Admin-Skill": 0.3, "Hospitality-Svc": 0.2}
             },
             {
                 "option_id": 18033,
                 "option_text": "Culinary arts, cooking, and food service",
-                "trait_tags": {"Culinary-Arts": 1.0, "Creative-Skill": 0.4, "Hospitality-Svc": 0.4}
+                "trait_tags": {"Culinary-Arts": 1.0, "Creative-Skill": 0.4, "Hospitality-Svc": 0.4, "Food-Science": 0.3, "Artistic": 0.2}
             },
             {
                 "option_id": 18034,
                 "option_text": "Office and business administration",
-                "trait_tags": {"Admin-Skill": 1.0, "Conventional": 0.5, "People-Skill": 0.3}
+                "trait_tags": {"Admin-Skill": 1.0, "Conventional": 0.5, "People-Skill": 0.3, "Finance-Acct": 0.3, "Analytical-Skill": 0.2}
             },
         ]
     },
@@ -1225,27 +1290,27 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 19011,
                 "option_text": "Collaborating with a team and working with people",
-                "trait_tags": {"People-Skill": 0.8, "Social": 0.5, "Teaching-Ed": 0.2}
+                "trait_tags": {"People-Skill": 0.8, "Social": 0.5, "Teaching-Ed": 0.2, "Community-Serve": 0.2, "HR-Management": 0.15}
             },
             {
                 "option_id": 19012,
                 "option_text": "Working independently on focused, technical problems",
-                "trait_tags": {"Technical-Skill": 0.6, "Investigative": 0.5, "Analytical-Skill": 0.3}
+                "trait_tags": {"Technical-Skill": 0.6, "Investigative": 0.5, "Analytical-Skill": 0.3, "Software-Dev": 0.25, "Lab-Research": 0.2}
             },
             {
                 "option_id": 19013,
                 "option_text": "A mix of teamwork and independent work",
-                "trait_tags": {"People-Skill": 0.4, "Technical-Skill": 0.4, "Admin-Skill": 0.2}
+                "trait_tags": {"People-Skill": 0.4, "Technical-Skill": 0.4, "Admin-Skill": 0.2, "Analytical-Skill": 0.2, "Social": 0.15}
             },
             {
                 "option_id": 19014,
                 "option_text": "Interacting with clients and customers directly",
-                "trait_tags": {"People-Skill": 0.7, "Enterprising": 0.5, "Hospitality-Svc": 0.2}
+                "trait_tags": {"People-Skill": 0.7, "Enterprising": 0.5, "Hospitality-Svc": 0.2, "Marketing-Sales": 0.2, "Social": 0.15}
             },
             {
                 "option_id": 19015,
                 "option_text": "Working outdoors or in the field",
-                "trait_tags": {"Physical-Skill": 0.6, "Field-Research": 0.5, "Realistic": 0.4}
+                "trait_tags": {"Physical-Skill": 0.6, "Field-Research": 0.5, "Realistic": 0.4, "Agri-Nature": 0.25, "Environmental-Sci": 0.2}
             },
         ]
     },
@@ -1259,27 +1324,27 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 19021,
                 "option_text": "Analytical and logical — breaking problems into steps",
-                "trait_tags": {"Analytical-Skill": 0.8, "Investigative": 0.5, "Technical-Skill": 0.3}
+                "trait_tags": {"Analytical-Skill": 0.8, "Investigative": 0.5, "Technical-Skill": 0.3, "Data-Analytics": 0.25, "Software-Dev": 0.2}
             },
             {
                 "option_id": 19022,
                 "option_text": "Creative and intuitive — finding innovative solutions",
-                "trait_tags": {"Creative-Skill": 0.8, "Artistic": 0.4, "Visual-Design": 0.2}
+                "trait_tags": {"Creative-Skill": 0.8, "Artistic": 0.4, "Visual-Design": 0.2, "Spatial-Design": 0.2, "Enterprising": 0.15}
             },
             {
                 "option_id": 19023,
                 "option_text": "Practical and hands-on — building and testing solutions",
-                "trait_tags": {"Realistic": 0.6, "Technical-Skill": 0.5, "Physical-Skill": 0.3}
+                "trait_tags": {"Realistic": 0.6, "Technical-Skill": 0.5, "Physical-Skill": 0.3, "Mechanical-Design": 0.25, "Field-Research": 0.2}
             },
             {
                 "option_id": 19024,
                 "option_text": "Social and collaborative — discussing with others",
-                "trait_tags": {"People-Skill": 0.7, "Social": 0.5, "Teaching-Ed": 0.2}
+                "trait_tags": {"People-Skill": 0.7, "Social": 0.5, "Teaching-Ed": 0.2, "Counseling": 0.2, "Community-Serve": 0.15}
             },
             {
                 "option_id": 19025,
                 "option_text": "Research and evidence-based — gathering data first",
-                "trait_tags": {"Investigative": 0.7, "Lab-Research": 0.5, "Analytical-Skill": 0.3}
+                "trait_tags": {"Investigative": 0.7, "Lab-Research": 0.5, "Analytical-Skill": 0.3, "Data-Analytics": 0.25, "Field-Research": 0.2}
             },
         ]
     },
@@ -1293,27 +1358,27 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 19031,
                 "option_text": "High salary and financial stability",
-                "trait_tags": {"Enterprising": 0.6, "Finance-Acct": 0.3, "Technical-Skill": 0.2}
+                "trait_tags": {"Enterprising": 0.6, "Finance-Acct": 0.3, "Technical-Skill": 0.2, "Conventional": 0.2, "Admin-Skill": 0.15}
             },
             {
                 "option_id": 19032,
                 "option_text": "Helping others and making a positive difference",
-                "trait_tags": {"Social": 0.7, "Patient-Care": 0.3, "Community-Serve": 0.3, "People-Skill": 0.2}
+                "trait_tags": {"Social": 0.7, "Patient-Care": 0.3, "Community-Serve": 0.3, "People-Skill": 0.2, "Teaching-Ed": 0.15}
             },
             {
                 "option_id": 19033,
                 "option_text": "Creative expression and artistic freedom",
-                "trait_tags": {"Creative-Skill": 0.7, "Artistic": 0.5, "Visual-Design": 0.2}
+                "trait_tags": {"Creative-Skill": 0.7, "Artistic": 0.5, "Visual-Design": 0.2, "Performing-Arts": 0.2, "Spatial-Design": 0.15}
             },
             {
                 "option_id": 19034,
                 "option_text": "Job stability and security",
-                "trait_tags": {"Conventional": 0.5, "Admin-Skill": 0.3, "Realistic": 0.2}
+                "trait_tags": {"Conventional": 0.5, "Admin-Skill": 0.3, "Realistic": 0.2, "Technical-Skill": 0.2, "Finance-Acct": 0.15}
             },
             {
                 "option_id": 19035,
                 "option_text": "Adventure, travel, and new experiences",
-                "trait_tags": {"Physical-Skill": 0.4, "Maritime-Sea": 0.3, "Tourism-Travel": 0.3, "Field-Research": 0.2}
+                "trait_tags": {"Physical-Skill": 0.4, "Maritime-Sea": 0.3, "Tourism-Travel": 0.3, "Field-Research": 0.2, "Agri-Nature": 0.15}
             },
         ]
     },
@@ -1327,27 +1392,27 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 19041,
                 "option_text": "A modern office with computers and technology",
-                "trait_tags": {"Technical-Skill": 0.5, "Software-Dev": 0.3, "Data-Analytics": 0.2}
+                "trait_tags": {"Technical-Skill": 0.5, "Software-Dev": 0.3, "Data-Analytics": 0.2, "Analytical-Skill": 0.2, "Cloud-Systems": 0.15}
             },
             {
                 "option_id": 19042,
                 "option_text": "A hospital, clinic, or healthcare facility",
-                "trait_tags": {"Patient-Care": 0.5, "Medical-Lab": 0.4, "People-Skill": 0.2}
+                "trait_tags": {"Patient-Care": 0.5, "Medical-Lab": 0.4, "People-Skill": 0.2, "Community-Serve": 0.2, "Social": 0.15}
             },
             {
                 "option_id": 19043,
                 "option_text": "A laboratory or research facility",
-                "trait_tags": {"Lab-Research": 0.6, "Investigative": 0.4, "Medical-Lab": 0.2}
+                "trait_tags": {"Lab-Research": 0.6, "Investigative": 0.4, "Medical-Lab": 0.2, "Analytical-Skill": 0.25, "Technical-Skill": 0.2}
             },
             {
                 "option_id": 19044,
                 "option_text": "Outdoors — construction sites, farms, or nature",
-                "trait_tags": {"Physical-Skill": 0.5, "Civil-Build": 0.3, "Agri-Nature": 0.3, "Field-Research": 0.3}
+                "trait_tags": {"Physical-Skill": 0.5, "Civil-Build": 0.3, "Agri-Nature": 0.3, "Field-Research": 0.3, "Realistic": 0.2}
             },
             {
                 "option_id": 19045,
                 "option_text": "A creative studio — design workshop, art studio, or media house",
-                "trait_tags": {"Creative-Skill": 0.5, "Visual-Design": 0.4, "Artistic": 0.3}
+                "trait_tags": {"Creative-Skill": 0.5, "Visual-Design": 0.4, "Artistic": 0.3, "Digital-Media": 0.25, "Animation-3D": 0.2}
             },
         ]
     },
@@ -1361,27 +1426,27 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 19051,
                 "option_text": "Research and analyze before acting",
-                "trait_tags": {"Investigative": 0.7, "Analytical-Skill": 0.5, "Lab-Research": 0.2}
+                "trait_tags": {"Investigative": 0.7, "Analytical-Skill": 0.5, "Lab-Research": 0.2, "Data-Analytics": 0.2, "Technical-Skill": 0.15}
             },
             {
                 "option_id": 19052,
                 "option_text": "Try different creative approaches until something works",
-                "trait_tags": {"Creative-Skill": 0.6, "Enterprising": 0.4, "Artistic": 0.2}
+                "trait_tags": {"Creative-Skill": 0.6, "Enterprising": 0.4, "Artistic": 0.2, "Visual-Design": 0.2, "Digital-Media": 0.15}
             },
             {
                 "option_id": 19053,
                 "option_text": "Consult experts and learn from others' experiences",
-                "trait_tags": {"People-Skill": 0.5, "Social": 0.4, "Teaching-Ed": 0.2}
+                "trait_tags": {"People-Skill": 0.5, "Social": 0.4, "Teaching-Ed": 0.2, "Analytical-Skill": 0.2, "Investigative": 0.15}
             },
             {
                 "option_id": 19054,
                 "option_text": "Take charge and lead a team to solve it",
-                "trait_tags": {"Enterprising": 0.6, "People-Skill": 0.4, "Admin-Skill": 0.3}
+                "trait_tags": {"Enterprising": 0.6, "People-Skill": 0.4, "Admin-Skill": 0.3, "HR-Management": 0.2, "Social": 0.15}
             },
             {
                 "option_id": 19055,
                 "option_text": "Follow a methodical, step-by-step process",
-                "trait_tags": {"Conventional": 0.5, "Analytical-Skill": 0.4, "Technical-Skill": 0.3}
+                "trait_tags": {"Conventional": 0.5, "Analytical-Skill": 0.4, "Technical-Skill": 0.3, "Admin-Skill": 0.25, "Investigative": 0.2}
             },
         ]
     },
@@ -1395,27 +1460,27 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 19061,
                 "option_text": "Technical and computer skills",
-                "trait_tags": {"Technical-Skill": 0.7, "Software-Dev": 0.3, "Hardware-Systems": 0.2}
+                "trait_tags": {"Technical-Skill": 0.7, "Software-Dev": 0.3, "Hardware-Systems": 0.2, "Analytical-Skill": 0.2, "Data-Analytics": 0.15}
             },
             {
                 "option_id": 19062,
                 "option_text": "Medical and health sciences knowledge",
-                "trait_tags": {"Patient-Care": 0.5, "Medical-Lab": 0.4, "Lab-Research": 0.2}
+                "trait_tags": {"Patient-Care": 0.5, "Medical-Lab": 0.4, "Lab-Research": 0.2, "Public-Health": 0.2, "Investigative": 0.15}
             },
             {
                 "option_id": 19063,
                 "option_text": "Creative and artistic abilities",
-                "trait_tags": {"Creative-Skill": 0.7, "Visual-Design": 0.3, "Artistic": 0.3}
+                "trait_tags": {"Creative-Skill": 0.7, "Visual-Design": 0.3, "Artistic": 0.3, "Digital-Media": 0.2, "Spatial-Design": 0.15}
             },
             {
                 "option_id": 19064,
                 "option_text": "Business and financial expertise",
-                "trait_tags": {"Finance-Acct": 0.5, "Enterprising": 0.4, "Admin-Skill": 0.3}
+                "trait_tags": {"Finance-Acct": 0.5, "Enterprising": 0.4, "Admin-Skill": 0.3, "Analytical-Skill": 0.25, "Marketing-Sales": 0.2}
             },
             {
                 "option_id": 19065,
                 "option_text": "Communication and leadership abilities",
-                "trait_tags": {"People-Skill": 0.6, "Enterprising": 0.4, "Teaching-Ed": 0.2}
+                "trait_tags": {"People-Skill": 0.6, "Enterprising": 0.4, "Teaching-Ed": 0.2, "Social": 0.2, "HR-Management": 0.15}
             },
         ]
     },
@@ -1429,27 +1494,27 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 19071,
                 "option_text": "Math and Science",
-                "trait_tags": {"Analytical-Skill": 0.6, "Investigative": 0.5, "Lab-Research": 0.3}
+                "trait_tags": {"Analytical-Skill": 0.6, "Investigative": 0.5, "Lab-Research": 0.3, "Data-Analytics": 0.25, "Technical-Skill": 0.2}
             },
             {
                 "option_id": 19072,
                 "option_text": "English, Literature, and Languages",
-                "trait_tags": {"Creative-Skill": 0.4, "People-Skill": 0.4, "Teaching-Ed": 0.3}
+                "trait_tags": {"Creative-Skill": 0.4, "People-Skill": 0.4, "Teaching-Ed": 0.3, "Social": 0.25, "Artistic": 0.2}
             },
             {
                 "option_id": 19073,
                 "option_text": "Social Studies, History, and Civics",
-                "trait_tags": {"Community-Serve": 0.5, "Social": 0.4, "People-Skill": 0.3}
+                "trait_tags": {"Community-Serve": 0.5, "Social": 0.4, "People-Skill": 0.3, "Investigative": 0.25, "Teaching-Ed": 0.2}
             },
             {
                 "option_id": 19074,
                 "option_text": "Arts, Music, and Creative subjects",
-                "trait_tags": {"Artistic": 0.6, "Creative-Skill": 0.5, "Visual-Design": 0.2}
+                "trait_tags": {"Artistic": 0.6, "Creative-Skill": 0.5, "Visual-Design": 0.2, "Performing-Arts": 0.25, "Digital-Media": 0.2}
             },
             {
                 "option_id": 19075,
                 "option_text": "Computer and Technology subjects",
-                "trait_tags": {"Technical-Skill": 0.6, "Software-Dev": 0.4, "Investigative": 0.2}
+                "trait_tags": {"Technical-Skill": 0.6, "Software-Dev": 0.4, "Investigative": 0.2, "Data-Analytics": 0.25, "Analytical-Skill": 0.2}
             },
         ]
     },
@@ -1463,27 +1528,27 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 19081,
                 "option_text": "Science club, coding, or robotics",
-                "trait_tags": {"Technical-Skill": 0.5, "Software-Dev": 0.4, "Investigative": 0.3, "Hardware-Systems": 0.2}
+                "trait_tags": {"Technical-Skill": 0.5, "Software-Dev": 0.4, "Investigative": 0.3, "Hardware-Systems": 0.2, "Analytical-Skill": 0.2}
             },
             {
                 "option_id": 19082,
                 "option_text": "Sports teams and athletic activities",
-                "trait_tags": {"Physical-Skill": 0.6, "Sports-Ed": 0.4, "People-Skill": 0.2}
+                "trait_tags": {"Physical-Skill": 0.6, "Sports-Ed": 0.4, "People-Skill": 0.2, "Realistic": 0.2, "Community-Serve": 0.15}
             },
             {
                 "option_id": 19083,
                 "option_text": "Art club, drama, music, or creative writing",
-                "trait_tags": {"Creative-Skill": 0.6, "Artistic": 0.4, "Performing-Arts": 0.3}
+                "trait_tags": {"Creative-Skill": 0.6, "Artistic": 0.4, "Performing-Arts": 0.3, "Visual-Design": 0.2, "Social": 0.15}
             },
             {
                 "option_id": 19084,
                 "option_text": "Student government and leadership organizations",
-                "trait_tags": {"Enterprising": 0.5, "People-Skill": 0.5, "Admin-Skill": 0.3}
+                "trait_tags": {"Enterprising": 0.5, "People-Skill": 0.5, "Admin-Skill": 0.3, "Community-Serve": 0.2, "Social": 0.15}
             },
             {
                 "option_id": 19085,
                 "option_text": "Community service and volunteer work",
-                "trait_tags": {"Community-Serve": 0.6, "Social": 0.5, "People-Skill": 0.3}
+                "trait_tags": {"Community-Serve": 0.6, "Social": 0.5, "People-Skill": 0.3, "Teaching-Ed": 0.2, "Social-Work": 0.15}
             },
         ]
     },
@@ -1497,32 +1562,32 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 19091,
                 "option_text": "At a technology or software company",
-                "trait_tags": {"Software-Dev": 0.5, "Technical-Skill": 0.4, "Data-Analytics": 0.2}
+                "trait_tags": {"Software-Dev": 0.5, "Technical-Skill": 0.4, "Data-Analytics": 0.2, "Analytical-Skill": 0.2, "Investigative": 0.15}
             },
             {
                 "option_id": 19092,
                 "option_text": "In a hospital, clinic, or healthcare organization",
-                "trait_tags": {"Patient-Care": 0.5, "Medical-Lab": 0.3, "Rehab-Therapy": 0.2}
+                "trait_tags": {"Patient-Care": 0.5, "Medical-Lab": 0.3, "Rehab-Therapy": 0.2, "People-Skill": 0.2, "Social": 0.15}
             },
             {
                 "option_id": 19093,
                 "option_text": "At an engineering or construction firm",
-                "trait_tags": {"Civil-Build": 0.4, "Mechanical-Design": 0.4, "Technical-Skill": 0.3}
+                "trait_tags": {"Civil-Build": 0.4, "Mechanical-Design": 0.4, "Technical-Skill": 0.3, "Realistic": 0.2, "Analytical-Skill": 0.15}
             },
             {
                 "option_id": 19094,
                 "option_text": "Running your own business or startup",
-                "trait_tags": {"Startup-Venture": 0.6, "Enterprising": 0.5, "Marketing-Sales": 0.2}
+                "trait_tags": {"Startup-Venture": 0.6, "Enterprising": 0.5, "Marketing-Sales": 0.2, "Finance-Acct": 0.2, "HR-Management": 0.15}
             },
             {
                 "option_id": 19095,
                 "option_text": "Teaching at a school or university",
-                "trait_tags": {"Teaching-Ed": 0.7, "People-Skill": 0.4, "Social": 0.2}
+                "trait_tags": {"Teaching-Ed": 0.7, "People-Skill": 0.4, "Social": 0.2, "Community-Serve": 0.2, "Counseling": 0.15}
             },
             {
                 "option_id": 19096,
                 "option_text": "Working at a creative or design studio",
-                "trait_tags": {"Creative-Skill": 0.6, "Visual-Design": 0.4, "Digital-Media": 0.2}
+                "trait_tags": {"Creative-Skill": 0.6, "Visual-Design": 0.4, "Digital-Media": 0.2, "Artistic": 0.2, "Animation-3D": 0.15}
             },
         ]
     },
@@ -1536,32 +1601,32 @@ DECISION_TREE_QUESTIONS = [
             {
                 "option_id": 19101,
                 "option_text": "Innovate with technology and drive digital transformation",
-                "trait_tags": {"Software-Dev": 0.4, "Technical-Skill": 0.4, "AI-ML": 0.3, "Enterprising": 0.2}
+                "trait_tags": {"Software-Dev": 0.4, "Technical-Skill": 0.4, "AI-ML": 0.3, "Enterprising": 0.2, "Data-Analytics": 0.15}
             },
             {
                 "option_id": 19102,
                 "option_text": "Save lives and improve people's health",
-                "trait_tags": {"Patient-Care": 0.5, "Medical-Lab": 0.3, "Social": 0.3}
+                "trait_tags": {"Patient-Care": 0.5, "Medical-Lab": 0.3, "Social": 0.3, "Community-Serve": 0.2, "Public-Health": 0.15}
             },
             {
                 "option_id": 19103,
                 "option_text": "Build infrastructure that improves communities",
-                "trait_tags": {"Civil-Build": 0.5, "Community-Serve": 0.4, "Technical-Skill": 0.2}
+                "trait_tags": {"Civil-Build": 0.5, "Community-Serve": 0.4, "Technical-Skill": 0.2, "Environmental-Eng": 0.2, "Analytical-Skill": 0.15}
             },
             {
                 "option_id": 19104,
                 "option_text": "Create economic growth and business opportunities",
-                "trait_tags": {"Enterprising": 0.5, "Finance-Acct": 0.3, "Marketing-Sales": 0.3}
+                "trait_tags": {"Enterprising": 0.5, "Finance-Acct": 0.3, "Marketing-Sales": 0.3, "Startup-Venture": 0.2, "Admin-Skill": 0.15}
             },
             {
                 "option_id": 19105,
                 "option_text": "Inspire and educate future generations",
-                "trait_tags": {"Teaching-Ed": 0.6, "People-Skill": 0.4, "Social": 0.3}
+                "trait_tags": {"Teaching-Ed": 0.6, "People-Skill": 0.4, "Social": 0.3, "Community-Serve": 0.2, "Counseling": 0.15}
             },
             {
                 "option_id": 19106,
                 "option_text": "Bring beauty and meaning through art and creativity",
-                "trait_tags": {"Creative-Skill": 0.6, "Artistic": 0.5, "Visual-Design": 0.2}
+                "trait_tags": {"Creative-Skill": 0.6, "Artistic": 0.5, "Visual-Design": 0.2, "Performing-Arts": 0.2, "Digital-Media": 0.15}
             },
         ]
     },
