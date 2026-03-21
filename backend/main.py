@@ -110,19 +110,62 @@ async def lifespan(app: FastAPI):
         with database.engine.connect() as conn:
             inspector = _inspect(database.engine)
             
-            # Check user_test_attempts table for missing columns
+            # Check user_test_attempts table — ensure it has all required columns
             if 'user_test_attempts' in inspector.get_table_names():
                 existing_cols = {c['name'] for c in inspector.get_columns('user_test_attempts')}
-                migrations = {
-                    'max_questions': 'INTEGER',
-                    'confidence_score': 'FLOAT',
-                    'traits_found': 'INTEGER',
-                }
-                for col_name, col_type in migrations.items():
-                    if col_name not in existing_cols:
-                        print(f"[MIGRATE] Adding column {col_name} to user_test_attempts")
-                        conn.execute(_text(f'ALTER TABLE user_test_attempts ADD COLUMN {col_name} {col_type}'))
+                required_base_cols = {'attempt_id', 'user_id', 'test_id', 'score', 'total_questions', 'attempt_date', 'time_taken', 'created_at'}
+                if not required_base_cols.issubset(existing_cols):
+                    print("[MIGRATE] user_test_attempts missing base columns — recreating table")
+                    conn.execute(_text('DROP TABLE user_test_attempts'))
+                    conn.commit()
+                    conn.execute(_text('''
+                        CREATE TABLE user_test_attempts (
+                            attempt_id INTEGER PRIMARY KEY,
+                            user_id INTEGER,
+                            test_id INTEGER,
+                            score INTEGER DEFAULT 0,
+                            total_questions INTEGER,
+                            attempt_date TIMESTAMP,
+                            time_taken INTEGER DEFAULT 0,
+                            created_at TIMESTAMP DEFAULT NOW(),
+                            max_questions INTEGER,
+                            confidence_score FLOAT,
+                            traits_found INTEGER
+                        )
+                    '''))
+                    conn.commit()
+                    print("[MIGRATE] user_test_attempts recreated with full schema")
+                else:
+                    # Table has base columns, just check for extra tracking columns
+                    migrations = {
+                        'max_questions': 'INTEGER',
+                        'confidence_score': 'FLOAT',
+                        'traits_found': 'INTEGER',
+                    }
+                    for col_name, col_type in migrations.items():
+                        if col_name not in existing_cols:
+                            print(f"[MIGRATE] Adding column {col_name} to user_test_attempts")
+                            conn.execute(_text(f'ALTER TABLE user_test_attempts ADD COLUMN {col_name} {col_type}'))
+                    conn.commit()
+            else:
+                # Table doesn't exist at all — create it
+                conn.execute(_text('''
+                    CREATE TABLE user_test_attempts (
+                        attempt_id INTEGER PRIMARY KEY,
+                        user_id INTEGER,
+                        test_id INTEGER,
+                        score INTEGER DEFAULT 0,
+                        total_questions INTEGER,
+                        attempt_date TIMESTAMP,
+                        time_taken INTEGER DEFAULT 0,
+                        created_at TIMESTAMP DEFAULT NOW(),
+                        max_questions INTEGER,
+                        confidence_score FLOAT,
+                        traits_found INTEGER
+                    )
+                '''))
                 conn.commit()
+                print("[MIGRATE] Created user_test_attempts table")
             
             # Check test_attempts table for missing columns
             if 'test_attempts' in inspector.get_table_names():
@@ -322,6 +365,18 @@ def sync_questions_db():
         default_test = db.query(models.Test).filter(models.Test.test_type == "assessment").first()
         test_id = default_test.test_id if default_test else 1
 
+        # 0b) Clean up orphaned options (options for questions that don't exist)
+        existing_question_ids = {q.question_id for q in db.query(models.Question).all()}
+        orphaned_options = db.query(models.Option).filter(
+            ~models.Option.question_id.in_(existing_question_ids)
+        ).all()
+        if orphaned_options:
+            orphan_count = len(orphaned_options)
+            for opt in orphaned_options:
+                db.delete(opt)
+            db.commit()
+            print(f"[SYNC] Removed {orphan_count} orphaned option(s)")
+
         # 1) Strip parenthetical RIASEC/trait hints from option text
         riasec_labels = [
             "Realistic", "Investigative", "Artistic", "Social", "Enterprising",
@@ -373,8 +428,13 @@ def sync_questions_db():
                 db.add(new_q)
                 db.flush()
 
-                # Insert all options for this question
+                # Insert all options for this question (skip if option_id already exists)
                 for opt in q.get("options", []):
+                    oid = opt.get("option_id")
+                    # Skip if this option_id already exists in DB (orphaned from previous sync)
+                    if oid in all_existing_option_ids:
+                        continue
+                    
                     option_text = opt.get("option_text") or opt.get("text")
                     trait_tag = opt.get("trait_tag") or opt.get("tag")
                     # Handle weighted dict trait_tags format
@@ -392,7 +452,7 @@ def sync_questions_db():
                     recommended_courses_json = json.dumps(opt.get("recommended_courses", [])) if opt.get("recommended_courses") else None
 
                     db.add(models.Option(
-                        option_id=opt.get("option_id"),
+                        option_id=oid,
                         question_id=qid,
                         option_text=option_text,
                         trait_tag=trait_tag,
@@ -400,6 +460,7 @@ def sync_questions_db():
                         trait_tags_json=trait_tags_json,
                         recommended_courses_json=recommended_courses_json
                     ))
+                    all_existing_option_ids.add(oid)
                 inserted += 1
             else:
                 # Update question text if changed
@@ -459,16 +520,22 @@ def sync_questions_db():
                 db.add(new_q)
                 db.flush()
                 for opt in q.get("options", []):
+                    oid = opt.get("option_id")
+                    # Skip if this option_id already exists in DB (orphaned from previous sync)
+                    if oid in all_existing_option_ids:
+                        continue
+                    
                     trait_tags_data = opt.get("trait_tags", {})
                     trait_tag = max(trait_tags_data, key=trait_tags_data.get) if trait_tags_data else None
                     db.add(models.Option(
-                        option_id=opt.get("option_id"),
+                        option_id=oid,
                         question_id=qid,
                         option_text=opt["option_text"],
                         trait_tag=trait_tag,
                         weight=1,
                         trait_tags_json=trait_tags_data
                     ))
+                    all_existing_option_ids.add(oid)
                 tree_inserted += 1
             else:
                 # Update existing decision tree options when trait_tags or text change

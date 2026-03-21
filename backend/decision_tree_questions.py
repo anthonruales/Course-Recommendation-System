@@ -148,6 +148,11 @@ DECISION_TREE_QUESTIONS = [
                 "option_text": "Programming embedded systems and microcontrollers",
                 "trait_tags": {"Hardware-Systems": 0.8, "Software-Dev": 0.6, "Technical-Skill": 0.5, "Electrical-Power": 0.3, "Investigative": 0.2}
             },
+            {
+                "option_id": 10035,
+                "option_text": "Troubleshooting hardware failures and improving system reliability",
+                "trait_tags": {"Hardware-Systems": 1.0, "Technical-Skill": 0.55, "Investigative": 0.35, "Cloud-Systems": 0.2, "Analytical-Skill": 0.2}
+            },
         ]
     },
 
@@ -178,6 +183,11 @@ DECISION_TREE_QUESTIONS = [
                 "option_text": "Managing and securing large-scale databases and information systems",
                 "trait_tags": {"Data-Analytics": 0.6, "Software-Dev": 0.5, "Cloud-Systems": 0.4, "Technical-Skill": 0.5, "Cyber-Defense": 0.3}
             },
+            {
+                "option_id": 10045,
+                "option_text": "Designing dashboards and reports that turn raw data into clear actions",
+                "trait_tags": {"Data-Analytics": 1.0, "Analytical-Skill": 0.5, "Software-Dev": 0.25, "Enterprising": 0.2, "Visual-Design": 0.15}
+            },
         ]
     },
 
@@ -207,6 +217,11 @@ DECISION_TREE_QUESTIONS = [
                 "option_id": 10054,
                 "option_text": "Setting security policies and managing organizational risk",
                 "trait_tags": {"Cyber-Defense": 0.7, "Admin-Skill": 0.5, "Analytical-Skill": 0.4, "Enterprising": 0.3, "Technical-Skill": 0.2}
+            },
+            {
+                "option_id": 10055,
+                "option_text": "Monitoring security operations and responding to active incidents",
+                "trait_tags": {"Cyber-Defense": 1.0, "Technical-Skill": 0.45, "Investigative": 0.35, "Analytical-Skill": 0.3, "Cloud-Systems": 0.2}
             },
         ]
     },
@@ -273,6 +288,11 @@ DECISION_TREE_QUESTIONS = [
                 "option_text": "Game audio, music, and sound design",
                 "trait_tags": {"Game-Dev": 0.4, "Performing-Arts": 0.5, "Digital-Media": 0.5, "Creative-Skill": 0.4, "Artistic": 0.3}
             },
+            {
+                "option_id": 10075,
+                "option_text": "Testing gameplay, balancing systems, and improving player experience",
+                "trait_tags": {"Game-Dev": 1.0, "Analytical-Skill": 0.35, "People-Skill": 0.2, "Creative-Skill": 0.25, "Investigative": 0.2}
+            },
         ]
     },
 
@@ -303,6 +323,11 @@ DECISION_TREE_QUESTIONS = [
                 "option_text": "Working with data to train AI models or analyze trends",
                 "trait_tags": {"Data-Analytics": 0.7, "AI-ML": 0.6, "Software-Dev": 0.4, "Analytical-Skill": 0.5, "Investigative": 0.25}
             },
+            {
+                "option_id": 10085,
+                "option_text": "Debugging complex code by tracing issues step by step until they are fixed",
+                "trait_tags": {"Software-Dev": 1.0, "Investigative": 0.45, "Analytical-Skill": 0.4, "Technical-Skill": 0.25, "Cloud-Systems": 0.15}
+            },
         ]
     },
 
@@ -332,6 +357,11 @@ DECISION_TREE_QUESTIONS = [
                 "option_id": 10094,
                 "option_text": "E-commerce and online business platforms",
                 "trait_tags": {"Web-Dev": 0.6, "Startup-Venture": 0.4, "Marketing-Sales": 0.3, "Software-Dev": 0.4, "Enterprising": 0.25}
+            },
+            {
+                "option_id": 10095,
+                "option_text": "Improving website performance, accessibility, and user experience",
+                "trait_tags": {"Web-Dev": 1.0, "Software-Dev": 0.35, "Analytical-Skill": 0.2, "Visual-Design": 0.2, "Technical-Skill": 0.2}
             },
         ]
     },
@@ -481,6 +511,11 @@ DECISION_TREE_QUESTIONS = [
                 "option_text": "Veterinary laboratory work and animal health diagnostics",
                 "trait_tags": {"Medical-Lab": 0.5, "Agri-Nature": 0.5, "Patient-Care": 0.4, "Lab-Research": 0.3, "Investigative": 0.2}
             },
+            {
+                "option_id": 11035,
+                "option_text": "Operating specialized lab instruments and ensuring test accuracy",
+                "trait_tags": {"Medical-Lab": 1.0, "Technical-Skill": 0.45, "Analytical-Skill": 0.35, "Investigative": 0.3, "Lab-Research": 0.25}
+            },
         ]
     },
 
@@ -510,6 +545,11 @@ DECISION_TREE_QUESTIONS = [
                 "option_id": 11044,
                 "option_text": "Mental health counseling and psychological support",
                 "trait_tags": {"Counseling": 1.0, "People-Skill": 0.6, "Social": 0.4, "Community-Serve": 0.3, "Patient-Care": 0.2}
+            },
+            {
+                "option_id": 11045,
+                "option_text": "Designing long-term rehabilitation plans and tracking patient progress",
+                "trait_tags": {"Rehab-Therapy": 1.0, "Patient-Care": 0.45, "People-Skill": 0.35, "Analytical-Skill": 0.2, "Community-Serve": 0.2}
             },
         ]
     },
@@ -915,6 +955,11 @@ DECISION_TREE_QUESTIONS = [
                 "option_text": "Multimedia content — interactive media and web experiences",
                 "trait_tags": {"Digital-Media": 1.0, "Creative-Skill": 0.5, "Web-Dev": 0.3, "Visual-Design": 0.3, "Animation-3D": 0.2}
             },
+            {
+                "option_id": 14035,
+                "option_text": "Digital illustration for social media, publishing, and online campaigns",
+                "trait_tags": {"Visual-Design": 1.0, "Digital-Media": 0.45, "Creative-Skill": 0.4, "Marketing-Sales": 0.2, "Artistic": 0.2}
+            },
         ]
     },
 
@@ -1071,6 +1116,11 @@ DECISION_TREE_QUESTIONS = [
                 "option_text": "Microbiology and medical research — studying microorganisms and diseases",
                 "trait_tags": {"Lab-Research": 0.8, "Medical-Lab": 0.6, "Investigative": 0.4, "Analytical-Skill": 0.3, "Technical-Skill": 0.2}
             },
+            {
+                "option_id": 16025,
+                "option_text": "Bioinformatics and computational biology using data to study life systems",
+                "trait_tags": {"Lab-Research": 1.0, "Data-Analytics": 0.35, "Investigative": 0.35, "Analytical-Skill": 0.3, "Technical-Skill": 0.2}
+            },
         ]
     },
 
@@ -1100,6 +1150,11 @@ DECISION_TREE_QUESTIONS = [
                 "option_id": 16034,
                 "option_text": "Environmental planning and urban sustainability",
                 "trait_tags": {"Environmental-Sci": 0.7, "Community-Serve": 0.5, "Admin-Skill": 0.3, "Civil-Build": 0.3, "Spatial-Design": 0.2}
+            },
+            {
+                "option_id": 16035,
+                "option_text": "Environmental monitoring using field sensors, mapping, and data collection",
+                "trait_tags": {"Environmental-Sci": 1.0, "Field-Research": 0.45, "Data-Analytics": 0.25, "Investigative": 0.25, "Technical-Skill": 0.2}
             },
         ]
     },
@@ -1207,6 +1262,11 @@ DECISION_TREE_QUESTIONS = [
                 "option_text": "Aviation electronics and avionics technology",
                 "trait_tags": {"Technical-Skill": 0.7, "Hardware-Systems": 0.5, "Electrical-Power": 0.4, "Investigative": 0.25, "Analytical-Skill": 0.2}
             },
+            {
+                "option_id": 18015,
+                "option_text": "Logistics, fleet operations, and coordinating transport schedules",
+                "trait_tags": {"Maritime-Sea": 1.0, "Admin-Skill": 0.35, "Technical-Skill": 0.25, "Analytical-Skill": 0.2, "Enterprising": 0.15}
+            },
         ]
     },
 
@@ -1240,6 +1300,11 @@ DECISION_TREE_QUESTIONS = [
                 "option_text": "Veterinary medicine and animal care",
                 "trait_tags": {"Patient-Care": 0.5, "Agri-Nature": 0.5, "Lab-Research": 0.3, "Medical-Lab": 0.3, "People-Skill": 0.2}
             },
+            {
+                "option_id": 18025,
+                "option_text": "Agricultural technology, farm systems, and improving production efficiency",
+                "trait_tags": {"Agri-Nature": 1.0, "Technical-Skill": 0.3, "Field-Research": 0.3, "Realistic": 0.25, "Food-Science": 0.2}
+            },
         ]
     },
 
@@ -1272,6 +1337,11 @@ DECISION_TREE_QUESTIONS = [
                 "option_id": 18034,
                 "option_text": "Office and business administration",
                 "trait_tags": {"Admin-Skill": 1.0, "Conventional": 0.5, "People-Skill": 0.3, "Finance-Acct": 0.3, "Analytical-Skill": 0.2}
+            },
+            {
+                "option_id": 18035,
+                "option_text": "Events, guest experiences, and tourism promotions",
+                "trait_tags": {"Hospitality-Svc": 1.0, "People-Skill": 0.45, "Tourism-Travel": 0.35, "Creative-Skill": 0.2, "Enterprising": 0.2}
             },
         ]
     },

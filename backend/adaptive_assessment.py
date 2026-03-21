@@ -75,6 +75,7 @@ class AdaptiveSession:
     question_history: List[int] = field(default_factory=list)  # Track order of answered questions for "Previous"
     answer_trait_changes: Dict[int, Dict[str, float]] = field(default_factory=dict)  # Track trait changes per question for reversal
     answer_rejection_data: Dict[int, Dict] = field(default_factory=dict)  # Track rejected topics and penalties per question for reversal
+    course_scores_snapshots: Dict[int, Dict[str, float]] = field(default_factory=dict)  # Snapshot of course_scores BEFORE each answer (for exact reversal)
     
     round_number: int = 0
     active_courses: Set[str] = field(default_factory=set)
@@ -103,6 +104,12 @@ class AdaptiveSession:
     explored_domains: Set[str] = field(default_factory=set)  # Domains that have had at least N questions asked
     domain_question_count: Dict[str, int] = field(default_factory=dict)  # How many questions per domain
     last_answer_trait: str = ""                      # Trait from the most recent answer (drives next question)
+
+    # --- Profile-Category Matching ---
+    profile_categories: Set[str] = field(default_factory=set)     # Question categories matching user's stated interests
+    profile_relevant_qids: Set[int] = field(default_factory=set)  # QIDs from profile-matching categories
+    category_history: List[str] = field(default_factory=list)     # Recently answered question categories
+    current_category_focus: str = ""                            # Dominant category thread (e.g. Fine Arts & Painting)
 
 
 # Maps SHS strand to prioritized traits for question selection
@@ -315,28 +322,49 @@ UNIFIED_PROFILE_TO_TRAITS = {
     "occupational_therapy": ["Rehab-Therapy", "Patient-Care", "People-Skill"],
     "speech_therapy": ["Rehab-Therapy", "Patient-Care", "People-Skill"],
     "respiratory": ["Rehab-Therapy", "Patient-Care", "Technical-Skill"],
+    "respiratory_therapy": ["Rehab-Therapy", "Patient-Care", "Medical-Lab", "Technical-Skill"],
+    "speech_pathology": ["Rehab-Therapy", "Patient-Care", "People-Skill", "Counseling"],
     "radiology": ["Medical-Lab", "Technical-Skill"],
     "optometry": ["Medical-Lab", "Patient-Care", "Technical-Skill"],
     "midwifery": ["Patient-Care", "People-Skill"],
     "public_health": ["Public-Health", "Community-Serve", "People-Skill"],
     "education": ["Teaching-Ed"],
-    "law": ["Law-Enforce", "Legal-Practice"],
-    "politics": ["Community-Serve"],
-    "social": ["Community-Serve", "Rehab-Therapy", "Social-Work"],
-    "history": ["Community-Serve"],
-    "communication": ["Marketing-Sales", "Teaching-Ed", "Admin-Skill", "Film-Broadcast"],
-    "philosophy": ["Community-Serve", "Teaching-Ed"],
-    "criminology": ["Law-Enforce", "Community-Serve", "Forensic-Sci"],
-    "early_childhood": ["Teaching-Ed", "People-Skill", "Creative-Skill"],
-    "special_education": ["Teaching-Ed", "People-Skill", "Counseling"],
-    "library_science": ["Teaching-Ed", "Admin-Skill"],
-    "public_admin": ["Community-Serve", "Admin-Skill"],
-    "intl_studies": ["Community-Serve", "People-Skill"],
-    "sociology": ["Community-Serve", "People-Skill"],
-    "linguistics": ["Teaching-Ed", "People-Skill"],
-    "dev_communication": ["Community-Serve", "People-Skill", "Marketing-Sales"],
-    "community_dev": ["Community-Serve", "Social-Work", "People-Skill"],
-    "legal_mgmt": ["Legal-Practice", "Admin-Skill", "Law-Enforce"],
+    "law": ["Legal-Practice", "Law-Enforce", "Analytical-Skill"],
+    "justice": ["Legal-Practice", "Law-Enforce", "Analytical-Skill"],
+    "politics": ["Community-Serve", "Admin-Skill", "Analytical-Skill"],
+    "social": ["Community-Serve", "Social-Work", "People-Skill"],
+    "history": ["Investigative", "Analytical-Skill", "Community-Serve"],
+    "communication": ["Marketing-Sales", "Film-Broadcast", "Digital-Media", "People-Skill"],
+    "culture": ["Investigative", "Community-Serve", "Creative-Skill"],
+    "journalism": ["Investigative", "Film-Broadcast", "Digital-Media", "Analytical-Skill"],
+    "community": ["Community-Serve", "People-Skill", "Social-Work"],
+    "philosophy": ["Analytical-Skill", "Investigative", "Teaching-Ed", "Community-Serve", "Philosophy-Path"],
+    "ethics": ["Analytical-Skill", "Investigative", "People-Skill", "Legal-Practice", "Philosophy-Path"],
+    "criminology": ["Law-Enforce", "Forensic-Sci", "Physical-Skill", "Analytical-Skill"],
+    "public_safety": ["Law-Enforce", "Physical-Skill", "Community-Serve", "Analytical-Skill"],
+    "early_childhood": ["Teaching-Ed", "People-Skill", "Creative-Skill", "Counseling", "Early-Childhood"],
+    "early_childhood_education": ["Teaching-Ed", "People-Skill", "Creative-Skill", "Counseling", "Early-Childhood"],
+    "special_education": ["Teaching-Ed", "People-Skill", "Counseling", "Analytical-Skill", "Inclusive-Ed"],
+    "special_needs": ["Teaching-Ed", "People-Skill", "Counseling", "Community-Serve", "Inclusive-Ed"],
+    "library_science": ["Teaching-Ed", "Admin-Skill", "Investigative", "Analytical-Skill", "Library-Info"],
+    "library_information_science": ["Teaching-Ed", "Admin-Skill", "Investigative", "Analytical-Skill", "Library-Info"],
+    "public_admin": ["Community-Serve", "Admin-Skill", "People-Skill", "Analytical-Skill"],
+    "public_administration": ["Community-Serve", "Admin-Skill", "People-Skill", "Analytical-Skill"],
+    "government": ["Community-Serve", "Admin-Skill", "Analytical-Skill"],
+    "governance": ["Admin-Skill", "Community-Serve", "Analytical-Skill"],
+    "intl_studies": ["Community-Serve", "People-Skill", "Analytical-Skill", "Legal-Practice"],
+    "international_studies": ["Community-Serve", "People-Skill", "Analytical-Skill", "Legal-Practice"],
+    "diplomacy": ["Community-Serve", "People-Skill", "Analytical-Skill", "Legal-Practice"],
+    "sociology": ["Community-Serve", "People-Skill", "Investigative", "Analytical-Skill"],
+    "linguistics": ["Teaching-Ed", "People-Skill", "Investigative", "Analytical-Skill"],
+    "language": ["Teaching-Ed", "People-Skill", "Investigative", "Analytical-Skill"],
+    "languages": ["Teaching-Ed", "People-Skill", "Investigative", "Analytical-Skill"],
+    "dev_communication": ["Community-Serve", "People-Skill", "Digital-Media", "Marketing-Sales"],
+    "development_communication": ["Community-Serve", "People-Skill", "Digital-Media", "Marketing-Sales"],
+    "community_dev": ["Community-Serve", "Social-Work", "People-Skill", "Admin-Skill"],
+    "community_development": ["Community-Serve", "Social-Work", "People-Skill", "Admin-Skill"],
+    "legal_mgmt": ["Legal-Practice", "Admin-Skill", "Law-Enforce", "Analytical-Skill", "Investigative", "Legal-Mgmt"],
+    "legal_management": ["Legal-Practice", "Admin-Skill", "Law-Enforce", "Analytical-Skill", "Investigative", "Legal-Mgmt"],
     "maritime": ["Maritime-Sea", "Mechanical-Design"],
     "aviation": ["Hardware-Systems", "Mechanical-Design"],
     "logistics": ["Industrial-Ops", "Admin-Skill"],
@@ -349,15 +377,29 @@ UNIFIED_PROFILE_TO_TRAITS = {
     "env_planning": ["Environmental-Eng", "Environmental-Sci", "Field-Research"],
     "marine_science": ["Field-Research", "Maritime-Sea", "Lab-Research"],
     "sports": ["Physical-Skill", "Rehab-Therapy", "Teaching-Ed", "Sports-Ed"],
+    "sport_&_fitness": ["Physical-Skill", "Rehab-Therapy", "Sports-Ed", "Sports-Fitness-Path"],
+    "sport_and_fitness": ["Physical-Skill", "Rehab-Therapy", "Sports-Ed", "Sports-Fitness-Path"],
+    "sports_fitness": ["Physical-Skill", "Rehab-Therapy", "Sports-Ed", "Sports-Fitness-Path"],
+    "sports_and_fitness": ["Physical-Skill", "Rehab-Therapy", "Sports-Ed", "Sports-Fitness-Path"],
     "tourism": ["Hospitality-Svc", "Tourism-Travel"],
+    "tourism_hospitality": ["Hospitality-Svc", "Tourism-Travel", "People-Skill", "Tourism-Hospitality-Path"],
+    "tourism_&_hospitality": ["Hospitality-Svc", "Tourism-Travel", "People-Skill", "Tourism-Hospitality-Path"],
+    "tourism_and_hospitality": ["Hospitality-Svc", "Tourism-Travel", "People-Skill", "Tourism-Hospitality-Path"],
     "food": ["Hospitality-Svc", "Culinary-Arts"],
     "agriculture": ["Agri-Nature", "Field-Research"],
     "veterinary": ["Agri-Nature", "Patient-Care", "Lab-Research"],
     "military": ["Law-Enforce", "Physical-Skill"],
+    "military_defense": ["Law-Enforce", "Physical-Skill", "Community-Serve", "Investigative", "Military-Defense"],
+    "military_&_defense": ["Law-Enforce", "Physical-Skill", "Community-Serve", "Investigative", "Military-Defense"],
+    "military_and_defense": ["Law-Enforce", "Physical-Skill", "Community-Serve", "Investigative", "Military-Defense"],
     "forestry": ["Agri-Nature", "Field-Research", "Physical-Skill"],
     "fisheries": ["Agri-Nature", "Maritime-Sea", "Field-Research"],
     "hotel_mgmt": ["Hospitality-Svc", "Admin-Skill", "People-Skill"],
+    "hotel_&_resort_management": ["Hospitality-Svc", "Admin-Skill", "People-Skill", "Tourism-Travel", "Hotel-Resort-Path"],
+    "hotel_and_resort_management": ["Hospitality-Svc", "Admin-Skill", "People-Skill", "Tourism-Travel", "Hotel-Resort-Path"],
     "exercise_science": ["Physical-Skill", "Rehab-Therapy", "Sports-Ed"],
+    "exercise_&_sports_science": ["Physical-Skill", "Rehab-Therapy", "Sports-Ed", "Investigative", "Exercise-Sci-Path"],
+    "exercise_and_sports_science": ["Physical-Skill", "Rehab-Therapy", "Sports-Ed", "Investigative", "Exercise-Sci-Path"],
     "tvet": ["Technical-Skill", "Mechanical-Design", "Teaching-Ed"],
     "culinary_mgmt": ["Culinary-Arts", "Hospitality-Svc", "Startup-Venture"],
     # Skills
@@ -486,6 +528,18 @@ UNIFIED_PROFILE_TO_TRAITS = {
     "athletic": ["Physical-Skill"],
 }
 
+UNIFIED_PROFILE_TO_TRAITS.update({
+    "culinary_&_food_science": ["Food-Science", "Lab-Research", "Nutrition-Diet", "Culinary-Arts", "Food-Science-Path"],
+    "culinary_and_food_science": ["Food-Science", "Lab-Research", "Nutrition-Diet", "Culinary-Arts", "Food-Science-Path"],
+    "culinary_food_science": ["Food-Science", "Lab-Research", "Nutrition-Diet", "Culinary-Arts", "Food-Science-Path"],
+    "veterinary_&_animal_science": ["Agri-Nature", "Patient-Care", "Lab-Research", "Investigative", "Veterinary-Path"],
+    "veterinary_and_animal_science": ["Agri-Nature", "Patient-Care", "Lab-Research", "Investigative", "Veterinary-Path"],
+    "veterinary_animal_science": ["Agri-Nature", "Patient-Care", "Lab-Research", "Investigative", "Veterinary-Path"],
+    "culinary_management": ["Culinary-Arts", "Hospitality-Svc", "Startup-Venture", "Admin-Skill", "Culinary-Mgmt-Path"],
+    "technical-vocational_training": ["Teaching-Ed", "Technical-Skill", "Mechanical-Design", "Community-Serve", "TVET-Path"],
+    "technical_vocational_training": ["Teaching-Ed", "Technical-Skill", "Mechanical-Design", "Community-Serve", "TVET-Path"],
+})
+
 
 # ==================== TRAIT-TO-BRANCH MAPPING ====================
 # Maps individual trait tags to high-level "branch" domains in the decision tree.
@@ -518,7 +572,7 @@ TRAIT_TO_BRANCH = {
     "Sports-Ed": "education",
     "Community-Serve": "public_service",
     "Law-Enforce": "public_service", "Legal-Practice": "public_service",
-    "Social-Work": "public_service",
+    "Social-Work": "social",
     "People-Skill": "social",
     # Creative branch
     "Visual-Design": "creative", "Creative-Skill": "creative",
@@ -1407,6 +1461,338 @@ QUESTION_TREE_NODES = {
     1908: {"level": 1, "weight": 0.6, "branches": ["technology", "healthcare", "creative", "education"]},
     1909: {"level": 1, "weight": 0.6, "branches": ["technology", "healthcare", "engineering", "business", "creative"]},
     1910: {"level": 1, "weight": 0.6, "branches": ["technology", "healthcare", "engineering", "business", "creative", "science"]},
+    # Animation / Game Development questions (Q1139-Q1168)
+    1139: {"level": 1, "weight": 0.8, "branches": ["technology", "creative"]},
+    1140: {"level": 1, "weight": 0.8, "branches": ["technology", "creative"]},
+    1141: {"level": 1, "weight": 0.8, "branches": ["creative", "technology"]},
+    1142: {"level": 1, "weight": 0.7, "branches": ["creative", "technology"]},
+    1143: {"level": 1, "weight": 0.8, "branches": ["technology", "creative"]},
+    1144: {"level": 1, "weight": 0.7, "branches": ["creative", "technology"]},
+    1145: {"level": 1, "weight": 0.8, "branches": ["technology", "creative"]},
+    1146: {"level": 1, "weight": 0.7, "branches": ["creative", "technology"]},
+    1147: {"level": 1, "weight": 0.7, "branches": ["technology", "creative", "business"]},
+    1148: {"level": 1, "weight": 0.8, "branches": ["technology", "creative"]},
+    1149: {"level": 1, "weight": 0.6, "branches": ["creative", "technology"]},
+    1150: {"level": 1, "weight": 0.7, "branches": ["creative", "technology"]},
+    1151: {"level": 1, "weight": 0.8, "branches": ["creative", "technology"]},
+    1152: {"level": 1, "weight": 0.6, "branches": ["creative", "technology"]},
+    1153: {"level": 1, "weight": 0.7, "branches": ["creative", "technology"]},
+    1154: {"level": 1, "weight": 0.7, "branches": ["creative", "technology"]},
+    1155: {"level": 1, "weight": 0.8, "branches": ["technology", "creative"]},
+    1156: {"level": 1, "weight": 0.7, "branches": ["creative", "technology"]},
+    1157: {"level": 1, "weight": 0.8, "branches": ["technology", "creative"]},
+    1158: {"level": 1, "weight": 0.7, "branches": ["creative", "technology", "business"]},
+    1159: {"level": 1, "weight": 0.7, "branches": ["technology", "creative", "business"]},
+    1160: {"level": 1, "weight": 0.7, "branches": ["technology", "creative", "business"]},
+    1161: {"level": 1, "weight": 0.6, "branches": ["creative", "technology"]},
+    1162: {"level": 1, "weight": 0.7, "branches": ["creative", "technology"]},
+    1163: {"level": 1, "weight": 0.7, "branches": ["technology", "creative"]},
+    1164: {"level": 1, "weight": 0.7, "branches": ["creative", "technology"]},
+    1165: {"level": 1, "weight": 0.7, "branches": ["technology", "creative"]},
+    1166: {"level": 1, "weight": 0.7, "branches": ["technology", "creative"]},
+    1167: {"level": 1, "weight": 0.7, "branches": ["technology", "creative", "business"]},
+    1168: {"level": 1, "weight": 0.6, "branches": ["creative", "technology"]},
+    # ── Arts sub-category expansion: Music & Performance (Q2721-Q2750) ──
+    2721: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2722: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2723: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2724: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2725: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2726: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2727: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2728: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2729: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2730: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2731: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2732: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2733: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2734: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2735: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2736: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2737: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2738: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2739: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2740: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2741: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2742: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2743: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2744: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2745: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2746: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2747: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2748: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2749: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2750: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    # ── Arts sub-category expansion: Music Production & Audio (Q2751-Q2780) ──
+    2751: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2752: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2753: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2754: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2755: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2756: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2757: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2758: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2759: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2760: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2761: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2762: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2763: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2764: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2765: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2766: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2767: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2768: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2769: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2770: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2771: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2772: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2773: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2774: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2775: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2776: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2777: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2778: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2779: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2780: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    # ── Arts sub-category expansion: Theater & Performing Arts (Q2781-Q2810) ──
+    2781: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2782: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2783: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2784: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2785: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2786: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2787: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2788: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2789: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2790: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2791: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2792: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2793: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2794: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2795: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2796: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2797: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2798: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2799: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2800: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2801: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2802: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2803: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2804: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2805: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2806: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2807: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2808: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2809: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2810: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    # ── Arts sub-category expansion: Photography & Visual Arts (Q2811-Q2840) ──
+    2811: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2812: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2813: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2814: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2815: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2816: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2817: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2818: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2819: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2820: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2821: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2822: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2823: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2824: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2825: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2826: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2827: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2828: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2829: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2830: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2831: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2832: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2833: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2834: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2835: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2836: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2837: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2838: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2839: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2840: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    # ── Writing & Literature (Q2841-Q2870) ──
+    2841: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2842: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2843: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2844: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2845: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2846: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2847: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2848: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2849: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2850: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2851: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2852: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2853: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2854: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2855: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2856: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2857: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2858: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2859: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2860: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2861: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2862: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2863: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2864: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2865: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2866: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2867: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2868: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2869: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2870: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    # ── Animation & Multimedia (Q2871-Q2900) ──
+    2871: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2872: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2873: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2874: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2875: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2876: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2877: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2878: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2879: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2880: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2881: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2882: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2883: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2884: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2885: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2886: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2887: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2888: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2889: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2890: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2891: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2892: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2893: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2894: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2895: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2896: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2897: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2898: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2899: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2900: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    # ── Clothing & Textile Technology (Q2901-Q2930) ──
+    2901: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2902: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2903: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2904: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2905: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2906: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2907: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2908: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2909: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2910: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2911: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2912: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2913: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2914: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2915: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2916: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2917: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2918: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2919: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2920: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2921: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2922: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2923: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2924: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2925: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2926: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2927: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2928: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2929: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    2930: {"level": 2, "weight": 2.0, "branches": ["creative"]},
+    # ── Healthcare expansion: Medicine & Healthcare Q2931-Q2960 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["healthcare"]} for qid in range(2931, 2961)},
+    # ── Healthcare expansion: Nursing & Patient Care Q2961-Q2990 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["healthcare"]} for qid in range(2961, 2991)},
+    # ── Healthcare expansion: Psychology & Mental Health Q2991-Q3020 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["healthcare"]} for qid in range(2991, 3021)},
+    # ── Healthcare expansion: Public Health Q3021-Q3050 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["healthcare"]} for qid in range(3021, 3051)},
+    # ── Healthcare expansion 2: Pharmacy & Pharmaceutical Science Q3051-Q3080 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["healthcare"]} for qid in range(3051, 3081)},
+    # ── Healthcare expansion 2: Physical Therapy & Rehabilitation Q3081-Q3110 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["healthcare"]} for qid in range(3081, 3111)},
+    # ── Healthcare expansion 2: Medical Technology & Lab Science Q3111-Q3140 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["healthcare"]} for qid in range(3111, 3141)},
+    # ── Healthcare expansion 2: Nutrition & Dietetics Q3141-Q3170 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["healthcare"]} for qid in range(3141, 3171)},
+    # ── Healthcare expansion 3: Occupational Therapy Q3171-Q3200 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["healthcare"]} for qid in range(3171, 3201)},
+    # ── Healthcare expansion 3: Respiratory Therapy Q3201-Q3230 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["healthcare"]} for qid in range(3201, 3231)},
+    # ── Healthcare expansion 3: Speech-Language Pathology Q3231-Q3260 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["healthcare"]} for qid in range(3231, 3261)},
+    # ── Healthcare expansion 3: Dentistry & Oral Health Q3261-Q3290 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["healthcare"]} for qid in range(3261, 3291)},
+    # ── Healthcare expansion 4: Radiology & Imaging Q3291-Q3320 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["healthcare"]} for qid in range(3291, 3321)},
+    # ── Healthcare expansion 4: Optometry & Vision Care Q3321-Q3350 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["healthcare"]} for qid in range(3321, 3351)},
+    # ── Healthcare expansion 4: Midwifery & Maternal Health Q3351-Q3380 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["healthcare"]} for qid in range(3351, 3381)},
+    # ── Social expansion 2: Education & Teaching Q3381-Q3410 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["social"]} for qid in range(3381, 3411)},
+    # ── Social expansion 2: Social Work & Community Q3411-Q3440 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["social"]} for qid in range(3411, 3441)},
+    # ── Social expansion 2: History & Culture Q3441-Q3470 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["social"]} for qid in range(3441, 3471)},
+    # ── Social expansion 2: Communication & Journalism Q3471-Q3500 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["social"]} for qid in range(3471, 3501)},
+    # ── Public service expansion 2: Law & Justice Q3501-Q3530 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["public_service", "law"]} for qid in range(3501, 3531)},
+    # ── Public service expansion 2: Politics & Government Q3531-Q3560 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["public_service"]} for qid in range(3531, 3561)},
+    # ── Public service expansion 2: Criminology & Public Safety Q3561-Q3590 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["public_service", "law"]} for qid in range(3561, 3591)},
+    # ── Public service expansion 2: Public Administration Q3591-Q3620 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["public_service"]} for qid in range(3591, 3621)},
+    # ── Social/public-service expansion 3: Development Communication Q3621-Q3650 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["social"]} for qid in range(3621, 3651)},
+    # ── Social/public-service expansion 3: Community Development Q3651-Q3680 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["social"]} for qid in range(3651, 3681)},
+    # ── Social/public-service expansion 3: Linguistics & Languages Q3681-Q3710 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["public_service"]} for qid in range(3681, 3711)},
+    # ── Social/public-service expansion 3: Sociology Q3711-Q3740 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["social"]} for qid in range(3711, 3741)},
+    # ── Social/public-service expansion 3: International Studies & Diplomacy Q3741-Q3770 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["public_service"]} for qid in range(3741, 3771)},
+    # ── Education/public-service expansion 4: Philosophy & Ethics Q3771-Q3800 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["public_service"]} for qid in range(3771, 3801)},
+    # ── Education/public-service expansion 4: Special Needs Education Q3801-Q3830 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["education"]} for qid in range(3801, 3831)},
+    # ── Education/public-service expansion 4: Library & Information Science Q3831-Q3860 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["education"]} for qid in range(3831, 3861)},
+    # ── Education/public-service expansion 4: Legal Management Q3861-Q3890 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["public_service", "law"]} for qid in range(3861, 3891)},
+    # ── Education/public-service expansion 4: Early Childhood Education Q3891-Q3920 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["education"]} for qid in range(3891, 3921)},
+    # ── Physical/hospitality expansion 5: Sports & Fitness Q3921-Q3950 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["physical", "education"]} for qid in range(3921, 3951)},
+    # ── Physical/hospitality expansion 5: Exercise & Sports Science Q3951-Q3980 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["physical", "healthcare"]} for qid in range(3951, 3981)},
+    # ── Physical/hospitality expansion 5: Tourism & Hospitality Q3981-Q4010 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["hospitality"]} for qid in range(3981, 4011)},
+    # ── Physical/hospitality expansion 5: Hotel & Resort Management Q4011-Q4040 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["hospitality", "business"]} for qid in range(4011, 4041)},
+    # ── Physical/hospitality expansion 5: Military & Defense Q4041-Q4070 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["physical", "public_service"]} for qid in range(4041, 4071)},
+    # ── Food/veterinary/TVET expansion 6: Culinary & Food Science Q4071-Q4100 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["science", "hospitality", "healthcare"]} for qid in range(4071, 4101)},
+    # ── Food/veterinary/TVET expansion 6: Veterinary & Animal Science Q4101-Q4130 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["agriculture", "healthcare"]} for qid in range(4101, 4131)},
+    # ── Food/veterinary/TVET expansion 6: Culinary Management Q4131-Q4160 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["hospitality", "business"]} for qid in range(4131, 4161)},
+    # ── Food/veterinary/TVET expansion 6: Technical-Vocational Training Q4161-Q4190 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["education", "technology"]} for qid in range(4161, 4191)},
 }
 
 
@@ -1430,6 +1816,12 @@ DOMAIN_ENTRY_QUESTIONS = {
     "technology": [121, 220, 134, 135, 136, 266, 56, 37, 1, 31, 2, 3, 4, 5, 23, 24, 26, 30, 32, 33, 38, 39, 45, 54, 59, 62, 65, 69, 70, 71],
 }
 
+DOMAIN_ENTRY_QUESTIONS["science"] = [4071, 4072, 4073, 4074, 4075, 4091, 4092, 4093, 4094, 4095] + DOMAIN_ENTRY_QUESTIONS.get("science", [])
+DOMAIN_ENTRY_QUESTIONS["agriculture"] = [4101, 4102, 4103, 4104, 4105, 4121, 4122, 4123, 4124, 4125] + DOMAIN_ENTRY_QUESTIONS.get("agriculture", [])
+DOMAIN_ENTRY_QUESTIONS["hospitality"] = [4131, 4132, 4133, 4134, 4135, 4151, 4152, 4153, 4154, 4155] + DOMAIN_ENTRY_QUESTIONS.get("hospitality", [])
+DOMAIN_ENTRY_QUESTIONS["education"] = [4161, 4162, 4163, 4164, 4165, 4181, 4182, 4183, 4184, 4185] + DOMAIN_ENTRY_QUESTIONS.get("education", [])
+DOMAIN_ENTRY_QUESTIONS["technology"] = [4166, 4167, 4168, 4169, 4170] + DOMAIN_ENTRY_QUESTIONS.get("technology", [])
+
 # ==================== CONVERSATION CHAIN: TRAIT FOLLOW-UP MAP ====================
 # After a user picks an option with trait X, these are the best follow-up questions.
 # The system picks the first unanswered one. When a chain runs out, accumulated
@@ -1440,25 +1832,25 @@ TRAIT_FOLLOWUP_MAP = {
     "Admin-Skill": [649, 650, 579, 580, 582, 651, 653, 654, 655, 652, 581, 150, 245, 636, 190, 471, 494, 106, 638, 26, 72, 44, 118, 529, 568, 613, 493, 503, 564, 565, 624, 627, 635, 93, 87, 80, 57, 104, 24, 25, 32, 35, 43, 61, 76, 460, 461, 498, 508, 523, 528, 531, 546, 569, 572, 577, 23, 27, 28, 37, 45, 56, 63, 66, 69, 79, 469, 496, 534, 562, 576, 486, 492, 535, 548, 570, 578, 600, 626, 631, 634, 639, 645, 467, 472, 502, 506, 507, 527, 532, 543, 566, 575, 596, 630, 637, 640, 737, 739, 745, 458, 459, 463, 464, 465, 474, 476, 491, 495, 499, 505, 510, 511, 522, 525, 533, 536, 544, 547, 549, 567, 571, 583, 586, 588, 598, 604, 607, 623, 632, 633, 641, 642, 643, 658, 677, 678, 679, 680, 688, 692, 693, 715, 717, 719, 729, 731, 736, 741, 742, 758, 763],
     "Agri-Nature": [252, 647, 648, 129, 402, 410, 409, 401, 407, 413, 161, 411, 400, 403, 405, 404, 412, 408, 406, 187, 92, 66, 29, 609, 113, 114, 90, 98, 119, 51, 53, 2, 3, 519, 584, 611, 617, 684, 470, 499, 500, 563, 612, 698, 718, 750, 752, 475, 477, 561, 602, 616, 642, 643, 716, 723, 734, 762],
     "Analytical-Skill": [656, 658, 663, 657, 660, 661, 662, 271, 659, 128, 571, 246, 142, 156, 194, 567, 517, 568, 509, 133, 195, 524, 550, 585, 619, 159, 554, 146, 490, 505, 518, 564, 172, 147, 124, 467, 507, 527, 190, 168, 471, 484, 504, 547, 565, 635, 751, 108, 171, 492, 606, 463, 488, 521, 540, 553, 573, 582, 127, 181, 498, 510, 545, 548, 608, 694, 741, 145, 158, 177, 173, 179, 469, 477, 478, 493, 514, 523, 552, 570, 583, 586, 615, 621, 630, 634, 744, 80, 76, 468, 530, 651, 655, 669, 692, 770, 97, 139, 465, 500, 531, 533, 535, 558, 569, 576, 581, 596, 605, 631, 756, 766, 56, 460, 501, 522, 542, 555, 579, 601, 622, 624, 126, 458, 466, 485, 520, 528, 557, 560, 645, 697, 740, 742, 746, 768, 461, 473, 487, 495, 497, 513, 526, 538, 551, 559, 562, 572, 575, 577, 587, 593, 597, 599, 602, 607, 614, 617, 623, 626, 632, 633, 640, 646, 653, 654, 664, 665, 676, 689, 690, 696, 713, 714, 732, 738, 748, 753, 763, 771, 747],
-    "Animation-3D": [213, 590, 591, 700, 701, 702, 703, 592, 249, 152, 208, 209, 206, 207, 260, 262, 247, 210, 125, 139, 221, 603, 219, 220, 248, 56, 121, 135, 134, 138, 250, 251, 542, 595, 666, 728, 176, 514, 540, 541, 587, 597, 670, 536, 588, 761, 93, 44, 98, 180, 189],
+    "Animation-3D": [213, 590, 591, 700, 701, 702, 703, 592, 249, 152, 208, 209, 206, 207, 260, 262, 247, 210, 125, 139, 221, 603, 219, 220, 248, 56, 121, 135, 134, 138, 250, 251, 542, 595, 666, 728, 176, 514, 540, 541, 587, 597, 670, 536, 588, 761, 93, 44, 98, 180, 189, 1141, 1142, 1144, 1146, 1150, 1151, 1154, 1156, 1158, 1162, 1164],
     "Civil-Build": [241, 547, 548, 549, 550, 551, 145, 147, 191, 90, 563, 602, 603, 59, 560, 30, 36, 119, 52, 25, 752, 84, 109, 26, 1, 2, 4, 5, 23, 34, 38, 39, 40, 41, 42, 43, 51, 54, 604, 751, 557, 566, 684, 519, 559, 561, 674, 683, 716, 717, 719, 552, 553, 556, 592, 648, 675, 705, 712, 713, 715, 761, 105, 116],
     "Cloud-Systems": [256, 217, 526, 527, 528, 529, 530, 687, 688, 689, 690, 691, 544, 137, 121, 539, 675, 523, 134, 140, 135, 169, 210, 220, 260, 264, 543, 673, 699, 206, 207, 208, 211, 212, 216, 222, 238, 255, 261, 266, 272, 273, 515, 504, 509, 517, 520, 546, 56, 190, 510, 692, 696, 697, 506, 512, 532, 533, 545, 672, 694, 695, 712, 97, 189, 191],
     "Community-Serve": [704, 705, 706, 707, 625, 627, 244, 626, 369, 371, 378, 383, 368, 379, 372, 375, 160, 159, 382, 641, 464, 457, 538, 629, 92, 94, 102, 41, 74, 5, 479, 628, 117, 114, 109, 31, 42, 459, 549, 43, 24, 35, 45, 474, 562, 612, 51, 37, 560, 630, 519, 525, 597, 608, 611, 730, 169, 460, 462, 473, 475, 476, 477, 482, 491, 494, 497, 510, 535, 575, 584, 623, 634, 648, 682, 723, 506, 508, 511, 513, 536, 557, 578, 581, 604, 607, 613, 616, 679, 684, 685, 714, 767, 774, 461, 463, 487, 488, 489, 492, 514, 542, 559, 563, 586, 598, 602, 609, 617, 621, 622, 632, 639, 640, 647, 652, 667, 692, 709, 712, 719, 720, 722, 731, 736, 738, 747, 752, 754, 755, 758, 541, 770],
     "Counseling": [487, 490, 488, 489, 491, 492, 276, 380, 158, 374, 379, 133, 375, 370, 371, 376, 381, 368, 157, 187, 629, 501, 126, 200, 383, 474, 628, 160, 678, 578, 192, 167, 141, 143, 144, 165, 179, 185, 189, 176, 198, 175, 458, 461, 476, 479, 481, 600, 621, 624, 634, 680, 477, 576, 623, 633, 635, 679, 681, 682, 704, 766, 457, 462, 478, 480, 483, 484, 485, 570, 574, 622, 627, 631, 637, 747, 756, 767, 772],
-    "Creative-Skill": [664, 665, 666, 667, 668, 669, 670, 186, 248, 219, 151, 152, 599, 139, 153, 587, 195, 590, 594, 596, 642, 30, 588, 597, 93, 194, 600, 602, 771, 44, 591, 593, 172, 179, 59, 271, 540, 601, 173, 69, 133, 488, 589, 604, 703, 75, 26, 572, 758, 88, 94, 98, 77, 90, 511, 514, 592, 759, 766, 45, 103, 124, 595, 622, 640, 657, 760, 516, 541, 542, 583, 644, 701, 730, 553, 555, 615, 621, 639, 682, 700, 708, 728, 746, 748, 770, 477, 486, 503, 505, 508, 509, 513, 522, 538, 574, 575, 579, 585, 586, 598, 603, 608, 609, 617, 624, 636, 643, 653, 662, 676, 679, 702, 711, 735, 754, 755, 767, 768, 66, 725, 616],
+    "Creative-Skill": [664, 665, 666, 667, 668, 669, 670, 186, 248, 219, 151, 152, 599, 139, 153, 587, 195, 590, 594, 596, 642, 30, 588, 597, 93, 194, 600, 602, 771, 44, 591, 593, 172, 179, 59, 271, 540, 601, 173, 69, 133, 488, 589, 604, 703, 75, 26, 572, 758, 88, 94, 98, 77, 90, 511, 514, 592, 759, 766, 45, 103, 124, 595, 622, 640, 657, 760, 516, 541, 542, 583, 644, 701, 730, 553, 555, 615, 621, 639, 682, 700, 708, 728, 746, 748, 770, 477, 486, 503, 505, 508, 509, 513, 522, 538, 574, 575, 579, 585, 586, 598, 603, 608, 609, 617, 624, 636, 643, 653, 662, 676, 679, 702, 711, 735, 754, 755, 767, 768, 66, 725, 616, 1140, 1142, 1149, 1153, 1156, 1161, 1163, 1168, 2721, 2722, 2723, 2724, 2725, 2726, 2727, 2728, 2729, 2730, 2731, 2732, 2733, 2734, 2735, 2736, 2737, 2738, 2739, 2740, 2741, 2742, 2743, 2744, 2745, 2746, 2747, 2748, 2749, 2750, 2751, 2752, 2753, 2754, 2755, 2756, 2757, 2758, 2759, 2760, 2761, 2762, 2763, 2764, 2765, 2766, 2767, 2768, 2769, 2770, 2771, 2772, 2773, 2774, 2775, 2776, 2777, 2778, 2779, 2780, 2781, 2782, 2783, 2784, 2785, 2786, 2787, 2788, 2789, 2790, 2791, 2792, 2793, 2794, 2795, 2796, 2797, 2798, 2799, 2800, 2801, 2802, 2803, 2804, 2805, 2806, 2807, 2808, 2809, 2810, 2811, 2812, 2813, 2814, 2815, 2816, 2817, 2818, 2819, 2820, 2821, 2822, 2823, 2824, 2825, 2826, 2827, 2828, 2829, 2830, 2831, 2832, 2833, 2834, 2835, 2836, 2837, 2838, 2839, 2840],
     "Culinary-Arts": [277, 642, 644, 643, 424, 163, 164, 148, 131, 231, 223, 224, 477, 225, 291, 302, 170, 199, 165, 181, 183, 185, 221, 226, 155, 176, 174, 184, 200, 144, 153, 259, 267, 305, 616, 617, 639, 665, 636, 637, 736, 739],
     "Cyber-Defense": [255, 216, 532, 533, 534, 535, 531, 137, 89, 111, 529, 691, 256, 217, 94, 99, 134, 264, 97, 222, 121, 135, 220, 221, 175, 138, 156, 211, 212, 214, 215, 234, 235, 236, 496, 507, 515, 545, 618, 620, 630, 518, 528, 502, 519, 650, 690, 698, 56, 86, 178],
     "Data-Analytics": [258, 218, 522, 524, 521, 525, 523, 26, 71, 97, 76, 59, 77, 463, 573, 458, 135, 614, 191, 567, 571, 31, 56, 517, 569, 91, 108, 28, 32, 33, 38, 72, 496, 662, 478, 495, 520, 539, 565, 656, 663, 768, 69, 4, 29, 30, 39, 45, 80, 27, 466, 472, 577, 689, 741, 24, 42, 65, 475, 477, 610, 612, 457, 493, 506, 507, 514, 515, 516, 526, 533, 570, 572, 576, 606, 613, 645, 658, 659, 459, 462, 464, 502, 530, 556, 580, 585, 624, 626, 660, 688, 717, 721, 724, 727, 742, 749, 764, 468, 470, 471, 473, 486, 490, 492, 498, 504, 505, 512, 513, 518, 519, 528, 542, 545, 550, 560, 563, 566, 568, 575, 579, 593, 621, 636, 647, 650, 653, 657, 687, 694, 696, 697, 737, 709],
-    "Digital-Media": [267, 268, 708, 709, 710, 711, 593, 594, 595, 221, 219, 247, 152, 186, 121, 588, 210, 30, 93, 44, 640, 222, 572, 592, 56, 118, 70, 78, 33, 86, 89, 92, 96, 769, 110, 23, 25, 84, 115, 116, 120, 459, 511, 521, 573, 575, 587, 590, 591, 596, 598, 601, 622, 623, 642, 643, 512, 515, 589, 664, 665, 728, 729, 748, 749, 754, 765, 460, 516, 520, 541, 583, 619, 637, 644, 666, 693, 707, 746, 98],
+    "Digital-Media": [267, 268, 708, 709, 710, 711, 593, 594, 595, 221, 219, 247, 152, 186, 121, 588, 210, 30, 93, 44, 640, 222, 572, 592, 56, 118, 70, 78, 33, 86, 89, 92, 96, 769, 110, 23, 25, 84, 115, 116, 120, 459, 511, 521, 573, 575, 587, 590, 591, 596, 598, 601, 622, 623, 642, 643, 512, 515, 589, 664, 665, 728, 729, 748, 749, 754, 765, 460, 516, 520, 541, 583, 619, 637, 644, 666, 693, 707, 746, 98, 1143, 1144, 1150, 1158, 1162, 2730, 2746, 2751, 2759, 2760, 2764, 2765, 2769, 2776, 2789, 2808, 2814, 2823, 2826, 2830, 2834],
     "Electrical-Power": [556, 557, 558, 559, 712, 713, 714, 715, 238, 362, 316, 237, 308, 315, 309, 313, 314, 306, 312, 311, 310, 307, 543, 187, 145, 146, 123, 147, 563, 43, 162, 169, 105, 52, 699, 109, 114, 26, 60, 560, 674, 544, 546, 552, 554, 671, 672, 675, 685, 695, 698, 549, 677, 697, 716, 719, 745, 759, 116, 59],
     "Environmental-Eng": [242, 560, 561, 563, 716, 717, 718, 719, 562, 425, 253, 180, 189, 239, 241, 407, 557, 547, 549, 612, 147, 154, 191, 145, 146, 153, 168, 237, 240, 175, 159, 169, 187, 123, 138, 140, 198, 238, 251, 259, 273, 745, 750, 404, 457, 556, 559, 648, 554, 604, 611, 613, 647, 712, 743, 658, 704, 715, 722, 725, 740, 759, 760],
     "Environmental-Sci": [253, 612, 614, 720, 721, 722, 723, 613, 154, 611, 609, 159, 175, 648, 128, 196, 561, 725, 153, 189, 187, 610, 726, 167, 163, 166, 178, 182, 199, 225, 647, 724, 176, 184, 193, 130, 135, 136, 140, 141, 145, 161, 129, 458, 462, 519, 521, 560, 605, 607, 625, 639, 641, 705, 123, 461, 602, 633, 685, 704, 465, 467, 468, 522, 549, 562, 615, 616, 638, 667, 713, 727, 732, 737, 760, 113, 114],
     "Field-Research": [254, 610, 724, 725, 726, 727, 609, 611, 92, 154, 128, 129, 196, 612, 161, 167, 720, 168, 177, 113, 38, 130, 145, 551, 114, 108, 98, 90, 105, 116, 183, 686, 123, 84, 110, 147, 171, 178, 199, 522, 550, 613, 614, 622, 721, 176, 561, 562, 597, 671, 717, 119, 457, 458, 460, 462, 469, 475, 519, 521, 524, 547, 605, 607, 618, 619, 620, 683, 722],
-    "Film-Broadcast": [274, 597, 728, 729, 730, 731, 596, 598, 170, 152, 164, 249, 125, 133, 590, 151, 186, 159, 168, 177, 189, 224, 226, 247, 248, 270, 700, 701, 708, 219, 176, 193, 165, 178, 183, 591, 595, 174, 184, 592, 593, 594, 599, 666, 668, 702, 703, 757, 601, 664, 671, 673, 709, 746, 749, 93, 44, 98, 167],
+    "Film-Broadcast": [274, 597, 728, 729, 730, 731, 596, 598, 170, 152, 164, 249, 125, 133, 590, 151, 186, 159, 168, 177, 189, 224, 226, 247, 248, 270, 700, 701, 708, 219, 176, 193, 165, 178, 183, 591, 595, 174, 184, 592, 593, 594, 599, 666, 668, 702, 703, 757, 601, 664, 671, 673, 709, 746, 749, 93, 44, 98, 167, 1141, 1144, 1152, 1156, 1162, 2745, 2749, 2758, 2767, 2774, 2789, 2809, 2827],
     "Finance-Acct": [568, 571, 569, 570, 246, 104, 87, 35, 61, 62, 100, 149, 26, 91, 498, 24, 57, 32, 4, 30, 494, 525, 737, 25, 1, 5, 29, 31, 33, 39, 524, 626, 761, 763, 764, 52, 190, 2, 3, 34, 36, 40, 41, 493, 495, 496, 497, 519, 521, 548, 576, 577, 582, 584, 585, 586, 618, 636, 659, 660, 461, 511, 515, 522, 527, 534, 536, 539, 567, 575, 581, 596, 633, 640, 643, 649, 652, 662, 693, 762, 463, 477, 506, 508, 564, 574, 579, 580, 583, 627, 634, 635, 638, 644, 653, 656, 661, 663, 687, 690, 706, 709, 711, 715, 739, 742, 747, 748],
     "Food-Science": [294, 305, 259, 616, 732, 733, 734, 735, 615, 617, 155, 298, 231, 406, 297, 301, 141, 277, 642, 164, 148, 161, 154, 189, 233, 252, 296, 299, 187, 128, 181, 185, 223, 230, 242, 295, 473, 476, 475, 566, 643, 644, 647, 738, 774, 499, 742, 752, 108, 113],
     "Forensic-Sci": [236, 288, 289, 303, 422, 618, 619, 620, 156, 415, 234, 235, 420, 630, 632, 160, 170, 199, 233, 295, 296, 297, 298, 299, 301, 178, 127, 128, 200, 470, 500, 531, 534, 631, 663, 713, 734, 159, 92, 94, 142, 108, 193, 775, 776],
-    "Game-Dev": [261, 262, 206, 207, 208, 260, 542, 540, 541, 210, 209, 139, 221, 220, 213, 152, 125, 56, 121, 135, 198, 180, 136, 222, 214, 215, 217, 218, 248, 258, 263, 536, 591, 592, 668, 701, 703, 622, 518, 590, 657, 696, 765, 70, 185],
+    "Game-Dev": [261, 262, 206, 207, 208, 260, 542, 540, 541, 210, 209, 139, 221, 220, 213, 152, 125, 56, 121, 135, 198, 180, 136, 222, 214, 215, 217, 218, 248, 258, 263, 536, 591, 592, 668, 701, 703, 622, 518, 590, 657, 696, 765, 70, 185, 1139, 1140, 1142, 1143, 1145, 1147, 1148, 1149, 1150, 1152, 1153, 1155, 1157, 1159, 1160, 1161, 1163, 1165, 1166, 1167, 1168],
     "HR-Management": [245, 285, 286, 287, 300, 576, 577, 578, 426, 427, 428, 150, 149, 160, 148, 163, 173, 225, 295, 296, 297, 299, 301, 190, 124, 223, 243, 246, 275, 293, 493, 461, 487, 491, 497, 586, 633, 489, 495, 569, 583, 649, 651, 739, 582, 585, 106, 87, 193],
     "Hardware-Systems": [543, 545, 695, 696, 697, 698, 699, 544, 546, 177, 178, 184, 272, 237, 123, 180, 197, 56, 187, 145, 111, 89, 526, 672, 674, 675, 135, 533, 43, 140, 96, 153, 159, 173, 189, 70, 54, 714, 44, 84, 90, 93, 116, 505, 516, 518, 532, 556, 531, 558, 563, 671, 673, 76, 469, 481, 523, 529, 542, 559, 565, 566, 601, 608, 610, 688, 710, 740, 743, 105],
     "Health-Admin": [282, 283, 284, 493, 494, 496, 497, 498, 495, 429, 431, 430, 230, 106, 227, 295, 296, 298, 188, 143, 141, 142, 297, 299, 301, 107, 122, 144, 231, 232, 280, 506, 521, 56, 492, 604, 693, 774, 463, 476, 482, 503, 584, 628, 712, 758, 95, 57, 61, 80],
@@ -1475,22 +1867,1855 @@ TRAIT_FOLLOWUP_MAP = {
     "Nutrition-Diet": [474, 479, 477, 772, 773, 774, 473, 475, 478, 476, 231, 394, 259, 294, 155, 616, 297, 301, 141, 386, 144, 143, 188, 166, 187, 227, 229, 230, 232, 270, 295, 122, 148, 169, 243, 265, 269, 277, 457, 615, 645, 735, 175, 184, 200, 462, 705, 732, 734, 459, 643, 566],
     "Patient-Care": [227, 192, 142, 95, 107, 23, 36, 103, 141, 42, 81, 43, 5, 27, 25, 39, 2, 3, 4, 41, 58, 1, 34, 40, 38, 501, 480, 483, 482, 88, 474, 490, 60, 32, 469, 473, 486, 487, 494, 457, 467, 478, 484, 485, 491, 499, 772, 465, 488, 28, 29, 468, 464, 476, 516, 519, 607, 628, 629, 705, 466, 470, 471, 477, 479, 489, 500, 503, 536, 584, 620, 639, 652, 681, 472, 481, 492, 495, 506, 554, 605, 606, 625, 704, 738, 743, 762, 773, 723],
     "People-Skill": [278, 678, 679, 680, 681, 682, 373, 368, 381, 377, 45, 24, 369, 157, 370, 372, 383, 150, 371, 375, 380, 492, 88, 489, 379, 574, 627, 637, 79, 94, 487, 117, 23, 460, 581, 626, 635, 80, 83, 488, 497, 510, 576, 578, 646, 579, 599, 624, 634, 644, 374, 490, 572, 585, 622, 28, 382, 486, 501, 636, 655, 707, 25, 546, 570, 583, 586, 598, 631, 654, 669, 464, 483, 509, 580, 589, 593, 628, 638, 757, 767, 491, 494, 538, 600, 625, 747, 495, 499, 504, 582, 595, 610, 630, 643, 706, 727, 738, 748, 756, 766, 378, 459, 467, 469, 482, 498, 517, 532, 535, 541, 565, 568, 573, 577, 608, 629, 632, 645, 650, 651, 653, 677, 708, 726, 728, 761, 763, 479, 493, 507, 508, 511, 513, 516, 518, 534, 536, 544, 575, 594, 596, 615, 621, 633, 640, 649, 692, 709, 744, 746, 754, 764, 768, 376],
-    "Performing-Arts": [250, 599, 754, 755, 756, 757, 600, 601, 151, 125, 195, 164, 152, 139, 178, 179, 209, 248, 270, 593, 184, 168, 172, 173, 182, 199, 207, 208, 219, 249, 262, 268, 274, 488, 540, 597, 594, 595, 596, 598, 602, 664, 666, 667, 683, 710, 728, 731, 585, 635, 669, 680, 702, 708, 759, 744, 44, 30, 66, 93, 176],
+    "Performing-Arts": [250, 599, 754, 755, 756, 757, 600, 601, 151, 125, 195, 164, 152, 139, 178, 179, 209, 248, 270, 593, 184, 168, 172, 173, 182, 199, 207, 208, 219, 249, 262, 268, 274, 488, 540, 597, 594, 595, 596, 598, 602, 664, 666, 667, 683, 710, 728, 731, 585, 635, 669, 680, 702, 708, 759, 744, 44, 30, 66, 93, 176, 1141, 1152, 2721, 2722, 2723, 2724, 2725, 2726, 2727, 2728, 2729, 2730, 2731, 2732, 2733, 2734, 2735, 2736, 2737, 2738, 2739, 2740, 2741, 2742, 2743, 2744, 2745, 2746, 2747, 2748, 2749, 2750, 2751, 2752, 2753, 2754, 2755, 2756, 2757, 2758, 2759, 2760, 2761, 2762, 2763, 2764, 2765, 2766, 2767, 2768, 2769, 2770, 2771, 2772, 2773, 2774, 2775, 2776, 2777, 2778, 2779, 2780, 2781, 2782, 2783, 2784, 2785, 2786, 2787, 2788, 2789, 2790, 2791, 2792, 2793, 2794, 2795, 2796, 2797, 2798, 2799, 2800, 2801, 2802, 2803, 2804, 2805, 2806, 2807, 2808, 2809, 2810],
     "Pharmacy": [279, 280, 281, 228, 501, 500, 502, 499, 435, 503, 434, 436, 437, 295, 296, 297, 299, 301, 605, 141, 142, 143, 188, 144, 227, 230, 122, 233, 236, 289, 303, 461, 462, 470, 566, 607, 743, 200, 606, 618, 465, 616, 733, 107, 95, 60, 155],
     "Physical-Skill": [683, 684, 685, 686, 391, 397, 393, 386, 398, 395, 385, 29, 389, 384, 387, 269, 132, 394, 396, 646, 388, 390, 392, 399, 481, 192, 484, 631, 360, 632, 365, 66, 25, 480, 645, 555, 727, 755, 363, 103, 37, 756, 483, 625, 647, 726, 64, 34, 90, 610, 630, 486, 599, 600, 639, 745, 473, 482, 485, 545, 548, 558, 564, 757, 471, 474, 476, 478, 525, 542, 543, 550, 552, 554, 556, 565, 574, 590, 597, 601, 609, 611, 614, 618, 621, 622, 636, 638, 649, 654, 664, 676, 697, 729, 740, 741, 768],
     "Public-Health": [458, 463, 457, 462, 464, 459, 460, 461, 232, 169, 141, 479, 143, 188, 230, 175, 475, 497, 142, 160, 227, 229, 244, 166, 198, 122, 190, 135, 140, 154, 159, 164, 167, 172, 180, 189, 218, 228, 231, 470, 478, 495, 525, 608, 609, 611, 625, 725, 773, 176, 473, 476, 524, 706, 494, 500, 519, 521, 578, 629, 192],
     "Rehab-Therapy": [484, 480, 481, 482, 483, 485, 486, 229, 390, 88, 94, 95, 387, 188, 141, 122, 176, 132, 103, 143, 227, 295, 269, 107, 36, 113, 110, 99, 144, 84, 96, 163, 223, 158, 115, 491, 554, 645, 494, 623, 629, 29, 564, 600, 636, 641, 646, 736, 750, 45],
     "Social-Work": [292, 293, 304, 243, 628, 629, 376, 378, 160, 383, 175, 374, 380, 379, 381, 368, 375, 372, 370, 166, 127, 489, 296, 297, 299, 301, 487, 133, 159, 169, 157, 193, 182, 627, 704, 462, 464, 584, 597, 625, 680, 681, 479, 482, 491, 575, 623, 626, 633, 634, 730, 731, 176],
-    "Software-Dev": [266, 504, 509, 506, 510, 692, 693, 694, 505, 507, 508, 56, 222, 134, 135, 512, 537, 515, 541, 523, 527, 530, 520, 526, 111, 89, 558, 689, 97, 33, 496, 502, 532, 539, 569, 83, 29, 76, 28, 32, 511, 536, 577, 189, 30, 528, 584, 70, 37, 516, 551, 687, 690, 69, 108, 4, 31, 23, 517, 544, 553, 662, 695, 1, 2, 3, 5, 34, 35, 36, 591, 688, 765, 462, 513, 514, 522, 531, 535, 540, 543, 583, 472, 518, 519, 529, 533, 542, 552, 565, 567, 580, 624, 657, 673, 702, 463, 534, 538, 546, 555, 556, 570, 582, 587, 588, 589, 603, 618, 620, 621, 622, 623, 633, 641, 656, 676, 691, 699, 701, 724, 740, 749, 762, 764, 698],
-    "Spatial-Design": [251, 603, 758, 759, 760, 761, 602, 604, 153, 248, 241, 125, 123, 59, 30, 152, 145, 551, 553, 237, 118, 112, 67, 36, 104, 147, 148, 149, 163, 164, 185, 110, 120, 151, 177, 191, 213, 240, 540, 548, 590, 592, 601, 643, 176, 547, 558, 564, 574, 665, 668, 670, 769, 485, 549, 557, 559, 563, 651, 703, 719, 742, 770, 771],
+    "Software-Dev": [266, 504, 509, 506, 510, 692, 693, 694, 505, 507, 508, 56, 222, 134, 135, 512, 537, 515, 541, 523, 527, 530, 520, 526, 111, 89, 558, 689, 97, 33, 496, 502, 532, 539, 569, 83, 29, 76, 28, 32, 511, 536, 577, 189, 30, 528, 584, 70, 37, 516, 551, 687, 690, 69, 108, 4, 31, 23, 517, 544, 553, 662, 695, 1, 2, 3, 5, 34, 35, 36, 591, 688, 765, 462, 513, 514, 522, 531, 535, 540, 543, 583, 472, 518, 519, 529, 533, 542, 552, 565, 567, 580, 624, 657, 673, 702, 463, 534, 538, 546, 555, 556, 570, 582, 587, 588, 589, 603, 618, 620, 621, 622, 623, 633, 641, 656, 676, 691, 699, 701, 724, 740, 749, 762, 764, 698, 1140, 1143, 1145, 1148, 1155, 1157, 1159],
+    "Spatial-Design": [251, 603, 758, 759, 760, 761, 602, 604, 153, 248, 241, 125, 123, 59, 30, 152, 145, 551, 553, 237, 118, 112, 67, 36, 104, 147, 148, 149, 163, 164, 185, 110, 120, 151, 177, 191, 213, 240, 540, 548, 590, 592, 601, 643, 176, 547, 558, 564, 574, 665, 668, 670, 769, 485, 549, 557, 559, 563, 651, 703, 719, 742, 770, 771, 1151, 1153, 1165],
     "Sports-Ed": [646, 645, 392, 269, 132, 388, 270, 384, 389, 399, 396, 387, 183, 398, 385, 394, 393, 395, 390, 391, 386, 684, 397, 157, 144, 166, 169, 153, 158, 683, 686, 193, 176, 126, 473, 474, 476, 480, 482, 483, 525, 621, 685, 774, 772, 481, 484, 536, 639, 682, 698, 710, 187],
     "Startup-Venture": [583, 585, 586, 762, 763, 764, 584, 165, 57, 80, 148, 149, 91, 87, 104, 65, 62, 508, 534, 598, 28, 246, 100, 61, 1, 5, 24, 35, 54, 64, 73, 74, 77, 78, 85, 37, 38, 42, 63, 69, 570, 575, 626, 638, 644, 482, 491, 528, 562, 589, 604, 607, 608, 617, 620, 627, 711, 476, 546, 559, 572, 613, 625, 648, 659, 666, 668, 677, 678, 679, 755, 757, 774],
     "Teaching-Ed": [624, 765, 766, 767, 768, 621, 622, 623, 157, 158, 535, 88, 99, 31, 71, 33, 83, 86, 459, 625, 45, 117, 24, 42, 489, 27, 32, 81, 5, 35, 41, 36, 682, 106, 1, 2, 3, 4, 26, 28, 30, 34, 40, 490, 503, 598, 457, 467, 469, 474, 476, 487, 491, 506, 511, 536, 542, 576, 577, 578, 584, 589, 592, 600, 613, 628, 632, 634, 637, 641, 644, 645, 679, 681, 704, 757, 479, 483, 495, 497, 507, 582, 607, 617, 652, 670, 676, 678, 705, 706, 707, 710, 711, 726, 735, 464, 470, 473, 480, 481, 482, 486, 488, 504, 510, 525, 532, 604, 608, 609, 620, 627, 639, 648, 693, 730, 748, 758, 762, 772, 774],
     "Technical-Skill": [272, 273, 671, 672, 673, 674, 675, 676, 677, 37, 134, 530, 466, 545, 544, 603, 505, 507, 509, 537, 472, 504, 551, 606, 552, 109, 111, 526, 531, 533, 543, 553, 580, 729, 194, 195, 502, 513, 558, 601, 33, 56, 520, 527, 561, 83, 151, 29, 55, 271, 546, 555, 556, 610, 42, 78, 107, 481, 512, 528, 539, 557, 614, 76, 28, 32, 66, 72, 87, 100, 534, 535, 538, 582, 623, 744, 467, 510, 518, 541, 566, 579, 590, 595, 631, 696, 702, 733, 753, 70, 122, 80, 24, 529, 540, 559, 578, 105, 469, 471, 478, 486, 517, 550, 569, 605, 608, 621, 647, 654, 699, 724, 462, 480, 485, 496, 508, 523, 596, 598, 600, 624, 633, 637, 649, 650, 651, 667, 669, 687, 695, 700, 714, 716, 727, 731, 750, 754, 765, 470, 484, 493, 500, 503, 506, 515, 516, 522, 532, 548, 554, 560, 563, 564, 565, 572, 574, 581, 583, 584, 588, 591, 607, 611, 630, 640, 645, 653, 656, 706, 715, 721, 732, 737, 739, 755, 577, 662, 688],
     "Tourism-Travel": [290, 291, 302, 640, 639, 641, 438, 440, 441, 226, 439, 442, 224, 131, 223, 299, 163, 152, 638, 736, 170, 165, 296, 297, 301, 199, 200, 130, 132, 204, 267, 269, 575, 176, 193, 604, 681, 710, 723, 730, 637, 642, 667, 680, 706, 760, 164],
-    "Visual-Design": [587, 769, 770, 771, 588, 589, 248, 219, 247, 30, 32, 514, 186, 56, 153, 93, 44, 152, 118, 69, 26, 591, 595, 602, 78, 33, 221, 700, 1, 2, 3, 4, 5, 24, 27, 28, 31, 34, 35, 37, 603, 511, 513, 538, 540, 593, 594, 596, 604, 664, 666, 708, 522, 619, 665, 668, 670, 710, 746, 759, 110, 541, 542, 590, 592, 597, 642, 667, 749],
+    "Visual-Design": [587, 769, 770, 771, 588, 589, 248, 219, 247, 30, 32, 514, 186, 56, 153, 93, 44, 152, 118, 69, 26, 591, 595, 602, 78, 33, 221, 700, 1, 2, 3, 4, 5, 24, 27, 28, 31, 34, 35, 37, 603, 511, 513, 538, 540, 593, 594, 596, 604, 664, 666, 708, 522, 619, 665, 668, 670, 710, 746, 759, 110, 541, 542, 590, 592, 597, 642, 667, 749, 1139, 1142, 1143, 1146, 1150, 1151, 1165, 2811, 2812, 2813, 2814, 2815, 2816, 2817, 2818, 2819, 2820, 2821, 2822, 2823, 2824, 2825, 2826, 2827, 2828, 2829, 2830, 2831, 2832, 2833, 2834, 2835, 2836, 2837, 2838, 2839, 2840],
     "Web-Dev": [263, 211, 264, 515, 212, 511, 512, 513, 514, 134, 222, 121, 165, 198, 537, 140, 247, 506, 186, 148, 163, 139, 219, 220, 224, 226, 268, 573, 694, 177, 181, 185, 191, 209, 522, 532, 539, 574, 589, 594, 640, 56, 200, 504, 505, 533, 587, 588, 769, 525, 526, 687, 688, 709, 747, 749, 771, 97, 89, 70],
 }
+
+
+def _prepend_unique(existing, new_items, limit=None):
+    ordered = []
+    seen = set()
+    for item in list(new_items) + list(existing):
+        if item in seen:
+            continue
+        seen.add(item)
+        ordered.append(item)
+    if limit is not None:
+        return ordered[:limit]
+    return ordered
+
+
+SCIENCE_INTEREST_RESEARCH_QIDS = list(range(1169, 1197))
+SCIENCE_BIOLOGY_QIDS = list(range(1197, 1225))
+SCIENCE_CHEMISTRY_QIDS = list(range(1225, 1253))
+SCIENCE_PHYSICS_QIDS = list(range(1253, 1281))
+SCIENCE_ENVIRONMENT_NATURE_QIDS = list(range(1281, 1311))
+SCIENCE_EARTH_GEOLOGY_QIDS = list(range(1311, 1341))
+SCIENCE_ENV_PLANNING_QIDS = list(range(1341, 1371))
+SCIENCE_BIOTECH_GENETICS_QIDS = list(range(1371, 1401))
+SCIENCE_WEATHER_ATMOS_QIDS = list(range(1401, 1431))
+TECH_PROGRAMMING_QIDS = list(range(1431, 1461))
+TECH_COMPUTERS_IT_QIDS = list(range(1461, 1491))
+TECH_AI_ML_QIDS = list(range(1491, 1521))
+TECH_ROBOTICS_QIDS = list(range(1521, 1551))
+TECH_CYBERSECURITY_QIDS = list(range(1551, 1581))
+TECH_DATA_ANALYTICS_QIDS = list(range(1581, 1611))
+TECH_GAME_DEVELOPMENT_QIDS = list(range(1611, 1641))
+TECH_WEB_MOBILE_QIDS = list(range(1641, 1671))
+TECH_NETWORKING_QIDS = list(range(1671, 1701))
+TECH_SOFTWARE_ENGINEERING_QIDS = list(range(1701, 1731))
+TECH_MULTIMEDIA_QIDS = list(range(1731, 1761))
+TECH_DATABASE_SYSTEMS_QIDS = list(range(1761, 1791))
+TECH_HEALTH_IT_QIDS = list(range(1791, 1821))
+ENG_CIVIL_CONSTRUCTION_QIDS = list(range(1821, 1851))
+ENG_ARCH_INTERIOR_QIDS = list(range(1851, 1881))
+ENG_INDUSTRIAL_MANUFACTURING_QIDS = list(range(1881, 1911))
+ENG_LANDSCAPE_ARCH_QIDS = list(range(1911, 1941))
+ENG_GENERAL_QIDS = list(range(1941, 1971))
+ENG_MECHANICAL_SYSTEMS_QIDS = list(range(1971, 2001))
+ENG_ELECTRICAL_ELECTRONICS_QIDS = list(range(2001, 2031))
+ENG_AIRCRAFT_AVIONICS_QIDS = list(range(2031, 2061))
+ENG_AERONAUTICAL_AEROSPACE_QIDS = list(range(2061, 2091))
+ENG_GEODETIC_SURVEYING_QIDS = list(range(2091, 2121))
+ENG_PRODUCT_INDUSTRIAL_DESIGN_QIDS = list(range(2121, 2151))
+ENG_MARINE_ENGINEERING_QIDS = list(range(2151, 2181))
+BUS_ENTREPRENEURSHIP_QIDS = list(range(2181, 2211))
+BUS_FINANCE_BANKING_QIDS = list(range(2211, 2241))
+BUS_MARKETING_ADVERTISING_QIDS = list(range(2241, 2271))
+BUS_MANAGEMENT_ADMIN_QIDS = list(range(2271, 2301))
+BUS_ACCOUNTING_QIDS = list(range(2301, 2331))
+BUS_ECONOMICS_QIDS = list(range(2331, 2361))
+BUS_REAL_ESTATE_PROPERTY_QIDS = list(range(2361, 2391))
+BUS_HR_MANAGEMENT_QIDS = list(range(2391, 2421))
+BUS_OPERATIONS_SUPPLY_CHAIN_QIDS = list(range(2421, 2451))
+BUS_CUSTOMS_INTL_TRADE_QIDS = list(range(2451, 2481))
+BUS_AGRIBUSINESS_QIDS = list(range(2481, 2511))
+BUS_OFFICE_ADMIN_QIDS = list(range(2511, 2541))
+BUS_STARTUP_INNOVATION_QIDS = list(range(2541, 2571))
+ARTS_FINE_PAINTING_QIDS = list(range(2571, 2601))
+ARTS_FASHION_TEXTILE_QIDS = list(range(2601, 2631))
+ARTS_ART_DESIGN_QIDS = list(range(2631, 2661))
+ARTS_FILM_MEDIA_QIDS = list(range(2661, 2691))
+ARTS_ADVERTISING_GRAPHIC_QIDS = list(range(2691, 2721))
+SCIENCE_INTEREST_EXPANSION_QIDS = (
+    SCIENCE_INTEREST_RESEARCH_QIDS
+    + SCIENCE_BIOLOGY_QIDS
+    + SCIENCE_CHEMISTRY_QIDS
+    + SCIENCE_PHYSICS_QIDS
+    + SCIENCE_ENVIRONMENT_NATURE_QIDS
+    + SCIENCE_EARTH_GEOLOGY_QIDS
+    + SCIENCE_ENV_PLANNING_QIDS
+    + SCIENCE_BIOTECH_GENETICS_QIDS
+    + SCIENCE_WEATHER_ATMOS_QIDS
+)
+TECH_INTEREST_EXPANSION_QIDS = (
+    TECH_PROGRAMMING_QIDS
+    + TECH_COMPUTERS_IT_QIDS
+    + TECH_AI_ML_QIDS
+    + TECH_ROBOTICS_QIDS
+    + TECH_CYBERSECURITY_QIDS
+)
+TECH_SPECIALIZATION_EXPANSION_QIDS = (
+    TECH_DATA_ANALYTICS_QIDS
+    + TECH_GAME_DEVELOPMENT_QIDS
+    + TECH_WEB_MOBILE_QIDS
+    + TECH_NETWORKING_QIDS
+    + TECH_SOFTWARE_ENGINEERING_QIDS
+)
+TECH_INFORMATION_EXPANSION_QIDS = (
+    TECH_MULTIMEDIA_QIDS
+    + TECH_DATABASE_SYSTEMS_QIDS
+    + TECH_HEALTH_IT_QIDS
+)
+ENGINEERING_INTEREST_EXPANSION_QIDS = (
+    ENG_CIVIL_CONSTRUCTION_QIDS
+    + ENG_ARCH_INTERIOR_QIDS
+    + ENG_INDUSTRIAL_MANUFACTURING_QIDS
+    + ENG_LANDSCAPE_ARCH_QIDS
+)
+ENGINEERING_SYSTEMS_EXPANSION_QIDS = (
+    ENG_GENERAL_QIDS
+    + ENG_MECHANICAL_SYSTEMS_QIDS
+    + ENG_ELECTRICAL_ELECTRONICS_QIDS
+    + ENG_AIRCRAFT_AVIONICS_QIDS
+)
+ENGINEERING_SPECIALTY_EXPANSION_QIDS = (
+    ENG_AERONAUTICAL_AEROSPACE_QIDS
+    + ENG_GEODETIC_SURVEYING_QIDS
+    + ENG_PRODUCT_INDUSTRIAL_DESIGN_QIDS
+    + ENG_MARINE_ENGINEERING_QIDS
+)
+BUSINESS_INTEREST_EXPANSION_QIDS = (
+    BUS_ENTREPRENEURSHIP_QIDS
+    + BUS_FINANCE_BANKING_QIDS
+    + BUS_MARKETING_ADVERTISING_QIDS
+    + BUS_MANAGEMENT_ADMIN_QIDS
+)
+BUSINESS_SPECIALTY_EXPANSION_QIDS = (
+    BUS_ACCOUNTING_QIDS
+    + BUS_ECONOMICS_QIDS
+    + BUS_REAL_ESTATE_PROPERTY_QIDS
+    + BUS_HR_MANAGEMENT_QIDS
+)
+BUSINESS_APPLIED_EXPANSION_QIDS = (
+    BUS_OPERATIONS_SUPPLY_CHAIN_QIDS
+    + BUS_CUSTOMS_INTL_TRADE_QIDS
+    + BUS_AGRIBUSINESS_QIDS
+    + BUS_OFFICE_ADMIN_QIDS
+    + BUS_STARTUP_INNOVATION_QIDS
+)
+ARTS_EXPANSION_QIDS = (
+    ARTS_FINE_PAINTING_QIDS
+    + ARTS_FASHION_TEXTILE_QIDS
+    + ARTS_ART_DESIGN_QIDS
+    + ARTS_FILM_MEDIA_QIDS
+    + ARTS_ADVERTISING_GRAPHIC_QIDS
+)
+
+for qid in SCIENCE_INTEREST_EXPANSION_QIDS:
+    if qid in SCIENCE_INTEREST_RESEARCH_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["science"]}
+    elif qid in SCIENCE_BIOLOGY_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["science", "healthcare", "agriculture"]}
+    elif qid in SCIENCE_CHEMISTRY_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["science", "healthcare", "engineering"]}
+    elif qid in SCIENCE_PHYSICS_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["science", "engineering", "technology"]}
+    elif qid in SCIENCE_ENVIRONMENT_NATURE_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["science", "agriculture"]}
+    elif qid in SCIENCE_EARTH_GEOLOGY_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["science", "engineering", "agriculture"]}
+    elif qid in SCIENCE_ENV_PLANNING_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["science", "engineering", "business"]}
+    elif qid in SCIENCE_BIOTECH_GENETICS_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["science", "healthcare", "agriculture"]}
+    else:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["science", "technology", "agriculture"]}
+
+for qid in TECH_INTEREST_EXPANSION_QIDS:
+    if qid in TECH_PROGRAMMING_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["technology"]}
+    elif qid in TECH_COMPUTERS_IT_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["technology", "business"]}
+    elif qid in TECH_AI_ML_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["technology", "science"]}
+    elif qid in TECH_ROBOTICS_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["technology", "engineering"]}
+    else:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["technology", "public_service", "business"]}
+
+for qid in TECH_SPECIALIZATION_EXPANSION_QIDS:
+    if qid in TECH_DATA_ANALYTICS_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["technology", "business", "science"]}
+    elif qid in TECH_GAME_DEVELOPMENT_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["technology", "creative"]}
+    elif qid in TECH_WEB_MOBILE_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["technology", "business", "creative"]}
+    elif qid in TECH_NETWORKING_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["technology", "public_service", "business"]}
+    else:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["technology", "business"]}
+
+for qid in TECH_INFORMATION_EXPANSION_QIDS:
+    if qid in TECH_MULTIMEDIA_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["technology", "creative"]}
+    elif qid in TECH_DATABASE_SYSTEMS_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["technology", "business"]}
+    else:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["technology", "healthcare", "business"]}
+
+for qid in ENGINEERING_INTEREST_EXPANSION_QIDS:
+    if qid in ENG_CIVIL_CONSTRUCTION_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["engineering", "public_service"]}
+    elif qid in ENG_ARCH_INTERIOR_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["engineering", "creative"]}
+    elif qid in ENG_INDUSTRIAL_MANUFACTURING_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["engineering", "business"]}
+    else:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["engineering", "creative", "agriculture"]}
+
+for qid in ENGINEERING_SYSTEMS_EXPANSION_QIDS:
+    if qid in ENG_GENERAL_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["engineering"]}
+    elif qid in ENG_MECHANICAL_SYSTEMS_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["engineering", "technology"]}
+    elif qid in ENG_ELECTRICAL_ELECTRONICS_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["engineering", "technology"]}
+    else:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["engineering", "technology", "public_service"]}
+
+for qid in ENGINEERING_SPECIALTY_EXPANSION_QIDS:
+    if qid in ENG_AERONAUTICAL_AEROSPACE_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["engineering", "technology", "science"]}
+    elif qid in ENG_GEODETIC_SURVEYING_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["engineering", "public_service", "agriculture"]}
+    elif qid in ENG_PRODUCT_INDUSTRIAL_DESIGN_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["engineering", "creative", "business"]}
+    else:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["engineering", "maritime", "technology"]}
+
+for qid in BUSINESS_INTEREST_EXPANSION_QIDS:
+    if qid in BUS_ENTREPRENEURSHIP_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["business"]}
+    elif qid in BUS_FINANCE_BANKING_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["business", "science"]}
+    elif qid in BUS_MARKETING_ADVERTISING_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["business", "creative"]}
+    else:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["business", "public_service"]}
+
+for qid in BUSINESS_SPECIALTY_EXPANSION_QIDS:
+    if qid in BUS_ACCOUNTING_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["business", "science"]}
+    elif qid in BUS_ECONOMICS_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["business", "science", "public_service"]}
+    elif qid in BUS_REAL_ESTATE_PROPERTY_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["business", "public_service"]}
+    else:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["business", "public_service"]}
+
+for qid in BUSINESS_APPLIED_EXPANSION_QIDS:
+    if qid in BUS_OPERATIONS_SUPPLY_CHAIN_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["business", "engineering"]}
+    elif qid in BUS_CUSTOMS_INTL_TRADE_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["business", "public_service"]}
+    elif qid in BUS_AGRIBUSINESS_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["business", "agriculture"]}
+    elif qid in BUS_OFFICE_ADMIN_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["business", "public_service"]}
+    else:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["business", "technology", "creative"]}
+
+for qid in ARTS_EXPANSION_QIDS:
+    if qid in ARTS_FINE_PAINTING_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["creative", "arts"]}
+    elif qid in ARTS_FASHION_TEXTILE_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["creative", "design", "business"]}
+    elif qid in ARTS_ART_DESIGN_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["creative", "design", "technology"]}
+    elif qid in ARTS_FILM_MEDIA_QIDS:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["creative", "technology", "entertainment"]}
+    else:
+        QUESTION_TREE_NODES[qid] = {"level": 1, "weight": 1.6, "branches": ["creative", "business", "design"]}
+
+DOMAIN_ENTRY_QUESTIONS["science"] = _prepend_unique(
+    DOMAIN_ENTRY_QUESTIONS["science"],
+    [
+        1281, 1286, 1291, 1296, 1301,
+        1311, 1316, 1321, 1326, 1331,
+        1341, 1346, 1351, 1356, 1361,
+        1371, 1376, 1381, 1386, 1391,
+        1401, 1406, 1411, 1416, 1421,
+        1169, 1197, 1225, 1253,
+    ],
+    limit=30,
+)
+DOMAIN_ENTRY_QUESTIONS["technology"] = _prepend_unique(
+    DOMAIN_ENTRY_QUESTIONS["technology"],
+    [
+        1431, 1436, 1441, 1446, 1451,
+        1491, 1496, 1501, 1506, 1511,
+        1551, 1556, 1561, 1566, 1571,
+        1701, 1706, 1711, 1716, 1721,
+        1641, 1646, 1651, 1656, 1661,
+        1581, 1586, 1591, 1596, 1601,
+        1671, 1676, 1681, 1686, 1691,
+        1761, 1766, 1771, 1776, 1781,
+        1611, 1616, 1621, 1626, 1631,
+    ],
+    limit=30,
+)
+DOMAIN_ENTRY_QUESTIONS["engineering"] = _prepend_unique(
+    DOMAIN_ENTRY_QUESTIONS["engineering"],
+    [
+        2061, 2066, 2071, 2076, 2081,
+        2091, 2096, 2101, 2106, 2111,
+        2121, 2126, 2131, 2136, 2141,
+        2151, 2156, 2161, 2166, 2171,
+        1941, 1946, 1951, 1956, 1961,
+        1971, 1976, 1981, 1986, 1991,
+        2001, 2006, 2011, 2016, 2021,
+        2031, 2036, 2041, 2046, 2051,
+    ],
+    limit=30,
+)
+DOMAIN_ENTRY_QUESTIONS["business"] = _prepend_unique(
+    DOMAIN_ENTRY_QUESTIONS["business"],
+    [
+        2421, 2426, 2431, 2436, 2441,
+        2451, 2456, 2461, 2466, 2471,
+        2481, 2486, 2491, 2496, 2501,
+        2511, 2516, 2521, 2526, 2531,
+        2541, 2546, 2551, 2556, 2561,
+        2301, 2306, 2311, 2316, 2321,
+    ],
+    limit=30,
+)
+
+DOMAIN_ENTRY_QUESTIONS["creative"] = _prepend_unique(
+    DOMAIN_ENTRY_QUESTIONS["creative"],
+    [
+        2841, 2846, 2851, 2856, 2861,  # Writing & Literature
+        2871, 2876, 2881, 2886, 2891,  # Animation & Multimedia
+        2901, 2906, 2911, 2916, 2921,  # Clothing & Textile Technology
+        2721, 2726, 2731, 2736, 2741,  # Music & Performance
+        2751, 2756, 2761, 2766, 2771,  # Music Production & Audio
+        2781, 2786, 2791, 2796, 2801,  # Theater & Performing Arts
+        2811, 2816, 2821, 2826, 2831,  # Photography & Visual Arts
+        1731, 1736, 1741, 1746, 1751,
+        2661, 2666, 2671, 2676, 2681,
+        2571, 2576, 2581, 2586, 2591,
+        2691, 2696, 2701, 2706, 2711,
+        2601, 2606, 2611, 2616, 2621,
+        2631, 2636, 2641, 2646, 2651,
+    ],
+    limit=65,
+)
+
+TRAIT_FOLLOWUP_MAP["Environmental-Sci"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Environmental-Sci"],
+    [1281, 1286, 1291, 1296, 1301, 1306, 1311, 1316, 1321, 1326, 1331, 1341, 1346, 1351, 1356, 1361, 1366, 1401, 1406, 1411, 1416, 1421, 1426],
+)
+TRAIT_FOLLOWUP_MAP["Field-Research"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Field-Research"],
+    [1281, 1286, 1291, 1301, 1306, 1311, 1316, 1321, 1326, 1331, 1336, 1406, 1411, 1421],
+)
+TRAIT_FOLLOWUP_MAP["Environmental-Eng"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Environmental-Eng"],
+    [1296, 1301, 1341, 1346, 1351, 1356, 1361, 1366, 1401, 1416],
+)
+TRAIT_FOLLOWUP_MAP["Agri-Nature"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Agri-Nature"],
+    [1286, 1306, 1331, 1371, 1376, 1386, 1426],
+)
+TRAIT_FOLLOWUP_MAP["Lab-Research"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Lab-Research"],
+    [1316, 1371, 1376, 1381, 1386, 1391, 1396, 1401, 1416],
+)
+TRAIT_FOLLOWUP_MAP["Data-Analytics"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Data-Analytics"],
+    [1291, 1321, 1326, 1336, 1351, 1356, 1366, 1381, 1391, 1396, 1401, 1406, 1411, 1426],
+)
+TRAIT_FOLLOWUP_MAP["Medical-Lab"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Medical-Lab"],
+    [1371, 1376, 1381, 1391, 1396],
+)
+TRAIT_FOLLOWUP_MAP["Community-Serve"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Community-Serve"],
+    [1281, 1301, 1311, 1336, 1341, 1346, 1361, 1366, 1406, 1416, 1421, 1426],
+)
+TRAIT_FOLLOWUP_MAP["Software-Dev"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Software-Dev"],
+    [1431, 1436, 1441, 1446, 1451, 1456, 1491, 1496, 1501, 1523, 1528, 1554],
+)
+TRAIT_FOLLOWUP_MAP["Hardware-Systems"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Hardware-Systems"],
+    [1461, 1466, 1471, 1476, 1481, 1486, 1521, 1526, 1531, 1536, 1541, 1546],
+)
+TRAIT_FOLLOWUP_MAP["AI-ML"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["AI-ML"],
+    [1491, 1496, 1501, 1506, 1511, 1516, 1523, 1534, 1540],
+)
+TRAIT_FOLLOWUP_MAP["Cyber-Defense"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Cyber-Defense"],
+    [1486, 1551, 1556, 1561, 1566, 1571, 1576],
+)
+TRAIT_FOLLOWUP_MAP["Technical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Technical-Skill"],
+    [1435, 1453, 1465, 1473, 1483, 1505, 1521, 1532, 1548, 1563],
+)
+TRAIT_FOLLOWUP_MAP["Data-Analytics"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Data-Analytics"],
+    [1443, 1458, 1465, 1474, 1491, 1497, 1503, 1514, 1538, 1552, 1563],
+)
+TRAIT_FOLLOWUP_MAP["Cloud-Systems"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Cloud-Systems"],
+    [1462, 1467, 1472, 1477, 1482, 1487, 1503, 1553, 1558, 1563, 1568, 1573, 1578],
+)
+TRAIT_FOLLOWUP_MAP["Mechanical-Design"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Mechanical-Design"],
+    [1522, 1527, 1532, 1537, 1542, 1547],
+)
+TRAIT_FOLLOWUP_MAP["Electrical-Power"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Electrical-Power"],
+    [1524, 1531, 1541, 1545],
+)
+TRAIT_FOLLOWUP_MAP["Industrial-Ops"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Industrial-Ops"],
+    [1525, 1526, 1535, 1540, 1543, 1548],
+)
+TRAIT_FOLLOWUP_MAP["Data-Analytics"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Data-Analytics"],
+    [1581, 1586, 1591, 1596, 1601, 1606, 1613, 1622, 1633, 1656, 1663, 1676, 1683, 1692, 1705, 1724],
+)
+TRAIT_FOLLOWUP_MAP["Game-Dev"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Game-Dev"],
+    [1611, 1616, 1621, 1626, 1631, 1636],
+)
+TRAIT_FOLLOWUP_MAP["Web-Dev"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Web-Dev"],
+    [1641, 1646, 1651, 1656, 1661, 1666, 1702],
+)
+TRAIT_FOLLOWUP_MAP["Mobile-Dev"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Mobile-Dev"],
+    [1643, 1648, 1653, 1658, 1663, 1668],
+)
+TRAIT_FOLLOWUP_MAP["Cloud-Systems"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Cloud-Systems"],
+    [1643, 1654, 1671, 1676, 1681, 1686, 1691, 1696, 1701, 1708, 1714, 1726],
+)
+TRAIT_FOLLOWUP_MAP["Software-Dev"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Software-Dev"],
+    [1611, 1613, 1621, 1634, 1642, 1646, 1653, 1659, 1674, 1689, 1701, 1706, 1711, 1716, 1721, 1726],
+)
+TRAIT_FOLLOWUP_MAP["Technical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Technical-Skill"],
+    [1586, 1593, 1600, 1611, 1625, 1644, 1659, 1672, 1684, 1695, 1704, 1713, 1728],
+)
+TRAIT_FOLLOWUP_MAP["Analytical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Analytical-Skill"],
+    [1581, 1584, 1588, 1598, 1606, 1613, 1623, 1645, 1656, 1672, 1680, 1696, 1702, 1711, 1724, 1728],
+)
+TRAIT_FOLLOWUP_MAP["People-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["People-Skill"],
+    [1585, 1598, 1606, 1621, 1626, 1634, 1645, 1659, 1664, 1675, 1686, 1698, 1705, 1715, 1725],
+)
+TRAIT_FOLLOWUP_MAP["Admin-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Admin-Skill"],
+    [1582, 1587, 1593, 1600, 1673, 1678, 1683, 1703, 1712],
+)
+TRAIT_FOLLOWUP_MAP["Creative-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Creative-Skill"],
+    [1612, 1616, 1627, 1630, 1641, 1643, 1660],
+)
+TRAIT_FOLLOWUP_MAP["Animation-3D"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Animation-3D"],
+    [1614, 1616, 1624, 1636],
+)
+TRAIT_FOLLOWUP_MAP["Hardware-Systems"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Hardware-Systems"],
+    [1671, 1674, 1678, 1689, 1693],
+)
+TRAIT_FOLLOWUP_MAP["Community-Serve"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Community-Serve"],
+    [1583, 1599, 1604, 1629, 1644, 1664, 1675, 1695, 1704, 1728],
+)
+TRAIT_FOLLOWUP_MAP["Startup-Venture"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Startup-Venture"],
+    [1585, 1616, 1630, 1651, 1666, 1685, 1706, 1716],
+)
+TRAIT_FOLLOWUP_MAP["Digital-Media"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Digital-Media"],
+    [1731, 1736, 1741, 1746, 1751, 1756],
+)
+TRAIT_FOLLOWUP_MAP["Animation-3D"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Animation-3D"],
+    [1731, 1737, 1743, 1750],
+)
+TRAIT_FOLLOWUP_MAP["Creative-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Creative-Skill"],
+    [1733, 1739, 1746, 1749, 1754],
+)
+TRAIT_FOLLOWUP_MAP["Visual-Design"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Visual-Design"],
+    [1733, 1737, 1751],
+)
+TRAIT_FOLLOWUP_MAP["Cloud-Systems"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Cloud-Systems"],
+    [1761, 1766, 1771, 1776, 1781, 1786, 1791, 1796, 1801, 1806, 1811, 1816],
+)
+TRAIT_FOLLOWUP_MAP["Admin-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Admin-Skill"],
+    [1762, 1768, 1774, 1780, 1792, 1798, 1804, 1810],
+)
+TRAIT_FOLLOWUP_MAP["Health-Admin"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Health-Admin"],
+    [1791, 1796, 1801, 1806, 1811, 1816],
+)
+TRAIT_FOLLOWUP_MAP["Public-Health"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Public-Health"],
+    [1793, 1798, 1806, 1810, 1817],
+)
+TRAIT_FOLLOWUP_MAP["Medical-Lab"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Medical-Lab"],
+    [1801, 1804],
+)
+TRAIT_FOLLOWUP_MAP["Teaching-Ed"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Teaching-Ed"],
+    [1734, 1749, 1795, 1804, 1817],
+)
+TRAIT_FOLLOWUP_MAP["Community-Serve"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Community-Serve"],
+    [1744, 1753, 1763, 1779, 1791, 1794, 1805, 1810, 1817],
+)
+TRAIT_FOLLOWUP_MAP["Cyber-Defense"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Cyber-Defense"],
+    [1764, 1779, 1794, 1798, 1803, 1813],
+)
+TRAIT_FOLLOWUP_MAP["People-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["People-Skill"],
+    [1735, 1748, 1754, 1766, 1775, 1784, 1795, 1805, 1814],
+)
+TRAIT_FOLLOWUP_MAP["Software-Dev"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Software-Dev"],
+    [1732, 1737, 1755, 1763, 1769, 1779, 1796, 1803, 1815],
+)
+TRAIT_FOLLOWUP_MAP["Technical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Technical-Skill"],
+    [1734, 1743, 1750, 1762, 1768, 1782, 1798, 1809, 1815],
+)
+TRAIT_FOLLOWUP_MAP["Data-Analytics"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Data-Analytics"],
+    [1736, 1742, 1751, 1765, 1771, 1775, 1780, 1793, 1798, 1802, 1817],
+)
+TRAIT_FOLLOWUP_MAP["Civil-Build"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Civil-Build"],
+    [1821, 1826, 1831, 1836, 1841, 1846, 1915, 1922, 1930],
+)
+TRAIT_FOLLOWUP_MAP["Spatial-Design"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Spatial-Design"],
+    [1825, 1851, 1856, 1861, 1866, 1871, 1876, 1911, 1916, 1921, 1926, 1931, 1936],
+)
+TRAIT_FOLLOWUP_MAP["Industrial-Ops"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Industrial-Ops"],
+    [1824, 1828, 1833, 1840, 1881, 1886, 1891, 1896, 1901, 1906],
+)
+TRAIT_FOLLOWUP_MAP["Environmental-Eng"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Environmental-Eng"],
+    [1826, 1834, 1845, 1855, 1866, 1875, 1911, 1916, 1921, 1927, 1934, 1939],
+)
+TRAIT_FOLLOWUP_MAP["Mechanical-Design"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Mechanical-Design"],
+    [1882, 1886, 1891, 1896, 1901, 1906],
+)
+TRAIT_FOLLOWUP_MAP["Technical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Technical-Skill"],
+    [1826, 1831, 1838, 1843, 1854, 1864, 1881, 1883, 1889, 1895, 1906, 1925],
+)
+TRAIT_FOLLOWUP_MAP["Analytical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Analytical-Skill"],
+    [1823, 1833, 1844, 1853, 1863, 1873, 1881, 1883, 1889, 1899, 1916, 1923, 1935],
+)
+TRAIT_FOLLOWUP_MAP["Admin-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Admin-Skill"],
+    [1822, 1827, 1838, 1846, 1855, 1864, 1874, 1884, 1892, 1901],
+)
+TRAIT_FOLLOWUP_MAP["People-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["People-Skill"],
+    [1825, 1846, 1852, 1863, 1874, 1890, 1899, 1924, 1930, 1936],
+)
+TRAIT_FOLLOWUP_MAP["Community-Serve"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Community-Serve"],
+    [1825, 1831, 1842, 1856, 1876, 1886, 1893, 1911, 1924, 1936],
+)
+TRAIT_FOLLOWUP_MAP["Creative-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Creative-Skill"],
+    [1851, 1853, 1857, 1862, 1868, 1913, 1929],
+)
+TRAIT_FOLLOWUP_MAP["Visual-Design"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Visual-Design"],
+    [1854, 1858, 1863, 1872],
+)
+TRAIT_FOLLOWUP_MAP["Field-Research"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Field-Research"],
+    [1823, 1835, 1911, 1916, 1921, 1935],
+)
+TRAIT_FOLLOWUP_MAP["Agri-Nature"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Agri-Nature"],
+    [1845, 1860, 1875, 1912, 1917, 1927, 1939],
+)
+TRAIT_FOLLOWUP_MAP["Aeronautical-Eng"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Aeronautical-Eng", []),
+    [2031, 2036, 2041, 2046, 2051, 2056, 1976, 1996, 2008],
+)
+TRAIT_FOLLOWUP_MAP["Electronics-Dev"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Electronics-Dev", []),
+    [2001, 2006, 2011, 2016, 2021, 2026, 2034, 2043, 2052],
+)
+TRAIT_FOLLOWUP_MAP["Mechanical-Design"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Mechanical-Design"],
+    [1946, 1966, 1971, 1976, 1981, 1986, 1991, 1996, 2031, 2043],
+)
+TRAIT_FOLLOWUP_MAP["Electrical-Power"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Electrical-Power"],
+    [1944, 2001, 2006, 2011, 2016, 2021, 2026, 2034, 2048],
+)
+TRAIT_FOLLOWUP_MAP["Hardware-Systems"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Hardware-Systems"],
+    [1944, 1953, 1966, 1976, 1996, 2003, 2007, 2013, 2024, 2033, 2043],
+)
+TRAIT_FOLLOWUP_MAP["Technical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Technical-Skill"],
+    [1942, 1952, 1961, 1972, 1982, 1991, 2004, 2014, 2022, 2032, 2042, 2056],
+)
+TRAIT_FOLLOWUP_MAP["Analytical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Analytical-Skill"],
+    [1941, 1951, 1964, 1971, 1984, 1994, 2005, 2011, 2024, 2031, 2041, 2054],
+)
+TRAIT_FOLLOWUP_MAP["Industrial-Ops"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Industrial-Ops"],
+    [1945, 1951, 1965, 1973, 1983, 1993, 2004, 2016, 2035, 2046, 2053],
+)
+TRAIT_FOLLOWUP_MAP["Admin-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Admin-Skill"],
+    [1943, 1954, 1963, 1976, 1986, 1994, 2006, 2016, 2026, 2035, 2045, 2055],
+)
+TRAIT_FOLLOWUP_MAP["People-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["People-Skill"],
+    [1946, 1966, 1976, 1985, 1995, 2006, 2016, 2025, 2036, 2045, 2056],
+)
+TRAIT_FOLLOWUP_MAP["Community-Serve"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Community-Serve"],
+    [1945, 1966, 1985, 2001, 2015, 2031, 2043, 2056],
+)
+TRAIT_FOLLOWUP_MAP["Aeronautical-Eng"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Aeronautical-Eng", []),
+    [2061, 2066, 2071, 2076, 2081, 2086],
+)
+TRAIT_FOLLOWUP_MAP["Field-Research"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Field-Research", []),
+    [2091, 2096, 2101, 2106, 2111, 2116],
+)
+TRAIT_FOLLOWUP_MAP["Civil-Build"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Civil-Build", []),
+    [2091, 2094, 2098, 2103, 2109, 2114],
+)
+TRAIT_FOLLOWUP_MAP["Visual-Design"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Visual-Design", []),
+    [2121, 2126, 2131, 2136, 2141, 2146],
+)
+TRAIT_FOLLOWUP_MAP["Creative-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Creative-Skill", []),
+    [2121, 2126, 2131, 2136, 2141, 2146],
+)
+TRAIT_FOLLOWUP_MAP["Spatial-Design"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Spatial-Design", []),
+    [2126, 2131, 2135, 2146],
+)
+TRAIT_FOLLOWUP_MAP["Maritime-Sea"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Maritime-Sea", []),
+    [2151, 2156, 2161, 2166, 2171, 2176],
+)
+TRAIT_FOLLOWUP_MAP["Mechanical-Design"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Mechanical-Design", []),
+    [2063, 2069, 2074, 2123, 2133, 2151, 2157, 2163, 2169],
+)
+TRAIT_FOLLOWUP_MAP["Electrical-Power"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Electrical-Power", []),
+    [2064, 2073, 2083, 2155, 2165, 2175],
+)
+TRAIT_FOLLOWUP_MAP["Electronics-Dev"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Electronics-Dev", []),
+    [2064, 2069, 2073, 2085],
+)
+TRAIT_FOLLOWUP_MAP["Technical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Technical-Skill", []),
+    [2062, 2072, 2084, 2095, 2105, 2123, 2152, 2162, 2172],
+)
+TRAIT_FOLLOWUP_MAP["Analytical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Analytical-Skill", []),
+    [2061, 2071, 2081, 2092, 2102, 2112, 2124, 2154, 2164],
+)
+TRAIT_FOLLOWUP_MAP["Industrial-Ops"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Industrial-Ops", []),
+    [2066, 2125, 2134, 2154, 2164, 2174],
+)
+TRAIT_FOLLOWUP_MAP["Data-Analytics"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Data-Analytics", []),
+    [2065, 2075, 2085, 2105, 2115],
+)
+TRAIT_FOLLOWUP_MAP["People-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("People-Skill", []),
+    [2096, 2106, 2122, 2132, 2142, 2156, 2166, 2176],
+)
+TRAIT_FOLLOWUP_MAP["Admin-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Admin-Skill", []),
+    [2066, 2076, 2086, 2106, 2134, 2154, 2164, 2174],
+)
+TRAIT_FOLLOWUP_MAP["Community-Serve"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Community-Serve", []),
+    [2094, 2104, 2122, 2156, 2176],
+)
+TRAIT_FOLLOWUP_MAP["Startup-Venture"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Startup-Venture", []),
+    [2481, 2486, 2491, 2496, 2501, 2506, 2541, 2546, 2551, 2556, 2561, 2566, 2331, 2336, 2341, 2346, 2351, 2356, 2361, 2366, 2371, 2376, 2381, 2386, 2181, 2186, 2191, 2196, 2201, 2206, 2213, 2223, 2233, 2246, 2266, 2286, 2296],
+)
+TRAIT_FOLLOWUP_MAP["Finance-Acct"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Finance-Acct", []),
+    [2424, 2434, 2444, 2453, 2463, 2473, 2484, 2494, 2504, 2515, 2525, 2535, 2544, 2554, 2564, 2301, 2306, 2311, 2316, 2321, 2326, 2331, 2336, 2341, 2346, 2351, 2356, 2361, 2366, 2371, 2376, 2381, 2386, 2184, 2194, 2204, 2211, 2216, 2221, 2226, 2231, 2236, 2274, 2284, 2294],
+)
+TRAIT_FOLLOWUP_MAP["Marketing-Sales"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Marketing-Sales", []),
+    [2456, 2466, 2476, 2485, 2495, 2505, 2543, 2553, 2563, 2361, 2366, 2371, 2376, 2381, 2386, 2183, 2193, 2203, 2241, 2246, 2251, 2256, 2261, 2266, 2181, 2191],
+)
+TRAIT_FOLLOWUP_MAP["Admin-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Admin-Skill", []),
+    [2422, 2432, 2442, 2451, 2461, 2471, 2483, 2493, 2503, 2511, 2516, 2521, 2526, 2531, 2536, 2301, 2306, 2311, 2316, 2321, 2326, 2391, 2396, 2401, 2406, 2411, 2416, 2182, 2192, 2202, 2212, 2222, 2232, 2271, 2276, 2281, 2286, 2291, 2296],
+)
+TRAIT_FOLLOWUP_MAP["People-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("People-Skill", []),
+    [2426, 2436, 2446, 2454, 2464, 2474, 2512, 2522, 2532, 2546, 2556, 2566, 2361, 2366, 2371, 2376, 2381, 2386, 2391, 2396, 2401, 2406, 2411, 2416, 2185, 2195, 2205, 2214, 2224, 2234, 2241, 2245, 2255, 2265, 2272, 2282, 2292],
+)
+TRAIT_FOLLOWUP_MAP["Data-Analytics"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Data-Analytics", []),
+    [2423, 2433, 2443, 2455, 2465, 2475, 2486, 2496, 2506, 2516, 2526, 2536, 2543, 2553, 2563, 2301, 2311, 2321, 2331, 2341, 2351, 2391, 2401, 2411, 2183, 2184, 2211, 2215, 2225, 2235, 2244, 2254, 2264, 2273, 2283],
+)
+TRAIT_FOLLOWUP_MAP["Creative-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Creative-Skill", []),
+    [2186, 2196, 2206, 2242, 2247, 2252, 2257, 2262],
+)
+TRAIT_FOLLOWUP_MAP["Digital-Media"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Digital-Media", []),
+    [2186, 2243, 2247, 2253, 2258, 2263],
+)
+TRAIT_FOLLOWUP_MAP["Industrial-Ops"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Industrial-Ops", []),
+    [2182, 2192, 2271, 2273, 2277, 2283, 2287, 2293, 2297],
+)
+TRAIT_FOLLOWUP_MAP["Analytical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Analytical-Skill", []),
+    [2301, 2306, 2311, 2316, 2321, 2326, 2331, 2336, 2341, 2346, 2351, 2356, 2361, 2366, 2184, 2194, 2204, 2211, 2216, 2221, 2226, 2231, 2236, 2244, 2254, 2271, 2281],
+)
+TRAIT_FOLLOWUP_MAP["HR-Management"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("HR-Management", []),
+    [2391, 2396, 2401, 2406, 2411, 2416],
+)
+
+TRAIT_FOLLOWUP_MAP["Visual-Design"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Visual-Design", []),
+    [2870, 2878, 2888, 2893, 2898, 2903, 2913, 2923, 2811, 2816, 2821, 2826, 2831, 2836, 2721, 2731, 2741, 2781, 2791, 2571, 2576, 2581, 2586, 2591, 2596, 2601, 2606, 2611, 2616, 2621, 2626, 2631, 2636, 2641, 2646, 2651, 2656, 2691, 2696, 2701, 2706, 2711, 2716],
+)
+TRAIT_FOLLOWUP_MAP["Creative-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Creative-Skill", []),
+    [2841, 2846, 2851, 2856, 2861, 2866, 2871, 2876, 2881, 2886, 2891, 2896, 2901, 2906, 2911, 2916, 2921, 2926, 2721, 2726, 2731, 2741, 2751, 2756, 2761, 2771, 2781, 2786, 2791, 2801, 2811, 2816, 2821, 2831, 2571, 2576, 2581, 2586, 2591, 2596, 2601, 2606, 2611, 2616, 2621, 2626, 2631, 2636, 2641, 2646, 2651, 2656, 2661, 2666, 2671, 2676, 2681, 2686, 2691, 2696, 2701, 2706, 2711],
+)
+TRAIT_FOLLOWUP_MAP["Artistic"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Artistic", []),
+    [2842, 2847, 2852, 2857, 2862, 2871, 2876, 2881, 2886, 2896, 2901, 2911, 2921, 2926, 2721, 2726, 2731, 2736, 2741, 2746, 2781, 2786, 2791, 2796, 2801, 2806, 2811, 2816, 2821, 2571, 2576, 2581, 2586, 2591, 2596, 2601, 2606, 2611, 2616, 2621, 2626, 2661, 2666, 2671, 2676, 2681, 2686, 2691, 2696, 2701],
+)
+TRAIT_FOLLOWUP_MAP["Digital-Media"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Digital-Media", []),
+    [2844, 2854, 2864, 2869, 2873, 2880, 2885, 2895, 2900, 2912, 2924, 2581, 2591, 2596, 2616, 2626, 2636, 2646, 2656, 2661, 2666, 2671, 2676, 2681, 2686, 2701, 2706, 2711, 2716],
+)
+TRAIT_FOLLOWUP_MAP["Spatial-Design"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Spatial-Design", []),
+    [2904, 2909, 2914, 2925, 2576, 2586, 2596, 2631, 2636, 2641, 2646, 2651, 2656],
+)
+TRAIT_FOLLOWUP_MAP["Film-Broadcast"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Film-Broadcast", []),
+    [2848, 2853, 2858, 2863, 2868, 2874, 2882, 2887, 2892, 2897, 2930, 2745, 2749, 2758, 2767, 2774, 2789, 2809, 2827, 2661, 2666, 2671, 2676, 2681, 2686],
+)
+TRAIT_FOLLOWUP_MAP["Marketing-Sales"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Marketing-Sales", []),
+    [2855, 2860, 2865, 2920, 2925, 2601, 2606, 2611, 2616, 2621, 2626, 2691, 2696, 2701, 2706, 2711, 2716],
+)
+TRAIT_FOLLOWUP_MAP["Software-Dev"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Software-Dev", []),
+    [2858, 2875, 2881, 2885, 2889, 2900, 2912, 2917, 2927, 2929, 2581, 2586, 2596, 2631, 2636, 2641, 2651, 2691, 2696, 2701, 2706, 2711, 2716],
+)
+TRAIT_FOLLOWUP_MAP["Community-Serve"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Community-Serve", []),
+    [2859, 2866, 2870, 2921, 2930, 2631, 2636, 2641, 2646, 2651, 2691, 2696, 2706],
+)
+TRAIT_FOLLOWUP_MAP["Data-Analytics"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Data-Analytics", []),
+    [2606, 2616, 2621, 2626, 2691, 2696, 2701, 2706, 2711, 2716],
+)
+TRAIT_FOLLOWUP_MAP["Startup-Venture"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Startup-Venture", []),
+    [2856, 2862, 2867, 2885, 2906, 2926, 2601, 2611, 2631, 2641, 2651, 2691, 2701, 2711],
+)
+TRAIT_FOLLOWUP_MAP["Teaching-Ed"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Teaching-Ed", []),
+    [2861, 2866, 2870, 2884, 2895, 2930, 2576, 2586, 2591, 2596, 2606, 2616, 2626, 2641, 2651, 2656, 2661, 2671, 2681],
+)
+TRAIT_FOLLOWUP_MAP["Lab-Research"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Lab-Research", []),
+    [2907, 2908, 2917, 2923, 2928, 2571, 2576, 2581, 2586, 2591, 2596, 2631, 2636, 2641, 2646],
+)
+TRAIT_FOLLOWUP_MAP["Analytical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Analytical-Skill", []),
+    [2843, 2845, 2847, 2853, 2857, 2909, 2918, 2581, 2591, 2596, 2606, 2621, 2631, 2641, 2646, 2651, 2691, 2706, 2711, 2716],
+)
+TRAIT_FOLLOWUP_MAP["Performing-Arts"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Performing-Arts", []),
+    [2850, 2854, 2858, 2883, 2895, 2898, 2926, 2930, 2721, 2726, 2731, 2736, 2741, 2746, 2751, 2756, 2761, 2766, 2771, 2776, 2781, 2786, 2791, 2796, 2801, 2806, 2811, 2816, 2821, 2661, 2666, 2671, 2676, 2681, 2686],
+)
+TRAIT_FOLLOWUP_MAP["Community-Serve"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Community-Serve", []),
+    [2426, 2436, 2446, 2454, 2464, 2474, 2512, 2522, 2532, 2546, 2556, 2566, 2331, 2336, 2341, 2346, 2351, 2356, 2361, 2366, 2391, 2396, 2401, 2406, 2411, 2416],
+)
+TRAIT_FOLLOWUP_MAP["Teaching-Ed"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Teaching-Ed", []),
+    [2391, 2396, 2401, 2406, 2411, 2416],
+)
+TRAIT_FOLLOWUP_MAP["Industrial-Ops"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Industrial-Ops", []),
+    [2902, 2907, 2912, 2917, 2922, 2927, 2421, 2426, 2431, 2436, 2441, 2446, 2452, 2462, 2472, 2482, 2492, 2502],
+)
+TRAIT_FOLLOWUP_MAP["Agri-Nature"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Agri-Nature", []),
+    [2481, 2486, 2491, 2496, 2501, 2506],
+)
+TRAIT_FOLLOWUP_MAP["Hospitality-Svc"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Hospitality-Svc", []),
+    [2511, 2516, 2521, 2526, 2531, 2536],
+)
+TRAIT_FOLLOWUP_MAP["Conventional"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Conventional", []),
+    [2451, 2461, 2471, 2511, 2521, 2531],
+)
+TRAIT_FOLLOWUP_MAP["Mechanical-Design"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Mechanical-Design", []),
+    [2904, 2914, 2927, 2425, 2435, 2445],
+)
+# ── Arts Expansion 2 new trait entries ──
+TRAIT_FOLLOWUP_MAP["Animation-3D"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Animation-3D", []),
+    [2871, 2872, 2873, 2874, 2875, 2876, 2877, 2878, 2879, 2880, 2881, 2882, 2883, 2884, 2885, 2886, 2887, 2888, 2889, 2890, 2891, 2892, 2893, 2894, 2895, 2896, 2897, 2898, 2899, 2900],
+)
+TRAIT_FOLLOWUP_MAP["Game-Dev"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Game-Dev", []),
+    [2876, 2882, 2890, 2895, 2897],
+)
+TRAIT_FOLLOWUP_MAP["Environmental-Eng"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Environmental-Eng", []),
+    [2903, 2915, 2921, 2928],
+)
+TRAIT_FOLLOWUP_MAP["Software-Dev"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Software-Dev", []),
+    [2423, 2433, 2443, 2516, 2526, 2536, 2545, 2555, 2565],
+)
+
+# ── Healthcare expansion: domain entry points ──
+DOMAIN_ENTRY_QUESTIONS["healthcare"] = _prepend_unique(
+    DOMAIN_ENTRY_QUESTIONS["healthcare"],
+    # 5 entry points per category (every 5th Q for variety)
+    [2931, 2936, 2941, 2946, 2951,   # Medicine & Healthcare
+     2961, 2966, 2971, 2976, 2981,   # Nursing & Patient Care
+     2991, 2996, 3001, 3006, 3011,   # Psychology & Mental Health
+     3021, 3026, 3031, 3036, 3041],  # Public Health
+)
+
+# ── Healthcare expansion: trait follow-up prepends ──
+TRAIT_FOLLOWUP_MAP["Patient-Care"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Patient-Care", []),
+    [2931, 2932, 2933, 2934, 2935, 2936, 2937, 2938, 2939, 2940, 2941, 2942, 2943, 2944, 2945, 2946, 2947, 2948, 2949, 2950, 2956, 2957, 2958, 2959, 2960, 2961, 2962, 2963, 2964, 2965, 2966, 2967, 2968, 2969, 2970, 2971, 2972, 2973, 2974, 2975, 2976, 2977, 2978, 2979, 2980, 2981, 2982, 2983, 2984, 2985, 2986, 2987, 2988, 2989, 2990, 3006, 3007, 3008, 3009, 3010],
+)
+TRAIT_FOLLOWUP_MAP["Medical-Lab"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Medical-Lab", []),
+    [2936, 2937, 2938, 2939, 2940, 2941, 2942, 2943, 2944, 2945, 2946, 2947, 2948, 2949, 2950, 2951, 2952, 2953, 2954, 2955],
+)
+TRAIT_FOLLOWUP_MAP["Rehab-Therapy"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Rehab-Therapy", []),
+    [2936, 2937, 2938, 2939, 2940, 2946, 2947, 2948, 2949, 2950, 2956, 2957, 2958, 2959, 2960, 3006, 3007, 3008, 3009, 3010, 3011, 3012, 3013, 3014, 3015, 3016, 3017, 3018, 3019, 3020],
+)
+TRAIT_FOLLOWUP_MAP["Health-Admin"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Health-Admin", []),
+    [2931, 2932, 2933, 2934, 2935, 2941, 2942, 2943, 2944, 2945, 2946, 2947, 2948, 2949, 2950, 2956, 2957, 2958, 2959, 2960, 2961, 2962, 2963, 2964, 2965, 2971, 2972, 2973, 2974, 2975, 2976, 2977, 2978, 2979, 2980, 2981, 2982, 2983, 2984, 2985, 2986, 2987, 2988, 2989, 2990, 3016, 3017, 3018, 3019, 3020, 3021, 3022, 3023, 3024, 3025, 3031, 3032, 3033, 3034, 3035, 3036, 3037, 3038, 3039, 3040, 3041, 3042, 3043, 3044, 3045, 3046, 3047, 3048, 3049, 3050],
+)
+TRAIT_FOLLOWUP_MAP["Counseling"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Counseling", []),
+    [2941, 2942, 2943, 2944, 2945, 2951, 2952, 2953, 2954, 2955, 2966, 2967, 2968, 2969, 2970, 2971, 2972, 2973, 2974, 2975, 2981, 2982, 2983, 2984, 2985, 2991, 2992, 2993, 2994, 2995, 2996, 2997, 2998, 2999, 3000, 3001, 3002, 3003, 3004, 3005, 3006, 3007, 3008, 3009, 3010, 3016, 3017, 3018, 3019, 3020, 3041, 3042, 3043, 3044, 3045],
+)
+TRAIT_FOLLOWUP_MAP["Public-Health"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Public-Health", []),
+    [2951, 2952, 2953, 2954, 2955, 2966, 2967, 2968, 2969, 2970, 2981, 2982, 2983, 2984, 2985, 3021, 3022, 3023, 3024, 3025, 3026, 3027, 3028, 3029, 3030, 3031, 3032, 3033, 3034, 3035, 3041, 3042, 3043, 3044, 3045, 3046, 3047, 3048, 3049, 3050],
+)
+TRAIT_FOLLOWUP_MAP["Lab-Research"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Lab-Research", []),
+    [2931, 2932, 2933, 2934, 2935, 2941, 2942, 2943, 2944, 2945, 2946, 2947, 2948, 2949, 2950, 2956, 2957, 2958, 2959, 2960, 2981, 2982, 2983, 2984, 2985, 2991, 2992, 2993, 2994, 2995, 2996, 2997, 2998, 2999, 3000, 3001, 3002, 3003, 3004, 3005, 3006, 3007, 3008, 3009, 3010, 3011, 3012, 3013, 3014, 3015, 3016, 3017, 3018, 3019, 3020, 3021, 3022, 3023, 3024, 3025, 3031, 3032, 3033, 3034, 3035, 3036, 3037, 3038, 3039, 3040, 3046, 3047, 3048, 3049, 3050],
+)
+TRAIT_FOLLOWUP_MAP["Pharmacy"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Pharmacy", []),
+    [2936, 2937, 2938, 2939, 2940, 2946, 2947, 2948, 2949, 2950, 2971, 2972, 2973, 2974, 2975],
+)
+TRAIT_FOLLOWUP_MAP["Nutrition-Diet"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Nutrition-Diet", []),
+    [2951, 2952, 2953, 2954, 2955, 3041, 3042, 3043, 3044, 3045],
+)
+TRAIT_FOLLOWUP_MAP["People-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("People-Skill", []),
+    [2971, 2972, 2973, 2974, 2975, 2986, 2987, 2988, 2989, 2990, 2996, 2997, 2998, 2999, 3000, 3001, 3002, 3003, 3004, 3005],
+)
+TRAIT_FOLLOWUP_MAP["Analytical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Analytical-Skill", []),
+    [2941, 2942, 2943, 2944, 2945, 2956, 2957, 2958, 2959, 2960, 2971, 2972, 2973, 2974, 2975, 2996, 2997, 2998, 2999, 3000, 3001, 3002, 3003, 3004, 3005, 3011, 3012, 3013, 3014, 3015, 3021, 3022, 3023, 3024, 3025, 3026, 3027, 3028, 3029, 3030, 3031, 3032, 3033, 3034, 3035, 3036, 3037, 3038, 3039, 3040, 3046, 3047, 3048, 3049, 3050],
+)
+TRAIT_FOLLOWUP_MAP["Community-Serve"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Community-Serve", []),
+    [2961, 2962, 2963, 2964, 2965, 2966, 2967, 2968, 2969, 2970, 2986, 2987, 2988, 2989, 2990, 2991, 2992, 2993, 2994, 2995, 3006, 3007, 3008, 3009, 3010, 3011, 3012, 3013, 3014, 3015, 3016, 3017, 3018, 3019, 3020, 3021, 3022, 3023, 3024, 3025, 3026, 3027, 3028, 3029, 3030, 3031, 3032, 3033, 3034, 3035, 3036, 3037, 3038, 3039, 3040, 3046, 3047, 3048, 3049, 3050],
+)
+TRAIT_FOLLOWUP_MAP["Teaching-Ed"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Teaching-Ed", []),
+    [2976, 2977, 2978, 2979, 2980, 2981, 2982, 2983, 2984, 2985, 2986, 2987, 2988, 2989, 2990, 2996, 2997, 2998, 2999, 3000, 3006, 3007, 3008, 3009, 3010, 3011, 3012, 3013, 3014, 3015, 3041, 3042, 3043, 3044, 3045],
+)
+
+# ── Healthcare expansion 2: domain entry points ──
+DOMAIN_ENTRY_QUESTIONS["healthcare"] = _prepend_unique(
+    DOMAIN_ENTRY_QUESTIONS["healthcare"],
+    [3051, 3056, 3061, 3066, 3071,   # Pharmacy & Pharmaceutical Science
+     3081, 3086, 3091, 3096, 3101,   # Physical Therapy & Rehabilitation
+     3111, 3116, 3121, 3126, 3131,   # Medical Technology & Lab Science
+     3141, 3146, 3151, 3156, 3161],  # Nutrition & Dietetics
+)
+
+# ── Healthcare expansion 2: trait follow-up prepends ──
+TRAIT_FOLLOWUP_MAP["Pharmacy"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Pharmacy", []),
+    list(range(3051, 3081)),
+)
+TRAIT_FOLLOWUP_MAP["Rehab-Therapy"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Rehab-Therapy", []),
+    list(range(3081, 3111)),
+)
+TRAIT_FOLLOWUP_MAP["Medical-Lab"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Medical-Lab", []),
+    list(range(3111, 3141)),
+)
+TRAIT_FOLLOWUP_MAP["Nutrition-Diet"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Nutrition-Diet", []),
+    list(range(3141, 3171)),
+)
+TRAIT_FOLLOWUP_MAP["Patient-Care"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Patient-Care", []),
+    [3051, 3052, 3053, 3054, 3055, 3056, 3057, 3058, 3059, 3060, 3066, 3067, 3068, 3069, 3070,
+     3076, 3077, 3078, 3079, 3080, 3081, 3082, 3083, 3084, 3085, 3086, 3087, 3088, 3089, 3090,
+     3091, 3092, 3093, 3094, 3095, 3096, 3097, 3098, 3099, 3100, 3101, 3102, 3103, 3104, 3105,
+     3111, 3112, 3113, 3114, 3115, 3121, 3122, 3123, 3124, 3125, 3126, 3127, 3128, 3129, 3130,
+     3141, 3142, 3143, 3144, 3145, 3146, 3147, 3148, 3149, 3150, 3151, 3152, 3153, 3154, 3155,
+     3161, 3162, 3163, 3164, 3165, 3166, 3167, 3168, 3169, 3170],
+)
+TRAIT_FOLLOWUP_MAP["Lab-Research"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Lab-Research", []),
+    [3051, 3052, 3053, 3054, 3055, 3056, 3057, 3058, 3059, 3060, 3061, 3062, 3063, 3064, 3065,
+     3071, 3072, 3073, 3074, 3075, 3076, 3077, 3078, 3079, 3080, 3096, 3097, 3098, 3099, 3100,
+     3101, 3102, 3103, 3104, 3105, 3111, 3112, 3113, 3114, 3115, 3116, 3117, 3118, 3119, 3120,
+     3121, 3122, 3123, 3124, 3125, 3126, 3127, 3128, 3129, 3130, 3131, 3132, 3133, 3134, 3135,
+     3136, 3137, 3138, 3139, 3140, 3141, 3142, 3143, 3144, 3145, 3156, 3157, 3158, 3159, 3160,
+     3166, 3167, 3168, 3169, 3170],
+)
+TRAIT_FOLLOWUP_MAP["Analytical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Analytical-Skill", []),
+    [3051, 3052, 3053, 3054, 3055, 3056, 3057, 3058, 3059, 3060, 3061, 3062, 3063, 3064, 3065,
+     3066, 3067, 3068, 3069, 3070, 3071, 3072, 3073, 3074, 3075, 3081, 3082, 3083, 3084, 3085,
+     3091, 3092, 3093, 3094, 3095, 3101, 3102, 3103, 3104, 3105,
+     3111, 3112, 3113, 3114, 3115, 3116, 3117, 3118, 3119, 3120, 3121, 3122, 3123, 3124, 3125,
+     3126, 3127, 3128, 3129, 3130, 3131, 3132, 3133, 3134, 3135, 3136, 3137, 3138, 3139, 3140,
+     3141, 3142, 3143, 3144, 3145, 3151, 3152, 3153, 3154, 3155, 3156, 3157, 3158, 3159, 3160,
+     3166, 3167, 3168, 3169, 3170],
+)
+TRAIT_FOLLOWUP_MAP["People-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("People-Skill", []),
+    [3051, 3052, 3053, 3054, 3055, 3061, 3062, 3063, 3064, 3065, 3066, 3067, 3068, 3069, 3070,
+     3071, 3072, 3073, 3074, 3075, 3081, 3082, 3083, 3084, 3085, 3091, 3092, 3093, 3094, 3095,
+     3096, 3097, 3098, 3099, 3100, 3101, 3102, 3103, 3104, 3105,
+     3126, 3127, 3128, 3129, 3130, 3136, 3137, 3138, 3139, 3140,
+     3141, 3142, 3143, 3144, 3145, 3156, 3157, 3158, 3159, 3160, 3161, 3162, 3163, 3164, 3165],
+)
+TRAIT_FOLLOWUP_MAP["Community-Serve"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Community-Serve", []),
+    [3051, 3052, 3053, 3054, 3055, 3071, 3072, 3073, 3074, 3075, 3076, 3077, 3078, 3079, 3080,
+     3081, 3082, 3083, 3084, 3085, 3096, 3097, 3098, 3099, 3100, 3101, 3102, 3103, 3104, 3105,
+     3131, 3132, 3133, 3134, 3135, 3141, 3142, 3143, 3144, 3145, 3146, 3147, 3148, 3149, 3150,
+     3151, 3152, 3153, 3154, 3155, 3156, 3157, 3158, 3159, 3160, 3161, 3162, 3163, 3164, 3165,
+     3166, 3167, 3168, 3169, 3170],
+)
+TRAIT_FOLLOWUP_MAP["Health-Admin"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Health-Admin", []),
+    [3056, 3057, 3058, 3059, 3060, 3061, 3062, 3063, 3064, 3065, 3066, 3067, 3068, 3069, 3070,
+     3071, 3072, 3073, 3074, 3075, 3081, 3082, 3083, 3084, 3085, 3101, 3102, 3103, 3104, 3105,
+     3116, 3117, 3118, 3119, 3120, 3126, 3127, 3128, 3129, 3130, 3131, 3132, 3133, 3134, 3135,
+     3136, 3137, 3138, 3139, 3140, 3146, 3147, 3148, 3149, 3150, 3151, 3152, 3153, 3154, 3155,
+     3156, 3157, 3158, 3159, 3160, 3166, 3167, 3168, 3169, 3170],
+)
+TRAIT_FOLLOWUP_MAP["Public-Health"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Public-Health", []),
+    [3071, 3072, 3073, 3074, 3075, 3096, 3097, 3098, 3099, 3100, 3101, 3102, 3103, 3104, 3105,
+     3111, 3112, 3113, 3114, 3115, 3116, 3117, 3118, 3119, 3120, 3131, 3132, 3133, 3134, 3135,
+     3136, 3137, 3138, 3139, 3140, 3146, 3147, 3148, 3149, 3150, 3156, 3157, 3158, 3159, 3160,
+     3161, 3162, 3163, 3164, 3165, 3166, 3167, 3168, 3169, 3170],
+)
+TRAIT_FOLLOWUP_MAP["Teaching-Ed"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Teaching-Ed", []),
+    [3076, 3077, 3078, 3079, 3080, 3091, 3092, 3093, 3094, 3095, 3101, 3102, 3103, 3104, 3105,
+     3126, 3127, 3128, 3129, 3130, 3131, 3132, 3133, 3134, 3135, 3136, 3137, 3138, 3139, 3140,
+     3146, 3147, 3148, 3149, 3150, 3156, 3157, 3158, 3159, 3160, 3161, 3162, 3163, 3164, 3165],
+)
+TRAIT_FOLLOWUP_MAP["Counseling"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Counseling", []),
+    [3051, 3052, 3053, 3054, 3055, 3076, 3077, 3078, 3079, 3080, 3081, 3082, 3083, 3084, 3085,
+     3086, 3087, 3088, 3089, 3090, 3091, 3092, 3093, 3094, 3095,
+     3141, 3142, 3143, 3144, 3145, 3146, 3147, 3148, 3149, 3150, 3151, 3152, 3153, 3154, 3155,
+     3156, 3157, 3158, 3159, 3160],
+)
+TRAIT_FOLLOWUP_MAP["Physical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Physical-Skill", []),
+    [3081, 3082, 3083, 3084, 3085, 3086, 3087, 3088, 3089, 3090, 3091, 3092, 3093, 3094, 3095,
+     3096, 3097, 3098, 3099, 3100, 3101, 3102, 3103, 3104, 3105,
+     3146, 3147, 3148, 3149, 3150, 3161, 3162, 3163, 3164, 3165],
+)
+
+# ── Healthcare expansion 3: domain entry points ──
+DOMAIN_ENTRY_QUESTIONS["healthcare"] = _prepend_unique(
+    DOMAIN_ENTRY_QUESTIONS["healthcare"],
+    [3171, 3176, 3181, 3186, 3191,   # Occupational Therapy
+     3201, 3206, 3211, 3216, 3221,   # Respiratory Therapy
+     3231, 3236, 3241, 3246, 3251,   # Speech-Language Pathology
+     3261, 3266, 3271, 3276, 3281],  # Dentistry & Oral Health
+)
+
+# ── Healthcare expansion 3: trait follow-up prepends ──
+TRAIT_FOLLOWUP_MAP["Rehab-Therapy"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Rehab-Therapy", []),
+    [3171, 3172, 3173, 3174, 3175, 3176, 3177, 3178, 3179, 3180,
+     3181, 3182, 3183, 3184, 3185, 3186, 3187, 3188, 3189, 3190,
+     3191, 3192, 3193, 3194, 3195, 3196, 3197, 3198, 3199, 3200,
+     3201, 3202, 3203, 3204, 3205, 3206, 3207, 3208, 3209, 3210,
+     3211, 3212, 3213, 3214, 3215, 3216, 3217, 3218, 3219, 3220,
+     3221, 3222, 3223, 3224, 3225, 3226, 3227, 3228, 3229, 3230,
+     3231, 3232, 3233, 3234, 3235, 3236, 3237, 3238, 3239, 3240,
+     3241, 3242, 3243, 3244, 3245, 3246, 3247, 3248, 3249, 3250,
+     3251, 3252, 3253, 3254, 3255, 3256, 3257, 3258, 3259, 3260],
+)
+TRAIT_FOLLOWUP_MAP["Patient-Care"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Patient-Care", []),
+    [3171, 3172, 3173, 3174, 3175, 3176, 3177, 3178, 3179, 3180,
+     3181, 3182, 3183, 3184, 3185, 3186, 3187, 3188, 3189, 3190,
+     3191, 3192, 3193, 3194, 3195, 3196, 3197, 3198, 3199, 3200,
+     3201, 3202, 3203, 3204, 3205, 3206, 3207, 3208, 3209, 3210,
+     3211, 3212, 3213, 3214, 3215, 3216, 3217, 3218, 3219, 3220,
+     3221, 3222, 3223, 3224, 3225, 3226, 3227, 3228, 3229, 3230,
+     3231, 3232, 3233, 3234, 3235, 3236, 3237, 3238, 3239, 3240,
+     3241, 3242, 3243, 3244, 3245, 3246, 3247, 3248, 3249, 3250,
+     3251, 3252, 3253, 3254, 3255, 3256, 3257, 3258, 3259, 3260,
+     3261, 3262, 3263, 3264, 3265, 3266, 3267, 3268, 3269, 3270,
+     3271, 3272, 3273, 3274, 3275, 3276, 3277, 3278, 3279, 3280,
+     3281, 3282, 3283, 3284, 3285, 3286, 3287, 3288, 3289, 3290],
+)
+TRAIT_FOLLOWUP_MAP["People-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("People-Skill", []),
+    [3171, 3172, 3173, 3174, 3175, 3176, 3177, 3178, 3179, 3180,
+     3181, 3182, 3183, 3184, 3185, 3186, 3187, 3188, 3189, 3190,
+     3191, 3192, 3193, 3194, 3195, 3196, 3197, 3198, 3199, 3200,
+     3231, 3232, 3233, 3234, 3235, 3236, 3237, 3238, 3239, 3240,
+     3241, 3242, 3243, 3244, 3245, 3246, 3247, 3248, 3249, 3250,
+     3251, 3252, 3253, 3254, 3255, 3256, 3257, 3258, 3259, 3260,
+     3261, 3262, 3263, 3264, 3265, 3266, 3267, 3268, 3269, 3270,
+     3281, 3282, 3283, 3284, 3285, 3286, 3287, 3288, 3289, 3290],
+)
+TRAIT_FOLLOWUP_MAP["Counseling"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Counseling", []),
+    [3171, 3172, 3173, 3174, 3175, 3176, 3177, 3178, 3179, 3180,
+     3186, 3187, 3188, 3189, 3190, 3191, 3192, 3193, 3194, 3195,
+     3196, 3197, 3198, 3199, 3200,
+     3231, 3232, 3233, 3234, 3235, 3236, 3237, 3238, 3239, 3240,
+     3246, 3247, 3248, 3249, 3250, 3251, 3252, 3253, 3254, 3255,
+     3281, 3282, 3283, 3284, 3285],
+)
+TRAIT_FOLLOWUP_MAP["Community-Serve"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Community-Serve", []),
+    [3171, 3172, 3173, 3174, 3175, 3186, 3187, 3188, 3189, 3190,
+     3191, 3192, 3193, 3194, 3195, 3196, 3197, 3198, 3199, 3200,
+     3221, 3222, 3223, 3224, 3225, 3226, 3227, 3228, 3229, 3230,
+     3231, 3232, 3233, 3234, 3235, 3251, 3252, 3253, 3254, 3255,
+     3256, 3257, 3258, 3259, 3260,
+     3261, 3262, 3263, 3264, 3265, 3276, 3277, 3278, 3279, 3280,
+     3286, 3287, 3288, 3289, 3290],
+)
+TRAIT_FOLLOWUP_MAP["Teaching-Ed"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Teaching-Ed", []),
+    [3171, 3172, 3173, 3174, 3175, 3181, 3182, 3183, 3184, 3185,
+     3186, 3187, 3188, 3189, 3190, 3196, 3197, 3198, 3199, 3200,
+     3221, 3222, 3223, 3224, 3225,
+     3236, 3237, 3238, 3239, 3240, 3241, 3242, 3243, 3244, 3245,
+     3251, 3252, 3253, 3254, 3255, 3256, 3257, 3258, 3259, 3260,
+     3271, 3272, 3273, 3274, 3275, 3286, 3287, 3288, 3289, 3290],
+)
+TRAIT_FOLLOWUP_MAP["Health-Admin"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Health-Admin", []),
+    [3176, 3177, 3178, 3179, 3180, 3186, 3187, 3188, 3189, 3190,
+     3191, 3192, 3193, 3194, 3195, 3196, 3197, 3198, 3199, 3200,
+     3211, 3212, 3213, 3214, 3215, 3216, 3217, 3218, 3219, 3220,
+     3226, 3227, 3228, 3229, 3230,
+     3246, 3247, 3248, 3249, 3250,
+     3261, 3262, 3263, 3264, 3265, 3276, 3277, 3278, 3279, 3280,
+     3281, 3282, 3283, 3284, 3285],
+)
+TRAIT_FOLLOWUP_MAP["Analytical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Analytical-Skill", []),
+    [3176, 3177, 3178, 3179, 3180, 3181, 3182, 3183, 3184, 3185,
+     3191, 3192, 3193, 3194, 3195, 3196, 3197, 3198, 3199, 3200,
+     3201, 3202, 3203, 3204, 3205, 3206, 3207, 3208, 3209, 3210,
+     3211, 3212, 3213, 3214, 3215, 3216, 3217, 3218, 3219, 3220,
+     3226, 3227, 3228, 3229, 3230,
+     3236, 3237, 3238, 3239, 3240, 3241, 3242, 3243, 3244, 3245,
+     3251, 3252, 3253, 3254, 3255, 3256, 3257, 3258, 3259, 3260,
+     3261, 3262, 3263, 3264, 3265, 3266, 3267, 3268, 3269, 3270,
+     3271, 3272, 3273, 3274, 3275, 3281, 3282, 3283, 3284, 3285,
+     3286, 3287, 3288, 3289, 3290],
+)
+TRAIT_FOLLOWUP_MAP["Medical-Lab"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Medical-Lab", []),
+    [3176, 3177, 3178, 3179, 3180, 3181, 3182, 3183, 3184, 3185,
+     3201, 3202, 3203, 3204, 3205, 3206, 3207, 3208, 3209, 3210,
+     3211, 3212, 3213, 3214, 3215, 3216, 3217, 3218, 3219, 3220,
+     3226, 3227, 3228, 3229, 3230,
+     3236, 3237, 3238, 3239, 3240, 3241, 3242, 3243, 3244, 3245,
+     3261, 3262, 3263, 3264, 3265, 3266, 3267, 3268, 3269, 3270,
+     3271, 3272, 3273, 3274, 3275, 3281, 3282, 3283, 3284, 3285,
+     3286, 3287, 3288, 3289, 3290],
+)
+TRAIT_FOLLOWUP_MAP["Lab-Research"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Lab-Research", []),
+    [3176, 3177, 3178, 3179, 3180, 3191, 3192, 3193, 3194, 3195,
+     3196, 3197, 3198, 3199, 3200,
+     3216, 3217, 3218, 3219, 3220, 3221, 3222, 3223, 3224, 3225,
+     3241, 3242, 3243, 3244, 3245, 3246, 3247, 3248, 3249, 3250,
+     3256, 3257, 3258, 3259, 3260,
+     3261, 3262, 3263, 3264, 3265, 3266, 3267, 3268, 3269, 3270,
+     3276, 3277, 3278, 3279, 3280, 3286, 3287, 3288, 3289, 3290],
+)
+TRAIT_FOLLOWUP_MAP["Public-Health"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Public-Health", []),
+    [3191, 3192, 3193, 3194, 3195, 3221, 3222, 3223, 3224, 3225,
+     3251, 3252, 3253, 3254, 3255, 3256, 3257, 3258, 3259, 3260,
+     3261, 3262, 3263, 3264, 3265, 3271, 3272, 3273, 3274, 3275,
+     3276, 3277, 3278, 3279, 3280, 3281, 3282, 3283, 3284, 3285,
+     3286, 3287, 3288, 3289, 3290],
+)
+TRAIT_FOLLOWUP_MAP["Technical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Technical-Skill", []),
+    [3201, 3202, 3203, 3204, 3205, 3206, 3207, 3208, 3209, 3210,
+     3211, 3212, 3213, 3214, 3215, 3216, 3217, 3218, 3219, 3220,
+     3221, 3222, 3223, 3224, 3225, 3226, 3227, 3228, 3229, 3230],
+)
+TRAIT_FOLLOWUP_MAP["Physical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Physical-Skill", []),
+    [3176, 3177, 3178, 3179, 3180, 3191, 3192, 3193, 3194, 3195,
+     3206, 3207, 3208, 3209, 3210, 3221, 3222, 3223, 3224, 3225,
+     3261, 3262, 3263, 3264, 3265, 3266, 3267, 3268, 3269, 3270,
+     3271, 3272, 3273, 3274, 3275, 3281, 3282, 3283, 3284, 3285,
+     3286, 3287, 3288, 3289, 3290],
+)
+TRAIT_FOLLOWUP_MAP["Pharmacy"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Pharmacy", []),
+    [3261, 3262, 3263, 3264, 3265, 3266, 3267, 3268, 3269, 3270,
+     3271, 3272, 3273, 3274, 3275, 3281, 3282, 3283, 3284, 3285],
+)
+
+# ── Healthcare expansion 4: domain entry points ──
+DOMAIN_ENTRY_QUESTIONS["healthcare"] = _prepend_unique(
+    DOMAIN_ENTRY_QUESTIONS["healthcare"],
+    [3291, 3296, 3301, 3306, 3311,   # Radiology & Imaging
+     3321, 3326, 3331, 3336, 3341,   # Optometry & Vision Care
+     3351, 3356, 3361, 3366, 3371],  # Midwifery & Maternal Health
+)
+
+# ── Healthcare expansion 4: trait follow-up prepends ──
+TRAIT_FOLLOWUP_MAP["Medical-Lab"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Medical-Lab", []),
+    [3291, 3292, 3293, 3294, 3295, 3296, 3297, 3298, 3299, 3300,
+     3301, 3302, 3303, 3304, 3305, 3306, 3307, 3308, 3309, 3310,
+     3311, 3312, 3313, 3314, 3315, 3316, 3317, 3318, 3319, 3320,
+     3321, 3322, 3323, 3324, 3325, 3326, 3327, 3328, 3329, 3330,
+     3331, 3332, 3333, 3334, 3335, 3336, 3337, 3338, 3339, 3340,
+     3341, 3342, 3343, 3344, 3345, 3346, 3347, 3348, 3349, 3350,
+     3351, 3352, 3353, 3354, 3355, 3356, 3357, 3358, 3359, 3360,
+     3361, 3362, 3363, 3364, 3365, 3371, 3372, 3373, 3374, 3375,
+     3376, 3377, 3378, 3379, 3380],
+)
+TRAIT_FOLLOWUP_MAP["Technical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Technical-Skill", []),
+    [3291, 3292, 3293, 3294, 3295, 3296, 3297, 3298, 3299, 3300,
+     3301, 3302, 3303, 3304, 3305, 3306, 3307, 3308, 3309, 3310,
+     3311, 3312, 3313, 3314, 3315, 3316, 3317, 3318, 3319, 3320,
+     3321, 3322, 3323, 3324, 3325, 3326, 3327, 3328, 3329, 3330,
+     3331, 3332, 3333, 3334, 3335, 3341, 3342, 3343, 3344, 3345,
+     3351, 3352, 3353, 3354, 3355, 3361, 3362, 3363, 3364, 3365,
+     3371, 3372, 3373, 3374, 3375, 3376, 3377, 3378, 3379, 3380],
+)
+TRAIT_FOLLOWUP_MAP["Analytical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Analytical-Skill", []),
+    [3291, 3292, 3293, 3294, 3295, 3296, 3297, 3298, 3299, 3300,
+     3301, 3302, 3303, 3304, 3305, 3306, 3307, 3308, 3309, 3310,
+     3311, 3312, 3313, 3314, 3315, 3316, 3317, 3318, 3319, 3320,
+     3321, 3322, 3323, 3324, 3325, 3326, 3327, 3328, 3329, 3330,
+     3331, 3332, 3333, 3334, 3335, 3336, 3341, 3346,
+     3356, 3357, 3358, 3359, 3360, 3361, 3362, 3363, 3364, 3365,
+     3376, 3377, 3378, 3379, 3380],
+)
+TRAIT_FOLLOWUP_MAP["Patient-Care"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Patient-Care", []),
+    [3291, 3292, 3293, 3294, 3295, 3296, 3297, 3298, 3299, 3300,
+     3301, 3302, 3303, 3304, 3305, 3306, 3307, 3308, 3309, 3310,
+     3311, 3312, 3313, 3314, 3315, 3316, 3317, 3318, 3319, 3320,
+     3321, 3322, 3323, 3324, 3325, 3326, 3327, 3328, 3329, 3330,
+     3331, 3332, 3333, 3334, 3335, 3336, 3337, 3338, 3339, 3340,
+     3341, 3342, 3343, 3344, 3345, 3346, 3347, 3348, 3349, 3350,
+     3351, 3352, 3353, 3354, 3355, 3356, 3357, 3358, 3359, 3360,
+     3361, 3362, 3363, 3364, 3365, 3366, 3367, 3368, 3369, 3370,
+     3371, 3372, 3373, 3374, 3375, 3376, 3377, 3378, 3379, 3380],
+)
+TRAIT_FOLLOWUP_MAP["People-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("People-Skill", []),
+    [3291, 3292, 3293, 3294, 3295, 3301, 3302, 3303, 3304, 3305,
+     3306, 3307, 3308, 3309, 3310, 3316, 3317, 3318, 3319, 3320,
+     3321, 3322, 3323, 3324, 3325, 3326, 3327, 3328, 3329, 3330,
+     3331, 3332, 3333, 3334, 3335, 3336, 3337, 3338, 3339, 3340,
+     3341, 3342, 3343, 3344, 3345, 3346, 3347, 3348, 3349, 3350,
+     3351, 3352, 3353, 3354, 3355, 3356, 3357, 3358, 3359, 3360,
+     3361, 3362, 3363, 3364, 3365, 3366, 3367, 3368, 3369, 3370,
+     3371, 3372, 3373, 3374, 3375, 3376, 3377, 3378, 3379, 3380],
+)
+TRAIT_FOLLOWUP_MAP["Lab-Research"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Lab-Research", []),
+    [3291, 3292, 3293, 3294, 3295, 3296, 3297, 3298, 3299, 3300,
+     3301, 3302, 3303, 3304, 3305, 3306, 3307, 3308, 3309, 3310,
+     3311, 3312, 3313, 3314, 3315, 3316, 3317, 3318, 3319, 3320,
+     3326, 3327, 3328, 3329, 3330, 3331, 3332, 3333, 3334, 3335,
+     3336, 3337, 3338, 3339, 3340, 3341, 3342, 3343, 3344, 3345,
+     3346, 3347, 3348, 3349, 3350,
+     3366, 3367, 3368, 3369, 3370],
+)
+TRAIT_FOLLOWUP_MAP["Health-Admin"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Health-Admin", []),
+    [3291, 3292, 3293, 3294, 3295, 3301, 3302, 3303, 3304, 3305,
+     3306, 3307, 3308, 3309, 3310, 3311, 3312, 3313, 3314, 3315,
+     3316, 3317, 3318, 3319, 3320,
+     3331, 3332, 3333, 3334, 3335, 3336, 3337, 3338, 3339, 3340,
+     3346, 3347, 3348, 3349, 3350,
+     3351, 3352, 3353, 3354, 3355, 3356, 3357, 3358, 3359, 3360,
+     3361, 3362, 3363, 3364, 3365, 3366, 3367, 3368, 3369, 3370,
+     3376, 3377, 3378, 3379, 3380],
+)
+TRAIT_FOLLOWUP_MAP["Teaching-Ed"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Teaching-Ed", []),
+    [3316, 3317, 3318, 3319, 3320,
+     3321, 3322, 3323, 3324, 3325, 3326, 3327, 3328, 3329, 3330,
+     3336, 3337, 3338, 3339, 3340, 3341, 3342, 3343, 3344, 3345,
+     3346, 3347, 3348, 3349, 3350,
+     3351, 3352, 3353, 3354, 3355, 3356, 3357, 3358, 3359, 3360,
+     3361, 3362, 3363, 3364, 3365, 3366, 3367, 3368, 3369, 3370,
+     3371, 3372, 3373, 3374, 3375, 3376, 3377, 3378, 3379, 3380],
+)
+TRAIT_FOLLOWUP_MAP["Counseling"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Counseling", []),
+    [3301, 3302, 3303, 3304, 3305, 3316, 3317, 3318, 3319, 3320,
+     3326, 3327, 3328, 3329, 3330, 3331, 3332, 3333, 3334, 3335,
+     3351, 3352, 3353, 3354, 3355, 3356, 3357, 3358, 3359, 3360,
+     3361, 3362, 3363, 3364, 3365, 3371, 3372, 3373, 3374, 3375,
+     3376, 3377, 3378, 3379, 3380],
+)
+TRAIT_FOLLOWUP_MAP["Community-Serve"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Community-Serve", []),
+    [3336, 3337, 3338, 3339, 3340, 3346, 3347, 3348, 3349, 3350,
+     3351, 3352, 3353, 3354, 3355, 3356, 3357, 3358, 3359, 3360,
+     3361, 3362, 3363, 3364, 3365, 3366, 3367, 3368, 3369, 3370,
+     3371, 3372, 3373, 3374, 3375, 3376, 3377, 3378, 3379, 3380],
+)
+TRAIT_FOLLOWUP_MAP["Public-Health"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Public-Health", []),
+    [3311, 3312, 3313, 3314, 3315,
+     3341, 3342, 3343, 3344, 3345, 3346, 3347, 3348, 3349, 3350,
+     3351, 3352, 3353, 3354, 3355,
+     3366, 3367, 3368, 3369, 3370, 3371, 3372, 3373, 3374, 3375,
+     3376, 3377, 3378, 3379, 3380],
+)
+
+# ── Social expansion 2: domain entry points ──
+DOMAIN_ENTRY_QUESTIONS["social"] = _prepend_unique(
+    DOMAIN_ENTRY_QUESTIONS["social"],
+    [3621, 3626, 3631, 3651, 3656, 3661, 3711, 3716, 3721,
+     3411, 3416, 3421, 3426, 3431,
+     3441, 3446, 3451, 3456, 3461,
+     3471, 3476, 3481, 3486, 3491,
+     3381, 3386, 3391, 3396, 3401],
+)
+
+# ── Public service expansion 2: domain entry points ──
+DOMAIN_ENTRY_QUESTIONS["public_service"] = _prepend_unique(
+    DOMAIN_ENTRY_QUESTIONS["public_service"],
+    [3861, 3866, 3871, 3876, 3881,
+    3771, 3776, 3781, 3786, 3791,
+    3741, 3746, 3751, 3756, 3761,
+    3531, 3536, 3541, 3546, 3551,
+    3591, 3596, 3601, 3606, 3611,
+    3501, 3506, 3511, 3516, 3521,
+    3561, 3566, 3571, 3576, 3581],
+)
+DOMAIN_ENTRY_QUESTIONS["education"] = _prepend_unique(
+    DOMAIN_ENTRY_QUESTIONS["education"],
+    [3801, 3806, 3811, 3816, 3821,
+     3891, 3896, 3901, 3906, 3911,
+     3831, 3836, 3841, 3846, 3851,
+     3381, 3386, 3391, 3396, 3401],
+)
+DOMAIN_ENTRY_QUESTIONS["hospitality"] = _prepend_unique(
+    DOMAIN_ENTRY_QUESTIONS["hospitality"],
+    [3981, 3986, 3991, 3996, 4001,
+     4011, 4016, 4021, 4026, 4031],
+)
+DOMAIN_ENTRY_QUESTIONS["law"] = _prepend_unique(
+    DOMAIN_ENTRY_QUESTIONS["law"],
+    [3861, 3866, 3871, 3876, 3881,
+    3501, 3506, 3511, 3516, 3521,
+    3561, 3566, 3571, 3576, 3581],
+)
+DOMAIN_ENTRY_QUESTIONS["physical"] = _prepend_unique(
+    DOMAIN_ENTRY_QUESTIONS["physical"],
+    [4041, 4046, 4051, 4056, 4061,
+     3951, 3956, 3961, 3966, 3971,
+     3921, 3926, 3931, 3936, 3941],
+)
+DOMAIN_ENTRY_QUESTIONS["public_service"] = _prepend_unique(
+    DOMAIN_ENTRY_QUESTIONS["public_service"],
+    [4041, 4046, 4051, 4056, 4061,
+    3861, 3866, 3871, 3876, 3881,
+    3771, 3776, 3781, 3786, 3791,
+    3741, 3746, 3751, 3756, 3761,
+    3531, 3536, 3541, 3546, 3551,
+    3591, 3596, 3601, 3606, 3611,
+    3501, 3506, 3511, 3516, 3521,
+    3561, 3566, 3571, 3576, 3581],
+)
+
+# ── Social expansion 2: trait follow-up prepends ──
+TRAIT_FOLLOWUP_MAP["Teaching-Ed"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Teaching-Ed", []),
+    [3381, 3382, 3383, 3384, 3385, 3386, 3387, 3388, 3389, 3390,
+     3391, 3392, 3393, 3394, 3395, 3396, 3397, 3398, 3399, 3400,
+     3401, 3402, 3403, 3404, 3405, 3406, 3407, 3408, 3409, 3410,
+     3421, 3422, 3423, 3424, 3425, 3426, 3427, 3428, 3429, 3430,
+     3451, 3452, 3453, 3454, 3455,
+     3491, 3492, 3493, 3494, 3495],
+)
+TRAIT_FOLLOWUP_MAP["Social-Work"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Social-Work", []),
+    [3411, 3412, 3413, 3414, 3415, 3416, 3417, 3418, 3419, 3420,
+     3421, 3422, 3423, 3424, 3425, 3426, 3427, 3428, 3429, 3430,
+     3431, 3432, 3433, 3434, 3435, 3436, 3437, 3438, 3439, 3440],
+)
+TRAIT_FOLLOWUP_MAP["Film-Broadcast"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Film-Broadcast", []),
+    [3451, 3452, 3453, 3454, 3455, 3461, 3462, 3463, 3464, 3465,
+     3471, 3472, 3473, 3474, 3475, 3476, 3477, 3478, 3479, 3480,
+     3481, 3482, 3483, 3484, 3485, 3496, 3497, 3498, 3499, 3500],
+)
+TRAIT_FOLLOWUP_MAP["Digital-Media"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Digital-Media", []),
+    [3471, 3472, 3473, 3474, 3475, 3476, 3477, 3478, 3479, 3480,
+     3481, 3482, 3483, 3484, 3485, 3486, 3487, 3488, 3489, 3490,
+     3491, 3492, 3493, 3494, 3495, 3496, 3497, 3498, 3499, 3500],
+)
+TRAIT_FOLLOWUP_MAP["People-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("People-Skill", []),
+    [3381, 3382, 3383, 3384, 3385, 3386, 3387, 3388, 3389, 3390,
+     3391, 3392, 3393, 3394, 3395, 3401, 3402, 3403, 3404, 3405,
+     3411, 3412, 3413, 3414, 3415, 3416, 3417, 3418, 3419, 3420,
+     3421, 3422, 3423, 3424, 3425, 3431, 3432, 3433, 3434, 3435,
+     3471, 3472, 3473, 3474, 3475, 3476, 3477, 3478, 3479, 3480,
+     3481, 3482, 3483, 3484, 3485, 3491, 3492, 3493, 3494, 3495],
+)
+TRAIT_FOLLOWUP_MAP["Counseling"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Counseling", []),
+    [3381, 3382, 3383, 3384, 3385, 3391, 3392, 3393, 3394, 3395,
+     3401, 3402, 3403, 3404, 3405,
+     3411, 3412, 3413, 3414, 3415, 3416, 3417, 3418, 3419, 3420,
+     3421, 3422, 3423, 3424, 3425, 3431, 3432, 3433, 3434, 3435],
+)
+TRAIT_FOLLOWUP_MAP["Community-Serve"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Community-Serve", []),
+    [3401, 3402, 3403, 3404, 3405,
+     3411, 3412, 3413, 3414, 3415, 3416, 3417, 3418, 3419, 3420,
+     3421, 3422, 3423, 3424, 3425, 3426, 3427, 3428, 3429, 3430,
+     3431, 3432, 3433, 3434, 3435, 3436, 3437, 3438, 3439, 3440,
+     3441, 3442, 3443, 3444, 3445, 3456, 3457, 3458, 3459, 3460,
+     3461, 3462, 3463, 3464, 3465,
+     3471, 3472, 3473, 3474, 3475, 3491, 3492, 3493, 3494, 3495],
+)
+TRAIT_FOLLOWUP_MAP["Admin-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Admin-Skill", []),
+    [3391, 3392, 3393, 3394, 3395, 3396, 3397, 3398, 3399, 3400,
+     3401, 3402, 3403, 3404, 3405,
+     3411, 3412, 3413, 3414, 3415, 3426, 3427, 3428, 3429, 3430,
+     3431, 3432, 3433, 3434, 3435,
+     3446, 3447, 3448, 3449, 3450, 3456, 3457, 3458, 3459, 3460,
+     3466, 3467, 3468, 3469, 3470,
+     3481, 3482, 3483, 3484, 3485, 3491, 3492, 3493, 3494, 3495,
+     3496, 3497, 3498, 3499, 3500],
+)
+TRAIT_FOLLOWUP_MAP["Analytical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Analytical-Skill", []),
+    [3381, 3382, 3383, 3384, 3385, 3386, 3387, 3388, 3389, 3390,
+     3441, 3442, 3443, 3444, 3445, 3446, 3447, 3448, 3449, 3450,
+     3451, 3452, 3453, 3454, 3455, 3456, 3457, 3458, 3459, 3460,
+     3461, 3462, 3463, 3464, 3465, 3466, 3467, 3468, 3469, 3470,
+     3471, 3472, 3473, 3474, 3475, 3486, 3487, 3488, 3489, 3490,
+     3491, 3492, 3493, 3494, 3495, 3496, 3497, 3498, 3499, 3500],
+)
+TRAIT_FOLLOWUP_MAP["Investigative"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Investigative", []),
+    [3441, 3442, 3443, 3444, 3445, 3446, 3447, 3448, 3449, 3450,
+     3451, 3452, 3453, 3454, 3455, 3456, 3457, 3458, 3459, 3460,
+     3461, 3462, 3463, 3464, 3465, 3466, 3467, 3468, 3469, 3470,
+     3471, 3472, 3473, 3474, 3475, 3476, 3477, 3478, 3479, 3480,
+     3496, 3497, 3498, 3499, 3500],
+)
+TRAIT_FOLLOWUP_MAP["Creative-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Creative-Skill", []),
+    [3381, 3382, 3383, 3384, 3385, 3441, 3442, 3443, 3444, 3445,
+     3451, 3452, 3453, 3454, 3455, 3461, 3462, 3463, 3464, 3465,
+     3471, 3472, 3473, 3474, 3475, 3481, 3482, 3483, 3484, 3485],
+)
+TRAIT_FOLLOWUP_MAP["Technical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Technical-Skill", []),
+    [3386, 3387, 3388, 3389, 3390, 3391, 3392, 3393, 3394, 3395,
+     3471, 3472, 3473, 3474, 3475, 3476, 3477, 3478, 3479, 3480,
+     3491, 3492, 3493, 3494, 3495],
+)
+TRAIT_FOLLOWUP_MAP["Marketing-Sales"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Marketing-Sales", []),
+    [3471, 3472, 3473, 3474, 3475, 3476, 3477, 3478, 3479, 3480,
+     3481, 3482, 3483, 3484, 3485, 3486, 3487, 3488, 3489, 3490,
+     3491, 3492, 3493, 3494, 3495, 3496, 3497, 3498, 3499, 3500],
+)
+TRAIT_FOLLOWUP_MAP["People-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("People-Skill", []),
+    [3411, 3412, 3413, 3414, 3415, 3416, 3417, 3418, 3419, 3420,
+     3421, 3422, 3423, 3424, 3425, 3431, 3432, 3433, 3434, 3435,
+     3471, 3472, 3473, 3474, 3475, 3476, 3477, 3478, 3479, 3480,
+     3481, 3482, 3483, 3484, 3485, 3491, 3492, 3493, 3494, 3495,
+     3381, 3382, 3383, 3384, 3385, 3386, 3387, 3388, 3389, 3390,
+     3391, 3392, 3393, 3394, 3395, 3401, 3402, 3403, 3404, 3405],
+)
+TRAIT_FOLLOWUP_MAP["Counseling"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Counseling", []),
+    [3411, 3412, 3413, 3414, 3415, 3416, 3417, 3418, 3419, 3420,
+     3421, 3422, 3423, 3424, 3425, 3431, 3432, 3433, 3434, 3435,
+     3381, 3382, 3383, 3384, 3385, 3391, 3392, 3393, 3394, 3395,
+     3401, 3402, 3403, 3404, 3405],
+)
+TRAIT_FOLLOWUP_MAP["Community-Serve"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Community-Serve", []),
+    [3411, 3412, 3413, 3414, 3415, 3416, 3417, 3418, 3419, 3420,
+     3421, 3422, 3423, 3424, 3425, 3426, 3427, 3428, 3429, 3430,
+     3431, 3432, 3433, 3434, 3435, 3436, 3437, 3438, 3439, 3440,
+     3441, 3442, 3443, 3444, 3445, 3456, 3457, 3458, 3459, 3460,
+     3461, 3462, 3463, 3464, 3465,
+     3471, 3472, 3473, 3474, 3475, 3491, 3492, 3493, 3494, 3495,
+     3401, 3402, 3403, 3404, 3405],
+)
+TRAIT_FOLLOWUP_MAP["Legal-Practice"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Legal-Practice", []),
+    [3501, 3502, 3503, 3504, 3505, 3506, 3507, 3508, 3509, 3510,
+     3511, 3512, 3513, 3514, 3515, 3516, 3517, 3518, 3519, 3520,
+     3521, 3522, 3523, 3524, 3525, 3526, 3527, 3528, 3529, 3530,
+     3531, 3532, 3533, 3534, 3535, 3546, 3547, 3548, 3549, 3550,
+     3591, 3592, 3593, 3594, 3595, 3601, 3602, 3603, 3604, 3605],
+)
+TRAIT_FOLLOWUP_MAP["Law-Enforce"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Law-Enforce", []),
+    [3561, 3562, 3563, 3564, 3565, 3566, 3567, 3568, 3569, 3570,
+     3571, 3572, 3573, 3574, 3575, 3576, 3577, 3578, 3579, 3580,
+     3581, 3582, 3583, 3584, 3585, 3586, 3587, 3588, 3589, 3590,
+     3501, 3502, 3503, 3504, 3505, 3511, 3512, 3513, 3514, 3515,
+     3521, 3522, 3523, 3524, 3525],
+)
+TRAIT_FOLLOWUP_MAP["Forensic-Sci"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Forensic-Sci", []),
+    [3561, 3562, 3563, 3564, 3565, 3571, 3572, 3573, 3574, 3575,
+     3581, 3582, 3583, 3584, 3585],
+)
+TRAIT_FOLLOWUP_MAP["Physical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Physical-Skill", []),
+    [3561, 3562, 3563, 3564, 3565, 3566, 3567, 3568, 3569, 3570,
+     3586, 3587, 3588, 3589, 3590],
+)
+TRAIT_FOLLOWUP_MAP["Community-Serve"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Community-Serve", []),
+    [3531, 3532, 3533, 3534, 3535, 3536, 3537, 3538, 3539, 3540,
+     3551, 3552, 3553, 3554, 3555, 3591, 3592, 3593, 3594, 3595,
+     3596, 3597, 3598, 3599, 3600, 3616, 3617, 3618, 3619, 3620,
+     3501, 3502, 3503, 3504, 3505, 3511, 3512, 3513, 3514, 3515,
+     3571, 3572, 3573, 3574, 3575],
+)
+TRAIT_FOLLOWUP_MAP["Admin-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Admin-Skill", []),
+    [3546, 3547, 3548, 3549, 3550, 3551, 3552, 3553, 3554, 3555,
+     3591, 3592, 3593, 3594, 3595, 3596, 3597, 3598, 3599, 3600,
+     3601, 3602, 3603, 3604, 3605, 3606, 3607, 3608, 3609, 3610,
+     3506, 3507, 3508, 3509, 3510, 3516, 3517, 3518, 3519, 3520,
+     3581, 3582, 3583, 3584, 3585],
+)
+TRAIT_FOLLOWUP_MAP["Analytical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Analytical-Skill", []),
+    [3531, 3532, 3533, 3534, 3535, 3541, 3542, 3543, 3544, 3545,
+     3501, 3502, 3503, 3504, 3505, 3506, 3507, 3508, 3509, 3510,
+     3591, 3592, 3593, 3594, 3595, 3601, 3602, 3603, 3604, 3605,
+     3561, 3562, 3563, 3564, 3565, 3571, 3572, 3573, 3574, 3575],
+)
+TRAIT_FOLLOWUP_MAP["Investigative"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Investigative", []),
+    [3501, 3502, 3503, 3504, 3505, 3526, 3527, 3528, 3529, 3530,
+     3541, 3542, 3543, 3544, 3545, 3556, 3557, 3558, 3559, 3560,
+     3561, 3562, 3563, 3564, 3565, 3576, 3577, 3578, 3579, 3580,
+     3606, 3607, 3608, 3609, 3610],
+)
+TRAIT_FOLLOWUP_MAP["People-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("People-Skill", []),
+    [3536, 3537, 3538, 3539, 3540, 3556, 3557, 3558, 3559, 3560,
+     3596, 3597, 3598, 3599, 3600, 3611, 3612, 3613, 3614, 3615,
+     3501, 3502, 3503, 3504, 3505, 3516, 3517, 3518, 3519, 3520,
+     3571, 3572, 3573, 3574, 3575],
+)
+TRAIT_FOLLOWUP_MAP["Admin-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Admin-Skill", []),
+    [3591, 3592, 3593, 3594, 3595, 3596, 3597, 3598, 3599, 3600,
+     3601, 3602, 3603, 3604, 3605, 3606, 3607, 3608, 3609, 3610,
+     3546, 3547, 3548, 3549, 3550, 3551, 3552, 3553, 3554, 3555],
+)
+TRAIT_FOLLOWUP_MAP["Community-Serve"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Community-Serve", []),
+    [3621, 3622, 3623, 3624, 3625, 3631, 3632, 3633, 3634, 3635,
+     3651, 3652, 3653, 3654, 3655, 3666, 3667, 3668, 3669, 3670,
+     3711, 3712, 3713, 3714, 3715, 3726, 3727, 3728, 3729, 3730,
+     3741, 3742, 3743, 3744, 3745, 3766, 3767, 3768, 3769, 3770],
+)
+TRAIT_FOLLOWUP_MAP["People-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("People-Skill", []),
+    [3621, 3622, 3623, 3624, 3625, 3636, 3637, 3638, 3639, 3640,
+     3651, 3652, 3653, 3654, 3655, 3661, 3662, 3663, 3664, 3665,
+     3681, 3682, 3683, 3684, 3685, 3696, 3697, 3698, 3699, 3700,
+     3711, 3712, 3713, 3714, 3715, 3721, 3722, 3723, 3724, 3725,
+     3746, 3747, 3748, 3749, 3750, 3751, 3752, 3753, 3754, 3755],
+)
+TRAIT_FOLLOWUP_MAP["Teaching-Ed"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Teaching-Ed", []),
+    [3621, 3622, 3623, 3624, 3625, 3641, 3642, 3643, 3644, 3645,
+     3651, 3652, 3653, 3654, 3655, 3661, 3662, 3663, 3664, 3665,
+     3681, 3682, 3683, 3684, 3685, 3686, 3687, 3688, 3689, 3690,
+     3706, 3707, 3708, 3709, 3710],
+)
+TRAIT_FOLLOWUP_MAP["Digital-Media"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Digital-Media", []),
+    [3621, 3622, 3623, 3624, 3625, 3626, 3627, 3628, 3629, 3630,
+     3636, 3637, 3638, 3639, 3640, 3646, 3647, 3648, 3649, 3650],
+)
+TRAIT_FOLLOWUP_MAP["Marketing-Sales"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Marketing-Sales", []),
+    [3621, 3622, 3623, 3624, 3625, 3626, 3627, 3628, 3629, 3630,
+     3636, 3637, 3638, 3639, 3640, 3646, 3647, 3648, 3649, 3650],
+)
+TRAIT_FOLLOWUP_MAP["Social-Work"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Social-Work", []),
+    [3651, 3652, 3653, 3654, 3655, 3656, 3657, 3658, 3659, 3660,
+     3671, 3672, 3673, 3674, 3675, 3711, 3712, 3713, 3714, 3715,
+     3726, 3727, 3728, 3729, 3730],
+)
+TRAIT_FOLLOWUP_MAP["Analytical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Analytical-Skill", []),
+    [3626, 3627, 3628, 3629, 3630, 3631, 3632, 3633, 3634, 3635,
+     3661, 3662, 3663, 3664, 3665, 3666, 3667, 3668, 3669, 3670,
+     3686, 3687, 3688, 3689, 3690, 3701, 3702, 3703, 3704, 3705,
+     3711, 3712, 3713, 3714, 3715, 3716, 3717, 3718, 3719, 3720,
+     3741, 3742, 3743, 3744, 3745, 3756, 3757, 3758, 3759, 3760],
+)
+TRAIT_FOLLOWUP_MAP["Investigative"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Investigative", []),
+    [3631, 3632, 3633, 3634, 3635, 3666, 3667, 3668, 3669, 3670,
+     3686, 3687, 3688, 3689, 3690, 3691, 3692, 3693, 3694, 3695,
+     3711, 3712, 3713, 3714, 3715, 3716, 3717, 3718, 3719, 3720,
+     3741, 3742, 3743, 3744, 3745, 3761, 3762, 3763, 3764, 3765],
+)
+TRAIT_FOLLOWUP_MAP["Legal-Practice"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Legal-Practice", []),
+    [3741, 3742, 3743, 3744, 3745, 3746, 3747, 3748, 3749, 3750,
+     3751, 3752, 3753, 3754, 3755, 3766, 3767, 3768, 3769, 3770],
+)
+TRAIT_FOLLOWUP_MAP["Admin-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Admin-Skill", []),
+    [3631, 3632, 3633, 3634, 3635, 3646, 3647, 3648, 3649, 3650,
+     3656, 3657, 3658, 3659, 3660, 3676, 3677, 3678, 3679, 3680,
+     3741, 3742, 3743, 3744, 3745, 3756, 3757, 3758, 3759, 3760],
+)
+TRAIT_FOLLOWUP_MAP["Community-Serve"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Community-Serve", []),
+    [3651, 3652, 3653, 3654, 3655, 3666, 3667, 3668, 3669, 3670,
+     3711, 3712, 3713, 3714, 3715, 3726, 3727, 3728, 3729, 3730,
+     3741, 3742, 3743, 3744, 3745, 3766, 3767, 3768, 3769, 3770,
+     3621, 3622, 3623, 3624, 3625, 3631, 3632, 3633, 3634, 3635],
+)
+TRAIT_FOLLOWUP_MAP["People-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("People-Skill", []),
+    [3746, 3747, 3748, 3749, 3750, 3751, 3752, 3753, 3754, 3755,
+     3651, 3652, 3653, 3654, 3655, 3661, 3662, 3663, 3664, 3665,
+     3711, 3712, 3713, 3714, 3715, 3721, 3722, 3723, 3724, 3725,
+     3681, 3682, 3683, 3684, 3685, 3696, 3697, 3698, 3699, 3700,
+     3621, 3622, 3623, 3624, 3625, 3636, 3637, 3638, 3639, 3640],
+)
+TRAIT_FOLLOWUP_MAP["Analytical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Analytical-Skill", []),
+    [3711, 3712, 3713, 3714, 3715, 3716, 3717, 3718, 3719, 3720,
+     3741, 3742, 3743, 3744, 3745, 3756, 3757, 3758, 3759, 3760,
+     3686, 3687, 3688, 3689, 3690, 3701, 3702, 3703, 3704, 3705,
+     3661, 3662, 3663, 3664, 3665, 3666, 3667, 3668, 3669, 3670,
+     3626, 3627, 3628, 3629, 3630, 3631, 3632, 3633, 3634, 3635],
+)
+TRAIT_FOLLOWUP_MAP["Investigative"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Investigative", []),
+    [3711, 3712, 3713, 3714, 3715, 3716, 3717, 3718, 3719, 3720,
+     3741, 3742, 3743, 3744, 3745, 3761, 3762, 3763, 3764, 3765,
+     3686, 3687, 3688, 3689, 3690, 3691, 3692, 3693, 3694, 3695,
+     3666, 3667, 3668, 3669, 3670, 3631, 3632, 3633, 3634, 3635],
+)
+TRAIT_FOLLOWUP_MAP["Admin-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Admin-Skill", []),
+    [3741, 3742, 3743, 3744, 3745, 3756, 3757, 3758, 3759, 3760,
+     3656, 3657, 3658, 3659, 3660, 3676, 3677, 3678, 3679, 3680,
+     3631, 3632, 3633, 3634, 3635, 3646, 3647, 3648, 3649, 3650],
+)
+TRAIT_FOLLOWUP_MAP["Teaching-Ed"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Teaching-Ed", []),
+    [3801, 3802, 3803, 3804, 3805, 3806, 3807, 3808, 3809, 3810,
+     3811, 3812, 3813, 3814, 3815, 3891, 3892, 3893, 3894, 3895,
+     3896, 3897, 3898, 3899, 3900, 3901, 3902, 3903, 3904, 3905,
+     3831, 3832, 3833, 3834, 3835, 3841, 3842, 3843, 3844, 3845,
+     3771, 3772, 3773, 3774, 3775],
+)
+TRAIT_FOLLOWUP_MAP["Counseling"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Counseling", []),
+    [3801, 3802, 3803, 3804, 3805, 3811, 3812, 3813, 3814, 3815,
+     3821, 3822, 3823, 3824, 3825, 3891, 3892, 3893, 3894, 3895,
+     3901, 3902, 3903, 3904, 3905, 3911, 3912, 3913, 3914, 3915],
+)
+TRAIT_FOLLOWUP_MAP["Creative-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Creative-Skill", []),
+    [3801, 3802, 3803, 3804, 3805, 3816, 3817, 3818, 3819, 3820,
+     3891, 3892, 3893, 3894, 3895, 3906, 3907, 3908, 3909, 3910],
+)
+TRAIT_FOLLOWUP_MAP["Admin-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Admin-Skill", []),
+    [3831, 3832, 3833, 3834, 3835, 3846, 3847, 3848, 3849, 3850,
+     3861, 3862, 3863, 3864, 3865, 3876, 3877, 3878, 3879, 3880,
+     3891, 3892, 3893, 3894, 3895, 3906, 3907, 3908, 3909, 3910],
+)
+TRAIT_FOLLOWUP_MAP["Investigative"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Investigative", []),
+    [3771, 3772, 3773, 3774, 3775, 3776, 3777, 3778, 3779, 3780,
+     3831, 3832, 3833, 3834, 3835, 3836, 3837, 3838, 3839, 3840,
+     3861, 3862, 3863, 3864, 3865, 3871, 3872, 3873, 3874, 3875],
+)
+TRAIT_FOLLOWUP_MAP["Analytical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Analytical-Skill", []),
+    [3771, 3772, 3773, 3774, 3775, 3781, 3782, 3783, 3784, 3785,
+     3801, 3802, 3803, 3804, 3805, 3806, 3807, 3808, 3809, 3810,
+     3831, 3832, 3833, 3834, 3835, 3836, 3837, 3838, 3839, 3840,
+     3861, 3862, 3863, 3864, 3865, 3866, 3867, 3868, 3869, 3870],
+)
+TRAIT_FOLLOWUP_MAP["People-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("People-Skill", []),
+    [3771, 3772, 3773, 3774, 3775, 3786, 3787, 3788, 3789, 3790,
+     3801, 3802, 3803, 3804, 3805, 3811, 3812, 3813, 3814, 3815,
+     3831, 3832, 3833, 3834, 3835, 3851, 3852, 3853, 3854, 3855,
+     3861, 3862, 3863, 3864, 3865, 3871, 3872, 3873, 3874, 3875,
+     3891, 3892, 3893, 3894, 3895, 3901, 3902, 3903, 3904, 3905],
+)
+TRAIT_FOLLOWUP_MAP["Community-Serve"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Community-Serve", []),
+    [3771, 3772, 3773, 3774, 3775, 3791, 3792, 3793, 3794, 3795,
+     3801, 3802, 3803, 3804, 3805, 3816, 3817, 3818, 3819, 3820,
+     3831, 3832, 3833, 3834, 3835, 3841, 3842, 3843, 3844, 3845,
+     3861, 3862, 3863, 3864, 3865, 3886, 3887, 3888, 3889, 3890,
+     3891, 3892, 3893, 3894, 3895, 3901, 3902, 3903, 3904, 3905],
+)
+TRAIT_FOLLOWUP_MAP["Legal-Practice"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Legal-Practice", []),
+    [3771, 3772, 3773, 3774, 3775, 3796, 3797, 3798, 3799, 3800,
+     3861, 3862, 3863, 3864, 3865, 3866, 3867, 3868, 3869, 3870,
+     3871, 3872, 3873, 3874, 3875, 3881, 3882, 3883, 3884, 3885],
+)
+TRAIT_FOLLOWUP_MAP["Sports-Ed"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Sports-Ed", []),
+    [3921, 3922, 3923, 3924, 3925, 3926, 3927, 3928, 3929, 3930,
+     3931, 3932, 3933, 3934, 3935, 3951, 3952, 3953, 3954, 3955,
+     3971, 3972, 3973, 3974, 3975],
+)
+TRAIT_FOLLOWUP_MAP["Physical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Physical-Skill", []),
+    [3921, 3922, 3923, 3924, 3925, 3936, 3937, 3938, 3939, 3940,
+     3951, 3952, 3953, 3954, 3955, 3961, 3962, 3963, 3964, 3965,
+     4041, 4042, 4043, 4044, 4045, 4046, 4047, 4048, 4049, 4050],
+)
+TRAIT_FOLLOWUP_MAP["Rehab-Therapy"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Rehab-Therapy", []),
+    [3926, 3927, 3928, 3929, 3930, 3956, 3957, 3958, 3959, 3960,
+     3961, 3962, 3963, 3964, 3965, 3981, 3982, 3983, 3984, 3985],
+)
+TRAIT_FOLLOWUP_MAP["Hospitality-Svc"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Hospitality-Svc", []),
+    [3981, 3982, 3983, 3984, 3985, 3991, 3992, 3993, 3994, 3995,
+     4011, 4012, 4013, 4014, 4015, 4021, 4022, 4023, 4024, 4025,
+     4031, 4032, 4033, 4034, 4035],
+)
+TRAIT_FOLLOWUP_MAP["Tourism-Travel"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Tourism-Travel", []),
+    [3981, 3982, 3983, 3984, 3985, 3986, 3987, 3988, 3989, 3990,
+     4006, 4007, 4008, 4009, 4010, 4036, 4037, 4038, 4039, 4040],
+)
+TRAIT_FOLLOWUP_MAP["Marketing-Sales"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Marketing-Sales", []),
+    [3991, 3992, 3993, 3994, 3995, 4001, 4002, 4003, 4004, 4005,
+     4011, 4012, 4013, 4014, 4015, 4026, 4027, 4028, 4029, 4030],
+)
+TRAIT_FOLLOWUP_MAP["Law-Enforce"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Law-Enforce", []),
+    [4041, 4042, 4043, 4044, 4045, 4051, 4052, 4053, 4054, 4055,
+     4061, 4062, 4063, 4064, 4065],
+)
+TRAIT_FOLLOWUP_MAP["Investigative"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Investigative", []),
+    [3951, 3952, 3953, 3954, 3955, 3966, 3967, 3968, 3969, 3970,
+     4041, 4042, 4043, 4044, 4045, 4056, 4057, 4058, 4059, 4060],
+)
+TRAIT_FOLLOWUP_MAP["Analytical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Analytical-Skill", []),
+    [3956, 3957, 3958, 3959, 3960, 3966, 3967, 3968, 3969, 3970,
+     4056, 4057, 4058, 4059, 4060, 4061, 4062, 4063, 4064, 4065,
+     4016, 4017, 4018, 4019, 4020],
+)
+TRAIT_FOLLOWUP_MAP["People-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("People-Skill", []),
+    [3921, 3922, 3923, 3924, 3925, 3986, 3987, 3988, 3989, 3990,
+     4011, 4012, 4013, 4014, 4015, 4046, 4047, 4048, 4049, 4050,
+     4066, 4067, 4068, 4069, 4070],
+)
+TRAIT_FOLLOWUP_MAP["Community-Serve"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Community-Serve", []),
+    [3931, 3932, 3933, 3934, 3935, 3996, 3997, 3998, 3999, 4000,
+     4031, 4032, 4033, 4034, 4035, 4051, 4052, 4053, 4054, 4055,
+     4066, 4067, 4068, 4069, 4070],
+)
+TRAIT_FOLLOWUP_MAP["Teaching-Ed"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Teaching-Ed", []),
+    [3921, 3922, 3923, 3924, 3925, 3941, 3942, 3943, 3944, 3945,
+     3971, 3972, 3973, 3974, 3975],
+)
+TRAIT_FOLLOWUP_MAP["Admin-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Admin-Skill", []),
+    [3946, 3947, 3948, 3949, 3950, 4001, 4002, 4003, 4004, 4005,
+     4016, 4017, 4018, 4019, 4020, 4021, 4022, 4023, 4024, 4025],
+)
+TRAIT_FOLLOWUP_MAP["Food-Science"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Food-Science", []),
+    [4071, 4072, 4073, 4074, 4075, 4081, 4082, 4083, 4084, 4085,
+     4091, 4092, 4093, 4094, 4095],
+)
+TRAIT_FOLLOWUP_MAP["Lab-Research"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Lab-Research", []),
+    [4076, 4077, 4078, 4079, 4080, 4106, 4107, 4108, 4109, 4110],
+)
+TRAIT_FOLLOWUP_MAP["Nutrition-Diet"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Nutrition-Diet", []),
+    [4086, 4087, 4088, 4089, 4090],
+)
+TRAIT_FOLLOWUP_MAP["Culinary-Arts"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Culinary-Arts", []),
+    [4131, 4132, 4133, 4134, 4135, 4076, 4077, 4078, 4079, 4080],
+)
+TRAIT_FOLLOWUP_MAP["Patient-Care"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Patient-Care", []),
+    [4101, 4102, 4103, 4104, 4105, 4126, 4127, 4128, 4129, 4130],
+)
+TRAIT_FOLLOWUP_MAP["Investigative"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Investigative", []),
+    [4106, 4107, 4108, 4109, 4110, 4116, 4117, 4118, 4119, 4120],
+)
+TRAIT_FOLLOWUP_MAP["Agri-Nature"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Agri-Nature", []),
+    [4111, 4112, 4113, 4114, 4115],
+)
+TRAIT_FOLLOWUP_MAP["Hospitality-Svc"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Hospitality-Svc", []),
+    [4136, 4137, 4138, 4139, 4140, 4141, 4142, 4143, 4144, 4145],
+)
+TRAIT_FOLLOWUP_MAP["Startup-Venture"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Startup-Venture", []),
+    [4146, 4147, 4148, 4149, 4150],
+)
+TRAIT_FOLLOWUP_MAP["Teaching-Ed"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Teaching-Ed", []),
+    [4161, 4162, 4163, 4164, 4165, 4181, 4182, 4183, 4184, 4185],
+)
+TRAIT_FOLLOWUP_MAP["Technical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Technical-Skill", []),
+    [4166, 4167, 4168, 4169, 4170, 4171, 4172, 4173, 4174, 4175],
+)
+TRAIT_FOLLOWUP_MAP["Mechanical-Design"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Mechanical-Design", []),
+    [4171, 4172, 4173, 4174, 4175],
+)
+TRAIT_FOLLOWUP_MAP["Community-Serve"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("Community-Serve", []),
+    [4111, 4112, 4113, 4114, 4115, 4176, 4177, 4178, 4179, 4180],
+)
+TRAIT_FOLLOWUP_MAP["People-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP.get("People-Skill", []),
+    [4156, 4157, 4158, 4159, 4160, 4176, 4177, 4178, 4179, 4180],
+)
 
 # ==================== INTEREST KEYWORD → DOMAIN ====================
 INTEREST_DOMAIN_MAP = {
@@ -1503,9 +3728,9 @@ INTEREST_DOMAIN_MAP = {
     "machine_learning": "technology", "artificial_intelligence": "technology",
     "cloud_computing": "technology", "database": "technology", "networking": "technology",
     "game_development": "technology", "hacking": "technology", "app_development": "technology",
-    "web_tech": "technology", "multimedia": "technology", "software_eng": "technology",
+    "web_tech": "technology", "multimedia": "creative", "software_eng": "technology",
     "networking_skill": "technology", "database_skill": "technology", "mobile_dev": "technology",
-    "ux_ui": "technology", "health_info": "technology",
+    "ux_ui": "technology", "health_info": "healthcare",
     "medical": "healthcare", "nursing": "healthcare", "pharmacy": "healthcare",
     "physical_therapy": "healthcare", "nutrition": "healthcare", "psychology": "healthcare",
     "medical_tech": "healthcare", "dentistry": "healthcare", "health": "healthcare",
@@ -1514,7 +3739,8 @@ INTEREST_DOMAIN_MAP = {
     "radiologic": "healthcare", "occupational_therapy": "healthcare",
     "speech_therapy": "healthcare", "respiratory": "healthcare", "radiology": "healthcare",
     "optometry": "healthcare", "patient_care": "healthcare", "elderly_care": "healthcare",
-    "lab_equipment": "healthcare",
+    "lab_equipment": "healthcare", "respiratory_therapy": "healthcare",
+    "speech_pathology": "healthcare",
     "engineering": "engineering", "mechanical": "engineering", "electrical": "engineering",
     "civil": "engineering", "architecture": "engineering", "industrial": "engineering",
     "drafting": "engineering", "repair_maintenance": "engineering",
@@ -1549,17 +3775,26 @@ INTEREST_DOMAIN_MAP = {
     "library_science": "education", "curriculum": "education",
     "early_childhood": "education", "child_interaction": "education",
     "sign_language": "education",
-    "law": "public_service", "politics": "public_service", "criminology": "public_service",
-    "social": "public_service", "communication": "public_service",
-    "philosophy": "public_service", "history": "public_service",
+    "law": "public_service", "justice": "public_service", "legal": "public_service",
+    "politics": "public_service", "government": "public_service", "governance": "public_service",
+    "criminology": "public_service", "public_safety": "public_service",
+    "social": "social", "communication": "social",
+    "philosophy": "public_service", "ethics": "public_service", "history": "social",
     "conflict_resolution": "public_service", "forensics": "public_service",
-    "social_work": "public_service", "human_rights": "public_service",
+    "social_work": "social", "human_rights": "public_service",
     "diplomacy": "public_service", "public_policy": "public_service",
-    "public_admin": "public_service", "intl_studies": "public_service",
-    "sociology": "public_service", "linguistics": "public_service",
-    "dev_communication": "public_service", "community_dev": "public_service",
-    "legal_mgmt": "public_service", "case_analysis": "public_service",
+    "public_admin": "public_service", "public_administration": "public_service",
+    "intl_studies": "public_service",
+    "international_studies": "public_service",
+    "sociology": "social", "linguistics": "public_service",
+    "language": "public_service", "languages": "public_service",
+    "dev_communication": "social", "development_communication": "social",
+    "community_dev": "social", "community_development": "social",
+    "special_needs": "education", "early_childhood_education": "education",
+    "library_information_science": "education",
+    "legal_mgmt": "public_service", "legal_management": "public_service", "case_analysis": "public_service",
     "policy_analysis": "public_service",
+    "culture": "social", "journalism": "social", "community": "social",
     "science": "science", "biology": "science", "chemistry": "science",
     "physics": "science", "environment": "science", "earth_science": "science",
     "laboratory": "science", "research": "science",
@@ -1576,15 +3811,23 @@ INTEREST_DOMAIN_MAP = {
     "shipping": "maritime", "navigation": "maritime", "seafaring": "maritime",
     "marine_transport": "maritime", "seaman": "maritime", "flight_ops": "maritime",
     "tourism": "hospitality", "food": "hospitality", "cooking": "hospitality",
+    "tourism_hospitality": "hospitality", "tourism_&_hospitality": "hospitality",
+    "tourism_and_hospitality": "hospitality",
     "customer_service": "hospitality", "hotel": "hospitality", "culinary": "hospitality",
     "baking": "hospitality", "travel": "hospitality", "events": "hospitality",
     "restaurant": "hospitality", "resort": "hospitality",
     "hotel_mgmt": "hospitality", "culinary_mgmt": "hospitality",
+    "hotel_&_resort_management": "hospitality", "hotel_and_resort_management": "hospitality",
     "tvet": "hospitality", "food_safety": "hospitality",
     "sports": "physical", "sports_fitness": "physical", "military": "physical",
+    "sport_&_fitness": "physical", "sport_and_fitness": "physical",
+    "sports_and_fitness": "physical",
     "driving": "physical", "fitness": "physical", "athletics": "physical",
     "gym": "physical", "exercise": "physical", "martial_arts": "physical",
     "exercise_science": "physical", "swimming": "physical",
+    "exercise_&_sports_science": "physical", "exercise_and_sports_science": "physical",
+    "military_defense": "physical", "military_&_defense": "physical",
+    "military_and_defense": "physical",
     "heavy_equipment": "physical", "carpentry": "physical", "plumbing": "physical",
     "welding": "physical", "auto_repair": "physical",
     "acting": "creative", "illustration": "creative",
@@ -1600,11 +3843,312 @@ INTEREST_DOMAIN_MAP = {
     "attention_to_detail": "science", "multitasking": "business",
 }
 
+INTEREST_DOMAIN_MAP.update({
+    "culinary_&_food_science": "science",
+    "culinary_and_food_science": "science",
+    "culinary_food_science": "science",
+    "veterinary_&_animal_science": "agriculture",
+    "veterinary_and_animal_science": "agriculture",
+    "veterinary_animal_science": "agriculture",
+    "culinary_management": "hospitality",
+    "technical-vocational_training": "education",
+    "technical_vocational_training": "education",
+})
+
 # Maps SHS strand to default domain
 STRAND_DOMAIN_MAP = {
     "STEM": "technology", "ABM": "business", "HUMSS": "education",
     "TVL": "technology", "GAS": None, "SPORTS": "physical", "ARTS": "creative",
 }
+
+# ==================== INTEREST KEYWORD → QUESTION CATEGORY PATTERNS ====================
+# Maps user profile interest names to substrings that match question categories.
+# Used to pre-filter the question pool so users get questions directly related
+# to their stated interests.
+INTEREST_CATEGORY_KEYWORDS = {
+    # Technology
+    "programming": ["Programming & Coding", "Software Engineering", "Computers & IT"],
+    "programming_&_coding": ["Programming & Coding", "Software Engineering", "Computers & IT"],
+    "coding": ["Programming & Coding", "Software Engineering"],
+    "computers_&_it": ["Computers & IT", "Programming & Coding", "Software Engineering", "Data & Analytics", "Cybersecurity", "Computer Networking", "Web & Mobile", "Database & Information"],
+    "ai_&_machine_learning": ["AI & Machine Learning", "Data & Analytics", "Robotics & Automation"],
+    "machine_learning": ["AI & Machine Learning", "Data & Analytics"],
+    "artificial_intelligence": ["AI & Machine Learning", "Robotics & Automation"],
+    "cybersecurity": ["Cybersecurity", "Computer Networking"],
+    "software": ["Software Engineering", "Programming & Coding", "Computers & IT"],
+    "software_eng": ["Software Engineering", "Programming & Coding"],
+    "web_development": ["Web & Mobile Technologies", "Programming & Coding"],
+    "web_design": ["Web & Mobile Technologies"],
+    "web_tech": ["Web & Mobile Technologies"],
+    "mobile_app": ["Web & Mobile Technologies"],
+    "mobile_dev": ["Web & Mobile Technologies"],
+    "game_dev": ["Game Development", "Animation"],
+    "game_development": ["Game Development"],
+    "data": ["Data & Analytics", "Database & Information"],
+    "data_analysis": ["Data & Analytics"],
+    "database": ["Database & Information Systems"],
+    "networking": ["Computer Networking"],
+    "robotics": ["Robotics & Automation"],
+    "multimedia": ["Multimedia & Digital Entertainment", "Film & Media"],
+    "ux_ui": ["Web & Mobile Technologies", "Art & Design"],
+    "cloud_computing": ["Computers & IT", "Software Engineering"],
+    "health_info": ["Health Information Technology"],
+    # Healthcare
+    "medical": ["Healthcare General", "Medicine"],
+    "nursing": ["Nursing", "Patient Care"],
+    "pharmacy": ["Pharmacy"],
+    "health": ["Healthcare General", "Health Information"],
+    "nutrition": ["Nutrition"],
+    "psychology": ["Psychology"],
+    "physical_therapy": ["Physical Therapy"],
+    "dentistry": ["Dentistry"],
+    # Engineering
+    "engineering": ["Engineering"],
+    "mechanical": ["Mechanical Systems"],
+    "electrical": ["Electrical & Electronics"],
+    "civil": ["Civil & Construction"],
+    "architecture": ["Architecture & Interior Design"],
+    "industrial": ["Industrial & Manufacturing"],
+    "aeronautical": ["Aeronautical & Aerospace"],
+    "geodetic": ["Geodetic & Surveying"],
+    "robotics": ["Robotics & Automation"],
+    # Business
+    "business": ["Business", "Management", "Entrepreneurship"],
+    "finance": ["Finance & Banking", "Accounting"],
+    "marketing": ["Marketing & Advertising"],
+    "accounting": ["Accounting"],
+    "economics": ["Economics"],
+    "management": ["Management & Administration"],
+    "entrepreneurship": ["Startup & Innovation", "Business & Entrepreneurship"],
+    "human_resources": ["Human Resource Management"],
+    "real_estate": ["Real Estate & Property"],
+    "operations": ["Operations & Supply Chain"],
+    "customs": ["Customs & International Trade"],
+    "office_admin": ["Office Administration"],
+    # Creative/Arts
+    "art": ["Art & Design", "Fine Arts", "Arts General"],
+    "arts": ["Art & Design", "Fine Arts & Painting", "Arts General"],
+    "arts_and_design": ["Art & Design", "Fine Arts & Painting", "Advertising & Graphic Arts"],
+    "music_and_arts": ["Music & Performance", "Music Production & Audio", "Fine Arts & Painting", "Art & Design"],
+    "multimedia_arts": ["Animation & Multimedia", "Multimedia & Digital Entertainment", "Art & Design"],
+    "fine_arts": ["Fine Arts & Painting"],
+    "music": ["Music"],
+    "music_production": ["Music Production & Audio", "Music & Performance"],
+    "film": ["Film & Media Production"],
+    "writing": ["Writing & Literature"],
+    "photography": ["Photography"],
+    "animation": ["Animation"],
+    "fashion": ["Fashion & Textile Design", "Clothing & Textile Technology"],
+    "clothing_tech": ["Clothing & Textile Technology", "Fashion & Textile Design"],
+    "graphic_design": ["Advertising & Graphic Arts", "Art & Design"],
+    "design": ["Art & Design", "Architecture & Interior Design"],
+    "advertising_arts": ["Advertising & Graphic Arts"],
+    "filmmaking": ["Film & Media Production"],
+    "theater": ["Theater & Performing Arts"],
+    # Science
+    "science": ["Science & Research", "Science General"],
+    "biology": ["Biology & Life Sciences"],
+    "chemistry": ["Chemistry"],
+    "physics": ["Physics"],
+    "environment": ["Environment & Nature", "Environmental Planning"],
+    "biotechnology": ["Biotechnology & Genetics"],
+    "earth_science": ["Earth Science & Geology"],
+    "meteorology": ["Weather & Atmospheric Science"],
+    "food_science": ["Culinary & Food Science", "Food Science"],
+    # Education
+    "education": ["Education & Teaching"],
+    "teaching": ["Education & Teaching"],
+    # Agriculture
+    "agriculture": ["Agriculture", "Agribusiness"],
+    "veterinary": ["Veterinary & Animal Science"],
+    "fishery": ["Fisheries & Aquaculture"],
+    "forestry": ["Forestry & Natural Resources"],
+    # Maritime
+    "maritime": ["Maritime", "Marine"],
+    "aviation": ["Aviation & Aerospace", "Aeronautical"],
+    # Hospitality
+    "tourism": ["Tourism & Hospitality"],
+    "tourism_hospitality": ["Tourism & Hospitality"],
+    "tourism_&_hospitality": ["Tourism & Hospitality"],
+    "tourism_and_hospitality": ["Tourism & Hospitality"],
+    "cooking": ["Culinary"],
+    "culinary": ["Culinary"],
+    "hotel": ["Hotel & Resort Management"],
+    "hotel_&_resort_management": ["Hotel & Resort Management"],
+    "hotel_and_resort_management": ["Hotel & Resort Management"],
+    # Physical/Sports
+    "sports": ["Sports & Fitness", "Exercise"],
+    "sport_&_fitness": ["Sports & Fitness"],
+    "sport_and_fitness": ["Sports & Fitness"],
+    "sports_fitness": ["Sports & Fitness"],
+    "sports_and_fitness": ["Sports & Fitness"],
+    "exercise_&_sports_science": ["Exercise & Sports Science"],
+    "exercise_and_sports_science": ["Exercise & Sports Science"],
+    "military": ["Military & Defense"],
+    "military_defense": ["Military & Defense"],
+    "military_&_defense": ["Military & Defense"],
+    "military_and_defense": ["Military & Defense"],
+    # Social/Public Service
+    "law": ["Law & Justice", "Legal"],
+    "justice": ["Law & Justice", "Legal"],
+    "legal": ["Law & Justice", "Legal"],
+    "criminology": ["Criminology & Public Safety"],
+    "public_safety": ["Criminology & Public Safety"],
+    "social": ["Sociology", "Social Work & Community"],
+    "social_work": ["Social Work & Community"],
+    "community": ["Community Development", "Social Work & Community"],
+    "history": ["History & Culture"],
+    "culture": ["History & Culture"],
+    "communication": ["Development Communication", "Communication & Journalism"],
+    "journalism": ["Communication & Journalism"],
+    "media": ["Communication & Journalism"],
+    "politics": ["Politics & Government"],
+    "government": ["Politics & Government", "Public Administration"],
+    "governance": ["Politics & Government", "Public Administration"],
+    "public_admin": ["Public Administration"],
+    "public_administration": ["Public Administration"],
+    "policy": ["Politics & Government", "Public Administration"],
+    "intl_studies": ["International Studies & Diplomacy"],
+    "international_studies": ["International Studies & Diplomacy"],
+    "diplomacy": ["International Studies & Diplomacy"],
+    "sociology": ["Sociology"],
+    "linguistics": ["Linguistics & Languages"],
+    "language": ["Linguistics & Languages"],
+    "languages": ["Linguistics & Languages"],
+    "dev_communication": ["Development Communication"],
+    "development_communication": ["Development Communication"],
+    "community_dev": ["Community Development"],
+    "community_development": ["Community Development"],
+    "philosophy": ["Philosophy & Ethics"],
+    "ethics": ["Philosophy & Ethics"],
+    "special_education": ["Special Needs Education"],
+    "special_needs": ["Special Needs Education"],
+    "library_science": ["Library & Information Science"],
+    "library_information_science": ["Library & Information Science"],
+    "legal_mgmt": ["Legal Management"],
+    "legal_management": ["Legal Management"],
+    "early_childhood": ["Early Childhood Education"],
+    "early_childhood_education": ["Early Childhood Education"],
+    # Healthcare
+    "medical": ["Medicine & Healthcare"],
+    "nursing": ["Nursing & Patient Care"],
+    "psychology": ["Psychology & Mental Health"],
+    "mental_health": ["Psychology & Mental Health"],
+    "public_health": ["Public Health"],
+    "health": ["Medicine & Healthcare", "Nursing & Patient Care"],
+    "pharmacy": ["Pharmacy & Pharmaceutical Science"],
+    "physical_therapy": ["Physical Therapy & Rehabilitation"],
+    "nutrition": ["Nutrition & Dietetics"],
+    "dentistry": ["Dentistry & Oral Health"],
+    "counseling": ["Psychology & Mental Health"],
+    "patient_care": ["Nursing & Patient Care", "Medicine & Healthcare"],
+    "midwifery": ["Midwifery & Maternal Health"],
+    "maternal_health": ["Midwifery & Maternal Health"],
+    "radiology": ["Radiology & Imaging"],
+    "radiologic": ["Radiology & Imaging"],
+    "imaging": ["Radiology & Imaging"],
+    "optometry": ["Optometry & Vision Care"],
+    "vision_care": ["Optometry & Vision Care"],
+    "occupational_therapy": ["Occupational Therapy"],
+    "medical_tech": ["Medical Technology & Lab Science"],
+    "lab_science": ["Medical Technology & Lab Science"],
+    "dietetics": ["Nutrition & Dietetics"],
+    "pharmaceutical": ["Pharmacy & Pharmaceutical Science"],
+    "rehabilitation": ["Physical Therapy & Rehabilitation"],
+    "respiratory": ["Respiratory Therapy"],
+    "respiratory_therapy": ["Respiratory Therapy"],
+    "speech_therapy": ["Speech-Language Pathology"],
+    "speech_pathology": ["Speech-Language Pathology"],
+}
+
+INTEREST_CATEGORY_KEYWORDS.update({
+    "culinary_&_food_science": ["Culinary & Food Science", "Food Science"],
+    "culinary_and_food_science": ["Culinary & Food Science", "Food Science"],
+    "culinary_food_science": ["Culinary & Food Science", "Food Science"],
+    "veterinary_&_animal_science": ["Veterinary & Animal Science"],
+    "veterinary_and_animal_science": ["Veterinary & Animal Science"],
+    "veterinary_animal_science": ["Veterinary & Animal Science"],
+    "culinary_management": ["Culinary Management"],
+    "technical-vocational_training": ["Technical-Vocational Training"],
+    "technical_vocational_training": ["Technical-Vocational Training"],
+})
+
+QUESTION_CATEGORY_DOMAIN_HINTS = {
+    "creative": [
+        "Fine Arts", "Art & Design", "Music", "Film", "Animation", "Photography",
+        "Fashion", "Graphic Arts", "Advertising", "Multimedia", "Writing", "Theater",
+        "Performing", "Arts General", "Audio", "Performance", "Production",
+        "Literature", "Clothing", "Textile",
+    ],
+    "technology": [
+        "Programming", "Software", "Computers", "Cybersecurity", "Database",
+        "Web & Mobile", "Computer Networking", "AI & Machine Learning", "Data & Analytics",
+        "Robotics", "Information Systems", "Information Technology",
+    ],
+    "healthcare": [
+        "Healthcare", "Nursing", "Patient Care", "Medicine", "Pharmacy",
+        "Dentistry", "Psychology", "Nutrition", "Physical Therapy", "Health Information",
+        "Medical", "Clinical", "Mental Health", "Public Health",
+        "Lab Science", "Dietetics", "Pharmaceutical", "Rehabilitation", "Technology & Lab",
+        "Occupational Therapy", "Respiratory Therapy", "Speech-Language Pathology",
+        "Oral Health", "Speech", "Respiratory", "Occupational",
+        "Radiology", "Imaging", "Optometry", "Vision", "Midwifery", "Maternal",
+    ],
+    "engineering": [
+        "Civil & Construction", "Electrical & Electronics", "Architecture & Interior Design",
+        "Mechanical", "Engineering", "Industrial & Manufacturing", "Aeronautical",
+        "Geodetic", "Surveying",
+    ],
+    "business": [
+        "Business & Entrepreneurship", "Finance & Banking", "Accounting", "Management & Administration",
+        "Marketing & Advertising", "Human Resource", "Real Estate", "Operations", "Customs",
+        "Office Administration",
+    ],
+    "science": [
+        "Biology", "Chemistry", "Physics", "Weather & Atmospheric Science", "Earth Science",
+        "Biotechnology", "Science", "Environmental", "Research", "Geology",
+    ],
+    "hospitality": [
+        "Tourism & Hospitality", "Hotel & Resort Management", "Culinary", "Hospitality",
+        "Tourism", "Food Science",
+    ],
+    "agriculture": [
+        "Agriculture", "Agribusiness", "Veterinary", "Forestry", "Fisheries", "Aquaculture",
+    ],
+    "maritime": [
+        "Maritime", "Marine", "Aviation", "Aeronautical & Aerospace", "Marine Engineering",
+    ],
+    "education": [
+        "Education & Teaching", "Teaching", "Early Childhood", "Special Education",
+    ],
+    "public_service": [
+        "Law & Justice", "Criminology", "Politics", "Public Safety", "Government", "Social Work",
+        "Public Administration", "Justice", "Legal", "Governance", "Policy", "Administration",
+        "International Studies & Diplomacy", "International Studies", "Diplomacy",
+        "Linguistics & Languages", "Linguistics", "Languages",
+        "Philosophy & Ethics", "Philosophy", "Ethics", "Legal Management",
+    ],
+    "social": [
+        "Psychology", "Social Work", "Community", "Mental Health", "Counseling",
+        "Education & Teaching", "History & Culture", "Communication & Journalism",
+        "Teaching", "History", "Culture", "Communication", "Journalism", "Media",
+        "Development Communication", "Community Development", "Sociology",
+    ],
+    "education": [
+        "Education & Teaching", "Teaching", "Early Childhood", "Special Education",
+        "Special Needs Education", "Library & Information Science", "Library", "Information Science",
+        "Early Childhood Education",
+    ],
+    "physical": [
+        "Sports", "Fitness", "Exercise", "Exercise & Sports Science", "Military", "Defense",
+    ],
+}
+
+QUESTION_CATEGORY_DOMAIN_HINTS["science"].extend(["Culinary & Food Science", "Food Science"])
+QUESTION_CATEGORY_DOMAIN_HINTS["agriculture"].extend(["Veterinary & Animal Science", "Animal Science"])
+QUESTION_CATEGORY_DOMAIN_HINTS["hospitality"].extend(["Culinary Management"])
+QUESTION_CATEGORY_DOMAIN_HINTS["education"].extend(["Technical-Vocational Training"])
+QUESTION_CATEGORY_DOMAIN_HINTS["technology"].extend(["Technical-Vocational Training"])
 
 # Minimum questions to ask in a domain before moving on
 DOMAIN_MIN_QUESTIONS = 3
@@ -1748,6 +4292,114 @@ class AdaptiveAssessmentEngine:
                     traits.append(trait)
                     seen.add(trait)
         return traits
+
+    def _get_profile_category_keywords_for_selection(self, selection: str) -> List[str]:
+        """Resolve a profile selection to question-category keywords using tolerant matching."""
+        categories = []
+        seen = set()
+        for key in self._profile_lookup_keys(selection):
+            for category in INTEREST_CATEGORY_KEYWORDS.get(key, []):
+                if category not in seen:
+                    categories.append(category)
+                    seen.add(category)
+        return categories
+
+    def _normalize_category_name(self, category: str) -> str:
+        """Normalize question category labels for continuity matching."""
+        if not category:
+            return ""
+        normalized = category.replace("Academic Interest -", "").strip()
+        normalized = normalized.replace("—", "-")
+        return normalized
+
+    def _category_match_score(self, category: str, keyword: str) -> int:
+        """Return a token-based match score between a question category and a profile keyword."""
+        normalized_category = self._normalize_category_name(category).lower()
+        normalized_keyword = self._normalize_category_name(keyword).lower()
+        if not normalized_category or not normalized_keyword:
+            return 0
+
+        def _tokenize(value: str) -> Set[str]:
+            cleaned = (
+                value.replace("&", " ")
+                     .replace("/", " ")
+                     .replace("-", " ")
+                     .replace("(", " ")
+                     .replace(")", " ")
+            )
+            return {token for token in cleaned.split() if token}
+
+        category_tokens = _tokenize(normalized_category)
+        keyword_tokens = _tokenize(normalized_keyword)
+        if not category_tokens or not keyword_tokens:
+            return 0
+
+        if keyword_tokens.issubset(category_tokens):
+            return len(keyword_tokens)
+        return 0
+
+    def _question_in_profile_pool(self, qid: int, session: AdaptiveSession) -> bool:
+        """When a profile pool exists, require questions to come from it."""
+        return not session.profile_relevant_qids or qid in session.profile_relevant_qids
+
+    def _infer_question_domains(self, question: dict) -> Set[str]:
+        """Infer branch domains from question metadata when tree node metadata is missing."""
+        inferred: Set[str] = set()
+        category = question.get("category", "")
+        for domain, hints in QUESTION_CATEGORY_DOMAIN_HINTS.items():
+            for hint in hints:
+                if self._category_match_score(category, hint) > 0:
+                    inferred.add(domain)
+                    break
+        return inferred
+
+    def _question_in_domain(self, qid: int, domain: str) -> bool:
+        """Check whether a question belongs to a branch/domain."""
+        if not domain:
+            return True
+        node = QUESTION_TREE_NODES.get(qid)
+        if node:
+            return domain in set(node.get("branches", []))
+        question = self.questions.get(qid)
+        if not question:
+            return False
+        return domain in self._infer_question_domains(question)
+
+    def _get_session_category_focus(self, session: AdaptiveSession) -> str:
+        """Return the dominant recent category thread for the session."""
+        if session.current_category_focus:
+            return session.current_category_focus
+        if not session.category_history:
+            return ""
+
+        recent = session.category_history[-5:]
+        counts: Dict[str, int] = {}
+        for category in recent:
+            counts[category] = counts.get(category, 0) + 1
+        return max(counts.items(), key=lambda item: item[1])[0]
+
+    def _question_matches_category_focus(self, qid: int, session: AdaptiveSession) -> bool:
+        """Prefer questions from the same category family the user keeps choosing."""
+        focus = self._get_session_category_focus(session)
+        if not focus:
+            return False
+
+        question = self.questions.get(qid)
+        if not question:
+            return False
+
+        q_category = self._normalize_category_name(question.get("category", ""))
+        if not q_category:
+            return False
+
+        if q_category == focus:
+            return True
+
+        focus_tokens = {token for token in focus.lower().replace("&", " ").replace("/", " ").replace("-", " ").split() if len(token) > 2}
+        q_tokens = {token for token in q_category.lower().replace("&", " ").replace("/", " ").replace("-", " ").split() if len(token) > 2}
+        if not focus_tokens or not q_tokens:
+            return False
+        return len(focus_tokens & q_tokens) >= 2
 
     def _get_profile_domain_for_selection(self, selection: str) -> Optional[str]:
         """Resolve a profile selection to its most relevant domain."""
@@ -2147,36 +4799,52 @@ class AdaptiveAssessmentEngine:
 
     def _has_dominant_trait_overlap(self, question: dict, session: AdaptiveSession) -> bool:
         """
-        Check if a question has at least one option with a trait from the user's
-        DOMINANT pattern (top accumulated traits + profile seeds).
+        Check if a question has meaningful overlap with the user's DOMINANT pattern
+        (top accumulated traits + profile seeds).
         
-        This is STRICTER than _has_trait_continuity — it requires overlap with
-        the user's strongest traits, not just any trait ever encountered.
-        Used to prevent a single minority answer from hijacking the question chain.
+        For questions with many options: require at least 2 options to match
+        dominant traits, OR require the question to be in the profile category pool.
+        For questions with few options (<=4): require at least 1 match.
         
-        NO adjacency expansion — prevents cross-cluster leakage where
-        Digital-Media (dominant for art user) would expand to include Software-Dev.
+        This prevents off-topic questions (where only 1 out of 8+ options 
+        tangentially matches) from being served.
         """
         dominant = self._get_dominant_traits(session)
         if not dominant:
             return True  # No dominant traits yet — allow anything
         
+        # If question is in profile category pool, always allow
+        qid = question.get('question_id')
+        if qid and qid in session.profile_relevant_qids:
+            return True
+        
         options = question.get('options', [])
+        matching_options = 0
         for opt in options:
             trait_tags = opt.get('trait_tags', {})
+            opt_matches = False
             if isinstance(trait_tags, dict):
                 for trait in trait_tags:
                     if trait in dominant:
-                        return True
+                        opt_matches = True
+                        break
             elif isinstance(trait_tags, list):
                 for trait in trait_tags:
                     if trait in dominant:
-                        return True
+                        opt_matches = True
+                        break
             else:
                 trait = opt.get('trait_tag')
                 if trait and trait in dominant:
-                    return True
-        return False
+                    opt_matches = True
+            if opt_matches:
+                matching_options += 1
+        
+        # For questions with many options, require at least 2 matches
+        # to ensure the question is genuinely relevant, not tangentially connected
+        if len(options) >= 6:
+            return matching_options >= 2
+        return matching_options >= 1
 
     def _has_trait_continuity(self, question: dict, session: AdaptiveSession) -> bool:
         """
@@ -2331,7 +4999,8 @@ class AdaptiveAssessmentEngine:
         )
         
         # ─── CONVERSATION CHAIN: Determine primary domain from profile ───
-        # Count how many interest/skill keywords map to each domain
+        # Count how many explicit interest/skill keywords map to each domain.
+        # These explicit selections should override strand-derived bias.
         domain_votes: Dict[str, int] = {}
         all_keywords = []
         if user_interests:
@@ -2344,10 +5013,16 @@ class AdaptiveAssessmentEngine:
             if domain:
                 domain_votes[domain] = domain_votes.get(domain, 0) + 1
 
-        for trait in profile_ranked:
-            branch = TRAIT_TO_BRANCH.get(trait, "")
-            if branch:
-                domain_votes[branch] = domain_votes.get(branch, 0) + 1
+        explicit_domain_votes = domain_votes.copy()
+
+        # Only fall back to trait-derived domain votes when the user did not
+        # give clear interests/skills. This prevents strand-derived technology
+        # traits from hijacking a creative profile.
+        if not explicit_domain_votes:
+            for trait in profile_ranked:
+                branch = TRAIT_TO_BRANCH.get(trait, "")
+                if branch:
+                    domain_votes[branch] = domain_votes.get(branch, 0) + 1
         
         # Primary domain: most voted, with strand as tiebreaker
         strand_domain = STRAND_DOMAIN_MAP.get(normalized_strand)
@@ -2363,37 +5038,85 @@ class AdaptiveAssessmentEngine:
         
         session.primary_domain = primary
         
-        # Build domain exploration queue: ONLY profile-relevant domains
-        # (primary → adjacent → voted → strand-related). Never add unrelated domains.
+        # Build domain exploration queue: ONLY profile-selected domains.
+        # Do not include adjacent domains by default. This keeps a user who
+        # explicitly chose arts/music from drifting into science or technology
+        # unless their answers repeatedly establish a new path.
         domain_queue = [primary]
         relevant_domains = {primary}
-        # Add adjacent domains of primary
-        for adj in BRANCH_ADJACENCY.get(primary, []):
-            if adj not in domain_queue:
-                domain_queue.append(adj)
-            relevant_domains.add(adj)
-        # Add other voted domains (from interests/skills)
+        # Add other voted domains (from interests/skills) to BOTH queue and relevant
         for dom, _ in sorted(domain_votes.items(), key=lambda x: x[1], reverse=True):
-            if dom not in domain_queue:
-                domain_queue.append(dom)
-            relevant_domains.add(dom)
-            # Also add adjacents of voted domains
-            for adj in BRANCH_ADJACENCY.get(dom, []):
-                relevant_domains.add(adj)
-        # Add strand domain if not yet included
-        if strand_domain and strand_domain not in domain_queue:
+            if dom != primary:
+                if dom not in domain_queue:
+                    domain_queue.append(dom)
+                relevant_domains.add(dom)
+        # Add strand domain only when the profile did not already specify domains.
+        if strand_domain and not explicit_domain_votes and strand_domain not in domain_queue:
             domain_queue.append(strand_domain)
             relevant_domains.add(strand_domain)
-            for adj in BRANCH_ADJACENCY.get(strand_domain, []):
-                relevant_domains.add(adj)
-        # DO NOT add remaining unrelated domains — keep questions focused on profile
+        # DO NOT add adjacent or unrelated domains here — keep questions focused on profile
+
+        # If the user explicitly selected domains, keep branch weights focused on
+        # those domains so fallback scoring cannot drift to unrelated branches.
+        if explicit_domain_votes:
+            explicit_domains = set(explicit_domain_votes.keys())
+            for branch in list(initial_branch_weights.keys()):
+                if branch in explicit_domains:
+                    initial_branch_weights[branch] = max(initial_branch_weights.get(branch, 0.0), 4.0 + explicit_domain_votes.get(branch, 0))
+                else:
+                    initial_branch_weights[branch] = min(initial_branch_weights.get(branch, 0.0), 0.1)
+            session.branch_weights = initial_branch_weights.copy()
         
         session.domain_queue = domain_queue
         session.relevant_domains = relevant_domains
         
+        # ─── PROFILE CATEGORY MATCHING: Build focused question pool ───
+        # Map user's interest/skill keywords to question categories so
+        # questions directly related to their stated interests are prioritized.
+        profile_categories = set()
+        for kw in all_keywords:
+            cat_keywords = self._get_profile_category_keywords_for_selection(kw)
+            for cat_kw in cat_keywords:
+                profile_categories.add(cat_kw)
+        
+        # Build the set of QIDs whose categories match profile interests.
+        # Use token-based matching so broad labels like "Business" do not
+        # accidentally match "Agribusiness", while multi-word labels like
+        # "Database & Information" still match "Database & Information Systems".
+        profile_relevant_qids = set()
+        if profile_categories:
+            min_profile_match_score = 1
+            if any(len(self._normalize_category_name(cat_kw).replace("&", " ").replace("/", " ").replace("-", " ").split()) >= 2 for cat_kw in profile_categories):
+                min_profile_match_score = 2
+            for qid, question in self.questions.items():
+                q_cat = question.get('category', '')
+                best_score = 0
+                for cat_kw in profile_categories:
+                    best_score = max(best_score, self._category_match_score(q_cat, cat_kw))
+                if best_score >= min_profile_match_score:
+                    profile_relevant_qids.add(qid)
+        
+        session.profile_categories = profile_categories
+        session.profile_relevant_qids = profile_relevant_qids
+        
+        print(f"[PROFILE] Category keywords: {sorted(profile_categories)[:8]}")
+        print(f"[PROFILE] Matching QIDs: {len(profile_relevant_qids)} questions in profile pool")
+        
         # Preload the first chain: entry questions for primary domain
+        # PRIORITIZE profile-relevant questions at the front
         entry_qs = DOMAIN_ENTRY_QUESTIONS.get(primary, [])
-        session.chain_queue = list(entry_qs)
+        if profile_relevant_qids:
+            # Put profile-matching entry questions first, then others
+            profile_entry = [q for q in entry_qs if q in profile_relevant_qids]
+            if profile_entry:
+                session.chain_queue = profile_entry
+            else:
+                session.chain_queue = [
+                    qid for qid in sorted(profile_relevant_qids)
+                    if self._question_in_domain(qid, primary)
+                ]
+        else:
+            session.chain_queue = list(entry_qs)
         session.domain_question_count = {primary: 0}
         
         print(f"[CHAIN] Primary domain: {primary} (votes: {domain_votes})")
@@ -2461,6 +5184,8 @@ class AdaptiveAssessmentEngine:
         top_branch_weight = sorted_branch_weights[0] if sorted_branch_weights else 0.0
         second_branch_weight = sorted_branch_weights[1] if len(sorted_branch_weights) > 1 else 0.0
         recent_same_branch = session.branch_history[-4:].count(current_chain_domain) if current_chain_domain else 0
+        # Also check recent history for dominant branch (even if current chain domain differs)
+        recent_dominant_count = sum(1 for b in session.branch_history[-4:] if b == dominant_branch) if dominant_branch else 0
         strong_branch_lock = (
             current_chain_domain and
             current_chain_domain == dominant_branch and
@@ -2469,6 +5194,23 @@ class AdaptiveAssessmentEngine:
                 recent_same_branch >= 3
             )
         )
+        # Secondary lock: if the dominant branch is overwhelmingly strong,
+        # prevent rotation even when current_chain_domain differs (e.g., chain
+        # was cleared by a previous rotation or user answered an off-domain question).
+        # This prevents bouncing away from the user's clear interest area.
+        if not strong_branch_lock and dominant_branch:
+            dominant_is_overwhelming = (
+                top_branch_weight >= second_branch_weight + 4.0 or
+                recent_dominant_count >= 3
+            )
+            if dominant_is_overwhelming and current_chain_domain != dominant_branch:
+                # Redirect to the dominant domain instead of rotating away
+                current_chain_domain = dominant_branch
+                current_domain_count = session.domain_question_count.get(current_chain_domain, 0)
+                strong_branch_lock = True
+                print(f"[LOCK-REDIRECT] Redirecting to dominant domain '{dominant_branch}' "
+                      f"(weight gap: {top_branch_weight - second_branch_weight:.1f}, recent: {recent_dominant_count})")
+        
         force_domain_rotation = (
             current_chain_domain and
             current_domain_count >= domain_budget and
@@ -2492,6 +5234,7 @@ class AdaptiveAssessmentEngine:
         selected_qid = None
         selection_reason = ""
         relevant = session.relevant_domains
+        profile_qids = session.profile_relevant_qids
         
         def _is_relevant_question(qid):
             """Check if a question belongs to at least one profile-relevant branch."""
@@ -2507,6 +5250,30 @@ class AdaptiveAssessmentEngine:
                 return False
             return self._has_trait_continuity(q, session)
         
+        def _is_profile_category_question(qid):
+            """Check if question's category matches user's stated interests."""
+            return qid in profile_qids
+
+        remaining_profile_qids = {
+            qid for qid in profile_qids
+            if qid not in asked and qid in self.questions and _is_relevant_question(qid)
+        }
+        strict_profile_lock = bool(remaining_profile_qids)
+
+        def _is_allowed_profile_question(qid):
+            """Require profile-pool membership while relevant profile questions remain.
+
+            Once the profile pool is exhausted, widen within the same relevant
+            domain instead of ending the assessment early.
+            """
+            if strict_profile_lock:
+                return qid in profile_qids
+            return True
+
+        def _matches_current_category_focus(qid):
+            """Check if question stays in the user's current category thread."""
+            return self._question_matches_category_focus(qid, session)
+        
         # --- Step 1A: If we have a last_answer_trait, build a follow-up chain from it ---
         # GUARD: Only follow the last answer's chain if the trait is part of the
         # user's dominant pattern. This prevents a single "off-topic" answer
@@ -2519,23 +5286,48 @@ class AdaptiveAssessmentEngine:
             
             if allow_chain:
                 followups = TRAIT_FOLLOWUP_MAP[session.last_answer_trait]
-                for fq in followups:
-                    if fq not in asked and fq in self.questions and _is_relevant_question(fq):
-                        # EXTRA CHECK: the follow-up must also connect to dominant traits
-                        fq_question = self.questions[fq]
-                        if self._has_dominant_trait_overlap(fq_question, session):
-                            selected_qid = fq
-                            selection_reason = f"follow-up from trait {session.last_answer_trait}"
-                            session.current_chain_trait = session.last_answer_trait
-                            break
+                # FIRST PASS: if the user is already consistent in a category family,
+                # keep the follow-up in that same category before widening out.
+                if profile_qids and session.current_category_focus:
+                    for fq in followups:
+                        if fq not in asked and fq in self.questions and _is_relevant_question(fq) and _is_profile_category_question(fq) and _matches_current_category_focus(fq):
+                            fq_question = self.questions[fq]
+                            if self._has_dominant_trait_overlap(fq_question, session):
+                                selected_qid = fq
+                                selection_reason = f"follow-up from trait {session.last_answer_trait} (category focus)"
+                                session.current_chain_trait = session.last_answer_trait
+                                break
+                # FIRST PASS: prefer follow-ups that match user's profile categories
+                if profile_qids and not selected_qid:
+                    for fq in followups:
+                        if fq not in asked and fq in self.questions and _is_relevant_question(fq) and _is_profile_category_question(fq):
+                            fq_question = self.questions[fq]
+                            if self._has_dominant_trait_overlap(fq_question, session):
+                                selected_qid = fq
+                                selection_reason = f"follow-up from trait {session.last_answer_trait} (profile match)"
+                                session.current_chain_trait = session.last_answer_trait
+                                break
+                # SECOND PASS: allow any relevant follow-up
+                if not selected_qid and not profile_qids:
+                    for fq in followups:
+                        if fq not in asked and fq in self.questions and _is_relevant_question(fq):
+                            fq_question = self.questions[fq]
+                            if self._has_dominant_trait_overlap(fq_question, session):
+                                selected_qid = fq
+                                selection_reason = f"follow-up from trait {session.last_answer_trait}"
+                                session.current_chain_trait = session.last_answer_trait
+                                break
             else:
                 print(f"[GUARD] Skipping chain for minority trait '{session.last_answer_trait}' "
                       f"(not in dominant pattern: {sorted(self._get_dominant_traits(session))[:5]})")
         
         # --- Step 1B: If no follow-up found, try the pre-loaded chain_queue ---
         if not force_domain_rotation and not selected_qid and session.chain_queue:
-            for cq in list(session.chain_queue):
-                if cq not in asked and cq in self.questions and _is_relevant_question(cq):
+            ordered_chain = list(session.chain_queue)
+            if session.current_category_focus:
+                ordered_chain = [q for q in ordered_chain if _matches_current_category_focus(q)] + [q for q in ordered_chain if not _matches_current_category_focus(q)]
+            for cq in ordered_chain:
+                if cq not in asked and cq in self.questions and _is_relevant_question(cq) and _is_allowed_profile_question(cq):
                     cq_question = self.questions[cq]
                     if self._has_dominant_trait_overlap(cq_question, session):
                         selected_qid = cq
@@ -2543,6 +5335,28 @@ class AdaptiveAssessmentEngine:
                         break
                 # Remove already-asked or non-qualifying questions from queue
                 session.chain_queue = [q for q in session.chain_queue if q != cq]
+
+        # --- Step 1C: If the user is staying consistent in one category family,
+        # exhaust unanswered questions from that same category before widening out.
+        if not force_domain_rotation and not selected_qid and session.current_category_focus:
+            focused_qids = []
+            for qid, question in self.questions.items():
+                if qid in asked:
+                    continue
+                if not _is_relevant_question(qid):
+                    continue
+                if not _matches_current_category_focus(qid):
+                    continue
+                if profile_qids and qid not in profile_qids:
+                    continue
+                focused_qids.append(qid)
+
+            for fq in focused_qids:
+                fq_question = self.questions[fq]
+                if self._has_dominant_trait_overlap(fq_question, session):
+                    selected_qid = fq
+                    selection_reason = f"category focus ({session.current_category_focus})"
+                    break
         
         # ═══════════════════════════════════════════════════════════════════
         # PHASE 2: If chain is exhausted, look at accumulated traits
@@ -2553,23 +5367,53 @@ class AdaptiveAssessmentEngine:
             # Find the strongest trait that still has unanswered follow-up questions
             # Only follow traits whose follow-ups are in relevant branches AND
             # connect back to the user's dominant traits
+            # FIRST: prefer profile-category matches
             sorted_traits = sorted(
                 session.trait_scores.items(),
                 key=lambda x: x[1],
                 reverse=True
             )
-            for trait, score in sorted_traits:
-                if trait in TRAIT_FOLLOWUP_MAP:
-                    for fq in TRAIT_FOLLOWUP_MAP[trait]:
-                        if fq not in asked and fq in self.questions and _is_relevant_question(fq):
-                            fq_question = self.questions[fq]
-                            if self._has_dominant_trait_overlap(fq_question, session):
-                                selected_qid = fq
-                                selection_reason = f"strongest trait chain ({trait}, score={score:.1f})"
-                                session.current_chain_trait = trait
-                                break
-                if selected_qid:
-                    break
+            focus_only = bool(session.current_category_focus)
+            if focus_only:
+                for trait, score in sorted_traits:
+                    if trait in TRAIT_FOLLOWUP_MAP:
+                        for fq in TRAIT_FOLLOWUP_MAP[trait]:
+                            if fq not in asked and fq in self.questions and _is_relevant_question(fq) and _matches_current_category_focus(fq) and _is_allowed_profile_question(fq):
+                                fq_question = self.questions[fq]
+                                if self._has_dominant_trait_overlap(fq_question, session):
+                                    selected_qid = fq
+                                    selection_reason = f"strongest trait chain ({trait}, score={score:.1f}, category focus)"
+                                    session.current_chain_trait = trait
+                                    break
+                    if selected_qid:
+                        break
+            if profile_qids:
+                for trait, score in sorted_traits:
+                    if trait in TRAIT_FOLLOWUP_MAP:
+                        for fq in TRAIT_FOLLOWUP_MAP[trait]:
+                            if fq not in asked and fq in self.questions and _is_relevant_question(fq) and _is_profile_category_question(fq):
+                                fq_question = self.questions[fq]
+                                if self._has_dominant_trait_overlap(fq_question, session):
+                                    selected_qid = fq
+                                    selection_reason = f"strongest trait chain ({trait}, score={score:.1f}, profile match)"
+                                    session.current_chain_trait = trait
+                                    break
+                    if selected_qid:
+                        break
+            # THEN: allow any relevant follow-up
+            if not selected_qid and not profile_qids:
+                for trait, score in sorted_traits:
+                    if trait in TRAIT_FOLLOWUP_MAP:
+                        for fq in TRAIT_FOLLOWUP_MAP[trait]:
+                            if fq not in asked and fq in self.questions and _is_relevant_question(fq):
+                                fq_question = self.questions[fq]
+                                if self._has_dominant_trait_overlap(fq_question, session):
+                                    selected_qid = fq
+                                    selection_reason = f"strongest trait chain ({trait}, score={score:.1f})"
+                                    session.current_chain_trait = trait
+                                    break
+                    if selected_qid:
+                        break
         
         # ═══════════════════════════════════════════════════════════════════
         # PHASE 3: If still nothing, move to the next domain in queue
@@ -2585,11 +5429,25 @@ class AdaptiveAssessmentEngine:
                 domain_count = session.domain_question_count.get(domain, 0)
                 if domain_count < DOMAIN_MIN_QUESTIONS or domain not in session.explored_domains:
                     entry_qs = DOMAIN_ENTRY_QUESTIONS.get(domain, [])
-                    for eq in entry_qs:
-                        if eq not in asked and eq in self.questions:
+                    # Prefer profile-matching entry questions when entering a new domain
+                    if profile_qids:
+                        sorted_entry = [q for q in entry_qs if q in profile_qids]
+                        if not sorted_entry:
+                            sorted_entry = [
+                                qid for qid in sorted(profile_qids)
+                                if self._question_in_domain(qid, domain) and qid not in asked
+                            ]
+                        if not sorted_entry:
+                            sorted_entry = entry_qs
+                    else:
+                        sorted_entry = entry_qs
+                    if session.current_category_focus:
+                        sorted_entry = [q for q in sorted_entry if _matches_current_category_focus(q)] + [q for q in sorted_entry if not _matches_current_category_focus(q)]
+                    for eq in sorted_entry:
+                        if eq not in asked and eq in self.questions and _is_allowed_profile_question(eq):
                             selected_qid = eq
                             selection_reason = f"new domain entry ({domain})"
-                            session.chain_queue = [q for q in entry_qs if q != eq and q not in asked]
+                            session.chain_queue = [q for q in sorted_entry if q != eq and q not in asked]
                             break
                 if selected_qid:
                     break
@@ -2607,6 +5465,8 @@ class AdaptiveAssessmentEngine:
             candidates = []
             for qid, question in self.questions.items():
                 if qid in asked:
+                    continue
+                if not _is_allowed_profile_question(qid):
                     continue
                 node = QUESTION_TREE_NODES.get(qid)
                 if not node:
@@ -2635,6 +5495,16 @@ class AdaptiveAssessmentEngine:
                     continue
                 
                 score = 0.0
+                
+                # PROFILE CATEGORY BONUS — strongly prioritize questions whose
+                # category directly matches user's stated interests
+                if qid in profile_qids:
+                    score += 15.0  # Major bonus for interest-matching questions
+
+                # CATEGORY FOCUS BONUS — if the user has been consistently in a
+                # sub-path like Fine Arts or Music, keep serving that path.
+                if _matches_current_category_focus(qid):
+                    score += 18.0
                 
                 # TRAIT CONTINUITY BONUS — strongly favor questions sharing traits
                 # with the user's accumulated trait profile and profile seeds
@@ -2700,7 +5570,7 @@ class AdaptiveAssessmentEngine:
         if not selected_qid and session.round_number < session.max_questions:
             # First pass: look for any unanswered question with trait continuity
             for qid, question in self.questions.items():
-                if qid not in asked and _passes_trait_continuity(qid):
+                if qid not in asked and _passes_trait_continuity(qid) and _is_relevant_question(qid) and _is_allowed_profile_question(qid):
                     selected_qid = qid
                     selection_reason = "safety net (trait-continuous)"
                     print(f"[SAFETY] Trait-continuous fallback at round {round_num}")
@@ -2709,7 +5579,7 @@ class AdaptiveAssessmentEngine:
         # Last resort: any unanswered question to avoid premature end
         if not selected_qid and session.round_number < session.max_questions:
             for qid, question in self.questions.items():
-                if qid not in asked:
+                if qid not in asked and _is_relevant_question(qid) and _is_allowed_profile_question(qid):
                     selected_qid = qid
                     selection_reason = "safety net (last resort)"
                     print(f"[SAFETY] Last resort fallback at round {round_num}")
@@ -2966,7 +5836,18 @@ class AdaptiveAssessmentEngine:
         session.answered_questions[question_id] = chosen_option_id
         session.excluded_question_ids.add(question_id)
         session.question_history.append(question_id)  # Track for "Previous" button
+        answered_category = self._normalize_category_name(question.get('category', ''))
+        if answered_category:
+            session.category_history.append(answered_category)
+            recent_categories = session.category_history[-5:]
+            category_counts: Dict[str, int] = {}
+            for category in recent_categories:
+                category_counts[category] = category_counts.get(category, 0) + 1
+            session.current_category_focus = max(category_counts.items(), key=lambda item: item[1])[0]
         print(f"[ANSWER] Q{question_id} answered. Total answers={len(session.answered_questions)}, round={session.round_number}, excluded={len(session.excluded_question_ids)}")
+        
+        # Snapshot course scores BEFORE any changes (for exact reversal with "Previous" button)
+        session.course_scores_snapshots[question_id] = session.course_scores.copy()
         
         # Check if user rejected this topic (e.g., "none", "not interested")
         option_text = chosen_option.get('option_text', '').lower()
@@ -3120,6 +6001,11 @@ class AdaptiveAssessmentEngine:
                 if chosen_trait in TRAIT_FOLLOWUP_MAP:
                     new_chain = [q for q in TRAIT_FOLLOWUP_MAP[chosen_trait]
                                  if q not in session.excluded_question_ids and q in self.questions]
+                    # Prioritize profile-matching follow-ups at the front
+                    if session.profile_relevant_qids:
+                        profile_chain = [q for q in new_chain if q in session.profile_relevant_qids]
+                        other_chain = [q for q in new_chain if q not in session.profile_relevant_qids]
+                        new_chain = profile_chain + other_chain
                     session.chain_queue = new_chain
                     session.current_chain_trait = chosen_trait
                     print(f"[CHAIN] Answer trait={chosen_trait} (dominant) -> follow-up chain: {new_chain[:5]}")
@@ -3165,8 +6051,6 @@ class AdaptiveAssessmentEngine:
                         session.relevant_domains.add(chosen_branch)
                         if chosen_branch not in session.domain_queue:
                             session.domain_queue.append(chosen_branch)
-                        for adj in BRANCH_ADJACENCY.get(chosen_branch, []):
-                            session.relevant_domains.add(adj)
                         print(f"[EXPAND] Domain '{chosen_branch}' added to relevant domains (picked {branch_count}x)")
         
         # Track question weight for this question (for scoring impact)
@@ -3816,8 +6700,16 @@ class AdaptiveAssessmentEngine:
                 rebuilt_weights[adj] = rebuilt_weights.get(adj, 0) + 0.5
         session.branch_weights = rebuilt_weights
         
-        # Recalculate course scores based on current trait scores
-        self._recalculate_all_course_scores(session)
+        # Restore course scores from the snapshot taken BEFORE this answer was processed.
+        # This guarantees the scores revert to exactly what they were, using the same
+        # scoring formula that was applied going forward (no simplified recalculation).
+        if previous_question_id in session.course_scores_snapshots:
+            session.course_scores = session.course_scores_snapshots.pop(previous_question_id)
+            print(f"[PREVIOUS] Restored course scores from snapshot for Q{previous_question_id}")
+        else:
+            # Fallback: recalculate if no snapshot (shouldn't happen for normal flow)
+            self._recalculate_all_course_scores(session)
+            print(f"[PREVIOUS] No snapshot for Q{previous_question_id}, used recalculation fallback")
         
         # Recalculate confidence
         session.confidence = self._calculate_confidence(session)
