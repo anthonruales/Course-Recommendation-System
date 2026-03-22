@@ -629,28 +629,45 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
             <h2 className="assess-question-text" style={styles.questionText}>{currentQuestion?.question_text}</h2>
 
             <div style={styles.optionsContainer}>
-              {currentQuestion?.options?.map((option, index) => (
+              {currentQuestion?.options?.map((option, index) => {
+                const isNoneOption = option.option_id === -1;
+                return (
                 <button
                   key={option.option_id}
                   onClick={() => submitAnswer(option.option_id)}
                   disabled={isLoading}
-                  style={styles.optionButton}
+                  style={{
+                    ...styles.optionButton,
+                    ...(isNoneOption ? {
+                      borderStyle: 'dashed',
+                      opacity: 0.75,
+                      fontStyle: 'italic',
+                      marginTop: '8px',
+                    } : {})
+                  }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'rgba(99, 102, 241, 0.15)';
-                    e.currentTarget.style.borderColor = '#6366f1';
+                    e.currentTarget.style.background = isNoneOption
+                      ? 'rgba(148, 163, 184, 0.12)'
+                      : 'rgba(99, 102, 241, 0.15)';
+                    e.currentTarget.style.borderColor = isNoneOption ? '#94a3b8' : '#6366f1';
                     e.currentTarget.style.transform = 'translateX(6px)';
-                    e.currentTarget.style.boxShadow = '0 4px 20px rgba(99, 102, 241, 0.2)';
+                    e.currentTarget.style.boxShadow = isNoneOption
+                      ? '0 4px 20px rgba(148, 163, 184, 0.15)'
+                      : '0 4px 20px rgba(99, 102, 241, 0.2)';
+                    e.currentTarget.style.opacity = '1';
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.background = 'rgba(30, 41, 59, 0.5)';
                     e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)';
                     e.currentTarget.style.transform = 'translateX(0)';
                     e.currentTarget.style.boxShadow = 'none';
+                    e.currentTarget.style.opacity = isNoneOption ? '0.75' : '1';
                   }}
                 >
                   {option.option_text}
                 </button>
-              ))}
+                );
+              })}
             </div>
 
             {isLoading && (

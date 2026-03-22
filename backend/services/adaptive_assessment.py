@@ -4362,6 +4362,49 @@ class AdaptiveAssessmentEngine:
                 seen.add(candidate)
         return ordered
 
+    def _build_profile_none_option(self, session: AdaptiveSession) -> dict:
+        """Build a dynamic 'I don't see what I want' option with traits from user profile."""
+        trait_scores = {}  # trait -> accumulated weight
+
+        # Gather traits from academic interests
+        if session.user_interests:
+            for interest in session.user_interests.split(','):
+                for trait in self._get_profile_traits_for_selection(interest.strip()):
+                    trait_scores[trait] = trait_scores.get(trait, 0) + 0.4
+
+        # Gather traits from skills
+        if session.user_skills:
+            for skill in session.user_skills.split(','):
+                for trait in self._get_profile_traits_for_selection(skill.strip()):
+                    trait_scores[trait] = trait_scores.get(trait, 0) + 0.3
+
+        if not trait_scores:
+            # Fallback: no profile data, return empty option with no traits
+            return {
+                "option_id": -1,
+                "option_text": "I don't see what I want",
+                "trait_tags": {}
+            }
+
+        # Normalize: primary trait = 1.0, others scaled proportionally
+        max_score = max(trait_scores.values())
+        normalized = {}
+        for trait, score in sorted(trait_scores.items(), key=lambda x: -x[1]):
+            normalized[trait] = round(min(score / max_score, 1.0), 2)
+
+        return {
+            "option_id": -1,
+            "option_text": "I don't see what I want",
+            "trait_tags": normalized
+        }
+
+    def _append_none_option(self, question: dict, session: AdaptiveSession) -> dict:
+        """Return a copy of the question with the profile-based 'None' option appended."""
+        none_opt = self._build_profile_none_option(session)
+        q_copy = dict(question)
+        q_copy["options"] = list(question.get("options", [])) + [none_opt]
+        return q_copy
+
     def _get_profile_traits_for_selection(self, selection: str) -> List[str]:
         """Resolve a profile selection to traits using tolerant key matching."""
         traits = []
@@ -5774,7 +5817,7 @@ class AdaptiveAssessmentEngine:
             "session_id": session_id,
             "round": session.round_number,
             "total_max_rounds": session.max_questions,
-            "question": best_question,
+            "question": self._append_none_option(best_question, session),
             "courses_remaining": len(session.active_courses),
             "confidence": round(session.confidence * 100, 1),
             "can_finish_early": session.round_number >= session.min_questions,
@@ -5950,10 +5993,14 @@ class AdaptiveAssessmentEngine:
         
         # Find the chosen option
         chosen_option = None
-        for opt in question.get('options', []):
-            if opt.get('option_id') == chosen_option_id:
-                chosen_option = opt
-                break
+        if chosen_option_id == -1:
+            # Special "I don't see what I want" option — build dynamically from profile
+            chosen_option = self._build_profile_none_option(session)
+        else:
+            for opt in question.get('options', []):
+                if opt.get('option_id') == chosen_option_id:
+                    chosen_option = opt
+                    break
         
         if not chosen_option:
             print(f"[WARN] process_answer: Option {chosen_option_id} not found for question {question_id}!")
@@ -5990,9 +6037,13 @@ class AdaptiveAssessmentEngine:
         # Snapshot course scores BEFORE any changes (for exact reversal with "Previous" button)
         session.course_scores_snapshots[question_id] = session.course_scores.copy()
         
+        # The special "I don't see what I want" option (option_id == -1) is NOT a rejection.
+        # It carries profile-derived traits and should be processed like a normal answer.
+        is_profile_none_option = (chosen_option_id == -1)
+        
         # Check if user rejected this topic (e.g., "none", "not interested")
         option_text = chosen_option.get('option_text', '').lower()
-        is_rejection = any(phrase in option_text for phrase in [
+        is_rejection = not is_profile_none_option and any(phrase in option_text for phrase in [
             "none", "not interested", "don't want", "prefer not", 
             "i'm not", "im not", "prefer non-", "prefer other",
             "i don't want to", "not for me"
@@ -6058,8 +6109,8 @@ class AdaptiveAssessmentEngine:
         # Track all trait changes for this question (for reversal with "Previous" button)
         trait_changes = {}
         
-        # Check if this is a "None" or "Not interested" option
-        is_none_option = any(phrase in option_text for phrase in [
+        # Check if this is a "None" or "Not interested" option (but NOT the profile-based option)
+        is_none_option = not is_profile_none_option and any(phrase in option_text for phrase in [
             'none', 'not interested', "don't want", 'prefer not',
             'none of these', 'not for me', "i don't"
         ])
@@ -6904,7 +6955,7 @@ class AdaptiveAssessmentEngine:
             "status": "continue",
             "session_id": session_id,
             "round": session.round_number,
-            "question": question,
+            "question": self._append_none_option(question, session),
             "confidence": round(session.confidence * 100, 1),
             "courses_remaining": len(self.courses),
             "traits_discovered": len(session.trait_scores),
