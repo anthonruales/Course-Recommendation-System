@@ -264,7 +264,6 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
   const [profilePhoto, setProfilePhoto] = useState(null);
   const pendingPhotoRef = useRef({ changed: false, value: null });
   const [newEmail, setNewEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
   const fileInputRef = useRef(null);
   
   // Load saved profile photo and email
@@ -462,7 +461,6 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
     if (newEmail && newEmail !== currentEmail) {
       // Validate email format
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)) {
-        setEmailError('Please enter a valid email address');
         showToast('Invalid email format', 'error');
         return;
       }
@@ -477,7 +475,6 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
         const emailData = await emailRes.json();
         
         if (!emailRes.ok) {
-          setEmailError(emailData.detail || 'Failed to update email');
           showToast(emailData.detail || 'Failed to update email', 'error');
           return;
         }
@@ -485,7 +482,6 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
         // Update localStorage with new email
         localStorage.setItem('userEmail', newEmail);
         changedFields.push('Email');
-        setEmailError('');
       } catch (err) {
         console.error('Error changing email:', err);
         showToast('Failed to update email. Please try again.', 'error');
