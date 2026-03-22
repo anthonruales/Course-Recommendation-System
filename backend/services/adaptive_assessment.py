@@ -4577,8 +4577,8 @@ class AdaptiveAssessmentEngine:
         # Academic Interests contribute at 5.0× weight; Skills at 3.0×.
         # This ensures interest-matched courses always rank above skill-only courses
         # in the initial Top Matches, regardless of how many skill selections there are.
-        INTEREST_WEIGHT = 5.0
-        SKILL_WEIGHT = 3.0
+        INTEREST_WEIGHT = 2.0
+        SKILL_WEIGHT = 0.3
 
         interest_list = [i.strip().lower() for i in (interests or "").split(",") if i.strip()]
         skill_list = [s.strip().lower() for s in (skills or "").split(",") if s.strip()]
