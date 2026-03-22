@@ -2497,14 +2497,21 @@ def reset_adaptive_engine():
     print("[CACHE] Adaptive engine cache cleared - will reload on next request")
 
 def get_or_init_adaptive_engine(db: Session) -> AdaptiveAssessmentEngine:
-    """Get or initialize the adaptive engine with courses and questions from DB"""
+    """Get or initialize the adaptive engine with courses and questions.
+
+    Questions are loaded directly from the Python source files
+    (QUESTIONS_POOL_ENHANCED + DECISION_TREE_QUESTIONS) so that the full
+    question pool is always available, regardless of whether the deployed
+    database has been fully synced.  The DB is only used for courses, which
+    are managed exclusively there.
+    """
     global _adaptive_engine
     
     if _adaptive_engine is None:
         from data.questions_enhanced import QUESTIONS_POOL_ENHANCED
         from data.curated_trait_map import build_multi_trait
         
-        # Load courses from database
+        # Load courses from database (DB is source of truth for courses)
         courses = db.query(models.Course).all()
         courses_data = [
             {
@@ -2517,44 +2524,58 @@ def get_or_init_adaptive_engine(db: Session) -> AdaptiveAssessmentEngine:
             for c in courses
         ]
         
-        # Build lookup from QUESTIONS_POOL_ENHANCED for per-option trait_tags
-        enhanced_trait_lookup = {}
-        for eq in QUESTIONS_POOL_ENHANCED:
-            for eopt in eq.get('options', []):
-                key = (eq['question_id'], eopt['option_id'])
-                enhanced_trait_lookup[key] = eopt.get('trait_tags', {})
-        # Also index decision-tree questions directly from source so their
-        # rich multi-trait definitions are used (not reconstructed from a single primary tag)
-        for dq in DECISION_TREE_QUESTIONS:
-            for dopt in dq.get('options', []):
-                key = (dq['question_id'], dopt['option_id'])
-                if key not in enhanced_trait_lookup:
-                    enhanced_trait_lookup[key] = dopt.get('trait_tags', {})
-        
-        # Load questions from database and use curated per-option traits
-        questions = db.query(models.Question).options(joinedload(models.Question.options)).all()
+        # Build questions_data directly from Python source files.
+        # This guarantees all questions (including recently added ones) are
+        # always present in the engine, even when the deployed database has
+        # not yet been fully synced with the latest question pool.
         questions_data = []
-        for q in questions:
+        processed_ids = set()
+
+        for q in QUESTIONS_POOL_ENHANCED:
+            qid = q['question_id']
+            processed_ids.add(qid)
             options_list = []
-            for opt in q.options:
-                # Use curated trait_tags from source files (QUESTIONS_POOL_ENHANCED + DECISION_TREE_QUESTIONS)
-                trait_tags = enhanced_trait_lookup.get((q.question_id, opt.option_id), {})
-                if not trait_tags and opt.trait_tag:
-                    # Fallback: build multi-trait from curated domain map
-                    trait_tags = build_multi_trait(opt.trait_tag)
+            for opt in q.get('options', []):
+                trait_tags = opt.get('trait_tags', {})
+                if not trait_tags and opt.get('trait_tag'):
+                    trait_tags = build_multi_trait(opt['trait_tag'])
                 options_list.append({
-                    "option_id": opt.option_id,
-                    "option_text": opt.option_text,
-                    "trait_tag": opt.trait_tag,
+                    "option_id": opt.get('option_id'),
+                    "option_text": opt.get('option_text') or opt.get('text', ''),
+                    "trait_tag": opt.get('trait_tag'),
                     "trait_tags": trait_tags
                 })
             questions_data.append({
-                "question_id": q.question_id,
-                "question_text": q.question_text,
-                "category": q.category,
+                "question_id": qid,
+                "question_text": q.get('question_text') or q.get('question', ''),
+                "category": q.get('category', ''),
                 "options": options_list
             })
-        
+
+        for q in DECISION_TREE_QUESTIONS:
+            qid = q['question_id']
+            if qid in processed_ids:
+                continue
+            processed_ids.add(qid)
+            options_list = []
+            for opt in q.get('options', []):
+                trait_tags = opt.get('trait_tags', {})
+                if not trait_tags and opt.get('trait_tag'):
+                    trait_tags = build_multi_trait(opt['trait_tag'])
+                options_list.append({
+                    "option_id": opt.get('option_id'),
+                    "option_text": opt.get('option_text') or opt.get('text', ''),
+                    "trait_tag": opt.get('trait_tag'),
+                    "trait_tags": trait_tags
+                })
+            questions_data.append({
+                "question_id": qid,
+                "question_text": q.get('question_text') or q.get('question', ''),
+                "category": q.get('category', ''),
+                "options": options_list
+            })
+
+        print(f"[ENGINE] Loaded {len(questions_data)} questions from source files ({len(processed_ids)} unique IDs)")
         _adaptive_engine = AdaptiveAssessmentEngine(courses_data, questions_data)
     
     return _adaptive_engine
