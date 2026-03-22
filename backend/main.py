@@ -2091,10 +2091,10 @@ def get_assessment_history(user_id: int, current_user: models.User = Depends(get
                 if chosen_option.trait_tag:
                     discovered_traits.add(chosen_option.trait_tag)
         
-        # Get recommendations for this attempt (ordered by creation time to get first/top one)
+        # Get recommendations for this attempt (ordered by score descending to preserve ranking)
         recommendations = db.query(models.Recommendation).filter(
             models.Recommendation.attempt_id == attempt.attempt_id
-        ).order_by(models.Recommendation.recommended_at.asc()).all()
+        ).order_by(models.Recommendation.score.desc().nullslast()).all()
         
         recommended_courses = []
         top_course = None
@@ -3403,7 +3403,14 @@ def email_recommendations(data: EmailRequest, current_user: models.User = Depend
                     <h2 style="color: #1e293b;">Recommended Courses</h2>
         """
         
-        for idx, rec in enumerate(data.recommendations, 1):
+        # Sort recommendations by score descending so email ranking always
+        # matches the on-screen order, regardless of the order received.
+        sorted_recs = sorted(
+            data.recommendations,
+            key=lambda r: r.get('compatibility_score') or r.get('final_score') or r.get('match_percentage') or 0,
+            reverse=True
+        )
+        for idx, rec in enumerate(sorted_recs, 1):
             score = rec.get('compatibility_score') or rec.get('final_score') or rec.get('match_percentage') or 0
             html_content += f"""
                     <div class="course">
@@ -3489,10 +3496,10 @@ def send_daily_digest(data: DailyDigestRequest, current_user: models.User = Depe
         test = db.query(models.Test).filter(models.Test.test_id == attempt.test_id).first()
         test_name = test.test_name if test else "Assessment"
         
-        # Get recommendations for this attempt
+        # Get recommendations for this attempt (ordered by score to preserve ranking)
         recommendations = db.query(models.Recommendation).filter(
             models.Recommendation.attempt_id == attempt.attempt_id
-        ).order_by(models.Recommendation.recommended_at.asc()).all()
+        ).order_by(models.Recommendation.score.desc().nullslast()).all()
         
         courses = []
         for rec in recommendations:

@@ -536,7 +536,13 @@ function MyActivity({ onBack, onViewProfile }) {
       setSeenActivities(savedSeen);
       
       authFetch(`${process.env.REACT_APP_API_URL}/user/${userId}/assessment-history`)
-        .then(res => res.json())
+        .then(res => {
+          if (!res.ok) {
+            console.error('Assessment history API error:', res.status, res.statusText);
+            return { history: [] };
+          }
+          return res.json();
+        })
         .then(data => {
           setActivityHistory(data.history || []);
           setLoading(false);

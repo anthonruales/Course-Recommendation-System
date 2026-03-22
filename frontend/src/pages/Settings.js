@@ -261,6 +261,13 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
   const [interestModalOpen, setInterestModalOpen] = useState(false);
   const [skillsModalOpen, setSkillsModalOpen] = useState(false);
   const [toast, setToast] = useState(null);
+
+  // Lock body scroll when a modal is open
+  useEffect(() => {
+    document.body.style.overflow = (interestModalOpen || skillsModalOpen) ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [interestModalOpen, skillsModalOpen]);
+
   const [profilePhoto, setProfilePhoto] = useState(null);
   const pendingPhotoRef = useRef({ changed: false, value: null });
   const [newEmail, setNewEmail] = useState('');
@@ -824,6 +831,12 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
               <h2 style={styles.modalTitle}>Select Academic Interests</h2>
               <button onClick={() => setInterestModalOpen(false)} style={styles.closeBtn}>✕</button>
             </div>
+            <div style={{ padding: '10px 20px', background: 'rgba(234, 179, 8, 0.08)', borderBottom: '1px solid rgba(234, 179, 8, 0.15)', display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
+              <span style={{ fontSize: '14px', marginTop: '1px' }}>💡</span>
+              <p style={{ margin: 0, fontSize: '12.5px', color: 'rgba(234, 179, 8, 0.9)', lineHeight: '1.5' }}>
+                <strong>Tip:</strong> Selecting too many different interests across categories may decrease recommendation accuracy. For best results, focus on related interests. You can always retake the assessment with different interests selected.
+              </p>
+            </div>
             <div style={styles.modalBody}>
               {Object.values(
                 INTEREST_OPTIONS.reduce((acc, option) => {
@@ -854,7 +867,12 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
                 </div>
               ))}
             </div>
-            <div style={styles.modalFooter}>
+            <div style={{ ...styles.modalFooter, display: 'flex', justifyContent: 'center', gap: '12px' }}>
+              {selectedInterests.length > 0 && (
+                <button onClick={() => setLocalFormData(prev => ({ ...prev, interests: '' }))} style={{ background: 'rgba(239, 68, 68, 0.1)', color: '#f87171', border: '1px solid rgba(239, 68, 68, 0.2)', padding: '10px 20px', borderRadius: '10px', cursor: 'pointer', fontWeight: '600', fontSize: '14px' }}>
+                  Unselect All
+                </button>
+              )}
               <button onClick={() => setInterestModalOpen(false)} style={styles.modalCloseBtn}>
                 Done ({selectedInterests.length} selected)
               </button>
@@ -870,6 +888,12 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
             <div style={styles.modalHeader}>
               <h2 style={styles.modalTitle}>Select Technical & Soft Skills</h2>
               <button onClick={() => setSkillsModalOpen(false)} style={styles.closeBtn}>✕</button>
+            </div>
+            <div style={{ padding: '10px 20px', background: 'rgba(234, 179, 8, 0.08)', borderBottom: '1px solid rgba(234, 179, 8, 0.15)', display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
+              <span style={{ fontSize: '14px', marginTop: '1px' }}>💡</span>
+              <p style={{ margin: 0, fontSize: '12.5px', color: 'rgba(234, 179, 8, 0.9)', lineHeight: '1.5' }}>
+                <strong>Tip:</strong> Selecting too many varied skills may reduce accuracy. Focus on skills you're most confident in. You can retake the assessment later with different skills to explore other options.
+              </p>
             </div>
             <div style={styles.modalBody}>
               {Object.values(
@@ -901,7 +925,12 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
                 </div>
               ))}
             </div>
-            <div style={styles.modalFooter}>
+            <div style={{ ...styles.modalFooter, display: 'flex', justifyContent: 'center', gap: '12px' }}>
+              {selectedSkills.length > 0 && (
+                <button onClick={() => setLocalFormData(prev => ({ ...prev, skills: '' }))} style={{ background: 'rgba(239, 68, 68, 0.1)', color: '#f87171', border: '1px solid rgba(239, 68, 68, 0.2)', padding: '10px 20px', borderRadius: '10px', cursor: 'pointer', fontWeight: '600', fontSize: '14px' }}>
+                  Unselect All
+                </button>
+              )}
               <button onClick={() => setSkillsModalOpen(false)} style={styles.modalCloseBtn}>
                 Done ({selectedSkills.length} selected)
               </button>
