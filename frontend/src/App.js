@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { authFetch } from './api';
+import { authFetch, getTokenPayload } from './api';
 import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 // Signup removed — Google-only auth
@@ -138,7 +138,7 @@ function App() {
   useEffect(() => {
     if (user && user !== 'Admin User') {
       // Load profile from backend
-      const userId = localStorage.getItem('userId');
+      const userId = getTokenPayload()?.user_id;
       if (userId) {
         authFetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`)
           .then(res => res.json())
@@ -183,20 +183,13 @@ function App() {
   };
 
   const handleLogout = () => {
-    // Call backend logout with auth header
-    const userId = localStorage.getItem('userId');
-    if (userId) {
-      authFetch(`${process.env.REACT_APP_API_URL}/logout`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user_id: parseInt(userId) })
-      }).catch(() => {});
-    }
+    // Call backend logout with auth header (backend reads identity from JWT)
+    authFetch(`${process.env.REACT_APP_API_URL}/logout`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    }).catch(() => {});
     localStorage.removeItem('userName');
-    localStorage.removeItem('userId');
     localStorage.removeItem('accessToken');
-    localStorage.removeItem('userUsername');
-    localStorage.removeItem('userEmail');
     setUser(null);
     setRecommendationData(null);
     setProfileData({}); // Clear state on logout
@@ -281,7 +274,7 @@ function App() {
                   setHistory([updateLog, ...history]);
                   
                   // Re-fetch profile data to sync state with backend
-                  const userId = localStorage.getItem('userId');
+                  const userId = getTokenPayload()?.user_id;
                   if (userId) {
                     authFetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`)
                       .then(res => res.json())

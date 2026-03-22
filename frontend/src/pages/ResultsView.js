@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { authFetch } from '../api';
+import { authFetch, getTokenPayload } from '../api';
 import FeedbackForm from '../components/FeedbackForm';
 import NavBar from '../components/NavBar';
 
@@ -417,18 +417,18 @@ function ResultsView({ recommendation, profileData, onRetake, onBack, onViewProf
   const [exporting, setExporting] = useState(false);
   const [emailSending, setEmailSending] = useState(false);
   const [exportMessage, setExportMessage] = useState(null);
-  const userId = localStorage.getItem('userId');
+  const userId = getTokenPayload()?.user_id;
   const userName = localStorage.getItem('userName') || 'Student';
-  const userEmail = localStorage.getItem('userEmail') || '';
+  const userEmail = getTokenPayload()?.email || '';
   
-  console.log('[ResultsView] userId from localStorage:', userId);
+  console.log('[ResultsView] userId from JWT:', userId);
 
   // Export to PDF
   const handleExportPDF = async () => {
     setExporting(true);
     setExportMessage(null);
     try {
-      const userId = localStorage.getItem('userId');
+      const userId = getTokenPayload()?.user_id;
       
       // Fetch user's GWA and Strand from backend
       const userRes = await authFetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`);

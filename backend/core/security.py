@@ -1,6 +1,6 @@
 import os
 from datetime import datetime, timedelta
-from typing import Optional
+from typing import Optional, Set
 
 from dotenv import load_dotenv
 from fastapi import Depends, HTTPException, status
@@ -28,12 +28,24 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24  # 24 hours
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login", auto_error=False)
 
+# --------------- Server-side session invalidation ---------------
+# Set of invalidated (logged-out) JTIs. In production, use Redis or a DB table.
+_invalidated_sessions: Set[str] = set()
+
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None) -> str:
-    """Create a signed JWT containing user_id, username, and is_admin."""
+    """Create a signed JWT containing user_id, username, email, and is_admin.
+    
+    Each token receives a unique session id (jti) that can be invalidated
+    server-side on logout, preventing reuse of logged-out tokens.
+    """
+    import secrets as _secrets
     to_encode = data.copy()
     expire = datetime.utcnow() + (expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
-    to_encode.update({"exp": expire})
+    to_encode.update({
+        "exp": expire,
+        "jti": _secrets.token_hex(16),  # unique session identifier
+    })
     return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
 
@@ -65,7 +77,7 @@ def get_current_user(token: Optional[str] = Depends(oauth2_scheme), db: Session 
     """
     FastAPI dependency — extracts and validates the JWT from the Authorization header.
     Returns the User ORM object.
-    Raises 401 if token is missing/invalid, or if the user no longer exists.
+    Raises 401 if token is missing/invalid, session was invalidated, or user no longer exists.
     """
     if token is None:
         raise HTTPException(
@@ -74,6 +86,12 @@ def get_current_user(token: Optional[str] = Depends(oauth2_scheme), db: Session 
             headers={"WWW-Authenticate": "Bearer"},
         )
     payload = decode_access_token(token)
+
+    # Check server-side session invalidation (logout)
+    jti = payload.get("jti")
+    if jti and jti in _invalidated_sessions:
+        raise HTTPException(status_code=401, detail="Session has been logged out")
+
     user_id: int = payload.get("user_id")
     if user_id is None:
         raise HTTPException(status_code=401, detail="Invalid token payload")
@@ -85,6 +103,21 @@ def get_current_user(token: Optional[str] = Depends(oauth2_scheme), db: Session 
     if hasattr(user, "is_active") and not user.is_active:
         raise HTTPException(status_code=403, detail="Account is deactivated")
     return user
+
+
+def invalidate_session(token: str):
+    """Mark a JWT session as logged-out so it cannot be reused.
+    
+    Decodes the token to extract the jti (session id) and adds it to
+    the server-side invalidation set.
+    """
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        jti = payload.get("jti")
+        if jti:
+            _invalidated_sessions.add(jti)
+    except JWTError:
+        pass  # Token already invalid — nothing to invalidate
 
 
 def require_admin(current_user=Depends(get_current_user)):

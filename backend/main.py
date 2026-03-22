@@ -11,7 +11,8 @@ from core import models
 from core import database
 from core.security import (
     hash_password, verify_password, create_access_token,
-    get_current_user, require_admin, require_self_or_admin
+    get_current_user, require_admin, require_self_or_admin,
+    invalidate_session, oauth2_scheme, decode_access_token
 )
 
 # Bad words filter list (common inappropriate words)
@@ -893,10 +894,11 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
     db.commit()
     print(f"[LOGIN] Updated last_active to: {db_user.last_active}")
     
-    # Generate JWT token
+    # Generate JWT token (includes email so frontend can decode identity from token)
     token = create_access_token({
         "user_id": db_user.user_id,
         "username": db_user.username,
+        "email": db_user.email,
         "is_admin": bool(getattr(db_user, 'is_admin', 0))
     })
     
@@ -930,10 +932,11 @@ def google_login(user: dict, db: Session = Depends(get_db)):
         db.commit()
         print(f"[GOOGLE-LOGIN] Updated last_active to: {db_user.last_active}")
         
-        # Generate JWT token for Google login
+        # Generate JWT token for Google login (includes email for frontend identity)
         token = create_access_token({
             "user_id": db_user.user_id,
             "username": db_user.username,
+            "email": db_user.email,
             "is_admin": bool(getattr(db_user, 'is_admin', 0))
         })
         
@@ -991,10 +994,11 @@ def google_register(user: dict, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_user)
     
-    # Generate JWT token for newly registered Google user
+    # Generate JWT token for newly registered Google user (includes email for frontend identity)
     token = create_access_token({
         "user_id": new_user.user_id,
         "username": new_user.username,
+        "email": new_user.email,
         "is_admin": False
     })
     
@@ -1003,9 +1007,29 @@ def google_register(user: dict, db: Session = Depends(get_db)):
         "access_token": token, "token_type": "bearer"
     }
 
+# ========== IDENTITY ENDPOINT — derive user info from JWT ==========
+@app.get("/me")
+def get_current_user_info(current_user: models.User = Depends(get_current_user)):
+    """Return the authenticated user's identity decoded from the JWT.
+    
+    This is the single source of truth for user identity on the client.
+    The frontend should call this instead of reading userId/email/username
+    from localStorage.
+    """
+    return {
+        "user_id": current_user.user_id,
+        "username": current_user.username,
+        "email": current_user.email,
+        "fullname": current_user.fullname,
+        "is_admin": bool(getattr(current_user, "is_admin", 0)),
+    }
+
 @app.post("/user/{user_id}/update-activity")
 def update_activity(user_id: int, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Update user online status only - DO NOT update last_active (only login should update that)"""
+    # IDOR protection: ensure the JWT user matches the requested user_id
+    if current_user.user_id != user_id and not getattr(current_user, "is_admin", False):
+        raise HTTPException(status_code=403, detail="Access denied: you can only update your own activity")
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
@@ -1017,26 +1041,30 @@ def update_activity(user_id: int, current_user: models.User = Depends(get_curren
     return {"message": "Online status updated"}
 
 @app.post("/logout")
-def logout(data: dict, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
-    """Handle user logout - mark user as offline"""
-    user_id = data.get("user_id")
+def logout(current_user: models.User = Depends(get_current_user),
+           token: Optional[str] = Depends(oauth2_scheme),
+           db: Session = Depends(get_db)):
+    """Handle user logout - mark user as offline and invalidate session token.
     
-    if not user_id:
-        raise HTTPException(status_code=400, detail="user_id is required")
-    
-    user = db.query(models.User).filter(models.User.user_id == user_id).first()
-    if not user:
-        raise HTTPException(status_code=404, detail="User not found")
-    
-    # Mark user as offline
-    user.is_online = 0
+    User identity is derived from the JWT (not from a request body parameter)
+    to prevent one user from logging out another user.
+    """
+    # Mark user as offline using identity from verified JWT
+    current_user.is_online = 0
     db.commit()
     
-    return {"message": "Logged out successfully", "user_id": user_id}
+    # Invalidate the JWT session server-side so it cannot be reused
+    if token:
+        invalidate_session(token)
+    
+    return {"message": "Logged out successfully", "user_id": current_user.user_id}
 
 @app.get("/verify-session/{user_id}")
 def verify_session(user_id: int, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Verify if a user's session is still valid (account is active)"""
+    # IDOR protection: JWT user must match requested user_id
+    if current_user.user_id != user_id and not getattr(current_user, "is_admin", False):
+        raise HTTPException(status_code=403, detail="Access denied: you can only verify your own session")
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     
     if not user:
@@ -1051,6 +1079,9 @@ def verify_session(user_id: int, current_user: models.User = Depends(get_current
 @app.post("/refresh-user-activity/{user_id}")
 def refresh_user_activity(user_id: int, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Force refresh user's last_active timestamp on login"""
+    # IDOR protection: JWT user must match requested user_id
+    if current_user.user_id != user_id and not getattr(current_user, "is_admin", False):
+        raise HTTPException(status_code=403, detail="Access denied")
     print(f"\n[REFRESH-ACTIVITY] Endpoint called for user_id: {user_id}")
     
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
@@ -1080,6 +1111,9 @@ def refresh_user_activity(user_id: int, current_user: models.User = Depends(get_
 @app.get("/user/{user_id}/academic-info")
 def get_academic_info(user_id: int, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Get user's academic info including GWA, Strand, and personal info"""
+    # IDOR protection: JWT user must match requested user_id
+    if current_user.user_id != user_id and not getattr(current_user, "is_admin", False):
+        raise HTTPException(status_code=403, detail="Access denied: you can only access your own data")
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
@@ -1094,6 +1128,9 @@ def get_academic_info(user_id: int, current_user: models.User = Depends(get_curr
 @app.put("/user/{user_id}/academic-info")
 def update_academic_info(user_id: int, info: AcademicInfoUpdate, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Update user's academic info (GWA, Strand, and personal info) for recommendation accuracy"""
+    # IDOR protection: JWT user must match requested user_id
+    if current_user.user_id != user_id and not getattr(current_user, "is_admin", False):
+        raise HTTPException(status_code=403, detail="Access denied: you can only modify your own data")
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
@@ -1145,6 +1182,9 @@ class PasswordChangeRequest(BaseModel):
 @app.put("/user/{user_id}/change-password")
 def change_password(user_id: int, request: PasswordChangeRequest, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Change user's password after verifying current password"""
+    # IDOR protection: JWT user must match requested user_id
+    if current_user.user_id != user_id and not getattr(current_user, "is_admin", False):
+        raise HTTPException(status_code=403, detail="Access denied: you can only change your own password")
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
@@ -1172,6 +1212,9 @@ class EmailChangeRequest(BaseModel):
 @app.put("/user/{user_id}/change-email")
 def change_email(user_id: int, request: EmailChangeRequest, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Change user's email address"""
+    # IDOR protection: JWT user must match requested user_id
+    if current_user.user_id != user_id and not getattr(current_user, "is_admin", False):
+        raise HTTPException(status_code=403, detail="Access denied: you can only change your own email")
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
@@ -1962,6 +2005,9 @@ def get_user_activity(admin_user: models.User = Depends(require_admin), db: Sess
 @app.get("/user/{user_id}/recommendations")
 def get_user_recommendations(user_id: int, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Get user's saved recommendations"""
+    # IDOR protection: JWT user must match requested user_id
+    if current_user.user_id != user_id and not getattr(current_user, "is_admin", False):
+        raise HTTPException(status_code=403, detail="Access denied: you can only view your own recommendations")
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
@@ -1991,6 +2037,9 @@ def get_user_recommendations(user_id: int, current_user: models.User = Depends(g
 @app.get("/user/{user_id}/assessment-history")
 def get_assessment_history(user_id: int, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Get user's test attempts history with recommendations and answered questions (D5 - Test Attempt Database)"""
+    # IDOR protection: JWT user must match requested user_id
+    if current_user.user_id != user_id and not getattr(current_user, "is_admin", False):
+        raise HTTPException(status_code=403, detail="Access denied: you can only view your own history")
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
@@ -2165,9 +2214,15 @@ def submit_recommendation_feedback(
     current_user: models.User = Depends(get_current_user),
     db: Session = Depends(get_db)
 ):
-    """User: Submit feedback/rating on a recommendation or overall recommendations"""
+    """User: Submit feedback/rating on a recommendation or overall recommendations.
     
-    print(f"[FEEDBACK] Received feedback: recommendation_id={feedback.recommendation_id}, user_id={feedback.user_id}, rating={feedback.rating}")
+    The user_id is taken from the authenticated JWT (current_user), not from
+    the request body, to prevent users from submitting feedback as other users.
+    """
+    # Use JWT-verified user_id instead of client-provided user_id
+    authenticated_user_id = current_user.user_id
+    
+    print(f"[FEEDBACK] Received feedback: recommendation_id={feedback.recommendation_id}, user_id={authenticated_user_id}, rating={feedback.rating}")
     
     # Validate rating is 1-5
     if feedback.rating < 1 or feedback.rating > 5:
@@ -2185,7 +2240,7 @@ def submit_recommendation_feedback(
         # Check if user already gave feedback on this recommendation
         existing_feedback = db.query(models.RecommendationFeedback).filter(
             models.RecommendationFeedback.recommendation_id == feedback.recommendation_id,
-            models.RecommendationFeedback.user_id == feedback.user_id
+            models.RecommendationFeedback.user_id == authenticated_user_id
         ).first()
         
         if existing_feedback:
@@ -2202,7 +2257,7 @@ def submit_recommendation_feedback(
         # Create new feedback
         new_feedback = models.RecommendationFeedback(
             recommendation_id=feedback.recommendation_id,
-            user_id=feedback.user_id,
+            user_id=authenticated_user_id,
             rating=feedback.rating,
             feedback_text=feedback.feedback_text
         )
@@ -2229,7 +2284,7 @@ def submit_recommendation_feedback(
         try:
             new_feedback = models.RecommendationFeedback(
                 recommendation_id=None,
-                user_id=feedback.user_id,
+                user_id=authenticated_user_id,
                 rating=feedback.rating,
                 feedback_text=feedback.feedback_text
             )
@@ -2297,6 +2352,9 @@ def get_user_feedback_history(
     db: Session = Depends(get_db)
 ):
     """Get all feedback submitted by a user"""
+    # IDOR protection: JWT user must match requested user_id
+    if current_user.user_id != user_id and not getattr(current_user, "is_admin", False):
+        raise HTTPException(status_code=403, detail="Access denied: you can only view your own feedback")
     
     user = db.query(models.User).filter(models.User.user_id == user_id).first()
     if not user:
@@ -2607,8 +2665,10 @@ def start_adaptive_assessment(data: AdaptiveSessionStart, current_user: models.U
     """
     import traceback
     try:
-        # Get user info for initial scoring
-        user = db.query(models.User).filter(models.User.user_id == data.userId).first()
+        # Use JWT-verified user identity, not the client-provided userId
+        user_id = current_user.user_id
+        
+        user = db.query(models.User).filter(models.User.user_id == user_id).first()
         if not user:
             raise HTTPException(status_code=404, detail="User not found")
         
@@ -2629,7 +2689,7 @@ def start_adaptive_assessment(data: AdaptiveSessionStart, current_user: models.U
         max_questions = 30
         
         # Create session with custom max questions and profile data (interests/skills)
-        session_id = engine.create_session(data.userId, user_gwa, user_strand, max_questions, user_interests, user_skills)
+        session_id = engine.create_session(user_id, user_gwa, user_strand, max_questions, user_interests, user_skills)
         
         # Get first question
         first_question = engine.get_next_question(session_id)
@@ -3392,8 +3452,12 @@ class DailyDigestRequest(BaseModel):
 def send_daily_digest(data: DailyDigestRequest, current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """Send a daily digest email containing all assessments and course recommendations from today"""
     
+    # IDOR protection: use JWT user identity, not client-provided user_id
+    if current_user.user_id != data.user_id and not getattr(current_user, "is_admin", False):
+        raise HTTPException(status_code=403, detail="Access denied")
+    
     # Get user info
-    user = db.query(models.User).filter(models.User.user_id == data.user_id).first()
+    user = db.query(models.User).filter(models.User.user_id == current_user.user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     
