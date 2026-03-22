@@ -103,6 +103,7 @@ class AdaptiveSession:
     chain_queue: List[int] = field(default_factory=list)   # Ordered question IDs to ask next (from current chain)
     explored_domains: Set[str] = field(default_factory=set)  # Domains that have had at least N questions asked
     domain_question_count: Dict[str, int] = field(default_factory=dict)  # How many questions per domain
+    domain_vote_weights: Dict[str, float] = field(default_factory=dict)  # Weighted votes per domain (interests 3×, skills 1×)
     last_answer_trait: str = ""                      # Trait from the most recent answer (drives next question)
     option_fingerprints_seen: Set[tuple] = field(default_factory=set)  # Tracks option-set tuples already shown to prevent duplicate choices
 
@@ -4878,13 +4879,13 @@ class AdaptiveAssessmentEngine:
                     # First trait in list is most relevant
                     trait_counts[trait] = trait_counts.get(trait, 0) + (2.0 - i * 0.3)
 
-        # Skills get weight 1.5
+        # Skills get weight 0.8 (secondary to academic interests)
         if skills:
             for skill in skills.split(','):
                 skill = skill.strip().lower()
                 traits = self._get_profile_traits_for_selection(skill)
                 for i, trait in enumerate(traits):
-                    trait_counts[trait] = trait_counts.get(trait, 0) + (1.5 - i * 0.2)
+                    trait_counts[trait] = trait_counts.get(trait, 0) + (0.8 - i * 0.1)
 
         # Strand traits get weight 1.0 (background context)
         strand_traits = STRAND_PRIORITY_TRAITS.get(strand, [])
@@ -5203,18 +5204,27 @@ class AdaptiveAssessmentEngine:
         
         # ─── CONVERSATION CHAIN: Determine primary domain from profile ───
         # Count how many explicit interest/skill keywords map to each domain.
-        # These explicit selections should override strand-derived bias.
+        # Academic Interests carry 3× the vote weight of Technical & Soft Skills
+        # so that the user's field of study drives question distribution.
         domain_votes: Dict[str, int] = {}
-        all_keywords = []
+        interest_keywords = []
+        skill_keywords = []
         if user_interests:
-            all_keywords.extend([kw.strip().lower().replace(" ", "_") for kw in user_interests.split(",")])
+            interest_keywords = [kw.strip().lower().replace(" ", "_") for kw in user_interests.split(",") if kw.strip()]
         if user_skills:
-            all_keywords.extend([kw.strip().lower().replace(" ", "_") for kw in user_skills.split(",")])
+            skill_keywords = [kw.strip().lower().replace(" ", "_") for kw in user_skills.split(",") if kw.strip()]
+        all_keywords = interest_keywords + skill_keywords
         
-        for kw in all_keywords:
+        INTEREST_VOTE_WEIGHT = 3  # Academic interests = primary driver
+        SKILL_VOTE_WEIGHT = 1    # Soft skills = bonus/secondary
+        for kw in interest_keywords:
             domain = self._get_profile_domain_for_selection(kw)
             if domain:
-                domain_votes[domain] = domain_votes.get(domain, 0) + 1
+                domain_votes[domain] = domain_votes.get(domain, 0) + INTEREST_VOTE_WEIGHT
+        for kw in skill_keywords:
+            domain = self._get_profile_domain_for_selection(kw)
+            if domain:
+                domain_votes[domain] = domain_votes.get(domain, 0) + SKILL_VOTE_WEIGHT
 
         explicit_domain_votes = domain_votes.copy()
 
@@ -5272,6 +5282,7 @@ class AdaptiveAssessmentEngine:
         
         session.domain_queue = domain_queue
         session.relevant_domains = relevant_domains
+        session.domain_vote_weights = dict(explicit_domain_votes) if explicit_domain_votes else {}
         
         # ─── PROFILE CATEGORY MATCHING: Build focused question pool ───
         # Map user's interest/skill keywords to question categories so
@@ -5371,15 +5382,24 @@ class AdaptiveAssessmentEngine:
         asked = session.excluded_question_ids
         round_num = session.round_number + 1
 
-        num_voted_domains = max(len(session.domain_queue), 1)
-        domain_budget = max(session.max_questions // num_voted_domains, DOMAIN_MIN_QUESTIONS)
-        domain_budget = min(domain_budget, DOMAIN_MAX_QUESTIONS_HARD_CAP)
-
         current_chain_domain = ""
         if session.current_chain_trait:
             current_chain_domain = TRAIT_TO_BRANCH.get(session.current_chain_trait, "")
         elif session.last_answer_trait:
             current_chain_domain = TRAIT_TO_BRANCH.get(session.last_answer_trait, "")
+
+        # Calculate per-domain budget PROPORTIONAL to vote weights.
+        # Academic interests carry 3× the vote weight, so interest-driven domains
+        # get proportionally more questions than skill-derived domains.
+        num_voted_domains = max(len(session.domain_queue), 1)
+        if current_chain_domain and session.domain_vote_weights:
+            total_weight = sum(session.domain_vote_weights.get(d, 1) for d in session.domain_queue) or 1
+            current_weight = session.domain_vote_weights.get(current_chain_domain, 1)
+            proportion = current_weight / total_weight
+            domain_budget = max(int(session.max_questions * proportion), DOMAIN_MIN_QUESTIONS)
+        else:
+            domain_budget = max(session.max_questions // num_voted_domains, DOMAIN_MIN_QUESTIONS)
+        domain_budget = min(domain_budget, DOMAIN_MAX_QUESTIONS_HARD_CAP)
 
         current_domain_count = session.domain_question_count.get(current_chain_domain, 0)
         sorted_branch_weights = sorted(session.branch_weights.values(), reverse=True)
