@@ -2710,9 +2710,11 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
         print(f"[OK] Created test attempt: {attempt_id} for user {user_id}")
         print(f"[TRACKING] max_questions={max_questions_selected}, presented={questions_presented}, answered={questions_answered}, confidence={confidence_score}%")
         
-        # Save answered questions
+        # Save answered questions (skip virtual option_id=-1 which has no DB row)
         if answered_questions:
             for question_id, option_id in answered_questions.items():
+                if option_id == -1:
+                    continue  # "I don't see what I want" is a virtual option, not in options table
                 db.add(models.StudentAnswer(
                     attempt_id=attempt_id,
                     question_id=question_id,
