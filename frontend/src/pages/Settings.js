@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { authFetch } from '../api';
+import { authFetch, getTokenPayload } from '../api';
 import Toast from '../components/Toast';
 import NavBar from '../components/NavBar';
 
@@ -268,14 +268,14 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
   
   // Load saved profile photo and email
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
+    const userId = getTokenPayload()?.user_id;
     if (userId) {
       const savedPhoto = localStorage.getItem(`profilePhoto_${userId}`);
       if (savedPhoto) {
         setProfilePhoto(savedPhoto);
       }
     }
-    const savedEmail = localStorage.getItem('userEmail');
+    const savedEmail = getTokenPayload()?.email;
     if (savedEmail) {
       setNewEmail(savedEmail);
     }
@@ -448,14 +448,14 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
       return;
     }
     
-    const userId = localStorage.getItem('userId');
+    const userId = getTokenPayload()?.user_id;
     if (!userId) {
       showToast('User ID not found. Please log in again.', 'error');
       return;
     }
     
     const changedFields = getChangedFields();
-    const currentEmail = localStorage.getItem('userEmail') || '';
+    const currentEmail = getTokenPayload()?.email || '';
     
     // Check if email was changed
     if (newEmail && newEmail !== currentEmail) {
@@ -479,8 +479,7 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
           return;
         }
         
-        // Update localStorage with new email
-        localStorage.setItem('userEmail', newEmail);
+        // Email updated in backend; will reflect in JWT on next login
         changedFields.push('Email');
       } catch (err) {
         console.error('Error changing email:', err);
@@ -540,7 +539,7 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
   };
 
   const userName = localStorage.getItem('userName') || 'User';
-    const userUsername = localStorage.getItem('userUsername') || '';
+    const userUsername = getTokenPayload()?.username || '';
 
   const settingsSections = [
     { id: 'profile', label: 'Profile Information', icon: '👤' },

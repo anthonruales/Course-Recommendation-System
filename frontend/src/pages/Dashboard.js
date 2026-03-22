@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { authFetch } from '../api';
+import { authFetch, getTokenPayload } from '../api';
 import NavBar from '../components/NavBar';
 
 // Add CSS keyframes for smooth animations
@@ -57,7 +57,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
 
   // Detect if this is a returning user
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
+    const userId = getTokenPayload()?.user_id;
     if (userId) {
       const hasVisited = localStorage.getItem(`hasVisitedDashboard_${userId}`);
       if (hasVisited) {
@@ -83,7 +83,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
 
   // Load profile photo from localStorage (user-specific)
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
+    const userId = getTokenPayload()?.user_id;
     if (userId) {
       const savedPhoto = localStorage.getItem(`profilePhoto_${userId}`);
       if (savedPhoto) {
@@ -96,7 +96,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
 
   // Check if user has filled academic info and fetch activity count
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
+    const userId = getTokenPayload()?.user_id;
     if (userId) {
       authFetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`)
         .then(res => res.json())
@@ -132,7 +132,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
 
   // Periodically update activity to keep user marked as online
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
+    const userId = getTokenPayload()?.user_id;
     if (!userId) return;
 
     // Update activity immediately on mount
@@ -158,20 +158,15 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
 
   // Handle logout with activity tracking - memoized to prevent re-renders
   const handleLogout = useCallback(async () => {
-    const userId = localStorage.getItem('userId');
-    
-    // Call logout endpoint to mark user as offline
-    if (userId) {
-      try {
-        await authFetch(`${process.env.REACT_APP_API_URL}/logout`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ user_id: userId })
-        });
+    // Call logout endpoint to mark user as offline (backend reads identity from JWT)
+    try {
+      await authFetch(`${process.env.REACT_APP_API_URL}/logout`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      });
       } catch (err) {
         console.error('Error during logout:', err);
       }
-    }
     
     // Call the original logout handler
     onLogout();
@@ -242,7 +237,7 @@ function Dashboard({ userName, onLogout, onStart, onStartAssessment, onViewProfi
                     </div>
                     <div style={styles.userMenuInfo}>
                       <span style={styles.userMenuName}>{userName}</span>
-                      <span style={styles.userMenuEmail}>{localStorage.getItem('userEmail') || ''}</span>
+                      <span style={styles.userMenuEmail}>{getTokenPayload()?.email || ''}</span>
                     </div>
                   </div>
                   <div style={styles.userMenuDivider}></div>

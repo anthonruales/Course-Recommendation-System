@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { getTokenPayload } from '../api';
 
 function AssessmentForm({ onBack, onShowResults }) {
   const [questions, setQuestions] = useState([]);
@@ -13,7 +14,7 @@ function AssessmentForm({ onBack, onShowResults }) {
 
   // CHECK ACADEMIC PROFILE FIRST
   useEffect(() => {
-    const userId = localStorage.getItem('userId');
+    const userId = getTokenPayload()?.user_id;
     if (userId) {
       fetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`)
         .then(res => res.json())
@@ -107,8 +108,8 @@ function AssessmentForm({ onBack, onShowResults }) {
       chosenOptionId: parseInt(chosenOptionId)
     }));
 
-    // Get userId from localStorage
-    const userId = localStorage.getItem('userId');
+    // Get userId from JWT token
+    const userId = getTokenPayload()?.user_id;
     if (!userId) {
       alert('User ID not found. Please log in again.');
       setLoading(false);

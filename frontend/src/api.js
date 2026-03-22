@@ -1,6 +1,23 @@
 import axios from 'axios';
 
 /**
+ * Decode the JWT payload stored in localStorage.
+ * Returns { user_id, username, email, is_admin } or null if no valid token.
+ */
+export function getTokenPayload() {
+  const token = localStorage.getItem('accessToken');
+  if (!token) return null;
+  try {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const payload = JSON.parse(atob(base64));
+    return payload;
+  } catch {
+    return null;
+  }
+}
+
+/**
  * Pre-configured Axios instance that automatically attaches the JWT
  * Authorization header to every request.
  *
@@ -29,9 +46,6 @@ api.interceptors.response.use(
       // Token expired or invalid — clear auth state and redirect to login
       localStorage.removeItem('accessToken');
       localStorage.removeItem('userName');
-      localStorage.removeItem('userId');
-      localStorage.removeItem('userUsername');
-      localStorage.removeItem('userEmail');
       // Only reload if we're not already on the landing/login page
       if (window.location.hash !== '#/landing' && window.location.hash !== '#/login') {
         window.location.hash = '#/landing';

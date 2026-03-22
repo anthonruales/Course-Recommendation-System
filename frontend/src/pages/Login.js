@@ -36,10 +36,7 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
           setGoogleFullName(backendRes.data.name || '');
           setShowUsernameModal(true);
         } else {
-          // Existing user - login directly
-          localStorage.setItem('userId', backendRes.data.user_id);
-          localStorage.setItem('userUsername', backendRes.data.username || '');
-          localStorage.setItem('userEmail', backendRes.data.email || '');
+          // Existing user - login directly (only store JWT)
           localStorage.setItem('accessToken', backendRes.data.access_token || '');
           
           // Ensure last_active is updated on login
@@ -90,9 +87,7 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
         username: googleUsername
       });
       
-      localStorage.setItem('userId', res.data.user_id);
-      localStorage.setItem('userUsername', googleUsername);
-      localStorage.setItem('userEmail', googleUserData.email || '');
+      // Only store JWT — user identity is decoded from the token
       localStorage.setItem('accessToken', res.data.access_token || '');
       setShowUsernameModal(false);
       
