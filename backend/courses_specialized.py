@@ -572,17 +572,17 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BS Agriculture", 
      "description": "Crop production, soil management, and agricultural technology.", 
      "minimum_gwa": 80, "required_strand": "STEM",
-     "trait_tag": ["Realistic", "Agri-Nature", "Physical-Skill"]},
+        "trait_tag": ["Realistic", "Agri-Nature", "Field-Research", "Environmental-Sci", "Technical-Skill", "Agriculture-Farming-Path"]},
     
     {"course_name": "BS Forestry", 
      "description": "Forest management, conservation, and natural resources.", 
      "minimum_gwa": 80, "required_strand": "STEM",
-     "trait_tag": ["Realistic", "Agri-Nature", "Physical-Skill"]},
+        "trait_tag": ["Realistic", "Agri-Nature", "Field-Research", "Environmental-Sci", "Community-Serve", "Forestry-Path"]},
     
     {"course_name": "BS Fisheries", 
      "description": "Aquaculture, fish production, and marine resource management.", 
      "minimum_gwa": 80, "required_strand": "STEM",
-     "trait_tag": ["Realistic", "Agri-Nature", "Physical-Skill"]},
+        "trait_tag": ["Realistic", "Agri-Nature", "Maritime-Sea", "Field-Research", "Environmental-Sci", "Fisheries-Agri-Path"]},
     
     # ============== HOSPITALITY & TOURISM ==============
     {"course_name": "BS Hospitality Management", 

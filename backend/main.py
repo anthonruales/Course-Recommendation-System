@@ -2581,49 +2581,57 @@ def start_adaptive_assessment(data: AdaptiveSessionStart, current_user: models.U
     
     Returns: session_id and first question
     """
-    # Get user info for initial scoring
-    user = db.query(models.User).filter(models.User.user_id == data.userId).first()
-    if not user:
-        raise HTTPException(status_code=404, detail="User not found")
-    
-    user_gwa = None
-    user_strand = None
-    user_interests = None
-    user_skills = None
-    if user.academic_info:
-        user_gwa = user.academic_info.get("gwa")
-        user_strand = user.academic_info.get("strand")
-        user_interests = user.academic_info.get("interests", "")
-        user_skills = user.academic_info.get("skills", "")
-    
-    # Initialize adaptive engine
-    engine = get_or_init_adaptive_engine(db)
-    
-    # Keep the assessment concise so niche paths do not run out of relevant questions.
-    max_questions = 30
-    
-    # Create session with custom max questions and profile data (interests/skills)
-    session_id = engine.create_session(data.userId, user_gwa, user_strand, max_questions, user_interests, user_skills)
-    
-    # Get first question
-    first_question = engine.get_next_question(session_id)
-    
-    if not first_question:
-        raise HTTPException(status_code=500, detail="Failed to start adaptive assessment")
-    
-    # Get session to return correct max/min values
-    session = engine.sessions.get(session_id)
-    
-    return {
-        "success": True,
-        "message": f"[BRAIN] Smart Assessment started with {max_questions} questions!",
-        "session_id": session_id,
-        "mode": "adaptive",
-        "description": "Questions are selected based on your previous answers to find the best course match.",
-        "max_questions": session.max_questions if session else max_questions,
-        "min_questions": session.min_questions if session else int(max_questions * 0.5),
-        "first_question": first_question
-    }
+    import traceback
+    try:
+        # Get user info for initial scoring
+        user = db.query(models.User).filter(models.User.user_id == data.userId).first()
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        
+        user_gwa = None
+        user_strand = None
+        user_interests = None
+        user_skills = None
+        if user.academic_info:
+            user_gwa = user.academic_info.get("gwa")
+            user_strand = user.academic_info.get("strand")
+            user_interests = user.academic_info.get("interests", "")
+            user_skills = user.academic_info.get("skills", "")
+        
+        # Initialize adaptive engine
+        engine = get_or_init_adaptive_engine(db)
+        
+        # Keep the assessment concise so niche paths do not run out of relevant questions.
+        max_questions = 30
+        
+        # Create session with custom max questions and profile data (interests/skills)
+        session_id = engine.create_session(data.userId, user_gwa, user_strand, max_questions, user_interests, user_skills)
+        
+        # Get first question
+        first_question = engine.get_next_question(session_id)
+        
+        if not first_question:
+            raise HTTPException(status_code=500, detail="Failed to start adaptive assessment")
+        
+        # Get session to return correct max/min values
+        session = engine.sessions.get(session_id)
+        
+        return {
+            "success": True,
+            "message": f"[BRAIN] Smart Assessment started with {max_questions} questions!",
+            "session_id": session_id,
+            "mode": "adaptive",
+            "description": "Questions are selected based on your previous answers to find the best course match.",
+            "max_questions": session.max_questions if session else max_questions,
+            "min_questions": session.min_questions if session else int(max_questions * 0.5),
+            "first_question": first_question
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        print(f"[ERROR] /adaptive/start crashed: {e}")
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Internal error: {str(e)}")
 
 
 def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommendations: list, user_id: int = None, answered_questions: dict = None):
