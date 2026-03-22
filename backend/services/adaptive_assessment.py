@@ -4266,9 +4266,13 @@ class AdaptiveAssessmentEngine:
                 self.trait_to_courses[trait].add(course_name)
         
         # Pre-compute trait -> questions mapping
+        # Skip rejection/none options so their traits don't make questions
+        # appear relevant to unrelated profiles.
         self.trait_to_questions: Dict[str, List[int]] = defaultdict(list)
         for qid, question in self.questions.items():
             for opt in question.get('options', []):
+                if self._is_rejection_option(opt):
+                    continue
                 trait_tags = opt.get('trait_tags', {})
                 if isinstance(trait_tags, dict):
                     for trait in trait_tags:
@@ -4283,11 +4287,13 @@ class AdaptiveAssessmentEngine:
         
         # Pre-compute question-trait affinity matrix for decision tree
         # affinity[qid] = {trait: max_weight_across_options}
+        # Skip rejection/none options so their traits don't inflate affinity.
         self.question_trait_affinity: Dict[int, Dict[str, float]] = {}
         for qid, question in self.questions.items():
             affinities = {}
             options = question.get('options', [])
-            for opt in options:
+            substantive_opts = [o for o in options if not self._is_rejection_option(o)]
+            for opt in substantive_opts:
                 trait_tags = opt.get('trait_tags', {})
                 if isinstance(trait_tags, dict):
                     for trait, weight in trait_tags.items():
@@ -4299,7 +4305,7 @@ class AdaptiveAssessmentEngine:
                     trait = opt.get('trait_tag')
                     if trait:
                         affinities[trait] = affinities.get(trait, 0) + 1
-            total = len(options)
+            total = len(substantive_opts)
             if total > 0:
                 for trait in affinities:
                     affinities[trait] /= total  # Normalize
@@ -5684,8 +5690,10 @@ class AdaptiveAssessmentEngine:
                 if q_branches:
                     score /= len(q_branches)
                 
-                # Information gain
+                # Information gain (skip rejection/none options)
                 for opt in options:
+                    if self._is_rejection_option(opt):
+                        continue
                     tt = opt.get('trait_tags', {})
                     if isinstance(tt, dict):
                         for t, w in tt.items():
