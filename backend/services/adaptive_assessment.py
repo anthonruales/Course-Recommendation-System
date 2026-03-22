@@ -4566,25 +4566,37 @@ class AdaptiveAssessmentEngine:
         gets a low weight.  This prevents courses that only match a peripheral interest
         (e.g. Hardware-Systems from 'robotics') from tying with courses that match the
         user's core interest (e.g. Software-Dev from Programming, AI, Computers & IT).
+
+        Academic Interests carry 2× the weight of Technical & Soft Skills so that
+        a user's field of study is always the primary driver of Top Matches.
+        Skills still influence the score but cannot override an explicit interest.
         """
         if not interests and not skills:
             return 0.0
 
-        # Parse user's selections
+        # Academic Interests contribute at 2.0× weight; Skills at 1.0×.
+        # This ensures a course that matches an explicit interest always outscores
+        # a course that only matches a skill (unless the skill appears many times).
+        INTEREST_WEIGHT = 2.0
+        SKILL_WEIGHT = 1.0
+
         interest_list = [i.strip().lower() for i in (interests or "").split(",") if i.strip()]
         skill_list = [s.strip().lower() for s in (skills or "").split(",") if s.strip()]
-        user_selections = set(interest_list + skill_list)
 
         # Build a weighted trait map.
-        # For each selection, the first trait in the mapped list gets weight 1.0,
-        # the second gets 0.5, the third 0.33, etc.
+        # For each selection, the first trait gets weight 1.0/(i+1) × source_multiplier.
         # A trait that shows up in many selections accumulates weight across all of them.
         user_trait_weights: Dict[str, float] = {}
-        for selection in user_selections:
+        for selection in interest_list:
             related_traits = self._get_profile_traits_for_selection(selection)
             for i, trait in enumerate(related_traits):
                 key = trait.lower()
-                user_trait_weights[key] = user_trait_weights.get(key, 0.0) + 1.0 / (i + 1)
+                user_trait_weights[key] = user_trait_weights.get(key, 0.0) + INTEREST_WEIGHT / (i + 1)
+        for selection in skill_list:
+            related_traits = self._get_profile_traits_for_selection(selection)
+            for i, trait in enumerate(related_traits):
+                key = trait.lower()
+                user_trait_weights[key] = user_trait_weights.get(key, 0.0) + SKILL_WEIGHT / (i + 1)
 
         if not user_trait_weights:
             return 0.0
