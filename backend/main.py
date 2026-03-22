@@ -428,6 +428,7 @@ def sync_questions_db():
                 )
                 db.add(new_q)
                 db.flush()
+                db_questions[qid] = new_q  # prevent DECISION_TREE loop re-inserting same ID
 
                 # Insert all options for this question (skip if option_id already exists)
                 for opt in q.get("options", []):
@@ -520,6 +521,7 @@ def sync_questions_db():
                 )
                 db.add(new_q)
                 db.flush()
+                db_questions[qid] = new_q  # prevent re-insertion if same ID was just flushed
                 for opt in q.get("options", []):
                     oid = opt.get("option_id")
                     # Skip if this option_id already exists in DB (orphaned from previous sync)
@@ -2840,7 +2842,8 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
         import traceback
         traceback.print_exc()
         db.rollback()
-        raise
+        # Do NOT re-raise — a DB save failure must not prevent is_complete=True
+        # from reaching the frontend. The assessment result is already in memory.
 
 
 @app.post("/adaptive/answer")
