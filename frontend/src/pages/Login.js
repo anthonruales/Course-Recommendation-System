@@ -11,6 +11,7 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
   // Google username selection modal state
   const [showUsernameModal, setShowUsernameModal] = useState(false);
   const [googleUsername, setGoogleUsername] = useState('');
+  const [googleFullName, setGoogleFullName] = useState('');
   const [googleUserData, setGoogleUserData] = useState(null);
 
   const handleGoogleLogin = useGoogleLogin({
@@ -33,8 +34,9 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
             email: backendRes.data.email,
             name: backendRes.data.name
           });
-          // Suggest username from email
+          // Suggest username from email, pre-fill name from Google
           setGoogleUsername(backendRes.data.email.split('@')[0]);
+          setGoogleFullName(backendRes.data.name || '');
           setShowUsernameModal(true);
         } else {
           // Existing user - login directly
@@ -77,12 +79,17 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
       alert("Username can only contain letters, numbers, and underscores.");
       return;
     }
+
+    if (!googleFullName.trim()) {
+      alert("Please enter your full name.");
+      return;
+    }
     
     setLoading(true);
     try {
       const res = await axios.post(`${process.env.REACT_APP_API_URL}/google-register`, {
         email: googleUserData.email,
-        name: googleUserData.name,
+        name: googleFullName.trim(),
         username: googleUsername
       });
       
@@ -148,8 +155,8 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
         <div className="auth-glass-card" style={styles.glassCard}>
           <img src="/logo.png" alt="CoursePro" className="auth-brand-icon" style={styles.brandIcon} />
           
-          <h2 style={styles.title}>Choose Username</h2>
-          <p style={styles.subtitle}>Create a username for your account</p>
+          <h2 style={styles.title}>Complete Your Profile</h2>
+          <p style={styles.subtitle}>Choose a username and enter your name</p>
           
           <form onSubmit={handleGoogleRegister}>
             <div style={styles.inputWrapper}>
@@ -157,9 +164,21 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
               <input 
                 style={styles.input} 
                 type="text" 
-                placeholder="Enter username"
+                placeholder="Choose a username"
                 value={googleUsername}
                 onChange={(e) => setGoogleUsername(e.target.value)}
+                required 
+              />
+            </div>
+
+            <div style={styles.inputWrapper}>
+              <label style={styles.label}>Full Name</label>
+              <input 
+                style={styles.input} 
+                type="text" 
+                placeholder="Enter your full name"
+                value={googleFullName}
+                onChange={(e) => setGoogleFullName(e.target.value)}
                 required 
               />
             </div>
@@ -184,8 +203,8 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
       <div className="auth-glass-card" style={styles.glassCard}>
         <img src="/logo.png" alt="CoursePro" className="auth-brand-icon" style={styles.brandIcon} />
         
-        <h2 style={styles.title}>Sign In</h2>
-        <p style={styles.subtitle}>Welcome back</p>
+        <h2 style={styles.title}>Welcome</h2>
+        <p style={styles.subtitle}>Sign in with your Google account</p>
 
         <button 
           style={styles.googleBtn} 
@@ -197,57 +216,6 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
           <img src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/24px.svg" alt="G" style={{width: 18}} />
           <span>Continue with Google</span>
         </button>
-
-        <div style={styles.divider}>
-          <div style={styles.line}></div>
-          <span style={styles.dividerText}>OR</span>
-          <div style={styles.line}></div>
-        </div>
-
-        <form onSubmit={handleSubmit}>
-          <div style={styles.inputWrapper}>
-            <label style={styles.label}>Username or Email</label>
-            <input 
-              style={styles.input} 
-              type="text" 
-              placeholder="Enter username or email"
-              onChange={(e) => setUsernameOrEmail(e.target.value)}
-              required 
-            />
-          </div>
-
-          <div style={styles.inputWrapper}>
-            <label style={styles.label}>Password</label>
-            <div style={{ position: 'relative' }}>
-              <input
-                style={styles.input}
-                type={showPassword ? "text" : "password"}
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <button 
-                type="button" 
-                onClick={() => setShowPassword(!showPassword)}
-                style={styles.viewBtn}
-              >
-                {showPassword ? "HIDE" : "SHOW"}
-              </button>
-            </div>
-          </div>
-
-          <button type="submit" style={styles.loginBtn} disabled={loading}
-            onMouseEnter={(e) => { if (!loading) { e.target.style.transform = 'translateY(-2px)'; e.target.style.boxShadow = '0 15px 25px rgba(99, 102, 241, 0.5)'; } }}
-            onMouseLeave={(e) => { e.target.style.transform = 'translateY(0)'; e.target.style.boxShadow = '0 10px 15px rgba(99, 102, 241, 0.3)'; }}
-          >
-            {loading ? "Verifying..." : "Login to Portal"}
-          </button>
-        </form>
-
-        <p style={styles.footerText}>
-          New here? <span onClick={onSwitch} style={styles.link}>Create Account</span>
-        </p>
         
         {onBack && (
           <p style={styles.backLink} onClick={onBack}>

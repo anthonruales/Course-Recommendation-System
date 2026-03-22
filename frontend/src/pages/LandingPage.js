@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
  * LANDING PAGE
  * Beautiful hero page for CoursePro
  */
-function LandingPage({ onLogin, onSignup }) {
+function LandingPage({ onLogin }) {
   const [scrolled, setScrolled] = useState(false);
   
   useEffect(() => {
@@ -68,10 +68,7 @@ function LandingPage({ onLogin, onSignup }) {
           </div>
 
           <div style={styles.navRight}>
-            <button onClick={onLogin} style={styles.signInBtn}>
-              Sign In
-            </button>
-            <button onClick={onSignup} style={styles.getStartedBtn}>
+            <button onClick={onLogin} style={styles.getStartedBtn}>
               Get Started
               <span style={styles.btnArrow}>→</span>
             </button>
@@ -101,12 +98,9 @@ function LandingPage({ onLogin, onSignup }) {
           </p>
 
           <div className="landing-hero-cta" style={styles.heroCTA}>
-            <button onClick={onSignup} style={styles.primaryBtn}>
-              Start Assessment
+            <button onClick={onLogin} style={styles.primaryBtn}>
+              Get Started
               <span style={styles.btnArrow}>→</span>
-            </button>
-            <button onClick={onLogin} style={styles.secondaryBtn}>
-              I Have an Account
             </button>
           </div>
 
@@ -193,7 +187,7 @@ function LandingPage({ onLogin, onSignup }) {
           <p style={styles.ctaSubtitle}>
             Take our assessment and get personalized course recommendations
           </p>
-          <button onClick={onSignup} style={styles.ctaButton}>
+          <button onClick={onLogin} style={styles.ctaButton}>
             Get Started Now
             <span style={styles.btnArrow}>→</span>
           </button>

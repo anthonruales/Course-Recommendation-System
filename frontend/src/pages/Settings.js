@@ -254,6 +254,8 @@ const SKILL_OPTIONS = [
 ];
 
 function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, onViewActivity }) {
+  // Local draft state — edits stay here until Save is clicked
+  const [localFormData, setLocalFormData] = useState(() => ({ ...formData }));
   const [activeSection, setActiveSection] = useState('profile');
   const [gwaError, setGwaError] = useState('');
   const [interestModalOpen, setInterestModalOpen] = useState(false);
@@ -263,17 +265,6 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
   const pendingPhotoRef = useRef({ changed: false, value: null });
   const [newEmail, setNewEmail] = useState('');
   const [emailError, setEmailError] = useState('');
-  const [passwordData, setPasswordData] = useState({
-    currentPassword: '',
-    newPassword: '',
-    confirmPassword: ''
-  });
-  const [passwordError, setPasswordError] = useState('');
-  const [showPasswords, setShowPasswords] = useState({
-    current: false,
-    new: false,
-    confirm: false
-  });
   const fileInputRef = useRef(null);
   
   // Load saved profile photo and email
@@ -324,12 +315,12 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
     showToast('Photo removed — click Save Changes to apply', 'info');
   };
   
-  // Parse interests and skills
-  const selectedInterests = formData?.interests 
-    ? formData.interests.split(',').map(i => i.trim()).filter(i => i) 
+  // Parse interests and skills from local draft
+  const selectedInterests = localFormData?.interests 
+    ? localFormData.interests.split(',').map(i => i.trim()).filter(i => i) 
     : [];
-  const selectedSkills = formData?.skills 
-    ? formData.skills.split(',').map(s => s.trim()).filter(s => s) 
+  const selectedSkills = localFormData?.skills 
+    ? localFormData.skills.split(',').map(s => s.trim()).filter(s => s) 
     : [];
   
   const toggleInterest = (interestId) => {
@@ -340,7 +331,7 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
     } else {
       current.push(interestId);
     }
-    setFormData(prev => ({ ...prev, interests: current.join(',') }));
+    setLocalFormData(prev => ({ ...prev, interests: current.join(',') }));
   };
   
   const toggleSkill = (skillId) => {
@@ -351,7 +342,7 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
     } else {
       current.push(skillId);
     }
-    setFormData(prev => ({ ...prev, skills: current.join(',') }));
+    setLocalFormData(prev => ({ ...prev, skills: current.join(',') }));
   };
   
   const handleChange = (e) => {
@@ -359,14 +350,14 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
     
     if (name === 'fullname') {
       const capitalizedName = capitalizeName(value);
-      setFormData(prev => ({ ...prev, fullname: capitalizedName }));
+      setLocalFormData(prev => ({ ...prev, fullname: capitalizedName }));
       return;
     }
     
     if (name === 'age') {
       const ageValue = parseInt(value, 10);
       if (value && ageValue < 0) {
-        setFormData(prev => ({ ...prev, age: 0 }));
+        setLocalFormData(prev => ({ ...prev, age: 0 }));
         return;
       }
     }
@@ -382,10 +373,10 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
       }
     }
     
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setLocalFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  // Track original values
+  // Track original values (from parent prop, not local draft)
   const originalDataRef = useRef(null);
   
   useEffect(() => {
@@ -415,11 +406,11 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
       skills: 'Skills'
     };
     
-    if ((formData.fullname || '') !== original.fullname) changes.push(fieldLabels.fullname);
-    if ((formData.gwa || '') !== original.gwa) changes.push(fieldLabels.gwa);
-    if ((formData.strand || '') !== original.strand) changes.push(fieldLabels.strand);
-    if ((formData.age || '') !== original.age) changes.push(fieldLabels.age);
-    if ((formData.gender || '') !== original.gender) changes.push(fieldLabels.gender);
+    if ((localFormData.fullname || '') !== original.fullname) changes.push(fieldLabels.fullname);
+    if ((localFormData.gwa || '') !== original.gwa) changes.push(fieldLabels.gwa);
+    if ((localFormData.strand || '') !== original.strand) changes.push(fieldLabels.strand);
+    if ((localFormData.age || '') !== original.age) changes.push(fieldLabels.age);
+    if ((localFormData.gender || '') !== original.gender) changes.push(fieldLabels.gender);
     if (selectedInterests.join(', ') !== (original.interests || '')) changes.push(fieldLabels.interests);
     if (selectedSkills.join(', ') !== (original.skills || '')) changes.push(fieldLabels.skills);
     
@@ -428,8 +419,8 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
 
   const handleSaveProfile = async () => {
     const missing = [];
-    if (!formData.gwa) missing.push('GWA');
-    if (!formData.strand) missing.push('SHS Strand');
+    if (!localFormData.gwa) missing.push('GWA');
+    if (!localFormData.strand) missing.push('SHS Strand');
     if (selectedInterests.length === 0) missing.push('Academic Interests');
     if (selectedSkills.length === 0) missing.push('Skills');
     if (missing.length > 0) {
@@ -437,18 +428,18 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
       return;
     }
     
-    if (formData.fullname) {
-      if (containsBadWords(formData.fullname)) {
+    if (localFormData.fullname) {
+      if (containsBadWords(localFormData.fullname)) {
         showToast('Please use an appropriate name.', 'error');
         return;
       }
-      if (!/^[a-zA-Z\s'.-]+$/.test(formData.fullname.trim())) {
+      if (!/^[a-zA-Z\s'.-]+$/.test(localFormData.fullname.trim())) {
         showToast('Name can only contain letters, spaces, hyphens, apostrophes, and dots.', 'error');
         return;
       }
     }
     
-    const gwaValue = parseFloat(formData.gwa);
+    const gwaValue = parseFloat(localFormData.gwa);
     if (gwaValue > 100) {
       showToast('GWA cannot exceed 100', 'error');
       return;
@@ -506,11 +497,11 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        gwa: parseFloat(formData.gwa),
-        strand: formData.strand,
-        fullname: formData.fullname || null,
-        age: formData.age ? parseInt(formData.age) : null,
-        gender: formData.gender || null,
+        gwa: parseFloat(localFormData.gwa),
+        strand: localFormData.strand,
+        fullname: localFormData.fullname || null,
+        age: localFormData.age ? parseInt(localFormData.age) : null,
+        gender: localFormData.gender || null,
         interests: selectedInterests.join(', ') || null,
         skills: selectedSkills.join(', ') || null
       })
@@ -528,17 +519,19 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
         pendingPhotoRef.current = { changed: false, value: null };
       }
       // Update localStorage userName if fullname changed
-      if (formData.fullname) {
-        localStorage.setItem('userName', formData.fullname);
+      if (localFormData.fullname) {
+        localStorage.setItem('userName', localFormData.fullname);
       }
+      // Push local edits to parent state now that save succeeded
+      setFormData({ ...localFormData });
       showToast('Profile updated successfully!', 'success');
       // Reset original data ref so change tracking resets
       originalDataRef.current = {
-        fullname: formData.fullname || '',
-        gwa: formData.gwa || '',
-        strand: formData.strand || '',
-        age: formData.age || '',
-        gender: formData.gender || '',
+        fullname: localFormData.fullname || '',
+        gwa: localFormData.gwa || '',
+        strand: localFormData.strand || '',
+        age: localFormData.age || '',
+        gender: localFormData.gender || '',
         interests: selectedInterests.join(', ') || '',
         skills: selectedSkills.join(', ') || ''
       };
@@ -550,63 +543,11 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
     });
   };
 
-  const handlePasswordChange = async () => {
-    setPasswordError('');
-    
-    if (!passwordData.currentPassword) {
-      setPasswordError('Please enter your current password');
-      return;
-    }
-    if (!passwordData.newPassword) {
-      setPasswordError('Please enter a new password');
-      return;
-    }
-    if (passwordData.newPassword.length < 6) {
-      setPasswordError('New password must be at least 6 characters');
-      return;
-    }
-    if (passwordData.newPassword !== passwordData.confirmPassword) {
-      setPasswordError('New passwords do not match');
-      return;
-    }
-    
-    const userId = localStorage.getItem('userId');
-    if (!userId) {
-      showToast('User ID not found. Please log in again.', 'error');
-      return;
-    }
-    
-    try {
-      const response = await authFetch(`${process.env.REACT_APP_API_URL}/user/${userId}/change-password`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          current_password: passwordData.currentPassword,
-          new_password: passwordData.newPassword
-        })
-      });
-      
-      const data = await response.json();
-      
-      if (!response.ok) {
-        setPasswordError(data.detail || 'Failed to change password');
-        return;
-      }
-      
-      showToast('Password changed successfully!', 'success');
-      setPasswordData({ currentPassword: '', newPassword: '', confirmPassword: '' });
-    } catch (err) {
-      console.error('Error changing password:', err);
-      setPasswordError('Failed to change password. Please try again.');
-    }
-  };
-
   const userName = localStorage.getItem('userName') || 'User';
     const userUsername = localStorage.getItem('userUsername') || '';
 
   const settingsSections = [
     { id: 'profile', label: 'Profile Information', icon: '👤' },
-    { id: 'security', label: 'Password & Security', icon: '🔒' },
   ];
 
   return (
@@ -711,22 +652,9 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
                   
                   <div style={styles.inputGroup}>
                     <label style={styles.label}>Email Address</label>
-                    <input
-                      style={{
-                        ...styles.input,
-                        ...(emailError ? { borderColor: '#ef4444' } : {})
-                      }}
-                      type="email"
-                      value={newEmail}
-                      onChange={(e) => {
-                        setNewEmail(e.target.value);
-                        setEmailError('');
-                      }}
-                      placeholder="Enter your email address"
-                    />
-                    {emailError && (
-                      <span style={styles.inputError}>{emailError}</span>
-                    )}
+                    <div style={styles.readOnlyField}>
+                      {newEmail || 'No email set'}
+                    </div>
                   </div>
                   
                   <div style={styles.inputGroup}>
@@ -735,7 +663,7 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
                       style={styles.input}
                       type="text"
                       name="fullname"
-                      value={formData?.fullname || ''}
+                      value={localFormData?.fullname || ''}
                       onChange={handleChange}
                       placeholder="Enter your full name"
                     />
@@ -748,7 +676,7 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
                       type="number"
                       name="age"
                       min="0"
-                      value={formData?.age || ''}
+                      value={localFormData?.age || ''}
                       onChange={handleChange}
                       onKeyDown={(e) => { if (e.key === '-' || e.key === '+') e.preventDefault(); }}
                       placeholder="Enter your age"
@@ -760,7 +688,7 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
                     <select
                       style={styles.input}
                       name="gender"
-                      value={formData?.gender || ''}
+                      value={localFormData?.gender || ''}
                       onChange={handleChange}
                     >
                       <option value="" disabled>Select gender</option>
@@ -778,7 +706,7 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
                     <select
                       style={styles.input}
                       name="strand"
-                      value={formData?.strand || ''}
+                      value={localFormData?.strand || ''}
                       onChange={handleChange}
                     >
                       <option value="" disabled>Select your strand</option>
@@ -803,7 +731,7 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
                       min="75"
                       max="100"
                       name="gwa"
-                      value={formData?.gwa || ''}
+                      value={localFormData?.gwa || ''}
                       onChange={handleChange}
                       placeholder="75.00 - 100.00"
                     />
@@ -885,89 +813,6 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
                 <div style={styles.sectionFooter}>
                   <button onClick={handleSaveProfile} style={styles.saveBtn}>
                     Save Changes
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Password & Security Section */}
-            {activeSection === 'security' && (
-              <div style={styles.section}>
-                <h2 style={styles.sectionTitle}>Password & Security</h2>
-                <p style={styles.sectionDesc}>Keep your account secure by updating your password</p>
-                
-                <div style={styles.passwordForm}>
-                  <div style={styles.inputGroup}>
-                    <label style={styles.label}>Current Password</label>
-                    <div style={styles.passwordInputWrapper}>
-                      <input
-                        style={styles.input}
-                        type={showPasswords.current ? 'text' : 'password'}
-                        value={passwordData.currentPassword}
-                        onChange={(e) => setPasswordData({...passwordData, currentPassword: e.target.value})}
-                        placeholder="Enter current password"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowPasswords({...showPasswords, current: !showPasswords.current})}
-                        style={styles.eyeBtn}
-                      >
-                        {showPasswords.current ? '👁️' : '👁️‍🗨️'}
-                      </button>
-                    </div>
-                  </div>
-                  
-                  <div style={styles.inputGroup}>
-                    <label style={styles.label}>New Password</label>
-                    <div style={styles.passwordInputWrapper}>
-                      <input
-                        style={styles.input}
-                        type={showPasswords.new ? 'text' : 'password'}
-                        value={passwordData.newPassword}
-                        onChange={(e) => setPasswordData({...passwordData, newPassword: e.target.value})}
-                        placeholder="Enter new password"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowPasswords({...showPasswords, new: !showPasswords.new})}
-                        style={styles.eyeBtn}
-                      >
-                        {showPasswords.new ? '👁️' : '👁️‍🗨️'}
-                      </button>
-                    </div>
-                    <span style={styles.inputHint}>Must be at least 6 characters</span>
-                  </div>
-                  
-                  <div style={styles.inputGroup}>
-                    <label style={styles.label}>Confirm New Password</label>
-                    <div style={styles.passwordInputWrapper}>
-                      <input
-                        style={styles.input}
-                        type={showPasswords.confirm ? 'text' : 'password'}
-                        value={passwordData.confirmPassword}
-                        onChange={(e) => setPasswordData({...passwordData, confirmPassword: e.target.value})}
-                        placeholder="Confirm new password"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => setShowPasswords({...showPasswords, confirm: !showPasswords.confirm})}
-                        style={styles.eyeBtn}
-                      >
-                        {showPasswords.confirm ? '👁️' : '👁️‍🗨️'}
-                      </button>
-                    </div>
-                  </div>
-                  
-                  {passwordError && (
-                    <div style={styles.errorBox}>
-                      <span>⚠️</span> {passwordError}
-                    </div>
-                  )}
-                </div>
-
-                <div style={styles.sectionFooter}>
-                  <button onClick={handlePasswordChange} style={styles.saveBtn}>
-                    Update Password
                   </button>
                 </div>
               </div>

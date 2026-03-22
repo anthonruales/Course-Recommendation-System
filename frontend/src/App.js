@@ -3,7 +3,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { authFetch } from './api';
 import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
-import Signup from './pages/Signup';
+// Signup removed — Google-only auth
 import Dashboard from './pages/Dashboard';
 import ProfileView from './pages/ProfileView';
 import './App.css';
@@ -16,7 +16,7 @@ const ResultsView = lazy(() => import('./pages/ResultsView'));
 
 // Valid views that can be stored in the URL hash
 const VALID_VIEWS = ['dashboard', 'profile', 'settings', 'assessment', 'activity', 'results'];
-const VALID_AUTH_VIEWS = ['landing', 'login', 'signup'];
+const VALID_AUTH_VIEWS = ['landing', 'login'];
 
 // Helper: read view from hash
 const getViewFromHash = () => {
@@ -63,9 +63,9 @@ function App() {
   });
   const [view, setViewState] = useState(() => {
     if (isLoggedIn) {
-      // Don't restore 'results' or 'adaptive' on refresh (they need session data)
+      // Don't restore 'results' on refresh (it needs recommendation data)
       const restored = initialHash.view;
-      if (restored && restored !== 'results' && restored !== 'adaptive') return restored;
+      if (restored && restored !== 'results') return restored;
       return 'dashboard';
     }
     return 'dashboard';
@@ -81,6 +81,7 @@ function App() {
   // Wrap setView to also push to browser history
   const setView = useCallback((newView) => {
     setViewState(newView);
+    window.scrollTo(0, 0);
     const newHash = `#/${newView}`;
     if (window.location.hash !== newHash) {
       window.history.pushState(null, '', newHash);
@@ -102,7 +103,7 @@ function App() {
       const { view: hashView, authView: hashAuthView } = getViewFromHash();
       if (user) {
         // Logged in: navigate between app views
-        if (hashView && hashView !== 'results' && hashView !== 'adaptive') {
+        if (hashView && hashView !== 'results') {
           setViewState(hashView);
         } else if (hashView === 'results' && recommendationData) {
           setViewState('results');
@@ -347,22 +348,12 @@ function App() {
             {authView === 'landing' && (
               <LandingPage 
                 onLogin={() => setAuthView('login')}
-                onSignup={() => setAuthView('signup')}
               />
             )}
             {authView === 'login' && (
               <div className="auth-shell">
                 <Login 
-                  onSwitch={() => setAuthView('signup')} 
                   onLoginSuccess={handleLoginSuccess}
-                  onBack={() => setAuthView('landing')}
-                />
-              </div>
-            )}
-            {authView === 'signup' && (
-              <div className="auth-shell">
-                <Signup 
-                  onSwitch={() => setAuthView('login')}
                   onBack={() => setAuthView('landing')}
                 />
               </div>
