@@ -527,6 +527,15 @@ UNIFIED_PROFILE_TO_TRAITS = {
     "culinary": ["Hospitality-Svc", "Culinary-Arts"],
     "sports and fitness": ["Physical-Skill", "Rehab-Therapy"],
     "athletic": ["Physical-Skill"],
+    # Technology interest aliases that the frontend sends as-is
+    "computers": ["Software-Dev", "Hardware-Systems", "Data-Analytics"],
+    "computers_it": ["Software-Dev", "Hardware-Systems", "Data-Analytics", "Technical-Skill"],
+    "computers_&_it": ["Software-Dev", "Hardware-Systems", "Data-Analytics", "Technical-Skill"],
+    "ai_&_machine_learning": ["Software-Dev", "Data-Analytics", "Investigative"],
+    "ai_and_machine_learning": ["Software-Dev", "Data-Analytics", "Investigative"],
+    "programming_&_coding": ["Software-Dev", "Data-Analytics", "Cyber-Defense"],
+    "programming_and_coding": ["Software-Dev", "Data-Analytics", "Cyber-Defense"],
+    "programming_/_coding": ["Software-Dev", "Data-Analytics", "Cyber-Defense"],
 }
 
 UNIFIED_PROFILE_TO_TRAITS.update({
@@ -4597,9 +4606,9 @@ class AdaptiveAssessmentEngine:
                     matched_course_traits.add(course_trait)
                     # Specific path traits score higher than generic ones
                     if course_trait in GENERIC_TRAITS:
-                        bonus += 2.0
+                        bonus += 3.0
                     else:
-                        bonus += 4.0
+                        bonus += 6.0
                     break  # Don't double-count this course trait
         
         # Breadth bonus: reward courses where MOST of their traits match the profile
@@ -5106,11 +5115,11 @@ class AdaptiveAssessmentEngine:
             if user_gwa and course.get('minimum_gwa'):
                 gap = float(user_gwa) - float(course['minimum_gwa'])
                 if gap >= 5:
-                    course_scores[course_name] += 10  # Well above requirement
+                    course_scores[course_name] += 6   # Well above requirement
                 elif gap >= 0:
-                    course_scores[course_name] += 7   # Meets requirement
+                    course_scores[course_name] += 4   # Meets requirement
                 elif gap >= -3:
-                    course_scores[course_name] += 3   # Close to requirement
+                    course_scores[course_name] += 2   # Close to requirement
                 elif gap >= -7:
                     course_scores[course_name] += 1   # Within reach
             
