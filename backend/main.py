@@ -2723,19 +2723,23 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
     import os
     log_dir = os.environ.get("TEMP", ".")
     log_file = os.path.join(log_dir, "adaptive_debug.log")
-    try:
-        with open(log_file, "a") as f:
-            f.write(f"\n=== SAVE_ADAPTIVE_SESSION CALLED ===\n")
-            f.write(f"session_id: {session_id}\n")
-            f.write(f"user_id: {user_id}\n")
-            f.write(f"recommendations type: {type(recommendations)}\n")
-            f.write(f"recommendations length: {len(recommendations) if recommendations else 0}\n")
-            if recommendations:
-                for idx, rec in enumerate(recommendations[:2]):
-                    f.write(f"  [{idx}] type={type(rec)}, keys={list(rec.keys()) if isinstance(rec, dict) else 'N/A'}\n")
-    except Exception as log_err:
-        pass  # Ignore logging errors
-    
+
+    def _log(msg):
+        try:
+            with open(log_file, "a") as _f:
+                _f.write(msg + "\n")
+        except Exception:
+            pass
+
+    _log(f"\n=== SAVE_ADAPTIVE_SESSION CALLED ===")
+    _log(f"session_id: {session_id}")
+    _log(f"user_id: {user_id}")
+    _log(f"recommendations type: {type(recommendations)}")
+    _log(f"recommendations length: {len(recommendations) if recommendations else 0}")
+    if recommendations:
+        for idx, rec in enumerate(recommendations[:2]):
+            _log(f"  [{idx}] type={type(rec)}, keys={list(rec.keys()) if isinstance(rec, dict) else 'N/A'}")
+
     print(f"[REC_SAVE] ENTERING save_adaptive_session_to_db - session_id: {session_id}")
     try:
         # Get session from engine if available
@@ -2743,13 +2747,16 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
         if session:
             user_id = session.user_id
             answered_questions = session.answered_questions
+            _log(f"session found: round_number={session.round_number}, answered_questions={len(session.answered_questions)}")
             print(f"[DEBUG] Session found: round_number={session.round_number}, answered_questions={len(session.answered_questions)}")
         
         # If we still don't have user_id, we can't save
         if not user_id:
+            _log(f"ERROR: No user_id available for session {session_id}")
             print(f"[ERROR] No user_id available for session {session_id}")
             raise Exception(f"Cannot save adaptive session {session_id}: No user_id available")
         
+        _log(f"saving for user_id={user_id}, recs={len(recommendations) if recommendations else 0}")
         print(f"[DEBUG] Saving adaptive session {session_id} - User: {user_id}, Questions answered: {len(answered_questions) if answered_questions else 0}, Recs: {len(recommendations) if recommendations else 0}")
         if recommendations and len(recommendations) > 0:
             print(f"    First rec course_name: '{recommendations[0].get('course_name')}'")
@@ -2766,7 +2773,8 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
                 description="Akinator-style adaptive assessment"
             )
             db.add(adaptive_test)
-            db.flush()
+            db.commit()
+            db.refresh(adaptive_test)
             print(f"🆕 Created new adaptive test with ID: {adaptive_test.test_id}")
         
         # Extract quiz config from session for tracking
@@ -2775,7 +2783,16 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
         questions_answered = len(answered_questions) if answered_questions else 0
         # Use 1 decimal place to match what student app displays
         confidence_score = round(session.confidence * 100, 1) if session else None
-        
+
+        # Safely coerce user_gwa to float (academic_info JSON may store it as string)
+        raw_gwa = session.user_gwa if session else None
+        safe_gwa = None
+        if raw_gwa is not None:
+            try:
+                safe_gwa = float(raw_gwa)
+            except (ValueError, TypeError):
+                safe_gwa = None
+
         # Create test attempt with full tracking data
         test_attempt = models.TestAttempt(
             user_id=user_id,
@@ -2784,29 +2801,41 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
             questions_presented=questions_presented,  # How many questions were shown
             questions_answered=questions_answered,  # How many were actually answered
             confidence_score=confidence_score,  # Final confidence %
-            user_gwa=session.user_gwa if session else None,  # User's GWA at time of assessment
+            user_gwa=safe_gwa,  # User's GWA at time of assessment (float)
             user_strand=session.user_strand if session else None  # User's strand at time of assessment
         )
+        _log(f"inserting TestAttempt for user_id={user_id}, test_id={adaptive_test.test_id}")
         db.add(test_attempt)
-        db.flush()
-        attempt_id = test_attempt.attempt_id  # CACHE THE ATTEMPT ID BEFORE COMMIT!
-        print(f"[OK] Created test attempt: {attempt_id} for user {user_id}")
-        print(f"[TRACKING] max_questions={max_questions_selected}, presented={questions_presented}, answered={questions_answered}, confidence={confidence_score}%")
-        
-        # Save answered questions (skip virtual option_id=-1 which has no DB row)
-        if answered_questions:
-            for question_id, option_id in answered_questions.items():
-                if option_id == -1:
-                    continue  # "I don't see what I want" is a virtual option, not in options table
-                db.add(models.StudentAnswer(
-                    attempt_id=attempt_id,
-                    question_id=question_id,
-                    chosen_option_id=option_id
-                ))
-        
-        # 🔑 COMMIT TestAttempt and StudentAnswers FIRST
+        # Commit TestAttempt ALONE first so it is always persisted even if
+        # StudentAnswer inserts fail (adaptive question/option IDs come from
+        # Python source files and may not exist in the DB tables, which would
+        # cause a FK violation that previously rolled back the TestAttempt too).
         db.commit()
-        print(f"[OK] Committed attempt and answers: attempt_id={attempt_id}")
+        db.refresh(test_attempt)
+        attempt_id = test_attempt.attempt_id
+        _log(f"TestAttempt committed: attempt_id={attempt_id}")
+        print(f"[OK] Committed test attempt: {attempt_id} for user {user_id}")
+        print(f"[TRACKING] max_questions={max_questions_selected}, presented={questions_presented}, answered={questions_answered}, confidence={confidence_score}%")
+
+        # Save answered questions in a separate transaction so any FK failure
+        # (question/option not in DB) does not undo the TestAttempt above.
+        if answered_questions:
+            try:
+                for question_id, option_id in answered_questions.items():
+                    if option_id == -1:
+                        continue  # virtual "I don't see what I want" option — no DB row
+                    db.add(models.StudentAnswer(
+                        attempt_id=attempt_id,
+                        question_id=question_id,
+                        chosen_option_id=option_id
+                    ))
+                db.commit()
+                _log(f"student answers committed for attempt {attempt_id}")
+                print(f"[OK] Committed student answers for attempt {attempt_id}")
+            except Exception as answer_err:
+                db.rollback()
+                _log(f"STUDENT ANSWER ERROR: {answer_err}")
+                print(f"[WARN] Could not save student answers (question/option IDs may not be in DB): {answer_err}")
         
         # Sync to user_test_attempts (per-user tracking table) with FULL quiz tracking data
         try:
@@ -2891,6 +2920,7 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
                     print(f"[REC_SAVE] WARNING: No recommendations matched (rec_count=0)")
             except Exception as rec_error:
                 print(f"[REC_SAVE] ERROR: {rec_error}")
+                _log(f"REC_SAVE ERROR: {rec_error}")
                 import traceback
                 traceback.print_exc()
                 db.rollback()
@@ -2898,6 +2928,7 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
             print(f"[REC_SAVE] WARNING: Recommendations list empty or None")
             
     except Exception as e:
+        _log(f"OUTER ERROR: {e}")
         print(f"[ERROR] Error saving adaptive assessment: {e}")
         import traceback
         traceback.print_exc()
