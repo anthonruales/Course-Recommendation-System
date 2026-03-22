@@ -104,6 +104,7 @@ class AdaptiveSession:
     explored_domains: Set[str] = field(default_factory=set)  # Domains that have had at least N questions asked
     domain_question_count: Dict[str, int] = field(default_factory=dict)  # How many questions per domain
     last_answer_trait: str = ""                      # Trait from the most recent answer (drives next question)
+    option_fingerprints_seen: Set[tuple] = field(default_factory=set)  # Tracks option-set tuples already shown to prevent duplicate choices
 
     # --- Profile-Category Matching ---
     profile_categories: Set[str] = field(default_factory=set)     # Question categories matching user's stated interests
@@ -386,14 +387,14 @@ UNIFIED_PROFILE_TO_TRAITS = {
     "tourism_&_hospitality": ["Hospitality-Svc", "Tourism-Travel", "People-Skill", "Tourism-Hospitality-Path"],
     "tourism_and_hospitality": ["Hospitality-Svc", "Tourism-Travel", "People-Skill", "Tourism-Hospitality-Path"],
     "food": ["Hospitality-Svc", "Culinary-Arts"],
-    "agriculture": ["Agri-Nature", "Field-Research"],
+    "agriculture": ["Agri-Nature", "Field-Research", "Environmental-Sci", "Technical-Skill", "Agriculture-Farming-Path"],
     "veterinary": ["Agri-Nature", "Patient-Care", "Lab-Research"],
     "military": ["Law-Enforce", "Physical-Skill"],
     "military_defense": ["Law-Enforce", "Physical-Skill", "Community-Serve", "Investigative", "Military-Defense"],
     "military_&_defense": ["Law-Enforce", "Physical-Skill", "Community-Serve", "Investigative", "Military-Defense"],
     "military_and_defense": ["Law-Enforce", "Physical-Skill", "Community-Serve", "Investigative", "Military-Defense"],
-    "forestry": ["Agri-Nature", "Field-Research", "Physical-Skill"],
-    "fisheries": ["Agri-Nature", "Maritime-Sea", "Field-Research"],
+    "forestry": ["Agri-Nature", "Field-Research", "Environmental-Sci", "Community-Serve", "Forestry-Path"],
+    "fisheries": ["Agri-Nature", "Maritime-Sea", "Field-Research", "Environmental-Sci", "Fisheries-Agri-Path"],
     "hotel_mgmt": ["Hospitality-Svc", "Admin-Skill", "People-Skill"],
     "hotel_&_resort_management": ["Hospitality-Svc", "Admin-Skill", "People-Skill", "Tourism-Travel", "Hotel-Resort-Path"],
     "hotel_and_resort_management": ["Hospitality-Svc", "Admin-Skill", "People-Skill", "Tourism-Travel", "Hotel-Resort-Path"],
@@ -492,8 +493,8 @@ UNIFIED_PROFILE_TO_TRAITS = {
     "swimming": ["Physical-Skill", "Maritime-Sea", "Sports-Ed"],
     "animal_handling": ["Agri-Nature", "Patient-Care", "Field-Research"],
     "carpentry": ["Mechanical-Design", "Spatial-Design", "Physical-Skill"],
-    "farming": ["Agri-Nature", "Field-Research", "Physical-Skill"],
-    "fishing": ["Agri-Nature", "Maritime-Sea", "Physical-Skill"],
+    "farming": ["Agri-Nature", "Field-Research", "Environmental-Sci", "Technical-Skill", "Agriculture-Farming-Path"],
+    "fishing": ["Agri-Nature", "Maritime-Sea", "Field-Research", "Environmental-Sci", "Fisheries-Agri-Path"],
     "sewing": ["Creative-Skill", "Spatial-Design", "Technical-Skill"],
     "coaching": ["Sports-Ed", "Teaching-Ed", "Physical-Skill"],
     # Strand-related keywords (for free text matching)
@@ -532,6 +533,15 @@ UNIFIED_PROFILE_TO_TRAITS.update({
     "culinary_&_food_science": ["Food-Science", "Lab-Research", "Nutrition-Diet", "Culinary-Arts", "Food-Science-Path"],
     "culinary_and_food_science": ["Food-Science", "Lab-Research", "Nutrition-Diet", "Culinary-Arts", "Food-Science-Path"],
     "culinary_food_science": ["Food-Science", "Lab-Research", "Nutrition-Diet", "Culinary-Arts", "Food-Science-Path"],
+    "agriculture_&_farming": ["Agri-Nature", "Field-Research", "Environmental-Sci", "Technical-Skill", "Agriculture-Farming-Path"],
+    "agriculture_and_farming": ["Agri-Nature", "Field-Research", "Environmental-Sci", "Technical-Skill", "Agriculture-Farming-Path"],
+    "agriculture_farming": ["Agri-Nature", "Field-Research", "Environmental-Sci", "Technical-Skill", "Agriculture-Farming-Path"],
+    "forestry_&_natural_resources": ["Agri-Nature", "Field-Research", "Environmental-Sci", "Community-Serve", "Forestry-Path"],
+    "forestry_and_natural_resources": ["Agri-Nature", "Field-Research", "Environmental-Sci", "Community-Serve", "Forestry-Path"],
+    "forestry_natural_resources": ["Agri-Nature", "Field-Research", "Environmental-Sci", "Community-Serve", "Forestry-Path"],
+    "fisheries_&_agriculture": ["Agri-Nature", "Maritime-Sea", "Field-Research", "Environmental-Sci", "Fisheries-Agri-Path"],
+    "fisheries_and_agriculture": ["Agri-Nature", "Maritime-Sea", "Field-Research", "Environmental-Sci", "Fisheries-Agri-Path"],
+    "fisheries_agriculture": ["Agri-Nature", "Maritime-Sea", "Field-Research", "Environmental-Sci", "Fisheries-Agri-Path"],
     "veterinary_&_animal_science": ["Agri-Nature", "Patient-Care", "Lab-Research", "Investigative", "Veterinary-Path"],
     "veterinary_and_animal_science": ["Agri-Nature", "Patient-Care", "Lab-Research", "Investigative", "Veterinary-Path"],
     "veterinary_animal_science": ["Agri-Nature", "Patient-Care", "Lab-Research", "Investigative", "Veterinary-Path"],
@@ -1793,6 +1803,12 @@ QUESTION_TREE_NODES = {
     **{qid: {"level": 2, "weight": 2.0, "branches": ["hospitality", "business"]} for qid in range(4131, 4161)},
     # ── Food/veterinary/TVET expansion 6: Technical-Vocational Training Q4161-Q4190 ──
     **{qid: {"level": 2, "weight": 2.0, "branches": ["education", "technology"]} for qid in range(4161, 4191)},
+    # ── Agriculture/resource expansion 7: Agriculture & Farming Q4191-Q4220 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["agriculture", "science", "business"]} for qid in range(4191, 4221)},
+    # ── Agriculture/resource expansion 7: Forestry & Natural Resources Q4221-Q4250 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["agriculture", "science", "public_service"]} for qid in range(4221, 4251)},
+    # ── Agriculture/resource expansion 7: Fisheries & Agriculture Q4251-Q4280 ──
+    **{qid: {"level": 2, "weight": 2.0, "branches": ["agriculture", "maritime", "science"]} for qid in range(4251, 4281)},
 }
 
 
@@ -1821,6 +1837,7 @@ DOMAIN_ENTRY_QUESTIONS["agriculture"] = [4101, 4102, 4103, 4104, 4105, 4121, 412
 DOMAIN_ENTRY_QUESTIONS["hospitality"] = [4131, 4132, 4133, 4134, 4135, 4151, 4152, 4153, 4154, 4155] + DOMAIN_ENTRY_QUESTIONS.get("hospitality", [])
 DOMAIN_ENTRY_QUESTIONS["education"] = [4161, 4162, 4163, 4164, 4165, 4181, 4182, 4183, 4184, 4185] + DOMAIN_ENTRY_QUESTIONS.get("education", [])
 DOMAIN_ENTRY_QUESTIONS["technology"] = [4166, 4167, 4168, 4169, 4170] + DOMAIN_ENTRY_QUESTIONS.get("technology", [])
+DOMAIN_ENTRY_QUESTIONS["agriculture"] = [4191, 4192, 4193, 4194, 4195, 4211, 4212, 4213, 4214, 4215, 4221, 4222, 4223, 4224, 4225, 4241, 4242, 4243, 4244, 4245, 4251, 4252, 4253, 4254, 4255, 4271, 4272, 4273, 4274, 4275] + DOMAIN_ENTRY_QUESTIONS.get("agriculture", [])
 
 # ==================== CONVERSATION CHAIN: TRAIT FOLLOW-UP MAP ====================
 # After a user picks an option with trait X, these are the best follow-up questions.
@@ -1896,6 +1913,48 @@ def _prepend_unique(existing, new_items, limit=None):
     if limit is not None:
         return ordered[:limit]
     return ordered
+
+
+TRAIT_FOLLOWUP_MAP["Agri-Nature"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Agri-Nature"],
+    [4191, 4192, 4193, 4194, 4195, 4201, 4202, 4203, 4204, 4205, 4211, 4212, 4213, 4214, 4215, 4221, 4222, 4223, 4224, 4225, 4231, 4232, 4233, 4234, 4235, 4251, 4252, 4253, 4254, 4255, 4261, 4262, 4263, 4264, 4265, 4271, 4272, 4273, 4274, 4275],
+)
+TRAIT_FOLLOWUP_MAP["Field-Research"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Field-Research"],
+    [4196, 4197, 4198, 4199, 4200, 4221, 4222, 4223, 4224, 4225, 4236, 4237, 4238, 4239, 4240, 4256, 4257, 4258, 4259, 4260],
+)
+TRAIT_FOLLOWUP_MAP["Environmental-Sci"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Environmental-Sci"],
+    [4206, 4207, 4208, 4209, 4210, 4226, 4227, 4228, 4229, 4230, 4246, 4247, 4248, 4249, 4250, 4256, 4257, 4258, 4259, 4260],
+)
+TRAIT_FOLLOWUP_MAP["Technical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Technical-Skill"],
+    [4206, 4207, 4208, 4209, 4210, 4266, 4267, 4268, 4269, 4270],
+)
+TRAIT_FOLLOWUP_MAP["Startup-Venture"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Startup-Venture"],
+    [4216, 4217, 4218, 4219, 4220],
+)
+TRAIT_FOLLOWUP_MAP["Community-Serve"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Community-Serve"],
+    [4226, 4227, 4228, 4229, 4230, 4241, 4242, 4243, 4244, 4245],
+)
+TRAIT_FOLLOWUP_MAP["Physical-Skill"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Physical-Skill"],
+    [4216, 4217, 4218, 4219, 4220, 4246, 4247, 4248, 4249, 4250],
+)
+TRAIT_FOLLOWUP_MAP["Data-Analytics"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Data-Analytics"],
+    [4236, 4237, 4238, 4239, 4240, 4266, 4267, 4268, 4269, 4270],
+)
+TRAIT_FOLLOWUP_MAP["Maritime-Sea"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Maritime-Sea"],
+    [4251, 4252, 4253, 4254, 4255, 4261, 4262, 4263, 4264, 4265, 4271, 4272, 4273, 4274, 4275],
+)
+TRAIT_FOLLOWUP_MAP["Food-Science"] = _prepend_unique(
+    TRAIT_FOLLOWUP_MAP["Food-Science"],
+    [4276, 4277, 4278, 4279, 4280],
+)
 
 
 SCIENCE_INTEREST_RESEARCH_QIDS = list(range(1169, 1197))
@@ -3847,6 +3906,15 @@ INTEREST_DOMAIN_MAP.update({
     "culinary_&_food_science": "science",
     "culinary_and_food_science": "science",
     "culinary_food_science": "science",
+    "agriculture_&_farming": "agriculture",
+    "agriculture_and_farming": "agriculture",
+    "agriculture_farming": "agriculture",
+    "forestry_&_natural_resources": "agriculture",
+    "forestry_and_natural_resources": "agriculture",
+    "forestry_natural_resources": "agriculture",
+    "fisheries_&_agriculture": "agriculture",
+    "fisheries_and_agriculture": "agriculture",
+    "fisheries_agriculture": "agriculture",
     "veterinary_&_animal_science": "agriculture",
     "veterinary_and_animal_science": "agriculture",
     "veterinary_animal_science": "agriculture",
@@ -3959,9 +4027,11 @@ INTEREST_CATEGORY_KEYWORDS = {
     "education": ["Education & Teaching"],
     "teaching": ["Education & Teaching"],
     # Agriculture
-    "agriculture": ["Agriculture", "Agribusiness"],
+    "agriculture": ["Agriculture & Farming", "Agriculture", "Agribusiness"],
+    "farming": ["Agriculture & Farming"],
     "veterinary": ["Veterinary & Animal Science"],
-    "fishery": ["Fisheries & Aquaculture"],
+    "fishery": ["Fisheries & Agriculture", "Fisheries & Aquaculture"],
+    "fisheries": ["Fisheries & Agriculture", "Fisheries & Aquaculture"],
     "forestry": ["Forestry & Natural Resources"],
     # Maritime
     "maritime": ["Maritime", "Marine"],
@@ -4065,6 +4135,15 @@ INTEREST_CATEGORY_KEYWORDS.update({
     "culinary_&_food_science": ["Culinary & Food Science", "Food Science"],
     "culinary_and_food_science": ["Culinary & Food Science", "Food Science"],
     "culinary_food_science": ["Culinary & Food Science", "Food Science"],
+    "agriculture_&_farming": ["Agriculture & Farming"],
+    "agriculture_and_farming": ["Agriculture & Farming"],
+    "agriculture_farming": ["Agriculture & Farming"],
+    "forestry_&_natural_resources": ["Forestry & Natural Resources"],
+    "forestry_and_natural_resources": ["Forestry & Natural Resources"],
+    "forestry_natural_resources": ["Forestry & Natural Resources"],
+    "fisheries_&_agriculture": ["Fisheries & Agriculture"],
+    "fisheries_and_agriculture": ["Fisheries & Agriculture"],
+    "fisheries_agriculture": ["Fisheries & Agriculture"],
     "veterinary_&_animal_science": ["Veterinary & Animal Science"],
     "veterinary_and_animal_science": ["Veterinary & Animal Science"],
     "veterinary_animal_science": ["Veterinary & Animal Science"],
@@ -4146,6 +4225,7 @@ QUESTION_CATEGORY_DOMAIN_HINTS = {
 
 QUESTION_CATEGORY_DOMAIN_HINTS["science"].extend(["Culinary & Food Science", "Food Science"])
 QUESTION_CATEGORY_DOMAIN_HINTS["agriculture"].extend(["Veterinary & Animal Science", "Animal Science"])
+QUESTION_CATEGORY_DOMAIN_HINTS["agriculture"].extend(["Agriculture & Farming", "Forestry & Natural Resources", "Fisheries & Agriculture"])
 QUESTION_CATEGORY_DOMAIN_HINTS["hospitality"].extend(["Culinary Management"])
 QUESTION_CATEGORY_DOMAIN_HINTS["education"].extend(["Technical-Vocational Training"])
 QUESTION_CATEGORY_DOMAIN_HINTS["technology"].extend(["Technical-Vocational Training"])
@@ -4947,17 +5027,31 @@ class AdaptiveAssessmentEngine:
         
         # Apply initial GWA/Strand bonuses (not exclusions!)
         for course_name, course in self.courses.items():
-            # GWA bonus (preference, not requirement)
+            # GWA bonus — scaled by how well user meets the requirement
             if user_gwa and course.get('minimum_gwa'):
-                if user_gwa >= course['minimum_gwa']:
-                    course_scores[course_name] += 5  # Bonus for meeting GWA
-                elif user_gwa >= course['minimum_gwa'] - 5:
-                    course_scores[course_name] += 2  # Small bonus for close
+                gap = float(user_gwa) - float(course['minimum_gwa'])
+                if gap >= 5:
+                    course_scores[course_name] += 10  # Well above requirement
+                elif gap >= 0:
+                    course_scores[course_name] += 7   # Meets requirement
+                elif gap >= -3:
+                    course_scores[course_name] += 3   # Close to requirement
+                elif gap >= -7:
+                    course_scores[course_name] += 1   # Within reach
             
-            # Strand bonus (preference, not requirement)
+            # Strand bonus — exact match gets strong boost, trait-overlap gets moderate
             if user_strand and course.get('required_strand'):
                 if user_strand.upper() == course['required_strand'].upper():
-                    course_scores[course_name] += 5  # Bonus for matching strand
+                    course_scores[course_name] += 10  # Exact strand match
+                else:
+                    # Check trait overlap between user's strand and course traits
+                    user_strand_traits = set(STRAND_PRIORITY_TRAITS.get(normalized_strand, []))
+                    course_trait_tags = self.course_traits.get(course_name, set())
+                    overlap = user_strand_traits & course_trait_tags
+                    if len(overlap) >= 3:
+                        course_scores[course_name] += 5   # Strong trait overlap
+                    elif len(overlap) >= 1:
+                        course_scores[course_name] += 2   # Some trait overlap
             
             # Add profile bonus from interests/skills
             if user_interests or user_skills:
@@ -5595,6 +5689,53 @@ class AdaptiveAssessmentEngine:
         
         # ─── RECORD SELECTION ───
         best_question = self.questions[selected_qid]
+
+        # --- Option fingerprint deduplication ---
+        # Never show two questions with identical option choices in the same session.
+        # This prevents the user from seeing "Designing experiments / Running instruments / ..."
+        # repeated across multiple questions (which all measured the same 6 traits).
+        opt_fp = tuple(o.get("option_text", "") for o in best_question.get("options", []))
+        if len(opt_fp) >= 4 and opt_fp in session.option_fingerprints_seen:
+            replacement_found = False
+            # Pass 1: respect profile + relevance restrictions
+            for alt_qid, alt_q in self.questions.items():
+                if alt_qid in asked or alt_qid == selected_qid:
+                    continue
+                if not _is_relevant_question(alt_qid) or not _is_allowed_profile_question(alt_qid):
+                    continue
+                alt_fp = tuple(o.get("option_text", "") for o in alt_q.get("options", []))
+                if alt_fp not in session.option_fingerprints_seen:
+                    selected_qid = alt_qid
+                    best_question = alt_q
+                    opt_fp = alt_fp
+                    replacement_found = True
+                    print(f"[DEDUP] Swapped Q with repeated option-set → Q{alt_qid}")
+                    break
+            # Pass 2: widen to ANY unanswered question with unseen options
+            if not replacement_found:
+                for alt_qid, alt_q in self.questions.items():
+                    if alt_qid in asked or alt_qid == selected_qid:
+                        continue
+                    alt_fp = tuple(o.get("option_text", "") for o in alt_q.get("options", []))
+                    if alt_fp not in session.option_fingerprints_seen:
+                        selected_qid = alt_qid
+                        best_question = alt_q
+                        opt_fp = alt_fp
+                        replacement_found = True
+                        print(f"[DEDUP] Swapped Q (widened) → Q{alt_qid}")
+                        break
+            # Pass 3: if still no replacement, skip this question and recurse (with depth limit)
+            if not replacement_found:
+                _depth = getattr(session, '_dedup_depth', 0)
+                if _depth < 5:
+                    session._dedup_depth = _depth + 1
+                    session.excluded_question_ids.add(selected_qid)
+                    print(f"[DEDUP] No unique-option replacement for Q{selected_qid}, skipping")
+                    return self.get_next_question(session_id)
+                else:
+                    session._dedup_depth = 0
+        session.option_fingerprints_seen.add(opt_fp)
+
         session.round_number = round_num
         
         # Track domain question count

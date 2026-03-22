@@ -40734,61 +40734,886 @@ if _food_vet_tvet6_existing_oids & _food_vet_tvet6_generated_oids:
 
 QUESTIONS_POOL_ENHANCED.extend(_FOOD_VET_TVET_EXPANSION_6)
 
-TRAIT_SECONDARY_MAP = {
-    "AI-ML": [("Software-Dev", 0.8), ("Data-Analytics", 0.8), ("Environmental-Sci", 0.8), ("Teaching-Ed", 0.8), ("Cyber-Defense", 0.8), ("Law-Enforce", 0.8), ("Admin-Skill", 0.8), ("Animation-3D", 0.8), ("Environmental-Eng", 0.8), ("Public-Health", 0.8), ("Patient-Care", 0.8), ("Mobile-Dev", 0.8), ("Counseling", 0.8), ("Web-Dev", 0.8), ("Digital-Media", 0.8), ("Hardware-Systems", 0.8), ("Medical-Lab", 0.8), ("Finance-Acct", 0.8), ("Game-Dev", 0.8), ("Agri-Nature", 0.8), ("Startup-Venture", 0.8), ("Investigative", 0.45), ("Analytical-Skill", 0.45), ("Technical-Skill", 0.36), ("Social", 0.36), ("Conventional", 0.36), ("People-Skill", 0.36), ("Realistic", 0.36), ("Enterprising", 0.36), ("Lab-Research", 0.2)],
-    "Admin-Skill": [("Finance-Acct", 0.8), ("Health-Admin", 0.8), ("Software-Dev", 0.8), ("People-Skill", 0.8), ("Startup-Venture", 0.8), ("Analytical-Skill", 0.8), ("Community-Serve", 0.8), ("Marketing-Sales", 0.8), ("Industrial-Ops", 0.8), ("Legal-Practice", 0.8), ("Sports-Ed", 0.8), ("Conventional", 0.45), ("Technical-Skill", 0.36), ("Investigative", 0.36), ("Social", 0.36), ("Enterprising", 0.36), ("Physical-Skill", 0.36), ("Hospitality-Svc", 0.32), ("Teaching-Ed", 0.32), ("Data-Analytics", 0.32)],
-    "Aeronautical-Eng": [("Mechanical-Design", 0.8), ("Electronics-Dev", 0.8), ("Software-Dev", 0.8), ("Data-Analytics", 0.8), ("Electrical-Power", 0.8), ("Realistic", 0.36), ("Technical-Skill", 0.36), ("Investigative", 0.36), ("Analytical-Skill", 0.36), ("Hardware-Systems", 0.24), ("Industrial-Ops", 0.2), ("Lab-Research", 0.2), ("Civil-Build", 0.16)],
-    "Agri-Nature": [("Physical-Skill", 0.8), ("Field-Research", 0.8), ("Lab-Research", 0.8), ("Environmental-Sci", 0.8), ("Maritime-Sea", 0.8), ("Technical-Skill", 0.8), ("Mechanical-Design", 0.8), ("Startup-Venture", 0.8), ("Hardware-Systems", 0.8), ("Marketing-Sales", 0.8), ("Nutrition-Diet", 0.8), ("Environmental-Eng", 0.8), ("Teaching-Ed", 0.8), ("Realistic", 0.45), ("Investigative", 0.36), ("Analytical-Skill", 0.36), ("Enterprising", 0.36), ("People-Skill", 0.36), ("Social", 0.36), ("Food-Science", 0.28), ("Law-Enforce", 0.24)],
-    "Analytical-Skill": [("Teaching-Ed", 0.8), ("Data-Analytics", 0.8), ("Industrial-Ops", 0.8), ("Lab-Research", 0.8), ("Finance-Acct", 0.8), ("Software-Dev", 0.8), ("Visual-Design", 0.8), ("Investigative", 0.45), ("Social", 0.36), ("People-Skill", 0.36), ("Technical-Skill", 0.36), ("Conventional", 0.36), ("Artistic", 0.36), ("Creative-Skill", 0.36), ("Medical-Lab", 0.3)],
-    "Animation-3D": [("Digital-Media", 0.8), ("Creative-Skill", 0.8), ("Game-Dev", 0.8), ("Visual-Design", 0.8), ("Tourism-Travel", 0.8), ("Film-Broadcast", 0.8), ("Software-Dev", 0.8), ("Spatial-Design", 0.8), ("Startup-Venture", 0.8), ("Hardware-Systems", 0.8), ("Artistic", 0.4), ("Technical-Skill", 0.36), ("Enterprising", 0.36)],
-    "Civil-Build": [("Spatial-Design", 0.8), ("Mechanical-Design", 0.8), ("Industrial-Ops", 0.8), ("Field-Research", 0.8), ("Analytical-Skill", 0.8), ("Data-Analytics", 0.8), ("Community-Serve", 0.8), ("Environmental-Eng", 0.8), ("Environmental-Sci", 0.8), ("Physical-Skill", 0.8), ("Software-Dev", 0.8), ("Maritime-Sea", 0.8), ("Electrical-Power", 0.8), ("Realistic", 0.45), ("Technical-Skill", 0.4), ("Investigative", 0.36), ("Social", 0.36), ("People-Skill", 0.32), ("Artistic", 0.28), ("Creative-Skill", 0.28), ("Agri-Nature", 0.28), ("Hardware-Systems", 0.24)],
-    "Cloud-Systems": [("Hardware-Systems", 0.8), ("Software-Dev", 0.8), ("Data-Analytics", 0.8), ("Web-Dev", 0.8), ("Cyber-Defense", 0.8), ("Admin-Skill", 0.8), ("Community-Serve", 0.8), ("Teaching-Ed", 0.8), ("Game-Dev", 0.8), ("AI-ML", 0.8), ("Digital-Media", 0.8), ("Startup-Venture", 0.8), ("Finance-Acct", 0.8), ("Technical-Skill", 0.45), ("Investigative", 0.36), ("Analytical-Skill", 0.36), ("Conventional", 0.36), ("Social", 0.36), ("People-Skill", 0.36), ("Enterprising", 0.36), ("Realistic", 0.32), ("Artistic", 0.32), ("Creative-Skill", 0.32)],
-    "Community-Serve": [("People-Skill", 0.8), ("Teaching-Ed", 0.8), ("Admin-Skill", 0.8), ("Social-Work", 0.8), ("Physical-Skill", 0.8), ("Analytical-Skill", 0.8), ("Legal-Practice", 0.8), ("Public-Health", 0.8), ("Field-Research", 0.8), ("Agri-Nature", 0.8), ("Social", 0.45), ("Conventional", 0.36), ("Realistic", 0.36), ("Investigative", 0.36), ("Patient-Care", 0.32), ("Data-Analytics", 0.32), ("Enterprising", 0.28), ("Health-Admin", 0.28), ("Counseling", 0.24), ("Law-Enforce", 0.15)],
-    "Counseling": [("People-Skill", 0.8), ("Teaching-Ed", 0.8), ("Patient-Care", 0.8), ("Analytical-Skill", 0.8), ("Rehab-Therapy", 0.8), ("Social-Work", 0.8), ("Community-Serve", 0.8), ("Web-Dev", 0.8), ("Data-Analytics", 0.8), ("Public-Health", 0.8), ("Lab-Research", 0.8), ("Admin-Skill", 0.8), ("Social", 0.45), ("Investigative", 0.36), ("Technical-Skill", 0.36), ("Conventional", 0.36), ("Hospitality-Svc", 0.32), ("Physical-Skill", 0.32)],
-    "Creative-Skill": [("Visual-Design", 0.8), ("Film-Broadcast", 0.8), ("Game-Dev", 0.8), ("Teaching-Ed", 0.8), ("Startup-Venture", 0.8), ("Community-Serve", 0.8), ("People-Skill", 0.8), ("Analytical-Skill", 0.8), ("Artistic", 0.45), ("Digital-Media", 0.4), ("Social", 0.36), ("Enterprising", 0.36), ("Investigative", 0.36), ("Spatial-Design", 0.35)],
-    "Culinary-Arts": [("Creative-Skill", 0.8), ("Hospitality-Svc", 0.8), ("Digital-Media", 0.8), ("Startup-Venture", 0.8), ("Tourism-Travel", 0.8), ("Film-Broadcast", 0.8), ("Food-Science", 0.8), ("Nutrition-Diet", 0.8), ("Teaching-Ed", 0.8), ("Artistic", 0.36), ("Enterprising", 0.36), ("People-Skill", 0.36), ("Social", 0.36), ("Visual-Design", 0.32), ("Investigative", 0.32)],
-    "Cyber-Defense": [("Software-Dev", 0.8), ("Law-Enforce", 0.8), ("Data-Analytics", 0.8), ("Hardware-Systems", 0.8), ("Web-Dev", 0.8), ("Cloud-Systems", 0.8), ("Forensic-Sci", 0.8), ("Analytical-Skill", 0.8), ("Teaching-Ed", 0.8), ("Legal-Practice", 0.8), ("Startup-Venture", 0.8), ("Digital-Media", 0.8), ("Admin-Skill", 0.8), ("Technical-Skill", 0.4), ("Investigative", 0.36), ("Social", 0.36), ("People-Skill", 0.36), ("Enterprising", 0.36), ("Conventional", 0.36), ("Realistic", 0.32), ("Artistic", 0.32), ("Creative-Skill", 0.32), ("Physical-Skill", 0.28), ("Lab-Research", 0.28), ("Mobile-Dev", 0.24)],
-    "Data-Analytics": [("Analytical-Skill", 0.8), ("Software-Dev", 0.8), ("Finance-Acct", 0.8), ("AI-ML", 0.8), ("Web-Dev", 0.8), ("Public-Health", 0.8), ("Field-Research", 0.8), ("HR-Management", 0.8), ("Environmental-Sci", 0.8), ("Mechanical-Design", 0.8), ("Marketing-Sales", 0.8), ("Health-Admin", 0.8), ("Admin-Skill", 0.8), ("Industrial-Ops", 0.8), ("Agri-Nature", 0.8), ("Visual-Design", 0.8), ("Game-Dev", 0.8), ("Digital-Media", 0.8), ("Teaching-Ed", 0.8), ("Civil-Build", 0.8), ("Sports-Ed", 0.8), ("Cloud-Systems", 0.8), ("Hardware-Systems", 0.8), ("Investigative", 0.45), ("Conventional", 0.36), ("Technical-Skill", 0.36), ("Social", 0.36), ("People-Skill", 0.36), ("Realistic", 0.36), ("Enterprising", 0.36), ("Artistic", 0.36), ("Creative-Skill", 0.36), ("Physical-Skill", 0.36), ("Lab-Research", 0.28)],
-    "Digital-Media": [("Creative-Skill", 0.8), ("Visual-Design", 0.8), ("Animation-3D", 0.8), ("Game-Dev", 0.8), ("Marketing-Sales", 0.8), ("People-Skill", 0.8), ("Film-Broadcast", 0.8), ("Performing-Arts", 0.8), ("Hardware-Systems", 0.8), ("Culinary-Arts", 0.8), ("Teaching-Ed", 0.8), ("Tourism-Travel", 0.8), ("Sports-Ed", 0.8), ("Startup-Venture", 0.8), ("Artistic", 0.4), ("Technical-Skill", 0.36), ("Enterprising", 0.36), ("Social", 0.36), ("Physical-Skill", 0.36), ("Software-Dev", 0.32), ("Realistic", 0.32), ("Hospitality-Svc", 0.32), ("Spatial-Design", 0.28)],
-    "Electrical-Power": [("Technical-Skill", 0.8), ("Hardware-Systems", 0.8), ("Mechanical-Design", 0.8), ("Industrial-Ops", 0.8), ("Civil-Build", 0.8), ("Maritime-Sea", 0.8), ("Law-Enforce", 0.8), ("Environmental-Eng", 0.8), ("Electronics-Dev", 0.8), ("Data-Analytics", 0.8), ("Realistic", 0.4), ("Analytical-Skill", 0.36), ("Investigative", 0.36), ("Software-Dev", 0.32), ("Physical-Skill", 0.32), ("Environmental-Sci", 0.28)],
-    "Electronics-Dev": [("Hardware-Systems", 0.8), ("Electrical-Power", 0.8), ("Aeronautical-Eng", 0.8), ("Software-Dev", 0.8), ("Technical-Skill", 0.36), ("Realistic", 0.32), ("Investigative", 0.32), ("Data-Analytics", 0.24), ("Mechanical-Design", 0.2), ("Cyber-Defense", 0.2)],
-    "Environmental-Eng": [("Environmental-Sci", 0.8), ("Industrial-Ops", 0.8), ("Lab-Research", 0.8), ("Electrical-Power", 0.8), ("Civil-Build", 0.8), ("Mechanical-Design", 0.8), ("Hardware-Systems", 0.8), ("Food-Science", 0.8), ("Agri-Nature", 0.8), ("Realistic", 0.4), ("Investigative", 0.36), ("Technical-Skill", 0.36), ("Analytical-Skill", 0.36), ("Field-Research", 0.32), ("Physical-Skill", 0.28)],
-    "Environmental-Sci": [("Field-Research", 0.8), ("Environmental-Eng", 0.8), ("Lab-Research", 0.8), ("Agri-Nature", 0.8), ("Hospitality-Svc", 0.8), ("Community-Serve", 0.8), ("Maritime-Sea", 0.8), ("Data-Analytics", 0.8), ("Electrical-Power", 0.8), ("Legal-Practice", 0.8), ("Investigative", 0.45), ("People-Skill", 0.36), ("Realistic", 0.36), ("Technical-Skill", 0.36), ("Analytical-Skill", 0.36), ("Social", 0.36), ("Tourism-Travel", 0.32), ("Physical-Skill", 0.32), ("Enterprising", 0.28)],
-    "Field-Research": [("Agri-Nature", 0.8), ("Physical-Skill", 0.8), ("Lab-Research", 0.8), ("Environmental-Sci", 0.8), ("Hardware-Systems", 0.8), ("Data-Analytics", 0.8), ("Community-Serve", 0.8), ("Civil-Build", 0.8), ("Maritime-Sea", 0.8), ("Investigative", 0.4), ("Analytical-Skill", 0.36), ("Realistic", 0.36), ("Technical-Skill", 0.36), ("Social", 0.36), ("People-Skill", 0.32)],
-    "Film-Broadcast": [("Digital-Media", 0.8), ("Creative-Skill", 0.8), ("Visual-Design", 0.8), ("Analytical-Skill", 0.8), ("Community-Serve", 0.8), ("Environmental-Sci", 0.8), ("Animation-3D", 0.8), ("Tourism-Travel", 0.8), ("People-Skill", 0.8), ("Performing-Arts", 0.8), ("Admin-Skill", 0.8), ("Artistic", 0.4), ("Investigative", 0.36), ("Social", 0.36), ("Conventional", 0.36), ("Game-Dev", 0.28), ("Spatial-Design", 0.28), ("Technical-Skill", 0.2)],
-    "Finance-Acct": [("Analytical-Skill", 0.8), ("Admin-Skill", 0.8), ("Startup-Venture", 0.8), ("Marketing-Sales", 0.8), ("Data-Analytics", 0.8), ("Hospitality-Svc", 0.8), ("Industrial-Ops", 0.8), ("Digital-Media", 0.8), ("Conventional", 0.45), ("Investigative", 0.36), ("Enterprising", 0.36), ("People-Skill", 0.36), ("Artistic", 0.32), ("Creative-Skill", 0.32), ("Tourism-Travel", 0.32)],
-    "Food-Science": [("Lab-Research", 0.8), ("Analytical-Skill", 0.8), ("Nutrition-Diet", 0.8), ("Medical-Lab", 0.8), ("Culinary-Arts", 0.8), ("Legal-Practice", 0.8), ("Industrial-Ops", 0.8), ("Public-Health", 0.8), ("Health-Admin", 0.8), ("Agri-Nature", 0.8), ("Field-Research", 0.8), ("Environmental-Eng", 0.8), ("Creative-Skill", 0.8), ("Admin-Skill", 0.8), ("Startup-Venture", 0.8), ("Finance-Acct", 0.8), ("Investigative", 0.4), ("Conventional", 0.36), ("Realistic", 0.36), ("Artistic", 0.36), ("Enterprising", 0.36), ("Social", 0.32), ("Data-Analytics", 0.32)],
-    "Forensic-Sci": [("Lab-Research", 0.8), ("Analytical-Skill", 0.8), ("Law-Enforce", 0.8), ("Medical-Lab", 0.8), ("Data-Analytics", 0.8), ("Cyber-Defense", 0.8), ("Legal-Practice", 0.8), ("Physical-Skill", 0.8), ("Film-Broadcast", 0.8), ("Pharmacy", 0.8), ("Visual-Design", 0.8), ("Finance-Acct", 0.8), ("Counseling", 0.8), ("People-Skill", 0.8), ("Environmental-Sci", 0.8), ("Admin-Skill", 0.8), ("Patient-Care", 0.8), ("Technical-Skill", 0.8), ("Digital-Media", 0.8), ("Investigative", 0.45), ("Artistic", 0.36), ("Creative-Skill", 0.36), ("Conventional", 0.36), ("Social", 0.36), ("Realistic", 0.28)],
-    "Game-Dev": [("Hardware-Systems", 0.8), ("Software-Dev", 0.8), ("Creative-Skill", 0.8), ("Animation-3D", 0.8), ("Digital-Media", 0.8), ("Teaching-Ed", 0.8), ("People-Skill", 0.8), ("Finance-Acct", 0.8), ("AI-ML", 0.8), ("Analytical-Skill", 0.8), ("Film-Broadcast", 0.8), ("Cloud-Systems", 0.8), ("Mobile-Dev", 0.8), ("Visual-Design", 0.8), ("Data-Analytics", 0.8), ("Performing-Arts", 0.8), ("Marketing-Sales", 0.8), ("Startup-Venture", 0.8), ("Cyber-Defense", 0.8), ("Spatial-Design", 0.8), ("Technical-Skill", 0.4), ("Artistic", 0.36), ("Social", 0.36), ("Investigative", 0.36), ("Conventional", 0.36), ("Enterprising", 0.36)],
-    "HR-Management": [("People-Skill", 0.8), ("Admin-Skill", 0.8), ("Teaching-Ed", 0.8), ("Counseling", 0.8), ("Creative-Skill", 0.8), ("Community-Serve", 0.8), ("Social-Work", 0.8), ("Hospitality-Svc", 0.8), ("Finance-Acct", 0.8), ("Software-Dev", 0.8), ("Legal-Practice", 0.8), ("Data-Analytics", 0.8), ("Marketing-Sales", 0.8), ("Startup-Venture", 0.8), ("Social", 0.36), ("Enterprising", 0.36), ("Artistic", 0.36), ("Conventional", 0.36), ("Technical-Skill", 0.36), ("Investigative", 0.36), ("Analytical-Skill", 0.36)],
-    "Hardware-Systems": [("Electrical-Power", 0.8), ("Mechanical-Design", 0.8), ("Software-Dev", 0.8), ("Cloud-Systems", 0.8), ("Agri-Nature", 0.8), ("Law-Enforce", 0.8), ("Civil-Build", 0.8), ("Environmental-Eng", 0.8), ("Public-Health", 0.8), ("Patient-Care", 0.8), ("Data-Analytics", 0.8), ("Environmental-Sci", 0.8), ("Electronics-Dev", 0.8), ("Technical-Skill", 0.45), ("Realistic", 0.4), ("Investigative", 0.36), ("People-Skill", 0.36), ("Analytical-Skill", 0.36), ("Social", 0.32), ("Field-Research", 0.32), ("Physical-Skill", 0.28)],
-    "Health-Admin": [("Admin-Skill", 0.8), ("Finance-Acct", 0.8), ("Software-Dev", 0.8), ("Teaching-Ed", 0.8), ("Analytical-Skill", 0.8), ("Public-Health", 0.8), ("Cyber-Defense", 0.8), ("Data-Analytics", 0.8), ("Hardware-Systems", 0.8), ("Lab-Research", 0.8), ("Community-Serve", 0.8), ("Conventional", 0.4), ("Technical-Skill", 0.36), ("Investigative", 0.36), ("Social", 0.36), ("People-Skill", 0.36), ("Realistic", 0.32), ("Hospitality-Svc", 0.16), ("Startup-Venture", 0.16), ("Patient-Care", 0.15)],
-    "Hospitality-Svc": [("People-Skill", 0.8), ("Tourism-Travel", 0.8), ("Culinary-Arts", 0.8), ("Marketing-Sales", 0.8), ("Admin-Skill", 0.8), ("HR-Management", 0.8), ("Enterprising", 0.36), ("Social", 0.36), ("Conventional", 0.36), ("Teaching-Ed", 0.32), ("Creative-Skill", 0.28)],
-    "Industrial-Ops": [("Analytical-Skill", 0.8), ("Mechanical-Design", 0.8), ("Admin-Skill", 0.8), ("Data-Analytics", 0.8), ("Food-Science", 0.8), ("Lab-Research", 0.8), ("Maritime-Sea", 0.8), ("Spatial-Design", 0.8), ("Hardware-Systems", 0.8), ("Teaching-Ed", 0.8), ("Realistic", 0.36), ("Technical-Skill", 0.36), ("Conventional", 0.36), ("Investigative", 0.36), ("Social", 0.36), ("People-Skill", 0.36), ("Physical-Skill", 0.32), ("Enterprising", 0.3), ("Finance-Acct", 0.28), ("Artistic", 0.28), ("Creative-Skill", 0.28)],
-    "Lab-Research": [("Analytical-Skill", 0.8), ("Medical-Lab", 0.8), ("Field-Research", 0.8), ("Environmental-Sci", 0.8), ("Teaching-Ed", 0.8), ("AI-ML", 0.8), ("Legal-Practice", 0.8), ("Film-Broadcast", 0.8), ("Forensic-Sci", 0.8), ("Digital-Media", 0.8), ("Investigative", 0.45), ("Social", 0.36), ("People-Skill", 0.36), ("Data-Analytics", 0.32), ("Artistic", 0.32), ("Creative-Skill", 0.32), ("Enterprising", 0.28), ("Law-Enforce", 0.28)],
-    "Law-Enforce": [("Physical-Skill", 0.8), ("Community-Serve", 0.8), ("Cyber-Defense", 0.8), ("Analytical-Skill", 0.8), ("Data-Analytics", 0.8), ("Forensic-Sci", 0.8), ("People-Skill", 0.8), ("Counseling", 0.8), ("Admin-Skill", 0.8), ("Investigative", 0.36), ("Social", 0.36), ("Conventional", 0.36), ("Realistic", 0.35), ("Patient-Care", 0.32), ("Technical-Skill", 0.32), ("Health-Admin", 0.28), ("Rehab-Therapy", 0.24)],
-    "Legal-Practice": [("Analytical-Skill", 0.8), ("People-Skill", 0.8), ("Community-Serve", 0.8), ("Admin-Skill", 0.8), ("Environmental-Sci", 0.8), ("Social-Work", 0.8), ("Law-Enforce", 0.8), ("Finance-Acct", 0.8), ("HR-Management", 0.8), ("Cyber-Defense", 0.8), ("Creative-Skill", 0.8), ("Investigative", 0.36), ("Social", 0.36), ("Conventional", 0.36), ("Artistic", 0.36), ("Enterprising", 0.35), ("Data-Analytics", 0.32), ("Field-Research", 0.32), ("Patient-Care", 0.32), ("Technical-Skill", 0.32), ("Realistic", 0.28)],
-    "Maritime-Sea": [("Physical-Skill", 0.8), ("Technical-Skill", 0.8), ("Mechanical-Design", 0.8), ("Agri-Nature", 0.8), ("Industrial-Ops", 0.8), ("Admin-Skill", 0.8), ("Tourism-Travel", 0.8), ("People-Skill", 0.8), ("Hospitality-Svc", 0.8), ("Field-Research", 0.8), ("Community-Serve", 0.8), ("Environmental-Sci", 0.8), ("Electrical-Power", 0.8), ("Hardware-Systems", 0.8), ("Analytical-Skill", 0.8), ("Legal-Practice", 0.8), ("Civil-Build", 0.8), ("Data-Analytics", 0.8), ("Marketing-Sales", 0.8), ("Realistic", 0.45), ("Conventional", 0.36), ("Social", 0.36), ("Investigative", 0.36), ("Enterprising", 0.36), ("Lab-Research", 0.28), ("Law-Enforce", 0.24), ("Spatial-Design", 0.2)],
-    "Marketing-Sales": [("People-Skill", 0.8), ("Startup-Venture", 0.8), ("Creative-Skill", 0.8), ("Admin-Skill", 0.8), ("Digital-Media", 0.8), ("Community-Serve", 0.8), ("Film-Broadcast", 0.8), ("Agri-Nature", 0.8), ("Pharmacy", 0.8), ("Analytical-Skill", 0.8), ("Enterprising", 0.45), ("Social", 0.36), ("Artistic", 0.36), ("Conventional", 0.36), ("Realistic", 0.36), ("Investigative", 0.36), ("Hospitality-Svc", 0.32), ("Teaching-Ed", 0.32), ("Visual-Design", 0.32), ("Data-Analytics", 0.32), ("Finance-Acct", 0.16)],
-    "Mechanical-Design": [("Technical-Skill", 0.8), ("Industrial-Ops", 0.8), ("Civil-Build", 0.8), ("Electrical-Power", 0.8), ("Hardware-Systems", 0.8), ("Physical-Skill", 0.8), ("Agri-Nature", 0.8), ("Software-Dev", 0.8), ("Lab-Research", 0.8), ("Environmental-Eng", 0.8), ("Rehab-Therapy", 0.8), ("Maritime-Sea", 0.8), ("Aeronautical-Eng", 0.8), ("Electronics-Dev", 0.8), ("Realistic", 0.45), ("Analytical-Skill", 0.36), ("Investigative", 0.36), ("Environmental-Sci", 0.28), ("Social", 0.28), ("Enterprising", 0.24)],
-    "Medical-Lab": [("Analytical-Skill", 0.8), ("Lab-Research", 0.8), ("Technical-Skill", 0.8), ("Patient-Care", 0.8), ("Food-Science", 0.8), ("Hardware-Systems", 0.8), ("Environmental-Sci", 0.8), ("Pharmacy", 0.8), ("Investigative", 0.4), ("People-Skill", 0.36), ("Software-Dev", 0.32), ("Data-Analytics", 0.32), ("Field-Research", 0.32), ("Nutrition-Diet", 0.28), ("Finance-Acct", 0.28)],
-    "Mobile-Dev": [("AI-ML", 0.8), ("Software-Dev", 0.8), ("Web-Dev", 0.8), ("Game-Dev", 0.8), ("Startup-Venture", 0.8), ("Patient-Care", 0.8), ("Finance-Acct", 0.8), ("Agri-Nature", 0.8), ("Visual-Design", 0.8), ("Creative-Skill", 0.8), ("Sports-Ed", 0.8), ("Environmental-Sci", 0.8), ("Law-Enforce", 0.8), ("Tourism-Travel", 0.8), ("Public-Health", 0.8), ("Marketing-Sales", 0.8), ("Data-Analytics", 0.8), ("Cyber-Defense", 0.8), ("Electrical-Power", 0.8), ("Nutrition-Diet", 0.8), ("Teaching-Ed", 0.8), ("Community-Serve", 0.8), ("Technical-Skill", 0.45), ("Investigative", 0.36), ("Analytical-Skill", 0.36), ("Enterprising", 0.36), ("People-Skill", 0.36), ("Conventional", 0.36), ("Realistic", 0.36), ("Artistic", 0.36), ("Physical-Skill", 0.36), ("Social", 0.36), ("Field-Research", 0.32)],
-    "Nutrition-Diet": [("Patient-Care", 0.8), ("Food-Science", 0.8), ("Public-Health", 0.8), ("Community-Serve", 0.8), ("Culinary-Arts", 0.8), ("Lab-Research", 0.8), ("Social-Work", 0.8), ("Teaching-Ed", 0.8), ("Rehab-Therapy", 0.8), ("Sports-Ed", 0.8), ("People-Skill", 0.36), ("Social", 0.36), ("Analytical-Skill", 0.36), ("Investigative", 0.36), ("Physical-Skill", 0.36), ("Creative-Skill", 0.28)],
-    "Patient-Care": [("People-Skill", 0.8), ("Community-Serve", 0.8), ("Medical-Lab", 0.8), ("Teaching-Ed", 0.8), ("Physical-Skill", 0.8), ("Public-Health", 0.8), ("Counseling", 0.8), ("Lab-Research", 0.8), ("Social-Work", 0.8), ("Pharmacy", 0.8), ("Maritime-Sea", 0.8), ("Health-Admin", 0.8), ("Social", 0.4), ("Realistic", 0.36), ("Analytical-Skill", 0.36), ("Investigative", 0.36), ("Admin-Skill", 0.36), ("Hospitality-Svc", 0.32), ("Conventional", 0.32), ("Rehab-Therapy", 0.3)],
-    "People-Skill": [("Teaching-Ed", 0.8), ("Hospitality-Svc", 0.8), ("Analytical-Skill", 0.8), ("Admin-Skill", 0.8), ("Performing-Arts", 0.8), ("Counseling", 0.8), ("Physical-Skill", 0.8), ("HR-Management", 0.8), ("Legal-Practice", 0.8), ("Sports-Ed", 0.8), ("Marketing-Sales", 0.8), ("Community-Serve", 0.8), ("Social", 0.45), ("Patient-Care", 0.4), ("Tourism-Travel", 0.32), ("Enterprising", 0.3)],
-    "Performing-Arts": [("People-Skill", 0.8), ("Creative-Skill", 0.8), ("Digital-Media", 0.8), ("Film-Broadcast", 0.8), ("Admin-Skill", 0.8), ("Game-Dev", 0.8), ("Physical-Skill", 0.8), ("Animation-3D", 0.8), ("Sports-Ed", 0.8), ("Artistic", 0.45), ("Social", 0.36), ("Conventional", 0.36), ("Teaching-Ed", 0.32), ("Visual-Design", 0.32), ("Technical-Skill", 0.32), ("Software-Dev", 0.32), ("Realistic", 0.32)],
-    "Pharmacy": [("Medical-Lab", 0.8), ("Analytical-Skill", 0.8), ("Lab-Research", 0.8), ("Patient-Care", 0.8), ("Public-Health", 0.8), ("Admin-Skill", 0.8), ("People-Skill", 0.8), ("Legal-Practice", 0.8), ("Field-Research", 0.8), ("Community-Serve", 0.8), ("Teaching-Ed", 0.8), ("Health-Admin", 0.8), ("Finance-Acct", 0.8), ("Marketing-Sales", 0.8), ("Startup-Venture", 0.8), ("Industrial-Ops", 0.8), ("Investigative", 0.4), ("Social", 0.36), ("Conventional", 0.36), ("Enterprising", 0.36), ("Data-Analytics", 0.32)],
-    "Physical-Skill": [("Law-Enforce", 0.8), ("Sports-Ed", 0.8), ("Tourism-Travel", 0.8), ("Community-Serve", 0.8), ("Mechanical-Design", 0.8), ("Teaching-Ed", 0.8), ("Realistic", 0.4), ("People-Skill", 0.36), ("Social", 0.36), ("Maritime-Sea", 0.35), ("Agri-Nature", 0.35), ("Technical-Skill", 0.32), ("Rehab-Therapy", 0.3)],
-    "Public-Health": [("Community-Serve", 0.8), ("Patient-Care", 0.8), ("Environmental-Sci", 0.8), ("Data-Analytics", 0.8), ("Civil-Build", 0.8), ("Physical-Skill", 0.8), ("Marketing-Sales", 0.8), ("Teaching-Ed", 0.8), ("Visual-Design", 0.8), ("Social", 0.4), ("Analytical-Skill", 0.36), ("People-Skill", 0.36), ("Investigative", 0.36), ("Realistic", 0.36), ("Enterprising", 0.36), ("Artistic", 0.36), ("Creative-Skill", 0.36)],
-    "Rehab-Therapy": [("Physical-Skill", 0.8), ("People-Skill", 0.8), ("Patient-Care", 0.8), ("Teaching-Ed", 0.8), ("Counseling", 0.8), ("Sports-Ed", 0.8), ("Hospitality-Svc", 0.8), ("Social", 0.36), ("Realistic", 0.32), ("Tourism-Travel", 0.32)],
-    "Social-Work": [("People-Skill", 0.8), ("Community-Serve", 0.8), ("Teaching-Ed", 0.8), ("Patient-Care", 0.8), ("Counseling", 0.8), ("Admin-Skill", 0.8), ("Startup-Venture", 0.8), ("HR-Management", 0.8), ("Nutrition-Diet", 0.8), ("Legal-Practice", 0.8), ("Digital-Media", 0.8), ("Rehab-Therapy", 0.8), ("Law-Enforce", 0.8), ("Social", 0.45), ("Conventional", 0.36), ("Enterprising", 0.36), ("Artistic", 0.32), ("Physical-Skill", 0.32)],
-    "Software-Dev": [("Technical-Skill", 0.8), ("Data-Analytics", 0.8), ("Cyber-Defense", 0.8), ("Hardware-Systems", 0.8), ("Web-Dev", 0.8), ("Analytical-Skill", 0.8), ("Lab-Research", 0.8), ("Public-Health", 0.8), ("Environmental-Eng", 0.8), ("Finance-Acct", 0.8), ("Startup-Venture", 0.8), ("Teaching-Ed", 0.8), ("Film-Broadcast", 0.8), ("Digital-Media", 0.8), ("AI-ML", 0.8), ("Cloud-Systems", 0.8), ("Mechanical-Design", 0.8), ("Game-Dev", 0.8), ("Admin-Skill", 0.8), ("Hospitality-Svc", 0.8), ("Mobile-Dev", 0.8), ("Investigative", 0.4), ("Social", 0.36), ("Realistic", 0.36), ("Conventional", 0.36), ("Enterprising", 0.36), ("People-Skill", 0.36), ("Artistic", 0.32), ("Creative-Skill", 0.32)],
-    "Spatial-Design": [("Creative-Skill", 0.8), ("Civil-Build", 0.8), ("Visual-Design", 0.8), ("Marketing-Sales", 0.8), ("Environmental-Sci", 0.8), ("Environmental-Eng", 0.8), ("Hardware-Systems", 0.8), ("Community-Serve", 0.8), ("Animation-3D", 0.8), ("Artistic", 0.36), ("Technical-Skill", 0.36), ("Realistic", 0.36), ("Enterprising", 0.36), ("Investigative", 0.36), ("Social", 0.36), ("Digital-Media", 0.32), ("People-Skill", 0.32), ("Field-Research", 0.32), ("Game-Dev", 0.28)],
-    "Sports-Ed": [("Physical-Skill", 0.8), ("Teaching-Ed", 0.8), ("People-Skill", 0.8), ("Rehab-Therapy", 0.8), ("Admin-Skill", 0.8), ("Counseling", 0.8), ("Startup-Venture", 0.8), ("Community-Serve", 0.8), ("Film-Broadcast", 0.8), ("Public-Health", 0.8), ("Marketing-Sales", 0.8), ("Patient-Care", 0.8), ("Nutrition-Diet", 0.8), ("Social", 0.36), ("Conventional", 0.36), ("Enterprising", 0.36), ("Realistic", 0.32), ("Artistic", 0.32), ("Maritime-Sea", 0.28), ("Analytical-Skill", 0.28), ("Food-Science", 0.28)],
-    "Startup-Venture": [("People-Skill", 0.8), ("Marketing-Sales", 0.8), ("Finance-Acct", 0.8), ("Community-Serve", 0.8), ("Admin-Skill", 0.8), ("Web-Dev", 0.8), ("Software-Dev", 0.8), ("Teaching-Ed", 0.8), ("Film-Broadcast", 0.8), ("Enterprising", 0.45), ("Conventional", 0.36), ("Social", 0.36), ("Technical-Skill", 0.36), ("Creative-Skill", 0.32), ("Analytical-Skill", 0.32), ("Artistic", 0.32), ("Digital-Media", 0.32), ("Investigative", 0.32), ("Hospitality-Svc", 0.32)],
-    "Teaching-Ed": [("People-Skill", 0.8), ("Community-Serve", 0.8), ("Analytical-Skill", 0.8), ("Lab-Research", 0.8), ("Technical-Skill", 0.8), ("Counseling", 0.8), ("Admin-Skill", 0.8), ("Creative-Skill", 0.8), ("Cyber-Defense", 0.8), ("Industrial-Ops", 0.8), ("Software-Dev", 0.8), ("Public-Health", 0.8), ("Social-Work", 0.8), ("Web-Dev", 0.8), ("Social", 0.45), ("Investigative", 0.36), ("Conventional", 0.36), ("Artistic", 0.36), ("Patient-Care", 0.32), ("Hospitality-Svc", 0.32), ("Visual-Design", 0.32), ("Realistic", 0.28), ("Health-Admin", 0.28), ("Rehab-Therapy", 0.2)],
-    "Technical-Skill": [("Software-Dev", 0.8), ("Hardware-Systems", 0.8), ("Mechanical-Design", 0.8), ("Analytical-Skill", 0.8), ("Admin-Skill", 0.8), ("Electrical-Power", 0.8), ("Industrial-Ops", 0.8), ("Civil-Build", 0.8), ("Cloud-Systems", 0.8), ("Environmental-Eng", 0.8), ("Realistic", 0.36), ("Investigative", 0.36), ("Conventional", 0.36)],
-    "Tourism-Travel": [("Marketing-Sales", 0.8), ("People-Skill", 0.8), ("Hospitality-Svc", 0.8), ("Startup-Venture", 0.8), ("Teaching-Ed", 0.8), ("Culinary-Arts", 0.8), ("Film-Broadcast", 0.8), ("Field-Research", 0.8), ("Environmental-Sci", 0.8), ("Community-Serve", 0.8), ("Visual-Design", 0.8), ("Physical-Skill", 0.8), ("Digital-Media", 0.8), ("Admin-Skill", 0.8), ("Web-Dev", 0.8), ("Finance-Acct", 0.8), ("Law-Enforce", 0.8), ("Enterprising", 0.36), ("Social", 0.36), ("Artistic", 0.36), ("Investigative", 0.36), ("Creative-Skill", 0.36), ("Conventional", 0.36), ("Technical-Skill", 0.36), ("Realistic", 0.32)],
-    "Visual-Design": [("Creative-Skill", 0.8), ("Digital-Media", 0.8), ("Spatial-Design", 0.8), ("Animation-3D", 0.8), ("Game-Dev", 0.8), ("Film-Broadcast", 0.8), ("Marketing-Sales", 0.8), ("Law-Enforce", 0.8), ("Startup-Venture", 0.8), ("Performing-Arts", 0.8), ("Web-Dev", 0.8), ("Artistic", 0.45), ("Technical-Skill", 0.36), ("Enterprising", 0.36), ("Software-Dev", 0.36), ("People-Skill", 0.32), ("Realistic", 0.28)],
-    "Web-Dev": [("Software-Dev", 0.8), ("Mobile-Dev", 0.8), ("Digital-Media", 0.8), ("Visual-Design", 0.8), ("Animation-3D", 0.8), ("Marketing-Sales", 0.8), ("Startup-Venture", 0.8), ("Community-Serve", 0.8), ("Environmental-Eng", 0.8), ("Agri-Nature", 0.8), ("Cyber-Defense", 0.8), ("Data-Analytics", 0.8), ("Analytical-Skill", 0.8), ("Finance-Acct", 0.8), ("Cloud-Systems", 0.8), ("Admin-Skill", 0.8), ("Tourism-Travel", 0.8), ("Teaching-Ed", 0.8), ("Hospitality-Svc", 0.8), ("Game-Dev", 0.8), ("Technical-Skill", 0.45), ("Investigative", 0.36), ("Creative-Skill", 0.36), ("Artistic", 0.36), ("Enterprising", 0.36), ("Social", 0.36), ("Realistic", 0.36), ("Conventional", 0.36), ("People-Skill", 0.36)],
+
+def _build_agriculture_resource_subcategory_expansion_7():
+    """Generate 90 sub-category questions for agriculture, forestry, and fisheries-focused pathways."""
+
+    path_traits = {
+        "Academic Interest - Agriculture & Farming": "Agriculture-Farming-Path",
+        "Academic Interest - Forestry & Natural Resources": "Forestry-Path",
+        "Academic Interest - Fisheries & Agriculture": "Fisheries-Agri-Path",
+    }
+
+    def add_path_trait(category, option_specs):
+        path_trait = path_traits.get(category)
+        if not path_trait:
+            return option_specs
+
+        adjusted_specs = []
+        for option_text, trait_tags in option_specs:
+            adjusted_traits = dict(trait_tags)
+            adjusted_traits[path_trait] = 0.2
+            adjusted_specs.append((option_text, adjusted_traits))
+        return adjusted_specs
+
+    def make_question(question_id, category, question_text, option_id_start, option_specs):
+        return {
+            "question_id": question_id,
+            "question_text": question_text,
+            "category": category,
+            "options": [
+                {
+                    "option_id": option_id_start + index,
+                    "option_text": option_text,
+                    "trait_tags": trait_tags,
+                }
+                for index, (option_text, trait_tags) in enumerate(option_specs)
+            ],
+        }
+
+    category_specs = [
+        (
+            "Academic Interest - Agriculture & Farming",
+            [
+                (
+                    [
+                        "What excites you most about studying agriculture and farming?",
+                        "Which side of agriculture and farming feels most meaningful to you?",
+                        "What would you enjoy most about a career in agriculture and farming?",
+                        "How do you see yourself making an impact through agriculture and farming?",
+                        "What makes agriculture and farming worth pursuing for you?",
+                    ],
+                    [
+                        ("Improving crop growth through better soil, season planning, and farm decisions", {"Agri-Nature": 1.0, "Field-Research": 0.25, "Environmental-Sci": 0.1, "Analytical-Skill": 0.1, "Physical-Skill": 0.1}),
+                        ("Using field evidence to decide what crops, methods, or inputs perform best", {"Field-Research": 1.0, "Agri-Nature": 0.25, "Analytical-Skill": 0.1, "Environmental-Sci": 0.1, "Technical-Skill": 0.1}),
+                        ("Protecting land productivity while keeping farms environmentally resilient", {"Environmental-Sci": 1.0, "Agri-Nature": 0.25, "Field-Research": 0.1, "Community-Serve": 0.1, "Analytical-Skill": 0.1}),
+                        ("Applying tools, irrigation, sensors, or farm systems to work more efficiently", {"Technical-Skill": 1.0, "Agri-Nature": 0.25, "Field-Research": 0.1, "Data-Analytics": 0.1, "Mechanical-Design": 0.1}),
+                        ("Turning farm output into sustainable income through planning and market awareness", {"Startup-Venture": 1.0, "Agri-Nature": 0.25, "Marketing-Sales": 0.1, "Admin-Skill": 0.1, "Analytical-Skill": 0.1}),
+                        ("Working in outdoor farm settings where physical effort and steady routines matter", {"Physical-Skill": 1.0, "Agri-Nature": 0.25, "Field-Research": 0.1, "Technical-Skill": 0.1, "Community-Serve": 0.1}),
+                    ],
+                ),
+                (
+                    [
+                        "Which area of agriculture and farming interests you most?",
+                        "If you could specialize in one part of agriculture and farming, which would it be?",
+                        "What branch of agriculture and farming would you build your path around?",
+                        "Which agriculture-and-farming specialization draws you in the most?",
+                        "What kind of farm-focused work would you choose first?",
+                    ],
+                    [
+                        ("Crop production focused on planting strategy, field conditions, and harvest quality", {"Agri-Nature": 1.0, "Field-Research": 0.25, "Environmental-Sci": 0.1, "Analytical-Skill": 0.1, "Physical-Skill": 0.1}),
+                        ("Farm trials focused on comparing seeds, fertilizers, and cultivation methods", {"Field-Research": 1.0, "Agri-Nature": 0.25, "Analytical-Skill": 0.1, "Environmental-Sci": 0.1, "Data-Analytics": 0.1}),
+                        ("Sustainable farming focused on soil health, biodiversity, and long-term resilience", {"Environmental-Sci": 1.0, "Agri-Nature": 0.25, "Field-Research": 0.1, "Community-Serve": 0.1, "Analytical-Skill": 0.1}),
+                        ("Precision farming focused on sensors, weather data, and smart field decisions", {"Technical-Skill": 1.0, "Agri-Nature": 0.25, "Data-Analytics": 0.1, "Field-Research": 0.1, "Mechanical-Design": 0.1}),
+                        ("Agri-enterprise focused on improving profitability, pricing, and operations", {"Startup-Venture": 1.0, "Agri-Nature": 0.25, "Marketing-Sales": 0.1, "Admin-Skill": 0.1, "Analytical-Skill": 0.1}),
+                        ("Hands-on farm operations focused on implementing methods effectively in the field", {"Physical-Skill": 1.0, "Agri-Nature": 0.25, "Technical-Skill": 0.1, "Field-Research": 0.1, "Community-Serve": 0.1}),
+                    ],
+                ),
+                (
+                    [
+                        "What part of agriculture-and-farming work would you enjoy most?",
+                        "Where in agriculture-and-farming work do you see yourself thriving?",
+                        "Which agriculture-and-farming responsibility feels most fulfilling to you?",
+                        "What part of agriculture and farming would you focus on first?",
+                        "Which part of agriculture and farming would matter most to you?",
+                    ],
+                    [
+                        ("Planning field activities so crops, timing, and conditions line up well", {"Agri-Nature": 1.0, "Field-Research": 0.25, "Analytical-Skill": 0.1, "Environmental-Sci": 0.1, "Physical-Skill": 0.1}),
+                        ("Collecting field observations before changing farm practices or inputs", {"Field-Research": 1.0, "Agri-Nature": 0.25, "Analytical-Skill": 0.1, "Data-Analytics": 0.1, "Environmental-Sci": 0.1}),
+                        ("Protecting soil, water, and farm ecosystems while improving output", {"Environmental-Sci": 1.0, "Agri-Nature": 0.25, "Field-Research": 0.1, "Community-Serve": 0.1, "Analytical-Skill": 0.1}),
+                        ("Managing irrigation, equipment, or farm technology to keep systems dependable", {"Technical-Skill": 1.0, "Agri-Nature": 0.25, "Mechanical-Design": 0.1, "Data-Analytics": 0.1, "Field-Research": 0.1}),
+                        ("Shaping farm decisions so production stays sustainable and financially viable", {"Startup-Venture": 1.0, "Agri-Nature": 0.25, "Admin-Skill": 0.1, "Marketing-Sales": 0.1, "Analytical-Skill": 0.1}),
+                        ("Doing practical field work where stamina and direct implementation matter daily", {"Physical-Skill": 1.0, "Agri-Nature": 0.25, "Field-Research": 0.1, "Technical-Skill": 0.1, "Community-Serve": 0.1}),
+                    ],
+                ),
+                (
+                    [
+                        "What kind of agriculture-and-farming career path appeals to you most?",
+                        "Where would you see yourself working in agriculture and farming?",
+                        "Which professional agriculture-and-farming role interests you most?",
+                        "What type of farm-focused career would you build for yourself?",
+                        "Which agriculture-and-farming role would you most want to pursue?",
+                    ],
+                    [
+                        ("Farm production specialist focused on crop performance and field decision-making", {"Agri-Nature": 1.0, "Field-Research": 0.25, "Environmental-Sci": 0.1, "Analytical-Skill": 0.1, "Physical-Skill": 0.1}),
+                        ("Agricultural field researcher focused on trial results and evidence-based improvement", {"Field-Research": 1.0, "Agri-Nature": 0.25, "Analytical-Skill": 0.1, "Data-Analytics": 0.1, "Environmental-Sci": 0.1}),
+                        ("Sustainable farming specialist focused on long-term land and resource stewardship", {"Environmental-Sci": 1.0, "Agri-Nature": 0.25, "Community-Serve": 0.1, "Field-Research": 0.1, "Analytical-Skill": 0.1}),
+                        ("Precision agriculture specialist focused on sensors, systems, and efficient farm control", {"Technical-Skill": 1.0, "Agri-Nature": 0.25, "Data-Analytics": 0.1, "Mechanical-Design": 0.1, "Field-Research": 0.1}),
+                        ("Farm enterprise manager focused on growth, operations, and market direction", {"Startup-Venture": 1.0, "Agri-Nature": 0.25, "Admin-Skill": 0.1, "Marketing-Sales": 0.1, "Analytical-Skill": 0.1}),
+                        ("Farm operations lead focused on executing plans directly in real field conditions", {"Physical-Skill": 1.0, "Agri-Nature": 0.25, "Field-Research": 0.1, "Technical-Skill": 0.1, "Community-Serve": 0.1}),
+                    ],
+                ),
+                (
+                    [
+                        "How does agriculture and farming connect with other fields for you?",
+                        "Which cross-disciplinary side of agriculture and farming interests you most?",
+                        "What broader path would you combine with agriculture and farming?",
+                        "How would you connect agriculture and farming with other disciplines?",
+                        "What role would agriculture and farming play in your larger career vision?",
+                    ],
+                    [
+                        ("Agriculture and production through better crop choices and field planning", {"Agri-Nature": 1.0, "Field-Research": 0.25, "Environmental-Sci": 0.1, "Analytical-Skill": 0.1, "Physical-Skill": 0.1}),
+                        ("Agriculture and research through tested methods before scaling them up", {"Field-Research": 1.0, "Agri-Nature": 0.25, "Data-Analytics": 0.1, "Analytical-Skill": 0.1, "Environmental-Sci": 0.1}),
+                        ("Agriculture and environment through farming that protects resources over time", {"Environmental-Sci": 1.0, "Agri-Nature": 0.25, "Field-Research": 0.1, "Community-Serve": 0.1, "Analytical-Skill": 0.1}),
+                        ("Agriculture and technology through tools that improve field decisions and efficiency", {"Technical-Skill": 1.0, "Agri-Nature": 0.25, "Data-Analytics": 0.1, "Mechanical-Design": 0.1, "Field-Research": 0.1}),
+                        ("Agriculture and business through more sustainable and competitive farm systems", {"Startup-Venture": 1.0, "Agri-Nature": 0.25, "Marketing-Sales": 0.1, "Admin-Skill": 0.1, "Analytical-Skill": 0.1}),
+                        ("Agriculture and practical work through strong implementation in the field", {"Physical-Skill": 1.0, "Agri-Nature": 0.25, "Field-Research": 0.1, "Technical-Skill": 0.1, "Community-Serve": 0.1}),
+                    ],
+                ),
+                (
+                    [
+                        "What agriculture-and-farming scenario resonates with you most?",
+                        "Which farm-focused situation would bring out your strengths best?",
+                        "What kind of agriculture-and-farming challenge motivates you most?",
+                        "How would you respond in this agriculture-and-farming scenario?",
+                        "Which farm-management situation feels most meaningful to you?",
+                    ],
+                    [
+                        ("A field underperforms and you want to improve the next planting cycle systematically", {"Agri-Nature": 1.0, "Field-Research": 0.25, "Analytical-Skill": 0.1, "Environmental-Sci": 0.1, "Physical-Skill": 0.1}),
+                        ("Several cultivation methods are possible and you compare them through trials first", {"Field-Research": 1.0, "Agri-Nature": 0.25, "Data-Analytics": 0.1, "Analytical-Skill": 0.1, "Environmental-Sci": 0.1}),
+                        ("Soil and water stress are rising and you redesign the approach for resilience", {"Environmental-Sci": 1.0, "Agri-Nature": 0.25, "Field-Research": 0.1, "Community-Serve": 0.1, "Analytical-Skill": 0.1}),
+                        ("A farm needs smarter monitoring and you install systems that support better decisions", {"Technical-Skill": 1.0, "Agri-Nature": 0.25, "Data-Analytics": 0.1, "Mechanical-Design": 0.1, "Field-Research": 0.1}),
+                        ("Costs rise and you rethink the farm model so income and operations stay healthy", {"Startup-Venture": 1.0, "Agri-Nature": 0.25, "Admin-Skill": 0.1, "Marketing-Sales": 0.1, "Analytical-Skill": 0.1}),
+                        ("A community farm needs reliable execution and you lead the work on the ground", {"Physical-Skill": 1.0, "Agri-Nature": 0.25, "Field-Research": 0.1, "Community-Serve": 0.1, "Technical-Skill": 0.1}),
+                    ],
+                ),
+            ],
+        ),
+        (
+            "Academic Interest - Forestry & Natural Resources",
+            [
+                (
+                    [
+                        "What excites you most about studying forestry and natural resources?",
+                        "Which side of forestry and natural resources feels most meaningful to you?",
+                        "What would you enjoy most about a career in forestry and natural resources?",
+                        "How do you see yourself making an impact through forestry and natural resources?",
+                        "What makes forestry and natural resources worth pursuing for you?",
+                    ],
+                    [
+                        ("Managing forests so ecosystems stay healthy while resources remain sustainable", {"Agri-Nature": 1.0, "Environmental-Sci": 0.25, "Field-Research": 0.1, "Community-Serve": 0.1, "Physical-Skill": 0.1}),
+                        ("Collecting field evidence on forest health, watersheds, and ecosystem change", {"Field-Research": 1.0, "Environmental-Sci": 0.25, "Agri-Nature": 0.1, "Data-Analytics": 0.1, "Physical-Skill": 0.1}),
+                        ("Protecting biodiversity, soil, and water through conservation decisions", {"Environmental-Sci": 1.0, "Agri-Nature": 0.25, "Community-Serve": 0.1, "Field-Research": 0.1, "Analytical-Skill": 0.1}),
+                        ("Working with communities whose livelihoods depend on forests and resource stewardship", {"Community-Serve": 1.0, "Agri-Nature": 0.25, "People-Skill": 0.1, "Environmental-Sci": 0.1, "Field-Research": 0.1}),
+                        ("Handling outdoor forest operations where endurance and field judgment matter", {"Physical-Skill": 1.0, "Agri-Nature": 0.25, "Field-Research": 0.1, "Environmental-Sci": 0.1, "Community-Serve": 0.1}),
+                        ("Using maps, monitoring systems, or spatial data to guide natural-resource decisions", {"Data-Analytics": 1.0, "Environmental-Sci": 0.25, "Field-Research": 0.1, "Agri-Nature": 0.1, "Technical-Skill": 0.1}),
+                    ],
+                ),
+                (
+                    [
+                        "Which area of forestry and natural resources interests you most?",
+                        "If you could specialize in one part of forestry and natural resources, which would it be?",
+                        "What branch of forestry and natural resources would you build your path around?",
+                        "Which forestry-and-natural-resources specialization draws you in the most?",
+                        "What kind of forest-focused work would you choose first?",
+                    ],
+                    [
+                        ("Forest planning focused on regeneration, harvest balance, and long-term care", {"Agri-Nature": 1.0, "Environmental-Sci": 0.25, "Field-Research": 0.1, "Community-Serve": 0.1, "Physical-Skill": 0.1}),
+                        ("Field ecology focused on surveying habitats, species, and resource conditions", {"Field-Research": 1.0, "Environmental-Sci": 0.25, "Agri-Nature": 0.1, "Data-Analytics": 0.1, "Physical-Skill": 0.1}),
+                        ("Conservation work focused on resilience, protection, and ecosystem recovery", {"Environmental-Sci": 1.0, "Agri-Nature": 0.25, "Community-Serve": 0.1, "Field-Research": 0.1, "Analytical-Skill": 0.1}),
+                        ("Community resource management focused on people, livelihoods, and stewardship", {"Community-Serve": 1.0, "Agri-Nature": 0.25, "People-Skill": 0.1, "Environmental-Sci": 0.1, "Field-Research": 0.1}),
+                        ("Forest operations focused on implementing plans directly across outdoor sites", {"Physical-Skill": 1.0, "Agri-Nature": 0.25, "Field-Research": 0.1, "Environmental-Sci": 0.1, "Community-Serve": 0.1}),
+                        ("Resource mapping focused on using spatial evidence to guide better land decisions", {"Data-Analytics": 1.0, "Environmental-Sci": 0.25, "Field-Research": 0.1, "Agri-Nature": 0.1, "Technical-Skill": 0.1}),
+                    ],
+                ),
+                (
+                    [
+                        "What part of forestry-and-natural-resources work would you enjoy most?",
+                        "Where in forestry-and-natural-resources work do you see yourself thriving?",
+                        "Which forestry-and-natural-resources responsibility feels most fulfilling to you?",
+                        "What part of forestry and natural resources would you focus on first?",
+                        "Which part of forestry and natural resources would matter most to you?",
+                    ],
+                    [
+                        ("Balancing forest use with replanting, protection, and long-range stewardship", {"Agri-Nature": 1.0, "Environmental-Sci": 0.25, "Field-Research": 0.1, "Community-Serve": 0.1, "Physical-Skill": 0.1}),
+                        ("Surveying sites before deciding how resources or habitats should be managed", {"Field-Research": 1.0, "Environmental-Sci": 0.25, "Agri-Nature": 0.1, "Data-Analytics": 0.1, "Physical-Skill": 0.1}),
+                        ("Protecting watersheds, wildlife, and biodiversity through sound conservation choices", {"Environmental-Sci": 1.0, "Agri-Nature": 0.25, "Community-Serve": 0.1, "Field-Research": 0.1, "Analytical-Skill": 0.1}),
+                        ("Working with people so natural-resource plans are practical and locally supported", {"Community-Serve": 1.0, "Agri-Nature": 0.25, "People-Skill": 0.1, "Environmental-Sci": 0.1, "Field-Research": 0.1}),
+                        ("Doing rigorous outdoor work where forest conditions and safety shape decisions", {"Physical-Skill": 1.0, "Agri-Nature": 0.25, "Field-Research": 0.1, "Environmental-Sci": 0.1, "Community-Serve": 0.1}),
+                        ("Interpreting monitoring data and maps before natural-resource action is taken", {"Data-Analytics": 1.0, "Environmental-Sci": 0.25, "Field-Research": 0.1, "Agri-Nature": 0.1, "Technical-Skill": 0.1}),
+                    ],
+                ),
+                (
+                    [
+                        "What kind of forestry-and-natural-resources career path appeals to you most?",
+                        "Where would you see yourself working in forestry and natural resources?",
+                        "Which professional forestry-and-natural-resources role interests you most?",
+                        "What type of forest-focused career would you build for yourself?",
+                        "Which forestry-and-natural-resources role would you most want to pursue?",
+                    ],
+                    [
+                        ("Forestry specialist focused on managing forests as productive and healthy systems", {"Agri-Nature": 1.0, "Environmental-Sci": 0.25, "Field-Research": 0.1, "Community-Serve": 0.1, "Physical-Skill": 0.1}),
+                        ("Field ecologist focused on evidence from forest sites, habitats, and watersheds", {"Field-Research": 1.0, "Environmental-Sci": 0.25, "Agri-Nature": 0.1, "Data-Analytics": 0.1, "Physical-Skill": 0.1}),
+                        ("Conservation specialist focused on ecosystem protection and recovery planning", {"Environmental-Sci": 1.0, "Agri-Nature": 0.25, "Community-Serve": 0.1, "Field-Research": 0.1, "Analytical-Skill": 0.1}),
+                        ("Natural-resource coordinator focused on communities and shared stewardship", {"Community-Serve": 1.0, "Agri-Nature": 0.25, "People-Skill": 0.1, "Environmental-Sci": 0.1, "Field-Research": 0.1}),
+                        ("Forest operations lead focused on implementing plans across difficult outdoor sites", {"Physical-Skill": 1.0, "Agri-Nature": 0.25, "Field-Research": 0.1, "Environmental-Sci": 0.1, "Community-Serve": 0.1}),
+                        ("Resource mapping analyst focused on turning land data into management decisions", {"Data-Analytics": 1.0, "Environmental-Sci": 0.25, "Field-Research": 0.1, "Agri-Nature": 0.1, "Technical-Skill": 0.1}),
+                    ],
+                ),
+                (
+                    [
+                        "How does forestry and natural resources connect with other fields for you?",
+                        "Which cross-disciplinary side of forestry and natural resources interests you most?",
+                        "What broader path would you combine with forestry and natural resources?",
+                        "How would you connect forestry and natural resources with other disciplines?",
+                        "What role would forestry and natural resources play in your larger career vision?",
+                    ],
+                    [
+                        ("Forestry and land stewardship through long-term care of productive ecosystems", {"Agri-Nature": 1.0, "Environmental-Sci": 0.25, "Field-Research": 0.1, "Community-Serve": 0.1, "Physical-Skill": 0.1}),
+                        ("Forestry and research through field evidence before policy or site decisions", {"Field-Research": 1.0, "Environmental-Sci": 0.25, "Agri-Nature": 0.1, "Data-Analytics": 0.1, "Physical-Skill": 0.1}),
+                        ("Forestry and conservation through biodiversity, water, and climate resilience work", {"Environmental-Sci": 1.0, "Agri-Nature": 0.25, "Community-Serve": 0.1, "Field-Research": 0.1, "Analytical-Skill": 0.1}),
+                        ("Forestry and public service through resource plans that communities can support", {"Community-Serve": 1.0, "Agri-Nature": 0.25, "People-Skill": 0.1, "Environmental-Sci": 0.1, "Field-Research": 0.1}),
+                        ("Forestry and field operations through reliable work in demanding outdoor conditions", {"Physical-Skill": 1.0, "Agri-Nature": 0.25, "Field-Research": 0.1, "Environmental-Sci": 0.1, "Community-Serve": 0.1}),
+                        ("Forestry and data-driven planning through maps, monitoring, and spatial analysis", {"Data-Analytics": 1.0, "Environmental-Sci": 0.25, "Field-Research": 0.1, "Agri-Nature": 0.1, "Technical-Skill": 0.1}),
+                    ],
+                ),
+                (
+                    [
+                        "What forestry-and-natural-resources scenario resonates with you most?",
+                        "Which forest-management situation would bring out your strengths best?",
+                        "What kind of forestry-and-natural-resources challenge motivates you most?",
+                        "How would you respond in this forestry-and-natural-resources scenario?",
+                        "Which forest-and-resource situation feels most meaningful to you?",
+                    ],
+                    [
+                        ("A forest plan needs revision and you rebalance protection with sustainable use", {"Agri-Nature": 1.0, "Environmental-Sci": 0.25, "Field-Research": 0.1, "Community-Serve": 0.1, "Physical-Skill": 0.1}),
+                        ("A watershed is changing and you gather field evidence before recommending action", {"Field-Research": 1.0, "Environmental-Sci": 0.25, "Agri-Nature": 0.1, "Data-Analytics": 0.1, "Physical-Skill": 0.1}),
+                        ("Habitat pressure rises and you prioritize recovery, protection, and resilience", {"Environmental-Sci": 1.0, "Agri-Nature": 0.25, "Community-Serve": 0.1, "Field-Research": 0.1, "Analytical-Skill": 0.1}),
+                        ("A community depends on forest resources and you build a workable stewardship response", {"Community-Serve": 1.0, "Agri-Nature": 0.25, "People-Skill": 0.1, "Environmental-Sci": 0.1, "Field-Research": 0.1}),
+                        ("Emergency conditions require outdoor action and you coordinate reliable field execution", {"Physical-Skill": 1.0, "Agri-Nature": 0.25, "Field-Research": 0.1, "Environmental-Sci": 0.1, "Community-Serve": 0.1}),
+                        ("Satellite and monitoring data disagree and you resolve the decision through analysis", {"Data-Analytics": 1.0, "Environmental-Sci": 0.25, "Field-Research": 0.1, "Agri-Nature": 0.1, "Technical-Skill": 0.1}),
+                    ],
+                ),
+            ],
+        ),
+        (
+            "Academic Interest - Fisheries & Agriculture",
+            [
+                (
+                    [
+                        "What excites you most about studying fisheries and agriculture?",
+                        "Which side of fisheries and agriculture feels most meaningful to you?",
+                        "What would you enjoy most about a career in fisheries and agriculture?",
+                        "How do you see yourself making an impact through fisheries and agriculture?",
+                        "What makes fisheries and agriculture worth pursuing for you?",
+                    ],
+                    [
+                        ("Improving fish production through better growing conditions and resource management", {"Agri-Nature": 1.0, "Maritime-Sea": 0.25, "Field-Research": 0.1, "Environmental-Sci": 0.1, "Technical-Skill": 0.1}),
+                        ("Working in aquatic environments where water conditions and field evidence guide decisions", {"Maritime-Sea": 1.0, "Agri-Nature": 0.25, "Field-Research": 0.1, "Technical-Skill": 0.1, "Physical-Skill": 0.1}),
+                        ("Studying stocks, habitats, and aquatic ecosystems before improving production methods", {"Field-Research": 1.0, "Environmental-Sci": 0.25, "Agri-Nature": 0.1, "Maritime-Sea": 0.1, "Data-Analytics": 0.1}),
+                        ("Protecting aquatic systems so harvesting and aquaculture stay sustainable", {"Environmental-Sci": 1.0, "Agri-Nature": 0.25, "Maritime-Sea": 0.1, "Community-Serve": 0.1, "Field-Research": 0.1}),
+                        ("Using farm, hatchery, or monitoring systems to keep aquatic production reliable", {"Technical-Skill": 1.0, "Agri-Nature": 0.25, "Maritime-Sea": 0.1, "Data-Analytics": 0.1, "Field-Research": 0.1}),
+                        ("Connecting aquatic production to food supply, quality, and practical use", {"Food-Science": 1.0, "Agri-Nature": 0.25, "Maritime-Sea": 0.1, "Technical-Skill": 0.1, "Analytical-Skill": 0.1}),
+                    ],
+                ),
+                (
+                    [
+                        "Which area of fisheries and agriculture interests you most?",
+                        "If you could specialize in one part of fisheries and agriculture, which would it be?",
+                        "What branch of fisheries and agriculture would you build your path around?",
+                        "Which fisheries-and-agriculture specialization draws you in the most?",
+                        "What kind of aquatic-production work would you choose first?",
+                    ],
+                    [
+                        ("Aquatic production focused on raising healthy stocks with strong management", {"Agri-Nature": 1.0, "Maritime-Sea": 0.25, "Field-Research": 0.1, "Environmental-Sci": 0.1, "Technical-Skill": 0.1}),
+                        ("Marine and freshwater work focused on conditions, habitats, and water-based operations", {"Maritime-Sea": 1.0, "Agri-Nature": 0.25, "Field-Research": 0.1, "Technical-Skill": 0.1, "Physical-Skill": 0.1}),
+                        ("Fisheries research focused on stock behavior, health, and aquatic evidence", {"Field-Research": 1.0, "Environmental-Sci": 0.25, "Agri-Nature": 0.1, "Maritime-Sea": 0.1, "Data-Analytics": 0.1}),
+                        ("Sustainability work focused on protecting fisheries and aquatic ecosystems", {"Environmental-Sci": 1.0, "Agri-Nature": 0.25, "Maritime-Sea": 0.1, "Community-Serve": 0.1, "Field-Research": 0.1}),
+                        ("Aquaculture systems focused on monitoring, equipment, and water control", {"Technical-Skill": 1.0, "Agri-Nature": 0.25, "Maritime-Sea": 0.1, "Data-Analytics": 0.1, "Field-Research": 0.1}),
+                        ("Seafood quality and use focused on turning production into dependable food supply", {"Food-Science": 1.0, "Agri-Nature": 0.25, "Maritime-Sea": 0.1, "Technical-Skill": 0.1, "Analytical-Skill": 0.1}),
+                    ],
+                ),
+                (
+                    [
+                        "What part of fisheries-and-agriculture work would you enjoy most?",
+                        "Where in fisheries-and-agriculture work do you see yourself thriving?",
+                        "Which fisheries-and-agriculture responsibility feels most fulfilling to you?",
+                        "What part of fisheries and agriculture would you focus on first?",
+                        "Which part of fisheries and agriculture would matter most to you?",
+                    ],
+                    [
+                        ("Managing ponds, cages, or hatcheries so aquatic production stays healthy and efficient", {"Agri-Nature": 1.0, "Maritime-Sea": 0.25, "Technical-Skill": 0.1, "Field-Research": 0.1, "Environmental-Sci": 0.1}),
+                        ("Working directly around aquatic systems where conditions change and field judgment matters", {"Maritime-Sea": 1.0, "Agri-Nature": 0.25, "Field-Research": 0.1, "Technical-Skill": 0.1, "Physical-Skill": 0.1}),
+                        ("Collecting evidence on fish health, habitats, or stock conditions before acting", {"Field-Research": 1.0, "Environmental-Sci": 0.25, "Agri-Nature": 0.1, "Maritime-Sea": 0.1, "Data-Analytics": 0.1}),
+                        ("Protecting water quality and sustainability while keeping production realistic", {"Environmental-Sci": 1.0, "Agri-Nature": 0.25, "Maritime-Sea": 0.1, "Community-Serve": 0.1, "Field-Research": 0.1}),
+                        ("Maintaining monitoring systems, aeration, or hatchery controls that support performance", {"Technical-Skill": 1.0, "Agri-Nature": 0.25, "Maritime-Sea": 0.1, "Data-Analytics": 0.1, "Field-Research": 0.1}),
+                        ("Improving seafood quality, handling, or downstream food use after production", {"Food-Science": 1.0, "Agri-Nature": 0.25, "Maritime-Sea": 0.1, "Technical-Skill": 0.1, "Analytical-Skill": 0.1}),
+                    ],
+                ),
+                (
+                    [
+                        "What kind of fisheries-and-agriculture career path appeals to you most?",
+                        "Where would you see yourself working in fisheries and agriculture?",
+                        "Which professional fisheries-and-agriculture role interests you most?",
+                        "What type of aquatic-production career would you build for yourself?",
+                        "Which fisheries-and-agriculture role would you most want to pursue?",
+                    ],
+                    [
+                        ("Aquaculture specialist focused on managing healthy and productive aquatic systems", {"Agri-Nature": 1.0, "Maritime-Sea": 0.25, "Technical-Skill": 0.1, "Field-Research": 0.1, "Environmental-Sci": 0.1}),
+                        ("Fisheries operations specialist focused on water-based production and site management", {"Maritime-Sea": 1.0, "Agri-Nature": 0.25, "Field-Research": 0.1, "Technical-Skill": 0.1, "Physical-Skill": 0.1}),
+                        ("Fisheries researcher focused on stocks, habitats, and aquatic evidence", {"Field-Research": 1.0, "Environmental-Sci": 0.25, "Agri-Nature": 0.1, "Maritime-Sea": 0.1, "Data-Analytics": 0.1}),
+                        ("Aquatic sustainability specialist focused on protecting fisheries and ecosystems", {"Environmental-Sci": 1.0, "Agri-Nature": 0.25, "Maritime-Sea": 0.1, "Community-Serve": 0.1, "Field-Research": 0.1}),
+                        ("Aquaculture systems specialist focused on equipment, monitoring, and water control", {"Technical-Skill": 1.0, "Agri-Nature": 0.25, "Maritime-Sea": 0.1, "Data-Analytics": 0.1, "Field-Research": 0.1}),
+                        ("Seafood production specialist focused on quality, handling, and practical food value", {"Food-Science": 1.0, "Agri-Nature": 0.25, "Maritime-Sea": 0.1, "Technical-Skill": 0.1, "Analytical-Skill": 0.1}),
+                    ],
+                ),
+                (
+                    [
+                        "How does fisheries and agriculture connect with other fields for you?",
+                        "Which cross-disciplinary side of fisheries and agriculture interests you most?",
+                        "What broader path would you combine with fisheries and agriculture?",
+                        "How would you connect fisheries and agriculture with other disciplines?",
+                        "What role would fisheries and agriculture play in your larger career vision?",
+                    ],
+                    [
+                        ("Aquatic agriculture and production through better stock management and growth decisions", {"Agri-Nature": 1.0, "Maritime-Sea": 0.25, "Technical-Skill": 0.1, "Field-Research": 0.1, "Environmental-Sci": 0.1}),
+                        ("Fisheries and maritime work through stronger control of aquatic environments", {"Maritime-Sea": 1.0, "Agri-Nature": 0.25, "Field-Research": 0.1, "Technical-Skill": 0.1, "Physical-Skill": 0.1}),
+                        ("Fisheries and research through evidence before scaling any production change", {"Field-Research": 1.0, "Environmental-Sci": 0.25, "Agri-Nature": 0.1, "Maritime-Sea": 0.1, "Data-Analytics": 0.1}),
+                        ("Fisheries and sustainability through protecting water systems and future supply", {"Environmental-Sci": 1.0, "Agri-Nature": 0.25, "Maritime-Sea": 0.1, "Community-Serve": 0.1, "Field-Research": 0.1}),
+                        ("Fisheries and technology through monitoring systems that keep production dependable", {"Technical-Skill": 1.0, "Agri-Nature": 0.25, "Maritime-Sea": 0.1, "Data-Analytics": 0.1, "Field-Research": 0.1}),
+                        ("Fisheries and food systems through quality seafood supply and handling", {"Food-Science": 1.0, "Agri-Nature": 0.25, "Maritime-Sea": 0.1, "Technical-Skill": 0.1, "Analytical-Skill": 0.1}),
+                    ],
+                ),
+                (
+                    [
+                        "What fisheries-and-agriculture scenario resonates with you most?",
+                        "Which aquatic-production situation would bring out your strengths best?",
+                        "What kind of fisheries-and-agriculture challenge motivates you most?",
+                        "How would you respond in this fisheries-and-agriculture scenario?",
+                        "Which fisheries-management situation feels most meaningful to you?",
+                    ],
+                    [
+                        ("Production drops in a hatchery and you stabilize the system through better stock management", {"Agri-Nature": 1.0, "Maritime-Sea": 0.25, "Technical-Skill": 0.1, "Field-Research": 0.1, "Environmental-Sci": 0.1}),
+                        ("A water-based site changes fast and you lead decisions directly in the aquatic environment", {"Maritime-Sea": 1.0, "Agri-Nature": 0.25, "Field-Research": 0.1, "Technical-Skill": 0.1, "Physical-Skill": 0.1}),
+                        ("Fish health or stock behavior becomes uncertain and you gather evidence before acting", {"Field-Research": 1.0, "Environmental-Sci": 0.25, "Agri-Nature": 0.1, "Maritime-Sea": 0.1, "Data-Analytics": 0.1}),
+                        ("Water quality declines and you redesign the system for sustainability first", {"Environmental-Sci": 1.0, "Agri-Nature": 0.25, "Maritime-Sea": 0.1, "Community-Serve": 0.1, "Field-Research": 0.1}),
+                        ("Monitoring equipment fails and you rebuild technical control so the operation stays reliable", {"Technical-Skill": 1.0, "Agri-Nature": 0.25, "Maritime-Sea": 0.1, "Data-Analytics": 0.1, "Field-Research": 0.1}),
+                        ("A seafood line needs better handling and you improve quality from harvest to use", {"Food-Science": 1.0, "Agri-Nature": 0.25, "Maritime-Sea": 0.1, "Technical-Skill": 0.1, "Analytical-Skill": 0.1}),
+                    ],
+                ),
+            ],
+        ),
+    ]
+
+    questions = []
+    q_id = 4191
+    o_id = 26473
+    for category_name, prompt_groups in category_specs:
+        for prompts, option_specs in prompt_groups:
+            option_specs = add_path_trait(category_name, option_specs)
+            for prompt_text in prompts:
+                questions.append(make_question(q_id, category_name, prompt_text, o_id, option_specs))
+                q_id += 1
+                o_id += len(option_specs)
+    return questions
+
+
+_AGRICULTURE_RESOURCE_EXPANSION_7 = _build_agriculture_resource_subcategory_expansion_7()
+_agri_resource7_existing_qids = {question["question_id"] for question in QUESTIONS_POOL_ENHANCED}
+_agri_resource7_generated_qids = {question["question_id"] for question in _AGRICULTURE_RESOURCE_EXPANSION_7}
+if _agri_resource7_existing_qids & _agri_resource7_generated_qids:
+    raise ValueError("Agriculture/resource expansion 7 question IDs overlap with existing questions")
+
+_agri_resource7_existing_oids = {option["option_id"] for question in QUESTIONS_POOL_ENHANCED for option in question.get("options", [])}
+_agri_resource7_generated_oids = {option["option_id"] for question in _AGRICULTURE_RESOURCE_EXPANSION_7 for option in question.get("options", [])}
+if _agri_resource7_existing_oids & _agri_resource7_generated_oids:
+    raise ValueError("Agriculture/resource expansion 7 option IDs overlap with existing options")
+
+QUESTIONS_POOL_ENHANCED.extend(_AGRICULTURE_RESOURCE_EXPANSION_7)
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# OPTION DIVERSIFICATION ENGINE
+# ══════════════════════════════════════════════════════════════════════════════
+# Many builder functions produce groups of 4-5 question prompts that share
+# IDENTICAL option text (because all prompts in a group target the same 6
+# traits).  This post-processing pass rewrites the option text for prompts
+# 2-5 in each group so every question has genuinely unique wording while
+# keeping trait_tags unchanged.
+#
+# Strategy:
+#   - Prompt 0 in each group: keep original text (unchanged)
+#   - Prompt 1: verb-synonym swap (table A)
+#   - Prompt 2: verb-synonym swap (table B)
+#   - Prompt 3: verb-synonym swap (table C)
+#   - Prompt 4+: noun-phrase restructuring fallback
+#
+# For options that start with a gerund ("Designing…", "Building…"), the
+# leading verb is swapped with a genuine synonym.  For noun-phrase options
+# ("A web app…", "High-resolution imaging…"), a natural action-verb prefix
+# or restructuring is applied.
+# ══════════════════════════════════════════════════════════════════════════════
+
+import re as _re_opt_div
+
+# ── Three synonym tables so each variant reads differently ──────────────────
+
+_VERB_SWAP_A = {
+    "adapting": "adjusting",
+    "advising": "counseling",
+    "analyzing": "evaluating",
+    "applying": "utilizing",
+    "assembling": "constructing",
+    "building": "creating",
+    "calculating": "computing",
+    "collaborating": "partnering",
+    "collecting": "gathering",
+    "communicating": "conveying",
+    "comparing": "contrasting",
+    "conducting": "carrying out",
+    "configuring": "adjusting",
+    "connecting": "linking",
+    "constructing": "assembling",
+    "coordinating": "synchronizing",
+    "creating": "developing",
+    "debugging": "troubleshooting",
+    "deploying": "launching",
+    "designing": "planning",
+    "developing": "crafting",
+    "diagnosing": "pinpointing",
+    "discovering": "uncovering",
+    "drafting": "sketching",
+    "editing": "refining",
+    "evaluating": "assessing",
+    "examining": "inspecting",
+    "experimenting": "testing ideas with",
+    "explaining": "presenting",
+    "exploring": "discovering",
+    "facilitating": "enabling",
+    "finding": "locating",
+    "fixing": "troubleshooting",
+    "following": "tracking",
+    "formulating": "devising",
+    "growing": "cultivating",
+    "guiding": "mentoring",
+    "handling": "managing",
+    "helping": "supporting",
+    "identifying": "recognizing",
+    "implementing": "executing",
+    "improving": "enhancing",
+    "inspecting": "scrutinizing",
+    "interpreting": "deciphering",
+    "investigating": "probing",
+    "leading": "directing",
+    "learning": "mastering",
+    "maintaining": "sustaining",
+    "managing": "overseeing",
+    "mapping": "charting",
+    "measuring": "gauging",
+    "mentoring": "guiding",
+    "modeling": "simulating",
+    "monitoring": "overseeing",
+    "negotiating": "mediating",
+    "observing": "watching",
+    "operating": "handling",
+    "optimizing": "fine-tuning",
+    "organizing": "arranging",
+    "planning": "strategizing",
+    "practicing": "rehearsing",
+    "preparing": "readying",
+    "presenting": "showcasing",
+    "programming": "coding",
+    "protecting": "safeguarding",
+    "reading": "reviewing",
+    "recording": "documenting",
+    "refactoring": "restructuring",
+    "repeating": "rerunning",
+    "researching": "investigating",
+    "restoring": "recovering",
+    "reviewing": "examining",
+    "running": "conducting",
+    "securing": "fortifying",
+    "setting": "establishing",
+    "solving": "tackling",
+    "studying": "examining",
+    "supporting": "backing",
+    "teaching": "mentoring",
+    "testing": "validating",
+    "tracking": "monitoring",
+    "training": "coaching",
+    "translating": "converting",
+    "turning": "transforming",
+    "understanding": "grasping",
+    "using": "applying",
+    "working": "collaborating",
+    "writing": "composing",
 }
+
+_VERB_SWAP_B = {
+    "adapting": "tailoring",
+    "advising": "consulting on",
+    "analyzing": "dissecting",
+    "applying": "putting to use",
+    "assembling": "fitting together",
+    "building": "putting together",
+    "calculating": "working out",
+    "collaborating": "teaming up on",
+    "collecting": "compiling",
+    "communicating": "expressing",
+    "comparing": "weighing",
+    "conducting": "performing",
+    "configuring": "setting up",
+    "connecting": "tying together",
+    "constructing": "building",
+    "coordinating": "bringing together",
+    "creating": "producing",
+    "debugging": "diagnosing",
+    "deploying": "rolling out",
+    "designing": "crafting",
+    "developing": "building up",
+    "diagnosing": "figuring out",
+    "discovering": "finding",
+    "drafting": "writing up",
+    "editing": "reworking",
+    "evaluating": "judging",
+    "examining": "studying",
+    "experimenting": "running trials on",
+    "explaining": "breaking down",
+    "exploring": "looking into",
+    "facilitating": "making happen",
+    "finding": "tracking down",
+    "fixing": "repairing",
+    "following": "keeping up with",
+    "formulating": "working out",
+    "growing": "nurturing",
+    "guiding": "coaching",
+    "handling": "dealing with",
+    "helping": "assisting",
+    "identifying": "spotting",
+    "implementing": "putting into action",
+    "improving": "refining",
+    "inspecting": "checking over",
+    "interpreting": "reading into",
+    "investigating": "digging into",
+    "leading": "heading up",
+    "learning": "getting into",
+    "maintaining": "keeping up",
+    "managing": "directing",
+    "mapping": "outlining",
+    "measuring": "sizing up",
+    "mentoring": "coaching",
+    "modeling": "representing",
+    "monitoring": "keeping track of",
+    "negotiating": "hashing out",
+    "observing": "keeping an eye on",
+    "operating": "working",
+    "optimizing": "tweaking",
+    "organizing": "structuring",
+    "planning": "laying out",
+    "practicing": "working on",
+    "preparing": "getting set for",
+    "presenting": "demonstrating",
+    "programming": "writing code for",
+    "protecting": "defending",
+    "reading": "studying",
+    "recording": "logging",
+    "refactoring": "reworking",
+    "repeating": "running again",
+    "researching": "digging into",
+    "restoring": "bringing back",
+    "reviewing": "going over",
+    "running": "operating",
+    "securing": "locking down",
+    "setting": "laying out",
+    "solving": "working through",
+    "studying": "researching",
+    "supporting": "lending a hand with",
+    "teaching": "guiding",
+    "testing": "trying out",
+    "tracking": "tracing",
+    "training": "developing skills in",
+    "translating": "rephrasing",
+    "turning": "converting",
+    "understanding": "getting to know",
+    "using": "working with",
+    "working": "engaging in",
+    "writing": "putting together",
+}
+
+_VERB_SWAP_C = {
+    "adapting": "modifying",
+    "advising": "offering guidance on",
+    "analyzing": "picking apart",
+    "applying": "making use of",
+    "assembling": "piecing together",
+    "building": "setting up",
+    "calculating": "figuring",
+    "collaborating": "working alongside others on",
+    "collecting": "pulling together",
+    "communicating": "getting across",
+    "comparing": "looking at differences in",
+    "conducting": "doing",
+    "configuring": "tailoring",
+    "connecting": "bridging",
+    "constructing": "putting up",
+    "coordinating": "organizing",
+    "creating": "coming up with",
+    "debugging": "hunting down bugs in",
+    "deploying": "putting into action",
+    "designing": "mapping out",
+    "developing": "shaping",
+    "diagnosing": "identifying",
+    "discovering": "stumbling upon",
+    "drafting": "outlining",
+    "editing": "polishing",
+    "evaluating": "weighing",
+    "examining": "looking closely at",
+    "experimenting": "exploring possibilities in",
+    "explaining": "walking others through",
+    "exploring": "venturing into",
+    "facilitating": "smoothing the way for",
+    "finding": "uncovering",
+    "fixing": "patching up",
+    "following": "staying on top of",
+    "formulating": "putting together",
+    "growing": "raising",
+    "guiding": "showing others",
+    "handling": "taking on",
+    "helping": "being there for",
+    "identifying": "pinpointing",
+    "implementing": "rolling out",
+    "improving": "upgrading",
+    "inspecting": "looking over",
+    "interpreting": "making sense of",
+    "investigating": "looking deeper into",
+    "leading": "spearheading",
+    "learning": "picking up",
+    "maintaining": "looking after",
+    "managing": "taking charge of",
+    "mapping": "sketching out",
+    "measuring": "checking on",
+    "mentoring": "walking someone through",
+    "modeling": "building models of",
+    "monitoring": "watching over",
+    "negotiating": "working out terms on",
+    "observing": "studying closely",
+    "operating": "running",
+    "optimizing": "streamlining",
+    "organizing": "sorting out",
+    "planning": "thinking through",
+    "practicing": "getting better at",
+    "preparing": "gearing up for",
+    "presenting": "sharing",
+    "programming": "developing software for",
+    "protecting": "shielding",
+    "reading": "going through",
+    "recording": "keeping records of",
+    "refactoring": "cleaning up",
+    "repeating": "doing over",
+    "researching": "looking deeper into",
+    "restoring": "fixing up",
+    "reviewing": "looking back at",
+    "running": "managing",
+    "securing": "making safe",
+    "setting": "putting in place",
+    "solving": "figuring out",
+    "studying": "looking closely at",
+    "supporting": "helping out with",
+    "teaching": "showing others",
+    "testing": "checking",
+    "tracking": "following up on",
+    "training": "instructing",
+    "translating": "turning into",
+    "turning": "shifting",
+    "understanding": "making sense of",
+    "using": "employing",
+    "working": "getting involved in",
+    "writing": "authoring",
+}
+
+# ── Noun-phrase action verbs (for options that don't start with a gerund) ────
+_NOUN_ACTION_A = [
+    ("a ", "Building a "), ("an ", "Building an "),
+    (None, "Diving into "),
+]
+_NOUN_ACTION_B = [
+    ("a ", "Developing a "), ("an ", "Developing an "),
+    (None, "Getting hands-on with "),
+]
+_NOUN_ACTION_C = [
+    ("a ", "Creating a "), ("an ", "Setting up an "),
+    (None, "Pursuing "),
+]
+_NOUN_ACTION_D = [
+    ("a ", "Launching a "), ("an ", "Launching an "),
+    (None, "Focusing on "),
+]
+
+# ── 4th swap table: unique synonyms for 5th prompt in each group ────────────
+_VERB_SWAP_D = {
+    "adapting": "reshaping",
+    "advising": "giving input on",
+    "analyzing": "scrutinizing",
+    "applying": "harnessing",
+    "assembling": "bringing together",
+    "building": "assembling",
+    "calculating": "crunching",
+    "collaborating": "joining forces on",
+    "collecting": "amassing",
+    "communicating": "relaying",
+    "comparing": "benchmarking",
+    "conducting": "leading",
+    "configuring": "customizing",
+    "connecting": "weaving together",
+    "constructing": "erecting",
+    "coordinating": "lining up",
+    "creating": "inventing",
+    "debugging": "tracing bugs in",
+    "deploying": "shipping",
+    "designing": "sketching out",
+    "developing": "advancing",
+    "diagnosing": "tracing",
+    "discovering": "revealing",
+    "drafting": "roughing out",
+    "editing": "touching up",
+    "evaluating": "rating",
+    "examining": "probing",
+    "experimenting": "piloting",
+    "explaining": "describing",
+    "exploring": "charting",
+    "facilitating": "supporting",
+    "finding": "detecting",
+    "fixing": "correcting",
+    "following": "keeping pace with",
+    "formulating": "composing",
+    "growing": "propagating",
+    "guiding": "steering",
+    "handling": "navigating",
+    "helping": "serving",
+    "identifying": "distinguishing",
+    "implementing": "activating",
+    "improving": "strengthening",
+    "inspecting": "auditing",
+    "interpreting": "translating",
+    "investigating": "examining",
+    "leading": "championing",
+    "learning": "absorbing",
+    "maintaining": "preserving",
+    "managing": "supervising",
+    "mapping": "diagramming",
+    "measuring": "quantifying",
+    "mentoring": "tutoring",
+    "modeling": "prototyping",
+    "monitoring": "surveilling",
+    "negotiating": "bargaining on",
+    "observing": "noticing",
+    "operating": "piloting",
+    "optimizing": "maximizing",
+    "organizing": "cataloging",
+    "planning": "outlining",
+    "practicing": "drilling",
+    "preparing": "priming",
+    "presenting": "delivering",
+    "programming": "building software for",
+    "protecting": "guarding",
+    "reading": "absorbing",
+    "recording": "cataloging",
+    "refactoring": "overhauling",
+    "repeating": "iterating",
+    "researching": "surveying",
+    "restoring": "rebuilding",
+    "reviewing": "critiquing",
+    "running": "steering",
+    "securing": "hardening",
+    "setting": "configuring",
+    "solving": "resolving",
+    "studying": "scrutinizing",
+    "supporting": "championing",
+    "teaching": "educating",
+    "testing": "probing",
+    "tracking": "keeping tabs on",
+    "training": "cultivating skills in",
+    "translating": "adapting",
+    "turning": "morphing",
+    "understanding": "comprehending",
+    "using": "leveraging",
+    "working": "participating in",
+    "writing": "scripting",
+}
+
+_SKIP_OPTIONS = frozenset({
+    "none of these", "none of the above", "undecided for now",
+    "i'm not sure yet", "not sure yet", "i am not sure yet",
+    "skip this question", "i don't know yet",
+})
+
+
+def _swap_leading_gerund(text, swap_table):
+    """Replace the first word with a synonym if it's a known gerund."""
+    words = text.split(None, 1)
+    if len(words) < 2:
+        return None
+    first, rest = words
+    key = first.lower()
+    if key in swap_table:
+        replacement = swap_table[key]
+        if first[0].isupper():
+            replacement = replacement[0].upper() + replacement[1:]
+        return replacement + " " + rest
+    return None
+
+
+def _transform_noun_phrase(text, action_table):
+    """Transform a noun-phrase option by prepending a natural action verb."""
+    lower = text.lower()
+    for prefix, replacement in action_table:
+        if prefix and lower.startswith(prefix):
+            return replacement + text[len(prefix):]
+    # Fallback: use the default (last entry)
+    _, fallback = action_table[-1]
+    return fallback + text[0].lower() + text[1:]
+
+
+def _diversify_pool_options():
+    """Post-process QUESTIONS_POOL_ENHANCED so each question gets unique option text.
+
+    For each group of N questions sharing identical option text:
+      - Question 0: unchanged
+      - Question 1: verb-swap table A (or noun-phrase action A)
+      - Question 2: verb-swap table B (or noun-phrase action B)
+      - Question 3: verb-swap table C (or noun-phrase action C)
+      - Question 4+: verb-swap table A with noun-phrase fallback
+    Trait tags are NEVER modified — only display text changes.
+    """
+    swap_tables = [_VERB_SWAP_A, _VERB_SWAP_B, _VERB_SWAP_C, _VERB_SWAP_D]
+    noun_tables = [_NOUN_ACTION_A, _NOUN_ACTION_B, _NOUN_ACTION_C, _NOUN_ACTION_D]
+
+    # Group questions by option-text fingerprint
+    groups = {}
+    for q in QUESTIONS_POOL_ENHANCED:
+        fp = tuple(o["option_text"] for o in q.get("options", []))
+        if len(fp) >= 2:
+            groups.setdefault(fp, []).append(q)
+
+    modified = 0
+    for fp, qs in groups.items():
+        if len(qs) <= 1:
+            continue
+        qs.sort(key=lambda q: q["question_id"])
+
+        for idx, q in enumerate(qs):
+            if idx == 0:
+                continue  # keep original
+            table_idx = (idx - 1) % 4
+            swap = swap_tables[table_idx]
+            noun = noun_tables[table_idx]
+
+            for opt in q.get("options", []):
+                orig = opt["option_text"]
+                if not orig or orig.strip().lower() in _SKIP_OPTIONS:
+                    continue
+
+                # Try gerund swap first
+                result = _swap_leading_gerund(orig, swap)
+                if result is None:
+                    # Not a gerund — apply noun-phrase transformation
+                    result = _transform_noun_phrase(orig, noun)
+
+                if result != orig:
+                    opt["option_text"] = result
+                    modified += 1
+
+    return modified
+
+
+_DIVERSIFY_COUNT = _diversify_pool_options()
