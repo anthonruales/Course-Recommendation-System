@@ -7,8 +7,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Optional
 from dotenv import load_dotenv
-import models, database
-from security import (
+from core import models
+from core import database
+from core.security import (
     hash_password, verify_password, create_access_token,
     get_current_user, require_admin, require_self_or_admin
 )
@@ -66,13 +67,13 @@ def validate_email(email: str) -> tuple:
 
 # Import enhanced questions if available, fall back to seed_data
 try:
-    from questions_enhanced import QUESTIONS_POOL_ENHANCED as QUESTIONS_POOL
+    from data.questions_enhanced import QUESTIONS_POOL_ENHANCED as QUESTIONS_POOL
     print("[OK] Using enhanced questions (8-10 options per question)")
 except ImportError:
-    from seed_data import QUESTIONS_POOL
+    from data.seed_data import QUESTIONS_POOL
     print("! Using standard questions from seed_data")
 
-from seed_data import (
+from data.seed_data import (
     COURSES_POOL, ASSESSMENT_TIERS, COURSE_DIRECT_MAPPING, SCALE_WEIGHTS,
     LEARNING_STYLE_MAPPING, WORK_ENVIRONMENT_MAPPING, COURSE_EMPLOYABILITY, 
     COURSE_PUBLIC_AVAILABILITY, COURSE_SKILL_REQUIREMENTS, CAREER_GOAL_MAPPING,
@@ -80,11 +81,11 @@ from seed_data import (
 )
 from sqlalchemy import func, text
 from sqlalchemy.orm import Session, joinedload
-from trait_mapping import apply_trait_mapping
-from assessment_service import AssessmentService
-from recommendation_engine import HybridRecommendationEngine
-from adaptive_assessment import AdaptiveAssessmentEngine, initialize_adaptive_engine, get_adaptive_engine
-from decision_tree_questions import DECISION_TREE_QUESTIONS
+from services.trait_mapping import apply_trait_mapping
+from services.assessment_service import AssessmentService
+from services.recommendation_engine import HybridRecommendationEngine
+from services.adaptive_assessment import AdaptiveAssessmentEngine, initialize_adaptive_engine, get_adaptive_engine
+from data.decision_tree_questions import DECISION_TREE_QUESTIONS
 import json
 import secrets
 import hashlib
@@ -2500,8 +2501,8 @@ def get_or_init_adaptive_engine(db: Session) -> AdaptiveAssessmentEngine:
     global _adaptive_engine
     
     if _adaptive_engine is None:
-        from questions_enhanced import QUESTIONS_POOL_ENHANCED
-        from curated_trait_map import build_multi_trait
+        from data.questions_enhanced import QUESTIONS_POOL_ENHANCED
+        from data.curated_trait_map import build_multi_trait
         
         # Load courses from database
         courses = db.query(models.Course).all()
