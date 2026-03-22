@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { authFetch } from './api';
-import LandingPage from './LandingPage';
-import Login from './Login';
-import Signup from './Signup';
-import Dashboard from './Dashboard';
-import ProfileView from './ProfileView';
+import LandingPage from './pages/LandingPage';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import Dashboard from './pages/Dashboard';
+import ProfileView from './pages/ProfileView';
 import './App.css';
 
 // Lazy load heavy components for better initial load performance
-const Settings = lazy(() => import('./Settings'));
-const AdaptiveAssessment = lazy(() => import('./AdaptiveAssessment'));
-const MyActivity = lazy(() => import('./MyActivity'));
-const ResultsView = lazy(() => import('./ResultsView'));
+const Settings = lazy(() => import('./pages/Settings'));
+const AdaptiveAssessment = lazy(() => import('./pages/AdaptiveAssessment'));
+const MyActivity = lazy(() => import('./pages/MyActivity'));
+const ResultsView = lazy(() => import('./pages/ResultsView'));
 
 // Valid views that can be stored in the URL hash
 const VALID_VIEWS = ['dashboard', 'profile', 'settings', 'assessment', 'activity', 'results'];
