@@ -3,9 +3,6 @@ import axios from 'axios';
 import { useGoogleLogin } from '@react-oauth/google';
 
 function Login({ onSwitch, onLoginSuccess, onBack }) {
-  const [usernameOrEmail, setUsernameOrEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   
   // Google username selection modal state
@@ -117,34 +114,7 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}/login`, { username: usernameOrEmail, password });
-      localStorage.setItem('userId', res.data.user_id);
-      localStorage.setItem('userUsername', res.data.username || usernameOrEmail);
-      localStorage.setItem('userEmail', res.data.email || '');
-      localStorage.setItem('accessToken', res.data.access_token || '');
-      
-      // Ensure last_active is updated on login
-      try {
-        await fetch(`${process.env.REACT_APP_API_URL}/refresh-user-activity/${res.data.user_id}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${res.data.access_token}` }
-        });
-      } catch (err) {
-        console.warn('Could not refresh user activity:', err);
-      }
-      
-      onLoginSuccess(res.data.user, usernameOrEmail); 
-    } catch (err) { 
-      alert(err.response?.data?.detail || "Invalid login credentials.");
-      setPassword('');
-    } finally {
-      setLoading(false);
-    }
-  };
+
 
   // Username selection modal for Google users
   if (showUsernameModal) {
