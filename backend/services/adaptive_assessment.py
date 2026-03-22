@@ -4559,67 +4559,73 @@ class AdaptiveAssessmentEngine:
     
     def _calculate_profile_bonus(self, interests: str, skills: str, course_traits: Set[str]) -> float:
         """Calculate bonus points (0-20) for courses matching user's profile interests/skills.
-        
-        Scoring strategy:
-        - Count each UNIQUE course trait only once (prevents generic traits like Creative-Skill
-          from being counted multiple times across different profile selections)
-        - Weight specific/path traits higher (e.g. Visual-Design, Digital-Media = 4pts)
-          vs generic skill traits (e.g. Creative-Skill = 2pts)
-        - Award a breadth bonus when a high fraction of the course's traits are matched
+
+        Uses a WEIGHTED approach: a trait that appears in many of the user's profile
+        selections (or appears as the PRIMARY trait in a selection) gets a high weight,
+        while a trait that appears as a peripheral/secondary result of one selection
+        gets a low weight.  This prevents courses that only match a peripheral interest
+        (e.g. Hardware-Systems from 'robotics') from tying with courses that match the
+        user's core interest (e.g. Software-Dev from Programming, AI, Computers & IT).
         """
         if not interests and not skills:
             return 0.0
-        
-        PROFILE_TO_TRAITS = UNIFIED_PROFILE_TO_TRAITS
-        
+
         # Parse user's selections
         interest_list = [i.strip().lower() for i in (interests or "").split(",") if i.strip()]
         skill_list = [s.strip().lower() for s in (skills or "").split(",") if s.strip()]
         user_selections = set(interest_list + skill_list)
-        
-        # Collect ALL unique traits the user's profile maps to
-        user_profile_traits: Set[str] = set()
+
+        # Build a weighted trait map.
+        # For each selection, the first trait in the mapped list gets weight 1.0,
+        # the second gets 0.5, the third 0.33, etc.
+        # A trait that shows up in many selections accumulates weight across all of them.
+        user_trait_weights: Dict[str, float] = {}
         for selection in user_selections:
             related_traits = self._get_profile_traits_for_selection(selection)
-            for trait in related_traits:
-                user_profile_traits.add(trait.lower())
-        
-        if not user_profile_traits:
+            for i, trait in enumerate(related_traits):
+                key = trait.lower()
+                user_trait_weights[key] = user_trait_weights.get(key, 0.0) + 1.0 / (i + 1)
+
+        if not user_trait_weights:
             return 0.0
-        
+
+        # Normalize: the most-central user trait gets weight 1.0
+        max_w = max(user_trait_weights.values())
+        normalized: Dict[str, float] = {t: w / max_w for t, w in user_trait_weights.items()}
+
         # Normalize course traits for matching
         course_traits_lower = {t.lower() for t in course_traits}
-        
-        # Generic/broad traits get lower weight; specific path traits get higher weight
+
+        # Generic/broad traits get a lower base than specific path traits
         GENERIC_TRAITS = {"creative-skill", "technical-skill", "people-skill",
                           "analytical-skill", "physical-skill", "admin-skill",
                           "artistic", "realistic", "investigative", "social",
                           "enterprising", "conventional"}
-        
-        # Find unique course traits that match the user's profile traits
+
+        # Score each course trait by best-matching user trait weight
         bonus = 0.0
-        matched_course_traits = set()
-        
+        best_weights: Dict[str, float] = {}
+
         for course_trait in course_traits_lower:
-            for user_trait in user_profile_traits:
+            best_weight = 0.0
+            for user_trait, ut_weight in normalized.items():
                 if user_trait == course_trait or user_trait in course_trait or course_trait in user_trait:
-                    matched_course_traits.add(course_trait)
-                    # Specific path traits score higher than generic ones
-                    if course_trait in GENERIC_TRAITS:
-                        bonus += 3.0
-                    else:
-                        bonus += 6.0
-                    break  # Don't double-count this course trait
-        
-        # Breadth bonus: reward courses where MOST of their traits match the profile
-        if len(course_traits_lower) > 0:
-            match_ratio = len(matched_course_traits) / len(course_traits_lower)
-            if match_ratio >= 0.8:
-                bonus += 4.0  # Almost all course traits match the profile
-            elif match_ratio >= 0.6:
-                bonus += 2.0  # Majority of course traits match
-        
-        # Cap bonus at 20 points
+                    best_weight = max(best_weight, ut_weight)
+            if best_weight > 0:
+                best_weights[course_trait] = best_weight
+                base = 3.0 if course_trait in GENERIC_TRAITS else 6.0
+                bonus += base * best_weight  # Scales from full pts (core trait) to near-0 (peripheral)
+
+        # Breadth bonus: only awarded when matched traits are STRONGLY relevant
+        # (average match-weight is high). This stops a course with many weak peripheral
+        # matches from outscoring a course with one strong primary match.
+        if course_traits_lower:
+            avg_weight = sum(best_weights.get(ct, 0.0) for ct in course_traits_lower) / len(course_traits_lower)
+            if avg_weight >= 0.5:
+                bonus += 4.0  # Most course traits are central to the user's profile
+            elif avg_weight >= 0.3:
+                bonus += 2.0  # Moderate overall relevance
+
         return min(bonus, 20.0)
     
     def _determine_rejected_topic(self, question: dict, chosen_option: dict) -> Optional[str]:
@@ -5109,10 +5115,23 @@ class AdaptiveAssessmentEngine:
         # Initialize all courses with base score
         course_scores = {name: 50.0 for name in self.courses}
         
-        # Apply initial GWA/Strand bonuses (not exclusions!)
+        # Apply initial GWA/Strand/Profile bonuses
         for course_name, course in self.courses.items():
-            # GWA bonus — scaled by how well user meets the requirement
-            if user_gwa and course.get('minimum_gwa'):
+            # Profile bonus is computed first so GWA bonus can be applied conditionally.
+            # When a user has profile data, courses with no trait overlap with the user's
+            # interests/skills should NOT be lifted by the GWA bonus — otherwise dozens of
+            # irrelevant courses (e.g. Animation, Education, Agriculture) will flood the
+            # initial Top Matches when the user has low GWA for the "right" courses.
+            course_traits = self.course_traits.get(course_name, set())
+            profile_bonus = 0.0
+            if user_interests or user_skills:
+                profile_bonus = self._calculate_profile_bonus(user_interests, user_skills, course_traits)
+                course_scores[course_name] += profile_bonus
+
+            # GWA bonus — only awarded when the course has some relevance to the user's
+            # profile (profile_bonus >= 1.0), OR when no profile data is available at all.
+            has_profile_relevance = (not (user_interests or user_skills)) or (profile_bonus >= 1.0)
+            if has_profile_relevance and user_gwa and course.get('minimum_gwa'):
                 gap = float(user_gwa) - float(course['minimum_gwa'])
                 if gap >= 5:
                     course_scores[course_name] += 6   # Well above requirement
@@ -5136,12 +5155,6 @@ class AdaptiveAssessmentEngine:
                         course_scores[course_name] += 5   # Strong trait overlap
                     elif len(overlap) >= 1:
                         course_scores[course_name] += 2   # Some trait overlap
-            
-            # Add profile bonus from interests/skills
-            if user_interests or user_skills:
-                course_traits = self.course_traits.get(course_name, set())
-                profile_bonus = self._calculate_profile_bonus(user_interests, user_skills, course_traits)
-                course_scores[course_name] += profile_bonus
         
         # Build initial branch weights from user profile
         profile_ranked = list(self._get_profile_priority_traits_ranked(user_interests, user_skills, normalized_strand))
