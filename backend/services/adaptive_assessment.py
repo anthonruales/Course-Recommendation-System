@@ -4920,6 +4920,21 @@ class AdaptiveAssessmentEngine:
         dominant = self._get_dominant_traits(session)
         return trait in dominant
 
+    @staticmethod
+    def _is_rejection_option(opt: dict) -> bool:
+        """Check if an option is a 'none'/'not interested' rejection choice.
+        These options should be excluded from trait-relevance checks during
+        question selection, because their traits don't represent the question's
+        actual topic."""
+        if opt.get('option_id') == -1:
+            return True
+        text = opt.get('option_text', '').lower()
+        return any(phrase in text for phrase in [
+            'none', 'not interested', "don't want", 'prefer not',
+            'not for me', "i don't", 'none of these', 'not really',
+            "i'm not", 'im not'
+        ])
+
     def _has_dominant_trait_overlap(self, question: dict, session: AdaptiveSession) -> bool:
         """
         Check if a question has meaningful overlap with the user's DOMINANT pattern
@@ -4943,7 +4958,11 @@ class AdaptiveAssessmentEngine:
         
         options = question.get('options', [])
         matching_options = 0
+        substantive_count = 0
         for opt in options:
+            if self._is_rejection_option(opt):
+                continue
+            substantive_count += 1
             trait_tags = opt.get('trait_tags', {})
             opt_matches = False
             if isinstance(trait_tags, dict):
@@ -4965,7 +4984,7 @@ class AdaptiveAssessmentEngine:
         
         # For questions with many options, require at least 2 matches
         # to ensure the question is genuinely relevant, not tangentially connected
-        if len(options) >= 6:
+        if substantive_count >= 6:
             return matching_options >= 2
         return matching_options >= 1
 
@@ -4993,6 +5012,8 @@ class AdaptiveAssessmentEngine:
         
         options = question.get('options', [])
         for opt in options:
+            if self._is_rejection_option(opt):
+                continue
             trait_tags = opt.get('trait_tags', {})
             if isinstance(trait_tags, dict):
                 for trait in trait_tags:
@@ -5024,10 +5045,15 @@ class AdaptiveAssessmentEngine:
         if not options:
             return 0.0
         
+        # Only count substantive options (not rejection/none choices)
+        substantive_options = [opt for opt in options if not self._is_rejection_option(opt)]
+        if not substantive_options:
+            return 0.0
+        
         matching_options = 0
         total_match_weight = 0.0
         
-        for opt in options:
+        for opt in substantive_options:
             trait_tags = opt.get('trait_tags', {})
             if isinstance(trait_tags, dict):
                 for trait, weight in trait_tags.items():
@@ -5048,8 +5074,8 @@ class AdaptiveAssessmentEngine:
                     total_match_weight += 1.0
         
         # Score: ratio of matching options + weight bonus
-        option_ratio = matching_options / len(options)
-        weight_bonus = min(total_match_weight / len(options), 1.0)
+        option_ratio = matching_options / len(substantive_options)
+        weight_bonus = min(total_match_weight / len(substantive_options), 1.0)
         return (option_ratio + weight_bonus) / 2.0
 
     def create_session(self, user_id: int, user_gwa: float = None, user_strand: str = None, max_questions: int = 30, user_interests: str = None, user_skills: str = None) -> str:
@@ -5903,9 +5929,11 @@ class AdaptiveAssessmentEngine:
         
         # Track if this question is primarily about a rejected topic
         rejected_option_count = 0
-        total_options = len(options)
+        # Only count substantive options for rejection ratio
+        substantive_options = [opt for opt in options if not self._is_rejection_option(opt)]
+        total_options = len(substantive_options)
         
-        for opt in options:
+        for opt in substantive_options:
             trait_tags = opt.get('trait_tags', {})
             if isinstance(trait_tags, dict) and trait_tags:
                 for trait, weight in trait_tags.items():
@@ -6125,6 +6153,17 @@ class AdaptiveAssessmentEngine:
             # This prevents arbitrary traits from being added
             print(f"[NONE_OPTION] No traits added - user rejected this topic")
             chosen_trait = None
+        elif is_profile_none_option:
+            # "I don't see what I want" — update course scores using profile traits
+            # but do NOT add them to trait_scores (which drives question selection).
+            # This prevents the profile-derived traits from making every question
+            # in the database appear relevant.
+            if isinstance(chosen_trait_tags, dict) and chosen_trait_tags:
+                primary_trait = max(chosen_trait_tags, key=chosen_trait_tags.get)
+                for trait, weight in chosen_trait_tags.items():
+                    traits_to_boost.append((trait, weight))
+                chosen_trait = primary_trait
+            print(f"[NONE_OPTION_PROFILE] Course scores updated but traits NOT added to trait_scores")
         elif isinstance(chosen_trait_tags, dict) and chosen_trait_tags:
             # Weighted dict format: apply each trait with its weight
             primary_trait = max(chosen_trait_tags, key=chosen_trait_tags.get)
@@ -6169,7 +6208,9 @@ class AdaptiveAssessmentEngine:
             self._update_course_scores(session, trait, trait_weight=weight, is_primary=is_primary)
         
         # --- Track topic continuity for profile-driven question selection ---
-        if chosen_trait:
+        # --- Track topic continuity for profile-driven question selection ---
+        # Skip for profile-based "none" option — its traits should not steer questions
+        if chosen_trait and not is_profile_none_option:
             session.recent_traits.append(chosen_trait)
             # Determine new current topic from recent window
             new_topic, _ = self._get_current_topic_and_adjacent(session)
@@ -6183,7 +6224,8 @@ class AdaptiveAssessmentEngine:
         # IMPORTANT: Only let the answer trait drive the chain if it's consistent
         # with the user's dominant pattern. If the trait is a minority (one-off),
         # keep the chain following the dominant trait instead.
-        if chosen_trait and not is_none_option:
+        # Skip for profile-based "none" option — its traits should not steer questions
+        if chosen_trait and not is_none_option and not is_profile_none_option:
             session.last_answer_trait = chosen_trait
             is_dominant = self._is_dominant_trait(chosen_trait, session)
             early_stage = len(session.answered_questions) < 5
@@ -6216,7 +6258,8 @@ class AdaptiveAssessmentEngine:
         
         # --- Decision Tree: Update branch weights based on answer ---
         # When user picks a trait, BOOST the corresponding branch and adjacent branches
-        if chosen_trait and not is_none_option:
+        # Skip for profile-based "none" option — its traits should not steer questions
+        if chosen_trait and not is_none_option and not is_profile_none_option:
             chosen_branch = TRAIT_TO_BRANCH.get(chosen_trait, "")
             if chosen_branch:
                 # Strong boost to the chosen branch
