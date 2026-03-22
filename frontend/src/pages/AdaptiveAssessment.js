@@ -11,6 +11,21 @@ import NavBar from '../components/NavBar';
  * - You can see courses narrowing down in real-time
  * - Assessment runs in a focused 30-question flow
  */
+// Helpers to persist/restore assessment state across browser refreshes
+const ASSESSMENT_STORAGE_KEY = 'assessmentSessionState';
+const saveAssessmentState = (state) => {
+  try { sessionStorage.setItem(ASSESSMENT_STORAGE_KEY, JSON.stringify(state)); } catch {}
+};
+const clearAssessmentState = () => {
+  sessionStorage.removeItem(ASSESSMENT_STORAGE_KEY);
+};
+const getSavedAssessmentState = () => {
+  try {
+    const raw = sessionStorage.getItem(ASSESSMENT_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch { return null; }
+};
+
 function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewProfile, onViewActivity }) {
   // Session state
   const [sessionId, setSessionId] = useState(null);
@@ -39,27 +54,66 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
   // Results
   const [isComplete, setIsComplete] = useState(false);
   const [results, setResults] = useState(null);
+  
+  // Whether we're attempting to restore a previous session
+  const [isRestoring, setIsRestoring] = useState(false);
 
-  // Check academic profile on mount
+  // Check academic profile on mount AND try to restore a saved session
   useEffect(() => {
     const userId = localStorage.getItem('userId');
-    if (userId) {
-      authFetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`)
-        .then(res => res.json())
-        .then(data => {
-          if (!data.has_academic_info) {
-            alert('⚠️ Please complete your Academic Profile first!\n\nYou need to fill in your GWA and SHS Strand before taking the assessment.');
-            onBack();
-          }
-        })
-        .catch(err => {
-          console.error('Error checking academic info:', err);
-        });
-    } else {
+    if (!userId) {
       alert('User ID not found. Please log in again.');
       onBack();
+      return;
     }
-  }, [onBack]);
+
+    authFetch(`${process.env.REACT_APP_API_URL}/user/${userId}/academic-info`)
+      .then(res => res.json())
+      .then(data => {
+        if (!data.has_academic_info) {
+          alert('⚠️ Please complete your Academic Profile first!\n\nYou need to fill in your GWA and SHS Strand before taking the assessment.');
+          onBack();
+          return;
+        }
+
+        // Academic profile OK — try to restore a saved session
+        const saved = getSavedAssessmentState();
+        if (saved && saved.sessionId) {
+          setIsRestoring(true);
+          authFetch(`${process.env.REACT_APP_API_URL}/adaptive/status/${saved.sessionId}`)
+            .then(res => {
+              if (res.ok) return res.json();
+              throw new Error('Session expired');
+            })
+            .then(status => {
+              if (!status.is_complete) {
+                // Session still alive — restore UI state
+                setSessionId(saved.sessionId);
+                setCurrentQuestion(saved.currentQuestion);
+                setCurrentRound(saved.currentRound);
+                setMaxRounds(saved.maxRounds);
+                setConfidence(saved.confidence);
+                setCoursesRemaining(saved.coursesRemaining);
+                setTraitsDiscovered(saved.traitsDiscovered);
+                setTopCoursesPreview(saved.topCoursesPreview || []);
+                setAllTraits(saved.allTraits || []);
+              } else {
+                // Session already completed on server side
+                clearAssessmentState();
+              }
+            })
+            .catch(() => {
+              // Session expired or server restarted
+              clearAssessmentState();
+            })
+            .finally(() => setIsRestoring(false));
+        }
+      })
+      .catch(err => {
+        console.error('Error checking academic info:', err);
+      });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Start the adaptive assessment
   const startAssessment = async () => {
@@ -92,7 +146,19 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
         setCurrentRound(data.first_question.round);
         setCoursesRemaining(data.first_question.courses_remaining);
         setConfidence(data.first_question.confidence);
-        setTopCoursesPreview(data.first_question.top_courses_preview || []);  // Show initial profile-based courses
+        setTopCoursesPreview(data.first_question.top_courses_preview || []);
+        // Persist session so a browser refresh can resume
+        saveAssessmentState({
+          sessionId: data.session_id,
+          currentQuestion: data.first_question.question,
+          currentRound: data.first_question.round,
+          maxRounds: data.max_questions,
+          confidence: data.first_question.confidence,
+          coursesRemaining: data.first_question.courses_remaining,
+          traitsDiscovered: 0,
+          topCoursesPreview: data.first_question.top_courses_preview || [],
+          allTraits: []
+        });
       } else {
         setError(data.detail || 'Failed to start assessment');
       }
@@ -135,6 +201,7 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
         setIsComplete(true);
         setResults(data.recommendations);
         setIsLoading(false);  // Only set loading false after completion
+        clearAssessmentState();
       } else {
         // Update state with new info
         setLastTraitRecorded(data.trait_recorded);
@@ -145,6 +212,19 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
         setTraitsDiscovered(data.traits_discovered);
         setTopCoursesPreview(data.top_courses_preview || []);
         setCanFinishEarly(data.can_finish_early);
+        
+        // Persist updated state for refresh recovery
+        saveAssessmentState({
+          sessionId,
+          currentQuestion: data.next_question.question,
+          currentRound: data.current_round,
+          maxRounds,
+          confidence: data.confidence,
+          coursesRemaining: data.courses_remaining,
+          traitsDiscovered: data.traits_discovered,
+          topCoursesPreview: data.top_courses_preview || [],
+          allTraits: data.all_traits || []
+        });
         
         // Brief delay for transition effect - IMPORTANT: Keep isLoading true until question is updated
         // to prevent user from clicking again with old question_id
@@ -188,6 +268,19 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
       setTraitsDiscovered(data.traits_discovered);
       setTopCoursesPreview(data.top_courses_preview || []);
       
+      // Persist for refresh recovery
+      saveAssessmentState({
+        sessionId,
+        currentQuestion: data.next_question,
+        currentRound: data.current_round,
+        maxRounds,
+        confidence: data.confidence,
+        coursesRemaining,
+        traitsDiscovered: data.traits_discovered,
+        topCoursesPreview: data.top_courses_preview || [],
+        allTraits
+      });
+      
       setTimeout(() => {
         setCurrentQuestion(data.next_question);
         setIsTransitioning(false);
@@ -223,6 +316,7 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
         setConfidence(data.confidence);
         setIsComplete(true);
         setResults(data.recommendations);
+        clearAssessmentState();
       } else {
         alert(data.detail || 'Cannot finish early yet');
       }
@@ -234,8 +328,15 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
     }
   };
 
+  // Wrap exit to also clear saved session
+  const handleExit = () => {
+    clearAssessmentState();
+    onBack();
+  };
+
   // Show results
   const handleShowResults = () => {
+    clearAssessmentState();
     if (results) {
       // Format for ResultsView - must match what standard assessment returns
       const formattedResults = {
@@ -262,6 +363,31 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
       onShowResults(formattedResults);
     }
   };
+
+  // RENDER: Restoring a saved session
+  if (isRestoring) {
+    return (
+      <div style={{
+        display: 'flex', justifyContent: 'center', alignItems: 'center',
+        height: '100vh',
+        background: 'linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #0f0f1a 100%)',
+        color: '#fff'
+      }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{
+            width: '50px', height: '50px',
+            border: '3px solid rgba(139, 92, 246, 0.3)',
+            borderTop: '3px solid #8b5cf6',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite',
+            margin: '0 auto 16px'
+          }} />
+          <p style={{ opacity: 0.7 }}>Resuming your assessment...</p>
+          <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+        </div>
+      </div>
+    );
+  }
 
   // RENDER: Start Screen
   if (!sessionId) {
@@ -556,7 +682,7 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
       {/* Compact top bar during questions */}
       <nav style={styles.questionNavbar}>
         <div style={styles.navContainer}>
-          <div style={styles.navBrand} onClick={onBack}>
+          <div style={styles.navBrand} onClick={handleExit}>
             <img src="/logo.png" alt="CoursePro" style={styles.navLogo} />
             <span style={styles.navBrandName}>CoursePro</span>
           </div>
@@ -574,7 +700,7 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
           </div>
 
           <div style={styles.navRight}>
-            <button onClick={onBack} style={styles.exitBtn}>← Exit</button>
+            <button onClick={handleExit} style={styles.exitBtn}>← Exit</button>
           </div>
         </div>
       </nav>
