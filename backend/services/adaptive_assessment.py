@@ -3786,6 +3786,61 @@ TRAIT_FOLLOWUP_MAP["People-Skill"] = _prepend_unique(
     [4156, 4157, 4158, 4159, 4160, 4176, 4177, 4178, 4179, 4180],
 )
 
+# ==================== APPLY EXPANSION QID REMAP ====================
+# Expansion dedup removed rephrased duplicate questions from the pool.
+# Remap stale QIDs in TRAIT_FOLLOWUP_MAP and DOMAIN_ENTRY_QUESTIONS so
+# they point to the canonical (kept) question IDs.
+try:
+    from data.questions_enhanced import EXPANSION_QID_REMAP as _QID_REMAP
+    if _QID_REMAP:
+        for _trait, _qids in TRAIT_FOLLOWUP_MAP.items():
+            _seen = set()
+            _remapped = []
+            for _qid in _qids:
+                _resolved = _QID_REMAP.get(_qid, _qid)
+                if _resolved not in _seen:
+                    _remapped.append(_resolved)
+                    _seen.add(_resolved)
+            TRAIT_FOLLOWUP_MAP[_trait] = _remapped
+        for _domain, _qids in DOMAIN_ENTRY_QUESTIONS.items():
+            _seen = set()
+            _remapped = []
+            for _qid in _qids:
+                _resolved = _QID_REMAP.get(_qid, _qid)
+                if _resolved not in _seen:
+                    _remapped.append(_resolved)
+                    _seen.add(_resolved)
+            DOMAIN_ENTRY_QUESTIONS[_domain] = _remapped
+except ImportError:
+    pass
+
+# ==================== APPLY SEMANTIC QID REMAP ====================
+# Semantic dedup removed same-meaning questions (different options but
+# identical conceptual question) from the pool. Remap stale QIDs.
+try:
+    from data.questions_enhanced import SEMANTIC_QID_REMAP as _SEM_REMAP
+    if _SEM_REMAP:
+        for _trait, _qids in TRAIT_FOLLOWUP_MAP.items():
+            _seen = set()
+            _remapped = []
+            for _qid in _qids:
+                _resolved = _SEM_REMAP.get(_qid, _qid)
+                if _resolved not in _seen:
+                    _remapped.append(_resolved)
+                    _seen.add(_resolved)
+            TRAIT_FOLLOWUP_MAP[_trait] = _remapped
+        for _domain, _qids in DOMAIN_ENTRY_QUESTIONS.items():
+            _seen = set()
+            _remapped = []
+            for _qid in _qids:
+                _resolved = _SEM_REMAP.get(_qid, _qid)
+                if _resolved not in _seen:
+                    _remapped.append(_resolved)
+                    _seen.add(_resolved)
+            DOMAIN_ENTRY_QUESTIONS[_domain] = _remapped
+except ImportError:
+    pass
+
 # ==================== INTEREST KEYWORD → DOMAIN ====================
 INTEREST_DOMAIN_MAP = {
     "computer": "technology", "programming": "technology", "coding": "technology",
@@ -4937,8 +4992,13 @@ class AdaptiveAssessmentEngine:
             reverse=True
         )
         dominant = {t for t, s in sorted_traits[:top_n]}
-        # Always include top profile seeds as dominant context
-        dominant.update(session.profile_seed_traits[:3])
+        # Include profile seeds as dominant only during the warm-up phase
+        # (first 10 answers). After that, dominance is driven purely by
+        # the user's actual accumulated trait scores, so a pivot in their
+        # answers (e.g., from animation to programming) is reflected in
+        # the ranking instead of being permanently anchored to the profile.
+        if len(session.answered_questions) < 10:
+            dominant.update(session.profile_seed_traits[:3])
         return dominant
 
     def _is_dominant_trait(self, trait: str, session: AdaptiveSession) -> bool:
@@ -5852,6 +5912,21 @@ class AdaptiveAssessmentEngine:
                 return cat
             return None
 
+        # Track how many times each Academic Interest sub-category has been shown
+        if not hasattr(session, '_category_shown_count'):
+            session._category_shown_count = {}
+            for prev_qid in session.answered_questions:
+                prev_q = self.questions.get(prev_qid)
+                if prev_q:
+                    ckey = _category_key(prev_q)
+                    if ckey:
+                        session._category_shown_count[ckey] = session._category_shown_count.get(ckey, 0) + 1
+
+        # Allow up to this many questions per Academic Interest sub-category
+        # before considering further questions in that category as duplicates.
+        # This ensures that interest-aligned questions are not exhausted in 1 round.
+        _MAX_PER_INTEREST_CATEGORY = 3
+
         def _is_dup(q):
             """Return True if this question is a semantic duplicate of one already shown."""
             # Check 1: exact option text
@@ -5862,10 +5937,12 @@ class AdaptiveAssessmentEngine:
             tfp = _trait_fp(q)
             if tfp and tfp in session._trait_fingerprints_seen:
                 return True
-            # Check 3: narrow category already covered
+            # Check 3: narrow category already covered (allow up to N per sub-category)
             ckey = _category_key(q)
-            if ckey and ckey in session._categories_seen:
-                return True
+            if ckey:
+                shown = session._category_shown_count.get(ckey, 0)
+                if shown >= _MAX_PER_INTEREST_CATEGORY:
+                    return True
             return False
 
         def _record_fingerprints(q):
@@ -5878,6 +5955,7 @@ class AdaptiveAssessmentEngine:
             ckey = _category_key(q)
             if ckey:
                 session._categories_seen.add(ckey)
+                session._category_shown_count[ckey] = session._category_shown_count.get(ckey, 0) + 1
 
         # Lazily initialize the new tracking sets (avoids dataclass change)
         if not hasattr(session, '_trait_fingerprints_seen'):
@@ -5913,8 +5991,31 @@ class AdaptiveAssessmentEngine:
                 replacement_found = True
                 print(f"[DEDUP] Swapped Q with semantic-duplicate -> Q{alt_qid}")
                 break
-            # Pass 2: widen to ANY unanswered question with unseen fingerprints
-            if not replacement_found:
+            # Pass 1.5: When profile lock is active, prefer ANY profile question
+            # (even a sub-category duplicate) over leaving the profile pool.
+            # A repeated interest-area question is better than a generic one.
+            if not replacement_found and strict_profile_lock:
+                for alt_qid, alt_q in self.questions.items():
+                    if alt_qid in asked or alt_qid == selected_qid:
+                        continue
+                    if not _is_allowed_profile_question(alt_qid):
+                        continue
+                    if not _is_relevant_question(alt_qid):
+                        continue
+                    # Allow category duplicates here — skip only exact option/trait dups
+                    txt_fp = _option_text_fp(alt_q)
+                    if len(txt_fp) >= 4 and txt_fp in session.option_fingerprints_seen:
+                        continue
+                    tfp = _trait_fp(alt_q)
+                    if tfp and tfp in session._trait_fingerprints_seen:
+                        continue
+                    selected_qid = alt_qid
+                    best_question = alt_q
+                    replacement_found = True
+                    print(f"[DEDUP] Swapped Q (profile priority, relaxed category) -> Q{alt_qid}")
+                    break
+            # Pass 2: widen to ANY unanswered question — only when profile lock is OFF
+            if not replacement_found and not strict_profile_lock:
                 for alt_qid, alt_q in self.questions.items():
                     if alt_qid in asked or alt_qid == selected_qid:
                         continue
@@ -6500,26 +6601,14 @@ class AdaptiveAssessmentEngine:
             node = QUESTION_TREE_NODES.get(last_qid, {})
             question_weight = node.get("weight", 1.0)
         
-        # Early answers also have extra impact (profile confirmation)
-        early_boost_multiplier = 1.0
-        if session.round_number <= 3:
-            early_boost_multiplier = 2.0  # First 3 answers: 2x impact
-        elif session.round_number <= 7:
-            early_boost_multiplier = 1.5  # Next 4 answers: 1.5x impact
-        
-        # Dampen boost for minority traits — prevents one off-topic answer
-        # from swinging course recommendations away from the user's pattern
-        is_dominant = self._is_dominant_trait(chosen_trait, session)
-        early_stage = len(session.answered_questions) < 5
-        dominance_multiplier = 1.0 if (is_dominant or early_stage) else 0.15
-        
         primary_bonus = 1.3 if is_primary else 1.0
 
-        # Combined multiplier: question weight × early boost × dominance × trait weight × primary bonus
+        # Combined multiplier: question weight × trait weight × primary bonus
+        # All answers are weighted equally by position — the user's overall
+        # pattern (volume of answers in a domain) determines the final ranking,
+        # not which questions were asked first.
         total_multiplier = (
             question_weight *
-            early_boost_multiplier *
-            dominance_multiplier *
             trait_weight *
             primary_bonus
         )
