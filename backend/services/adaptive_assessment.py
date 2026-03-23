@@ -5821,12 +5821,84 @@ class AdaptiveAssessmentEngine:
         # ─── RECORD SELECTION ───
         best_question = self.questions[selected_qid]
 
-        # --- Option fingerprint deduplication ---
-        # Never show two questions with identical option choices in the same session.
-        # This prevents the user from seeing "Designing experiments / Running instruments / ..."
-        # repeated across multiple questions (which all measured the same 6 traits).
-        opt_fp = tuple(o.get("option_text", "") for o in best_question.get("options", []))
-        if len(opt_fp) >= 4 and opt_fp in session.option_fingerprints_seen:
+        # --- ENHANCED SEMANTIC DEDUPLICATION ---
+        # Prevents showing two questions that look or measure the same thing.
+        # Uses THREE fingerprints:
+        #   1. Exact option text tuple  (catches verbatim duplicates)
+        #   2. Trait fingerprint: sorted primary traits (weight ≥ 0.8) across
+        #      all options — catches rephrased questions with identical choices
+        #   3. Specific sub-category: e.g. "Academic Interest - Programming & Coding"
+        #      so the same narrow topic is never asked twice
+
+        def _option_text_fp(q):
+            return tuple(o.get("option_text", "") for o in q.get("options", []))
+
+        def _trait_fp(q):
+            """Sorted tuple of primary traits (w ≥ 0.8) across all options."""
+            traits = set()
+            for opt in q.get("options", []):
+                tt = opt.get("trait_tags", {})
+                if isinstance(tt, dict):
+                    for t, w in tt.items():
+                        if w >= 0.8:
+                            traits.add(t)
+            return tuple(sorted(traits)) if traits else ()
+
+        def _category_key(q):
+            """Return the question's narrow sub-category (if any)."""
+            cat = q.get("category", "")
+            # Only enforce for narrow "Academic Interest - X" categories
+            if cat.startswith("Academic Interest"):
+                return cat
+            return None
+
+        def _is_dup(q):
+            """Return True if this question is a semantic duplicate of one already shown."""
+            # Check 1: exact option text
+            txt_fp = _option_text_fp(q)
+            if len(txt_fp) >= 4 and txt_fp in session.option_fingerprints_seen:
+                return True
+            # Check 2: trait fingerprint
+            tfp = _trait_fp(q)
+            if tfp and tfp in session._trait_fingerprints_seen:
+                return True
+            # Check 3: narrow category already covered
+            ckey = _category_key(q)
+            if ckey and ckey in session._categories_seen:
+                return True
+            return False
+
+        def _record_fingerprints(q):
+            """Record all fingerprints for a shown question."""
+            txt_fp = _option_text_fp(q)
+            session.option_fingerprints_seen.add(txt_fp)
+            tfp = _trait_fp(q)
+            if tfp:
+                session._trait_fingerprints_seen.add(tfp)
+            ckey = _category_key(q)
+            if ckey:
+                session._categories_seen.add(ckey)
+
+        # Lazily initialize the new tracking sets (avoids dataclass change)
+        if not hasattr(session, '_trait_fingerprints_seen'):
+            session._trait_fingerprints_seen = set()
+            # Back-fill from questions already answered in this session
+            for prev_qid in session.answered_questions:
+                prev_q = self.questions.get(prev_qid)
+                if prev_q:
+                    tfp = _trait_fp(prev_q)
+                    if tfp:
+                        session._trait_fingerprints_seen.add(tfp)
+        if not hasattr(session, '_categories_seen'):
+            session._categories_seen = set()
+            for prev_qid in session.answered_questions:
+                prev_q = self.questions.get(prev_qid)
+                if prev_q:
+                    ckey = _category_key(prev_q)
+                    if ckey:
+                        session._categories_seen.add(ckey)
+
+        if _is_dup(best_question):
             replacement_found = False
             # Pass 1: respect profile + relevance restrictions
             for alt_qid, alt_q in self.questions.items():
@@ -5834,38 +5906,36 @@ class AdaptiveAssessmentEngine:
                     continue
                 if not _is_relevant_question(alt_qid) or not _is_allowed_profile_question(alt_qid):
                     continue
-                alt_fp = tuple(o.get("option_text", "") for o in alt_q.get("options", []))
-                if alt_fp not in session.option_fingerprints_seen:
-                    selected_qid = alt_qid
-                    best_question = alt_q
-                    opt_fp = alt_fp
-                    replacement_found = True
-                    print(f"[DEDUP] Swapped Q with repeated option-set → Q{alt_qid}")
-                    break
-            # Pass 2: widen to ANY unanswered question with unseen options
+                if _is_dup(alt_q):
+                    continue
+                selected_qid = alt_qid
+                best_question = alt_q
+                replacement_found = True
+                print(f"[DEDUP] Swapped Q with semantic-duplicate -> Q{alt_qid}")
+                break
+            # Pass 2: widen to ANY unanswered question with unseen fingerprints
             if not replacement_found:
                 for alt_qid, alt_q in self.questions.items():
                     if alt_qid in asked or alt_qid == selected_qid:
                         continue
-                    alt_fp = tuple(o.get("option_text", "") for o in alt_q.get("options", []))
-                    if alt_fp not in session.option_fingerprints_seen:
-                        selected_qid = alt_qid
-                        best_question = alt_q
-                        opt_fp = alt_fp
-                        replacement_found = True
-                        print(f"[DEDUP] Swapped Q (widened) → Q{alt_qid}")
-                        break
-            # Pass 3: if still no replacement, skip this question and recurse (with depth limit)
+                    if _is_dup(alt_q):
+                        continue
+                    selected_qid = alt_qid
+                    best_question = alt_q
+                    replacement_found = True
+                    print(f"[DEDUP] Swapped Q (widened) -> Q{alt_qid}")
+                    break
+            # Pass 3: if still no replacement, skip and recurse (depth limit)
             if not replacement_found:
                 _depth = getattr(session, '_dedup_depth', 0)
                 if _depth < 5:
                     session._dedup_depth = _depth + 1
                     session.excluded_question_ids.add(selected_qid)
-                    print(f"[DEDUP] No unique-option replacement for Q{selected_qid}, skipping")
+                    print(f"[DEDUP] No unique replacement for Q{selected_qid}, skipping")
                     return self.get_next_question(session_id)
                 else:
                     session._dedup_depth = 0
-        session.option_fingerprints_seen.add(opt_fp)
+        _record_fingerprints(best_question)
 
         session.round_number = round_num
         
@@ -6934,6 +7004,28 @@ class AdaptiveAssessmentEngine:
                 fp = tuple(o.get("option_text", "") for o in q.get("options", []))
                 if len(fp) >= 4:
                     session.option_fingerprints_seen.add(fp)
+
+        # Rebuild semantic dedup tracking sets from remaining answered questions
+        if hasattr(session, '_trait_fingerprints_seen'):
+            session._trait_fingerprints_seen = set()
+            session._categories_seen = set()
+            for qid in session.answered_questions:
+                q = self.questions.get(qid)
+                if q:
+                    # Trait fingerprint
+                    traits = set()
+                    for opt in q.get("options", []):
+                        tt = opt.get("trait_tags", {})
+                        if isinstance(tt, dict):
+                            for t, w in tt.items():
+                                if w >= 0.8:
+                                    traits.add(t)
+                    if traits:
+                        session._trait_fingerprints_seen.add(tuple(sorted(traits)))
+                    # Category key
+                    cat = q.get("category", "")
+                    if cat.startswith("Academic Interest"):
+                        session._categories_seen.add(cat)
         
         # Clean up category_history for the undone question and recalculate focus
         if question:

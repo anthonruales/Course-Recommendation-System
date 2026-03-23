@@ -2776,7 +2776,51 @@ def get_or_init_adaptive_engine(db: Session) -> AdaptiveAssessmentEngine:
                 "options": options_list
             })
 
-        print(f"[ENGINE] Loaded {len(questions_data)} questions from source files ({len(processed_ids)} unique IDs)")
+        # ── SEMANTIC DEDUPLICATION ─────────────────────────────────────
+        # Many questions share the exact same set of primary option‑traits
+        # (weight ≥ 0.8), meaning they measure the same thing with rephrased
+        # text.  Group by trait fingerprint and keep only ONE per group
+        # (lowest question_id) so users never see "the same question again."
+        # Decision‑tree questions are never pruned.
+        tree_qids = set(q['question_id'] for q in DECISION_TREE_QUESTIONS)
+
+        def _trait_fingerprint(q):
+            """Sorted tuple of primary traits (w ≥ 0.8) across all options."""
+            traits = []
+            for opt in q.get("options", []):
+                tt = opt.get("trait_tags", {})
+                if isinstance(tt, dict):
+                    for t, w in tt.items():
+                        if w >= 0.8:
+                            traits.append(t)
+            return tuple(sorted(set(traits)))
+
+        seen_fps = {}          # fingerprint → kept question_id
+        deduped_data = []
+        removed_count = 0
+        for q in questions_data:
+            qid = q["question_id"]
+            # Always keep decision‑tree questions and core questions (≤ 57)
+            if qid in tree_qids or qid <= 57:
+                deduped_data.append(q)
+                continue
+            fp = _trait_fingerprint(q)
+            if not fp:                       # no high‑weight traits → keep
+                deduped_data.append(q)
+                continue
+            # Also factor in the category so that different categories with
+            # the same traits still get one representative each.
+            cat = q.get("category", "")
+            key = (fp, cat)
+            if key not in seen_fps:
+                seen_fps[key] = qid
+                deduped_data.append(q)
+            else:
+                removed_count += 1
+
+        questions_data = deduped_data
+        print(f"[ENGINE] Loaded {len(questions_data)} questions after dedup "
+              f"(removed {removed_count} trait‑duplicate questions)")
         _adaptive_engine = AdaptiveAssessmentEngine(courses_data, questions_data)
     
     return _adaptive_engine
