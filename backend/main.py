@@ -99,14 +99,76 @@ load_dotenv()
 _otp_store: dict = {}
 
 @asynccontextmanager
+# ========== TIMEZONE HELPER ==========
+def _format_taken_at(dt):
+    """Format a taken_at datetime to ISO string with proper Manila timezone.
+    Works correctly regardless of whether the DB server is in UTC or Asia/Manila."""
+    if dt is None:
+        return None
+    # If the datetime is naive (no tzinfo), we need to figure out what timezone it's in.
+    # We check the DB server timezone at startup and store it.
+    import pytz
+    manila = pytz.timezone('Asia/Manila')
+    if dt.tzinfo is not None:
+        # Already timezone-aware — convert to Manila
+        return dt.astimezone(manila).strftime('%Y-%m-%dT%H:%M:%S') + '+08:00'
+    else:
+        # Naive datetime — assume it came from the DB server's timezone
+        server_tz = getattr(_format_taken_at, '_server_tz', None)
+        if server_tz:
+            localized = server_tz.localize(dt)
+        else:
+            # Fallback: assume UTC (Railway default)
+            localized = pytz.utc.localize(dt)
+        return localized.astimezone(manila).strftime('%Y-%m-%dT%H:%M:%S') + '+08:00'
+
+# ========== PYTHON SOURCE QUESTION/OPTION LOOKUP ==========
+_source_questions = {}  # {question_id: {question_text, category, options: {option_id: {...}}}}
+
+def _build_source_lookup():
+    """Build a fast lookup dict from Python source questions for fallback."""
+    global _source_questions
+    if _source_questions:
+        return
+    for q in QUESTIONS_POOL:
+        qid = q['question_id']
+        opts = {}
+        for opt in q.get('options', []):
+            oid = opt.get('option_id')
+            if oid:
+                opts[oid] = {
+                    'option_text': opt.get('option_text') or opt.get('text', ''),
+                    'trait_tag': opt.get('trait_tag') or opt.get('tag', ''),
+                }
+        _source_questions[qid] = {
+            'question_text': q.get('question_text') or q.get('question', ''),
+            'category': q.get('category', ''),
+            'options': opts
+        }
+    for q in DECISION_TREE_QUESTIONS:
+        qid = q['question_id']
+        if qid in _source_questions:
+            continue
+        opts = {}
+        for opt in q.get('options', []):
+            oid = opt.get('option_id')
+            if oid:
+                trait_tags = opt.get('trait_tags', {})
+                primary_trait = max(trait_tags, key=trait_tags.get) if trait_tags else ''
+                opts[oid] = {
+                    'option_text': opt.get('option_text', ''),
+                    'trait_tag': primary_trait,
+                }
+        _source_questions[qid] = {
+            'question_text': q.get('question_text', ''),
+            'category': q.get('category', ''),
+            'options': opts
+        }
+    print(f"[SOURCE] Built fallback lookup: {len(_source_questions)} questions")
+
+
 async def lifespan(app: FastAPI):
     try:
-        # [DEPLOYMENT TRACKER] Print startup time and verify code version
-        startup_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        print(f"\n{'='*60}")
-        print(f"[DEPLOYMENT] Backend started at {startup_time} (Manila time: UTC+8)")
-        print(f"[DEPLOYMENT] This version includes: timezone +08:00 offset, StudentAnswer logging")
-        print(f"{'='*60}\n")
         print("[START] Synchronizing database schema...")
         
         # SQLAlchemy will handle schema updates automatically via create_all()
@@ -185,6 +247,8 @@ async def lifespan(app: FastAPI):
                     'confidence_score': 'FLOAT',
                     'user_gwa': 'FLOAT',
                     'user_strand': 'VARCHAR(50)',
+                    'traits_found': 'INTEGER',
+                    'answered_questions_json': 'JSON',
                 }
                 for col_name, col_type in migrations.items():
                     if col_name not in existing_cols:
@@ -608,6 +672,26 @@ def sync_questions_db():
         db.rollback()
     finally:
         db.close()
+
+    # Detect DB server timezone for timestamp formatting
+    try:
+        import pytz
+        db2 = database.SessionLocal()
+        tz_result = db2.execute(text('SHOW timezone')).fetchone()
+        db2.close()
+        server_tz_name = tz_result[0] if tz_result else 'UTC'
+        # Map common synonyms
+        tz_map = {'Asia/Taipei': 'Asia/Manila', 'PRC': 'Asia/Shanghai'}
+        server_tz_name = tz_map.get(server_tz_name, server_tz_name)
+        _format_taken_at._server_tz = pytz.timezone(server_tz_name)
+        print(f"[TZ] Database server timezone detected: {tz_result[0] if tz_result else 'unknown'} -> using {server_tz_name}")
+    except Exception as tz_err:
+        print(f"[TZ] Could not detect DB timezone ({tz_err}), assuming UTC")
+        import pytz
+        _format_taken_at._server_tz = pytz.utc
+
+    # Build source question lookup for fallback
+    _build_source_lookup()
 
 
 def get_db():
@@ -2094,14 +2178,52 @@ def get_assessment_history(user_id: int, current_user: models.User = Depends(get
                     "chosen_option_text": chosen_option.option_text,
                     "trait_tag": chosen_option.trait_tag
                 })
-                # Collect trait for counting
                 if chosen_option.trait_tag:
                     discovered_traits.add(chosen_option.trait_tag)
             else:
-                missed_answers.append(f"q_id={answer.question_id}(found={question is not None}), opt_id={answer.chosen_option_id}(found={chosen_option is not None})")
+                # Fallback: look up from Python source data
+                src_q = _source_questions.get(answer.question_id)
+                if src_q:
+                    src_opt = src_q['options'].get(answer.chosen_option_id, {})
+                    answered_questions.append({
+                        "question_id": answer.question_id,
+                        "question_text": src_q['question_text'],
+                        "category": src_q['category'],
+                        "chosen_option_id": answer.chosen_option_id,
+                        "chosen_option_text": src_opt.get('option_text', 'Unknown option'),
+                        "trait_tag": src_opt.get('trait_tag', '')
+                    })
+                    if src_opt.get('trait_tag'):
+                        discovered_traits.add(src_opt['trait_tag'])
+                else:
+                    missed_answers.append(f"q_id={answer.question_id}, opt_id={answer.chosen_option_id}")
         
-        if len(student_answers) > 0 and len(answered_questions) < len(student_answers):
-            print(f"[WARN] attempt_id={attempt.attempt_id}: {len(student_answers)} StudentAnswer rows but only {len(answered_questions)} could be found. Missed: {missed_answers}")
+        if missed_answers:
+            print(f"[WARN] attempt_id={attempt.attempt_id}: {len(missed_answers)} answers could not be resolved. Missed: {missed_answers}")
+        
+        # If NO StudentAnswer rows found, try the JSON fallback on TestAttempt
+        if not answered_questions and not student_answers:
+            json_answers = getattr(attempt, 'answered_questions_json', None)
+            if json_answers and isinstance(json_answers, dict):
+                for q_id_str, opt_id in json_answers.items():
+                    q_id = int(q_id_str)
+                    opt_id = int(opt_id)
+                    src_q = _source_questions.get(q_id)
+                    if src_q:
+                        src_opt = src_q['options'].get(opt_id, {})
+                        answered_questions.append({
+                            "question_id": q_id,
+                            "question_text": src_q['question_text'],
+                            "category": src_q['category'],
+                            "chosen_option_id": opt_id,
+                            "chosen_option_text": src_opt.get('option_text', 'Unknown option'),
+                            "trait_tag": src_opt.get('trait_tag', '')
+                        })
+                        if src_opt.get('trait_tag'):
+                            discovered_traits.add(src_opt['trait_tag'])
+                if answered_questions:
+                    answer_count = len(answered_questions)
+                    print(f"[OK] Recovered {answer_count} answers from JSON fallback for attempt {attempt.attempt_id}")
         
         # Get recommendations for this attempt (ordered by score descending to preserve ranking)
         recommendations = db.query(models.Recommendation).filter(
@@ -2167,7 +2289,7 @@ def get_assessment_history(user_id: int, current_user: models.User = Depends(get
             "attempt_id": attempt.attempt_id,
             "test_name": test.test_name if test else "Assessment",
             "test_type": test.test_type if test else "assessment",
-            "taken_at": (attempt.taken_at.strftime('%Y-%m-%dT%H:%M:%S') + '+08:00') if attempt.taken_at else None,
+            "taken_at": _format_taken_at(attempt.taken_at),
             "questions_answered": answer_count,
             "max_questions": max_questions,  # Quiz length selected (30, 50, 60)
             "confidence_score": round(confidence_score, 1) if confidence_score else None,  # Final confidence %
@@ -2832,6 +2954,17 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
         # Save answered questions in a separate transaction so any FK failure
         # (question/option not in DB) does not undo the TestAttempt above.
         if answered_questions:
+            # Always store the raw JSON fallback on the TestAttempt itself,
+            # so answers are never lost even when FK inserts fail.
+            try:
+                clean_answers = {str(k): v for k, v in answered_questions.items() if v != -1}
+                test_attempt.answered_questions_json = clean_answers
+                db.commit()
+                print(f"[OK] Stored {len(clean_answers)} answers as JSON fallback on attempt {attempt_id}")
+            except Exception as json_err:
+                db.rollback()
+                print(f"[WARN] Could not store JSON fallback: {json_err}")
+            
             try:
                 answer_count = 0
                 for question_id, option_id in answered_questions.items():
@@ -2850,7 +2983,7 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
             except Exception as answer_err:
                 db.rollback()
                 _log(f"STUDENT ANSWER ERROR: {answer_err}")
-                print(f"[WARN] Could not save student answers (question/option IDs may not be in DB): {answer_err}")
+                print(f"[WARN] Could not save student answers (FK failure): {answer_err}")
         
         # Sync to user_test_attempts (per-user tracking table) with FULL quiz tracking data
         try:

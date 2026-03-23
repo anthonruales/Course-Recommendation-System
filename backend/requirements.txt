@@ -11,3 +11,4 @@ pydantic
 pydantic[email]
 reportlab
 requests
+pytz

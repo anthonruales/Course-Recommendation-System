@@ -57,10 +57,14 @@ class TestAttempt(Base):
     questions_presented = Column(Integer, nullable=True)  # How many questions were actually shown
     questions_answered = Column(Integer, nullable=True)  # How many questions were actually answered
     confidence_score = Column(Float, nullable=True)  # Final confidence percentage
+    traits_found = Column(Integer, nullable=True)  # Track traits discovered
     
     # User's academic profile at time of assessment (for historical PDF exports)
     user_gwa = Column(Float, nullable=True)  # User's GWA when they took this assessment
     user_strand = Column(String(50), nullable=True)  # User's strand when they took this assessment
+    
+    # Fallback: store answered questions as JSON when StudentAnswer FK inserts fail
+    answered_questions_json = Column(JSON, nullable=True)  # {question_id: option_id, ...}
     
     # Relationships
     user = relationship("User", back_populates="test_attempts")
