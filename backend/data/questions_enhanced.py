@@ -41123,6 +41123,165 @@ QUESTIONS_POOL_ENHANCED.extend(_AGRICULTURE_RESOURCE_EXPANSION_7)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
+# EXPANSION DEDUPLICATION
+# ══════════════════════════════════════════════════════════════════════════════
+# Expansion functions generate multiple rephrased prompts per question concept,
+# all sharing identical options and trait_tags.  This keeps only the first
+# question from each group and builds a remap dict for the engine.
+
+def _dedup_expansion_questions():
+    seen = {}
+    to_keep = []
+    remap = {}
+    for q in QUESTIONS_POOL_ENHANCED:
+        trait_fp = tuple(
+            tuple(sorted(o.get("trait_tags", {}).items()))
+            for o in q.get("options", [])
+        )
+        key = (q.get("category", ""), trait_fp)
+        if key not in seen:
+            seen[key] = q["question_id"]
+            to_keep.append(q)
+        else:
+            remap[q["question_id"]] = seen[key]
+    QUESTIONS_POOL_ENHANCED.clear()
+    QUESTIONS_POOL_ENHANCED.extend(to_keep)
+    return remap
+
+EXPANSION_QID_REMAP = _dedup_expansion_questions()
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SEMANTIC DEDUP — remove questions that ask the SAME CONCEPTUAL QUESTION
+# within the same category, even if options/trait_tags differ.
+# ══════════════════════════════════════════════════════════════════════════════
+
+import re as _re_sem
+
+def _semantic_dedup():
+    """Remove questions within the same category that ask the same thing."""
+
+    def _normalize(text):
+        text = text.lower().strip()
+        text = _re_sem.sub(r'^scenario:\s*', '', text)
+        text = _re_sem.sub(r'[^a-z0-9\s]', '', text)
+        return text
+
+    def _stem(word):
+        for suffix in ['ment','ness','tion','sion','ious','eous','ance','ence',
+                       'able','ible','ful','less','ive','ise','ize','ous',
+                       'ity','ies','ied','ers','est','ely','ally','ing',
+                       'ly','ed','es','er','en','al','s']:
+            if len(word) > len(suffix) + 2 and word.endswith(suffix):
+                return word[:-len(suffix)]
+        return word
+
+    _STOP = frozenset(
+        'a an the is are was were be been being have has had do does did '
+        'will would could should may might shall can need dare ought used '
+        'to of in for on with at by from as into through during before '
+        'after above below between out off over under again further then '
+        'once here there when where why how all each every both few more '
+        'most other some such no nor not only own same so than too very '
+        's t just don now d ll m o re ve y you your yours yourself i me '
+        'my mine we our this that these those it its he she they them his '
+        'her their what which who whom if about up but and or because '
+        'until while one first two second also get got go went much many '
+        'like well even still back feel feels sound sounds best fits pick '
+        'choose type kind style way'.split()
+    )
+
+    def _content_words(text):
+        words = _normalize(text).split()
+        return [_stem(w) for w in words if w not in _STOP and len(w) > 2]
+
+    def _word_overlap(q1, q2):
+        w1 = set(_content_words(q1))
+        w2 = set(_content_words(q2))
+        if not w1 or not w2:
+            return 0.0
+        return len(w1 & w2) / len(w1 | w2)
+
+    def _intent(text):
+        t = _normalize(text)
+        sigs = []
+        if any(w in t for w in ['excit','interest','appeal','drawn','attract','fascinat']):
+            sigs.append('INTEREST')
+        if any(w in t for w in ['motivat','drives you','keeps you','committed','value most','meaningful']):
+            sigs.append('MOTIVATION')
+        if any(w in t for w in ['part ','area ','aspect ','branch ','field ','side ','focus ']):
+            sigs.append('WHICH_PART')
+        if any(w in t for w in ['build','create','make','project','develop','ship']):
+            sigs.append('BUILD')
+        if any(w in t for w in ['skill','master','learn','improve','strengthen','expertise']):
+            sigs.append('SKILL')
+        if any(w in t for w in ['environment','setting','workplace','setup','work best']):
+            sigs.append('ENVIRONMENT')
+        if any(w in t for w in ['career','job','role','profession','position','work as']):
+            sigs.append('CAREER')
+        if any(w in t for w in ['challenge','problem','tackle','solve','fix']):
+            sigs.append('CHALLENGE')
+        if any(w in t for w in ['team','collabor','group','contribute']):
+            sigs.append('TEAM')
+        if any(w in t for w in ['scenario','imagine','what if','pretend','suppose']):
+            sigs.append('SCENARIO')
+        if any(w in t for w in ['present','show','represent','portfolio','showcase']):
+            sigs.append('SHOWCASE')
+        return tuple(sorted(sigs)) if sigs else ('GENERAL',)
+
+    def _similar(q1_text, q2_text):
+        overlap = _word_overlap(q1_text, q2_text)
+        s1 = set(_intent(q1_text))
+        s2 = set(_intent(q2_text))
+        shared = s1 & s2 - {'GENERAL'}
+        merged = s1 | s2
+        if overlap >= 0.3:
+            return True
+        if shared and overlap >= 0.1:
+            return True
+        if 'INTEREST' in merged and 'MOTIVATION' in merged:
+            return True
+        if 'BUILD' in merged and 'SHOWCASE' in merged:
+            return True
+        if 'INTEREST' in merged and 'WHICH_PART' in merged:
+            return True
+        return False
+
+    from collections import defaultdict as _dd
+    cat_qs = _dd(list)
+    for q in QUESTIONS_POOL_ENHANCED:
+        cat_qs[q.get('category', '')].append(q)
+
+    remove_ids = set()
+    remap = {}
+    for cat, qs in cat_qs.items():
+        if len(qs) < 2:
+            continue
+        clusters = []
+        for q in qs:
+            placed = False
+            for cluster in clusters:
+                if _similar(cluster[0]['question_text'], q['question_text']):
+                    cluster.append(q)
+                    placed = True
+                    break
+            if not placed:
+                clusters.append([q])
+        for cluster in clusters:
+            keep_id = cluster[0]['question_id']
+            for extra in cluster[1:]:
+                remove_ids.add(extra['question_id'])
+                remap[extra['question_id']] = keep_id
+
+    to_keep = [q for q in QUESTIONS_POOL_ENHANCED if q['question_id'] not in remove_ids]
+    QUESTIONS_POOL_ENHANCED.clear()
+    QUESTIONS_POOL_ENHANCED.extend(to_keep)
+    return remap
+
+SEMANTIC_QID_REMAP = _semantic_dedup()
+
+
+# ══════════════════════════════════════════════════════════════════════════════
 # OPTION DIVERSIFICATION ENGINE
 # ══════════════════════════════════════════════════════════════════════════════
 # Many builder functions produce groups of 4-5 question prompts that share

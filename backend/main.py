@@ -662,7 +662,7 @@ def sync_questions_db():
         # 3) Log stale questions (can't delete due to foreign keys from student_answers)
         stale_ids = [qid for qid in db_questions if qid not in source_ids]
         if stale_ids:
-            print(f"[SYNC] {len(stale_ids)} stale question(s) in DB (IDs: {stale_ids}) — skipped by engine")
+            print(f"[SYNC] {len(stale_ids)} stale question(s) in DB — skipped by engine (removed by dedup)")
 
         if not cleaned and not inserted and not updated and not stale_ids:
             print("[SYNC] Questions database is already in sync")
