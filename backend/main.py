@@ -2068,6 +2068,7 @@ def get_assessment_history(user_id: int, current_user: models.User = Depends(get
         
         answered_questions = []
         discovered_traits = set()  # Collect unique traits
+        missed_answers = []  # Track answers with missing Q/Option
         
         for answer in student_answers:
             question = db.query(models.Question).filter(
@@ -2090,6 +2091,11 @@ def get_assessment_history(user_id: int, current_user: models.User = Depends(get
                 # Collect trait for counting
                 if chosen_option.trait_tag:
                     discovered_traits.add(chosen_option.trait_tag)
+            else:
+                missed_answers.append(f"q_id={answer.question_id}(found={question is not None}), opt_id={answer.chosen_option_id}(found={chosen_option is not None})")
+        
+        if len(student_answers) > 0 and len(answered_questions) < len(student_answers):
+            print(f"[WARN] attempt_id={attempt.attempt_id}: {len(student_answers)} StudentAnswer rows but only {len(answered_questions)} could be found. Missed: {missed_answers}")
         
         # Get recommendations for this attempt (ordered by score descending to preserve ranking)
         recommendations = db.query(models.Recommendation).filter(
@@ -2821,17 +2827,20 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
         # (question/option not in DB) does not undo the TestAttempt above.
         if answered_questions:
             try:
+                answer_count = 0
                 for question_id, option_id in answered_questions.items():
                     if option_id == -1:
+                        _log(f"skipping virtual option for q_id={question_id}")
                         continue  # virtual "I don't see what I want" option — no DB row
                     db.add(models.StudentAnswer(
                         attempt_id=attempt_id,
                         question_id=question_id,
                         chosen_option_id=option_id
                     ))
+                    answer_count += 1
                 db.commit()
-                _log(f"student answers committed for attempt {attempt_id}")
-                print(f"[OK] Committed student answers for attempt {attempt_id}")
+                _log(f"student answers committed for attempt {attempt_id}: inserted {answer_count} records")
+                print(f"[OK] Committed {answer_count} student answers for attempt {attempt_id}")
             except Exception as answer_err:
                 db.rollback()
                 _log(f"STUDENT ANSWER ERROR: {answer_err}")
