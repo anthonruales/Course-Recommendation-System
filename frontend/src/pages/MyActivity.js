@@ -527,6 +527,7 @@ function MyActivity({ onBack, onViewProfile }) {
   const [seenActivities, setSeenActivities] = useState([]);
   const [sendingDigest, setSendingDigest] = useState(false);
   const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
+  const cardRefs = React.useRef({});
 
   useEffect(() => {
     const userId = getTokenPayload()?.user_id;
@@ -570,8 +571,15 @@ function MyActivity({ onBack, onViewProfile }) {
 
   // Handle activity card click - expand and mark as seen
   const handleActivityClick = (attemptId) => {
-    setExpandedAttempt(expandedAttempt === attemptId ? null : attemptId);
+    const isOpening = expandedAttempt !== attemptId;
+    setExpandedAttempt(isOpening ? attemptId : null);
     markAsSeen(attemptId);
+    if (isOpening) {
+      setTimeout(() => {
+        const el = cardRefs.current[attemptId];
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
   };
 
   const formatDate = (dateString) => {
@@ -579,7 +587,8 @@ function MyActivity({ onBack, onViewProfile }) {
     const date = new Date(dateString);
     return date.toLocaleString('en-US', {
       year: 'numeric', month: 'short', day: 'numeric',
-      hour: '2-digit', minute: '2-digit'
+      hour: '2-digit', minute: '2-digit',
+      timeZone: 'Asia/Manila'
     });
   };
 
@@ -762,7 +771,8 @@ function MyActivity({ onBack, onViewProfile }) {
               const isUnseen = !seenActivities.includes(activity.attempt_id);
               return (
               <div 
-                key={activity.attempt_id} 
+                key={activity.attempt_id}
+                ref={el => cardRefs.current[activity.attempt_id] = el}
                 style={{
                   ...styles.activityCard,
                   ...(isUnseen ? styles.activityCardUnseen : {})
@@ -892,7 +902,7 @@ function MyActivity({ onBack, onViewProfile }) {
                       <button 
                         style={{...styles.tabBtn, ...(expandedTab[activity.attempt_id] !== 'results' ? styles.tabBtnActive : {})}}
                         onClick={() => setExpandedTab({...expandedTab, [activity.attempt_id]: 'answers'})}
-                      >📋 Answers</button>
+                      >📋 Answers {activity.answered_questions?.length > 0 ? `(${activity.answered_questions.length})` : ''}</button>
                       <button 
                         style={{...styles.tabBtn, ...(expandedTab[activity.attempt_id] === 'results' ? styles.tabBtnActive : {})}}
                         onClick={() => setExpandedTab({...expandedTab, [activity.attempt_id]: 'results'})}
