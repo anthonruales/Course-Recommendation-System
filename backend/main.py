@@ -1825,9 +1825,9 @@ def get_user_details(user_id: int, admin_user: models.User = Depends(require_adm
     ).all()
     
     # Get user's assessment answers count
-    answers_count = db.query(models.StudentAnswer).filter(
-        models.StudentAnswer.user_id == user_id
-    ).count()
+    answers_count = db.query(models.StudentAnswer).join(
+        models.TestAttempt, models.TestAttempt.attempt_id == models.StudentAnswer.attempt_id
+    ).filter(models.TestAttempt.user_id == user_id).count()
     
     return {
         "user_id": user.user_id,
@@ -2155,7 +2155,7 @@ def get_assessment_history(user_id: int, current_user: models.User = Depends(get
             "attempt_id": attempt.attempt_id,
             "test_name": test.test_name if test else "Assessment",
             "test_type": test.test_type if test else "assessment",
-            "taken_at": attempt.taken_at,
+            "taken_at": (attempt.taken_at.strftime('%Y-%m-%dT%H:%M:%S') + '+08:00') if attempt.taken_at else None,
             "questions_answered": answer_count,
             "max_questions": max_questions,  # Quiz length selected (30, 50, 60)
             "confidence_score": round(confidence_score, 1) if confidence_score else None,  # Final confidence %

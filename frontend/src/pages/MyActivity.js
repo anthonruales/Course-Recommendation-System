@@ -577,7 +577,7 @@ function MyActivity({ onBack, onViewProfile }) {
   const formatDate = (dateString) => {
     if (!dateString) return 'N/A';
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
+    return date.toLocaleString('en-US', {
       year: 'numeric', month: 'short', day: 'numeric',
       hour: '2-digit', minute: '2-digit'
     });
@@ -901,19 +901,25 @@ function MyActivity({ onBack, onViewProfile }) {
 
                     <div style={{ marginTop: '15px' }}>
                       {expandedTab[activity.attempt_id] !== 'results' ? (
-                        activity.answered_questions?.map((qa, qIdx) => (
-                          <div key={qIdx} style={styles.cardItemAnswer}>
-                            <div style={styles.badgeAnswer}>{qIdx + 1}</div>
-                            <div style={{ flex: 1 }}>
-                              <span style={styles.categoryBadge}>{qa.category}</span>
-                              <h5 style={styles.questionText}>{qa.question_text}</h5>
-                              <div style={styles.reasoningBox}>
-                                <span style={styles.reasoningLabel}>Your Choice:</span>
-                                <p style={styles.reasoningText}>{qa.chosen_option_text}</p>
+                        activity.answered_questions?.length > 0 ? (
+                          activity.answered_questions.map((qa, qIdx) => (
+                            <div key={qIdx} style={styles.cardItemAnswer}>
+                              <div style={styles.badgeAnswer}>{qIdx + 1}</div>
+                              <div style={{ flex: 1 }}>
+                                <span style={styles.categoryBadge}>{qa.category}</span>
+                                <h5 style={styles.questionText}>{qa.question_text}</h5>
+                                <div style={styles.reasoningBox}>
+                                  <span style={styles.reasoningLabel}>Your Choice:</span>
+                                  <p style={styles.reasoningText}>{qa.chosen_option_text}</p>
+                                </div>
                               </div>
                             </div>
+                          ))
+                        ) : (
+                          <div style={{ textAlign: 'center', padding: '40px', color: '#64748b' }}>
+                            <p style={{ fontSize: '15px', margin: 0 }}>No answered questions recorded for this assessment.</p>
                           </div>
-                        ))
+                        )
                       ) : (
                         activity.recommended_courses?.length > 0 ? (
                           activity.recommended_courses.map((course, cIdx) => (
