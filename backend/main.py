@@ -101,6 +101,12 @@ _otp_store: dict = {}
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     try:
+        # [DEPLOYMENT TRACKER] Print startup time and verify code version
+        startup_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        print(f"\n{'='*60}")
+        print(f"[DEPLOYMENT] Backend started at {startup_time} (Manila time: UTC+8)")
+        print(f"[DEPLOYMENT] This version includes: timezone +08:00 offset, StudentAnswer logging")
+        print(f"{'='*60}\n")
         print("[START] Synchronizing database schema...")
         
         # SQLAlchemy will handle schema updates automatically via create_all()
