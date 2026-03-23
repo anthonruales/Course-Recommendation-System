@@ -406,35 +406,35 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
         <main className="assess-main-content" style={styles.mainContent}>
           <div style={styles.startScreen}>
             <div style={styles.heroBadge}>
-              <span>🧠</span> AI-Powered Analysis
+              <span>🧠</span> Course Recommendation
             </div>
             <h1 className="assess-hero-title" style={styles.heroTitle}>
-              Smart Career <span style={styles.heroGradient}>Assessment</span>
+              Find the Right <span style={styles.heroGradient}>Course for You</span>
             </h1>
             <p style={styles.heroSubtitle}>
-              Experience an intelligent assessment that adapts to YOUR answers!
+              Answer a few questions about your interests and we'll suggest courses that may be a good fit.
             </p>
 
             <div className="assess-feature-grid" style={styles.featureGrid}>
               <div style={styles.featureCard}>
-                <span style={styles.featureIcon}>🎯</span>
-                <h3>Adaptive Intelligence</h3>
-                <p>Each question is dynamically selected based on your responses</p>
+                <span style={styles.featureIcon}>📝</span>
+                <h3>Quick Questions</h3>
+                <p>A short set of questions about your interests, skills, and goals</p>
               </div>
               <div style={styles.featureCard}>
-                <span style={styles.featureIcon}>⚡</span>
-                <h3>Efficient Analysis</h3>
-                <p>Get precise recommendations with only 10-25 targeted questions</p>
+                <span style={styles.featureIcon}>🔄</span>
+                <h3>Adapts to You</h3>
+                <p>Questions adjust based on your answers so it stays relevant</p>
               </div>
               <div style={styles.featureCard}>
-                <span style={styles.featureIcon}>📊</span>
-                <h3>Real-Time Matching</h3>
-                <p>Watch your career matches refine as you progress</p>
+                <span style={styles.featureIcon}>🎓</span>
+                <h3>Course Suggestions</h3>
+                <p>Get a list of college courses that match your profile</p>
               </div>
               <div style={styles.featureCard}>
-                <span style={styles.featureIcon}>💼</span>
-                <h3>Personalized Guidance</h3>
-                <p>One-on-one style consultation powered by AI</p>
+                <span style={styles.featureIcon}>💡</span>
+                <h3>Simple Guidance</h3>
+                <p>Helpful starting point for exploring your course options</p>
               </div>
             </div>
 

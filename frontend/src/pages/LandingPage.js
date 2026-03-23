@@ -19,22 +19,22 @@ function LandingPage({ onLogin }) {
     {
       icon: '🎯',
       title: 'Smart Course Matching',
-      description: 'Our system analyzes your interests, skills, and academic profile to find courses that fit you best.'
+      description: 'We analyze your interests, skills, and SHS strand to recommend the best-fit college courses for you.'
     },
     {
       icon: '📊',
-      title: 'Adaptive Assessment',
-      description: 'Answer questions that adapt to your responses for more accurate and personalized recommendations.'
+      title: 'Adaptive Questions',
+      description: 'Each question adapts based on your previous answers — no two assessments are the same.'
     },
     {
       icon: '🎓',
-      title: 'College Course Database',
-      description: 'Explore various college courses with detailed information about career opportunities.'
+      title: 'College Course Explorer',
+      description: 'Browse recommended courses with details on what to expect, career paths, and job demand.'
     },
     {
       icon: '✨',
-      title: 'Personalized Results',
-      description: 'Get recommendations tailored to your unique personality traits and academic background.'
+      title: 'Trait-Based Results',
+      description: 'Your personality traits and academic strengths are mapped to courses where you\'ll thrive.'
     }
   ];
 
@@ -69,7 +69,7 @@ function LandingPage({ onLogin }) {
 
           <div style={styles.navRight}>
             <button onClick={onLogin} style={styles.getStartedBtn}>
-              Get Started
+              Begin Assessment
               <span style={styles.btnArrow}>→</span>
             </button>
           </div>
@@ -82,30 +82,28 @@ function LandingPage({ onLogin }) {
           <div style={styles.heroBadge}>
             <span style={styles.badgeDot} />
             AI-Powered Course Matching
-            <span style={styles.badgeArrow}>→</span>
           </div>
           
           <h1 className="landing-hero-title" style={styles.heroTitle}>
-            Find Your
+            Not Sure What
             <br />
-            <span className="gradient-text landing-hero-title" style={styles.heroGradient}>Perfect Career Path</span>
+            <span className="gradient-text landing-hero-title" style={styles.heroGradient}>Course to Take?</span>
           </h1>
           
           <p className="landing-hero-subtitle" style={styles.heroSubtitle}>
-            Not sure what course to take? Take our quick assessment to discover 
-            your strengths and interests, then get matched with college courses 
-            that fit your goals.
+            Answer a short set of adaptive questions and we'll match you 
+            with college courses based on your personality, interests, and 
+            academic background.
           </p>
 
           <div className="landing-hero-cta" style={styles.heroCTA}>
-            <button onClick={onLogin} style={styles.primaryBtn}>
-              Get Started
-              <span style={styles.btnArrow}>→</span>
+            <button onClick={onLogin} style={styles.beginBtn}>
+              🚀 Begin Assessment
             </button>
           </div>
 
           <p style={styles.heroNote}>
-            ✨ Free to use • Quick and easy • Get results in minutes
+            Free • 10–25 questions • Results in minutes
           </p>
         </div>
       </section>
@@ -183,16 +181,22 @@ function LandingPage({ onLogin }) {
       {/* CTA Section */}
       <section className="landing-cta-section" style={styles.ctaSection}>
         <div className="landing-cta-card" style={styles.ctaCard}>
-          <h2 className="landing-cta-title" style={styles.ctaTitle}>Ready to find the right course for you?</h2>
+          <h2 className="landing-cta-title" style={styles.ctaTitle}>Ready to find the right course?</h2>
           <p style={styles.ctaSubtitle}>
-            Take our assessment and get personalized course recommendations
+            Take the assessment now and get matched with courses that fit your strengths.
           </p>
           <button onClick={onLogin} style={styles.ctaButton}>
-            Get Started Now
-            <span style={styles.btnArrow}>→</span>
+            🚀 Begin Assessment
           </button>
         </div>
       </section>
+
+      {/* Sticky bottom CTA for mobile/scroll */}
+      <div style={styles.stickyBottom}>
+        <button onClick={onLogin} style={styles.stickyBtn}>
+          🚀 Begin Assessment
+        </button>
+      </div>
 
       {/* Footer */}
       <footer className="landing-footer" style={styles.footer}>
@@ -223,6 +227,10 @@ function LandingPage({ onLogin }) {
         @keyframes shimmer {
           0% { background-position: -200% 0; }
           100% { background-position: 200% 0; }
+        }
+        @keyframes btnGlow {
+          0%, 100% { box-shadow: 0 8px 40px rgba(99, 102, 241, 0.5), 0 0 60px rgba(139, 92, 246, 0.2); }
+          50% { box-shadow: 0 8px 50px rgba(99, 102, 241, 0.7), 0 0 80px rgba(139, 92, 246, 0.35); }
         }
       `}</style>
     </div>
@@ -455,6 +463,23 @@ const styles = {
     transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
     boxShadow: '0 8px 30px rgba(99, 102, 241, 0.4)',
   },
+  beginBtn: {
+    background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%)',
+    border: 'none',
+    color: 'white',
+    padding: '20px 48px',
+    borderRadius: '16px',
+    fontSize: '20px',
+    fontWeight: '700',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+    boxShadow: '0 8px 40px rgba(99, 102, 241, 0.5), 0 0 60px rgba(139, 92, 246, 0.2)',
+    animation: 'btnGlow 3s ease-in-out infinite',
+    letterSpacing: '0.5px',
+  },
   secondaryBtn: {
     background: 'rgba(255,255,255,0.05)',
     border: '1px solid rgba(255,255,255,0.1)',
@@ -645,7 +670,7 @@ const styles = {
 
   // Footer
   footer: {
-    padding: '48px',
+    padding: '48px 48px 80px',
     borderTop: '1px solid rgba(255,255,255,0.05)',
     textAlign: 'center',
   },
@@ -682,6 +707,33 @@ const styles = {
   footerCopyright: {
     color: '#475569',
     fontSize: '13px',
+  },
+
+  // Sticky bottom CTA
+  stickyBottom: {
+    position: 'fixed',
+    bottom: '0',
+    left: '0',
+    right: '0',
+    padding: '12px 24px',
+    background: 'linear-gradient(0deg, rgba(5,5,16,0.98) 60%, transparent 100%)',
+    display: 'flex',
+    justifyContent: 'center',
+    zIndex: 999,
+    pointerEvents: 'none',
+  },
+  stickyBtn: {
+    background: 'linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%)',
+    border: 'none',
+    color: 'white',
+    padding: '14px 36px',
+    borderRadius: '14px',
+    fontSize: '16px',
+    fontWeight: '700',
+    cursor: 'pointer',
+    boxShadow: '0 4px 30px rgba(99, 102, 241, 0.5)',
+    pointerEvents: 'auto',
+    letterSpacing: '0.3px',
   },
 };
 
