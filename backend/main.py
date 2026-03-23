@@ -98,29 +98,29 @@ load_dotenv()
 # Each entry: {"otp_hash": str, "expires": float, "verified": bool, "token": str|None}
 _otp_store: dict = {}
 
-@asynccontextmanager
 # ========== TIMEZONE HELPER ==========
+# Offset from UTC to Manila (UTC+8), using stdlib only — no pytz needed
+_MANILA_OFFSET = datetime.timezone(datetime.timedelta(hours=8))
+_SERVER_TZ_OFFSET = None  # Set at startup after detecting DB timezone
+
 def _format_taken_at(dt):
-    """Format a taken_at datetime to ISO string with proper Manila timezone.
-    Works correctly regardless of whether the DB server is in UTC or Asia/Manila."""
+    """Convert a taken_at datetime to Manila-time ISO string.
+    Works for both UTC servers (Railway) and Manila servers (local)."""
     if dt is None:
         return None
-    # If the datetime is naive (no tzinfo), we need to figure out what timezone it's in.
-    # We check the DB server timezone at startup and store it.
-    import pytz
-    manila = pytz.timezone('Asia/Manila')
-    if dt.tzinfo is not None:
-        # Already timezone-aware — convert to Manila
-        return dt.astimezone(manila).strftime('%Y-%m-%dT%H:%M:%S') + '+08:00'
-    else:
-        # Naive datetime — assume it came from the DB server's timezone
-        server_tz = getattr(_format_taken_at, '_server_tz', None)
-        if server_tz:
-            localized = server_tz.localize(dt)
+    try:
+        if dt.tzinfo is not None:
+            # Already timezone-aware — convert to Manila
+            manila_dt = dt.astimezone(_MANILA_OFFSET)
         else:
-            # Fallback: assume UTC (Railway default)
-            localized = pytz.utc.localize(dt)
-        return localized.astimezone(manila).strftime('%Y-%m-%dT%H:%M:%S') + '+08:00'
+            # Naive datetime — attach the server's timezone, then convert
+            tz = _SERVER_TZ_OFFSET or datetime.timezone.utc
+            aware_dt = dt.replace(tzinfo=tz)
+            manila_dt = aware_dt.astimezone(_MANILA_OFFSET)
+        return manila_dt.strftime('%Y-%m-%dT%H:%M:%S+08:00')
+    except Exception:
+        # Ultimate fallback — return whatever strftime gives us
+        return dt.strftime('%Y-%m-%dT%H:%M:%S')
 
 # ========== PYTHON SOURCE QUESTION/OPTION LOOKUP ==========
 _source_questions = {}  # {question_id: {question_text, category, options: {option_id: {...}}}}
@@ -167,6 +167,7 @@ def _build_source_lookup():
     print(f"[SOURCE] Built fallback lookup: {len(_source_questions)} questions")
 
 
+@asynccontextmanager
 async def lifespan(app: FastAPI):
     try:
         print("[START] Synchronizing database schema...")
@@ -674,21 +675,27 @@ def sync_questions_db():
         db.close()
 
     # Detect DB server timezone for timestamp formatting
+    global _SERVER_TZ_OFFSET
     try:
-        import pytz
         db2 = database.SessionLocal()
         tz_result = db2.execute(text('SHOW timezone')).fetchone()
         db2.close()
         server_tz_name = tz_result[0] if tz_result else 'UTC'
-        # Map common synonyms
-        tz_map = {'Asia/Taipei': 'Asia/Manila', 'PRC': 'Asia/Shanghai'}
-        server_tz_name = tz_map.get(server_tz_name, server_tz_name)
-        _format_taken_at._server_tz = pytz.timezone(server_tz_name)
-        print(f"[TZ] Database server timezone detected: {tz_result[0] if tz_result else 'unknown'} -> using {server_tz_name}")
+        # Map well-known timezone names to UTC offsets
+        tz_offsets = {
+            'UTC': 0, 'Etc/UTC': 0, 'GMT': 0, 'Etc/GMT': 0,
+            'US/Eastern': -5, 'US/Central': -6, 'US/Mountain': -7, 'US/Pacific': -8,
+            'America/New_York': -5, 'America/Chicago': -6, 'America/Denver': -7, 'America/Los_Angeles': -8,
+            'Europe/London': 0, 'Europe/Berlin': 1, 'Europe/Paris': 1,
+            'Asia/Taipei': 8, 'Asia/Manila': 8, 'Asia/Shanghai': 8, 'Asia/Tokyo': 9,
+            'Asia/Singapore': 8, 'Asia/Hong_Kong': 8, 'PRC': 8,
+        }
+        offset_hours = tz_offsets.get(server_tz_name, 0)
+        _SERVER_TZ_OFFSET = datetime.timezone(datetime.timedelta(hours=offset_hours))
+        print(f"[TZ] Database server timezone: {server_tz_name} (UTC{'+' if offset_hours >= 0 else ''}{offset_hours})")
     except Exception as tz_err:
         print(f"[TZ] Could not detect DB timezone ({tz_err}), assuming UTC")
-        import pytz
-        _format_taken_at._server_tz = pytz.utc
+        _SERVER_TZ_OFFSET = datetime.timezone.utc
 
     # Build source question lookup for fallback
     _build_source_lookup()
