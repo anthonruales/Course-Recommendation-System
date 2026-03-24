@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useGoogleLogin } from '@react-oauth/google';
 
-function Login({ onSwitch, onLoginSuccess, onBack }) {
+function Login({ onSwitch, onLoginSuccess, onBack, autoTrigger }) {
   const [loading, setLoading] = useState(false);
+  const autoTriggered = useRef(false);
   
   // Google username selection modal state
   const [showUsernameModal, setShowUsernameModal] = useState(false);
@@ -60,6 +61,14 @@ function Login({ onSwitch, onLoginSuccess, onBack }) {
     },
     onError: () => alert("Google Login Failed."),
   });
+
+  useEffect(() => {
+    if (autoTrigger && !autoTriggered.current) {
+      autoTriggered.current = true;
+      handleGoogleLogin();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoTrigger]);
 
   const handleGoogleRegister = async (e) => {
     e.preventDefault();

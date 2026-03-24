@@ -348,6 +348,7 @@ function App() {
                 <Login 
                   onLoginSuccess={handleLoginSuccess}
                   onBack={() => setAuthView('landing')}
+                  autoTrigger={true}
                 />
               </div>
             )}
