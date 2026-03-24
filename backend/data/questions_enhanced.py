@@ -41159,7 +41159,12 @@ EXPANSION_QID_REMAP = _dedup_expansion_questions()
 import re as _re_sem
 
 def _semantic_dedup():
-    """Remove questions within the same category that ask the same thing."""
+    """Remove questions within the same category that ask the same thing.
+
+    Only merges questions with the SAME intent type — e.g. two "what excites
+    you" questions are duplicates, but "what excites you" vs "what career path"
+    are genuinely different angles and must both survive.
+    """
 
     def _normalize(text):
         text = text.lower().strip()
@@ -41203,48 +41208,63 @@ def _semantic_dedup():
         return len(w1 & w2) / len(w1 | w2)
 
     def _intent(text):
+        """Classify the QUESTION TYPE — what conceptual angle it asks from."""
         t = _normalize(text)
-        sigs = []
-        if any(w in t for w in ['excit','interest','appeal','drawn','attract','fascinat']):
-            sigs.append('INTEREST')
-        if any(w in t for w in ['motivat','drives you','keeps you','committed','value most','meaningful']):
-            sigs.append('MOTIVATION')
-        if any(w in t for w in ['part ','area ','aspect ','branch ','field ','side ','focus ']):
-            sigs.append('WHICH_PART')
-        if any(w in t for w in ['build','create','make','project','develop','ship']):
-            sigs.append('BUILD')
-        if any(w in t for w in ['skill','master','learn','improve','strengthen','expertise']):
-            sigs.append('SKILL')
-        if any(w in t for w in ['environment','setting','workplace','setup','work best']):
-            sigs.append('ENVIRONMENT')
-        if any(w in t for w in ['career','job','role','profession','position','work as']):
-            sigs.append('CAREER')
-        if any(w in t for w in ['challenge','problem','tackle','solve','fix']):
-            sigs.append('CHALLENGE')
-        if any(w in t for w in ['team','collabor','group','contribute']):
-            sigs.append('TEAM')
-        if any(w in t for w in ['scenario','imagine','what if','pretend','suppose']):
-            sigs.append('SCENARIO')
-        if any(w in t for w in ['present','show','represent','portfolio','showcase']):
-            sigs.append('SHOWCASE')
-        return tuple(sorted(sigs)) if sigs else ('GENERAL',)
+        # Order matters: check specific patterns first, fall through to general
+        if any(w in t for w in ['career','job ','role ','profession','position','work as',
+                                'where would you work','career path']):
+            return 'CAREER'
+        if any(w in t for w in ['skill','master','learn','improve','strengthen',
+                                'expertise','develop first']):
+            return 'SKILL'
+        if any(w in t for w in ['scenario','imagine','what if','pretend','suppose',
+                                'respond to','situation','challenge','motivat',
+                                'resonat','handle']):
+            return 'SCENARIO'
+        if any(w in t for w in ['connect with other','cross-disciplin','interdisciplin',
+                                'blend','broader career','other fields']):
+            return 'CROSS_FIELD'
+        if any(w in t for w in ['build','create','project','develop','design from',
+                                'portfolio','present','show','showcase','represent']):
+            return 'BUILD'
+        if any(w in t for w in ['environment','setting','workplace','setup','work best',
+                                'work in']):
+            return 'ENVIRONMENT'
+        if any(w in t for w in ['team','collabor','group','contribute to a']):
+            return 'TEAM'
+        if any(w in t for w in ['specialty','specializ','practice area','branch',
+                                'discipline','focus on one','dedicated']):
+            return 'SPECIALTY'
+        if any(w in t for w in ['aspect','part ','workflow','stage ','fulfilling',
+                                'thriving']):
+            return 'WHICH_PART'
+        if any(w in t for w in ['excit','interest','appeal','drawn','attract',
+                                'fascinat','meaningful','speaks to']):
+            return 'INTEREST'
+        return 'GENERAL'
 
     def _similar(q1_text, q2_text):
+        """Two questions are duplicates only if they share the SAME intent type
+        AND have meaningful word overlap (beyond just the domain name)."""
+        i1 = _intent(q1_text)
+        i2 = _intent(q2_text)
+
+        # Different intent types => NOT duplicates (these are different angles)
+        if i1 != i2:
+            return False
+
+        # Same intent type — check word overlap to confirm
         overlap = _word_overlap(q1_text, q2_text)
-        s1 = set(_intent(q1_text))
-        s2 = set(_intent(q2_text))
-        shared = s1 & s2 - {'GENERAL'}
-        merged = s1 | s2
-        if overlap >= 0.3:
+
+        # High overlap with same intent = definite duplicate
+        if overlap >= 0.25:
             return True
-        if shared and overlap >= 0.1:
+
+        # Same specific intent within same category = likely duplicate
+        # (the category already constrains the domain)
+        if i1 != 'GENERAL' and overlap >= 0.1:
             return True
-        if 'INTEREST' in merged and 'MOTIVATION' in merged:
-            return True
-        if 'BUILD' in merged and 'SHOWCASE' in merged:
-            return True
-        if 'INTEREST' in merged and 'WHICH_PART' in merged:
-            return True
+
         return False
 
     from collections import defaultdict as _dd

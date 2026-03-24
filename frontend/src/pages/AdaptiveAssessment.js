@@ -423,8 +423,8 @@ function AdaptiveAssessment({ onBack, onShowResults, maxQuestions = 30, onViewPr
               </div>
               <div style={styles.featureCard}>
                 <span style={styles.featureIcon}>🔄</span>
-                <h3>Adapts to You</h3>
-                <p>Questions adjust based on your answers so it stays relevant</p>
+                <h3>Smart Questions</h3>
+                <p>Each question builds on your previous answers to stay relevant</p>
               </div>
               <div style={styles.featureCard}>
                 <span style={styles.featureIcon}>🎓</span>
