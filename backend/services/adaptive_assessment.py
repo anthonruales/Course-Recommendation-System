@@ -3888,6 +3888,7 @@ INTEREST_DOMAIN_MAP = {
     "networking_skill": "technology", "database_skill": "technology", "mobile_dev": "technology",
     "ux_ui": "technology", "health_info": "healthcare",
     "medical": "healthcare", "nursing": "healthcare", "pharmacy": "healthcare",
+    "medicine": "healthcare", "healthcare": "healthcare",
     "physical_therapy": "healthcare", "nutrition": "healthcare", "psychology": "healthcare",
     "medical_tech": "healthcare", "dentistry": "healthcare", "health": "healthcare",
     "first_aid": "healthcare", "counseling": "healthcare", "dietetics": "healthcare",
@@ -4197,8 +4198,9 @@ INTEREST_CATEGORY_KEYWORDS = {
     "early_childhood": ["Early Childhood Education"],
     "early_childhood_education": ["Early Childhood Education"],
     # Healthcare
-    "medical": ["Medicine & Healthcare"],
-    "nursing": ["Nursing & Patient Care"],
+    "medical": ["Medicine & Healthcare", "Healthcare General", "Medical Technology"],
+    "nursing": ["Nursing & Patient Care", "Nursing & Emergency Health"],
+    "ai": ["AI & Machine Learning", "Computer Science", "Data & Analytics"],
     "psychology": ["Psychology & Mental Health"],
     "mental_health": ["Psychology & Mental Health"],
     "public_health": ["Public Health"],
@@ -5590,6 +5592,36 @@ class AdaptiveAssessmentEngine:
             if domain:
                 domain_votes[domain] = domain_votes.get(domain, 0) + SKILL_VOTE_WEIGHT
 
+        # ─── FIELD-LEVEL BALANCING ───
+        # Problem: If a user picks 3 healthcare interests and 1 business
+        # interest, healthcare would get 9 votes vs 3 → 75% of questions.
+        # From the user's POV these are 2 career fields deserving equal time.
+        #
+        # Fix: Normalize so each distinct domain gets the same base weight.
+        # Multiple interests in the same domain add a small bonus (+1 each)
+        # for richer sub-topic coverage, but don't multiply linearly.
+        if domain_votes and interest_keywords:
+            # Count how many interest keywords mapped to each domain
+            domain_interest_count = {}
+            for kw in interest_keywords:
+                domain = self._get_profile_domain_for_selection(kw)
+                if domain:
+                    domain_interest_count[domain] = domain_interest_count.get(domain, 0) + 1
+
+            # Normalize: every domain with interests gets base weight = INTEREST_VOTE_WEIGHT
+            # plus +1 for each additional sub-interest beyond the first
+            for domain in list(domain_votes.keys()):
+                n_interests = domain_interest_count.get(domain, 0)
+                if n_interests > 0:
+                    # Skill votes for this domain (keep them as-is)
+                    skill_portion = domain_votes[domain] - (n_interests * INTEREST_VOTE_WEIGHT)
+                    skill_portion = max(skill_portion, 0)
+                    # Base weight + diminishing bonus for extra sub-interests
+                    normalized_interest_weight = INTEREST_VOTE_WEIGHT + max(0, n_interests - 1)
+                    domain_votes[domain] = normalized_interest_weight + skill_portion
+
+            print(f"[BALANCE] Normalized domain votes: {domain_votes} (interests per domain: {domain_interest_count})")
+
         explicit_domain_votes = domain_votes.copy()
 
         # Only fall back to trait-derived domain votes when the user did not
@@ -5798,14 +5830,38 @@ class AdaptiveAssessmentEngine:
                 print(f"[LOCK-REDIRECT] Redirecting to dominant domain '{dominant_branch}' "
                       f"(weight gap: {top_branch_weight - second_branch_weight:.1f}, recent: {recent_dominant_count})")
         
+        # Override: when other explicitly-voted domains with similar weight
+        # haven't received their fair share, force rotation even if the current
+        # domain has strong branch lock. This prevents the first-served domain
+        # from monopolizing questions when the user selected equal-weight interests.
+        other_domains_starved = False
+        if current_chain_domain and current_domain_count >= domain_budget and strong_branch_lock and session.domain_vote_weights:
+            current_vote_w = session.domain_vote_weights.get(current_chain_domain, 0)
+            for dom in session.domain_queue:
+                if dom == current_chain_domain:
+                    continue
+                dom_vote_w = session.domain_vote_weights.get(dom, 0)
+                if dom_vote_w < current_vote_w * 0.5:
+                    continue  # Skip low-weight domains
+                dom_count = session.domain_question_count.get(dom, 0)
+                total_w = sum(session.domain_vote_weights.get(d, 1) for d in session.domain_queue) or 1
+                dom_proportion = dom_vote_w / total_w
+                dom_target = max(int(session.max_questions * dom_proportion), DOMAIN_MIN_QUESTIONS)
+                if dom_count < dom_target:
+                    other_domains_starved = True
+                    print(f"[ROTATE-FAIRNESS] Domain '{dom}' has {dom_count}/{dom_target} questions "
+                          f"(weight {dom_vote_w}) — overriding branch lock on '{current_chain_domain}'.")
+                    break
+
         force_domain_rotation = (
             current_chain_domain and
-            current_domain_count >= domain_budget and
-            not strong_branch_lock
+            current_domain_count >= domain_budget
         )
 
-        if current_chain_domain and current_domain_count >= domain_budget and strong_branch_lock:
-            print(f"[ROTATE-BYPASS] Keeping domain '{current_chain_domain}' active because it remains strongly dominant.")
+        if current_chain_domain and current_domain_count >= domain_budget and strong_branch_lock and not other_domains_starved:
+            # Even with strong branch lock, always enforce budget to ensure
+            # equal question distribution across career fields.
+            print(f"[ROTATE-BUDGET] Domain '{current_chain_domain}' hit budget {domain_budget} — rotating despite branch lock.")
 
         if force_domain_rotation:
             print(f"[ROTATE] Domain '{current_chain_domain}' has {current_domain_count} questions "
@@ -6383,6 +6439,56 @@ class AdaptiveAssessmentEngine:
                     session._dedup_depth = 0
         _record_fingerprints(best_question)
 
+        # ─── HARD BUDGET GATE ───
+        # Determine the question's primary domain (first match from voted domains).
+        # If that domain is already at or over budget, reject and re-select.
+        node = QUESTION_TREE_NODES.get(selected_qid, {})
+        q_branches = set(node.get("branches", []))
+        q_primary_domain = ""
+        for dom in session.domain_queue:
+            if dom in q_branches:
+                q_primary_domain = dom
+                break
+        if not q_primary_domain and q_branches:
+            q_primary_domain = next(iter(q_branches))
+
+        if q_primary_domain and session.domain_vote_weights:
+            total_w = sum(session.domain_vote_weights.get(d, 1) for d in session.domain_queue) or 1
+            q_dom_weight = session.domain_vote_weights.get(q_primary_domain, 1)
+            q_dom_budget = max(int(session.max_questions * q_dom_weight / total_w), DOMAIN_MIN_QUESTIONS)
+            q_dom_count = session.domain_question_count.get(q_primary_domain, 0)
+            _budget_depth = getattr(session, '_budget_gate_depth', 0)
+            if q_dom_count >= q_dom_budget:
+                if _budget_depth < 12:
+                    session._budget_gate_depth = _budget_depth + 1
+                    session.excluded_question_ids.add(selected_qid)
+                    return self.get_next_question(session_id)
+                else:
+                    # Depth exhausted — force pick from an under-budget domain
+                    session._budget_gate_depth = 0
+                    under_budget_domains = []
+                    for dom in session.domain_queue:
+                        d_w = session.domain_vote_weights.get(dom, 1)
+                        d_budget = max(int(session.max_questions * d_w / total_w), DOMAIN_MIN_QUESTIONS)
+                        d_count = session.domain_question_count.get(dom, 0)
+                        if d_count < d_budget:
+                            under_budget_domains.append(dom)
+                    if under_budget_domains:
+                        for dom in under_budget_domains:
+                            entry_qs = DOMAIN_ENTRY_QUESTIONS.get(dom, [])
+                            for eq in entry_qs:
+                                if eq not in session.answered_questions and eq not in session.excluded_question_ids and eq in self.questions:
+                                    selected_qid = eq
+                                    best_question = self.questions[eq]
+                                    node = QUESTION_TREE_NODES.get(selected_qid, {})
+                                    q_branches = set(node.get("branches", []))
+                                    q_primary_domain = dom
+                                    break
+                            else:
+                                continue
+                            break
+            session._budget_gate_depth = 0
+
         # Track the intent of the final selected question (after all swaps)
         _final_intent = self._classify_question_intent(best_question)
         session._recent_intents.append(_final_intent)
@@ -6391,13 +6497,18 @@ class AdaptiveAssessmentEngine:
 
         session.round_number = round_num
         
-        # Track domain question count
-        node = QUESTION_TREE_NODES.get(selected_qid, {})
-        q_branches = node.get("branches", [])
-        for branch in q_branches:
-            session.domain_question_count[branch] = session.domain_question_count.get(branch, 0) + 1
-            if session.domain_question_count[branch] >= DOMAIN_MIN_QUESTIONS:
-                session.explored_domains.add(branch)
+        # Track domain question count — use PRIMARY domain only to prevent
+        # multi-branch questions from inflating counts across all domains.
+        if q_primary_domain:
+            session.domain_question_count[q_primary_domain] = session.domain_question_count.get(q_primary_domain, 0) + 1
+            if session.domain_question_count[q_primary_domain] >= DOMAIN_MIN_QUESTIONS:
+                session.explored_domains.add(q_primary_domain)
+        else:
+            # Fallback: increment all branches for unclassified questions
+            for branch in q_branches:
+                session.domain_question_count[branch] = session.domain_question_count.get(branch, 0) + 1
+                if session.domain_question_count[branch] >= DOMAIN_MIN_QUESTIONS:
+                    session.explored_domains.add(branch)
         
         # Determine phase label for logging
         q_level = node.get("level", 0)
@@ -6899,15 +7010,24 @@ class AdaptiveAssessmentEngine:
                             if sec_branch:
                                 session.branch_weights[sec_branch] = session.branch_weights.get(sec_branch, 0) + weight * 0.5
                 
-                # Dynamically expand relevant_domains if user consistently picks a new domain
-                # (allows natural discovery while keeping profile focus)
+                # Dynamically expand relevant_domains if user consistently picks a new domain.
+                # Guard: require higher threshold for domains far from the user's profile,
+                # and never inject entry-questions for expanded domains so they don't
+                # hijack the question flow.
                 if chosen_branch not in session.relevant_domains:
                     branch_count = session.branch_history.count(chosen_branch)
-                    if branch_count >= 2:  # User picked this domain at least twice
+                    # Check if this domain is adjacent to any profile domain
+                    profile_domains = set(session.domain_queue[:len(session.domain_vote_weights)])
+                    is_adjacent = any(
+                        chosen_branch in BRANCH_ADJACENCY.get(pd, [])
+                        for pd in profile_domains
+                    )
+                    threshold = 3 if is_adjacent else 5
+                    if branch_count >= threshold:
                         session.relevant_domains.add(chosen_branch)
-                        if chosen_branch not in session.domain_queue:
-                            session.domain_queue.append(chosen_branch)
-                        print(f"[EXPAND] Domain '{chosen_branch}' added to relevant domains (picked {branch_count}x)")
+                        # Do NOT add to domain_queue — expanded domains should only
+                        # pass the relevance filter, not receive dedicated questions.
+                        print(f"[EXPAND] Domain '{chosen_branch}' added to relevant domains (picked {branch_count}x, adjacent={is_adjacent})")
         
         # Track question weight for this question (for scoring impact)
         node = QUESTION_TREE_NODES.get(question_id, {})
@@ -7654,14 +7774,29 @@ class AdaptiveAssessmentEngine:
                                    if q not in session.excluded_question_ids and q in self.questions]
         
         # Rebuild domain_question_count from remaining answered questions
+        # Use PRIMARY domain only (first match from domain_queue) to stay
+        # consistent with the budget gate in get_next_question.
         session.domain_question_count = {}
         session.explored_domains = set()
         for answered_qid in session.answered_questions:
             node = QUESTION_TREE_NODES.get(answered_qid, {})
-            for branch in node.get("branches", []):
-                session.domain_question_count[branch] = session.domain_question_count.get(branch, 0) + 1
-                if session.domain_question_count[branch] >= DOMAIN_MIN_QUESTIONS:
-                    session.explored_domains.add(branch)
+            q_branches = set(node.get("branches", []))
+            primary = ""
+            for dom in session.domain_queue:
+                if dom in q_branches:
+                    primary = dom
+                    break
+            if not primary and q_branches:
+                primary = next(iter(q_branches))
+            if primary:
+                session.domain_question_count[primary] = session.domain_question_count.get(primary, 0) + 1
+                if session.domain_question_count[primary] >= DOMAIN_MIN_QUESTIONS:
+                    session.explored_domains.add(primary)
+            else:
+                for branch in q_branches:
+                    session.domain_question_count[branch] = session.domain_question_count.get(branch, 0) + 1
+                    if session.domain_question_count[branch] >= DOMAIN_MIN_QUESTIONS:
+                        session.explored_domains.add(branch)
         
         # Rebuild branch_weights from scratch: profile baseline + remaining answers
         # Start from initial profile-based weights

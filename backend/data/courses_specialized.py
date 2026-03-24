@@ -154,12 +154,12 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BS Computer Engineering", 
      "description": "Hardware-software integration, embedded systems, and computer architecture.", 
      "minimum_gwa": 85, "required_strand": "STEM",
-     "trait_tag": ["Investigative", "Hardware-Systems", "Technical-Skill"]},
+     "trait_tag": ["Investigative", "Hardware-Systems", "Technical-Skill", "Software-Dev", "Analytical-Skill"]},
     
     {"course_name": "BS Electronics Engineering", 
      "description": "Electronic circuits, communications systems, and signal processing.", 
      "minimum_gwa": 85, "required_strand": "STEM",
-     "trait_tag": ["Investigative", "Hardware-Systems", "Technical-Skill"]},
+     "trait_tag": ["Investigative", "Hardware-Systems", "Technical-Skill", "Electrical-Power", "Analytical-Skill"]},
     
     {"course_name": "BS Data Science", 
      "description": "Big data analytics, machine learning, and statistical modeling.", 
@@ -180,38 +180,38 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BS Civil Engineering", 
      "description": "Design and construction of infrastructure like bridges, roads, and buildings.", 
      "minimum_gwa": 85, "required_strand": "STEM",
-     "trait_tag": ["Realistic", "Civil-Build", "Technical-Skill"]},
+     "trait_tag": ["Realistic", "Civil-Build", "Technical-Skill", "Analytical-Skill", "Spatial-Design"]},
     
     {"course_name": "BS Mechanical Engineering", 
      "description": "Design of mechanical systems, thermodynamics, and manufacturing.", 
      "minimum_gwa": 85, "required_strand": "STEM",
-     "trait_tag": ["Realistic", "Mechanical-Design", "Technical-Skill"]},
+     "trait_tag": ["Realistic", "Mechanical-Design", "Technical-Skill", "Analytical-Skill", "Industrial-Ops"]},
     
     {"course_name": "BS Electrical Engineering", 
      "description": "Power generation, electrical systems, and electronics.", 
      "minimum_gwa": 85, "required_strand": "STEM",
-     "trait_tag": ["Investigative", "Electrical-Power", "Technical-Skill"]},
+     "trait_tag": ["Investigative", "Electrical-Power", "Technical-Skill", "Analytical-Skill", "Hardware-Systems"]},
     
     {"course_name": "BS Industrial Engineering", 
      "description": "Process optimization, operations management, and quality control.", 
      "minimum_gwa": 85, "required_strand": "STEM",
-     "trait_tag": ["Enterprising", "Industrial-Ops", "Analytical-Skill"]},
+     "trait_tag": ["Enterprising", "Industrial-Ops", "Analytical-Skill", "Technical-Skill", "Admin-Skill"]},
     
     {"course_name": "BS Geodetic Engineering", 
      "description": "Land surveying, mapping, and geographic information systems.", 
      "minimum_gwa": 83, "required_strand": "STEM",
-     "trait_tag": ["Realistic", "Civil-Build", "Technical-Skill"]},
+     "trait_tag": ["Realistic", "Civil-Build", "Technical-Skill", "Analytical-Skill", "Field-Research"]},
     
     {"course_name": "BS Aeronautical Engineering", 
      "description": "Design and maintenance of aircraft and aerospace systems.", 
      "minimum_gwa": 88, "required_strand": "STEM",
-     "trait_tag": ["Investigative", "Mechanical-Design", "Technical-Skill"]},
+     "trait_tag": ["Investigative", "Mechanical-Design", "Technical-Skill", "Analytical-Skill", "Physical-Skill"]},
     
     # ============== HEALTHCARE - PATIENT CARE ==============
     {"course_name": "BS Nursing", 
      "description": "Professional training in patient care, health promotion, and community health nursing.", 
      "minimum_gwa": 85, "required_strand": "STEM",
-     "trait_tag": ["Social", "Patient-Care", "People-Skill"]},
+     "trait_tag": ["Social", "Patient-Care", "People-Skill", "Analytical-Skill", "Community-Serve", "Public-Health"]},
     
     {"course_name": "BS Midwifery", 
      "description": "Primary healthcare for women during pregnancy, childbirth, and the postpartum period.", 
@@ -222,7 +222,7 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BS Medical Technology", 
      "description": "Laboratory analysis of blood, tissues, and other specimens for diagnosis.", 
      "minimum_gwa": 85, "required_strand": "STEM",
-     "trait_tag": ["Investigative", "Medical-Lab", "Analytical-Skill"]},
+     "trait_tag": ["Investigative", "Medical-Lab", "Analytical-Skill", "Lab-Research", "Patient-Care", "Technical-Skill"]},
     
     {"course_name": "BS Pharmacy", 
      "description": "Drug formulation, dispensing, and pharmaceutical care.", 
@@ -238,7 +238,7 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BS Physical Therapy", 
      "description": "Rehabilitation through physical exercises and therapeutic techniques.", 
      "minimum_gwa": 85, "required_strand": "STEM",
-     "trait_tag": ["Social", "Rehab-Therapy", "Physical-Skill"]},
+     "trait_tag": ["Social", "Rehab-Therapy", "Physical-Skill", "Patient-Care", "People-Skill", "Analytical-Skill"]},
     
     {"course_name": "BS Occupational Therapy", 
      "description": "Helping patients develop or recover daily living and work skills.", 
@@ -274,7 +274,7 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BS Health Information Management", 
      "description": "Managing patient health records and healthcare data systems.", 
      "minimum_gwa": 82, "required_strand": "STEM",
-     "trait_tag": ["Conventional", "Health-Admin", "Admin-Skill"]},
+     "trait_tag": ["Conventional", "Health-Admin", "Admin-Skill", "Technical-Skill", "Analytical-Skill"]},
     
     {"course_name": "Doctor of Veterinary Medicine", 
      "description": "Medical care for animals including diagnosis, treatment, and surgery.", 
@@ -285,38 +285,38 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BS Accountancy", 
      "description": "Financial reporting, auditing, and tax accounting.", 
      "minimum_gwa": 85, "required_strand": "ABM",
-     "trait_tag": ["Conventional", "Finance-Acct", "Analytical-Skill"]},
+     "trait_tag": ["Conventional", "Finance-Acct", "Analytical-Skill", "Admin-Skill", "Technical-Skill"]},
     
     {"course_name": "BS Business Administration major in Financial Management", 
      "description": "Corporate finance, investment analysis, and financial planning.", 
      "minimum_gwa": 82, "required_strand": "ABM",
-     "trait_tag": ["Enterprising", "Finance-Acct", "Analytical-Skill"]},
+     "trait_tag": ["Enterprising", "Finance-Acct", "Analytical-Skill", "Admin-Skill", "People-Skill"]},
     
     {"course_name": "BS Management Accounting", 
      "description": "Cost accounting, budgeting, and management financial analysis.", 
      "minimum_gwa": 83, "required_strand": "ABM",
-     "trait_tag": ["Conventional", "Finance-Acct", "Analytical-Skill"]},
+     "trait_tag": ["Conventional", "Finance-Acct", "Analytical-Skill", "Admin-Skill", "Technical-Skill"]},
     
     {"course_name": "BS Accounting Information Systems", 
      "description": "Integration of accounting with information technology systems.", 
      "minimum_gwa": 83, "required_strand": "ABM",
-     "trait_tag": ["Conventional", "Finance-Acct", "Technical-Skill"]},
+     "trait_tag": ["Conventional", "Finance-Acct", "Technical-Skill", "Analytical-Skill", "Software-Dev"]},
     
     {"course_name": "BS Business Economics", 
      "description": "Economic analysis for business decision-making.", 
      "minimum_gwa": 85, "required_strand": "ABM",
-     "trait_tag": ["Investigative", "Finance-Acct", "Analytical-Skill"]},
+     "trait_tag": ["Investigative", "Finance-Acct", "Analytical-Skill", "Data-Analytics", "Admin-Skill"]},
     
     {"course_name": "BS Customs Administration", 
      "description": "Customs procedures, international trade, and tariff management.", 
      "minimum_gwa": 82, "required_strand": "ABM",
-     "trait_tag": ["Conventional", "Finance-Acct", "Admin-Skill"]},
+     "trait_tag": ["Conventional", "Finance-Acct", "Admin-Skill", "Legal-Practice", "Analytical-Skill"]},
     
     # ============== BUSINESS - MARKETING ==============
     {"course_name": "BS Business Administration major in Marketing Management", 
      "description": "Marketing strategies, consumer behavior, and brand management.", 
      "minimum_gwa": 82, "required_strand": "ABM",
-     "trait_tag": ["Enterprising", "Marketing-Sales", "People-Skill"]},
+     "trait_tag": ["Enterprising", "Marketing-Sales", "People-Skill", "Creative-Skill", "Analytical-Skill"]},
     
     {"course_name": "BS Business Administration major in Human Resource Management", 
      "description": "Recruitment, training, and employee relations.", 
@@ -326,23 +326,23 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BS Real Estate Management", 
      "description": "Property development, sales, and real estate investments.", 
      "minimum_gwa": 82, "required_strand": "ABM",
-     "trait_tag": ["Enterprising", "Marketing-Sales", "People-Skill"]},
+     "trait_tag": ["Enterprising", "Marketing-Sales", "People-Skill", "Finance-Acct", "Admin-Skill"]},
     
     # ============== BUSINESS - ENTREPRENEURSHIP ==============
     {"course_name": "BS Entrepreneurship", 
      "description": "Starting and managing new business ventures.", 
      "minimum_gwa": 80, "required_strand": "ABM",
-     "trait_tag": ["Enterprising", "Startup-Venture", "Creative-Skill"]},
+     "trait_tag": ["Enterprising", "Startup-Venture", "Creative-Skill", "Marketing-Sales", "People-Skill"]},
     
     {"course_name": "BS Business Administration major in Operations Management", 
      "description": "Supply chain, logistics, and operations optimization.", 
      "minimum_gwa": 82, "required_strand": "ABM",
-     "trait_tag": ["Enterprising", "Industrial-Ops", "Admin-Skill"]},
+     "trait_tag": ["Enterprising", "Industrial-Ops", "Admin-Skill", "Analytical-Skill", "Technical-Skill"]},
     
     {"course_name": "BS Agribusiness", 
      "description": "Business management in agriculture and food industries.", 
      "minimum_gwa": 80, "required_strand": "ABM",
-     "trait_tag": ["Enterprising", "Agri-Nature", "Admin-Skill"]},
+     "trait_tag": ["Enterprising", "Agri-Nature", "Admin-Skill", "Marketing-Sales", "Finance-Acct"]},
     
     # ============== EDUCATION ==============
     {"course_name": "Bachelor of Elementary Education", 
@@ -384,22 +384,22 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "Bachelor of Fine Arts", 
      "description": "Studio art, painting, sculpture, and visual arts.", 
      "minimum_gwa": 80, "required_strand": "HUMSS",
-     "trait_tag": ["Artistic", "Visual-Design", "Creative-Skill"]},
+     "trait_tag": ["Artistic", "Visual-Design", "Creative-Skill", "Physical-Skill", "Spatial-Design"]},
     
     {"course_name": "BS Multimedia Arts", 
      "description": "Digital design, graphics, and multimedia production.", 
      "minimum_gwa": 80, "required_strand": "HUMSS",
-     "trait_tag": ["Artistic", "Visual-Design", "Creative-Skill"]},
+     "trait_tag": ["Artistic", "Visual-Design", "Creative-Skill", "Digital-Media", "Technical-Skill"]},
     
     {"course_name": "BA in Advertising Arts", 
      "description": "Visual communication for advertising and branding.", 
      "minimum_gwa": 80, "required_strand": "HUMSS",
-     "trait_tag": ["Artistic", "Visual-Design", "Creative-Skill"]},
+     "trait_tag": ["Artistic", "Visual-Design", "Creative-Skill", "Marketing-Sales", "People-Skill"]},
     
     {"course_name": "BA in Photography", 
      "description": "Photography techniques, editing, and visual storytelling.", 
      "minimum_gwa": 80, "required_strand": "HUMSS",
-     "trait_tag": ["Artistic", "Visual-Design", "Creative-Skill"]},
+     "trait_tag": ["Artistic", "Visual-Design", "Creative-Skill", "Digital-Media", "Technical-Skill"]},
     
     # ============== ARTS & DESIGN - DIGITAL MEDIA ==============
     {"course_name": "BA in Animation", 
@@ -426,63 +426,63 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BS Architecture", 
      "description": "Building design, urban planning, and structural aesthetics.", 
      "minimum_gwa": 85, "required_strand": "STEM",
-     "trait_tag": ["Artistic", "Spatial-Design", "Technical-Skill"]},
+     "trait_tag": ["Artistic", "Spatial-Design", "Technical-Skill", "Creative-Skill", "Analytical-Skill"]},
     
     {"course_name": "BS Interior Design", 
      "description": "Interior space planning, decoration, and functional design.", 
      "minimum_gwa": 80, "required_strand": "HUMSS",
-     "trait_tag": ["Artistic", "Spatial-Design", "Creative-Skill"]},
+     "trait_tag": ["Artistic", "Spatial-Design", "Creative-Skill", "Visual-Design", "People-Skill"]},
     
     {"course_name": "BS Landscape Architecture", 
      "description": "Outdoor space design, parks, and environmental planning.", 
      "minimum_gwa": 83, "required_strand": "STEM",
-     "trait_tag": ["Artistic", "Spatial-Design", "Creative-Skill"]},
+     "trait_tag": ["Artistic", "Spatial-Design", "Creative-Skill", "Field-Research", "Technical-Skill"]},
     
     {"course_name": "BS Industrial Design", 
      "description": "Product design, manufacturing aesthetics, and ergonomics.", 
      "minimum_gwa": 82, "required_strand": "STEM",
-     "trait_tag": ["Artistic", "Spatial-Design", "Creative-Skill"]},
+     "trait_tag": ["Artistic", "Spatial-Design", "Creative-Skill", "Technical-Skill", "Mechanical-Design"]},
     
     {"course_name": "BA in Fashion Design and Merchandising", 
      "description": "Clothing design, fashion trends, and retail management.", 
      "minimum_gwa": 80, "required_strand": "HUMSS",
-     "trait_tag": ["Artistic", "Spatial-Design", "Creative-Skill"]},
+     "trait_tag": ["Artistic", "Spatial-Design", "Creative-Skill", "Marketing-Sales", "Visual-Design"]},
     
     {"course_name": "BS Clothing Technology", 
      "description": "Garment production, textile science, and apparel manufacturing.", 
      "minimum_gwa": 80, "required_strand": "TVL",
-     "trait_tag": ["Realistic", "Spatial-Design", "Technical-Skill"]},
+     "trait_tag": ["Realistic", "Spatial-Design", "Technical-Skill", "Industrial-Ops", "Creative-Skill"]},
     
     # ============== SCIENCE - LAB RESEARCH ==============
     {"course_name": "BS Biology", 
      "description": "Study of living organisms, genetics, and ecosystems.", 
      "minimum_gwa": 85, "required_strand": "STEM",
-     "trait_tag": ["Investigative", "Lab-Research", "Analytical-Skill"]},
+     "trait_tag": ["Investigative", "Lab-Research", "Analytical-Skill", "Field-Research", "Technical-Skill"]},
     
     {"course_name": "BS Chemistry", 
      "description": "Chemical compounds, reactions, and materials science.", 
      "minimum_gwa": 85, "required_strand": "STEM",
-     "trait_tag": ["Investigative", "Lab-Research", "Analytical-Skill"]},
+     "trait_tag": ["Investigative", "Lab-Research", "Analytical-Skill", "Technical-Skill", "Medical-Lab"]},
     
     {"course_name": "BS Physics", 
      "description": "Fundamental laws of nature, matter, and energy.", 
      "minimum_gwa": 88, "required_strand": "STEM",
-     "trait_tag": ["Investigative", "Lab-Research", "Analytical-Skill"]},
+     "trait_tag": ["Investigative", "Lab-Research", "Analytical-Skill", "Technical-Skill", "Data-Analytics"]},
     
     {"course_name": "BS Biotechnology", 
      "description": "Application of biology in medicine, agriculture, and industry.", 
      "minimum_gwa": 85, "required_strand": "STEM",
-     "trait_tag": ["Investigative", "Lab-Research", "Technical-Skill"]},
+     "trait_tag": ["Investigative", "Lab-Research", "Technical-Skill", "Analytical-Skill", "Medical-Lab"]},
     
     {"course_name": "BS Mathematics", 
      "description": "Pure and applied mathematics, statistics, and computation.", 
      "minimum_gwa": 85, "required_strand": "STEM",
-     "trait_tag": ["Investigative", "Lab-Research", "Analytical-Skill"]},
+     "trait_tag": ["Investigative", "Lab-Research", "Analytical-Skill", "Data-Analytics", "Technical-Skill"]},
     
     {"course_name": "BS Statistics", 
      "description": "Statistical analysis, probability, and data interpretation.", 
      "minimum_gwa": 85, "required_strand": "STEM",
-     "trait_tag": ["Investigative", "Data-Analytics", "Analytical-Skill"]},
+     "trait_tag": ["Investigative", "Data-Analytics", "Analytical-Skill", "Technical-Skill", "Lab-Research"]},
     
     {"course_name": "BS Food Technology", 
      "description": "Food processing, preservation, and quality control.", 
@@ -498,17 +498,17 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BS Marine Biology", 
      "description": "Study of marine organisms and ocean ecosystems.", 
      "minimum_gwa": 83, "required_strand": "STEM",
-     "trait_tag": ["Investigative", "Field-Research", "Physical-Skill"]},
+     "trait_tag": ["Investigative", "Field-Research", "Physical-Skill", "Lab-Research", "Analytical-Skill"]},
     
     {"course_name": "BS Geology", 
      "description": "Study of Earth's structure, minerals, and geological processes.", 
      "minimum_gwa": 83, "required_strand": "STEM",
-     "trait_tag": ["Investigative", "Field-Research", "Physical-Skill"]},
+     "trait_tag": ["Investigative", "Field-Research", "Physical-Skill", "Lab-Research", "Analytical-Skill"]},
     
     {"course_name": "BS Meteorology", 
      "description": "Weather patterns, climate science, and atmospheric phenomena.", 
      "minimum_gwa": 83, "required_strand": "STEM",
-     "trait_tag": ["Investigative", "Field-Research", "Analytical-Skill"]},
+     "trait_tag": ["Investigative", "Field-Research", "Analytical-Skill", "Data-Analytics", "Technical-Skill"]},
     
     {"course_name": "BS Environmental Planning", 
      "description": "Land use planning, urban development, and environmental policy.", 
@@ -561,12 +561,12 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BS Marine Transportation", 
      "description": "Ship navigation, maritime law, and vessel operations.", 
      "minimum_gwa": 80, "required_strand": "STEM",
-     "trait_tag": ["Realistic", "Maritime-Sea", "Physical-Skill"]},
+     "trait_tag": ["Realistic", "Maritime-Sea", "Physical-Skill", "Technical-Skill", "Admin-Skill"]},
     
     {"course_name": "BS Marine Engineering", 
      "description": "Ship engine systems, maintenance, and marine machinery.", 
      "minimum_gwa": 83, "required_strand": "STEM",
-     "trait_tag": ["Realistic", "Maritime-Sea", "Technical-Skill"]},
+     "trait_tag": ["Realistic", "Maritime-Sea", "Technical-Skill", "Mechanical-Design", "Analytical-Skill"]},
     
     # ============== AGRICULTURE ==============
     {"course_name": "BS Agriculture", 
@@ -603,7 +603,7 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BS Office Administration", 
      "description": "Office management, administrative support, and business communication.", 
      "minimum_gwa": 80, "required_strand": "ABM",
-     "trait_tag": ["Conventional", "Hospitality-Svc", "Admin-Skill"]},
+     "trait_tag": ["Conventional", "Hospitality-Svc", "Admin-Skill", "People-Skill", "Technical-Skill"]},
     
     # ============== COMMUNICATION & MEDIA ==============
     {"course_name": "BA in Communication", 
@@ -646,7 +646,7 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BA in Theater Arts", 
      "description": "Acting, stage production, and dramatic arts.", 
      "minimum_gwa": 80, "required_strand": "HUMSS",
-     "trait_tag": ["Artistic", "Visual-Design", "Creative-Skill", "Performing-Arts"]},
+     "trait_tag": ["Artistic", "Visual-Design", "Creative-Skill", "Performing-Arts", "People-Skill"]},
     
     # ============== EXERCISE & SPORTS ==============
     {"course_name": "BS Exercise and Sports Science", 
@@ -658,12 +658,12 @@ COURSES_POOL_SPECIALIZED = [
     {"course_name": "BS Aircraft Maintenance Technology", 
      "description": "Aircraft repair, maintenance, and aviation safety.", 
      "minimum_gwa": 83, "required_strand": "STEM",
-     "trait_tag": ["Realistic", "Hardware-Systems", "Technical-Skill"]},
+     "trait_tag": ["Realistic", "Hardware-Systems", "Technical-Skill", "Mechanical-Design", "Physical-Skill"]},
     
     {"course_name": "BS Aviation Electronics Technology", 
      "description": "Aircraft electronic systems and avionics maintenance.", 
      "minimum_gwa": 83, "required_strand": "STEM",
-     "trait_tag": ["Realistic", "Hardware-Systems", "Technical-Skill"]},
+     "trait_tag": ["Realistic", "Hardware-Systems", "Technical-Skill", "Electrical-Power", "Analytical-Skill"]},
 ]
 
 # Verify trait coverage
