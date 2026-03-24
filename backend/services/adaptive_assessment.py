@@ -4345,6 +4345,73 @@ QUESTION_CATEGORY_DOMAIN_HINTS["business"].extend(["Startup & Innovation", "PH I
                                                     "Career Shadow Extended", "Work Environment Extended",
                                                     "Licensure Extended"])
 
+# ── EXPLICIT REGISTRATION: Batches 32-34 (Q5306-Q5365) ─────────────
+# Batch 32 – Q5306-Q5325
+QUESTION_TREE_NODES[5306] = {"level": 2, "weight": 2.0, "branches": ["maritime"]}                           # Maritime Studies
+QUESTION_TREE_NODES[5307] = {"level": 2, "weight": 2.0, "branches": ["law", "public_service"]}              # Criminology & Public Safety
+QUESTION_TREE_NODES[5308] = {"level": 2, "weight": 2.0, "branches": ["engineering", "creative"]}            # Architecture & Interior Design
+QUESTION_TREE_NODES[5309] = {"level": 2, "weight": 2.0, "branches": ["healthcare", "education"]}            # Psychology & Counseling
+QUESTION_TREE_NODES[5310] = {"level": 2, "weight": 2.0, "branches": ["agriculture", "science"]}             # Agriculture & Farming
+QUESTION_TREE_NODES[5311] = {"level": 2, "weight": 2.0, "branches": ["creative", "business"]}               # Communication & Journalism
+QUESTION_TREE_NODES[5312] = {"level": 2, "weight": 2.0, "branches": ["technology", "business", "science"]}  # Data & Analytics
+QUESTION_TREE_NODES[5313] = {"level": 2, "weight": 2.0, "branches": ["hospitality", "business"]}            # Tourism & Hospitality
+QUESTION_TREE_NODES[5314] = {"level": 2, "weight": 2.0, "branches": ["engineering", "technology"]}           # Electrical & Electronics
+QUESTION_TREE_NODES[5315] = {"level": 2, "weight": 2.0, "branches": ["business", "science"]}                # Accounting
+QUESTION_TREE_NODES[5316] = {"level": 2, "weight": 2.0, "branches": ["education"]}                          # Education & Teaching
+QUESTION_TREE_NODES[5317] = {"level": 2, "weight": 2.0, "branches": ["technology", "public_service"]}       # Cybersecurity
+QUESTION_TREE_NODES[5318] = {"level": 2, "weight": 2.0, "branches": ["agriculture", "maritime", "science"]} # Marine Biology & Fisheries
+QUESTION_TREE_NODES[5319] = {"level": 2, "weight": 2.0, "branches": ["business"]}                           # Business & Entrepreneurship
+QUESTION_TREE_NODES[5320] = {"level": 2, "weight": 2.0, "branches": ["technology", "creative"]}             # Game Development
+QUESTION_TREE_NODES[5321] = {"level": 2, "weight": 2.0, "branches": ["public_service", "business"]}         # Public Administration
+QUESTION_TREE_NODES[5322] = {"level": 2, "weight": 2.0, "branches": ["science", "healthcare"]}              # Biotechnology & Genetics
+QUESTION_TREE_NODES[5323] = {"level": 2, "weight": 2.0, "branches": ["creative", "business"]}               # Fashion & Textile Design
+QUESTION_TREE_NODES[5324] = {"level": 2, "weight": 2.0, "branches": ["agriculture", "science"]}             # Forestry & Environmental Science
+QUESTION_TREE_NODES[5325] = {"level": 2, "weight": 2.0, "branches": ["education", "healthcare"]}            # Special Needs Education
+
+# Batch 33 – Q5326-Q5345
+QUESTION_TREE_NODES[5326] = {"level": 2, "weight": 2.0, "branches": ["agriculture", "healthcare"]}                   # Veterinary Medicine
+QUESTION_TREE_NODES[5327] = {"level": 2, "weight": 2.0, "branches": ["science", "engineering", "technology"]}         # Physics & Mathematics
+QUESTION_TREE_NODES[5328] = {"level": 2, "weight": 2.0, "branches": ["technology", "education"]}                      # Library & Information Science
+QUESTION_TREE_NODES[5329] = {"level": 2, "weight": 2.0, "branches": ["public_service", "education"]}                  # Sociology & Social Research
+QUESTION_TREE_NODES[5330] = {"level": 2, "weight": 2.0, "branches": ["education", "creative"]}                        # Linguistics & Language Studies
+QUESTION_TREE_NODES[5331] = {"level": 2, "weight": 2.0, "branches": ["creative"]}                                     # Theater & Performing Arts
+QUESTION_TREE_NODES[5332] = {"level": 2, "weight": 2.0, "branches": ["physical", "healthcare"]}                       # Exercise & Sports Science
+QUESTION_TREE_NODES[5333] = {"level": 2, "weight": 2.0, "branches": ["engineering", "technology", "science"]}          # Aviation Technology
+QUESTION_TREE_NODES[5334] = {"level": 2, "weight": 2.0, "branches": ["engineering", "public_service", "agriculture"]} # Geodetic Engineering
+QUESTION_TREE_NODES[5335] = {"level": 2, "weight": 2.0, "branches": ["engineering", "creative", "business"]}           # Industrial Design
+QUESTION_TREE_NODES[5336] = {"level": 2, "weight": 2.0, "branches": ["creative"]}                                     # Photography & Visual Arts
+QUESTION_TREE_NODES[5337] = {"level": 2, "weight": 2.0, "branches": ["creative", "technology"]}                        # Music Production
+QUESTION_TREE_NODES[5338] = {"level": 2, "weight": 2.0, "branches": ["engineering", "creative"]}                       # Landscape Architecture
+QUESTION_TREE_NODES[5339] = {"level": 2, "weight": 2.0, "branches": ["business", "public_service"]}                   # Real Estate Management
+QUESTION_TREE_NODES[5340] = {"level": 2, "weight": 2.0, "branches": ["business", "public_service"]}                   # Office Administration
+QUESTION_TREE_NODES[5341] = {"level": 2, "weight": 2.0, "branches": ["business", "public_service"]}                   # Customs Administration
+QUESTION_TREE_NODES[5342] = {"level": 2, "weight": 2.0, "branches": ["science", "hospitality", "healthcare"]}         # Food Technology
+QUESTION_TREE_NODES[5343] = {"level": 2, "weight": 2.0, "branches": ["science", "engineering"]}                        # Geology & Meteorology
+QUESTION_TREE_NODES[5344] = {"level": 2, "weight": 2.0, "branches": ["public_service", "education"]}                  # Community Development
+QUESTION_TREE_NODES[5345] = {"level": 2, "weight": 2.0, "branches": ["public_service", "business"]}                   # Political Science & Intl Studies
+
+# Batch 34 – Q5346-Q5365
+QUESTION_TREE_NODES[5346] = {"level": 2, "weight": 2.0, "branches": ["technology", "science"]}              # Computer Science & AI
+QUESTION_TREE_NODES[5347] = {"level": 2, "weight": 2.0, "branches": ["technology", "business"]}             # Information Technology
+QUESTION_TREE_NODES[5348] = {"level": 2, "weight": 2.0, "branches": ["engineering", "technology"]}           # Computer Engineering
+QUESTION_TREE_NODES[5349] = {"level": 2, "weight": 2.0, "branches": ["engineering", "technology"]}           # Electronics & Electrical Eng
+QUESTION_TREE_NODES[5350] = {"level": 2, "weight": 2.0, "branches": ["engineering", "public_service"]}      # Civil Engineering
+QUESTION_TREE_NODES[5351] = {"level": 2, "weight": 2.0, "branches": ["engineering", "technology"]}           # Mechanical Engineering
+QUESTION_TREE_NODES[5352] = {"level": 2, "weight": 2.0, "branches": ["engineering", "business"]}             # Industrial Engineering
+QUESTION_TREE_NODES[5353] = {"level": 2, "weight": 2.0, "branches": ["engineering", "technology", "science"]}# Aeronautical Engineering
+QUESTION_TREE_NODES[5354] = {"level": 2, "weight": 2.0, "branches": ["creative", "technology"]}              # Animation & Multimedia
+QUESTION_TREE_NODES[5355] = {"level": 2, "weight": 2.0, "branches": ["creative"]}                            # Fine Arts & Visual Design
+QUESTION_TREE_NODES[5356] = {"level": 2, "weight": 2.0, "branches": ["business", "creative"]}                # Marketing Management
+QUESTION_TREE_NODES[5357] = {"level": 2, "weight": 2.0, "branches": ["business", "public_service"]}          # Human Resource Management
+QUESTION_TREE_NODES[5358] = {"level": 2, "weight": 2.0, "branches": ["business", "agriculture"]}             # Agribusiness
+QUESTION_TREE_NODES[5359] = {"level": 2, "weight": 2.0, "branches": ["science", "healthcare"]}               # Biology & Life Sciences
+QUESTION_TREE_NODES[5360] = {"level": 2, "weight": 2.0, "branches": ["science", "healthcare"]}               # Chemistry & Laboratory Science
+QUESTION_TREE_NODES[5361] = {"level": 2, "weight": 2.0, "branches": ["technology", "business", "science"]}   # Statistics & Data Science
+QUESTION_TREE_NODES[5362] = {"level": 2, "weight": 2.0, "branches": ["science", "engineering", "public_service"]} # Environmental Planning
+QUESTION_TREE_NODES[5363] = {"level": 2, "weight": 2.0, "branches": ["education", "public_service"]}         # Philosophy & Ethics
+QUESTION_TREE_NODES[5364] = {"level": 2, "weight": 2.0, "branches": ["healthcare"]}                          # Nursing & Emergency Health
+QUESTION_TREE_NODES[5365] = {"level": 2, "weight": 2.0, "branches": ["creative", "public_service"]}          # Development Communication
+
 # ── AUTO-CLASSIFY UNCLASSIFIED QUESTIONS ────────────────────────────
 # Many enhanced questions are not explicitly added to QUESTION_TREE_NODES.
 # Without classification, _is_relevant_question() cannot filter them,
