@@ -615,6 +615,38 @@ TRAIT_TO_BRANCH = {
     "Artistic": "creative", "Social": "social",
     "Enterprising": "business", "Conventional": "business",
     "Analytical-Skill": "technology",
+    # Alternate trait names used in batch questions
+    "Business-Mgmt": "business", "Finance-Acctg": "business",
+    "Marketing-Ads": "business", "Operations-Logistics": "business",
+    "Enterprise": "business", "Leadership": "business",
+    "Healthcare-Med": "healthcare", "Psychology-Path": "social",
+    "Tech-Tic": "technology", "UI-UX": "technology",
+    "Creative-Design": "creative", "Creative-Writing": "creative",
+    "Film-Media": "creative", "Cultural-Preservation": "creative",
+    "Communication-Media": "creative", "Music-Audio": "creative",
+    "Public-Admin": "public_service", "Community-Dev": "public_service",
+    "Agri-Fisheries": "agriculture", "Sustainability-Path": "science",
+    "Architecture-Path": "engineering", "Engineering-Path": "engineering",
+    "Electrical-Electronics": "engineering", "Electronics-Dev": "engineering",
+    "Scientific-Research": "science", "Nutrition-Food-Sci": "science",
+    "Veterinary-Path": "agriculture",
+    "Hotel-Resort-Path": "hospitality", "Culinary-Mgmt-Path": "hospitality",
+    "Tourism-Hospitality-Path": "hospitality",
+    "Automotive-Tech": "engineering", "Geodetic-Surveying": "engineering",
+    "Exercise-Sci-Path": "physical", "Sports-Fitness-Path": "physical",
+    "Military-Defense": "physical",
+    "Inclusive-Ed": "education", "Early-Childhood": "education",
+    "Philosophy-Path": "education", "Library-Info": "education",
+    "Special-Ed": "education",
+    "Forestry-Path": "agriculture", "Fisheries-Agri-Path": "agriculture",
+    "Legal-Mgmt": "public_service", "Law-Enforce": "public_service",
+    "Criminology": "public_service", "Intl-Studies": "public_service",
+    "TVET-Path": "education",
+    "Forensic-Sci": "science", "Food-Science": "science",
+    "Rehab-Therapy": "healthcare", "Health-Admin": "healthcare",
+    "Patient-Care": "healthcare", "Medical-Lab": "healthcare",
+    "Pharmacy": "healthcare", "Public-Health": "healthcare",
+    "Nutrition-Diet": "healthcare",
 }
 
 # Maps branch domains to their adjacent/related branches
@@ -4345,27 +4377,98 @@ def _infer_branches_from_category(category: str) -> list:
     return list(set(matched)) if matched else []
 
 # Apply to all questions not already in QUESTION_TREE_NODES
-# Note: will be re-run in AdaptiveAssessmentEngine.__init__ once questions are available.
 try:
+    from data.questions_enhanced import QUESTIONS_POOL_ENHANCED
     _all_questions_to_classify = QUESTIONS_POOL_ENHANCED
-except NameError:
+except (ImportError, NameError):
     _all_questions_to_classify = []
 
+def _infer_branches_from_traits(question: dict) -> list:
+    """Fallback: infer branch domains from a question's option trait_tags."""
+    branch_votes: Dict[str, int] = {}
+    for opt in question.get("options", []):
+        tt = opt.get("trait_tags", {})
+        traits = tt.keys() if isinstance(tt, dict) else (tt if isinstance(tt, list) else [])
+        for t in traits:
+            branch = TRAIT_TO_BRANCH.get(t, "")
+            if branch:
+                branch_votes[branch] = branch_votes.get(branch, 0) + 1
+    if not branch_votes:
+        return []
+    # Return branches that appear in at least 10% of the votes (min 1)
+    max_count = max(branch_votes.values())
+    threshold = max(1, max_count * 0.2)
+    return sorted([b for b, c in branch_votes.items() if c >= threshold],
+                  key=lambda b: branch_votes[b], reverse=True)
+
 _auto_classified = 0
+_trait_classified = 0
 for _q in _all_questions_to_classify:
     _qid = _q.get("question_id")
     if _qid and _qid not in QUESTION_TREE_NODES:
         _branches = _infer_branches_from_category(_q.get("category", ""))
+        if not _branches:
+            _branches = _infer_branches_from_traits(_q)
+            if _branches:
+                _trait_classified += 1
         if _branches:
             QUESTION_TREE_NODES[_qid] = {
-                "level": 1,
-                "weight": 1.4,
+                "level": 2,
+                "weight": 1.6,
                 "branches": _branches,
             }
             _auto_classified += 1
 
 if _auto_classified:
-    print(f"[TREE] Auto-classified {_auto_classified} unclassified questions by category")
+    print(f"[TREE] Auto-classified {_auto_classified} unclassified questions "
+          f"({_auto_classified - _trait_classified} by category, {_trait_classified} by trait analysis)")
+
+# ── AUTO-REGISTER INTO TRAIT_FOLLOWUP_MAP & DOMAIN_ENTRY_QUESTIONS ──
+# For every auto-classified question, register it as a follow-up for its
+# dominant traits so the conversation chain can reach it.
+_followup_added = 0
+for _q in _all_questions_to_classify:
+    _qid = _q.get("question_id")
+    if not _qid or _qid not in QUESTION_TREE_NODES:
+        continue
+    # Collect all traits this question covers
+    _trait_counts: Dict[str, float] = {}
+    for _opt in _q.get("options", []):
+        _tt = _opt.get("trait_tags", {})
+        if isinstance(_tt, dict):
+            for _t, _w in _tt.items():
+                _trait_counts[_t] = _trait_counts.get(_t, 0) + (float(_w) if isinstance(_w, (int, float)) else 1.0)
+        elif isinstance(_tt, list):
+            for _t in _tt:
+                _trait_counts[_t] = _trait_counts.get(_t, 0) + 1.0
+    # Add this question to the follow-up list of its top traits
+    _sorted_traits = sorted(_trait_counts.items(), key=lambda x: x[1], reverse=True)
+    for _t, _w in _sorted_traits[:5]:  # Top 5 traits only
+        if _t in TRAIT_FOLLOWUP_MAP:
+            if _qid not in TRAIT_FOLLOWUP_MAP[_t]:
+                TRAIT_FOLLOWUP_MAP[_t].append(_qid)
+                _followup_added += 1
+        else:
+            TRAIT_FOLLOWUP_MAP[_t] = [_qid]
+            _followup_added += 1
+
+# Also add auto-classified questions to DOMAIN_ENTRY_QUESTIONS
+_domain_entry_added = 0
+for _q in _all_questions_to_classify:
+    _qid = _q.get("question_id")
+    if not _qid or _qid not in QUESTION_TREE_NODES:
+        continue
+    _node = QUESTION_TREE_NODES[_qid]
+    for _branch in _node.get("branches", [])[:2]:  # Primary + secondary branch
+        if _branch in DOMAIN_ENTRY_QUESTIONS:
+            if _qid not in DOMAIN_ENTRY_QUESTIONS[_branch]:
+                DOMAIN_ENTRY_QUESTIONS[_branch].append(_qid)
+                _domain_entry_added += 1
+
+if _followup_added:
+    print(f"[TREE] Added {_followup_added} trait follow-up entries for auto-classified questions")
+if _domain_entry_added:
+    print(f"[TREE] Added {_domain_entry_added} domain entry entries for auto-classified questions")
 
 # ────────────────────────────────────────────────────────────────────
 
