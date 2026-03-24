@@ -41020,6 +41020,733 @@ QUESTIONS_POOL_ENHANCED.extend(_AGRICULTURE_RESOURCE_EXPANSION_7)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
+# REPLACEMENT BATCH — 15 new questions (IDs 8-22, option IDs 27013-27102)
+# Filling gaps left by the 88 removed duplicate/rephrase questions.
+# ══════════════════════════════════════════════════════════════════════════════
+_REPLACEMENT_BATCH_15 = [
+    # ── Q8 — SCENARIO: Heritage preservation project ─────────────────────────
+    {
+        "question_id": 8,
+        "question_text": "SCENARIO: Your town council allocates a budget to preserve a crumbling heritage site. Which role would you take on?",
+        "category": "Situational - Heritage Preservation",
+        "options": [
+            {"option_id": 27013, "option_text": "Researching the historical significance of the site and documenting its story", "trait_tags": {"Writing-Comm": 1.0, "Investigative": 0.5, "Lab-Research": 0.35, "Teaching-Ed": 0.2, "Analytical-Skill": 0.15}},
+            {"option_id": 27014, "option_text": "Drawing up architectural restoration plans to rebuild the structure safely", "trait_tags": {"Spatial-Design": 1.0, "Civil-Build": 0.5, "Mechanical-Design": 0.3, "Creative-Skill": 0.2, "Realistic": 0.15}},
+            {"option_id": 27015, "option_text": "Fundraising and pitching the project to sponsors and local businesses", "trait_tags": {"Marketing-Sales": 1.0, "Enterprising": 0.5, "People-Skill": 0.4, "Finance-Acct": 0.2, "Admin-Skill": 0.15}},
+            {"option_id": 27016, "option_text": "Building a virtual reality tour so people worldwide can experience the site", "trait_tags": {"Digital-Media": 1.0, "Software-Dev": 0.5, "Animation-3D": 0.4, "Web-Dev": 0.25, "Creative-Skill": 0.15}},
+            {"option_id": 27017, "option_text": "Coordinating volunteers and scheduling the restoration work", "trait_tags": {"Admin-Skill": 1.0, "People-Skill": 0.5, "Community-Serve": 0.4, "Conventional": 0.25, "Social": 0.15}},
+            {"option_id": 27018, "option_text": "Assessing the soil and foundation to determine structural safety", "trait_tags": {"Civil-Build": 1.0, "Field-Research": 0.5, "Environmental-Sci": 0.35, "Analytical-Skill": 0.25, "Realistic": 0.15}},
+        ],
+    },
+    # ── Q9 — SCENARIO: Debate competition ────────────────────────────────────
+    {
+        "question_id": 9,
+        "question_text": "SCENARIO: Your school enters a national debate competition. What role suits you best on the team?",
+        "category": "Situational - Debate & Communication",
+        "options": [
+            {"option_id": 27019, "option_text": "Lead debater — constructing arguments and delivering them persuasively", "trait_tags": {"Writing-Comm": 1.0, "People-Skill": 0.5, "Analytical-Skill": 0.4, "Enterprising": 0.25, "Legal-Practice": 0.2}},
+            {"option_id": 27020, "option_text": "Researcher — digging deep into data, cases, and evidence for the team", "trait_tags": {"Investigative": 1.0, "Lab-Research": 0.5, "Data-Analytics": 0.4, "Analytical-Skill": 0.3, "Writing-Comm": 0.2}},
+            {"option_id": 27021, "option_text": "Strategist — analyzing the opponents' weaknesses and planning counterarguments", "trait_tags": {"Analytical-Skill": 1.0, "Investigative": 0.5, "Enterprising": 0.35, "Legal-Practice": 0.25, "People-Skill": 0.15}},
+            {"option_id": 27022, "option_text": "Media manager — filming, editing highlights, and running the team social media", "trait_tags": {"Digital-Media": 1.0, "Film-Broadcast": 0.5, "Creative-Skill": 0.4, "Marketing-Sales": 0.25, "Web-Dev": 0.15}},
+            {"option_id": 27023, "option_text": "Coach liaison — coordinating practice schedules, logistics, and travel for the team", "trait_tags": {"Admin-Skill": 1.0, "People-Skill": 0.5, "Conventional": 0.35, "Community-Serve": 0.2, "Social": 0.15}},
+            {"option_id": 27024, "option_text": "Psychology consultant — reading body language and coaching speakers on presence", "trait_tags": {"Counseling": 1.0, "People-Skill": 0.5, "Social": 0.4, "Teaching-Ed": 0.25, "Analytical-Skill": 0.2}},
+        ],
+    },
+    # ── Q10 — SCENARIO: Community garden project ─────────────────────────────
+    {
+        "question_id": 10,
+        "question_text": "SCENARIO: Your neighborhood starts a community garden on an empty lot. How would you contribute?",
+        "category": "Situational - Community Agriculture",
+        "options": [
+            {"option_id": 27025, "option_text": "Testing the soil quality and choosing which crops will thrive", "trait_tags": {"Agri-Nature": 1.0, "Field-Research": 0.5, "Environmental-Sci": 0.4, "Lab-Research": 0.25, "Analytical-Skill": 0.15}},
+            {"option_id": 27026, "option_text": "Designing the garden layout with paths, beds, and an irrigation system", "trait_tags": {"Spatial-Design": 1.0, "Civil-Build": 0.5, "Environmental-Eng": 0.35, "Mechanical-Design": 0.2, "Creative-Skill": 0.15}},
+            {"option_id": 27027, "option_text": "Teaching children and neighbors how to plant and maintain vegetables", "trait_tags": {"Teaching-Ed": 1.0, "Community-Serve": 0.5, "People-Skill": 0.4, "Agri-Nature": 0.25, "Social": 0.2}},
+            {"option_id": 27028, "option_text": "Building a website and app for members to track plots and share harvests", "trait_tags": {"Software-Dev": 1.0, "Web-Dev": 0.5, "Mobile-Dev": 0.4, "Data-Analytics": 0.2, "Digital-Media": 0.15}},
+            {"option_id": 27029, "option_text": "Managing the budget, supplies, and partnerships with local businesses", "trait_tags": {"Finance-Acct": 1.0, "Admin-Skill": 0.5, "Marketing-Sales": 0.35, "Enterprising": 0.25, "People-Skill": 0.15}},
+            {"option_id": 27030, "option_text": "Composting waste and setting up a sustainable recycling system for the garden", "trait_tags": {"Environmental-Sci": 1.0, "Environmental-Eng": 0.5, "Agri-Nature": 0.4, "Field-Research": 0.2, "Realistic": 0.15}},
+        ],
+    },
+    # ── Q11 — SCENARIO: Yearbook creation ────────────────────────────────────
+    {
+        "question_id": 11,
+        "question_text": "SCENARIO: You're chosen to lead your school yearbook. Which section would you personally handle?",
+        "category": "Situational - Yearbook & Publishing",
+        "options": [
+            {"option_id": 27031, "option_text": "Writing feature stories and student profiles that capture the school year", "trait_tags": {"Writing-Comm": 1.0, "Creative-Skill": 0.5, "People-Skill": 0.35, "Investigative": 0.2, "Social": 0.15}},
+            {"option_id": 27032, "option_text": "Designing the cover, layouts, and typography for every page", "trait_tags": {"Visual-Design": 1.0, "Creative-Skill": 0.5, "Digital-Media": 0.4, "Spatial-Design": 0.2, "Artistic": 0.15}},
+            {"option_id": 27033, "option_text": "Photographing events, candid moments, and group portraits", "trait_tags": {"Film-Broadcast": 1.0, "Creative-Skill": 0.5, "Artistic": 0.4, "Digital-Media": 0.25, "Visual-Design": 0.15}},
+            {"option_id": 27034, "option_text": "Handling the printing budget, deadlines, and vendor negotiations", "trait_tags": {"Admin-Skill": 1.0, "Finance-Acct": 0.5, "Conventional": 0.35, "Enterprising": 0.25, "People-Skill": 0.15}},
+            {"option_id": 27035, "option_text": "Building an interactive digital version with embedded videos and links", "trait_tags": {"Web-Dev": 1.0, "Software-Dev": 0.5, "Digital-Media": 0.4, "Creative-Skill": 0.2, "Mobile-Dev": 0.15}},
+            {"option_id": 27036, "option_text": "Compiling statistics — top honors, club participation rates, and school records", "trait_tags": {"Data-Analytics": 1.0, "Analytical-Skill": 0.5, "Conventional": 0.35, "Investigative": 0.25, "Writing-Comm": 0.15}},
+        ],
+    },
+    # ── Q12 — SCENARIO: Cultural exchange program ────────────────────────────
+    {
+        "question_id": 12,
+        "question_text": "SCENARIO: Your school hosts a week-long cultural exchange with students from another country. What would you organize?",
+        "category": "Situational - Cultural Exchange",
+        "options": [
+            {"option_id": 27037, "option_text": "A live cooking showcase where both groups prepare traditional dishes together", "trait_tags": {"Culinary-Arts": 1.0, "Hospitality-Svc": 0.5, "People-Skill": 0.4, "Creative-Skill": 0.2, "Social": 0.15}},
+            {"option_id": 27038, "option_text": "A bilingual storytelling night with translated poetry and folk tales", "trait_tags": {"Writing-Comm": 1.0, "Performing-Arts": 0.5, "Creative-Skill": 0.4, "Teaching-Ed": 0.25, "Social": 0.2}},
+            {"option_id": 27039, "option_text": "A collaborative art mural representing both cultures on a shared canvas", "trait_tags": {"Visual-Design": 1.0, "Artistic": 0.5, "Creative-Skill": 0.4, "Community-Serve": 0.2, "Social": 0.15}},
+            {"option_id": 27040, "option_text": "A mini science fair where students present innovations from their home countries", "trait_tags": {"Lab-Research": 1.0, "Teaching-Ed": 0.5, "Investigative": 0.4, "Analytical-Skill": 0.25, "People-Skill": 0.15}},
+            {"option_id": 27041, "option_text": "A sports tournament and outdoor team-building games between delegations", "trait_tags": {"Sports-Fitness-Path": 1.0, "People-Skill": 0.5, "Physical-Skill": 0.4, "Social": 0.3, "Community-Serve": 0.15}},
+            {"option_id": 27042, "option_text": "A documentary film about the exchange experience for both schools to keep", "trait_tags": {"Film-Broadcast": 1.0, "Digital-Media": 0.5, "Creative-Skill": 0.4, "Writing-Comm": 0.2, "Visual-Design": 0.15}},
+        ],
+    },
+    # ── Q13 — SCENARIO: Local newspaper startup ─────────────────────────────
+    {
+        "question_id": 13,
+        "question_text": "SCENARIO: A group of alumni launches a free local newspaper for your town. Which beat would you cover?",
+        "category": "Situational - Journalism & Media",
+        "options": [
+            {"option_id": 27043, "option_text": "Investigative reports — uncovering corruption and holding officials accountable", "trait_tags": {"Law-Enforce": 1.0, "Writing-Comm": 0.5, "Investigative": 0.45, "Analytical-Skill": 0.2, "Legal-Practice": 0.15}},
+            {"option_id": 27044, "option_text": "Science and health — explaining medical breakthroughs and wellness tips", "trait_tags": {"Public-Health": 1.0, "Lab-Research": 0.5, "Writing-Comm": 0.4, "Patient-Care": 0.2, "Analytical-Skill": 0.15}},
+            {"option_id": 27045, "option_text": "Business and startups — profiling local entrepreneurs and market trends", "trait_tags": {"Marketing-Sales": 1.0, "Enterprising": 0.5, "Finance-Acct": 0.35, "Writing-Comm": 0.25, "People-Skill": 0.15}},
+            {"option_id": 27046, "option_text": "Arts and entertainment — reviewing shows, music, and cultural events", "trait_tags": {"Creative-Skill": 1.0, "Performing-Arts": 0.5, "Writing-Comm": 0.45, "Visual-Design": 0.2, "Social": 0.15}},
+            {"option_id": 27047, "option_text": "Technology — covering gadgets, apps, and digital trends changing daily life", "trait_tags": {"Software-Dev": 1.0, "Hardware-Systems": 0.5, "Writing-Comm": 0.4, "Digital-Media": 0.25, "Data-Analytics": 0.15}},
+            {"option_id": 27048, "option_text": "Environment — reporting on climate action, conservation, and green initiatives", "trait_tags": {"Environmental-Sci": 1.0, "Field-Research": 0.5, "Writing-Comm": 0.4, "Community-Serve": 0.2, "Agri-Nature": 0.15}},
+        ],
+    },
+    # ── Q14 — SCENARIO: Talent show production ────────────────────────────────
+    {
+        "question_id": 14,
+        "question_text": "SCENARIO: You're producing your school's annual talent show. Which backstage job would you pick?",
+        "category": "Situational - Event Production",
+        "options": [
+            {"option_id": 27049, "option_text": "Running the sound board and mixing live audio for every performer", "trait_tags": {"Music-Audio": 1.0, "Electronics-Dev": 0.5, "Technical-Skill": 0.4, "Creative-Skill": 0.2, "Realistic": 0.15}},
+            {"option_id": 27050, "option_text": "Designing and operating the stage lighting for dramatic effects", "trait_tags": {"Performing-Arts": 1.0, "Electrical-Power": 0.5, "Creative-Skill": 0.4, "Visual-Design": 0.2, "Technical-Skill": 0.15}},
+            {"option_id": 27051, "option_text": "Building the physical stage set, props, and backdrops", "trait_tags": {"Spatial-Design": 1.0, "Mechanical-Design": 0.5, "Realistic": 0.4, "Creative-Skill": 0.25, "Civil-Build": 0.15}},
+            {"option_id": 27052, "option_text": "Streaming the event live and managing the multi-camera video feed", "trait_tags": {"Film-Broadcast": 1.0, "Digital-Media": 0.5, "Software-Dev": 0.35, "Creative-Skill": 0.2, "Web-Dev": 0.15}},
+            {"option_id": 27053, "option_text": "Selling tickets, managing sponsors, and handling the event finances", "trait_tags": {"Finance-Acct": 1.0, "Marketing-Sales": 0.5, "Enterprising": 0.4, "Admin-Skill": 0.25, "People-Skill": 0.15}},
+            {"option_id": 27054, "option_text": "Coaching nervous performers on stage presence and confidence", "trait_tags": {"Counseling": 1.0, "Performing-Arts": 0.5, "People-Skill": 0.45, "Teaching-Ed": 0.3, "Social": 0.2}},
+        ],
+    },
+    # ── Q15 — SCENARIO: Autonomous vehicle ethics ────────────────────────────
+    {
+        "question_id": 15,
+        "question_text": "SCENARIO: A tech company asks your class to advise on ethical guidelines for self-driving vehicles. What angle do you focus on?",
+        "category": "Situational - Technology Ethics",
+        "options": [
+            {"option_id": 27055, "option_text": "Programming the decision-making algorithm to handle emergency situations", "trait_tags": {"AI-ML": 1.0, "Software-Dev": 0.5, "Analytical-Skill": 0.4, "Cyber-Defense": 0.2, "Data-Analytics": 0.15}},
+            {"option_id": 27056, "option_text": "Drafting the legal framework for liability when accidents occur", "trait_tags": {"Legal-Practice": 1.0, "Law-Enforce": 0.5, "Writing-Comm": 0.35, "Analytical-Skill": 0.25, "Investigative": 0.15}},
+            {"option_id": 27057, "option_text": "Testing sensor reliability and vehicle hardware under extreme conditions", "trait_tags": {"Hardware-Systems": 1.0, "Electronics-Dev": 0.5, "Mechanical-Design": 0.4, "Realistic": 0.2, "Technical-Skill": 0.15}},
+            {"option_id": 27058, "option_text": "Surveying community attitudes and fears about autonomous transport", "trait_tags": {"Community-Serve": 1.0, "People-Skill": 0.5, "Social": 0.4, "Data-Analytics": 0.25, "Writing-Comm": 0.15}},
+            {"option_id": 27059, "option_text": "Designing the passenger interface so anyone can use it safely and intuitively", "trait_tags": {"Visual-Design": 1.0, "Digital-Media": 0.5, "Creative-Skill": 0.35, "Software-Dev": 0.25, "People-Skill": 0.15}},
+            {"option_id": 27060, "option_text": "Evaluating the environmental impact of replacing traditional vehicles", "trait_tags": {"Environmental-Sci": 1.0, "Environmental-Eng": 0.5, "Data-Analytics": 0.4, "Field-Research": 0.2, "Analytical-Skill": 0.15}},
+        ],
+    },
+    # ── Q16 — SCENARIO: Time capsule project ─────────────────────────────────
+    {
+        "question_id": 16,
+        "question_text": "SCENARIO: Your class buries a time capsule to be opened in 50 years. What would you contribute?",
+        "category": "Situational - Time Capsule & Legacy",
+        "options": [
+            {"option_id": 27061, "option_text": "A hand-written letter describing today's biggest social issues and your hopes", "trait_tags": {"Writing-Comm": 1.0, "Social": 0.5, "Community-Serve": 0.35, "Creative-Skill": 0.2, "People-Skill": 0.15}},
+            {"option_id": 27062, "option_text": "A USB drive with student-coded apps and programs your class built this year", "trait_tags": {"Software-Dev": 1.0, "Web-Dev": 0.5, "Hardware-Systems": 0.3, "Digital-Media": 0.2, "Technical-Skill": 0.15}},
+            {"option_id": 27063, "option_text": "Preserved seed samples of local plants with planting instructions", "trait_tags": {"Agri-Nature": 1.0, "Environmental-Sci": 0.5, "Field-Research": 0.4, "Lab-Research": 0.2, "Realistic": 0.15}},
+            {"option_id": 27064, "option_text": "An original painting or sculpture made from recycled classroom materials", "trait_tags": {"Visual-Design": 1.0, "Artistic": 0.5, "Creative-Skill": 0.45, "Environmental-Sci": 0.15, "Spatial-Design": 0.1}},
+            {"option_id": 27065, "option_text": "A short documentary film interviewing students about their dreams", "trait_tags": {"Film-Broadcast": 1.0, "Digital-Media": 0.5, "People-Skill": 0.4, "Creative-Skill": 0.25, "Writing-Comm": 0.15}},
+            {"option_id": 27066, "option_text": "A data chart showing the school's statistics — enrollment, achievements, demographics", "trait_tags": {"Data-Analytics": 1.0, "Analytical-Skill": 0.5, "Conventional": 0.35, "Finance-Acct": 0.2, "Writing-Comm": 0.15}},
+        ],
+    },
+    # ── Q17 — SCENARIO: Cooperative business ─────────────────────────────────
+    {
+        "question_id": 17,
+        "question_text": "SCENARIO: Students in your barangay form a cooperative to earn during summer. What business would you propose?",
+        "category": "Situational - Cooperative Entrepreneurship",
+        "options": [
+            {"option_id": 27067, "option_text": "A repair and maintenance service for electronics, bikes, and small appliances", "trait_tags": {"Electronics-Dev": 1.0, "Mechanical-Design": 0.5, "Technical-Skill": 0.4, "Realistic": 0.25, "Hardware-Systems": 0.15}},
+            {"option_id": 27068, "option_text": "A catering and baking business specializing in local Filipino recipes", "trait_tags": {"Culinary-Arts": 1.0, "Hospitality-Svc": 0.5, "Food-Science": 0.35, "Enterprising": 0.25, "Creative-Skill": 0.15}},
+            {"option_id": 27069, "option_text": "A graphic design and printing shop for tarpaulins, invitations, and branding", "trait_tags": {"Visual-Design": 1.0, "Digital-Media": 0.5, "Marketing-Sales": 0.4, "Creative-Skill": 0.25, "Software-Dev": 0.15}},
+            {"option_id": 27070, "option_text": "A tutoring center offering after-school help in math, science, and English", "trait_tags": {"Teaching-Ed": 1.0, "People-Skill": 0.5, "Analytical-Skill": 0.35, "Community-Serve": 0.25, "Social": 0.15}},
+            {"option_id": 27071, "option_text": "An urban farming operation selling fresh herbs and vegetables to neighbors", "trait_tags": {"Agri-Nature": 1.0, "Enterprising": 0.5, "Environmental-Sci": 0.35, "Food-Science": 0.2, "Field-Research": 0.15}},
+            {"option_id": 27072, "option_text": "A social media management service helping local shops build their online presence", "trait_tags": {"Marketing-Sales": 1.0, "Digital-Media": 0.5, "Web-Dev": 0.4, "Creative-Skill": 0.2, "Enterprising": 0.15}},
+        ],
+    },
+    # ── Q18 — SCENARIO: Abandoned building transformation ────────────────────
+    {
+        "question_id": 18,
+        "question_text": "SCENARIO: The mayor asks residents to propose a new use for an abandoned warehouse downtown. What do you suggest?",
+        "category": "Situational - Urban Redevelopment",
+        "options": [
+            {"option_id": 27073, "option_text": "A community health clinic with free check-ups and a small pharmacy", "trait_tags": {"Patient-Care": 1.0, "Public-Health": 0.5, "Community-Serve": 0.4, "Pharmacy": 0.2, "Social": 0.15}},
+            {"option_id": 27074, "option_text": "A makerspace with 3D printers, soldering stations, and coding workshops", "trait_tags": {"Hardware-Systems": 1.0, "Software-Dev": 0.5, "Animation-3D": 0.35, "Technical-Skill": 0.25, "Creative-Skill": 0.15}},
+            {"option_id": 27075, "option_text": "An indoor sports facility with a climbing wall and fitness classes", "trait_tags": {"Sports-Fitness-Path": 1.0, "Physical-Skill": 0.5, "Rehab-Therapy": 0.3, "Community-Serve": 0.2, "Realistic": 0.15}},
+            {"option_id": 27076, "option_text": "An art gallery and performance venue for local musicians and painters", "trait_tags": {"Performing-Arts": 1.0, "Visual-Design": 0.5, "Music-Audio": 0.4, "Creative-Skill": 0.3, "Artistic": 0.2}},
+            {"option_id": 27077, "option_text": "A co-working hub for freelancers and small startups to share office space", "trait_tags": {"Enterprising": 1.0, "Admin-Skill": 0.5, "Finance-Acct": 0.35, "Marketing-Sales": 0.2, "People-Skill": 0.15}},
+            {"option_id": 27078, "option_text": "A public library and study lounge with free Wi-Fi and tutoring rooms", "trait_tags": {"Teaching-Ed": 1.0, "Community-Serve": 0.5, "Writing-Comm": 0.35, "Social": 0.25, "Investigative": 0.15}},
+        ],
+    },
+    # ── Q19 — SCENARIO: Mental health awareness week ─────────────────────────
+    {
+        "question_id": 19,
+        "question_text": "SCENARIO: Your school declares a Mental Health Awareness Week. Which activity would you lead?",
+        "category": "Situational - Mental Health Advocacy",
+        "options": [
+            {"option_id": 27079, "option_text": "Running a peer counseling booth where students can talk anonymously", "trait_tags": {"Counseling": 1.0, "People-Skill": 0.5, "Social": 0.45, "Patient-Care": 0.2, "Community-Serve": 0.15}},
+            {"option_id": 27080, "option_text": "Creating informational posters and infographics about coping strategies", "trait_tags": {"Visual-Design": 1.0, "Public-Health": 0.5, "Creative-Skill": 0.4, "Writing-Comm": 0.2, "Digital-Media": 0.15}},
+            {"option_id": 27081, "option_text": "Organizing a guided meditation and yoga session in the school gym", "trait_tags": {"Rehab-Therapy": 1.0, "Physical-Skill": 0.5, "Patient-Care": 0.35, "Social": 0.2, "Teaching-Ed": 0.15}},
+            {"option_id": 27082, "option_text": "Collecting and analyzing a survey on student stress levels and sleep patterns", "trait_tags": {"Data-Analytics": 1.0, "Public-Health": 0.5, "Investigative": 0.4, "Analytical-Skill": 0.3, "Lab-Research": 0.15}},
+            {"option_id": 27083, "option_text": "Producing a short film featuring real student stories about mental health", "trait_tags": {"Film-Broadcast": 1.0, "Digital-Media": 0.5, "Creative-Skill": 0.4, "People-Skill": 0.25, "Writing-Comm": 0.2}},
+            {"option_id": 27084, "option_text": "Inviting a psychologist for a keynote talk and moderating the Q&A session", "trait_tags": {"Teaching-Ed": 1.0, "People-Skill": 0.5, "Counseling": 0.4, "Admin-Skill": 0.2, "Social": 0.15}},
+        ],
+    },
+    # ── Q20 — SCENARIO: Space colony design ──────────────────────────────────
+    {
+        "question_id": 20,
+        "question_text": "SCENARIO: A science class project asks you to design a self-sustaining colony on Mars. What system would you be responsible for?",
+        "category": "Situational - Space & Innovation",
+        "options": [
+            {"option_id": 27085, "option_text": "Life support — oxygen recycling, water filtration, and air quality monitoring", "trait_tags": {"Environmental-Eng": 1.0, "Mechanical-Design": 0.5, "Lab-Research": 0.35, "Hardware-Systems": 0.2, "Analytical-Skill": 0.15}},
+            {"option_id": 27086, "option_text": "Food production — hydroponic farms and nutrition planning for colonists", "trait_tags": {"Agri-Nature": 1.0, "Nutrition-Diet": 0.5, "Food-Science": 0.4, "Field-Research": 0.2, "Environmental-Sci": 0.15}},
+            {"option_id": 27087, "option_text": "Communications — building satellite links and a network back to Earth", "trait_tags": {"Electronics-Dev": 1.0, "Cloud-Systems": 0.5, "Hardware-Systems": 0.4, "Software-Dev": 0.25, "Technical-Skill": 0.15}},
+            {"option_id": 27088, "option_text": "Habitat architecture — designing living quarters and recreational spaces", "trait_tags": {"Spatial-Design": 1.0, "Civil-Build": 0.5, "Creative-Skill": 0.35, "Mechanical-Design": 0.25, "Realistic": 0.15}},
+            {"option_id": 27089, "option_text": "Colony governance — drafting laws, roles, and conflict resolution protocols", "trait_tags": {"Legal-Practice": 1.0, "Admin-Skill": 0.5, "People-Skill": 0.4, "Writing-Comm": 0.2, "Social": 0.15}},
+            {"option_id": 27090, "option_text": "Medical bay — setting up healthcare, emergency response, and telemedicine", "trait_tags": {"Patient-Care": 1.0, "Medical-Lab": 0.5, "Public-Health": 0.35, "Rehab-Therapy": 0.2, "Technical-Skill": 0.15}},
+        ],
+    },
+    # ── Q21 — SCENARIO: Street art district proposal ─────────────────────────
+    {
+        "question_id": 21,
+        "question_text": "SCENARIO: Your city plans to turn a gray underpass into a vibrant street-art district. What would you do?",
+        "category": "Situational - Public Art & Design",
+        "options": [
+            {"option_id": 27091, "option_text": "Painting a large-scale mural that tells the neighborhood's history", "trait_tags": {"Visual-Design": 1.0, "Artistic": 0.5, "Creative-Skill": 0.45, "Community-Serve": 0.2, "Spatial-Design": 0.1}},
+            {"option_id": 27092, "option_text": "Installing interactive digital projections that respond to pedestrians", "trait_tags": {"Software-Dev": 1.0, "Digital-Media": 0.5, "Animation-3D": 0.4, "Electronics-Dev": 0.25, "Creative-Skill": 0.15}},
+            {"option_id": 27093, "option_text": "Curating which artists get wall space and managing the rotation schedule", "trait_tags": {"Admin-Skill": 1.0, "People-Skill": 0.5, "Creative-Skill": 0.35, "Marketing-Sales": 0.2, "Conventional": 0.15}},
+            {"option_id": 27094, "option_text": "Engineering better drainage and lighting so the underpass is safe and clean", "trait_tags": {"Civil-Build": 1.0, "Electrical-Power": 0.5, "Environmental-Eng": 0.35, "Mechanical-Design": 0.2, "Realistic": 0.15}},
+            {"option_id": 27095, "option_text": "Composing original music and ambient soundscapes played through speakers", "trait_tags": {"Music-Audio": 1.0, "Creative-Skill": 0.5, "Performing-Arts": 0.4, "Electronics-Dev": 0.2, "Digital-Media": 0.15}},
+            {"option_id": 27096, "option_text": "Studying pedestrian flow and gathering feedback to improve the design over time", "trait_tags": {"Data-Analytics": 1.0, "Investigative": 0.5, "People-Skill": 0.35, "Analytical-Skill": 0.25, "Community-Serve": 0.15}},
+        ],
+    },
+    # ── Q22 — SCENARIO: Classroom of the future design challenge ─────────────
+    {
+        "question_id": 22,
+        "question_text": "SCENARIO: An education foundation challenges your class to design the 'Classroom of 2050.' What feature would you prototype?",
+        "category": "Situational - Future Education",
+        "options": [
+            {"option_id": 27097, "option_text": "An AI tutor that adapts lessons to each student's learning pace", "trait_tags": {"AI-ML": 1.0, "Software-Dev": 0.5, "Teaching-Ed": 0.4, "Data-Analytics": 0.25, "Analytical-Skill": 0.15}},
+            {"option_id": 27098, "option_text": "Augmented-reality lab simulations so students can dissect and experiment virtually", "trait_tags": {"Animation-3D": 1.0, "Digital-Media": 0.5, "Lab-Research": 0.4, "Software-Dev": 0.25, "Creative-Skill": 0.15}},
+            {"option_id": 27099, "option_text": "Flexible modular furniture that transforms for lectures, group work, or solo study", "trait_tags": {"Spatial-Design": 1.0, "Industrial-Ops": 0.5, "Mechanical-Design": 0.4, "Creative-Skill": 0.2, "Realistic": 0.15}},
+            {"option_id": 27100, "option_text": "A biometric wellness system that monitors stress and adjusts lighting and temperature", "trait_tags": {"Electronics-Dev": 1.0, "Public-Health": 0.5, "Hardware-Systems": 0.4, "Patient-Care": 0.2, "Data-Analytics": 0.15}},
+            {"option_id": 27101, "option_text": "A global video-conferencing wall connecting classrooms across continents in real time", "trait_tags": {"Cloud-Systems": 1.0, "Web-Dev": 0.5, "People-Skill": 0.35, "Teaching-Ed": 0.25, "Digital-Media": 0.15}},
+            {"option_id": 27102, "option_text": "An outdoor rooftop garden classroom combining nature studies with urban farming", "trait_tags": {"Environmental-Sci": 1.0, "Agri-Nature": 0.5, "Teaching-Ed": 0.4, "Field-Research": 0.2, "Spatial-Design": 0.15}},
+        ],
+    },
+]
+
+# Validate replacement batch: no ID collisions
+_repl15_existing_qids = {q["question_id"] for q in QUESTIONS_POOL_ENHANCED}
+_repl15_new_qids = {q["question_id"] for q in _REPLACEMENT_BATCH_15}
+if _repl15_existing_qids & _repl15_new_qids:
+    raise ValueError(f"Replacement batch 15 question IDs overlap: {_repl15_existing_qids & _repl15_new_qids}")
+
+_repl15_existing_oids = {o["option_id"] for q in QUESTIONS_POOL_ENHANCED for o in q.get("options", [])}
+_repl15_new_oids = {o["option_id"] for q in _REPLACEMENT_BATCH_15 for o in q.get("options", [])}
+if _repl15_existing_oids & _repl15_new_oids:
+    raise ValueError(f"Replacement batch 15 option IDs overlap: {_repl15_existing_oids & _repl15_new_oids}")
+
+QUESTIONS_POOL_ENHANCED.extend(_REPLACEMENT_BATCH_15)
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# REPLACEMENT BATCH 16 — 15 course-related questions (IDs from gap list)
+# Each question targets specific courses / course categories in the catalog.
+# Option IDs: 27103 – 27192
+# ══════════════════════════════════════════════════════════════════════════════
+
+_REPLACEMENT_BATCH_16 = [
+    # ── Q46 — Forensic Investigation Lab ─────────────────────────────────────
+    # Targets: BS Forensic Science, BS Criminology, BS Chemistry
+    {
+        "question_id": 46,
+        "question_text": "A suspicious substance is found at a crime scene and your team must identify it. Which part of the investigation appeals to you most?",
+        "category": "Course Focus - Forensic & Criminal Investigation",
+        "options": [
+            {"option_id": 27103, "option_text": "Running chemical analyses on the substance in the laboratory", "trait_tags": {"Forensic-Sci": 1.0, "Lab-Research": 0.5, "Analytical-Skill": 0.4, "Investigative": 0.25, "Medical-Lab": 0.15}},
+            {"option_id": 27104, "option_text": "Interviewing witnesses and mapping the chain of custody", "trait_tags": {"Law-Enforce": 1.0, "People-Skill": 0.5, "Investigative": 0.4, "Analytical-Skill": 0.25, "Community-Serve": 0.15}},
+            {"option_id": 27105, "option_text": "Photographing and cataloging every piece of physical evidence", "trait_tags": {"Forensic-Sci": 0.8, "Conventional": 0.5, "Analytical-Skill": 0.4, "Visual-Design": 0.25, "Realistic": 0.2}},
+            {"option_id": 27106, "option_text": "Building a digital reconstruction of the crime scene using 3-D software", "trait_tags": {"Animation-3D": 1.0, "Digital-Media": 0.5, "Software-Dev": 0.35, "Technical-Skill": 0.25, "Creative-Skill": 0.15}},
+            {"option_id": 27107, "option_text": "Writing a detailed legal report that could be used in court", "trait_tags": {"Legal-Practice": 1.0, "Writing-Comm": 0.5, "Analytical-Skill": 0.4, "Legal-Mgmt": 0.3, "Investigative": 0.15}},
+            {"option_id": 27108, "option_text": "Cross-referencing DNA profiles against national databases", "trait_tags": {"Data-Analytics": 1.0, "Lab-Research": 0.5, "Technical-Skill": 0.35, "Forensic-Sci": 0.3, "Investigative": 0.2}},
+        ],
+    },
+    # ── Q47 — Early Childhood Learning Center ────────────────────────────────
+    # Targets: Bachelor of Early Childhood Education, Bachelor of Special Needs Education
+    {
+        "question_id": 47,
+        "question_text": "You are designing a new learning program for children aged 3–6 at a daycare center. What would you focus on?",
+        "category": "Course Focus - Early Childhood & Inclusive Education",
+        "options": [
+            {"option_id": 27109, "option_text": "Creating story-based play activities that develop reading readiness", "trait_tags": {"Early-Childhood": 1.0, "Teaching-Ed": 0.5, "Creative-Skill": 0.4, "People-Skill": 0.25, "Social": 0.15}},
+            {"option_id": 27110, "option_text": "Developing sensory-friendly spaces for children with autism spectrum needs", "trait_tags": {"Inclusive-Ed": 1.0, "Counseling": 0.5, "People-Skill": 0.4, "Early-Childhood": 0.3, "Social": 0.2}},
+            {"option_id": 27111, "option_text": "Tracking each child's developmental milestones through an observation checklist", "trait_tags": {"Analytical-Skill": 1.0, "Early-Childhood": 0.5, "Data-Analytics": 0.35, "Conventional": 0.25, "Teaching-Ed": 0.2}},
+            {"option_id": 27112, "option_text": "Painting murals and crafting tactile learning boards for the classroom walls", "trait_tags": {"Visual-Design": 1.0, "Creative-Skill": 0.5, "Artistic": 0.4, "Early-Childhood": 0.25, "Spatial-Design": 0.15}},
+            {"option_id": 27113, "option_text": "Meeting parents to discuss behavior strategies and progress reports", "trait_tags": {"Counseling": 1.0, "People-Skill": 0.5, "Social": 0.4, "Community-Serve": 0.3, "Teaching-Ed": 0.2}},
+            {"option_id": 27114, "option_text": "Writing a curriculum guide aligned with government early learning standards", "trait_tags": {"Teaching-Ed": 1.0, "Writing-Comm": 0.5, "Admin-Skill": 0.4, "Analytical-Skill": 0.25, "Conventional": 0.15}},
+        ],
+    },
+    # ── Q48 — Music Production Studio ────────────────────────────────────────
+    # Targets: BA in Music Production, BA in Theater Arts
+    {
+        "question_id": 48,
+        "question_text": "A local band hires you at a recording studio to help produce their debut album. Which task excites you most?",
+        "category": "Course Focus - Music & Performing Arts",
+        "options": [
+            {"option_id": 27115, "option_text": "Mixing and mastering the audio tracks using professional studio equipment", "trait_tags": {"Music-Audio": 1.0, "Technical-Skill": 0.5, "Creative-Skill": 0.35, "Digital-Media": 0.25, "Performing-Arts": 0.15}},
+            {"option_id": 27116, "option_text": "Writing original melodies and lyrics to fill gaps in their setlist", "trait_tags": {"Performing-Arts": 1.0, "Creative-Skill": 0.5, "Music-Audio": 0.4, "Writing-Comm": 0.25, "Artistic": 0.2}},
+            {"option_id": 27117, "option_text": "Designing the album cover art and visual branding for the band", "trait_tags": {"Visual-Design": 1.0, "Creative-Skill": 0.5, "Artistic": 0.4, "Digital-Media": 0.3, "Marketing-Sales": 0.15}},
+            {"option_id": 27118, "option_text": "Managing the release schedule, streaming platform distribution, and promotions", "trait_tags": {"Marketing-Sales": 1.0, "Admin-Skill": 0.5, "Enterprising": 0.4, "Digital-Media": 0.25, "People-Skill": 0.15}},
+            {"option_id": 27119, "option_text": "Directing the music video shoot — blocking scenes and choosing camera angles", "trait_tags": {"Film-Broadcast": 1.0, "Creative-Skill": 0.5, "Digital-Media": 0.4, "Performing-Arts": 0.25, "Visual-Design": 0.15}},
+            {"option_id": 27120, "option_text": "Setting up and calibrating the sound system for the band's live showcase", "trait_tags": {"Hardware-Systems": 1.0, "Technical-Skill": 0.5, "Music-Audio": 0.4, "Realistic": 0.25, "Electrical-Power": 0.15}},
+        ],
+    },
+    # ── Q49 — Military & Defense Simulation ──────────────────────────────────
+    # Targets: BS Criminology (Military-Defense trait), public safety roles
+    {
+        "question_id": 49,
+        "question_text": "Your university runs a national defense simulation exercise. Which role would you volunteer for?",
+        "category": "Course Focus - Defense & Public Safety",
+        "options": [
+            {"option_id": 27121, "option_text": "Leading the command post and coordinating troop movements on the tactical map", "trait_tags": {"Military-Defense": 1.0, "Admin-Skill": 0.5, "Analytical-Skill": 0.4, "Enterprising": 0.25, "People-Skill": 0.15}},
+            {"option_id": 27122, "option_text": "Operating the drone surveillance feeds and interpreting satellite imagery", "trait_tags": {"Technical-Skill": 1.0, "Data-Analytics": 0.5, "Cyber-Defense": 0.4, "Military-Defense": 0.3, "Hardware-Systems": 0.15}},
+            {"option_id": 27123, "option_text": "Treating simulated casualties at the field medical station", "trait_tags": {"Patient-Care": 1.0, "Rehab-Therapy": 0.5, "People-Skill": 0.35, "Social": 0.25, "Physical-Skill": 0.2}},
+            {"option_id": 27124, "option_text": "Handling communications security and encrypted message routing", "trait_tags": {"Cyber-Defense": 1.0, "Technical-Skill": 0.5, "Cloud-Systems": 0.35, "Military-Defense": 0.3, "Analytical-Skill": 0.2}},
+            {"option_id": 27125, "option_text": "Negotiating peace terms with the opposing team during the ceasefire phase", "trait_tags": {"People-Skill": 1.0, "Legal-Practice": 0.5, "Social": 0.4, "Community-Serve": 0.3, "Counseling": 0.15}},
+            {"option_id": 27126, "option_text": "Documenting the exercise for the after-action report and lessons-learned briefing", "trait_tags": {"Writing-Comm": 1.0, "Analytical-Skill": 0.5, "Investigative": 0.35, "Military-Defense": 0.25, "Conventional": 0.15}},
+        ],
+    },
+    # ── Q50 — Library & Information Science ──────────────────────────────────
+    # Targets: Bachelor of Library and Information Science
+    {
+        "question_id": 50,
+        "question_text": "Your city library is being modernized with new technology and a bigger community role. What project would you lead?",
+        "category": "Course Focus - Library & Information Science",
+        "options": [
+            {"option_id": 27127, "option_text": "Digitizing rare historical manuscripts and building a searchable online archive", "trait_tags": {"Library-Info": 1.0, "Technical-Skill": 0.5, "Investigative": 0.4, "Data-Analytics": 0.25, "Analytical-Skill": 0.15}},
+            {"option_id": 27128, "option_text": "Designing a children's reading corner with interactive story stations", "trait_tags": {"Early-Childhood": 0.8, "Creative-Skill": 0.5, "Spatial-Design": 0.4, "Teaching-Ed": 0.3, "Community-Serve": 0.2}},
+            {"option_id": 27129, "option_text": "Running a media literacy workshop series for senior citizens", "trait_tags": {"Teaching-Ed": 1.0, "Community-Serve": 0.5, "People-Skill": 0.4, "Library-Info": 0.3, "Social": 0.2}},
+            {"option_id": 27130, "option_text": "Developing the library's new catalog database and recommendation algorithm", "trait_tags": {"Software-Dev": 1.0, "Data-Analytics": 0.5, "AI-ML": 0.4, "Library-Info": 0.3, "Technical-Skill": 0.15}},
+            {"option_id": 27131, "option_text": "Negotiating partnerships with publishers for e-book lending programs", "trait_tags": {"Admin-Skill": 1.0, "Enterprising": 0.5, "People-Skill": 0.4, "Marketing-Sales": 0.3, "Finance-Acct": 0.15}},
+            {"option_id": 27132, "option_text": "Curating themed book collections and writing monthly review newsletters", "trait_tags": {"Writing-Comm": 1.0, "Library-Info": 0.5, "Creative-Skill": 0.4, "Investigative": 0.25, "Artistic": 0.15}},
+        ],
+    },
+    # ── Q5001 — Veterinary Field Clinic ──────────────────────────────────────
+    # Targets: Doctor of Veterinary Medicine, BS Agriculture
+    {
+        "question_id": 5001,
+        "question_text": "A mobile veterinary clinic visits farming communities to treat sick livestock. How would you contribute during a field day?",
+        "category": "Course Focus - Veterinary & Animal Science",
+        "options": [
+            {"option_id": 27133, "option_text": "Examining animals, diagnosing common diseases, and prescribing treatments", "trait_tags": {"Patient-Care": 1.0, "Analytical-Skill": 0.5, "Agri-Nature": 0.35, "Investigative": 0.25, "Veterinary-Path": 0.2}},
+            {"option_id": 27134, "option_text": "Collecting blood and tissue samples for laboratory testing", "trait_tags": {"Lab-Research": 1.0, "Medical-Lab": 0.5, "Analytical-Skill": 0.4, "Investigative": 0.25, "Veterinary-Path": 0.2}},
+            {"option_id": 27135, "option_text": "Teaching farmers how to prevent infections through better animal husbandry", "trait_tags": {"Teaching-Ed": 1.0, "Community-Serve": 0.5, "Agri-Nature": 0.4, "People-Skill": 0.3, "Public-Health": 0.15}},
+            {"option_id": 27136, "option_text": "Maintaining records of vaccinations and treatment histories per farm", "trait_tags": {"Conventional": 1.0, "Admin-Skill": 0.5, "Data-Analytics": 0.35, "Health-Admin": 0.3, "Analytical-Skill": 0.15}},
+            {"option_id": 27137, "option_text": "Driving the clinic van and setting up portable surgical tents", "trait_tags": {"Physical-Skill": 1.0, "Realistic": 0.5, "Mechanical-Design": 0.3, "Agri-Nature": 0.25, "Field-Research": 0.2}},
+            {"option_id": 27138, "option_text": "Mapping disease outbreak patterns using GIS software", "trait_tags": {"Data-Analytics": 1.0, "Technical-Skill": 0.5, "Field-Research": 0.4, "Environmental-Sci": 0.25, "Investigative": 0.2}},
+        ],
+    },
+    # ── Q5002 — Culinary & Restaurant Venture ────────────────────────────────
+    # Targets: BS Culinary Management, BS Hospitality Management, BS Food Technology
+    {
+        "question_id": 5002,
+        "question_text": "You and your friends plan to open a small restaurant featuring local Filipino cuisine. Which responsibility would you take?",
+        "category": "Course Focus - Culinary & Hospitality Management",
+        "options": [
+            {"option_id": 27139, "option_text": "Developing the menu — experimenting with traditional recipes and modern twists", "trait_tags": {"Culinary-Arts": 1.0, "Creative-Skill": 0.5, "Food-Science": 0.4, "Culinary-Mgmt-Path": 0.3, "Artistic": 0.15}},
+            {"option_id": 27140, "option_text": "Handling the business plan, permits, and financial projections", "trait_tags": {"Startup-Venture": 1.0, "Finance-Acct": 0.5, "Admin-Skill": 0.4, "Enterprising": 0.3, "Legal-Practice": 0.15}},
+            {"option_id": 27141, "option_text": "Creating the interior design concept — furniture, lighting, and table layout", "trait_tags": {"Spatial-Design": 1.0, "Creative-Skill": 0.5, "Artistic": 0.4, "Hospitality-Svc": 0.25, "Visual-Design": 0.15}},
+            {"option_id": 27142, "option_text": "Training the wait staff on customer service and proper food handling", "trait_tags": {"People-Skill": 1.0, "Teaching-Ed": 0.5, "Hospitality-Svc": 0.4, "Admin-Skill": 0.25, "Hotel-Resort-Path": 0.15}},
+            {"option_id": 27143, "option_text": "Running social media campaigns and contacting food bloggers for reviews", "trait_tags": {"Marketing-Sales": 1.0, "Digital-Media": 0.5, "Creative-Skill": 0.35, "Web-Dev": 0.2, "People-Skill": 0.15}},
+            {"option_id": 27144, "option_text": "Ensuring food safety compliance and checking ingredient quality daily", "trait_tags": {"Food-Science": 1.0, "Analytical-Skill": 0.5, "Nutrition-Diet": 0.35, "Health-Admin": 0.25, "Conventional": 0.15}},
+        ],
+    },
+    # ── Q5003 — Sports Science & Fitness Center ──────────────────────────────
+    # Targets: BS Exercise and Sports Science, Bachelor of Physical Education
+    {
+        "question_id": 5003,
+        "question_text": "A new university fitness center asks students to help build its programs. Where would you jump in?",
+        "category": "Course Focus - Exercise & Sports Science",
+        "options": [
+            {"option_id": 27145, "option_text": "Designing personalized workout programs based on body composition assessments", "trait_tags": {"Exercise-Sci-Path": 1.0, "Analytical-Skill": 0.5, "Physical-Skill": 0.4, "Rehab-Therapy": 0.25, "Sports-Fitness-Path": 0.2}},
+            {"option_id": 27146, "option_text": "Coaching group fitness classes like HIIT, yoga, or circuit training", "trait_tags": {"Sports-Ed": 1.0, "People-Skill": 0.5, "Physical-Skill": 0.4, "Teaching-Ed": 0.3, "Social": 0.15}},
+            {"option_id": 27147, "option_text": "Setting up wearable-tech integrations to track members' heart rate and calories", "trait_tags": {"Technical-Skill": 1.0, "Data-Analytics": 0.5, "Software-Dev": 0.35, "Hardware-Systems": 0.25, "Exercise-Sci-Path": 0.2}},
+            {"option_id": 27148, "option_text": "Developing a nutrition plan menu for the center's juice bar and snack counter", "trait_tags": {"Nutrition-Diet": 1.0, "Food-Science": 0.5, "Analytical-Skill": 0.35, "Creative-Skill": 0.2, "Health-Admin": 0.15}},
+            {"option_id": 27149, "option_text": "Organizing intramural sports leagues and weekend fitness challenges", "trait_tags": {"Community-Serve": 1.0, "Admin-Skill": 0.5, "Sports-Ed": 0.4, "People-Skill": 0.3, "Enterprising": 0.15}},
+            {"option_id": 27150, "option_text": "Conducting biomechanical research on injury prevention for student athletes", "trait_tags": {"Lab-Research": 1.0, "Investigative": 0.5, "Analytical-Skill": 0.4, "Rehab-Therapy": 0.3, "Physical-Skill": 0.15}},
+        ],
+    },
+    # ── Q5004 — Tourism & Heritage Trail ─────────────────────────────────────
+    # Targets: BS Tourism Management, BS Hospitality Management
+    {
+        "question_id": 5004,
+        "question_text": "Your province launches a new cultural heritage trail to attract tourists. Which part of the project would you handle?",
+        "category": "Course Focus - Tourism & Hospitality",
+        "options": [
+            {"option_id": 27151, "option_text": "Researching historical landmarks and writing compelling descriptions for the trail guide", "trait_tags": {"Writing-Comm": 1.0, "Investigative": 0.5, "Tourism-Travel": 0.4, "Tourism-Hospitality-Path": 0.3, "Creative-Skill": 0.15}},
+            {"option_id": 27152, "option_text": "Building a mobile tour app with GPS directions and audio narration", "trait_tags": {"Mobile-Dev": 1.0, "Software-Dev": 0.5, "Digital-Media": 0.35, "Web-Dev": 0.25, "Technical-Skill": 0.2}},
+            {"option_id": 27153, "option_text": "Training local residents to become certified tour guides", "trait_tags": {"Teaching-Ed": 1.0, "Tourism-Travel": 0.5, "People-Skill": 0.4, "Community-Serve": 0.3, "Hospitality-Svc": 0.15}},
+            {"option_id": 27154, "option_text": "Negotiating with hotels and restaurants to offer trail-package deals", "trait_tags": {"Hospitality-Svc": 1.0, "Marketing-Sales": 0.5, "Enterprising": 0.4, "Hotel-Resort-Path": 0.3, "People-Skill": 0.15}},
+            {"option_id": 27155, "option_text": "Photographing scenic spots and creating promotional videos for social media", "trait_tags": {"Film-Broadcast": 1.0, "Visual-Design": 0.5, "Digital-Media": 0.4, "Creative-Skill": 0.25, "Marketing-Sales": 0.15}},
+            {"option_id": 27156, "option_text": "Analyzing visitor data to identify peak seasons and optimize pricing", "trait_tags": {"Data-Analytics": 1.0, "Finance-Acct": 0.5, "Analytical-Skill": 0.4, "Admin-Skill": 0.25, "Conventional": 0.15}},
+        ],
+    },
+    # ── Q5005 — Forestry & Environmental Conservation ────────────────────────
+    # Targets: BS Forestry, BS Environmental Science, BS Environmental Planning
+    {
+        "question_id": 5005,
+        "question_text": "A national reforestation project needs volunteers with diverse skills. Which assignment matches you best?",
+        "category": "Course Focus - Forestry & Environmental Science",
+        "options": [
+            {"option_id": 27157, "option_text": "Identifying native tree species and deciding where each should be planted", "trait_tags": {"Agri-Nature": 1.0, "Field-Research": 0.5, "Environmental-Sci": 0.4, "Forestry-Path": 0.3, "Investigative": 0.15}},
+            {"option_id": 27158, "option_text": "Surveying the terrain with GPS and creating topographic planting maps", "trait_tags": {"Civil-Build": 1.0, "Technical-Skill": 0.5, "Field-Research": 0.4, "Data-Analytics": 0.25, "Environmental-Eng": 0.2}},
+            {"option_id": 27159, "option_text": "Educating local communities about forest conservation and fire prevention", "trait_tags": {"Community-Serve": 1.0, "Teaching-Ed": 0.5, "People-Skill": 0.4, "Environmental-Sci": 0.25, "Social": 0.2}},
+            {"option_id": 27160, "option_text": "Monitoring soil moisture and weather data to optimize planting schedules", "trait_tags": {"Field-Research": 1.0, "Analytical-Skill": 0.5, "Environmental-Sci": 0.4, "Data-Analytics": 0.3, "Lab-Research": 0.15}},
+            {"option_id": 27161, "option_text": "Managing the project budget, procurement of seedlings, and logistics", "trait_tags": {"Admin-Skill": 1.0, "Finance-Acct": 0.5, "Industrial-Ops": 0.35, "Enterprising": 0.25, "Conventional": 0.15}},
+            {"option_id": 27162, "option_text": "Drafting an environmental impact assessment report for the government", "trait_tags": {"Environmental-Eng": 1.0, "Writing-Comm": 0.5, "Analytical-Skill": 0.4, "Legal-Practice": 0.25, "Investigative": 0.15}},
+        ],
+    },
+    # ── Q5006 — Maritime & Fisheries Expedition ──────────────────────────────
+    # Targets: BS Marine Transportation, BS Marine Engineering, BS Fisheries, BS Marine Biology
+    {
+        "question_id": 5006,
+        "question_text": "A marine research vessel is setting out on a two-week expedition to study coral reef health. Which crew role would you fill?",
+        "category": "Course Focus - Maritime & Marine Sciences",
+        "options": [
+            {"option_id": 27163, "option_text": "Navigating the ship using nautical charts, radar, and weather routing", "trait_tags": {"Maritime-Sea": 1.0, "Technical-Skill": 0.5, "Realistic": 0.35, "Physical-Skill": 0.25, "Analytical-Skill": 0.15}},
+            {"option_id": 27164, "option_text": "Diving to collect coral samples and recording underwater biodiversity", "trait_tags": {"Field-Research": 1.0, "Environmental-Sci": 0.5, "Physical-Skill": 0.4, "Lab-Research": 0.25, "Fisheries-Agri-Path": 0.15}},
+            {"option_id": 27165, "option_text": "Maintaining the ship's engine room and mechanical systems at sea", "trait_tags": {"Mechanical-Design": 1.0, "Technical-Skill": 0.5, "Maritime-Sea": 0.4, "Realistic": 0.3, "Hardware-Systems": 0.15}},
+            {"option_id": 27166, "option_text": "Analyzing water quality samples for pollutants back in the onboard lab", "trait_tags": {"Lab-Research": 1.0, "Analytical-Skill": 0.5, "Environmental-Sci": 0.4, "Medical-Lab": 0.25, "Investigative": 0.2}},
+            {"option_id": 27167, "option_text": "Filming a documentary about the expedition for an ocean conservation campaign", "trait_tags": {"Film-Broadcast": 1.0, "Digital-Media": 0.5, "Creative-Skill": 0.4, "Writing-Comm": 0.2, "Environmental-Sci": 0.15}},
+            {"option_id": 27168, "option_text": "Coordinating with the coast guard and managing the expedition's daily schedule", "trait_tags": {"Admin-Skill": 1.0, "People-Skill": 0.5, "Maritime-Sea": 0.35, "Conventional": 0.25, "Law-Enforce": 0.15}},
+        ],
+    },
+    # ── Q5007 — Pharmaceutical Research Lab ──────────────────────────────────
+    # Targets: BS Pharmacy, BS Medical Technology, BS Biotechnology
+    {
+        "question_id": 5007,
+        "question_text": "A pharmaceutical company is testing a new herbal-based medicine. Which stage of the development process would you want to work on?",
+        "category": "Course Focus - Pharmacy & Biotechnology",
+        "options": [
+            {"option_id": 27169, "option_text": "Extracting and isolating active compounds from the plant material", "trait_tags": {"Pharmacy": 1.0, "Lab-Research": 0.5, "Analytical-Skill": 0.4, "Investigative": 0.25, "Food-Science": 0.15}},
+            {"option_id": 27170, "option_text": "Designing the clinical trial protocol and reviewing patient safety guidelines", "trait_tags": {"Medical-Lab": 1.0, "Analytical-Skill": 0.5, "Patient-Care": 0.4, "Health-Admin": 0.25, "Investigative": 0.2}},
+            {"option_id": 27171, "option_text": "Analyzing statistical results from trial data to assess drug effectiveness", "trait_tags": {"Data-Analytics": 1.0, "Analytical-Skill": 0.5, "Investigative": 0.4, "Lab-Research": 0.25, "Technical-Skill": 0.15}},
+            {"option_id": 27172, "option_text": "Preparing patent filings and regulatory submission documents", "trait_tags": {"Legal-Practice": 1.0, "Writing-Comm": 0.5, "Admin-Skill": 0.4, "Conventional": 0.25, "Analytical-Skill": 0.2}},
+            {"option_id": 27173, "option_text": "Operating the biotech equipment used for gene sequencing and protein analysis", "trait_tags": {"Technical-Skill": 1.0, "Lab-Research": 0.5, "Hardware-Systems": 0.35, "Investigative": 0.25, "Realistic": 0.15}},
+            {"option_id": 27174, "option_text": "Marketing the finished product to hospitals and creating educational brochures", "trait_tags": {"Marketing-Sales": 1.0, "People-Skill": 0.5, "Pharmacy": 0.35, "Creative-Skill": 0.2, "Enterprising": 0.15}},
+        ],
+    },
+    # ── Q5008 — Technical-Vocational Training Center ─────────────────────────
+    # Targets: Bachelor of Technical-Vocational Teacher Education
+    {
+        "question_id": 5008,
+        "question_text": "A new technical-vocational training center is opening in your town, offering skills-based courses. Where would you want to help?",
+        "category": "Course Focus - Technical-Vocational Education",
+        "options": [
+            {"option_id": 27175, "option_text": "Teaching hands-on welding and automotive repair workshops", "trait_tags": {"TVET-Path": 1.0, "Teaching-Ed": 0.5, "Mechanical-Design": 0.4, "Realistic": 0.3, "Technical-Skill": 0.2}},
+            {"option_id": 27176, "option_text": "Setting up the electronics lab with circuit boards and testing instruments", "trait_tags": {"Hardware-Systems": 1.0, "Electrical-Power": 0.5, "Technical-Skill": 0.4, "Realistic": 0.25, "TVET-Path": 0.15}},
+            {"option_id": 27177, "option_text": "Developing competency-based lesson plans aligned with TESDA standards", "trait_tags": {"Teaching-Ed": 1.0, "Admin-Skill": 0.5, "Analytical-Skill": 0.35, "TVET-Path": 0.3, "Writing-Comm": 0.2}},
+            {"option_id": 27178, "option_text": "Building the center's enrollment website and online course portal", "trait_tags": {"Web-Dev": 1.0, "Software-Dev": 0.5, "Digital-Media": 0.35, "Technical-Skill": 0.25, "Creative-Skill": 0.15}},
+            {"option_id": 27179, "option_text": "Connecting with local industries to set up apprenticeship placements for graduates", "trait_tags": {"People-Skill": 1.0, "Community-Serve": 0.5, "Enterprising": 0.4, "HR-Management": 0.3, "Marketing-Sales": 0.15}},
+            {"option_id": 27180, "option_text": "Managing the center's budget, equipment inventory, and facility maintenance schedule", "trait_tags": {"Admin-Skill": 1.0, "Finance-Acct": 0.5, "Conventional": 0.4, "Industrial-Ops": 0.25, "Realistic": 0.15}},
+        ],
+    },
+    # ── Q5009 — Public Health Emergency ──────────────────────────────────────
+    # Targets: BS Nursing, BS Public Health, BS Midwifery, BS Health Information Management
+    {
+        "question_id": 5009,
+        "question_text": "A dengue outbreak hits a rural municipality and a rapid-response health team is formed. What would you do on the team?",
+        "category": "Course Focus - Public Health & Nursing",
+        "options": [
+            {"option_id": 27181, "option_text": "Going door-to-door to check patients' vital signs and administer first aid", "trait_tags": {"Patient-Care": 1.0, "Social": 0.5, "People-Skill": 0.4, "Community-Serve": 0.3, "Physical-Skill": 0.15}},
+            {"option_id": 27182, "option_text": "Mapping the affected areas and tracking infection rates using health data software", "trait_tags": {"Public-Health": 1.0, "Data-Analytics": 0.5, "Health-Admin": 0.4, "Analytical-Skill": 0.3, "Technical-Skill": 0.15}},
+            {"option_id": 27183, "option_text": "Running blood platelet count tests in a field laboratory", "trait_tags": {"Medical-Lab": 1.0, "Lab-Research": 0.5, "Analytical-Skill": 0.4, "Investigative": 0.25, "Patient-Care": 0.15}},
+            {"option_id": 27184, "option_text": "Leading a fumigation and clean-up drive to eliminate mosquito breeding sites", "trait_tags": {"Environmental-Sci": 1.0, "Community-Serve": 0.5, "Realistic": 0.4, "Public-Health": 0.3, "Physical-Skill": 0.15}},
+            {"option_id": 27185, "option_text": "Counseling anxious families and mothers of infected children", "trait_tags": {"Counseling": 1.0, "People-Skill": 0.5, "Social": 0.4, "Social-Work": 0.3, "Community-Serve": 0.2}},
+            {"option_id": 27186, "option_text": "Coordinating medicine supply logistics between the health center and hospitals", "trait_tags": {"Admin-Skill": 1.0, "Health-Admin": 0.5, "Industrial-Ops": 0.35, "Conventional": 0.25, "People-Skill": 0.15}},
+        ],
+    },
+    # ── Q5010 — Philosophy & Ethics Conference ───────────────────────────────
+    # Targets: BA in Philosophy, BA in Political Science, BS Psychology
+    {
+        "question_id": 5010,
+        "question_text": "Your university hosts an ethics and philosophy conference on artificial intelligence. How would you participate?",
+        "category": "Course Focus - Philosophy & Social Sciences",
+        "options": [
+            {"option_id": 27187, "option_text": "Presenting a paper on whether AI systems can have moral responsibility", "trait_tags": {"Philosophy-Path": 1.0, "Writing-Comm": 0.5, "Analytical-Skill": 0.4, "Investigative": 0.3, "Teaching-Ed": 0.15}},
+            {"option_id": 27188, "option_text": "Moderating a panel debate between tech leaders and ethicists", "trait_tags": {"People-Skill": 1.0, "Social": 0.5, "Analytical-Skill": 0.4, "Philosophy-Path": 0.3, "Community-Serve": 0.15}},
+            {"option_id": 27189, "option_text": "Developing a survey to gauge public opinion on AI in the workplace", "trait_tags": {"Data-Analytics": 1.0, "Analytical-Skill": 0.5, "Investigative": 0.4, "Social-Work": 0.25, "Technical-Skill": 0.15}},
+            {"option_id": 27190, "option_text": "Designing the conference program layout, signage, and promotional materials", "trait_tags": {"Visual-Design": 1.0, "Creative-Skill": 0.5, "Admin-Skill": 0.35, "Digital-Media": 0.25, "Artistic": 0.15}},
+            {"option_id": 27191, "option_text": "Reviewing case law on AI liability to support the legal discussion panel", "trait_tags": {"Legal-Practice": 1.0, "Analytical-Skill": 0.5, "Investigative": 0.4, "Legal-Mgmt": 0.3, "Writing-Comm": 0.15}},
+            {"option_id": 27192, "option_text": "Conducting a psychological experiment on how people react when they learn a decision was made by AI", "trait_tags": {"Counseling": 0.8, "Investigative": 0.5, "Lab-Research": 0.4, "Analytical-Skill": 0.35, "Social": 0.2}},
+        ],
+    },
+]
+
+# ── Collision checks for batch 16 ────────────────────────────────────────────
+_repl16_existing_qids = {q["question_id"] for q in QUESTIONS_POOL_ENHANCED}
+_repl16_new_qids = {q["question_id"] for q in _REPLACEMENT_BATCH_16}
+if _repl16_existing_qids & _repl16_new_qids:
+    raise ValueError(f"Replacement batch 16 question IDs overlap: {_repl16_existing_qids & _repl16_new_qids}")
+
+_repl16_existing_oids = {o["option_id"] for q in QUESTIONS_POOL_ENHANCED for o in q.get("options", [])}
+_repl16_new_oids = {o["option_id"] for q in _REPLACEMENT_BATCH_16 for o in q.get("options", [])}
+if _repl16_existing_oids & _repl16_new_oids:
+    raise ValueError(f"Replacement batch 16 option IDs overlap: {_repl16_existing_oids & _repl16_new_oids}")
+
+QUESTIONS_POOL_ENHANCED.extend(_REPLACEMENT_BATCH_16)
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# REPLACEMENT BATCH 17 — 15 course-related questions (IDs 5011–5025)
+# Each question targets specific courses / course categories in the catalog.
+# Option IDs: 27193 – 27282
+# ══════════════════════════════════════════════════════════════════════════════
+
+_REPLACEMENT_BATCH_17 = [
+    # ── Q5011 — Optometry & Vision Screening Camp ────────────────────────────
+    # Targets: BS Optometry, Doctor of Dental Medicine (patient-care overlap)
+    {
+        "question_id": 5011,
+        "question_text": "A free eye-care mission visits underserved barangays. Which task on the medical team would you choose?",
+        "category": "Course Focus - Optometry & Vision Care",
+        "options": [
+            {"option_id": 27193, "option_text": "Performing preliminary eye exams and measuring patients' visual acuity", "trait_tags": {"Patient-Care": 1.0, "Medical-Lab": 0.5, "Analytical-Skill": 0.35, "People-Skill": 0.25, "Investigative": 0.15}},
+            {"option_id": 27194, "option_text": "Calibrating the autorefractor and maintaining diagnostic instruments", "trait_tags": {"Technical-Skill": 1.0, "Hardware-Systems": 0.5, "Medical-Lab": 0.4, "Realistic": 0.25, "Analytical-Skill": 0.15}},
+            {"option_id": 27195, "option_text": "Explaining lens prescriptions and post-visit care instructions to patients", "trait_tags": {"People-Skill": 1.0, "Patient-Care": 0.5, "Teaching-Ed": 0.4, "Social": 0.25, "Counseling": 0.15}},
+            {"option_id": 27196, "option_text": "Recording patient data into the electronic health records system", "trait_tags": {"Health-Admin": 1.0, "Data-Analytics": 0.5, "Conventional": 0.4, "Admin-Skill": 0.25, "Technical-Skill": 0.15}},
+            {"option_id": 27197, "option_text": "Arranging referrals for patients who need advanced surgical consultation", "trait_tags": {"Admin-Skill": 1.0, "People-Skill": 0.5, "Health-Admin": 0.35, "Community-Serve": 0.25, "Social": 0.15}},
+            {"option_id": 27198, "option_text": "Collecting epidemiological data on common vision problems in the area", "trait_tags": {"Public-Health": 1.0, "Data-Analytics": 0.5, "Investigative": 0.4, "Analytical-Skill": 0.3, "Field-Research": 0.15}},
+        ],
+    },
+    # ── Q5012 — Radiology & Medical Imaging Suite ────────────────────────────
+    # Targets: BS Radiologic Technology
+    {
+        "question_id": 5012,
+        "question_text": "A hospital upgrades its radiology department with new imaging technology. Where would you want to work in that unit?",
+        "category": "Course Focus - Radiology & Medical Imaging",
+        "options": [
+            {"option_id": 27199, "option_text": "Operating the CT and MRI scanners to capture diagnostic images", "trait_tags": {"Medical-Lab": 1.0, "Technical-Skill": 0.5, "Patient-Care": 0.35, "Hardware-Systems": 0.2, "Realistic": 0.15}},
+            {"option_id": 27200, "option_text": "Reviewing image quality and flagging anomalies for the radiologist", "trait_tags": {"Analytical-Skill": 1.0, "Medical-Lab": 0.5, "Investigative": 0.4, "Lab-Research": 0.25, "Data-Analytics": 0.15}},
+            {"option_id": 27201, "option_text": "Explaining procedures to nervous patients and positioning them correctly", "trait_tags": {"Patient-Care": 1.0, "People-Skill": 0.5, "Social": 0.35, "Counseling": 0.25, "Teaching-Ed": 0.15}},
+            {"option_id": 27202, "option_text": "Managing the radiation safety protocols and dosimetry logs", "trait_tags": {"Health-Admin": 1.0, "Analytical-Skill": 0.5, "Conventional": 0.4, "Technical-Skill": 0.25, "Admin-Skill": 0.15}},
+            {"option_id": 27203, "option_text": "Troubleshooting software glitches in the picture archiving and communication system", "trait_tags": {"Software-Dev": 1.0, "Technical-Skill": 0.5, "Cloud-Systems": 0.35, "Data-Analytics": 0.2, "Analytical-Skill": 0.15}},
+            {"option_id": 27204, "option_text": "Researching the effectiveness of new contrast agents in a clinical trial", "trait_tags": {"Lab-Research": 1.0, "Investigative": 0.5, "Analytical-Skill": 0.4, "Medical-Lab": 0.3, "Writing-Comm": 0.15}},
+        ],
+    },
+    # ── Q5013 — Speech-Language Therapy Ward ─────────────────────────────────
+    # Targets: BS Speech-Language Pathology, BS Occupational Therapy
+    {
+        "question_id": 5013,
+        "question_text": "A rehabilitation center opens a new speech and language therapy wing. Which day-to-day responsibility would you prefer?",
+        "category": "Course Focus - Speech-Language & Rehabilitation",
+        "options": [
+            {"option_id": 27205, "option_text": "Conducting articulation drills and language exercises with stroke survivors", "trait_tags": {"Rehab-Therapy": 1.0, "Patient-Care": 0.5, "People-Skill": 0.4, "Teaching-Ed": 0.25, "Social": 0.15}},
+            {"option_id": 27206, "option_text": "Assessing a child's speech development using standardized diagnostic tools", "trait_tags": {"Analytical-Skill": 1.0, "Early-Childhood": 0.5, "Rehab-Therapy": 0.4, "Investigative": 0.3, "Medical-Lab": 0.15}},
+            {"option_id": 27207, "option_text": "Designing visual communication boards for non-verbal patients", "trait_tags": {"Creative-Skill": 1.0, "Inclusive-Ed": 0.5, "Visual-Design": 0.4, "Rehab-Therapy": 0.25, "Patient-Care": 0.15}},
+            {"option_id": 27208, "option_text": "Training family members on home-based therapy techniques between sessions", "trait_tags": {"Teaching-Ed": 1.0, "Counseling": 0.5, "People-Skill": 0.4, "Community-Serve": 0.3, "Social": 0.15}},
+            {"option_id": 27209, "option_text": "Documenting therapy outcomes and updating each patient's progress chart", "trait_tags": {"Conventional": 1.0, "Health-Admin": 0.5, "Analytical-Skill": 0.4, "Admin-Skill": 0.25, "Data-Analytics": 0.15}},
+            {"option_id": 27210, "option_text": "Exploring new assistive-technology apps that could improve patient engagement", "trait_tags": {"Software-Dev": 0.8, "Technical-Skill": 0.5, "Digital-Media": 0.4, "Rehab-Therapy": 0.3, "AI-ML": 0.2}},
+        ],
+    },
+    # ── Q5014 — Respiratory Therapy ICU Rotation ─────────────────────────────
+    # Targets: BS Respiratory Therapy
+    {
+        "question_id": 5014,
+        "question_text": "During an ICU rotation, your respiratory therapy team handles critical patients. Which responsibility would you gravitate toward?",
+        "category": "Course Focus - Respiratory Therapy & Critical Care",
+        "options": [
+            {"option_id": 27211, "option_text": "Managing mechanical ventilator settings based on arterial blood gas results", "trait_tags": {"Rehab-Therapy": 1.0, "Analytical-Skill": 0.5, "Technical-Skill": 0.4, "Medical-Lab": 0.3, "Patient-Care": 0.15}},
+            {"option_id": 27212, "option_text": "Performing bedside pulmonary function tests and interpreting the data", "trait_tags": {"Medical-Lab": 1.0, "Analytical-Skill": 0.5, "Lab-Research": 0.35, "Investigative": 0.25, "Technical-Skill": 0.2}},
+            {"option_id": 27213, "option_text": "Comforting patients experiencing breathing distress and guiding their breathing exercises", "trait_tags": {"Patient-Care": 1.0, "People-Skill": 0.5, "Counseling": 0.4, "Social": 0.25, "Physical-Skill": 0.15}},
+            {"option_id": 27214, "option_text": "Maintaining and sterilizing nebulizers, CPAP machines, and oxygen delivery devices", "trait_tags": {"Technical-Skill": 1.0, "Realistic": 0.5, "Hardware-Systems": 0.35, "Medical-Lab": 0.25, "Conventional": 0.15}},
+            {"option_id": 27215, "option_text": "Participating in a research project comparing weaning protocols for ventilated patients", "trait_tags": {"Lab-Research": 1.0, "Investigative": 0.5, "Analytical-Skill": 0.4, "Data-Analytics": 0.3, "Writing-Comm": 0.15}},
+            {"option_id": 27216, "option_text": "Coordinating patient handoffs between the ICU nurses, doctors, and therapists", "trait_tags": {"Admin-Skill": 1.0, "People-Skill": 0.5, "Health-Admin": 0.4, "Community-Serve": 0.2, "Social": 0.15}},
+        ],
+    },
+    # ── Q5015 — International Diplomacy Simulation ───────────────────────────
+    # Targets: BA in International Studies, BA in Political Science, Bachelor of Public Admin
+    {
+        "question_id": 5015,
+        "question_text": "Your university hosts a Model United Nations conference and you must pick a committee assignment. Which one fits you?",
+        "category": "Course Focus - International Studies & Diplomacy",
+        "options": [
+            {"option_id": 27217, "option_text": "Drafting resolution papers on international trade agreements", "trait_tags": {"Legal-Practice": 1.0, "Writing-Comm": 0.5, "Analytical-Skill": 0.4, "Investigative": 0.25, "Admin-Skill": 0.15}},
+            {"option_id": 27218, "option_text": "Negotiating alliances between country delegates behind the scenes", "trait_tags": {"People-Skill": 1.0, "Enterprising": 0.5, "Social": 0.4, "Community-Serve": 0.25, "Marketing-Sales": 0.15}},
+            {"option_id": 27219, "option_text": "Presenting speeches on human rights issues in the general assembly", "trait_tags": {"Writing-Comm": 1.0, "People-Skill": 0.5, "Social": 0.4, "Legal-Practice": 0.25, "Community-Serve": 0.2}},
+            {"option_id": 27220, "option_text": "Analyzing geopolitical data to support your country's stance with evidence", "trait_tags": {"Data-Analytics": 1.0, "Analytical-Skill": 0.5, "Investigative": 0.4, "Lab-Research": 0.2, "Technical-Skill": 0.15}},
+            {"option_id": 27221, "option_text": "Organizing the logistics — room assignments, schedules, and event programs", "trait_tags": {"Admin-Skill": 1.0, "Conventional": 0.5, "People-Skill": 0.35, "Enterprising": 0.2, "Community-Serve": 0.15}},
+            {"option_id": 27222, "option_text": "Reporting live conference updates through the official event newsletter and social media", "trait_tags": {"Digital-Media": 1.0, "Film-Broadcast": 0.5, "Writing-Comm": 0.35, "Marketing-Sales": 0.25, "Creative-Skill": 0.15}},
+        ],
+    },
+    # ── Q5016 — Linguistics Field Research ───────────────────────────────────
+    # Targets: BA in Linguistics, Bachelor of Secondary Education
+    {
+        "question_id": 5016,
+        "question_text": "A team of researchers is documenting an endangered indigenous language before it disappears. Which part of the project suits you?",
+        "category": "Course Focus - Linguistics & Language Preservation",
+        "options": [
+            {"option_id": 27223, "option_text": "Recording native speakers and transcribing their vocabulary and grammar", "trait_tags": {"Investigative": 1.0, "Writing-Comm": 0.5, "Field-Research": 0.4, "Analytical-Skill": 0.3, "Lab-Research": 0.15}},
+            {"option_id": 27224, "option_text": "Analyzing phonetic patterns to create a pronunciation guide for learners", "trait_tags": {"Analytical-Skill": 1.0, "Investigative": 0.5, "Teaching-Ed": 0.4, "Lab-Research": 0.3, "Data-Analytics": 0.15}},
+            {"option_id": 27225, "option_text": "Building a digital dictionary app with audio pronunciation clips", "trait_tags": {"Software-Dev": 1.0, "Mobile-Dev": 0.5, "Digital-Media": 0.35, "Technical-Skill": 0.25, "Creative-Skill": 0.15}},
+            {"option_id": 27226, "option_text": "Teaching the younger community members how to read and write in their ancestral language", "trait_tags": {"Teaching-Ed": 1.0, "Community-Serve": 0.5, "People-Skill": 0.4, "Social": 0.3, "Creative-Skill": 0.15}},
+            {"option_id": 27227, "option_text": "Handling ethical clearances, consent forms, and partnership agreements with tribal leaders", "trait_tags": {"Legal-Practice": 1.0, "Admin-Skill": 0.5, "People-Skill": 0.35, "Community-Serve": 0.3, "Conventional": 0.15}},
+            {"option_id": 27228, "option_text": "Photographing cultural practices and creating a multimedia ethnographic exhibit", "trait_tags": {"Visual-Design": 1.0, "Film-Broadcast": 0.5, "Creative-Skill": 0.4, "Digital-Media": 0.3, "Artistic": 0.15}},
+        ],
+    },
+    # ── Q5017 — Real Estate Development Project ──────────────────────────────
+    # Targets: BS Real Estate Management, BS Architecture
+    {
+        "question_id": 5017,
+        "question_text": "A developer plans a mixed-use residential and commercial complex in a growing city district. Which role in the project appeals to you?",
+        "category": "Course Focus - Real Estate & Property Development",
+        "options": [
+            {"option_id": 27229, "option_text": "Appraising nearby land values and forecasting return on investment", "trait_tags": {"Finance-Acct": 1.0, "Analytical-Skill": 0.5, "Marketing-Sales": 0.35, "Enterprising": 0.25, "Data-Analytics": 0.2}},
+            {"option_id": 27230, "option_text": "Sketching floor plans and exteriors that blend aesthetics with function", "trait_tags": {"Spatial-Design": 1.0, "Creative-Skill": 0.5, "Civil-Build": 0.4, "Artistic": 0.25, "Technical-Skill": 0.15}},
+            {"option_id": 27231, "option_text": "Reviewing zoning regulations and securing government building permits", "trait_tags": {"Legal-Practice": 1.0, "Admin-Skill": 0.5, "Conventional": 0.4, "Analytical-Skill": 0.25, "Legal-Mgmt": 0.2}},
+            {"option_id": 27232, "option_text": "Marketing model units and giving prospective buyers property walkthroughs", "trait_tags": {"Marketing-Sales": 1.0, "People-Skill": 0.5, "Enterprising": 0.4, "Creative-Skill": 0.2, "Hospitality-Svc": 0.15}},
+            {"option_id": 27233, "option_text": "Running structural stress simulations on the building's foundation design", "trait_tags": {"Civil-Build": 1.0, "Technical-Skill": 0.5, "Analytical-Skill": 0.4, "Mechanical-Design": 0.25, "Realistic": 0.15}},
+            {"option_id": 27234, "option_text": "Assessing the environmental impact and integrating green building features", "trait_tags": {"Environmental-Eng": 1.0, "Environmental-Sci": 0.5, "Analytical-Skill": 0.35, "Spatial-Design": 0.25, "Community-Serve": 0.15}},
+        ],
+    },
+    # ── Q5018 — Customs & International Trade ────────────────────────────────
+    # Targets: BS Customs Administration, BS Business Economics
+    {
+        "question_id": 5018,
+        "question_text": "A government customs bureau overhauls its import-export inspection system. Where would you contribute?",
+        "category": "Course Focus - Customs & International Trade",
+        "options": [
+            {"option_id": 27235, "option_text": "Inspecting cargo manifests and verifying tariff classifications for imported goods", "trait_tags": {"Analytical-Skill": 1.0, "Finance-Acct": 0.5, "Conventional": 0.4, "Legal-Practice": 0.25, "Investigative": 0.15}},
+            {"option_id": 27236, "option_text": "Developing a risk-scoring algorithm to flag suspicious shipments automatically", "trait_tags": {"Data-Analytics": 1.0, "Software-Dev": 0.5, "AI-ML": 0.4, "Cyber-Defense": 0.25, "Technical-Skill": 0.15}},
+            {"option_id": 27237, "option_text": "Negotiating bilateral trade agreements with representatives from partner countries", "trait_tags": {"People-Skill": 1.0, "Enterprising": 0.5, "Legal-Practice": 0.35, "Admin-Skill": 0.25, "Social": 0.15}},
+            {"option_id": 27238, "option_text": "Training new customs officers on updated import procedures and regulatory codes", "trait_tags": {"Teaching-Ed": 1.0, "Admin-Skill": 0.5, "People-Skill": 0.4, "Legal-Practice": 0.25, "Conventional": 0.15}},
+            {"option_id": 27239, "option_text": "Writing policy briefs on how tariff changes affect local industries", "trait_tags": {"Writing-Comm": 1.0, "Investigative": 0.5, "Analytical-Skill": 0.4, "Finance-Acct": 0.3, "Community-Serve": 0.15}},
+            {"option_id": 27240, "option_text": "Operating X-ray scanners and physical inspection equipment at the port", "trait_tags": {"Technical-Skill": 1.0, "Realistic": 0.5, "Law-Enforce": 0.4, "Hardware-Systems": 0.25, "Physical-Skill": 0.15}},
+        ],
+    },
+    # ── Q5019 — Office Administration Overhaul ───────────────────────────────
+    # Targets: BS Office Administration, BS Accounting Information Systems
+    {
+        "question_id": 5019,
+        "question_text": "A growing company hires you to modernize its office operations. Which improvement project would you tackle first?",
+        "category": "Course Focus - Office Administration & Systems",
+        "options": [
+            {"option_id": 27241, "option_text": "Redesigning the filing system and digitizing paper records into a cloud database", "trait_tags": {"Admin-Skill": 1.0, "Cloud-Systems": 0.5, "Conventional": 0.4, "Data-Analytics": 0.25, "Technical-Skill": 0.15}},
+            {"option_id": 27242, "option_text": "Automating repetitive tasks like payroll and invoice processing", "trait_tags": {"Software-Dev": 1.0, "Finance-Acct": 0.5, "Technical-Skill": 0.4, "Analytical-Skill": 0.25, "Conventional": 0.15}},
+            {"option_id": 27243, "option_text": "Creating a company training manual for new hires covering all office procedures", "trait_tags": {"Writing-Comm": 1.0, "Teaching-Ed": 0.5, "Admin-Skill": 0.4, "People-Skill": 0.2, "Conventional": 0.15}},
+            {"option_id": 27244, "option_text": "Renegotiating supplier contracts to cut overhead costs", "trait_tags": {"Finance-Acct": 1.0, "Enterprising": 0.5, "People-Skill": 0.4, "Marketing-Sales": 0.25, "Analytical-Skill": 0.15}},
+            {"option_id": 27245, "option_text": "Setting up a modern reception area and visitor management kiosk", "trait_tags": {"Hospitality-Svc": 1.0, "Spatial-Design": 0.5, "Creative-Skill": 0.35, "People-Skill": 0.25, "Admin-Skill": 0.15}},
+            {"option_id": 27246, "option_text": "Implementing cybersecurity policies for employee email and network access", "trait_tags": {"Cyber-Defense": 1.0, "Technical-Skill": 0.5, "Cloud-Systems": 0.4, "Admin-Skill": 0.25, "Analytical-Skill": 0.15}},
+        ],
+    },
+    # ── Q5020 — Landscape Architecture & Urban Park ──────────────────────────
+    # Targets: BS Landscape Architecture, BS Environmental Planning
+    {
+        "question_id": 5020,
+        "question_text": "A city hires a design team to transform an abandoned rail yard into a public park. What role would you fill?",
+        "category": "Course Focus - Landscape Architecture & Urban Green Spaces",
+        "options": [
+            {"option_id": 27247, "option_text": "Sketching the park layout — pathways, water features, seating areas, and plant zones", "trait_tags": {"Spatial-Design": 1.0, "Creative-Skill": 0.5, "Environmental-Sci": 0.35, "Artistic": 0.25, "Civil-Build": 0.15}},
+            {"option_id": 27248, "option_text": "Selecting native plant species that will thrive in the local climate and soil", "trait_tags": {"Agri-Nature": 1.0, "Field-Research": 0.5, "Environmental-Sci": 0.4, "Analytical-Skill": 0.25, "Lab-Research": 0.15}},
+            {"option_id": 27249, "option_text": "Building a 3-D visualization model so the community can preview the final design", "trait_tags": {"Animation-3D": 1.0, "Digital-Media": 0.5, "Software-Dev": 0.4, "Creative-Skill": 0.25, "Spatial-Design": 0.15}},
+            {"option_id": 27250, "option_text": "Consulting residents about what amenities they want in the new park", "trait_tags": {"Community-Serve": 1.0, "People-Skill": 0.5, "Social": 0.4, "Teaching-Ed": 0.2, "Admin-Skill": 0.15}},
+            {"option_id": 27251, "option_text": "Designing the drainage and irrigation infrastructure for the green spaces", "trait_tags": {"Environmental-Eng": 1.0, "Civil-Build": 0.5, "Technical-Skill": 0.4, "Mechanical-Design": 0.25, "Realistic": 0.15}},
+            {"option_id": 27252, "option_text": "Writing a grant proposal to fund the park's maintenance for the next five years", "trait_tags": {"Writing-Comm": 1.0, "Finance-Acct": 0.5, "Admin-Skill": 0.35, "Enterprising": 0.25, "Analytical-Skill": 0.15}},
+        ],
+    },
+    # ── Q5021 — Industrial Design Product Launch ─────────────────────────────
+    # Targets: BS Industrial Design, BS Clothing Technology
+    {
+        "question_id": 5021,
+        "question_text": "A startup asks your team to design an eco-friendly reusable water bottle from scratch. Which stage are you drawn to?",
+        "category": "Course Focus - Industrial & Product Design",
+        "options": [
+            {"option_id": 27253, "option_text": "Sketching ergonomic shapes and color options that stand out on store shelves", "trait_tags": {"Visual-Design": 1.0, "Creative-Skill": 0.5, "Spatial-Design": 0.4, "Artistic": 0.3, "Marketing-Sales": 0.15}},
+            {"option_id": 27254, "option_text": "Testing material durability — drop tests, temperature stress, and leak seals", "trait_tags": {"Lab-Research": 1.0, "Technical-Skill": 0.5, "Analytical-Skill": 0.4, "Realistic": 0.25, "Mechanical-Design": 0.15}},
+            {"option_id": 27255, "option_text": "Programming the CNC machine to produce the first prototype mold", "trait_tags": {"Technical-Skill": 1.0, "Mechanical-Design": 0.5, "Software-Dev": 0.35, "Realistic": 0.3, "Hardware-Systems": 0.15}},
+            {"option_id": 27256, "option_text": "Calculating production costs and setting a competitive retail price point", "trait_tags": {"Finance-Acct": 1.0, "Analytical-Skill": 0.5, "Enterprising": 0.4, "Industrial-Ops": 0.3, "Admin-Skill": 0.15}},
+            {"option_id": 27257, "option_text": "Photographing the bottle for the e-commerce store and creating social media content", "trait_tags": {"Digital-Media": 1.0, "Creative-Skill": 0.5, "Visual-Design": 0.4, "Marketing-Sales": 0.3, "Film-Broadcast": 0.15}},
+            {"option_id": 27258, "option_text": "Sourcing sustainable biodegradable materials from ethical suppliers", "trait_tags": {"Environmental-Sci": 1.0, "Agri-Nature": 0.5, "Community-Serve": 0.3, "Enterprising": 0.25, "Investigative": 0.15}},
+        ],
+    },
+    # ── Q5022 — Fashion Show & Textile Event ─────────────────────────────────
+    # Targets: BA in Fashion Design and Merchandising, BS Clothing Technology
+    {
+        "question_id": 5022,
+        "question_text": "Your school's fashion program puts on a semester-end runway show. Which backstage role do you claim?",
+        "category": "Course Focus - Fashion Design & Textile Technology",
+        "options": [
+            {"option_id": 27259, "option_text": "Draping fabrics on a dress form and hand-sewing the final garments", "trait_tags": {"Creative-Skill": 1.0, "Spatial-Design": 0.5, "Artistic": 0.4, "Realistic": 0.3, "Physical-Skill": 0.15}},
+            {"option_id": 27260, "option_text": "Choosing textiles — comparing thread counts, stretch, and colorfastness", "trait_tags": {"Lab-Research": 1.0, "Analytical-Skill": 0.5, "Technical-Skill": 0.35, "Investigative": 0.25, "Realistic": 0.15}},
+            {"option_id": 27261, "option_text": "Styling the models — selecting accessories, hair, and makeup looks per outfit", "trait_tags": {"Visual-Design": 1.0, "Creative-Skill": 0.5, "Artistic": 0.4, "People-Skill": 0.25, "Performing-Arts": 0.15}},
+            {"option_id": 27262, "option_text": "Creating the digital lookbook and uploading it to the brand's online portfolio", "trait_tags": {"Digital-Media": 1.0, "Web-Dev": 0.5, "Creative-Skill": 0.4, "Marketing-Sales": 0.25, "Visual-Design": 0.15}},
+            {"option_id": 27263, "option_text": "Handling the event budget, vendor payments, and sponsorship invoices", "trait_tags": {"Finance-Acct": 1.0, "Admin-Skill": 0.5, "Conventional": 0.4, "Enterprising": 0.2, "People-Skill": 0.15}},
+            {"option_id": 27264, "option_text": "Choreographing the runway walk order and cueing music transitions", "trait_tags": {"Performing-Arts": 1.0, "Admin-Skill": 0.5, "Creative-Skill": 0.35, "People-Skill": 0.25, "Music-Audio": 0.2}},
+        ],
+    },
+    # ── Q5023 — Geology & Weather Station Field Work ─────────────────────────
+    # Targets: BS Geology, BS Meteorology, BS Environmental Science
+    {
+        "question_id": 5023,
+        "question_text": "A government science agency sets up a remote field station to monitor earthquake and weather risks. Which assignment would you pick?",
+        "category": "Course Focus - Geology & Atmospheric Science",
+        "options": [
+            {"option_id": 27265, "option_text": "Collecting rock core samples and logging the stratigraphic layers", "trait_tags": {"Field-Research": 1.0, "Lab-Research": 0.5, "Analytical-Skill": 0.35, "Physical-Skill": 0.25, "Investigative": 0.15}},
+            {"option_id": 27266, "option_text": "Installing and calibrating seismograph sensors across the fault line", "trait_tags": {"Hardware-Systems": 1.0, "Technical-Skill": 0.5, "Field-Research": 0.4, "Electrical-Power": 0.2, "Realistic": 0.15}},
+            {"option_id": 27267, "option_text": "Launching weather balloons and interpreting upper-atmosphere data", "trait_tags": {"Analytical-Skill": 1.0, "Field-Research": 0.5, "Data-Analytics": 0.4, "Investigative": 0.3, "Technical-Skill": 0.15}},
+            {"option_id": 27268, "option_text": "Creating hazard maps that help local officials plan evacuation routes", "trait_tags": {"Environmental-Eng": 1.0, "Data-Analytics": 0.5, "Community-Serve": 0.4, "Civil-Build": 0.25, "Admin-Skill": 0.15}},
+            {"option_id": 27269, "option_text": "Writing a risk assessment report for publication in a scientific journal", "trait_tags": {"Writing-Comm": 1.0, "Investigative": 0.5, "Analytical-Skill": 0.4, "Lab-Research": 0.25, "Environmental-Sci": 0.15}},
+            {"option_id": 27270, "option_text": "Briefing nearby communities on disaster preparedness and early-warning signals", "trait_tags": {"Community-Serve": 1.0, "People-Skill": 0.5, "Teaching-Ed": 0.4, "Social": 0.3, "Public-Health": 0.15}},
+        ],
+    },
+    # ── Q5024 — Sociology & Community Study ──────────────────────────────────
+    # Targets: BA in Sociology, BS Social Work, BS Community Development
+    {
+        "question_id": 5024,
+        "question_text": "A university sociology department partners with a low-income community to study and address poverty factors. What role would you take?",
+        "category": "Course Focus - Sociology & Community Development",
+        "options": [
+            {"option_id": 27271, "option_text": "Conducting door-to-door surveys and focus groups to gather residents' lived experiences", "trait_tags": {"Social-Work": 1.0, "People-Skill": 0.5, "Investigative": 0.4, "Community-Serve": 0.3, "Social": 0.15}},
+            {"option_id": 27272, "option_text": "Analyzing census and income data to identify systemic inequality patterns", "trait_tags": {"Data-Analytics": 1.0, "Analytical-Skill": 0.5, "Investigative": 0.4, "Social-Work": 0.25, "Lab-Research": 0.15}},
+            {"option_id": 27273, "option_text": "Facilitating community workshops on financial literacy and livelihood skills", "trait_tags": {"Teaching-Ed": 1.0, "Community-Serve": 0.5, "People-Skill": 0.4, "Social": 0.3, "Counseling": 0.15}},
+            {"option_id": 27274, "option_text": "Writing policy recommendations and presenting them to local government officials", "trait_tags": {"Writing-Comm": 1.0, "Legal-Practice": 0.5, "Analytical-Skill": 0.4, "Admin-Skill": 0.25, "Social-Work": 0.15}},
+            {"option_id": 27275, "option_text": "Providing one-on-one counseling for families facing emotional and financial stress", "trait_tags": {"Counseling": 1.0, "People-Skill": 0.5, "Social-Work": 0.4, "Social": 0.35, "Patient-Care": 0.15}},
+            {"option_id": 27276, "option_text": "Producing a short documentary highlighting the community's resilience and stories", "trait_tags": {"Film-Broadcast": 1.0, "Digital-Media": 0.5, "Creative-Skill": 0.4, "Writing-Comm": 0.25, "Social": 0.15}},
+        ],
+    },
+    # ── Q5025 — Development Communication Campaign ───────────────────────────
+    # Targets: BS Development Communication, BA in Journalism, BA in Communication
+    {
+        "question_id": 5025,
+        "question_text": "An NGO launches a health awareness campaign in far-flung provinces using various media. Which part of the campaign would you lead?",
+        "category": "Course Focus - Development Communication & Media",
+        "options": [
+            {"option_id": 27277, "option_text": "Writing radio scripts in the local dialect explaining disease prevention tips", "trait_tags": {"Writing-Comm": 1.0, "Community-Serve": 0.5, "Social": 0.4, "People-Skill": 0.25, "Teaching-Ed": 0.15}},
+            {"option_id": 27278, "option_text": "Producing short educational videos optimized for social media sharing", "trait_tags": {"Film-Broadcast": 1.0, "Digital-Media": 0.5, "Creative-Skill": 0.4, "Marketing-Sales": 0.2, "Technical-Skill": 0.15}},
+            {"option_id": 27279, "option_text": "Organizing town-hall meetings where healthcare workers answer community questions", "trait_tags": {"Community-Serve": 1.0, "People-Skill": 0.5, "Admin-Skill": 0.4, "Social": 0.3, "Public-Health": 0.15}},
+            {"option_id": 27280, "option_text": "Designing infographic posters and comic strips for low-literacy audiences", "trait_tags": {"Visual-Design": 1.0, "Creative-Skill": 0.5, "Artistic": 0.4, "Teaching-Ed": 0.25, "Digital-Media": 0.15}},
+            {"option_id": 27281, "option_text": "Measuring the campaign's impact through before-and-after knowledge surveys", "trait_tags": {"Data-Analytics": 1.0, "Analytical-Skill": 0.5, "Investigative": 0.4, "Lab-Research": 0.2, "Public-Health": 0.15}},
+            {"option_id": 27282, "option_text": "Securing funding from international donors and writing grant progress reports", "trait_tags": {"Finance-Acct": 1.0, "Writing-Comm": 0.5, "Enterprising": 0.4, "Admin-Skill": 0.3, "People-Skill": 0.15}},
+        ],
+    },
+]
+
+# ── Collision checks for batch 17 ────────────────────────────────────────────
+_repl17_existing_qids = {q["question_id"] for q in QUESTIONS_POOL_ENHANCED}
+_repl17_new_qids = {q["question_id"] for q in _REPLACEMENT_BATCH_17}
+if _repl17_existing_qids & _repl17_new_qids:
+    raise ValueError(f"Replacement batch 17 question IDs overlap: {_repl17_existing_qids & _repl17_new_qids}")
+
+_repl17_existing_oids = {o["option_id"] for q in QUESTIONS_POOL_ENHANCED for o in q.get("options", [])}
+_repl17_new_oids = {o["option_id"] for q in _REPLACEMENT_BATCH_17 for o in q.get("options", [])}
+if _repl17_existing_oids & _repl17_new_oids:
+    raise ValueError(f"Replacement batch 17 option IDs overlap: {_repl17_existing_oids & _repl17_new_oids}")
+
+QUESTIONS_POOL_ENHANCED.extend(_REPLACEMENT_BATCH_17)
+
+
+# ══════════════════════════════════════════════════════════════════════════════
 # EXPANSION DEDUPLICATION
 # ══════════════════════════════════════════════════════════════════════════════
 # Expansion functions generate multiple rephrased prompts per question concept,
