@@ -69,7 +69,7 @@ function LandingPage({ onLogin }) {
 
           <div style={styles.navRight}>
             <button onClick={onLogin} style={styles.getStartedBtn}>
-              Begin Assessment
+              Let's get started
               <span style={styles.btnArrow}>→</span>
             </button>
           </div>
@@ -98,7 +98,7 @@ function LandingPage({ onLogin }) {
 
           <div className="landing-hero-cta" style={styles.heroCTA}>
             <button onClick={onLogin} style={styles.beginBtn}>
-              🚀 Begin Assessment
+              🚀 Let's get started
             </button>
           </div>
 
@@ -185,18 +185,8 @@ function LandingPage({ onLogin }) {
           <p style={styles.ctaSubtitle}>
             Take the assessment now and get matched with courses that fit your strengths.
           </p>
-          <button onClick={onLogin} style={styles.ctaButton}>
-            🚀 Begin Assessment
-          </button>
         </div>
       </section>
-
-      {/* Sticky bottom CTA for mobile/scroll */}
-      <div style={styles.stickyBottom}>
-        <button onClick={onLogin} style={styles.stickyBtn}>
-          🚀 Begin Assessment
-        </button>
-      </div>
 
       {/* Footer */}
       <footer className="landing-footer" style={styles.footer}>
