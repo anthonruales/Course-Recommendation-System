@@ -990,12 +990,7 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
               <h2 style={styles.modalTitle}>Select Academic Interests</h2>
               <button onClick={() => setInterestModalOpen(false)} style={styles.closeBtn}>✕</button>
             </div>
-            <div style={{ padding: '10px 20px', background: 'rgba(234, 179, 8, 0.08)', borderBottom: '1px solid rgba(234, 179, 8, 0.15)', display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
-              <span style={{ fontSize: '14px', marginTop: '1px' }}>💡</span>
-              <p style={{ margin: 0, fontSize: '12.5px', color: 'rgba(234, 179, 8, 0.9)', lineHeight: '1.5' }}>
-                <strong>Tip:</strong> Selecting too many different interests across categories may decrease recommendation accuracy. For best results, focus on related interests. You can always retake the assessment with different interests selected.
-              </p>
-            </div>
+            
             <div style={styles.modalBody}>
               {Object.values(
                 INTEREST_OPTIONS.reduce((acc, option) => {
@@ -1048,12 +1043,7 @@ function Settings({ formData = {}, setFormData, onSave, onBack, onViewProfile, o
               <h2 style={styles.modalTitle}>Select Technical & Soft Skills</h2>
               <button onClick={() => setSkillsModalOpen(false)} style={styles.closeBtn}>✕</button>
             </div>
-            <div style={{ padding: '10px 20px', background: 'rgba(234, 179, 8, 0.08)', borderBottom: '1px solid rgba(234, 179, 8, 0.15)', display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
-              <span style={{ fontSize: '14px', marginTop: '1px' }}>💡</span>
-              <p style={{ margin: 0, fontSize: '12.5px', color: 'rgba(234, 179, 8, 0.9)', lineHeight: '1.5' }}>
-                <strong>Tip:</strong> Selecting too many varied skills may reduce accuracy. Focus on skills you're most confident in. You can retake the assessment later with different skills to explore other options.
-              </p>
-            </div>
+           
             <div style={styles.modalBody}>
               {Object.values(
                 SKILL_OPTIONS.reduce((acc, option) => {

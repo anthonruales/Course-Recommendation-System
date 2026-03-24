@@ -21,6 +21,7 @@ from typing import List, Dict, Any, Optional, Tuple, Set
 from dataclasses import dataclass, field
 from enum import Enum
 import json
+import math
 
 # Import enhanced trait system for accurate matching
 from services.trait_system import (
@@ -30,6 +31,30 @@ from services.trait_system import (
     EXPANDED_TRAIT_MAPPING,
     TRAIT_CATEGORIES
 )
+
+# ================================================================================
+# TRAIT-TO-DOMAIN MAPPING  (used for normalization and diversity)
+# ================================================================================
+TRAIT_TO_DOMAIN = {
+    "Patient-Care": "healthcare", "Medical-Lab": "healthcare",
+    "Rehab-Therapy": "healthcare", "Health-Admin": "healthcare",
+    "Nutrition-Diet": "healthcare", "Public-Health": "healthcare",
+    "Pharmacy": "healthcare",
+    "Software-Dev": "technology", "Hardware-Systems": "technology",
+    "Data-Analytics": "technology", "Cyber-Defense": "technology",
+    "Civil-Build": "engineering", "Electrical-Power": "engineering",
+    "Mechanical-Design": "engineering", "Industrial-Ops": "engineering",
+    "Finance-Acct": "business", "Marketing-Sales": "business",
+    "Startup-Venture": "business", "Hospitality-Svc": "business",
+    "Teaching-Ed": "education",
+    "Visual-Design": "arts_design", "Digital-Media": "arts_design",
+    "Spatial-Design": "arts_design",
+    "Lab-Research": "science", "Field-Research": "science",
+    "Law-Enforce": "public_service", "Community-Serve": "public_service",
+    "Legal-Practice": "public_service",
+    "Maritime-Sea": "maritime",
+    "Agri-Nature": "agriculture",
+}
 
 
 # ================================================================================
@@ -999,10 +1024,15 @@ class RuleBasedFilter:
         
         env_mapping = {
             'office': ['Office-based', 'Remote-friendly', 'Organized'],
-            'field': ['Field-work', 'Outdoor-enthusiast', 'Adventurous', 'Active'],
-            'clinical': ['Clinical-setting', 'Patient-focused', 'Helping-others', 'Empathetic'],
-            'laboratory': ['Laboratory', 'Research-oriented', 'Detail-focused', 'Scientific-thinking'],
-            'studio': ['Studio-work', 'Creative-expression', 'Artistic-passion', 'Visual-learner'],
+            'field': ['Field-work', 'Outdoor-enthusiast', 'Adventurous', 'Active',
+                      'Field-Research', 'Agri-Nature', 'Maritime-Sea', 'Physical-Skill'],
+            'clinical': ['Clinical-setting', 'Patient-focused', 'Helping-others', 'Empathetic',
+                         'Patient-Care', 'Medical-Lab', 'Rehab-Therapy', 'Health-Admin',
+                         'Nutrition-Diet', 'Public-Health'],
+            'laboratory': ['Laboratory', 'Research-oriented', 'Detail-focused', 'Scientific-thinking',
+                           'Lab-Research', 'Medical-Lab', 'Data-Analytics', 'Analytical-Skill'],
+            'studio': ['Studio-work', 'Creative-expression', 'Artistic-passion', 'Visual-learner',
+                       'Visual-Design', 'Digital-Media', 'Spatial-Design', 'Creative-Skill'],
         }
         
         for env, env_traits in env_mapping.items():
@@ -1386,6 +1416,49 @@ class DecisionTreeClassifier:
             current_node.score_modifier,
             decision_path
         )
+
+    def classify_multi(self, user_profile: Dict[str, Any]) -> List[Tuple[str, float, int, List[str]]]:
+        """
+        Traverse multiple branches of the decision tree based on the user's
+        trait distribution across categories.  Returns up to 3 classifications
+        with proportionally scaled score modifiers.
+        """
+        top_traits = user_profile.get("top_traits", [])
+
+        # Count how many top traits fall into each root category
+        category_counts: Dict[str, int] = {}
+        for trait in top_traits:
+            cat = self._categorize_trait(trait)
+            category_counts[cat] = category_counts.get(cat, 0) + 1
+
+        # Rank categories by count; keep those with >= 1 trait
+        ranked = sorted(category_counts.items(), key=lambda x: x[1], reverse=True)
+        total_trait_hits = sum(c for _, c in ranked) or 1
+
+        results: List[Tuple[str, float, int, List[str]]] = []
+        seen_classifications: set = set()
+
+        for category, count in ranked[:3]:
+            # Build a modified profile with this category as primary
+            modified_profile = dict(user_profile)
+            # Pick the first trait from this category as the "primary_trait"
+            for t in top_traits:
+                if self._categorize_trait(t) == category:
+                    modified_profile["primary_trait"] = t
+                    break
+
+            classification, confidence, base_modifier, path = self.classify(modified_profile)
+            if classification in seen_classifications:
+                continue
+            seen_classifications.add(classification)
+
+            # Scale the modifier proportionally to this category's trait share
+            proportion = count / total_trait_hits
+            scaled_modifier = max(5, int(base_modifier * proportion))
+
+            results.append((classification, confidence * proportion, scaled_modifier, path))
+
+        return results if results else [self.classify(user_profile)]
     
     def _get_attribute_value(self, attribute: str, user_profile: Dict[str, Any]) -> str:
         """Get the value of an attribute for decision making"""
@@ -1414,8 +1487,10 @@ class DecisionTreeClassifier:
         
         elif attribute == "social_orientation":
             traits = user_profile.get("top_traits", [])
-            extrovert_traits = ["Extroverted", "Social", "Collaborative", "Team-centric"]
-            introvert_traits = ["Introverted", "Independent", "Contemplative"]
+            extrovert_traits = ["Extroverted", "Social", "Collaborative", "Team-centric",
+                                "People-Skill", "Community-Serve", "Teaching-Ed", "Marketing-Sales"]
+            introvert_traits = ["Introverted", "Independent", "Contemplative",
+                                "Lab-Research", "Analytical-Skill", "Data-Analytics"]
             
             ext_count = sum(1 for t in traits if t in extrovert_traits)
             int_count = sum(1 for t in traits if t in introvert_traits)
@@ -1429,9 +1504,14 @@ class DecisionTreeClassifier:
         
         elif attribute == "analytical_type":
             traits = user_profile.get("top_traits", [])
-            tech_traits = ["Logical", "Tech-savvy", "Algorithm-focused", "Hands-on"]
-            business_traits = ["Strategic", "Business-minded", "Leadership"]
-            research_traits = ["Research-oriented", "Theoretical", "Scientific-thinking"]
+            tech_traits = ["Logical", "Tech-savvy", "Algorithm-focused", "Hands-on",
+                           "Software-Dev", "Hardware-Systems", "Technical-Skill", "Cyber-Defense",
+                           "Civil-Build", "Electrical-Power", "Mechanical-Design"]
+            business_traits = ["Strategic", "Business-minded", "Leadership",
+                               "Finance-Acct", "Marketing-Sales", "Startup-Venture", "Admin-Skill"]
+            research_traits = ["Research-oriented", "Theoretical", "Scientific-thinking",
+                               "Lab-Research", "Field-Research", "Data-Analytics", "Medical-Lab",
+                               "Analytical-Skill"]
             
             tech_count = sum(1 for t in traits if t in tech_traits)
             bus_count = sum(1 for t in traits if t in business_traits)
@@ -1446,9 +1526,12 @@ class DecisionTreeClassifier:
         
         elif attribute == "creative_type":
             traits = user_profile.get("top_traits", [])
-            visual_traits = ["Visual-learner", "Digital-art", "Aesthetic-sense"]
-            performing_traits = ["Performative", "Expressive", "Storytelling"]
-            writing_traits = ["Articulate", "Media-savvy", "Investigative"]
+            visual_traits = ["Visual-learner", "Digital-art", "Aesthetic-sense",
+                             "Visual-Design", "Spatial-Design", "Digital-Media"]
+            performing_traits = ["Performative", "Expressive", "Storytelling",
+                                 "Performing-Arts", "Physical-Skill"]
+            writing_traits = ["Articulate", "Media-savvy", "Investigative",
+                              "Marketing-Sales", "Community-Serve"]
             
             vis_count = sum(1 for t in traits if t in visual_traits)
             perf_count = sum(1 for t in traits if t in performing_traits)
@@ -1463,7 +1546,9 @@ class DecisionTreeClassifier:
         
         elif attribute == "tech_affinity":
             traits = user_profile.get("top_traits", [])
-            tech_traits = ["Tech-savvy", "Digital-art", "Remote-friendly", "Innovative"]
+            tech_traits = ["Tech-savvy", "Digital-art", "Remote-friendly", "Innovative",
+                           "Software-Dev", "Hardware-Systems", "Technical-Skill", "Digital-Media",
+                           "Data-Analytics", "Cyber-Defense"]
             tech_count = sum(1 for t in traits if t in tech_traits)
             
             if tech_count >= 2:
@@ -1475,7 +1560,8 @@ class DecisionTreeClassifier:
         
         elif attribute == "leadership_tendency":
             traits = user_profile.get("top_traits", [])
-            leader_traits = ["Leading-teams", "Leadership", "Big-picture", "Strategic"]
+            leader_traits = ["Leading-teams", "Leadership", "Big-picture", "Strategic",
+                             "Enterprising", "Startup-Venture", "Marketing-Sales", "Admin-Skill"]
             leader_count = sum(1 for t in traits if t in leader_traits)
             
             if leader_count >= 2:
@@ -1487,9 +1573,13 @@ class DecisionTreeClassifier:
         
         elif attribute == "domain_interest":
             traits = user_profile.get("top_traits", [])
-            business_traits = ["Business-minded", "Strategic", "Entrepreneurial"]
-            public_traits = ["Civic-minded", "Public-service", "Advocacy"]
-            tech_traits = ["Technical", "Engineering", "Problem-solving"]
+            business_traits = ["Business-minded", "Strategic", "Entrepreneurial",
+                               "Finance-Acct", "Marketing-Sales", "Startup-Venture"]
+            public_traits = ["Civic-minded", "Public-service", "Advocacy",
+                             "Community-Serve", "Law-Enforce", "Legal-Practice"]
+            tech_traits = ["Technical", "Engineering", "Problem-solving",
+                           "Software-Dev", "Hardware-Systems", "Civil-Build",
+                           "Electrical-Power", "Mechanical-Design", "Industrial-Ops"]
             
             bus_count = sum(1 for t in traits if t in business_traits)
             pub_count = sum(1 for t in traits if t in public_traits)
@@ -1509,22 +1599,37 @@ class DecisionTreeClassifier:
         
         helping_traits = [
             "Helping-others", "Empathetic", "Compassionate", "Patient-focused",
-            "Service-oriented", "Nurturing", "Mentoring", "Collaborative"
+            "Service-oriented", "Nurturing", "Mentoring", "Collaborative",
+            # Specialized trait names
+            "Patient-Care", "Rehab-Therapy", "Community-Serve", "Teaching-Ed",
+            "Social", "People-Skill", "Health-Admin", "Public-Health",
+            "Counseling", "Social-Work"
         ]
         
         problem_traits = [
             "Problem-solving", "Analytical", "Logical", "Research-oriented",
-            "Detail-focused", "Methodical", "Systematic", "Investigative"
+            "Detail-focused", "Methodical", "Systematic", "Investigative",
+            # Specialized trait names
+            "Analytical-Skill", "Lab-Research", "Data-Analytics", "Medical-Lab",
+            "Field-Research", "Technical-Skill", "Software-Dev", "Hardware-Systems",
+            "Cyber-Defense", "Civil-Build", "Electrical-Power", "Mechanical-Design",
+            "Industrial-Ops", "Finance-Acct"
         ]
         
         creative_traits = [
             "Creative-expression", "Innovative", "Artistic-passion", "Visual-learner",
-            "Aesthetic-sense", "Expressive", "Storytelling", "Digital-art"
+            "Aesthetic-sense", "Expressive", "Storytelling", "Digital-art",
+            # Specialized trait names
+            "Visual-Design", "Digital-Media", "Spatial-Design", "Creative-Skill",
+            "Artistic", "Performing-Arts"
         ]
         
         leading_traits = [
             "Leading-teams", "Leadership", "Big-picture", "Strategic",
-            "Ambitious", "Confident", "Extroverted", "Persuasive"
+            "Ambitious", "Confident", "Extroverted", "Persuasive",
+            # Specialized trait names
+            "Enterprising", "Startup-Venture", "Marketing-Sales", "Admin-Skill",
+            "Hospitality-Svc"
         ]
         
         if trait in helping_traits:
@@ -1684,6 +1789,43 @@ class HybridRecommendationEngine:
             Dictionary with recommendations and detailed explanations
         """
         
+        # ── TRAIT SCORE NORMALIZATION ──
+        # Domains with more assessment questions accumulate more trait points,
+        # biasing the recommendation toward those domains.  Normalize so that
+        # each domain's total trait contribution is equalized to its *average*
+        # trait score, preventing question-count inflation.
+        domain_totals: Dict[str, float] = {}
+        domain_counts: Dict[str, int] = {}
+        for trait, score in trait_scores.items():
+            domain = TRAIT_TO_DOMAIN.get(trait)
+            if domain:
+                domain_totals[domain] = domain_totals.get(domain, 0) + score
+                domain_counts[domain] = domain_counts.get(domain, 0) + 1
+
+        if domain_totals:
+            # Target: each domain's total = median domain total
+            # Use sqrt-dampened scaling to avoid extreme swings, clamped to [0.5, 2.0]
+            all_totals = sorted(domain_totals.values())
+            median_total = all_totals[len(all_totals) // 2] if all_totals else 1
+            domain_scale: Dict[str, float] = {}
+            for dom, total in domain_totals.items():
+                if total > 0:
+                    raw = median_total / total
+                    dampened = math.sqrt(raw) if raw < 1 else 1 + (raw - 1) * 0.5
+                    domain_scale[dom] = max(0.5, min(2.0, dampened))
+                else:
+                    domain_scale[dom] = 1.0
+
+            normalized_scores: Dict[str, float] = {}
+            for trait, score in trait_scores.items():
+                domain = TRAIT_TO_DOMAIN.get(trait)
+                if domain and domain in domain_scale:
+                    normalized_scores[trait] = score * domain_scale[domain]
+                else:
+                    normalized_scores[trait] = score
+            trait_scores = normalized_scores
+            print(f"[NORM] Domain scale factors: { {d: round(s, 2) for d, s in domain_scale.items()} }")
+
         # Prepare user data for decision tree
         sorted_traits = sorted(trait_scores.items(), key=lambda x: x[1], reverse=True)
         top_traits = [t for t, _ in sorted_traits[:7]]
@@ -1717,16 +1859,26 @@ class HybridRecommendationEngine:
         print(f"   ✗ {len(ineligible_courses)} ineligible courses")
         
         # ==================== PHASE 2: DECISION TREE CLASSIFICATION ====================
-        print("🌳 PHASE 2: Applying Decision Tree Classification...")
+        print("🌳 PHASE 2: Applying Multi-Classification Decision Tree...")
         
-        classification, confidence, tree_modifier, decision_path = self.decision_tree.classify(tree_profile)
+        multi_classifications = self.decision_tree.classify_multi(tree_profile)
         
-        print(f"   → Classification: {classification}")
-        print(f"   → Confidence: {confidence:.0%}")
-        print(f"   → Decision Path: {' → '.join(decision_path)}")
+        # Build a map: course_name → best tree boost across all classifications
+        course_tree_boost: Dict[str, int] = {}
+        all_predicted_courses: set = set()
+        for cls_name, cls_conf, cls_modifier, cls_path in multi_classifications:
+            print(f"   → Classification: {cls_name} (modifier={cls_modifier}, conf={cls_conf:.0%})")
+            print(f"     Path: {' → '.join(cls_path)}")
+            for cname in CLASSIFICATION_TO_COURSES.get(cls_name, []):
+                all_predicted_courses.add(cname)
+                # Keep the highest boost if a course appears in multiple classifications
+                if cname not in course_tree_boost or cls_modifier > course_tree_boost[cname]:
+                    course_tree_boost[cname] = cls_modifier
         
-        # Get recommended course categories
-        recommended_courses_in_category = CLASSIFICATION_TO_COURSES.get(classification, [])
+        # Primary classification for logging / backward compat
+        classification = multi_classifications[0][0] if multi_classifications else ""
+        confidence = multi_classifications[0][1] if multi_classifications else 0.5
+        tree_modifier = multi_classifications[0][2] if multi_classifications else 0
         
         # ==================== COMBINE SCORES ====================
         print("🔢 Combining scores from both phases...")
@@ -1739,11 +1891,9 @@ class HybridRecommendationEngine:
             # Base score from rule-based filtering
             rule_score = fc.eligibility_score
             
-            # Decision tree boost for courses in predicted category
-            tree_boost = 0
-            in_predicted_category = course.course_name in recommended_courses_in_category
-            if in_predicted_category:
-                tree_boost = tree_modifier
+            # Decision tree boost — proportional across all qualifying classifications
+            tree_boost = course_tree_boost.get(course.course_name, 0)
+            in_predicted_category = course.course_name in all_predicted_courses
             
             # Calculate matched traits using enhanced system for display
             course_traits = [t.strip() for t in (course.trait_tag or "").split(",")]
@@ -1841,7 +1991,7 @@ class HybridRecommendationEngine:
         final_scored_courses.sort(key=lambda x: (x["final_score"], x["confidence"]), reverse=True)
         
         # Select top recommendations with diversity
-        top_recommendations = self._select_diverse_recommendations(final_scored_courses, top_n)
+        top_recommendations = self._select_diverse_recommendations(final_scored_courses, top_n, trait_scores)
         
         # ==================== BUILD RESPONSE ====================
         recommendations = []
@@ -1911,8 +2061,8 @@ class HybridRecommendationEngine:
                 "phase2_decision_tree": {
                     "classification": classification,
                     "confidence": confidence,
-                    "decision_path": decision_path,
-                    "recommended_category_courses": len(recommended_courses_in_category)
+                    "classifications": [c[0] for c in multi_classifications],
+                    "recommended_category_courses": len(all_predicted_courses)
                 }
             },
             "user_analysis": {
@@ -1926,31 +2076,126 @@ class HybridRecommendationEngine:
     def _select_diverse_recommendations(
         self,
         scored_courses: List[Dict],
-        top_n: int
+        top_n: int,
+        trait_scores: Dict[str, float] = None
     ) -> List[Dict]:
         """
-        Select top recommendations prioritizing relevance over diversity.
+        Select top recommendations with proportional domain diversity.
         
-        Uses a soft diversity approach: allow up to 4 courses per strand,
-        but always prefer higher-scoring courses. This ensures the top
-        recommendations genuinely match the user's profile rather than
-        padding with low-scoring courses from unrelated strands.
+        Uses the user's trait scores to determine which domains they care
+        about, then allocates recommendation slots proportionally.  For
+        example, if 55% of trait signal is healthcare, 25% public_service,
+        and 20% business, a 6-slot list becomes 3 healthcare + 2 public
+        service + 1 business.
         """
         
-        selected = []
-        used_strands = {}
-        max_per_strand = 4  # Allow more courses from dominant strand
+        DOMAIN_MAP = TRAIT_TO_DOMAIN  # module-level mapping
         
-        # Single pass: select top-scoring courses with soft strand cap
-        for course_data in scored_courses:
-            if len(selected) >= top_n:
-                break
-            
+        def get_course_domain(course_data):
             course = course_data["course"]
-            strand = course.required_strand or "General"
+            traits = [t.strip() for t in (course.trait_tag or "").split(",")]
+            for trait in traits:
+                if trait in DOMAIN_MAP:
+                    return DOMAIN_MAP[trait]
+            return "other"
+        
+        if not scored_courses:
+            return []
+        
+        # Step 1: Assign domain labels to all scored courses
+        for cd in scored_courses:
+            cd["_domain"] = get_course_domain(cd)
+        
+        # Step 2: Compute per-domain relevance from user's trait scores
+        domain_relevance = {}
+        if trait_scores:
+            for trait, score in trait_scores.items():
+                domain = TRAIT_TO_DOMAIN.get(trait)
+                if domain:
+                    domain_relevance[domain] = domain_relevance.get(domain, 0) + score
+        
+        # Step 3: Allocate slots proportionally (Hamilton/largest-remainder method)
+        # Only consider domains with meaningful relevance (≥ 30% of top domain)
+        # to avoid cross-domain trait bleed (e.g. Lab-Research from healthcare)
+        if domain_relevance:
+            max_relevance = max(domain_relevance.values())
+            threshold = max_relevance * 0.30
+            qualifying = {d: s for d, s in domain_relevance.items() if s >= threshold}
             
-            if used_strands.get(strand, 0) < max_per_strand:
-                selected.append(course_data)
-                used_strands[strand] = used_strands.get(strand, 0) + 1
+            total_signal = sum(qualifying.values())
+            
+            # Hamilton method: floor quotas + distribute remainders
+            raw_quotas = {d: (s / total_signal) * top_n for d, s in qualifying.items()}
+            slot_alloc = {d: int(q) for d, q in raw_quotas.items()}  # floor
+            remainders = {d: raw_quotas[d] - slot_alloc[d] for d in qualifying}
+            
+            # Every qualifying domain gets at least 1 slot
+            for d in slot_alloc:
+                if slot_alloc[d] == 0:
+                    slot_alloc[d] = 1
+            
+            # Distribute leftover slots by largest remainder
+            leftover = top_n - sum(slot_alloc.values())
+            if leftover > 0:
+                for d in sorted(remainders, key=remainders.get, reverse=True):
+                    if leftover <= 0:
+                        break
+                    slot_alloc[d] += 1
+                    leftover -= 1
+            
+            # If over-allocated (from the min-1 guarantee), trim smallest domains
+            while sum(slot_alloc.values()) > top_n:
+                shrinkable = [d for d in slot_alloc if slot_alloc[d] > 1]
+                if not shrinkable:
+                    break
+                min_domain = min(shrinkable, key=lambda d: qualifying[d])
+                slot_alloc[min_domain] -= 1
+        else:
+            slot_alloc = {}
+        
+        # Step 4: Group scored courses by domain
+        domain_pools = {}
+        for cd in scored_courses:
+            domain = cd["_domain"]
+            if domain not in domain_pools:
+                domain_pools[domain] = []
+            domain_pools[domain].append(cd)
+        
+        # Step 5: Fill allocated slots from each domain's pool (already sorted by score)
+        selected = []
+        selected_names = set()
+        
+        # Sort domains by relevance (highest first) to fill important domains first
+        sorted_domains = sorted(slot_alloc.keys(), key=lambda d: domain_relevance.get(d, 0), reverse=True)
+        
+        for domain in sorted_domains:
+            slots = slot_alloc[domain]
+            pool = domain_pools.get(domain, [])
+            filled = 0
+            for cd in pool:
+                if filled >= slots:
+                    break
+                name = cd["course"].course_name
+                if name not in selected_names:
+                    selected.append(cd)
+                    selected_names.add(name)
+                    filled += 1
+        
+        # Step 6: If any slots remain (domain pool exhausted), fill by raw score
+        if len(selected) < top_n:
+            for cd in scored_courses:
+                if len(selected) >= top_n:
+                    break
+                name = cd["course"].course_name
+                if name not in selected_names:
+                    selected.append(cd)
+                    selected_names.add(name)
+        
+        # Re-sort by score for display ranking
+        selected.sort(key=lambda x: (x["final_score"], x["confidence"]), reverse=True)
+        
+        # Clean up temporary field
+        for cd in scored_courses:
+            cd.pop("_domain", None)
         
         return selected

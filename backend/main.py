@@ -294,10 +294,26 @@ app.add_middleware(
 def seed_database():
     db = database.SessionLocal()
     try:
-        # Check if database already has courses - if so, skip seeding
+        # Check if database already has courses - if so, update trait tags and skip full seeding
         existing_courses = db.query(models.Course).count()
         if existing_courses > 0:
-            print("[OK] Database already seeded with courses. Skipping seed operation.")
+            print("[OK] Database already seeded with courses. Refreshing trait tags...")
+            # Update trait_tag for existing courses from the source file
+            updated = 0
+            for c in COURSES_POOL:
+                tags = c.get("trait_tag", [])
+                tag_str = ", ".join(tags) if isinstance(tags, list) else str(tags)
+                course = db.query(models.Course).filter(
+                    models.Course.course_name == c.get("course_name")
+                ).first()
+                if course and course.trait_tag != tag_str:
+                    course.trait_tag = tag_str
+                    updated += 1
+            if updated:
+                db.commit()
+                print(f"   [OK] Updated trait tags for {updated} courses")
+            else:
+                print("   [OK] All trait tags already up to date")
             print("[DATA] ALL DATA IS PERMANENT:")
             print("   [OK] Courses & Questions")
             print("   [OK] User Accounts & Profiles")

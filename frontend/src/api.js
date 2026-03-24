@@ -72,6 +72,7 @@ export function authHeaders(extra = {}) {
 /**
  * Authenticated fetch wrapper.
  * Drop-in replacement for fetch() that adds the JWT header.
+ * Automatically handles 401 responses by clearing auth state and redirecting.
  */
 export function authFetch(url, options = {}) {
   const token = localStorage.getItem('accessToken');
@@ -79,7 +80,17 @@ export function authFetch(url, options = {}) {
   if (token) {
     headers['Authorization'] = `Bearer ${token}`;
   }
-  return fetch(url, { ...options, headers });
+  return fetch(url, { ...options, headers }).then((response) => {
+    if (response.status === 401) {
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('userName');
+      if (window.location.hash !== '#/landing' && window.location.hash !== '#/login') {
+        window.location.hash = '#/landing';
+        window.location.reload();
+      }
+    }
+    return response;
+  });
 }
 
 export default api;
