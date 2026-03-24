@@ -5823,6 +5823,14 @@ class AdaptiveAssessmentEngine:
                 # Question weight from tree
                 score += node.get("weight", 1.0)
 
+                # Intent diversity penalty — penalize questions whose "shape"
+                # matches recently asked questions (e.g. same template with
+                # different category name)
+                _q_intent = self._classify_question_intent(question)
+                _recent = getattr(session, '_recent_intents', [])
+                if _q_intent != 'GENERAL' and _q_intent in _recent[-3:]:
+                    score -= 8.0
+
                 if force_domain_rotation:
                     for branch in q_branches:
                         branch_count = session.domain_question_count.get(branch, 0)
@@ -5880,6 +5888,39 @@ class AdaptiveAssessmentEngine:
         
         # ─── RECORD SELECTION ───
         best_question = self.questions[selected_qid]
+
+        # --- INTENT DIVERSITY SWAP ---
+        # Avoid repeating the same question "shape" (e.g. "What excites you
+        # about [X]?") across consecutive categories.  If the selected
+        # question has the same intent as a recent question, try to swap it
+        # for a same-category question with a DIFFERENT intent.
+        if not hasattr(session, '_recent_intents'):
+            session._recent_intents = []
+            for _prev_qid in session.answered_questions:
+                _prev_q = self.questions.get(_prev_qid)
+                if _prev_q:
+                    session._recent_intents.append(
+                        self._classify_question_intent(_prev_q))
+
+        _cur_intent = self._classify_question_intent(best_question)
+        if (_cur_intent != 'GENERAL'
+                and _cur_intent in session._recent_intents[-3:]):
+            _cat = best_question.get('category', '')
+            for _alt_qid, _alt_q in self.questions.items():
+                if _alt_qid in asked or _alt_qid == selected_qid:
+                    continue
+                if _alt_q.get('category', '') != _cat:
+                    continue
+                _alt_intent = self._classify_question_intent(_alt_q)
+                if (_alt_intent != 'GENERAL'
+                        and _alt_intent not in session._recent_intents[-3:]):
+                    selected_qid = _alt_qid
+                    best_question = _alt_q
+                    _cur_intent = _alt_intent
+                    print(f"[INTENT-DIV] Swapped to Q{_alt_qid} "
+                          f"(intent={_alt_intent}) to avoid repeating "
+                          f"{session._recent_intents[-1]}")
+                    break
 
         # --- ENHANCED SEMANTIC DEDUPLICATION ---
         # Prevents showing two questions that look or measure the same thing.
@@ -6038,6 +6079,12 @@ class AdaptiveAssessmentEngine:
                     session._dedup_depth = 0
         _record_fingerprints(best_question)
 
+        # Track the intent of the final selected question (after all swaps)
+        _final_intent = self._classify_question_intent(best_question)
+        session._recent_intents.append(_final_intent)
+        if len(session._recent_intents) > 8:
+            session._recent_intents = session._recent_intents[-8:]
+
         session.round_number = round_num
         
         # Track domain question count
@@ -6083,6 +6130,56 @@ class AdaptiveAssessmentEngine:
             "top_courses_preview": top_courses
         }
     
+    # ═══════════════════════════════════════════════════════════════════
+    # INTENT DIVERSITY — prevents the same question "shape" across
+    # consecutive categories (e.g. "What excites you about [X]?" N times)
+    # ═══════════════════════════════════════════════════════════════════
+
+    @staticmethod
+    def _classify_question_intent(question: dict) -> str:
+        """Classify what conceptual angle a question asks from.
+
+        Returns one of: CAREER, SKILL, SCENARIO, CROSS_FIELD, BUILD,
+        ENVIRONMENT, TEAM, SPECIALTY, WHICH_PART, INTEREST, GENERAL.
+        Used to rotate question *shapes* across consecutive categories.
+        """
+        text = question.get('question_text', '').lower()
+        if any(w in text for w in ['career', 'job ', 'role ', 'profession',
+                                    'position', 'work as', 'career path',
+                                    'where would you work']):
+            return 'CAREER'
+        if any(w in text for w in ['skill', 'master', 'learn', 'improve',
+                                    'strengthen', 'expertise', 'develop first']):
+            return 'SKILL'
+        if any(w in text for w in ['scenario', 'imagine', 'what if', 'pretend',
+                                    'suppose', 'struggling', 'situation',
+                                    'challenge', 'respond to', 'how would you']):
+            return 'SCENARIO'
+        if any(w in text for w in ['connect with other', 'cross-disciplin',
+                                    'interdisciplin', 'blend', 'other fields',
+                                    'broader']):
+            return 'CROSS_FIELD'
+        if any(w in text for w in ['build', 'create', 'project', 'design from',
+                                    'portfolio', 'showcase']):
+            return 'BUILD'
+        if any(w in text for w in ['environment', 'setting', 'workplace',
+                                    'setup', 'work best']):
+            return 'ENVIRONMENT'
+        if any(w in text for w in ['team', 'collabor', 'group',
+                                    'contribute to a']):
+            return 'TEAM'
+        if any(w in text for w in ['specialty', 'specializ', 'practice area',
+                                    'branch', 'discipline', 'focus on one',
+                                    'dedicated']):
+            return 'SPECIALTY'
+        if any(w in text for w in ['aspect', 'part ', 'workflow', 'stage ',
+                                    'fulfilling', 'enjoy most', 'appeals to you']):
+            return 'WHICH_PART'
+        if any(w in text for w in ['excit', 'interest', 'appeal', 'drawn',
+                                    'attract', 'fascinat', 'meaningful']):
+            return 'INTEREST'
+        return 'GENERAL'
+
     def _calculate_profile_question_bonus(self, question: dict, profile_traits: Set[str], bonus_multiplier: float) -> float:
         """Calculate bonus score for questions matching user's profile interests/skills."""
         if not profile_traits:
