@@ -1712,6 +1712,63 @@ QUESTIONS_POOL_ENHANCED = [
         ]
     },
     {
+        "question_id": 52,
+        "question_text": "Which board exam would you be most willing to study hard for?",
+        "category": "Board Exam Preference",
+        "options": [
+            {
+                "option_id": 511,
+                "option_text": "Nursing Licensure Exam (NLE)",
+                "trait_tags": {"Patient-Care": 1.0, "Medical-Lab": 0.4, "People-Skill": 0.4, "Rehab-Therapy": 0.35, "Social": 0.25, "Analytical-Skill": 0.2}
+            },
+            {
+                "option_id": 512,
+                "option_text": "CPA Board Exam",
+                "trait_tags": {"Finance-Acct": 1.0, "Conventional": 0.5, "Analytical-Skill": 0.4, "Admin-Skill": 0.3, "Investigative": 0.2, "Enterprising": 0.15}
+            },
+            {
+                "option_id": 513,
+                "option_text": "Civil Engineering Board Exam",
+                "trait_tags": {"Civil-Build": 1.0, "Technical-Skill": 0.45, "Analytical-Skill": 0.4, "Spatial-Design": 0.35, "Realistic": 0.3, "Mechanical-Design": 0.25}
+            },
+            {
+                "option_id": 514,
+                "option_text": "Electrical Engineering Board Exam",
+                "trait_tags": {"Electrical-Power": 1.0, "Technical-Skill": 0.45, "Realistic": 0.4, "Hardware-Systems": 0.3, "Mechanical-Design": 0.2, "Industrial-Ops": 0.2}
+            },
+            {
+                "option_id": 515,
+                "option_text": "Mechanical Engineering Board Exam",
+                "trait_tags": {"Mechanical-Design": 1.0, "Realistic": 0.45, "Technical-Skill": 0.4, "Industrial-Ops": 0.25, "Civil-Build": 0.2, "Electrical-Power": 0.2}
+            },
+            {
+                "option_id": 516,
+                "option_text": "Criminology Board Exam",
+                "trait_tags": {"Law-Enforce": 1.0, "Investigative": 0.45, "Community-Serve": 0.35, "Forensic-Sci": 0.3, "Physical-Skill": 0.25, "Realistic": 0.2}
+            },
+            {
+                "option_id": 517,
+                "option_text": "Licensure Exam for Teachers (LET)",
+                "trait_tags": {"Teaching-Ed": 1.0, "Conventional": 0.4, "Social": 0.35, "People-Skill": 0.3, "Community-Serve": 0.25, "Investigative": 0.2}
+            },
+            {
+                "option_id": 518,
+                "option_text": "Medical Technologist Board Exam",
+                "trait_tags": {"Medical-Lab": 1.0, "Analytical-Skill": 0.5, "Lab-Research": 0.4, "Investigative": 0.4, "Technical-Skill": 0.3, "Patient-Care": 0.2}
+            },
+            {
+                "option_id": 519,
+                "option_text": "Pharmacy Board Exam",
+                "trait_tags": {"Medical-Lab": 1.0, "Analytical-Skill": 0.45, "Lab-Research": 0.4, "Patient-Care": 0.35, "Investigative": 0.3, "Technical-Skill": 0.2}
+            },
+            {
+                "option_id": 520,
+                "option_text": "I prefer careers without board exams",
+                "trait_tags": {"Software-Dev": 1.0, "Technical-Skill": 0.4, "Investigative": 0.35, "Data-Analytics": 0.3, "Digital-Media": 0.2, "Enterprising": 0.15}
+            }
+        ]
+    },
+    {
         "question_id": 53,
         "question_text": "Where in the Philippines would you prefer to work?",
         "category": "Work Location",
@@ -2734,6 +2791,120 @@ QUESTIONS_POOL_ENHANCED = [
                 "option_id": 700,
                 "option_text": "Mock trial/debate",
                 "trait_tags": {"Legal-Practice": 1.0, "Law-Enforce": 0.4, "People-Skill": 0.35, "Analytical-Skill": 0.3, "Investigative": 0.25, "Social": 0.2}
+            }
+        ]
+    },
+    {
+        "question_id": 71,
+        "question_text": "What's your FAVORITE subject in school?",
+        "category": "Favorite Subject",
+        "options": [
+            {
+                "option_id": 701,
+                "option_text": "Math",
+                "trait_tags": {"Data-Analytics": 1.0, "Analytical-Skill": 0.5, "Investigative": 0.35, "Finance-Acct": 0.3, "Software-Dev": 0.25, "Lab-Research": 0.2}
+            },
+            {
+                "option_id": 702,
+                "option_text": "Science",
+                "trait_tags": {"Lab-Research": 1.0, "Investigative": 0.5, "Analytical-Skill": 0.45, "Medical-Lab": 0.35, "Field-Research": 0.3, "Data-Analytics": 0.2}
+            },
+            {
+                "option_id": 703,
+                "option_text": "English",
+                "trait_tags": {"Teaching-Ed": 1.0, "Social": 0.4, "People-Skill": 0.35, "Conventional": 0.3, "Community-Serve": 0.2, "Investigative": 0.15}
+            },
+            {
+                "option_id": 704,
+                "option_text": "Filipino",
+                "trait_tags": {"Teaching-Ed": 1.0, "Social": 0.4, "People-Skill": 0.35, "Community-Serve": 0.3, "Conventional": 0.25, "Artistic": 0.15}
+            },
+            {
+                "option_id": 705,
+                "option_text": "Social Studies",
+                "trait_tags": {"Community-Serve": 1.0, "Social": 0.5, "Teaching-Ed": 0.35, "People-Skill": 0.3, "Law-Enforce": 0.25, "Investigative": 0.2}
+            },
+            {
+                "option_id": 706,
+                "option_text": "Computer/ICT/TLE",
+                "trait_tags": {"Software-Dev": 1.0, "Technical-Skill": 0.45, "Hardware-Systems": 0.35, "Data-Analytics": 0.3, "Investigative": 0.25, "Digital-Media": 0.2}
+            },
+            {
+                "option_id": 707,
+                "option_text": "Arts",
+                "trait_tags": {"Artistic": 1.0, "Visual-Design": 0.45, "Creative-Skill": 0.4, "Digital-Media": 0.3, "Spatial-Design": 0.25, "Realistic": 0.2}
+            },
+            {
+                "option_id": 708,
+                "option_text": "PE",
+                "trait_tags": {"Physical-Skill": 1.0, "Realistic": 0.4, "Maritime-Sea": 0.35, "Agri-Nature": 0.35, "Law-Enforce": 0.3, "Rehab-Therapy": 0.3}
+            },
+            {
+                "option_id": 709,
+                "option_text": "Accounting/Business subjects",
+                "trait_tags": {"Finance-Acct": 1.0, "Conventional": 0.45, "Analytical-Skill": 0.4, "Admin-Skill": 0.35, "Enterprising": 0.25, "Investigative": 0.15}
+            },
+            {
+                "option_id": 710,
+                "option_text": "Research/Practical Research",
+                "trait_tags": {"Lab-Research": 1.0, "Investigative": 0.5, "Analytical-Skill": 0.45, "Field-Research": 0.35, "Data-Analytics": 0.3, "Medical-Lab": 0.2}
+            }
+        ]
+    },
+    {
+        "question_id": 72,
+        "question_text": "What's your LEAST favorite or most challenging subject?",
+        "category": "Challenging Subject",
+        "options": [
+            {
+                "option_id": 711,
+                "option_text": "Math - too many formulas",
+                "trait_tags": {"Artistic": 1.0, "Creative-Skill": 0.45, "Visual-Design": 0.4, "Digital-Media": 0.3, "People-Skill": 0.25, "Social": 0.2}
+            },
+            {
+                "option_id": 712,
+                "option_text": "Science - hard to memorize",
+                "trait_tags": {"Finance-Acct": 1.0, "Conventional": 0.4, "Analytical-Skill": 0.35, "Admin-Skill": 0.3, "Enterprising": 0.2, "Data-Analytics": 0.15}
+            },
+            {
+                "option_id": 713,
+                "option_text": "English - grammar is confusing",
+                "trait_tags": {"Technical-Skill": 1.0, "Realistic": 0.4, "Hardware-Systems": 0.35, "Mechanical-Design": 0.35, "Software-Dev": 0.3, "Physical-Skill": 0.2}
+            },
+            {
+                "option_id": 714,
+                "option_text": "Filipino - prefer English",
+                "trait_tags": {"Software-Dev": 1.0, "Technical-Skill": 0.4, "Investigative": 0.3, "Data-Analytics": 0.25, "Conventional": 0.2, "Digital-Media": 0.15}
+            },
+            {
+                "option_id": 715,
+                "option_text": "History - too many dates",
+                "trait_tags": {"Data-Analytics": 1.0, "Analytical-Skill": 0.45, "Software-Dev": 0.35, "Investigative": 0.3, "Technical-Skill": 0.2, "Finance-Acct": 0.2}
+            },
+            {
+                "option_id": 716,
+                "option_text": "PE - not athletic",
+                "trait_tags": {"Lab-Research": 1.0, "Investigative": 0.45, "Analytical-Skill": 0.4, "Data-Analytics": 0.3, "Medical-Lab": 0.25, "Software-Dev": 0.2}
+            },
+            {
+                "option_id": 717,
+                "option_text": "Arts - not creative",
+                "trait_tags": {"Finance-Acct": 1.0, "Conventional": 0.45, "Analytical-Skill": 0.4, "Admin-Skill": 0.3, "Investigative": 0.2, "Data-Analytics": 0.15}
+            },
+            {
+                "option_id": 718,
+                "option_text": "Computer - technology confuses me",
+                "trait_tags": {"Patient-Care": 1.0, "People-Skill": 0.5, "Physical-Skill": 0.4, "Social": 0.35, "Rehab-Therapy": 0.3, "Community-Serve": 0.2}
+            },
+            {
+                "option_id": 719,
+                "option_text": "None - I do well in all subjects",
+                "trait_tags": {"Teaching-Ed": 1.0, "Investigative": 0.4, "Social": 0.35, "People-Skill": 0.35, "Analytical-Skill": 0.25, "Community-Serve": 0.2}
+            },
+            {
+                "option_id": 720,
+                "option_text": "All are equally challenging",
+                "trait_tags": {"Admin-Skill": 1.0, "Conventional": 0.45, "Analytical-Skill": 0.35, "People-Skill": 0.3, "Teaching-Ed": 0.25, "Social": 0.2}
             }
         ]
     },
@@ -17554,6 +17725,19 @@ QUESTIONS_POOL_ENHANCED = [
 
     # ==================== LAW DOMAIN (414-423) ====================
     {
+        "question_id": 414,
+        "question_text": "Which area of law interests you most?",
+        "category": "Law - Area of Interest",
+        "options": [
+            {"option_id": 3715, "option_text": "Criminal law and prosecution", "trait_tags": {'Law-Enforce': 0.9, 'Legal-Practice': 0.8, 'Forensic-Sci': 0.4, 'Realistic': 0.22}},
+            {"option_id": 3716, "option_text": "Civil law and private rights", "trait_tags": {'Legal-Practice': 1.0, 'Admin-Skill': 0.4, 'Analytical-Skill': 0.4, 'Enterprising': 0.24}},
+            {"option_id": 3717, "option_text": "Constitutional and human rights law", "trait_tags": {'Legal-Practice': 0.9, 'Community-Serve': 0.6, 'Social-Work': 0.4, 'Enterprising': 0.22}},
+            {"option_id": 3718, "option_text": "International or maritime law", "trait_tags": {'Legal-Practice': 0.8, 'Maritime-Sea': 0.4, 'Community-Serve': 0.3, 'Enterprising': 0.2}},
+            {"option_id": 3847, "option_text": "Labor and employment law protecting workers rights", "trait_tags": {'Legal-Practice': 0.9, 'Community-Serve': 0.5, 'Admin-Skill': 0.3, 'Enterprising': 0.22}},
+            {"option_id": 3848, "option_text": "Environmental and natural resources law", "trait_tags": {'Legal-Practice': 0.8, 'Environmental-Sci': 0.5, 'Community-Serve': 0.4, 'Enterprising': 0.2}}
+        ]
+    },
+    {
         "question_id": 415,
         "question_text": "When investigating a case, which aspect do you find most engaging?",
         "category": "Law - Investigation",
@@ -20774,6 +20958,36 @@ QUESTIONS_POOL_ENHANCED = [
         ]
     },
     {
+        "question_id": 633,
+        "question_text": 'What area of law interests you most?',
+"category": "Interest - Legal Practice",
+        "weight": 1.5,
+        "trait_tags": {'Legal-Practice': 0.9},
+        "options": [
+            {"option_id": 5121, "option_text": 'Criminal law and prosecution/defense', "trait_tags": {'Legal-Practice': 1.0, 'Law-Enforce': 0.4, 'Analytical-Skill': 0.3, 'Enterprising': 0.24}},
+            {"option_id": 5122, "option_text": 'Corporate and business law', "trait_tags": {'Legal-Practice': 0.9, 'Finance-Acct': 0.4, 'Admin-Skill': 0.3, 'Enterprising': 0.22}},
+            {"option_id": 5123, "option_text": 'Family law and custody matters', "trait_tags": {'Legal-Practice': 0.9, 'Counseling': 0.4, 'Social-Work': 0.3, 'Enterprising': 0.22}},
+            {"option_id": 5124, "option_text": 'Labor and employment law', "trait_tags": {'Legal-Practice': 0.9, 'HR-Management': 0.5, 'People-Skill': 0.3, 'Enterprising': 0.22}},
+            {"option_id": 5125, "option_text": 'Environmental and mining law', "trait_tags": {'Legal-Practice': 0.3, 'Environmental-Sci': 0.4, 'Investigative': 0.13, 'Field-Research': 0.11}},
+            {"option_id": 5126, "option_text": 'Intellectual property and technology law', "trait_tags": {'Legal-Practice': 0.9, 'Technical-Skill': 0.4, 'Software-Dev': 0.3, 'Enterprising': 0.22}},
+        ]
+    },
+    {
+        "question_id": 634,
+        "question_text": 'What legal career path appeals to you?',
+"category": "Career - Legal Practice",
+        "weight": 1.5,
+        "trait_tags": {'Legal-Practice': 0.9, 'People-Skill': 0.3},
+        "options": [
+            {"option_id": 5127, "option_text": 'Trial lawyer arguing cases in court', "trait_tags": {'Legal-Practice': 1.0, 'People-Skill': 0.5, 'Analytical-Skill': 0.3, 'Enterprising': 0.24}},
+            {"option_id": 5128, "option_text": 'Public attorney helping indigent Filipinos', "trait_tags": {'Legal-Practice': 0.9, 'Community-Serve': 0.5, 'Social-Work': 0.3, 'Enterprising': 0.22}},
+            {"option_id": 5129, "option_text": 'Corporate legal counsel for a company', "trait_tags": {'Legal-Practice': 0.9, 'Admin-Skill': 0.5, 'Finance-Acct': 0.3, 'Enterprising': 0.22}},
+            {"option_id": 5130, "option_text": 'Judge or magistrate in the judiciary', "trait_tags": {'Legal-Practice': 1.0, 'Analytical-Skill': 0.5, 'People-Skill': 0.3, 'Enterprising': 0.24}},
+            {"option_id": 5131, "option_text": 'Legal researcher and law professor', "trait_tags": {'Legal-Practice': 0.9, 'Teaching-Ed': 0.5, 'Lab-Research': 0.3, 'Enterprising': 0.22}},
+            {"option_id": 5132, "option_text": 'Mediator and alternative dispute resolution', "trait_tags": {'Legal-Practice': 0.9, 'Counseling': 0.5, 'People-Skill': 0.4, 'Enterprising': 0.22}},
+        ]
+    },
+    {
         "question_id": 635,
         "question_text": 'What legal skill would you prioritize?',
 "category": "Interest - Legal Practice",
@@ -20834,6 +21048,21 @@ QUESTIONS_POOL_ENHANCED = [
         ]
     },
     {
+        "question_id": 639,
+        "question_text": 'What tourism sector excites you most?',
+"category": "Interest - Tourism & Travel",
+        "weight": 1.5,
+        "trait_tags": {'Tourism-Travel': 0.9},
+        "options": [
+            {"option_id": 5157, "option_text": 'Eco-tourism and sustainable travel', "trait_tags": {'Tourism-Travel': 1.0, 'Environmental-Sci': 0.5, 'Community-Serve': 0.3, 'People-Skill': 0.28}},
+            {"option_id": 5158, "option_text": 'Cultural and heritage tourism', "trait_tags": {'Tourism-Travel': 0.9, 'Creative-Skill': 0.4, 'Teaching-Ed': 0.3, 'People-Skill': 0.25}},
+            {"option_id": 5159, "option_text": 'Adventure tourism and outdoor activities', "trait_tags": {'Tourism-Travel': 0.9, 'Physical-Skill': 0.5, 'Sports-Ed': 0.3, 'People-Skill': 0.25}},
+            {"option_id": 5160, "option_text": 'Medical and wellness tourism', "trait_tags": {'Tourism-Travel': 0.9, 'Patient-Care': 0.4, 'Hospitality-Svc': 0.3, 'People-Skill': 0.25}},
+            {"option_id": 5161, "option_text": 'MICE (meetings, incentives, conventions)', "trait_tags": {'Tourism-Travel': 0.9, 'Admin-Skill': 0.5, 'Marketing-Sales': 0.3, 'People-Skill': 0.25}},
+            {"option_id": 5162, "option_text": 'Food and culinary tourism tours', "trait_tags": {'Tourism-Travel': 0.9, 'Culinary-Arts': 0.5, 'Hospitality-Svc': 0.3, 'People-Skill': 0.25}},
+        ]
+    },
+    {
         "question_id": 640,
         "question_text": 'What tourism marketing strategy would you use?',
 "category": "Interest - Tourism & Travel",
@@ -20861,6 +21090,21 @@ QUESTIONS_POOL_ENHANCED = [
             {"option_id": 5172, "option_text": 'Training local communities for tourism jobs', "trait_tags": {'Tourism-Travel': 0.9, 'Teaching-Ed': 0.5, 'Community-Serve': 0.4, 'People-Skill': 0.25}},
             {"option_id": 5173, "option_text": 'Building accessible tourism for PWDs', "trait_tags": {'Tourism-Travel': 0.9, 'Rehab-Therapy': 0.3, 'Community-Serve': 0.4, 'People-Skill': 0.25}},
             {"option_id": 5174, "option_text": 'Creating digital tourism maps and apps', "trait_tags": {'Tourism-Travel': 0.9, 'Mobile-Dev': 0.5, 'Software-Dev': 0.3, 'People-Skill': 0.25}},
+        ]
+    },
+    {
+        "question_id": 642,
+        "question_text": 'What culinary specialization appeals to you?',
+"category": "Interest - Culinary Arts",
+        "weight": 1.5,
+        "trait_tags": {'Culinary-Arts': 0.9},
+        "options": [
+            {"option_id": 5175, "option_text": 'Filipino cuisine and traditional cooking', "trait_tags": {'Culinary-Arts': 1.0, 'Creative-Skill': 0.4, 'Agri-Nature': 0.3, 'Hospitality-Svc': 0.24}},
+            {"option_id": 5176, "option_text": 'Pastry arts and baking', "trait_tags": {'Culinary-Arts': 0.9, 'Creative-Skill': 0.5, 'Food-Science': 0.3, 'Hospitality-Svc': 0.22}},
+            {"option_id": 5177, "option_text": 'International cuisine and fusion cooking', "trait_tags": {'Culinary-Arts': 0.9, 'Creative-Skill': 0.5, 'Tourism-Travel': 0.3, 'Hospitality-Svc': 0.22}},
+            {"option_id": 5178, "option_text": 'Catering management and event food service', "trait_tags": {'Culinary-Arts': 0.9, 'Hospitality-Svc': 0.5, 'Admin-Skill': 0.3, 'Creative-Skill': 0.22}},
+            {"option_id": 5179, "option_text": 'Food styling and photography for media', "trait_tags": {'Culinary-Arts': 0.9, 'Digital-Media': 0.5, 'Visual-Design': 0.3, 'Creative-Skill': 0.22}},
+            {"option_id": 5180, "option_text": 'Research and development for food products', "trait_tags": {'Culinary-Arts': 0.9, 'Food-Science': 0.5, 'Lab-Research': 0.3, 'Creative-Skill': 0.22}},
         ]
     },
     {
@@ -24754,6 +24998,20 @@ QUESTIONS_POOL_ENHANCED = [
     },
 
     # --- Geodetic & Surveying ---
+    {
+        "question_id": 911,
+        "question_text": "What part of geodetic and surveying engineering interests you?",
+        "category": "Academic Interest - Geodetic & Surveying",
+        "options": [
+            {"option_id": 6793, "option_text": "Using GPS and satellite systems to map land boundaries accurately", "trait_tags": {"Technical-Skill": 1.0, "Data-Analytics": 0.5, "Analytical-Skill": 0.45, "Hardware-Systems": 0.35, "Investigative": 0.25}},
+            {"option_id": 6794, "option_text": "Creating 3D terrain models from drone and LiDAR data", "trait_tags": {"Data-Analytics": 1.0, "Technical-Skill": 0.5, "Software-Dev": 0.45, "Aeronautical-Eng": 0.3, "Creative-Skill": 0.25}},
+            {"option_id": 6795, "option_text": "Surveying land for new construction projects like roads and bridges", "trait_tags": {"Civil-Build": 1.0, "Technical-Skill": 0.5, "Realistic": 0.45, "Analytical-Skill": 0.35, "Investigative": 0.25}},
+            {"option_id": 6796, "option_text": "Monitoring ground movement to predict landslides and sinkholes", "trait_tags": {"Environmental-Sci": 1.0, "Technical-Skill": 0.5, "Data-Analytics": 0.45, "Investigative": 0.35, "Analytical-Skill": 0.25}},
+            {"option_id": 6797, "option_text": "Building GIS maps for urban planning and disaster response", "trait_tags": {"Data-Analytics": 1.0, "Software-Dev": 0.5, "Community-Serve": 0.4, "Civil-Build": 0.35, "Analytical-Skill": 0.25}},
+            {"option_id": 6798, "option_text": "Working in mining or oil exploration, mapping underground resources", "trait_tags": {"Realistic": 1.0, "Investigative": 0.5, "Technical-Skill": 0.45, "Analytical-Skill": 0.35, "Environmental-Sci": 0.25}},
+        ]
+    },
+
     # --- Landscape Architecture ---
     {
         "question_id": 912,
@@ -24799,6 +25057,19 @@ QUESTIONS_POOL_ENHANCED = [
 
     # --- Aircraft Maintenance & Avionics ---
     {
+        "question_id": 915,
+        "question_text": "What aspect of aircraft maintenance and avionics interests you?",
+        "category": "Academic Interest - Aircraft Maintenance & Avionics",
+        "options": [
+            {"option_id": 6817, "option_text": "Inspecting jet engines and performing routine maintenance checks", "trait_tags": {"Aeronautical-Eng": 1.0, "Realistic": 0.5, "Technical-Skill": 0.5, "Mechanical-Design": 0.35, "Investigative": 0.25}},
+            {"option_id": 6818, "option_text": "Troubleshooting avionics systems — navigation, radar, and communications", "trait_tags": {"Electronics-Dev": 1.0, "Aeronautical-Eng": 0.5, "Technical-Skill": 0.45, "Investigative": 0.35, "Analytical-Skill": 0.25}},
+            {"option_id": 6819, "option_text": "Testing and calibrating flight instruments for accuracy", "trait_tags": {"Aeronautical-Eng": 1.0, "Analytical-Skill": 0.5, "Technical-Skill": 0.45, "Investigative": 0.35, "Conventional": 0.25}},
+            {"option_id": 6820, "option_text": "Reading aircraft manuals and ensuring compliance with safety regulations", "trait_tags": {"Aeronautical-Eng": 1.0, "Conventional": 0.5, "Legal-Practice": 0.4, "Admin-Skill": 0.35, "Analytical-Skill": 0.25}},
+            {"option_id": 6821, "option_text": "Repairing composite airframe structures after damage", "trait_tags": {"Aeronautical-Eng": 1.0, "Realistic": 0.5, "Technical-Skill": 0.45, "Mechanical-Design": 0.35, "Investigative": 0.25}},
+            {"option_id": 6822, "option_text": "Upgrading older aircraft with modern digital avionics suites", "trait_tags": {"Electronics-Dev": 1.0, "Aeronautical-Eng": 0.5, "Software-Dev": 0.4, "Technical-Skill": 0.35, "Hardware-Systems": 0.25}},
+        ]
+    },
+    {
         "question_id": 916,
         "question_text": "SCENARIO: A plane's warning system triggers a false alarm mid-flight. What do you do post-landing?",
         "category": "Academic Interest - Aircraft Maintenance & Avionics",
@@ -24841,6 +25112,32 @@ QUESTIONS_POOL_ENHANCED = [
     },
 
     # --- Engineering (General) / Cross-domain ---
+    {
+        "question_id": 919,
+        "question_text": "What type of engineer do you most admire?",
+        "category": "Academic Interest - Engineering (General)",
+        "options": [
+            {"option_id": 6841, "option_text": "A civil engineer who designed an earthquake-proof building", "trait_tags": {"Civil-Build": 1.0, "Analytical-Skill": 0.5, "Technical-Skill": 0.45, "Investigative": 0.35, "Creative-Skill": 0.25}},
+            {"option_id": 6842, "option_text": "An electrical engineer who created a breakthrough solar cell", "trait_tags": {"Electrical-Power": 1.0, "Environmental-Eng": 0.5, "Lab-Research": 0.4, "Investigative": 0.35, "Technical-Skill": 0.25}},
+            {"option_id": 6843, "option_text": "A software engineer who built an app used by millions daily", "trait_tags": {"Software-Dev": 1.0, "Creative-Skill": 0.5, "Startup-Venture": 0.4, "Technical-Skill": 0.35, "People-Skill": 0.25}},
+            {"option_id": 6844, "option_text": "A biomedical engineer who developed a life-saving prosthetic", "trait_tags": {"Patient-Care": 1.0, "Mechanical-Design": 0.5, "Investigative": 0.4, "Technical-Skill": 0.35, "Community-Serve": 0.25}},
+            {"option_id": 6845, "option_text": "An aerospace engineer who designed a spacecraft that reached Mars", "trait_tags": {"Aeronautical-Eng": 1.0, "Technical-Skill": 0.5, "Investigative": 0.45, "Mechanical-Design": 0.35, "Analytical-Skill": 0.25}},
+            {"option_id": 6846, "option_text": "An environmental engineer who cleaned a polluted river for a community", "trait_tags": {"Environmental-Eng": 1.0, "Community-Serve": 0.5, "Environmental-Sci": 0.45, "Civil-Build": 0.3, "Investigative": 0.25}},
+        ]
+    },
+    {
+        "question_id": 920,
+        "question_text": "What engineering subject would you enjoy studying the most?",
+        "category": "Academic Interest - Engineering (General)",
+        "options": [
+            {"option_id": 6847, "option_text": "Thermodynamics — how heat and energy transfer in systems", "trait_tags": {"Mechanical-Design": 1.0, "Analytical-Skill": 0.5, "Investigative": 0.45, "Technical-Skill": 0.35, "Lab-Research": 0.25}},
+            {"option_id": 6848, "option_text": "Strength of materials — understanding how structures handle stress", "trait_tags": {"Civil-Build": 1.0, "Analytical-Skill": 0.5, "Technical-Skill": 0.45, "Investigative": 0.35, "Mechanical-Design": 0.25}},
+            {"option_id": 6849, "option_text": "Control systems — making machines self-regulate automatically", "trait_tags": {"Electronics-Dev": 1.0, "Software-Dev": 0.5, "Analytical-Skill": 0.45, "Technical-Skill": 0.35, "AI-ML": 0.25}},
+            {"option_id": 6850, "option_text": "Engineering economics — balancing technical solutions with budgets", "trait_tags": {"Finance-Acct": 1.0, "Analytical-Skill": 0.5, "Admin-Skill": 0.4, "Technical-Skill": 0.35, "Enterprising": 0.25}},
+            {"option_id": 6851, "option_text": "Fluid mechanics — how liquids and gases flow through pipes and channels", "trait_tags": {"Civil-Build": 1.0, "Analytical-Skill": 0.5, "Investigative": 0.45, "Mechanical-Design": 0.35, "Lab-Research": 0.25}},
+            {"option_id": 6852, "option_text": "Engineering drawing and CAD — turning ideas into precise blueprints", "trait_tags": {"Technical-Skill": 1.0, "Spatial-Design": 0.5, "Creative-Skill": 0.4, "Software-Dev": 0.35, "Mechanical-Design": 0.25}},
+        ]
+    },
     {
         "question_id": 921,
         "question_text": "SCENARIO: Your university lets you pick one engineering elective. Which do you choose?",
@@ -28273,200 +28570,6 @@ QUESTIONS_POOL_ENHANCED = [
             {"option_id": 8338, "option_text": "Building something people enjoy — seeing players have fun with my creation", "trait_tags": {"Game-Dev": 1.0, "People-Skill": 0.6, "Creative-Skill": 0.5, "Community-Serve": 0.4, "Social": 0.3, "Startup-Venture": 0.2}},
             {"option_id": 8339, "option_text": "The art itself — mastering craft, color, form, and visual beauty", "trait_tags": {"Artistic": 1.0, "Visual-Design": 0.8, "Animation-3D": 0.5, "Creative-Skill": 0.5, "Digital-Media": 0.3, "Spatial-Design": 0.2}},
             {"option_id": 8340, "option_text": "The industry opportunity — games are a massive growing market", "trait_tags": {"Game-Dev": 1.0, "Startup-Venture": 0.7, "Marketing-Sales": 0.5, "Finance-Acct": 0.4, "Enterprising": 0.35, "Software-Dev": 0.2}},
-        ]
-    },
-    {
-        "question_id": 71,
-        "question_text": "Outside of class, how do you use or explore what you learn in school?",
-        "category": "Academic - Application",
-        "options": [
-            {"option_id": 51, "option_text": "I do science experiments or watch documentaries about discoveries", "trait_tags": {"Lab-Research": 1.0, "Investigative": 0.5, "Analytical-Skill": 0.4, "Field-Research": 0.35, "Data-Analytics": 0.2, "Medical-Lab": 0.15}},
-            {"option_id": 52, "option_text": "I solve math puzzles, brainteasers, or play strategy games", "trait_tags": {"Data-Analytics": 1.0, "Analytical-Skill": 0.5, "Software-Dev": 0.35, "Finance-Acct": 0.3, "Investigative": 0.25, "Technical-Skill": 0.2}},
-            {"option_id": 53, "option_text": "I read novels, write stories, or join speech contests", "trait_tags": {"Teaching-Ed": 1.0, "Writing-Comm": 0.5, "Social": 0.4, "People-Skill": 0.35, "Creative-Skill": 0.25, "Community-Serve": 0.2}},
-            {"option_id": 54, "option_text": "I help younger students with homework or tutor classmates", "trait_tags": {"Teaching-Ed": 1.0, "People-Skill": 0.5, "Community-Serve": 0.45, "Social": 0.35, "Conventional": 0.25, "Counseling": 0.2}},
-            {"option_id": 55, "option_text": "I tinker with computers, build apps, or edit videos", "trait_tags": {"Software-Dev": 1.0, "Technical-Skill": 0.5, "Digital-Media": 0.4, "Hardware-Systems": 0.3, "Creative-Skill": 0.25, "Data-Analytics": 0.2}},
-            {"option_id": 56, "option_text": "I draw, paint, take photos, or create digital art", "trait_tags": {"Artistic": 1.0, "Visual-Design": 0.5, "Creative-Skill": 0.45, "Digital-Media": 0.35, "Spatial-Design": 0.25, "Performing-Arts": 0.15}},
-            {"option_id": 57, "option_text": "I play sports, work out, or practice martial arts", "trait_tags": {"Physical-Skill": 1.0, "Realistic": 0.45, "Sports-Ed": 0.4, "Rehab-Therapy": 0.3, "Law-Enforce": 0.25, "Maritime-Sea": 0.2}},
-            {"option_id": 58, "option_text": "I track my savings, sell things online, or plan small ventures", "trait_tags": {"Finance-Acct": 1.0, "Enterprising": 0.5, "Admin-Skill": 0.4, "Marketing-Sales": 0.35, "Startup-Venture": 0.3, "Conventional": 0.2}},
-            {"option_id": 59, "option_text": "I grow plants, take care of animals, or explore outdoors", "trait_tags": {"Agri-Nature": 1.0, "Field-Research": 0.5, "Environmental-Sci": 0.4, "Physical-Skill": 0.3, "Realistic": 0.25, "Community-Serve": 0.2}},
-            {"option_id": 60, "option_text": "I research current events, debate issues, or follow politics", "trait_tags": {"Community-Serve": 1.0, "Social": 0.5, "Legal-Practice": 0.35, "Law-Enforce": 0.3, "People-Skill": 0.25, "Investigative": 0.2}},
-        ]
-    },
-    {
-        "question_id": 72,
-        "question_text": "When a school subject gets really difficult, what do you usually do?",
-        "category": "Academic - Coping",
-        "options": [
-            {"option_id": 61, "option_text": "I search for YouTube tutorials or visual explanations", "trait_tags": {"Digital-Media": 1.0, "Software-Dev": 0.4, "Technical-Skill": 0.35, "Creative-Skill": 0.3, "Data-Analytics": 0.2, "Investigative": 0.15}},
-            {"option_id": 62, "option_text": "I form a study group and we figure it out together", "trait_tags": {"People-Skill": 1.0, "Social": 0.5, "Teaching-Ed": 0.4, "Community-Serve": 0.3, "Counseling": 0.25, "Conventional": 0.2}},
-            {"option_id": 63, "option_text": "I practice over and over until the formulas make sense", "trait_tags": {"Analytical-Skill": 1.0, "Data-Analytics": 0.45, "Investigative": 0.4, "Technical-Skill": 0.3, "Finance-Acct": 0.25, "Lab-Research": 0.2}},
-            {"option_id": 64, "option_text": "I ask the teacher for extra help or attend remedial classes", "trait_tags": {"Conventional": 1.0, "Teaching-Ed": 0.4, "People-Skill": 0.35, "Admin-Skill": 0.35, "Community-Serve": 0.25, "Social": 0.2}},
-            {"option_id": 65, "option_text": "I try to connect it to something real-world that I care about", "trait_tags": {"Creative-Skill": 1.0, "Artistic": 0.4, "Investigative": 0.35, "Field-Research": 0.3, "Environmental-Sci": 0.2, "Realistic": 0.15}},
-            {"option_id": 66, "option_text": "I make flashcards, summaries, or organized review notes", "trait_tags": {"Admin-Skill": 1.0, "Conventional": 0.5, "Analytical-Skill": 0.4, "Teaching-Ed": 0.3, "Finance-Acct": 0.25, "Data-Analytics": 0.2}},
-            {"option_id": 67, "option_text": "I try hands-on experiments or build models to understand it", "trait_tags": {"Lab-Research": 1.0, "Technical-Skill": 0.5, "Mechanical-Design": 0.4, "Hardware-Systems": 0.3, "Realistic": 0.25, "Civil-Build": 0.2}},
-            {"option_id": 68, "option_text": "I look for the easier parts first and build confidence from there", "trait_tags": {"Enterprising": 1.0, "Startup-Venture": 0.35, "People-Skill": 0.3, "Marketing-Sales": 0.3, "Admin-Skill": 0.25, "Hospitality-Svc": 0.2}},
-            {"option_id": 69, "option_text": "I push through with physical activity breaks to stay focused", "trait_tags": {"Physical-Skill": 1.0, "Realistic": 0.45, "Sports-Ed": 0.35, "Rehab-Therapy": 0.3, "Law-Enforce": 0.25, "Patient-Care": 0.2}},
-            {"option_id": 70, "option_text": "Honestly, I just focus more on the subjects I'm already good at", "trait_tags": {"Artistic": 1.0, "Creative-Skill": 0.4, "Performing-Arts": 0.35, "Visual-Design": 0.3, "Digital-Media": 0.25, "Music-Audio": 0.2}},
-        ]
-    },
-    {
-        "question_id": 52,
-        "question_text": "How do you feel about spending years studying for a professional licensure exam?",
-        "category": "Professional Commitment",
-        "options": [
-            {"option_id": 75, "option_text": "I'd gladly do it if it means I'll save lives as a nurse or doctor", "trait_tags": {"Patient-Care": 1.0, "Medical-Lab": 0.45, "People-Skill": 0.4, "Rehab-Therapy": 0.35, "Social": 0.2, "Community-Serve": 0.2}},
-            {"option_id": 76, "option_text": "I'd commit if it leads to a respected career in accounting or finance", "trait_tags": {"Finance-Acct": 1.0, "Conventional": 0.5, "Analytical-Skill": 0.45, "Admin-Skill": 0.35, "Enterprising": 0.2, "Investigative": 0.15}},
-            {"option_id": 77, "option_text": "Studying for an engineering board exam sounds like a worthy challenge", "trait_tags": {"Civil-Build": 1.0, "Technical-Skill": 0.5, "Analytical-Skill": 0.4, "Mechanical-Design": 0.35, "Electrical-Power": 0.25, "Realistic": 0.2}},
-            {"option_id": 78, "option_text": "I'd study hard to become a licensed teacher and shape young minds", "trait_tags": {"Teaching-Ed": 1.0, "Community-Serve": 0.45, "Social": 0.4, "People-Skill": 0.35, "Conventional": 0.25, "Counseling": 0.2}},
-            {"option_id": 79, "option_text": "I'd train for a criminology exam if it meant serving justice", "trait_tags": {"Law-Enforce": 1.0, "Investigative": 0.5, "Community-Serve": 0.4, "Forensic-Sci": 0.3, "Physical-Skill": 0.25, "Realistic": 0.2}},
-            {"option_id": 80, "option_text": "The pharmacy or med-tech board exam suits my love for lab work", "trait_tags": {"Medical-Lab": 1.0, "Lab-Research": 0.5, "Analytical-Skill": 0.45, "Investigative": 0.35, "Patient-Care": 0.25, "Technical-Skill": 0.2}},
-            {"option_id": 81, "option_text": "I'd take the architecture board exam to bring designs to life", "trait_tags": {"Spatial-Design": 1.0, "Artistic": 0.45, "Creative-Skill": 0.4, "Civil-Build": 0.3, "Visual-Design": 0.25, "Technical-Skill": 0.2}},
-            {"option_id": 82, "option_text": "I'd prepare for the PT/OT exam because I want to help people recover", "trait_tags": {"Rehab-Therapy": 1.0, "Physical-Skill": 0.5, "Patient-Care": 0.45, "People-Skill": 0.35, "Medical-Lab": 0.2, "Analytical-Skill": 0.15}},
-            {"option_id": 83, "option_text": "I'd rather skip the board exam and go straight into tech or business", "trait_tags": {"Software-Dev": 1.0, "Enterprising": 0.45, "Technical-Skill": 0.4, "Startup-Venture": 0.35, "Digital-Media": 0.25, "Data-Analytics": 0.2}},
-            {"option_id": 84, "option_text": "I haven't thought about it yet \u2014 I want to explore my options first", "trait_tags": {"Creative-Skill": 1.0, "Artistic": 0.35, "Investigative": 0.3, "Performing-Arts": 0.3, "Tourism-Travel": 0.25, "Hospitality-Svc": 0.2}},
-        ]
-    },
-    {
-        "question_id": 414,
-        "question_text": "What motivates you most about pursuing a career in law or criminal justice?",
-        "category": "Law - Motivation",
-        "options": [
-            {"option_id": 85, "option_text": "Standing up in court and arguing for what's right", "trait_tags": {"Legal-Practice": 1.0, "People-Skill": 0.5, "Enterprising": 0.4, "Community-Serve": 0.3}},
-            {"option_id": 86, "option_text": "Investigating crimes and piecing together evidence", "trait_tags": {"Law-Enforce": 1.0, "Forensic-Sci": 0.6, "Investigative": 0.5, "Analytical-Skill": 0.3}},
-            {"option_id": 87, "option_text": "Helping everyday people understand and protect their rights", "trait_tags": {"Community-Serve": 1.0, "Legal-Practice": 0.6, "Social": 0.5, "People-Skill": 0.3}},
-            {"option_id": 88, "option_text": "Drafting contracts and advising companies on compliance", "trait_tags": {"Legal-Practice": 0.9, "Finance-Acct": 0.6, "Admin-Skill": 0.5, "Conventional": 0.25}},
-            {"option_id": 89, "option_text": "Fighting corruption and holding powerful people accountable", "trait_tags": {"Law-Enforce": 0.9, "Community-Serve": 0.7, "Investigative": 0.5, "Social": 0.25}},
-            {"option_id": 90, "option_text": "Using technology to solve cybercrimes and protect digital privacy", "trait_tags": {"Cyber-Defense": 1.0, "Legal-Practice": 0.5, "Technical-Skill": 0.5, "Software-Dev": 0.3}},
-        ]
-    },
-    {
-        "question_id": 633,
-        "question_text": "In what setting would you most want to practice law or justice work?",
-        "category": "Career - Legal Setting",
-        "options": [
-            {"option_id": 91, "option_text": "A busy courtroom handling criminal or civil trials", "trait_tags": {"Legal-Practice": 1.0, "Law-Enforce": 0.5, "People-Skill": 0.5, "Enterprising": 0.25}},
-            {"option_id": 92, "option_text": "A corporate office advising a major business on legal strategy", "trait_tags": {"Legal-Practice": 0.9, "Finance-Acct": 0.6, "Admin-Skill": 0.5, "Enterprising": 0.25}},
-            {"option_id": 93, "option_text": "A forensic lab analyzing evidence from crime scenes", "trait_tags": {"Forensic-Sci": 1.0, "Lab-Research": 0.6, "Law-Enforce": 0.5, "Investigative": 0.3}},
-            {"option_id": 94, "option_text": "A community legal aid office serving underprivileged clients", "trait_tags": {"Community-Serve": 1.0, "Legal-Practice": 0.6, "Social-Work": 0.5, "People-Skill": 0.3}},
-            {"option_id": 95, "option_text": "A government agency creating policies and writing legislation", "trait_tags": {"Legal-Practice": 0.8, "Admin-Skill": 0.6, "Community-Serve": 0.5, "Writing-Comm": 0.3}},
-            {"option_id": 96, "option_text": "In the field \u2014 conducting investigations or intelligence operations", "trait_tags": {"Law-Enforce": 1.0, "Physical-Skill": 0.5, "Investigative": 0.5, "Realistic": 0.25}},
-        ]
-    },
-    {
-        "question_id": 634,
-        "question_text": "If you were starting a legal career, which skill would you want to master first?",
-        "category": "Law - Skill Development",
-        "options": [
-            {"option_id": 97, "option_text": "Public speaking and persuasive argumentation", "trait_tags": {"Legal-Practice": 1.0, "People-Skill": 0.6, "Enterprising": 0.4, "Writing-Comm": 0.3}},
-            {"option_id": 98, "option_text": "Critical analysis of legal documents and case precedent", "trait_tags": {"Analytical-Skill": 1.0, "Legal-Practice": 0.6, "Investigative": 0.5, "Conventional": 0.25}},
-            {"option_id": 99, "option_text": "Crime scene investigation and forensic evidence handling", "trait_tags": {"Forensic-Sci": 1.0, "Law-Enforce": 0.6, "Lab-Research": 0.4, "Investigative": 0.3}},
-            {"option_id": 100, "option_text": "Negotiation and conflict mediation between disputing parties", "trait_tags": {"People-Skill": 1.0, "Legal-Practice": 0.6, "Counseling": 0.5, "Social": 0.25}},
-            {"option_id": 101, "option_text": "Digital forensics and cybercrime investigation techniques", "trait_tags": {"Cyber-Defense": 1.0, "Software-Dev": 0.5, "Law-Enforce": 0.5, "Technical-Skill": 0.3}},
-            {"option_id": 102, "option_text": "Legal writing \u2014 drafting briefs, contracts, and legislation", "trait_tags": {"Writing-Comm": 1.0, "Legal-Practice": 0.6, "Admin-Skill": 0.4, "Conventional": 0.3}},
-        ]
-    },
-    {
-        "question_id": 639,
-        "question_text": "If you could improve one thing about the Philippine travel and tourism industry, what would it be?",
-        "category": "Interest - Tourism Development",
-        "options": [
-            {"option_id": 103, "option_text": "Creating better eco-tourism programs that protect natural wonders", "trait_tags": {"Tourism-Travel": 1.0, "Environmental-Sci": 0.6, "Community-Serve": 0.4, "Agri-Nature": 0.3}},
-            {"option_id": 104, "option_text": "Training more world-class Filipino chefs and hospitality professionals", "trait_tags": {"Hospitality-Svc": 1.0, "Culinary-Arts": 0.5, "Teaching-Ed": 0.4, "People-Skill": 0.3}},
-            {"option_id": 105, "option_text": "Building a travel app that makes island-hopping easier for tourists", "trait_tags": {"Software-Dev": 1.0, "Tourism-Travel": 0.5, "Digital-Media": 0.4, "Technical-Skill": 0.3}},
-            {"option_id": 106, "option_text": "Promoting local festivals and cultural heritage to international visitors", "trait_tags": {"Marketing-Sales": 1.0, "Tourism-Travel": 0.6, "Creative-Skill": 0.4, "Community-Serve": 0.3}},
-            {"option_id": 107, "option_text": "Designing luxury resorts that blend modern comfort with nature", "trait_tags": {"Spatial-Design": 1.0, "Tourism-Travel": 0.5, "Hospitality-Svc": 0.5, "Creative-Skill": 0.3}},
-            {"option_id": 108, "option_text": "Organizing adventure tours like diving, hiking, and surfing packages", "trait_tags": {"Tourism-Travel": 0.9, "Physical-Skill": 0.6, "Enterprising": 0.4, "People-Skill": 0.3}},
-        ]
-    },
-    {
-        "question_id": 642,
-        "question_text": "If you could create any food-related experience, what would it be?",
-        "category": "Interest - Food Innovation",
-        "options": [
-            {"option_id": 109, "option_text": "A pop-up restaurant showcasing modern Filipino cuisine", "trait_tags": {"Culinary-Arts": 1.0, "Creative-Skill": 0.5, "Startup-Venture": 0.4, "Hospitality-Svc": 0.3}},
-            {"option_id": 110, "option_text": "A food science lab developing healthier versions of local snacks", "trait_tags": {"Food-Science": 1.0, "Lab-Research": 0.5, "Nutrition-Diet": 0.5, "Investigative": 0.25}},
-            {"option_id": 111, "option_text": "A cooking show or food vlog reviewing street food across provinces", "trait_tags": {"Culinary-Arts": 0.8, "Digital-Media": 0.7, "Creative-Skill": 0.4, "Tourism-Travel": 0.3}},
-            {"option_id": 112, "option_text": "A farm-to-table cooperative connecting local farmers to restaurants", "trait_tags": {"Agri-Nature": 1.0, "Culinary-Arts": 0.5, "Community-Serve": 0.5, "Enterprising": 0.25}},
-            {"option_id": 113, "option_text": "A pastry shop famous for unique desserts and custom cakes", "trait_tags": {"Culinary-Arts": 1.0, "Artistic": 0.5, "Creative-Skill": 0.5, "Visual-Design": 0.3}},
-            {"option_id": 114, "option_text": "A hotel kitchen where I manage a team preparing banquet menus", "trait_tags": {"Hospitality-Svc": 1.0, "Culinary-Arts": 0.6, "Admin-Skill": 0.5, "People-Skill": 0.25}},
-        ]
-    },
-    {
-        "question_id": 919,
-        "question_text": "If you were an engineer, what real-world problem would you want to solve first?",
-        "category": "Academic Interest - Engineering Application",
-        "options": [
-            {"option_id": 115, "option_text": "Designing earthquake-resistant buildings for Philippine cities", "trait_tags": {"Civil-Build": 1.0, "Analytical-Skill": 0.5, "Technical-Skill": 0.4, "Spatial-Design": 0.3, "Realistic": 0.25}},
-            {"option_id": 116, "option_text": "Developing renewable energy systems to reduce power costs", "trait_tags": {"Electrical-Power": 1.0, "Environmental-Eng": 0.5, "Technical-Skill": 0.45, "Investigative": 0.3, "Environmental-Sci": 0.25}},
-            {"option_id": 117, "option_text": "Building affordable medical devices for rural health clinics", "trait_tags": {"Mechanical-Design": 1.0, "Medical-Lab": 0.5, "Patient-Care": 0.4, "Technical-Skill": 0.3, "Community-Serve": 0.25}},
-            {"option_id": 118, "option_text": "Automating factory processes to make manufacturing more efficient", "trait_tags": {"Industrial-Ops": 1.0, "Hardware-Systems": 0.5, "Software-Dev": 0.4, "Mechanical-Design": 0.3, "Technical-Skill": 0.25}},
-            {"option_id": 119, "option_text": "Cleaning polluted rivers and creating sustainable waste systems", "trait_tags": {"Environmental-Eng": 1.0, "Environmental-Sci": 0.5, "Community-Serve": 0.4, "Technical-Skill": 0.3, "Field-Research": 0.25}},
-            {"option_id": 120, "option_text": "Programming drones or robots for disaster rescue operations", "trait_tags": {"Aeronautical-Eng": 1.0, "Software-Dev": 0.5, "Hardware-Systems": 0.4, "Technical-Skill": 0.35, "Mechanical-Design": 0.25}},
-        ]
-    },
-    {
-        "question_id": 920,
-        "question_text": "Which hands-on engineering project would you sign up for first?",
-        "category": "Academic Interest - Engineering Projects",
-        "options": [
-            {"option_id": 121, "option_text": "Building a small concrete bridge and testing how much weight it holds", "trait_tags": {"Civil-Build": 1.0, "Analytical-Skill": 0.5, "Technical-Skill": 0.4, "Mechanical-Design": 0.3, "Realistic": 0.25}},
-            {"option_id": 122, "option_text": "Assembling and programming a robot to navigate a maze", "trait_tags": {"Hardware-Systems": 1.0, "Software-Dev": 0.5, "Mechanical-Design": 0.4, "Technical-Skill": 0.35, "Electronics-Dev": 0.25}},
-            {"option_id": 123, "option_text": "Wiring a solar panel system to power a model house", "trait_tags": {"Electrical-Power": 1.0, "Electronics-Dev": 0.5, "Environmental-Eng": 0.4, "Technical-Skill": 0.35, "Analytical-Skill": 0.25}},
-            {"option_id": 124, "option_text": "Designing and 3D-printing a prototype of a product you invented", "trait_tags": {"Mechanical-Design": 1.0, "Creative-Skill": 0.5, "Spatial-Design": 0.45, "Technical-Skill": 0.35, "Software-Dev": 0.25}},
-            {"option_id": 125, "option_text": "Building a water filtration system from recycled materials", "trait_tags": {"Environmental-Eng": 1.0, "Environmental-Sci": 0.5, "Technical-Skill": 0.4, "Community-Serve": 0.3, "Investigative": 0.25}},
-            {"option_id": 126, "option_text": "Disassembling a car engine and putting it back together", "trait_tags": {"Mechanical-Design": 1.0, "Technical-Skill": 0.5, "Realistic": 0.45, "Investigative": 0.3, "Industrial-Ops": 0.25}},
-        ]
-    },
-    {
-        "question_id": 911,
-        "question_text": "What career path in geodetic engineering and surveying appeals to you most?",
-        "category": "Academic Interest - Geodetic Careers",
-        "options": [
-            {"option_id": 127, "option_text": "Leading survey teams for large infrastructure projects like highways", "trait_tags": {"Field-Research": 1.0, "Civil-Build": 0.5, "Admin-Skill": 0.4, "Realistic": 0.35, "Technical-Skill": 0.25}},
-            {"option_id": 128, "option_text": "Operating satellite and drone systems for precision agriculture mapping", "trait_tags": {"Technical-Skill": 1.0, "Aeronautical-Eng": 0.5, "Agri-Nature": 0.4, "Data-Analytics": 0.35, "Field-Research": 0.25}},
-            {"option_id": 129, "option_text": "Developing GIS software that city planners use for zoning decisions", "trait_tags": {"Software-Dev": 1.0, "Data-Analytics": 0.5, "Civil-Build": 0.4, "Field-Research": 0.3, "Technical-Skill": 0.25}},
-            {"option_id": 130, "option_text": "Monitoring volcanic activity and earthquake fault lines", "trait_tags": {"Field-Research": 1.0, "Investigative": 0.5, "Environmental-Sci": 0.5, "Analytical-Skill": 0.3, "Technical-Skill": 0.25}},
-            {"option_id": 131, "option_text": "Working as a licensed geodetic engineer resolving land boundary disputes", "trait_tags": {"Field-Research": 1.0, "Legal-Practice": 0.5, "People-Skill": 0.4, "Analytical-Skill": 0.35, "Civil-Build": 0.25}},
-            {"option_id": 132, "option_text": "Creating detailed 3D terrain models from LIDAR and photogrammetry data", "trait_tags": {"Data-Analytics": 1.0, "Technical-Skill": 0.5, "Visual-Design": 0.4, "Field-Research": 0.35, "Software-Dev": 0.25}},
-        ]
-    },
-    {
-        "question_id": 915,
-        "question_text": "What would you focus on if you worked in the aircraft maintenance industry?",
-        "category": "Academic Interest - Aviation Focus",
-        "options": [
-            {"option_id": 133, "option_text": "Becoming certified to sign off that an aircraft is safe to fly", "trait_tags": {"Aeronautical-Eng": 1.0, "Admin-Skill": 0.5, "Legal-Practice": 0.4, "Analytical-Skill": 0.35, "Technical-Skill": 0.25}},
-            {"option_id": 134, "option_text": "Specializing in jet engine overhaul and performance tuning", "trait_tags": {"Mechanical-Design": 1.0, "Aeronautical-Eng": 0.5, "Technical-Skill": 0.5, "Realistic": 0.3, "Investigative": 0.25}},
-            {"option_id": 135, "option_text": "Working on next-gen avionics like digital fly-by-wire systems", "trait_tags": {"Electronics-Dev": 1.0, "Software-Dev": 0.5, "Aeronautical-Eng": 0.45, "Technical-Skill": 0.3, "Data-Analytics": 0.25}},
-            {"option_id": 136, "option_text": "Using predictive data to schedule maintenance before parts fail", "trait_tags": {"Data-Analytics": 1.0, "Aeronautical-Eng": 0.5, "Software-Dev": 0.4, "Analytical-Skill": 0.35, "Technical-Skill": 0.25}},
-            {"option_id": 137, "option_text": "Training the next generation of aircraft maintenance technicians", "trait_tags": {"Teaching-Ed": 1.0, "Aeronautical-Eng": 0.5, "People-Skill": 0.45, "Technical-Skill": 0.35, "Community-Serve": 0.25}},
-            {"option_id": 138, "option_text": "Investigating aircraft incidents and writing safety improvement reports", "trait_tags": {"Investigative": 1.0, "Aeronautical-Eng": 0.5, "Analytical-Skill": 0.5, "Writing-Comm": 0.3, "Admin-Skill": 0.25}},
-        ]
-    },
-    {
-        "question_id": 6,
-        "question_text": "SCENARIO: A grounded aircraft needs to be cleared for its next flight by tomorrow morning. Which task would you volunteer for?",
-        "category": "Academic Interest - Aircraft Maintenance & Avionics",
-        "options": [
-            {"option_id": 139, "option_text": "Running diagnostics on the engine control unit and turbine sensors", "trait_tags": {"Aeronautical-Eng": 1.0, "Mechanical-Design": 0.5, "Technical-Skill": 0.45, "Investigative": 0.3, "Analytical-Skill": 0.25}},
-            {"option_id": 140, "option_text": "Checking all navigation and communication systems in the cockpit", "trait_tags": {"Electronics-Dev": 1.0, "Aeronautical-Eng": 0.5, "Hardware-Systems": 0.45, "Technical-Skill": 0.3, "Analytical-Skill": 0.25}},
-            {"option_id": 141, "option_text": "Inspecting the airframe, landing gear, and hydraulic lines", "trait_tags": {"Mechanical-Design": 1.0, "Aeronautical-Eng": 0.5, "Realistic": 0.45, "Technical-Skill": 0.3, "Physical-Skill": 0.25}},
-            {"option_id": 142, "option_text": "Reviewing the flight data logs for any anomalies to investigate", "trait_tags": {"Data-Analytics": 1.0, "Investigative": 0.5, "Aeronautical-Eng": 0.45, "Analytical-Skill": 0.35, "Software-Dev": 0.25}},
-            {"option_id": 143, "option_text": "Coordinating the maintenance crew's tasks and signing off the work order", "trait_tags": {"Admin-Skill": 1.0, "Aeronautical-Eng": 0.5, "People-Skill": 0.45, "Legal-Practice": 0.3, "Conventional": 0.25}},
-            {"option_id": 144, "option_text": "Testing and recalibrating the autopilot and weather radar systems", "trait_tags": {"Electronics-Dev": 1.0, "Software-Dev": 0.5, "Aeronautical-Eng": 0.45, "Data-Analytics": 0.3, "Technical-Skill": 0.25}},
-        ]
-    },
-    {
-        "question_id": 7,
-        "question_text": "If you had the resources to create any performing arts production, what would you choose?",
-        "category": "Academic Interest - Theater & Performing Arts",
-        "options": [
-            {"option_id": 145, "option_text": "A musical that fuses traditional Filipino folk stories with modern music", "trait_tags": {"Performing-Arts": 1.0, "Music-Audio": 0.5, "Creative-Skill": 0.45, "Writing-Comm": 0.3, "Community-Serve": 0.25}},
-            {"option_id": 146, "option_text": "A dance show combining hip-hop, contemporary, and cultural dance forms", "trait_tags": {"Performing-Arts": 1.0, "Physical-Skill": 0.5, "Creative-Skill": 0.45, "Artistic": 0.35, "People-Skill": 0.25}},
-            {"option_id": 147, "option_text": "A drama series dealing with real social issues affecting Filipino youth", "trait_tags": {"Writing-Comm": 1.0, "Performing-Arts": 0.5, "Social": 0.45, "Community-Serve": 0.35, "People-Skill": 0.25}},
-            {"option_id": 148, "option_text": "An immersive theater experience where the audience walks through the set", "trait_tags": {"Spatial-Design": 1.0, "Performing-Arts": 0.5, "Creative-Skill": 0.5, "Artistic": 0.3, "Technical-Skill": 0.25}},
-            {"option_id": 149, "option_text": "A one-person comedy show that I write and perform myself", "trait_tags": {"Performing-Arts": 1.0, "Creative-Skill": 0.5, "People-Skill": 0.5, "Writing-Comm": 0.3, "Enterprising": 0.25}},
-            {"option_id": 150, "option_text": "A large-scale production where I manage lights, sound, and stage crew", "trait_tags": {"Admin-Skill": 1.0, "Technical-Skill": 0.5, "Performing-Arts": 0.45, "Conventional": 0.3, "People-Skill": 0.25}},
         ]
     },
 ]
@@ -41693,17 +41796,3 @@ def _diversify_pool_options():
 
 
 _DIVERSIFY_COUNT = _diversify_pool_options()
-
-
-# ══════════════════════════════════════════════════════════════════════════════
-# FINAL DUPLICATE SWEEP — remove specific near-duplicate pairs that survived
-# earlier dedup passes due to differing intent classification.
-# ══════════════════════════════════════════════════════════════════════════════
-_MANUAL_REMOVE_IDS = {
-    2031,  # dup of Q857 (aircraft maintenance — WHICH_PART vs INTEREST)
-    2781,  # dup of Q940 (theater performing arts — INTEREST vs CAREER)
-}
-QUESTIONS_POOL_ENHANCED[:] = [
-    q for q in QUESTIONS_POOL_ENHANCED
-    if q["question_id"] not in _MANUAL_REMOVE_IDS
-]

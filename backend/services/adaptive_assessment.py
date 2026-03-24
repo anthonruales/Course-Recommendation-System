@@ -263,10 +263,10 @@ UNIFIED_PROFILE_TO_TRAITS = {
     "physics": ["Mechanical-Design", "Electrical-Power", "Civil-Build"],
     "environment": ["Agri-Nature", "Field-Research"],
     "earth_science": ["Field-Research", "Agri-Nature", "Lab-Research"],
-    "programming": ["Software-Dev", "Data-Analytics", "Cyber-Defense"],
-    "computer": ["Software-Dev", "Hardware-Systems", "Data-Analytics"],
+    "programming": ["Software-Dev", "Data-Analytics", "Cyber-Defense", "Web-Dev"],
+    "computer": ["Software-Dev", "Hardware-Systems", "Data-Analytics", "Web-Dev", "Cloud-Systems"],
     "data": ["Data-Analytics", "Software-Dev"],
-    "ai": ["Software-Dev", "Data-Analytics"],
+    "ai": ["Software-Dev", "Data-Analytics", "AI-ML"],
     "cybersecurity": ["Cyber-Defense", "Software-Dev"],
     "robotics": ["Hardware-Systems", "Software-Dev", "Mechanical-Design"],
     "game_dev": ["Digital-Media", "Software-Dev", "Game-Dev"],
@@ -529,14 +529,14 @@ UNIFIED_PROFILE_TO_TRAITS = {
     "sports and fitness": ["Physical-Skill", "Rehab-Therapy"],
     "athletic": ["Physical-Skill"],
     # Technology interest aliases that the frontend sends as-is
-    "computers": ["Software-Dev", "Hardware-Systems", "Data-Analytics"],
-    "computers_it": ["Software-Dev", "Hardware-Systems", "Data-Analytics", "Technical-Skill"],
-    "computers_&_it": ["Software-Dev", "Hardware-Systems", "Data-Analytics", "Technical-Skill"],
-    "ai_&_machine_learning": ["Software-Dev", "Data-Analytics", "Investigative"],
-    "ai_and_machine_learning": ["Software-Dev", "Data-Analytics", "Investigative"],
-    "programming_&_coding": ["Software-Dev", "Data-Analytics", "Cyber-Defense"],
-    "programming_and_coding": ["Software-Dev", "Data-Analytics", "Cyber-Defense"],
-    "programming_/_coding": ["Software-Dev", "Data-Analytics", "Cyber-Defense"],
+    "computers": ["Software-Dev", "Hardware-Systems", "Data-Analytics", "Web-Dev", "Cloud-Systems"],
+    "computers_it": ["Software-Dev", "Hardware-Systems", "Data-Analytics", "Technical-Skill", "Web-Dev", "Cloud-Systems"],
+    "computers_&_it": ["Software-Dev", "Hardware-Systems", "Data-Analytics", "Technical-Skill", "Web-Dev", "Cloud-Systems"],
+    "ai_&_machine_learning": ["Software-Dev", "Data-Analytics", "Investigative", "AI-ML"],
+    "ai_and_machine_learning": ["Software-Dev", "Data-Analytics", "Investigative", "AI-ML"],
+    "programming_&_coding": ["Software-Dev", "Data-Analytics", "Cyber-Defense", "Web-Dev"],
+    "programming_and_coding": ["Software-Dev", "Data-Analytics", "Cyber-Defense", "Web-Dev"],
+    "programming_/_coding": ["Software-Dev", "Data-Analytics", "Cyber-Defense", "Web-Dev"],
 }
 
 UNIFIED_PROFILE_TO_TRAITS.update({
@@ -4567,25 +4567,69 @@ class AdaptiveAssessmentEngine:
         return q_copy
 
     def _get_profile_traits_for_selection(self, selection: str) -> List[str]:
-        """Resolve a profile selection to traits using tolerant key matching."""
+        """Resolve a profile selection to traits using tolerant key matching.
+
+        Prefers compound (multi-word) key matches over individual word matches
+        to prevent overly broad trait expansion (e.g. 'graphic_design' should
+        NOT also match 'design' → 'Spatial-Design').
+        """
         traits = []
         seen = set()
-        for key in self._profile_lookup_keys(selection):
+        all_keys = self._profile_lookup_keys(selection)
+
+        # Phase 1: try compound keys first
+        compound_found = False
+        for key in all_keys:
+            is_compound = any(c in key for c in '_& /')
+            if not is_compound:
+                continue
             for trait in UNIFIED_PROFILE_TO_TRAITS.get(key, []):
                 if trait not in seen:
                     traits.append(trait)
                     seen.add(trait)
+                    compound_found = True
+
+        # Phase 2: only fall back to single-word keys when no compound matched
+        if not compound_found:
+            for key in all_keys:
+                for trait in UNIFIED_PROFILE_TO_TRAITS.get(key, []):
+                    if trait not in seen:
+                        traits.append(trait)
+                        seen.add(trait)
+
         return traits
 
     def _get_profile_category_keywords_for_selection(self, selection: str) -> List[str]:
-        """Resolve a profile selection to question-category keywords using tolerant matching."""
+        """Resolve a profile selection to question-category keywords using tolerant matching.
+
+        Prefers compound (multi-word) key matches over individual word matches
+        to prevent overly broad expansion (e.g. 'graphic_design' should NOT
+        also match 'design' → 'Architecture & Interior Design').
+        """
         categories = []
         seen = set()
-        for key in self._profile_lookup_keys(selection):
+        all_keys = self._profile_lookup_keys(selection)
+
+        # Phase 1: try compound keys (contain separator characters)
+        compound_found = False
+        for key in all_keys:
+            is_compound = any(c in key for c in '_& /')
+            if not is_compound:
+                continue
             for category in INTEREST_CATEGORY_KEYWORDS.get(key, []):
                 if category not in seen:
                     categories.append(category)
                     seen.add(category)
+                    compound_found = True
+
+        # Phase 2: only fall back to single-word keys when no compound matched
+        if not compound_found:
+            for key in all_keys:
+                for category in INTEREST_CATEGORY_KEYWORDS.get(key, []):
+                    if category not in seen:
+                        categories.append(category)
+                        seen.add(category)
+
         return categories
 
     def _normalize_category_name(self, category: str) -> str:
@@ -6840,8 +6884,19 @@ class AdaptiveAssessmentEngine:
         penalty.  Courses with ≥50 % unique trait matches get 1.15× boost.
         This prevents generic-trait spillover from pushing irrelevant courses
         to the top of the live sidebar.
+
+        Before any answers are given, profile seed traits are used as a proxy
+        so that the initial Top Matches reflect the user's stated interests
+        rather than defaulting to courses with only common traits.
         """
         user_traits = set(session.trait_scores.keys())
+
+        # Before any answers, trait_scores is empty.  Use profile seed traits
+        # so the initial sidebar reflects the user's stated interests/skills
+        # instead of penalizing every specialized course to 0.6×.
+        if not user_traits and session.profile_seed_traits:
+            user_traits = set(session.profile_seed_traits)
+
         adjusted = {}
         for name, raw in session.course_scores.items():
             course_traits = self.course_traits.get(name, set())
