@@ -1,0 +1,1490 @@
+﻿[TREE] Loaded 45 decision tree questions across 13 domains
+[TREE] Navigation rules: 31 branch transitions
+[TREE] Validation questions: 10
+Pool: 1422 questions
+
+======================================================================
+CLUSTER 1 in [Academic Interest - Accounting]
+  KEEP   Q875: Which area of accounting would you want to specialize in?
+  REMOVE Q2301: Which part of accounting interests you most?
+    merge Q875<->Q2301: same_WHAT_ABOUT j=0.20 opt=0.17
+
+======================================================================
+CLUSTER 2 in [Academic Interest - Aeronautical & Aerospace]
+  KEEP   Q851: What part of aeronautical and aerospace engineering excites you?
+  REMOVE Q909: What area of aeronautical and aerospace engineering excites you?
+    merge Q851<->Q909: high_jaccard=0.67 opt=0.24 [WHAT_ABOUT/WHAT_ABOUT]
+
+======================================================================
+CLUSTER 3 in [Academic Interest - Aeronautical & Aerospace]
+  KEEP   Q2061: Which part of aeronautical and aerospace work interests you most?
+  REMOVE Q2066: Which aeronautical or aerospace project would you most want to work on?
+    merge Q2061<->Q2066: high_jaccard=0.50 opt=0.19 [ENVIRONMENT/PROJECT]
+
+======================================================================
+CLUSTER 4 in [Academic Interest - Art & Design]
+  KEEP   Q2646: How do you envision design's future impact?
+  REMOVE Q2651: How can design create positive impact?
+    merge Q2646<->Q2651: same_type=GENERAL j=0.33 opt=0.20
+
+======================================================================
+CLUSTER 5 in [Academic Interest - Computers & IT]
+  KEEP   Q811: What part of Computers & IT appeals to you the most?
+  REMOVE Q1461: Which side of computers and IT interests you most?
+    merge Q811<->Q1461: same_WHAT_ABOUT j=0.20 opt=0.15
+
+======================================================================
+CLUSTER 6 in [Academic Interest - Dentistry & Oral Health]
+  KEEP   Q968: What area of dentistry and oral health appeals to you?
+  REMOVE Q3266: Which dental specialty or oral health area interests you most?
+    merge Q968<->Q3266: same_type=WHAT_ABOUT j=0.38 opt=0.27
+
+======================================================================
+CLUSTER 7 in [Academic Interest - Early Childhood Education]
+  KEEP   Q3891: What excites you most about studying early childhood education?
+  REMOVE Q3901: What part of early childhood education work would you enjoy most?
+    merge Q3891<->Q3901: same_type=WHAT_ABOUT j=0.38 opt=0.22
+
+======================================================================
+CLUSTER 8 in [Academic Interest - Electrical & Electronics]
+  KEEP   Q844: Which electrical & electronics project would you want to work on?
+  REMOVE Q901: What area of electrical and electronics engineering excites you?
+    merge Q844<->Q901: very_high_opt=0.43 j=0.29 [PROJECT/WHAT_ABOUT]
+
+======================================================================
+CLUSTER 9 in [Academic Interest - Film & Media Production]
+  KEEP   Q932: What role in film and media production excites you?
+  REMOVE Q2661: What draws you to film and media production?
+    merge Q932<->Q2661: high_jaccard=0.50 opt=0.20 [CAREER/WHAT_ABOUT]
+
+======================================================================
+CLUSTER 10 in [Academic Interest - Marine Engineering]
+  KEEP   Q859: What aspect of marine engineering would you want to specialize in?
+  REMOVE Q917: What area of marine engineering appeals to you?
+    merge Q859<->Q917: same_type=WHAT_ABOUT j=0.33 opt=0.39
+
+======================================================================
+CLUSTER 11 in [Academic Interest - Mechanical Systems]
+  KEEP   Q842: What aspect of mechanical systems fascinates you?
+  REMOVE Q899: What area of mechanical systems fascinates you the most?
+    merge Q842<->Q899: high_jaccard=0.60 opt=0.30 [WHAT_ABOUT/WHAT_ABOUT]
+
+======================================================================
+CLUSTER 12 in [Academic Interest - Midwifery & Maternal Health]
+  KEEP   Q974: What draws you to midwifery and maternal health?
+  REMOVE Q3356: Which midwifery specialty or area of maternal health interests you most?
+    merge Q974<->Q3356: same_type=WHAT_ABOUT j=0.43 opt=0.20
+
+======================================================================
+CLUSTER 13 in [Academic Interest - Multimedia & Digital Entertainment]
+  KEEP   Q825: Which area of multimedia and digital entertainment excites you?
+  REMOVE Q1731: Which part of multimedia and digital entertainment interests you most?
+    merge Q825<->Q1731: same_WHAT_ABOUT j=0.43 opt=0.16
+
+======================================================================
+CLUSTER 14 in [Academic Interest - Music & Performance]
+  KEEP   Q931: What draws you to music and performance?
+  REMOVE Q2721: What excites you most about pursuing music and performance?
+    merge Q931<->Q2721: same_WHAT_ABOUT j=0.40 opt=0.16
+
+======================================================================
+CLUSTER 15 in [Academic Interest - Music Production & Audio]
+  KEEP   Q943: What area of music production and audio work appeals to you?
+  REMOVE Q2751: What draws you most to music production and audio work?
+  REMOVE Q2756: What area of music production would you specialize in?
+  REMOVE Q2771: What career in music production and audio appeals to you?
+    merge Q943<->Q2751: high_jaccard=0.57 opt=0.19 [WHAT_ABOUT/WHAT_ABOUT]
+    merge Q943<->Q2756: same_type=WHAT_ABOUT j=0.43 opt=0.31
+    merge Q943<->Q2771: high_jaccard=0.57 opt=0.19 [WHAT_ABOUT/CAREER]
+
+======================================================================
+CLUSTER 16 in [Academic Interest - Nursing & Patient Care]
+  KEEP   Q961: What draws you to nursing and patient care?
+  REMOVE Q2961: What excites you most about pursuing a career in nursing and patient care?
+  REMOVE Q2966: Which nursing specialty or patient population interests you the most?
+    merge Q961<->Q2961: high_jaccard=0.50 opt=0.20 [WHAT_ABOUT/CAREER]
+    merge Q961<->Q2966: same_WHAT_ABOUT opt=0.30 j=0.29
+
+======================================================================
+CLUSTER 17 in [Academic Interest - Nutrition & Dietetics]
+  KEEP   Q966: What aspect of nutrition and dietetics excites you?
+  REMOVE Q3146: Which nutrition specialty or dietetics area interests you most?
+    merge Q966<->Q3146: same_WHAT_ABOUT j=0.29 opt=0.21
+
+======================================================================
+CLUSTER 18 in [Academic Interest - Occupational Therapy]
+  KEEP   Q969: What kind of occupational therapy work appeals to you?
+  REMOVE Q3176: Which occupational therapy specialty or practice area interests you most?
+    merge Q969<->Q3176: same_WHAT_ABOUT j=0.25 opt=0.25
+
+======================================================================
+CLUSTER 19 in [Academic Interest - Optometry & Vision Care]
+  KEEP   Q973: What area of optometry and vision care appeals to you?
+  REMOVE Q3326: Which optometry specialty or area of vision care interests you most?
+    merge Q973<->Q3326: high_jaccard=0.57 opt=0.25 [WHAT_ABOUT/WHAT_ABOUT]
+
+======================================================================
+CLUSTER 20 in [Academic Interest - Pharmacy & Pharmaceutical Science]
+  KEEP   Q964: What area of pharmacy and pharmaceutical science interests you?
+  REMOVE Q3056: Which pharmacy specialty or pharmaceutical area interests you most?
+    merge Q964<->Q3056: high_jaccard=0.67 opt=0.34 [WHAT_ABOUT/WHAT_ABOUT]
+
+======================================================================
+CLUSTER 21 in [Academic Interest - Photography & Visual Arts]
+  KEEP   Q936: What style of photography and visual arts appeals to you?
+  REMOVE Q2811: What draws you most to photography and visual arts?
+    merge Q936<->Q2811: high_jaccard=0.60 opt=0.28 [WHAT_ABOUT/WHAT_ABOUT]
+
+======================================================================
+CLUSTER 22 in [Academic Interest - Physical Therapy & Rehabilitation]
+  KEEP   Q965: What draws you to physical therapy and rehabilitation?
+  REMOVE Q3086: Which physical therapy specialty or rehabilitation area interests you most?
+    merge Q965<->Q3086: same_type=WHAT_ABOUT j=0.43 opt=0.27
+
+======================================================================
+CLUSTER 23 in [Academic Interest - Programming & Coding]
+  KEEP   Q809: What excites you most about programming and coding?
+  REMOVE Q1431: Which part of programming feels most exciting to you?
+    merge Q809<->Q1431: high_jaccard=0.50 opt=0.16 [WHAT_ABOUT/WHAT_ABOUT]
+
+======================================================================
+CLUSTER 24 in [Academic Interest - Psychology & Mental Health]
+  KEEP   Q962: What aspect of psychology and mental health interests you?
+  REMOVE Q2996: Which psychology specialty or mental health area interests you most?
+    merge Q962<->Q2996: high_jaccard=0.57 opt=0.33 [WHAT_ABOUT/WHAT_ABOUT]
+
+======================================================================
+CLUSTER 25 in [Academic Interest - Public Health]
+  KEEP   Q975: What area of public health excites you?
+  REMOVE Q3026: Which public health specialty or focus area interests you most?
+    merge Q975<->Q3026: same_type=WHAT_ABOUT j=0.43 opt=0.35
+
+======================================================================
+CLUSTER 26 in [Academic Interest - Respiratory Therapy]
+  KEEP   Q971: What aspect of respiratory therapy interests you?
+  REMOVE Q3206: Which respiratory therapy specialty or practice area interests you most?
+    merge Q971<->Q3206: same_type=WHAT_ABOUT j=0.43 opt=0.34
+
+======================================================================
+CLUSTER 27 in [Academic Interest - Social Work & Community]
+  KEEP   Q1031: What kind of social work specialization interests you most?
+  REMOVE Q3416: Which social work or community field interests you most?
+  REMOVE Q3431: How does social work connect with other fields for you?
+    merge Q1031<->Q3416: high_jaccard=0.50 opt=0.27 [WHAT_ABOUT/WHAT_ABOUT]
+    merge Q3416<->Q3431: high_jaccard=0.50 opt=0.18 [WHAT_ABOUT/CROSS_FIELD]
+
+======================================================================
+CLUSTER 28 in [Academic Interest - Special Needs Education]
+  KEEP   Q3801: What excites you most about studying special needs education?
+  REMOVE Q3811: What part of special needs education work would you enjoy most?
+    merge Q3801<->Q3811: same_type=WHAT_ABOUT j=0.38 opt=0.21
+
+======================================================================
+CLUSTER 29 in [Academic Interest - Speech-Language Pathology]
+  KEEP   Q970: What area of speech-language pathology interests you?
+  REMOVE Q3236: Which speech-language pathology specialty or practice area interests you most?
+    merge Q970<->Q3236: high_jaccard=0.71 opt=0.22 [WHAT_ABOUT/WHAT_ABOUT]
+
+======================================================================
+CLUSTER 30 in [Academic Interest - Writing & Literature]
+  KEEP   Q934: What kind of writing and literature excites you?
+  REMOVE Q2841: What excites you most about pursuing a career in writing and literature?
+    merge Q934<->Q2841: high_jaccard=0.60 opt=0.36 [WHAT_ABOUT/CAREER]
+
+======================================================================
+CLUSTER 31 in [Interest - Forensic Science]
+  KEEP   Q236: What type of forensic work fascinates you?
+  REMOVE Q618: What forensic science specialization interests you?
+    merge Q236<->Q618: same_WHAT_ABOUT opt=0.30 j=0.17
+
+======================================================================
+CLUSTER 32 in [Interest - Medical Laboratory]
+  KEEP   Q233: You're working in a medical laboratory. What type of testing interests you most?
+  REMOVE Q465: Which medical laboratory specialization excites you most?
+    merge Q233<->Q465: same_WHAT_ABOUT j=0.29 opt=0.22
+
+======================================================================
+CLUSTER 33 in [Interest - Nutrition & Dietetics]
+  KEEP   Q476: Where would you most want to practice nutrition?
+  REMOVE Q774: Where would you work as a nutritionist?
+    merge Q476<->Q774: very_high_opt=0.46 j=0.00 [GENERAL/CAREER]
+
+======================================================================
+CLUSTER 34 in [Interest - Performing Arts]
+  KEEP   Q250: What type of performance or performing arts excites you?
+  REMOVE Q599: What performing arts discipline appeals to you?
+    merge Q250<->Q599: same_type=WHAT_ABOUT j=0.40 opt=0.66
+
+======================================================================
+CLUSTER 35 in [Situational - Family Business]
+  KEEP   Q87: Your family is starting a small business. How would you contribute?
+  REMOVE Q104: Your family is planning to start a small business. What role would you take?
+    merge Q87<->Q104: high_jaccard=0.50 opt=0.23 [GENERAL/CAREER]
+
+======================================================================
+TOTAL CLUSTERS: 35
+TOTAL QUESTIONS TO REMOVE: 39
+POOL AFTER REMOVAL: 1383
+
+# Python set for removal:
+REMOVE_IDS = {
+    104, 465, 599, 618, 774, 899, 901, 909, 917, 1431,
+    1461, 1731, 2066, 2301, 2651, 2661, 2721, 2751, 2756, 2771,
+    2811, 2841, 2961, 2966, 2996, 3026, 3056, 3086, 3146, 3176,
+    3206, 3236, 3266, 3326, 3356, 3416, 3431, 3811, 3901,
+}
+
+======================================================================
+DIAGNOSTIC: Same-type pairs NOT caught by rules
+Review these manually for potential missed rephrases
+======================================================================
+
+  [Academic Interest - AI & Machine Learning] type=GENERAL j=0.00 opt=0.05
+    Q816: If you trained a machine learning model, what data would you feed it?
+    Q1496: Which AI application would you most want to build?
+
+  [Academic Interest - Advertising & Graphic Arts] type=GENERAL j=0.12 opt=0.08
+    Q942: What kind of advertising and graphic arts work would you enjoy?
+    Q2706: How does advertising reflect and shape culture?
+
+  [Academic Interest - Advertising & Graphic Arts] type=GENERAL j=0.12 opt=0.08
+    Q942: What kind of advertising and graphic arts work would you enjoy?
+    Q2711: How do you envision advertising's future impact?
+
+  [Academic Interest - Advertising & Graphic Arts] type=WHAT_ABOUT j=0.50 opt=0.14
+    Q2691: What excites you about advertising and graphic design?
+    Q2696: What advertising or graphic design specialty attracts you?
+
+  [Academic Interest - Advertising & Graphic Arts] type=GENERAL j=0.14 opt=0.08
+    Q2706: How does advertising reflect and shape culture?
+    Q2711: How do you envision advertising's future impact?
+
+  [Academic Interest - Agriculture & Farming] type=WHAT_ABOUT j=0.17 opt=0.14
+    Q1086: What part of agriculture and farming interests you most?
+    Q1114: What type of farming innovation excites you?
+
+  [Academic Interest - Agriculture & Farming] type=GENERAL j=0.00 opt=0.05
+    Q1087: SCENARIO: You inherit a large farm. How do you modernize it?
+    Q1115: SCENARIO: You're advising a developing country on agricultural policy. What's your priority?
+
+  [Academic Interest - Aircraft Maintenance & Avionics] type=GENERAL j=0.07 opt=0.21
+    Q858: SCENARIO: An aircraft just landed with a reported issue. What do you check first?
+    Q916: SCENARIO: A plane's warning system triggers a false alarm mid-flight. What do you do post-landing?
+
+  [Academic Interest - Aircraft Maintenance & Avionics] type=GENERAL j=0.07 opt=0.23
+    Q858: SCENARIO: An aircraft just landed with a reported issue. What do you check first?
+    Q6: SCENARIO: A grounded aircraft needs to be cleared for its next flight by tomorrow morning. Which task would you volunteer for?
+
+  [Academic Interest - Aircraft Maintenance & Avionics] type=GENERAL j=0.05 opt=0.12
+    Q916: SCENARIO: A plane's warning system triggers a false alarm mid-flight. What do you do post-landing?
+    Q6: SCENARIO: A grounded aircraft needs to be cleared for its next flight by tomorrow morning. Which task would you volunteer for?
+
+  [Academic Interest - Animation & Multimedia] type=GENERAL j=0.17 opt=0.03
+    Q938: SCENARIO: A studio hires you for a new animated movie. What's your role?
+    Q2896: SCENARIO: A studio gives you full creative freedom for an animated short. What do you make?
+
+  [Academic Interest - Architecture & Interior Design] type=WHAT_ABOUT j=0.50 opt=0.07
+    Q848: What excites you about architecture and interior design?
+    Q1851: Which part of architecture and interior design interests you most?
+
+  [Academic Interest - Arts General] type=GENERAL j=0.17 opt=0.09
+    Q952: What kind of art or design event would you attend?
+    Q955: What's your favorite way to consume art?
+
+  [Academic Interest - Arts General] type=GENERAL j=0.17 opt=0.05
+    Q952: What kind of art or design event would you attend?
+    Q956: If you could take one arts elective, what would it be?
+
+  [Academic Interest - Arts General] type=GENERAL j=0.00 opt=0.11
+    Q953: Who is your biggest creative inspiration?
+    Q956: If you could take one arts elective, what would it be?
+
+  [Academic Interest - Arts General] type=GENERAL j=0.20 opt=0.08
+    Q955: What's your favorite way to consume art?
+    Q956: If you could take one arts elective, what would it be?
+
+  [Academic Interest - Aviation & Aerospace] type=WHAT_ABOUT j=0.17 opt=0.07
+    Q1056: What draws you to aviation and aerospace?
+    Q1058: Which area of aerospace research excites you most?
+
+  [Academic Interest - Aviation & Aerospace] type=WHAT_ABOUT j=0.00 opt=0.08
+    Q1056: What draws you to aviation and aerospace?
+    Q1061: What fascinates you about space technology?
+
+  [Academic Interest - Aviation & Aerospace] type=WHAT_ABOUT j=0.00 opt=0.10
+    Q1058: Which area of aerospace research excites you most?
+    Q1061: What fascinates you about space technology?
+
+  [Academic Interest - Biology & Life Sciences] type=WHAT_ABOUT j=0.17 opt=0.15
+    Q781: Which area of biology fascinates you the most?
+    Q1197: Which part of biology do you most want to understand in detail?
+
+  [Academic Interest - Biology & Life Sciences] type=WHAT_ABOUT j=0.17 opt=0.07
+    Q781: Which area of biology fascinates you the most?
+    Q1217: Which branch of organismal biology feels most exciting?
+
+  [Academic Interest - Biology & Life Sciences] type=WHAT_ABOUT j=0.14 opt=0.04
+    Q1197: Which part of biology do you most want to understand in detail?
+    Q1217: Which branch of organismal biology feels most exciting?
+
+  [Academic Interest - Biology & Life Sciences] type=GENERAL j=0.00 opt=0.05
+    Q1201: Which modern biology breakthrough would you most want to work on?
+    Q1205: Which ecology question would you most want to investigate outdoors?
+
+  [Academic Interest - Biotechnology & Genetics] type=WHAT_ABOUT j=0.00 opt=0.11
+    Q792: Which biotechnology application excites you the most?
+    Q1371: Which genetics question interests you most?
+
+  [Academic Interest - Biotechnology & Genetics] type=GENERAL j=0.12 opt=0.11
+    Q793: If you worked in a genetics lab, what task would you find most rewarding?
+    Q1376: Which biotech application would you most want to work on?
+
+  [Academic Interest - Business & Entrepreneurship] type=WHAT_ABOUT j=0.14 opt=0.10
+    Q869: What excites you most about starting or running a business?
+    Q2181: Which part of business and entrepreneurship interests you most?
+
+  [Academic Interest - Business General] type=GENERAL j=0.17 opt=0.00
+    Q889: What type of company would you want to lead someday?
+    Q892: What's the most important quality for a business leader?
+
+  [Academic Interest - Business General] type=GENERAL j=0.00 opt=0.06
+    Q889: What type of company would you want to lead someday?
+    Q893: If you attended a business conference, which panel would you join?
+
+  [Academic Interest - Business General] type=GENERAL j=0.00 opt=0.08
+    Q889: What type of company would you want to lead someday?
+    Q897: SCENARIO: You won a business competition prize of seed funding. What do you launch?
+
+  [Academic Interest - Business General] type=GENERAL j=0.11 opt=0.06
+    Q890: SCENARIO: You're given a struggling business to turn around. What's your first move?
+    Q892: What's the most important quality for a business leader?
+
+  [Academic Interest - Business General] type=GENERAL j=0.10 opt=0.04
+    Q890: SCENARIO: You're given a struggling business to turn around. What's your first move?
+    Q893: If you attended a business conference, which panel would you join?
+
+  [Academic Interest - Business General] type=GENERAL j=0.11 opt=0.04
+    Q890: SCENARIO: You're given a struggling business to turn around. What's your first move?
+    Q895: Which business book topic would you read first?
+
+  [Academic Interest - Business General] type=GENERAL j=0.08 opt=0.06
+    Q890: SCENARIO: You're given a struggling business to turn around. What's your first move?
+    Q897: SCENARIO: You won a business competition prize of seed funding. What do you launch?
+
+  [Academic Interest - Business General] type=GENERAL j=0.12 opt=0.04
+    Q892: What's the most important quality for a business leader?
+    Q893: If you attended a business conference, which panel would you join?
+
+  [Academic Interest - Business General] type=GENERAL j=0.14 opt=0.02
+    Q892: What's the most important quality for a business leader?
+    Q895: Which business book topic would you read first?
+
+  [Academic Interest - Business General] type=GENERAL j=0.10 opt=0.00
+    Q892: What's the most important quality for a business leader?
+    Q897: SCENARIO: You won a business competition prize of seed funding. What do you launch?
+
+  [Academic Interest - Business General] type=GENERAL j=0.12 opt=0.07
+    Q893: If you attended a business conference, which panel would you join?
+    Q895: Which business book topic would you read first?
+
+  [Academic Interest - Business General] type=GENERAL j=0.09 opt=0.06
+    Q893: If you attended a business conference, which panel would you join?
+    Q897: SCENARIO: You won a business competition prize of seed funding. What do you launch?
+
+  [Academic Interest - Business General] type=GENERAL j=0.10 opt=0.02
+    Q895: Which business book topic would you read first?
+    Q897: SCENARIO: You won a business competition prize of seed funding. What do you launch?
+
+  [Academic Interest - Chemistry] type=WHAT_ABOUT j=0.17 opt=0.06
+    Q783: What aspect of chemistry interests you the most?
+    Q1225: Which kind of chemistry work excites you most in the lab?
+
+  [Academic Interest - Civil & Construction] type=GENERAL j=0.00 opt=0.12
+    Q847: SCENARIO: A new town is being built from scratch. What do you design first?
+    Q904: SCENARIO: A coastal city floods every rainy season. What's your engineering solution?
+
+  [Academic Interest - Clothing & Textile Technology] type=WHAT_ABOUT j=0.50 opt=0.14
+    Q947: What aspect of clothing and textile technology interests you?
+    Q2901: What excites you most about clothing and textile technology?
+
+  [Academic Interest - Communication & Journalism] type=WHAT_ABOUT j=0.50 opt=0.08
+    Q996: What type of communication and journalism work appeals to you?
+    Q3481: What part of communication and journalism work would you enjoy most?
+
+  [Academic Interest - Criminology & Public Safety] type=WHAT_ABOUT j=0.38 opt=0.05
+    Q998: What area of criminology and public safety interests you?
+    Q3571: What part of criminology and public safety work would you enjoy most?
+
+  [Academic Interest - Culinary Management] type=WHAT_ABOUT j=0.00 opt=0.12
+    Q1104: What excites you about culinary management?
+    Q1138: What aspect of the food industry would you write about or study?
+
+  [Academic Interest - Culinary Management] type=GENERAL j=0.00 opt=0.08
+    Q1105: SCENARIO: You're the head chef of a new restaurant. What cuisine and concept do you go with?
+    Q1136: What kind of food business would you launch?
+
+  [Academic Interest - Culinary Management] type=GENERAL j=0.09 opt=0.04
+    Q1105: SCENARIO: You're the head chef of a new restaurant. What cuisine and concept do you go with?
+    Q1137: SCENARIO: Your restaurant is fully booked but a key ingredient is unavailable. What do you do?
+
+  [Academic Interest - Cybersecurity] type=WHAT_ABOUT j=0.50 opt=0.07
+    Q817: What aspect of cybersecurity interests you the most?
+    Q1551: Which side of cybersecurity interests you most?
+
+  [Academic Interest - Cybersecurity] type=MOTIVATION j=0.20 opt=0.08
+    Q1556: Which cybersecurity challenge would you most want to solve?
+    Q1571: What do you value most about cybersecurity work?
+
+  [Academic Interest - Data & Analytics] type=GENERAL j=0.00 opt=0.09
+    Q814: SCENARIO: A company gives you a massive dataset. What do you do first?
+    Q1596: Which analytics problem would you most want to solve?
+
+  [Academic Interest - Dentistry & Oral Health] type=WHAT_ABOUT j=0.00 opt=0.08
+    Q968: What area of dentistry and oral health appeals to you?
+    Q3271: What aspect of dental practice do you find most fulfilling?
+
+  [Academic Interest - Early Childhood Education] type=WHAT_ABOUT j=0.50 opt=0.13
+    Q999: What draws you to early childhood education?
+    Q3891: What excites you most about studying early childhood education?
+
+  [Academic Interest - Earth Science & Geology] type=WHAT_ABOUT j=0.14 opt=0.22
+    Q789: Which aspect of Earth science captures your curiosity?
+    Q1311: Which Earth process fascinates you most?
+
+  [Academic Interest - Earth Science & Geology] type=WHAT_ABOUT j=0.00 opt=0.17
+    Q789: Which aspect of Earth science captures your curiosity?
+    Q1316: What kind of geology fieldwork sounds most exciting to you?
+
+  [Academic Interest - Earth Science & Geology] type=WHAT_ABOUT j=0.00 opt=0.10
+    Q1311: Which Earth process fascinates you most?
+    Q1316: What kind of geology fieldwork sounds most exciting to you?
+
+  [Academic Interest - Earth Science & Geology] type=GENERAL j=0.11 opt=0.07
+    Q1321: Which geologic hazard would you most want to study or help manage?
+    Q1331: What kind of Earth resource or land question would you most want to study?
+
+  [Academic Interest - Economics] type=WHAT_ABOUT j=0.17 opt=0.09
+    Q876: What topic in economics fascinates you the most?
+    Q877: SCENARIO: You're an economic advisor to the government. What do you focus on?
+
+  [Academic Interest - Economics] type=WHAT_ABOUT j=0.20 opt=0.11
+    Q876: What topic in economics fascinates you the most?
+    Q2331: Which part of economics interests you most?
+
+  [Academic Interest - Economics] type=WHAT_ABOUT j=0.17 opt=0.01
+    Q877: SCENARIO: You're an economic advisor to the government. What do you focus on?
+    Q2331: Which part of economics interests you most?
+
+  [Academic Interest - Education & Teaching] type=WHAT_ABOUT j=0.12 opt=0.08
+    Q989: What area of education and teaching excites you?
+    Q3391: What part of day-to-day teaching work would you enjoy most?
+
+  [Academic Interest - Education & Teaching] type=GENERAL j=0.25 opt=0.14
+    Q990: SCENARIO: Your school needs a new program. What do you create?
+    Q1009: SCENARIO: You're designing a new school from scratch. What's your priority?
+
+  [Academic Interest - Electrical & Electronics] type=GENERAL j=0.11 opt=0.07
+    Q845: What kind of electrical system would you enjoy troubleshooting?
+    Q902: SCENARIO: A rural village needs electricity. How do you bring power to them?
+
+  [Academic Interest - Electrical & Electronics] type=ENVIRONMENT j=0.29 opt=0.11
+    Q2001: Which part of electrical and electronics work interests you most?
+    Q2021: What kind of electrical-electronics environment appeals to you most?
+
+  [Academic Interest - Engineering (General)] type=WHAT_ABOUT j=0.17 opt=0.08
+    Q839: What draws you most to engineering as a field?
+    Q841: Which engineering tool or method excites you the most?
+
+  [Academic Interest - Engineering (General)] type=WHAT_ABOUT j=0.17 opt=0.12
+    Q839: What draws you most to engineering as a field?
+    Q1941: Which part of engineering in general interests you most?
+
+  [Academic Interest - Engineering (General)] type=WHAT_ABOUT j=0.14 opt=0.06
+    Q841: Which engineering tool or method excites you the most?
+    Q1941: Which part of engineering in general interests you most?
+
+  [Academic Interest - Engineering (General)] type=GENERAL j=0.12 opt=0.08
+    Q921: SCENARIO: Your university lets you pick one engineering elective. Which do you choose?
+    Q928: What book topic related to engineering would you read first?
+
+  [Academic Interest - Engineering General] type=GENERAL j=0.00 opt=0.07
+    Q861: What type of engineer do you admire most?
+    Q866: How do you prefer to solve engineering problems?
+
+  [Academic Interest - Engineering General] type=GENERAL j=0.17 opt=0.07
+    Q863: If you could invent one engineering tool, what would it do?
+    Q864: Which engineering subject would you enjoy studying the most?
+
+  [Academic Interest - Engineering General] type=GENERAL j=0.17 opt=0.04
+    Q863: If you could invent one engineering tool, what would it do?
+    Q865: SCENARIO: You have a summer engineering internship. Which placement do you pick?
+
+  [Academic Interest - Engineering General] type=GENERAL j=0.17 opt=0.04
+    Q863: If you could invent one engineering tool, what would it do?
+    Q866: How do you prefer to solve engineering problems?
+
+  [Academic Interest - Engineering General] type=GENERAL j=0.14 opt=0.06
+    Q864: Which engineering subject would you enjoy studying the most?
+    Q865: SCENARIO: You have a summer engineering internship. Which placement do you pick?
+
+  [Academic Interest - Engineering General] type=GENERAL j=0.14 opt=0.03
+    Q864: Which engineering subject would you enjoy studying the most?
+    Q866: How do you prefer to solve engineering problems?
+
+  [Academic Interest - Engineering General] type=GENERAL j=0.14 opt=0.05
+    Q865: SCENARIO: You have a summer engineering internship. Which placement do you pick?
+    Q866: How do you prefer to solve engineering problems?
+
+  [Academic Interest - Environment & Nature] type=ENVIRONMENT j=0.00 opt=0.08
+    Q787: How would you prefer to help protect the environment?
+    Q1296: Which environmental tool or method would you most want to master?
+
+  [Academic Interest - Environment & Nature] type=ENVIRONMENT j=0.00 opt=0.07
+    Q788: If you spent a week doing fieldwork in nature, which task would you enjoy?
+    Q1296: Which environmental tool or method would you most want to master?
+
+  [Academic Interest - Environment & Nature] type=GENERAL j=0.00 opt=0.08
+    Q1281: How would you most want to help protect nature?
+    Q1301: What kind of sustainability action sounds most practical to you?
+
+  [Academic Interest - Environmental Planning & Sustainability] type=PROJECT j=0.09 opt=0.04
+    Q802: SCENARIO: Your city wants to become carbon neutral. What project do you lead?
+    Q1346: Which urban sustainability project would you most enjoy planning?
+
+  [Academic Interest - Environmental Planning & Sustainability] type=GENERAL j=0.00 opt=0.09
+    Q1341: Which planning goal matters most to you in a growing community?
+    Q1366: SCENARIO: A city funds one sustainability plan and puts you in charge. What do you deliver?
+
+  [Academic Interest - Exercise & Sports Science] type=WHAT_ABOUT j=0.38 opt=0.07
+    Q1100: What area of exercise and sports science fascinates you?
+    Q3961: What part of exercise-and-sports-science work would you enjoy most?
+
+  [Academic Interest - Fashion & Textile Design] type=WHAT_ABOUT j=0.12 opt=0.14
+    Q939: What area of fashion and textile design appeals to you?
+    Q2601: What aspects of fashion and textiles excite you most?
+
+  [Academic Interest - Fashion & Textile Design] type=WHAT_ABOUT j=0.14 opt=0.27
+    Q939: What area of fashion and textile design appeals to you?
+    Q2606: Which fashion specialization interests you?
+
+  [Academic Interest - Fashion & Textile Design] type=WHAT_ABOUT j=0.00 opt=0.10
+    Q939: What area of fashion and textile design appeals to you?
+    Q2611: What drives your interest in textiles and garment creation?
+
+  [Academic Interest - Fashion & Textile Design] type=WHAT_ABOUT j=0.17 opt=0.14
+    Q2601: What aspects of fashion and textiles excite you most?
+    Q2606: Which fashion specialization interests you?
+
+  [Academic Interest - Fashion & Textile Design] type=WHAT_ABOUT j=0.12 opt=0.11
+    Q2601: What aspects of fashion and textiles excite you most?
+    Q2611: What drives your interest in textiles and garment creation?
+
+  [Academic Interest - Fashion & Textile Design] type=WHAT_ABOUT j=0.00 opt=0.13
+    Q2606: Which fashion specialization interests you?
+    Q2611: What drives your interest in textiles and garment creation?
+
+  [Academic Interest - Fashion & Textile Design] type=GENERAL j=0.20 opt=0.19
+    Q2616: How do you see fashion evolution and innovation?
+    Q2621: How would you innovate in fashion and textiles?
+
+  [Academic Interest - Fashion & Textile Design] type=GENERAL j=0.17 opt=0.19
+    Q2616: How do you see fashion evolution and innovation?
+    Q2626: How does fashion connect to broader systems?
+
+  [Academic Interest - Fashion & Textile Design] type=GENERAL j=0.17 opt=0.12
+    Q2621: How would you innovate in fashion and textiles?
+    Q2626: How does fashion connect to broader systems?
+
+  [Academic Interest - Finance & Banking] type=WHAT_ABOUT j=0.60 opt=0.08
+    Q871: What area of finance and banking interests you the most?
+    Q2211: Which part of finance and banking interests you most?
+
+  [Academic Interest - Fine Arts & Painting] type=GENERAL j=0.00 opt=0.09
+    Q946: SCENARIO: You're given a blank gallery wall. What do you create?
+    Q2586: How do different painting movements inspire you?
+
+  [Academic Interest - Fine Arts & Painting] type=WHAT_ABOUT j=0.33 opt=0.12
+    Q2571: What draws you most to fine arts and painting?
+    Q2576: Which area of fine arts interests you most?
+
+  [Academic Interest - Fine Arts & Painting] type=WHAT_ABOUT j=0.17 opt=0.14
+    Q2571: What draws you most to fine arts and painting?
+    Q2596: How does painting connect to other disciplines?
+
+  [Academic Interest - Fine Arts & Painting] type=WHAT_ABOUT j=0.00 opt=0.11
+    Q2576: Which area of fine arts interests you most?
+    Q2596: How does painting connect to other disciplines?
+
+  [Academic Interest - Fisheries & Aquaculture] type=WHAT_ABOUT j=0.17 opt=0.14
+    Q1096: What aspect of fisheries and aquaculture appeals to you?
+    Q1124: What aquaculture innovation interests you most?
+
+  [Academic Interest - Fisheries & Aquaculture] type=GENERAL j=0.00 opt=0.09
+    Q1097: SCENARIO: A coastal community depends on fishing but stocks are declining. What's your plan?
+    Q1126: SCENARIO: You're designing a sustainable seafood supply chain. What's your priority?
+
+  [Academic Interest - Forestry & Natural Resources] type=WHAT_ABOUT j=0.50 opt=0.08
+    Q1094: What draws you to forestry and natural resources?
+    Q4221: What excites you most about studying forestry and natural resources?
+
+  [Academic Interest - Health Information Technology] type=SKILL j=0.00 opt=0.13
+    Q831: How would you use technology to improve healthcare?
+    Q1801: Which health IT skill would you most want to master?
+
+  [Academic Interest - Health Information Technology] type=WHAT_ABOUT j=0.11 opt=0.14
+    Q832: SCENARIO: A hospital hires you as a health IT specialist. What's your focus?
+    Q1791: Which part of health information technology interests you most?
+
+  [Academic Interest - Healthcare General] type=GENERAL j=0.00 opt=0.05
+    Q980: What healthcare subject would you most enjoy studying?
+    Q981: How do you feel about blood, needles, and medical procedures?
+
+  [Academic Interest - Healthcare General] type=GENERAL j=0.00 opt=0.05
+    Q980: What healthcare subject would you most enjoy studying?
+    Q982: SCENARIO: Your community needs a new health initiative. What do you propose?
+
+  [Academic Interest - Healthcare General] type=GENERAL j=0.17 opt=0.02
+    Q980: What healthcare subject would you most enjoy studying?
+    Q986: What's your preferred way to learn about healthcare?
+
+  [Academic Interest - Healthcare General] type=GENERAL j=0.00 opt=0.05
+    Q980: What healthcare subject would you most enjoy studying?
+    Q987: If you could solve one major health problem, what would it be?
+
+  [Academic Interest - Healthcare General] type=GENERAL j=0.00 opt=0.09
+    Q981: How do you feel about blood, needles, and medical procedures?
+    Q982: SCENARIO: Your community needs a new health initiative. What do you propose?
+
+  [Academic Interest - Healthcare General] type=GENERAL j=0.00 opt=0.11
+    Q981: How do you feel about blood, needles, and medical procedures?
+    Q986: What's your preferred way to learn about healthcare?
+
+  [Academic Interest - Healthcare General] type=GENERAL j=0.00 opt=0.06
+    Q981: How do you feel about blood, needles, and medical procedures?
+    Q987: If you could solve one major health problem, what would it be?
+
+  [Academic Interest - Healthcare General] type=GENERAL j=0.10 opt=0.05
+    Q982: SCENARIO: Your community needs a new health initiative. What do you propose?
+    Q985: SCENARIO: You're starting a health-related business. What do you build?
+
+  [Academic Interest - Healthcare General] type=GENERAL j=0.00 opt=0.09
+    Q982: SCENARIO: Your community needs a new health initiative. What do you propose?
+    Q986: What's your preferred way to learn about healthcare?
+
+  [Academic Interest - Healthcare General] type=GENERAL j=0.11 opt=0.08
+    Q982: SCENARIO: Your community needs a new health initiative. What do you propose?
+    Q987: If you could solve one major health problem, what would it be?
+
+  [Academic Interest - Healthcare General] type=GENERAL j=0.00 opt=0.05
+    Q985: SCENARIO: You're starting a health-related business. What do you build?
+    Q986: What's your preferred way to learn about healthcare?
+
+  [Academic Interest - Healthcare General] type=GENERAL j=0.12 opt=0.03
+    Q985: SCENARIO: You're starting a health-related business. What do you build?
+    Q987: If you could solve one major health problem, what would it be?
+
+  [Academic Interest - History & Culture] type=WHAT_ABOUT j=0.00 opt=0.05
+    Q995: What area of history and culture fascinates you?
+    Q3451: What part of historical and cultural work would you enjoy most?
+
+  [Academic Interest - Hotel & Resort Management] type=GENERAL j=0.12 opt=0.02
+    Q1099: SCENARIO: You're opening a boutique hotel. What's your unique selling point?
+    Q1127: What hotel department would you most like to manage?
+
+  [Academic Interest - Hotel & Resort Management] type=GENERAL j=0.00 opt=0.12
+    Q1099: SCENARIO: You're opening a boutique hotel. What's your unique selling point?
+    Q1129: SCENARIO: You're designing a resort for a tropical destination. What feature is non-negotiable?
+
+  [Academic Interest - International Studies & Diplomacy] type=WHAT_ABOUT j=0.67 opt=0.12
+    Q1003: What aspect of international studies and diplomacy excites you?
+    Q3741: What excites you most about studying international studies and diplomacy?
+
+  [Academic Interest - Law & Justice] type=WHAT_ABOUT j=0.29 opt=0.06
+    Q991: What area of law and justice interests you?
+    Q3511: What part of law and justice work would you enjoy most?
+
+  [Academic Interest - Legal Management] type=WHAT_ABOUT j=0.29 opt=0.07
+    Q1008: What area of legal management interests you?
+    Q3871: What part of legal-management work would you enjoy most?
+
+  [Academic Interest - Linguistics & Languages] type=WHAT_ABOUT j=0.29 opt=0.09
+    Q1005: What area of linguistics and languages excites you?
+    Q3691: What part of linguistics and languages work would you enjoy most?
+
+  [Academic Interest - Logistics & Supply Chain] type=GENERAL j=0.00 opt=0.06
+    Q1063: SCENARIO: A natural disaster disrupts a major shipping route. What do you do?
+    Q1064: What logistics technology trend do you find most promising?
+
+  [Academic Interest - Logistics & Supply Chain] type=GENERAL j=0.00 opt=0.06
+    Q1063: SCENARIO: A natural disaster disrupts a major shipping route. What do you do?
+    Q1065: SCENARIO: An e-commerce company asks you to design their fulfillment center. What's key?
+
+  [Academic Interest - Logistics & Supply Chain] type=GENERAL j=0.00 opt=0.07
+    Q1064: What logistics technology trend do you find most promising?
+    Q1065: SCENARIO: An e-commerce company asks you to design their fulfillment center. What's key?
+
+  [Academic Interest - Management & Administration] type=WHAT_ABOUT j=0.40 opt=0.12
+    Q878: What style of management and administration appeals to you?
+    Q2271: Which part of management and administration interests you most?
+
+  [Academic Interest - Marine Engineering] type=WHAT_ABOUT j=0.33 opt=0.11
+    Q859: What aspect of marine engineering would you want to specialize in?
+    Q2151: Which part of marine engineering interests you most?
+
+  [Academic Interest - Marine Transportation & Navigation] type=GENERAL j=0.00 opt=0.05
+    Q1069: SCENARIO: You're designing a navigation training simulator. What features matter most?
+    Q1070: SCENARIO: A shipping company asks you to reduce fuel costs. What do you recommend?
+
+  [Academic Interest - Maritime & Seafaring] type=WHAT_ABOUT j=0.17 opt=0.07
+    Q1049: What aspect of maritime work appeals to you the most?
+    Q1054: What maritime technology excites you the most?
+
+  [Academic Interest - Maritime & Seafaring] type=GENERAL j=0.00 opt=0.05
+    Q1051: What type of vessel would you most like to work on?
+    Q1052: SCENARIO: A port is being built in a developing country. What's your role?
+
+  [Academic Interest - Maritime & Seafaring] type=GENERAL j=0.00 opt=0.08
+    Q1051: What type of vessel would you most like to work on?
+    Q1053: What maritime safety topic concerns you the most?
+
+  [Academic Interest - Maritime & Seafaring] type=GENERAL j=0.00 opt=0.06
+    Q1052: SCENARIO: A port is being built in a developing country. What's your role?
+    Q1053: What maritime safety topic concerns you the most?
+
+  [Academic Interest - Maritime General] type=GENERAL j=0.12 opt=0.05
+    Q1072: SCENARIO: A maritime academy offers you a scholarship. Which program do you choose?
+    Q1073: What global maritime issue concerns you the most?
+
+  [Academic Interest - Maritime General] type=GENERAL j=0.14 opt=0.10
+    Q1072: SCENARIO: A maritime academy offers you a scholarship. Which program do you choose?
+    Q1074: What kind of maritime innovation would you like to work on?
+
+  [Academic Interest - Maritime General] type=GENERAL j=0.12 opt=0.11
+    Q1072: SCENARIO: A maritime academy offers you a scholarship. Which program do you choose?
+    Q1076: SCENARIO: You're asked to teach a maritime course. Which one do you pick?
+
+  [Academic Interest - Maritime General] type=GENERAL j=0.12 opt=0.04
+    Q1072: SCENARIO: A maritime academy offers you a scholarship. Which program do you choose?
+    Q1077: Which maritime documentary topic would you want to watch?
+
+  [Academic Interest - Maritime General] type=GENERAL j=0.17 opt=0.04
+    Q1073: What global maritime issue concerns you the most?
+    Q1074: What kind of maritime innovation would you like to work on?
+
+  [Academic Interest - Maritime General] type=GENERAL j=0.14 opt=0.03
+    Q1073: What global maritime issue concerns you the most?
+    Q1076: SCENARIO: You're asked to teach a maritime course. Which one do you pick?
+
+  [Academic Interest - Maritime General] type=GENERAL j=0.14 opt=0.06
+    Q1073: What global maritime issue concerns you the most?
+    Q1077: Which maritime documentary topic would you want to watch?
+
+  [Academic Interest - Maritime General] type=GENERAL j=0.17 opt=0.08
+    Q1074: What kind of maritime innovation would you like to work on?
+    Q1076: SCENARIO: You're asked to teach a maritime course. Which one do you pick?
+
+  [Academic Interest - Maritime General] type=GENERAL j=0.17 opt=0.04
+    Q1074: What kind of maritime innovation would you like to work on?
+    Q1077: Which maritime documentary topic would you want to watch?
+
+  [Academic Interest - Maritime General] type=GENERAL j=0.14 opt=0.05
+    Q1076: SCENARIO: You're asked to teach a maritime course. Which one do you pick?
+    Q1077: Which maritime documentary topic would you want to watch?
+
+  [Academic Interest - Medical Technology & Lab Science] type=WHAT_ABOUT j=0.00 opt=0.06
+    Q3116: Which medical technology specialty or lab science area interests you most?
+    Q3121: What aspect of laboratory practice do you find most fulfilling?
+
+  [Academic Interest - Medicine & Healthcare] type=WHAT_ABOUT j=0.29 opt=0.07
+    Q959: What area of medicine and healthcare appeals to you most?
+    Q2936: Which medical specialty or area of healthcare interests you most?
+
+  [Academic Interest - Medicine & Healthcare] type=WHAT_ABOUT j=0.00 opt=0.13
+    Q959: What area of medicine and healthcare appeals to you most?
+    Q2941: What aspect of medical practice do you find most fulfilling?
+
+  [Academic Interest - Medicine & Healthcare] type=WHAT_ABOUT j=0.11 opt=0.08
+    Q2936: Which medical specialty or area of healthcare interests you most?
+    Q2941: What aspect of medical practice do you find most fulfilling?
+
+  [Academic Interest - Midwifery & Maternal Health] type=WHAT_ABOUT j=0.12 opt=0.11
+    Q974: What draws you to midwifery and maternal health?
+    Q3361: What aspect of midwifery practice do you find most fulfilling?
+
+  [Academic Interest - Military & Defense] type=WHAT_ABOUT j=0.00 opt=0.06
+    Q1091: What aspect of military and defense interests you most?
+    Q1120: SCENARIO: You're tasked with improving national disaster response. What's your focus?
+
+  [Academic Interest - Military & Defense] type=WHAT_ABOUT j=0.33 opt=0.06
+    Q1091: What aspect of military and defense interests you most?
+    Q4041: What excites you most about studying military and defense?
+
+  [Academic Interest - Military & Defense] type=GENERAL j=0.00 opt=0.09
+    Q1092: SCENARIO: You're assigned to a peacekeeping engineering unit. What do you build?
+    Q1093: Which defense technology intrigues you the most?
+
+  [Academic Interest - Music & Performance] type=WHAT_ABOUT j=0.17 opt=0.05
+    Q931: What draws you to music and performance?
+    Q2726: Which musical instrument or specialization appeals to you most?
+
+  [Academic Interest - Nursing & Patient Care] type=WHAT_ABOUT j=0.12 opt=0.10
+    Q961: What draws you to nursing and patient care?
+    Q2971: What aspect of nursing practice do you find most fulfilling?
+
+  [Academic Interest - Occupational Therapy] type=WHAT_ABOUT j=0.25 opt=0.02
+    Q969: What kind of occupational therapy work appeals to you?
+    Q3181: What aspect of occupational therapy practice do you find most fulfilling?
+
+  [Academic Interest - Optometry & Vision Care] type=WHAT_ABOUT j=0.11 opt=0.09
+    Q973: What area of optometry and vision care appeals to you?
+    Q3331: What aspect of optometry practice do you find most fulfilling?
+
+  [Academic Interest - Pharmacy & Pharmaceutical Science] type=WHAT_ABOUT j=0.11 opt=0.10
+    Q964: What area of pharmacy and pharmaceutical science interests you?
+    Q3061: What aspect of pharmaceutical practice do you find most fulfilling?
+
+  [Academic Interest - Philosophy & Ethics] type=WHAT_ABOUT j=0.40 opt=0.07
+    Q997: What draws you to philosophy and ethics?
+    Q3771: What excites you most about studying philosophy and ethics?
+
+  [Academic Interest - Philosophy & Ethics] type=WHAT_ABOUT j=0.33 opt=0.07
+    Q997: What draws you to philosophy and ethics?
+    Q3781: What part of philosophy-and-ethics work would you enjoy most?
+
+  [Academic Interest - Philosophy & Ethics] type=WHAT_ABOUT j=0.29 opt=0.14
+    Q3771: What excites you most about studying philosophy and ethics?
+    Q3781: What part of philosophy-and-ethics work would you enjoy most?
+
+  [Academic Interest - Physical Therapy & Rehabilitation] type=WHAT_ABOUT j=0.12 opt=0.06
+    Q965: What draws you to physical therapy and rehabilitation?
+    Q3091: What aspect of rehabilitation practice do you find most fulfilling?
+
+  [Academic Interest - Physics] type=WHAT_ABOUT j=0.11 opt=0.13
+    Q785: Which branch of physics would you love to explore?
+    Q1253: Which part of physics would you most enjoy testing with real objects?
+
+  [Academic Interest - Physics] type=WHAT_ABOUT j=0.14 opt=0.03
+    Q785: Which branch of physics would you love to explore?
+    Q1257: Which big physics mystery fascinates you most?
+
+  [Academic Interest - Physics] type=GENERAL j=0.12 opt=0.06
+    Q786: SCENARIO: Your physics teacher asks you to build something. What do you pick?
+    Q1261: Which physics topic connects best with technology for you?
+
+  [Academic Interest - Physics] type=WHAT_ABOUT j=0.11 opt=0.02
+    Q1253: Which part of physics would you most enjoy testing with real objects?
+    Q1257: Which big physics mystery fascinates you most?
+
+  [Academic Interest - Politics & Government] type=WHAT_ABOUT j=0.29 opt=0.04
+    Q992: What area of politics and government appeals to you?
+    Q3541: What part of politics and government work would you enjoy most?
+
+  [Academic Interest - Product & Industrial Design] type=GENERAL j=0.25 opt=0.02
+    Q855: What kind of product would you love to design from concept to production?
+    Q856: Which step of the product design process do you enjoy most?
+
+  [Academic Interest - Product & Industrial Design] type=WHAT_ABOUT j=0.09 opt=0.03
+    Q913: What aspect of product and industrial design appeals to you?
+    Q914: SCENARIO: A company wants a new water bottle design. What do you focus on?
+
+  [Academic Interest - Programming & Coding] type=PROJECT j=0.14 opt=0.11
+    Q810: SCENARIO: You're learning to code. Which first project would you tackle?
+    Q1436: Which coding project would you most want to build from scratch?
+
+  [Academic Interest - Public Administration] type=WHAT_ABOUT j=0.50 opt=0.08
+    Q1002: What type of public administration work appeals to you?
+    Q3601: What part of public administration work would you enjoy most?
+
+  [Academic Interest - Public Health] type=WHAT_ABOUT j=0.25 opt=0.09
+    Q975: What area of public health excites you?
+    Q3031: What aspect of public health practice do you find most fulfilling?
+
+  [Academic Interest - Public Health] type=CAREER j=0.00 opt=0.06
+    Q976: SCENARIO: A disease outbreak hits your region. What role do you take?
+    Q3021: What excites you most about pursuing a career in public health?
+
+  [Academic Interest - Radiology & Imaging] type=WHAT_ABOUT j=0.11 opt=0.05
+    Q3296: Which radiology specialty or imaging modality interests you most?
+    Q3301: What aspect of radiology practice do you find most fulfilling?
+
+  [Academic Interest - Science & Research] type=WHAT_ABOUT j=0.00 opt=0.14
+    Q779: What excites you most about working in a science laboratory?
+    Q1169: Which part of lab research sounds most satisfying to you?
+
+  [Academic Interest - Science General] type=GENERAL j=0.00 opt=0.05
+    Q803: Which Nobel Prize category would you dream of winning?
+    Q804: What kind of science documentary would you binge-watch?
+
+  [Academic Interest - Science General] type=GENERAL j=0.00 opt=0.07
+    Q803: Which Nobel Prize category would you dream of winning?
+    Q805: If you could intern at any science facility, which would you choose?
+
+  [Academic Interest - Science General] type=GENERAL j=0.00 opt=0.09
+    Q803: Which Nobel Prize category would you dream of winning?
+    Q806: Which science elective would you add to your school schedule?
+
+  [Academic Interest - Science General] type=GENERAL j=0.00 opt=0.05
+    Q803: Which Nobel Prize category would you dream of winning?
+    Q808: What kind of scientist do you admire or want to become?
+
+  [Academic Interest - Science General] type=GENERAL j=0.14 opt=0.11
+    Q804: What kind of science documentary would you binge-watch?
+    Q805: If you could intern at any science facility, which would you choose?
+
+  [Academic Interest - Science General] type=GENERAL j=0.12 opt=0.10
+    Q804: What kind of science documentary would you binge-watch?
+    Q806: Which science elective would you add to your school schedule?
+
+  [Academic Interest - Science General] type=GENERAL j=0.12 opt=0.13
+    Q805: If you could intern at any science facility, which would you choose?
+    Q806: Which science elective would you add to your school schedule?
+
+  [Academic Interest - Science General] type=GENERAL j=0.00 opt=0.07
+    Q805: If you could intern at any science facility, which would you choose?
+    Q808: What kind of scientist do you admire or want to become?
+
+  [Academic Interest - Social General] type=GENERAL j=0.12 opt=0.04
+    Q1019: Which social science subject would you most enjoy studying?
+    Q1025: What's your ideal way to learn about social issues?
+
+  [Academic Interest - Social General] type=GENERAL j=0.00 opt=0.07
+    Q1019: Which social science subject would you most enjoy studying?
+    Q1040: What type of book would you recommend to everyone?
+
+  [Academic Interest - Social General] type=GENERAL j=0.12 opt=0.02
+    Q1019: Which social science subject would you most enjoy studying?
+    Q1041: SCENARIO: You have a free Saturday. Which social activity would you choose?
+
+  [Academic Interest - Social General] type=GENERAL j=0.12 opt=0.04
+    Q1019: Which social science subject would you most enjoy studying?
+    Q1044: What social media content do you engage with most?
+
+  [Academic Interest - Social General] type=GENERAL j=0.00 opt=0.13
+    Q1019: Which social science subject would you most enjoy studying?
+    Q1045: SCENARIO: You're creating a podcast. What's it about?
+
+  [Academic Interest - Social General] type=GENERAL j=0.12 opt=0.03
+    Q1019: Which social science subject would you most enjoy studying?
+    Q1046: If you could travel anywhere for a social cause, where would you go?
+
+  [Academic Interest - Social General] type=GENERAL j=0.10 opt=0.05
+    Q1019: Which social science subject would you most enjoy studying?
+    Q1048: What personal quality do you think is most important in the social sciences?
+
+  [Academic Interest - Social General] type=GENERAL j=0.00 opt=0.08
+    Q1020: What kind of volunteer work would you choose?
+    Q1023: How do you prefer to help people?
+
+  [Academic Interest - Social General] type=GENERAL j=0.00 opt=0.05
+    Q1020: What kind of volunteer work would you choose?
+    Q1043: Which TED Talk topic would you watch first?
+
+  [Academic Interest - Social General] type=GENERAL j=0.00 opt=0.05
+    Q1020: What kind of volunteer work would you choose?
+    Q1046: If you could travel anywhere for a social cause, where would you go?
+
+  [Academic Interest - Social General] type=PROJECT j=0.18 opt=0.06
+    Q1021: SCENARIO: You're leading a social project on a tight budget. What do you prioritize?
+    Q1030: SCENARIO: Your university is hosting a social innovation challenge. What project do you pitch?
+
+  [Academic Interest - Social General] type=GENERAL j=0.00 opt=0.06
+    Q1023: How do you prefer to help people?
+    Q1043: Which TED Talk topic would you watch first?
+
+  [Academic Interest - Social General] type=GENERAL j=0.00 opt=0.06
+    Q1023: How do you prefer to help people?
+    Q1045: SCENARIO: You're creating a podcast. What's it about?
+
+  [Academic Interest - Social General] type=GENERAL j=0.00 opt=0.05
+    Q1023: How do you prefer to help people?
+    Q1047: What's your reaction when you see a news report about injustice?
+
+  [Academic Interest - Social General] type=GENERAL j=0.00 opt=0.12
+    Q1024: What global issue matters most to you?
+    Q1026: If you could create one new law, what would it do?
+
+  [Academic Interest - Social General] type=GENERAL j=0.14 opt=0.02
+    Q1025: What's your ideal way to learn about social issues?
+    Q1041: SCENARIO: You have a free Saturday. Which social activity would you choose?
+
+  [Academic Interest - Social General] type=GENERAL j=0.00 opt=0.05
+    Q1025: What's your ideal way to learn about social issues?
+    Q1043: Which TED Talk topic would you watch first?
+
+  [Academic Interest - Social General] type=GENERAL j=0.14 opt=0.05
+    Q1025: What's your ideal way to learn about social issues?
+    Q1044: What social media content do you engage with most?
+
+  [Academic Interest - Social General] type=GENERAL j=0.14 opt=0.01
+    Q1025: What's your ideal way to learn about social issues?
+    Q1046: If you could travel anywhere for a social cause, where would you go?
+
+  [Academic Interest - Social General] type=GENERAL j=0.00 opt=0.08
+    Q1025: What's your ideal way to learn about social issues?
+    Q1047: What's your reaction when you see a news report about injustice?
+
+  [Academic Interest - Social General] type=GENERAL j=0.11 opt=0.02
+    Q1025: What's your ideal way to learn about social issues?
+    Q1048: What personal quality do you think is most important in the social sciences?
+
+  [Academic Interest - Social General] type=GENERAL j=0.17 opt=0.00
+    Q1026: If you could create one new law, what would it do?
+    Q1047: What's your reaction when you see a news report about injustice?
+
+  [Academic Interest - Social General] type=GENERAL j=0.00 opt=0.10
+    Q1040: What type of book would you recommend to everyone?
+    Q1044: What social media content do you engage with most?
+
+  [Academic Interest - Social General] type=GENERAL j=0.00 opt=0.10
+    Q1040: What type of book would you recommend to everyone?
+    Q1045: SCENARIO: You're creating a podcast. What's it about?
+
+  [Academic Interest - Social General] type=GENERAL j=0.00 opt=0.06
+    Q1041: SCENARIO: You have a free Saturday. Which social activity would you choose?
+    Q1043: Which TED Talk topic would you watch first?
+
+  [Academic Interest - Social General] type=GENERAL j=0.14 opt=0.02
+    Q1041: SCENARIO: You have a free Saturday. Which social activity would you choose?
+    Q1044: What social media content do you engage with most?
+
+  [Academic Interest - Social General] type=GENERAL j=0.00 opt=0.06
+    Q1041: SCENARIO: You have a free Saturday. Which social activity would you choose?
+    Q1045: SCENARIO: You're creating a podcast. What's it about?
+
+  [Academic Interest - Social General] type=GENERAL j=0.14 opt=0.02
+    Q1041: SCENARIO: You have a free Saturday. Which social activity would you choose?
+    Q1046: If you could travel anywhere for a social cause, where would you go?
+
+  [Academic Interest - Social General] type=GENERAL j=0.00 opt=0.05
+    Q1041: SCENARIO: You have a free Saturday. Which social activity would you choose?
+    Q1047: What's your reaction when you see a news report about injustice?
+
+  [Academic Interest - Social General] type=GENERAL j=0.11 opt=0.05
+    Q1041: SCENARIO: You have a free Saturday. Which social activity would you choose?
+    Q1048: What personal quality do you think is most important in the social sciences?
+
+  [Academic Interest - Social General] type=GENERAL j=0.00 opt=0.06
+    Q1043: Which TED Talk topic would you watch first?
+    Q1044: What social media content do you engage with most?
+
+  [Academic Interest - Social General] type=GENERAL j=0.00 opt=0.06
+    Q1043: Which TED Talk topic would you watch first?
+    Q1045: SCENARIO: You're creating a podcast. What's it about?
+
+  [Academic Interest - Social General] type=GENERAL j=0.00 opt=0.07
+    Q1043: Which TED Talk topic would you watch first?
+    Q1048: What personal quality do you think is most important in the social sciences?
+
+  [Academic Interest - Social General] type=GENERAL j=0.00 opt=0.10
+    Q1044: What social media content do you engage with most?
+    Q1045: SCENARIO: You're creating a podcast. What's it about?
+
+  [Academic Interest - Social General] type=GENERAL j=0.14 opt=0.02
+    Q1044: What social media content do you engage with most?
+    Q1046: If you could travel anywhere for a social cause, where would you go?
+
+  [Academic Interest - Social General] type=GENERAL j=0.11 opt=0.03
+    Q1044: What social media content do you engage with most?
+    Q1048: What personal quality do you think is most important in the social sciences?
+
+  [Academic Interest - Social General] type=GENERAL j=0.00 opt=0.06
+    Q1045: SCENARIO: You're creating a podcast. What's it about?
+    Q1047: What's your reaction when you see a news report about injustice?
+
+  [Academic Interest - Social General] type=GENERAL j=0.11 opt=0.04
+    Q1046: If you could travel anywhere for a social cause, where would you go?
+    Q1048: What personal quality do you think is most important in the social sciences?
+
+  [Academic Interest - Social Work & Community] type=WHAT_ABOUT j=0.29 opt=0.05
+    Q1031: What kind of social work specialization interests you most?
+    Q3421: What part of social work practice would you enjoy most?
+
+  [Academic Interest - Sociology] type=WHAT_ABOUT j=0.17 opt=0.08
+    Q1004: What area of sociology interests you?
+    Q3721: What part of sociology work would you enjoy most?
+
+  [Academic Interest - Speech-Language Pathology] type=WHAT_ABOUT j=0.33 opt=0.10
+    Q970: What area of speech-language pathology interests you?
+    Q3241: What aspect of speech-language pathology practice do you find most fulfilling?
+
+  [Academic Interest - Sports & Fitness] type=WHAT_ABOUT j=0.60 opt=0.05
+    Q1079: What aspect of sports and fitness excites you the most?
+    Q3921: What excites you most about studying sports and fitness?
+
+  [Academic Interest - Startup & Innovation] type=WHAT_ABOUT j=0.33 opt=0.05
+    Q886: What drives your interest in startups and innovation?
+    Q2541: Which part of startup and innovation interests you most?
+
+  [Academic Interest - Statistics & Probability] type=GENERAL j=0.09 opt=0.08
+    Q795: How would you prefer to use statistics and data in real life?
+    Q796: SCENARIO: A company asks you to solve a problem with data. Which sounds fun?
+
+  [Academic Interest - Technical-Vocational Training] type=GENERAL j=0.11 opt=0.01
+    Q1134: SCENARIO: You're starting a vocational training center. What do you emphasize?
+    Q1135: What emerging vocational field do you find most promising?
+
+  [Academic Interest - Technology General] type=GENERAL j=0.12 opt=0.18
+    Q833: Which tech company would you dream of working at?
+    Q835: If you attended a tech conference, which talk would you rush to see?
+
+  [Academic Interest - Theater & Performing Arts] type=GENERAL j=0.00 opt=0.05
+    Q941: SCENARIO: Your school is putting on a play. What do you volunteer for?
+    Q7: If you had the resources to create any performing arts production, what would you choose?
+
+  [Academic Interest - Theater & Performing Arts] type=GENERAL j=0.00 opt=0.09
+    Q7: If you had the resources to create any performing arts production, what would you choose?
+    Q2806: How does theater connect to other areas of life and study?
+
+  [Academic Interest - Tourism & Hospitality] type=WHAT_ABOUT j=0.00 opt=0.05
+    Q1082: What part of tourism and hospitality interests you most?
+    Q1110: SCENARIO: A rural town wants to attract tourists. What do you recommend?
+
+  [Academic Interest - Tourism & Hospitality] type=WHAT_ABOUT j=0.33 opt=0.12
+    Q1082: What part of tourism and hospitality interests you most?
+    Q3981: What excites you most about studying tourism and hospitality?
+
+  [Academic Interest - Tourism & Hospitality] type=WHAT_ABOUT j=0.00 opt=0.06
+    Q1110: SCENARIO: A rural town wants to attract tourists. What do you recommend?
+    Q3981: What excites you most about studying tourism and hospitality?
+
+  [Academic Interest - Veterinary & Animal Science] type=WHAT_ABOUT j=0.25 opt=0.07
+    Q1089: What aspect of veterinary and animal science interests you most?
+    Q1116: What animal science research area excites you?
+
+  [Academic Interest - Weather & Atmospheric Science] type=WHAT_ABOUT j=0.50 opt=0.10
+    Q794: What about weather and atmospheric science interests you?
+    Q1401: Which part of weather and atmosphere science interests you most?
+
+  [Academic Interest - Writing & Literature] type=WHAT_ABOUT j=0.17 opt=0.09
+    Q934: What kind of writing and literature excites you?
+    Q2851: What aspect of the writing process do you enjoy most?
+
+  [Interest - Administration] type=GENERAL j=0.00 opt=0.15
+    Q579: What administrative function do you excel at?
+    Q653: What daily admin task do you enjoy most?
+
+  [Interest - Administration] type=SKILL j=0.00 opt=0.08
+    Q580: What office technology would you master?
+    Q582: What administrative improvement would you prioritize?
+
+  [Interest - Administration] type=CAREER j=0.00 opt=0.14
+    Q581: Which administrative leadership role appeals to you?
+    Q654: What office management certification would you pursue?
+
+  [Interest - Analytical Skills] type=GENERAL j=0.14 opt=0.07
+    Q656: What analytical problem-solving approach suits you?
+    Q662: What analytical tool would you learn?
+
+  [Interest - Analytical Skills] type=PROJECT j=0.00 opt=0.08
+    Q658: What critical thinking skill would you develop?
+    Q663: What reasoning challenge would you tackle?
+
+  [Interest - Animation & 3D] type=WHAT_ABOUT j=0.17 opt=0.13
+    Q590: What animation style would you specialize in?
+    Q700: What animation production pipeline stage interests you?
+
+  [Interest - Animation & 3D] type=WHAT_ABOUT j=0.20 opt=0.14
+    Q590: What animation style would you specialize in?
+    Q701: What Philippine animation opportunity excites you?
+
+  [Interest - Animation & 3D] type=WHAT_ABOUT j=0.12 opt=0.08
+    Q700: What animation production pipeline stage interests you?
+    Q701: What Philippine animation opportunity excites you?
+
+  [Interest - Animation & 3D] type=GENERAL j=0.00 opt=0.07
+    Q702: What animation technique would you perfect?
+    Q703: What animated content do you watch and admire?
+
+  [Interest - Architecture & Design] type=WHAT_ABOUT j=0.33 opt=0.10
+    Q602: What spatial design discipline interests you?
+    Q759: What interior design element interests you most?
+
+  [Interest - Artificial Intelligence] type=WHAT_ABOUT j=0.00 opt=0.06
+    Q215: Which AI application fascinates you the most?
+    Q517: What ML workflow step interests you most?
+
+  [Interest - Civil Engineering] type=WHAT_ABOUT j=0.00 opt=0.06
+    Q548: What construction management task appeals to you?
+    Q550: What structural engineering topic fascinates you?
+
+  [Interest - Cloud Computing] type=WHAT_ABOUT j=0.17 opt=0.08
+    Q217: What interests you most about cloud computing and servers?
+    Q528: Which cloud platform would you specialize in?
+
+  [Interest - Cloud Computing] type=WHAT_ABOUT j=0.00 opt=0.09
+    Q217: What interests you most about cloud computing and servers?
+    Q689: What DevOps practice excites you?
+
+  [Interest - Community Service] type=GENERAL j=0.20 opt=0.06
+    Q627: Where would you serve your community?
+    Q704: What Filipino community issue would you address?
+
+  [Interest - Community Service] type=GENERAL j=0.20 opt=0.06
+    Q627: Where would you serve your community?
+    Q706: What community empowerment approach would you use?
+
+  [Interest - Community Service] type=GENERAL j=0.20 opt=0.15
+    Q627: Where would you serve your community?
+    Q707: What community organizing strategy would you lead?
+
+  [Interest - Community Service] type=GENERAL j=0.14 opt=0.08
+    Q704: What Filipino community issue would you address?
+    Q706: What community empowerment approach would you use?
+
+  [Interest - Community Service] type=GENERAL j=0.14 opt=0.00
+    Q704: What Filipino community issue would you address?
+    Q707: What community organizing strategy would you lead?
+
+  [Interest - Community Service] type=GENERAL j=0.14 opt=0.00
+    Q706: What community empowerment approach would you use?
+    Q707: What community organizing strategy would you lead?
+
+  [Interest - Counseling] type=WHAT_ABOUT j=0.20 opt=0.10
+    Q487: What type of counseling practice appeals to you most?
+    Q489: What counseling population would you focus on?
+
+  [Interest - Creative Skills] type=GENERAL j=0.00 opt=0.05
+    Q664: What creative activity do you enjoy most?
+    Q665: How do you express creativity at work?
+
+  [Interest - Creative Skills] type=PROJECT j=0.20 opt=0.08
+    Q666: What creative skill would you develop?
+    Q670: What creative challenge would you tackle?
+
+  [Interest - Cybersecurity] type=WHAT_ABOUT j=0.17 opt=0.04
+    Q531: Which cybersecurity domain interests you most?
+    Q532: What cybersecurity threat would you specialize in defending?
+
+  [Interest - Cybersecurity] type=GENERAL j=0.20 opt=0.04
+    Q534: Where would you practice cybersecurity?
+    Q535: What cybersecurity awareness effort would you lead?
+
+  [Interest - Digital Media] type=PROJECT j=0.33 opt=0.15
+    Q593: What digital media content would you produce?
+    Q595: What digital media skill would you develop?
+
+  [Interest - Entrepreneurship] type=WHAT_ABOUT j=0.14 opt=0.00
+    Q583: What stage of startup building excites you?
+    Q584: What Philippine startup sector interests you?
+
+  [Interest - Entrepreneurship] type=GENERAL j=0.17 opt=0.00
+    Q762: What would your Filipino startup solve?
+    Q763: What startup funding strategy would you use?
+
+  [Interest - Entrepreneurship] type=GENERAL j=0.17 opt=0.00
+    Q762: What would your Filipino startup solve?
+    Q764: What startup metric would you track obsessively?
+
+  [Interest - Entrepreneurship] type=GENERAL j=0.14 opt=0.02
+    Q763: What startup funding strategy would you use?
+    Q764: What startup metric would you track obsessively?
+
+  [Interest - Environmental Engineering] type=ENVIRONMENT j=0.14 opt=0.07
+    Q242: What environmental engineering challenge would you want to solve?
+    Q561: What environmental remediation method interests you?
+
+  [Interest - Environmental Engineering] type=ENVIRONMENT j=0.17 opt=0.04
+    Q242: What environmental engineering challenge would you want to solve?
+    Q562: Where would you work as an environmental engineer?
+
+  [Interest - Environmental Engineering] type=ENVIRONMENT j=0.17 opt=0.04
+    Q561: What environmental remediation method interests you?
+    Q562: Where would you work as an environmental engineer?
+
+  [Interest - Field Research] type=GENERAL j=0.00 opt=0.09
+    Q254: You're doing field research in a national park. What would you study?
+    Q611: Where in the Philippines would you do fieldwork?
+
+  [Interest - Field Research] type=GENERAL j=0.10 opt=0.15
+    Q254: You're doing field research in a national park. What would you study?
+    Q724: What field data collection technology would you use?
+
+  [Interest - Field Research] type=GENERAL j=0.12 opt=0.06
+    Q254: You're doing field research in a national park. What would you study?
+    Q725: What type of field survey would you conduct?
+
+  [Interest - Field Research] type=GENERAL j=0.00 opt=0.12
+    Q611: Where in the Philippines would you do fieldwork?
+    Q725: What type of field survey would you conduct?
+
+  [Interest - Field Research] type=GENERAL j=0.14 opt=0.02
+    Q724: What field data collection technology would you use?
+    Q725: What type of field survey would you conduct?
+
+  [Interest - Food Science] type=PROJECT j=0.12 opt=0.10
+    Q259: You're working in a food laboratory. What project interests you most?
+    Q734: What food quality challenge would you tackle?
+
+  [Interest - Forensic Science] type=GENERAL j=0.17 opt=0.08
+    Q619: What forensic lab technique would you learn?
+    Q620: Where would you apply forensic science?
+
+  [Interest - Health Administration] type=GENERAL j=0.17 opt=0.02
+    Q494: What type of healthcare facility would you manage?
+    Q495: What healthcare quality metric would you prioritize?
+
+  [Interest - Hospitality] type=PROJECT j=0.00 opt=0.08
+    Q637: What hospitality skill would you develop?
+    Q736: What guest experience would you create?
+
+  [Interest - Industrial Operations] type=GENERAL j=0.17 opt=0.00
+    Q566: Which industry would you optimize operations for?
+    Q567: What operations research technique would you apply?
+
+  [Interest - Industrial Operations] type=GENERAL j=0.14 opt=0.06
+    Q567: What operations research technique would you apply?
+    Q741: What industrial engineering tool would you apply?
+
+  [Interest - Laboratory Research] type=GENERAL j=0.20 opt=0.08
+    Q607: Where would you conduct research?
+    Q744: What lab research routine would you enjoy?
+
+  [Interest - Laboratory Research] type=GENERAL j=0.14 opt=0.02
+    Q744: What lab research routine would you enjoy?
+    Q745: What lab safety practice is most important to you?
+
+  [Interest - Maritime] type=GENERAL j=0.00 opt=0.09
+    Q443: Which maritime subject are you most eager to study?
+    Q444: What type of cargo operation would you most want to oversee?
+
+  [Interest - Maritime] type=GENERAL j=0.11 opt=0.02
+    Q443: Which maritime subject are you most eager to study?
+    Q445: During a maritime emergency drill, which station would you gravitate toward?
+
+  [Interest - Maritime] type=WHAT_ABOUT j=0.00 opt=0.10
+    Q446: Which maritime technology advancement excites you most?
+    Q451: On a long ocean crossing, what would you focus on most?
+
+  [Interest - Maritime] type=WHAT_ABOUT j=0.00 opt=0.08
+    Q446: Which maritime technology advancement excites you most?
+    Q452: Which shipboard communication duty appeals to you most?
+
+  [Interest - Maritime] type=WHAT_ABOUT j=0.00 opt=0.06
+    Q447: What aspect of port and harbor operations would you want to manage?
+    Q452: Which shipboard communication duty appeals to you most?
+
+  [Interest - Maritime] type=WHAT_ABOUT j=0.00 opt=0.06
+    Q451: On a long ocean crossing, what would you focus on most?
+    Q452: Which shipboard communication duty appeals to you most?
+
+  [Interest - Marketing & Sales] type=WHAT_ABOUT j=0.20 opt=0.10
+    Q572: What marketing strategy interests you most?
+    Q749: What marketing channel would you specialize in?
+
+  [Interest - Marketing & Sales] type=GENERAL j=0.00 opt=0.05
+    Q573: Which marketing analytics method would you use?
+    Q574: What sales approach suits you best?
+
+  [Interest - Mechanical Engineering] type=WHAT_ABOUT j=0.00 opt=0.08
+    Q552: What mechanical engineering work excites you?
+    Q555: What type of manufacturing fascinates you?
+
+  [Interest - Mechanical Engineering] type=GENERAL j=0.14 opt=0.10
+    Q554: What mechanical systems problem would you solve?
+    Q752: What Philippine mechanical engineering need would you address?
+
+  [Interest - Mechanical Engineering] type=GENERAL j=0.14 opt=0.10
+    Q554: What mechanical systems problem would you solve?
+    Q753: What mechanical testing method would you perform?
+
+  [Interest - Mechanical Engineering] type=GENERAL j=0.14 opt=0.00
+    Q752: What Philippine mechanical engineering need would you address?
+    Q753: What mechanical testing method would you perform?
+
+  [Interest - Medical Laboratory] type=WHAT_ABOUT j=0.00 opt=0.09
+    Q233: You're working in a medical laboratory. What type of testing interests you most?
+    Q472: Which emerging lab technology fascinates you?
+
+  [Interest - People Skills] type=TEAM j=0.00 opt=0.06
+    Q679: What team leadership style suits you?
+    Q682: What group activity do you enjoy facilitating?
+
+  [Interest - Pharmacy] type=WHAT_ABOUT j=0.00 opt=0.07
+    Q499: Which pharmacy practice area excites you most?
+    Q500: What pharmaceutical science topic fascinates you?
+
+  [Interest - Pharmacy] type=WHAT_ABOUT j=0.17 opt=0.10
+    Q499: Which pharmacy practice area excites you most?
+    Q502: Which pharmacy technology interests you?
+
+  [Interest - Pharmacy] type=WHAT_ABOUT j=0.00 opt=0.07
+    Q500: What pharmaceutical science topic fascinates you?
+    Q502: Which pharmacy technology interests you?
+
+  [Interest - Public Health] type=WHAT_ABOUT j=0.00 opt=0.09
+    Q458: Which epidemiology topic interests you most?
+    Q459: What health promotion strategy appeals to you most?
+
+  [Interest - Public Health] type=WHAT_ABOUT j=0.00 opt=0.17
+    Q458: Which epidemiology topic interests you most?
+    Q461: What aspect of healthcare policy would you want to shape?
+
+  [Interest - Public Health] type=WHAT_ABOUT j=0.00 opt=0.14
+    Q459: What health promotion strategy appeals to you most?
+    Q461: What aspect of healthcare policy would you want to shape?
+
+  [Interest - Rehabilitation] type=WHAT_ABOUT j=0.00 opt=0.08
+    Q229: You want to help people with health issues. What approach appeals to you?
+    Q481: Which rehabilitation therapy technique interests you?
+
+  [Interest - Rehabilitation] type=WHAT_ABOUT j=0.00 opt=0.07
+    Q229: You want to help people with health issues. What approach appeals to you?
+    Q485: What aspect of rehabilitation science excites you?
+
+  [Interest - Rehabilitation] type=GENERAL j=0.20 opt=0.17
+    Q480: What type of rehabilitation patient would you most want to help?
+    Q483: What rehabilitation outcome is most rewarding to you?
+
+  [Interest - Rehabilitation] type=WHAT_ABOUT j=0.14 opt=0.05
+    Q481: Which rehabilitation therapy technique interests you?
+    Q485: What aspect of rehabilitation science excites you?
+
+  [Interest - Software Development] type=WHAT_ABOUT j=0.00 opt=0.06
+    Q504: What software development practice interests you most?
+    Q505: Which programming paradigm excites you most?
+
+  [Interest - Teaching & Education] type=GENERAL j=0.20 opt=0.05
+    Q621: What would you most enjoy teaching?
+    Q766: What makes a great teacher in your view?
+
+  [Interest - Teaching & Education] type=GENERAL j=0.00 opt=0.08
+    Q621: What would you most enjoy teaching?
+    Q767: What student population would you serve?
+
+  [Interest - Teaching & Education] type=GENERAL j=0.00 opt=0.09
+    Q766: What makes a great teacher in your view?
+    Q767: What student population would you serve?
+
+  [Interest - Technical Skills] type=GENERAL j=0.17 opt=0.04
+    Q272: What hands-on technical activity do you enjoy most?
+    Q675: What technical certification would you earn?
+
+  [Interest - Visual Design] type=GENERAL j=0.17 opt=0.02
+    Q770: What color and design principle matters most to you?
+    Q771: What design movement inspires your style?
+
+  [Interest - Web Development] type=WHAT_ABOUT j=0.12 opt=0.00
+    Q512: Which web development technology stack interests you?
+    Q514: Which web design approach appeals to you?
+
+  [Situational - Ethics] type=GENERAL j=0.00 opt=0.07
+    Q86: You found a lost wallet with cash and IDs near your school. What do you do?
+    Q96: You witness someone shoplifting at a mall. What's your reaction?
+
+  [Situational - Forensics] type=GENERAL j=0.00 opt=0.05
+    Q156: You're working at a forensic science lab. What's your favorite task?
+    Q289: SCENARIO: Police find an unidentified substance at a crime scene. How would you help?
+
+  [Situational - Group Research] type=PROJECT j=0.18 opt=0.23
+    Q108: Your group is assigned a research project. What role do you naturally take?
+    Q168: Your group project is about climate change. Which part do you want to handle?
+
+  [Situational - Leadership] type=PROJECT j=0.10 opt=0.04
+    Q83: You're assigned to lead a group project with unmotivated members. How do you handle it?
+    Q278: You've been elected class president. What's your first project?
+
+  [Situational - Social Work] type=GENERAL j=0.11 opt=0.15
+    Q243: You see a family in your community struggling with poverty. How would you help?
+    Q293: SCENARIO: A family is about to be evicted from their home. As a social worker, what do you do first?
+
+  Total uncaught same-type pairs with overlap: 312
