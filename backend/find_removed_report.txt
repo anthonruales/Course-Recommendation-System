@@ -1,0 +1,245 @@
+﻿[TREE] Loaded 45 decision tree questions across 13 domains
+[TREE] Navigation rules: 31 branch transitions
+[TREE] Validation questions: 10
+Q1401: NOT FOUND IN SOURCE
+Q1431: NOT FOUND IN SOURCE
+Q1461: NOT FOUND IN SOURCE
+Q1551: NOT FOUND IN SOURCE
+Q1731: NOT FOUND IN SOURCE
+Q1821: NOT FOUND IN SOURCE
+Q1851: NOT FOUND IN SOURCE
+Q1881: NOT FOUND IN SOURCE
+Q2001: NOT FOUND IN SOURCE
+Q2031: NOT FOUND IN SOURCE
+Q2061: NOT FOUND IN SOURCE
+Q2066: NOT FOUND IN SOURCE
+Q2091: NOT FOUND IN SOURCE
+Q2151: NOT FOUND IN SOURCE
+Q2211: NOT FOUND IN SOURCE
+Q2271: NOT FOUND IN SOURCE
+Q2301: NOT FOUND IN SOURCE
+Q2331: NOT FOUND IN SOURCE
+Q2541: NOT FOUND IN SOURCE
+Q2576: NOT FOUND IN SOURCE
+Q2651: NOT FOUND IN SOURCE
+Q2661: NOT FOUND IN SOURCE
+Q2666: NOT FOUND IN SOURCE
+Q2696: NOT FOUND IN SOURCE
+Q2721: NOT FOUND IN SOURCE
+Q2751: NOT FOUND IN SOURCE
+Q2756: NOT FOUND IN SOURCE
+Q2771: NOT FOUND IN SOURCE
+Q2781: NOT FOUND IN SOURCE
+Q2811: NOT FOUND IN SOURCE
+Q2841: NOT FOUND IN SOURCE
+Q2871: NOT FOUND IN SOURCE
+Q2901: NOT FOUND IN SOURCE
+Q2936: NOT FOUND IN SOURCE
+Q2961: NOT FOUND IN SOURCE
+Q2966: NOT FOUND IN SOURCE
+Q2996: NOT FOUND IN SOURCE
+Q3026: NOT FOUND IN SOURCE
+Q3031: NOT FOUND IN SOURCE
+Q3056: NOT FOUND IN SOURCE
+Q3086: NOT FOUND IN SOURCE
+Q3116: NOT FOUND IN SOURCE
+Q3146: NOT FOUND IN SOURCE
+Q3176: NOT FOUND IN SOURCE
+Q3181: NOT FOUND IN SOURCE
+Q3206: NOT FOUND IN SOURCE
+Q3236: NOT FOUND IN SOURCE
+Q3241: NOT FOUND IN SOURCE
+Q3266: NOT FOUND IN SOURCE
+Q3296: NOT FOUND IN SOURCE
+Q3326: NOT FOUND IN SOURCE
+Q3356: NOT FOUND IN SOURCE
+Q3416: NOT FOUND IN SOURCE
+Q3421: NOT FOUND IN SOURCE
+Q3431: NOT FOUND IN SOURCE
+Q3481: NOT FOUND IN SOURCE
+Q3511: NOT FOUND IN SOURCE
+Q3541: NOT FOUND IN SOURCE
+Q3571: NOT FOUND IN SOURCE
+Q3601: NOT FOUND IN SOURCE
+Q3691: NOT FOUND IN SOURCE
+Q3741: NOT FOUND IN SOURCE
+Q3771: NOT FOUND IN SOURCE
+Q3781: NOT FOUND IN SOURCE
+Q3801: NOT FOUND IN SOURCE
+Q3811: NOT FOUND IN SOURCE
+Q3871: NOT FOUND IN SOURCE
+Q3891: NOT FOUND IN SOURCE
+Q3901: NOT FOUND IN SOURCE
+Q3921: NOT FOUND IN SOURCE
+Q3961: NOT FOUND IN SOURCE
+Q3981: NOT FOUND IN SOURCE
+Q4041: NOT FOUND IN SOURCE
+Q4221: NOT FOUND IN SOURCE
+
+=== Found 14 of 88 removed questions ===
+
+Categories affected: 14
+
+
+[Academic Interest - Aeronautical & Aerospace] - 1 removed
+  Q909: What area of aeronautical and aerospace engineering excites you?
+    Options(6): ['Designing aircraft that are faster, ligh', 'Working on rocket propulsion systems for', 'Developing drones for agriculture, deliv']...
+    Traits: ['AI-ML', 'Aeronautical-Eng', 'Analytical-Skill', 'Creative-Skill', 'Data-Analytics']...
+
+[Academic Interest - Electrical & Electronics] - 1 removed
+  Q901: What area of electrical and electronics engineering excites you?
+    Options(6): ['Designing circuit boards and microchips ', 'Working on power grids and electrical di', 'Developing renewable energy systems ù so']...
+    Traits: ['AI-ML', 'Analytical-Skill', 'Automotive-Tech', 'Civil-Build', 'Creative-Skill']...
+
+[Academic Interest - Marine Engineering] - 1 removed
+  Q917: What area of marine engineering appeals to you?
+    Options(7): ['Designing ship hulls for maximum speed a', 'Working on underwater robotics and auton', 'Maintaining and repairing ship engines a']...
+    Traits: ['AI-ML', 'Analytical-Skill', 'Civil-Build', 'Community-Serve', 'Data-Analytics']...
+
+[Academic Interest - Mechanical Systems] - 1 removed
+  Q899: What area of mechanical systems fascinates you the most?
+    Options(6): ['Designing engines and turbines that conv', 'Creating robotic arms and automated asse', 'Developing HVAC systems that keep buildi']...
+    Traits: ['AI-ML', 'Analytical-Skill', 'Automotive-Tech', 'Civil-Build', 'Data-Analytics']...
+
+[Academic Interest - Veterinary & Animal Science] - 1 removed
+  Q1116: What animal science research area excites you?
+    Options(7): ['Animal genetics and selective breeding f', 'Zoonotic diseases ù how diseases jump fr', 'Animal welfare science ù measuring stres']...
+    Traits: ['Agri-Nature', 'Analytical-Skill', 'Community-Serve', 'Data-Analytics', 'Environmental-Sci']...
+
+[Interest - Animation & 3D] - 1 removed
+  Q701: UNKNOWN
+    Options(1): ["Working in Manila's growing animation st"]...
+    Traits: []...
+
+[Interest - Architecture & Design] - 1 removed
+  Q759: UNKNOWN
+    Options(0): []...
+    Traits: []...
+
+[Interest - Counseling] - 1 removed
+  Q489: UNKNOWN
+    Options(0): []...
+    Traits: []...
+
+[Interest - Forensic Science] - 1 removed
+  Q618: UNKNOWN
+    Options(0): []...
+    Traits: []...
+
+[Interest - Marketing & Sales] - 1 removed
+  Q749: UNKNOWN
+    Options(0): []...
+    Traits: []...
+
+[Interest - Medical Laboratory] - 1 removed
+  Q465: UNKNOWN
+    Options(0): []...
+    Traits: []...
+
+[Interest - Nutrition & Dietetics] - 1 removed
+  Q774: Which forensic science specialty would you pursue?
+    Options(2): ['Crime scene reconstruction and bloodstai', 'Digital forensics ù recovering deleted d']...
+    Traits: ['Forensic-Sci']...
+
+[Interest - Performing Arts] - 1 removed
+  Q599: UNKNOWN
+    Options(0): []...
+    Traits: []...
+
+[Situational - Family Business] - 1 removed
+  Q104: Your family is planning to start a small business. What role would you take?
+    Options(6): ['Handle the bookkeeping and financial rec', 'Build a website and manage online presen', 'Design the store layout and physical set']...
+    Traits: ['Admin-Skill', 'Analytical-Skill', 'Civil-Build', 'Creative-Skill', 'Data-Analytics']...
+
+
+=== Parent questions (what each removed Q was a rephrase of) ===
+  Q2031 -> rephrase of Q857: What interests you about aircraft maintenance and avionics?
+  Q2781 -> rephrase of Q940: What role in theater and performing arts interests you?
+  Q104 -> rephrase of Q87: Your family is starting a small business. How would you cont
+  Q465 -> rephrase of Q458: Which epidemiology topic interests you most?
+  Q489 -> rephrase of Q483: What rehabilitation outcome is most rewarding to you?
+  Q599 -> rephrase of Q250: What type of performance or performing arts excites you?
+  Q618 -> rephrase of Q236: What type of forensic work fascinates you?
+  Q701 -> rephrase of Q697: What hardware troubleshooting do you enjoy?
+  Q749 -> rephrase of Q746: What marketing content would you create?
+  Q759 -> rephrase of Q756: NOT IN POOL
+  Q774 -> rephrase of Q476: Where would you most want to practice nutrition?
+  Q899 -> rephrase of Q851: What part of aeronautical and aerospace engineering excites 
+  Q901 -> rephrase of Q844: Which electrical & electronics project would you want to wor
+  Q909 -> rephrase of Q851: What part of aeronautical and aerospace engineering excites 
+  Q917 -> rephrase of Q859: What aspect of marine engineering would you want to speciali
+  Q1116 -> rephrase of Q1096: What aspect of fisheries and aquaculture appeals to you?
+  Q1401 -> rephrase of Q794: What about weather and atmospheric science interests you?
+  Q1431 -> rephrase of Q809: What excites you most about programming and coding?
+  Q1461 -> rephrase of Q811: What part of Computers & IT appeals to you the most?
+  Q1551 -> rephrase of Q817: What aspect of cybersecurity interests you the most?
+  Q1731 -> rephrase of Q848: What excites you about architecture and interior design?
+  Q1821 -> rephrase of Q834: What tech trend are you most excited about for the future?
+  Q1851 -> rephrase of Q848: What excites you about architecture and interior design?
+  Q1881 -> rephrase of Q854: What type of landscape architecture project would you love t
+  Q2001 -> rephrase of Q901: NOT IN POOL
+  Q2061 -> rephrase of Q853: What interests you about geodetic engineering and surveying?
+  Q2066 -> rephrase of Q853: What interests you about geodetic engineering and surveying?
+  Q2091 -> rephrase of Q857: What interests you about aircraft maintenance and avionics?
+  Q2151 -> rephrase of Q859: What aspect of marine engineering would you want to speciali
+  Q2211 -> rephrase of Q871: What area of finance and banking interests you the most?
+  Q2271 -> rephrase of Q878: What style of management and administration appeals to you?
+  Q2301 -> rephrase of Q875: Which area of accounting would you want to specialize in?
+  Q2331 -> rephrase of Q876: What topic in economics fascinates you the most?
+  Q2541 -> rephrase of Q880: What part of human resource management interests you?
+  Q2576 -> rephrase of Q933: SCENARIO: You're making a short film for a competition. What
+  Q2651 -> rephrase of Q2636: What design discipline attracts you most?
+  Q2661 -> rephrase of Q2636: What design discipline attracts you most?
+  Q2666 -> rephrase of Q2636: What design discipline attracts you most?
+  Q2696 -> rephrase of Q2691: What excites you about advertising and graphic design?
+  Q2721 -> rephrase of Q943: What area of music production and audio work appeals to you?
+  Q2751 -> rephrase of Q943: What area of music production and audio work appeals to you?
+  Q2756 -> rephrase of Q943: What area of music production and audio work appeals to you?
+  Q2771 -> rephrase of Q936: What style of photography and visual arts appeals to you?
+  Q2811 -> rephrase of Q936: What style of photography and visual arts appeals to you?
+  Q2841 -> rephrase of Q934: What kind of writing and literature excites you?
+  Q2871 -> rephrase of Q940: What role in theater and performing arts interests you?
+  Q2901 -> rephrase of Q947: What aspect of clothing and textile technology interests you
+  Q2936 -> rephrase of Q959: What area of medicine and healthcare appeals to you most?
+  Q2961 -> rephrase of Q961: What draws you to nursing and patient care?
+  Q2966 -> rephrase of Q961: What draws you to nursing and patient care?
+  Q2996 -> rephrase of Q962: What aspect of psychology and mental health interests you?
+  Q3026 -> rephrase of Q975: What area of public health excites you?
+  Q3031 -> rephrase of Q975: What area of public health excites you?
+  Q3056 -> rephrase of Q964: What area of pharmacy and pharmaceutical science interests y
+  Q3086 -> rephrase of Q965: What draws you to physical therapy and rehabilitation?
+  Q3116 -> rephrase of Q967: What kind of medical technology and lab science work interes
+  Q3146 -> rephrase of Q966: What aspect of nutrition and dietetics excites you?
+  Q3176 -> rephrase of Q969: What kind of occupational therapy work appeals to you?
+  Q3181 -> rephrase of Q969: What kind of occupational therapy work appeals to you?
+  Q3206 -> rephrase of Q971: What aspect of respiratory therapy interests you?
+  Q3236 -> rephrase of Q970: What area of speech-language pathology interests you?
+  Q3241 -> rephrase of Q970: What area of speech-language pathology interests you?
+  Q3266 -> rephrase of Q968: What area of dentistry and oral health appeals to you?
+  Q3296 -> rephrase of Q972: What type of radiology and medical imaging work interests yo
+  Q3326 -> rephrase of Q973: What area of optometry and vision care appeals to you?
+  Q3356 -> rephrase of Q973: What area of optometry and vision care appeals to you?
+  Q3416 -> rephrase of Q989: What area of education and teaching excites you?
+  Q3421 -> rephrase of Q989: What area of education and teaching excites you?
+  Q3431 -> rephrase of Q988: NOT IN POOL
+  Q3481 -> rephrase of Q996: What type of communication and journalism work appeals to yo
+  Q3511 -> rephrase of Q991: What area of law and justice interests you?
+  Q3541 -> rephrase of Q992: What area of politics and government appeals to you?
+  Q3571 -> rephrase of Q998: What area of criminology and public safety interests you?
+  Q3601 -> rephrase of Q1002: What type of public administration work appeals to you?
+  Q3691 -> rephrase of Q1005: What area of linguistics and languages excites you?
+  Q3741 -> rephrase of Q1003: What aspect of international studies and diplomacy excites y
+  Q3771 -> rephrase of Q997: What draws you to philosophy and ethics?
+  Q3781 -> rephrase of Q997: What draws you to philosophy and ethics?
+  Q3801 -> rephrase of Q1001: What area of library and information science appeals to you?
+  Q3811 -> rephrase of Q988: NOT IN POOL
+  Q3871 -> rephrase of Q1008: What area of legal management interests you?
+  Q3891 -> rephrase of Q999: What draws you to early childhood education?
+  Q3901 -> rephrase of Q999: What draws you to early childhood education?
+  Q3921 -> rephrase of Q1079: What aspect of sports and fitness excites you the most?
+  Q3961 -> rephrase of Q1100: What area of exercise and sports science fascinates you?
+  Q3981 -> rephrase of Q1094: What draws you to forestry and natural resources?
+  Q4041 -> rephrase of Q1108: What type of tourism experience would you design?
+  Q4221 -> rephrase of Q1094: What draws you to forestry and natural resources?
+
+Saved to removed_full_data.json

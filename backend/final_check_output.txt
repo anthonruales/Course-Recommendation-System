@@ -1,0 +1,824 @@
+﻿[TREE] Loaded 45 decision tree questions across 13 domains
+[TREE] Navigation rules: 31 branch transitions
+[TREE] Validation questions: 10
+======================================================================
+  DUPLICATE / REDUNDANT QUESTION & OPTION DETECTOR
+======================================================================
+
+  Total questions: 1336
+  Total options:   8865
+
+----------------------------------------------------------------------
+  CHECK 1: Exact Duplicate Question Texts
+----------------------------------------------------------------------
+  PASS ù No exact duplicate question texts found.
+
+----------------------------------------------------------------------
+  CHECK 2: Near-Duplicate Question Texts (Jaccard >= 0.75)
+----------------------------------------------------------------------
+  PASS ù No near-duplicate question texts found.
+
+----------------------------------------------------------------------
+  CHECK 3: Option-Set Clones (identical option text sets)
+----------------------------------------------------------------------
+  PASS ù No option-set clones found.
+
+----------------------------------------------------------------------
+  CHECK 4: Trait-Fingerprint Clones (same primary traits >= 0.8)
+----------------------------------------------------------------------
+  PASS ù Trait-fingerprint clones exist but have sufficiently different text.
+
+----------------------------------------------------------------------
+  CHECK 5: Option-Level Duplicates Across Questions
+----------------------------------------------------------------------
+  FOUND 5 exact option duplicates (same text + same traits):
+
+    "watching videos and tutorials" [Artistic:0.2, Creative-Skill:0.4, Digital-Media:1.0...]
+      In: [(33, 327), (78, 772)]
+
+    "regular 9 5 office hours" [Admin-Skill:0.4, Analytical-Skill:0.3, Conventional:0.5...]
+      In: [(34, 334), (64, 631)]
+
+    "post about it on social media to find the owner" [Community-Serve:0.35, Creative-Skill:0.25, Digital-Media:1.0...]
+      In: [(86, 849), (115, 1142)]
+
+    "none of these interest me" [...]
+      In: [(121, 1210), (122, 1220), (123, 1230), (124, 1240), (125, 1250), (126, 1260), (127, 1270), (128, 1280), (129, 1289), (130, 1298), (131, 1309), (132, 1318), (133, 1329)]
+
+    "an educational game that teaches filipino history" [Game-Dev:1.0, People-Skill:0.36, Social:0.36...]
+      In: [(206, 2067), (262, 2625)]
+
+
+  FOUND 89 near-duplicate option pairs (Jaccard >= 0.80 + same traits):
+
+    Q33 vs Q78 (sim=100%)
+      A: "Watching videos and tutorials"
+      B: "Watching videos and tutorials"
+
+    Q34 vs Q64 (sim=100%)
+      A: "Regular 9-5 office hours"
+      B: "Regular 9-5 office hours"
+
+    Q86 vs Q115 (sim=100%)
+      A: "Post about it on social media to find the owner"
+      B: "Post about it on social media to find the owner"
+
+    Q121 vs Q122 (sim=100%)
+      A: "None of these interest me"
+      B: "None of these interest me"
+
+    Q121 vs Q123 (sim=100%)
+      A: "None of these interest me"
+      B: "None of these interest me"
+
+    Q121 vs Q124 (sim=100%)
+      A: "None of these interest me"
+      B: "None of these interest me"
+
+    Q121 vs Q125 (sim=100%)
+      A: "None of these interest me"
+      B: "None of these interest me"
+
+    Q121 vs Q126 (sim=100%)
+      A: "None of these interest me"
+      B: "None of these interest me"
+
+    Q121 vs Q127 (sim=100%)
+      A: "None of these interest me"
+      B: "None of these interest me"
+
+    Q121 vs Q128 (sim=100%)
+      A: "None of these interest me"
+      B: "None of these interest me"
+
+    Q121 vs Q129 (sim=100%)
+      A: "None of these interest me"
+      B: "None of these interest me"
+
+    Q121 vs Q130 (sim=100%)
+      A: "None of these interest me"
+      B: "None of these interest me"
+
+    Q121 vs Q131 (sim=100%)
+      A: "None of these interest me"
+      B: "None of these interest me"
+
+    Q121 vs Q132 (sim=100%)
+      A: "None of these interest me"
+      B: "None of these interest me"
+
+    Q121 vs Q133 (sim=100%)
+      A: "None of these interest me"
+      B: "None of these interest me"
+
+    Q122 vs Q123 (sim=100%)
+      A: "None of these interest me"
+      B: "None of these interest me"
+
+    Q122 vs Q124 (sim=100%)
+      A: "None of these interest me"
+      B: "None of these interest me"
+
+    Q122 vs Q125 (sim=100%)
+      A: "None of these interest me"
+      B: "None of these interest me"
+
+    Q122 vs Q126 (sim=100%)
+      A: "None of these interest me"
+      B: "None of these interest me"
+
+    Q122 vs Q127 (sim=100%)
+      A: "None of these interest me"
+      B: "None of these interest me"
+
+    ... and 69 more
+
+----------------------------------------------------------------------
+  CHECK 6: Runtime ù Answered Questions Never Reappear
+----------------------------------------------------------------------
+  Simulating 4 full assessments (30 questions each)...
+[OK] Using enhanced questions (8-10 options each)
+[ENGINE] Adaptive Engine initialized with 100 courses and 1336 questions
+[ENGINE] Pre-computed trait affinity for 1336 questions
+[ENGINE] Auto-classified 397 previously unclassified questions by category
+[ENGINE] Decision tree nodes classified: 4234 questions
+[PROFILE-SEED] Ranked profile traits: ['Software-Dev', 'Data-Analytics', 'Hardware-Systems', 'Web-Dev', 'Mechanical-Design', 'Cyber-Defense', 'Investigative', 'Technical-Skill', 'AI-ML', 'Hospitality-Svc']
+[TREE] Initial branch weights from profile: {'technology': 16.3, 'engineering': 2.2, 'science': 1.8, 'creative': 1.8, 'hospitality': 1.2, 'physical': 0.6}
+[PROFILE] Category keywords: ['AI & Machine Learning', 'Advertising & Graphic Arts', 'Art & Design', 'Computer Networking', 'Computers & IT', 'Cybersecurity', 'Data & Analytics', 'Database & Information']
+[PROFILE] Matching QIDs: 70 questions in profile pool
+[CHAIN] Primary domain: technology (votes: {'technology': 13, 'creative': 1})
+[CHAIN] Relevant domains: ['creative', 'technology']
+[CHAIN] Domain queue: ['technology', 'creative']
+[CHAIN] Initial chain: [1436, 1441, 1446, 1451, 816]
+[SESSION] Created adaptive session 238c1146 for user 100 (strand: TVL, questions: 30, interests: True, skills: True)
+[LOCK-REDIRECT] Redirecting to dominant domain 'technology' (weight gap: 12.0, recent: 0)
+[CHAIN-EXPLORE] Round 1: Q1436 cat='Academic Interest - Programming & Coding' ù chain queue (domain entry)
+[ANSWER] Q1436 answered. Total answers=1, round=1, excluded=1
+[CHAIN] Answer trait=Web-Dev (dominant) -> follow-up chain: [1641, 823, 824, 1656, 1661]
+[CHAIN-EXPLORE] Round 2: Q1641 cat='Academic Interest - Web & Mobile Technologies' ù follow-up from trait Web-Dev (profile match)
+[ANSWER] Q1641 answered. Total answers=2, round=2, excluded=2
+[CHAIN] Answer trait=Web-Dev (dominant) -> follow-up chain: [823, 824, 1656, 1661, 828]
+[INTENT-DIV] Swapped to Q824 (intent=SKILL) to avoid repeating WHICH_PART
+[CHAIN-EXPLORE] Round 3: Q824 cat='Academic Interest - Web & Mobile Technologies' ù follow-up from trait Web-Dev (profile match)
+[ANSWER] Q824 answered. Total answers=3, round=3, excluded=3
+[CHAIN] Answer trait=Web-Dev (dominant) -> follow-up chain: [823, 1656, 1661, 828, 522]
+[INTENT-DIV] Swapped to Q1656 (intent=SCENARIO) to avoid repeating SKILL
+[CHAIN-EXPLORE] Round 4: Q1656 cat='Academic Interest - Web & Mobile Technologies' ù follow-up from trait Web-Dev (category focus)
+[ANSWER] Q1656 answered. Total answers=4, round=4, excluded=4
+[CHAIN] Answer trait=People-Skill (dominant) -> follow-up chain: [1766, 1771, 1781, 1581, 1596]
+[LOCK-REDIRECT] Redirecting to dominant domain 'technology' (weight gap: 17.0, recent: 3)
+[ROTATE-BYPASS] Keeping domain 'technology' active because it remains strongly dominant.
+[DEDUP] Swapped Q with semantic-duplicate -> Q218
+[CHAIN-DEEP] Round 5: Q218 cat='Situational - Data Analytics' ù follow-up from trait People-Skill (category focus)
+[ANSWER] Q218 answered. Total answers=5, round=5, excluded=5
+[CHAIN] Answer trait=Data-Analytics (dominant) -> follow-up chain: [2691, 2701, 2706, 2711, 2716]
+[DEDUP] Swapped Q with semantic-duplicate -> Q521
+[CHAIN-DEEP] Round 6: Q521 cat='Interest - Data Analytics' ù follow-up from trait Data-Analytics (category focus)
+[ANSWER] Q521 answered. Total answers=6, round=6, excluded=6
+[CHAIN] Answer trait=Data-Analytics (dominant) -> follow-up chain: [2691, 2701, 2706, 2711, 2716]
+[DEDUP] Swapped Q with semantic-duplicate -> Q809
+[CHAIN-EXPLORE] Round 7: Q809 cat='Academic Interest - Programming & Coding' ù follow-up from trait Data-Analytics (category focus)
+[ANSWER] Q809 answered. Total answers=7, round=7, excluded=7
+[CHAIN] Answer trait=Software-Dev (dominant) -> follow-up chain: [2631, 2636, 2641, 2691, 2701]
+[INTENT-DIV] Swapped to Q1661 (intent=ENVIRONMENT) to avoid repeating INTEREST
+[DEDUP] Swapped Q with semantic-duplicate -> Q810
+[CHAIN-EXPLORE] Round 8: Q810 cat='Academic Interest - Programming & Coding' ù follow-up from trait Software-Dev (category focus)
+[ANSWER] Q810 answered. Total answers=8, round=8, excluded=8
+[CHAIN] Answer trait=Software-Dev (dominant) -> follow-up chain: [2631, 2636, 2641, 2691, 2701]
+[INTENT-DIV] Swapped to Q1446 (intent=ENVIRONMENT) to avoid repeating SKILL
+[DEDUP] Swapped Q with semantic-duplicate -> Q811
+[CHAIN-EXPLORE] Round 9: Q811 cat='Academic Interest - Computers & IT' ù follow-up from trait Software-Dev (category focus)
+[ANSWER] Q811 answered. Total answers=9, round=9, excluded=9
+[CHAIN] Answer trait=Hardware-Systems (dominant) -> follow-up chain: [827, 1676, 1686, 1691, 1466]
+[INTENT-DIV] Swapped to Q1676 (intent=BUILD) to avoid repeating WHICH_PART
+[CHAIN-EXPLORE] Round 10: Q1676 cat='Academic Interest - Computer Networking' ù follow-up from trait Hardware-Systems (profile match)
+[ANSWER] Q1676 answered. Total answers=10, round=10, excluded=10
+[CHAIN] Answer trait=Cloud-Systems is MINORITY (dominant: ['Analytical-Skill', 'Data-Analytics', 'Software-Dev', 'Technical-Skill', 'Web-Dev']). Keeping existing chain for continuity.
+[GUARD] Skipping chain for minority trait 'Cloud-Systems' (not in dominant pattern: ['Analytical-Skill', 'Data-Analytics', 'Software-Dev', 'Technical-Skill', 'Web-Dev'])
+[INTENT-DIV] Swapped to Q1686 (intent=SCENARIO) to avoid repeating BUILD
+[CHAIN-EXPLORE] Round 11: Q1686 cat='Academic Interest - Computer Networking' ù chain queue (domain entry)
+[ANSWER] Q1686 answered. Total answers=11, round=11, excluded=11
+[CHAIN] Answer trait=Community-Serve is MINORITY (dominant: ['Analytical-Skill', 'Data-Analytics', 'Software-Dev', 'Technical-Skill', 'Web-Dev']). Keeping existing chain for continuity.
+[GUARD] Skipping chain for minority trait 'Community-Serve' (not in dominant pattern: ['Analytical-Skill', 'Data-Analytics', 'Software-Dev', 'Technical-Skill', 'Web-Dev'])
+[INTENT-DIV] Swapped to Q1681 (intent=SKILL) to avoid repeating SCENARIO
+[CHAIN-EXPLORE] Round 12: Q1681 cat='Academic Interest - Computer Networking' ù chain queue (domain entry)
+[ANSWER] Q1681 answered. Total answers=12, round=12, excluded=12
+[CHAIN] Answer trait=Technical-Skill (dominant) -> follow-up chain: [830, 1766, 1781, 1586, 1591]
+[DEDUP] Swapped Q with semantic-duplicate -> Q812
+[CHAIN-EXPLORE] Round 13: Q812 cat='Academic Interest - Computers & IT' ù follow-up from trait Technical-Skill (category focus)
+[ANSWER] Q812 answered. Total answers=13, round=13, excluded=13
+[CHAIN] Answer trait=Hardware-Systems (dominant) -> follow-up chain: [827, 1691, 1466, 1471, 1476]
+[DEDUP] Swapped Q with semantic-duplicate -> Q814
+[CHAIN-EXPLORE] Round 14: Q814 cat='Academic Interest - Data & Analytics' ù follow-up from trait Hardware-Systems (category focus)
+[ANSWER] Q814 answered. Total answers=14, round=14, excluded=14
+[CHAIN] Answer trait=Data-Analytics (dominant) -> follow-up chain: [2691, 2701, 2706, 2711, 2716]
+[DEDUP] Swapped Q with semantic-duplicate -> Q815
+[CHAIN-EXPLORE] Round 15: Q815 cat='Academic Interest - AI & Machine Learning' ù follow-up from trait Data-Analytics (category focus)
+[ANSWER] Q815 answered. Total answers=15, round=15, excluded=15
+[CHAIN] Answer trait=AI-ML is MINORITY (dominant: ['Analytical-Skill', 'Data-Analytics', 'Software-Dev', 'Technical-Skill', 'Web-Dev']). Keeping existing chain for continuity.
+[GUARD] Skipping chain for minority trait 'AI-ML' (not in dominant pattern: ['Analytical-Skill', 'Data-Analytics', 'Software-Dev', 'Technical-Skill', 'Web-Dev'])
+[DEDUP] Swapped Q with semantic-duplicate -> Q819
+[CHAIN-EXPLORE] Round 16: Q819 cat='Academic Interest - Robotics & Automation' ù chain queue (domain entry)
+[ANSWER] Q819 answered. Total answers=16, round=16, excluded=16
+[CHAIN] Answer trait=Hardware-Systems (dominant) -> follow-up chain: [827, 1691, 1466, 1471, 1476]
+[DEDUP] Swapped Q with semantic-duplicate -> Q820
+[CHAIN-EXPLORE] Round 17: Q820 cat='Academic Interest - Robotics & Automation' ù follow-up from trait Hardware-Systems (category focus)
+[ANSWER] Q820 answered. Total answers=17, round=17, excluded=17
+[CHAIN] Answer trait=Software-Dev (dominant) -> follow-up chain: [2631, 2636, 2641, 2691, 2701]
+[CHAIN-EXPLORE] Round 18: Q1521 cat='Academic Interest - Robotics & Automation' ù follow-up from trait Software-Dev (category focus)
+[ANSWER] Q1521 answered. Total answers=18, round=18, excluded=18
+[CHAIN] Answer trait=Hardware-Systems (dominant) -> follow-up chain: [827, 1691, 1466, 1471, 1476]
+[DEDUP] Swapped Q with semantic-duplicate -> Q829
+[CHAIN-EXPLORE] Round 19: Q829 cat='Academic Interest - Software Engineering' ù follow-up from trait Hardware-Systems (category focus)
+[ANSWER] Q829 answered. Total answers=19, round=19, excluded=19
+[CHAIN] Answer trait=Web-Dev (dominant) -> follow-up chain: [823, 1661, 828, 522, 263]
+[DEDUP] Swapped Q with semantic-duplicate -> Q830
+[CHAIN-EXPLORE] Round 20: Q830 cat='Academic Interest - Database & Information Systems' ù follow-up from trait Web-Dev (profile match)
+[ANSWER] Q830 answered. Total answers=20, round=20, excluded=20
+[CHAIN] Answer trait=Data-Analytics (dominant) -> follow-up chain: [2691, 2701, 2706, 2711, 2716]
+[CHAIN-EXPLORE] Round 21: Q2691 cat='Academic Interest - Advertising & Graphic Arts' ù follow-up from trait Data-Analytics (profile match)
+[ANSWER] Q2691 answered. Total answers=21, round=21, excluded=21
+[CHAIN] Answer trait=Visual-Design is MINORITY (dominant: ['Data-Analytics', 'Hardware-Systems', 'Software-Dev', 'Technical-Skill', 'Web-Dev']). Keeping existing chain for continuity.
+[GUARD] Skipping chain for minority trait 'Visual-Design' (not in dominant pattern: ['Data-Analytics', 'Hardware-Systems', 'Software-Dev', 'Technical-Skill', 'Web-Dev'])
+[CHAIN-EXPLORE] Round 22: Q2701 cat='Academic Interest - Advertising & Graphic Arts' ù chain queue (domain entry)
+[ANSWER] Q2701 answered. Total answers=22, round=22, excluded=22
+[CHAIN] Answer trait=Software-Dev (dominant) -> follow-up chain: [2631, 2636, 2641, 2706, 2711]
+[CHAIN-EXPLORE] Round 23: Q2706 cat='Academic Interest - Advertising & Graphic Arts' ù follow-up from trait Software-Dev (category focus)
+[ANSWER] Q2706 answered. Total answers=23, round=23, excluded=23
+[CHAIN] Answer trait=Community-Serve is MINORITY (dominant: ['Data-Analytics', 'Hardware-Systems', 'Software-Dev', 'Technical-Skill', 'Web-Dev']). Keeping existing chain for continuity.
+[EXPAND] Domain 'public_service' added to relevant domains (picked 2x)
+[GUARD] Skipping chain for minority trait 'Community-Serve' (not in dominant pattern: ['Data-Analytics', 'Hardware-Systems', 'Software-Dev', 'Technical-Skill', 'Web-Dev'])
+[DEDUP] Swapped Q with semantic-duplicate -> Q1466
+[CHAIN-EXPLORE] Round 24: Q1466 cat='Academic Interest - Computers & IT' ù chain queue (domain entry)
+[ANSWER] Q1466 answered. Total answers=24, round=24, excluded=24
+[CHAIN] Answer trait=People-Skill is MINORITY (dominant: ['Data-Analytics', 'Hardware-Systems', 'Software-Dev', 'Technical-Skill', 'Web-Dev']). Keeping existing chain for continuity.
+[EXPAND] Domain 'social' added to relevant domains (picked 2x)
+[GUARD] Skipping chain for minority trait 'People-Skill' (not in dominant pattern: ['Data-Analytics', 'Hardware-Systems', 'Software-Dev', 'Technical-Skill', 'Web-Dev'])
+[DEDUP] Swapped Q with semantic-duplicate -> Q1496
+[CHAIN-EXPLORE] Round 25: Q1496 cat='Academic Interest - AI & Machine Learning' ù chain queue (domain entry)
+[ANSWER] Q1496 answered. Total answers=25, round=25, excluded=25
+[CHAIN] Answer trait=AI-ML is MINORITY (dominant: ['Data-Analytics', 'Hardware-Systems', 'Software-Dev', 'Technical-Skill', 'Web-Dev']). Keeping existing chain for continuity.
+[GUARD] Skipping chain for minority trait 'AI-ML' (not in dominant pattern: ['Data-Analytics', 'Hardware-Systems', 'Software-Dev', 'Technical-Skill', 'Web-Dev'])
+[DEDUP] Swapped Q with semantic-duplicate -> Q1501
+[CHAIN-EXPLORE] Round 26: Q1501 cat='Academic Interest - AI & Machine Learning' ù chain queue (domain entry)
+[ANSWER] Q1501 answered. Total answers=26, round=26, excluded=26
+[CHAIN] Answer trait=Data-Analytics (dominant) -> follow-up chain: [2711, 2716, 1771, 1776, 1581]
+[DEDUP] Swapped Q with semantic-duplicate -> Q1581
+[CHAIN-EXPLORE] Round 27: Q1581 cat='Academic Interest - Data & Analytics' ù follow-up from trait Data-Analytics (category focus)
+[ANSWER] Q1581 answered. Total answers=27, round=27, excluded=27
+[CHAIN] Answer trait=Data-Analytics (dominant) -> follow-up chain: [2711, 2716, 1771, 1776, 1586]
+[ROTATE-BYPASS] Keeping domain 'technology' active because it remains strongly dominant.
+[INTENT-DIV] Swapped to Q1506 (intent=SCENARIO) to avoid repeating WHICH_PART
+[DEDUP] Swapped Q with semantic-duplicate -> Q1586
+[CHAIN-EXPLORE] Round 28: Q1586 cat='Academic Interest - Data & Analytics' ù follow-up from trait Data-Analytics (category focus)
+[ANSWER] Q1586 answered. Total answers=28, round=28, excluded=28
+[CHAIN] Answer trait=Data-Analytics (dominant) -> follow-up chain: [2711, 2716, 1771, 1776, 1591]
+[ROTATE-BYPASS] Keeping domain 'technology' active because it remains strongly dominant.
+[INTENT-DIV] Swapped to Q1506 (intent=SCENARIO) to avoid repeating BUILD
+[DEDUP] Swapped Q with semantic-duplicate -> Q1706
+[CHAIN-EXPLORE] Round 29: Q1706 cat='Academic Interest - Software Engineering' ù follow-up from trait Data-Analytics (category focus)
+[ANSWER] Q1706 answered. Total answers=29, round=29, excluded=29
+[CHAIN] Answer trait=Cloud-Systems is MINORITY (dominant: ['Data-Analytics', 'Hardware-Systems', 'Software-Dev', 'Technical-Skill', 'Web-Dev']). Keeping existing chain for continuity.
+[ROTATE-BYPASS] Keeping domain 'technology' active because it remains strongly dominant.
+[GUARD] Skipping chain for minority trait 'Cloud-Systems' (not in dominant pattern: ['Data-Analytics', 'Hardware-Systems', 'Software-Dev', 'Technical-Skill', 'Web-Dev'])
+[DEDUP] Swapped Q with semantic-duplicate -> Q1711
+[CHAIN-EXPLORE] Round 30: Q1711 cat='Academic Interest - Software Engineering' ù chain queue (domain entry)
+[ANSWER] Q1711 answered. Total answers=30, round=30, excluded=30
+[CHAIN] Answer trait=Software-Dev (dominant) -> follow-up chain: [2631, 2636, 2641, 2711, 2716]
+[OK_GREEN] FINALIZE SESSION CALLED - session_id: 238c1146
+[OK_GREEN] Total courses scored: 100
+[OK_GREEN] Top 5 courses: [('BS Computer Science', 643.9284479452054), ('BS Information Technology', 622.177855205479), ('BS Data Science', 417.7011599999997), ('BS Computer Engineering', 379.15224630136964), ('BS Electronics Engineering', 379.15224630136964)]
+[OK_GREEN] Generated 6 recommendations
+[OK_GREEN] Recommendation course names: ['BS Computer Science', 'BS Information Technology', 'BS Data Science', 'BS Computer Engineering', 'BS Electronics Engineering', 'BS Statistics']
+[OK] Session 238c1146 complete after 30 questions
+[PROFILE-SEED] Ranked profile traits: ['Patient-Care', 'Lab-Research', 'Medical-Lab', 'Software-Dev', 'Hardware-Systems', 'Rehab-Therapy', 'Analytical', 'Investigative', 'Scientific', 'Math-Logic']
+[TREE] Initial branch weights from profile: {'healthcare': 7.6, 'technology': 5.4, 'science': 4.4, 'physical': 1.0, 'engineering': 0.1, 'business': 0.1}
+[PROFILE] Category keywords: ['Biology & Life Sciences', 'Nursing & Patient Care']
+[PROFILE] Matching QIDs: 11 questions in profile pool
+[CHAIN] Primary domain: healthcare (votes: {'healthcare': 4, 'science': 3})
+[CHAIN] Relevant domains: ['healthcare', 'science']
+[CHAIN] Domain queue: ['healthcare', 'science']
+[CHAIN] Initial chain: [2971, 2981]
+[SESSION] Created adaptive session 20347fd3 for user 101 (strand: STEM, questions: 30, interests: True, skills: True)
+[CHAIN-DEEP] Round 1: Q2971 cat='Academic Interest - Nursing & Patient Care' ù chain queue (domain entry)
+[ANSWER] Q2971 answered. Total answers=1, round=1, excluded=1
+[CHAIN] Answer trait=Analytical-Skill (dominant) -> follow-up chain: [1100, 4061, 1098, 1001, 1008]
+[CHAIN-EXPLORE] Round 2: Q961 cat='Academic Interest - Nursing & Patient Care' ù category focus (Nursing & Patient Care)
+[ANSWER] Q961 answered. Total answers=2, round=2, excluded=2
+[CHAIN] Answer trait=Patient-Care (dominant) -> follow-up chain: [2981, 2986, 3291, 3301, 3311]
+[CHAIN-DEEP] Round 3: Q2981 cat='Academic Interest - Nursing & Patient Care' ù follow-up from trait Patient-Care (category focus)
+[ANSWER] Q2981 answered. Total answers=3, round=3, excluded=3
+[CHAIN] Answer trait=Health-Admin (dominant) -> follow-up chain: [2986, 3291, 3301, 3311, 3316]
+[DEDUP] Swapped Q with semantic-duplicate -> Q781
+[CHAIN-EXPLORE] Round 4: Q781 cat='Academic Interest - Biology & Life Sciences' ù follow-up from trait Health-Admin (category focus)
+[ANSWER] Q781 answered. Total answers=4, round=4, excluded=4
+[CHAIN] Answer trait=Medical-Lab (dominant) -> follow-up chain: [3291, 3301, 3311, 3316, 3321]
+[DEDUP] Swapped Q with semantic-duplicate -> Q782
+[CHAIN-EXPLORE] Round 5: Q782 cat='Academic Interest - Biology & Life Sciences' ù category focus (Nursing & Patient Care)
+[ANSWER] Q782 answered. Total answers=5, round=5, excluded=5
+[CHAIN] Answer trait=Medical-Lab (dominant) -> follow-up chain: [3291, 3301, 3311, 3316, 3321]
+[DEDUP] Swapped Q with semantic-duplicate -> Q1197
+[CHAIN-EXPLORE] Round 6: Q1197 cat='Academic Interest - Biology & Life Sciences' ù category focus (Nursing & Patient Care)
+[ANSWER] Q1197 answered. Total answers=6, round=6, excluded=6
+[CHAIN] Answer trait=Medical-Lab (dominant) -> follow-up chain: [3291, 3301, 3311, 3316, 3321]
+[DEDUP] Swapped Q (profile priority, relaxed category) -> Q1205
+[CHAIN-EXPLORE] Round 7: Q1205 cat='Academic Interest - Biology & Life Sciences' ù category focus (Biology & Life Sciences)
+[ANSWER] Q1205 answered. Total answers=7, round=7, excluded=7
+[CHAIN] Answer trait=Field-Research is MINORITY (dominant: ['Analytical-Skill', 'Investigative', 'Lab-Research', 'Medical-Lab', 'Patient-Care']). Keeping existing chain for continuity.
+[GUARD] Skipping chain for minority trait 'Field-Research' (not in dominant pattern: ['Analytical-Skill', 'Investigative', 'Lab-Research', 'Medical-Lab', 'Patient-Care'])
+[DEDUP] Swapped Q (profile priority, relaxed category) -> Q1209
+[CHAIN-EXPLORE] Round 8: Q1209 cat='Academic Interest - Biology & Life Sciences' ù category focus (Biology & Life Sciences)
+[ANSWER] Q1209 answered. Total answers=8, round=8, excluded=8
+[CHAIN] Answer trait=Lab-Research (dominant) -> follow-up chain: [1084, 3291, 3301, 3311, 3316]
+[LOCK-REDIRECT] Redirecting to dominant domain 'healthcare' (weight gap: 5.3, recent: 2)
+[DEDUP] Swapped Q (profile priority, relaxed category) -> Q1217
+[CHAIN-EXPLORE] Round 9: Q1217 cat='Academic Interest - Biology & Life Sciences' ù category focus (Biology & Life Sciences)
+[ANSWER] Q1217 answered. Total answers=9, round=9, excluded=9
+[CHAIN] Answer trait=Field-Research (dominant) -> follow-up chain: [2096, 2101, 2106, 1831, 1911]
+[EXPAND] Domain 'agriculture' added to relevant domains (picked 2x)
+[LOCK-REDIRECT] Redirecting to dominant domain 'healthcare' (weight gap: 4.4, recent: 1)
+[ROTATE-BYPASS] Keeping domain 'healthcare' active because it remains strongly dominant.
+[DEDUP] Swapped Q (profile priority, relaxed category) -> Q2986
+[CHAIN-DEEP] Round 10: Q2986 cat='Academic Interest - Nursing & Patient Care' ù category focus (Biology & Life Sciences)
+[ANSWER] Q2986 answered. Total answers=10, round=10, excluded=10
+[CHAIN] Answer trait=Patient-Care (dominant) -> follow-up chain: [3291, 3301, 3311, 3316, 3321]
+[DEDUP] No unique replacement for Q1201, skipping
+[CHAIN-ENTRY] Round 11: Q122 cat='Domain Entry - Healthcare' ù fallback scoring with continuity (score=42.9)
+[ANSWER] Q122 answered. Total answers=11, round=11, excluded=12
+[CHAIN] Answer trait=Patient-Care (dominant) -> follow-up chain: [3291, 3301, 3311, 3316, 3321]
+[CHAIN-DEEP] Round 12: Q3291 cat='Academic Interest - Radiology & Imaging' ù chain queue (domain entry)
+[ANSWER] Q3291 answered. Total answers=12, round=12, excluded=13
+[CHAIN] Answer trait=Technical-Skill is MINORITY (dominant: ['Analytical-Skill', 'Field-Research', 'Lab-Research', 'Medical-Lab', 'Patient-Care']). Keeping existing chain for continuity.
+[EXPAND] Domain 'technology' added to relevant domains (picked 2x)
+[GUARD] Skipping chain for minority trait 'Technical-Skill' (not in dominant pattern: ['Analytical-Skill', 'Field-Research', 'Lab-Research', 'Medical-Lab', 'Patient-Care'])
+[CHAIN-DEEP] Round 13: Q3301 cat='Academic Interest - Radiology & Imaging' ù chain queue (domain entry)
+[ANSWER] Q3301 answered. Total answers=13, round=13, excluded=14
+[CHAIN] Answer trait=Technical-Skill (dominant) -> follow-up chain: [4161, 989, 3391, 3471, 996]
+[LOCK-REDIRECT] Redirecting to dominant domain 'healthcare' (weight gap: 7.1, recent: 2)
+[ROTATE-BYPASS] Keeping domain 'healthcare' active because it remains strongly dominant.
+[CHAIN-DEEP] Round 14: Q3311 cat='Academic Interest - Radiology & Imaging' ù chain queue (domain entry)
+[ANSWER] Q3311 answered. Total answers=14, round=14, excluded=15
+[CHAIN] Answer trait=Analytical-Skill (dominant) -> follow-up chain: [1100, 4061, 1098, 1001, 1008]
+[LOCK-REDIRECT] Redirecting to dominant domain 'healthcare' (weight gap: 6.6, recent: 1)
+[ROTATE-BYPASS] Keeping domain 'healthcare' active because it remains strongly dominant.
+[DEDUP] Swapped Q with semantic-duplicate -> Q1
+[CHAIN-ENTRY] Round 15: Q1 cat='Dream Career' ù chain queue (domain entry)
+[ANSWER] Q1 answered. Total answers=15, round=15, excluded=16
+[CHAIN] Answer trait=Patient-Care (dominant) -> follow-up chain: [3316, 3321, 3331, 3341, 3346]
+[ROTATE-BYPASS] Keeping domain 'healthcare' active because it remains strongly dominant.
+[DEDUP] Swapped Q with semantic-duplicate -> Q2
+[CHAIN-ENTRY] Round 16: Q2 cat='Work Environment' ù chain queue (domain entry)
+[ANSWER] Q2 answered. Total answers=16, round=16, excluded=17
+[CHAIN] Answer trait=Patient-Care (dominant) -> follow-up chain: [3316, 3321, 3331, 3341, 3346]
+[ROTATE-BYPASS] Keeping domain 'healthcare' active because it remains strongly dominant.
+[DEDUP] Swapped Q with semantic-duplicate -> Q3
+[CHAIN-ENTRY] Round 17: Q3 cat='Daily Work' ù chain queue (domain entry)
+[ANSWER] Q3 answered. Total answers=17, round=17, excluded=18
+[CHAIN] Answer trait=Patient-Care (dominant) -> follow-up chain: [3316, 3321, 3331, 3341, 3346]
+[ROTATE-BYPASS] Keeping domain 'healthcare' active because it remains strongly dominant.
+[DEDUP] Swapped Q with semantic-duplicate -> Q4
+[CHAIN-ENTRY] Round 18: Q4 cat='Skill Mastery' ù chain queue (domain entry)
+[ANSWER] Q4 answered. Total answers=18, round=18, excluded=19
+[CHAIN] Answer trait=Patient-Care (dominant) -> follow-up chain: [3316, 3321, 3331, 3341, 3346]
+[ROTATE-BYPASS] Keeping domain 'healthcare' active because it remains strongly dominant.
+[DEDUP] Swapped Q with semantic-duplicate -> Q5
+[CHAIN-ENTRY] Round 19: Q5 cat='Career Achievement' ù chain queue (domain entry)
+[ANSWER] Q5 answered. Total answers=19, round=19, excluded=20
+[CHAIN] Answer trait=Patient-Care (dominant) -> follow-up chain: [3316, 3321, 3331, 3341, 3346]
+[ROTATE-BYPASS] Keeping domain 'healthcare' active because it remains strongly dominant.
+[DEDUP] Swapped Q with semantic-duplicate -> Q23
+[CHAIN-CONFIRM] Round 20: Q23 cat='Situational - Emergency' ù chain queue (domain entry)
+[ANSWER] Q23 answered. Total answers=20, round=20, excluded=21
+[CHAIN] Answer trait=Patient-Care (dominant) -> follow-up chain: [3316, 3321, 3331, 3341, 3346]
+[ROTATE-BYPASS] Keeping domain 'healthcare' active because it remains strongly dominant.
+[INTENT-DIV] Swapped to Q972 (intent=INTEREST) to avoid repeating SCENARIO
+[DEDUP] Swapped Q with semantic-duplicate -> Q24
+[CHAIN-CONFIRM] Round 21: Q24 cat='Situational - Teamwork' ù chain queue (domain entry)
+[ANSWER] Q24 answered. Total answers=21, round=21, excluded=22
+[CHAIN] Answer trait=People-Skill (dominant) -> follow-up chain: [4151, 4161, 1098, 4061, 3786]
+[LOCK-REDIRECT] Redirecting to dominant domain 'healthcare' (weight gap: 18.1, recent: 3)
+[ROTATE-BYPASS] Keeping domain 'healthcare' active because it remains strongly dominant.
+[CHAIN-DEEP] Round 22: Q4161 cat='Academic Interest - Technical-Vocational Training' ù chain queue (domain entry)
+[ANSWER] Q4161 answered. Total answers=22, round=22, excluded=23
+[CHAIN] Answer trait=Teaching-Ed is MINORITY (dominant: ['Analytical-Skill', 'Lab-Research', 'Medical-Lab', 'Patient-Care', 'People-Skill']). Keeping existing chain for continuity.
+[LOCK-REDIRECT] Redirecting to dominant domain 'healthcare' (weight gap: 18.6, recent: 2)
+[ROTATE-BYPASS] Keeping domain 'healthcare' active because it remains strongly dominant.
+[GUARD] Skipping chain for minority trait 'Teaching-Ed' (not in dominant pattern: ['Analytical-Skill', 'Lab-Research', 'Medical-Lab', 'Patient-Care', 'People-Skill'])
+[CHAIN-EXPLORE] Round 23: Q1001 cat='Academic Interest - Library & Information Science' ù chain queue (domain entry)
+[ANSWER] Q1001 answered. Total answers=23, round=23, excluded=24
+[CHAIN] Answer trait=Conventional is MINORITY (dominant: ['Analytical-Skill', 'Medical-Lab', 'Patient-Care', 'People-Skill', 'Technical-Skill']). Keeping existing chain for continuity.
+[LOCK-REDIRECT] Redirecting to dominant domain 'healthcare' (weight gap: 18.4, recent: 1)
+[ROTATE-BYPASS] Keeping domain 'healthcare' active because it remains strongly dominant.
+[GUARD] Skipping chain for minority trait 'Conventional' (not in dominant pattern: ['Analytical-Skill', 'Medical-Lab', 'Patient-Care', 'People-Skill', 'Technical-Skill'])
+[CHAIN-EXPLORE] Round 24: Q1008 cat='Academic Interest - Legal Management' ù chain queue (domain entry)
+[ANSWER] Q1008 answered. Total answers=24, round=24, excluded=25
+[CHAIN] Answer trait=Admin-Skill is MINORITY (dominant: ['Analytical-Skill', 'Medical-Lab', 'Patient-Care', 'People-Skill', 'Technical-Skill']). Keeping existing chain for continuity.
+[EXPAND] Domain 'business' added to relevant domains (picked 2x)
+[LOCK-REDIRECT] Redirecting to dominant domain 'healthcare' (weight gap: 18.4, recent: 0)
+[ROTATE-BYPASS] Keeping domain 'healthcare' active because it remains strongly dominant.
+[GUARD] Skipping chain for minority trait 'Admin-Skill' (not in dominant pattern: ['Analytical-Skill', 'Medical-Lab', 'Patient-Care', 'People-Skill', 'Technical-Skill'])
+[INTENT-DIV] Swapped to Q3666 (intent=CAREER) to avoid repeating INTEREST
+[CHAIN-DEEP] Round 25: Q3666 cat='Academic Interest - Community Development' ù chain queue (domain entry)
+[ANSWER] Q3666 answered. Total answers=25, round=25, excluded=26
+[CHAIN] Answer trait=Community-Serve is MINORITY (dominant: ['Analytical-Skill', 'Medical-Lab', 'Patient-Care', 'People-Skill', 'Technical-Skill']). Keeping existing chain for continuity.
+[LOCK-REDIRECT] Redirecting to dominant domain 'healthcare' (weight gap: 18.9, recent: 0)
+[ROTATE-BYPASS] Keeping domain 'healthcare' active because it remains strongly dominant.
+[GUARD] Skipping chain for minority trait 'Community-Serve' (not in dominant pattern: ['Analytical-Skill', 'Medical-Lab', 'Patient-Care', 'People-Skill', 'Technical-Skill'])
+[INTENT-DIV] Swapped to Q3671 (intent=CROSS_FIELD) to avoid repeating CAREER
+[DEDUP] Swapped Q with semantic-duplicate -> Q25
+[CHAIN-CONFIRM] Round 26: Q25 cat='Situational - Accident' ù chain queue (domain entry)
+[ANSWER] Q25 answered. Total answers=26, round=26, excluded=27
+[CHAIN] Answer trait=Patient-Care (dominant) -> follow-up chain: [3316, 3321, 3331, 3341, 3346]
+[ROTATE-BYPASS] Keeping domain 'healthcare' active because it remains strongly dominant.
+[DEDUP] Swapped Q with semantic-duplicate -> Q26
+[CHAIN-EXPLORE] Round 27: Q26 cat='Scale - Math' ù chain queue (domain entry)
+[ANSWER] Q26 answered. Total answers=27, round=27, excluded=28
+[CHAIN] Answer trait=Data-Analytics is MINORITY (dominant: ['Analytical-Skill', 'Lab-Research', 'Medical-Lab', 'Patient-Care', 'People-Skill']). Keeping existing chain for continuity.
+[ROTATE-BYPASS] Keeping domain 'healthcare' active because it remains strongly dominant.
+[GUARD] Skipping chain for minority trait 'Data-Analytics' (not in dominant pattern: ['Analytical-Skill', 'Lab-Research', 'Medical-Lab', 'Patient-Care', 'People-Skill'])
+[INTENT-DIV] Swapped to Q972 (intent=INTEREST) to avoid repeating GENERAL
+[DEDUP] Swapped Q with semantic-duplicate -> Q27
+[CHAIN-EXPLORE] Round 28: Q27 cat='Scale - Stress' ù chain queue (domain entry)
+[ANSWER] Q27 answered. Total answers=28, round=28, excluded=29
+[CHAIN] Answer trait=Patient-Care (dominant) -> follow-up chain: [3316, 3321, 3331, 3341, 3346]
+[ROTATE-BYPASS] Keeping domain 'healthcare' active because it remains strongly dominant.
+[INTENT-DIV] Swapped to Q972 (intent=INTEREST) to avoid repeating GENERAL
+[DEDUP] Swapped Q with semantic-duplicate -> Q28
+[CHAIN-EXPLORE] Round 29: Q28 cat='Scale - Communication' ù chain queue (domain entry)
+[ANSWER] Q28 answered. Total answers=29, round=29, excluded=30
+[CHAIN] Answer trait=Marketing-Sales is MINORITY (dominant: ['Analytical-Skill', 'Medical-Lab', 'Patient-Care', 'People-Skill', 'Social']). Keeping existing chain for continuity.
+[ROTATE-BYPASS] Keeping domain 'healthcare' active because it remains strongly dominant.
+[GUARD] Skipping chain for minority trait 'Marketing-Sales' (not in dominant pattern: ['Analytical-Skill', 'Medical-Lab', 'Patient-Care', 'People-Skill', 'Social'])
+[DEDUP] Swapped Q with semantic-duplicate -> Q29
+[CHAIN-EXPLORE] Round 30: Q29 cat='Scale - Physical' ù chain queue (domain entry)
+[ANSWER] Q29 answered. Total answers=30, round=30, excluded=31
+[CHAIN] Answer trait=Physical-Skill is MINORITY (dominant: ['Analytical-Skill', 'Medical-Lab', 'Patient-Care', 'People-Skill', 'Social']). Keeping existing chain for continuity.
+[OK_GREEN] FINALIZE SESSION CALLED - session_id: 20347fd3
+[OK_GREEN] Total courses scored: 100
+[OK_GREEN] Top 5 courses: [('BS Optometry', 892.145868089888), ('Doctor of Dental Medicine', 848.6100053932591), ('BS Radiologic Technology', 842.972098089888), ('BS Respiratory Therapy', 760.2097017977533), ('BS Speech-Language Pathology', 689.2763864044947)]
+[OK_GREEN] Generated 6 recommendations
+[OK_GREEN] Recommendation course names: ['BS Optometry', 'Doctor of Dental Medicine', 'BS Radiologic Technology', 'BS Respiratory Therapy', 'BS Speech-Language Pathology', 'BS Midwifery']
+[OK] Session 20347fd3 complete after 30 questions
+[PROFILE-SEED] Ranked profile traits: ['Marketing-Sales', 'Startup-Venture', 'Finance-Acct', 'Teaching-Ed', 'Admin-Skill', 'Enterprising', 'Conventional', 'Business-Ops', 'Corporate-Mgmt', 'Communication']
+[TREE] Initial branch weights from profile: {'business': 14.4, 'education': 2.4, 'healthcare': 0.1, 'technology': 0.1, 'engineering': 0.1, 'public_service': 0.1}
+[PROFILE] Category keywords: ['Business', 'Business & Entrepreneurship', 'Entrepreneurship', 'Management', 'Marketing & Advertising', 'Startup & Innovation']
+[PROFILE] Matching QIDs: 14 questions in profile pool
+[CHAIN] Primary domain: business (votes: {'business': 7, 'education': 1})
+[CHAIN] Relevant domains: ['business', 'education']
+[CHAIN] Domain queue: ['business', 'education']
+[CHAIN] Initial chain: [869, 870, 873, 874, 886]
+[SESSION] Created adaptive session ac5bb6e5 for user 102 (strand: ABM, questions: 30, interests: True, skills: True)
+[LOCK-REDIRECT] Redirecting to dominant domain 'business' (weight gap: 9.4, recent: 0)
+[CHAIN-EXPLORE] Round 1: Q869 cat='Academic Interest - Business & Entrepreneurship' ù chain queue (domain entry)
+[ANSWER] Q869 answered. Total answers=1, round=1, excluded=1
+[CHAIN] Answer trait=Startup-Venture (dominant) -> follow-up chain: [2181, 2186, 2191, 2196, 2201]
+[CHAIN-EXPLORE] Round 2: Q2181 cat='Academic Interest - Business & Entrepreneurship' ù follow-up from trait Startup-Venture (category focus)
+[ANSWER] Q2181 answered. Total answers=2, round=2, excluded=2
+[CHAIN] Answer trait=Startup-Venture (dominant) -> follow-up chain: [2186, 2191, 2196, 2201, 2246]
+[DEDUP] Swapped Q with semantic-duplicate -> Q870
+[CHAIN-EXPLORE] Round 3: Q870 cat='Academic Interest - Business & Entrepreneurship' ù follow-up from trait Startup-Venture (category focus)
+[ANSWER] Q870 answered. Total answers=3, round=3, excluded=3
+[CHAIN] Answer trait=Marketing-Sales (dominant) -> follow-up chain: [2191, 2201, 873, 2246, 2251]
+[DEDUP] Swapped Q with semantic-duplicate -> Q873
+[CHAIN-EXPLORE] Round 4: Q873 cat='Academic Interest - Marketing & Advertising' ù follow-up from trait Marketing-Sales (category focus)
+[ANSWER] Q873 answered. Total answers=4, round=4, excluded=4
+[CHAIN] Answer trait=Marketing-Sales (dominant) -> follow-up chain: [2191, 2201, 2246, 2251, 2256]
+[DEDUP] Swapped Q with semantic-duplicate -> Q874
+[CHAIN-EXPLORE] Round 5: Q874 cat='Academic Interest - Marketing & Advertising' ù follow-up from trait Marketing-Sales (category focus)
+[ANSWER] Q874 answered. Total answers=5, round=5, excluded=5
+[CHAIN] Answer trait=Marketing-Sales (dominant) -> follow-up chain: [2191, 2201, 2246, 2251, 2256]
+[DEDUP] Swapped Q with semantic-duplicate -> Q886
+[CHAIN-EXPLORE] Round 6: Q886 cat='Academic Interest - Startup & Innovation' ù follow-up from trait Marketing-Sales (category focus)
+[ANSWER] Q886 answered. Total answers=6, round=6, excluded=6
+[CHAIN] Answer trait=Startup-Venture (dominant) -> follow-up chain: [2186, 2191, 2196, 2201, 2246]
+[DEDUP] Swapped Q with semantic-duplicate -> Q2246
+[CHAIN-EXPLORE] Round 7: Q2246 cat='Academic Interest - Marketing & Advertising' ù follow-up from trait Startup-Venture (category focus)
+[ANSWER] Q2246 answered. Total answers=7, round=7, excluded=7
+[CHAIN] Answer trait=Marketing-Sales (dominant) -> follow-up chain: [2191, 2201, 2251, 2256, 1098]
+[DEDUP] No unique replacement for Q2251, skipping
+[DEDUP] No unique replacement for Q2256, skipping
+[DEDUP] No unique replacement for Q2191, skipping
+[DEDUP] No unique replacement for Q2201, skipping
+[DEDUP] No unique replacement for Q2186, skipping
+[CHAIN-EXPLORE] Round 8: Q2196 cat='Academic Interest - Business & Entrepreneurship' ù strongest trait chain (Startup-Venture, score=3.4, profile match)
+[ANSWER] Q2196 answered. Total answers=8, round=8, excluded=13
+[CHAIN] Answer trait=Startup-Venture (dominant) -> follow-up chain: [1104, 2866, 2881, 2926, 2601]
+[DEDUP] No unique replacement for Q887, skipping
+[CHAIN-DEEP] Round 9: Q3816 cat='Academic Interest - Special Needs Education' ù new domain entry (education)
+[ANSWER] Q3816 answered. Total answers=9, round=9, excluded=15
+[CHAIN] Answer trait=Teaching-Ed is MINORITY (dominant: ['Creative-Skill', 'Enterprising', 'Finance-Acct', 'Marketing-Sales', 'People-Skill']). Keeping existing chain for continuity.
+[GUARD] Skipping chain for minority trait 'Teaching-Ed' (not in dominant pattern: ['Creative-Skill', 'Enterprising', 'Finance-Acct', 'Marketing-Sales', 'People-Skill'])
+[DEDUP] Swapped Q with semantic-duplicate -> Q1
+[CHAIN-ENTRY] Round 10: Q1 cat='Dream Career' ù chain queue (domain entry)
+[ANSWER] Q1 answered. Total answers=10, round=10, excluded=16
+[CHAIN] Answer trait=Patient-Care is MINORITY (dominant: ['Creative-Skill', 'Enterprising', 'Marketing-Sales', 'People-Skill', 'Startup-Venture']). Keeping existing chain for continuity.
+[GUARD] Skipping chain for minority trait 'Patient-Care' (not in dominant pattern: ['Creative-Skill', 'Enterprising', 'Marketing-Sales', 'People-Skill', 'Startup-Venture'])
+[DEDUP] Swapped Q with semantic-duplicate -> Q2
+[CHAIN-ENTRY] Round 11: Q2 cat='Work Environment' ù chain queue (domain entry)
+[ANSWER] Q2 answered. Total answers=11, round=11, excluded=17
+[CHAIN] Answer trait=Patient-Care (dominant) -> follow-up chain: [3291, 3301, 3311, 3316, 3321]
+[EXPAND] Domain 'healthcare' added to relevant domains (picked 2x)
+[LOCK-REDIRECT] Redirecting to dominant domain 'business' (weight gap: 23.8, recent: 1)
+[ROTATE-BYPASS] Keeping domain 'business' active because it remains strongly dominant.
+[INTENT-DIV] Swapped to Q972 (intent=INTEREST) to avoid repeating GENERAL
+[CHAIN-EXPLORE] Round 12: Q972 cat='Academic Interest - Radiology & Imaging' ù chain queue (domain entry)
+[ANSWER] Q972 answered. Total answers=12, round=12, excluded=18
+[CHAIN] Answer trait=Technical-Skill is MINORITY (dominant: ['Creative-Skill', 'Marketing-Sales', 'Patient-Care', 'People-Skill', 'Startup-Venture']). Keeping existing chain for continuity.
+[LOCK-REDIRECT] Redirecting to dominant domain 'business' (weight gap: 23.8, recent: 0)
+[ROTATE-BYPASS] Keeping domain 'business' active because it remains strongly dominant.
+[GUARD] Skipping chain for minority trait 'Technical-Skill' (not in dominant pattern: ['Creative-Skill', 'Marketing-Sales', 'Patient-Care', 'People-Skill', 'Startup-Venture'])
+[INTENT-DIV] Swapped to Q3301 (intent=WHICH_PART) to avoid repeating INTEREST
+[CHAIN-DEEP] Round 13: Q3301 cat='Academic Interest - Radiology & Imaging' ù chain queue (domain entry)
+[ANSWER] Q3301 answered. Total answers=13, round=13, excluded=19
+[CHAIN] Answer trait=Technical-Skill (dominant) -> follow-up chain: [4161, 989, 3391, 3471, 996]
+[EXPAND] Domain 'technology' added to relevant domains (picked 2x)
+[LOCK-REDIRECT] Redirecting to dominant domain 'business' (weight gap: 22.9, recent: 0)
+[ROTATE-BYPASS] Keeping domain 'business' active because it remains strongly dominant.
+[CHAIN-DEEP] Round 14: Q3291 cat='Academic Interest - Radiology & Imaging' ù chain queue (domain entry)
+[ANSWER] Q3291 answered. Total answers=14, round=14, excluded=20
+[CHAIN] Answer trait=Technical-Skill (dominant) -> follow-up chain: [4161, 989, 3391, 3471, 996]
+[LOCK-REDIRECT] Redirecting to dominant domain 'business' (weight gap: 20.8, recent: 0)
+[ROTATE-BYPASS] Keeping domain 'business' active because it remains strongly dominant.
+[DEDUP] Swapped Q with semantic-duplicate -> Q3
+[CHAIN-ENTRY] Round 15: Q3 cat='Daily Work' ù chain queue (domain entry)
+[ANSWER] Q3 answered. Total answers=15, round=15, excluded=21
+[CHAIN] Answer trait=Patient-Care (dominant) -> follow-up chain: [3311, 3316, 3321, 3331, 3341]
+[LOCK-REDIRECT] Redirecting to dominant domain 'business' (weight gap: 20.8, recent: 0)
+[ROTATE-BYPASS] Keeping domain 'business' active because it remains strongly dominant.
+[DEDUP] Swapped Q with semantic-duplicate -> Q4
+[CHAIN-ENTRY] Round 16: Q4 cat='Skill Mastery' ù chain queue (domain entry)
+[ANSWER] Q4 answered. Total answers=16, round=16, excluded=22
+[CHAIN] Answer trait=Patient-Care (dominant) -> follow-up chain: [3311, 3316, 3321, 3331, 3341]
+[LOCK-REDIRECT] Redirecting to dominant domain 'business' (weight gap: 20.6, recent: 0)
+[ROTATE-BYPASS] Keeping domain 'business' active because it remains strongly dominant.
+[DEDUP] Swapped Q with semantic-duplicate -> Q5
+[CHAIN-ENTRY] Round 17: Q5 cat='Career Achievement' ù chain queue (domain entry)
+[ANSWER] Q5 answered. Total answers=17, round=17, excluded=23
+[CHAIN] Answer trait=Patient-Care (dominant) -> follow-up chain: [3311, 3316, 3321, 3331, 3341]
+[LOCK-REDIRECT] Redirecting to dominant domain 'business' (weight gap: 19.1, recent: 0)
+[ROTATE-BYPASS] Keeping domain 'business' active because it remains strongly dominant.
+[DEDUP] Swapped Q with semantic-duplicate -> Q23
+[CHAIN-CONFIRM] Round 18: Q23 cat='Situational - Emergency' ù chain queue (domain entry)
+[ANSWER] Q23 answered. Total answers=18, round=18, excluded=24
+[CHAIN] Answer trait=Patient-Care (dominant) -> follow-up chain: [3311, 3316, 3321, 3331, 3341]
+[LOCK-REDIRECT] Redirecting to dominant domain 'business' (weight gap: 16.9, recent: 0)
+[ROTATE-BYPASS] Keeping domain 'business' active because it remains strongly dominant.
+[DEDUP] Swapped Q with semantic-duplicate -> Q24
+[CHAIN-CONFIRM] Round 19: Q24 cat='Situational - Teamwork' ù chain queue (domain entry)
+[ANSWER] Q24 answered. Total answers=19, round=19, excluded=25
+[CHAIN] Answer trait=People-Skill (dominant) -> follow-up chain: [4151, 4161, 1098, 4061, 3786]
+[LOCK-REDIRECT] Redirecting to dominant domain 'business' (weight gap: 16.1, recent: 0)
+[ROTATE-BYPASS] Keeping domain 'business' active because it remains strongly dominant.
+[CHAIN-DEEP] Round 20: Q4151 cat='Academic Interest - Culinary Management' ù chain queue (domain entry)
+[ANSWER] Q4151 answered. Total answers=20, round=20, excluded=26
+[CHAIN] Answer trait=Culinary-Arts is MINORITY (dominant: ['Marketing-Sales', 'Patient-Care', 'People-Skill', 'Startup-Venture', 'Technical-Skill']). Keeping existing chain for continuity.
+[LOCK-REDIRECT] Redirecting to dominant domain 'business' (weight gap: 16.8, recent: 0)
+[ROTATE-BYPASS] Keeping domain 'business' active because it remains strongly dominant.
+[GUARD] Skipping chain for minority trait 'Culinary-Arts' (not in dominant pattern: ['Marketing-Sales', 'Patient-Care', 'People-Skill', 'Startup-Venture', 'Technical-Skill'])
+[CHAIN-DEEP] Round 21: Q4161 cat='Academic Interest - Technical-Vocational Training' ù chain queue (domain entry)
+[ANSWER] Q4161 answered. Total answers=21, round=21, excluded=27
+[CHAIN] Answer trait=Teaching-Ed is MINORITY (dominant: ['Marketing-Sales', 'Patient-Care', 'People-Skill', 'Startup-Venture', 'Technical-Skill']). Keeping existing chain for continuity.
+[LOCK-REDIRECT] Redirecting to dominant domain 'business' (weight gap: 16.4, recent: 0)
+[ROTATE-BYPASS] Keeping domain 'business' active because it remains strongly dominant.
+[GUARD] Skipping chain for minority trait 'Teaching-Ed' (not in dominant pattern: ['Marketing-Sales', 'Patient-Care', 'People-Skill', 'Startup-Venture', 'Technical-Skill'])
+[CHAIN-EXPLORE] Round 22: Q1001 cat='Academic Interest - Library & Information Science' ù chain queue (domain entry)
+[ANSWER] Q1001 answered. Total answers=22, round=22, excluded=28
+[CHAIN] Answer trait=Conventional is MINORITY (dominant: ['Marketing-Sales', 'Patient-Care', 'People-Skill', 'Startup-Venture', 'Technical-Skill']). Keeping existing chain for continuity.
+[LOCK-REDIRECT] Redirecting to dominant domain 'business' (weight gap: 18.6, recent: 1)
+[ROTATE-BYPASS] Keeping domain 'business' active because it remains strongly dominant.
+[GUARD] Skipping chain for minority trait 'Conventional' (not in dominant pattern: ['Marketing-Sales', 'Patient-Care', 'People-Skill', 'Startup-Venture', 'Technical-Skill'])
+[INTENT-DIV] Swapped to Q1035 (intent=SCENARIO) to avoid repeating WHICH_PART
+[CHAIN-EXPLORE] Round 23: Q1035 cat='Academic Interest - Library & Information Science' ù chain queue (domain entry)
+[ANSWER] Q1035 answered. Total answers=23, round=23, excluded=29
+[CHAIN] Answer trait=Community-Serve is MINORITY (dominant: ['Marketing-Sales', 'Patient-Care', 'People-Skill', 'Startup-Venture', 'Technical-Skill']). Keeping existing chain for continuity.
+[LOCK-REDIRECT] Redirecting to dominant domain 'business' (weight gap: 18.2, recent: 1)
+[ROTATE-BYPASS] Keeping domain 'business' active because it remains strongly dominant.
+[GUARD] Skipping chain for minority trait 'Community-Serve' (not in dominant pattern: ['Marketing-Sales', 'Patient-Care', 'People-Skill', 'Startup-Venture', 'Technical-Skill'])
+[CHAIN-DEEP] Round 24: Q3851 cat='Academic Interest - Library & Information Science' ù chain queue (domain entry)
+[ANSWER] Q3851 answered. Total answers=24, round=24, excluded=30
+[CHAIN] Answer trait=Admin-Skill is MINORITY (dominant: ['Marketing-Sales', 'Patient-Care', 'People-Skill', 'Startup-Venture', 'Technical-Skill']). Keeping existing chain for continuity.
+[LOCK-REDIRECT] Redirecting to dominant domain 'business' (weight gap: 20.2, recent: 2)
+[ROTATE-BYPASS] Keeping domain 'business' active because it remains strongly dominant.
+[GUARD] Skipping chain for minority trait 'Admin-Skill' (not in dominant pattern: ['Marketing-Sales', 'Patient-Care', 'People-Skill', 'Startup-Venture', 'Technical-Skill'])
+[CHAIN-EXPLORE] Round 25: Q1008 cat='Academic Interest - Legal Management' ù chain queue (domain entry)
+[ANSWER] Q1008 answered. Total answers=25, round=25, excluded=31
+[CHAIN] Answer trait=Admin-Skill is MINORITY (dominant: ['Marketing-Sales', 'Patient-Care', 'People-Skill', 'Startup-Venture', 'Technical-Skill']). Keeping existing chain for continuity.
+[LOCK-REDIRECT] Redirecting to dominant domain 'business' (weight gap: 22.6, recent: 3)
+[ROTATE-BYPASS] Keeping domain 'business' active because it remains strongly dominant.
+[GUARD] Skipping chain for minority trait 'Admin-Skill' (not in dominant pattern: ['Marketing-Sales', 'Patient-Care', 'People-Skill', 'Startup-Venture', 'Technical-Skill'])
+[INTENT-DIV] Swapped to Q3666 (intent=CAREER) to avoid repeating INTEREST
+[CHAIN-DEEP] Round 26: Q3666 cat='Academic Interest - Community Development' ù chain queue (domain entry)
+[ANSWER] Q3666 answered. Total answers=26, round=26, excluded=32
+[CHAIN] Answer trait=Community-Serve is MINORITY (dominant: ['Marketing-Sales', 'Patient-Care', 'People-Skill', 'Startup-Venture', 'Technical-Skill']). Keeping existing chain for continuity.
+[EXPAND] Domain 'public_service' added to relevant domains (picked 2x)
+[LOCK-REDIRECT] Redirecting to dominant domain 'business' (weight gap: 22.1, recent: 2)
+[ROTATE-BYPASS] Keeping domain 'business' active because it remains strongly dominant.
+[GUARD] Skipping chain for minority trait 'Community-Serve' (not in dominant pattern: ['Marketing-Sales', 'Patient-Care', 'People-Skill', 'Startup-Venture', 'Technical-Skill'])
+[INTENT-DIV] Swapped to Q3676 (intent=SCENARIO) to avoid repeating CAREER
+[DEDUP] Swapped Q with semantic-duplicate -> Q25
+[CHAIN-CONFIRM] Round 27: Q25 cat='Situational - Accident' ù chain queue (domain entry)
+[ANSWER] Q25 answered. Total answers=27, round=27, excluded=33
+[CHAIN] Answer trait=Patient-Care (dominant) -> follow-up chain: [3311, 3316, 3321, 3331, 3341]
+[LOCK-REDIRECT] Redirecting to dominant domain 'business' (weight gap: 20.0, recent: 2)
+[ROTATE-BYPASS] Keeping domain 'business' active because it remains strongly dominant.
+[DEDUP] Swapped Q with semantic-duplicate -> Q26
+[CHAIN-EXPLORE] Round 28: Q26 cat='Scale - Math' ù chain queue (domain entry)
+[ANSWER] Q26 answered. Total answers=28, round=28, excluded=34
+[CHAIN] Answer trait=Data-Analytics is MINORITY (dominant: ['Marketing-Sales', 'Patient-Care', 'People-Skill', 'Startup-Venture', 'Technical-Skill']). Keeping existing chain for continuity.
+[LOCK-REDIRECT] Redirecting to dominant domain 'business' (weight gap: 20.2, recent: 1)
+[ROTATE-BYPASS] Keeping domain 'business' active because it remains strongly dominant.
+[GUARD] Skipping chain for minority trait 'Data-Analytics' (not in dominant pattern: ['Marketing-Sales', 'Patient-Care', 'People-Skill', 'Startup-Venture', 'Technical-Skill'])
+[DEDUP] Swapped Q with semantic-duplicate -> Q27
+[CHAIN-EXPLORE] Round 29: Q27 cat='Scale - Stress' ù chain queue (domain entry)
+[ANSWER] Q27 answered. Total answers=29, round=29, excluded=35
+[CHAIN] Answer trait=Patient-Care (dominant) -> follow-up chain: [3311, 3316, 3321, 3331, 3341]
+[LOCK-REDIRECT] Redirecting to dominant domain 'business' (weight gap: 18.0, recent: 0)
+[ROTATE-BYPASS] Keeping domain 'business' active because it remains strongly dominant.
+[DEDUP] Swapped Q with semantic-duplicate -> Q28
+[CHAIN-EXPLORE] Round 30: Q28 cat='Scale - Communication' ù chain queue (domain entry)
+[ANSWER] Q28 answered. Total answers=30, round=30, excluded=36
+[CHAIN] Answer trait=Marketing-Sales (dominant) -> follow-up chain: [1098, 1006, 3636, 3646, 3471]
+[OK_GREEN] FINALIZE SESSION CALLED - session_id: ac5bb6e5
+[OK_GREEN] Total courses scored: 100
+[OK_GREEN] Top 5 courses: [('BS Development Communication', 664.179499545455), ('BS Speech-Language Pathology', 584.4397227272727), ('BS Optometry', 580.4599700000003), ('BA in Communication', 572.4829218181818), ('Doctor of Dental Medicine', 555.68851)]
+[OK_GREEN] Generated 6 recommendations
+[OK_GREEN] Recommendation course names: ['BS Development Communication', 'BS Speech-Language Pathology', 'BS Optometry', 'BA in Communication', 'Doctor of Dental Medicine', 'BA in Journalism']
+[OK] Session ac5bb6e5 complete after 30 questions
+[PROFILE-SEED] Ranked profile traits: ['Performing-Arts', 'Creative-Skill', 'Creative-Design', 'Media-Production', 'Visual-Design', 'Artistic', 'Digital-Media', 'Creative', 'Visual-Arts', 'Communication']
+[TREE] Initial branch weights from profile: {'creative': 11.8, 'healthcare': 0.1, 'technology': 0.1, 'engineering': 0.1, 'business': 0.1, 'education': 0.1}
+[PROFILE] Category keywords: ['Art & Design', 'Arts General', 'Fine Arts & Painting', 'Music', 'Photography']
+[PROFILE] Matching QIDs: 20 questions in profile pool
+[CHAIN] Primary domain: creative (votes: {'creative': 8})
+[CHAIN] Relevant domains: ['creative']
+[CHAIN] Domain queue: ['creative']
+[CHAIN] Initial chain: [2571, 2581, 2586, 2631, 2636]
+[SESSION] Created adaptive session dae7b67f for user 103 (strand: ARTS, questions: 30, interests: True, skills: True)
+[LOCK-REDIRECT] Redirecting to dominant domain 'creative' (weight gap: 11.9, recent: 0)
+[CHAIN-EXPLORE] Round 1: Q2571 cat='Academic Interest - Fine Arts & Painting' ù chain queue (domain entry)
+[ANSWER] Q2571 answered. Total answers=1, round=1, excluded=1
+[CHAIN] Answer trait=Visual-Design (dominant) -> follow-up chain: [2581, 2586, 2596, 2631, 2636]
+[CHAIN-EXPLORE] Round 2: Q2581 cat='Academic Interest - Fine Arts & Painting' ù follow-up from trait Visual-Design (category focus)
+[ANSWER] Q2581 answered. Total answers=2, round=2, excluded=2
+[CHAIN] Answer trait=Artistic (dominant) -> follow-up chain: [2586, 2596, 934, 2851, 2881]
+[CHAIN-EXPLORE] Round 3: Q2586 cat='Academic Interest - Fine Arts & Painting' ù follow-up from trait Artistic (category focus)
+[ANSWER] Q2586 answered. Total answers=3, round=3, excluded=3
+[CHAIN] Answer trait=Artistic (dominant) -> follow-up chain: [2596, 934, 2851, 2881, 2886]
+[DEDUP] Swapped Q with semantic-duplicate -> Q948
+[CHAIN-EXPLORE] Round 4: Q948 cat='Academic Interest - Arts General' ù follow-up from trait Artistic (category focus)
+[ANSWER] Q948 answered. Total answers=4, round=4, excluded=4
+[CHAIN] Answer trait=Artistic (dominant) -> follow-up chain: [2596, 934, 2851, 2881, 2886]
+[DEDUP] Swapped Q with semantic-duplicate -> Q949
+[CHAIN-EXPLORE] Round 5: Q949 cat='Academic Interest - Arts General' ù follow-up from trait Artistic (category focus)
+[ANSWER] Q949 answered. Total answers=5, round=5, excluded=5
+[CHAIN] Answer trait=Digital-Media (dominant) -> follow-up chain: [2596, 2636, 2646, 2656, 1006]
+[DEDUP] Swapped Q with semantic-duplicate -> Q950
+[CHAIN-EXPLORE] Round 6: Q950 cat='Academic Interest - Arts General' ù follow-up from trait Digital-Media (category focus)
+[ANSWER] Q950 answered. Total answers=6, round=6, excluded=6
+[CHAIN] Answer trait=Artistic (dominant) -> follow-up chain: [2596, 934, 2851, 2881, 2886]
+[DEDUP] Swapped Q with semantic-duplicate -> Q2631
+[CHAIN-EXPLORE] Round 7: Q2631 cat='Academic Interest - Art & Design' ù follow-up from trait Artistic (profile match)
+[ANSWER] Q2631 answered. Total answers=7, round=7, excluded=7
+[CHAIN] Answer trait=Visual-Design (dominant) -> follow-up chain: [2596, 2636, 2641, 2646, 2656]
+[DEDUP] Swapped Q with semantic-duplicate -> Q2636
+[CHAIN-EXPLORE] Round 8: Q2636 cat='Academic Interest - Art & Design' ù follow-up from trait Visual-Design (profile match)
+[ANSWER] Q2636 answered. Total answers=8, round=8, excluded=8
+[CHAIN] Answer trait=Visual-Design (dominant) -> follow-up chain: [2596, 2641, 2646, 2656, 2866]
+[DEDUP] Swapped Q with semantic-duplicate -> Q2641
+[CHAIN-EXPLORE] Round 9: Q2641 cat='Academic Interest - Art & Design' ù follow-up from trait Visual-Design (profile match)
+[ANSWER] Q2641 answered. Total answers=9, round=9, excluded=9
+[CHAIN] Answer trait=Artistic (dominant) -> follow-up chain: [2596, 934, 2851, 2881, 2886]
+[INTENT-DIV] Swapped to Q946 (intent=SCENARIO) to avoid repeating SKILL
+[DEDUP] Swapped Q (profile priority, relaxed category) -> Q945
+[CHAIN-EXPLORE] Round 10: Q945 cat='Academic Interest - Fine Arts & Painting' ù follow-up from trait Artistic (profile match)
+[ANSWER] Q945 answered. Total answers=10, round=10, excluded=10
+[CHAIN] Answer trait=Artistic (dominant) -> follow-up chain: [2596, 934, 2851, 2881, 2886]
+[INTENT-DIV] Swapped to Q946 (intent=SCENARIO) to avoid repeating GENERAL
+[DEDUP] Swapped Q (profile priority, relaxed category) -> Q951
+[CHAIN-EXPLORE] Round 11: Q951 cat='Academic Interest - Arts General' ù follow-up from trait Artistic (profile match)
+[ANSWER] Q951 answered. Total answers=11, round=11, excluded=11
+[CHAIN] Answer trait=Creative-Skill (dominant) -> follow-up chain: [2596, 2646, 2656, 3816, 3381]
+[DEDUP] Swapped Q (profile priority, relaxed category) -> Q946
+[CHAIN-EXPLORE] Round 12: Q946 cat='Academic Interest - Fine Arts & Painting' ù follow-up from trait Creative-Skill (category focus)
+[ANSWER] Q946 answered. Total answers=12, round=12, excluded=12
+[CHAIN] Answer trait=Artistic (dominant) -> follow-up chain: [2596, 934, 2851, 2881, 2886]
+[DEDUP] Swapped Q (profile priority, relaxed category) -> Q952
+[CHAIN-EXPLORE] Round 13: Q952 cat='Academic Interest - Arts General' ù follow-up from trait Artistic (profile match)
+[ANSWER] Q952 answered. Total answers=13, round=13, excluded=13
+[CHAIN] Answer trait=Performing-Arts is MINORITY (dominant: ['Artistic', 'Creative-Skill', 'People-Skill', 'Social', 'Visual-Design']). Keeping existing chain for continuity.
+[GUARD] Skipping chain for minority trait 'Performing-Arts' (not in dominant pattern: ['Artistic', 'Creative-Skill', 'People-Skill', 'Social', 'Visual-Design'])
+[DEDUP] Swapped Q (profile priority, relaxed category) -> Q953
+[CHAIN-EXPLORE] Round 14: Q953 cat='Academic Interest - Arts General' ù chain queue (domain entry)
+[ANSWER] Q953 answered. Total answers=14, round=14, excluded=14
+[CHAIN] Answer trait=Artistic (dominant) -> follow-up chain: [2596, 934, 2851, 2881, 2886]
+[DEDUP] Swapped Q (profile priority, relaxed category) -> Q954
+[CHAIN-EXPLORE] Round 15: Q954 cat='Academic Interest - Arts General' ù follow-up from trait Artistic (profile match)
+[ANSWER] Q954 answered. Total answers=15, round=15, excluded=15
+[CHAIN] Answer trait=Film-Broadcast is MINORITY (dominant: ['Artistic', 'Creative-Skill', 'Digital-Media', 'People-Skill', 'Visual-Design']). Keeping existing chain for continuity.
+[GUARD] Skipping chain for minority trait 'Film-Broadcast' (not in dominant pattern: ['Artistic', 'Creative-Skill', 'Digital-Media', 'People-Skill', 'Visual-Design'])
+[DEDUP] Swapped Q (profile priority, relaxed category) -> Q955
+[CHAIN-EXPLORE] Round 16: Q955 cat='Academic Interest - Arts General' ù chain queue (domain entry)
+[ANSWER] Q955 answered. Total answers=16, round=16, excluded=16
+[CHAIN] Answer trait=Film-Broadcast (dominant) -> follow-up chain: [3451, 3461, 3471, 996, 3496]
+[DEDUP] Swapped Q (profile priority, relaxed category) -> Q2596
+[CHAIN-EXPLORE] Round 17: Q2596 cat='Academic Interest - Fine Arts & Painting' ù category focus (Arts General)
+[ANSWER] Q2596 answered. Total answers=17, round=17, excluded=17
+[CHAIN] Answer trait=Lab-Research is MINORITY (dominant: ['Artistic', 'Creative-Skill', 'Film-Broadcast', 'People-Skill', 'Visual-Design']). Keeping existing chain for continuity.
+[GUARD] Skipping chain for minority trait 'Lab-Research' (not in dominant pattern: ['Artistic', 'Creative-Skill', 'Film-Broadcast', 'People-Skill', 'Visual-Design'])
+[DEDUP] Swapped Q (profile priority, relaxed category) -> Q2646
+[CHAIN-EXPLORE] Round 18: Q2646 cat='Academic Interest - Art & Design' ù category focus (Arts General)
+[ANSWER] Q2646 answered. Total answers=18, round=18, excluded=18
+[CHAIN] Answer trait=Community-Serve (dominant) -> follow-up chain: [4161, 1098, 4061, 3791, 3816]
+[LOCK-REDIRECT] Redirecting to dominant domain 'creative' (weight gap: 38.8, recent: 2)
+[ROTATE-BYPASS] Keeping domain 'creative' active because it remains strongly dominant.
+[DEDUP] Swapped Q (profile priority, relaxed category) -> Q2656
+[CHAIN-EXPLORE] Round 19: Q2656 cat='Academic Interest - Art & Design' ù category focus (Arts General)
+[ANSWER] Q2656 answered. Total answers=19, round=19, excluded=19
+[CHAIN] Answer trait=Community-Serve (dominant) -> follow-up chain: [4161, 1098, 4061, 3791, 3816]
+[EXPAND] Domain 'public_service' added to relevant domains (picked 2x)
+[LOCK-REDIRECT] Redirecting to dominant domain 'creative' (weight gap: 38.3, recent: 1)
+[ROTATE-BYPASS] Keeping domain 'creative' active because it remains strongly dominant.
+[DEDUP] No unique replacement for Q956, skipping
+[LOCK-REDIRECT] Redirecting to dominant domain 'creative' (weight gap: 38.3, recent: 1)
+[ROTATE-BYPASS] Keeping domain 'creative' active because it remains strongly dominant.
+[INTENT-DIV] Swapped to Q1091 (intent=WHICH_PART) to avoid repeating CROSS_FIELD
+[CHAIN-EXPLORE] Round 20: Q1091 cat='Academic Interest - Military & Defense' ù new domain entry (public_service)
+[ANSWER] Q1091 answered. Total answers=20, round=20, excluded=21
+[CHAIN] Answer trait=Analytical-Skill is MINORITY (dominant: ['Artistic', 'Community-Serve', 'Creative-Skill', 'People-Skill', 'Visual-Design']). Keeping existing chain for continuity.
+[LOCK-REDIRECT] Redirecting to dominant domain 'creative' (weight gap: 37.9, recent: 0)
+[ROTATE-BYPASS] Keeping domain 'creative' active because it remains strongly dominant.
+[GUARD] Skipping chain for minority trait 'Analytical-Skill' (not in dominant pattern: ['Artistic', 'Community-Serve', 'Creative-Skill', 'People-Skill', 'Visual-Design'])
+[CHAIN-DEEP] Round 21: Q3786 cat='Academic Interest - Philosophy & Ethics' ù chain queue (domain entry)
+[ANSWER] Q3786 answered. Total answers=21, round=21, excluded=22
+[CHAIN] Answer trait=Analytical-Skill (dominant) -> follow-up chain: [1100, 4061, 1098, 1001, 1008]
+[EXPAND] Domain 'technology' added to relevant domains (picked 2x)
+[LOCK-REDIRECT] Redirecting to dominant domain 'creative' (weight gap: 36.4, recent: 0)
+[ROTATE-BYPASS] Keeping domain 'creative' active because it remains strongly dominant.
+[INTENT-DIV] Swapped to Q1092 (intent=SCENARIO) to avoid repeating CAREER
+[CHAIN-EXPLORE] Round 22: Q1092 cat='Academic Interest - Military & Defense' ù chain queue (domain entry)
+[ANSWER] Q1092 answered. Total answers=22, round=22, excluded=23
+[CHAIN] Answer trait=Civil-Build is MINORITY (dominant: ['Analytical-Skill', 'Artistic', 'Community-Serve', 'Creative-Skill', 'Visual-Design']). Keeping existing chain for continuity.
+[LOCK-REDIRECT] Redirecting to dominant domain 'creative' (weight gap: 35.9, recent: 0)
+[ROTATE-BYPASS] Keeping domain 'creative' active because it remains strongly dominant.
+[GUARD] Skipping chain for minority trait 'Civil-Build' (not in dominant pattern: ['Analytical-Skill', 'Artistic', 'Community-Serve', 'Creative-Skill', 'Visual-Design'])
+[CHAIN-DEEP] Round 23: Q4061 cat='Academic Interest - Military & Defense' ù chain queue (domain entry)
+[ANSWER] Q4061 answered. Total answers=23, round=23, excluded=24
+[CHAIN] Answer trait=Law-Enforce is MINORITY (dominant: ['Analytical-Skill', 'Artistic', 'Community-Serve', 'Creative-Skill', 'Visual-Design']). Keeping existing chain for continuity.
+[LOCK-REDIRECT] Redirecting to dominant domain 'creative' (weight gap: 35.9, recent: 0)
+[ROTATE-BYPASS] Keeping domain 'creative' active because it remains strongly dominant.
+[GUARD] Skipping chain for minority trait 'Law-Enforce' (not in dominant pattern: ['Analytical-Skill', 'Artistic', 'Community-Serve', 'Creative-Skill', 'Visual-Design'])
+[CHAIN-EXPLORE] Round 24: Q1001 cat='Academic Interest - Library & Information Science' ù chain queue (domain entry)
+[ANSWER] Q1001 answered. Total answers=24, round=24, excluded=25
+[CHAIN] Answer trait=Conventional is MINORITY (dominant: ['Analytical-Skill', 'Artistic', 'Community-Serve', 'Creative-Skill', 'Visual-Design']). Keeping existing chain for continuity.
+[LOCK-REDIRECT] Redirecting to dominant domain 'creative' (weight gap: 35.0, recent: 0)
+[ROTATE-BYPASS] Keeping domain 'creative' active because it remains strongly dominant.
+[GUARD] Skipping chain for minority trait 'Conventional' (not in dominant pattern: ['Analytical-Skill', 'Artistic', 'Community-Serve', 'Creative-Skill', 'Visual-Design'])
+[CHAIN-EXPLORE] Round 25: Q1008 cat='Academic Interest - Legal Management' ù chain queue (domain entry)
+[ANSWER] Q1008 answered. Total answers=25, round=25, excluded=26
+[CHAIN] Answer trait=Admin-Skill is MINORITY (dominant: ['Analytical-Skill', 'Artistic', 'Community-Serve', 'Creative-Skill', 'Visual-Design']). Keeping existing chain for continuity.
+[EXPAND] Domain 'business' added to relevant domains (picked 2x)
+[LOCK-REDIRECT] Redirecting to dominant domain 'creative' (weight gap: 34.5, recent: 0)
+[ROTATE-BYPASS] Keeping domain 'creative' active because it remains strongly dominant.
+[GUARD] Skipping chain for minority trait 'Admin-Skill' (not in dominant pattern: ['Analytical-Skill', 'Artistic', 'Community-Serve', 'Creative-Skill', 'Visual-Design'])
+[INTENT-DIV] Swapped to Q1015 (intent=SCENARIO) to avoid repeating INTEREST
+[CHAIN-EXPLORE] Round 26: Q1015 cat='Academic Interest - Sociology' ù chain queue (domain entry)
+[ANSWER] Q1015 answered. Total answers=26, round=26, excluded=27
+[CHAIN] Answer trait=Social is MINORITY (dominant: ['Analytical-Skill', 'Artistic', 'Community-Serve', 'Creative-Skill', 'Visual-Design']). Keeping existing chain for continuity.
+[LOCK-REDIRECT] Redirecting to dominant domain 'creative' (weight gap: 34.6, recent: 0)
+[ROTATE-BYPASS] Keeping domain 'creative' active because it remains strongly dominant.
+[INTENT-DIV] Swapped to Q3731 (intent=CROSS_FIELD) to avoid repeating SCENARIO
+[CHAIN-DEEP] Round 27: Q3731 cat='Academic Interest - Sociology' ù chain queue (domain entry)
+[ANSWER] Q3731 answered. Total answers=27, round=27, excluded=28
+[CHAIN] Answer trait=Investigative is MINORITY (dominant: ['Analytical-Skill', 'Artistic', 'Community-Serve', 'Creative-Skill', 'Visual-Design']). Keeping existing chain for continuity.
+[EXPAND] Domain 'science' added to relevant domains (picked 2x)
+[LOCK-REDIRECT] Redirecting to dominant domain 'creative' (weight gap: 34.0, recent: 0)
+[ROTATE-BYPASS] Keeping domain 'creative' active because it remains strongly dominant.
+[GUARD] Skipping chain for minority trait 'Investigative' (not in dominant pattern: ['Analytical-Skill', 'Artistic', 'Community-Serve', 'Creative-Skill', 'Visual-Design'])
+[INTENT-DIV] Swapped to Q3721 (intent=WHICH_PART) to avoid repeating CROSS_FIELD
+[DEDUP] Swapped Q with semantic-duplicate -> Q1
+[CHAIN-ENTRY] Round 28: Q1 cat='Dream Career' ù chain queue (domain entry)
+[ANSWER] Q1 answered. Total answers=28, round=28, excluded=29
+[CHAIN] Answer trait=Patient-Care is MINORITY (dominant: ['Analytical-Skill', 'Artistic', 'Community-Serve', 'Creative-Skill', 'Visual-Design']). Keeping existing chain for continuity.
+[LOCK-REDIRECT] Redirecting to dominant domain 'creative' (weight gap: 34.0, recent: 0)
+[ROTATE-BYPASS] Keeping domain 'creative' active because it remains strongly dominant.
+[GUARD] Skipping chain for minority trait 'Patient-Care' (not in dominant pattern: ['Analytical-Skill', 'Artistic', 'Community-Serve', 'Creative-Skill', 'Visual-Design'])
+[CHAIN-EXPLORE] Round 29: Q1004 cat='Academic Interest - Sociology' ù chain queue (domain entry)
+[ANSWER] Q1004 answered. Total answers=29, round=29, excluded=30
+[CHAIN] Answer trait=Social is MINORITY (dominant: ['Analytical-Skill', 'Artistic', 'Community-Serve', 'Creative-Skill', 'Visual-Design']). Keeping existing chain for continuity.
+[EXPAND] Domain 'social' added to relevant domains (picked 2x)
+[LOCK-REDIRECT] Redirecting to dominant domain 'creative' (weight gap: 32.7, recent: 0)
+[ROTATE-BYPASS] Keeping domain 'creative' active because it remains strongly dominant.
+[INTENT-DIV] Swapped to Q1016 (intent=SCENARIO) to avoid repeating INTEREST
+[CHAIN-EXPLORE] Round 30: Q1016 cat='Academic Interest - Linguistics & Languages' ù chain queue (domain entry)
+[ANSWER] Q1016 answered. Total answers=30, round=30, excluded=31
+[CHAIN] Answer trait=Teaching-Ed is MINORITY (dominant: ['Analytical-Skill', 'Artistic', 'Community-Serve', 'Creative-Skill', 'Visual-Design']). Keeping existing chain for continuity.
+[OK_GREEN] FINALIZE SESSION CALLED - session_id: dae7b67f
+[OK_GREEN] Total courses scored: 100
+[OK_GREEN] Top 5 courses: [('BA in Theater Arts', 558.9414), ('Bachelor of Fine Arts', 529.30452), ('BS Multimedia Arts', 529.30452), ('BA in Advertising Arts', 529.30452), ('BA in Photography', 529.30452)]
+[OK_GREEN] Generated 6 recommendations
+[OK_GREEN] Recommendation course names: ['BA in Theater Arts', 'Bachelor of Fine Arts', 'BS Multimedia Arts', 'BA in Advertising Arts', 'BA in Photography', 'BS Development Communication']
+[OK] Session dae7b67f complete after 30 questions
+  PASS ù No answered question ever reappeared across all 4 profiles.
+
+======================================================================
+  ISSUES FOUND ù Review the flagged items above.
+======================================================================

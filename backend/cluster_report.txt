@@ -1,0 +1,842 @@
+﻿[TREE] Loaded 45 decision tree questions across 13 domains
+[TREE] Navigation rules: 31 branch transitions
+[TREE] Validation questions: 10
+Pool: 1422 questions
+
+======================================================================
+CLUSTER 1 in [Academic Interest - Accounting]
+  KEEP   Q875: Which area of accounting would you want to specialize in?
+  REMOVE Q2301: Which part of accounting interests you most?
+    merge Q875<->Q2301: same_type=WHAT_ABOUT jaccard=0.20
+
+======================================================================
+CLUSTER 2 in [Academic Interest - Advertising & Graphic Arts]
+  KEEP   Q2691: What excites you about advertising and graphic design?
+  REMOVE Q2696: What advertising or graphic design specialty attracts you?
+  REMOVE Q2716: How do advertising and graphic design intersect with other fields?
+    merge Q2691<->Q2696: high_jaccard=0.50 type1=WHAT_ABOUT type2=WHAT_ABOUT
+    merge Q2691<->Q2716: high_jaccard=0.50 type1=WHAT_ABOUT type2=CROSS_FIELD
+
+======================================================================
+CLUSTER 3 in [Academic Interest - Aeronautical & Aerospace]
+  KEEP   Q851: What part of aeronautical and aerospace engineering excites you?
+  REMOVE Q909: What area of aeronautical and aerospace engineering excites you?
+    merge Q851<->Q909: high_jaccard=0.67 type1=WHAT_ABOUT type2=WHAT_ABOUT
+
+======================================================================
+CLUSTER 4 in [Academic Interest - Aeronautical & Aerospace]
+  KEEP   Q2061: Which part of aeronautical and aerospace work interests you most?
+  REMOVE Q2066: Which aeronautical or aerospace project would you most want to work on?
+    merge Q2061<->Q2066: high_jaccard=0.50 type1=ENVIRONMENT type2=PROJECT
+
+======================================================================
+CLUSTER 5 in [Academic Interest - Agriculture & Farming]
+  KEEP   Q1086: What part of agriculture and farming interests you most?
+  REMOVE Q1114: What type of farming innovation excites you?
+    merge Q1086<->Q1114: same_type=WHAT_ABOUT jaccard=0.17
+
+======================================================================
+CLUSTER 6 in [Academic Interest - Aircraft Maintenance & Avionics]
+  KEEP   Q857: What interests you about aircraft maintenance and avionics?
+  REMOVE Q2036: Which aircraft-maintenance or avionics project would you most want to work on?
+    merge Q857<->Q2036: high_jaccard=0.50 type1=WHAT_ABOUT type2=PROJECT
+
+======================================================================
+CLUSTER 7 in [Academic Interest - Aircraft Maintenance & Avionics]
+  KEEP   Q6: SCENARIO: A grounded aircraft needs to be cleared for its next flight by tomorrow morning. Which task would you volunteer for?
+  REMOVE Q858: SCENARIO: An aircraft just landed with a reported issue. What do you check first?
+  REMOVE Q916: SCENARIO: A plane's warning system triggers a false alarm mid-flight. What do you do post-landing?
+    merge Q858<->Q916: same_type=GENERAL opt_overlap=0.21
+    merge Q858<->Q6: same_type=GENERAL opt_overlap=0.23
+
+======================================================================
+CLUSTER 8 in [Academic Interest - Animation & Multimedia]
+  KEEP   Q938: SCENARIO: A studio hires you for a new animated movie. What's your role?
+  REMOVE Q2896: SCENARIO: A studio gives you full creative freedom for an animated short. What do you make?
+    merge Q938<->Q2896: same_type=GENERAL jaccard=0.17
+
+======================================================================
+CLUSTER 9 in [Academic Interest - Architecture & Interior Design]
+  KEEP   Q848: What excites you about architecture and interior design?
+  REMOVE Q1851: Which part of architecture and interior design interests you most?
+  REMOVE Q1856: Which architecture or interior project would you most want to design?
+    merge Q848<->Q1851: high_jaccard=0.50 type1=WHAT_ABOUT type2=WHAT_ABOUT
+    merge Q848<->Q1856: high_jaccard=0.60 type1=WHAT_ABOUT type2=PROJECT
+
+======================================================================
+CLUSTER 10 in [Academic Interest - Art & Design]
+  KEEP   Q2646: How do you envision design's future impact?
+  REMOVE Q2651: How can design create positive impact?
+    merge Q2646<->Q2651: same_type=GENERAL jaccard=0.33
+
+======================================================================
+CLUSTER 11 in [Academic Interest - Arts General]
+  KEEP   Q952: What kind of art or design event would you attend?
+  REMOVE Q955: What's your favorite way to consume art?
+  REMOVE Q956: If you could take one arts elective, what would it be?
+    merge Q952<->Q955: same_type=GENERAL jaccard=0.17
+    merge Q952<->Q956: same_type=GENERAL jaccard=0.17
+
+======================================================================
+CLUSTER 12 in [Academic Interest - Aviation & Aerospace]
+  KEEP   Q1056: What draws you to aviation and aerospace?
+  REMOVE Q1058: Which area of aerospace research excites you most?
+    merge Q1056<->Q1058: same_type=WHAT_ABOUT jaccard=0.17
+
+======================================================================
+CLUSTER 13 in [Academic Interest - Biology & Life Sciences]
+  KEEP   Q781: Which area of biology fascinates you the most?
+  REMOVE Q1197: Which part of biology do you most want to understand in detail?
+  REMOVE Q1217: Which branch of organismal biology feels most exciting?
+    merge Q781<->Q1197: same_type=WHAT_ABOUT jaccard=0.17
+    merge Q781<->Q1217: same_type=WHAT_ABOUT jaccard=0.17
+
+======================================================================
+CLUSTER 14 in [Academic Interest - Business General]
+  KEEP   Q889: What type of company would you want to lead someday?
+  REMOVE Q892: What's the most important quality for a business leader?
+    merge Q889<->Q892: same_type=GENERAL jaccard=0.17
+
+======================================================================
+CLUSTER 15 in [Academic Interest - Chemistry]
+  KEEP   Q783: What aspect of chemistry interests you the most?
+  REMOVE Q1225: Which kind of chemistry work excites you most in the lab?
+    merge Q783<->Q1225: same_type=WHAT_ABOUT jaccard=0.17
+
+======================================================================
+CLUSTER 16 in [Academic Interest - Civil & Construction]
+  KEEP   Q846: What part of civil engineering and construction interests you most?
+  REMOVE Q903: What type of civil and construction project would you love working on?
+  REMOVE Q1821: Which part of civil and construction work interests you most?
+    merge Q846<->Q903: cross_type (WHAT_ABOUT vs PROJECT) but j=0.25 opt=0.28
+    merge Q846<->Q1821: high_jaccard=0.67 type1=WHAT_ABOUT type2=ENVIRONMENT
+
+======================================================================
+CLUSTER 17 in [Academic Interest - Clothing & Textile Technology]
+  KEEP   Q947: What aspect of clothing and textile technology interests you?
+  REMOVE Q2901: What excites you most about clothing and textile technology?
+  REMOVE Q2916: What kind of career in clothing and textile technology would you pursue?
+  REMOVE Q2921: How does clothing and textile technology connect with other fields for you?
+    merge Q947<->Q2901: high_jaccard=0.50 type1=WHAT_ABOUT type2=WHAT_ABOUT
+    merge Q2901<->Q2916: high_jaccard=0.50 type1=WHAT_ABOUT type2=CAREER
+    merge Q2901<->Q2921: high_jaccard=0.50 type1=WHAT_ABOUT type2=CROSS_FIELD
+
+======================================================================
+CLUSTER 18 in [Academic Interest - Communication & Journalism]
+  KEEP   Q996: What type of communication and journalism work appeals to you?
+  REMOVE Q3481: What part of communication and journalism work would you enjoy most?
+    merge Q996<->Q3481: high_jaccard=0.50 type1=WHAT_ABOUT type2=WHAT_ABOUT
+
+======================================================================
+CLUSTER 19 in [Academic Interest - Computers & IT]
+  KEEP   Q811: What part of Computers & IT appeals to you the most?
+  REMOVE Q1461: Which side of computers and IT interests you most?
+    merge Q811<->Q1461: same_type=WHAT_ABOUT jaccard=0.20
+
+======================================================================
+CLUSTER 20 in [Academic Interest - Criminology & Public Safety]
+  KEEP   Q998: What area of criminology and public safety interests you?
+  REMOVE Q3571: What part of criminology and public safety work would you enjoy most?
+    merge Q998<->Q3571: same_type=WHAT_ABOUT jaccard=0.38
+
+======================================================================
+CLUSTER 21 in [Academic Interest - Cybersecurity]
+  KEEP   Q817: What aspect of cybersecurity interests you the most?
+  REMOVE Q1551: Which side of cybersecurity interests you most?
+    merge Q817<->Q1551: high_jaccard=0.50 type1=WHAT_ABOUT type2=WHAT_ABOUT
+
+======================================================================
+CLUSTER 22 in [Academic Interest - Cybersecurity]
+  KEEP   Q1556: Which cybersecurity challenge would you most want to solve?
+  REMOVE Q1571: What do you value most about cybersecurity work?
+    merge Q1556<->Q1571: same_type=MOTIVATION jaccard=0.20
+
+======================================================================
+CLUSTER 23 in [Academic Interest - Dentistry & Oral Health]
+  KEEP   Q968: What area of dentistry and oral health appeals to you?
+  REMOVE Q3266: Which dental specialty or oral health area interests you most?
+    merge Q968<->Q3266: same_type=WHAT_ABOUT jaccard=0.38
+
+======================================================================
+CLUSTER 24 in [Academic Interest - Development Communication]
+  KEEP   Q1006: What kind of development communication work appeals to you?
+  REMOVE Q3636: What kind of development-communication career path appeals to you most?
+    merge Q1006<->Q3636: high_jaccard=0.50 type1=WHAT_ABOUT type2=CAREER
+
+======================================================================
+CLUSTER 25 in [Academic Interest - Early Childhood Education]
+  KEEP   Q999: What draws you to early childhood education?
+  REMOVE Q3891: What excites you most about studying early childhood education?
+  REMOVE Q3901: What part of early childhood education work would you enjoy most?
+    merge Q999<->Q3891: high_jaccard=0.50 type1=WHAT_ABOUT type2=WHAT_ABOUT
+    merge Q999<->Q3901: same_type=WHAT_ABOUT jaccard=0.43
+
+======================================================================
+CLUSTER 26 in [Academic Interest - Earth Science & Geology]
+  KEEP   Q789: Which aspect of Earth science captures your curiosity?
+  REMOVE Q1311: Which Earth process fascinates you most?
+    merge Q789<->Q1311: same_type=WHAT_ABOUT opt_overlap=0.22
+
+======================================================================
+CLUSTER 27 in [Academic Interest - Economics]
+  KEEP   Q876: What topic in economics fascinates you the most?
+  REMOVE Q877: SCENARIO: You're an economic advisor to the government. What do you focus on?
+  REMOVE Q2331: Which part of economics interests you most?
+    merge Q876<->Q877: same_type=WHAT_ABOUT jaccard=0.17
+    merge Q876<->Q2331: same_type=WHAT_ABOUT jaccard=0.20
+
+======================================================================
+CLUSTER 28 in [Academic Interest - Education & Teaching]
+  KEEP   Q989: What area of education and teaching excites you?
+  REMOVE Q3381: What excites you most about pursuing a career in education and teaching?
+    merge Q989<->Q3381: high_jaccard=0.50 type1=WHAT_ABOUT type2=CAREER
+
+======================================================================
+CLUSTER 29 in [Academic Interest - Education & Teaching]
+  KEEP   Q990: SCENARIO: Your school needs a new program. What do you create?
+  REMOVE Q1009: SCENARIO: You're designing a new school from scratch. What's your priority?
+    merge Q990<->Q1009: same_type=GENERAL jaccard=0.25
+
+======================================================================
+CLUSTER 30 in [Academic Interest - Electrical & Electronics]
+  KEEP   Q844: Which electrical & electronics project would you want to work on?
+  REMOVE Q901: What area of electrical and electronics engineering excites you?
+  REMOVE Q2001: Which part of electrical and electronics work interests you most?
+  REMOVE Q2021: What kind of electrical-electronics environment appeals to you most?
+    merge Q844<->Q901: cross_type (PROJECT vs WHAT_ABOUT) but j=0.29 opt=0.43
+    merge Q844<->Q2001: high_jaccard=0.50 type1=PROJECT type2=ENVIRONMENT
+    merge Q2001<->Q2021: same_type=ENVIRONMENT jaccard=0.29
+
+======================================================================
+CLUSTER 31 in [Academic Interest - Engineering (General)]
+  KEEP   Q839: What draws you most to engineering as a field?
+  REMOVE Q841: Which engineering tool or method excites you the most?
+  REMOVE Q1941: Which part of engineering in general interests you most?
+    merge Q839<->Q841: same_type=WHAT_ABOUT jaccard=0.17
+    merge Q839<->Q1941: same_type=WHAT_ABOUT jaccard=0.17
+
+======================================================================
+CLUSTER 32 in [Academic Interest - Engineering General]
+  KEEP   Q863: If you could invent one engineering tool, what would it do?
+  REMOVE Q864: Which engineering subject would you enjoy studying the most?
+  REMOVE Q865: SCENARIO: You have a summer engineering internship. Which placement do you pick?
+  REMOVE Q866: How do you prefer to solve engineering problems?
+    merge Q863<->Q864: same_type=GENERAL jaccard=0.17
+    merge Q863<->Q865: same_type=GENERAL jaccard=0.17
+    merge Q863<->Q866: same_type=GENERAL jaccard=0.17
+
+======================================================================
+CLUSTER 33 in [Academic Interest - Exercise & Sports Science]
+  KEEP   Q1100: What area of exercise and sports science fascinates you?
+  REMOVE Q3961: What part of exercise-and-sports-science work would you enjoy most?
+    merge Q1100<->Q3961: same_type=WHAT_ABOUT jaccard=0.38
+
+======================================================================
+CLUSTER 34 in [Academic Interest - Fashion & Textile Design]
+  KEEP   Q939: What area of fashion and textile design appeals to you?
+  REMOVE Q2601: What aspects of fashion and textiles excite you most?
+  REMOVE Q2606: Which fashion specialization interests you?
+    merge Q939<->Q2606: same_type=WHAT_ABOUT opt_overlap=0.27
+    merge Q2601<->Q2606: same_type=WHAT_ABOUT jaccard=0.17
+
+======================================================================
+CLUSTER 35 in [Academic Interest - Fashion & Textile Design]
+  KEEP   Q2616: How do you see fashion evolution and innovation?
+  REMOVE Q2621: How would you innovate in fashion and textiles?
+  REMOVE Q2626: How does fashion connect to broader systems?
+    merge Q2616<->Q2621: same_type=GENERAL jaccard=0.20
+    merge Q2616<->Q2626: same_type=GENERAL jaccard=0.17
+
+======================================================================
+CLUSTER 36 in [Academic Interest - Film & Media Production]
+  KEEP   Q932: What role in film and media production excites you?
+  REMOVE Q2661: What draws you to film and media production?
+  REMOVE Q2666: What type of film or media interests you most?
+    merge Q932<->Q2661: high_jaccard=0.50 type1=CAREER type2=WHAT_ABOUT
+    merge Q2661<->Q2666: same_type=WHAT_ABOUT jaccard=0.40
+
+======================================================================
+CLUSTER 37 in [Academic Interest - Finance & Banking]
+  KEEP   Q871: What area of finance and banking interests you the most?
+  REMOVE Q2211: Which part of finance and banking interests you most?
+    merge Q871<->Q2211: high_jaccard=0.60 type1=WHAT_ABOUT type2=WHAT_ABOUT
+
+======================================================================
+CLUSTER 38 in [Academic Interest - Fine Arts & Painting]
+  KEEP   Q945: What approach to fine arts and painting resonates with you?
+  REMOVE Q2571: What draws you most to fine arts and painting?
+  REMOVE Q2576: Which area of fine arts interests you most?
+  REMOVE Q2596: How does painting connect to other disciplines?
+    merge Q945<->Q2571: high_jaccard=0.50 type1=MOTIVATION type2=WHAT_ABOUT
+    merge Q2571<->Q2576: same_type=WHAT_ABOUT jaccard=0.33
+    merge Q2571<->Q2596: same_type=WHAT_ABOUT jaccard=0.17
+
+======================================================================
+CLUSTER 39 in [Academic Interest - Fisheries & Aquaculture]
+  KEEP   Q1096: What aspect of fisheries and aquaculture appeals to you?
+  REMOVE Q1124: What aquaculture innovation interests you most?
+    merge Q1096<->Q1124: same_type=WHAT_ABOUT jaccard=0.17
+
+======================================================================
+CLUSTER 40 in [Academic Interest - Forestry & Natural Resources]
+  KEEP   Q1094: What draws you to forestry and natural resources?
+  REMOVE Q4221: What excites you most about studying forestry and natural resources?
+    merge Q1094<->Q4221: high_jaccard=0.50 type1=WHAT_ABOUT type2=WHAT_ABOUT
+
+======================================================================
+CLUSTER 41 in [Academic Interest - Geodetic & Surveying]
+  KEEP   Q853: What interests you about geodetic engineering and surveying?
+  REMOVE Q2091: Which part of geodetic and surveying work interests you most?
+  REMOVE Q2096: Which geodetic or surveying project would you most want to work on?
+    merge Q853<->Q2091: high_jaccard=0.50 type1=WHAT_ABOUT type2=ENVIRONMENT
+    merge Q2091<->Q2096: high_jaccard=0.50 type1=ENVIRONMENT type2=PROJECT
+
+======================================================================
+CLUSTER 42 in [Academic Interest - Healthcare General]
+  KEEP   Q977: What motivates you most about working in healthcare?
+  REMOVE Q978: Which healthcare setting would you want to work in?
+    merge Q977<->Q978: high_jaccard=0.50 type1=MOTIVATION type2=ENVIRONMENT
+
+======================================================================
+CLUSTER 43 in [Academic Interest - Healthcare General]
+  KEEP   Q980: What healthcare subject would you most enjoy studying?
+  REMOVE Q986: What's your preferred way to learn about healthcare?
+    merge Q980<->Q986: same_type=GENERAL jaccard=0.17
+
+======================================================================
+CLUSTER 44 in [Academic Interest - Industrial & Manufacturing]
+  KEEP   Q907: What part of industrial and manufacturing engineering interests you?
+  REMOVE Q1881: Which part of industrial and manufacturing work interests you most?
+    merge Q907<->Q1881: high_jaccard=0.67 type1=WHAT_ABOUT type2=ENVIRONMENT
+
+======================================================================
+CLUSTER 45 in [Academic Interest - International Studies & Diplomacy]
+  KEEP   Q1003: What aspect of international studies and diplomacy excites you?
+  REMOVE Q3741: What excites you most about studying international studies and diplomacy?
+    merge Q1003<->Q3741: high_jaccard=0.67 type1=WHAT_ABOUT type2=WHAT_ABOUT
+
+======================================================================
+CLUSTER 46 in [Academic Interest - Law & Justice]
+  KEEP   Q991: What area of law and justice interests you?
+  REMOVE Q3511: What part of law and justice work would you enjoy most?
+    merge Q991<->Q3511: same_type=WHAT_ABOUT jaccard=0.29
+
+======================================================================
+CLUSTER 47 in [Academic Interest - Legal Management]
+  KEEP   Q1008: What area of legal management interests you?
+  REMOVE Q3871: What part of legal-management work would you enjoy most?
+    merge Q1008<->Q3871: same_type=WHAT_ABOUT jaccard=0.29
+
+======================================================================
+CLUSTER 48 in [Academic Interest - Library & Information Science]
+  KEEP   Q1001: What area of library and information science appeals to you?
+  REMOVE Q3846: What kind of library-and-information-science career path appeals to you most?
+    merge Q1001<->Q3846: high_jaccard=0.57 type1=WHAT_ABOUT type2=CAREER
+
+======================================================================
+CLUSTER 49 in [Academic Interest - Linguistics & Languages]
+  KEEP   Q1005: What area of linguistics and languages excites you?
+  REMOVE Q3691: What part of linguistics and languages work would you enjoy most?
+    merge Q1005<->Q3691: same_type=WHAT_ABOUT jaccard=0.29
+
+======================================================================
+CLUSTER 50 in [Academic Interest - Management & Administration]
+  KEEP   Q878: What style of management and administration appeals to you?
+  REMOVE Q2271: Which part of management and administration interests you most?
+    merge Q878<->Q2271: same_type=WHAT_ABOUT jaccard=0.40
+
+======================================================================
+CLUSTER 51 in [Academic Interest - Marine Engineering]
+  KEEP   Q859: What aspect of marine engineering would you want to specialize in?
+  REMOVE Q917: What area of marine engineering appeals to you?
+  REMOVE Q2151: Which part of marine engineering interests you most?
+  REMOVE Q2171: What kind of marine-engineering environment appeals to you most?
+    merge Q859<->Q917: same_type=WHAT_ABOUT jaccard=0.33
+    merge Q859<->Q2151: same_type=WHAT_ABOUT jaccard=0.33
+    merge Q917<->Q2171: high_jaccard=0.60 type1=WHAT_ABOUT type2=ENVIRONMENT
+
+======================================================================
+CLUSTER 52 in [Academic Interest - Maritime & Seafaring]
+  KEEP   Q1049: What aspect of maritime work appeals to you the most?
+  REMOVE Q1054: What maritime technology excites you the most?
+    merge Q1049<->Q1054: same_type=WHAT_ABOUT jaccard=0.17
+
+======================================================================
+CLUSTER 53 in [Academic Interest - Maritime General]
+  KEEP   Q1073: What global maritime issue concerns you the most?
+  REMOVE Q1074: What kind of maritime innovation would you like to work on?
+  REMOVE Q1076: SCENARIO: You're asked to teach a maritime course. Which one do you pick?
+  REMOVE Q1077: Which maritime documentary topic would you want to watch?
+    merge Q1073<->Q1074: same_type=GENERAL jaccard=0.17
+    merge Q1074<->Q1076: same_type=GENERAL jaccard=0.17
+    merge Q1074<->Q1077: same_type=GENERAL jaccard=0.17
+
+======================================================================
+CLUSTER 54 in [Academic Interest - Mechanical Systems]
+  KEEP   Q842: What aspect of mechanical systems fascinates you?
+  REMOVE Q899: What area of mechanical systems fascinates you the most?
+    merge Q842<->Q899: high_jaccard=0.60 type1=WHAT_ABOUT type2=WHAT_ABOUT
+
+======================================================================
+CLUSTER 55 in [Academic Interest - Medical Technology & Lab Science]
+  KEEP   Q967: What kind of medical technology and lab science work interests you?
+  REMOVE Q3116: Which medical technology specialty or lab science area interests you most?
+    merge Q967<->Q3116: high_jaccard=0.62 type1=ENVIRONMENT type2=WHAT_ABOUT
+
+======================================================================
+CLUSTER 56 in [Academic Interest - Medicine & Healthcare]
+  KEEP   Q959: What area of medicine and healthcare appeals to you most?
+  REMOVE Q2936: Which medical specialty or area of healthcare interests you most?
+    merge Q959<->Q2936: same_type=WHAT_ABOUT jaccard=0.29
+
+======================================================================
+CLUSTER 57 in [Academic Interest - Midwifery & Maternal Health]
+  KEEP   Q974: What draws you to midwifery and maternal health?
+  REMOVE Q3356: Which midwifery specialty or area of maternal health interests you most?
+    merge Q974<->Q3356: same_type=WHAT_ABOUT jaccard=0.43
+
+======================================================================
+CLUSTER 58 in [Academic Interest - Military & Defense]
+  KEEP   Q1091: What aspect of military and defense interests you most?
+  REMOVE Q4041: What excites you most about studying military and defense?
+    merge Q1091<->Q4041: same_type=WHAT_ABOUT jaccard=0.33
+
+======================================================================
+CLUSTER 59 in [Academic Interest - Multimedia & Digital Entertainment]
+  KEEP   Q825: Which area of multimedia and digital entertainment excites you?
+  REMOVE Q1731: Which part of multimedia and digital entertainment interests you most?
+    merge Q825<->Q1731: same_type=WHAT_ABOUT jaccard=0.43
+
+======================================================================
+CLUSTER 60 in [Academic Interest - Music & Performance]
+  KEEP   Q931: What draws you to music and performance?
+  REMOVE Q2721: What excites you most about pursuing music and performance?
+  REMOVE Q2726: Which musical instrument or specialization appeals to you most?
+    merge Q931<->Q2721: same_type=WHAT_ABOUT jaccard=0.40
+    merge Q931<->Q2726: same_type=WHAT_ABOUT jaccard=0.17
+
+======================================================================
+CLUSTER 61 in [Academic Interest - Music Production & Audio]
+  KEEP   Q943: What area of music production and audio work appeals to you?
+  REMOVE Q2751: What draws you most to music production and audio work?
+  REMOVE Q2756: What area of music production would you specialize in?
+  REMOVE Q2771: What career in music production and audio appeals to you?
+    merge Q943<->Q2751: high_jaccard=0.57 type1=WHAT_ABOUT type2=WHAT_ABOUT
+    merge Q943<->Q2756: same_type=WHAT_ABOUT jaccard=0.43
+    merge Q943<->Q2771: high_jaccard=0.57 type1=WHAT_ABOUT type2=CAREER
+
+======================================================================
+CLUSTER 62 in [Academic Interest - Nursing & Patient Care]
+  KEEP   Q961: What draws you to nursing and patient care?
+  REMOVE Q2961: What excites you most about pursuing a career in nursing and patient care?
+  REMOVE Q2966: Which nursing specialty or patient population interests you the most?
+    merge Q961<->Q2961: high_jaccard=0.50 type1=WHAT_ABOUT type2=CAREER
+    merge Q961<->Q2966: same_type=WHAT_ABOUT jaccard=0.29
+
+======================================================================
+CLUSTER 63 in [Academic Interest - Nutrition & Dietetics]
+  KEEP   Q966: What aspect of nutrition and dietetics excites you?
+  REMOVE Q3141: What excites you most about pursuing a career in nutrition and dietetics?
+  REMOVE Q3146: Which nutrition specialty or dietetics area interests you most?
+    merge Q966<->Q3141: high_jaccard=0.50 type1=WHAT_ABOUT type2=CAREER
+    merge Q966<->Q3146: same_type=WHAT_ABOUT jaccard=0.29
+
+======================================================================
+CLUSTER 64 in [Academic Interest - Occupational Therapy]
+  KEEP   Q969: What kind of occupational therapy work appeals to you?
+  REMOVE Q3171: What excites you most about pursuing a career in occupational therapy?
+  REMOVE Q3176: Which occupational therapy specialty or practice area interests you most?
+  REMOVE Q3181: What aspect of occupational therapy practice do you find most fulfilling?
+    merge Q969<->Q3171: cross_type (WHAT_ABOUT vs CAREER) but j=0.29 opt=0.27
+    merge Q969<->Q3176: same_type=WHAT_ABOUT jaccard=0.25
+    merge Q969<->Q3181: same_type=WHAT_ABOUT jaccard=0.25
+
+======================================================================
+CLUSTER 65 in [Academic Interest - Optometry & Vision Care]
+  KEEP   Q973: What area of optometry and vision care appeals to you?
+  REMOVE Q3326: Which optometry specialty or area of vision care interests you most?
+    merge Q973<->Q3326: high_jaccard=0.57 type1=WHAT_ABOUT type2=WHAT_ABOUT
+
+======================================================================
+CLUSTER 66 in [Academic Interest - Pharmacy & Pharmaceutical Science]
+  KEEP   Q964: What area of pharmacy and pharmaceutical science interests you?
+  REMOVE Q3056: Which pharmacy specialty or pharmaceutical area interests you most?
+    merge Q964<->Q3056: high_jaccard=0.67 type1=WHAT_ABOUT type2=WHAT_ABOUT
+
+======================================================================
+CLUSTER 67 in [Academic Interest - Philosophy & Ethics]
+  KEEP   Q997: What draws you to philosophy and ethics?
+  REMOVE Q3771: What excites you most about studying philosophy and ethics?
+  REMOVE Q3781: What part of philosophy-and-ethics work would you enjoy most?
+    merge Q997<->Q3771: same_type=WHAT_ABOUT jaccard=0.40
+    merge Q997<->Q3781: same_type=WHAT_ABOUT jaccard=0.33
+
+======================================================================
+CLUSTER 68 in [Academic Interest - Photography & Visual Arts]
+  KEEP   Q936: What style of photography and visual arts appeals to you?
+  REMOVE Q2811: What draws you most to photography and visual arts?
+  REMOVE Q2831: What career in photography and visual arts appeals to you?
+    merge Q936<->Q2811: high_jaccard=0.60 type1=WHAT_ABOUT type2=WHAT_ABOUT
+    merge Q936<->Q2831: high_jaccard=0.80 type1=WHAT_ABOUT type2=CAREER
+
+======================================================================
+CLUSTER 69 in [Academic Interest - Physical Therapy & Rehabilitation]
+  KEEP   Q965: What draws you to physical therapy and rehabilitation?
+  REMOVE Q3086: Which physical therapy specialty or rehabilitation area interests you most?
+    merge Q965<->Q3086: same_type=WHAT_ABOUT jaccard=0.43
+
+======================================================================
+CLUSTER 70 in [Academic Interest - Politics & Government]
+  KEEP   Q992: What area of politics and government appeals to you?
+  REMOVE Q3541: What part of politics and government work would you enjoy most?
+    merge Q992<->Q3541: same_type=WHAT_ABOUT jaccard=0.29
+
+======================================================================
+CLUSTER 71 in [Academic Interest - Product & Industrial Design]
+  KEEP   Q855: What kind of product would you love to design from concept to production?
+  REMOVE Q856: Which step of the product design process do you enjoy most?
+    merge Q855<->Q856: same_type=GENERAL jaccard=0.25
+
+======================================================================
+CLUSTER 72 in [Academic Interest - Product & Industrial Design]
+  KEEP   Q913: What aspect of product and industrial design appeals to you?
+  REMOVE Q2141: What kind of product-design environment appeals to you most?
+    merge Q913<->Q2141: high_jaccard=0.50 type1=WHAT_ABOUT type2=ENVIRONMENT
+
+======================================================================
+CLUSTER 73 in [Academic Interest - Programming & Coding]
+  KEEP   Q809: What excites you most about programming and coding?
+  REMOVE Q1431: Which part of programming feels most exciting to you?
+    merge Q809<->Q1431: high_jaccard=0.50 type1=WHAT_ABOUT type2=WHAT_ABOUT
+
+======================================================================
+CLUSTER 74 in [Academic Interest - Psychology & Mental Health]
+  KEEP   Q962: What aspect of psychology and mental health interests you?
+  REMOVE Q2996: Which psychology specialty or mental health area interests you most?
+    merge Q962<->Q2996: high_jaccard=0.57 type1=WHAT_ABOUT type2=WHAT_ABOUT
+
+======================================================================
+CLUSTER 75 in [Academic Interest - Public Administration]
+  KEEP   Q1002: What type of public administration work appeals to you?
+  REMOVE Q3601: What part of public administration work would you enjoy most?
+    merge Q1002<->Q3601: high_jaccard=0.50 type1=WHAT_ABOUT type2=WHAT_ABOUT
+
+======================================================================
+CLUSTER 76 in [Academic Interest - Public Health]
+  KEEP   Q975: What area of public health excites you?
+  REMOVE Q3021: What excites you most about pursuing a career in public health?
+  REMOVE Q3026: Which public health specialty or focus area interests you most?
+  REMOVE Q3031: What aspect of public health practice do you find most fulfilling?
+    merge Q975<->Q3021: high_jaccard=0.50 type1=WHAT_ABOUT type2=CAREER
+    merge Q975<->Q3026: same_type=WHAT_ABOUT jaccard=0.43
+    merge Q975<->Q3031: same_type=WHAT_ABOUT jaccard=0.25
+
+======================================================================
+CLUSTER 77 in [Academic Interest - Respiratory Therapy]
+  KEEP   Q971: What aspect of respiratory therapy interests you?
+  REMOVE Q3201: What excites you most about pursuing a career in respiratory therapy?
+  REMOVE Q3206: Which respiratory therapy specialty or practice area interests you most?
+  REMOVE Q3226: What scenario in respiratory therapy resonates with you the most?
+    merge Q971<->Q3201: cross_type (WHAT_ABOUT vs CAREER) but j=0.29 opt=0.31
+    merge Q971<->Q3206: same_type=WHAT_ABOUT jaccard=0.43
+    merge Q971<->Q3226: cross_type (WHAT_ABOUT vs SCENARIO) but j=0.33 opt=0.27
+
+======================================================================
+CLUSTER 78 in [Academic Interest - Social General]
+  KEEP   Q1021: SCENARIO: You're leading a social project on a tight budget. What do you prioritize?
+  REMOVE Q1030: SCENARIO: Your university is hosting a social innovation challenge. What project do you pitch?
+    merge Q1021<->Q1030: same_type=PROJECT jaccard=0.18
+
+======================================================================
+CLUSTER 79 in [Academic Interest - Social General]
+  KEEP   Q1026: If you could create one new law, what would it do?
+  REMOVE Q1047: What's your reaction when you see a news report about injustice?
+    merge Q1026<->Q1047: same_type=GENERAL jaccard=0.17
+
+======================================================================
+CLUSTER 80 in [Academic Interest - Social Work & Community]
+  KEEP   Q993: What kind of social work and community service motivates you?
+  REMOVE Q3411: What excites you most about pursuing a career in social work and community service?
+    merge Q993<->Q3411: high_jaccard=0.50 type1=MOTIVATION type2=CAREER
+
+======================================================================
+CLUSTER 81 in [Academic Interest - Social Work & Community]
+  KEEP   Q1031: What kind of social work specialization interests you most?
+  REMOVE Q3416: Which social work or community field interests you most?
+  REMOVE Q3421: What part of social work practice would you enjoy most?
+  REMOVE Q3431: How does social work connect with other fields for you?
+    merge Q1031<->Q3416: high_jaccard=0.50 type1=WHAT_ABOUT type2=WHAT_ABOUT
+    merge Q1031<->Q3421: same_type=WHAT_ABOUT jaccard=0.29
+    merge Q3416<->Q3431: high_jaccard=0.50 type1=WHAT_ABOUT type2=CROSS_FIELD
+
+======================================================================
+CLUSTER 82 in [Academic Interest - Sociology]
+  KEEP   Q1004: What area of sociology interests you?
+  REMOVE Q3721: What part of sociology work would you enjoy most?
+    merge Q1004<->Q3721: same_type=WHAT_ABOUT jaccard=0.17
+
+======================================================================
+CLUSTER 83 in [Academic Interest - Special Needs Education]
+  KEEP   Q1000: What type of special needs education work interests you?
+  REMOVE Q3801: What excites you most about studying special needs education?
+  REMOVE Q3811: What part of special needs education work would you enjoy most?
+    merge Q1000<->Q3811: high_jaccard=0.57 type1=ENVIRONMENT type2=WHAT_ABOUT
+    merge Q3801<->Q3811: same_type=WHAT_ABOUT jaccard=0.38
+
+======================================================================
+CLUSTER 84 in [Academic Interest - Speech-Language Pathology]
+  KEEP   Q970: What area of speech-language pathology interests you?
+  REMOVE Q3231: What excites you most about pursuing a career in speech-language pathology?
+  REMOVE Q3236: Which speech-language pathology specialty or practice area interests you most?
+  REMOVE Q3241: What aspect of speech-language pathology practice do you find most fulfilling?
+    merge Q970<->Q3231: cross_type (WHAT_ABOUT vs CAREER) but j=0.38 opt=0.34
+    merge Q970<->Q3236: high_jaccard=0.71 type1=WHAT_ABOUT type2=WHAT_ABOUT
+    merge Q970<->Q3241: same_type=WHAT_ABOUT jaccard=0.33
+
+======================================================================
+CLUSTER 85 in [Academic Interest - Sports & Fitness]
+  KEEP   Q1079: What aspect of sports and fitness excites you the most?
+  REMOVE Q3921: What excites you most about studying sports and fitness?
+    merge Q1079<->Q3921: high_jaccard=0.60 type1=WHAT_ABOUT type2=WHAT_ABOUT
+
+======================================================================
+CLUSTER 86 in [Academic Interest - Startup & Innovation]
+  KEEP   Q886: What drives your interest in startups and innovation?
+  REMOVE Q2541: Which part of startup and innovation interests you most?
+    merge Q886<->Q2541: same_type=WHAT_ABOUT jaccard=0.33
+
+======================================================================
+CLUSTER 87 in [Academic Interest - Tourism & Hospitality]
+  KEEP   Q1082: What part of tourism and hospitality interests you most?
+  REMOVE Q3981: What excites you most about studying tourism and hospitality?
+    merge Q1082<->Q3981: same_type=WHAT_ABOUT jaccard=0.33
+
+======================================================================
+CLUSTER 88 in [Academic Interest - Veterinary & Animal Science]
+  KEEP   Q1089: What aspect of veterinary and animal science interests you most?
+  REMOVE Q1116: What animal science research area excites you?
+    merge Q1089<->Q1116: same_type=WHAT_ABOUT jaccard=0.25
+
+======================================================================
+CLUSTER 89 in [Academic Interest - Weather & Atmospheric Science]
+  KEEP   Q794: What about weather and atmospheric science interests you?
+  REMOVE Q1401: Which part of weather and atmosphere science interests you most?
+    merge Q794<->Q1401: high_jaccard=0.50 type1=WHAT_ABOUT type2=WHAT_ABOUT
+
+======================================================================
+CLUSTER 90 in [Academic Interest - Writing & Literature]
+  KEEP   Q934: What kind of writing and literature excites you?
+  REMOVE Q2841: What excites you most about pursuing a career in writing and literature?
+  REMOVE Q2851: What aspect of the writing process do you enjoy most?
+    merge Q934<->Q2841: high_jaccard=0.60 type1=WHAT_ABOUT type2=CAREER
+    merge Q934<->Q2851: same_type=WHAT_ABOUT jaccard=0.17
+
+======================================================================
+CLUSTER 91 in [Interest - Animation & 3D]
+  KEEP   Q590: What animation style would you specialize in?
+  REMOVE Q700: What animation production pipeline stage interests you?
+  REMOVE Q701: What Philippine animation opportunity excites you?
+    merge Q590<->Q700: same_type=WHAT_ABOUT jaccard=0.17
+    merge Q590<->Q701: same_type=WHAT_ABOUT jaccard=0.20
+
+======================================================================
+CLUSTER 92 in [Interest - Architecture & Design]
+  KEEP   Q602: What spatial design discipline interests you?
+  REMOVE Q759: What interior design element interests you most?
+    merge Q602<->Q759: same_type=WHAT_ABOUT jaccard=0.33
+
+======================================================================
+CLUSTER 93 in [Interest - Cloud Computing]
+  KEEP   Q217: What interests you most about cloud computing and servers?
+  REMOVE Q528: Which cloud platform would you specialize in?
+    merge Q217<->Q528: same_type=WHAT_ABOUT jaccard=0.17
+
+======================================================================
+CLUSTER 94 in [Interest - Community Service]
+  KEEP   Q627: Where would you serve your community?
+  REMOVE Q704: What Filipino community issue would you address?
+  REMOVE Q706: What community empowerment approach would you use?
+  REMOVE Q707: What community organizing strategy would you lead?
+    merge Q627<->Q704: same_type=GENERAL jaccard=0.20
+    merge Q627<->Q706: same_type=GENERAL jaccard=0.20
+    merge Q627<->Q707: same_type=GENERAL jaccard=0.20
+
+======================================================================
+CLUSTER 95 in [Interest - Counseling]
+  KEEP   Q487: What type of counseling practice appeals to you most?
+  REMOVE Q489: What counseling population would you focus on?
+  REMOVE Q491: Where would you most want to practice counseling?
+    merge Q487<->Q489: same_type=WHAT_ABOUT jaccard=0.20
+    merge Q487<->Q491: high_jaccard=0.67 type1=WHAT_ABOUT type2=GENERAL
+
+======================================================================
+CLUSTER 96 in [Interest - Creative Skills]
+  KEEP   Q666: What creative skill would you develop?
+  REMOVE Q670: What creative challenge would you tackle?
+    merge Q666<->Q670: same_type=PROJECT jaccard=0.20
+
+======================================================================
+CLUSTER 97 in [Interest - Cybersecurity]
+  KEEP   Q531: Which cybersecurity domain interests you most?
+  REMOVE Q532: What cybersecurity threat would you specialize in defending?
+    merge Q531<->Q532: same_type=WHAT_ABOUT jaccard=0.17
+
+======================================================================
+CLUSTER 98 in [Interest - Cybersecurity]
+  KEEP   Q534: Where would you practice cybersecurity?
+  REMOVE Q535: What cybersecurity awareness effort would you lead?
+    merge Q534<->Q535: same_type=GENERAL jaccard=0.20
+
+======================================================================
+CLUSTER 99 in [Interest - Digital Media]
+  KEEP   Q593: What digital media content would you produce?
+  REMOVE Q595: What digital media skill would you develop?
+    merge Q593<->Q595: same_type=PROJECT jaccard=0.33
+
+======================================================================
+CLUSTER 100 in [Interest - Entrepreneurship]
+  KEEP   Q586: What startup challenge would you solve?
+  REMOVE Q762: What would your Filipino startup solve?
+  REMOVE Q763: What startup funding strategy would you use?
+  REMOVE Q764: What startup metric would you track obsessively?
+    merge Q586<->Q762: high_jaccard=0.50 type1=MOTIVATION type2=GENERAL
+    merge Q762<->Q763: same_type=GENERAL jaccard=0.17
+    merge Q762<->Q764: same_type=GENERAL jaccard=0.17
+
+======================================================================
+CLUSTER 101 in [Interest - Environmental Engineering]
+  KEEP   Q242: What environmental engineering challenge would you want to solve?
+  REMOVE Q561: What environmental remediation method interests you?
+  REMOVE Q562: Where would you work as an environmental engineer?
+    merge Q242<->Q562: same_type=ENVIRONMENT jaccard=0.17
+    merge Q561<->Q562: same_type=ENVIRONMENT jaccard=0.17
+
+======================================================================
+CLUSTER 102 in [Interest - Film & Broadcast]
+  KEEP   Q596: What film/broadcast production role excites you?
+  REMOVE Q728: What film production stage excites you most?
+    merge Q596<->Q728: high_jaccard=0.50 type1=CAREER type2=WHAT_ABOUT
+
+======================================================================
+CLUSTER 103 in [Interest - Forensic Science]
+  KEEP   Q236: What type of forensic work fascinates you?
+  REMOVE Q618: What forensic science specialization interests you?
+    merge Q236<->Q618: same_type=WHAT_ABOUT jaccard=0.17
+
+======================================================================
+CLUSTER 104 in [Interest - Forensic Science]
+  KEEP   Q619: What forensic lab technique would you learn?
+  REMOVE Q620: Where would you apply forensic science?
+    merge Q619<->Q620: same_type=GENERAL jaccard=0.17
+
+======================================================================
+CLUSTER 105 in [Interest - Health Administration]
+  KEEP   Q494: What type of healthcare facility would you manage?
+  REMOVE Q495: What healthcare quality metric would you prioritize?
+    merge Q494<->Q495: same_type=GENERAL jaccard=0.17
+
+======================================================================
+CLUSTER 106 in [Interest - Industrial Operations]
+  KEEP   Q566: Which industry would you optimize operations for?
+  REMOVE Q567: What operations research technique would you apply?
+    merge Q566<->Q567: same_type=GENERAL jaccard=0.17
+
+======================================================================
+CLUSTER 107 in [Interest - Laboratory Research]
+  KEEP   Q607: Where would you conduct research?
+  REMOVE Q744: What lab research routine would you enjoy?
+    merge Q607<->Q744: same_type=GENERAL jaccard=0.20
+
+======================================================================
+CLUSTER 108 in [Interest - Marketing & Sales]
+  KEEP   Q572: What marketing strategy interests you most?
+  REMOVE Q749: What marketing channel would you specialize in?
+    merge Q572<->Q749: same_type=WHAT_ABOUT jaccard=0.20
+
+======================================================================
+CLUSTER 109 in [Interest - Medical Laboratory]
+  KEEP   Q233: You're working in a medical laboratory. What type of testing interests you most?
+  REMOVE Q465: Which medical laboratory specialization excites you most?
+    merge Q233<->Q465: same_type=WHAT_ABOUT jaccard=0.29
+
+======================================================================
+CLUSTER 110 in [Interest - Performing Arts]
+  KEEP   Q250: What type of performance or performing arts excites you?
+  REMOVE Q599: What performing arts discipline appeals to you?
+  REMOVE Q757: What performing arts collaboration appeals to you?
+    merge Q250<->Q599: same_type=WHAT_ABOUT jaccard=0.40
+    merge Q599<->Q757: high_jaccard=0.60 type1=WHAT_ABOUT type2=TEAM
+
+======================================================================
+CLUSTER 111 in [Interest - Pharmacy]
+  KEEP   Q499: Which pharmacy practice area excites you most?
+  REMOVE Q502: Which pharmacy technology interests you?
+    merge Q499<->Q502: same_type=WHAT_ABOUT jaccard=0.17
+
+======================================================================
+CLUSTER 112 in [Interest - Rehabilitation]
+  KEEP   Q480: What type of rehabilitation patient would you most want to help?
+  REMOVE Q483: What rehabilitation outcome is most rewarding to you?
+    merge Q480<->Q483: same_type=GENERAL jaccard=0.20
+
+======================================================================
+CLUSTER 113 in [Interest - Software Development]
+  KEEP   Q505: Which programming paradigm excites you most?
+  REMOVE Q694: What programming challenge excites you?
+    merge Q505<->Q694: high_jaccard=0.50 type1=WHAT_ABOUT type2=MOTIVATION
+
+======================================================================
+CLUSTER 114 in [Interest - Teaching & Education]
+  KEEP   Q621: What would you most enjoy teaching?
+  REMOVE Q766: What makes a great teacher in your view?
+    merge Q621<->Q766: same_type=GENERAL jaccard=0.20
+
+======================================================================
+CLUSTER 115 in [Interest - Technical Skills]
+  KEEP   Q272: What hands-on technical activity do you enjoy most?
+  REMOVE Q675: What technical certification would you earn?
+    merge Q272<->Q675: same_type=GENERAL jaccard=0.17
+
+======================================================================
+CLUSTER 116 in [Interest - Visual Design]
+  KEEP   Q770: What color and design principle matters most to you?
+  REMOVE Q771: What design movement inspires your style?
+    merge Q770<->Q771: same_type=GENERAL jaccard=0.17
+
+======================================================================
+CLUSTER 117 in [Situational - Family Business]
+  KEEP   Q87: Your family is starting a small business. How would you contribute?
+  REMOVE Q104: Your family is planning to start a small business. What role would you take?
+    merge Q87<->Q104: high_jaccard=0.50 type1=GENERAL type2=CAREER
+
+======================================================================
+CLUSTER 118 in [Situational - Group Research]
+  KEEP   Q108: Your group is assigned a research project. What role do you naturally take?
+  REMOVE Q168: Your group project is about climate change. Which part do you want to handle?
+    merge Q108<->Q168: same_type=PROJECT jaccard=0.18
+
+======================================================================
+TOTAL CLUSTERS: 118
+TOTAL QUESTIONS TO REMOVE: 170
+POOL AFTER REMOVAL: 1252
+
+# Python set for removal:
+REMOVE_IDS = {
+    104, 168, 465, 483, 489, 491, 495, 502, 528, 532,
+    535, 561, 562, 567, 595, 599, 618, 620, 670, 675,
+    694, 700, 701, 704, 706, 707, 728, 744, 749, 757,
+    759, 762, 763, 764, 766, 771, 841, 856, 858, 864,
+    865, 866, 877, 892, 899, 901, 903, 909, 916, 917,
+    955, 956, 978, 986, 1009, 1030, 1047, 1054, 1058, 1074,
+    1076, 1077, 1114, 1116, 1124, 1197, 1217, 1225, 1311, 1401,
+    1431, 1461, 1551, 1571, 1731, 1821, 1851, 1856, 1881, 1941,
+    2001, 2021, 2036, 2066, 2091, 2096, 2141, 2151, 2171, 2211,
+    2271, 2301, 2331, 2541, 2571, 2576, 2596, 2601, 2606, 2621,
+    2626, 2651, 2661, 2666, 2696, 2716, 2721, 2726, 2751, 2756,
+    2771, 2811, 2831, 2841, 2851, 2896, 2901, 2916, 2921, 2936,
+    2961, 2966, 2996, 3021, 3026, 3031, 3056, 3086, 3116, 3141,
+    3146, 3171, 3176, 3181, 3201, 3206, 3226, 3231, 3236, 3241,
+    3266, 3326, 3356, 3381, 3411, 3416, 3421, 3431, 3481, 3511,
+    3541, 3571, 3601, 3636, 3691, 3721, 3741, 3771, 3781, 3801,
+    3811, 3846, 3871, 3891, 3901, 3921, 3961, 3981, 4041, 4221,
+}

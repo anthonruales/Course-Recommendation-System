@@ -1,0 +1,359 @@
+﻿[TREE] Loaded 45 decision tree questions across 13 domains
+[TREE] Navigation rules: 31 branch transitions
+[TREE] Validation questions: 10
+Total removed questions extracted: 88
+Q104 [Situational - Family Business]
+  Text: Your family is planning to start a small business. What role would you take?
+  Parent: Q87 - Your family is starting a small business. How would you cont
+  Options: 10, Traits: ['Admin-Skill', 'Analytical-Skill', 'Artistic', 'Civil-Build', 'Community-Serve']
+Q465 [Interest - Medical Laboratory]
+  Text: Which medical laboratory specialization excites you most?
+  Parent: Q458 - Which epidemiology topic interests you most?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Environmental-Sci', 'Investigative', 'Lab-Research']
+Q489 [Interest - Counseling]
+  Text: What counseling population would you focus on?
+  Parent: Q483 - What rehabilitation outcome is most rewarding to you?
+  Options: 6, Traits: ['Community-Serve', 'Counseling', 'HR-Management', 'Patient-Care', 'People-Skill']
+Q599 [Interest - Performing Arts]
+  Text: What performing arts discipline appeals to you?
+  Parent: Q250 - What type of performance or performing arts excites you?
+  Options: 6, Traits: ['Analytical-Skill', 'Artistic', 'Creative-Skill', 'Film-Broadcast', 'People-Skill']
+Q618 [Interest - Forensic Science]
+  Text: What forensic science specialization interests you?
+  Parent: Q236 - What type of forensic work fascinates you?
+  Options: 6, Traits: ['Cyber-Defense', 'Field-Research', 'Finance-Acct', 'Forensic-Sci', 'Investigative']
+Q701 [Interest - Animation & 3D]
+  Text: What Philippine animation opportunity excites you?
+  Parent: Q697 - What hardware troubleshooting do you enjoy?
+  Options: 6, Traits: ['Animation-3D', 'Artistic', 'Creative-Skill', 'Digital-Media', 'Film-Broadcast']
+Q749 [Interest - Marketing & Sales]
+  Text: What marketing channel would you specialize in?
+  Parent: Q746 - What marketing content would you create?
+  Options: 6, Traits: ['Data-Analytics', 'Digital-Media', 'Enterprising', 'Film-Broadcast', 'Marketing-Sales']
+Q759 [Interest - Architecture & Design]
+  Text: What interior design element interests you most?
+  Parent: Q756 - ?
+  Options: 6, Traits: ['Artistic', 'Civil-Build', 'Creative-Skill', 'Electrical-Power', 'Environmental-Eng']
+Q774 [Interest - Nutrition & Dietetics]
+  Text: Where would you work as a nutritionist?
+  Parent: Q476 - Where would you most want to practice nutrition?
+  Options: 6, Traits: ['Analytical-Skill', 'Community-Serve', 'Food-Science', 'Health-Admin', 'Nutrition-Diet']
+Q899 [Academic Interest - Mechanical Systems]
+  Text: What area of mechanical systems fascinates you the most?
+  Parent: Q851 - What part of aeronautical and aerospace engineering excites 
+  Options: 6, Traits: ['AI-ML', 'Analytical-Skill', 'Automotive-Tech', 'Civil-Build', 'Data-Analytics']
+Q901 [Academic Interest - Electrical & Electronics]
+  Text: What area of electrical and electronics engineering excites you?
+  Parent: Q844 - Which electrical & electronics project would you want to wor
+  Options: 6, Traits: ['AI-ML', 'Analytical-Skill', 'Automotive-Tech', 'Civil-Build', 'Creative-Skill']
+Q909 [Academic Interest - Aeronautical & Aerospace]
+  Text: What area of aeronautical and aerospace engineering excites you?
+  Parent: Q851 - What part of aeronautical and aerospace engineering excites 
+  Options: 6, Traits: ['AI-ML', 'Aeronautical-Eng', 'Analytical-Skill', 'Creative-Skill', 'Data-Analytics']
+Q917 [Academic Interest - Marine Engineering]
+  Text: What area of marine engineering appeals to you?
+  Parent: Q859 - What aspect of marine engineering would you want to speciali
+  Options: 6, Traits: ['AI-ML', 'Analytical-Skill', 'Civil-Build', 'Community-Serve', 'Data-Analytics']
+Q1116 [Academic Interest - Veterinary & Animal Science]
+  Text: What animal science research area excites you?
+  Parent: Q1096 - What aspect of fisheries and aquaculture appeals to you?
+  Options: 6, Traits: ['Agri-Nature', 'Analytical-Skill', 'Community-Serve', 'Data-Analytics', 'Environmental-Sci']
+Q1401 [Academic Interest - Weather & Atmospheric Science]
+  Text: Which part of weather and atmosphere science interests you most?
+  Parent: Q794 - What about weather and atmospheric science interests you?
+  Options: 6, Traits: ['Analytical-Skill', 'Community-Serve', 'Data-Analytics', 'Environmental-Sci', 'Field-Research']
+Q1431 [Academic Interest - Programming & Coding]
+  Text: Which part of programming feels most exciting to you?
+  Parent: Q809 - What excites you most about programming and coding?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Creative-Skill', 'Data-Analytics', 'Investigative']
+Q1461 [Academic Interest - Computers & IT]
+  Text: Which side of computers and IT interests you most?
+  Parent: Q811 - What part of Computers & IT appeals to you the most?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Cloud-Systems', 'Community-Serve', 'Data-Analytics']
+Q1551 [Academic Interest - Cybersecurity]
+  Text: Which side of cybersecurity interests you most?
+  Parent: Q817 - What aspect of cybersecurity interests you the most?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Cloud-Systems', 'Community-Serve', 'Cyber-Defense']
+Q1731 [Academic Interest - Multimedia & Digital Entertainment]
+  Text: Which part of multimedia and digital entertainment interests you most?
+  Parent: Q848 - What excites you about architecture and interior design?
+  Options: 6, Traits: ['Analytical-Skill', 'Animation-3D', 'Creative-Skill', 'Data-Analytics', 'Digital-Media']
+Q1821 [Academic Interest - Civil & Construction]
+  Text: Which part of civil and construction work interests you most?
+  Parent: Q834 - What tech trend are you most excited about for the future?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Civil-Build', 'Community-Serve', 'Creative-Skill']
+Q1851 [Academic Interest - Architecture & Interior Design]
+  Text: Which part of architecture and interior design interests you most?
+  Parent: Q848 - What excites you about architecture and interior design?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Civil-Build', 'Community-Serve', 'Creative-Skill']
+Q1881 [Academic Interest - Industrial & Manufacturing]
+  Text: Which part of industrial and manufacturing work interests you most?
+  Parent: Q854 - What type of landscape architecture project would you love t
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Data-Analytics', 'Industrial-Ops']
+Q2001 [Academic Interest - Electrical & Electronics]
+  Text: Which part of electrical and electronics work interests you most?
+  Parent: Q901 - ?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Data-Analytics', 'Electrical-Power', 'Electronics-Dev']
+Q2031 [Academic Interest - Aircraft Maintenance & Avionics]
+  Text: Which part of aircraft maintenance and avionics interests you most?
+  Parent: Q857 - What interests you about aircraft maintenance and avionics?
+  Options: 6, Traits: ['Admin-Skill', 'Aeronautical-Eng', 'Analytical-Skill', 'Community-Serve', 'Electrical-Power']
+Q2061 [Academic Interest - Aeronautical & Aerospace]
+  Text: Which part of aeronautical and aerospace work interests you most?
+  Parent: Q853 - What interests you about geodetic engineering and surveying?
+  Options: 6, Traits: ['Admin-Skill', 'Aeronautical-Eng', 'Analytical-Skill', 'Data-Analytics', 'Electrical-Power']
+Q2066 [Academic Interest - Aeronautical & Aerospace]
+  Text: Which aeronautical or aerospace project would you most want to work on?
+  Parent: Q853 - What interests you about geodetic engineering and surveying?
+  Options: 6, Traits: ['Admin-Skill', 'Aeronautical-Eng', 'Analytical-Skill', 'Data-Analytics', 'Electrical-Power']
+Q2091 [Academic Interest - Geodetic & Surveying]
+  Text: Which part of geodetic and surveying work interests you most?
+  Parent: Q857 - What interests you about aircraft maintenance and avionics?
+  Options: 6, Traits: ['Admin-Skill', 'Agri-Nature', 'Analytical-Skill', 'Civil-Build', 'Community-Serve']
+Q2151 [Academic Interest - Marine Engineering]
+  Text: Which part of marine engineering interests you most?
+  Parent: Q859 - What aspect of marine engineering would you want to speciali
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Electrical-Power', 'Hardware-Systems']
+Q2211 [Academic Interest - Finance & Banking]
+  Text: Which part of finance and banking interests you most?
+  Parent: Q871 - What area of finance and banking interests you the most?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Data-Analytics', 'Finance-Acct']
+Q2271 [Academic Interest - Management & Administration]
+  Text: Which part of management and administration interests you most?
+  Parent: Q878 - What style of management and administration appeals to you?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Conventional', 'Data-Analytics']
+Q2301 [Academic Interest - Accounting]
+  Text: Which part of accounting interests you most?
+  Parent: Q875 - Which area of accounting would you want to specialize in?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Conventional', 'Data-Analytics']
+Q2331 [Academic Interest - Economics]
+  Text: Which part of economics interests you most?
+  Parent: Q876 - What topic in economics fascinates you the most?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Data-Analytics', 'Finance-Acct']
+Q2541 [Academic Interest - Startup & Innovation]
+  Text: Which part of startup and innovation interests you most?
+  Parent: Q880 - What part of human resource management interests you?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Creative-Skill', 'Data-Analytics']
+Q2576 [Academic Interest - Fine Arts & Painting]
+  Text: Which area of fine arts interests you most?
+  Parent: Q933 - SCENARIO: You're making a short film for a competition. What
+  Options: 6, Traits: ['Analytical-Skill', 'Artistic', 'Community-Serve', 'Creative-Skill', 'Digital-Media']
+Q2651 [Academic Interest - Art & Design]
+  Text: How can design create positive impact?
+  Parent: Q2636 - What design discipline attracts you most?
+  Options: 6, Traits: ['Analytical-Skill', 'Community-Serve', 'Creative-Skill', 'Digital-Media', 'Field-Research']
+Q2661 [Academic Interest - Film & Media Production]
+  Text: What draws you to film and media production?
+  Parent: Q2636 - What design discipline attracts you most?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Artistic', 'Creative-Skill', 'Digital-Media']
+Q2666 [Academic Interest - Film & Media Production]
+  Text: What type of film or media interests you most?
+  Parent: Q2636 - What design discipline attracts you most?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Artistic', 'Community-Serve', 'Creative-Skill']
+Q2696 [Academic Interest - Advertising & Graphic Arts]
+  Text: What advertising or graphic design specialty attracts you?
+  Parent: Q2691 - What excites you about advertising and graphic design?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Artistic', 'Creative-Skill', 'Data-Analytics']
+Q2721 [Academic Interest - Music & Performance]
+  Text: What excites you most about pursuing music and performance?
+  Parent: Q943 - What area of music production and audio work appeals to you?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Artistic', 'Community-Serve', 'Creative-Skill']
+Q2751 [Academic Interest - Music Production & Audio]
+  Text: What draws you most to music production and audio work?
+  Parent: Q943 - What area of music production and audio work appeals to you?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Artistic', 'Creative-Skill', 'Digital-Media']
+Q2756 [Academic Interest - Music Production & Audio]
+  Text: What area of music production would you specialize in?
+  Parent: Q943 - What area of music production and audio work appeals to you?
+  Options: 6, Traits: ['Analytical-Skill', 'Artistic', 'Creative-Skill', 'Digital-Media', 'Film-Broadcast']
+Q2771 [Academic Interest - Music Production & Audio]
+  Text: What career in music production and audio appeals to you?
+  Parent: Q936 - What style of photography and visual arts appeals to you?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Artistic', 'Creative-Skill', 'Digital-Media']
+Q2781 [Academic Interest - Theater & Performing Arts]
+  Text: What excites you most about theater and the performing arts?
+  Parent: Q940 - What role in theater and performing arts interests you?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Artistic', 'Conventional', 'Creative-Skill']
+Q2811 [Academic Interest - Photography & Visual Arts]
+  Text: What draws you most to photography and visual arts?
+  Parent: Q936 - What style of photography and visual arts appeals to you?
+  Options: 6, Traits: ['Analytical-Skill', 'Artistic', 'Creative-Skill', 'Digital-Media', 'Field-Research']
+Q2841 [Academic Interest - Writing & Literature]
+  Text: What excites you most about pursuing a career in writing and literature?
+  Parent: Q934 - What kind of writing and literature excites you?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Artistic', 'Community-Serve', 'Creative-Skill']
+Q2871 [Academic Interest - Animation & Multimedia]
+  Text: What excites you most about animation and multimedia?
+  Parent: Q940 - What role in theater and performing arts interests you?
+  Options: 6, Traits: ['Animation-3D', 'Artistic', 'Creative-Skill', 'Digital-Media', 'Film-Broadcast']
+Q2901 [Academic Interest - Clothing & Textile Technology]
+  Text: What excites you most about clothing and textile technology?
+  Parent: Q947 - What aspect of clothing and textile technology interests you
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Artistic', 'Community-Serve', 'Creative-Skill']
+Q2936 [Academic Interest - Medicine & Healthcare]
+  Text: Which medical specialty or area of healthcare interests you most?
+  Parent: Q959 - What area of medicine and healthcare appeals to you most?
+  Options: 6, Traits: ['Analytical-Skill', 'Community-Serve', 'Counseling', 'Lab-Research', 'Medical-Lab']
+Q2961 [Academic Interest - Nursing & Patient Care]
+  Text: What excites you most about pursuing a career in nursing and patient care?
+  Parent: Q961 - What draws you to nursing and patient care?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Counseling', 'Health-Admin']
+Q2966 [Academic Interest - Nursing & Patient Care]
+  Text: Which nursing specialty or patient population interests you the most?
+  Parent: Q961 - What draws you to nursing and patient care?
+  Options: 6, Traits: ['Analytical-Skill', 'Community-Serve', 'Counseling', 'Health-Admin', 'Medical-Lab']
+Q2996 [Academic Interest - Psychology & Mental Health]
+  Text: Which psychology specialty or mental health area interests you most?
+  Parent: Q962 - What aspect of psychology and mental health interests you?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Counseling', 'Lab-Research']
+Q3026 [Academic Interest - Public Health]
+  Text: Which public health specialty or focus area interests you most?
+  Parent: Q975 - What area of public health excites you?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Counseling', 'Health-Admin']
+Q3031 [Academic Interest - Public Health]
+  Text: What aspect of public health practice do you find most fulfilling?
+  Parent: Q975 - What area of public health excites you?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Health-Admin', 'Lab-Research']
+Q3056 [Academic Interest - Pharmacy & Pharmaceutical Science]
+  Text: Which pharmacy specialty or pharmaceutical area interests you most?
+  Parent: Q964 - What area of pharmacy and pharmaceutical science interests y
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Counseling', 'Health-Admin']
+Q3086 [Academic Interest - Physical Therapy & Rehabilitation]
+  Text: Which physical therapy specialty or rehabilitation area interests you most?
+  Parent: Q965 - What draws you to physical therapy and rehabilitation?
+  Options: 6, Traits: ['Analytical-Skill', 'Community-Serve', 'Counseling', 'Medical-Lab', 'Patient-Care']
+Q3116 [Academic Interest - Medical Technology & Lab Science]
+  Text: Which medical technology specialty or lab science area interests you most?
+  Parent: Q967 - What kind of medical technology and lab science work interes
+  Options: 6, Traits: ['Analytical-Skill', 'Lab-Research', 'Medical-Lab', 'Patient-Care', 'Pharmacy']
+Q3146 [Academic Interest - Nutrition & Dietetics]
+  Text: Which nutrition specialty or dietetics area interests you most?
+  Parent: Q966 - What aspect of nutrition and dietetics excites you?
+  Options: 6, Traits: ['Analytical-Skill', 'Community-Serve', 'Counseling', 'Health-Admin', 'Lab-Research']
+Q3176 [Academic Interest - Occupational Therapy]
+  Text: Which occupational therapy specialty or practice area interests you most?
+  Parent: Q969 - What kind of occupational therapy work appeals to you?
+  Options: 6, Traits: ['Analytical-Skill', 'Community-Serve', 'Counseling', 'Health-Admin', 'Medical-Lab']
+Q3181 [Academic Interest - Occupational Therapy]
+  Text: What aspect of occupational therapy practice do you find most fulfilling?
+  Parent: Q969 - What kind of occupational therapy work appeals to you?
+  Options: 6, Traits: ['Analytical-Skill', 'Community-Serve', 'Counseling', 'Health-Admin', 'Medical-Lab']
+Q3206 [Academic Interest - Respiratory Therapy]
+  Text: Which respiratory therapy specialty or practice area interests you most?
+  Parent: Q971 - What aspect of respiratory therapy interests you?
+  Options: 6, Traits: ['Analytical-Skill', 'Community-Serve', 'Health-Admin', 'Lab-Research', 'Medical-Lab']
+Q3236 [Academic Interest - Speech-Language Pathology]
+  Text: Which speech-language pathology specialty or practice area interests you most?
+  Parent: Q970 - What area of speech-language pathology interests you?
+  Options: 6, Traits: ['Analytical-Skill', 'Community-Serve', 'Counseling', 'Lab-Research', 'Medical-Lab']
+Q3241 [Academic Interest - Speech-Language Pathology]
+  Text: What aspect of speech-language pathology practice do you find most fulfilling?
+  Parent: Q970 - What area of speech-language pathology interests you?
+  Options: 6, Traits: ['Analytical-Skill', 'Community-Serve', 'Counseling', 'Health-Admin', 'Lab-Research']
+Q3266 [Academic Interest - Dentistry & Oral Health]
+  Text: Which dental specialty or oral health area interests you most?
+  Parent: Q968 - What area of dentistry and oral health appeals to you?
+  Options: 6, Traits: ['Analytical-Skill', 'Community-Serve', 'Counseling', 'Lab-Research', 'Medical-Lab']
+Q3296 [Academic Interest - Radiology & Imaging]
+  Text: Which radiology specialty or imaging modality interests you most?
+  Parent: Q972 - What type of radiology and medical imaging work interests yo
+  Options: 6, Traits: ['Analytical-Skill', 'Health-Admin', 'Lab-Research', 'Medical-Lab', 'Patient-Care']
+Q3326 [Academic Interest - Optometry & Vision Care]
+  Text: Which optometry specialty or area of vision care interests you most?
+  Parent: Q973 - What area of optometry and vision care appeals to you?
+  Options: 6, Traits: ['Analytical-Skill', 'Counseling', 'Lab-Research', 'Medical-Lab', 'Patient-Care']
+Q3356 [Academic Interest - Midwifery & Maternal Health]
+  Text: Which midwifery specialty or area of maternal health interests you most?
+  Parent: Q973 - What area of optometry and vision care appeals to you?
+  Options: 6, Traits: ['Analytical-Skill', 'Community-Serve', 'Counseling', 'Health-Admin', 'Medical-Lab']
+Q3416 [Academic Interest - Social Work & Community]
+  Text: Which social work or community field interests you most?
+  Parent: Q989 - What area of education and teaching excites you?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Counseling', 'People-Skill']
+Q3421 [Academic Interest - Social Work & Community]
+  Text: What part of social work practice would you enjoy most?
+  Parent: Q989 - What area of education and teaching excites you?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Counseling', 'People-Skill']
+Q3431 [Academic Interest - Social Work & Community]
+  Text: How does social work connect with other fields for you?
+  Parent: Q988 - ?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Counseling', 'People-Skill']
+Q3481 [Academic Interest - Communication & Journalism]
+  Text: What part of communication and journalism work would you enjoy most?
+  Parent: Q996 - What type of communication and journalism work appeals to yo
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Digital-Media', 'Film-Broadcast']
+Q3511 [Academic Interest - Law & Justice]
+  Text: What part of law and justice work would you enjoy most?
+  Parent: Q991 - What area of law and justice interests you?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Investigative', 'Law-Enforce']
+Q3541 [Academic Interest - Politics & Government]
+  Text: What part of politics and government work would you enjoy most?
+  Parent: Q992 - What area of politics and government appeals to you?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Investigative', 'Legal-Practice']
+Q3571 [Academic Interest - Criminology & Public Safety]
+  Text: What part of criminology and public safety work would you enjoy most?
+  Parent: Q998 - What area of criminology and public safety interests you?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Forensic-Sci', 'Investigative']
+Q3601 [Academic Interest - Public Administration]
+  Text: What part of public administration work would you enjoy most?
+  Parent: Q1002 - What type of public administration work appeals to you?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Investigative', 'Legal-Practice']
+Q3691 [Academic Interest - Linguistics & Languages]
+  Text: What part of linguistics and languages work would you enjoy most?
+  Parent: Q1005 - What area of linguistics and languages excites you?
+  Options: 6, Traits: ['Analytical-Skill', 'Community-Serve', 'Investigative', 'People-Skill', 'Teaching-Ed']
+Q3741 [Academic Interest - International Studies & Diplomacy]
+  Text: What excites you most about studying international studies and diplomacy?
+  Parent: Q1003 - What aspect of international studies and diplomacy excites y
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Investigative', 'Legal-Practice']
+Q3771 [Academic Interest - Philosophy & Ethics]
+  Text: What excites you most about studying philosophy and ethics?
+  Parent: Q997 - What draws you to philosophy and ethics?
+  Options: 6, Traits: ['Analytical-Skill', 'Community-Serve', 'Investigative', 'Legal-Practice', 'People-Skill']
+Q3781 [Academic Interest - Philosophy & Ethics]
+  Text: What part of philosophy-and-ethics work would you enjoy most?
+  Parent: Q997 - What draws you to philosophy and ethics?
+  Options: 6, Traits: ['Analytical-Skill', 'Community-Serve', 'Investigative', 'Legal-Practice', 'People-Skill']
+Q3801 [Academic Interest - Special Needs Education]
+  Text: What excites you most about studying special needs education?
+  Parent: Q1001 - What area of library and information science appeals to you?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Counseling', 'Creative-Skill']
+Q3811 [Academic Interest - Special Needs Education]
+  Text: What part of special needs education work would you enjoy most?
+  Parent: Q988 - ?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Counseling', 'Creative-Skill']
+Q3871 [Academic Interest - Legal Management]
+  Text: What part of legal-management work would you enjoy most?
+  Parent: Q1008 - What area of legal management interests you?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Investigative', 'Law-Enforce']
+Q3891 [Academic Interest - Early Childhood Education]
+  Text: What excites you most about studying early childhood education?
+  Parent: Q999 - What draws you to early childhood education?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Counseling', 'Creative-Skill']
+Q3901 [Academic Interest - Early Childhood Education]
+  Text: What part of early childhood education work would you enjoy most?
+  Parent: Q999 - What draws you to early childhood education?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Counseling', 'Creative-Skill']
+Q3921 [Academic Interest - Sports & Fitness]
+  Text: What excites you most about studying sports and fitness?
+  Parent: Q1079 - What aspect of sports and fitness excites you the most?
+  Options: 6, Traits: ['Admin-Skill', 'Analytical-Skill', 'Community-Serve', 'Creative-Skill', 'People-Skill']
+Q3961 [Academic Interest - Exercise & Sports Science]
+  Text: What part of exercise-and-sports-science work would you enjoy most?
+  Parent: Q1100 - What area of exercise and sports science fascinates you?
+  Options: 6, Traits: ['Analytical-Skill', 'Exercise-Sci-Path', 'Investigative', 'People-Skill', 'Physical-Skill']
+Q3981 [Academic Interest - Tourism & Hospitality]
+  Text: What excites you most about studying tourism and hospitality?
+  Parent: Q1094 - What draws you to forestry and natural resources?
+  Options: 6, Traits: ['Admin-Skill', 'Community-Serve', 'Hospitality-Svc', 'Marketing-Sales', 'People-Skill']
+Q4041 [Academic Interest - Military & Defense]
+  Text: What excites you most about studying military and defense?
+  Parent: Q1108 - What type of tourism experience would you design?
+  Options: 6, Traits: ['Analytical-Skill', 'Community-Serve', 'Investigative', 'Law-Enforce', 'Military-Defense']
+Q4221 [Academic Interest - Forestry & Natural Resources]
+  Text: What excites you most about studying forestry and natural resources?
+  Parent: Q1094 - What draws you to forestry and natural resources?
+  Options: 6, Traits: ['Agri-Nature', 'Analytical-Skill', 'Community-Serve', 'Data-Analytics', 'Environmental-Sci']
+
+Saved complete data for 88 removed questions
+Saved existing pool data: 1336 questions, 8834 unique options
