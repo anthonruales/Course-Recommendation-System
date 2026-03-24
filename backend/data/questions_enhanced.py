@@ -44530,6 +44530,1416 @@ if _repl27_existing_oids & _repl27_new_oids:
 QUESTIONS_POOL_ENHANCED.extend(_REPLACEMENT_BATCH_27)
 
 
+# ──────────────────────────────────────────────────────────────────────────────
+# REPLACEMENT BATCH 28 — 20 new questions  (QIDs 5226-5245, OIDs 28483-28602)
+# ──────────────────────────────────────────────────────────────────────────────
+_REPLACEMENT_BATCH_28 = [
+    # Q1 — Teaching + Early-Childhood + Inclusive-Ed
+    {
+        "question_id": 5226,
+        "question_text": "A Camarines Sur municipal government is opening a free preschool literacy center for children in far-flung fishing villages — some pupils have hearing impairments and travel by boat to school. Which role appeals to you most?",
+        "category": "Education & Pedagogy",
+        "options": [
+            {"option_id": 28483, "option_text": "Create a multi-sensory phonics curriculum that uses visual cues, tactile letter boards, and Filipino Sign Language prompts so every child can participate", "trait_tags": {"Teaching": 5, "Inclusive-Ed": 4, "Early-Childhood": 4}},
+            {"option_id": 28484, "option_text": "Design inflatable floating classroom modules that dock at each coastal barangay, equipped with solar power and satellite internet", "trait_tags": {"Engineering-Path": 4, "Sustainability-Path": 3, "Innovation": 3}},
+            {"option_id": 28485, "option_text": "Build an adaptive learning app with text-to-speech, adjustable font sizes, and gamified literacy quests accessible offline on cheap tablets", "trait_tags": {"IT-Software-Dev": 4, "UI-UX": 3, "Teaching": 3}},
+            {"option_id": 28486, "option_text": "Train local parent-volunteers as reading coaches using a cascading mentorship model that multiplies the center's reach", "trait_tags": {"Teaching": 4, "Community-Dev": 4, "Leadership": 3}},
+            {"option_id": 28487, "option_text": "Document the dialect-specific oral stories of each village and publish illustrated children's books in local mother tongues", "trait_tags": {"Creative-Writing": 4, "Cultural-Preservation": 4, "Early-Childhood": 3}},
+            {"option_id": 28488, "option_text": "Audit every entry point, ramp, and restroom of the building for wheelchair, crutch, and hearing-loop accessibility compliance", "trait_tags": {"Inclusive-Ed": 4, "Architecture-Path": 3, "Public-Admin": 3}},
+            {"option_id": 28489, "option_text": "Craft a fundraising strategy that pairs each donor with a specific child's progress dashboard showing reading-level improvements", "trait_tags": {"Marketing-Ads": 3, "Data-Analytics": 3, "Social-Work": 3}},
+            {"option_id": 28490, "option_text": "Manage the logistics of scheduling boat pickups, meal programs, and teacher rotations across six island barangays", "trait_tags": {"Operations-Logistics": 4, "Public-Admin": 3, "Community-Dev": 3}}
+        ]
+    },
+    # Q2 — Hotel-Resort-Path + Tourism-Hospitality-Path + Culinary-Mgmt-Path
+    {
+        "question_id": 5227,
+        "question_text": "A heritage boutique hotel inside a restored Spanish-era casa in Vigan is preparing to host an international slow-food festival. What contribution excites you?",
+        "category": "Hospitality & Tourism",
+        "options": [
+            {"option_id": 28491, "option_text": "Curate a nine-course degustation dinner that pairs Ilocano heirloom-rice dishes with regional sugarcane wines and fermented condiments", "trait_tags": {"Culinary-Mgmt-Path": 5, "Hotel-Resort-Path": 3, "Cultural-Preservation": 3}},
+            {"option_id": 28492, "option_text": "Design the festival's experiential walking-tour route through Vigan's cobblestone streets, integrating food stops, artisan workshops, and calesa rides", "trait_tags": {"Tourism-Hospitality-Path": 5, "Cultural-Preservation": 3, "Creative-Design": 3}},
+            {"option_id": 28493, "option_text": "Oversee the hotel's front-of-house staffing plan — concierge scripts, multilingual signage, room-turnover schedules — for 200 international guests", "trait_tags": {"Hotel-Resort-Path": 5, "HR-Management": 3, "Operations-Logistics": 3}},
+            {"option_id": 28494, "option_text": "Photograph and film every course plating, kitchen process, and vendor story to produce a cinematic social-media campaign", "trait_tags": {"Film-Media": 4, "Marketing-Ads": 3, "Creative-Design": 3}},
+            {"option_id": 28495, "option_text": "Negotiate farm-to-table supply agreements with 30 local growers, guaranteeing fair prices and organic certification standards", "trait_tags": {"Agri-Fisheries": 4, "Business-Mgmt": 3, "Sustainability-Path": 3}},
+            {"option_id": 28496, "option_text": "Develop the festival's food-safety and hygiene protocol — cold-chain monitoring, allergen labeling, and waste-segregation stations", "trait_tags": {"Nutrition-Food-Sci": 4, "Hotel-Resort-Path": 3, "Public-Admin": 3}},
+            {"option_id": 28497, "option_text": "Create an AR heritage overlay app so visitors can point their phone at any building and see its 18th-century appearance side-by-side with the present", "trait_tags": {"IT-Software-Dev": 4, "Tourism-Hospitality-Path": 3, "Cultural-Preservation": 3}},
+            {"option_id": 28498, "option_text": "Compose and rehearse a live rondalla-and-choir ensemble that performs regional folk songs at each festival dinner course transition", "trait_tags": {"Music-Audio": 5, "Tourism-Hospitality-Path": 3, "Cultural-Preservation": 3}}
+        ]
+    },
+    # Q3 — Veterinary-Path + Forestry-Path + Agri-Fisheries
+    {
+        "question_id": 5228,
+        "question_text": "The Philippine Eagle Foundation is releasing two captive-bred eagles into the forests of Mt. Hamiguitan in Davao Oriental, but poaching and habitat loss remain threats. Which task would you tackle?",
+        "category": "Agriculture, Forestry & Veterinary Sciences",
+        "options": [
+            {"option_id": 28499, "option_text": "Perform the final health exam — blood panels, feather-condition scoring, flight-strength tests — and attach GPS tracking harnesses before release", "trait_tags": {"Veterinary-Path": 5, "Scientific-Research": 3, "Sustainability-Path": 3}},
+            {"option_id": 28500, "option_text": "Map and restore a 500-hectare old-growth corridor using native dipterocarp and strangler-fig seedlings to reconnect fragmented eagle habitat", "trait_tags": {"Forestry-Path": 5, "Sustainability-Path": 4, "Agri-Fisheries": 3}},
+            {"option_id": 28501, "option_text": "Set up a real-time drone and camera-trap surveillance network to detect poachers and log illegal chainsaw activity across the buffer zone", "trait_tags": {"IT-Software-Dev": 4, "Military-Defense": 3, "Engineering-Path": 3}},
+            {"option_id": 28502, "option_text": "Organize an alternative-livelihood workshop teaching former hunters to raise free-range native chickens and harvest forest honey sustainably", "trait_tags": {"Agri-Fisheries": 4, "Community-Dev": 4, "TVET-Path": 3}},
+            {"option_id": 28503, "option_text": "Write a children's storybook featuring the two eagles as characters to build empathy in local elementary schools", "trait_tags": {"Creative-Writing": 4, "Teaching": 3, "Early-Childhood": 3}},
+            {"option_id": 28504, "option_text": "Draft the municipal ordinance tightening penalties for wildlife trafficking and establishing community forest guards with enforcement powers", "trait_tags": {"Legal-Mgmt": 5, "Public-Admin": 3, "Forestry-Path": 3}},
+            {"option_id": 28505, "option_text": "Design interpretive jungle boardwalks and bird-watching towers with minimal ecological footprint for ecotourist revenue", "trait_tags": {"Architecture-Path": 4, "Tourism-Hospitality-Path": 3, "Sustainability-Path": 3}},
+            {"option_id": 28506, "option_text": "Analyze five years of GPS and prey-density data to model optimal release windows and post-release survival probabilities", "trait_tags": {"Data-Analytics": 4, "Scientific-Research": 4, "Veterinary-Path": 3}}
+        ]
+    },
+    # Q4 — Sports-Fitness-Path + Exercise-Sci-Path + Nutrition-Food-Sci
+    {
+        "question_id": 5229,
+        "question_text": "A Philippine Sports Commission initiative is sending a mobile fitness-and-nutrition van to remote Cordillera mountain towns where childhood stunting rates are high. What role fits you?",
+        "category": "Sports, Fitness & Health Sciences",
+        "options": [
+            {"option_id": 28507, "option_text": "Design age-appropriate physical-literacy games — balance beams from bamboo, obstacle courses using hillside terrain — that double as play and developmental assessment", "trait_tags": {"Sports-Fitness-Path": 5, "Exercise-Sci-Path": 4, "Early-Childhood": 3}},
+            {"option_id": 28508, "option_text": "Conduct body-composition scans and VO₂ sub-max tests on adolescent athletes to identify talents eligible for provincial sports academies", "trait_tags": {"Exercise-Sci-Path": 5, "Sports-Fitness-Path": 3, "Scientific-Research": 3}},
+            {"option_id": 28509, "option_text": "Formulate high-protein meal plans using locally available sweet potato, mung beans, and dried venison to combat stunting", "trait_tags": {"Nutrition-Food-Sci": 5, "Culinary-Mgmt-Path": 3, "Community-Dev": 3}},
+            {"option_id": 28510, "option_text": "Convert the van's interior into a foldable clinic with a treatment table, ultrasound unit, and taping station for on-site physiotherapy", "trait_tags": {"Healthcare-Med": 4, "Engineering-Path": 3, "Exercise-Sci-Path": 3}},
+            {"option_id": 28511, "option_text": "Produce a multilingual health-education radio segment broadcast across Cordillera FM stations explaining why diverse diets matter for growing children", "trait_tags": {"Communication-Media": 4, "Teaching": 3, "Community-Dev": 3}},
+            {"option_id": 28512, "option_text": "Develop a data dashboard that aggregates each town's anthropometric measurements over time to track intervention effectiveness", "trait_tags": {"Data-Analytics": 4, "Public-Admin": 3, "IT-Software-Dev": 3}},
+            {"option_id": 28513, "option_text": "Negotiate municipal co-funding agreements so each LGU continues the program after the van moves on to the next town", "trait_tags": {"Public-Admin": 4, "Business-Mgmt": 3, "Leadership": 3}},
+            {"option_id": 28514, "option_text": "Film mini-documentaries of each community's health transformation to build a national campaign encouraging replication elsewhere", "trait_tags": {"Film-Media": 4, "Marketing-Ads": 3, "Social-Work": 3}}
+        ]
+    },
+    # Q5 — Automotive-Tech + TVET-Path + Engineering-Path
+    {
+        "question_id": 5230,
+        "question_text": "TESDA is partnering with a Laguna jeepney-modernization cooperative to convert vintage jeepneys from diesel to electric drivetrains while preserving their iconic chrome art. Where do you jump in?",
+        "category": "Technical-Vocational & Automotive",
+        "options": [
+            {"option_id": 28515, "option_text": "Retrofit the chassis — remove the diesel engine, weld motor mounts, integrate a lithium-iron-phosphate battery tray, and calibrate regenerative braking", "trait_tags": {"Automotive-Tech": 5, "Engineering-Path": 4, "TVET-Path": 3}},
+            {"option_id": 28516, "option_text": "Write the TESDA competency-based training module with step-by-step practicum guides so other mechanics can replicate the conversion nationwide", "trait_tags": {"TVET-Path": 5, "Teaching": 3, "Automotive-Tech": 3}},
+            {"option_id": 28517, "option_text": "Design the onboard infotainment and route-tracking display so passengers see real-time location, next stops, and fare deductions via RFID", "trait_tags": {"IT-Software-Dev": 4, "UI-UX": 3, "Automotive-Tech": 3}},
+            {"option_id": 28518, "option_text": "Restore and polish the stainless-steel horse-hood ornaments, hand-painted murals, and chrome hubcaps that make each jeepney a rolling artwork", "trait_tags": {"Creative-Design": 5, "Cultural-Preservation": 3, "Automotive-Tech": 3}},
+            {"option_id": 28519, "option_text": "Secure DOTr accreditation, draft roadworthiness test criteria for e-jeepneys, and prepare the cooperative's franchise application", "trait_tags": {"Legal-Mgmt": 4, "Public-Admin": 3, "Business-Mgmt": 3}},
+            {"option_id": 28520, "option_text": "Install rooftop solar panels on the cooperative's depot to supply free overnight charging and sell surplus power back to the grid", "trait_tags": {"Engineering-Path": 4, "Sustainability-Path": 4, "Electrical-Electronics": 3}},
+            {"option_id": 28521, "option_text": "Run a financial model showing break-even timelines, battery replacement cycles, and fare adjustments needed for the cooperative to stay profitable", "trait_tags": {"Finance-Acctg": 4, "Data-Analytics": 3, "Business-Mgmt": 3}},
+            {"option_id": 28522, "option_text": "Document the conversion journey — from first wrench turn to maiden voyage — as a docu-series that builds public support for e-jeepney adoption", "trait_tags": {"Film-Media": 4, "Communication-Media": 3, "Marketing-Ads": 3}}
+        ]
+    },
+    # Q6 — Library-Info + IT-Software-Dev + Community-Dev
+    {
+        "question_id": 5231,
+        "question_text": "A Cagayan Valley provincial library is launching a digital heritage archive to preserve centuries of flood-damaged parish records, revolutionary-era letters, and Japanese-occupation diaries before they disintegrate. Which task draws you?",
+        "category": "Library & Information Science",
+        "options": [
+            {"option_id": 28523, "option_text": "Operate the high-resolution multispectral scanner, adjust UV and infrared pass filters, and stitch fragile parchment scans into seamless composite images", "trait_tags": {"Library-Info": 5, "Scientific-Research": 3, "IT-Software-Dev": 3}},
+            {"option_id": 28524, "option_text": "Design the metadata schema — Dublin Core fields, controlled vocabularies, and IIIF manifest structures — so researchers worldwide can search the collection", "trait_tags": {"Library-Info": 5, "Data-Analytics": 3, "IT-Software-Dev": 3}},
+            {"option_id": 28525, "option_text": "Build an OCR and handwriting-recognition pipeline using machine learning trained on 19th-century Spanish and Ilocano scripts", "trait_tags": {"IT-Software-Dev": 5, "Data-Analytics": 3, "Library-Info": 3}},
+            {"option_id": 28526, "option_text": "Conduct oral-history interviews with elderly community members who can identify people and places in the photographs", "trait_tags": {"Communication-Media": 4, "Community-Dev": 4, "Cultural-Preservation": 3}},
+            {"option_id": 28527, "option_text": "Secure grants from the National Historical Commission and international archives foundations to fund multi-year preservation work", "trait_tags": {"Business-Mgmt": 4, "Public-Admin": 3, "Library-Info": 3}},
+            {"option_id": 28528, "option_text": "Chemically stabilize the most fragile documents with deacidification sprays, tissue-paper interleaving, and climate-controlled archival enclosures", "trait_tags": {"Scientific-Research": 4, "Library-Info": 3, "Sustainability-Path": 3}},
+            {"option_id": 28529, "option_text": "Develop school-visit programs where students decode actual old letters, connecting them to their local history in a hands-on way", "trait_tags": {"Teaching": 4, "Community-Dev": 3, "Cultural-Preservation": 3}},
+            {"option_id": 28530, "option_text": "Create a public exhibit with interactive touchscreen kiosks, projected map timelines, and audio narrations of the most dramatic diary entries", "trait_tags": {"Creative-Design": 4, "Tourism-Hospitality-Path": 3, "Film-Media": 3}}
+        ]
+    },
+    # Q7 — Military-Defense + Engineering-Path + IT-Software-Dev
+    {
+        "question_id": 5232,
+        "question_text": "The Philippine Air Force is upgrading its Mindanao radar network to improve maritime-domain awareness against illegal fishing vessels and unmapped aircraft. What assignment do you want?",
+        "category": "Military, Defense & Public Safety",
+        "options": [
+            {"option_id": 28531, "option_text": "Install phased-array radar antennas on remote hilltop sites, align feed horns, calibrate sidelobe suppression, and integrate with the national air-defense picture", "trait_tags": {"Military-Defense": 5, "Electrical-Electronics": 4, "Engineering-Path": 3}},
+            {"option_id": 28532, "option_text": "Write the sensor-fusion software that correlates radar tracks with AIS transponder data to distinguish legitimate fishing boats from dark vessels", "trait_tags": {"IT-Software-Dev": 5, "Military-Defense": 3, "Data-Analytics": 3}},
+            {"option_id": 28533, "option_text": "Build hardened power systems — hybrid solar-diesel generators with battery backup — at each radar site so it runs uninterrupted during typhoon season", "trait_tags": {"Engineering-Path": 4, "Sustainability-Path": 3, "Military-Defense": 3}},
+            {"option_id": 28534, "option_text": "Conduct the legal review of data-sharing agreements between the Air Force, Coast Guard, and BFAR to ensure privacy compliance and jurisdictional clarity", "trait_tags": {"Legal-Mgmt": 4, "Military-Defense": 3, "Public-Admin": 3}},
+            {"option_id": 28535, "option_text": "Train enlisted radar operators on interpreting track histories, weather clutter rejection, and threat-escalation procedures", "trait_tags": {"Teaching": 4, "Military-Defense": 4, "Leadership": 3}},
+            {"option_id": 28536, "option_text": "Negotiate with host communities near radar sites — address electromagnetic safety concerns, offer local employment, and finalize land-use permits", "trait_tags": {"Community-Dev": 4, "Public-Admin": 3, "Communication-Media": 3}},
+            {"option_id": 28537, "option_text": "Design camouflage housing and blast-resistant structures for each radar station to protect equipment from both weather and hostile action", "trait_tags": {"Architecture-Path": 4, "Military-Defense": 3, "Engineering-Path": 3}},
+            {"option_id": 28538, "option_text": "Develop a predictive analytics model using historical vessel-movement data to forecast poaching hotspots and pre-position patrol assets", "trait_tags": {"Data-Analytics": 5, "Military-Defense": 3, "Fisheries-Agri-Path": 3}}
+        ]
+    },
+    # Q8 — Music-Audio + Film-Media + Creative-Design
+    {
+        "question_id": 5233,
+        "question_text": "A Tondo community arts center is producing a hip-hop opera in Filipino that tells the story of Manila's informal-settler neighborhoods — from demolition threats to community organizing victories. Where do you contribute?",
+        "category": "Arts, Music & Creative Media",
+        "options": [
+            {"option_id": 28539, "option_text": "Compose the score — blending beatboxing, traditional kulintang percussion, and orchestral strings — and produce the master tracks in a home studio", "trait_tags": {"Music-Audio": 5, "Creative-Design": 3, "Cultural-Preservation": 3}},
+            {"option_id": 28540, "option_text": "Direct the stage production — blocking scenes on a set made from reclaimed construction materials, coordinating lighting cues with rap verses", "trait_tags": {"Film-Media": 4, "Creative-Design": 4, "Leadership": 3}},
+            {"option_id": 28541, "option_text": "Write the libretto in street-level Filipino slang, weaving interviews with actual residents into poetic lyrical structures", "trait_tags": {"Creative-Writing": 5, "Communication-Media": 3, "Community-Dev": 3}},
+            {"option_id": 28542, "option_text": "Design projection-mapped visuals that transform the bare stage into cityscapes, courtrooms, and flooding scenes using real documentary footage", "trait_tags": {"Film-Media": 4, "IT-Software-Dev": 3, "Creative-Design": 3}},
+            {"option_id": 28543, "option_text": "Manage ticket sales, merchandise, sponsorship deals, and a touring schedule to keep the show financially sustainable across provincial runs", "trait_tags": {"Business-Mgmt": 4, "Marketing-Ads": 3, "Operations-Logistics": 3}},
+            {"option_id": 28544, "option_text": "Conduct drama-therapy workshops for residents, using improvisation exercises to process trauma and build confidence before they perform biographical scenes", "trait_tags": {"Psychology-Path": 4, "Social-Work": 3, "Community-Dev": 3}},
+            {"option_id": 28545, "option_text": "Record a live-performance album with multi-track audio capture, mix it for streaming platforms, and submit it for awards consideration", "trait_tags": {"Music-Audio": 5, "Film-Media": 3, "Marketing-Ads": 3}},
+            {"option_id": 28546, "option_text": "Coordinate pro-bono legal aid booths in the lobby so audience members facing eviction can consult housing-rights lawyers during intermission", "trait_tags": {"Legal-Mgmt": 4, "Social-Work": 4, "Community-Dev": 3}}
+        ]
+    },
+    # Q9 — Fisheries-Agri-Path + Sustainability-Path + Marine Biology
+    {
+        "question_id": 5234,
+        "question_text": "A Samar coastal cooperative is installing a mangrove-integrated aquasilviculture farm that grows mud crabs and milkfish in channels between mangrove root systems. How do you help?",
+        "category": "Fisheries & Marine Sciences",
+        "options": [
+            {"option_id": 28547, "option_text": "Design the tidal-channel layout — water-gate positions, crab pen spacing, and mangrove replanting zones — maximizing both fish yield and carbon sequestration", "trait_tags": {"Fisheries-Agri-Path": 5, "Sustainability-Path": 4, "Forestry-Path": 3}},
+            {"option_id": 28548, "option_text": "Monitor water quality daily — salinity, dissolved oxygen, pH, and ammonia levels — adjusting feeding schedules and gate openings based on readings", "trait_tags": {"Scientific-Research": 4, "Fisheries-Agri-Path": 4, "Data-Analytics": 3}},
+            {"option_id": 28549, "option_text": "Breed disease-resistant mud-crab hatchlings in a recirculating nursery system and optimize survival rates through selective broodstock management", "trait_tags": {"Veterinary-Path": 4, "Fisheries-Agri-Path": 4, "Scientific-Research": 3}},
+            {"option_id": 28550, "option_text": "Process harvested crabs into vacuum-sealed ready-to-eat chili-crab packs and ship them to Manila restaurants via cold-chain logistics", "trait_tags": {"Culinary-Mgmt-Path": 4, "Operations-Logistics": 3, "Business-Mgmt": 3}},
+            {"option_id": 28551, "option_text": "Write the cooperative's application for a blue-carbon credit certification, quantifying mangrove biomass growth as tradeable carbon offsets", "trait_tags": {"Sustainability-Path": 5, "Finance-Acctg": 3, "Scientific-Research": 3}},
+            {"option_id": 28552, "option_text": "Train fisherfolk members in cooperative governance — profit-sharing ledgers, democratic voting procedures, and conflict mediation", "trait_tags": {"Community-Dev": 4, "Teaching": 3, "Business-Mgmt": 3}},
+            {"option_id": 28553, "option_text": "Build a GIS map of the entire mangrove-farm ecosystem, overlaying drone orthomosaics with bathymetric survey data for spatial planning", "trait_tags": {"IT-Software-Dev": 4, "Data-Analytics": 3, "Forestry-Path": 3}},
+            {"option_id": 28554, "option_text": "Develop a farm-tour circuit for eco-tourists that includes kayaking through mangrove channels, crab trapping demos, and a seafood cook-out finale", "trait_tags": {"Tourism-Hospitality-Path": 4, "Culinary-Mgmt-Path": 3, "Community-Dev": 3}}
+        ]
+    },
+    # Q10 — Philosophy-Path + Legal-Mgmt + Public-Admin
+    {
+        "question_id": 5235,
+        "question_text": "The Philippine Congress is drafting a bill on the ethical use of artificial intelligence — addressing deepfakes, automated loan denials, and algorithmic surveillance of citizens. Which committee role interests you?",
+        "category": "Philosophy, Ethics & Governance",
+        "options": [
+            {"option_id": 28555, "option_text": "Draft the bill's preamble and definitions section, articulating philosophical principles of human dignity, informed consent, and algorithmic transparency", "trait_tags": {"Philosophy-Path": 5, "Legal-Mgmt": 4, "Creative-Writing": 3}},
+            {"option_id": 28556, "option_text": "Conduct technical review sessions — explaining neural network biases, training data poisoning, and model interpretability to non-technical legislators", "trait_tags": {"IT-Software-Dev": 4, "Teaching": 3, "Data-Analytics": 3}},
+            {"option_id": 28557, "option_text": "Analyze how existing Philippine data-privacy, cybercrime, and consumer-protection laws overlap or conflict with the proposed AI provisions", "trait_tags": {"Legal-Mgmt": 5, "Public-Admin": 3, "Philosophy-Path": 3}},
+            {"option_id": 28558, "option_text": "Organize a nationwide public consultation — town halls in Luzon, Visayas, and Mindanao — where citizens share personal stories of AI-related harm", "trait_tags": {"Community-Dev": 4, "Communication-Media": 3, "Public-Admin": 3}},
+            {"option_id": 28559, "option_text": "Design the enforcement agency's complaint intake system — an online portal where citizens can flag suspected algorithmic discrimination", "trait_tags": {"IT-Software-Dev": 4, "UI-UX": 3, "Public-Admin": 3}},
+            {"option_id": 28560, "option_text": "Write the penalty and sanctions chapter — fine schedules for non-compliance, corporate officer liability, and whistleblower protection provisions", "trait_tags": {"Legal-Mgmt": 4, "Philosophy-Path": 3, "Business-Mgmt": 3}},
+            {"option_id": 28561, "option_text": "Prepare a comparative research brief covering AI regulations in the EU, Singapore, and South Korea to benchmark the Philippine bill internationally", "trait_tags": {"Scientific-Research": 4, "Philosophy-Path": 3, "Public-Admin": 3}},
+            {"option_id": 28562, "option_text": "Create a plain-language infographic pamphlet that explains the bill's key provisions to ordinary citizens in Filipino and Cebuano", "trait_tags": {"Creative-Design": 4, "Communication-Media": 3, "Teaching": 3}}
+        ]
+    },
+    # Q11 — Hotel-Resort-Path + Sustainability-Path + Architecture-Path
+    {
+        "question_id": 5236,
+        "question_text": "A Siargao beachfront resort damaged by a super-typhoon is being rebuilt as a net-zero energy property using typhoon-resistant design. What part of the rebuild project appeals to you?",
+        "category": "Hospitality & Sustainable Design",
+        "options": [
+            {"option_id": 28563, "option_text": "Design the aerodynamic building profiles — curved rooflines, breakaway wall panels, and elevated stilts — engineered to let 250 km/h winds pass through safely", "trait_tags": {"Architecture-Path": 5, "Engineering-Path": 4, "Sustainability-Path": 3}},
+            {"option_id": 28564, "option_text": "Plan the guest-experience journey — from arrival ritual with local musicians to in-room amenities made by island artisans — ensuring a five-star stay", "trait_tags": {"Hotel-Resort-Path": 5, "Tourism-Hospitality-Path": 3, "Creative-Design": 3}},
+            {"option_id": 28565, "option_text": "Specify the resort's off-grid energy systems — rooftop PV, micro-wind turbines, rainwater harvesting, and biodigester waste treatment", "trait_tags": {"Sustainability-Path": 5, "Engineering-Path": 3, "Electrical-Electronics": 3}},
+            {"option_id": 28566, "option_text": "Source typhoon-resistant landscaping — native vetiver grass for slope stabilization, pandanus wind barriers, and coral-stone gabion walls", "trait_tags": {"Forestry-Path": 4, "Sustainability-Path": 3, "Architecture-Path": 3}},
+            {"option_id": 28567, "option_text": "Develop the resort's wellness-spa menu — combining hilot massage traditions with modern hydrotherapy circuits and locally sourced essential oils", "trait_tags": {"Hotel-Resort-Path": 4, "Healthcare-Med": 3, "Culinary-Mgmt-Path": 3}},
+            {"option_id": 28568, "option_text": "Write an insurance and disaster-continuity plan — parametric weather-index policies, staff emergency protocols, and guest-evacuation simulations", "trait_tags": {"Finance-Acctg": 4, "Operations-Logistics": 3, "Military-Defense": 3}},
+            {"option_id": 28569, "option_text": "Train the construction crew in bamboo-and-engineered-timber building techniques certified by the Philippine Green Building Council", "trait_tags": {"TVET-Path": 4, "Teaching": 3, "Sustainability-Path": 3}},
+            {"option_id": 28570, "option_text": "Market the resort's rebuild story as a resilience brand — publishing before-and-after content and partnering with eco-travel influencers", "trait_tags": {"Marketing-Ads": 4, "Communication-Media": 3, "Hotel-Resort-Path": 3}}
+        ]
+    },
+    # Q12 — Forestry-Path + Community-Dev + Sustainability-Path
+    {
+        "question_id": 5237,
+        "question_text": "An Abra province highland community has received a Community-Based Forest Management Agreement covering 3,000 hectares of ancestral pine forest threatened by illegal logging and wildfire. What do you work on?",
+        "category": "Forestry & Environmental Management",
+        "options": [
+            {"option_id": 28571, "option_text": "Map the old-growth zones using LiDAR, classify tree species and canopy density, and delineate no-cut buffer areas around water sources", "trait_tags": {"Forestry-Path": 5, "Data-Analytics": 3, "Scientific-Research": 3}},
+            {"option_id": 28572, "option_text": "Build and maintain fire-break trails and install solar-powered fire-lookout stations with radio-linked community response teams", "trait_tags": {"Forestry-Path": 4, "Military-Defense": 3, "Community-Dev": 3}},
+            {"option_id": 28573, "option_text": "Establish a community-run resin-tapping enterprise that harvests Benguet pine resin sustainably for turpentine and rosin markets", "trait_tags": {"Business-Mgmt": 4, "Forestry-Path": 3, "Community-Dev": 3}},
+            {"option_id": 28574, "option_text": "Train para-foresters from the indigenous Tinguian community to patrol, monitor, and report activities within the forest boundary", "trait_tags": {"Teaching": 4, "Forestry-Path": 3, "Community-Dev": 4}},
+            {"option_id": 28575, "option_text": "Negotiate the legal boundaries and DENR compliance requirements of the CBFMA, resolving overlapping land claims with neighboring barangays", "trait_tags": {"Legal-Mgmt": 4, "Public-Admin": 3, "Community-Dev": 3}},
+            {"option_id": 28576, "option_text": "Design an agroforestry intercropping system — coffee and cacao under the pine canopy — providing income without clearcutting", "trait_tags": {"Agri-Fisheries": 4, "Forestry-Path": 3, "Sustainability-Path": 4}},
+            {"option_id": 28577, "option_text": "Calculate the forest's carbon stock and register it on a voluntary carbon-credit marketplace, channeling revenue back to community health and education", "trait_tags": {"Sustainability-Path": 4, "Finance-Acctg": 3, "Data-Analytics": 3}},
+            {"option_id": 28578, "option_text": "Produce a short documentary following Tinguian elders as they share the spiritual significance of specific grove sites and watershed rituals", "trait_tags": {"Film-Media": 4, "Cultural-Preservation": 4, "Community-Dev": 3}}
+        ]
+    },
+    # Q13 — Culinary-Mgmt-Path + Business-Mgmt + Marketing-Ads
+    {
+        "question_id": 5238,
+        "question_text": "A Kapampangan chef in Angeles City is opening a fermentation laboratory-restaurant that serves dishes made entirely from Philippine fermented ingredients — buro, bagoong, sukang Iloko, tapuy. Which role is yours?",
+        "category": "Culinary Arts & Food Business",
+        "options": [
+            {"option_id": 28579, "option_text": "Develop the fermentation program — controlling lactobacillus cultures, managing koji inoculation schedules, and aging fish pastes in clay jars for optimal umami depth", "trait_tags": {"Culinary-Mgmt-Path": 5, "Scientific-Research": 3, "Nutrition-Food-Sci": 3}},
+            {"option_id": 28580, "option_text": "Design the tasting-menu plating — ceramic vessels handmade by a local potter, edible-flower garnishes, and tableside aromatic presentations", "trait_tags": {"Creative-Design": 4, "Culinary-Mgmt-Path": 3, "Hotel-Resort-Path": 3}},
+            {"option_id": 28581, "option_text": "Write a business plan with revenue projections, break-even analysis, and a franchise model for scaling the concept to Makati and Cebu", "trait_tags": {"Business-Mgmt": 5, "Finance-Acctg": 3, "Culinary-Mgmt-Path": 3}},
+            {"option_id": 28582, "option_text": "Build an e-commerce platform selling bottled fermented sauces, vinegars, and pickle kits with subscription-box delivery options", "trait_tags": {"IT-Software-Dev": 4, "Marketing-Ads": 3, "Business-Mgmt": 3}},
+            {"option_id": 28583, "option_text": "Ensure every ferment meets BFAD safety standards — pH logging, pathogen testing, labeling for allergens and shelf-life dating", "trait_tags": {"Nutrition-Food-Sci": 4, "Legal-Mgmt": 3, "Scientific-Research": 3}},
+            {"option_id": 28584, "option_text": "Run a social-media content strategy featuring time-lapse fermentation videos, chef interviews, and behind-the-scenes lab footage", "trait_tags": {"Marketing-Ads": 5, "Film-Media": 3, "Communication-Media": 3}},
+            {"option_id": 28585, "option_text": "Negotiate partnerships with Pampanga rice farmers and Pangasinan fishermen to guarantee a year-round supply of raw ingredients at fair prices", "trait_tags": {"Agri-Fisheries": 4, "Operations-Logistics": 3, "Community-Dev": 3}},
+            {"option_id": 28586, "option_text": "Offer weekend fermentation workshops where home cooks learn to make their own buro, vinegar, and tapuy — generating additional revenue and brand ambassadors", "trait_tags": {"Teaching": 4, "Culinary-Mgmt-Path": 3, "Community-Dev": 3}}
+        ]
+    },
+    # Q14 — Tourism-Hospitality-Path + Cultural-Preservation + Creative-Design
+    {
+        "question_id": 5239,
+        "question_text": "The provincial government of Siquijor is rebranding the island's supernatural mystique into an immersive cultural-tourism experience — moving beyond the stigma of witchcraft toward heritage appreciation. What do you lead?",
+        "category": "Tourism & Cultural Heritage",
+        "options": [
+            {"option_id": 28587, "option_text": "Design an immersive night-walk trail through ancient balete trees with soundscape installations, fog machines, and narrated folklore stations", "trait_tags": {"Tourism-Hospitality-Path": 5, "Creative-Design": 4, "Cultural-Preservation": 3}},
+            {"option_id": 28588, "option_text": "Research and authenticate the island's centuries-old herbal-healing traditions, distinguishing genuine ethnobotany from tourist myths", "trait_tags": {"Scientific-Research": 4, "Healthcare-Med": 3, "Cultural-Preservation": 4}},
+            {"option_id": 28589, "option_text": "Produce a cinematic destination-marketing film that positions Siquijor as 'the Island of Healing' — serene, spiritual, and deeply Filipino", "trait_tags": {"Film-Media": 5, "Marketing-Ads": 3, "Tourism-Hospitality-Path": 3}},
+            {"option_id": 28590, "option_text": "Train local healers and herbalists to become accredited tour guides who can explain their practice respectfully to foreign visitors", "trait_tags": {"Teaching": 4, "Tourism-Hospitality-Path": 3, "Community-Dev": 3}},
+            {"option_id": 28591, "option_text": "Develop a branded product line — essential-oil blends, herbal soaps, and illustrated mythology postcards — sold at the airport and online", "trait_tags": {"Business-Mgmt": 4, "Creative-Design": 3, "Marketing-Ads": 3}},
+            {"option_id": 28592, "option_text": "Draft carrying-capacity regulations that limit daily visitors to fragile heritage sites and require booking through a centralized LGU portal", "trait_tags": {"Public-Admin": 4, "Legal-Mgmt": 3, "Sustainability-Path": 3}},
+            {"option_id": 28593, "option_text": "Create a digital archive of elder healers' chants, recipes, and rituals in video and audio format before their knowledge is lost", "trait_tags": {"Library-Info": 4, "Cultural-Preservation": 4, "Film-Media": 3}},
+            {"option_id": 28594, "option_text": "Build partnerships with wellness-resort chains to create Siquijor healing-retreat packages that bring high-spending tourists year-round", "trait_tags": {"Hotel-Resort-Path": 4, "Tourism-Hospitality-Path": 3, "Business-Mgmt": 3}}
+        ]
+    },
+    # Q15 — Exercise-Sci-Path + Healthcare-Med + Psychology-Path
+    {
+        "question_id": 5240,
+        "question_text": "A Manila metropolitan hospital is opening a cardiac-rehabilitation unit where heart-attack survivors undergo supervised exercise, dietary counseling, and psychological support to prevent recurrence. Which position suits you?",
+        "category": "Health Sciences & Rehabilitation",
+        "options": [
+            {"option_id": 28595, "option_text": "Program individualized exercise prescriptions — treadmill intervals, resistance-band circuits, and flexibility routines — calibrated to each patient's ejection-fraction data", "trait_tags": {"Exercise-Sci-Path": 5, "Healthcare-Med": 4, "Sports-Fitness-Path": 3}},
+            {"option_id": 28596, "option_text": "Counsel patients on behavioral change — addressing fear of exertion, depression after cardiac events, and family role adjustments", "trait_tags": {"Psychology-Path": 5, "Healthcare-Med": 3, "Social-Work": 3}},
+            {"option_id": 28597, "option_text": "Design heart-healthy Filipino meal plans — low-sodium sinigang, grilled fish, and brown-rice alternatives — that are affordable and culturally familiar", "trait_tags": {"Nutrition-Food-Sci": 5, "Culinary-Mgmt-Path": 3, "Healthcare-Med": 3}},
+            {"option_id": 28598, "option_text": "Connect wearable heart-rate monitors to a centralized nursing dashboard that triggers real-time alerts if a patient's rhythm becomes irregular during exercise", "trait_tags": {"IT-Software-Dev": 4, "Electrical-Electronics": 3, "Healthcare-Med": 3}},
+            {"option_id": 28599, "option_text": "Publish a longitudinal research study tracking 500 patients over five years to measure the unit's impact on readmission rates and survival outcomes", "trait_tags": {"Scientific-Research": 5, "Data-Analytics": 3, "Healthcare-Med": 3}},
+            {"option_id": 28600, "option_text": "Manage the unit's accreditation paperwork — PhilHealth reimbursement codes, DOH licensing, and clinical-practice guidelines compliance", "trait_tags": {"Public-Admin": 4, "Legal-Mgmt": 3, "Operations-Logistics": 3}},
+            {"option_id": 28601, "option_text": "Organize peer-support groups where recovering patients share coping strategies, celebrate milestones, and hold each other accountable", "trait_tags": {"Social-Work": 4, "Psychology-Path": 3, "Community-Dev": 3}},
+            {"option_id": 28602, "option_text": "Raise awareness through a public heart-health campaign — free screening days, educational seminars in barangay halls, and social-media testimonials", "trait_tags": {"Communication-Media": 4, "Marketing-Ads": 3, "Teaching": 3}}
+        ]
+    },
+    # Q16 — Veterinary-Path + Agri-Fisheries + TVET-Path
+    {
+        "question_id": 5241,
+        "question_text": "A Nueva Ecija carabao breeding center funded by the Philippine Carabao Center is introducing crossbreeding with Italian Murrah buffalo to boost milk production for a local dairy cooperative. What role fits you?",
+        "category": "Veterinary & Animal Sciences",
+        "options": [
+            {"option_id": 28603, "option_text": "Perform artificial insemination procedures, monitor estrus cycles with ultrasound, and maintain detailed genealogical records to prevent inbreeding", "trait_tags": {"Veterinary-Path": 5, "Scientific-Research": 3, "Data-Analytics": 3}},
+            {"option_id": 28604, "option_text": "Formulate nutritionally balanced silage and concentrate rations adjusted to each lactation stage to maximize milk yield without metabolic disorders", "trait_tags": {"Veterinary-Path": 4, "Nutrition-Food-Sci": 3, "Agri-Fisheries": 3}},
+            {"option_id": 28605, "option_text": "Train smallholder farmers in proper milking hygiene, colostrum management, and calf-rearing techniques through hands-on TESDA-accredited workshops", "trait_tags": {"TVET-Path": 5, "Teaching": 3, "Veterinary-Path": 3}},
+            {"option_id": 28606, "option_text": "Design the processing facility that pasteurizes milk and produces kesong puti, yogurt, and pastillas for market distribution", "trait_tags": {"Engineering-Path": 4, "Culinary-Mgmt-Path": 3, "Nutrition-Food-Sci": 3}},
+            {"option_id": 28607, "option_text": "Brand the dairy products under a cooperative label, design packaging, and negotiate shelf space in regional supermarkets", "trait_tags": {"Marketing-Ads": 4, "Business-Mgmt": 3, "Creative-Design": 3}},
+            {"option_id": 28608, "option_text": "Build an IoT-enabled barn management system — automated feeders, climate-controlled ventilation, and weight-tracking sensors connected to a mobile app", "trait_tags": {"IT-Software-Dev": 4, "Electrical-Electronics": 3, "Agri-Fisheries": 3}},
+            {"option_id": 28609, "option_text": "Conduct an environmental-impact assessment on manure management, proposing biogas digesters that convert waste into cooking fuel for nearby households", "trait_tags": {"Sustainability-Path": 4, "Engineering-Path": 3, "Agri-Fisheries": 3}},
+            {"option_id": 28610, "option_text": "Secure a low-interest loan from the Land Bank of the Philippines and create a cooperative financial model showing repayment from milk-sale revenues", "trait_tags": {"Finance-Acctg": 4, "Business-Mgmt": 3, "Community-Dev": 3}}
+        ]
+    },
+    # Q17 — Inclusive-Ed + Psychology-Path + IT-Software-Dev
+    {
+        "question_id": 5242,
+        "question_text": "A Cebu City special-education resource center is creating a sensory room and assistive-technology lab for students on the autism spectrum, transitioning from a one-size-fits-all approach to individualized support. What do you build?",
+        "category": "Inclusive & Special Education",
+        "options": [
+            {"option_id": 28611, "option_text": "Design the sensory room with weighted blankets, fiber-optic light curtains, vibration platforms, and scented stations calibrated to different sensory profiles", "trait_tags": {"Inclusive-Ed": 5, "Creative-Design": 3, "Psychology-Path": 3}},
+            {"option_id": 28612, "option_text": "Develop individualized education plans using functional-behavior assessments, establishing measurable goals and data-collection protocols for each learner", "trait_tags": {"Inclusive-Ed": 4, "Psychology-Path": 4, "Teaching": 3}},
+            {"option_id": 28613, "option_text": "Program assistive communication tablets with custom AAC boards featuring locally relevant icons — jeepneys, sari-sari stores, and Filipino meals", "trait_tags": {"IT-Software-Dev": 4, "Inclusive-Ed": 3, "UI-UX": 3}},
+            {"option_id": 28614, "option_text": "Train mainstream classroom teachers on co-teaching strategies, sensory accommodations, and positive behavior interventions so inclusion extends beyond the resource room", "trait_tags": {"Teaching": 5, "Inclusive-Ed": 3, "Leadership": 3}},
+            {"option_id": 28615, "option_text": "Conduct applied behavior analysis sessions, tracking antecedent-behavior-consequence data to reduce challenging behaviors and reinforce functional skills", "trait_tags": {"Psychology-Path": 5, "Inclusive-Ed": 3, "Scientific-Research": 3}},
+            {"option_id": 28616, "option_text": "Write grant proposals to international disability-rights foundations to fund assistive-tech equipment and staff training scholarships", "trait_tags": {"Business-Mgmt": 4, "Communication-Media": 3, "Inclusive-Ed": 3}},
+            {"option_id": 28617, "option_text": "Create a parent-coaching program that teaches families how to reinforce therapeutic strategies at home and navigate government support services", "trait_tags": {"Social-Work": 4, "Teaching": 3, "Community-Dev": 3}},
+            {"option_id": 28618, "option_text": "Build a cloud-based student-progress dashboard where therapists, teachers, and parents share real-time data on IEP goal attainment", "trait_tags": {"IT-Software-Dev": 5, "Data-Analytics": 3, "Inclusive-Ed": 3}}
+        ]
+    },
+    # Q18 — TVET-Path + Electrical-Electronics + Sustainability-Path
+    {
+        "question_id": 5243,
+        "question_text": "A Mindoro island municipality that just received 24/7 grid electricity for the first time is hiring technicians and planners to wire up homes, schools, and businesses safely. What do you contribute?",
+        "category": "Technical-Vocational & Electrical",
+        "options": [
+            {"option_id": 28619, "option_text": "Wire residential and commercial buildings to Philippine Electrical Code standards — sizing breaker panels, grounding systems, and running conduit through concrete-block walls", "trait_tags": {"TVET-Path": 5, "Electrical-Electronics": 4, "Engineering-Path": 3}},
+            {"option_id": 28620, "option_text": "Train a cohort of local electricians through a six-month TESDA NC-II certification program, combining classroom theory with supervised field installations", "trait_tags": {"Teaching": 5, "TVET-Path": 4, "Electrical-Electronics": 3}},
+            {"option_id": 28621, "option_text": "Design a mini-grid distribution network that integrates rooftop solar on public buildings, a community battery bank, and demand-side management software", "trait_tags": {"Sustainability-Path": 4, "Electrical-Electronics": 4, "Engineering-Path": 3}},
+            {"option_id": 28622, "option_text": "Set up the billing and metering system — prepaid smart meters, mobile-payment integrations, and a tariff schedule that subsidizes low-income households", "trait_tags": {"IT-Software-Dev": 4, "Finance-Acctg": 3, "Public-Admin": 3}},
+            {"option_id": 28623, "option_text": "Inspect every installation before energization — verifying insulation resistance, circuit-breaker ratings, and proper earth-fault loop impedance", "trait_tags": {"TVET-Path": 4, "Electrical-Electronics": 4, "Legal-Mgmt": 3}},
+            {"option_id": 28624, "option_text": "Produce safety-education materials in the local Hanunuo script and Tagalog, teaching residents about electrical hazards, overloaded outlets, and wet-hand risks", "trait_tags": {"Communication-Media": 4, "Teaching": 3, "Creative-Design": 3}},
+            {"option_id": 28625, "option_text": "Develop the municipality's five-year electrification master plan — load-growth projections, infrastructure investment timeline, and funding applications to NEA", "trait_tags": {"Public-Admin": 4, "Engineering-Path": 3, "Data-Analytics": 3}},
+            {"option_id": 28626, "option_text": "Install and maintain the step-down transformers, switchgear, and underground cable runs connecting the main feeder line to each barangay sub-station", "trait_tags": {"Electrical-Electronics": 5, "TVET-Path": 3, "Engineering-Path": 3}}
+        ]
+    },
+    # Q19 — Sports-Fitness-Path + Architecture-Path + Community-Dev
+    {
+        "question_id": 5244,
+        "question_text": "A Cavite City waterfront district is converting a decommissioned naval shipyard into a public multi-sport complex with skateparks, rowing channels, and climbing walls for underserved youth. Which part excites you?",
+        "category": "Sports Infrastructure & Urban Design",
+        "options": [
+            {"option_id": 28627, "option_text": "Design the skatepark's bowl gradients, rail placements, and concrete transitions using 3D modeling informed by professional skaters' feedback", "trait_tags": {"Architecture-Path": 4, "Sports-Fitness-Path": 4, "Creative-Design": 3}},
+            {"option_id": 28628, "option_text": "Coach beginner and intermediate athletes across disciplines — proper rowing stroke mechanics, bouldering techniques, and skateboard safety fundamentals", "trait_tags": {"Sports-Fitness-Path": 5, "Teaching": 3, "Exercise-Sci-Path": 3}},
+            {"option_id": 28629, "option_text": "Remediate the shipyard's soil and groundwater contamination — heavy-metal testing, phytoremediation planting, and EPA-standard compliance certification", "trait_tags": {"Scientific-Research": 4, "Sustainability-Path": 3, "Engineering-Path": 3}},
+            {"option_id": 28630, "option_text": "Run an after-school mentorship program pairing at-risk youth with athlete-mentors, combining sports training with academic tutoring and life-skills workshops", "trait_tags": {"Community-Dev": 5, "Social-Work": 3, "Sports-Fitness-Path": 3}},
+            {"option_id": 28631, "option_text": "Draft the public-private partnership agreement between the LGU, a sports-apparel sponsor, and the Department of National Defense for the land transfer", "trait_tags": {"Legal-Mgmt": 4, "Public-Admin": 3, "Business-Mgmt": 3}},
+            {"option_id": 28632, "option_text": "Install floodlighting, automated irrigation for turf fields, and a rainwater-harvesting system that fills the rowing channel from roof runoff", "trait_tags": {"Electrical-Electronics": 4, "Sustainability-Path": 3, "Engineering-Path": 3}},
+            {"option_id": 28633, "option_text": "Create the complex's brand identity — logo, wayfinding signage, murals on repurposed shipping containers, and a social-media launch campaign", "trait_tags": {"Creative-Design": 4, "Marketing-Ads": 4, "Communication-Media": 3}},
+            {"option_id": 28634, "option_text": "Conduct baseline fitness assessments on neighborhood youth — BMI, functional movement screens, grip strength — and track improvements quarterly", "trait_tags": {"Exercise-Sci-Path": 5, "Data-Analytics": 3, "Sports-Fitness-Path": 3}}
+        ]
+    },
+    # Q20 — Automotive-Tech + Military-Defense + Operations-Logistics
+    {
+        "question_id": 5245,
+        "question_text": "The Philippine Marine Corps is acquiring a fleet of amphibious armored vehicles for disaster response and territorial defense in island provinces. What role do you take on?",
+        "category": "Defense Technology & Logistics",
+        "options": [
+            {"option_id": 28635, "option_text": "Lead the acceptance inspection — testing engine performance, waterproofing seals, weapons-station traversal, and NBC overpressure systems against contract specifications", "trait_tags": {"Automotive-Tech": 5, "Military-Defense": 4, "Engineering-Path": 3}},
+            {"option_id": 28636, "option_text": "Develop the preventive-maintenance schedule and spare-parts inventory system so every vehicle stays mission-ready across six island garrisons", "trait_tags": {"Operations-Logistics": 5, "Automotive-Tech": 3, "Military-Defense": 3}},
+            {"option_id": 28637, "option_text": "Write the tactical doctrine for amphibious beach-landing operations — approach formations, surf-zone navigation, and vehicle-infantry coordination drills", "trait_tags": {"Military-Defense": 5, "Leadership": 3, "Creative-Writing": 3}},
+            {"option_id": 28638, "option_text": "Train Marine mechanics on turbocharged-diesel diagnostics, hydraulic-ramp repair, and field-expedient welding using the manufacturer's technical manuals", "trait_tags": {"TVET-Path": 4, "Automotive-Tech": 4, "Teaching": 3}},
+            {"option_id": 28639, "option_text": "Design the command-and-control communications suite — encrypted radios, satellite uplinks, and vehicle-tracking displays integrated into a tactical operations center", "trait_tags": {"IT-Software-Dev": 4, "Electrical-Electronics": 3, "Military-Defense": 3}},
+            {"option_id": 28640, "option_text": "Plan the inter-island logistics chain — roll-on/roll-off ferry contracts, fuel-depot locations, and ammunition-storage compliance with international safety standards", "trait_tags": {"Operations-Logistics": 4, "Military-Defense": 3, "Legal-Mgmt": 3}},
+            {"option_id": 28641, "option_text": "Produce a realistic training simulator using 3D terrain models of Philippine coastlines so crews practice amphibious maneuvers without fuel costs", "trait_tags": {"IT-Software-Dev": 4, "Film-Media": 3, "Military-Defense": 3}},
+            {"option_id": 28642, "option_text": "Coordinate a joint disaster-response exercise with the Red Cross, local coast guard, and provincial DRRMO to validate the vehicles' humanitarian-assistance capability", "trait_tags": {"Community-Dev": 4, "Military-Defense": 3, "Public-Admin": 3}}
+        ]
+    },
+]
+
+# --- collision guard for batch 28 ---
+_repl28_existing_qids = {q["question_id"] for q in QUESTIONS_POOL_ENHANCED}
+_repl28_new_qids = {q["question_id"] for q in _REPLACEMENT_BATCH_28}
+if _repl28_existing_qids & _repl28_new_qids:
+    raise ValueError(f"Replacement batch 28 question IDs overlap: {_repl28_existing_qids & _repl28_new_qids}")
+
+_repl28_existing_oids = {o["option_id"] for q in QUESTIONS_POOL_ENHANCED for o in q["options"]}
+_repl28_new_oids = {o["option_id"] for q in _REPLACEMENT_BATCH_28 for o in q["options"]}
+if _repl28_existing_oids & _repl28_new_oids:
+    raise ValueError(f"Replacement batch 28 option IDs overlap: {_repl28_existing_oids & _repl28_new_oids}")
+
+QUESTIONS_POOL_ENHANCED.extend(_REPLACEMENT_BATCH_28)
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# REPLACEMENT BATCH 29 — 20 new questions  (QIDs 5246-5265, OIDs 28643-28802)
+# ──────────────────────────────────────────────────────────────────────────────
+_REPLACEMENT_BATCH_29 = [
+    # Q1 — Healthcare-Med + Psychology-Path + Community-Dev
+    {
+        "question_id": 5246,
+        "question_text": "A Zamboanga City barangay health station is piloting a community mental-health outreach program after a spike in anxiety and PTSD cases following an armed siege anniversary. What responsibility do you choose?",
+        "category": "Health Sciences & Psychology",
+        "options": [
+            {"option_id": 28643, "option_text": "Conduct individual trauma-focused cognitive-behavioral therapy sessions with survivors, adapting techniques for Tausug cultural norms around emotional expression", "trait_tags": {"Psychology-Path": 5, "Healthcare-Med": 3, "Community-Dev": 3}},
+            {"option_id": 28644, "option_text": "Train barangay health workers to screen for depression and anxiety using validated Filipino-language questionnaires and referral decision trees", "trait_tags": {"Teaching": 4, "Healthcare-Med": 4, "Community-Dev": 3}},
+            {"option_id": 28645, "option_text": "Set up a telemedicine link so a Manila-based psychiatrist can prescribe and monitor medications remotely for patients who need pharmacological support", "trait_tags": {"IT-Software-Dev": 4, "Healthcare-Med": 4, "Electrical-Electronics": 3}},
+            {"option_id": 28646, "option_text": "Organize therapeutic art circles where participants paint, weave, and sculpt as non-verbal processing tools guided by an art-therapy framework", "trait_tags": {"Creative-Design": 4, "Psychology-Path": 3, "Community-Dev": 3}},
+            {"option_id": 28647, "option_text": "Compile an epidemiological report — prevalence rates, demographic breakdowns, service gaps — to justify provincial budget allocation for permanent mental-health staffing", "trait_tags": {"Data-Analytics": 4, "Public-Admin": 3, "Scientific-Research": 3}},
+            {"option_id": 28648, "option_text": "Facilitate restorative-justice dialogue circles between formerly displaced families and local peace advocates to rebuild neighborhood trust", "trait_tags": {"Social-Work": 4, "Philosophy-Path": 3, "Community-Dev": 4}},
+            {"option_id": 28649, "option_text": "Produce a radio drama series in Chavacano that normalizes help-seeking behavior and airs mental-health coping strategies through storytelling", "trait_tags": {"Communication-Media": 4, "Creative-Writing": 3, "Film-Media": 3}},
+            {"option_id": 28650, "option_text": "Secure pharmaceutical donations and cold-chain storage for psychotropic medications, managing inventory and expiry-date tracking for the station's dispensary", "trait_tags": {"Operations-Logistics": 4, "Healthcare-Med": 3, "Finance-Acctg": 3}}
+        ]
+    },
+    # Q2 — Finance-Acctg + Business-Mgmt + IT-Software-Dev
+    {
+        "question_id": 5247,
+        "question_text": "A Makati fintech startup is building an app that lets sari-sari store owners access micro-loans, track inventory, and accept cashless payments — all from a single smartphone. Which role do you take?",
+        "category": "Finance & Technology",
+        "options": [
+            {"option_id": 28651, "option_text": "Build the credit-scoring algorithm that analyzes a store's daily transaction history, foot traffic patterns, and repayment behavior to approve loans in minutes", "trait_tags": {"Data-Analytics": 4, "Finance-Acctg": 4, "IT-Software-Dev": 3}},
+            {"option_id": 28652, "option_text": "Design the mobile UI with large buttons, Tagalog labels, and voice-guided tutorials so store owners with limited tech literacy can navigate easily", "trait_tags": {"UI-UX": 5, "IT-Software-Dev": 3, "Creative-Design": 3}},
+            {"option_id": 28653, "option_text": "Develop the backend payment-processing integration — GCash, Maya, and bank-transfer APIs — with end-to-end encryption and PCI-DSS compliance", "trait_tags": {"IT-Software-Dev": 5, "Finance-Acctg": 3, "Engineering-Path": 3}},
+            {"option_id": 28654, "option_text": "Structure the company's Series A fundraising deck — unit economics, total addressable market, competitive moat analysis — for venture-capital pitches", "trait_tags": {"Business-Mgmt": 5, "Finance-Acctg": 3, "Marketing-Ads": 3}},
+            {"option_id": 28655, "option_text": "Navigate Bangko Sentral ng Pilipinas lending regulations, draft the e-money issuer license application, and ensure anti-money-laundering compliance", "trait_tags": {"Legal-Mgmt": 5, "Finance-Acctg": 3, "Public-Admin": 3}},
+            {"option_id": 28656, "option_text": "Run field pilots in three Quezon City barangays, onboarding 50 store owners, collecting usability feedback, and iterating features weekly", "trait_tags": {"Community-Dev": 4, "Business-Mgmt": 3, "Data-Analytics": 3}},
+            {"option_id": 28657, "option_text": "Create explainer videos in Tagalog and Bisaya showing real store owners demonstrating the app's features for social-media distribution", "trait_tags": {"Film-Media": 4, "Marketing-Ads": 3, "Communication-Media": 3}},
+            {"option_id": 28658, "option_text": "Build an automated bookkeeping module that categorizes each transaction, generates profit-and-loss statements, and flags inventory items nearing stockout", "trait_tags": {"Finance-Acctg": 5, "IT-Software-Dev": 3, "Operations-Logistics": 3}}
+        ]
+    },
+    # Q3 — Architecture-Path + Sustainability-Path + Engineering-Path
+    {
+        "question_id": 5248,
+        "question_text": "A Baguio City neighborhood ravaged by a landslide is being relocated to a new hillside settlement designed with slope-sensitive architecture and green infrastructure. What do you work on?",
+        "category": "Architecture & Disaster-Resilient Design",
+        "options": [
+            {"option_id": 28659, "option_text": "Design terraced housing clusters that follow the natural contour, using deep pile foundations and retaining walls engineered for saturated-soil conditions", "trait_tags": {"Architecture-Path": 5, "Engineering-Path": 4, "Sustainability-Path": 3}},
+            {"option_id": 28660, "option_text": "Install slope-stability monitoring instruments — inclinometers, piezometers, and rain gauges — connected to an early-warning SMS alert system", "trait_tags": {"Engineering-Path": 4, "IT-Software-Dev": 3, "Data-Analytics": 3}},
+            {"option_id": 28661, "option_text": "Plan the bioengineered drainage network — grass swales, check dams, and vetiver-hedgerow terraces — to control surface runoff without concrete channels", "trait_tags": {"Sustainability-Path": 5, "Forestry-Path": 3, "Architecture-Path": 3}},
+            {"option_id": 28662, "option_text": "Facilitate participatory design workshops where displaced families co-create floor plans, shared courtyards, and community garden plots", "trait_tags": {"Community-Dev": 5, "Architecture-Path": 3, "Social-Work": 3}},
+            {"option_id": 28663, "option_text": "Source locally quarried Benguet granite and reclaimed pine timber to reduce transport emissions and give buildings a regional material identity", "trait_tags": {"Sustainability-Path": 4, "Architecture-Path": 3, "Operations-Logistics": 3}},
+            {"option_id": 28664, "option_text": "Write the resettlement policy — land tenure guarantees, compensation packages, and livelihood-restoration commitments aligned with World Bank safeguards", "trait_tags": {"Legal-Mgmt": 4, "Public-Admin": 3, "Philosophy-Path": 3}},
+            {"option_id": 28665, "option_text": "Design the settlement's off-grid water system — spring capture, sand filtration, and gravity-fed distribution with household metering", "trait_tags": {"Engineering-Path": 4, "Sustainability-Path": 3, "TVET-Path": 3}},
+            {"option_id": 28666, "option_text": "Create a 3D fly-through animation of the finished settlement for public presentation to city council and donor agencies", "trait_tags": {"Creative-Design": 4, "Film-Media": 3, "Architecture-Path": 3}}
+        ]
+    },
+    # Q4 — Creative-Writing + Communication-Media + Cultural-Preservation
+    {
+        "question_id": 5249,
+        "question_text": "The National Commission for Culture and the Arts is funding a multilingual podcast series that documents endangered Philippine oral traditions — from Ivatan creation myths to T'boli epic chants. Which production role is yours?",
+        "category": "Communications, Media & Cultural Heritage",
+        "options": [
+            {"option_id": 28667, "option_text": "Travel to remote communities, record elders performing chants and narrations in their mother tongue, and transcribe each piece with linguistic annotations", "trait_tags": {"Communication-Media": 5, "Cultural-Preservation": 4, "Scientific-Research": 3}},
+            {"option_id": 28668, "option_text": "Write the narrative script that weaves each episode together — contextual intros, comparative mythology segments, and listener discussion prompts", "trait_tags": {"Creative-Writing": 5, "Communication-Media": 3, "Teaching": 3}},
+            {"option_id": 28669, "option_text": "Compose original ambient soundscapes — field-recorded river sounds, kulintang tones, bamboo percussion — that accompany each oral tradition without overpowering it", "trait_tags": {"Music-Audio": 5, "Creative-Design": 3, "Cultural-Preservation": 3}},
+            {"option_id": 28670, "option_text": "Edit and master each episode for broadcast quality — noise reduction, equalization, dynamic compression — and distribute across Spotify, Apple Podcasts, and local FM", "trait_tags": {"Film-Media": 4, "Music-Audio": 3, "IT-Software-Dev": 3}},
+            {"option_id": 28671, "option_text": "Negotiate intellectual-property agreements with indigenous communities, ensuring they retain ownership rights and receive royalty shares", "trait_tags": {"Legal-Mgmt": 4, "Philosophy-Path": 3, "Cultural-Preservation": 3}},
+            {"option_id": 28672, "option_text": "Develop a companion educational curriculum so high-school Filipino teachers can use episodes as classroom resources with guided activities", "trait_tags": {"Teaching": 4, "Creative-Writing": 3, "Cultural-Preservation": 3}},
+            {"option_id": 28673, "option_text": "Build the podcast's website with searchable transcripts, an interactive map pinpointing each tradition's origin, and a community contribution portal", "trait_tags": {"IT-Software-Dev": 4, "UI-UX": 3, "Library-Info": 3}},
+            {"option_id": 28674, "option_text": "Launch a crowdfunding and sponsorship campaign, partnering with Philippine Airlines in-flight entertainment and local telecom data-free streaming deals", "trait_tags": {"Marketing-Ads": 4, "Business-Mgmt": 3, "Communication-Media": 3}}
+        ]
+    },
+    # Q5 — Agri-Fisheries + Engineering-Path + Data-Analytics
+    {
+        "question_id": 5250,
+        "question_text": "A Bukidnon pineapple plantation is installing a precision-agriculture system that uses drones, soil sensors, and AI-driven analytics to optimize yields while reducing chemical inputs. Where do you contribute?",
+        "category": "Agriculture & Precision Technology",
+        "options": [
+            {"option_id": 28675, "option_text": "Deploy and calibrate soil-moisture, pH, and NPK sensors across 200 hectares, designing the wireless mesh network that relays data to the farm server", "trait_tags": {"Engineering-Path": 4, "Agri-Fisheries": 4, "Electrical-Electronics": 3}},
+            {"option_id": 28676, "option_text": "Train the machine-learning model that analyzes multispectral drone imagery to detect early signs of mealybug infestation and nutrient deficiency", "trait_tags": {"Data-Analytics": 5, "IT-Software-Dev": 3, "Agri-Fisheries": 3}},
+            {"option_id": 28677, "option_text": "Redesign the irrigation layout from flood-based to drip-based, calculating emitter spacing, pressure compensation, and fertigation injection rates", "trait_tags": {"Engineering-Path": 4, "Agri-Fisheries": 4, "Sustainability-Path": 3}},
+            {"option_id": 28678, "option_text": "Negotiate export contracts with Japanese and Korean fruit importers, handling phytosanitary certifications and cold-chain logistics to port", "trait_tags": {"Business-Mgmt": 4, "Operations-Logistics": 3, "Legal-Mgmt": 3}},
+            {"option_id": 28679, "option_text": "Develop the farmer-facing dashboard app — yield forecasts, pest alerts, weather overlays — in a simple interface that works on low-bandwidth mobile data", "trait_tags": {"IT-Software-Dev": 4, "UI-UX": 3, "Agri-Fisheries": 3}},
+            {"option_id": 28680, "option_text": "Convert pineapple-peel and crown waste into organic compost and biochar, closing the nutrient loop and reducing landfill dependence", "trait_tags": {"Sustainability-Path": 4, "Scientific-Research": 3, "Agri-Fisheries": 3}},
+            {"option_id": 28681, "option_text": "Conduct a cost-benefit analysis comparing precision-ag investment against traditional farming, modeling ROI over five harvest cycles", "trait_tags": {"Finance-Acctg": 4, "Data-Analytics": 3, "Business-Mgmt": 3}},
+            {"option_id": 28682, "option_text": "Train plantation workers on drone piloting, sensor maintenance, and data interpretation so technology adoption isn't dependent on outside consultants", "trait_tags": {"TVET-Path": 4, "Teaching": 3, "Agri-Fisheries": 3}}
+        ]
+    },
+    # Q6 — Nutrition-Food-Sci + Scientific-Research + Sustainability-Path
+    {
+        "question_id": 5251,
+        "question_text": "A University of the Philippines food-science lab is developing shelf-stable emergency ration packs made entirely from locally sourced Filipino ingredients for DSWD disaster-relief stockpiles. Which task do you take?",
+        "category": "Food Science & Disaster Preparedness",
+        "options": [
+            {"option_id": 28683, "option_text": "Formulate the ration's macronutrient profile — balancing rice crisps, mung-bean protein isolate, coconut oil, and dried mango to hit WHO caloric and micronutrient targets", "trait_tags": {"Nutrition-Food-Sci": 5, "Scientific-Research": 3, "Healthcare-Med": 3}},
+            {"option_id": 28684, "option_text": "Engineer the retort-pouch packaging process — heat-seal temperatures, sterilization cycles, and accelerated shelf-life testing to guarantee 36-month stability", "trait_tags": {"Engineering-Path": 4, "Nutrition-Food-Sci": 3, "Scientific-Research": 3}},
+            {"option_id": 28685, "option_text": "Conduct sensory-panel evaluations with blind taste tests across different age groups and regional palate preferences to refine flavor acceptability", "trait_tags": {"Scientific-Research": 4, "Nutrition-Food-Sci": 3, "Data-Analytics": 3}},
+            {"option_id": 28686, "option_text": "Source the supply chain — contract with Mindanao rice millers, Cebu coconut processors, and Benguet vegetable dryers — ensuring year-round raw-material availability", "trait_tags": {"Operations-Logistics": 4, "Agri-Fisheries": 3, "Business-Mgmt": 3}},
+            {"option_id": 28687, "option_text": "Design biodegradable packaging using cassava-starch films and printed QR codes that link to multilingual preparation instructions", "trait_tags": {"Creative-Design": 4, "Sustainability-Path": 4, "Nutrition-Food-Sci": 3}},
+            {"option_id": 28688, "option_text": "Write the FDA product-registration dossier, HALAL certification application, and government-procurement bid documents for DSWD stockpiling contracts", "trait_tags": {"Legal-Mgmt": 4, "Public-Admin": 3, "Nutrition-Food-Sci": 3}},
+            {"option_id": 28689, "option_text": "Build a real-time inventory tracker that maps DSWD warehouse locations, expiry dates, and optimal distribution routes when a typhoon is approaching", "trait_tags": {"IT-Software-Dev": 4, "Data-Analytics": 3, "Operations-Logistics": 3}},
+            {"option_id": 28690, "option_text": "Present the research at an international food-technology conference and publish the formulation methodology in a peer-reviewed journal", "trait_tags": {"Scientific-Research": 4, "Communication-Media": 3, "Teaching": 3}}
+        ]
+    },
+    # Q7 — Operations-Logistics + Business-Mgmt + Engineering-Path
+    {
+        "question_id": 5252,
+        "question_text": "A Cebu-based shipping company is launching a cold-chain logistics network to transport fresh Visayan seafood to Luzon markets within 24 hours of catch, reducing spoilage from 40% to under 5%. What do you handle?",
+        "category": "Logistics & Supply Chain Management",
+        "options": [
+            {"option_id": 28691, "option_text": "Design the refrigerated container fleet — specifying compressor units, insulation grades, and GPS-enabled temperature loggers for each truck and ferry reefer", "trait_tags": {"Operations-Logistics": 5, "Engineering-Path": 3, "Automotive-Tech": 3}},
+            {"option_id": 28692, "option_text": "Build route-optimization software that accounts for ferry schedules, traffic patterns, and perishability windows to guarantee the 24-hour dock-to-market promise", "trait_tags": {"IT-Software-Dev": 4, "Data-Analytics": 4, "Operations-Logistics": 3}},
+            {"option_id": 28693, "option_text": "Negotiate service-level agreements with fishing cooperatives, restaurant chains, and supermarket procurement departments across Metro Manila", "trait_tags": {"Business-Mgmt": 4, "Operations-Logistics": 3, "Communication-Media": 3}},
+            {"option_id": 28694, "option_text": "Install ice-making plants at fishing ports in Bantayan Island, Camotes, and Bohol, powered by solar panels to reduce diesel-generator dependency", "trait_tags": {"Engineering-Path": 4, "Sustainability-Path": 3, "Electrical-Electronics": 3}},
+            {"option_id": 28695, "option_text": "Train fish handlers in HACCP protocols — proper icing ratios, sanitary offloading procedures, and temperature-abuse documentation for traceability", "trait_tags": {"TVET-Path": 4, "Nutrition-Food-Sci": 3, "Fisheries-Agri-Path": 3}},
+            {"option_id": 28696, "option_text": "Structure the company's financial model — CAPEX for reefer trucks, working-capital cycles, break-even volume, and revenue-per-kilogram pricing tiers", "trait_tags": {"Finance-Acctg": 5, "Business-Mgmt": 3, "Data-Analytics": 3}},
+            {"option_id": 28697, "option_text": "Develop a consumer-facing QR traceability system — scan the code on a fish fillet and see the boat name, catch location, temperature log, and hours since harvest", "trait_tags": {"IT-Software-Dev": 4, "Marketing-Ads": 3, "Fisheries-Agri-Path": 3}},
+            {"option_id": 28698, "option_text": "Manage the regulatory compliance portfolio — Bureau of Fisheries permits, LTO truck registrations, MARINA ferry accreditations, and cold-storage facility licenses", "trait_tags": {"Legal-Mgmt": 4, "Operations-Logistics": 3, "Public-Admin": 3}}
+        ]
+    },
+    # Q8 — Leadership + Public-Admin + Social-Work
+    {
+        "question_id": 5253,
+        "question_text": "A newly elected indigenous Manobo chieftain in Agusan del Sur must unite five clans to negotiate with a mining company seeking to extract nickel from their ancestral domain. Which advisory role appeals to you?",
+        "category": "Governance, Leadership & Indigenous Rights",
+        "options": [
+            {"option_id": 28699, "option_text": "Facilitate inter-clan consensus-building sessions using the Manobo datu council tradition, ensuring all voices — elders, women, youth — are represented before any decision", "trait_tags": {"Leadership": 5, "Community-Dev": 4, "Cultural-Preservation": 3}},
+            {"option_id": 28700, "option_text": "Draft the Free, Prior, and Informed Consent document in both English and Manobo, outlining benefit-sharing terms, environmental safeguards, and exit clauses", "trait_tags": {"Legal-Mgmt": 5, "Philosophy-Path": 3, "Public-Admin": 3}},
+            {"option_id": 28701, "option_text": "Conduct an independent environmental-impact assessment — water-quality baselines, biodiversity surveys, and erosion-risk modeling — to arm the clan with scientific evidence", "trait_tags": {"Scientific-Research": 4, "Sustainability-Path": 4, "Data-Analytics": 3}},
+            {"option_id": 28702, "option_text": "Design an alternative livelihood development plan — agroforestry, eco-tourism, and handicraft cooperatives — that demonstrates the ancestral domain's economic value without mining", "trait_tags": {"Business-Mgmt": 4, "Agri-Fisheries": 3, "Community-Dev": 3}},
+            {"option_id": 28703, "option_text": "Train young Manobo leaders in public speaking, media interviews, and social-media advocacy so the community can represent itself in national forums", "trait_tags": {"Teaching": 4, "Communication-Media": 3, "Leadership": 3}},
+            {"option_id": 28704, "option_text": "Map the ancestral domain boundaries using GPS and satellite imagery, cross-referencing with NCIP land title records to strengthen the legal claim", "trait_tags": {"IT-Software-Dev": 4, "Data-Analytics": 3, "Legal-Mgmt": 3}},
+            {"option_id": 28705, "option_text": "Set up a community trust fund mechanism so any mining royalties are transparently managed, audited annually, and distributed for health and education priorities", "trait_tags": {"Finance-Acctg": 4, "Public-Admin": 3, "Social-Work": 3}},
+            {"option_id": 28706, "option_text": "Produce a documentary amplifying the Manobo perspective — ancestral ceremonies, forest dependencies, generational stewardship — for screening at international indigenous-rights summits", "trait_tags": {"Film-Media": 4, "Cultural-Preservation": 4, "Communication-Media": 3}}
+        ]
+    },
+    # Q9 — Electrical-Electronics + Automotive-Tech + TVET-Path
+    {
+        "question_id": 5254,
+        "question_text": "A Clark Freeport Zone electronics manufacturer is setting up the Philippines' first electric-motorcycle assembly line producing affordable commuter bikes for provincial riders. Which station do you run?",
+        "category": "Electrical Engineering & EV Manufacturing",
+        "options": [
+            {"option_id": 28707, "option_text": "Design the battery-management system — cell balancing circuits, thermal monitoring, and firmware that optimizes range for hilly Philippine terrain", "trait_tags": {"Electrical-Electronics": 5, "Automotive-Tech": 4, "Engineering-Path": 3}},
+            {"option_id": 28708, "option_text": "Program the motor controller's torque map, regenerative-braking calibration, and diagnostic-port interface using embedded C on ARM microcontrollers", "trait_tags": {"IT-Software-Dev": 4, "Electrical-Electronics": 4, "Automotive-Tech": 3}},
+            {"option_id": 28709, "option_text": "Train assembly-line workers on torque-wrench procedures, harness crimping, and end-of-line quality checks through a TESDA-certified skills-training program", "trait_tags": {"TVET-Path": 5, "Automotive-Tech": 3, "Teaching": 3}},
+            {"option_id": 28710, "option_text": "Source local and ASEAN component suppliers — hub motors from Vietnam, tires from Bataan, frames welded in Bulacan — to minimize import dependency", "trait_tags": {"Operations-Logistics": 4, "Business-Mgmt": 3, "Engineering-Path": 3}},
+            {"option_id": 28711, "option_text": "Design the bike's body panels and color schemes, balancing aerodynamic efficiency with the sporty aesthetic Filipino riders prefer", "trait_tags": {"Creative-Design": 4, "Automotive-Tech": 3, "Engineering-Path": 3}},
+            {"option_id": 28712, "option_text": "Model the retail pricing strategy — battery-lease vs. full-purchase options, dealer margins, and government EV-subsidy pass-throughs", "trait_tags": {"Finance-Acctg": 4, "Business-Mgmt": 3, "Marketing-Ads": 3}},
+            {"option_id": 28713, "option_text": "Set up a network of battery-swap kiosks at provincial gas stations, each with solar-charged battery banks and a mobile payment interface", "trait_tags": {"Sustainability-Path": 4, "Electrical-Electronics": 3, "IT-Software-Dev": 3}},
+            {"option_id": 28714, "option_text": "Conduct crash-safety and weatherproofing tests — salt-spray chambers, drop tests, IP67 ingress checks — and compile the DTI type-approval submission", "trait_tags": {"Scientific-Research": 4, "Legal-Mgmt": 3, "Automotive-Tech": 3}}
+        ]
+    },
+    # Q10 — Tourism-Hospitality-Path + Hotel-Resort-Path + Sports-Fitness-Path
+    {
+        "question_id": 5255,
+        "question_text": "An Apo Island marine sanctuary in Negros Oriental is developing a dive-tourism social enterprise where 100% of profits fund coral rehabilitation and local schooling. What role do you fill?",
+        "category": "Ecotourism & Marine Conservation",
+        "options": [
+            {"option_id": 28715, "option_text": "Lead guided dives along the sanctuary's reef transects, briefing guests on coral identification, responsible buoyancy, and marine-life photography ethics", "trait_tags": {"Tourism-Hospitality-Path": 5, "Sports-Fitness-Path": 3, "Sustainability-Path": 3}},
+            {"option_id": 28716, "option_text": "Manage the beachfront eco-lodge operations — guest bookings, meal planning with local cooks, housekeeping standards, and sunset bonfire experiences", "trait_tags": {"Hotel-Resort-Path": 5, "Operations-Logistics": 3, "Culinary-Mgmt-Path": 3}},
+            {"option_id": 28717, "option_text": "Monitor coral-bleaching recovery using quadrat surveys, photo transects, and underwater temperature loggers, publishing annual reef-health reports", "trait_tags": {"Scientific-Research": 5, "Data-Analytics": 3, "Sustainability-Path": 3}},
+            {"option_id": 28718, "option_text": "Train island youth as PADI-certified divemasters, giving them a career path that keeps them on-island and invested in conservation", "trait_tags": {"Teaching": 4, "Sports-Fitness-Path": 3, "Community-Dev": 3}},
+            {"option_id": 28719, "option_text": "Design a transparent financial model — booking revenue split, coral-fund allocation, school-scholarship disbursement — auditable by donors and community members alike", "trait_tags": {"Finance-Acctg": 4, "Business-Mgmt": 3, "Social-Work": 3}},
+            {"option_id": 28720, "option_text": "Build an online booking platform with live reef-cam feeds, diver certifications upload, and a carbon-offset calculator for each trip", "trait_tags": {"IT-Software-Dev": 4, "UI-UX": 3, "Marketing-Ads": 3}},
+            {"option_id": 28721, "option_text": "Produce underwater documentary footage of the reef restoration process for international film festivals and conservation fundraising galas", "trait_tags": {"Film-Media": 5, "Sustainability-Path": 3, "Communication-Media": 3}},
+            {"option_id": 28722, "option_text": "Draft the municipal ordinance setting visitor-carrying capacity, mooring-buoy regulations, and penalty schedules for anchor damage", "trait_tags": {"Legal-Mgmt": 4, "Public-Admin": 3, "Sustainability-Path": 3}}
+        ]
+    },
+    # Q11 — Forestry-Path + Scientific-Research + Data-Analytics
+    {
+        "question_id": 5256,
+        "question_text": "The DENR is establishing a national forest-fire prediction and rapid-response system after record wildfire seasons in the Cordillera and Zambales pine forests. What assignment draws you?",
+        "category": "Forestry & Disaster Technology",
+        "options": [
+            {"option_id": 28723, "option_text": "Deploy a satellite-linked fire-weather station network that measures fuel moisture, wind speed, temperature, and humidity at 50 high-risk forest sites", "trait_tags": {"Forestry-Path": 5, "Engineering-Path": 3, "Data-Analytics": 3}},
+            {"option_id": 28724, "option_text": "Build the machine-learning fire-spread model that ingests topography, vegetation type, and real-time weather to predict burn trajectories hours ahead", "trait_tags": {"Data-Analytics": 5, "IT-Software-Dev": 3, "Scientific-Research": 3}},
+            {"option_id": 28725, "option_text": "Train community fire brigades — hand-tool fireline construction, backburning techniques, and radio communication protocols — across 20 forest-edge barangays", "trait_tags": {"Teaching": 4, "Forestry-Path": 3, "Military-Defense": 3}},
+            {"option_id": 28726, "option_text": "Conduct post-fire ecological surveys — seedling regeneration counts, wildlife displacement tracking, and soil erosion measurement — to guide reforestation plans", "trait_tags": {"Scientific-Research": 5, "Forestry-Path": 3, "Sustainability-Path": 3}},
+            {"option_id": 28727, "option_text": "Develop the incident-command dashboard that dispatches helicopters, ground crews, and water tankers using real-time fire perimeter mapping", "trait_tags": {"IT-Software-Dev": 4, "Operations-Logistics": 3, "Military-Defense": 3}},
+            {"option_id": 28728, "option_text": "Negotiate inter-agency resource-sharing agreements between DENR, BFP, Philippine Air Force, and provincial DRRMOs for coordinated wildfire suppression", "trait_tags": {"Public-Admin": 4, "Leadership": 3, "Legal-Mgmt": 3}},
+            {"option_id": 28729, "option_text": "Produce public-awareness materials — animated PSAs about campfire safety, slash-and-burn alternatives, and emergency hotline numbers — for grassland communities", "trait_tags": {"Communication-Media": 4, "Creative-Design": 3, "Community-Dev": 3}},
+            {"option_id": 28730, "option_text": "Pioneer drone-based seed-bombing reforestation using clay-coated native-tree seeds dropped over inaccessible burned ridgelines", "trait_tags": {"Forestry-Path": 4, "Engineering-Path": 3, "Sustainability-Path": 4}}
+        ]
+    },
+    # Q12 — Culinary-Mgmt-Path + Tourism-Hospitality-Path + Marketing-Ads
+    {
+        "question_id": 5257,
+        "question_text": "A Batangas lakeshore town is launching a weekend food-crawl festival showcasing its unique local dishes — beef tapa, lomi, and kapeng barako — to attract Manila day-trippers year-round. What do you take charge of?",
+        "category": "Culinary Tourism & Festival Management",
+        "options": [
+            {"option_id": 28731, "option_text": "Curate the food-crawl route — ten vendor stations, each spotlighting a signature dish with a tasting portion, history card, and chef demonstration", "trait_tags": {"Culinary-Mgmt-Path": 5, "Tourism-Hospitality-Path": 3, "Creative-Design": 3}},
+            {"option_id": 28732, "option_text": "Develop a digital passport app where visitors collect stamps at each station, unlock recipes, and earn a Batangas food-explorer badge for social sharing", "trait_tags": {"IT-Software-Dev": 4, "Marketing-Ads": 3, "Tourism-Hospitality-Path": 3}},
+            {"option_id": 28733, "option_text": "Negotiate bus-package partnerships with Manila transport companies offering round-trip fare plus festival wristband at a bundled discount", "trait_tags": {"Business-Mgmt": 4, "Tourism-Hospitality-Path": 3, "Operations-Logistics": 3}},
+            {"option_id": 28734, "option_text": "Photograph and style each dish for a coffee-table lookbook that doubles as a souvenir and a marketing asset for future editions", "trait_tags": {"Creative-Design": 4, "Marketing-Ads": 4, "Culinary-Mgmt-Path": 3}},
+            {"option_id": 28735, "option_text": "Train home-cook vendors on food-safety standards — proper handwashing, serving temperatures, allergen disclosure — so the festival meets DOH requirements", "trait_tags": {"Teaching": 4, "Nutrition-Food-Sci": 3, "Culinary-Mgmt-Path": 3}},
+            {"option_id": 28736, "option_text": "Manage event logistics — tent layouts, power and water supply, waste segregation, crowd flow, and a contingency rain plan for the outdoor venues", "trait_tags": {"Operations-Logistics": 5, "Engineering-Path": 3, "Public-Admin": 3}},
+            {"option_id": 28737, "option_text": "Launch a TikTok and Instagram Reels campaign with food influencers doing live taste-tests, generating viral reach before opening weekend", "trait_tags": {"Marketing-Ads": 5, "Communication-Media": 3, "Film-Media": 3}},
+            {"option_id": 28738, "option_text": "Research and document the hundred-year culinary history of each featured dish, interviewing multi-generational family cooks for an oral-history archive", "trait_tags": {"Cultural-Preservation": 4, "Creative-Writing": 3, "Library-Info": 3}}
+        ]
+    },
+    # Q13 — Military-Defense + Engineering-Path + IT-Software-Dev
+    {
+        "question_id": 5258,
+        "question_text": "The Philippine Coast Guard is establishing a search-and-rescue training academy on a Bataan coastal base that simulates real maritime emergencies — capsized vessels, oil spills, and helicopter hoist operations. What do you build?",
+        "category": "Maritime Defense & Training",
+        "options": [
+            {"option_id": 28739, "option_text": "Construct the open-water training pool with wave generators, rain simulators, and a sinkable mock vessel hull for capsize-survival drills", "trait_tags": {"Engineering-Path": 5, "Military-Defense": 3, "Architecture-Path": 3}},
+            {"option_id": 28740, "option_text": "Develop the VR simulation suite where trainees practice helicopter hoist pickups, nighttime vessel boarding, and mass-rescue coordination in digital scenarios", "trait_tags": {"IT-Software-Dev": 5, "Military-Defense": 3, "Film-Media": 3}},
+            {"option_id": 28741, "option_text": "Write the academy's competency-based training curriculum — swimming proficiency levels, navigation skills, first-aid certifications, and leadership assessments", "trait_tags": {"Teaching": 4, "Military-Defense": 4, "Healthcare-Med": 3}},
+            {"option_id": 28742, "option_text": "Design the oil-spill containment training area with boom deployment lanes, skimmer operation stations, and dispersant application protocols", "trait_tags": {"Sustainability-Path": 4, "Military-Defense": 3, "Scientific-Research": 3}},
+            {"option_id": 28743, "option_text": "Install the communications nerve center — VHF/HF radios, satellite terminals, and a digital vessel-tracking wall display for coordinating multi-ship exercises", "trait_tags": {"Electrical-Electronics": 4, "IT-Software-Dev": 3, "Military-Defense": 3}},
+            {"option_id": 28744, "option_text": "Negotiate partnerships with the Japanese and Australian coast guards for instructor exchanges, joint exercises, and equipment donations", "trait_tags": {"Leadership": 4, "Public-Admin": 3, "Military-Defense": 3}},
+            {"option_id": 28745, "option_text": "Set up the academy's sports-medicine clinic providing injury prevention, physical conditioning programs, and rehabilitation for trainees", "trait_tags": {"Exercise-Sci-Path": 4, "Sports-Fitness-Path": 3, "Healthcare-Med": 3}},
+            {"option_id": 28746, "option_text": "Produce recruitment marketing — cinematic videos of rescue drills, alumni testimonials, and social-media posts targeting maritime-studies graduates", "trait_tags": {"Film-Media": 4, "Marketing-Ads": 3, "Communication-Media": 3}}
+        ]
+    },
+    # Q14 — Inclusive-Ed + Library-Info + Teaching
+    {
+        "question_id": 5259,
+        "question_text": "A Tarlac public library is transforming into a fully accessible learning hub with Braille printing services, audiobook studios, and assistive-tech lending programs for visually impaired patrons across Central Luzon. What do you set up?",
+        "category": "Inclusive Library Services",
+        "options": [
+            {"option_id": 28747, "option_text": "Install and maintain the Braille embosser and tactile-graphics printer, converting the library's most-requested Filipino and English titles into accessible formats", "trait_tags": {"Library-Info": 5, "Inclusive-Ed": 4, "TVET-Path": 3}},
+            {"option_id": 28748, "option_text": "Record audiobook narrations of Philippine literature classics, training volunteer readers in pacing, pronunciation, and DAISY navigable chapter structure", "trait_tags": {"Communication-Media": 4, "Library-Info": 3, "Creative-Writing": 3}},
+            {"option_id": 28749, "option_text": "Configure screen-reader workstations, magnification software, and refreshable Braille displays on public computers, ensuring compatibility with Filipino-language content", "trait_tags": {"IT-Software-Dev": 4, "Inclusive-Ed": 3, "Library-Info": 3}},
+            {"option_id": 28750, "option_text": "Design a wayfinding system — tactile floor paths, audio beacons, and high-contrast signage — that lets visually impaired visitors navigate independently", "trait_tags": {"Architecture-Path": 4, "Inclusive-Ed": 3, "Creative-Design": 3}},
+            {"option_id": 28751, "option_text": "Train librarians in disability-awareness etiquette, sighted-guide techniques, and how to conduct reference interviews with patrons using assistive devices", "trait_tags": {"Teaching": 5, "Inclusive-Ed": 3, "Library-Info": 3}},
+            {"option_id": 28752, "option_text": "Write grant proposals to international blindness-prevention NGOs and the Philippine National Council for Disability Affairs for equipment and staffing funds", "trait_tags": {"Business-Mgmt": 4, "Public-Admin": 3, "Social-Work": 3}},
+            {"option_id": 28753, "option_text": "Create a lending program that ships assistive devices — magnifiers, talking calculators, refreshable displays — to borrowers in rural municipalities via courier", "trait_tags": {"Operations-Logistics": 4, "Inclusive-Ed": 3, "Community-Dev": 3}},
+            {"option_id": 28754, "option_text": "Conduct user-experience research with visually impaired patrons, documenting pain points and co-designing service improvements through accessibility audits", "trait_tags": {"UI-UX": 4, "Data-Analytics": 3, "Inclusive-Ed": 3}}
+        ]
+    },
+    # Q15 — Veterinary-Path + Fisheries-Agri-Path + Sustainability-Path
+    {
+        "question_id": 5260,
+        "question_text": "A Bohol marine research station is breeding and releasing captive-reared giant clams to repopulate reefs depleted by poaching, while training fisherfolk in sustainable mariculture. Which task is yours?",
+        "category": "Marine Biology & Aquaculture",
+        "options": [
+            {"option_id": 28755, "option_text": "Manage the clam hatchery — controlling water temperature, salinity, and zooxanthellae inoculation schedules to maximize larval survival and shell growth rates", "trait_tags": {"Veterinary-Path": 4, "Fisheries-Agri-Path": 4, "Scientific-Research": 3}},
+            {"option_id": 28756, "option_text": "Dive to transplant juvenile clams onto reef substrates, tagging each with micro-transponders and documenting growth through quarterly photo surveys", "trait_tags": {"Fisheries-Agri-Path": 4, "Sports-Fitness-Path": 3, "Scientific-Research": 3}},
+            {"option_id": 28757, "option_text": "Train fisherfolk in seaweed and sea-cucumber co-culture techniques that generate income while reducing pressure on wild clam populations", "trait_tags": {"Teaching": 4, "Fisheries-Agri-Path": 3, "Sustainability-Path": 3}},
+            {"option_id": 28758, "option_text": "Analyze DNA microsatellite data to assess genetic diversity within the captive broodstock and recommend outcrossing schedules to avoid inbreeding depression", "trait_tags": {"Scientific-Research": 5, "Veterinary-Path": 3, "Data-Analytics": 3}},
+            {"option_id": 28759, "option_text": "Develop a clam-shell handicraft product line — polished shells, resin-embedded jewelry — sold to tourists as an alternative livelihood for former poachers", "trait_tags": {"Creative-Design": 4, "Business-Mgmt": 3, "Community-Dev": 3}},
+            {"option_id": 28760, "option_text": "Draft the municipal fisheries ordinance that designates clam sanctuaries, sets harvest moratoriums, and empowers bantay-dagat fish wardens with patrol authority", "trait_tags": {"Legal-Mgmt": 4, "Sustainability-Path": 3, "Public-Admin": 3}},
+            {"option_id": 28761, "option_text": "Build an underwater live-stream camera system that feeds giant-clam reef footage to the research station's website and partner aquariums worldwide", "trait_tags": {"IT-Software-Dev": 4, "Film-Media": 3, "Tourism-Hospitality-Path": 3}},
+            {"option_id": 28762, "option_text": "Apply for Global Environment Facility funding, writing the biodiversity-conservation project proposal with five-year milestones and measurable indicators", "trait_tags": {"Finance-Acctg": 4, "Sustainability-Path": 3, "Communication-Media": 3}}
+        ]
+    },
+    # Q16 — TVET-Path + Culinary-Mgmt-Path + Hotel-Resort-Path
+    {
+        "question_id": 5261,
+        "question_text": "A Tagaytay hospitality training institute is launching an intensive 6-month program that fast-tracks unemployed out-of-school youth into jobs at Cavite-Laguna-Batangas resort kitchens and front desks. What module do you build?",
+        "category": "TVET Hospitality Training",
+        "options": [
+            {"option_id": 28763, "option_text": "Design the culinary practicum — knife skills through plating, rotating trainees across pastry, grill, and banquet stations using restaurant-grade equipment", "trait_tags": {"Culinary-Mgmt-Path": 5, "TVET-Path": 3, "Hotel-Resort-Path": 3}},
+            {"option_id": 28764, "option_text": "Build the front-office simulation lab — a mock reception desk with a PMS terminal, key-card system, and role-play check-in scenarios with multilingual guests", "trait_tags": {"Hotel-Resort-Path": 5, "TVET-Path": 3, "Communication-Media": 3}},
+            {"option_id": 28765, "option_text": "Write the housekeeping competency standards — bed-making speed tests, chemical-safety handling, and turndown-service choreography evaluated by industry assessors", "trait_tags": {"TVET-Path": 5, "Hotel-Resort-Path": 3, "Operations-Logistics": 3}},
+            {"option_id": 28766, "option_text": "Counsel trainees on workplace readiness — resume writing, interview practice, professional grooming, and managing customer complaints without escalation", "trait_tags": {"Social-Work": 4, "HR-Management": 3, "Teaching": 3}},
+            {"option_id": 28767, "option_text": "Negotiate guaranteed-employment MOUs with five resort chains, setting minimum starting salaries and career-progression pathways for graduates", "trait_tags": {"Business-Mgmt": 4, "HR-Management": 3, "Legal-Mgmt": 3}},
+            {"option_id": 28768, "option_text": "Develop a barista and mixology elective track covering espresso extraction science, latte art, and Philippine-cocktail signature-drinks creation", "trait_tags": {"Culinary-Mgmt-Path": 4, "Creative-Design": 3, "Nutrition-Food-Sci": 3}},
+            {"option_id": 28769, "option_text": "Set up the program's learning-management system with video tutorials, assessment rubrics, and a mobile app for trainees to review lessons offline", "trait_tags": {"IT-Software-Dev": 4, "Teaching": 3, "UI-UX": 3}},
+            {"option_id": 28770, "option_text": "Measure the program's impact — graduate employment rates, average salary increases, trainee satisfaction scores — and present outcomes to TESDA for national accreditation renewal", "trait_tags": {"Data-Analytics": 4, "Public-Admin": 3, "TVET-Path": 3}}
+        ]
+    },
+    # Q17 — Psychology-Path + Social-Work + Legal-Mgmt
+    {
+        "question_id": 5262,
+        "question_text": "A Quezon City family court is creating a child-friendly justice center where young victims and witnesses can testify via recorded interviews in a non-threatening environment instead of facing the accused in open court. What do you establish?",
+        "category": "Justice, Psychology & Child Welfare",
+        "options": [
+            {"option_id": 28771, "option_text": "Design the forensic-interview room — child-scaled furniture, one-way mirror, concealed recording cameras, and a comfort corner with approved toys and art supplies", "trait_tags": {"Psychology-Path": 5, "Architecture-Path": 3, "Legal-Mgmt": 3}},
+            {"option_id": 28772, "option_text": "Train prosecutors and social workers in the NICHD forensic-interview protocol — open-ended prompts, avoiding leading questions, and proper documentation for court admissibility", "trait_tags": {"Teaching": 4, "Psychology-Path": 4, "Legal-Mgmt": 3}},
+            {"option_id": 28773, "option_text": "Draft the court's special rules for child-witness testimony — video-link procedures, guardian-ad-litem appointments, and protective-order templates", "trait_tags": {"Legal-Mgmt": 5, "Philosophy-Path": 3, "Public-Admin": 3}},
+            {"option_id": 28774, "option_text": "Provide play-therapy and trauma-debriefing sessions for child witnesses after their testimony, helping them process the court experience", "trait_tags": {"Psychology-Path": 4, "Social-Work": 4, "Healthcare-Med": 3}},
+            {"option_id": 28775, "option_text": "Build the secure digital evidence-management system — encrypted video storage, chain-of-custody logs, and judge-only access portals", "trait_tags": {"IT-Software-Dev": 5, "Legal-Mgmt": 3, "Data-Analytics": 3}},
+            {"option_id": 28776, "option_text": "Coordinate with DSWD case managers on wraparound services — safe housing, school re-enrollment, and family counseling for each child's case", "trait_tags": {"Social-Work": 5, "Community-Dev": 3, "Public-Admin": 3}},
+            {"option_id": 28777, "option_text": "Illustrate a child-friendly booklet explaining what happens at the justice center — using age-appropriate drawings and simple Tagalog — to reduce pre-testimony anxiety", "trait_tags": {"Creative-Design": 4, "Early-Childhood": 3, "Communication-Media": 3}},
+            {"option_id": 28778, "option_text": "Publish a research study comparing case outcomes and child-stress levels between traditional courtroom testimony and the center's recorded-interview method", "trait_tags": {"Scientific-Research": 4, "Psychology-Path": 3, "Data-Analytics": 3}}
+        ]
+    },
+    # Q18 — HR-Management + Business-Mgmt + IT-Software-Dev
+    {
+        "question_id": 5263,
+        "question_text": "A rapidly growing Philippine BPO company with 5,000 employees across three cities is overhauling its talent-management system to reduce 35% annual attrition. What initiative do you own?",
+        "category": "Human Resources & Organizational Development",
+        "options": [
+            {"option_id": 28779, "option_text": "Build a predictive attrition model using employee engagement surveys, attendance patterns, and performance data to flag flight risks before they resign", "trait_tags": {"Data-Analytics": 4, "HR-Management": 4, "IT-Software-Dev": 3}},
+            {"option_id": 28780, "option_text": "Redesign the onboarding journey — a 90-day structured integration with buddy assignments, milestone check-ins, and manager coaching guides", "trait_tags": {"HR-Management": 5, "Teaching": 3, "Leadership": 3}},
+            {"option_id": 28781, "option_text": "Implement a career-pathing portal where agents see certification tracks, internal job postings, and estimated timelines to team-lead or trainer roles", "trait_tags": {"IT-Software-Dev": 4, "HR-Management": 3, "UI-UX": 3}},
+            {"option_id": 28782, "option_text": "Design a competitive total-rewards package — performance bonuses, mental-health days, childcare subsidies — benchmarked against industry compensation surveys", "trait_tags": {"Finance-Acctg": 4, "HR-Management": 3, "Business-Mgmt": 3}},
+            {"option_id": 28783, "option_text": "Facilitate focus-group sessions with frontline employees across all sites to surface root-cause dissatisfaction themes, then present findings to the C-suite", "trait_tags": {"Communication-Media": 4, "Psychology-Path": 3, "Leadership": 3}},
+            {"option_id": 28784, "option_text": "Develop a gamified learning-management system with skill badges, leaderboards, and promotion-linked certification tracks to drive engagement", "trait_tags": {"IT-Software-Dev": 4, "Teaching": 3, "Creative-Design": 3}},
+            {"option_id": 28785, "option_text": "Draft updated employment contracts, non-compete clauses, and remote-work policies compliant with DOLE labor advisories and the Telecommuting Act", "trait_tags": {"Legal-Mgmt": 4, "HR-Management": 3, "Public-Admin": 3}},
+            {"option_id": 28786, "option_text": "Launch an internal wellness program — onsite gym, midnight-shift nutritionist consultations, and stress-management webinars — tailored to night-shift workers' circadian needs", "trait_tags": {"Exercise-Sci-Path": 4, "Nutrition-Food-Sci": 3, "HR-Management": 3}}
+        ]
+    },
+    # Q19 — Music-Audio + Creative-Design + Early-Childhood
+    {
+        "question_id": 5264,
+        "question_text": "A Pangasinan town is building a children's museum of sound where visitors aged 3–12 explore physics, music, and Philippine folk traditions through interactive acoustic exhibits. What do you design?",
+        "category": "Music, Education & Experience Design",
+        "options": [
+            {"option_id": 28787, "option_text": "Engineer the hands-on sound exhibits — a giant stringed harp wall, air-column organ pipes, a vibration sandbox, and a percussion garden made from bamboo and coconut shells", "trait_tags": {"Music-Audio": 5, "Engineering-Path": 3, "Early-Childhood": 3}},
+            {"option_id": 28788, "option_text": "Curate a Filipino instrument gallery — kulintang, kudyapi, kubing, and tongali — with listening stations and child-safe replicas visitors can play", "trait_tags": {"Music-Audio": 4, "Cultural-Preservation": 4, "Early-Childhood": 3}},
+            {"option_id": 28789, "option_text": "Develop the museum's educational program — guided worksheets, age-tiered science explanations, and teacher resource kits aligned with DepEd MAPEH competencies", "trait_tags": {"Teaching": 4, "Early-Childhood": 4, "Music-Audio": 3}},
+            {"option_id": 28790, "option_text": "Create the interior spatial design — colorful acoustic panels, whimsical signage, child-height interaction points, and wheelchair-accessible pathways through every exhibit", "trait_tags": {"Architecture-Path": 4, "Creative-Design": 4, "Inclusive-Ed": 3}},
+            {"option_id": 28791, "option_text": "Build an interactive digital mixing station where kids layer beats, record their voice, and compose a short song they can email home as a souvenir", "trait_tags": {"IT-Software-Dev": 4, "Music-Audio": 3, "UI-UX": 3}},
+            {"option_id": 28792, "option_text": "Produce a promotional animated video featuring cartoon characters exploring each exhibit, targeted at school field-trip coordinators and parent groups", "trait_tags": {"Film-Media": 4, "Marketing-Ads": 3, "Creative-Design": 3}},
+            {"option_id": 28793, "option_text": "Plan the museum's revenue model — ticket tiers, birthday-party packages, gift-shop merchandise, and corporate sponsorship of individual exhibits", "trait_tags": {"Business-Mgmt": 4, "Finance-Acctg": 3, "Operations-Logistics": 3}},
+            {"option_id": 28794, "option_text": "Organize opening-day and seasonal events — a children's choir festival, a beatboxing workshop, and a folk-song sing-along with local senior musicians", "trait_tags": {"Community-Dev": 4, "Music-Audio": 3, "Tourism-Hospitality-Path": 3}}
+        ]
+    },
+    # Q20 — Fisheries-Agri-Path + Veterinary-Path + Operations-Logistics
+    {
+        "question_id": 5265,
+        "question_text": "A Mindanao tuna handline-fishing cooperative is pursuing Marine Stewardship Council certification to access premium export markets in the EU, but must overhaul its catch-handling and traceability systems. What do you lead?",
+        "category": "Fisheries Certification & Export",
+        "options": [
+            {"option_id": 28795, "option_text": "Redesign onboard fish-handling procedures — live bleeding, ice-slurry immersion, and core-temperature logging — to meet MSC and EU hygiene chain-of-custody standards", "trait_tags": {"Fisheries-Agri-Path": 5, "Nutrition-Food-Sci": 3, "Operations-Logistics": 3}},
+            {"option_id": 28796, "option_text": "Build a blockchain-based traceability platform that records each tuna from hook to container, generating a digital passport EU importers can verify instantly", "trait_tags": {"IT-Software-Dev": 5, "Fisheries-Agri-Path": 3, "Data-Analytics": 3}},
+            {"option_id": 28797, "option_text": "Conduct a stock-assessment survey — tagging yellowfin tuna, estimating biomass through catch-per-unit-effort analysis — to prove the fishery's sustainability to MSC auditors", "trait_tags": {"Scientific-Research": 5, "Fisheries-Agri-Path": 3, "Veterinary-Path": 3}},
+            {"option_id": 28798, "option_text": "Train 200 handline fishermen in selective-harvesting techniques — size-limit compliance, bycatch release protocols, and logbook data recording for every trip", "trait_tags": {"Teaching": 4, "Fisheries-Agri-Path": 3, "TVET-Path": 3}},
+            {"option_id": 28799, "option_text": "Upgrade the cooperative's cold-storage and blast-freezing facility at the port, specifying equipment capacity, backup generators, and ammonia-refrigerant safety systems", "trait_tags": {"Engineering-Path": 4, "Operations-Logistics": 3, "Electrical-Electronics": 3}},
+            {"option_id": 28800, "option_text": "Write the certification application — fisheries management plan, stakeholder consultation records, and improvement-action timeline — addressing every MSC principle", "trait_tags": {"Legal-Mgmt": 4, "Communication-Media": 3, "Sustainability-Path": 3}},
+            {"option_id": 28801, "option_text": "Brand the cooperative's certified tuna line — logo, packaging, origin story — and pitch it to European premium supermarket buyers at a seafood trade expo", "trait_tags": {"Marketing-Ads": 4, "Creative-Design": 3, "Business-Mgmt": 3}},
+            {"option_id": 28802, "option_text": "Perform veterinary quality checks on landed tuna — histamine testing, parasite inspection, and mercury-level sampling — before clearing each lot for export shipment", "trait_tags": {"Veterinary-Path": 5, "Nutrition-Food-Sci": 3, "Scientific-Research": 3}}
+        ]
+    },
+]
+
+# --- collision guard for batch 29 ---
+_repl29_existing_qids = {q["question_id"] for q in QUESTIONS_POOL_ENHANCED}
+_repl29_new_qids = {q["question_id"] for q in _REPLACEMENT_BATCH_29}
+if _repl29_existing_qids & _repl29_new_qids:
+    raise ValueError(f"Replacement batch 29 question IDs overlap: {_repl29_existing_qids & _repl29_new_qids}")
+
+_repl29_existing_oids = {o["option_id"] for q in QUESTIONS_POOL_ENHANCED for o in q["options"]}
+_repl29_new_oids = {o["option_id"] for q in _REPLACEMENT_BATCH_29 for o in q["options"]}
+if _repl29_existing_oids & _repl29_new_oids:
+    raise ValueError(f"Replacement batch 29 option IDs overlap: {_repl29_existing_oids & _repl29_new_oids}")
+
+QUESTIONS_POOL_ENHANCED.extend(_REPLACEMENT_BATCH_29)
+
+
+# ── Replacement Batch 30 ─────────────────────────────────────────────────────
+_REPLACEMENT_BATCH_30 = [
+    # Q1 – Creative-Writing / Communication-Media / Film-Media
+    {
+        "question_id": 5266,
+        "question_text": "A provincial literary magazine in Leyte is launching a writing residency for young Filipino authors — participants spend three months in a coastal cottage to produce original works. Which residency contribution appeals to you?",
+        "category": "creative_arts",
+        "options": [
+            {"option_id": 28803, "option_text": "Serve as the narrative editor who reads every draft, suggests structural changes, and polishes each author's voice for the anthology", "trait_tags": {"Creative-Writing": 3, "Communication-Media": 2}},
+            {"option_id": 28804, "option_text": "Produce a short documentary capturing each writer's creative journey from first draft to finished manuscript", "trait_tags": {"Film-Media": 3, "Creative-Writing": 2}},
+            {"option_id": 28805, "option_text": "Lead daily writing workshops that teach craft elements like dialogue, pacing, and imagery using local folklore", "trait_tags": {"Creative-Writing": 3, "Leadership": 2}},
+            {"option_id": 28806, "option_text": "Translate selected works into Waray and Cebuano so the anthology resonates with readers across the Visayas", "trait_tags": {"Creative-Writing": 3, "Cultural-Preservation": 2}},
+            {"option_id": 28807, "option_text": "Design the anthology's cover art and interior layout to create a striking physical book", "trait_tags": {"Creative-Design": 3, "Creative-Writing": 1}},
+            {"option_id": 28808, "option_text": "Build a digital publishing platform with audio narrations so each story can be read or listened to online", "trait_tags": {"Tech-Tic": 3, "Creative-Writing": 1}},
+            {"option_id": 28809, "option_text": "Manage the residency's logistics — budgeting, meal planning, and scheduling — so the writers can focus on creating", "trait_tags": {"Operations-Logistics": 3, "Leadership": 1}},
+            {"option_id": 28810, "option_text": "Coordinate a nationwide book-launch tour with partner bookstores, libraries, and campus literary organizations", "trait_tags": {"Marketing-Ads": 3, "Communication-Media": 2}},
+            {"option_id": 28811, "option_text": "Establish a micro-grant fund from local sponsors so financially disadvantaged writers can participate without cost", "trait_tags": {"Finance-Acctg": 3, "Community-Dev": 2}}
+        ]
+    },
+    # Q2 – Architecture-Path / Sustainability-Path / Engineering-Path
+    {
+        "question_id": 5267,
+        "question_text": "An Iloilo City heritage district is converting a row of crumbling colonial-era warehouses along the Iloilo River into a mixed-use cultural corridor with galleries, cafés, and artist lofts. What role calls to you?",
+        "category": "engineering_architecture",
+        "options": [
+            {"option_id": 28812, "option_text": "Draft the adaptive-reuse architectural plans that preserve original coral-stone walls while adding modern utilities", "trait_tags": {"Architecture-Path": 3, "Cultural-Preservation": 2}},
+            {"option_id": 28813, "option_text": "Engineer the structural reinforcements — steel framing, seismic retrofits — needed to make century-old walls safe again", "trait_tags": {"Engineering-Path": 3, "Architecture-Path": 1}},
+            {"option_id": 28814, "option_text": "Design a green-roof and rainwater-harvesting system for each building to cut water costs and cool interiors naturally", "trait_tags": {"Sustainability-Path": 3, "Architecture-Path": 2}},
+            {"option_id": 28815, "option_text": "Create the interior-design concept for the artist lofts — maximizing light, workspace flow, and creative atmosphere", "trait_tags": {"Creative-Design": 3, "Architecture-Path": 2}},
+            {"option_id": 28816, "option_text": "Develop the corridor's business model covering tenant leases, revenue forecasts, and return-on-investment projections", "trait_tags": {"Finance-Acctg": 3, "Business-Mgmt": 2}},
+            {"option_id": 28817, "option_text": "Run the community engagement process so neighboring residents and vendors have input into the corridor's design", "trait_tags": {"Community-Dev": 3, "Public-Admin": 2}},
+            {"option_id": 28818, "option_text": "Install a smart energy-management system with solar panels, battery storage, and occupancy-based lighting", "trait_tags": {"Electrical-Electronics": 3, "Sustainability-Path": 2}},
+            {"option_id": 28819, "option_text": "Curate the inaugural gallery exhibitions that tell the warehouses' mercantile history through art and artifacts", "trait_tags": {"Cultural-Preservation": 3, "Creative-Design": 1}},
+            {"option_id": 28820, "option_text": "Manage the full construction timeline, subcontractors, permits, and materials procurement to keep the project on schedule", "trait_tags": {"Operations-Logistics": 3, "Engineering-Path": 2}}
+        ]
+    },
+    # Q3 – Psychology-Path / Healthcare-Med / Community-Dev
+    {
+        "question_id": 5268,
+        "question_text": "A Quezon City domestic-violence shelter is expanding its services to include a holistic survivor-recovery program covering therapy, job training, and legal aid. Which contribution would you make?",
+        "category": "social_services",
+        "options": [
+            {"option_id": 28821, "option_text": "Facilitate individual trauma-focused cognitive-behavioral therapy sessions for survivors in the shelter", "trait_tags": {"Psychology-Path": 3, "Healthcare-Med": 2}},
+            {"option_id": 28822, "option_text": "Lead group art-therapy workshops where survivors express experiences through painting, collage, and journaling", "trait_tags": {"Psychology-Path": 3, "Creative-Design": 1}},
+            {"option_id": 28823, "option_text": "Create a children's play-therapy room where young witnesses of violence can process trauma through guided play", "trait_tags": {"Psychology-Path": 3, "Community-Dev": 2}},
+            {"option_id": 28824, "option_text": "Prepare legal case files and help survivors navigate protection-order applications and custody proceedings", "trait_tags": {"Public-Admin": 3, "Psychology-Path": 1}},
+            {"option_id": 28825, "option_text": "Organize a vocational skills bootcamp teaching baking, sewing, and bookkeeping to build survivors' financial independence", "trait_tags": {"Community-Dev": 3, "Leadership": 2}},
+            {"option_id": 28826, "option_text": "Develop a confidential mobile app that lets survivors track court dates, access hotline numbers, and chat with counselors", "trait_tags": {"Tech-Tic": 3, "Psychology-Path": 1}},
+            {"option_id": 28827, "option_text": "Conduct health screenings, wound care, and referrals to OB-GYN and psychiatric specialists for each survivor", "trait_tags": {"Healthcare-Med": 3, "Psychology-Path": 1}},
+            {"option_id": 28828, "option_text": "Set up a transitional-housing partnership with local landlords so survivors have safe places to move after the shelter", "trait_tags": {"Community-Dev": 3, "Public-Admin": 2}},
+            {"option_id": 28829, "option_text": "Write and launch a public-awareness campaign to destigmatize seeking help and increase shelter referrals", "trait_tags": {"Marketing-Ads": 3, "Communication-Media": 2}}
+        ]
+    },
+    # Q4 – Finance-Acctg / Business-Mgmt / Enterprise
+    {
+        "question_id": 5269,
+        "question_text": "A cooperative of Batangas coffee farmers wants to bypass middlemen and sell single-origin beans directly to international specialty-coffee buyers. What task would you take on?",
+        "category": "business_finance",
+        "options": [
+            {"option_id": 28830, "option_text": "Build a cost-accounting system that tracks per-kilo production costs from cherry to export-ready green beans", "trait_tags": {"Finance-Acctg": 3, "Business-Mgmt": 2}},
+            {"option_id": 28831, "option_text": "Negotiate export contracts with roasters in Seoul and Melbourne, setting fair-trade pricing and quality benchmarks", "trait_tags": {"Business-Mgmt": 3, "Enterprise": 2}},
+            {"option_id": 28832, "option_text": "Design the brand identity — logo, packaging, and origin story — that will command shelf attention in overseas cafés", "trait_tags": {"Creative-Design": 3, "Marketing-Ads": 2}},
+            {"option_id": 28833, "option_text": "Develop a blockchain traceability ledger so each bag of beans links back to the exact farmer and harvest date", "trait_tags": {"Tech-Tic": 3, "Enterprise": 2}},
+            {"option_id": 28834, "option_text": "Set up the cold-chain and freight logistics to ship beans from Batangas port to overseas warehouses in under two weeks", "trait_tags": {"Operations-Logistics": 3, "Business-Mgmt": 1}},
+            {"option_id": 28835, "option_text": "Train farmers in post-harvest processing techniques — wet-hulling, sun-drying, grading — to improve cup scores", "trait_tags": {"Agri-Fisheries": 3, "Scientific-Research": 1}},
+            {"option_id": 28836, "option_text": "Create a direct-to-consumer e-commerce site with subscription plans, cupping notes, and farmer profiles", "trait_tags": {"Marketing-Ads": 3, "Tech-Tic": 2}},
+            {"option_id": 28837, "option_text": "Conduct soil and climate studies to determine optimal microlot locations for award-winning coffee varietals", "trait_tags": {"Scientific-Research": 3, "Agri-Fisheries": 2}},
+            {"option_id": 28838, "option_text": "Prepare the cooperative's financial statements, tax filings, and grant applications to secure expansion capital", "trait_tags": {"Finance-Acctg": 3, "Enterprise": 2}}
+        ]
+    },
+    # Q5 – UI-UX / Tech-Tic / Creative-Design
+    {
+        "question_id": 5270,
+        "question_text": "A Philippine government agency is modernizing its online public-services portal so citizens can renew licenses, pay taxes, and request documents without visiting an office. Which part of the redesign excites you?",
+        "category": "technology",
+        "options": [
+            {"option_id": 28839, "option_text": "Conduct user-research sessions — interviews, card sorts, and usability tests — with citizens of varying tech literacy", "trait_tags": {"UI-UX": 3, "Psychology-Path": 2}},
+            {"option_id": 28840, "option_text": "Design the portal's complete interaction flows, wireframes, and high-fidelity prototypes in Figma", "trait_tags": {"UI-UX": 3, "Creative-Design": 2}},
+            {"option_id": 28841, "option_text": "Build the front-end with accessible components — screen-reader labels, high-contrast themes, and keyboard navigation", "trait_tags": {"UI-UX": 3, "Tech-Tic": 2}},
+            {"option_id": 28842, "option_text": "Architect the back-end microservices that securely pull records from separate agency databases into one unified API", "trait_tags": {"Tech-Tic": 3, "UI-UX": 1}},
+            {"option_id": 28843, "option_text": "Write the plain-language guidance text and in-app tooltips so every citizen understands each step of a transaction", "trait_tags": {"Communication-Media": 3, "UI-UX": 2}},
+            {"option_id": 28844, "option_text": "Develop the identity-verification module using national-ID QR codes and biometric matching", "trait_tags": {"Tech-Tic": 3, "Electrical-Electronics": 1}},
+            {"option_id": 28845, "option_text": "Set up automated load testing and performance monitoring to keep page response times below two seconds", "trait_tags": {"Tech-Tic": 3, "Operations-Logistics": 1}},
+            {"option_id": 28846, "option_text": "Produce tutorial videos and animated walkthroughs that guide senior citizens through online transactions", "trait_tags": {"Film-Media": 3, "UI-UX": 2}},
+            {"option_id": 28847, "option_text": "Lead the change-management initiative that convinces both agency staff and the public to trust and adopt the new portal", "trait_tags": {"Leadership": 3, "Public-Admin": 2}}
+        ]
+    },
+    # Q6 – Agri-Fisheries / Nutrition-Food-Sci / Scientific-Research
+    {
+        "question_id": 5271,
+        "question_text": "An Isabela provincial government pilot program is converting idle rice paddies into integrated rice-duck farming systems where ducks provide pest control and fertilizer while producing eggs and meat. Which role interests you?",
+        "category": "agriculture_environment",
+        "options": [
+            {"option_id": 28848, "option_text": "Manage the day-to-day rotation schedules — when ducks enter paddies, feeding regimens, and egg-collection logistics", "trait_tags": {"Agri-Fisheries": 3, "Operations-Logistics": 2}},
+            {"option_id": 28849, "option_text": "Conduct controlled-experiment plots comparing rice-duck yields versus conventional pesticide-treated plots", "trait_tags": {"Scientific-Research": 3, "Agri-Fisheries": 2}},
+            {"option_id": 28850, "option_text": "Develop value-added duck-egg products — salted eggs, century eggs, pastillas — and their nutritional labels", "trait_tags": {"Nutrition-Food-Sci": 3, "Agri-Fisheries": 2}},
+            {"option_id": 28851, "option_text": "Train participating farmers on duck breed selection, health monitoring, and avian-disease prevention protocols", "trait_tags": {"Veterinary-Path": 3, "Agri-Fisheries": 2}},
+            {"option_id": 28852, "option_text": "Write the provincial ordinance and subsidy framework that incentivizes farmers to adopt the rice-duck system", "trait_tags": {"Public-Admin": 3, "Agri-Fisheries": 1}},
+            {"option_id": 28853, "option_text": "Build a mobile monitoring dashboard where farmers log duck count, egg production, and pest-damage observations", "trait_tags": {"Tech-Tic": 3, "Agri-Fisheries": 1}},
+            {"option_id": 28854, "option_text": "Analyze the soil microbiome changes after one season of rice-duck farming versus monoculture rice cultivation", "trait_tags": {"Scientific-Research": 3, "Sustainability-Path": 2}},
+            {"option_id": 28855, "option_text": "Design the marketing and branding for 'duck-paddy organic rice' to command a premium in Manila health-food stores", "trait_tags": {"Marketing-Ads": 3, "Creative-Design": 1}},
+            {"option_id": 28856, "option_text": "Calculate the full cost-benefit analysis including duck procurement, feed costs, and projected revenue per hectare", "trait_tags": {"Finance-Acctg": 3, "Agri-Fisheries": 1}}
+        ]
+    },
+    # Q7 – Leadership / Business-Mgmt / Psychology-Path
+    {
+        "question_id": 5272,
+        "question_text": "A fast-growing Davao City IT outsourcing firm has been losing senior developers to burnout and poaching — management is launching a comprehensive talent-retention overhaul. What would you focus on?",
+        "category": "business_management",
+        "options": [
+            {"option_id": 28857, "option_text": "Design a mentorship ladder where senior devs coach juniors and in return receive leadership training and promotion tracks", "trait_tags": {"Leadership": 3, "Business-Mgmt": 2}},
+            {"option_id": 28858, "option_text": "Conduct anonymous employee-wellbeing surveys and one-on-one exit interviews to uncover root causes of attrition", "trait_tags": {"Psychology-Path": 3, "Leadership": 2}},
+            {"option_id": 28859, "option_text": "Revamp the compensation structure with retention bonuses, stock-option equivalents, and transparent salary bands", "trait_tags": {"Finance-Acctg": 3, "Business-Mgmt": 2}},
+            {"option_id": 28860, "option_text": "Introduce a four-day workweek pilot and measure its impact on productivity, code quality, and employee satisfaction", "trait_tags": {"Leadership": 3, "Psychology-Path": 2}},
+            {"option_id": 28861, "option_text": "Build an internal learning-management system with certifications in emerging tech so developers keep growing", "trait_tags": {"Tech-Tic": 3, "Leadership": 1}},
+            {"option_id": 28862, "option_text": "Create a company culture playbook including team rituals, recognition programs, and conflict-resolution protocols", "trait_tags": {"Psychology-Path": 3, "Business-Mgmt": 2}},
+            {"option_id": 28863, "option_text": "Set up an on-site wellness suite with a counselor, nap pods, and a gym to address physical and mental health", "trait_tags": {"Healthcare-Med": 3, "Psychology-Path": 2}},
+            {"option_id": 28864, "option_text": "Analyze workforce data — tenure, performance reviews, project loads — to predict which employees are at flight risk", "trait_tags": {"Data-Analytics": 3, "Business-Mgmt": 1}},
+            {"option_id": 28865, "option_text": "Negotiate partnerships with co-working spaces and provincial satellite offices so developers can work near home", "trait_tags": {"Operations-Logistics": 3, "Leadership": 1}}
+        ]
+    },
+    # Q8 – Healthcare-Med / Nutrition-Food-Sci / Psychology-Path
+    {
+        "question_id": 5273,
+        "question_text": "A Cagayan de Oro public hospital is opening a diabetes-prevention clinic targeting pre-diabetic patients identified during free community screenings. What part of the clinic would you build?",
+        "category": "health_sciences",
+        "options": [
+            {"option_id": 28866, "option_text": "Run the clinical screening days — fasting blood-sugar draws, HbA1c tests, and BMI measurements — for hundreds of walk-ins", "trait_tags": {"Healthcare-Med": 3, "Community-Dev": 1}},
+            {"option_id": 28867, "option_text": "Design personalized meal plans using locally available produce and traditional Cagayan de Oro recipes low in glycemic load", "trait_tags": {"Nutrition-Food-Sci": 3, "Healthcare-Med": 2}},
+            {"option_id": 28868, "option_text": "Deliver behavioral-change counseling helping patients set goals around diet, exercise, and stress management", "trait_tags": {"Psychology-Path": 3, "Healthcare-Med": 2}},
+            {"option_id": 28869, "option_text": "Develop a patient-tracking database that monitors lab results, appointment attendance, and lifestyle-habit progress over time", "trait_tags": {"Tech-Tic": 3, "Healthcare-Med": 1}},
+            {"option_id": 28870, "option_text": "Formulate affordable herbal-supplement sachets from local plants with evidence-backed hypoglycemic properties", "trait_tags": {"Nutrition-Food-Sci": 3, "Scientific-Research": 2}},
+            {"option_id": 28871, "option_text": "Train community health workers to conduct door-to-door follow-ups and basic glucose monitoring in remote barangays", "trait_tags": {"Healthcare-Med": 3, "Leadership": 2}},
+            {"option_id": 28872, "option_text": "Write easy-to-understand Filipino-language health-literacy pamphlets explaining insulin resistance and preventive steps", "trait_tags": {"Communication-Media": 3, "Healthcare-Med": 2}},
+            {"option_id": 28873, "option_text": "Coordinate weekly group exercise classes — Zumba, walking clubs, and aqua-aerobics — tailored for middle-aged patients", "trait_tags": {"Healthcare-Med": 3, "Community-Dev": 2}},
+            {"option_id": 28874, "option_text": "Secure pharmaceutical sponsorships and barangay-health-board funding to keep the clinic's services permanently free", "trait_tags": {"Finance-Acctg": 3, "Public-Admin": 2}}
+        ]
+    },
+    # Q9 – Film-Media / Creative-Design / Cultural-Preservation
+    {
+        "question_id": 5274,
+        "question_text": "The Film Development Council of the Philippines is funding a feature-length animated film based on the Bicolano epic of Handiong, telling the mythological hero's battle against monsters in pre-colonial Bicol. Which production role fits you?",
+        "category": "creative_arts",
+        "options": [
+            {"option_id": 28875, "option_text": "Direct the film — define the visual style, pacing, and emotional arc that brings Handiong's journey to life", "trait_tags": {"Film-Media": 3, "Leadership": 2}},
+            {"option_id": 28876, "option_text": "Create the character designs and environment concept art drawing from Bicolano textiles, tattoos, and volcanic landscapes", "trait_tags": {"Creative-Design": 3, "Cultural-Preservation": 2}},
+            {"option_id": 28877, "option_text": "Write the screenplay adapting oral-tradition verses into compelling modern dialogue while keeping the epic's spirit", "trait_tags": {"Creative-Writing": 3, "Film-Media": 2}},
+            {"option_id": 28878, "option_text": "Compose the original orchestral and kulintang-infused score that underscores each battle and emotional beat", "trait_tags": {"Creative-Design": 3, "Cultural-Preservation": 2}},
+            {"option_id": 28879, "option_text": "Rig and animate the 3-D characters, ensuring fluid motion-capture-quality movement for fight choreography", "trait_tags": {"Tech-Tic": 3, "Film-Media": 2}},
+            {"option_id": 28880, "option_text": "Conduct ethnographic research with Bicolano elders and historians to ensure the film's cultural accuracy", "trait_tags": {"Cultural-Preservation": 3, "Scientific-Research": 1}},
+            {"option_id": 28881, "option_text": "Manage the production budget, vendor contracts, and funding-disbursement schedule across an 18-month timeline", "trait_tags": {"Finance-Acctg": 3, "Operations-Logistics": 2}},
+            {"option_id": 28882, "option_text": "Plan the film's festival circuit strategy and international distribution deals to reach a global audience", "trait_tags": {"Marketing-Ads": 3, "Film-Media": 2}},
+            {"option_id": 28883, "option_text": "Design the interactive companion website where viewers explore Bicolano mythology, character backstories, and behind-the-scenes footage", "trait_tags": {"UI-UX": 3, "Film-Media": 1}}
+        ]
+    },
+    # Q10 – Electrical-Electronics / Engineering-Path / Sustainability-Path
+    {
+        "question_id": 5275,
+        "question_text": "A Palawan off-grid island resort is installing a hybrid solar-wind-battery microgrid to replace its noisy diesel generators and achieve energy independence. What would you work on?",
+        "category": "engineering_technology",
+        "options": [
+            {"option_id": 28884, "option_text": "Size and configure the battery-management system — lithium iron-phosphate cells, charge controllers, and inverter topology", "trait_tags": {"Electrical-Electronics": 3, "Engineering-Path": 2}},
+            {"option_id": 28885, "option_text": "Design the photovoltaic array layout on cottage rooftops maximizing sun exposure while blending with tropical architecture", "trait_tags": {"Engineering-Path": 3, "Architecture-Path": 2}},
+            {"option_id": 28886, "option_text": "Develop the real-time energy-monitoring dashboard so resort staff can track generation, storage, and consumption live", "trait_tags": {"Tech-Tic": 3, "Electrical-Electronics": 1}},
+            {"option_id": 28887, "option_text": "Conduct a year-long wind-speed and solar-irradiance study to determine optimal turbine placement on the island", "trait_tags": {"Scientific-Research": 3, "Sustainability-Path": 2}},
+            {"option_id": 28888, "option_text": "Wire the resort's distribution panel, install grounding systems, and ensure compliance with Philippine Electrical Code", "trait_tags": {"Electrical-Electronics": 3, "Engineering-Path": 2}},
+            {"option_id": 28889, "option_text": "Calculate the total cost of ownership, payback period, and carbon-offset credits the resort can claim each year", "trait_tags": {"Finance-Acctg": 3, "Sustainability-Path": 2}},
+            {"option_id": 28890, "option_text": "Train the island's maintenance staff on routine panel cleaning, battery health checks, and basic fault troubleshooting", "trait_tags": {"Electrical-Electronics": 3, "Leadership": 2}},
+            {"option_id": 28891, "option_text": "Negotiate equipment procurement from solar-panel and wind-turbine suppliers, ensuring warranty and after-sales support", "trait_tags": {"Operations-Logistics": 3, "Business-Mgmt": 1}},
+            {"option_id": 28892, "option_text": "Design interpretive signage around the resort explaining the microgrid so guests learn about renewable energy", "trait_tags": {"Communication-Media": 3, "Sustainability-Path": 2}}
+        ]
+    },
+    # Q11 – Enterprise / Marketing-Ads / Business-Mgmt
+    {
+        "question_id": 5276,
+        "question_text": "Three young entrepreneurs in Cebu are launching a social enterprise that upcycles ocean plastic collected by local fishers into stylish backpacks and sells them globally. Which startup task would you own?",
+        "category": "business_entrepreneurship",
+        "options": [
+            {"option_id": 28893, "option_text": "Write the business plan, define the value proposition, and pitch to impact investors for seed funding", "trait_tags": {"Enterprise": 3, "Business-Mgmt": 2}},
+            {"option_id": 28894, "option_text": "Develop the brand narrative and social-media strategy highlighting the fisher-to-backpack supply chain story", "trait_tags": {"Marketing-Ads": 3, "Enterprise": 2}},
+            {"option_id": 28895, "option_text": "Engineer the material-processing workflow that transforms raw ocean plastic into durable woven textile sheets", "trait_tags": {"Engineering-Path": 3, "Sustainability-Path": 2}},
+            {"option_id": 28896, "option_text": "Design the backpack line — sketches, prototypes, and colorways that compete with established outdoor brands", "trait_tags": {"Creative-Design": 3, "Enterprise": 2}},
+            {"option_id": 28897, "option_text": "Build the Shopify-based e-commerce storefront with integrated international shipping and multi-currency checkout", "trait_tags": {"Tech-Tic": 3, "Marketing-Ads": 1}},
+            {"option_id": 28898, "option_text": "Manage the cooperative agreements with fisher communities — fair pay, plastic grading standards, and collection schedules", "trait_tags": {"Community-Dev": 3, "Enterprise": 2}},
+            {"option_id": 28899, "option_text": "Handle accounting, cost-per-unit analysis, and pricing strategy to balance affordability with profitability", "trait_tags": {"Finance-Acctg": 3, "Enterprise": 2}},
+            {"option_id": 28900, "option_text": "Pursue B-Corp certification and draft the company's environmental and social governance policies", "trait_tags": {"Sustainability-Path": 3, "Public-Admin": 1}},
+            {"option_id": 28901, "option_text": "Photograph and film campaign content showing fishers collecting plastic and artisans weaving the fabric", "trait_tags": {"Film-Media": 3, "Marketing-Ads": 2}}
+        ]
+    },
+    # Q12 – Veterinary-Path / Agri-Fisheries / Scientific-Research
+    {
+        "question_id": 5277,
+        "question_text": "A Bataan free-range poultry farm supplying high-welfare eggs to Metro Manila supermarkets is facing an outbreak of Newcastle disease threatening thousands of hens. What would you do first?",
+        "category": "agriculture_veterinary",
+        "options": [
+            {"option_id": 28902, "option_text": "Quarantine affected flocks, collect throat swabs, and send samples to the Bureau of Animal Industry for PCR confirmation", "trait_tags": {"Veterinary-Path": 3, "Scientific-Research": 2}},
+            {"option_id": 28903, "option_text": "Administer the emergency vaccination program for unaffected flocks following OIE-recommended live and inactivated protocols", "trait_tags": {"Veterinary-Path": 3, "Healthcare-Med": 1}},
+            {"option_id": 28904, "option_text": "Analyze epidemiological data to trace the infection source — feed shipments, wild-bird contact, or visitor biosecurity lapses", "trait_tags": {"Scientific-Research": 3, "Veterinary-Path": 2}},
+            {"option_id": 28905, "option_text": "Redesign the farm's biosecurity layout — foot baths, vehicle disinfection zones, and bird-proof netting around houses", "trait_tags": {"Architecture-Path": 3, "Agri-Fisheries": 2}},
+            {"option_id": 28906, "option_text": "Draft crisis communication for supermarket partners and consumers reassuring them about egg safety and supply continuity", "trait_tags": {"Communication-Media": 3, "Business-Mgmt": 1}},
+            {"option_id": 28907, "option_text": "Calculate the financial impact — lost birds, unsellable eggs, vaccination costs — and file the insurance claim", "trait_tags": {"Finance-Acctg": 3, "Agri-Fisheries": 1}},
+            {"option_id": 28908, "option_text": "Train farm workers on daily health-monitoring checklists, proper PPE use, and early-symptom reporting procedures", "trait_tags": {"Leadership": 3, "Veterinary-Path": 1}},
+            {"option_id": 28909, "option_text": "Develop an automated coop-monitoring system with temperature, humidity, and ammonia sensors linked to an alert dashboard", "trait_tags": {"Tech-Tic": 3, "Agri-Fisheries": 2}},
+            {"option_id": 28910, "option_text": "Coordinate with the municipal agriculture office to enforce a movement-control zone around the affected area", "trait_tags": {"Public-Admin": 3, "Veterinary-Path": 1}}
+        ]
+    },
+    # Q13 – Creative-Writing / Psychology-Path / Communication-Media
+    {
+        "question_id": 5278,
+        "question_text": "A Philippine mental-health nonprofit is producing a 'Voices of Recovery' storytelling project where former patients share their journeys through depression, anxiety, and addiction in written, audio, and visual formats. Which role would you fill?",
+        "category": "social_services",
+        "options": [
+            {"option_id": 28911, "option_text": "Serve as the ghostwriter who transforms raw patient interviews into polished personal essays for the book", "trait_tags": {"Creative-Writing": 3, "Psychology-Path": 2}},
+            {"option_id": 28912, "option_text": "Conduct structured narrative-therapy sessions that help participants shape their stories while processing emotions safely", "trait_tags": {"Psychology-Path": 3, "Creative-Writing": 2}},
+            {"option_id": 28913, "option_text": "Produce the companion podcast — recording, editing, and mixing interviews with ambient sounds from meaningful locations", "trait_tags": {"Film-Media": 3, "Communication-Media": 2}},
+            {"option_id": 28914, "option_text": "Create illustrated portraits of each storyteller for the exhibit, capturing their resilience through visual art", "trait_tags": {"Creative-Design": 3, "Psychology-Path": 1}},
+            {"option_id": 28915, "option_text": "Write a clinical appendix for the book explaining each condition, treatment options, and hotline resources in accessible language", "trait_tags": {"Healthcare-Med": 3, "Communication-Media": 2}},
+            {"option_id": 28916, "option_text": "Design the traveling exhibition layout — wall panels, lighting, audio stations — for libraries and university galleries", "trait_tags": {"Architecture-Path": 3, "Creative-Design": 1}},
+            {"option_id": 28917, "option_text": "Handle the ethical review process ensuring informed consent, anonymity options, and the right to withdraw stories", "trait_tags": {"Public-Admin": 3, "Psychology-Path": 2}},
+            {"option_id": 28918, "option_text": "Develop the media outreach plan to secure newspaper features, TV segments, and social-media virality for the launch", "trait_tags": {"Marketing-Ads": 3, "Communication-Media": 2}},
+            {"option_id": 28919, "option_text": "Build an interactive website where visitors read stories, share their own, and find nearby mental-health services on a map", "trait_tags": {"UI-UX": 3, "Tech-Tic": 2}}
+        ]
+    },
+    # Q14 – Operations-Logistics / Engineering-Path / Business-Mgmt
+    {
+        "question_id": 5279,
+        "question_text": "The Port of Subic is constructing a new container terminal to handle the growing volume of electronics exports from Clark Freeport Zone. What aspect of the project would you manage?",
+        "category": "engineering_logistics",
+        "options": [
+            {"option_id": 28920, "option_text": "Design the terminal's quay-crane and yard-stacking layout to maximize throughput per berth per hour", "trait_tags": {"Operations-Logistics": 3, "Engineering-Path": 2}},
+            {"option_id": 28921, "option_text": "Engineer the wharf's reinforced-concrete pile foundations to support 65-ton ship-to-shore gantry cranes", "trait_tags": {"Engineering-Path": 3, "Architecture-Path": 1}},
+            {"option_id": 28922, "option_text": "Develop the terminal operating system software — vessel scheduling, container tracking, and gate automation", "trait_tags": {"Tech-Tic": 3, "Operations-Logistics": 2}},
+            {"option_id": 28923, "option_text": "Negotiate shipping-line service agreements that guarantee minimum call volumes and competitive handling fees", "trait_tags": {"Business-Mgmt": 3, "Operations-Logistics": 2}},
+            {"option_id": 28924, "option_text": "Prepare the environmental-impact assessment and mangrove-offset plan required before reclamation work can begin", "trait_tags": {"Sustainability-Path": 3, "Scientific-Research": 1}},
+            {"option_id": 28925, "option_text": "Set up the customs pre-clearance integration so export containers move from factory to vessel in under 24 hours", "trait_tags": {"Operations-Logistics": 3, "Public-Admin": 2}},
+            {"option_id": 28926, "option_text": "Install the terminal's electrical infrastructure — transformer substations, LED floodlighting, and shore-power connections for vessels", "trait_tags": {"Electrical-Electronics": 3, "Engineering-Path": 1}},
+            {"option_id": 28927, "option_text": "Create a financial model projecting terminal revenues, debt service, and return on investment over a 25-year concession", "trait_tags": {"Finance-Acctg": 3, "Business-Mgmt": 2}},
+            {"option_id": 28928, "option_text": "Recruit, train, and certify the crane-operator and stevedore workforce needed before the terminal's opening day", "trait_tags": {"Leadership": 3, "Operations-Logistics": 2}}
+        ]
+    },
+    # Q15 – Cultural-Preservation / Community-Dev / Creative-Design
+    {
+        "question_id": 5280,
+        "question_text": "An Ifugao community is establishing a living-heritage center where master rice-terrace builders teach younger generations the ancient art of stone-wall construction and water-channel engineering. What would you contribute?",
+        "category": "cultural_heritage",
+        "options": [
+            {"option_id": 28929, "option_text": "Document every step of the stone-wall building technique through detailed technical drawings and instructional manuals", "trait_tags": {"Cultural-Preservation": 3, "Engineering-Path": 2}},
+            {"option_id": 28930, "option_text": "Record oral histories from the oldest master builders, preserving their knowledge in Tuwali Ifugao with English subtitles", "trait_tags": {"Cultural-Preservation": 3, "Communication-Media": 2}},
+            {"option_id": 28931, "option_text": "Design the living-heritage center's architecture inspired by the traditional Ifugao bale house form using sustainable local materials", "trait_tags": {"Architecture-Path": 3, "Cultural-Preservation": 2}},
+            {"option_id": 28932, "option_text": "Develop a paid apprenticeship curriculum so youth earn while they learn terrace-building over a six-month program", "trait_tags": {"Community-Dev": 3, "Leadership": 2}},
+            {"option_id": 28933, "option_text": "Create 3-D digital scans and virtual-reality tours of the terraces so visitors worldwide can experience them remotely", "trait_tags": {"Tech-Tic": 3, "Cultural-Preservation": 1}},
+            {"option_id": 28934, "option_text": "Study the water-engineering science — terracing hydrology, stone permeability, and irrigation flow dynamics", "trait_tags": {"Scientific-Research": 3, "Engineering-Path": 1}},
+            {"option_id": 28935, "option_text": "Manage the community tourism aspect — trail maps, guided-walk bookings, and revenue-sharing agreements with clan leaders", "trait_tags": {"Hotel-Resort-Path": 3, "Community-Dev": 2}},
+            {"option_id": 28936, "option_text": "Produce a photo-essay book featuring terrace landscapes across seasons, published with a major Philippine press", "trait_tags": {"Creative-Design": 3, "Cultural-Preservation": 2}},
+            {"option_id": 28937, "option_text": "Lobby UNESCO and the National Commission for Culture and the Arts for continued heritage-site funding and protection", "trait_tags": {"Public-Admin": 3, "Cultural-Preservation": 2}}
+        ]
+    },
+    # Q16 – Nutrition-Food-Sci / Scientific-Research / Healthcare-Med
+    {
+        "question_id": 5281,
+        "question_text": "The Department of Science and Technology is funding a project to develop a cheap, shelf-stable, high-protein snack bar made from locally farmed mung beans and moringa to combat child malnutrition in Mindanao. Which task suits you?",
+        "category": "food_science",
+        "options": [
+            {"option_id": 28938, "option_text": "Formulate the snack-bar recipe, optimizing the ratio of mung-bean protein isolate, moringa powder, and coconut sugar for taste and nutrition", "trait_tags": {"Nutrition-Food-Sci": 3, "Scientific-Research": 2}},
+            {"option_id": 28939, "option_text": "Conduct shelf-life studies — accelerated aging, moisture analysis, and microbial challenge tests — in a certified lab", "trait_tags": {"Scientific-Research": 3, "Nutrition-Food-Sci": 2}},
+            {"option_id": 28940, "option_text": "Run sensory-evaluation panels with children and mothers to refine flavor, texture, and packaging appeal", "trait_tags": {"Nutrition-Food-Sci": 3, "Psychology-Path": 2}},
+            {"option_id": 28941, "option_text": "Design the factory layout for a small-scale Good Manufacturing Practice production line with proper sanitation zones", "trait_tags": {"Engineering-Path": 3, "Operations-Logistics": 2}},
+            {"option_id": 28942, "option_text": "Analyze the micronutrient profile — iron, zinc, Vitamin A — and ensure each bar meets DOST recommended daily intake targets", "trait_tags": {"Nutrition-Food-Sci": 3, "Healthcare-Med": 2}},
+            {"option_id": 28943, "option_text": "Establish the mung-bean and moringa supply chain from Mindanao farms, negotiate pricing, and schedule harvests", "trait_tags": {"Agri-Fisheries": 3, "Operations-Logistics": 2}},
+            {"option_id": 28944, "option_text": "Design the bar's branding and packaging — child-friendly artwork, bilingual labels, and FDA-compliant nutrition facts", "trait_tags": {"Creative-Design": 3, "Marketing-Ads": 1}},
+            {"option_id": 28945, "option_text": "Conduct a randomized feeding trial in partner daycare centers to measure the bar's impact on children's growth metrics", "trait_tags": {"Healthcare-Med": 3, "Scientific-Research": 2}},
+            {"option_id": 28946, "option_text": "Prepare the project's financial sustainability plan so the snack bar continues production after the grant period ends", "trait_tags": {"Finance-Acctg": 3, "Enterprise": 2}}
+        ]
+    },
+    # Q17 – Hotel-Resort-Path / Marketing-Ads / Creative-Design
+    {
+        "question_id": 5282,
+        "question_text": "A luxury glamping resort on an uninhabited Calamian island near Coron is opening with 20 safari-tent villas, a coral-garden snorkeling reef, and a farm-to-table restaurant. Which opening task would you choose?",
+        "category": "hospitality_tourism",
+        "options": [
+            {"option_id": 28947, "option_text": "Develop operating procedures for every guest touchpoint — airport pickup, check-in ritual, sunset cocktail service, and farewell gift", "trait_tags": {"Hotel-Resort-Path": 3, "Operations-Logistics": 2}},
+            {"option_id": 28948, "option_text": "Craft the resort's brand story and launch a luxury-travel influencer campaign targeting East Asian and Australian markets", "trait_tags": {"Marketing-Ads": 3, "Hotel-Resort-Path": 2}},
+            {"option_id": 28949, "option_text": "Design the safari-tent interiors — hand-woven furniture, local-stone bathroom finishes, and ambient Filipino-textile accents", "trait_tags": {"Creative-Design": 3, "Hotel-Resort-Path": 2}},
+            {"option_id": 28950, "option_text": "Train the local island staff in five-star hospitality standards, food safety, and basic first-aid response", "trait_tags": {"Leadership": 3, "Hotel-Resort-Path": 2}},
+            {"option_id": 28951, "option_text": "Plan the farm-to-table menu using the island's herb garden, fish pens, and foraged tropical ingredients", "trait_tags": {"Nutrition-Food-Sci": 3, "Hotel-Resort-Path": 2}},
+            {"option_id": 28952, "option_text": "Set up the resort's booking engine, property-management system, and integration with international OTAs", "trait_tags": {"Tech-Tic": 3, "Hotel-Resort-Path": 1}},
+            {"option_id": 28953, "option_text": "Ensure the resort's environmental-management plan protects the coral garden — waste treatment, reef-safe sunscreen rules, and carrying-capacity limits", "trait_tags": {"Sustainability-Path": 3, "Hotel-Resort-Path": 2}},
+            {"option_id": 28954, "option_text": "Produce cinematic drone and underwater footage for the resort's website, social media, and travel-publication features", "trait_tags": {"Film-Media": 3, "Marketing-Ads": 2}},
+            {"option_id": 28955, "option_text": "Prepare the resort's financial projections, room-rate strategy, and breakeven analysis for investor review", "trait_tags": {"Finance-Acctg": 3, "Business-Mgmt": 2}}
+        ]
+    },
+    # Q18 – Public-Admin / Community-Dev / Leadership
+    {
+        "question_id": 5283,
+        "question_text": "A newly formed barangay council in a sprawling Taguig housing development of 40,000 residents must deliver basic services for the first time — no systems, staff, or records exist yet. What would you set up first?",
+        "category": "public_administration",
+        "options": [
+            {"option_id": 28956, "option_text": "Create the barangay's resident database — digital census, household mapping, and unique identification numbers for every family", "trait_tags": {"Public-Admin": 3, "Tech-Tic": 2}},
+            {"option_id": 28957, "option_text": "Draft the barangay's annual budget allocating funds for roads, streetlights, health workers, and a daycare center", "trait_tags": {"Public-Admin": 3, "Finance-Acctg": 2}},
+            {"option_id": 28958, "option_text": "Recruit and train volunteer peacekeeping tanods and establish a 24-hour community safety desk", "trait_tags": {"Leadership": 3, "Community-Dev": 2}},
+            {"option_id": 28959, "option_text": "Design the barangay hall's layout, service counters, waiting areas, and multipurpose meeting room", "trait_tags": {"Architecture-Path": 3, "Public-Admin": 1}},
+            {"option_id": 28960, "option_text": "Set up a community health station with a midwife, vaccine refrigerator, and weekly doctor consultations", "trait_tags": {"Healthcare-Med": 3, "Community-Dev": 2}},
+            {"option_id": 28961, "option_text": "Organize a participatory planning session where residents vote on which services to prioritize in the first year", "trait_tags": {"Community-Dev": 3, "Leadership": 2}},
+            {"option_id": 28962, "option_text": "Build the barangay's website and social-media pages for transparent posting of ordinances, meeting minutes, and project updates", "trait_tags": {"Communication-Media": 3, "Public-Admin": 2}},
+            {"option_id": 28963, "option_text": "Establish waste-collection routes, a materials-recovery facility, and composting stations throughout the housing development", "trait_tags": {"Sustainability-Path": 3, "Operations-Logistics": 2}},
+            {"option_id": 28964, "option_text": "Negotiate with DPWH and the local water district for road-repair schedules and 24/7 water-supply connections", "trait_tags": {"Engineering-Path": 3, "Public-Admin": 2}}
+        ]
+    },
+    # Q19 – Data-Analytics / Tech-Tic / Scientific-Research
+    {
+        "question_id": 5284,
+        "question_text": "The Philippine Atmospheric, Geophysical and Astronomical Services Administration (PAGASA) is upgrading its typhoon-forecasting system with machine-learning models trained on 50 years of cyclone data. What would you work on?",
+        "category": "technology_science",
+        "options": [
+            {"option_id": 28965, "option_text": "Clean, normalize, and feature-engineer the 50-year dataset — wind speeds, sea-surface temperatures, and pressure gradients — for model training", "trait_tags": {"Data-Analytics": 3, "Scientific-Research": 2}},
+            {"option_id": 28966, "option_text": "Train and tune the deep-learning cyclone-track prediction model, comparing LSTM, transformer, and hybrid architectures", "trait_tags": {"Tech-Tic": 3, "Data-Analytics": 2}},
+            {"option_id": 28967, "option_text": "Build the real-time data-ingestion pipeline that streams satellite imagery and weather-buoy readings into the model", "trait_tags": {"Tech-Tic": 3, "Engineering-Path": 1}},
+            {"option_id": 28968, "option_text": "Design the forecaster dashboard — interactive maps, uncertainty cones, and rainfall probability overlays viewable on desktop and mobile", "trait_tags": {"UI-UX": 3, "Data-Analytics": 2}},
+            {"option_id": 28969, "option_text": "Validate model outputs against historical typhoons to measure improvements in 24-, 48-, and 72-hour track accuracy", "trait_tags": {"Scientific-Research": 3, "Data-Analytics": 2}},
+            {"option_id": 28970, "option_text": "Write the public warning-text generator that translates model outputs into clear Filipino-language alerts for radio broadcast", "trait_tags": {"Communication-Media": 3, "Creative-Writing": 2}},
+            {"option_id": 28971, "option_text": "Establish the high-performance computing infrastructure — GPU clusters and cloud-burst capacity — needed for model inference", "trait_tags": {"Tech-Tic": 3, "Electrical-Electronics": 1}},
+            {"option_id": 28972, "option_text": "Coordinate with local disaster-risk-reduction offices to integrate forecasts into automated evacuation-trigger protocols", "trait_tags": {"Public-Admin": 3, "Operations-Logistics": 2}},
+            {"option_id": 28973, "option_text": "Publish a peer-reviewed research paper benchmarking the new model against PAGASA's existing numerical weather-prediction system", "trait_tags": {"Scientific-Research": 3, "Creative-Writing": 2}}
+        ]
+    },
+    # Q20 – Creative-Writing / UI-UX / Leadership
+    {
+        "question_id": 5285,
+        "question_text": "A Philippine public-school network is launching an open-access digital textbook platform so students from Grades 7–12 can learn entirely from free, locally authored, DepEd-aligned e-books. Which role would you take?",
+        "category": "education_technology",
+        "options": [
+            {"option_id": 28974, "option_text": "Author the Grade 10 creative-writing module — lessons on poetry, fiction, and essay with exercises rooted in Philippine literature", "trait_tags": {"Creative-Writing": 3, "Communication-Media": 2}},
+            {"option_id": 28975, "option_text": "Design the reading interface — page layout, font sizing, night mode, and bookmark features — for tablets and smartphones", "trait_tags": {"UI-UX": 3, "Creative-Design": 2}},
+            {"option_id": 28976, "option_text": "Lead the editorial board that reviews, fact-checks, and approves every submitted textbook chapter before publication", "trait_tags": {"Leadership": 3, "Creative-Writing": 2}},
+            {"option_id": 28977, "option_text": "Develop the platform's back-end — content-management system, version control, and analytics tracking student engagement", "trait_tags": {"Tech-Tic": 3, "UI-UX": 1}},
+            {"option_id": 28978, "option_text": "Create the interactive science simulations — virtual chemistry labs and physics experiments — embedded in the STEM textbooks", "trait_tags": {"Scientific-Research": 3, "Tech-Tic": 2}},
+            {"option_id": 28979, "option_text": "Write the Grade 9 financial-literacy supplement teaching budgeting, saving, and basic investing using Filipino family scenarios", "trait_tags": {"Finance-Acctg": 3, "Creative-Writing": 2}},
+            {"option_id": 28980, "option_text": "Produce the video lessons and animated explainers that complement each textbook chapter", "trait_tags": {"Film-Media": 3, "Communication-Media": 1}},
+            {"option_id": 28981, "option_text": "Coordinate with DepEd regional offices to pilot the platform in 50 schools and collect teacher and student feedback", "trait_tags": {"Public-Admin": 3, "Leadership": 2}},
+            {"option_id": 28982, "option_text": "Secure private-sector sponsorships and manage the platform's sustainability fund so hosting costs are covered long-term", "trait_tags": {"Enterprise": 3, "Finance-Acctg": 2}}
+        ]
+    },
+]
+
+# --- collision guard for batch 30 QIDs ---
+_repl30_existing_qids = {q["question_id"] for q in QUESTIONS_POOL_ENHANCED}
+_repl30_new_qids = {q["question_id"] for q in _REPLACEMENT_BATCH_30}
+if _repl30_existing_qids & _repl30_new_qids:
+    raise ValueError(f"Replacement batch 30 QIDs overlap: {_repl30_existing_qids & _repl30_new_qids}")
+
+# --- collision guard for batch 30 OIDs ---
+_repl30_existing_oids = set()
+for _q in QUESTIONS_POOL_ENHANCED:
+    for _o in _q["options"]:
+        _repl30_existing_oids.add(_o["option_id"])
+_repl30_new_oids = set()
+for _q in _REPLACEMENT_BATCH_30:
+    for _o in _q["options"]:
+        _repl30_new_oids.add(_o["option_id"])
+if _repl30_existing_oids & _repl30_new_oids:
+    raise ValueError(f"Replacement batch 30 option IDs overlap: {_repl30_existing_oids & _repl30_new_oids}")
+
+QUESTIONS_POOL_ENHANCED.extend(_REPLACEMENT_BATCH_30)
+
+
+# ── Replacement Batch 31  (Healthcare-focused) ────────────────────────────────
+_REPLACEMENT_BATCH_31 = [
+    # Q1 – Nursing / Patient-Care / Public-Health (rural nursing outreach)
+    {
+        "question_id": 5286,
+        "question_text": "A DOH-funded mobile health clinic is bringing primary-care services to an isolated Samar fishing village that has never had a resident doctor or nurse. Which role in the mobile clinic would you fill?",
+        "category": "healthcare_nursing",
+        "options": [
+            {"option_id": 28983, "option_text": "Perform the initial triage for each patient — blood-pressure screening, temperature checks, and chief-complaint documentation", "trait_tags": {"Patient-Care": 3, "People-Skill": 2}},
+            {"option_id": 28984, "option_text": "Administer childhood immunizations and record each dose in the national electronic immunization registry", "trait_tags": {"Patient-Care": 3, "Public-Health": 2}},
+            {"option_id": 28985, "option_text": "Run the point-of-care laboratory station — rapid blood-glucose tests, urinalysis strips, and hemoglobin checks", "trait_tags": {"Medical-Lab": 3, "Patient-Care": 2}},
+            {"option_id": 28986, "option_text": "Dispense pre-packaged medications and counsel patients on dosage, side effects, and drug interactions", "trait_tags": {"Pharmacy": 3, "Patient-Care": 2}},
+            {"option_id": 28987, "option_text": "Conduct prenatal check-ups for expectant mothers, measuring fundal height and monitoring fetal heart tones with a Doppler", "trait_tags": {"Patient-Care": 3, "Rehab-Therapy": 1}},
+            {"option_id": 28988, "option_text": "Teach a barangay-health-worker training session on wound care, oral rehydration therapy, and danger-sign recognition", "trait_tags": {"Public-Health": 3, "People-Skill": 2}},
+            {"option_id": 28989, "option_text": "Provide chairside dental cleanings, fluoride varnish applications, and basic tooth extractions under local anesthesia", "trait_tags": {"Patient-Care": 3, "Medical-Lab": 1}},
+            {"option_id": 28990, "option_text": "Maintain the cold-chain transport boxes for vaccines and biologics, logging temperatures every 30 minutes during transit", "trait_tags": {"Health-Admin": 3, "Pharmacy": 1}},
+            {"option_id": 28991, "option_text": "Collect epidemiological data from every patient encounter to map the village's disease-burden profile for the provincial health office", "trait_tags": {"Public-Health": 3, "Analytical-Skill": 2}}
+        ]
+    },
+    # Q2 – Pharmacy / Medical-Lab / Nutrition-Diet
+    {
+        "question_id": 5287,
+        "question_text": "A Manila teaching hospital is opening a compounding pharmacy that prepares custom medications — pediatric suspensions, dermatological creams, and chemotherapy infusions — that are not commercially available. What would you do there?",
+        "category": "healthcare_pharmacy",
+        "options": [
+            {"option_id": 28992, "option_text": "Compound sterile IV admixtures inside the ISO Class 5 laminar-flow hood, following aseptic technique and double-checking concentrations", "trait_tags": {"Pharmacy": 3, "Medical-Lab": 2}},
+            {"option_id": 28993, "option_text": "Formulate flavored oral suspensions for children who cannot swallow tablets, calculating age-appropriate doses", "trait_tags": {"Pharmacy": 3, "Nutrition-Diet": 1}},
+            {"option_id": 28994, "option_text": "Perform quality-control assays — potency testing, sterility checks, and beyond-use-date stability studies — on every batch", "trait_tags": {"Medical-Lab": 3, "Pharmacy": 2}},
+            {"option_id": 28995, "option_text": "Review each prescription for drug-drug interactions, allergies, and renal-dose adjustments before releasing the compound", "trait_tags": {"Pharmacy": 3, "Patient-Care": 2}},
+            {"option_id": 28996, "option_text": "Manage the pharmacy inventory system — ordering raw chemicals, tracking lot numbers, and flagging expiring reagents", "trait_tags": {"Health-Admin": 3, "Pharmacy": 1}},
+            {"option_id": 28997, "option_text": "Counsel oncology patients on how to handle, store, and administer take-home chemotherapy medications safely", "trait_tags": {"Patient-Care": 3, "Pharmacy": 2}},
+            {"option_id": 28998, "option_text": "Prepare total parenteral nutrition bags for ICU patients, calculating precise protein, lipid, and electrolyte ratios", "trait_tags": {"Nutrition-Diet": 3, "Pharmacy": 2}},
+            {"option_id": 28999, "option_text": "Train pharmacy interns on cleanroom gowning procedures, hand hygiene protocols, and hazardous-drug handling", "trait_tags": {"Pharmacy": 3, "People-Skill": 2}},
+            {"option_id": 29000, "option_text": "Design a barcoded medication-verification workflow that links each compounded product to the patient's electronic health record", "trait_tags": {"Health-Admin": 3, "Medical-Lab": 1}}
+        ]
+    },
+    # Q3 – Physical Therapy / Rehab-Therapy / Patient-Care
+    {
+        "question_id": 5288,
+        "question_text": "A provincial sports-medicine center in Pampanga is rehabilitating athletes injured during the Palarong Pambansa — ACL tears, rotator-cuff repairs, and ankle fractures requiring post-surgical recovery. What rehabilitation task would you take on?",
+        "category": "healthcare_rehabilitation",
+        "options": [
+            {"option_id": 29001, "option_text": "Assess each athlete's range of motion, muscle strength, and gait pattern to create an individualized rehab program", "trait_tags": {"Rehab-Therapy": 3, "Patient-Care": 2}},
+            {"option_id": 29002, "option_text": "Apply therapeutic modalities — ultrasound, electrical muscle stimulation, and cryotherapy — to manage post-surgical pain and swelling", "trait_tags": {"Rehab-Therapy": 3, "Medical-Lab": 1}},
+            {"option_id": 29003, "option_text": "Guide progressive weight-bearing exercises on the anti-gravity treadmill so knee-surgery patients regain walking confidence", "trait_tags": {"Rehab-Therapy": 3, "Physical-Skill": 2}},
+            {"option_id": 29004, "option_text": "Design sport-specific return-to-play protocols — cutting drills for basketball players, throwing programs for baseball pitchers", "trait_tags": {"Rehab-Therapy": 3, "Analytical-Skill": 2}},
+            {"option_id": 29005, "option_text": "Perform manual therapy techniques — joint mobilizations, myofascial release, and trigger-point dry needling — on tight tissues", "trait_tags": {"Rehab-Therapy": 3, "Patient-Care": 2}},
+            {"option_id": 29006, "option_text": "Fabricate custom orthotics, ankle braces, and compression sleeves using thermoplastic materials in the splinting lab", "trait_tags": {"Rehab-Therapy": 3, "Medical-Lab": 2}},
+            {"option_id": 29007, "option_text": "Educate athletes and coaches on injury-prevention warm-ups, proper biomechanics, and load-management strategies", "trait_tags": {"Public-Health": 3, "People-Skill": 2}},
+            {"option_id": 29008, "option_text": "Track each patient's weekly outcome scores — pain scales, functional tests, and patient-reported satisfaction — in the rehab database", "trait_tags": {"Health-Admin": 3, "Analytical-Skill": 2}},
+            {"option_id": 29009, "option_text": "Coordinate referrals with orthopedic surgeons, nutritionists, and sports psychologists for athletes needing multidisciplinary care", "trait_tags": {"Patient-Care": 3, "Health-Admin": 2}}
+        ]
+    },
+    # Q4 – Medical Technology / Medical-Lab / Scientific Research
+    {
+        "question_id": 5289,
+        "question_text": "A newly accredited hospital laboratory in Davao is processing its first wave of specimens — blood cultures, tissue biopsies, and cerebrospinal-fluid samples — for critically ill patients in the ICU. Which bench would you work at?",
+        "category": "healthcare_medtech",
+        "options": [
+            {"option_id": 29010, "option_text": "Operate the hematology analyzer to run complete blood counts and prepare peripheral blood smears for microscopic differential counts", "trait_tags": {"Medical-Lab": 3, "Analytical-Skill": 2}},
+            {"option_id": 29011, "option_text": "Process blood-bank specimens — ABO/Rh typing, antibody screening, and cross-matching — to ensure safe transfusions", "trait_tags": {"Medical-Lab": 3, "Patient-Care": 2}},
+            {"option_id": 29012, "option_text": "Inoculate microbiology culture plates, identify bacterial colonies with Gram staining, and run antimicrobial susceptibility panels", "trait_tags": {"Medical-Lab": 3, "Investigative": 2}},
+            {"option_id": 29013, "option_text": "Section and stain tissue biopsies for histopathology, producing slides the pathologist uses to diagnose cancers", "trait_tags": {"Medical-Lab": 3, "Analytical-Skill": 2}},
+            {"option_id": 29014, "option_text": "Run the clinical-chemistry panel — liver enzymes, kidney function markers, and electrolytes — on the automated analyzer", "trait_tags": {"Medical-Lab": 3, "Investigative": 1}},
+            {"option_id": 29015, "option_text": "Perform molecular diagnostic tests — PCR for dengue, tuberculosis, and hepatitis — in the biosafety-level-2 extraction room", "trait_tags": {"Medical-Lab": 3, "Lab-Research": 2}},
+            {"option_id": 29016, "option_text": "Calibrate and maintain all laboratory instruments, documenting daily quality-control results and troubleshooting out-of-range flags", "trait_tags": {"Medical-Lab": 3, "Technical-Skill": 2}},
+            {"option_id": 29017, "option_text": "Collect arterial blood-gas samples from ICU patients and report critical acid-base and oxygenation values to the intensivist stat", "trait_tags": {"Medical-Lab": 3, "Patient-Care": 2}},
+            {"option_id": 29018, "option_text": "Validate the lab's new test menu by running method-comparison studies and establishing reference ranges for the local population", "trait_tags": {"Lab-Research": 3, "Analytical-Skill": 2}}
+        ]
+    },
+    # Q5 – Dentistry / Patient-Care / Public-Health
+    {
+        "question_id": 5290,
+        "question_text": "A Taguig City public dental center serving low-income families has long wait lists for fillings, extractions, and orthodontic evaluations — the city is expanding the center with two new treatment chairs and a pediatric wing. Which dental-center role suits you?",
+        "category": "healthcare_dentistry",
+        "options": [
+            {"option_id": 29019, "option_text": "Perform composite-resin restorations on cavitated teeth, carefully matching shade and sculpting anatomy for a natural look", "trait_tags": {"Patient-Care": 3, "Medical-Lab": 2}},
+            {"option_id": 29020, "option_text": "Take and interpret periapical and panoramic radiographs, identifying decay, bone loss, and impacted third molars", "trait_tags": {"Medical-Lab": 3, "Analytical-Skill": 2}},
+            {"option_id": 29021, "option_text": "Provide scaling, root planing, and periodontal probing for patients with gum disease, then create home-care plans", "trait_tags": {"Patient-Care": 3, "People-Skill": 2}},
+            {"option_id": 29022, "option_text": "Manage the pediatric wing — using tell-show-do behavior guidance so anxious children feel safe during their first filling", "trait_tags": {"Patient-Care": 3, "People-Skill": 2}},
+            {"option_id": 29023, "option_text": "Fabricate dental prosthetics in the on-site lab — acrylic dentures, porcelain crowns, and removable partial frameworks", "trait_tags": {"Medical-Lab": 3, "Rehab-Therapy": 1}},
+            {"option_id": 29024, "option_text": "Administer local anesthesia and perform surgical extractions of severely decayed or impacted teeth under sterile conditions", "trait_tags": {"Patient-Care": 3, "Pharmacy": 1}},
+            {"option_id": 29025, "option_text": "Run the school-based fluoride-varnish and sealant program, visiting nearby public schools each quarter to prevent childhood caries", "trait_tags": {"Public-Health": 3, "Patient-Care": 2}},
+            {"option_id": 29026, "option_text": "Sterilize instruments, maintain autoclaves, and enforce the infection-control protocol to keep every operatory safe", "trait_tags": {"Health-Admin": 3, "Medical-Lab": 1}},
+            {"option_id": 29027, "option_text": "Screen patients for oral cancer — visual exams, palpation of lymph nodes, and referral of suspicious lesions to the oral surgeon", "trait_tags": {"Patient-Care": 3, "Public-Health": 2}}
+        ]
+    },
+    # Q6 – Psychology / Counseling / Public-Health
+    {
+        "question_id": 5291,
+        "question_text": "A Cebu City university counseling center is overwhelmed after a series of student suicides — the administration is expanding the center into a full mental-health hub with crisis response, group therapy, and peer-support programs. What would you contribute?",
+        "category": "healthcare_psychology",
+        "options": [
+            {"option_id": 29028, "option_text": "Staff the 24/7 crisis hotline, using evidence-based suicide-risk assessment tools to triage callers and dispatch responders", "trait_tags": {"Counseling": 3, "Patient-Care": 2}},
+            {"option_id": 29029, "option_text": "Facilitate cognitive-behavioral therapy groups where students with anxiety and depression learn coping skills together", "trait_tags": {"Counseling": 3, "People-Skill": 2}},
+            {"option_id": 29030, "option_text": "Administer and interpret psychological assessments — Beck Depression Inventory, PHQ-9, and MMPI-2 — for incoming students", "trait_tags": {"Analytical-Skill": 3, "Counseling": 2}},
+            {"option_id": 29031, "option_text": "Train resident advisers and faculty as mental-health gatekeepers who can recognize warning signs and refer students early", "trait_tags": {"Public-Health": 3, "People-Skill": 2}},
+            {"option_id": 29032, "option_text": "Develop a campus-wide mental-health literacy campaign with posters, social-media content, and assembly presentations", "trait_tags": {"Public-Health": 3, "Counseling": 1}},
+            {"option_id": 29033, "option_text": "Design the peer-counselor certification program so trained student volunteers can provide first-line emotional support", "trait_tags": {"Counseling": 3, "Public-Health": 2}},
+            {"option_id": 29034, "option_text": "Conduct a research study comparing intervention outcomes — measuring symptom reduction across therapy modalities", "trait_tags": {"Lab-Research": 3, "Analytical-Skill": 2}},
+            {"option_id": 29035, "option_text": "Coordinate psychiatric referrals for students needing medication, ensuring seamless handoff between the counseling center and the psychiatrist", "trait_tags": {"Patient-Care": 3, "Health-Admin": 2}},
+            {"option_id": 29036, "option_text": "Create a confidential digital intake system where students can self-schedule, complete screeners, and track their therapy progress online", "trait_tags": {"Health-Admin": 3, "Counseling": 1}}
+        ]
+    },
+    # Q7 – Radiologic Technology / Medical-Lab / Patient-Care
+    {
+        "question_id": 5292,
+        "question_text": "A Pangasinan provincial hospital just installed a brand-new CT scanner, digital X-ray suite, and ultrasound unit — the radiology department is building its team from scratch. Which imaging role would you take?",
+        "category": "healthcare_radiology",
+        "options": [
+            {"option_id": 29037, "option_text": "Position patients and operate the CT scanner, selecting proper slice thickness and contrast-injection protocols for each clinical indication", "trait_tags": {"Medical-Lab": 3, "Patient-Care": 2}},
+            {"option_id": 29038, "option_text": "Perform diagnostic X-rays — chest, spine, and extremity views — adjusting exposure settings to minimize patient radiation dose", "trait_tags": {"Medical-Lab": 3, "Patient-Care": 2}},
+            {"option_id": 29039, "option_text": "Conduct obstetric and abdominal ultrasound examinations, documenting fetal biometry and organ measurements for the radiologist", "trait_tags": {"Medical-Lab": 3, "Patient-Care": 2}},
+            {"option_id": 29040, "option_text": "Manage the picture archiving and communication system (PACS), ensuring all images are stored, indexed, and retrievable for clinicians", "trait_tags": {"Health-Admin": 3, "Technical-Skill": 2}},
+            {"option_id": 29041, "option_text": "Monitor and document each patient's radiation-dose history and ensure the department's annual quality-assurance audits pass", "trait_tags": {"Health-Admin": 3, "Medical-Lab": 2}},
+            {"option_id": 29042, "option_text": "Prepare contrast media — verifying allergies, renal-function labs, and IV-access patency — before injecting iodinated dye", "trait_tags": {"Patient-Care": 3, "Pharmacy": 1}},
+            {"option_id": 29043, "option_text": "Assist the radiologist during fluoroscopy-guided procedures — barium swallows, lumbar punctures, and joint injections", "trait_tags": {"Medical-Lab": 3, "Patient-Care": 2}},
+            {"option_id": 29044, "option_text": "Calibrate the X-ray and CT equipment daily, running phantom tests and documenting results in the radiation-safety log", "trait_tags": {"Medical-Lab": 3, "Technical-Skill": 2}},
+            {"option_id": 29045, "option_text": "Educate patients on what to expect during their scan, calming anxious individuals and positioning pediatric patients with immobilization aids", "trait_tags": {"Patient-Care": 3, "People-Skill": 2}}
+        ]
+    },
+    # Q8 – Occupational Therapy / Rehab-Therapy / Counseling
+    {
+        "question_id": 5293,
+        "question_text": "A Manila rehabilitation hospital is treating stroke survivors who have lost the ability to dress, cook, write, or return to work — the occupational-therapy department is designing a comprehensive independence-recovery program. What would you focus on?",
+        "category": "healthcare_occupational_therapy",
+        "options": [
+            {"option_id": 29046, "option_text": "Assess each patient's hand dexterity, visual-perceptual skills, and cognitive function using standardized OT evaluation tools", "trait_tags": {"Rehab-Therapy": 3, "Analytical-Skill": 2}},
+            {"option_id": 29047, "option_text": "Train patients in activities of daily living — one-handed dressing techniques, adaptive kitchen tools, and safe bathing methods", "trait_tags": {"Rehab-Therapy": 3, "Patient-Care": 2}},
+            {"option_id": 29048, "option_text": "Fabricate custom hand splints — resting, dynamic, and anti-spasticity designs — using low-temperature thermoplastic material", "trait_tags": {"Rehab-Therapy": 3, "Medical-Lab": 2}},
+            {"option_id": 29049, "option_text": "Lead a therapeutic cooking group in the simulated kitchen, retraining patients in meal preparation, sequencing, and safety awareness", "trait_tags": {"Rehab-Therapy": 3, "Nutrition-Diet": 1}},
+            {"option_id": 29050, "option_text": "Conduct cognitive rehabilitation sessions — memory drills, attention tasks, and problem-solving exercises — for patients with brain injuries", "trait_tags": {"Rehab-Therapy": 3, "Counseling": 2}},
+            {"option_id": 29051, "option_text": "Perform home-environment assessments and recommend grab bars, ramps, and furniture rearrangements so patients discharge safely", "trait_tags": {"Rehab-Therapy": 3, "Health-Admin": 1}},
+            {"option_id": 29052, "option_text": "Develop a return-to-work simulation program where patients practice job-specific tasks under gradually increasing demands", "trait_tags": {"Rehab-Therapy": 3, "People-Skill": 2}},
+            {"option_id": 29053, "option_text": "Provide sensory-integration therapy for pediatric patients with developmental delays, using swings, textured materials, and weighted vests", "trait_tags": {"Rehab-Therapy": 3, "Patient-Care": 2}},
+            {"option_id": 29054, "option_text": "Document each patient's functional progress on standardized outcome measures and present results at the weekly interdisciplinary team meeting", "trait_tags": {"Health-Admin": 3, "Analytical-Skill": 2}}
+        ]
+    },
+    # Q9 – Speech-Language Pathology / Rehab-Therapy / Patient-Care
+    {
+        "question_id": 5294,
+        "question_text": "A children's hospital in Quezon City is expanding its speech-language pathology department to serve young patients with cleft palate, autism spectrum disorder, hearing loss, and traumatic brain injury. Which caseload would you choose?",
+        "category": "healthcare_speech_therapy",
+        "options": [
+            {"option_id": 29055, "option_text": "Provide articulation therapy for post-cleft-palate-repair children, training correct tongue placement for sounds like /k/, /g/, and /s/", "trait_tags": {"Rehab-Therapy": 3, "Patient-Care": 2}},
+            {"option_id": 29056, "option_text": "Implement augmentative and alternative communication (AAC) devices for nonverbal autistic children, programming picture-exchange tablets", "trait_tags": {"Rehab-Therapy": 3, "Technical-Skill": 2}},
+            {"option_id": 29057, "option_text": "Conduct pediatric swallowing assessments using videofluoroscopy, identifying aspiration risks and recommending safe food textures", "trait_tags": {"Rehab-Therapy": 3, "Medical-Lab": 2}},
+            {"option_id": 29058, "option_text": "Deliver auditory-verbal therapy for children with cochlear implants, teaching them to process sound and develop spoken language", "trait_tags": {"Rehab-Therapy": 3, "Patient-Care": 2}},
+            {"option_id": 29059, "option_text": "Facilitate social-communication groups where children on the autism spectrum practice turn-taking, eye contact, and narrative storytelling", "trait_tags": {"Rehab-Therapy": 3, "Counseling": 2}},
+            {"option_id": 29060, "option_text": "Assess and treat language delays in toddlers, using play-based therapy to expand vocabulary, sentence length, and comprehension", "trait_tags": {"Rehab-Therapy": 3, "People-Skill": 2}},
+            {"option_id": 29061, "option_text": "Rehabilitate school-age children with traumatic brain injuries, targeting executive-function skills like planning, organizing, and self-monitoring", "trait_tags": {"Rehab-Therapy": 3, "Counseling": 2}},
+            {"option_id": 29062, "option_text": "Train parents on home-practice strategies so therapy gains carry over into daily routines — mealtime conversations, bedtime reading, and play", "trait_tags": {"People-Skill": 3, "Public-Health": 2}},
+            {"option_id": 29063, "option_text": "Collaborate with the ENT surgeon and audiologist to plan pre-and-post-operative speech evaluations for children undergoing cleft repair", "trait_tags": {"Patient-Care": 3, "Health-Admin": 2}}
+        ]
+    },
+    # Q10 – Midwifery / Patient-Care / Public-Health
+    {
+        "question_id": 5295,
+        "question_text": "A Lanao del Sur rural birthing clinic staffed entirely by midwives is the only facility within a three-hour drive for pregnant women in surrounding mountain barangays. Which midwifery responsibility would you handle?",
+        "category": "healthcare_midwifery",
+        "options": [
+            {"option_id": 29064, "option_text": "Manage low-risk normal deliveries from active labor through placental delivery, monitoring partograph progress and fetal heart tones", "trait_tags": {"Patient-Care": 3, "Medical-Lab": 1}},
+            {"option_id": 29065, "option_text": "Conduct focused prenatal visits — fundal-height measurements, blood-pressure monitoring, and urine-dipstick protein screening for pre-eclampsia", "trait_tags": {"Patient-Care": 3, "Public-Health": 2}},
+            {"option_id": 29066, "option_text": "Provide immediate newborn care — drying, cord clamping, Apgar scoring, Vitamin K injection, and initiation of breastfeeding within the first hour", "trait_tags": {"Patient-Care": 3, "Nutrition-Diet": 1}},
+            {"option_id": 29067, "option_text": "Identify obstetric danger signs — hemorrhage, prolonged labor, cord prolapse — and stabilize patients for emergency referral to the district hospital", "trait_tags": {"Patient-Care": 3, "Analytical-Skill": 2}},
+            {"option_id": 29068, "option_text": "Run family-planning counseling sessions, offering IUD insertions, injectables, and oral contraceptive education to postpartum mothers", "trait_tags": {"Public-Health": 3, "People-Skill": 2}},
+            {"option_id": 29069, "option_text": "Maintain the clinic's birth register, monthly delivery statistics, and maternal-mortality near-miss reports for the provincial health office", "trait_tags": {"Health-Admin": 3, "Public-Health": 2}},
+            {"option_id": 29070, "option_text": "Teach expectant mothers prenatal classes on nutrition, birth preparedness, breastfeeding positions, and postpartum warning signs", "trait_tags": {"Nutrition-Diet": 3, "People-Skill": 2}},
+            {"option_id": 29071, "option_text": "Perform postpartum home visits on days 1, 3, and 7, checking for uterine involution, breast engorgement, and neonatal jaundice", "trait_tags": {"Patient-Care": 3, "Public-Health": 2}},
+            {"option_id": 29072, "option_text": "Manage the clinic's essential drug and supply inventory — oxytocin ampoules, sutures, sterile gloves, and newborn resuscitation bags", "trait_tags": {"Pharmacy": 3, "Health-Admin": 2}}
+        ]
+    },
+    # Q11 – Nutrition & Dietetics / Nutrition-Diet / Patient-Care
+    {
+        "question_id": 5296,
+        "question_text": "A Makati private hospital is hiring clinical dietitians to manage therapeutic diets for patients in the cardiac ward, dialysis unit, oncology floor, and neonatal ICU. Which patient population would you serve?",
+        "category": "healthcare_nutrition",
+        "options": [
+            {"option_id": 29073, "option_text": "Design low-sodium, heart-healthy meal plans for post-bypass-surgery patients and monitor their fluid-intake restrictions", "trait_tags": {"Nutrition-Diet": 3, "Patient-Care": 2}},
+            {"option_id": 29074, "option_text": "Calculate renal-diet prescriptions — phosphorus, potassium, and protein limits — for hemodialysis patients and adjust after monthly lab reviews", "trait_tags": {"Nutrition-Diet": 3, "Medical-Lab": 2}},
+            {"option_id": 29075, "option_text": "Manage enteral-feeding regimens for neonatal ICU infants, selecting formula composition and advancing volumes based on weight gain", "trait_tags": {"Nutrition-Diet": 3, "Patient-Care": 2}},
+            {"option_id": 29076, "option_text": "Provide nutrition counseling for chemotherapy patients experiencing nausea, taste changes, and unintended weight loss", "trait_tags": {"Nutrition-Diet": 3, "Counseling": 2}},
+            {"option_id": 29077, "option_text": "Conduct malnutrition screening on every admitted patient using the Subjective Global Assessment tool and flag high-risk cases", "trait_tags": {"Nutrition-Diet": 3, "Analytical-Skill": 2}},
+            {"option_id": 29078, "option_text": "Supervise the hospital kitchen's therapeutic-diet preparation line, verifying portion sizes, allergen controls, and texture modifications", "trait_tags": {"Nutrition-Diet": 3, "Health-Admin": 2}},
+            {"option_id": 29079, "option_text": "Develop diabetes self-management education workshops teaching carbohydrate counting, label reading, and glycemic-index concepts", "trait_tags": {"Nutrition-Diet": 3, "Public-Health": 2}},
+            {"option_id": 29080, "option_text": "Analyze the hospital's menu-cycle costs versus nutritional adequacy and propose ingredient substitutions that lower expense without reducing quality", "trait_tags": {"Nutrition-Diet": 3, "Health-Admin": 2}},
+            {"option_id": 29081, "option_text": "Collaborate with pharmacists on drug-nutrient interactions — warfarin and Vitamin K, metformin and B12 depletion — and adjust diets accordingly", "trait_tags": {"Nutrition-Diet": 3, "Pharmacy": 2}}
+        ]
+    },
+    # Q12 – Respiratory Therapy / Rehab-Therapy / Medical-Lab
+    {
+        "question_id": 5297,
+        "question_text": "A Baguio City chest center specializing in tuberculosis, COPD, and asthma is adding a pulmonary-rehabilitation unit with a respiratory-therapy team. Which respiratory task would you perform?",
+        "category": "healthcare_respiratory",
+        "options": [
+            {"option_id": 29082, "option_text": "Set up and manage mechanical ventilators for ICU patients, adjusting tidal volume, PEEP, and FiO2 based on arterial blood-gas results", "trait_tags": {"Rehab-Therapy": 3, "Medical-Lab": 2}},
+            {"option_id": 29083, "option_text": "Perform bedside spirometry and pulmonary-function tests, coaching patients through forced vital-capacity and diffusion-capacity maneuvers", "trait_tags": {"Medical-Lab": 3, "Patient-Care": 2}},
+            {"option_id": 29084, "option_text": "Administer nebulized bronchodilators and inhaled corticosteroids, monitoring peak-flow improvements after each treatment", "trait_tags": {"Pharmacy": 3, "Patient-Care": 2}},
+            {"option_id": 29085, "option_text": "Lead pulmonary-rehabilitation exercise sessions — treadmill walking, arm ergometry, and breathing-retraining drills — for COPD patients", "trait_tags": {"Rehab-Therapy": 3, "Physical-Skill": 2}},
+            {"option_id": 29086, "option_text": "Manage oxygen-delivery systems — nasal cannulas, Venturi masks, and high-flow heated humidified devices — titrating flow to target SpO2", "trait_tags": {"Rehab-Therapy": 3, "Technical-Skill": 2}},
+            {"option_id": 29087, "option_text": "Perform chest physiotherapy — percussion, vibration, and postural drainage — to clear mucus plugs in patients with bronchiectasis", "trait_tags": {"Rehab-Therapy": 3, "Patient-Care": 2}},
+            {"option_id": 29088, "option_text": "Assist during bronchoscopy procedures, preparing the scope, suctioning secretions, and monitoring the patient's oxygen saturation throughout", "trait_tags": {"Medical-Lab": 3, "Patient-Care": 2}},
+            {"option_id": 29089, "option_text": "Educate asthma patients on proper inhaler technique, trigger avoidance, and when to use rescue versus controller medications", "trait_tags": {"Public-Health": 3, "People-Skill": 2}},
+            {"option_id": 29090, "option_text": "Draw and analyze arterial blood-gas samples, calculating A-a gradient and interpreting acid-base disturbances for the pulmonologist", "trait_tags": {"Medical-Lab": 3, "Analytical-Skill": 2}}
+        ]
+    },
+    # Q13 – Optometry / Medical-Lab / Patient-Care
+    {
+        "question_id": 5298,
+        "question_text": "A Quezon City eye center is offering free vision screenings in public schools and discovering alarming rates of uncorrected refractive errors, amblyopia, and color-vision deficiencies among grade-school children. Which optometry task would you do?",
+        "category": "healthcare_optometry",
+        "options": [
+            {"option_id": 29091, "option_text": "Perform comprehensive refraction exams — retinoscopy and subjective refraction — to prescribe accurate eyeglass lenses for each child", "trait_tags": {"Medical-Lab": 3, "Patient-Care": 2}},
+            {"option_id": 29092, "option_text": "Fit and dispense prescription eyeglasses, adjusting frame size and temple length so they stay comfortably on small faces", "trait_tags": {"Patient-Care": 3, "People-Skill": 2}},
+            {"option_id": 29093, "option_text": "Screen for amblyopia using cover-uncover tests and prescribe patching therapy with a follow-up schedule to track visual-acuity improvement", "trait_tags": {"Patient-Care": 3, "Medical-Lab": 2}},
+            {"option_id": 29094, "option_text": "Perform slit-lamp examinations and tonometry, detecting early signs of pediatric glaucoma, cataracts, or corneal abnormalities", "trait_tags": {"Medical-Lab": 3, "Analytical-Skill": 2}},
+            {"option_id": 29095, "option_text": "Conduct Ishihara color-vision testing and counsel affected students and parents on career and academic accommodations", "trait_tags": {"Patient-Care": 3, "Counseling": 2}},
+            {"option_id": 29096, "option_text": "Manage the contact-lens clinic — fitting soft, rigid, and orthokeratology lenses — for teenage patients unsuitable for glasses", "trait_tags": {"Medical-Lab": 3, "Patient-Care": 2}},
+            {"option_id": 29097, "option_text": "Train school nurses to perform annual Snellen visual-acuity screenings and generate referral lists for the eye center", "trait_tags": {"Public-Health": 3, "People-Skill": 2}},
+            {"option_id": 29098, "option_text": "Capture retinal photographs using a fundus camera and flag images showing optic-disc cupping or retinal hemorrhages for ophthalmologist review", "trait_tags": {"Medical-Lab": 3, "Technical-Skill": 2}},
+            {"option_id": 29099, "option_text": "Maintain the clinic's lens-grinding and edging equipment, verifying that every finished pair of glasses matches the written prescription exactly", "trait_tags": {"Technical-Skill": 3, "Medical-Lab": 2}}
+        ]
+    },
+    # Q14 – Public Health / Community-Serve / Analytical-Skill
+    {
+        "question_id": 5299,
+        "question_text": "The Zamboanga City Health Office is combating a dengue outbreak — case counts have tripled in three weeks and the city's hospitals are running out of beds. Which public-health emergency response role would you take?",
+        "category": "healthcare_public_health",
+        "options": [
+            {"option_id": 29100, "option_text": "Lead the epidemiological investigation — mapping case clusters, tracing mosquito-breeding sites, and calculating attack rates by barangay", "trait_tags": {"Public-Health": 3, "Analytical-Skill": 2}},
+            {"option_id": 29101, "option_text": "Coordinate city-wide fogging and larviciding operations, deploying spray teams neighborhood by neighborhood on a GPS-tracked schedule", "trait_tags": {"Public-Health": 3, "Health-Admin": 2}},
+            {"option_id": 29102, "option_text": "Set up a temporary triage and hydration tent outside the emergency department to manage the overflow of dengue-suspect patients", "trait_tags": {"Patient-Care": 3, "Public-Health": 2}},
+            {"option_id": 29103, "option_text": "Run rapid NS1 antigen and dengue IgM/IgG tests on hundreds of blood samples daily and feed results into the disease-surveillance database", "trait_tags": {"Medical-Lab": 3, "Public-Health": 2}},
+            {"option_id": 29104, "option_text": "Draft and broadcast public advisories in Chavacano, Tagalog, and English, urging residents to eliminate standing water and seek early medical care", "trait_tags": {"Public-Health": 3, "People-Skill": 2}},
+            {"option_id": 29105, "option_text": "Manage the hospital bed-capacity dashboard, diverting incoming patients to partner facilities before any single hospital reaches critical overcrowding", "trait_tags": {"Health-Admin": 3, "Public-Health": 2}},
+            {"option_id": 29106, "option_text": "Train barangay health workers to perform daily house-to-house fever surveillance and distribute oral rehydration salts", "trait_tags": {"Public-Health": 3, "Patient-Care": 1}},
+            {"option_id": 29107, "option_text": "Collect blood platelet counts and hematocrit readings for admitted patients, alerting physicians when values indicate severe dengue hemorrhagic fever", "trait_tags": {"Medical-Lab": 3, "Patient-Care": 2}},
+            {"option_id": 29108, "option_text": "Prepare a post-outbreak report analyzing response timelines, mortality rates, and lessons learned to improve future emergency preparedness", "trait_tags": {"Public-Health": 3, "Analytical-Skill": 2}}
+        ]
+    },
+    # Q15 – Nursing (ICU specialty) / Patient-Care / Medical-Lab
+    {
+        "question_id": 5300,
+        "question_text": "A Level III trauma center in Cebu City has opened a new 20-bed intensive-care unit staffed by critical-care nurses managing ventilated patients, post-operative cases, and sepsis protocols. Which ICU nursing responsibility would you want?",
+        "category": "healthcare_nursing",
+        "options": [
+            {"option_id": 29109, "option_text": "Perform continuous hemodynamic monitoring — reading arterial lines, central venous pressure, and cardiac-output values — and titrate vasopressors accordingly", "trait_tags": {"Patient-Care": 3, "Medical-Lab": 2}},
+            {"option_id": 29110, "option_text": "Manage endotracheal tubes and ventilator circuits, suctioning secretions, repositioning patients prone, and conducting spontaneous-breathing trials", "trait_tags": {"Patient-Care": 3, "Rehab-Therapy": 2}},
+            {"option_id": 29111, "option_text": "Administer IV medications — sedation drips, antibiotic infusions, and insulin protocols — using programmable smart-pump technology", "trait_tags": {"Patient-Care": 3, "Pharmacy": 2}},
+            {"option_id": 29112, "option_text": "Provide holistic nursing care — oral hygiene, skin-integrity assessments, and early-mobility exercises — to prevent ICU-acquired complications", "trait_tags": {"Patient-Care": 3, "Rehab-Therapy": 1}},
+            {"option_id": 29113, "option_text": "Run the rapid-response code-blue team, performing CPR, defibrillation, and emergency drug administration during cardiac arrests", "trait_tags": {"Patient-Care": 3, "Analytical-Skill": 2}},
+            {"option_id": 29114, "option_text": "Collect and interpret point-of-care lab results — blood gases, lactate levels, and coagulation panels — to guide treatment decisions", "trait_tags": {"Medical-Lab": 3, "Patient-Care": 2}},
+            {"option_id": 29115, "option_text": "Communicate patient updates to anxious families in the ICU waiting room, translating complex medical jargon into understandable language", "trait_tags": {"People-Skill": 3, "Counseling": 2}},
+            {"option_id": 29116, "option_text": "Document nursing interventions and patient responses every hour in the electronic ICU flowsheet, ensuring medicolegal accuracy", "trait_tags": {"Health-Admin": 3, "Patient-Care": 1}},
+            {"option_id": 29117, "option_text": "Lead the ICU's sepsis-bundle compliance campaign, ensuring blood cultures, antibiotics, and fluid boluses are delivered within the golden hour", "trait_tags": {"Public-Health": 3, "Patient-Care": 2}}
+        ]
+    },
+    # Q16 – Health Information Management / Health-Admin / Technical-Skill
+    {
+        "question_id": 5301,
+        "question_text": "A network of 12 provincial hospitals in the Visayas is migrating from paper charts to a unified electronic health-record system so patient data follows them across facilities. Which HIM role would you fill?",
+        "category": "healthcare_health_admin",
+        "options": [
+            {"option_id": 29118, "option_text": "Map existing paper-chart fields — history, physical exam, lab results, discharge summaries — into structured EHR templates", "trait_tags": {"Health-Admin": 3, "Analytical-Skill": 2}},
+            {"option_id": 29119, "option_text": "Build the master patient index that links a single patient's records across all 12 hospitals using a unique health identifier", "trait_tags": {"Health-Admin": 3, "Technical-Skill": 2}},
+            {"option_id": 29120, "option_text": "Train nursing and physician staff on how to navigate, document, and retrieve information in the new EHR during hands-on workshops", "trait_tags": {"Health-Admin": 3, "People-Skill": 2}},
+            {"option_id": 29121, "option_text": "Code diagnoses and procedures using ICD-10-CM and CPT standards so billing, research, and public-health reporting are accurate", "trait_tags": {"Health-Admin": 3, "Analytical-Skill": 2}},
+            {"option_id": 29122, "option_text": "Implement role-based access controls and audit logs ensuring only authorized staff can view or modify sensitive patient information", "trait_tags": {"Health-Admin": 3, "Technical-Skill": 2}},
+            {"option_id": 29123, "option_text": "Generate monthly analytics dashboards — average length of stay, readmission rates, and top diagnoses — for hospital administrators", "trait_tags": {"Health-Admin": 3, "Analytical-Skill": 2}},
+            {"option_id": 29124, "option_text": "Lead the data-migration team that digitizes years of archived paper records through scanning, OCR, and manual validation", "trait_tags": {"Health-Admin": 3, "Technical-Skill": 2}},
+            {"option_id": 29125, "option_text": "Ensure the system meets Philippine Data Privacy Act requirements — consent forms, breach-notification protocols, and data-retention policies", "trait_tags": {"Health-Admin": 3, "Public-Health": 1}},
+            {"option_id": 29126, "option_text": "Design clinical-decision-support alerts — drug-allergy warnings, overdue-vaccination reminders, and abnormal-lab-value flags — within the EHR", "trait_tags": {"Health-Admin": 3, "Patient-Care": 2}}
+        ]
+    },
+    # Q17 – Pharmacy (hospital clinical) / Pharmacy / Patient-Care
+    {
+        "question_id": 5302,
+        "question_text": "A Batangas general hospital is expanding its clinical-pharmacy service so pharmacists round with physicians in every ward — pediatrics, surgery, internal medicine, and psychiatry — instead of staying behind the dispensing counter. Which ward would you join?",
+        "category": "healthcare_pharmacy",
+        "options": [
+            {"option_id": 29127, "option_text": "Round with the pediatric team, calculating weight-based drug doses for neonates and flagging off-label medication use in children", "trait_tags": {"Pharmacy": 3, "Patient-Care": 2}},
+            {"option_id": 29128, "option_text": "Join the surgery ward to manage perioperative antibiotic prophylaxis, anticoagulation bridging, and post-op pain-medication stepdowns", "trait_tags": {"Pharmacy": 3, "Patient-Care": 2}},
+            {"option_id": 29129, "option_text": "Review polypharmacy in elderly internal-medicine patients, deprescribing unnecessary medications and simplifying regimens", "trait_tags": {"Pharmacy": 3, "Analytical-Skill": 2}},
+            {"option_id": 29130, "option_text": "Advise the psychiatry team on psychotropic drug selection, therapeutic-drug monitoring levels, and management of side effects like metabolic syndrome", "trait_tags": {"Pharmacy": 3, "Counseling": 2}},
+            {"option_id": 29131, "option_text": "Lead the antimicrobial stewardship program, reviewing culture results and recommending narrow-spectrum antibiotics to combat resistance", "trait_tags": {"Pharmacy": 3, "Public-Health": 2}},
+            {"option_id": 29132, "option_text": "Provide bedside medication-therapy counseling, ensuring patients understand why they take each drug, how to take it, and what to watch for", "trait_tags": {"Patient-Care": 3, "People-Skill": 2}},
+            {"option_id": 29133, "option_text": "Monitor adverse drug reactions, document them in the pharmacovigilance system, and report serious events to the FDA Philippines", "trait_tags": {"Pharmacy": 3, "Health-Admin": 2}},
+            {"option_id": 29134, "option_text": "Manage the hospital's drug formulary — evaluating new drug applications, negotiating supplier prices, and presenting cost-effectiveness data to the committee", "trait_tags": {"Pharmacy": 3, "Health-Admin": 2}},
+            {"option_id": 29135, "option_text": "Prepare chemotherapy regimens in the oncology satellite pharmacy, verifying body-surface-area calculations and ensuring safe handling protocols", "trait_tags": {"Pharmacy": 3, "Medical-Lab": 2}}
+        ]
+    },
+    # Q18 – Physical Therapy (pediatric neuro) / Rehab-Therapy / Patient-Care
+    {
+        "question_id": 5303,
+        "question_text": "A Laguna pediatric neuro-rehabilitation center treats children with cerebral palsy, spina bifida, muscular dystrophy, and acquired brain injuries — many of whom need years of continuous physical therapy. Which PT approach would you specialize in?",
+        "category": "healthcare_rehabilitation",
+        "options": [
+            {"option_id": 29136, "option_text": "Apply neurodevelopmental treatment (Bobath) techniques, facilitating normal movement patterns and inhibiting abnormal muscle tone in children with cerebral palsy", "trait_tags": {"Rehab-Therapy": 3, "Patient-Care": 2}},
+            {"option_id": 29137, "option_text": "Conduct aquatic therapy sessions in the heated pool, using buoyancy to help non-ambulatory children practice standing and stepping", "trait_tags": {"Rehab-Therapy": 3, "Physical-Skill": 2}},
+            {"option_id": 29138, "option_text": "Fit and train children in gait-assistive devices — ankle-foot orthoses, walkers, and powered wheelchairs — as they grow", "trait_tags": {"Rehab-Therapy": 3, "Technical-Skill": 2}},
+            {"option_id": 29139, "option_text": "Assess gross-motor milestones using the GMFM-88 scale and create goal-directed therapy plans reviewed every three months", "trait_tags": {"Rehab-Therapy": 3, "Analytical-Skill": 2}},
+            {"option_id": 29140, "option_text": "Lead constraint-induced movement therapy for children with hemiplegia, encouraging use of the affected arm through play-based activities", "trait_tags": {"Rehab-Therapy": 3, "Patient-Care": 2}},
+            {"option_id": 29141, "option_text": "Administer serial casting to gradually stretch contracted muscles in children with spastic diplegia, replacing casts biweekly", "trait_tags": {"Rehab-Therapy": 3, "Medical-Lab": 1}},
+            {"option_id": 29142, "option_text": "Collaborate with the orthotist and orthopedic surgeon to plan Botox-injection targets and post-injection stretching protocols", "trait_tags": {"Patient-Care": 3, "Pharmacy": 1}},
+            {"option_id": 29143, "option_text": "Train parents on daily home exercises — stretching routines, positioning techniques, and safe transfer methods — to maintain therapy gains", "trait_tags": {"People-Skill": 3, "Rehab-Therapy": 2}},
+            {"option_id": 29144, "option_text": "Organize recreational therapy events — adaptive sports days, wheelchair basketball, and swimming galas — that build motor skills and social confidence", "trait_tags": {"Rehab-Therapy": 3, "People-Skill": 2}}
+        ]
+    },
+    # Q19 – Psychology (clinical neuropsychology) / Counseling / Medical-Lab
+    {
+        "question_id": 5304,
+        "question_text": "A Veterans Memorial Medical Center in Quezon City is establishing a neuropsychology clinic for military veterans suffering from PTSD, traumatic brain injuries, and combat-related cognitive decline. Which clinical task would you perform?",
+        "category": "healthcare_psychology",
+        "options": [
+            {"option_id": 29145, "option_text": "Administer comprehensive neuropsychological test batteries — memory, attention, executive function, and processing speed — over full-day evaluation sessions", "trait_tags": {"Analytical-Skill": 3, "Counseling": 2}},
+            {"option_id": 29146, "option_text": "Provide prolonged-exposure therapy for veterans with PTSD, guiding them through imaginal and in-vivo confrontation of trauma memories", "trait_tags": {"Counseling": 3, "Patient-Care": 2}},
+            {"option_id": 29147, "option_text": "Conduct cognitive-processing therapy groups where veterans challenge and reframe maladaptive beliefs about guilt, safety, and trust", "trait_tags": {"Counseling": 3, "People-Skill": 2}},
+            {"option_id": 29148, "option_text": "Interpret brain-imaging data alongside neuropsychological scores to help neurologists pinpoint lesion-behavior relationships", "trait_tags": {"Medical-Lab": 3, "Analytical-Skill": 2}},
+            {"option_id": 29149, "option_text": "Deliver biofeedback-assisted relaxation training, teaching veterans to regulate heart-rate variability and muscle tension using real-time monitors", "trait_tags": {"Rehab-Therapy": 3, "Counseling": 2}},
+            {"option_id": 29150, "option_text": "Screen returning veterans for substance-use disorders and co-occurring depression using validated instruments like the AUDIT and PHQ-9", "trait_tags": {"Counseling": 3, "Public-Health": 2}},
+            {"option_id": 29151, "option_text": "Write detailed neuropsychological reports translating test scores into functional recommendations — fitness for duty, disability ratings, and rehabilitation plans", "trait_tags": {"Analytical-Skill": 3, "Health-Admin": 2}},
+            {"option_id": 29152, "option_text": "Facilitate couples and family therapy for veterans whose combat trauma has disrupted home relationships and parenting", "trait_tags": {"Counseling": 3, "People-Skill": 2}},
+            {"option_id": 29153, "option_text": "Design a cognitive-rehabilitation computer program that trains impaired veterans on attention, working memory, and decision-making tasks progressively", "trait_tags": {"Rehab-Therapy": 3, "Technical-Skill": 2}}
+        ]
+    },
+    # Q20 – Nursing (community/public-health nursing) / Public-Health / Patient-Care
+    {
+        "question_id": 5305,
+        "question_text": "A Leyte provincial health unit is deploying community-health nurses to 30 remote barangays as part of the Universal Health Care Act's primary-care strengthening initiative. Which community-nursing function would you perform?",
+        "category": "healthcare_nursing",
+        "options": [
+            {"option_id": 29154, "option_text": "Conduct house-to-house visits to monitor hypertensive and diabetic patients, checking blood pressure, blood sugar, and medication adherence", "trait_tags": {"Patient-Care": 3, "Public-Health": 2}},
+            {"option_id": 29155, "option_text": "Organize barangay immunization days — setting up cold-chain stations, giving vaccines, and recording doses in the Target Client List", "trait_tags": {"Public-Health": 3, "Patient-Care": 2}},
+            {"option_id": 29156, "option_text": "Perform newborn screening heel-prick blood collection within 48 hours of birth and ensure samples reach the Newborn Screening Reference Center on time", "trait_tags": {"Medical-Lab": 3, "Patient-Care": 2}},
+            {"option_id": 29157, "option_text": "Provide directly-observed therapy for tuberculosis patients, watching them swallow each dose daily for six months", "trait_tags": {"Patient-Care": 3, "Public-Health": 2}},
+            {"option_id": 29158, "option_text": "Facilitate mother-and-child health classes on exclusive breastfeeding, complementary feeding, and growth monitoring using WHO z-score charts", "trait_tags": {"Nutrition-Diet": 3, "Public-Health": 2}},
+            {"option_id": 29159, "option_text": "Map the barangay's disease surveillance data — plotting dengue cases, measles clusters, and malnutrition hotspots on a community health board", "trait_tags": {"Public-Health": 3, "Analytical-Skill": 2}},
+            {"option_id": 29160, "option_text": "Dress and monitor chronic wounds — diabetic foot ulcers, pressure injuries, and post-surgical incisions — during home visits", "trait_tags": {"Patient-Care": 3, "Medical-Lab": 1}},
+            {"option_id": 29161, "option_text": "Counsel adolescents on reproductive health, sexual health, and mental wellness during school-based outreach sessions", "trait_tags": {"Counseling": 3, "Public-Health": 2}},
+            {"option_id": 29162, "option_text": "Compile the monthly Field Health Services Information System report, entering all morbidity, mortality, and service-delivery data accurately", "trait_tags": {"Health-Admin": 3, "Public-Health": 2}}
+        ]
+    },
+]
+
+# --- collision guard for batch 31 QIDs ---
+_repl31_existing_qids = {q["question_id"] for q in QUESTIONS_POOL_ENHANCED}
+_repl31_new_qids = {q["question_id"] for q in _REPLACEMENT_BATCH_31}
+if _repl31_existing_qids & _repl31_new_qids:
+    raise ValueError(f"Replacement batch 31 QIDs overlap: {_repl31_existing_qids & _repl31_new_qids}")
+
+# --- collision guard for batch 31 OIDs ---
+_repl31_existing_oids = set()
+for _q in QUESTIONS_POOL_ENHANCED:
+    for _o in _q["options"]:
+        _repl31_existing_oids.add(_o["option_id"])
+_repl31_new_oids = set()
+for _q in _REPLACEMENT_BATCH_31:
+    for _o in _q["options"]:
+        _repl31_new_oids.add(_o["option_id"])
+if _repl31_existing_oids & _repl31_new_oids:
+    raise ValueError(f"Replacement batch 31 option IDs overlap: {_repl31_existing_oids & _repl31_new_oids}")
+
+QUESTIONS_POOL_ENHANCED.extend(_REPLACEMENT_BATCH_31)
+
+
 # ══════════════════════════════════════════════════════════════════════════════
 # EXPANSION DEDUPLICATION
 # ══════════════════════════════════════════════════════════════════════════════
