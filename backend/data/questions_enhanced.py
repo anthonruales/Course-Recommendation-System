@@ -41746,6 +41746,2790 @@ if _repl17_existing_oids & _repl17_new_oids:
 QUESTIONS_POOL_ENHANCED.extend(_REPLACEMENT_BATCH_17)
 
 
+# ─── REPLACEMENT BATCH 18 (20 course-related questions) ─────────────────────
+_REPLACEMENT_BATCH_18 = [
+    {
+        "question_id": 5026,
+        "question_text": "A municipal government hires you to map flood-prone zones and plan safer residential areas. Which responsibility grabs your attention?",
+        "category": "environmental_planning",
+        "options": [
+            {"option_id": 27283, "option_text": "Collecting satellite imagery and GIS data to produce accurate hazard maps", "trait_tags": {"Field-Research": 0.8, "Data-Analytics": 0.7, "Analytical-Skill": 0.6, "Environmental-Sci": 0.5}},
+            {"option_id": 27284, "option_text": "Designing drainage systems and infrastructure layouts for the new master plan", "trait_tags": {"Civil-Build": 0.8, "Spatial-Design": 0.7, "Technical-Skill": 0.6, "Environmental-Eng": 0.5}},
+            {"option_id": 27285, "option_text": "Analyzing population density statistics to decide which communities to relocate first", "trait_tags": {"Data-Analytics": 0.8, "Analytical-Skill": 0.7, "Community-Serve": 0.6, "Public-Health": 0.5}},
+            {"option_id": 27286, "option_text": "Conducting community consultations so residents can voice their concerns", "trait_tags": {"Community-Serve": 0.8, "People-Skill": 0.7, "Counseling": 0.6, "Social-Work": 0.5}},
+            {"option_id": 27287, "option_text": "Developing a public awareness campaign about disaster preparedness", "trait_tags": {"Digital-Media": 0.7, "Community-Serve": 0.8, "Writing-Comm": 0.6, "Public-Health": 0.5}},
+            {"option_id": 27288, "option_text": "Building a real-time flood monitoring dashboard with sensor data feeds", "trait_tags": {"Software-Dev": 0.8, "Cloud-Systems": 0.7, "Technical-Skill": 0.6, "Data-Analytics": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5027,
+        "question_text": "A veterinary hospital in a farming province asks for volunteers. Which role would you sign up for?",
+        "category": "agriculture_health",
+        "options": [
+            {"option_id": 27289, "option_text": "Assisting the vet during livestock surgeries and monitoring recovery", "trait_tags": {"Patient-Care": 0.8, "Veterinary-Path": 0.7, "Analytical-Skill": 0.6, "Lab-Research": 0.5}},
+            {"option_id": 27290, "option_text": "Running blood-work panels and laboratory diagnostics on animal samples", "trait_tags": {"Medical-Lab": 0.8, "Lab-Research": 0.7, "Analytical-Skill": 0.6, "Veterinary-Path": 0.5}},
+            {"option_id": 27291, "option_text": "Teaching local farmers about livestock nutrition and disease prevention", "trait_tags": {"Teaching-Ed": 0.8, "Community-Serve": 0.7, "Agri-Nature": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27292, "option_text": "Managing the clinic's appointment system and patient records digitally", "trait_tags": {"Admin-Skill": 0.8, "Health-Admin": 0.7, "Software-Dev": 0.5, "Technical-Skill": 0.5}},
+            {"option_id": 27293, "option_text": "Formulating herbal feed supplements using local plant species", "trait_tags": {"Food-Science": 0.7, "Agri-Nature": 0.8, "Lab-Research": 0.6, "Pharmacy": 0.5}},
+            {"option_id": 27294, "option_text": "Photographing and documenting rare animal conditions for a research journal", "trait_tags": {"Visual-Design": 0.7, "Lab-Research": 0.6, "Writing-Comm": 0.8, "Field-Research": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5028,
+        "question_text": "Your barangay wins a grant to build a youth development center. Which part of the project would you lead?",
+        "category": "community_development",
+        "options": [
+            {"option_id": 27295, "option_text": "Designing the building's floor plan to maximize open learning and recreation spaces", "trait_tags": {"Spatial-Design": 0.8, "Civil-Build": 0.7, "Creative-Skill": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27296, "option_text": "Writing the after-school tutoring curriculum for elementary and high school students", "trait_tags": {"Teaching-Ed": 0.8, "Early-Childhood": 0.6, "People-Skill": 0.7, "Counseling": 0.5}},
+            {"option_id": 27297, "option_text": "Setting up a computer lab with internet access and coding workshops", "trait_tags": {"Software-Dev": 0.7, "Technical-Skill": 0.8, "Web-Dev": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 27298, "option_text": "Organizing sports leagues and fitness programs for at-risk youth", "trait_tags": {"Sports-Ed": 0.8, "Physical-Skill": 0.7, "Community-Serve": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27299, "option_text": "Running a mental health peer-support group for teenagers", "trait_tags": {"Counseling": 0.8, "Social-Work": 0.7, "People-Skill": 0.6, "Rehab-Therapy": 0.5}},
+            {"option_id": 27300, "option_text": "Handling the center's budget, permits, and compliance requirements", "trait_tags": {"Admin-Skill": 0.8, "Finance-Acct": 0.7, "Legal-Practice": 0.5, "Analytical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5029,
+        "question_text": "A hotel chain is opening its first eco-resort in Palawan. Which opening-day role excites you the most?",
+        "category": "hospitality_tourism",
+        "options": [
+            {"option_id": 27301, "option_text": "Curating guided island-hopping tours and cultural immersion packages", "trait_tags": {"Tourism-Travel": 0.8, "Hospitality-Svc": 0.7, "People-Skill": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 27302, "option_text": "Designing the resort's farm-to-table menu using indigenous ingredients", "trait_tags": {"Culinary-Arts": 0.8, "Food-Science": 0.7, "Creative-Skill": 0.6, "Hospitality-Svc": 0.5}},
+            {"option_id": 27303, "option_text": "Building the booking platform and guest loyalty mobile app", "trait_tags": {"Mobile-Dev": 0.8, "Software-Dev": 0.7, "Web-Dev": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27304, "option_text": "Training front-desk and housekeeping staff on guest experience standards", "trait_tags": {"HR-Management": 0.8, "Hospitality-Svc": 0.7, "People-Skill": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 27305, "option_text": "Managing the resort's social media and online reputation strategy", "trait_tags": {"Marketing-Sales": 0.8, "Digital-Media": 0.7, "Writing-Comm": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27306, "option_text": "Implementing solar panels and rainwater harvesting for the resort's sustainability plan", "trait_tags": {"Environmental-Eng": 0.8, "Electrical-Power": 0.7, "Technical-Skill": 0.6, "Environmental-Sci": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5030,
+        "question_text": "A pharmaceutical company invites college interns to join different departments for the summer. Which department do you choose?",
+        "category": "pharmaceutical_sciences",
+        "options": [
+            {"option_id": 27307, "option_text": "Drug formulation lab — developing new tablet and capsule compositions", "trait_tags": {"Pharmacy": 0.8, "Lab-Research": 0.7, "Analytical-Skill": 0.6, "Food-Science": 0.5}},
+            {"option_id": 27308, "option_text": "Quality assurance — running chemical tests to verify batch purity and potency", "trait_tags": {"Medical-Lab": 0.8, "Analytical-Skill": 0.7, "Lab-Research": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27309, "option_text": "Clinical trials coordination — tracking patient outcomes and managing data", "trait_tags": {"Health-Admin": 0.7, "Data-Analytics": 0.8, "Patient-Care": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27310, "option_text": "Regulatory affairs — ensuring all products comply with FDA Philippines guidelines", "trait_tags": {"Legal-Practice": 0.7, "Admin-Skill": 0.8, "Analytical-Skill": 0.6, "Public-Health": 0.5}},
+            {"option_id": 27311, "option_text": "Sales and medical marketing — presenting new medicines to doctors and hospitals", "trait_tags": {"Marketing-Sales": 0.8, "People-Skill": 0.7, "Pharmacy": 0.6, "Startup-Venture": 0.5}},
+            {"option_id": 27312, "option_text": "Bioinformatics unit — using AI to predict molecule interactions and side effects", "trait_tags": {"AI-ML": 0.8, "Software-Dev": 0.7, "Lab-Research": 0.6, "Analytical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5031,
+        "question_text": "An airline is recruiting fresh graduates for multiple roles. Which position would you apply for?",
+        "category": "aviation_transport",
+        "options": [
+            {"option_id": 27313, "option_text": "Aircraft maintenance technician — inspecting and repairing planes between flights", "trait_tags": {"Hardware-Systems": 0.8, "Mechanical-Design": 0.7, "Technical-Skill": 0.6, "Automotive-Tech": 0.5}},
+            {"option_id": 27314, "option_text": "Avionics specialist — calibrating cockpit instruments and communication systems", "trait_tags": {"Electronics-Dev": 0.8, "Hardware-Systems": 0.7, "Technical-Skill": 0.6, "Electrical-Power": 0.5}},
+            {"option_id": 27315, "option_text": "Flight operations analyst — calculating fuel loads, routes, and weather risk", "trait_tags": {"Data-Analytics": 0.8, "Analytical-Skill": 0.7, "Aeronautical-Eng": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27316, "option_text": "Customer experience designer — improving in-flight service and cabin layouts", "trait_tags": {"Spatial-Design": 0.7, "Hospitality-Svc": 0.8, "Creative-Skill": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27317, "option_text": "Cybersecurity officer — protecting the airline's booking system and passenger data", "trait_tags": {"Cyber-Defense": 0.8, "Cloud-Systems": 0.7, "Technical-Skill": 0.6, "Software-Dev": 0.5}},
+            {"option_id": 27318, "option_text": "Corporate communications — writing press releases and managing crisis messaging", "trait_tags": {"Writing-Comm": 0.8, "Marketing-Sales": 0.7, "People-Skill": 0.6, "Film-Broadcast": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5032,
+        "question_text": "A music festival in Cebu needs a production team. Which crew would you join?",
+        "category": "performing_arts_media",
+        "options": [
+            {"option_id": 27319, "option_text": "Sound engineering — mixing the live audio and managing stage monitors", "trait_tags": {"Performing-Arts": 0.7, "Music-Audio": 0.8, "Technical-Skill": 0.6, "Electronics-Dev": 0.5}},
+            {"option_id": 27320, "option_text": "Stage design — building the main stage set and lighting rigs", "trait_tags": {"Spatial-Design": 0.8, "Creative-Skill": 0.7, "Electrical-Power": 0.5, "Visual-Design": 0.6}},
+            {"option_id": 27321, "option_text": "Livestream production — directing multi-camera feeds for online viewers", "trait_tags": {"Film-Broadcast": 0.8, "Digital-Media": 0.7, "Technical-Skill": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27322, "option_text": "Artist liaison — coordinating performer schedules and backstage hospitality", "trait_tags": {"Admin-Skill": 0.7, "Hospitality-Svc": 0.6, "People-Skill": 0.8, "Performing-Arts": 0.5}},
+            {"option_id": 27323, "option_text": "Sponsorship and partnerships — pitching brands and negotiating deals", "trait_tags": {"Marketing-Sales": 0.8, "Startup-Venture": 0.7, "People-Skill": 0.6, "Finance-Acct": 0.5}},
+            {"option_id": 27324, "option_text": "Emergency medical team — running the first-aid station for festival-goers", "trait_tags": {"Patient-Care": 0.8, "Public-Health": 0.7, "People-Skill": 0.6, "Rehab-Therapy": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5033,
+        "question_text": "A provincial library is being modernized into a digital knowledge hub. Which upgrade project would you handle?",
+        "category": "library_information",
+        "options": [
+            {"option_id": 27325, "option_text": "Digitizing the rare Filipiniana collection and building a searchable online archive", "trait_tags": {"Library-Info": 0.8, "Data-Analytics": 0.6, "Admin-Skill": 0.7, "Technical-Skill": 0.5}},
+            {"option_id": 27326, "option_text": "Setting up a makerspace with 3D printers and micro-controllers for student projects", "trait_tags": {"Hardware-Systems": 0.7, "Teaching-Ed": 0.6, "Technical-Skill": 0.8, "Creative-Skill": 0.5}},
+            {"option_id": 27327, "option_text": "Designing the new children's reading area with interactive story walls", "trait_tags": {"Early-Childhood": 0.8, "Visual-Design": 0.7, "Creative-Skill": 0.6, "Spatial-Design": 0.5}},
+            {"option_id": 27328, "option_text": "Creating a mobile app for borrowing e-books and reserving study rooms", "trait_tags": {"Mobile-Dev": 0.8, "Software-Dev": 0.7, "Web-Dev": 0.6, "Library-Info": 0.5}},
+            {"option_id": 27329, "option_text": "Launching free community workshops on digital literacy for senior citizens", "trait_tags": {"Community-Serve": 0.8, "Teaching-Ed": 0.7, "Inclusive-Ed": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27330, "option_text": "Writing grant proposals to fund the library's expansion into nearby barangays", "trait_tags": {"Writing-Comm": 0.8, "Admin-Skill": 0.7, "Finance-Acct": 0.6, "Community-Serve": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5034,
+        "question_text": "A national sports academy asks you to help build their new training facility program. What would you focus on?",
+        "category": "sports_fitness",
+        "options": [
+            {"option_id": 27331, "option_text": "Designing strength-and-conditioning programs tailored to each athlete's sport", "trait_tags": {"Sports-Ed": 0.7, "Exercise-Sci-Path": 0.8, "Physical-Skill": 0.7, "Analytical-Skill": 0.5}},
+            {"option_id": 27332, "option_text": "Using motion-capture technology to analyze and improve athletic performance", "trait_tags": {"Data-Analytics": 0.8, "Technical-Skill": 0.7, "Animation-3D": 0.6, "Sports-Ed": 0.5}},
+            {"option_id": 27333, "option_text": "Providing sports injury rehabilitation and return-to-play assessments", "trait_tags": {"Rehab-Therapy": 0.8, "Patient-Care": 0.7, "Physical-Skill": 0.6, "Exercise-Sci-Path": 0.5}},
+            {"option_id": 27334, "option_text": "Planning athlete meal plans based on their metabolic profiles and training loads", "trait_tags": {"Nutrition-Diet": 0.8, "Food-Science": 0.7, "Analytical-Skill": 0.6, "Health-Admin": 0.5}},
+            {"option_id": 27335, "option_text": "Coaching the junior varsity teams and mentoring young athletes", "trait_tags": {"Teaching-Ed": 0.7, "Sports-Ed": 0.8, "People-Skill": 0.6, "Counseling": 0.5}},
+            {"option_id": 27336, "option_text": "Creating highlight reels and social media content to attract sponsors", "trait_tags": {"Film-Broadcast": 0.8, "Digital-Media": 0.7, "Marketing-Sales": 0.6, "Creative-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5035,
+        "question_text": "A cooperative in Mindanao receives funding to revitalize its fishing and farming industries. Which initiative would you spearhead?",
+        "category": "agriculture_fisheries",
+        "options": [
+            {"option_id": 27337, "option_text": "Setting up aquaponics systems that combine fish cultivation with vegetable growing", "trait_tags": {"Agri-Nature": 0.8, "Fisheries-Agri-Path": 0.7, "Technical-Skill": 0.6, "Environmental-Sci": 0.5}},
+            {"option_id": 27338, "option_text": "Building a cold-chain storage facility so farmers don't lose harvest to spoilage", "trait_tags": {"Industrial-Ops": 0.8, "Mechanical-Design": 0.6, "Technical-Skill": 0.7, "Food-Science": 0.5}},
+            {"option_id": 27339, "option_text": "Training fishers on sustainable catch methods to protect marine biodiversity", "trait_tags": {"Environmental-Sci": 0.8, "Community-Serve": 0.7, "Teaching-Ed": 0.6, "Maritime-Sea": 0.5}},
+            {"option_id": 27340, "option_text": "Developing a mobile marketplace app connecting farmers directly to urban buyers", "trait_tags": {"Mobile-Dev": 0.7, "Startup-Venture": 0.8, "Marketing-Sales": 0.6, "Software-Dev": 0.5}},
+            {"option_id": 27341, "option_text": "Conducting soil and water quality tests to recommend the best crop varieties", "trait_tags": {"Lab-Research": 0.8, "Field-Research": 0.7, "Agri-Nature": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27342, "option_text": "Managing the cooperative's finances and applying for government subsidy programs", "trait_tags": {"Finance-Acct": 0.8, "Admin-Skill": 0.7, "Community-Serve": 0.6, "Analytical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5036,
+        "question_text": "A forensic investigation unit is assembling a team to solve a complex case. Which specialist role fits you?",
+        "category": "forensics_law",
+        "options": [
+            {"option_id": 27343, "option_text": "Analyzing DNA and trace evidence in the crime lab", "trait_tags": {"Forensic-Sci": 0.8, "Lab-Research": 0.7, "Analytical-Skill": 0.6, "Medical-Lab": 0.5}},
+            {"option_id": 27344, "option_text": "Reconstructing the crime scene digitally using 3D scanning technology", "trait_tags": {"Animation-3D": 0.7, "Technical-Skill": 0.8, "Forensic-Sci": 0.6, "Software-Dev": 0.5}},
+            {"option_id": 27345, "option_text": "Interviewing witnesses and building psychological profiles of suspects", "trait_tags": {"Counseling": 0.8, "Law-Enforce": 0.7, "People-Skill": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27346, "option_text": "Tracing financial transactions to uncover money-laundering networks", "trait_tags": {"Finance-Acct": 0.8, "Data-Analytics": 0.7, "Analytical-Skill": 0.6, "Law-Enforce": 0.5}},
+            {"option_id": 27347, "option_text": "Recovering deleted files and encrypted data from seized devices", "trait_tags": {"Cyber-Defense": 0.8, "Software-Dev": 0.7, "Technical-Skill": 0.6, "Forensic-Sci": 0.5}},
+            {"option_id": 27348, "option_text": "Preparing legal evidence reports and testifying as an expert in court", "trait_tags": {"Legal-Practice": 0.8, "Writing-Comm": 0.7, "Analytical-Skill": 0.6, "Law-Enforce": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5037,
+        "question_text": "A children's hospital launches an interdisciplinary care program for kids with developmental delays. Which team would you join?",
+        "category": "therapy_special_education",
+        "options": [
+            {"option_id": 27349, "option_text": "Speech therapy — helping children improve their communication and language skills", "trait_tags": {"Rehab-Therapy": 0.8, "Patient-Care": 0.7, "People-Skill": 0.6, "Inclusive-Ed": 0.5}},
+            {"option_id": 27350, "option_text": "Occupational therapy — strengthening motor skills through play-based activities", "trait_tags": {"Rehab-Therapy": 0.8, "Creative-Skill": 0.6, "Patient-Care": 0.7, "Early-Childhood": 0.5}},
+            {"option_id": 27351, "option_text": "Designing inclusive learning materials adapted for children with special needs", "trait_tags": {"Inclusive-Ed": 0.8, "Teaching-Ed": 0.7, "Creative-Skill": 0.6, "Visual-Design": 0.5}},
+            {"option_id": 27352, "option_text": "Developing a parent-coaching program so families can continue therapy at home", "trait_tags": {"Counseling": 0.8, "Teaching-Ed": 0.7, "People-Skill": 0.6, "Social-Work": 0.5}},
+            {"option_id": 27353, "option_text": "Building a tablet-based interactive game that reinforces fine motor exercises", "trait_tags": {"Game-Dev": 0.8, "Mobile-Dev": 0.7, "Software-Dev": 0.6, "Rehab-Therapy": 0.5}},
+            {"option_id": 27354, "option_text": "Analyzing patient progress data to measure the effectiveness of each therapy track", "trait_tags": {"Data-Analytics": 0.8, "Health-Admin": 0.7, "Analytical-Skill": 0.6, "Patient-Care": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5038,
+        "question_text": "A TV network is producing a documentary series about endangered Philippine wildlife. Which production role interests you?",
+        "category": "media_environmental",
+        "options": [
+            {"option_id": 27355, "option_text": "Field researcher — trekking through forests to study and document rare species", "trait_tags": {"Field-Research": 0.8, "Environmental-Sci": 0.7, "Physical-Skill": 0.6, "Agri-Nature": 0.5}},
+            {"option_id": 27356, "option_text": "Cinematographer — capturing stunning wildlife footage with specialized cameras", "trait_tags": {"Film-Broadcast": 0.8, "Visual-Design": 0.7, "Creative-Skill": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27357, "option_text": "Script writer and narrator — crafting the story that will move audiences to care", "trait_tags": {"Writing-Comm": 0.8, "Film-Broadcast": 0.7, "Creative-Skill": 0.6, "Digital-Media": 0.5}},
+            {"option_id": 27358, "option_text": "Post-production editor — assembling footage, color grading, and adding VFX", "trait_tags": {"Animation-3D": 0.7, "Digital-Media": 0.8, "Technical-Skill": 0.6, "Film-Broadcast": 0.5}},
+            {"option_id": 27359, "option_text": "Conservation advisor — ensuring the crew follows ethical wildlife filming protocols", "trait_tags": {"Environmental-Sci": 0.8, "Legal-Practice": 0.6, "Analytical-Skill": 0.7, "Community-Serve": 0.5}},
+            {"option_id": 27360, "option_text": "Social media strategist — releasing teasers and building an audience before launch", "trait_tags": {"Marketing-Sales": 0.8, "Digital-Media": 0.7, "Writing-Comm": 0.6, "Web-Dev": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5039,
+        "question_text": "A garment manufacturing company in the Visayas is upgrading from handloom to smart factory. Which transition role suits you?",
+        "category": "fashion_industrial",
+        "options": [
+            {"option_id": 27361, "option_text": "Programming the automated cutting machines and quality-control sensors", "trait_tags": {"Industrial-Ops": 0.8, "Software-Dev": 0.7, "Technical-Skill": 0.6, "Hardware-Systems": 0.5}},
+            {"option_id": 27362, "option_text": "Creating the new clothing line's design concepts and fabric patterns", "trait_tags": {"Visual-Design": 0.8, "Spatial-Design": 0.7, "Creative-Skill": 0.6, "Artistic": 0.5}},
+            {"option_id": 27363, "option_text": "Managing the supply chain — sourcing sustainable materials and tracking shipments", "trait_tags": {"Industrial-Ops": 0.7, "Admin-Skill": 0.8, "Environmental-Sci": 0.5, "Analytical-Skill": 0.6}},
+            {"option_id": 27364, "option_text": "Training workers on the new machinery and safety protocols", "trait_tags": {"Teaching-Ed": 0.8, "TVET-Path": 0.7, "People-Skill": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27365, "option_text": "Setting up the e-commerce website and handling digital advertising", "trait_tags": {"Web-Dev": 0.8, "Marketing-Sales": 0.7, "Digital-Media": 0.6, "Software-Dev": 0.5}},
+            {"option_id": 27366, "option_text": "Ensuring the factory meets labor laws and occupational safety standards", "trait_tags": {"Legal-Practice": 0.7, "HR-Management": 0.8, "Admin-Skill": 0.6, "Community-Serve": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5040,
+        "question_text": "A regional electric cooperative is building a solar-wind hybrid power plant. What job on the project appeals to you?",
+        "category": "energy_engineering",
+        "options": [
+            {"option_id": 27367, "option_text": "Designing the solar panel array layout and wind turbine placement for maximum output", "trait_tags": {"Electrical-Power": 0.8, "Mechanical-Design": 0.7, "Technical-Skill": 0.6, "Environmental-Eng": 0.5}},
+            {"option_id": 27368, "option_text": "Programming the smart grid controller that balances solar and wind load in real time", "trait_tags": {"Software-Dev": 0.8, "Cloud-Systems": 0.7, "Electrical-Power": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27369, "option_text": "Conducting the environmental impact assessment before construction begins", "trait_tags": {"Environmental-Sci": 0.8, "Field-Research": 0.7, "Analytical-Skill": 0.6, "Legal-Practice": 0.5}},
+            {"option_id": 27370, "option_text": "Managing budgets, timelines, and contractor coordination for the construction phase", "trait_tags": {"Admin-Skill": 0.8, "Civil-Build": 0.6, "Finance-Acct": 0.7, "Industrial-Ops": 0.5}},
+            {"option_id": 27371, "option_text": "Building the IoT sensor network that monitors each turbine's performance remotely", "trait_tags": {"Hardware-Systems": 0.8, "Cloud-Systems": 0.7, "Electronics-Dev": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27372, "option_text": "Running public information sessions to explain the benefits of renewable energy to residents", "trait_tags": {"Community-Serve": 0.8, "People-Skill": 0.7, "Teaching-Ed": 0.6, "Environmental-Eng": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5041,
+        "question_text": "A Special Education center needs help creating a more inclusive campus. Which improvement would you champion?",
+        "category": "inclusive_education",
+        "options": [
+            {"option_id": 27373, "option_text": "Developing individualized education programs that adapt to each learner's pace", "trait_tags": {"Inclusive-Ed": 0.8, "Teaching-Ed": 0.7, "Counseling": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27374, "option_text": "Building sensory rooms with calming lights, textures, and sound to help children self-regulate", "trait_tags": {"Spatial-Design": 0.8, "Early-Childhood": 0.7, "Inclusive-Ed": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27375, "option_text": "Creating assistive technology tools — screen readers, voice controls, or braille tablets", "trait_tags": {"Software-Dev": 0.8, "Hardware-Systems": 0.7, "Inclusive-Ed": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27376, "option_text": "Training teachers on differentiated instruction techniques for mixed-ability classrooms", "trait_tags": {"Teaching-Ed": 0.8, "People-Skill": 0.7, "Inclusive-Ed": 0.6, "Counseling": 0.5}},
+            {"option_id": 27377, "option_text": "Advocating for policy changes that ensure proper government funding for SPED programs", "trait_tags": {"Community-Serve": 0.8, "Legal-Practice": 0.7, "Writing-Comm": 0.6, "Social-Work": 0.5}},
+            {"option_id": 27378, "option_text": "Running art and music therapy sessions that support emotional expression", "trait_tags": {"Performing-Arts": 0.7, "Counseling": 0.8, "Creative-Skill": 0.6, "Rehab-Therapy": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5042,
+        "question_text": "A shipyard in Subic wins a contract to build a new inter-island cargo vessel. Which department do you join?",
+        "category": "maritime_engineering",
+        "options": [
+            {"option_id": 27379, "option_text": "Naval architecture — designing the hull shape for fuel efficiency and stability", "trait_tags": {"Mechanical-Design": 0.8, "Maritime-Sea": 0.7, "Technical-Skill": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27380, "option_text": "Marine electrical — wiring the navigation systems, radar, and engine controls", "trait_tags": {"Electrical-Power": 0.8, "Electronics-Dev": 0.7, "Maritime-Sea": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27381, "option_text": "Cargo logistics planning — optimizing hold layouts for mixed freight types", "trait_tags": {"Industrial-Ops": 0.8, "Analytical-Skill": 0.7, "Admin-Skill": 0.6, "Maritime-Sea": 0.5}},
+            {"option_id": 27382, "option_text": "Welding and fabrication — assembling the steel superstructure on the slipway", "trait_tags": {"Mechanical-Design": 0.7, "TVET-Path": 0.8, "Physical-Skill": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27383, "option_text": "Safety and compliance — ensuring the vessel meets international maritime regulations", "trait_tags": {"Legal-Practice": 0.7, "Maritime-Sea": 0.6, "Admin-Skill": 0.8, "Analytical-Skill": 0.5}},
+            {"option_id": 27384, "option_text": "Crew training program — preparing the future officers and engine-room staff", "trait_tags": {"Teaching-Ed": 0.8, "Maritime-Sea": 0.7, "People-Skill": 0.6, "Physical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5043,
+        "question_text": "A tech startup wins a pitch competition and needs to scale up fast. Which founding-team role do you take?",
+        "category": "entrepreneurship_tech",
+        "options": [
+            {"option_id": 27385, "option_text": "Lead developer — building the core product and deploying it on cloud infrastructure", "trait_tags": {"Software-Dev": 0.8, "Cloud-Systems": 0.7, "Technical-Skill": 0.6, "Web-Dev": 0.5}},
+            {"option_id": 27386, "option_text": "UX/UI designer — creating an intuitive and visually appealing user interface", "trait_tags": {"Visual-Design": 0.8, "Creative-Skill": 0.7, "Digital-Media": 0.6, "Software-Dev": 0.5}},
+            {"option_id": 27387, "option_text": "Data scientist — mining user behavior data to guide product decisions", "trait_tags": {"AI-ML": 0.7, "Data-Analytics": 0.8, "Analytical-Skill": 0.7, "Software-Dev": 0.5}},
+            {"option_id": 27388, "option_text": "Growth hacker — running viral marketing experiments to acquire users", "trait_tags": {"Marketing-Sales": 0.8, "Startup-Venture": 0.7, "Digital-Media": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27389, "option_text": "COO — managing daily operations, hiring, and investor relations", "trait_tags": {"Admin-Skill": 0.7, "HR-Management": 0.6, "Startup-Venture": 0.8, "Finance-Acct": 0.5}},
+            {"option_id": 27390, "option_text": "Legal and IP counsel — securing patents and handling contracts", "trait_tags": {"Legal-Practice": 0.8, "Legal-Mgmt": 0.7, "Analytical-Skill": 0.6, "Admin-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5044,
+        "question_text": "A reforestation NGO operating in the Cordillera highlands needs specialists. Which role do you volunteer for?",
+        "category": "forestry_environment",
+        "options": [
+            {"option_id": 27391, "option_text": "Selecting native tree species and planning seedling nurseries adapted to the altitude", "trait_tags": {"Forestry-Path": 0.8, "Agri-Nature": 0.7, "Field-Research": 0.6, "Environmental-Sci": 0.5}},
+            {"option_id": 27392, "option_text": "Mapping forest coverage changes over time using satellite data and drones", "trait_tags": {"Data-Analytics": 0.8, "Field-Research": 0.7, "Technical-Skill": 0.6, "Environmental-Eng": 0.5}},
+            {"option_id": 27393, "option_text": "Engaging indigenous communities to integrate their traditional land stewardship practices", "trait_tags": {"Community-Serve": 0.8, "People-Skill": 0.7, "Social-Work": 0.6, "Forestry-Path": 0.5}},
+            {"option_id": 27394, "option_text": "Building eco-tourism trails and birdwatching stations to generate sustainable income", "trait_tags": {"Tourism-Travel": 0.8, "Spatial-Design": 0.7, "Hospitality-Svc": 0.5, "Environmental-Sci": 0.6}},
+            {"option_id": 27395, "option_text": "Studying soil microbiomes and measuring carbon sequestration rates", "trait_tags": {"Lab-Research": 0.8, "Analytical-Skill": 0.7, "Environmental-Sci": 0.6, "Field-Research": 0.5}},
+            {"option_id": 27396, "option_text": "Producing a short documentary to raise awareness and attract donor funding", "trait_tags": {"Film-Broadcast": 0.8, "Digital-Media": 0.7, "Creative-Skill": 0.6, "Writing-Comm": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5045,
+        "question_text": "An automotive manufacturer is setting up its first Philippine assembly plant. Which division do you want to join?",
+        "category": "automotive_manufacturing",
+        "options": [
+            {"option_id": 27397, "option_text": "Engine testing lab — dynamometer runs and emissions compliance checks", "trait_tags": {"Automotive-Tech": 0.8, "Mechanical-Design": 0.7, "Analytical-Skill": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27398, "option_text": "Robotics assembly line — programming welding and painting robots", "trait_tags": {"Software-Dev": 0.7, "Industrial-Ops": 0.8, "Hardware-Systems": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27399, "option_text": "Quality inspection — running crash simulations and stress analysis on components", "trait_tags": {"Analytical-Skill": 0.8, "Mechanical-Design": 0.7, "Technical-Skill": 0.6, "Automotive-Tech": 0.5}},
+            {"option_id": 27400, "option_text": "Designing the electric vehicle battery management system", "trait_tags": {"Electrical-Power": 0.8, "Electronics-Dev": 0.7, "Technical-Skill": 0.6, "Automotive-Tech": 0.5}},
+            {"option_id": 27401, "option_text": "Occupational health unit — monitoring worker ergonomics and air quality", "trait_tags": {"Public-Health": 0.8, "Health-Admin": 0.7, "Patient-Care": 0.6, "Industrial-Ops": 0.5}},
+            {"option_id": 27402, "option_text": "Dealer network development — recruiting showroom partners across the provinces", "trait_tags": {"Marketing-Sales": 0.8, "People-Skill": 0.7, "Startup-Venture": 0.6, "Admin-Skill": 0.5}},
+        ],
+    },
+]
+
+# --- collision guard --------------------------------------------------------
+_repl18_existing_qids = {q["question_id"] for q in QUESTIONS_POOL_ENHANCED}
+_repl18_new_qids = {q["question_id"] for q in _REPLACEMENT_BATCH_18}
+if _repl18_existing_qids & _repl18_new_qids:
+    raise ValueError(f"Replacement batch 18 question IDs overlap: {_repl18_existing_qids & _repl18_new_qids}")
+
+_repl18_existing_oids = {o["option_id"] for q in QUESTIONS_POOL_ENHANCED for o in q.get("options", [])}
+_repl18_new_oids = {o["option_id"] for q in _REPLACEMENT_BATCH_18 for o in q.get("options", [])}
+if _repl18_existing_oids & _repl18_new_oids:
+    raise ValueError(f"Replacement batch 18 option IDs overlap: {_repl18_existing_oids & _repl18_new_oids}")
+
+QUESTIONS_POOL_ENHANCED.extend(_REPLACEMENT_BATCH_18)
+
+
+# ─── REPLACEMENT BATCH 19 (20 course-related questions) ─────────────────────
+_REPLACEMENT_BATCH_19 = [
+    {
+        "question_id": 5046,
+        "question_text": "A provincial hospital is opening a new rehabilitation wing for accident survivors. Which specialist position would you apply for?",
+        "category": "rehabilitation_health",
+        "options": [
+            {"option_id": 27403, "option_text": "Physical therapist — designing progressive mobility exercises for patients with fractures", "trait_tags": {"Rehab-Therapy": 0.8, "Physical-Skill": 0.7, "Patient-Care": 0.6, "Exercise-Sci-Path": 0.5}},
+            {"option_id": 27404, "option_text": "Prosthetics technician — custom-fitting artificial limbs using 3D printing", "trait_tags": {"Hardware-Systems": 0.7, "Technical-Skill": 0.8, "Mechanical-Design": 0.6, "Rehab-Therapy": 0.5}},
+            {"option_id": 27405, "option_text": "Clinical psychologist — running cognitive-behavioral sessions for trauma recovery", "trait_tags": {"Counseling": 0.8, "Rehab-Therapy": 0.7, "People-Skill": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27406, "option_text": "Nutritionist — planning high-protein recovery diets for post-surgery patients", "trait_tags": {"Nutrition-Diet": 0.8, "Food-Science": 0.7, "Patient-Care": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27407, "option_text": "Health informatics officer — building a digital patient progress tracking system", "trait_tags": {"Health-Admin": 0.8, "Software-Dev": 0.7, "Data-Analytics": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27408, "option_text": "Medical social worker — connecting discharged patients with community support programs", "trait_tags": {"Social-Work": 0.8, "Community-Serve": 0.7, "Counseling": 0.6, "People-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5047,
+        "question_text": "A city council hires your team to redesign a neglected public park into a multi-use urban green space. What do you tackle?",
+        "category": "architecture_planning",
+        "options": [
+            {"option_id": 27409, "option_text": "Drafting the landscape master plan with native trees, rain gardens, and walking paths", "trait_tags": {"Spatial-Design": 0.8, "Environmental-Sci": 0.7, "Creative-Skill": 0.6, "Civil-Build": 0.5}},
+            {"option_id": 27410, "option_text": "Engineering the stormwater management and irrigation drainage beneath the park", "trait_tags": {"Civil-Build": 0.8, "Environmental-Eng": 0.7, "Technical-Skill": 0.6, "Mechanical-Design": 0.5}},
+            {"option_id": 27411, "option_text": "Designing a community amphitheater and outdoor stage for weekend performances", "trait_tags": {"Spatial-Design": 0.7, "Performing-Arts": 0.6, "Creative-Skill": 0.8, "Visual-Design": 0.5}},
+            {"option_id": 27412, "option_text": "Installing smart lighting and security cameras connected to a monitoring hub", "trait_tags": {"Electronics-Dev": 0.8, "Cloud-Systems": 0.7, "Technical-Skill": 0.6, "Electrical-Power": 0.5}},
+            {"option_id": 27413, "option_text": "Conducting surveys and townhall meetings to incorporate residents' wishes into the design", "trait_tags": {"Community-Serve": 0.8, "People-Skill": 0.7, "Writing-Comm": 0.6, "Social-Work": 0.5}},
+            {"option_id": 27414, "option_text": "Creating a playground zone designed for children of all abilities, including wheelchair-accessible equipment", "trait_tags": {"Inclusive-Ed": 0.7, "Early-Childhood": 0.8, "Spatial-Design": 0.6, "Creative-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5048,
+        "question_text": "A national museum is curating a traveling exhibit on Philippine pre-colonial heritage. Which exhibit team would you join?",
+        "category": "arts_social_sciences",
+        "options": [
+            {"option_id": 27415, "option_text": "Artifact conservation — cleaning and preserving clay pots, gold jewelry, and textile fragments", "trait_tags": {"Lab-Research": 0.8, "Analytical-Skill": 0.7, "Visual-Design": 0.5, "Technical-Skill": 0.6}},
+            {"option_id": 27416, "option_text": "Interactive display engineering — building touchscreen kiosks and augmented-reality walkthroughs", "trait_tags": {"Software-Dev": 0.8, "Animation-3D": 0.7, "Digital-Media": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27417, "option_text": "Research and storytelling — writing the historical narratives that accompany each gallery", "trait_tags": {"Writing-Comm": 0.8, "Analytical-Skill": 0.7, "Philosophy-Path": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27418, "option_text": "Educational outreach — organizing school tours and hands-on workshops for students", "trait_tags": {"Teaching-Ed": 0.8, "Community-Serve": 0.7, "People-Skill": 0.6, "Early-Childhood": 0.5}},
+            {"option_id": 27419, "option_text": "Exhibit space design — arranging lighting, layout, and visitor flow for maximum impact", "trait_tags": {"Spatial-Design": 0.8, "Visual-Design": 0.7, "Creative-Skill": 0.6, "Electrical-Power": 0.5}},
+            {"option_id": 27420, "option_text": "Sponsorship and fundraising — pitching corporate donors and managing the exhibit budget", "trait_tags": {"Marketing-Sales": 0.8, "Finance-Acct": 0.7, "People-Skill": 0.6, "Admin-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5049,
+        "question_text": "A culinary institute is launching specialized certificate tracks. Which track would you enroll in?",
+        "category": "culinary_food",
+        "options": [
+            {"option_id": 27421, "option_text": "Filipino regional cuisine — mastering traditional recipes from Ilocos to Mindanao", "trait_tags": {"Culinary-Arts": 0.8, "Creative-Skill": 0.7, "Culinary-Mgmt-Path": 0.6, "Food-Science": 0.5}},
+            {"option_id": 27422, "option_text": "Pastry and baking science — understanding gluten chemistry, fermentation, and decoration techniques", "trait_tags": {"Food-Science": 0.8, "Culinary-Arts": 0.7, "Lab-Research": 0.5, "Creative-Skill": 0.6}},
+            {"option_id": 27423, "option_text": "Restaurant operations management — learning cost control, staffing, and service flow", "trait_tags": {"Culinary-Mgmt-Path": 0.8, "Admin-Skill": 0.7, "Finance-Acct": 0.6, "Hospitality-Svc": 0.5}},
+            {"option_id": 27424, "option_text": "Food safety and quality assurance — certifying kitchens meet hygiene and HACCP standards", "trait_tags": {"Public-Health": 0.8, "Analytical-Skill": 0.7, "Food-Science": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 27425, "option_text": "Food photography and styling — shooting dishes for menus, cookbooks, and social media", "trait_tags": {"Visual-Design": 0.8, "Digital-Media": 0.7, "Creative-Skill": 0.6, "Marketing-Sales": 0.5}},
+            {"option_id": 27426, "option_text": "Nutrition-focused cooking — developing meals for patients with diabetes and heart conditions", "trait_tags": {"Nutrition-Diet": 0.8, "Culinary-Arts": 0.6, "Patient-Care": 0.7, "Analytical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5050,
+        "question_text": "The military is modernizing its reserve officer training corps and invites college students to explore career tracks. Which briefing room do you enter?",
+        "category": "defense_public_safety",
+        "options": [
+            {"option_id": 27427, "option_text": "Combat engineering — learning to build field bridges, fortifications, and explosive demolition", "trait_tags": {"Military-Defense": 0.8, "Civil-Build": 0.7, "Physical-Skill": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27428, "option_text": "Signal corps — operating encrypted communications and satellite networks", "trait_tags": {"Military-Defense": 0.7, "Electronics-Dev": 0.8, "Cyber-Defense": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27429, "option_text": "Military intelligence — analyzing satellite imagery and intercepted data for threat assessment", "trait_tags": {"Military-Defense": 0.7, "Data-Analytics": 0.8, "Analytical-Skill": 0.6, "Cyber-Defense": 0.5}},
+            {"option_id": 27430, "option_text": "Medical corps — providing emergency triage and trauma care in field hospitals", "trait_tags": {"Patient-Care": 0.8, "Military-Defense": 0.7, "Physical-Skill": 0.6, "Medical-Lab": 0.5}},
+            {"option_id": 27431, "option_text": "Civil-military operations — coordinating disaster relief and community rebuilding", "trait_tags": {"Community-Serve": 0.8, "Military-Defense": 0.7, "Admin-Skill": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27432, "option_text": "Cyber warfare unit — running penetration tests and defending military networks", "trait_tags": {"Cyber-Defense": 0.8, "Software-Dev": 0.7, "Military-Defense": 0.6, "Technical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5051,
+        "question_text": "A ride-hailing company is expanding into electric tricycles for provincial towns. Which launch role do you take?",
+        "category": "transport_entrepreneurship",
+        "options": [
+            {"option_id": 27433, "option_text": "Designing the electric drivetrain and battery swap stations for the tricycles", "trait_tags": {"Electrical-Power": 0.8, "Automotive-Tech": 0.7, "Mechanical-Design": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27434, "option_text": "Developing the rider and passenger mobile app with GPS fleet tracking", "trait_tags": {"Mobile-Dev": 0.8, "Software-Dev": 0.7, "Cloud-Systems": 0.6, "Web-Dev": 0.5}},
+            {"option_id": 27435, "option_text": "Running the driver onboarding and road-safety certification program", "trait_tags": {"Teaching-Ed": 0.7, "TVET-Path": 0.8, "People-Skill": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 27436, "option_text": "Negotiating franchise agreements with local transport cooperatives", "trait_tags": {"Startup-Venture": 0.8, "Marketing-Sales": 0.7, "People-Skill": 0.6, "Legal-Practice": 0.5}},
+            {"option_id": 27437, "option_text": "Calculating fare structures and break-even models for the pilot towns", "trait_tags": {"Finance-Acct": 0.8, "Data-Analytics": 0.7, "Analytical-Skill": 0.6, "Industrial-Ops": 0.5}},
+            {"option_id": 27438, "option_text": "Assessing carbon-reduction impacts to qualify the project for green financing bonds", "trait_tags": {"Environmental-Eng": 0.8, "Analytical-Skill": 0.7, "Environmental-Sci": 0.6, "Finance-Acct": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5052,
+        "question_text": "A private university is creating a philosophy and ethics research center. Which founding initiative would you lead?",
+        "category": "philosophy_humanities",
+        "options": [
+            {"option_id": 27439, "option_text": "Publishing a peer-reviewed journal on Filipino ethical thought and indigenous philosophy", "trait_tags": {"Philosophy-Path": 0.8, "Writing-Comm": 0.7, "Analytical-Skill": 0.6, "Lab-Research": 0.5}},
+            {"option_id": 27440, "option_text": "Hosting public debates on bioethics dilemmas such as genetic editing and euthanasia", "trait_tags": {"Philosophy-Path": 0.8, "People-Skill": 0.7, "Community-Serve": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27441, "option_text": "Developing an AI ethics curriculum that technology students must complete before graduation", "trait_tags": {"Teaching-Ed": 0.8, "AI-ML": 0.6, "Philosophy-Path": 0.7, "Analytical-Skill": 0.5}},
+            {"option_id": 27442, "option_text": "Creating a podcast series interviewing thinkers from different cultural and religious traditions", "trait_tags": {"Digital-Media": 0.8, "Performing-Arts": 0.6, "Philosophy-Path": 0.7, "Creative-Skill": 0.5}},
+            {"option_id": 27443, "option_text": "Partnering with local government to draft ethical guidelines for public policy making", "trait_tags": {"Legal-Practice": 0.7, "Community-Serve": 0.8, "Philosophy-Path": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 27444, "option_text": "Building a digital archive of rare philosophy texts with full-text search capabilities", "trait_tags": {"Library-Info": 0.8, "Software-Dev": 0.6, "Philosophy-Path": 0.7, "Technical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5053,
+        "question_text": "A coastal city is establishing a marine research station to study coral reef decline. Which team would you join?",
+        "category": "marine_environmental",
+        "options": [
+            {"option_id": 27445, "option_text": "Scuba-diving survey team — mapping coral coverage and identifying bleached areas", "trait_tags": {"Field-Research": 0.8, "Maritime-Sea": 0.7, "Physical-Skill": 0.6, "Environmental-Sci": 0.5}},
+            {"option_id": 27446, "option_text": "Water chemistry lab — testing pH, salinity, and pollutant levels from sample sites", "trait_tags": {"Lab-Research": 0.8, "Medical-Lab": 0.6, "Analytical-Skill": 0.7, "Environmental-Sci": 0.5}},
+            {"option_id": 27447, "option_text": "Underwater drone operations — piloting ROVs to photograph deep-reef zones", "trait_tags": {"Hardware-Systems": 0.7, "Technical-Skill": 0.8, "Maritime-Sea": 0.6, "Digital-Media": 0.5}},
+            {"option_id": 27448, "option_text": "Community engagement — training fishers to adopt reef-safe fishing practices", "trait_tags": {"Community-Serve": 0.8, "Teaching-Ed": 0.7, "People-Skill": 0.6, "Fisheries-Agri-Path": 0.5}},
+            {"option_id": 27449, "option_text": "Data modeling — using machine learning to predict reef recovery timelines under different scenarios", "trait_tags": {"AI-ML": 0.8, "Data-Analytics": 0.7, "Software-Dev": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27450, "option_text": "Grant writing and publication — securing international research funding and publishing findings", "trait_tags": {"Writing-Comm": 0.8, "Finance-Acct": 0.6, "Admin-Skill": 0.7, "Analytical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5054,
+        "question_text": "An international hotel group is building a resort training academy in Boracay. Which instructor position do you apply for?",
+        "category": "hospitality_education",
+        "options": [
+            {"option_id": 27451, "option_text": "Front-office operations — teaching reservation systems, concierge protocols, and VIP handling", "trait_tags": {"Hotel-Resort-Path": 0.8, "Hospitality-Svc": 0.7, "People-Skill": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 27452, "option_text": "Housekeeping management — training teams on room preparation standards and quality audits", "trait_tags": {"Hotel-Resort-Path": 0.7, "Admin-Skill": 0.8, "Hospitality-Svc": 0.6, "Industrial-Ops": 0.5}},
+            {"option_id": 27453, "option_text": "Bartending and mixology — combining flavor science with showmanship techniques", "trait_tags": {"Culinary-Arts": 0.7, "Performing-Arts": 0.6, "Creative-Skill": 0.8, "Hospitality-Svc": 0.5}},
+            {"option_id": 27454, "option_text": "Revenue management — teaching dynamic pricing models and occupancy forecasting", "trait_tags": {"Finance-Acct": 0.8, "Data-Analytics": 0.7, "Analytical-Skill": 0.6, "Hospitality-Svc": 0.5}},
+            {"option_id": 27455, "option_text": "Spa and wellness therapy — instructing massage techniques, aromatherapy, and guest relaxation programs", "trait_tags": {"Tourism-Hospitality-Path": 0.8, "Physical-Skill": 0.7, "Patient-Care": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27456, "option_text": "Sustainable tourism practices — teaching waste reduction, coral protection, and eco-certifications", "trait_tags": {"Environmental-Sci": 0.8, "Tourism-Travel": 0.7, "Teaching-Ed": 0.6, "Community-Serve": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5055,
+        "question_text": "A game development studio in BGC announces paid apprenticeships for college students. Which apprenticeship track do you pick?",
+        "category": "game_development",
+        "options": [
+            {"option_id": 27457, "option_text": "Gameplay programming — coding physics engines, AI enemies, and multiplayer networking", "trait_tags": {"Game-Dev": 0.8, "Software-Dev": 0.7, "AI-ML": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27458, "option_text": "3D character modeling — sculpting heroes, monsters, and environments in ZBrush", "trait_tags": {"Animation-3D": 0.8, "Visual-Design": 0.7, "Creative-Skill": 0.6, "Game-Dev": 0.5}},
+            {"option_id": 27459, "option_text": "Sound design — creating original music scores, foley effects, and voiceover direction", "trait_tags": {"Music-Audio": 0.8, "Performing-Arts": 0.6, "Creative-Skill": 0.7, "Game-Dev": 0.5}},
+            {"option_id": 27460, "option_text": "QA and analytics — playtesting builds and mining telemetry data to improve balance", "trait_tags": {"Data-Analytics": 0.8, "Analytical-Skill": 0.7, "Game-Dev": 0.6, "Software-Dev": 0.5}},
+            {"option_id": 27461, "option_text": "Narrative design — writing branching storylines and dialogue trees for RPG quests", "trait_tags": {"Writing-Comm": 0.8, "Creative-Skill": 0.7, "Game-Dev": 0.6, "Philosophy-Path": 0.5}},
+            {"option_id": 27462, "option_text": "Community management — moderating player forums, running events, and analyzing feedback", "trait_tags": {"People-Skill": 0.8, "Marketing-Sales": 0.7, "Digital-Media": 0.6, "Community-Serve": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5056,
+        "question_text": "A renewable energy startup is piloting micro-hydro generators in mountain streams of Benguet. Which project role would you take?",
+        "category": "energy_environment",
+        "options": [
+            {"option_id": 27463, "option_text": "Designing the turbine blades and water-intake channels for optimal power output", "trait_tags": {"Mechanical-Design": 0.8, "Electrical-Power": 0.7, "Technical-Skill": 0.6, "Environmental-Eng": 0.5}},
+            {"option_id": 27464, "option_text": "Wiring the generator output to a village micro-grid and battery storage system", "trait_tags": {"Electrical-Power": 0.8, "Electronics-Dev": 0.7, "Technical-Skill": 0.6, "Hardware-Systems": 0.5}},
+            {"option_id": 27465, "option_text": "Surveying the watershed to ensure the project does not disrupt local ecosystems", "trait_tags": {"Field-Research": 0.8, "Environmental-Sci": 0.7, "Analytical-Skill": 0.6, "Agri-Nature": 0.5}},
+            {"option_id": 27466, "option_text": "Training local residents to maintain the turbines and troubleshoot common issues", "trait_tags": {"TVET-Path": 0.8, "Teaching-Ed": 0.7, "Community-Serve": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27467, "option_text": "Building a real-time monitoring dashboard that streams power-output data to your phone", "trait_tags": {"Cloud-Systems": 0.8, "Mobile-Dev": 0.7, "Software-Dev": 0.6, "Data-Analytics": 0.5}},
+            {"option_id": 27468, "option_text": "Pitching the project to impact investors and preparing the financial projections", "trait_tags": {"Startup-Venture": 0.8, "Finance-Acct": 0.7, "Marketing-Sales": 0.6, "Analytical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5057,
+        "question_text": "A school district is piloting a TVET (technical-vocational education and training) senior high strand. Which elective module would you teach?",
+        "category": "tvet_education",
+        "options": [
+            {"option_id": 27469, "option_text": "Automotive servicing — engine diagnostics, brake systems, and emission testing", "trait_tags": {"Automotive-Tech": 0.8, "TVET-Path": 0.7, "Mechanical-Design": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27470, "option_text": "Electrical installation and maintenance — wiring residential buildings to code", "trait_tags": {"Electrical-Power": 0.8, "TVET-Path": 0.7, "Technical-Skill": 0.6, "Civil-Build": 0.5}},
+            {"option_id": 27471, "option_text": "Bread and pastry production — commercial baking techniques and kitchen management", "trait_tags": {"Culinary-Arts": 0.8, "TVET-Path": 0.7, "Food-Science": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27472, "option_text": "Computer systems servicing — assembling, troubleshooting, and networking PCs", "trait_tags": {"Hardware-Systems": 0.8, "TVET-Path": 0.7, "Technical-Skill": 0.6, "Cloud-Systems": 0.5}},
+            {"option_id": 27473, "option_text": "Caregiving and elderly assistance — vital signs monitoring and personal care routines", "trait_tags": {"Patient-Care": 0.8, "TVET-Path": 0.7, "People-Skill": 0.6, "Rehab-Therapy": 0.5}},
+            {"option_id": 27474, "option_text": "Tourism promotion services — tour guiding, event coordination, and heritage interpretation", "trait_tags": {"Tourism-Travel": 0.8, "Tourism-Hospitality-Path": 0.7, "People-Skill": 0.6, "Community-Serve": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5058,
+        "question_text": "A children's TV network greenlights an educational animated series about Filipino folklore. Which production department do you pick?",
+        "category": "animation_media",
+        "options": [
+            {"option_id": 27475, "option_text": "Character design — illustrating mythical creatures like the tikbalang, diwata, and bakunawa", "trait_tags": {"Animation-3D": 0.8, "Visual-Design": 0.7, "Creative-Skill": 0.6, "Digital-Media": 0.5}},
+            {"option_id": 27476, "option_text": "Screenwriting — adapting oral legends into age-appropriate episode scripts", "trait_tags": {"Writing-Comm": 0.8, "Creative-Skill": 0.7, "Teaching-Ed": 0.5, "Early-Childhood": 0.6}},
+            {"option_id": 27477, "option_text": "Voice acting and music scoring — performing character voices and composing the theme song", "trait_tags": {"Performing-Arts": 0.8, "Music-Audio": 0.7, "Creative-Skill": 0.6, "Digital-Media": 0.5}},
+            {"option_id": 27478, "option_text": "Animation rigging — building the skeletal systems that let characters move smoothly", "trait_tags": {"Animation-3D": 0.7, "Software-Dev": 0.8, "Technical-Skill": 0.6, "Game-Dev": 0.5}},
+            {"option_id": 27479, "option_text": "Educational consultant — verifying cultural accuracy and age-appropriate content", "trait_tags": {"Teaching-Ed": 0.8, "Early-Childhood": 0.7, "Philosophy-Path": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27480, "option_text": "Marketing and merchandise — designing toys, coloring books, and licensing deals", "trait_tags": {"Marketing-Sales": 0.8, "Startup-Venture": 0.7, "Visual-Design": 0.6, "Creative-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5059,
+        "question_text": "A law firm specializing in intellectual property opens a college internship program. Which desk would you request?",
+        "category": "legal_business",
+        "options": [
+            {"option_id": 27481, "option_text": "Patent filings — researching prior art and drafting technical patent applications", "trait_tags": {"Legal-Mgmt": 0.8, "Legal-Practice": 0.7, "Writing-Comm": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27482, "option_text": "Trademark enforcement — investigating counterfeit goods and preparing cease-and-desist letters", "trait_tags": {"Law-Enforce": 0.7, "Legal-Mgmt": 0.8, "Analytical-Skill": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 27483, "option_text": "Contract review — checking licensing agreements for software, music, and film rights", "trait_tags": {"Legal-Practice": 0.8, "Admin-Skill": 0.7, "Analytical-Skill": 0.6, "Finance-Acct": 0.5}},
+            {"option_id": 27484, "option_text": "Digital forensics — recovering evidence of online copyright infringement", "trait_tags": {"Cyber-Defense": 0.8, "Forensic-Sci": 0.7, "Technical-Skill": 0.6, "Software-Dev": 0.5}},
+            {"option_id": 27485, "option_text": "Client outreach — meeting inventors and artists to explain how IP protection works", "trait_tags": {"People-Skill": 0.8, "Marketing-Sales": 0.7, "Legal-Mgmt": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 27486, "option_text": "Policy advisory — drafting position papers on AI-generated content and data privacy law", "trait_tags": {"Legal-Practice": 0.7, "Writing-Comm": 0.8, "AI-ML": 0.5, "Philosophy-Path": 0.6}},
+        ],
+    },
+    {
+        "question_id": 5060,
+        "question_text": "A sports science institute partners with a university to offer summer intensives. Which program do you sign up for?",
+        "category": "sports_exercise",
+        "options": [
+            {"option_id": 27487, "option_text": "Biomechanics lab — using force plates and high-speed cameras to analyze running gait", "trait_tags": {"Exercise-Sci-Path": 0.8, "Lab-Research": 0.7, "Analytical-Skill": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27488, "option_text": "Sports nutrition — studying the effects of hydration and electrolyte timing on endurance", "trait_tags": {"Nutrition-Diet": 0.8, "Sports-Fitness-Path": 0.7, "Food-Science": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27489, "option_text": "Strength and conditioning coaching — designing periodized training cycles for athletes", "trait_tags": {"Sports-Fitness-Path": 0.8, "Physical-Skill": 0.7, "Exercise-Sci-Path": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 27490, "option_text": "Sports psychology — teaching mental toughness techniques and pre-competition visualization", "trait_tags": {"Counseling": 0.8, "Sports-Ed": 0.7, "People-Skill": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27491, "option_text": "Wearable technology — programming smartwatch apps that track heart rate zones during workouts", "trait_tags": {"Mobile-Dev": 0.8, "Hardware-Systems": 0.7, "Software-Dev": 0.6, "Data-Analytics": 0.5}},
+            {"option_id": 27492, "option_text": "Adaptive sports — coaching wheelchair basketball and paraswimming athletes", "trait_tags": {"Inclusive-Ed": 0.7, "Sports-Ed": 0.8, "Physical-Skill": 0.6, "People-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5061,
+        "question_text": "A local government unit launches a 'Smart Province' digital transformation plan. Which pillar would you implement?",
+        "category": "public_admin_tech",
+        "options": [
+            {"option_id": 27493, "option_text": "E-governance portal — putting permits, tax payments, and complaints online", "trait_tags": {"Web-Dev": 0.8, "Software-Dev": 0.7, "Admin-Skill": 0.6, "Cloud-Systems": 0.5}},
+            {"option_id": 27494, "option_text": "Public health dashboard — tracking disease outbreaks and hospital bed availability in real time", "trait_tags": {"Health-Admin": 0.8, "Data-Analytics": 0.7, "Public-Health": 0.6, "Software-Dev": 0.5}},
+            {"option_id": 27495, "option_text": "Agricultural advisory system — sending weather-indexed crop alerts to farmers via SMS", "trait_tags": {"Agri-Nature": 0.8, "Mobile-Dev": 0.7, "Data-Analytics": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 27496, "option_text": "Traffic management AI — optimizing stoplights using camera feeds and vehicle counts", "trait_tags": {"AI-ML": 0.8, "Civil-Build": 0.6, "Data-Analytics": 0.7, "Technical-Skill": 0.5}},
+            {"option_id": 27497, "option_text": "Digital literacy program — training barangay officials and senior citizens to use the new systems", "trait_tags": {"Teaching-Ed": 0.8, "Community-Serve": 0.7, "Inclusive-Ed": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27498, "option_text": "Cybersecurity framework — protecting citizen data and preventing system breaches", "trait_tags": {"Cyber-Defense": 0.8, "Cloud-Systems": 0.7, "Legal-Practice": 0.6, "Technical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5062,
+        "question_text": "A heritage town in Ilocos is converting an ancestral house into a boutique creative hub. Which space would you manage?",
+        "category": "arts_entrepreneurship",
+        "options": [
+            {"option_id": 27499, "option_text": "Weaving workshop — reviving traditional Ilocano abel loom techniques with local artisans", "trait_tags": {"Visual-Design": 0.7, "Creative-Skill": 0.8, "Community-Serve": 0.6, "Spatial-Design": 0.5}},
+            {"option_id": 27500, "option_text": "Photography gallery — curating monthly exhibits from emerging Filipino photographers", "trait_tags": {"Visual-Design": 0.8, "Creative-Skill": 0.7, "Marketing-Sales": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 27501, "option_text": "Co-working space for freelance developers and digital nomads", "trait_tags": {"Web-Dev": 0.7, "Startup-Venture": 0.8, "Software-Dev": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 27502, "option_text": "Ceramic and pottery studio — offering weekly classes and selling artisan products online", "trait_tags": {"Creative-Skill": 0.8, "Spatial-Design": 0.6, "Marketing-Sales": 0.7, "Culinary-Arts": 0.5}},
+            {"option_id": 27503, "option_text": "Heritage walking tour office — training guides and booking cultural immersion experiences", "trait_tags": {"Tourism-Travel": 0.8, "Hospitality-Svc": 0.7, "People-Skill": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 27504, "option_text": "Podcast and recording studio — producing oral histories and local music", "trait_tags": {"Music-Audio": 0.8, "Digital-Media": 0.7, "Film-Broadcast": 0.6, "Creative-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5063,
+        "question_text": "A biotech startup growing high-protein microalgae for animal feed wins Series A funding. Which team do you join?",
+        "category": "biotech_agriculture",
+        "options": [
+            {"option_id": 27505, "option_text": "Strain engineering — using CRISPR to increase protein yield per harvest cycle", "trait_tags": {"Lab-Research": 0.8, "Analytical-Skill": 0.7, "Technical-Skill": 0.6, "Agri-Nature": 0.5}},
+            {"option_id": 27506, "option_text": "Bioreactor operations — optimizing temperature, light, and nutrient feed schedules", "trait_tags": {"Industrial-Ops": 0.8, "Lab-Research": 0.7, "Technical-Skill": 0.6, "Mechanical-Design": 0.5}},
+            {"option_id": 27507, "option_text": "Regulatory and food-safety compliance — obtaining FDA and DOST permits for commercial sale", "trait_tags": {"Legal-Practice": 0.7, "Admin-Skill": 0.8, "Public-Health": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27508, "option_text": "Business development — pitching poultry and aquaculture farms to switch to your product", "trait_tags": {"Marketing-Sales": 0.8, "Startup-Venture": 0.7, "Fisheries-Agri-Path": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27509, "option_text": "Data science — modeling growth curves and predicting batch yields with machine learning", "trait_tags": {"AI-ML": 0.8, "Data-Analytics": 0.7, "Software-Dev": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27510, "option_text": "Sustainability reporting — measuring the carbon footprint versus soybean-based feeds", "trait_tags": {"Environmental-Eng": 0.8, "Analytical-Skill": 0.7, "Writing-Comm": 0.6, "Environmental-Sci": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5064,
+        "question_text": "An international shipping line is building a new container terminal in Batangas. Which department would you work in?",
+        "category": "maritime_logistics",
+        "options": [
+            {"option_id": 27511, "option_text": "Port engineering — designing the wharf, cranes, and container yard layout", "trait_tags": {"Civil-Build": 0.8, "Mechanical-Design": 0.7, "Maritime-Sea": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27512, "option_text": "Logistics optimization — routing vessels and scheduling berth slots to minimize turnaround time", "trait_tags": {"Industrial-Ops": 0.8, "Data-Analytics": 0.7, "Analytical-Skill": 0.6, "Maritime-Sea": 0.5}},
+            {"option_id": 27513, "option_text": "Customs brokerage — classifying goods, computing duties, and clearing import documents", "trait_tags": {"Finance-Acct": 0.7, "Legal-Practice": 0.6, "Admin-Skill": 0.8, "Maritime-Sea": 0.5}},
+            {"option_id": 27514, "option_text": "Terminal automation — programming the autonomous guided vehicles that carry containers", "trait_tags": {"Software-Dev": 0.8, "Hardware-Systems": 0.7, "AI-ML": 0.6, "Industrial-Ops": 0.5}},
+            {"option_id": 27515, "option_text": "Occupational safety — ensuring stevedores and crane operators follow hazard protocols", "trait_tags": {"Public-Health": 0.7, "HR-Management": 0.8, "Admin-Skill": 0.6, "Law-Enforce": 0.5}},
+            {"option_id": 27516, "option_text": "Environmental compliance — monitoring ballast water discharge and air emissions from ships", "trait_tags": {"Environmental-Sci": 0.8, "Maritime-Sea": 0.7, "Analytical-Skill": 0.6, "Legal-Practice": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5065,
+        "question_text": "A veterinary college is expanding its rural outreach program to underserved farming communities. Which fieldwork role excites you?",
+        "category": "veterinary_agriculture",
+        "options": [
+            {"option_id": 27517, "option_text": "Large-animal clinician — performing vaccinations and health checks on carabao and cattle", "trait_tags": {"Veterinary-Path": 0.8, "Patient-Care": 0.7, "Physical-Skill": 0.6, "Field-Research": 0.5}},
+            {"option_id": 27518, "option_text": "Livestock breeding advisor — consulting on genetic programs to improve herd productivity", "trait_tags": {"Veterinary-Path": 0.7, "Agri-Nature": 0.8, "Analytical-Skill": 0.6, "Lab-Research": 0.5}},
+            {"option_id": 27519, "option_text": "Epidemiologist — tracking and containing animal disease outbreaks before they spread", "trait_tags": {"Public-Health": 0.8, "Data-Analytics": 0.7, "Veterinary-Path": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27520, "option_text": "Mobile vet-clinic driver and technician — bringing portable x-ray and ultrasound to remote farms", "trait_tags": {"Technical-Skill": 0.8, "Veterinary-Path": 0.7, "Hardware-Systems": 0.6, "Physical-Skill": 0.5}},
+            {"option_id": 27521, "option_text": "Community animal welfare educator — teaching children proper pet care and responsible ownership", "trait_tags": {"Teaching-Ed": 0.8, "Community-Serve": 0.7, "Veterinary-Path": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27522, "option_text": "Research officer — collecting samples for a national database on zoonotic diseases", "trait_tags": {"Lab-Research": 0.8, "Field-Research": 0.7, "Analytical-Skill": 0.6, "Veterinary-Path": 0.5}},
+        ],
+    },
+]
+
+# --- collision guard --------------------------------------------------------
+_repl19_existing_qids = {q["question_id"] for q in QUESTIONS_POOL_ENHANCED}
+_repl19_new_qids = {q["question_id"] for q in _REPLACEMENT_BATCH_19}
+if _repl19_existing_qids & _repl19_new_qids:
+    raise ValueError(f"Replacement batch 19 question IDs overlap: {_repl19_existing_qids & _repl19_new_qids}")
+
+_repl19_existing_oids = {o["option_id"] for q in QUESTIONS_POOL_ENHANCED for o in q.get("options", [])}
+_repl19_new_oids = {o["option_id"] for q in _REPLACEMENT_BATCH_19 for o in q.get("options", [])}
+if _repl19_existing_oids & _repl19_new_oids:
+    raise ValueError(f"Replacement batch 19 option IDs overlap: {_repl19_existing_oids & _repl19_new_oids}")
+
+QUESTIONS_POOL_ENHANCED.extend(_REPLACEMENT_BATCH_19)
+
+
+# ─── REPLACEMENT BATCH 20 (10 funnel + 10 scenario questions) ───────────────
+_REPLACEMENT_BATCH_20 = [
+    # ═══════════════  FUNNEL QUESTIONS (10) — broad-to-narrow  ═══════════════
+    {
+        "question_id": 5066,
+        "question_text": "Imagine you could shadow any professional for a week. Which workplace would you choose to observe?",
+        "category": "Funnel - Workplace Discovery",
+        "options": [
+            {"option_id": 27523, "option_text": "A hospital emergency room — watching doctors triage patients and nurses coordinate care", "trait_tags": {"Patient-Care": 0.8, "Medical-Lab": 0.6, "People-Skill": 0.5, "Analytical-Skill": 0.4}},
+            {"option_id": 27524, "option_text": "A software company's development floor — seeing how apps go from concept to production", "trait_tags": {"Software-Dev": 0.8, "Technical-Skill": 0.6, "Cloud-Systems": 0.5, "Analytical-Skill": 0.4}},
+            {"option_id": 27525, "option_text": "A construction megaproject — observing engineers, architects, and surveyors on site", "trait_tags": {"Civil-Build": 0.8, "Mechanical-Design": 0.6, "Technical-Skill": 0.5, "Spatial-Design": 0.4}},
+            {"option_id": 27526, "option_text": "A broadcast newsroom — watching journalists chase stories and editors assemble segments", "trait_tags": {"Film-Broadcast": 0.8, "Writing-Comm": 0.6, "Digital-Media": 0.5, "People-Skill": 0.4}},
+            {"option_id": 27527, "option_text": "A courtroom and law office — seeing how lawyers argue cases and draft legal briefs", "trait_tags": {"Legal-Practice": 0.8, "Law-Enforce": 0.6, "Analytical-Skill": 0.5, "Writing-Comm": 0.4}},
+            {"option_id": 27528, "option_text": "A five-star hotel during peak season — observing front-desk, kitchen, and event teams in action", "trait_tags": {"Hospitality-Svc": 0.8, "Hotel-Resort-Path": 0.6, "People-Skill": 0.5, "Admin-Skill": 0.4}},
+        ],
+    },
+    {
+        "question_id": 5067,
+        "question_text": "Your school assigns a capstone project where you must solve a real community problem. Which problem area do you pick?",
+        "category": "Funnel - Community Problem",
+        "options": [
+            {"option_id": 27529, "option_text": "Low crop yields among local farmers — researching soil health and introducing better varieties", "trait_tags": {"Agri-Nature": 0.8, "Field-Research": 0.6, "Lab-Research": 0.5, "Environmental-Sci": 0.4}},
+            {"option_id": 27530, "option_text": "Lack of mental health services — setting up a peer counseling and referral hotline", "trait_tags": {"Counseling": 0.8, "Social-Work": 0.7, "Community-Serve": 0.6, "People-Skill": 0.4}},
+            {"option_id": 27531, "option_text": "Unreliable electricity in rural sitios — designing a small off-grid solar installation", "trait_tags": {"Electrical-Power": 0.8, "Environmental-Eng": 0.6, "Technical-Skill": 0.5, "Hardware-Systems": 0.4}},
+            {"option_id": 27532, "option_text": "High dropout rates in elementary schools — creating engaging after-school tutorial programs", "trait_tags": {"Teaching-Ed": 0.8, "Early-Childhood": 0.6, "Community-Serve": 0.5, "People-Skill": 0.4}},
+            {"option_id": 27533, "option_text": "Declining fish catch in the local bay — mapping overfished zones and proposing marine sanctuaries", "trait_tags": {"Maritime-Sea": 0.7, "Fisheries-Agri-Path": 0.8, "Environmental-Sci": 0.6, "Field-Research": 0.4}},
+            {"option_id": 27534, "option_text": "Small businesses losing customers to online sellers — building them a shared e-commerce platform", "trait_tags": {"Web-Dev": 0.7, "Startup-Venture": 0.8, "Marketing-Sales": 0.6, "Software-Dev": 0.4}},
+        ],
+    },
+    {
+        "question_id": 5068,
+        "question_text": "A billionaire offers to fund one passion project of yours for a full year. What do you pitch?",
+        "category": "Funnel - Passion Project",
+        "options": [
+            {"option_id": 27535, "option_text": "A mobile veterinary clinic that travels to underserved farming barangays", "trait_tags": {"Veterinary-Path": 0.8, "Community-Serve": 0.6, "Patient-Care": 0.5, "Agri-Nature": 0.4}},
+            {"option_id": 27536, "option_text": "An indie film documenting the vanishing traditions of Philippine indigenous tribes", "trait_tags": {"Film-Broadcast": 0.8, "Creative-Skill": 0.6, "Writing-Comm": 0.5, "Community-Serve": 0.4}},
+            {"option_id": 27537, "option_text": "A free coding bootcamp that teaches out-of-school youth to build mobile apps", "trait_tags": {"Mobile-Dev": 0.8, "Teaching-Ed": 0.6, "Software-Dev": 0.5, "Community-Serve": 0.4}},
+            {"option_id": 27538, "option_text": "A network of vertical urban farms supplying affordable vegetables to city poor communities", "trait_tags": {"Agri-Nature": 0.7, "Food-Science": 0.8, "Environmental-Eng": 0.5, "Startup-Venture": 0.4}},
+            {"option_id": 27539, "option_text": "A sports rehabilitation center offering free physical therapy to injured athletes from public schools", "trait_tags": {"Rehab-Therapy": 0.7, "Sports-Fitness-Path": 0.8, "Exercise-Sci-Path": 0.6, "Patient-Care": 0.4}},
+            {"option_id": 27540, "option_text": "A forensic crime lab accessible to local police departments that currently outsource evidence testing", "trait_tags": {"Forensic-Sci": 0.8, "Lab-Research": 0.6, "Law-Enforce": 0.5, "Analytical-Skill": 0.4}},
+        ],
+    },
+    {
+        "question_id": 5069,
+        "question_text": "You win a scholarship that covers tuition anywhere but requires you to complete a practicum abroad. Which internship setting would you request?",
+        "category": "Funnel - International Practicum",
+        "options": [
+            {"option_id": 27541, "option_text": "A marine biology station on the Great Barrier Reef studying coral restoration", "trait_tags": {"Field-Research": 0.8, "Environmental-Sci": 0.7, "Maritime-Sea": 0.6, "Lab-Research": 0.4}},
+            {"option_id": 27542, "option_text": "A Formula 1 team's engineering garage learning aerodynamics and telemetry", "trait_tags": {"Automotive-Tech": 0.7, "Aeronautical-Eng": 0.8, "Mechanical-Design": 0.6, "Data-Analytics": 0.4}},
+            {"option_id": 27543, "option_text": "A Michelin-starred restaurant kitchen mastering fine dining cuisine techniques", "trait_tags": {"Culinary-Arts": 0.8, "Culinary-Mgmt-Path": 0.6, "Creative-Skill": 0.5, "Food-Science": 0.4}},
+            {"option_id": 27544, "option_text": "A United Nations agency working on refugee resettlement programs in Geneva", "trait_tags": {"Community-Serve": 0.8, "Social-Work": 0.7, "People-Skill": 0.6, "Legal-Practice": 0.4}},
+            {"option_id": 27545, "option_text": "An AI research lab at a Silicon Valley company working on large language models", "trait_tags": {"AI-ML": 0.8, "Software-Dev": 0.7, "Data-Analytics": 0.6, "Analytical-Skill": 0.4}},
+            {"option_id": 27546, "option_text": "A children's hospital in Japan observing pediatric occupational therapy innovations", "trait_tags": {"Rehab-Therapy": 0.8, "Patient-Care": 0.7, "Inclusive-Ed": 0.6, "People-Skill": 0.4}},
+        ],
+    },
+    {
+        "question_id": 5070,
+        "question_text": "If you could host your own YouTube channel dedicated to one theme, what would it cover?",
+        "category": "Funnel - Content Creation",
+        "options": [
+            {"option_id": 27547, "option_text": "DIY electronics and gadget teardowns — showing how everyday devices work inside", "trait_tags": {"Electronics-Dev": 0.8, "Hardware-Systems": 0.7, "Technical-Skill": 0.6, "Teaching-Ed": 0.4}},
+            {"option_id": 27548, "option_text": "True-crime analysis — breaking down forensic evidence and courtroom strategies", "trait_tags": {"Forensic-Sci": 0.8, "Law-Enforce": 0.7, "Analytical-Skill": 0.6, "Writing-Comm": 0.4}},
+            {"option_id": 27549, "option_text": "Budget travel guides — documenting hidden gems across the Philippine provinces", "trait_tags": {"Tourism-Travel": 0.8, "Tourism-Hospitality-Path": 0.7, "Digital-Media": 0.6, "Creative-Skill": 0.4}},
+            {"option_id": 27550, "option_text": "Workout science — explaining the biomechanics behind exercises and athletic performance", "trait_tags": {"Exercise-Sci-Path": 0.8, "Sports-Fitness-Path": 0.7, "Physical-Skill": 0.6, "Nutrition-Diet": 0.4}},
+            {"option_id": 27551, "option_text": "Indie game development logs — live-streaming the process of building a game from scratch", "trait_tags": {"Game-Dev": 0.8, "Software-Dev": 0.7, "Animation-3D": 0.5, "Creative-Skill": 0.4}},
+            {"option_id": 27552, "option_text": "Classroom experiments for kids — making science fun with at-home physics and chemistry demos", "trait_tags": {"Teaching-Ed": 0.7, "Lab-Research": 0.8, "Early-Childhood": 0.6, "Creative-Skill": 0.4}},
+        ],
+    },
+    {
+        "question_id": 5071,
+        "question_text": "A disaster strikes your town and multiple agencies respond. Which relief team would you volunteer for first?",
+        "category": "Funnel - Disaster Response",
+        "options": [
+            {"option_id": 27553, "option_text": "Search and rescue squad — clearing debris and extracting survivors", "trait_tags": {"Physical-Skill": 0.8, "Military-Defense": 0.6, "Community-Serve": 0.5, "Law-Enforce": 0.4}},
+            {"option_id": 27554, "option_text": "Medical triage tent — assessing injuries and providing first aid to evacuees", "trait_tags": {"Patient-Care": 0.8, "Public-Health": 0.7, "Medical-Lab": 0.5, "People-Skill": 0.4}},
+            {"option_id": 27555, "option_text": "Structural assessment team — inspecting buildings and bridges before allowing re-entry", "trait_tags": {"Civil-Build": 0.8, "Technical-Skill": 0.7, "Analytical-Skill": 0.6, "Mechanical-Design": 0.4}},
+            {"option_id": 27556, "option_text": "Communications hub — setting up emergency radio and internet links for coordination", "trait_tags": {"Electronics-Dev": 0.7, "Cloud-Systems": 0.8, "Technical-Skill": 0.6, "Hardware-Systems": 0.4}},
+            {"option_id": 27557, "option_text": "Psychosocial support unit — running debriefing sessions for traumatized families", "trait_tags": {"Counseling": 0.8, "Social-Work": 0.7, "People-Skill": 0.6, "Community-Serve": 0.4}},
+            {"option_id": 27558, "option_text": "Logistics and supply chain — organizing food, water, and medicine distribution to evacuation centers", "trait_tags": {"Industrial-Ops": 0.8, "Admin-Skill": 0.7, "Community-Serve": 0.6, "Finance-Acct": 0.4}},
+        ],
+    },
+    {
+        "question_id": 5072,
+        "question_text": "A publishing house asks you to write a book for senior high students. What subject would you pick?",
+        "category": "Funnel - Knowledge Sharing",
+        "options": [
+            {"option_id": 27559, "option_text": "A beginner's guide to Philippine constitutional law and citizens' rights", "trait_tags": {"Legal-Practice": 0.8, "Legal-Mgmt": 0.6, "Writing-Comm": 0.5, "Community-Serve": 0.4}},
+            {"option_id": 27560, "option_text": "An illustrated field guide to Philippine birds, reptiles, and forest ecosystems", "trait_tags": {"Field-Research": 0.8, "Environmental-Sci": 0.7, "Forestry-Path": 0.6, "Visual-Design": 0.4}},
+            {"option_id": 27561, "option_text": "A practical manual on starting and growing a small business from zero capital", "trait_tags": {"Startup-Venture": 0.8, "Finance-Acct": 0.7, "Marketing-Sales": 0.6, "Admin-Skill": 0.4}},
+            {"option_id": 27562, "option_text": "A step-by-step guide to building your first robot using Arduino and Raspberry Pi", "trait_tags": {"Hardware-Systems": 0.8, "Software-Dev": 0.6, "Electronics-Dev": 0.7, "Technical-Skill": 0.4}},
+            {"option_id": 27563, "option_text": "A collection of original Filipino short stories with creative writing exercises", "trait_tags": {"Writing-Comm": 0.8, "Creative-Skill": 0.7, "Philosophy-Path": 0.5, "Performing-Arts": 0.4}},
+            {"option_id": 27564, "option_text": "A nutrition and wellness handbook for student-athletes", "trait_tags": {"Nutrition-Diet": 0.8, "Sports-Ed": 0.7, "Exercise-Sci-Path": 0.6, "Food-Science": 0.4}},
+        ],
+    },
+    {
+        "question_id": 5073,
+        "question_text": "Your university lets you create an entirely new student organization. What would its mission focus on?",
+        "category": "Funnel - Organization Mission",
+        "options": [
+            {"option_id": 27565, "option_text": "A cybersecurity club that participates in national capture-the-flag competitions", "trait_tags": {"Cyber-Defense": 0.8, "Software-Dev": 0.6, "Technical-Skill": 0.5, "Analytical-Skill": 0.4}},
+            {"option_id": 27566, "option_text": "A theater troupe that stages original plays about Philippine social issues", "trait_tags": {"Performing-Arts": 0.8, "Creative-Skill": 0.7, "Writing-Comm": 0.6, "Community-Serve": 0.4}},
+            {"option_id": 27567, "option_text": "A student-run pharmacy outreach that provides free medicine consultations in underserved areas", "trait_tags": {"Pharmacy": 0.8, "Community-Serve": 0.7, "Patient-Care": 0.6, "Public-Health": 0.4}},
+            {"option_id": 27568, "option_text": "An automotive and motorcycle enthusiast club that rebuilds donated vehicles for rural health workers", "trait_tags": {"Automotive-Tech": 0.8, "Mechanical-Design": 0.7, "Community-Serve": 0.6, "TVET-Path": 0.4}},
+            {"option_id": 27569, "option_text": "A library volunteers network that sets up reading corners in low-income barangay halls", "trait_tags": {"Library-Info": 0.8, "Community-Serve": 0.7, "Teaching-Ed": 0.6, "Early-Childhood": 0.4}},
+            {"option_id": 27570, "option_text": "A music production collective that records and promotes independent OPM artists", "trait_tags": {"Music-Audio": 0.8, "Digital-Media": 0.7, "Creative-Skill": 0.6, "Marketing-Sales": 0.4}},
+        ],
+    },
+    {
+        "question_id": 5074,
+        "question_text": "You receive a government grant to develop one innovative prototype. What do you build?",
+        "category": "Funnel - Innovation Prototype",
+        "options": [
+            {"option_id": 27571, "option_text": "A wearable health monitor that alerts elderly patients and their caregivers in real time", "trait_tags": {"Hardware-Systems": 0.7, "Health-Admin": 0.8, "Mobile-Dev": 0.6, "Patient-Care": 0.4}},
+            {"option_id": 27572, "option_text": "A drone-based crop-dusting system that reduces pesticide use on rice paddies by 60%", "trait_tags": {"Agri-Nature": 0.8, "Hardware-Systems": 0.7, "Environmental-Eng": 0.6, "Technical-Skill": 0.4}},
+            {"option_id": 27573, "option_text": "An AI-powered sign-language translator app for hearing-impaired students in mainstream classrooms", "trait_tags": {"AI-ML": 0.8, "Inclusive-Ed": 0.7, "Software-Dev": 0.6, "Mobile-Dev": 0.4}},
+            {"option_id": 27574, "option_text": "A portable water purification unit that runs on solar power for island communities", "trait_tags": {"Environmental-Eng": 0.8, "Electrical-Power": 0.6, "Mechanical-Design": 0.7, "Public-Health": 0.4}},
+            {"option_id": 27575, "option_text": "A virtual-reality training simulator for firefighters and emergency responders", "trait_tags": {"Game-Dev": 0.7, "Animation-3D": 0.8, "Software-Dev": 0.6, "Military-Defense": 0.4}},
+            {"option_id": 27576, "option_text": "A blockchain-based land title registry to prevent fraudulent property claims", "trait_tags": {"Software-Dev": 0.7, "Legal-Mgmt": 0.8, "Data-Analytics": 0.6, "Admin-Skill": 0.4}},
+        ],
+    },
+    {
+        "question_id": 5075,
+        "question_text": "A national TV network offers you a behind-the-scenes apprenticeship in any department. Which do you join?",
+        "category": "Funnel - Media Apprenticeship",
+        "options": [
+            {"option_id": 27577, "option_text": "News investigation desk — researching corruption cases and verifying sources", "trait_tags": {"Writing-Comm": 0.7, "Analytical-Skill": 0.8, "Law-Enforce": 0.5, "People-Skill": 0.4}},
+            {"option_id": 27578, "option_text": "Visual effects studio — compositing CGI into live-action drama scenes", "trait_tags": {"Animation-3D": 0.8, "Digital-Media": 0.7, "Software-Dev": 0.6, "Creative-Skill": 0.4}},
+            {"option_id": 27579, "option_text": "Sports broadcasting unit — calling play-by-play and producing athlete feature stories", "trait_tags": {"Sports-Ed": 0.7, "Film-Broadcast": 0.8, "People-Skill": 0.6, "Performing-Arts": 0.4}},
+            {"option_id": 27580, "option_text": "Ad sales and brand partnerships — connecting advertisers with the right time slots and audiences", "trait_tags": {"Marketing-Sales": 0.8, "Finance-Acct": 0.6, "People-Skill": 0.7, "Data-Analytics": 0.4}},
+            {"option_id": 27581, "option_text": "Health and wellness show — producing segments on nutrition, mental health, and fitness", "trait_tags": {"Public-Health": 0.7, "Nutrition-Diet": 0.8, "Film-Broadcast": 0.6, "People-Skill": 0.4}},
+            {"option_id": 27582, "option_text": "IT and broadcast engineering — maintaining transmission towers, satellite uplinks, and streaming servers", "trait_tags": {"Electronics-Dev": 0.8, "Cloud-Systems": 0.7, "Hardware-Systems": 0.6, "Technical-Skill": 0.4}},
+        ],
+    },
+    # ═════════════  SCENARIO QUESTIONS (10) — real-world situations  ═════════
+    {
+        "question_id": 5076,
+        "question_text": "A historic Spanish-era church in Pampanga needs urgent restoration before the rainy season. Which specialist crew do you join?",
+        "category": "heritage_engineering",
+        "options": [
+            {"option_id": 27583, "option_text": "Structural engineer — reinforcing the bell tower's stone foundation against earthquakes", "trait_tags": {"Civil-Build": 0.8, "Mechanical-Design": 0.7, "Technical-Skill": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27584, "option_text": "Conservation artist — cleaning and retouching the ceiling murals using period-accurate pigments", "trait_tags": {"Visual-Design": 0.8, "Creative-Skill": 0.7, "Lab-Research": 0.6, "Spatial-Design": 0.5}},
+            {"option_id": 27585, "option_text": "Historian and archivist — documenting every tile pattern and inscription for the national registry", "trait_tags": {"Writing-Comm": 0.8, "Library-Info": 0.7, "Analytical-Skill": 0.6, "Philosophy-Path": 0.5}},
+            {"option_id": 27586, "option_text": "Electrical upgrader — rewiring the interior with concealed modern lighting that respects the original design", "trait_tags": {"Electrical-Power": 0.8, "Electronics-Dev": 0.7, "Spatial-Design": 0.5, "Technical-Skill": 0.6}},
+            {"option_id": 27587, "option_text": "Fundraising coordinator — organizing heritage concerts and online crowdfunding campaigns", "trait_tags": {"Marketing-Sales": 0.8, "Community-Serve": 0.7, "Finance-Acct": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27588, "option_text": "Drone and 3D scan operator — creating a digital twin of the church for virtual heritage tours", "trait_tags": {"Animation-3D": 0.7, "Technical-Skill": 0.8, "Digital-Media": 0.6, "Hardware-Systems": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5077,
+        "question_text": "A cooperative dairy farm in Batangas wants to add value-added products instead of just selling raw milk. Which venture do you develop?",
+        "category": "food_agribusiness",
+        "options": [
+            {"option_id": 27589, "option_text": "Artisan cheese-making — aging kesong puti varieties and developing new flavors", "trait_tags": {"Food-Science": 0.8, "Culinary-Arts": 0.7, "Lab-Research": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27590, "option_text": "Yogurt and probiotic drinks — formulating shelf-stable products for sari-sari store distribution", "trait_tags": {"Food-Science": 0.8, "Nutrition-Diet": 0.7, "Lab-Research": 0.6, "Marketing-Sales": 0.5}},
+            {"option_id": 27591, "option_text": "Packaging and branding — designing eye-catching labels and pitching to grocery chains", "trait_tags": {"Visual-Design": 0.8, "Marketing-Sales": 0.7, "Creative-Skill": 0.6, "Startup-Venture": 0.5}},
+            {"option_id": 27592, "option_text": "Quality control lab — testing fat content, bacteria levels, and pasteurization temperatures", "trait_tags": {"Medical-Lab": 0.7, "Analytical-Skill": 0.8, "Food-Science": 0.6, "Public-Health": 0.5}},
+            {"option_id": 27593, "option_text": "Farm-to-table café — opening a small on-site restaurant serving fresh dairy dishes", "trait_tags": {"Culinary-Mgmt-Path": 0.8, "Hospitality-Svc": 0.7, "Startup-Venture": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27594, "option_text": "Herd health program — improving cattle genetics and veterinary care to increase milk output", "trait_tags": {"Veterinary-Path": 0.8, "Agri-Nature": 0.7, "Analytical-Skill": 0.6, "Field-Research": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5078,
+        "question_text": "A national telco is rolling out 5G connectivity to provincial capitals. Which deployment team do you join?",
+        "category": "telecom_technology",
+        "options": [
+            {"option_id": 27595, "option_text": "Radio frequency engineer — planning tower placement and signal coverage maps", "trait_tags": {"Electronics-Dev": 0.8, "Data-Analytics": 0.7, "Technical-Skill": 0.6, "Electrical-Power": 0.5}},
+            {"option_id": 27596, "option_text": "Network software developer — building the 5G core and edge computing middleware", "trait_tags": {"Cloud-Systems": 0.8, "Software-Dev": 0.7, "Technical-Skill": 0.6, "AI-ML": 0.5}},
+            {"option_id": 27597, "option_text": "Fiber optic installation crew — laying underground cables and splicing connections", "trait_tags": {"TVET-Path": 0.8, "Technical-Skill": 0.7, "Hardware-Systems": 0.6, "Physical-Skill": 0.5}},
+            {"option_id": 27598, "option_text": "Cybersecurity analyst — hardening the new network against intrusion and data interception", "trait_tags": {"Cyber-Defense": 0.8, "Cloud-Systems": 0.7, "Analytical-Skill": 0.6, "Software-Dev": 0.5}},
+            {"option_id": 27599, "option_text": "Community engagement officer — explaining 5G safety to concerned residents and local officials", "trait_tags": {"Community-Serve": 0.8, "People-Skill": 0.7, "Writing-Comm": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 27600, "option_text": "Business development — signing up local companies and hospitals as early enterprise subscribers", "trait_tags": {"Marketing-Sales": 0.8, "Startup-Venture": 0.7, "People-Skill": 0.6, "Finance-Acct": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5079,
+        "question_text": "An adventure park in Bukidnon is adding extreme activity stations. Which station do you design and operate?",
+        "category": "tourism_sports",
+        "options": [
+            {"option_id": 27601, "option_text": "Zipline and rappelling course — engineering safety systems and cable tension calculations", "trait_tags": {"Mechanical-Design": 0.8, "Physical-Skill": 0.7, "Technical-Skill": 0.6, "Sports-Fitness-Path": 0.5}},
+            {"option_id": 27602, "option_text": "Mountain biking trail — grading terrain, marking routes, and maintaining trail drainage", "trait_tags": {"Field-Research": 0.7, "Sports-Ed": 0.8, "Physical-Skill": 0.6, "Environmental-Sci": 0.5}},
+            {"option_id": 27603, "option_text": "First-aid and rescue unit — staffing the emergency response post with paramedic-level care", "trait_tags": {"Patient-Care": 0.8, "Physical-Skill": 0.7, "Public-Health": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27604, "option_text": "Nature interpretation center — educating visitors about Bukidnon's indigenous flora and fauna", "trait_tags": {"Teaching-Ed": 0.7, "Environmental-Sci": 0.8, "Forestry-Path": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 27605, "option_text": "Digital ticketing system — building the online reservation and wristband-scanning platform", "trait_tags": {"Web-Dev": 0.8, "Mobile-Dev": 0.7, "Software-Dev": 0.6, "Cloud-Systems": 0.5}},
+            {"option_id": 27606, "option_text": "Photography and content — capturing action shots and producing promotional videos for social media", "trait_tags": {"Film-Broadcast": 0.7, "Visual-Design": 0.8, "Digital-Media": 0.6, "Creative-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5080,
+        "question_text": "A government hospital in Davao is opening a dedicated women's and children's health wing. Which department head position would you apply for?",
+        "category": "maternal_pediatric_health",
+        "options": [
+            {"option_id": 27607, "option_text": "Midwifery unit — overseeing prenatal care, labor support, and postpartum follow-ups", "trait_tags": {"Patient-Care": 0.8, "People-Skill": 0.7, "Community-Serve": 0.5, "Counseling": 0.6}},
+            {"option_id": 27608, "option_text": "Pediatric nutrition — creating feeding programs for malnourished children under five", "trait_tags": {"Nutrition-Diet": 0.8, "Early-Childhood": 0.7, "Food-Science": 0.6, "Public-Health": 0.5}},
+            {"option_id": 27609, "option_text": "Neonatal lab — running blood screens and genetic tests for newborns", "trait_tags": {"Medical-Lab": 0.8, "Lab-Research": 0.7, "Analytical-Skill": 0.6, "Patient-Care": 0.5}},
+            {"option_id": 27610, "option_text": "Child psychology — conducting developmental assessments and play-therapy sessions", "trait_tags": {"Counseling": 0.8, "Early-Childhood": 0.7, "People-Skill": 0.6, "Inclusive-Ed": 0.5}},
+            {"option_id": 27611, "option_text": "Health records and informatics — digitizing patient charts and building analytics dashboards", "trait_tags": {"Health-Admin": 0.8, "Data-Analytics": 0.7, "Software-Dev": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 27612, "option_text": "Community outreach — sending mobile clinics to remote barangays for vaccination drives", "trait_tags": {"Community-Serve": 0.8, "Public-Health": 0.7, "People-Skill": 0.6, "Admin-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5081,
+        "question_text": "A regional airport is being upgraded to international status. Which expansion team do you join?",
+        "category": "aviation_infrastructure",
+        "options": [
+            {"option_id": 27613, "option_text": "Runway and taxiway engineering — designing the extended pavement to handle wide-body jets", "trait_tags": {"Civil-Build": 0.8, "Aeronautical-Eng": 0.7, "Technical-Skill": 0.6, "Mechanical-Design": 0.5}},
+            {"option_id": 27614, "option_text": "Air traffic control systems — installing radar and flight management software", "trait_tags": {"Electronics-Dev": 0.7, "Software-Dev": 0.8, "Aeronautical-Eng": 0.6, "Cloud-Systems": 0.5}},
+            {"option_id": 27615, "option_text": "Terminal architecture — designing the passenger building with natural ventilation and local art", "trait_tags": {"Spatial-Design": 0.8, "Creative-Skill": 0.7, "Civil-Build": 0.6, "Visual-Design": 0.5}},
+            {"option_id": 27616, "option_text": "Customs and immigration processing — setting up border control lanes and document scanning", "trait_tags": {"Admin-Skill": 0.8, "Legal-Practice": 0.7, "Law-Enforce": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27617, "option_text": "Duty-free retail and food court — curating tenants and negotiating lease agreements", "trait_tags": {"Marketing-Sales": 0.7, "Hospitality-Svc": 0.8, "Finance-Acct": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 27618, "option_text": "Environmental compliance — managing noise abatement and fuel spill prevention programs", "trait_tags": {"Environmental-Sci": 0.8, "Environmental-Eng": 0.7, "Analytical-Skill": 0.6, "Legal-Practice": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5082,
+        "question_text": "A fintech company is launching a digital banking app targeting unbanked Filipinos in rural areas. Which team do you join?",
+        "category": "fintech_inclusion",
+        "options": [
+            {"option_id": 27619, "option_text": "Mobile app development — building a lightweight banking interface that works on low-end phones", "trait_tags": {"Mobile-Dev": 0.8, "Software-Dev": 0.7, "Web-Dev": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27620, "option_text": "Risk and fraud detection — designing algorithms that flag suspicious transactions in real time", "trait_tags": {"AI-ML": 0.7, "Data-Analytics": 0.8, "Analytical-Skill": 0.6, "Cyber-Defense": 0.5}},
+            {"option_id": 27621, "option_text": "BSP regulatory compliance — ensuring the app meets central bank digital-lending rules", "trait_tags": {"Legal-Mgmt": 0.8, "Finance-Acct": 0.7, "Admin-Skill": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27622, "option_text": "UX research — visiting rural communities to understand how farmers and fishers handle money", "trait_tags": {"People-Skill": 0.8, "Community-Serve": 0.7, "Visual-Design": 0.6, "Data-Analytics": 0.5}},
+            {"option_id": 27623, "option_text": "Financial literacy outreach — teaching users how to save, budget, and use the app safely", "trait_tags": {"Teaching-Ed": 0.8, "Community-Serve": 0.7, "Finance-Acct": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27624, "option_text": "Agent network — recruiting and training sari-sari store owners to become cash-in/cash-out partners", "trait_tags": {"Startup-Venture": 0.8, "HR-Management": 0.7, "Marketing-Sales": 0.6, "People-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5083,
+        "question_text": "A pet care startup is building a one-stop veterinary and grooming complex in Metro Manila. Which division head role do you take?",
+        "category": "veterinary_business",
+        "options": [
+            {"option_id": 27625, "option_text": "Small-animal surgery — performing spay/neuter procedures and emergency operations", "trait_tags": {"Veterinary-Path": 0.8, "Patient-Care": 0.7, "Medical-Lab": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27626, "option_text": "Dermatology and nutrition — treating skin conditions and formulating custom pet diets", "trait_tags": {"Veterinary-Path": 0.7, "Nutrition-Diet": 0.8, "Lab-Research": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27627, "option_text": "Pet grooming academy — training groomers in breed-specific styling and animal handling safety", "trait_tags": {"TVET-Path": 0.8, "Teaching-Ed": 0.7, "Veterinary-Path": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27628, "option_text": "Online scheduling platform — building the booking site and pet health record portal", "trait_tags": {"Web-Dev": 0.8, "Software-Dev": 0.7, "Cloud-Systems": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27629, "option_text": "Marketing and community events — organizing pet adoption drives and breed expos", "trait_tags": {"Marketing-Sales": 0.8, "Community-Serve": 0.7, "People-Skill": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27630, "option_text": "Operations and finance — managing inventory, vendor contracts, and monthly profit-loss reports", "trait_tags": {"Finance-Acct": 0.8, "Admin-Skill": 0.7, "Industrial-Ops": 0.6, "Analytical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5084,
+        "question_text": "A municipal fisheries office launches a mangrove restoration and sustainable aquaculture program. Which role do you fill?",
+        "category": "fisheries_environment",
+        "options": [
+            {"option_id": 27631, "option_text": "Mangrove nursery manager — cultivating seedlings and coordinating planting schedules with volunteers", "trait_tags": {"Forestry-Path": 0.8, "Environmental-Sci": 0.7, "Agri-Nature": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 27632, "option_text": "Aquaculture technician — designing fish pens and monitoring water quality in crab and shrimp ponds", "trait_tags": {"Fisheries-Agri-Path": 0.8, "Maritime-Sea": 0.7, "Lab-Research": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27633, "option_text": "GIS mapper — using drone surveys to track mangrove regrowth and coastline changes year over year", "trait_tags": {"Data-Analytics": 0.8, "Field-Research": 0.7, "Technical-Skill": 0.6, "Environmental-Eng": 0.5}},
+            {"option_id": 27634, "option_text": "Livelihood trainer — teaching fisher families to harvest mangrove-compatible products like honey and crabs", "trait_tags": {"Teaching-Ed": 0.8, "Community-Serve": 0.7, "Agri-Nature": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27635, "option_text": "Policy researcher — studying international best practices and drafting local ordinances for enforcement", "trait_tags": {"Legal-Practice": 0.7, "Writing-Comm": 0.8, "Analytical-Skill": 0.6, "Environmental-Sci": 0.5}},
+            {"option_id": 27636, "option_text": "Eco-tourism coordinator — developing kayak trails and birdwatching tours through the restored mangroves", "trait_tags": {"Tourism-Travel": 0.8, "Tourism-Hospitality-Path": 0.7, "Hospitality-Svc": 0.6, "Creative-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5085,
+        "question_text": "A Philippine Space Agency internship program accepts college applicants across various disciplines. Which unit do you apply to?",
+        "category": "space_multidisciplinary",
+        "options": [
+            {"option_id": 27637, "option_text": "Satellite design and fabrication — building cube-sats for weather monitoring and disaster detection", "trait_tags": {"Aeronautical-Eng": 0.8, "Hardware-Systems": 0.7, "Mechanical-Design": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27638, "option_text": "Ground station operations — tracking orbits, receiving telemetry, and archiving imagery data", "trait_tags": {"Electronics-Dev": 0.8, "Cloud-Systems": 0.7, "Data-Analytics": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27639, "option_text": "Remote sensing and GIS — processing satellite images for agriculture, urban planning, and forestry", "trait_tags": {"Data-Analytics": 0.8, "Agri-Nature": 0.6, "Environmental-Sci": 0.7, "Software-Dev": 0.5}},
+            {"option_id": 27640, "option_text": "Science communication — writing press releases and producing educational videos about space missions", "trait_tags": {"Writing-Comm": 0.8, "Film-Broadcast": 0.7, "Digital-Media": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 27641, "option_text": "Mission control software — coding the command interface and anomaly-detection algorithms", "trait_tags": {"Software-Dev": 0.8, "AI-ML": 0.7, "Cloud-Systems": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27642, "option_text": "International partnerships — negotiating cooperation agreements with JAXA, NASA, and ESA", "trait_tags": {"Admin-Skill": 0.7, "People-Skill": 0.8, "Legal-Practice": 0.6, "Marketing-Sales": 0.5}},
+        ],
+    },
+]
+
+# --- collision guard --------------------------------------------------------
+_repl20_existing_qids = {q["question_id"] for q in QUESTIONS_POOL_ENHANCED}
+_repl20_new_qids = {q["question_id"] for q in _REPLACEMENT_BATCH_20}
+if _repl20_existing_qids & _repl20_new_qids:
+    raise ValueError(f"Replacement batch 20 question IDs overlap: {_repl20_existing_qids & _repl20_new_qids}")
+
+_repl20_existing_oids = {o["option_id"] for q in QUESTIONS_POOL_ENHANCED for o in q.get("options", [])}
+_repl20_new_oids = {o["option_id"] for q in _REPLACEMENT_BATCH_20 for o in q.get("options", [])}
+if _repl20_existing_oids & _repl20_new_oids:
+    raise ValueError(f"Replacement batch 20 option IDs overlap: {_repl20_existing_oids & _repl20_new_oids}")
+
+QUESTIONS_POOL_ENHANCED.extend(_REPLACEMENT_BATCH_20)
+
+
+# ─── REPLACEMENT BATCH 21 (10 funnel + 10 scenario questions) ───────────────
+_REPLACEMENT_BATCH_21 = [
+    # ═══════════════  FUNNEL QUESTIONS (10) — broad-to-narrow  ═══════════════
+    {
+        "question_id": 5086,
+        "question_text": "A regional governor asks you to lead a flagship program for the province. Which initiative do you champion?",
+        "category": "Funnel - Provincial Initiative",
+        "options": [
+            {"option_id": 27643, "option_text": "A reforestation drive planting native hardwoods across denuded mountain slopes", "trait_tags": {"Forestry-Path": 0.8, "Environmental-Sci": 0.7, "Agri-Nature": 0.6, "Community-Serve": 0.4}},
+            {"option_id": 27644, "option_text": "A provincial skills-training center teaching welding, plumbing, and automotive repair to out-of-school youth", "trait_tags": {"TVET-Path": 0.8, "Automotive-Tech": 0.7, "Teaching-Ed": 0.6, "Mechanical-Design": 0.4}},
+            {"option_id": 27645, "option_text": "A digital government portal letting residents file permits and pay taxes online", "trait_tags": {"Web-Dev": 0.8, "Cloud-Systems": 0.7, "Admin-Skill": 0.6, "Software-Dev": 0.4}},
+            {"option_id": 27646, "option_text": "A province-wide school feeding program sourcing meals from local farmers and fisherfolk", "trait_tags": {"Nutrition-Diet": 0.7, "Community-Serve": 0.8, "Agri-Nature": 0.6, "Public-Health": 0.4}},
+            {"option_id": 27647, "option_text": "A heritage tourism circuit connecting historical churches, ancestral houses, and cultural festivals", "trait_tags": {"Tourism-Travel": 0.7, "Tourism-Hospitality-Path": 0.8, "Creative-Skill": 0.6, "Community-Serve": 0.4}},
+            {"option_id": 27648, "option_text": "A telemedicine network linking rural health stations to specialist doctors in the capital", "trait_tags": {"Patient-Care": 0.7, "Health-Admin": 0.8, "Cloud-Systems": 0.6, "Electronics-Dev": 0.4}},
+        ],
+    },
+    {
+        "question_id": 5087,
+        "question_text": "You stumble upon a time machine that lets you spend a year in any historical era learning a craft. Where do you go?",
+        "category": "Funnel - Historical Craft",
+        "options": [
+            {"option_id": 27649, "option_text": "Renaissance Italy — apprenticing under master builders and architects of grand cathedrals", "trait_tags": {"Civil-Build": 0.8, "Spatial-Design": 0.7, "Visual-Design": 0.6, "Creative-Skill": 0.4}},
+            {"option_id": 27650, "option_text": "Ancient Philippines — learning traditional boat-building and celestial navigation with Austronesian seafarers", "trait_tags": {"Maritime-Sea": 0.8, "Mechanical-Design": 0.6, "Field-Research": 0.7, "Physical-Skill": 0.4}},
+            {"option_id": 27651, "option_text": "Victorian England — studying early chemistry and pharmacology breakthroughs in a London laboratory", "trait_tags": {"Pharmacy": 0.8, "Lab-Research": 0.7, "Analytical-Skill": 0.6, "Medical-Lab": 0.4}},
+            {"option_id": 27652, "option_text": "1920s Harlem — composing jazz, learning music theory, and performing in legendary Harlem clubs", "trait_tags": {"Music-Audio": 0.8, "Performing-Arts": 0.7, "Creative-Skill": 0.6, "People-Skill": 0.4}},
+            {"option_id": 27653, "option_text": "World War II Pacific theater — serving as a military communications officer decoding intercepted signals", "trait_tags": {"Military-Defense": 0.8, "Cyber-Defense": 0.6, "Electronics-Dev": 0.7, "Analytical-Skill": 0.4}},
+            {"option_id": 27654, "option_text": "Pre-colonial Philippines — cataloging medicinal plants and traditional healing practices with local herbolarios", "trait_tags": {"Veterinary-Path": 0.6, "Agri-Nature": 0.8, "Lab-Research": 0.7, "Public-Health": 0.4}},
+        ],
+    },
+    {
+        "question_id": 5088,
+        "question_text": "An international NGO invites you to set up a model learning center in a remote island community. Which program do you prioritize?",
+        "category": "Funnel - Island Learning Center",
+        "options": [
+            {"option_id": 27655, "option_text": "An early-childhood development space with play-based learning for toddlers and pre-schoolers", "trait_tags": {"Early-Childhood": 0.8, "Teaching-Ed": 0.7, "Inclusive-Ed": 0.6, "People-Skill": 0.4}},
+            {"option_id": 27656, "option_text": "A marine livelihood hub teaching sustainable seaweed farming and fish-cage management", "trait_tags": {"Fisheries-Agri-Path": 0.8, "Maritime-Sea": 0.7, "Agri-Nature": 0.6, "Community-Serve": 0.4}},
+            {"option_id": 27657, "option_text": "A solar-powered computer lab offering digital literacy and basic coding classes", "trait_tags": {"Software-Dev": 0.7, "Teaching-Ed": 0.8, "Electrical-Power": 0.6, "Hardware-Systems": 0.4}},
+            {"option_id": 27658, "option_text": "A community health clinic with midwifery and first-aid certification training", "trait_tags": {"Patient-Care": 0.8, "Public-Health": 0.7, "Community-Serve": 0.6, "Counseling": 0.4}},
+            {"option_id": 27659, "option_text": "A culinary workshop turning local ingredients into packaged goods for mainland markets", "trait_tags": {"Culinary-Mgmt-Path": 0.8, "Food-Science": 0.7, "Marketing-Sales": 0.6, "Startup-Venture": 0.4}},
+            {"option_id": 27660, "option_text": "A legal aid desk helping residents process land titles, birth certificates, and civil registrations", "trait_tags": {"Legal-Mgmt": 0.8, "Legal-Practice": 0.7, "Community-Serve": 0.6, "Admin-Skill": 0.4}},
+        ],
+    },
+    {
+        "question_id": 5089,
+        "question_text": "A reality TV show puts you in charge of reviving a struggling small town. Which revitalization project do you launch first?",
+        "category": "Funnel - Town Revitalization",
+        "options": [
+            {"option_id": 27661, "option_text": "Build a boutique hotel and wellness spa sourcing treatments from local hot springs", "trait_tags": {"Hotel-Resort-Path": 0.8, "Hospitality-Svc": 0.7, "Tourism-Hospitality-Path": 0.6, "Startup-Venture": 0.4}},
+            {"option_id": 27662, "option_text": "Establish a cooperative craft brewery using locally grown rice and calamansi", "trait_tags": {"Food-Science": 0.7, "Culinary-Arts": 0.8, "Startup-Venture": 0.6, "Marketing-Sales": 0.4}},
+            {"option_id": 27663, "option_text": "Set up a satellite campus offering two-year associate degrees in agriculture and fisheries", "trait_tags": {"Teaching-Ed": 0.7, "Agri-Nature": 0.8, "Fisheries-Agri-Path": 0.6, "Community-Serve": 0.4}},
+            {"option_id": 27664, "option_text": "Open a sports training complex with a pool, track, and strength-conditioning gym", "trait_tags": {"Sports-Fitness-Path": 0.8, "Exercise-Sci-Path": 0.7, "Physical-Skill": 0.6, "Sports-Ed": 0.4}},
+            {"option_id": 27665, "option_text": "Launch a creative district — artist studios, a gallery, and a weekend night market", "trait_tags": {"Visual-Design": 0.7, "Creative-Skill": 0.8, "Performing-Arts": 0.6, "Marketing-Sales": 0.4}},
+            {"option_id": 27666, "option_text": "Wire the town with fiber internet and attract remote-work digital nomads", "trait_tags": {"Cloud-Systems": 0.8, "Electronics-Dev": 0.7, "Technical-Skill": 0.6, "Startup-Venture": 0.4}},
+        ],
+    },
+    {
+        "question_id": 5090,
+        "question_text": "A museum of the future asks you to curate one permanent exhibit. What theme do you choose?",
+        "category": "Funnel - Museum Exhibit",
+        "options": [
+            {"option_id": 27667, "option_text": "The evolution of human medicine — from herbal remedies to robotic surgery", "trait_tags": {"Patient-Care": 0.7, "Medical-Lab": 0.8, "Lab-Research": 0.6, "Rehab-Therapy": 0.4}},
+            {"option_id": 27668, "option_text": "Philippine biodiversity — interactive terrariums showcasing endemic species from each biogeographic zone", "trait_tags": {"Environmental-Sci": 0.8, "Forestry-Path": 0.7, "Field-Research": 0.6, "Agri-Nature": 0.4}},
+            {"option_id": 27669, "option_text": "The math behind music — letting visitors compose beats using frequency ratios and waveform generators", "trait_tags": {"Music-Audio": 0.8, "Analytical-Skill": 0.6, "Electronics-Dev": 0.7, "Creative-Skill": 0.4}},
+            {"option_id": 27670, "option_text": "Space exploration — a walkable replica of the International Space Station with zero-gravity simulations", "trait_tags": {"Aeronautical-Eng": 0.8, "Hardware-Systems": 0.7, "Mechanical-Design": 0.6, "Technical-Skill": 0.4}},
+            {"option_id": 27671, "option_text": "The story of justice — famous trials, forensic breakthroughs, and the evolution of human rights law", "trait_tags": {"Legal-Practice": 0.7, "Forensic-Sci": 0.8, "Law-Enforce": 0.6, "Writing-Comm": 0.4}},
+            {"option_id": 27672, "option_text": "AI and humanity — letting visitors train a small neural network and debate the ethics of automation", "trait_tags": {"AI-ML": 0.8, "Philosophy-Path": 0.7, "Software-Dev": 0.6, "Data-Analytics": 0.4}},
+        ],
+    },
+    {
+        "question_id": 5091,
+        "question_text": "Your family inherits a large rural property and you get to decide what to build on it. Which enterprise do you establish?",
+        "category": "Funnel - Rural Enterprise",
+        "options": [
+            {"option_id": 27673, "option_text": "An organic farm with a farm-stay and cooking classes for weekend visitors", "trait_tags": {"Agri-Nature": 0.7, "Hotel-Resort-Path": 0.8, "Culinary-Arts": 0.6, "Tourism-Travel": 0.4}},
+            {"option_id": 27674, "option_text": "A veterinary clinic and animal rescue shelter serving nearby livestock farms", "trait_tags": {"Veterinary-Path": 0.8, "Patient-Care": 0.7, "Community-Serve": 0.6, "Agri-Nature": 0.4}},
+            {"option_id": 27675, "option_text": "A woodworking and furniture workshop producing handcrafted pieces from plantation timber", "trait_tags": {"TVET-Path": 0.8, "Creative-Skill": 0.7, "Mechanical-Design": 0.6, "Forestry-Path": 0.4}},
+            {"option_id": 27676, "option_text": "A retreat and counseling center for frontline workers experiencing burnout", "trait_tags": {"Counseling": 0.8, "Social-Work": 0.7, "People-Skill": 0.6, "Community-Serve": 0.4}},
+            {"option_id": 27677, "option_text": "A solar-and-wind microgrid pilot powering the property and neighboring homes", "trait_tags": {"Electrical-Power": 0.8, "Environmental-Eng": 0.7, "Hardware-Systems": 0.6, "Technical-Skill": 0.4}},
+            {"option_id": 27678, "option_text": "A mini data center and co-working space for provincial freelancers and startups", "trait_tags": {"Cloud-Systems": 0.7, "Startup-Venture": 0.8, "Software-Dev": 0.6, "Admin-Skill": 0.4}},
+        ],
+    },
+    {
+        "question_id": 5092,
+        "question_text": "A documentary crew follows you for a week as you volunteer abroad. Which assignment do you accept?",
+        "category": "Funnel - Volunteer Abroad",
+        "options": [
+            {"option_id": 27679, "option_text": "Building earthquake-resistant classrooms in rural Nepal alongside local masons", "trait_tags": {"Civil-Build": 0.8, "TVET-Path": 0.6, "Community-Serve": 0.7, "Physical-Skill": 0.4}},
+            {"option_id": 27680, "option_text": "Teaching English through theater games to refugee children in Jordan", "trait_tags": {"Teaching-Ed": 0.7, "Performing-Arts": 0.8, "People-Skill": 0.6, "Early-Childhood": 0.4}},
+            {"option_id": 27681, "option_text": "Assisting wildlife veterinarians at an elephant sanctuary in Thailand", "trait_tags": {"Veterinary-Path": 0.8, "Field-Research": 0.7, "Environmental-Sci": 0.6, "Patient-Care": 0.4}},
+            {"option_id": 27682, "option_text": "Setting up a mobile library and reading program in villages across rural Cambodia", "trait_tags": {"Library-Info": 0.8, "Teaching-Ed": 0.7, "Community-Serve": 0.6, "Early-Childhood": 0.4}},
+            {"option_id": 27683, "option_text": "Mapping flood-prone zones using drones and GIS to help a Kenyan county plan evacuation routes", "trait_tags": {"Data-Analytics": 0.8, "Environmental-Eng": 0.7, "Technical-Skill": 0.6, "Hardware-Systems": 0.4}},
+            {"option_id": 27684, "option_text": "Cooking and serving meals at a soup kitchen for homeless communities in São Paulo", "trait_tags": {"Culinary-Mgmt-Path": 0.7, "Community-Serve": 0.8, "Food-Science": 0.6, "People-Skill": 0.4}},
+        ],
+    },
+    {
+        "question_id": 5093,
+        "question_text": "A tech incubator gives you seed funding and a team of five. What startup do you launch?",
+        "category": "Funnel - Startup Pitch",
+        "options": [
+            {"option_id": 27685, "option_text": "A SaaS platform that automates payroll, leave tracking, and tax filings for small Filipino businesses", "trait_tags": {"Software-Dev": 0.7, "HR-Management": 0.8, "Finance-Acct": 0.6, "Cloud-Systems": 0.4}},
+            {"option_id": 27686, "option_text": "An on-demand motorcycle repair app that dispatches certified mechanics to your location", "trait_tags": {"Automotive-Tech": 0.8, "Mobile-Dev": 0.7, "Startup-Venture": 0.6, "TVET-Path": 0.4}},
+            {"option_id": 27687, "option_text": "An inclusive e-learning platform with sign-language video lessons and dyslexia-friendly fonts", "trait_tags": {"Inclusive-Ed": 0.8, "Web-Dev": 0.7, "Teaching-Ed": 0.6, "Software-Dev": 0.4}},
+            {"option_id": 27688, "option_text": "A precision agriculture service using satellite data to advise rice farmers on irrigation and fertilizer timing", "trait_tags": {"Agri-Nature": 0.7, "Data-Analytics": 0.8, "AI-ML": 0.6, "Environmental-Sci": 0.4}},
+            {"option_id": 27689, "option_text": "A personal-training marketplace pairing certified coaches with clients for virtual and in-person sessions", "trait_tags": {"Exercise-Sci-Path": 0.8, "Sports-Fitness-Path": 0.7, "Mobile-Dev": 0.6, "People-Skill": 0.4}},
+            {"option_id": 27690, "option_text": "A podcast network producing investigative journalism shows about Philippine politics and culture", "trait_tags": {"Film-Broadcast": 0.7, "Writing-Comm": 0.8, "Digital-Media": 0.6, "Analytical-Skill": 0.4}},
+        ],
+    },
+    {
+        "question_id": 5094,
+        "question_text": "A luxury cruise ship is hiring fresh graduates for its maiden voyage. Which onboard role do you apply for?",
+        "category": "Funnel - Cruise Ship Career",
+        "options": [
+            {"option_id": 27691, "option_text": "Executive sous chef — supervising the galley and designing themed dinner menus", "trait_tags": {"Culinary-Arts": 0.7, "Culinary-Mgmt-Path": 0.8, "Food-Science": 0.6, "Creative-Skill": 0.4}},
+            {"option_id": 27692, "option_text": "Marine engineer — maintaining the ship's propulsion, desalination, and waste-treatment systems", "trait_tags": {"Maritime-Sea": 0.7, "Mechanical-Design": 0.8, "Electrical-Power": 0.6, "Technical-Skill": 0.4}},
+            {"option_id": 27693, "option_text": "Guest relations manager — handling VIP requests, excursion bookings, and complaint resolution", "trait_tags": {"Hospitality-Svc": 0.8, "Hotel-Resort-Path": 0.7, "People-Skill": 0.6, "Admin-Skill": 0.4}},
+            {"option_id": 27694, "option_text": "Onboard nurse — running the medical clinic and responding to passenger and crew health emergencies", "trait_tags": {"Patient-Care": 0.8, "Public-Health": 0.7, "Medical-Lab": 0.6, "People-Skill": 0.4}},
+            {"option_id": 27695, "option_text": "Entertainment director — producing nightly stage shows, comedy acts, and DJ sets", "trait_tags": {"Performing-Arts": 0.8, "Music-Audio": 0.7, "Creative-Skill": 0.6, "People-Skill": 0.4}},
+            {"option_id": 27696, "option_text": "IT and network officer — keeping the satellite internet, POS terminals, and booking systems running", "trait_tags": {"Cloud-Systems": 0.8, "Cyber-Defense": 0.7, "Hardware-Systems": 0.6, "Software-Dev": 0.4}},
+        ],
+    },
+    {
+        "question_id": 5095,
+        "question_text": "A national newspaper runs a 'Young Leader' contest and you must propose a policy for the next president. What do you advocate?",
+        "category": "Funnel - Policy Advocacy",
+        "options": [
+            {"option_id": 27697, "option_text": "Mandatory digital literacy and coding classes starting in Grade 4 across all public schools", "trait_tags": {"Teaching-Ed": 0.7, "Software-Dev": 0.8, "Early-Childhood": 0.6, "Technical-Skill": 0.4}},
+            {"option_id": 27698, "option_text": "A nationwide mental health helpline staffed by licensed psychologists and social workers available 24/7", "trait_tags": {"Counseling": 0.8, "Social-Work": 0.7, "Community-Serve": 0.6, "People-Skill": 0.4}},
+            {"option_id": 27699, "option_text": "Tax breaks for companies operating certified green manufacturing and zero-waste supply chains", "trait_tags": {"Environmental-Eng": 0.8, "Industrial-Ops": 0.7, "Finance-Acct": 0.6, "Legal-Practice": 0.4}},
+            {"option_id": 27700, "option_text": "Free annual check-ups and subsidized medicine for Filipino senior citizens and PWDs", "trait_tags": {"Patient-Care": 0.7, "Pharmacy": 0.8, "Public-Health": 0.6, "Inclusive-Ed": 0.4}},
+            {"option_id": 27701, "option_text": "A national apprenticeship law requiring large companies to accept vocational trainees each semester", "trait_tags": {"TVET-Path": 0.8, "Legal-Mgmt": 0.7, "HR-Management": 0.6, "Admin-Skill": 0.4}},
+            {"option_id": 27702, "option_text": "Creation of a Philippine Space Corps integrating satellite tech into agriculture, defense, and disaster response", "trait_tags": {"Aeronautical-Eng": 0.7, "Military-Defense": 0.8, "Hardware-Systems": 0.6, "Data-Analytics": 0.4}},
+        ],
+    },
+    # ═════════════  SCENARIO QUESTIONS (10) — real-world situations  ═════════
+    {
+        "question_id": 5096,
+        "question_text": "A popular resort in Palawan suffers a sewage leak that threatens the coral reef offshore. Which crisis team do you join?",
+        "category": "resort_environmental_crisis",
+        "options": [
+            {"option_id": 27703, "option_text": "Marine assessment diver — surveying coral damage and collecting water samples for lab testing", "trait_tags": {"Maritime-Sea": 0.8, "Environmental-Sci": 0.7, "Lab-Research": 0.6, "Field-Research": 0.5}},
+            {"option_id": 27704, "option_text": "Environmental engineer — redesigning the resort's wastewater treatment to prevent future leaks", "trait_tags": {"Environmental-Eng": 0.8, "Civil-Build": 0.7, "Technical-Skill": 0.6, "Mechanical-Design": 0.5}},
+            {"option_id": 27705, "option_text": "Legal compliance officer — ensuring the resort meets DENR discharge standards and filing incident reports", "trait_tags": {"Legal-Practice": 0.8, "Legal-Mgmt": 0.7, "Admin-Skill": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27706, "option_text": "Public health officer — testing nearby community wells and advising residents on safe water use", "trait_tags": {"Public-Health": 0.8, "Medical-Lab": 0.7, "Community-Serve": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27707, "option_text": "Crisis communications manager — issuing press statements and coordinating with tourists and media", "trait_tags": {"Writing-Comm": 0.8, "People-Skill": 0.7, "Digital-Media": 0.6, "Marketing-Sales": 0.5}},
+            {"option_id": 27708, "option_text": "Eco-tourism planner — redesigning the resort's tours around reef rehabilitation and voluntourism", "trait_tags": {"Tourism-Travel": 0.7, "Tourism-Hospitality-Path": 0.8, "Hotel-Resort-Path": 0.6, "Creative-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5097,
+        "question_text": "A Philippine animation studio wins a contract to produce an original children's series for an Asian streaming platform. Which production role do you want?",
+        "category": "animation_production",
+        "options": [
+            {"option_id": 27709, "option_text": "Character designer — sketching heroes, villains, and creatures that reflect Filipino folklore", "trait_tags": {"Visual-Design": 0.8, "Animation-3D": 0.7, "Creative-Skill": 0.6, "Digital-Media": 0.5}},
+            {"option_id": 27710, "option_text": "Lead writer — crafting episode scripts with age-appropriate humor and Filipino cultural themes", "trait_tags": {"Writing-Comm": 0.8, "Creative-Skill": 0.7, "Philosophy-Path": 0.6, "Performing-Arts": 0.5}},
+            {"option_id": 27711, "option_text": "Sound designer and composer — scoring the soundtrack and designing foley effects for each scene", "trait_tags": {"Music-Audio": 0.8, "Creative-Skill": 0.7, "Electronics-Dev": 0.6, "Digital-Media": 0.5}},
+            {"option_id": 27712, "option_text": "Technical director — managing the render farm, pipeline tools, and version-control systems", "trait_tags": {"Software-Dev": 0.8, "Cloud-Systems": 0.7, "Technical-Skill": 0.6, "Hardware-Systems": 0.5}},
+            {"option_id": 27713, "option_text": "Child development consultant — ensuring content meets educational standards and is suitable for the target age group", "trait_tags": {"Early-Childhood": 0.8, "Counseling": 0.7, "Teaching-Ed": 0.6, "Inclusive-Ed": 0.5}},
+            {"option_id": 27714, "option_text": "Business and licensing manager — negotiating toy merchandising deals and regional distribution rights", "trait_tags": {"Marketing-Sales": 0.8, "Finance-Acct": 0.7, "Legal-Mgmt": 0.6, "Admin-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5098,
+        "question_text": "A federation of jeepney operators needs to modernize their fleet under the government's PUV Modernization Program. Which role do you fill?",
+        "category": "transport_modernization",
+        "options": [
+            {"option_id": 27715, "option_text": "Electric vehicle conversion engineer — retrofitting diesel jeepneys with battery-electric drivetrains", "trait_tags": {"Automotive-Tech": 0.8, "Electrical-Power": 0.7, "Mechanical-Design": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27716, "option_text": "Route optimization analyst — using GPS data to redesign routes for maximum coverage and fuel efficiency", "trait_tags": {"Data-Analytics": 0.8, "Software-Dev": 0.7, "Industrial-Ops": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27717, "option_text": "Driver training coordinator — certifying operators on defensive driving, passenger safety, and new vehicle features", "trait_tags": {"Teaching-Ed": 0.7, "TVET-Path": 0.8, "People-Skill": 0.6, "Physical-Skill": 0.5}},
+            {"option_id": 27718, "option_text": "Cooperative finance officer — securing bank loans and government subsidies for the fleet purchase", "trait_tags": {"Finance-Acct": 0.8, "Admin-Skill": 0.7, "Legal-Practice": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27719, "option_text": "Exterior and interior designer — creating passenger-friendly layouts with ventilation, USB ports, and PWD ramps", "trait_tags": {"Spatial-Design": 0.8, "Visual-Design": 0.7, "Inclusive-Ed": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27720, "option_text": "Fare collection app developer — building a tap-to-pay system integrated with RFID cards and e-wallets", "trait_tags": {"Mobile-Dev": 0.8, "Software-Dev": 0.7, "Cloud-Systems": 0.6, "Cyber-Defense": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5099,
+        "question_text": "A group of young professionals pools savings to open a co-owned business in Baguio City. You choose the concept — what is it?",
+        "category": "baguio_business_venture",
+        "options": [
+            {"option_id": 27721, "option_text": "A specialty coffee roastery and tasting lounge featuring single-origin beans from Cordillera farmers", "trait_tags": {"Culinary-Arts": 0.7, "Culinary-Mgmt-Path": 0.8, "Startup-Venture": 0.6, "Food-Science": 0.5}},
+            {"option_id": 27722, "option_text": "An outdoor adventure outfitter offering guided hikes, caving, and mountain biking around Benguet", "trait_tags": {"Sports-Fitness-Path": 0.8, "Tourism-Travel": 0.7, "Physical-Skill": 0.6, "Exercise-Sci-Path": 0.5}},
+            {"option_id": 27723, "option_text": "A recording studio and jam space that rents by the hour and offers mixing and mastering services", "trait_tags": {"Music-Audio": 0.8, "Electronics-Dev": 0.7, "Creative-Skill": 0.6, "Startup-Venture": 0.5}},
+            {"option_id": 27724, "option_text": "A pet-friendly bed-and-breakfast with an on-site grooming parlor and vet consultation hours", "trait_tags": {"Hotel-Resort-Path": 0.8, "Veterinary-Path": 0.7, "Hospitality-Svc": 0.6, "Startup-Venture": 0.5}},
+            {"option_id": 27725, "option_text": "An art therapy and wellness studio hosting painting, pottery, and mindfulness sessions", "trait_tags": {"Counseling": 0.7, "Creative-Skill": 0.8, "Visual-Design": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27726, "option_text": "A co-working hub with dedicated desks for remote tech workers and freelance designers", "trait_tags": {"Admin-Skill": 0.7, "Startup-Venture": 0.8, "Web-Dev": 0.6, "Cloud-Systems": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5100,
+        "question_text": "A city government hires you to redesign an abandoned public market into a vibrant community space. Which anchor feature do you install?",
+        "category": "urban_redevelopment",
+        "options": [
+            {"option_id": 27727, "option_text": "A maker space with 3D printers, laser cutters, and CNC machines open to student inventors", "trait_tags": {"Hardware-Systems": 0.8, "Mechanical-Design": 0.7, "Technical-Skill": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27728, "option_text": "A community kitchen incubator where aspiring food entrepreneurs can develop and test recipes", "trait_tags": {"Culinary-Arts": 0.7, "Startup-Venture": 0.8, "Food-Science": 0.6, "Culinary-Mgmt-Path": 0.5}},
+            {"option_id": 27729, "option_text": "A public library branch with a children's reading nook and a digital media lab", "trait_tags": {"Library-Info": 0.8, "Early-Childhood": 0.7, "Digital-Media": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 27730, "option_text": "A multi-sport court and fitness zone with free group exercise classes for residents", "trait_tags": {"Sports-Fitness-Path": 0.7, "Exercise-Sci-Path": 0.8, "Community-Serve": 0.6, "Physical-Skill": 0.5}},
+            {"option_id": 27731, "option_text": "A legal and social-services one-stop shop providing free consultations on labor, family, and housing rights", "trait_tags": {"Legal-Practice": 0.8, "Social-Work": 0.7, "Community-Serve": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27732, "option_text": "A green urban farm on the rooftop growing vegetables and herbs sold at a ground-floor weekend market", "trait_tags": {"Agri-Nature": 0.8, "Environmental-Sci": 0.7, "Nutrition-Diet": 0.6, "Community-Serve": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5101,
+        "question_text": "A Philippine military base is training a new batch of reserve officers and offers elective specialty tracks. Which do you enroll in?",
+        "category": "military_reserve_training",
+        "options": [
+            {"option_id": 27733, "option_text": "Combat medic — learning battlefield first aid, triage under fire, and emergency evacuation procedures", "trait_tags": {"Military-Defense": 0.8, "Patient-Care": 0.7, "Physical-Skill": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27734, "option_text": "Signals and cyber warfare — operating encrypted radios, jamming enemy comms, and defending field networks", "trait_tags": {"Military-Defense": 0.7, "Cyber-Defense": 0.8, "Electronics-Dev": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27735, "option_text": "Military engineering — constructing field bridges, bunkers, and temporary airstrips under operational pressure", "trait_tags": {"Civil-Build": 0.8, "Military-Defense": 0.7, "Mechanical-Design": 0.6, "TVET-Path": 0.5}},
+            {"option_id": 27736, "option_text": "Intelligence analysis — gathering open-source data, interpreting satellite imagery, and briefing commanders", "trait_tags": {"Data-Analytics": 0.8, "Analytical-Skill": 0.7, "Military-Defense": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 27737, "option_text": "Judge Advocate — advising on rules of engagement, international humanitarian law, and military justice cases", "trait_tags": {"Legal-Practice": 0.8, "Legal-Mgmt": 0.7, "Military-Defense": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 27738, "option_text": "Civil-military operations — coordinating disaster relief, community outreach, and humanitarian missions", "trait_tags": {"Community-Serve": 0.8, "Military-Defense": 0.7, "People-Skill": 0.6, "Admin-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5102,
+        "question_text": "A national teachers' conference asks you to develop a workshop for K-12 educators. What is your workshop about?",
+        "category": "educator_professional_development",
+        "options": [
+            {"option_id": 27739, "option_text": "Using gamification and educational apps to teach math and science to attention-diverse learners", "trait_tags": {"Teaching-Ed": 0.7, "Game-Dev": 0.8, "Inclusive-Ed": 0.6, "Software-Dev": 0.5}},
+            {"option_id": 27740, "option_text": "Integrating hands-on agriculture projects — school gardens, composting, and aquaponics — into the curriculum", "trait_tags": {"Teaching-Ed": 0.8, "Agri-Nature": 0.7, "Environmental-Sci": 0.6, "Nutrition-Diet": 0.5}},
+            {"option_id": 27741, "option_text": "Trauma-informed teaching strategies for children affected by typhoons, poverty, or family disruption", "trait_tags": {"Counseling": 0.8, "Early-Childhood": 0.7, "Social-Work": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27742, "option_text": "Building a school makerspace on a budget — from cardboard prototyping to Arduino-based student projects", "trait_tags": {"Hardware-Systems": 0.8, "Teaching-Ed": 0.7, "Electronics-Dev": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27743, "option_text": "Financial literacy for teens — lesson plans on saving, budgeting, and understanding credit", "trait_tags": {"Finance-Acct": 0.8, "Teaching-Ed": 0.7, "Analytical-Skill": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27744, "option_text": "Adaptive PE programs that include students with physical and developmental disabilities", "trait_tags": {"Inclusive-Ed": 0.8, "Sports-Ed": 0.7, "Exercise-Sci-Path": 0.6, "Rehab-Therapy": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5103,
+        "question_text": "An international food expo in Manila invites you to run one demonstration booth for a week. What do you showcase?",
+        "category": "food_expo_showcase",
+        "options": [
+            {"option_id": 27745, "option_text": "Live cooking station — preparing regional Filipino dishes and explaining the science behind fermentation and smoking", "trait_tags": {"Culinary-Arts": 0.8, "Food-Science": 0.7, "Culinary-Mgmt-Path": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27746, "option_text": "Nutrition analysis corner — running calorie and macro breakdowns of popular street foods on the spot", "trait_tags": {"Nutrition-Diet": 0.8, "Analytical-Skill": 0.7, "Public-Health": 0.6, "Lab-Research": 0.5}},
+            {"option_id": 27747, "option_text": "Sustainable packaging demo — showcasing biodegradable wrappers made from banana leaves and seaweed extract", "trait_tags": {"Environmental-Eng": 0.8, "Food-Science": 0.7, "Lab-Research": 0.6, "Agri-Nature": 0.5}},
+            {"option_id": 27748, "option_text": "Food safety and inspection station — demonstrating rapid microbial testing kits for restaurant operators", "trait_tags": {"Medical-Lab": 0.7, "Public-Health": 0.8, "Analytical-Skill": 0.6, "Food-Science": 0.5}},
+            {"option_id": 27749, "option_text": "Farm-to-table storytelling booth — connecting visitors with the Cordillera farmers who grew the ingredients", "trait_tags": {"Agri-Nature": 0.7, "Marketing-Sales": 0.8, "People-Skill": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 27750, "option_text": "Robotics in food service — demonstrating an automated sushi/rice-ball machine and discussing AI in kitchens", "trait_tags": {"AI-ML": 0.7, "Hardware-Systems": 0.8, "Software-Dev": 0.6, "Mechanical-Design": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5104,
+        "question_text": "A large fishing company in General Santos is diversifying its operations and forming new departments. Which department head position do you take?",
+        "category": "fisheries_diversification",
+        "options": [
+            {"option_id": 27751, "option_text": "Cold-chain logistics — managing blast freezers, refrigerated trucks, and export shipping schedules", "trait_tags": {"Industrial-Ops": 0.8, "Mechanical-Design": 0.7, "Admin-Skill": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27752, "option_text": "Aquaculture R&D — breeding disease-resistant tilapia and milkfish strains in controlled ponds", "trait_tags": {"Fisheries-Agri-Path": 0.8, "Lab-Research": 0.7, "Agri-Nature": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27753, "option_text": "Quality assurance lab — testing mercury levels, freshness indicators, and HACCP compliance", "trait_tags": {"Medical-Lab": 0.7, "Food-Science": 0.8, "Analytical-Skill": 0.6, "Public-Health": 0.5}},
+            {"option_id": 27754, "option_text": "Fleet technology — outfitting boats with GPS tracking, fish finders, and satellite communication", "trait_tags": {"Electronics-Dev": 0.8, "Maritime-Sea": 0.7, "Hardware-Systems": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27755, "option_text": "Export marketing — negotiating supply contracts with buyers in Japan, Korea, and the EU", "trait_tags": {"Marketing-Sales": 0.8, "Finance-Acct": 0.7, "People-Skill": 0.6, "Legal-Practice": 0.5}},
+            {"option_id": 27756, "option_text": "Corporate social responsibility — running coastal cleanup drives and sponsoring fisherfolk scholarships", "trait_tags": {"Community-Serve": 0.8, "Social-Work": 0.7, "People-Skill": 0.6, "Writing-Comm": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5105,
+        "question_text": "A provincial hospital is adding an allied health sciences wing with new specialty clinics. Which clinic do you head?",
+        "category": "allied_health_expansion",
+        "options": [
+            {"option_id": 27757, "option_text": "Speech and language pathology — helping stroke survivors and children with communication disorders", "trait_tags": {"Rehab-Therapy": 0.8, "Patient-Care": 0.7, "People-Skill": 0.6, "Inclusive-Ed": 0.5}},
+            {"option_id": 27758, "option_text": "Sports medicine and orthopedic rehab — treating athletes' injuries and post-surgery recovery programs", "trait_tags": {"Sports-Fitness-Path": 0.8, "Exercise-Sci-Path": 0.7, "Rehab-Therapy": 0.6, "Patient-Care": 0.5}},
+            {"option_id": 27759, "option_text": "Clinical nutrition — designing meal plans for diabetic, cardiac, and renal patients", "trait_tags": {"Nutrition-Diet": 0.8, "Patient-Care": 0.7, "Food-Science": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27760, "option_text": "Medical imaging — operating CT scanners, MRI machines, and ultrasound equipment for diagnosis", "trait_tags": {"Medical-Lab": 0.8, "Technical-Skill": 0.7, "Hardware-Systems": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27761, "option_text": "Occupational therapy — helping patients relearn daily tasks after traumatic brain injuries or amputations", "trait_tags": {"Rehab-Therapy": 0.8, "Inclusive-Ed": 0.7, "People-Skill": 0.6, "Patient-Care": 0.5}},
+            {"option_id": 27762, "option_text": "Health informatics — connecting the wing's electronic records to the national PhilHealth database", "trait_tags": {"Health-Admin": 0.8, "Software-Dev": 0.7, "Data-Analytics": 0.6, "Cloud-Systems": 0.5}},
+        ],
+    },
+]
+
+# --- collision guard --------------------------------------------------------
+_repl21_existing_qids = {q["question_id"] for q in QUESTIONS_POOL_ENHANCED}
+_repl21_new_qids = {q["question_id"] for q in _REPLACEMENT_BATCH_21}
+if _repl21_existing_qids & _repl21_new_qids:
+    raise ValueError(f"Replacement batch 21 question IDs overlap: {_repl21_existing_qids & _repl21_new_qids}")
+
+_repl21_existing_oids = {o["option_id"] for q in QUESTIONS_POOL_ENHANCED for o in q.get("options", [])}
+_repl21_new_oids = {o["option_id"] for q in _REPLACEMENT_BATCH_21 for o in q.get("options", [])}
+if _repl21_existing_oids & _repl21_new_oids:
+    raise ValueError(f"Replacement batch 21 option IDs overlap: {_repl21_existing_oids & _repl21_new_oids}")
+
+QUESTIONS_POOL_ENHANCED.extend(_REPLACEMENT_BATCH_21)
+
+
+# ─── REPLACEMENT BATCH 22 (20 scenario questions) ───────────────────────────
+_REPLACEMENT_BATCH_22 = [
+    {
+        "question_id": 5106,
+        "question_text": "A coastal LGU in Zambales is building a marine sanctuary visitor center. Which staff position do you apply for?",
+        "category": "marine_ecotourism",
+        "options": [
+            {"option_id": 27763, "option_text": "Dive safety officer — briefing snorkelers and divers on currents, coral etiquette, and emergency protocols", "trait_tags": {"Maritime-Sea": 0.8, "Physical-Skill": 0.7, "Tourism-Travel": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27764, "option_text": "Marine biologist — tagging sea turtles, monitoring reef health, and maintaining a species database", "trait_tags": {"Field-Research": 0.8, "Environmental-Sci": 0.7, "Lab-Research": 0.6, "Data-Analytics": 0.5}},
+            {"option_id": 27765, "option_text": "Exhibit designer — creating interactive displays about ocean ecosystems using augmented-reality panels", "trait_tags": {"Animation-3D": 0.7, "Visual-Design": 0.8, "Digital-Media": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27766, "option_text": "Community liaison — training local fisherfolk as eco-tour guides and managing homestay partnerships", "trait_tags": {"Community-Serve": 0.8, "Tourism-Hospitality-Path": 0.7, "People-Skill": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 27767, "option_text": "Revenue and grants officer — writing funding proposals and tracking ticket-sale income", "trait_tags": {"Finance-Acct": 0.8, "Writing-Comm": 0.7, "Admin-Skill": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27768, "option_text": "Underwater photographer — producing promotional footage that markets the sanctuary worldwide", "trait_tags": {"Film-Broadcast": 0.8, "Creative-Skill": 0.7, "Digital-Media": 0.6, "Marketing-Sales": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5107,
+        "question_text": "A Cebu-based furniture exporter wants to launch a premium line using reclaimed wood. Which role do you take on the project?",
+        "category": "sustainable_manufacturing",
+        "options": [
+            {"option_id": 27769, "option_text": "Industrial designer — sketching ergonomic chairs and tables that highlight the wood's natural grain", "trait_tags": {"Spatial-Design": 0.8, "Creative-Skill": 0.7, "Mechanical-Design": 0.6, "Visual-Design": 0.5}},
+            {"option_id": 27770, "option_text": "Supply chain forester — sourcing reclaimed timber legally and verifying chain-of-custody certifications", "trait_tags": {"Forestry-Path": 0.8, "Admin-Skill": 0.7, "Legal-Practice": 0.6, "Environmental-Sci": 0.5}},
+            {"option_id": 27771, "option_text": "CNC machine programmer — converting 3D designs into tool paths for precision cutting and carving", "trait_tags": {"TVET-Path": 0.8, "Software-Dev": 0.7, "Mechanical-Design": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27772, "option_text": "Brand strategist — building the eco-luxury identity, product photography, and social media campaigns", "trait_tags": {"Marketing-Sales": 0.8, "Digital-Media": 0.7, "Creative-Skill": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 27773, "option_text": "Quality control chemist — testing wood finishes for VOC levels and ensuring non-toxic coatings", "trait_tags": {"Lab-Research": 0.8, "Analytical-Skill": 0.7, "Food-Science": 0.5, "Environmental-Eng": 0.6}},
+            {"option_id": 27774, "option_text": "Export logistics coordinator — managing container shipping, customs documents, and international delivery timelines", "trait_tags": {"Industrial-Ops": 0.8, "Admin-Skill": 0.7, "Finance-Acct": 0.6, "Legal-Practice": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5108,
+        "question_text": "A Philippine esports organization is building a training facility and academy for aspiring pro gamers. Which department do you head?",
+        "category": "esports_academy",
+        "options": [
+            {"option_id": 27775, "option_text": "Performance coaching — analyzing match replays, drafting strategies, and running scrimmage drills", "trait_tags": {"Game-Dev": 0.7, "Data-Analytics": 0.8, "Analytical-Skill": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27776, "option_text": "Sports psychology — helping players manage stage anxiety, tilt, and team conflict", "trait_tags": {"Counseling": 0.8, "Sports-Ed": 0.7, "People-Skill": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27777, "option_text": "Broadcast production — directing live tournament streams with camera switching and commentary overlays", "trait_tags": {"Film-Broadcast": 0.8, "Digital-Media": 0.7, "Software-Dev": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27778, "option_text": "Network and server admin — ensuring zero-latency LAN setups and managing anti-cheat software", "trait_tags": {"Cloud-Systems": 0.8, "Cyber-Defense": 0.7, "Hardware-Systems": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27779, "option_text": "Physical conditioning trainer — designing exercise routines that prevent RSI and improve players' reaction time", "trait_tags": {"Exercise-Sci-Path": 0.8, "Sports-Fitness-Path": 0.7, "Nutrition-Diet": 0.6, "Rehab-Therapy": 0.5}},
+            {"option_id": 27780, "option_text": "Sponsorship and events manager — signing brand deals and organizing inter-school tournaments", "trait_tags": {"Marketing-Sales": 0.8, "Finance-Acct": 0.7, "People-Skill": 0.6, "Admin-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5109,
+        "question_text": "A barangay daycare center in Tondo is being redesigned to serve as a model early-learning hub. Which improvement do you lead?",
+        "category": "early_learning_redesign",
+        "options": [
+            {"option_id": 27781, "option_text": "Curriculum developer — designing play-based modules aligned with DepEd's kindergarten learning standards", "trait_tags": {"Early-Childhood": 0.8, "Teaching-Ed": 0.7, "Creative-Skill": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 27782, "option_text": "Inclusive-access specialist — adding sensory rooms, wheelchair ramps, and visual schedules for children with disabilities", "trait_tags": {"Inclusive-Ed": 0.8, "Spatial-Design": 0.7, "Rehab-Therapy": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27783, "option_text": "Nutrition officer — planning balanced mealtime menus using local produce and monitoring children's growth metrics", "trait_tags": {"Nutrition-Diet": 0.8, "Early-Childhood": 0.7, "Public-Health": 0.6, "Food-Science": 0.5}},
+            {"option_id": 27784, "option_text": "Health screening coordinator — running eye, hearing, and dental checks with visiting volunteer professionals", "trait_tags": {"Patient-Care": 0.8, "Public-Health": 0.7, "Community-Serve": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 27785, "option_text": "Parent engagement facilitator — hosting parenting workshops and linking families to social-protection programs", "trait_tags": {"Social-Work": 0.8, "People-Skill": 0.7, "Counseling": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 27786, "option_text": "Facility safety engineer — upgrading fire exits, child-safe fixtures, and ventilation systems", "trait_tags": {"Civil-Build": 0.8, "Mechanical-Design": 0.7, "Technical-Skill": 0.6, "Electrical-Power": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5110,
+        "question_text": "A provincial government is converting a decommissioned military base into a mixed-use development. Which planning team do you join?",
+        "category": "base_conversion_planning",
+        "options": [
+            {"option_id": 27787, "option_text": "Urban planner — zoning residential, commercial, and green spaces within the former perimeter", "trait_tags": {"Spatial-Design": 0.8, "Civil-Build": 0.7, "Environmental-Sci": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27788, "option_text": "Heritage preservation officer — converting the old armory and barracks into a military history museum", "trait_tags": {"Military-Defense": 0.7, "Library-Info": 0.8, "Writing-Comm": 0.6, "Visual-Design": 0.5}},
+            {"option_id": 27789, "option_text": "Renewable energy planner — installing rooftop solar on repurposed hangars to power the whole development", "trait_tags": {"Electrical-Power": 0.8, "Environmental-Eng": 0.7, "Technical-Skill": 0.6, "Hardware-Systems": 0.5}},
+            {"option_id": 27790, "option_text": "IT infrastructure architect — laying fiber optic backbone and designing smart-building automation", "trait_tags": {"Cloud-Systems": 0.8, "Electronics-Dev": 0.7, "Software-Dev": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27791, "option_text": "Public health planner — designing a district clinic with outpatient, pharmacy, and emergency departments", "trait_tags": {"Health-Admin": 0.8, "Patient-Care": 0.7, "Pharmacy": 0.6, "Public-Health": 0.5}},
+            {"option_id": 27792, "option_text": "Sports complex developer — building an Olympic-size pool, velodrome, and multi-sport gymnasium", "trait_tags": {"Sports-Ed": 0.7, "Sports-Fitness-Path": 0.8, "Civil-Build": 0.6, "Exercise-Sci-Path": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5111,
+        "question_text": "A Philippine airline is launching direct flights to new international destinations and needs fresh hires. Which career track do you choose?",
+        "category": "airline_careers",
+        "options": [
+            {"option_id": 27793, "option_text": "Aircraft maintenance engineer — inspecting engines, hydraulics, and avionics between flights", "trait_tags": {"Aeronautical-Eng": 0.8, "Mechanical-Design": 0.7, "Technical-Skill": 0.6, "Hardware-Systems": 0.5}},
+            {"option_id": 27794, "option_text": "Revenue management analyst — setting fare prices using demand forecasting models and competitor data", "trait_tags": {"Data-Analytics": 0.8, "Finance-Acct": 0.7, "Analytical-Skill": 0.6, "Marketing-Sales": 0.5}},
+            {"option_id": 27795, "option_text": "Cabin crew trainer — teaching safety drills, service protocols, and cultural sensitivity to new flight attendants", "trait_tags": {"Teaching-Ed": 0.7, "Hospitality-Svc": 0.8, "People-Skill": 0.6, "Hotel-Resort-Path": 0.5}},
+            {"option_id": 27796, "option_text": "Ground operations supervisor — coordinating gate assignments, baggage handling, and on-time departures", "trait_tags": {"Industrial-Ops": 0.8, "Admin-Skill": 0.7, "Physical-Skill": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27797, "option_text": "Digital experience designer — redesigning the booking app with AI-powered seat selection and chatbot support", "trait_tags": {"Web-Dev": 0.7, "AI-ML": 0.8, "Mobile-Dev": 0.6, "Visual-Design": 0.5}},
+            {"option_id": 27798, "option_text": "Aviation medical officer — clearing pilots for duty and responding to in-flight medical emergencies", "trait_tags": {"Patient-Care": 0.8, "Medical-Lab": 0.7, "Aeronautical-Eng": 0.5, "Analytical-Skill": 0.6}},
+        ],
+    },
+    {
+        "question_id": 5112,
+        "question_text": "A Mindanao cooperative launches a cacao-to-chocolate social enterprise. Which division do you manage?",
+        "category": "cacao_social_enterprise",
+        "options": [
+            {"option_id": 27799, "option_text": "Farm extension — training growers on fermentation, drying, and post-harvest handling for premium-grade beans", "trait_tags": {"Agri-Nature": 0.8, "Teaching-Ed": 0.7, "Food-Science": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 27800, "option_text": "Chocolate R&D — roasting and tempering experimental batches to develop signature flavor profiles", "trait_tags": {"Culinary-Arts": 0.8, "Food-Science": 0.7, "Lab-Research": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27801, "option_text": "Fair-trade compliance — documenting labor practices and pursuing international organic certification", "trait_tags": {"Legal-Mgmt": 0.8, "Admin-Skill": 0.7, "Writing-Comm": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27802, "option_text": "Packaging and branding — designing artisan wrappers with QR codes linking to the farmer's story", "trait_tags": {"Visual-Design": 0.8, "Marketing-Sales": 0.7, "Digital-Media": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27803, "option_text": "Cooperative finance — managing member dividends, microloans, and reinvestment into seedling nurseries", "trait_tags": {"Finance-Acct": 0.8, "Community-Serve": 0.7, "Admin-Skill": 0.6, "Agri-Nature": 0.5}},
+            {"option_id": 27804, "option_text": "Eco-tourism café — running a tasting room on-site where visitors tour the plantation and sample fresh chocolate", "trait_tags": {"Culinary-Mgmt-Path": 0.8, "Tourism-Hospitality-Path": 0.7, "Hospitality-Svc": 0.6, "Startup-Venture": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5113,
+        "question_text": "A Philippine Red Cross chapter is upgrading its disaster-preparedness program for a typhoon-prone province. Which upgrade do you spearhead?",
+        "category": "disaster_preparedness",
+        "options": [
+            {"option_id": 27805, "option_text": "Early-warning tech — installing river-level sensors and automated SMS alerts for downstream communities", "trait_tags": {"Electronics-Dev": 0.8, "Environmental-Eng": 0.7, "Software-Dev": 0.6, "Hardware-Systems": 0.5}},
+            {"option_id": 27806, "option_text": "Volunteer medic training — certifying 500 barangay health workers in advanced first aid and CPR", "trait_tags": {"Patient-Care": 0.8, "Teaching-Ed": 0.7, "Community-Serve": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27807, "option_text": "Evacuation shelter design — engineering modular flood-proof structures that can be assembled in hours", "trait_tags": {"Civil-Build": 0.8, "Mechanical-Design": 0.7, "TVET-Path": 0.6, "Spatial-Design": 0.5}},
+            {"option_id": 27808, "option_text": "Psychosocial readiness — pre-positioning counselors and developing mental health first-aid kits", "trait_tags": {"Counseling": 0.8, "Social-Work": 0.7, "Community-Serve": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27809, "option_text": "Supply pre-positioning — mapping warehouses and pre-stocking food, medicine, and hygiene kits along evacuation corridors", "trait_tags": {"Industrial-Ops": 0.8, "Admin-Skill": 0.7, "Public-Health": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27810, "option_text": "Drone reconnaissance — flying post-storm damage assessments and delivering emergency supplies to cut-off areas", "trait_tags": {"Hardware-Systems": 0.7, "Data-Analytics": 0.8, "Technical-Skill": 0.6, "Field-Research": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5114,
+        "question_text": "A provincial library system receives a multi-million-peso grant to modernize. Which initiative do you champion?",
+        "category": "library_modernization",
+        "options": [
+            {"option_id": 27811, "option_text": "Digital archive project — scanning rare manuscripts, local newspapers, and oral-history recordings", "trait_tags": {"Library-Info": 0.8, "Digital-Media": 0.7, "Writing-Comm": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27812, "option_text": "Maker and STEM corner — setting up 3D printers, coding kits, and robotics workshops for teens", "trait_tags": {"Hardware-Systems": 0.8, "Teaching-Ed": 0.7, "Software-Dev": 0.6, "Electronics-Dev": 0.5}},
+            {"option_id": 27813, "option_text": "Bookmobile fleet — outfitting vans with shelves and Wi-Fi hotspots to reach far-flung barangays", "trait_tags": {"Library-Info": 0.7, "Community-Serve": 0.8, "Teaching-Ed": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 27814, "option_text": "Accessible reading program — producing Braille books, large-print editions, and audiobooks for visually impaired patrons", "trait_tags": {"Inclusive-Ed": 0.8, "Library-Info": 0.7, "Creative-Skill": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27815, "option_text": "Integrated catalog system — building a shared online database linking all branches with barcode/RFID checkout", "trait_tags": {"Software-Dev": 0.8, "Cloud-Systems": 0.7, "Data-Analytics": 0.6, "Library-Info": 0.5}},
+            {"option_id": 27816, "option_text": "Children's reading festival — organizing storytelling competitions, author visits, and read-aloud marathons", "trait_tags": {"Early-Childhood": 0.8, "Performing-Arts": 0.7, "Community-Serve": 0.6, "People-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5115,
+        "question_text": "A multinational auto manufacturer is opening an assembly plant in Laguna and hiring its first Philippine workforce. Which department do you join?",
+        "category": "automotive_assembly",
+        "options": [
+            {"option_id": 27817, "option_text": "Welding and body shop — programming robotic welders and inspecting body panel tolerances", "trait_tags": {"Automotive-Tech": 0.8, "TVET-Path": 0.7, "Mechanical-Design": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27818, "option_text": "Electric drivetrain integration — installing battery packs, motor controllers, and charging port assemblies", "trait_tags": {"Electrical-Power": 0.8, "Automotive-Tech": 0.7, "Electronics-Dev": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27819, "option_text": "Paint and finish lab — mixing custom colors, testing corrosion resistance, and managing the paint booth", "trait_tags": {"Lab-Research": 0.7, "Visual-Design": 0.8, "Analytical-Skill": 0.6, "Mechanical-Design": 0.5}},
+            {"option_id": 27820, "option_text": "Occupational health and safety — enforcing PPE protocols, noise limits, and ergonomic workstation design", "trait_tags": {"Public-Health": 0.8, "Industrial-Ops": 0.7, "Admin-Skill": 0.6, "Rehab-Therapy": 0.5}},
+            {"option_id": 27821, "option_text": "Human resources and recruitment — screening applicants, running skills tests, and managing onboarding", "trait_tags": {"HR-Management": 0.8, "People-Skill": 0.7, "Admin-Skill": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27822, "option_text": "Dealer network development — identifying provincial partners and training showroom sales teams", "trait_tags": {"Marketing-Sales": 0.8, "Startup-Venture": 0.7, "People-Skill": 0.6, "Finance-Acct": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5116,
+        "question_text": "A national museum partners with indigenous Mangyan communities to create a cultural preservation project. Which role do you volunteer for?",
+        "category": "indigenous_cultural_preservation",
+        "options": [
+            {"option_id": 27823, "option_text": "Ethnographic researcher — conducting interviews and documenting weaving patterns, chants, and rituals", "trait_tags": {"Field-Research": 0.8, "Writing-Comm": 0.7, "Philosophy-Path": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27824, "option_text": "Language preservation technologist — building a mobile dictionary and pronunciation app for the Hanunuo script", "trait_tags": {"Mobile-Dev": 0.8, "Software-Dev": 0.7, "Teaching-Ed": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27825, "option_text": "Textile conservator — stabilizing century-old fabrics using museum-grade techniques and climate-controlled storage", "trait_tags": {"Lab-Research": 0.8, "Visual-Design": 0.7, "Analytical-Skill": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27826, "option_text": "Rights and advocacy lawyer — ensuring IP communities retain ownership and licensing control over their cultural assets", "trait_tags": {"Legal-Practice": 0.8, "Legal-Mgmt": 0.7, "Community-Serve": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 27827, "option_text": "Documentary filmmaker — producing a multi-part series that airs on national television and streaming platforms", "trait_tags": {"Film-Broadcast": 0.8, "Creative-Skill": 0.7, "Music-Audio": 0.6, "Digital-Media": 0.5}},
+            {"option_id": 27828, "option_text": "Eco-cultural tour designer — creating responsible tourism packages that channel income directly to the community", "trait_tags": {"Tourism-Travel": 0.7, "Tourism-Hospitality-Path": 0.8, "Community-Serve": 0.6, "Startup-Venture": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5117,
+        "question_text": "A university hospital in Manila is piloting a one-of-a-kind rehabilitation ward for patients recovering from spinal injuries. Which specialty team do you join?",
+        "category": "spinal_rehabilitation",
+        "options": [
+            {"option_id": 27829, "option_text": "Physical therapist — designing progressive mobility exercises and pool-based hydrotherapy sessions", "trait_tags": {"Rehab-Therapy": 0.8, "Exercise-Sci-Path": 0.7, "Patient-Care": 0.6, "Physical-Skill": 0.5}},
+            {"option_id": 27830, "option_text": "Biomedical engineer — customizing powered wheelchairs and prosthetic assistive devices for each patient", "trait_tags": {"Hardware-Systems": 0.8, "Mechanical-Design": 0.7, "Electrical-Power": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27831, "option_text": "Clinical psychologist — running cognitive behavioral therapy and peer support groups for patients and families", "trait_tags": {"Counseling": 0.8, "People-Skill": 0.7, "Social-Work": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27832, "option_text": "Occupational therapist — retraining patients in daily tasks like cooking, dressing, and using adaptive tools", "trait_tags": {"Rehab-Therapy": 0.7, "Inclusive-Ed": 0.8, "People-Skill": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27833, "option_text": "Data scientist — analyzing recovery metrics across patients to identify which therapy combinations yield fastest results", "trait_tags": {"Data-Analytics": 0.8, "AI-ML": 0.7, "Analytical-Skill": 0.6, "Software-Dev": 0.5}},
+            {"option_id": 27834, "option_text": "Ward dietitian — formulating high-protein anti-inflammatory meal plans that accelerate tissue healing", "trait_tags": {"Nutrition-Diet": 0.8, "Food-Science": 0.7, "Patient-Care": 0.6, "Analytical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5118,
+        "question_text": "A Filipino inventor patents a low-cost prosthetic hand and wants to scale production. Which role do you fill on the startup team?",
+        "category": "prosthetics_startup",
+        "options": [
+            {"option_id": 27835, "option_text": "Embedded systems programmer — writing the microcontroller firmware that reads muscle signals and controls finger movements", "trait_tags": {"Software-Dev": 0.8, "Electronics-Dev": 0.7, "Hardware-Systems": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27836, "option_text": "3D printing production lead — optimizing print settings for durable, lightweight, and FDA-cleared materials", "trait_tags": {"Mechanical-Design": 0.8, "TVET-Path": 0.7, "Technical-Skill": 0.6, "Lab-Research": 0.5}},
+            {"option_id": 27837, "option_text": "Clinical fitting specialist — measuring residual limbs, adjusting socket fit, and teaching patients to use the prosthetic", "trait_tags": {"Rehab-Therapy": 0.8, "Patient-Care": 0.7, "People-Skill": 0.6, "Inclusive-Ed": 0.5}},
+            {"option_id": 27838, "option_text": "Regulatory affairs officer — navigating FDA Philippines registration and medical device import/export rules", "trait_tags": {"Legal-Mgmt": 0.8, "Admin-Skill": 0.7, "Analytical-Skill": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 27839, "option_text": "Impact storyteller — filming patient testimonials and writing grant applications for humanitarian distribution", "trait_tags": {"Film-Broadcast": 0.7, "Writing-Comm": 0.8, "Community-Serve": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27840, "option_text": "Fundraising and investor relations — pitching to venture capital and international development funders", "trait_tags": {"Finance-Acct": 0.8, "Startup-Venture": 0.7, "Marketing-Sales": 0.6, "People-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5119,
+        "question_text": "A group of Cordillera coffee farmers asks you to help them compete in the Specialty Coffee Association's global competition. Which area do you handle?",
+        "category": "specialty_coffee",
+        "options": [
+            {"option_id": 27841, "option_text": "Agronomy advisor — improving soil nutrient management, shade-tree canopy, and cherry-picking schedules", "trait_tags": {"Agri-Nature": 0.8, "Field-Research": 0.7, "Environmental-Sci": 0.6, "Lab-Research": 0.5}},
+            {"option_id": 27842, "option_text": "Roast master — profiling roast curves and cupping sessions to bring out each lot's unique flavor notes", "trait_tags": {"Culinary-Arts": 0.7, "Food-Science": 0.8, "Analytical-Skill": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27843, "option_text": "Barista trainer — coaching the competition barista on latte art, brew ratios, and presentation scoring", "trait_tags": {"Culinary-Mgmt-Path": 0.8, "Teaching-Ed": 0.7, "People-Skill": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27844, "option_text": "Cooperative accountant — tracking costs per kilo, managing member payouts, and applying for export rebates", "trait_tags": {"Finance-Acct": 0.8, "Admin-Skill": 0.7, "Analytical-Skill": 0.6, "Agri-Nature": 0.5}},
+            {"option_id": 27845, "option_text": "Origin branding designer — creating the packaging, story cards, and booth display for the competition expo", "trait_tags": {"Visual-Design": 0.8, "Creative-Skill": 0.7, "Marketing-Sales": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 27846, "option_text": "Water-quality technician — testing mineral content and pH in brewing water to meet SCA standards", "trait_tags": {"Lab-Research": 0.8, "Analytical-Skill": 0.7, "Environmental-Eng": 0.6, "Technical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5120,
+        "question_text": "A Philippine coast guard station is expanding its capabilities to combat illegal fishing and maritime smuggling. Which specialty do you train in?",
+        "category": "coast_guard_expansion",
+        "options": [
+            {"option_id": 27847, "option_text": "Maritime law enforcement — boarding vessels, inspecting cargo manifests, and filing criminal cases", "trait_tags": {"Law-Enforce": 0.8, "Maritime-Sea": 0.7, "Legal-Practice": 0.6, "Physical-Skill": 0.5}},
+            {"option_id": 27848, "option_text": "Vessel traffic management — operating radar consoles and AIS tracking to monitor ship movements 24/7", "trait_tags": {"Electronics-Dev": 0.8, "Data-Analytics": 0.7, "Technical-Skill": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27849, "option_text": "Marine environmental response — deploying oil-spill booms and hazmat containment after maritime incidents", "trait_tags": {"Environmental-Eng": 0.8, "Maritime-Sea": 0.7, "Physical-Skill": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27850, "option_text": "Search-and-rescue diver — conducting underwater hull inspections and ocean recovery operations", "trait_tags": {"Physical-Skill": 0.8, "Military-Defense": 0.7, "Maritime-Sea": 0.6, "Patient-Care": 0.5}},
+            {"option_id": 27851, "option_text": "Intelligence analyst — correlating satellite imagery and tip-offs to identify illegal trawler patterns", "trait_tags": {"Data-Analytics": 0.7, "Analytical-Skill": 0.8, "Cyber-Defense": 0.6, "Law-Enforce": 0.5}},
+            {"option_id": 27852, "option_text": "Public affairs officer — running coastal community awareness campaigns about reporting poaching and smuggling", "trait_tags": {"Writing-Comm": 0.8, "Community-Serve": 0.7, "People-Skill": 0.6, "Digital-Media": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5121,
+        "question_text": "A Taguig tech campus is hosting a 48-hour hackathon to solve urban mobility problems. Which challenge track do you compete in?",
+        "category": "urban_mobility_hackathon",
+        "options": [
+            {"option_id": 27853, "option_text": "Real-time traffic prediction — building a machine-learning model that reroutes commuters around congestion", "trait_tags": {"AI-ML": 0.8, "Data-Analytics": 0.7, "Software-Dev": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27854, "option_text": "Accessible navigation app — mapping wheelchair-friendly sidewalks, elevators, and ramp locations across Metro Manila", "trait_tags": {"Mobile-Dev": 0.8, "Inclusive-Ed": 0.7, "Web-Dev": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 27855, "option_text": "E-bike sharing platform — designing the IoT lock hardware and the rental management backend", "trait_tags": {"Hardware-Systems": 0.7, "Cloud-Systems": 0.8, "Automotive-Tech": 0.6, "Software-Dev": 0.5}},
+            {"option_id": 27856, "option_text": "Commuter safety dashboard — aggregating crime, accident, and flood reports so riders can choose safer routes", "trait_tags": {"Data-Analytics": 0.7, "Web-Dev": 0.8, "Cyber-Defense": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 27857, "option_text": "Gamified carpooling app — rewarding users with points and discounts for sharing rides during rush hour", "trait_tags": {"Game-Dev": 0.8, "Mobile-Dev": 0.7, "Startup-Venture": 0.6, "Marketing-Sales": 0.5}},
+            {"option_id": 27858, "option_text": "Pedestrian-first streetscape model — simulating how widening sidewalks and adding bike lanes affects traffic flow", "trait_tags": {"Civil-Build": 0.7, "Spatial-Design": 0.8, "Environmental-Sci": 0.6, "Analytical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5122,
+        "question_text": "A national park in Batanes needs a year-round ranger team. Which ranger specialty do you sign up for?",
+        "category": "national_park_rangers",
+        "options": [
+            {"option_id": 27859, "option_text": "Wildlife biologist — conducting bird counts, tracking Ivatan cattle herds, and monitoring invasive species", "trait_tags": {"Field-Research": 0.8, "Environmental-Sci": 0.7, "Forestry-Path": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27860, "option_text": "Trail maintenance and construction — building stone staircases, wooden boardwalks, and storm-proof shelters", "trait_tags": {"TVET-Path": 0.8, "Physical-Skill": 0.7, "Civil-Build": 0.6, "Mechanical-Design": 0.5}},
+            {"option_id": 27861, "option_text": "Interpretive guide — leading educational hikes and explaining geological formations and Ivatan heritage", "trait_tags": {"Teaching-Ed": 0.8, "Tourism-Travel": 0.7, "People-Skill": 0.6, "Environmental-Sci": 0.5}},
+            {"option_id": 27862, "option_text": "Weather station operator — recording typhoon wind speeds, rainfall, and sending early warnings to villages", "trait_tags": {"Electronics-Dev": 0.7, "Analytical-Skill": 0.8, "Technical-Skill": 0.6, "Data-Analytics": 0.5}},
+            {"option_id": 27863, "option_text": "Anti-poaching enforcement — patrolling marine and terrestrial boundaries and working with local law enforcement", "trait_tags": {"Law-Enforce": 0.8, "Military-Defense": 0.7, "Physical-Skill": 0.6, "Maritime-Sea": 0.5}},
+            {"option_id": 27864, "option_text": "Volunteer coordinator — organizing citizen-science programs and hosting conservation camp for students", "trait_tags": {"Community-Serve": 0.8, "People-Skill": 0.7, "Teaching-Ed": 0.6, "Admin-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5123,
+        "question_text": "A hospital pharmacy in Iloilo is upgrading from manual dispensing to a fully automated system. Which implementation team do you lead?",
+        "category": "pharmacy_automation",
+        "options": [
+            {"option_id": 27865, "option_text": "Robotic dispensing engineer — installing and calibrating the pill-counting and packaging machines", "trait_tags": {"Hardware-Systems": 0.8, "Pharmacy": 0.7, "Mechanical-Design": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27866, "option_text": "Clinical pharmacist — configuring drug-interaction alerts and dosage-limit safeguards in the new system", "trait_tags": {"Pharmacy": 0.8, "Analytical-Skill": 0.7, "Patient-Care": 0.6, "Medical-Lab": 0.5}},
+            {"option_id": 27867, "option_text": "Software integrator — connecting the dispensing system to the hospital's electronic medical records", "trait_tags": {"Software-Dev": 0.8, "Cloud-Systems": 0.7, "Health-Admin": 0.6, "Data-Analytics": 0.5}},
+            {"option_id": 27868, "option_text": "Staff trainer — running simulation drills so pharmacists and nurses are comfortable with the new workflow", "trait_tags": {"Teaching-Ed": 0.8, "People-Skill": 0.7, "Pharmacy": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 27869, "option_text": "Cold-chain compliance officer — ensuring vaccines and temperature-sensitive drugs stay within required ranges", "trait_tags": {"Public-Health": 0.8, "Lab-Research": 0.7, "Analytical-Skill": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 27870, "option_text": "Inventory analytics lead — building dashboards that forecast drug demand and prevent stock-outs", "trait_tags": {"Data-Analytics": 0.8, "Finance-Acct": 0.7, "Software-Dev": 0.6, "Analytical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5124,
+        "question_text": "A Philippine think tank publishes an annual 'Future of Work' report and needs researchers for the new edition. Which chapter do you author?",
+        "category": "future_of_work_research",
+        "options": [
+            {"option_id": 27871, "option_text": "AI displacement risk — modeling which Philippine industries face the highest automation threat by 2035", "trait_tags": {"AI-ML": 0.8, "Data-Analytics": 0.7, "Analytical-Skill": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 27872, "option_text": "Green jobs transition — mapping new roles created by renewable energy, circular economy, and climate adaptation", "trait_tags": {"Environmental-Eng": 0.8, "Electrical-Power": 0.7, "Field-Research": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27873, "option_text": "Gig economy labor rights — reviewing riders' and freelancers' legal protections across ASEAN countries", "trait_tags": {"Legal-Practice": 0.8, "HR-Management": 0.7, "Social-Work": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 27874, "option_text": "Remote work infrastructure — benchmarking provincial internet speeds and co-working space availability", "trait_tags": {"Cloud-Systems": 0.7, "Data-Analytics": 0.8, "Technical-Skill": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 27875, "option_text": "Mental health in hybrid workplaces — surveying burnout rates and recommending corporate wellness policies", "trait_tags": {"Counseling": 0.7, "Public-Health": 0.8, "HR-Management": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 27876, "option_text": "Skills mismatch — comparing university curricula with employer demand and proposing TVET pathway reforms", "trait_tags": {"Teaching-Ed": 0.7, "TVET-Path": 0.8, "Analytical-Skill": 0.6, "Philosophy-Path": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5125,
+        "question_text": "A Quezon Province coconut farmers' federation wants to move beyond selling copra. Which value-added venture do you develop for them?",
+        "category": "coconut_value_chain",
+        "options": [
+            {"option_id": 27877, "option_text": "Virgin coconut oil extraction — setting up cold-press machinery and securing organic export certification", "trait_tags": {"Food-Science": 0.8, "Agri-Nature": 0.7, "Lab-Research": 0.6, "Startup-Venture": 0.5}},
+            {"option_id": 27878, "option_text": "Coco coir and biochar production — manufacturing growing media and soil conditioners from husks and shells", "trait_tags": {"Environmental-Eng": 0.8, "Agri-Nature": 0.7, "Mechanical-Design": 0.6, "Industrial-Ops": 0.5}},
+            {"option_id": 27879, "option_text": "Coconut sugar and syrup line — teaching farmers low-glycemic sap collection and evaporation techniques", "trait_tags": {"Culinary-Arts": 0.7, "Teaching-Ed": 0.8, "Food-Science": 0.6, "Nutrition-Diet": 0.5}},
+            {"option_id": 27880, "option_text": "Coconut-wood furniture workshop — milling senile palms into lumber for tables, shelves, and décor", "trait_tags": {"TVET-Path": 0.7, "Forestry-Path": 0.8, "Creative-Skill": 0.6, "Mechanical-Design": 0.5}},
+            {"option_id": 27881, "option_text": "Cooperative e-commerce — building a Shopee/Lazada storefront with branding, logistics, and customer service", "trait_tags": {"Web-Dev": 0.8, "Marketing-Sales": 0.7, "Startup-Venture": 0.6, "Digital-Media": 0.5}},
+            {"option_id": 27882, "option_text": "Agri-tourism coconut farm — offering tree-climbing demos, cooking classes, and a souvenir shop for visitors", "trait_tags": {"Tourism-Hospitality-Path": 0.8, "Hotel-Resort-Path": 0.7, "Culinary-Mgmt-Path": 0.6, "Community-Serve": 0.5}},
+        ],
+    },
+]
+
+# --- collision guard --------------------------------------------------------
+_repl22_existing_qids = {q["question_id"] for q in QUESTIONS_POOL_ENHANCED}
+_repl22_new_qids = {q["question_id"] for q in _REPLACEMENT_BATCH_22}
+if _repl22_existing_qids & _repl22_new_qids:
+    raise ValueError(f"Replacement batch 22 question IDs overlap: {_repl22_existing_qids & _repl22_new_qids}")
+
+_repl22_existing_oids = {o["option_id"] for q in QUESTIONS_POOL_ENHANCED for o in q.get("options", [])}
+_repl22_new_oids = {o["option_id"] for q in _REPLACEMENT_BATCH_22 for o in q.get("options", [])}
+if _repl22_existing_oids & _repl22_new_oids:
+    raise ValueError(f"Replacement batch 22 option IDs overlap: {_repl22_existing_oids & _repl22_new_oids}")
+
+QUESTIONS_POOL_ENHANCED.extend(_REPLACEMENT_BATCH_22)
+
+
+# ─── REPLACEMENT BATCH 23 (20 scenario questions) ───────────────────────────
+_REPLACEMENT_BATCH_23 = [
+    {
+        "question_id": 5126,
+        "question_text": "A Benguet strawberry cooperative wants to expand beyond fresh-fruit sales. Which new product line do you develop for them?",
+        "category": "highland_agri_venture",
+        "options": [
+            {"option_id": 27883, "option_text": "Freeze-dried strawberry snacks — setting up vacuum dryers and designing snack-size packaging for convenience stores", "trait_tags": {"Food-Science": 0.8, "Mechanical-Design": 0.7, "Marketing-Sales": 0.6, "Industrial-Ops": 0.5}},
+            {"option_id": 27884, "option_text": "Artisan strawberry jam and preserves — experimenting with flavor combinations like strawberry-calamansi and strawberry-ginger", "trait_tags": {"Culinary-Arts": 0.8, "Culinary-Mgmt-Path": 0.7, "Food-Science": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27885, "option_text": "Pick-your-own farm experience — building a farm-stay with guided tours, strawberry-themed meals, and souvenir photos", "trait_tags": {"Hotel-Resort-Path": 0.8, "Tourism-Hospitality-Path": 0.7, "Hospitality-Svc": 0.6, "Marketing-Sales": 0.5}},
+            {"option_id": 27886, "option_text": "Organic certification advisor — documenting pesticide-free practices and applying for international organic seals", "trait_tags": {"Agri-Nature": 0.8, "Legal-Mgmt": 0.7, "Analytical-Skill": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 27887, "option_text": "Soil and plant pathology lab — testing for fungal diseases, optimizing fertigation schedules, and breeding hardier varieties", "trait_tags": {"Lab-Research": 0.8, "Agri-Nature": 0.7, "Analytical-Skill": 0.6, "Field-Research": 0.5}},
+            {"option_id": 27888, "option_text": "Cooperative e-commerce manager — photographing products, managing an online store, and coordinating cold-chain deliveries to Metro Manila", "trait_tags": {"Web-Dev": 0.8, "Startup-Venture": 0.7, "Digital-Media": 0.6, "Admin-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5127,
+        "question_text": "A Philippine Navy frigate is commissioning and needs to fill specialist billets. Which posting do you request?",
+        "category": "naval_operations",
+        "options": [
+            {"option_id": 27889, "option_text": "Combat information center — operating shipboard radar, sonar, and electronic warfare suites during patrols", "trait_tags": {"Military-Defense": 0.8, "Electronics-Dev": 0.7, "Analytical-Skill": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27890, "option_text": "Ship's medical officer — running sick call, conducting surgery at sea, and managing the onboard pharmacy", "trait_tags": {"Patient-Care": 0.8, "Pharmacy": 0.7, "Medical-Lab": 0.6, "Military-Defense": 0.5}},
+            {"option_id": 27891, "option_text": "Marine engineering division — maintaining gas turbines, propulsion shafts, and fresh-water desalination plants", "trait_tags": {"Mechanical-Design": 0.8, "Maritime-Sea": 0.7, "Electrical-Power": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27892, "option_text": "Supply and logistics officer — managing food stores, spare parts, and fuel consumption for a 90-day deployment", "trait_tags": {"Industrial-Ops": 0.8, "Finance-Acct": 0.7, "Admin-Skill": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27893, "option_text": "Cyber warfare specialist — defending the ship's networks from intrusion and ensuring secure satellite communications", "trait_tags": {"Cyber-Defense": 0.8, "Cloud-Systems": 0.7, "Software-Dev": 0.6, "Military-Defense": 0.5}},
+            {"option_id": 27894, "option_text": "Public affairs and diplomacy — drafting press releases during port calls and coordinating joint exercises with allied navies", "trait_tags": {"Writing-Comm": 0.8, "People-Skill": 0.7, "Legal-Practice": 0.6, "Community-Serve": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5128,
+        "question_text": "A Quezon City high school is piloting an after-school enrichment program for students at risk of dropping out. Which track do you design and teach?",
+        "category": "dropout_prevention",
+        "options": [
+            {"option_id": 27895, "option_text": "Motorcycle and small-engine repair — hands-on sessions where students learn to diagnose and fix common motorbike problems", "trait_tags": {"Automotive-Tech": 0.8, "TVET-Path": 0.7, "Mechanical-Design": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 27896, "option_text": "Music production using free software — teaching beat-making, recording, and mixing so students can release their own tracks", "trait_tags": {"Music-Audio": 0.8, "Creative-Skill": 0.7, "Digital-Media": 0.6, "Software-Dev": 0.5}},
+            {"option_id": 27897, "option_text": "Urban gardening and nutrition — building raised beds on campus and cooking simple meals from the harvest", "trait_tags": {"Agri-Nature": 0.7, "Nutrition-Diet": 0.8, "Teaching-Ed": 0.6, "Food-Science": 0.5}},
+            {"option_id": 27898, "option_text": "Peer counseling and life skills — training older students to facilitate conflict resolution and goal-setting sessions", "trait_tags": {"Counseling": 0.8, "People-Skill": 0.7, "Social-Work": 0.6, "Early-Childhood": 0.5}},
+            {"option_id": 27899, "option_text": "Basketball coaching and sports leadership — organizing inter-barangay leagues that keep students engaged and active", "trait_tags": {"Sports-Ed": 0.8, "Sports-Fitness-Path": 0.7, "People-Skill": 0.6, "Physical-Skill": 0.5}},
+            {"option_id": 27900, "option_text": "Graphic design and printing — teaching Canva, Photoshop basics, and t-shirt screen printing as a micro-business", "trait_tags": {"Visual-Design": 0.8, "Creative-Skill": 0.7, "Startup-Venture": 0.6, "Digital-Media": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5129,
+        "question_text": "An island municipality in Camiguin is drafting a 10-year sustainable development plan. Which sector do you author the blueprint for?",
+        "category": "island_development_plan",
+        "options": [
+            {"option_id": 27901, "option_text": "Geothermal and ocean thermal energy — harnessing volcanic heat and deep-sea temperature gradients for power", "trait_tags": {"Electrical-Power": 0.8, "Environmental-Eng": 0.7, "Mechanical-Design": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27902, "option_text": "Dive tourism management — regulating visitor numbers, training local dive masters, and rehabilitating sunken coral nurseries", "trait_tags": {"Tourism-Travel": 0.8, "Tourism-Hospitality-Path": 0.7, "Maritime-Sea": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 27903, "option_text": "Disaster risk reduction — mapping lahar paths, establishing early-warning sirens, and drilling evacuation routes quarterly", "trait_tags": {"Environmental-Sci": 0.8, "Data-Analytics": 0.7, "Community-Serve": 0.6, "Civil-Build": 0.5}},
+            {"option_id": 27904, "option_text": "Fisheries co-management — zoning closed seasons, licensing boats, and penalizing dynamite fishing through local ordinance", "trait_tags": {"Fisheries-Agri-Path": 0.8, "Legal-Practice": 0.7, "Maritime-Sea": 0.6, "Environmental-Sci": 0.5}},
+            {"option_id": 27905, "option_text": "Health workforce — recruiting and retaining doctors and nurses through scholarship-return-service agreements", "trait_tags": {"Health-Admin": 0.8, "HR-Management": 0.7, "Patient-Care": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 27906, "option_text": "Digital connectivity — deploying community Wi-Fi hotspots and a local government portal for permits and complaints", "trait_tags": {"Cloud-Systems": 0.8, "Web-Dev": 0.7, "Software-Dev": 0.6, "Community-Serve": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5130,
+        "question_text": "A Davao-based chocolate company wins an international award and now wants to open flagship cafés in three Asian capitals. Which expansion role do you fill?",
+        "category": "international_cafe_expansion",
+        "options": [
+            {"option_id": 27907, "option_text": "Menu developer — adapting recipes to local tastes while keeping the brand's single-origin Philippine cacao identity", "trait_tags": {"Culinary-Mgmt-Path": 0.8, "Culinary-Arts": 0.7, "Food-Science": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27908, "option_text": "Interior architect — designing each café's layout, lighting, and décor to reflect Filipino-tropical aesthetics", "trait_tags": {"Spatial-Design": 0.8, "Visual-Design": 0.7, "Creative-Skill": 0.6, "Civil-Build": 0.5}},
+            {"option_id": 27909, "option_text": "International franchise lawyer — drafting joint-venture agreements, trademark filings, and import-export food compliance", "trait_tags": {"Legal-Practice": 0.8, "Legal-Mgmt": 0.7, "Admin-Skill": 0.6, "Finance-Acct": 0.5}},
+            {"option_id": 27910, "option_text": "Barista academy director — certifying local hires in the company's proprietary brewing and chocolate-tempering methods", "trait_tags": {"Teaching-Ed": 0.8, "Culinary-Arts": 0.7, "People-Skill": 0.6, "Hospitality-Svc": 0.5}},
+            {"option_id": 27911, "option_text": "Social media and influencer strategist — orchestrating launch events and viral content campaigns in each city", "trait_tags": {"Marketing-Sales": 0.8, "Digital-Media": 0.7, "Creative-Skill": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 27912, "option_text": "Supply chain logistics — sourcing beans from Mindanao farms, managing roast batches, and coordinating cold-freight shipping schedules", "trait_tags": {"Industrial-Ops": 0.8, "Agri-Nature": 0.7, "Finance-Acct": 0.6, "Admin-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5131,
+        "question_text": "A Pampanga-based fireworks manufacturer is transitioning to drone light shows after new safety regulations. Which department do you join?",
+        "category": "drone_light_shows",
+        "options": [
+            {"option_id": 27913, "option_text": "Drone fleet engineer — calibrating GPS coordinates, LED payloads, and synchronized flight paths for hundreds of drones", "trait_tags": {"Hardware-Systems": 0.8, "Electronics-Dev": 0.7, "Aeronautical-Eng": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27914, "option_text": "Show choreographer — designing animated sky patterns and timing them to music scores", "trait_tags": {"Animation-3D": 0.8, "Music-Audio": 0.7, "Creative-Skill": 0.6, "Software-Dev": 0.5}},
+            {"option_id": 27915, "option_text": "Safety and aviation compliance — securing CAAP permits, coordinating no-fly zones, and running pre-show risk assessments", "trait_tags": {"Aeronautical-Eng": 0.7, "Legal-Mgmt": 0.8, "Admin-Skill": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27916, "option_text": "Client event manager — pitching light-show packages to festival organizers, resorts, and corporate clients", "trait_tags": {"Marketing-Sales": 0.8, "People-Skill": 0.7, "Hospitality-Svc": 0.6, "Finance-Acct": 0.5}},
+            {"option_id": 27917, "option_text": "Battery and power systems technician — maintaining lithium packs, building rapid-charge stations, and recycling spent cells safely", "trait_tags": {"Electrical-Power": 0.8, "TVET-Path": 0.7, "Environmental-Eng": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27918, "option_text": "Live stream director — broadcasting shows on social media with multi-angle drone cameras and real-time commentary", "trait_tags": {"Film-Broadcast": 0.8, "Digital-Media": 0.7, "Cloud-Systems": 0.6, "Creative-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5132,
+        "question_text": "A provincial veterinary office in Nueva Ecija is launching a one-health initiative linking animal, human, and environmental health. Which program do you run?",
+        "category": "one_health_initiative",
+        "options": [
+            {"option_id": 27919, "option_text": "Rabies elimination campaign — vaccinating dogs, training bite-response teams, and tracking case maps by barangay", "trait_tags": {"Veterinary-Path": 0.8, "Public-Health": 0.7, "Community-Serve": 0.6, "Data-Analytics": 0.5}},
+            {"option_id": 27920, "option_text": "Livestock disease surveillance — collecting blood samples from carabao and poultry and testing for avian flu and leptospirosis", "trait_tags": {"Veterinary-Path": 0.7, "Medical-Lab": 0.8, "Lab-Research": 0.6, "Field-Research": 0.5}},
+            {"option_id": 27921, "option_text": "Antimicrobial stewardship — auditing antibiotic use on farms and educating farmers on resistance risks", "trait_tags": {"Pharmacy": 0.7, "Agri-Nature": 0.8, "Teaching-Ed": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27922, "option_text": "Wetland conservation — protecting the migratory-bird habitats that also filter irrigation water for rice paddies", "trait_tags": {"Environmental-Sci": 0.8, "Forestry-Path": 0.7, "Field-Research": 0.6, "Agri-Nature": 0.5}},
+            {"option_id": 27923, "option_text": "Zoonotic disease educator — visiting schools and markets to teach hand-washing and safe meat-handling practices", "trait_tags": {"Teaching-Ed": 0.7, "Public-Health": 0.8, "Community-Serve": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27924, "option_text": "GIS and outbreak mapping — building real-time dashboards that show disease hotspots across the province", "trait_tags": {"Data-Analytics": 0.8, "Software-Dev": 0.7, "Environmental-Eng": 0.6, "Analytical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5133,
+        "question_text": "A heritage railway in Bicol is being restored as both a commuter line and a tourist attraction. Which restoration crew do you join?",
+        "category": "heritage_railway",
+        "options": [
+            {"option_id": 27925, "option_text": "Track and bridge engineer — inspecting rail beds, replacing rotted ties, and reinforcing century-old steel trusses", "trait_tags": {"Civil-Build": 0.8, "Mechanical-Design": 0.7, "Technical-Skill": 0.6, "Physical-Skill": 0.5}},
+            {"option_id": 27926, "option_text": "Locomotive mechanic — restoring a vintage steam engine to operational condition for weekend heritage runs", "trait_tags": {"Automotive-Tech": 0.7, "TVET-Path": 0.8, "Mechanical-Design": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27927, "option_text": "Station architect — renovating Art Deco depots into mixed-use spaces with cafés, museums, and bike-rental counters", "trait_tags": {"Spatial-Design": 0.8, "Visual-Design": 0.7, "Civil-Build": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27928, "option_text": "Ticketing and scheduling software developer — building the booking app with real-time seat maps and QR code validation", "trait_tags": {"Mobile-Dev": 0.8, "Software-Dev": 0.7, "Cloud-Systems": 0.6, "Web-Dev": 0.5}},
+            {"option_id": 27929, "option_text": "Tourism narrative designer — crafting onboard audio guides that tell local history as the train passes through each town", "trait_tags": {"Writing-Comm": 0.8, "Tourism-Travel": 0.7, "Creative-Skill": 0.6, "Performing-Arts": 0.5}},
+            {"option_id": 27930, "option_text": "Environmental compliance officer — managing noise abatement, diesel-emission controls, and right-of-way vegetation", "trait_tags": {"Environmental-Eng": 0.8, "Legal-Practice": 0.7, "Analytical-Skill": 0.6, "Environmental-Sci": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5134,
+        "question_text": "A Tarlac sugar mill is pivoting to produce bioethanol and organic fertilizer alongside raw sugar. Which technical team do you lead?",
+        "category": "sugar_mill_diversification",
+        "options": [
+            {"option_id": 27931, "option_text": "Fermentation plant operator — managing yeast cultures, distillation columns, and bioethanol quality testing", "trait_tags": {"Lab-Research": 0.8, "Food-Science": 0.7, "Mechanical-Design": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27932, "option_text": "Composting facility manager — converting bagasse and filter-press mud into bagged organic fertilizer", "trait_tags": {"Agri-Nature": 0.8, "Environmental-Eng": 0.7, "Industrial-Ops": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27933, "option_text": "Boiler and co-generation engineer — burning bagasse to produce steam electricity that powers the entire mill", "trait_tags": {"Electrical-Power": 0.8, "Mechanical-Design": 0.7, "Environmental-Eng": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27934, "option_text": "Regulatory and compliance officer — securing DOE bioethanol blending permits and Sugar Regulatory Administration approvals", "trait_tags": {"Legal-Mgmt": 0.8, "Admin-Skill": 0.7, "Analytical-Skill": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 27935, "option_text": "Farmer liaison and cane procurement — negotiating fair purchase prices and advising planters on high-yield varieties", "trait_tags": {"Agri-Nature": 0.7, "People-Skill": 0.8, "Finance-Acct": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 27936, "option_text": "IT and process automation — installing SCADA systems that monitor temperature, pressure, and flow rates across production lines", "trait_tags": {"Software-Dev": 0.8, "Electronics-Dev": 0.7, "Cloud-Systems": 0.6, "Data-Analytics": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5135,
+        "question_text": "An NGO is setting up the first public forensic science laboratory accessible to provincial prosecutors who currently lack evidence-testing facilities. Which section do you staff?",
+        "category": "forensic_lab_setup",
+        "options": [
+            {"option_id": 27937, "option_text": "DNA analysis — running PCR amplification and STR profiling on biological evidence from crime scenes", "trait_tags": {"Forensic-Sci": 0.8, "Lab-Research": 0.7, "Medical-Lab": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27938, "option_text": "Digital forensics — extracting and preserving data from seized phones, laptops, and CCTV hard drives", "trait_tags": {"Cyber-Defense": 0.8, "Forensic-Sci": 0.7, "Software-Dev": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27939, "option_text": "Ballistics and toolmark examination — matching bullet striations and firearm serial-number restorations", "trait_tags": {"Forensic-Sci": 0.7, "Mechanical-Design": 0.8, "Analytical-Skill": 0.6, "Law-Enforce": 0.5}},
+            {"option_id": 27940, "option_text": "Toxicology section — screening blood and tissue samples for drugs, poisons, and alcohol using gas chromatography", "trait_tags": {"Lab-Research": 0.8, "Pharmacy": 0.7, "Analytical-Skill": 0.6, "Medical-Lab": 0.5}},
+            {"option_id": 27941, "option_text": "Court testimony trainer — coaching lab analysts on how to present findings clearly and withstand cross-examination", "trait_tags": {"Teaching-Ed": 0.8, "Legal-Practice": 0.7, "People-Skill": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 27942, "option_text": "Quality assurance and accreditation — aligning procedures with ISO 17025 and preparing for international audit inspections", "trait_tags": {"Admin-Skill": 0.8, "Analytical-Skill": 0.7, "Writing-Comm": 0.6, "Legal-Mgmt": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5136,
+        "question_text": "A Bohol resort chain is adding a marine wildlife encounter program. Which program component do you design?",
+        "category": "marine_wildlife_tourism",
+        "options": [
+            {"option_id": 27943, "option_text": "Dolphin and whale-watch protocol — training boat captains on approach distances, engine-idle rules, and data-logging each sighting", "trait_tags": {"Maritime-Sea": 0.8, "Environmental-Sci": 0.7, "Field-Research": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 27944, "option_text": "Guest marine biology briefings — leading pre-dive seminars on reef ecology, species ID, and responsible underwater photography", "trait_tags": {"Teaching-Ed": 0.8, "Tourism-Travel": 0.7, "Environmental-Sci": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27945, "option_text": "Coral nursery volunteer experience — letting guests help transplant coral fragments and track growth over return visits", "trait_tags": {"Tourism-Hospitality-Path": 0.7, "Environmental-Eng": 0.8, "Community-Serve": 0.6, "Field-Research": 0.5}},
+            {"option_id": 27946, "option_text": "Resort wellness spa using marine-derived products — seaweed wraps, sea-salt scrubs, and thalassotherapy pools", "trait_tags": {"Hotel-Resort-Path": 0.8, "Hospitality-Svc": 0.7, "Nutrition-Diet": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27947, "option_text": "Underwater 360-degree camera installation — live-streaming reef activity to the resort lobby and the website", "trait_tags": {"Electronics-Dev": 0.8, "Film-Broadcast": 0.7, "Cloud-Systems": 0.6, "Hardware-Systems": 0.5}},
+            {"option_id": 27948, "option_text": "Liability and permits specialist — securing DENR wildlife interaction permits and drafting guest waivers", "trait_tags": {"Legal-Practice": 0.8, "Legal-Mgmt": 0.7, "Admin-Skill": 0.6, "Writing-Comm": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5137,
+        "question_text": "A consortium of Ilocos weavers wants to turn their abel fabric tradition into a globally recognized fashion brand. Which role do you take?",
+        "category": "heritage_fashion_brand",
+        "options": [
+            {"option_id": 27949, "option_text": "Textile engineer — upgrading looms for faster production while preserving the hand-woven authenticity", "trait_tags": {"TVET-Path": 0.8, "Mechanical-Design": 0.7, "Creative-Skill": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27950, "option_text": "Fashion designer — creating ready-to-wear and haute couture collections that feature abel as the hero fabric", "trait_tags": {"Visual-Design": 0.8, "Creative-Skill": 0.7, "Performing-Arts": 0.6, "Marketing-Sales": 0.5}},
+            {"option_id": 27951, "option_text": "Cultural IP lawyer — registering geographic indications and protecting patterns from foreign knockoffs", "trait_tags": {"Legal-Practice": 0.8, "Legal-Mgmt": 0.7, "Writing-Comm": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 27952, "option_text": "Dye chemist — developing colorfast plant-based dyes from local indigo, turmeric, and moringa leaves", "trait_tags": {"Lab-Research": 0.8, "Agri-Nature": 0.7, "Environmental-Eng": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27953, "option_text": "E-commerce and export coordinator — listing products on international platforms and managing cross-border shipping compliance", "trait_tags": {"Web-Dev": 0.7, "Marketing-Sales": 0.8, "Finance-Acct": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 27954, "option_text": "Weaver training program head — running apprenticeships for young Ilocanos to keep the craft alive across generations", "trait_tags": {"Teaching-Ed": 0.8, "Community-Serve": 0.7, "TVET-Path": 0.6, "People-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5138,
+        "question_text": "A major Philippine bank is opening a dedicated innovation lab focused on financial inclusion. Which prototype team do you join?",
+        "category": "bank_innovation_lab",
+        "options": [
+            {"option_id": 27955, "option_text": "Voice-based banking bot — building a Tagalog/Bisaya voice assistant so non-literate users can check balances and send money", "trait_tags": {"AI-ML": 0.8, "Software-Dev": 0.7, "Mobile-Dev": 0.6, "Inclusive-Ed": 0.5}},
+            {"option_id": 27956, "option_text": "Micro-insurance product designer — creating affordable crop and livestock coverage using satellite weather triggers", "trait_tags": {"Finance-Acct": 0.8, "Agri-Nature": 0.7, "Data-Analytics": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27957, "option_text": "Biometric identity team — implementing palm-vein and facial-recognition KYC for clients without government IDs", "trait_tags": {"Hardware-Systems": 0.8, "Cyber-Defense": 0.7, "AI-ML": 0.6, "Software-Dev": 0.5}},
+            {"option_id": 27958, "option_text": "Rural agent network — recruiting sari-sari store owners and training them as cash-in/cash-out human ATMs", "trait_tags": {"Community-Serve": 0.8, "People-Skill": 0.7, "HR-Management": 0.6, "Startup-Venture": 0.5}},
+            {"option_id": 27959, "option_text": "Behavioral finance researcher — studying saving habits of low-income Filipinos and designing nudge-based saving features", "trait_tags": {"Data-Analytics": 0.7, "Philosophy-Path": 0.8, "Analytical-Skill": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 27960, "option_text": "Regulatory sandbox liaison — coordinating with BSP to test new products under relaxed rules and reporting outcomes", "trait_tags": {"Legal-Mgmt": 0.8, "Finance-Acct": 0.7, "Admin-Skill": 0.6, "Writing-Comm": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5139,
+        "question_text": "A university in Leyte is establishing a typhoon research institute after the devastation of Super Typhoon Yolanda. Which research track do you lead?",
+        "category": "typhoon_research_institute",
+        "options": [
+            {"option_id": 27961, "option_text": "Storm-surge modeling — simulating wave heights and flooding depths for every coastal barangay using supercomputer fluid dynamics", "trait_tags": {"Data-Analytics": 0.8, "Environmental-Sci": 0.7, "Software-Dev": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27962, "option_text": "Wind-resistant housing design — testing bamboo-reinforced concrete prototypes in a custom wind tunnel", "trait_tags": {"Civil-Build": 0.8, "Mechanical-Design": 0.7, "Environmental-Eng": 0.6, "TVET-Path": 0.5}},
+            {"option_id": 27963, "option_text": "Disaster mental health — longitudinal study tracking PTSD prevalence among survivors and evaluating therapy interventions", "trait_tags": {"Counseling": 0.8, "Social-Work": 0.7, "Analytical-Skill": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 27964, "option_text": "Emergency communication systems — designing mesh-radio networks that function when cell towers are destroyed", "trait_tags": {"Electronics-Dev": 0.8, "Hardware-Systems": 0.7, "Cloud-Systems": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27965, "option_text": "Mangrove bio-shield research — quantifying how mangrove density reduces wave energy and protecting replanting sites", "trait_tags": {"Forestry-Path": 0.8, "Environmental-Sci": 0.7, "Field-Research": 0.6, "Lab-Research": 0.5}},
+            {"option_id": 27966, "option_text": "Agricultural resilience — breeding salt-tolerant rice and root-crop varieties that recover quickly after seawater intrusion", "trait_tags": {"Agri-Nature": 0.8, "Lab-Research": 0.7, "Fisheries-Agri-Path": 0.6, "Food-Science": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5140,
+        "question_text": "A pioneering home-care agency in Metro Manila specializes in elderly patients who want to age at home instead of in nursing facilities. Which service team do you join?",
+        "category": "elderly_homecare",
+        "options": [
+            {"option_id": 27967, "option_text": "Home physical therapist — visiting patients daily for fall-prevention exercises and post-surgery rehabilitation", "trait_tags": {"Rehab-Therapy": 0.8, "Exercise-Sci-Path": 0.7, "Patient-Care": 0.6, "Physical-Skill": 0.5}},
+            {"option_id": 27968, "option_text": "Geriatric nutritionist — preparing weekly meal plans that manage diabetes, hypertension, and bone-density loss", "trait_tags": {"Nutrition-Diet": 0.8, "Patient-Care": 0.7, "Food-Science": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27969, "option_text": "Smart-home installer — equipping houses with motion sensors, automated pill dispensers, and video-call tablets", "trait_tags": {"Hardware-Systems": 0.8, "Electronics-Dev": 0.7, "Cloud-Systems": 0.6, "Mobile-Dev": 0.5}},
+            {"option_id": 27970, "option_text": "Companion caregiver coordinator — matching trained companions with patients based on personality, language, and care needs", "trait_tags": {"HR-Management": 0.8, "People-Skill": 0.7, "Counseling": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 27971, "option_text": "Billing and insurance specialist — processing PhilHealth claims, HMO reimbursements, and private-pay invoices", "trait_tags": {"Finance-Acct": 0.8, "Health-Admin": 0.7, "Admin-Skill": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27972, "option_text": "End-of-life counselor — facilitating advance-directive conversations and bereavement support for families", "trait_tags": {"Counseling": 0.8, "Social-Work": 0.7, "People-Skill": 0.6, "Philosophy-Path": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5141,
+        "question_text": "A Philippine Olympic committee is building a high-performance sports science center ahead of the next SEA Games. Which unit do you direct?",
+        "category": "sports_science_center",
+        "options": [
+            {"option_id": 27973, "option_text": "Biomechanics lab — using motion-capture cameras and force plates to refine athletes' technique in real time", "trait_tags": {"Exercise-Sci-Path": 0.8, "Data-Analytics": 0.7, "Hardware-Systems": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27974, "option_text": "Sports nutrition kitchen — preparing personalized meals that time macros around training, competition, and recovery phases", "trait_tags": {"Nutrition-Diet": 0.8, "Food-Science": 0.7, "Sports-Fitness-Path": 0.6, "Culinary-Arts": 0.5}},
+            {"option_id": 27975, "option_text": "Anti-doping compliance — educating athletes on WADA rules and managing sample collection and chain-of-custody procedures", "trait_tags": {"Medical-Lab": 0.8, "Legal-Practice": 0.7, "Admin-Skill": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 27976, "option_text": "Strength and conditioning — designing periodized training programs that peak athletes for competition day", "trait_tags": {"Sports-Fitness-Path": 0.8, "Physical-Skill": 0.7, "Exercise-Sci-Path": 0.6, "Sports-Ed": 0.5}},
+            {"option_id": 27977, "option_text": "Injury prevention and rehab — running pre-season screening, managing recovery protocols, and clearing athletes to compete", "trait_tags": {"Rehab-Therapy": 0.8, "Patient-Care": 0.7, "Analytical-Skill": 0.6, "Sports-Ed": 0.5}},
+            {"option_id": 27978, "option_text": "Performance analytics — processing GPS tracker and heart-rate data to give coaches actionable training-load dashboards", "trait_tags": {"Data-Analytics": 0.8, "Software-Dev": 0.7, "AI-ML": 0.6, "Sports-Ed": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5142,
+        "question_text": "A Subic Bay free port is attracting foreign shipbuilders to set up a new dry-dock facility. Which division do you head?",
+        "category": "shipbuilding_drydock",
+        "options": [
+            {"option_id": 27979, "option_text": "Naval architecture — drafting hull designs and running stability simulations for inter-island passenger ferries", "trait_tags": {"Maritime-Sea": 0.8, "Mechanical-Design": 0.7, "Analytical-Skill": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27980, "option_text": "Welding and steel fabrication — supervising plate-cutting, hull assembly, and non-destructive testing of weld seams", "trait_tags": {"TVET-Path": 0.8, "Automotive-Tech": 0.7, "Mechanical-Design": 0.6, "Physical-Skill": 0.5}},
+            {"option_id": 27981, "option_text": "Marine electrical systems — wiring bridge consoles, engine-room controls, and navigation lighting circuits", "trait_tags": {"Electrical-Power": 0.8, "Electronics-Dev": 0.7, "Maritime-Sea": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27982, "option_text": "Occupational safety and health — implementing confined-space entry protocols and heat-stress prevention programs", "trait_tags": {"Public-Health": 0.8, "Industrial-Ops": 0.7, "Admin-Skill": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27983, "option_text": "Workforce development — partnering with TESDA to train 500 shipyard technicians through dual-education programs", "trait_tags": {"Teaching-Ed": 0.7, "TVET-Path": 0.8, "HR-Management": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 27984, "option_text": "Procurement and vendor management — sourcing marine-grade steel, paint, and propulsion components from global suppliers", "trait_tags": {"Finance-Acct": 0.8, "Industrial-Ops": 0.7, "Admin-Skill": 0.6, "Analytical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5143,
+        "question_text": "A Philippine Science High School campus is building a state-of-the-art STEM wing. Which facility do you advocate as the centerpiece?",
+        "category": "stem_campus_facility",
+        "options": [
+            {"option_id": 27985, "option_text": "Planetarium and astronomy observatory — housing a 14-inch telescope and projection dome for stargazing and physics classes", "trait_tags": {"Aeronautical-Eng": 0.7, "Teaching-Ed": 0.8, "Hardware-Systems": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 27986, "option_text": "Wet chemistry and microbiology lab — letting students culture bacteria, synthesize compounds, and run spectrophotometry", "trait_tags": {"Lab-Research": 0.8, "Medical-Lab": 0.7, "Analytical-Skill": 0.6, "Pharmacy": 0.5}},
+            {"option_id": 27987, "option_text": "Fabrication workshop — equipped with lathes, 3D printers, and laser cutters for engineering design challenges", "trait_tags": {"TVET-Path": 0.7, "Mechanical-Design": 0.8, "Hardware-Systems": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27988, "option_text": "Aquaponics and environmental science greenhouse — integrating fish-farming with hydroponic vegetable growth for ecology studies", "trait_tags": {"Fisheries-Agri-Path": 0.8, "Environmental-Sci": 0.7, "Agri-Nature": 0.6, "Field-Research": 0.5}},
+            {"option_id": 27989, "option_text": "Robotics arena — a competition-grade field for autonomous robots, drone racing, and AI algorithm battles", "trait_tags": {"Game-Dev": 0.7, "AI-ML": 0.8, "Software-Dev": 0.6, "Electronics-Dev": 0.5}},
+            {"option_id": 27990, "option_text": "Student radio and podcast studio — broadcasting science news, interviews with researchers, and student debate programs", "trait_tags": {"Film-Broadcast": 0.8, "Music-Audio": 0.7, "Writing-Comm": 0.6, "Digital-Media": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5144,
+        "question_text": "A Pangasinan salt-making community wants to preserve its traditional solar-evaporation method while boosting income. Which modernization project do you lead?",
+        "category": "artisan_salt_production",
+        "options": [
+            {"option_id": 27991, "option_text": "Salt purity testing lab — analyzing mineral content and certifying batches as gourmet-grade or industrial-grade", "trait_tags": {"Lab-Research": 0.8, "Food-Science": 0.7, "Analytical-Skill": 0.6, "Medical-Lab": 0.5}},
+            {"option_id": 27992, "option_text": "Product diversification — creating flavored finishing salts infused with calamansi, smoked coconut, and chili", "trait_tags": {"Culinary-Arts": 0.8, "Culinary-Mgmt-Path": 0.7, "Food-Science": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 27993, "option_text": "Heritage tour operator — guiding visitors through the salt beds, explaining the evaporation process, and selling directly", "trait_tags": {"Tourism-Travel": 0.7, "Tourism-Hospitality-Path": 0.8, "Teaching-Ed": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27994, "option_text": "Cooperative organizer — formalizing the salt makers into a legal cooperative with pooled marketing power and health benefits", "trait_tags": {"Community-Serve": 0.8, "Legal-Practice": 0.7, "HR-Management": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 27995, "option_text": "Solar-pond engineer — redesigning evaporation pans with UV-resistant liners and rainwater-diversion channels", "trait_tags": {"Environmental-Eng": 0.8, "Civil-Build": 0.7, "Mechanical-Design": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 27996, "option_text": "Brand and packaging designer — creating premium jars, labels, and a Shopee store targeting health-conscious urban buyers", "trait_tags": {"Visual-Design": 0.8, "Marketing-Sales": 0.7, "Digital-Media": 0.6, "Startup-Venture": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5145,
+        "question_text": "A non-profit orchestra based in Manila is expanding its outreach to teach classical music in underserved communities. Which program arm do you direct?",
+        "category": "music_outreach_program",
+        "options": [
+            {"option_id": 27997, "option_text": "Instrument donation and repair workshop — collecting used instruments and training teen volunteers to restore them", "trait_tags": {"Music-Audio": 0.8, "TVET-Path": 0.7, "Community-Serve": 0.6, "Mechanical-Design": 0.5}},
+            {"option_id": 27998, "option_text": "Youth ensemble conductor — rehearsing young musicians weekly and preparing them for citywide inter-school concerts", "trait_tags": {"Performing-Arts": 0.8, "Music-Audio": 0.7, "Teaching-Ed": 0.6, "People-Skill": 0.5}},
+            {"option_id": 27999, "option_text": "Music therapy sessions — using rhythm and melody exercises to support children with autism and developmental delays", "trait_tags": {"Counseling": 0.7, "Inclusive-Ed": 0.8, "Music-Audio": 0.6, "Early-Childhood": 0.5}},
+            {"option_id": 28000, "option_text": "Recording and streaming — capturing live performances and distributing them on Spotify, YouTube, and local radio", "trait_tags": {"Film-Broadcast": 0.8, "Digital-Media": 0.7, "Cloud-Systems": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28001, "option_text": "Grant writing and fundraising — applying to cultural agencies and corporate CSR programs for operational funding", "trait_tags": {"Writing-Comm": 0.8, "Finance-Acct": 0.7, "Admin-Skill": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 28002, "option_text": "Outreach logistics — scheduling van routes to satellite teaching sites and managing instrument transport and venue bookings", "trait_tags": {"Admin-Skill": 0.8, "Industrial-Ops": 0.7, "People-Skill": 0.6, "Community-Serve": 0.5}},
+        ],
+    },
+]
+
+# --- collision guard --------------------------------------------------------
+_repl23_existing_qids = {q["question_id"] for q in QUESTIONS_POOL_ENHANCED}
+_repl23_new_qids = {q["question_id"] for q in _REPLACEMENT_BATCH_23}
+if _repl23_existing_qids & _repl23_new_qids:
+    raise ValueError(f"Replacement batch 23 question IDs overlap: {_repl23_existing_qids & _repl23_new_qids}")
+
+_repl23_existing_oids = {o["option_id"] for q in QUESTIONS_POOL_ENHANCED for o in q.get("options", [])}
+_repl23_new_oids = {o["option_id"] for q in _REPLACEMENT_BATCH_23 for o in q.get("options", [])}
+if _repl23_existing_oids & _repl23_new_oids:
+    raise ValueError(f"Replacement batch 23 option IDs overlap: {_repl23_existing_oids & _repl23_new_oids}")
+
+QUESTIONS_POOL_ENHANCED.extend(_REPLACEMENT_BATCH_23)
+
+
+# ─── REPLACEMENT BATCH 24 (20 scenario questions) ───────────────────────────
+_REPLACEMENT_BATCH_24 = [
+    {
+        "question_id": 5146,
+        "question_text": "A newly opened resort in Siargao needs to launch a staff academy before peak surf season. Which training division do you build?",
+        "category": "resort_staff_academy",
+        "options": [
+            {"option_id": 28003, "option_text": "Front-desk and guest relations — teaching check-in protocols, complaint de-escalation, and VIP concierge services", "trait_tags": {"Hotel-Resort-Path": 0.8, "Hospitality-Svc": 0.7, "People-Skill": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 28004, "option_text": "Resort kitchen brigade — drilling line cooks on breakfast buffet flow, allergen labeling, and banquet plating standards", "trait_tags": {"Culinary-Arts": 0.8, "Culinary-Mgmt-Path": 0.7, "Food-Science": 0.6, "Hospitality-Svc": 0.5}},
+            {"option_id": 28005, "option_text": "Surf and water safety instructors — certifying lifeguards, teaching board handling, and enforcing rip-current awareness drills", "trait_tags": {"Sports-Fitness-Path": 0.8, "Sports-Ed": 0.7, "Physical-Skill": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 28006, "option_text": "Housekeeping and laundry operations — setting room-turnover times, linen-quality checks, and eco-friendly cleaning protocols", "trait_tags": {"Industrial-Ops": 0.7, "Hotel-Resort-Path": 0.8, "Admin-Skill": 0.6, "Environmental-Eng": 0.5}},
+            {"option_id": 28007, "option_text": "Resort accounting and payroll — configuring the POS system, auditing daily revenue, and processing bi-monthly salaries", "trait_tags": {"Finance-Acct": 0.8, "Admin-Skill": 0.7, "Software-Dev": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28008, "option_text": "Nature-tour guide program — training guides to lead island-hopping, mangrove kayaking, and birdwatching excursions", "trait_tags": {"Tourism-Travel": 0.8, "Tourism-Hospitality-Path": 0.7, "Environmental-Sci": 0.6, "People-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5147,
+        "question_text": "A Philippine Army engineering battalion is deployed to Marawi for post-conflict rehabilitation. Which reconstruction task force do you join?",
+        "category": "post_conflict_rebuild",
+        "options": [
+            {"option_id": 28009, "option_text": "Structural assessment — inspecting war-damaged mosques, schools, and bridges for demolition or reinforcement", "trait_tags": {"Civil-Build": 0.8, "Military-Defense": 0.7, "Analytical-Skill": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28010, "option_text": "Explosive ordnance disposal — sweeping cleared lots for unexploded ordnance before allowing civilian return", "trait_tags": {"Military-Defense": 0.8, "Law-Enforce": 0.7, "Technical-Skill": 0.6, "Physical-Skill": 0.5}},
+            {"option_id": 28011, "option_text": "Water and sanitation — restoring pipe networks and installing community water-treatment stations", "trait_tags": {"Environmental-Eng": 0.8, "Civil-Build": 0.7, "Public-Health": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28012, "option_text": "Trauma counseling — providing psychosocial support to displaced families and former child combatants", "trait_tags": {"Counseling": 0.8, "Social-Work": 0.7, "People-Skill": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 28013, "option_text": "Livelihood restoration — setting up sewing cooperatives and halal-food processing micro-enterprises for returning residents", "trait_tags": {"Startup-Venture": 0.8, "Community-Serve": 0.7, "TVET-Path": 0.6, "HR-Management": 0.5}},
+            {"option_id": 28014, "option_text": "Mapping and documentation — using drones to create before-and-after 3D city models for the Bangsamoro Transition Authority", "trait_tags": {"Data-Analytics": 0.8, "Hardware-Systems": 0.7, "Software-Dev": 0.6, "Digital-Media": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5148,
+        "question_text": "A Batangas municipality is converting an abandoned quarry into a multi-purpose community park. Which design team do you lead?",
+        "category": "quarry_park_conversion",
+        "options": [
+            {"option_id": 28015, "option_text": "Landscape architect — terracing the quarry walls into cascading gardens with native ferns and flowering trees", "trait_tags": {"Spatial-Design": 0.8, "Environmental-Sci": 0.7, "Creative-Skill": 0.6, "Agri-Nature": 0.5}},
+            {"option_id": 28016, "option_text": "Climbing wall and adventure park — installing bolt routes on the rock faces and building zip-line platforms across the pit", "trait_tags": {"Sports-Fitness-Path": 0.8, "Civil-Build": 0.7, "Physical-Skill": 0.6, "Tourism-Travel": 0.5}},
+            {"option_id": 28017, "option_text": "Open-air amphitheater — designing the acoustics, stage rigging, and tiered seating carved into the quarry slope", "trait_tags": {"Performing-Arts": 0.8, "Music-Audio": 0.7, "Spatial-Design": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28018, "option_text": "Stormwater management — engineering retention basins and bio-swales so the quarry naturally filters rainwater runoff", "trait_tags": {"Environmental-Eng": 0.8, "Civil-Build": 0.7, "Analytical-Skill": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28019, "option_text": "Community library and reading garden — constructing a sunlit reading pavilion with free Wi-Fi and a children's corner", "trait_tags": {"Library-Info": 0.8, "Early-Childhood": 0.7, "Spatial-Design": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 28020, "option_text": "Fitness and rehabilitation trail — laying rubberized jogging paths and installing outdoor physiotherapy stations for seniors", "trait_tags": {"Exercise-Sci-Path": 0.8, "Rehab-Therapy": 0.7, "Public-Health": 0.6, "Physical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5149,
+        "question_text": "A Philippine tuna-canning factory in General Santos wants to achieve EU export certification. Which compliance team do you head?",
+        "category": "tuna_export_certification",
+        "options": [
+            {"option_id": 28021, "option_text": "HACCP and food-safety auditor — documenting every critical control point from catch to canned product", "trait_tags": {"Food-Science": 0.8, "Analytical-Skill": 0.7, "Industrial-Ops": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 28022, "option_text": "Fisheries observer — boarding purse-seine vessels to verify legal catch methods and log-book accuracy", "trait_tags": {"Fisheries-Agri-Path": 0.8, "Maritime-Sea": 0.7, "Field-Research": 0.6, "Legal-Practice": 0.5}},
+            {"option_id": 28023, "option_text": "Wastewater treatment engineer — designing the effluent plant that processes fish offal and blood water before ocean discharge", "trait_tags": {"Environmental-Eng": 0.8, "Mechanical-Design": 0.7, "Analytical-Skill": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28024, "option_text": "Label and traceability developer — building a QR-code system that lets European consumers trace each can to a specific boat and date", "trait_tags": {"Software-Dev": 0.8, "Web-Dev": 0.7, "Marketing-Sales": 0.6, "Data-Analytics": 0.5}},
+            {"option_id": 28025, "option_text": "Worker welfare officer — ensuring the factory meets EU social-compliance standards on wages, hours, and PPE", "trait_tags": {"HR-Management": 0.8, "Legal-Mgmt": 0.7, "People-Skill": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 28026, "option_text": "Cold-chain logistics planner — mapping refrigeration from dock to container yard and booking reefer vessels to Rotterdam", "trait_tags": {"Industrial-Ops": 0.8, "Finance-Acct": 0.7, "Maritime-Sea": 0.6, "Analytical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5150,
+        "question_text": "An Iloilo City university is launching a children's science discovery center open to all elementary pupils on weekends. Which exhibit hall do you curate?",
+        "category": "childrens_science_center",
+        "options": [
+            {"option_id": 28027, "option_text": "Hands-on physics playground — pulleys, levers, and wind tunnels where kids build simple machines and test forces", "trait_tags": {"Teaching-Ed": 0.8, "Mechanical-Design": 0.7, "Early-Childhood": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28028, "option_text": "Mini veterinary clinic — life-size animal models with removable organs so children learn basic anatomy and pet care", "trait_tags": {"Veterinary-Path": 0.8, "Early-Childhood": 0.7, "Teaching-Ed": 0.6, "Patient-Care": 0.5}},
+            {"option_id": 28029, "option_text": "Junior coding lab — tablet stations running block-based programming games that introduce loops, conditionals, and sequencing", "trait_tags": {"Software-Dev": 0.7, "Teaching-Ed": 0.8, "Game-Dev": 0.6, "Early-Childhood": 0.5}},
+            {"option_id": 28030, "option_text": "Weather and climate room — simulating typhoons, monsoons, and earthquakes with safe sensory effects and live PAGASA data feeds", "trait_tags": {"Environmental-Sci": 0.8, "Data-Analytics": 0.7, "Electronics-Dev": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 28031, "option_text": "Space exploration corner — VR headsets showing Mars rovers and ISS walks, plus a model rocket-launch area", "trait_tags": {"Aeronautical-Eng": 0.8, "Hardware-Systems": 0.7, "Creative-Skill": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 28032, "option_text": "Art-and-STEAM maker space — 3D pens, clay sculpting with geometry guides, and mosaic tiling that teaches fractions", "trait_tags": {"Visual-Design": 0.8, "Creative-Skill": 0.7, "Early-Childhood": 0.6, "Teaching-Ed": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5151,
+        "question_text": "A Cebu-based jeepney manufacturer is designing the next-generation electric jeepney for the PUV modernization program. Which engineering unit do you join?",
+        "category": "electric_jeepney_design",
+        "options": [
+            {"option_id": 28033, "option_text": "Chassis and body engineer — designing a lightweight aluminum frame that meets LTFRB crash-test standards", "trait_tags": {"Automotive-Tech": 0.8, "Mechanical-Design": 0.7, "Technical-Skill": 0.6, "Civil-Build": 0.5}},
+            {"option_id": 28034, "option_text": "Battery management system — programming the BMS firmware to balance cells, prevent thermal runaway, and extend range", "trait_tags": {"Electronics-Dev": 0.8, "Software-Dev": 0.7, "Electrical-Power": 0.6, "Automotive-Tech": 0.5}},
+            {"option_id": 28035, "option_text": "Interior and accessibility designer — configuring wheelchair ramps, fare-tap validators, and CCTV placement", "trait_tags": {"Spatial-Design": 0.8, "Inclusive-Ed": 0.7, "Visual-Design": 0.6, "Industrial-Ops": 0.5}},
+            {"option_id": 28036, "option_text": "Route simulation analyst — modeling passenger loads, charging depot locations, and battery swap schedules across metro routes", "trait_tags": {"Data-Analytics": 0.8, "AI-ML": 0.7, "Analytical-Skill": 0.6, "Software-Dev": 0.5}},
+            {"option_id": 28037, "option_text": "Driver training coordinator — teaching operators regenerative braking, touchscreen dashboards, and emergency disconnect procedures", "trait_tags": {"Teaching-Ed": 0.8, "Automotive-Tech": 0.7, "People-Skill": 0.6, "TVET-Path": 0.5}},
+            {"option_id": 28038, "option_text": "Government subsidy application — preparing technical documentation and cost-benefit analyses for DOTr funding windows", "trait_tags": {"Writing-Comm": 0.8, "Finance-Acct": 0.7, "Legal-Mgmt": 0.6, "Admin-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5152,
+        "question_text": "A Cagayan de Oro outdoor-education center wants to run a year-round wilderness skills program for at-risk teens. Which module do you develop and teach?",
+        "category": "wilderness_youth_program",
+        "options": [
+            {"option_id": 28039, "option_text": "River kayaking and swift-water rescue — building confidence through Class II rapids while teaching teamwork and risk assessment", "trait_tags": {"Sports-Fitness-Path": 0.7, "Physical-Skill": 0.8, "Teaching-Ed": 0.6, "Sports-Ed": 0.5}},
+            {"option_id": 28040, "option_text": "Bushcraft and survival cooking — foraging edible plants, building smokeless fires, and preparing camp meals safely", "trait_tags": {"Culinary-Arts": 0.7, "Forestry-Path": 0.8, "Agri-Nature": 0.6, "Physical-Skill": 0.5}},
+            {"option_id": 28041, "option_text": "Trail building and conservation — clearing switchbacks, installing erosion-control structures, and marking routes with GPS waypoints", "trait_tags": {"Forestry-Path": 0.8, "Environmental-Eng": 0.7, "Civil-Build": 0.6, "Physical-Skill": 0.5}},
+            {"option_id": 28042, "option_text": "Wildlife photography and journaling — teaching teens to observe, photograph, and write field notes about local fauna", "trait_tags": {"Film-Broadcast": 0.7, "Writing-Comm": 0.8, "Environmental-Sci": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28043, "option_text": "Peer mentorship and conflict resolution circles — facilitating nightly reflection sessions and goal-setting journals", "trait_tags": {"Counseling": 0.8, "Social-Work": 0.7, "People-Skill": 0.6, "Early-Childhood": 0.5}},
+            {"option_id": 28044, "option_text": "Program evaluation researcher — tracking behavioral outcomes, school re-enrollment rates, and publishing longitudinal results", "trait_tags": {"Analytical-Skill": 0.8, "Data-Analytics": 0.7, "Writing-Comm": 0.6, "Social-Work": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5153,
+        "question_text": "A Philippine public library system is piloting a mobile library bus that visits remote barangays in Mindoro every week. Which service do you run aboard the bus?",
+        "category": "mobile_library_outreach",
+        "options": [
+            {"option_id": 28045, "option_text": "Cataloging and circulation — scanning books in and out, maintaining a cloud database, and ordering new titles based on requests", "trait_tags": {"Library-Info": 0.8, "Cloud-Systems": 0.7, "Admin-Skill": 0.6, "Software-Dev": 0.5}},
+            {"option_id": 28046, "option_text": "Children's story hour and puppet theater — performing weekly tales in Filipino and Mangyan dialect to build early literacy", "trait_tags": {"Early-Childhood": 0.8, "Performing-Arts": 0.7, "Teaching-Ed": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28047, "option_text": "Digital literacy station — helping adults set up email, use government e-services, and avoid online scams", "trait_tags": {"Teaching-Ed": 0.7, "Inclusive-Ed": 0.8, "Web-Dev": 0.6, "Cyber-Defense": 0.5}},
+            {"option_id": 28048, "option_text": "Health-info corner — distributing pamphlets on dengue, TB, and maternal care and connecting patients to telemedicine", "trait_tags": {"Public-Health": 0.8, "Patient-Care": 0.7, "Community-Serve": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 28049, "option_text": "Oral-history recorder — interviewing tribal elders, digitizing their stories, and archiving audio files for cultural preservation", "trait_tags": {"Library-Info": 0.7, "Film-Broadcast": 0.8, "Writing-Comm": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 28050, "option_text": "Grant writer and sponsor liaison — securing funding from NCCA, private donors, and international library foundations", "trait_tags": {"Writing-Comm": 0.8, "Finance-Acct": 0.7, "Admin-Skill": 0.6, "Community-Serve": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5154,
+        "question_text": "A start-up in Laguna is creating assistive-technology devices for Filipinos with disabilities. Which product line do you prototype?",
+        "category": "assistive_tech_startup",
+        "options": [
+            {"option_id": 28051, "option_text": "Low-cost prosthetic hand — 3D-printing finger mechanisms and calibrating myoelectric sensors for forearm amputees", "trait_tags": {"Hardware-Systems": 0.8, "Rehab-Therapy": 0.7, "Mechanical-Design": 0.6, "Electronics-Dev": 0.5}},
+            {"option_id": 28052, "option_text": "Screen-reader app in Filipino — developing a voice-synthesis engine that reads web pages and PDFs aloud naturally", "trait_tags": {"AI-ML": 0.8, "Inclusive-Ed": 0.7, "Mobile-Dev": 0.6, "Software-Dev": 0.5}},
+            {"option_id": 28053, "option_text": "Braille embosser from recycled parts — re-engineering old dot-matrix printers to produce affordable Braille textbooks", "trait_tags": {"TVET-Path": 0.8, "Inclusive-Ed": 0.7, "Hardware-Systems": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28054, "option_text": "Wheelchair-accessible tricycle — modifying the sidecar with ramp entry, locking clamps, and seatbelt systems", "trait_tags": {"Automotive-Tech": 0.8, "Mechanical-Design": 0.7, "Inclusive-Ed": 0.6, "TVET-Path": 0.5}},
+            {"option_id": 28055, "option_text": "Sign-language video relay service — connecting deaf callers with live interpreters through a 24/7 video platform", "trait_tags": {"Cloud-Systems": 0.8, "Mobile-Dev": 0.7, "People-Skill": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 28056, "option_text": "Impact measurement — surveying users, calculating quality-of-life improvements, and presenting data to investors and DSWD", "trait_tags": {"Data-Analytics": 0.8, "Writing-Comm": 0.7, "Social-Work": 0.6, "Analytical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5155,
+        "question_text": "A Zambales mango growers' association is losing fruit to post-harvest spoilage before it reaches Manila markets. Which intervention do you implement?",
+        "category": "mango_postharvest_loss",
+        "options": [
+            {"option_id": 28057, "option_text": "Hot-water treatment facility — building dip tanks that control anthracnose and extend shelf life by two weeks", "trait_tags": {"Food-Science": 0.8, "Agri-Nature": 0.7, "Mechanical-Design": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28058, "option_text": "Solar-powered cold storage — installing modular cold rooms at farm-gate collection points to break the heat chain", "trait_tags": {"Electrical-Power": 0.8, "Environmental-Eng": 0.7, "Civil-Build": 0.6, "Industrial-Ops": 0.5}},
+            {"option_id": 28059, "option_text": "Dried-mango processing line — slicing, dehydrating, and packaging fruit that would otherwise rot into export-ready snacks", "trait_tags": {"Culinary-Mgmt-Path": 0.8, "Food-Science": 0.7, "Industrial-Ops": 0.6, "Marketing-Sales": 0.5}},
+            {"option_id": 28060, "option_text": "Harvest-timing advisor — training pickers to judge maturity by shoulder shape and sap flow to avoid premature or late picks", "trait_tags": {"Agri-Nature": 0.8, "Teaching-Ed": 0.7, "Field-Research": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28061, "option_text": "Direct-to-consumer app — building a platform where Manila buyers pre-order farm-fresh mangoes with next-day refrigerated delivery", "trait_tags": {"Mobile-Dev": 0.8, "Startup-Venture": 0.7, "Web-Dev": 0.6, "Marketing-Sales": 0.5}},
+            {"option_id": 28062, "option_text": "Packaging engineer — designing ventilated corrugated crates and ethylene-absorbing sachets that reduce bruising in transit", "trait_tags": {"Mechanical-Design": 0.8, "Lab-Research": 0.7, "Industrial-Ops": 0.6, "Creative-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5156,
+        "question_text": "A Philippine women's crisis center is expanding its services from counseling into holistic recovery. Which new program arm do you establish?",
+        "category": "crisis_center_expansion",
+        "options": [
+            {"option_id": 28063, "option_text": "Legal aid clinic — preparing protection orders, annulment documents, and child-custody petitions for survivors", "trait_tags": {"Legal-Practice": 0.8, "Social-Work": 0.7, "Writing-Comm": 0.6, "People-Skill": 0.5}},
+            {"option_id": 28064, "option_text": "Financial literacy and micro-enterprise — teaching basic bookkeeping and helping women launch home-based catering or sewing businesses", "trait_tags": {"Finance-Acct": 0.8, "Startup-Venture": 0.7, "Teaching-Ed": 0.6, "TVET-Path": 0.5}},
+            {"option_id": 28065, "option_text": "Children's therapeutic play room — using art therapy, sand trays, and guided play for kids who witnessed domestic violence", "trait_tags": {"Early-Childhood": 0.8, "Counseling": 0.7, "Creative-Skill": 0.6, "Social-Work": 0.5}},
+            {"option_id": 28066, "option_text": "Health screening and referral — conducting STI testing, prenatal check-ups, and mental-health triage for new arrivals", "trait_tags": {"Patient-Care": 0.8, "Public-Health": 0.7, "Medical-Lab": 0.6, "Counseling": 0.5}},
+            {"option_id": 28067, "option_text": "Transitional housing coordinator — managing safe-house placements, roommate matchings, and eventual independent-living plans", "trait_tags": {"Social-Work": 0.8, "Admin-Skill": 0.7, "HR-Management": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 28068, "option_text": "Data privacy and digital safety — teaching survivors to secure social media accounts, change passwords, and detect stalkerware", "trait_tags": {"Cyber-Defense": 0.8, "Teaching-Ed": 0.7, "Software-Dev": 0.6, "People-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5157,
+        "question_text": "An Apayao provincial government wins a grant to set up a vocational training center for indigenous Isnag youth. Which skills track do you design?",
+        "category": "indigenous_vocational_center",
+        "options": [
+            {"option_id": 28069, "option_text": "Small-engine and appliance repair — teaching generator, water-pump, and chainsaw maintenance using locally sourced spare parts", "trait_tags": {"Automotive-Tech": 0.8, "TVET-Path": 0.7, "Mechanical-Design": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28070, "option_text": "Indigenous weaving with modern twist — preserving traditional Isnag loom patterns while adding product-design for commercial markets", "trait_tags": {"Creative-Skill": 0.8, "TVET-Path": 0.7, "Visual-Design": 0.6, "Marketing-Sales": 0.5}},
+            {"option_id": 28071, "option_text": "Community health worker — training youth in first aid, vital-sign monitoring, and rural telemedicine tablet operation", "trait_tags": {"Patient-Care": 0.8, "Public-Health": 0.7, "Teaching-Ed": 0.6, "Mobile-Dev": 0.5}},
+            {"option_id": 28072, "option_text": "Sustainable forestry and agroforestry — teaching timber stand improvement, rattan harvesting cycles, and cacao intercropping", "trait_tags": {"Forestry-Path": 0.8, "Agri-Nature": 0.7, "Environmental-Sci": 0.6, "Field-Research": 0.5}},
+            {"option_id": 28073, "option_text": "Solar panel installation — wiring off-grid photovoltaic systems for households without NAPOCOR connection", "trait_tags": {"Electrical-Power": 0.8, "TVET-Path": 0.7, "Electronics-Dev": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28074, "option_text": "Record-keeping and cooperative management — teaching bookkeeping, meeting facilitation, and SEC cooperative registration", "trait_tags": {"Finance-Acct": 0.7, "Admin-Skill": 0.8, "Legal-Mgmt": 0.6, "Community-Serve": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5158,
+        "question_text": "A Bacolod city government is converting disused sugar warehouses along the river into an arts-and-innovation district. Which anchor tenant concept do you pitch?",
+        "category": "arts_innovation_district",
+        "options": [
+            {"option_id": 28075, "option_text": "Indie film and post-production studio — equipping sound stages, color-grading suites, and a 50-seat screening room", "trait_tags": {"Film-Broadcast": 0.8, "Digital-Media": 0.7, "Music-Audio": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28076, "option_text": "Co-working tech hub — offering hot desks, a pitch stage, and mentorship for Negrense software start-ups", "trait_tags": {"Startup-Venture": 0.8, "Software-Dev": 0.7, "Web-Dev": 0.6, "People-Skill": 0.5}},
+            {"option_id": 28077, "option_text": "Public art gallery and residency — hosting rotating exhibits, visiting artists, and workshops on sculpture and muralism", "trait_tags": {"Visual-Design": 0.8, "Creative-Skill": 0.7, "Performing-Arts": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 28078, "option_text": "Culinary incubator — shared commercial kitchens where food entrepreneurs test recipes and package products for retail", "trait_tags": {"Culinary-Arts": 0.8, "Culinary-Mgmt-Path": 0.7, "Startup-Venture": 0.6, "Food-Science": 0.5}},
+            {"option_id": 28079, "option_text": "Music rehearsal and recording rooms — soundproofed spaces with rental instruments for local bands and a community radio booth", "trait_tags": {"Music-Audio": 0.8, "Performing-Arts": 0.7, "Film-Broadcast": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28080, "option_text": "Heritage and sugar-industry museum — preserving Negros hacienda history through interactive displays and oral-history kiosks", "trait_tags": {"Library-Info": 0.8, "Writing-Comm": 0.7, "Tourism-Travel": 0.6, "Teaching-Ed": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5159,
+        "question_text": "A Philippine Coast Guard station in Palawan is upgrading its maritime surveillance and rescue capabilities. Which project do you oversee?",
+        "category": "coast_guard_upgrade",
+        "options": [
+            {"option_id": 28081, "option_text": "Radar and AIS integration — linking shore-based radar with vessel transponder data into a unified maritime picture", "trait_tags": {"Electronics-Dev": 0.8, "Maritime-Sea": 0.7, "Software-Dev": 0.6, "Military-Defense": 0.5}},
+            {"option_id": 28082, "option_text": "Search-and-rescue diver training — running dive medicine courses, night-recovery drills, and helicopter-hoist exercises", "trait_tags": {"Military-Defense": 0.7, "Physical-Skill": 0.8, "Maritime-Sea": 0.6, "Sports-Ed": 0.5}},
+            {"option_id": 28083, "option_text": "Oil-spill response kit — pre-positioning containment booms, skimmers, and dispersant sprayers at high-risk shipping lanes", "trait_tags": {"Environmental-Eng": 0.8, "Maritime-Sea": 0.7, "Industrial-Ops": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28084, "option_text": "Fisheries law enforcement — detaining unlicensed foreign fishing boats and collecting evidence for BFAR prosecution", "trait_tags": {"Law-Enforce": 0.8, "Fisheries-Agri-Path": 0.7, "Legal-Practice": 0.6, "Maritime-Sea": 0.5}},
+            {"option_id": 28085, "option_text": "Station clinic upgrade — equipping the sick bay for stabilization of drowning victims and decompression sickness before hospital transfer", "trait_tags": {"Patient-Care": 0.8, "Medical-Lab": 0.7, "Health-Admin": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28086, "option_text": "Public information and marine safety campaigns — producing radio spots and social media infographics on life-jacket use and weather advisories", "trait_tags": {"Digital-Media": 0.8, "Writing-Comm": 0.7, "Marketing-Sales": 0.6, "Community-Serve": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5160,
+        "question_text": "A foundation is establishing a residential school for deaf children in Bukidnon. Which department do you set up?",
+        "category": "deaf_residential_school",
+        "options": [
+            {"option_id": 28087, "option_text": "Filipino Sign Language curriculum — developing grade-level math, science, and reading materials fully in FSL with video glossaries", "trait_tags": {"Inclusive-Ed": 0.8, "Teaching-Ed": 0.7, "Digital-Media": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28088, "option_text": "Audiology and speech-therapy unit — fitting hearing aids, calibrating cochlear implant processors, and running articulation drills", "trait_tags": {"Rehab-Therapy": 0.8, "Patient-Care": 0.7, "Medical-Lab": 0.6, "Electronics-Dev": 0.5}},
+            {"option_id": 28089, "option_text": "Dormitory and student life — managing residential routines, nutrition plans, weekend recreation, and emergency communication systems", "trait_tags": {"Admin-Skill": 0.8, "Nutrition-Diet": 0.7, "Hospitality-Svc": 0.6, "People-Skill": 0.5}},
+            {"option_id": 28090, "option_text": "Vocational arts workshop — teaching carpentry, screen printing, and basic electronics repair as pathways to employment", "trait_tags": {"TVET-Path": 0.8, "Creative-Skill": 0.7, "Inclusive-Ed": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28091, "option_text": "Parent and community engagement — running FSL classes for hearing parents and organizing deaf-awareness events in nearby towns", "trait_tags": {"Community-Serve": 0.8, "People-Skill": 0.7, "Teaching-Ed": 0.6, "Social-Work": 0.5}},
+            {"option_id": 28092, "option_text": "Sports and physical education — coaching deaf athletes for Philippine Deaf Games and daily fitness programs", "trait_tags": {"Sports-Ed": 0.8, "Sports-Fitness-Path": 0.7, "Physical-Skill": 0.6, "Inclusive-Ed": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5161,
+        "question_text": "A consortium of Philippine hospitals is building a shared biobank to accelerate genomics research on diseases prevalent among Filipinos. Which unit do you manage?",
+        "category": "hospital_biobank",
+        "options": [
+            {"option_id": 28093, "option_text": "Sample acquisition — coordinating informed-consent protocols and collecting blood, tissue, and saliva across 20 partner hospitals", "trait_tags": {"Medical-Lab": 0.8, "Legal-Practice": 0.7, "Admin-Skill": 0.6, "Patient-Care": 0.5}},
+            {"option_id": 28094, "option_text": "Cryo-storage engineering — maintaining liquid-nitrogen tanks, barcode-tracking every vial, and monitoring temperature alarms 24/7", "trait_tags": {"Lab-Research": 0.8, "Hardware-Systems": 0.7, "Mechanical-Design": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28095, "option_text": "Bioinformatics pipeline — building the analysis workflow that processes whole-genome sequences and flags disease-associated variants", "trait_tags": {"AI-ML": 0.8, "Software-Dev": 0.7, "Data-Analytics": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28096, "option_text": "Ethics and data governance — drafting data-sharing agreements, ensuring HIPAA-equivalent privacy, and chairing the ethics review board", "trait_tags": {"Legal-Mgmt": 0.8, "Philosophy-Path": 0.7, "Writing-Comm": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 28097, "option_text": "Community engagement — explaining genomics research benefits to indigenous communities and securing free prior and informed consent", "trait_tags": {"Community-Serve": 0.8, "People-Skill": 0.7, "Teaching-Ed": 0.6, "Social-Work": 0.5}},
+            {"option_id": 28098, "option_text": "Industry partnership — negotiating licensing deals with pharmaceutical companies interested in Filipino-specific drug targets", "trait_tags": {"Finance-Acct": 0.8, "Pharmacy": 0.7, "Marketing-Sales": 0.6, "Legal-Practice": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5162,
+        "question_text": "A Taal Lake conservation authority is responding to increased volcanic activity and fish-kill events. Which response team do you coordinate?",
+        "category": "taal_lake_conservation",
+        "options": [
+            {"option_id": 28099, "option_text": "Volcano monitoring — deploying tiltmeters, gas-flux sensors, and seismographs around the caldera and relaying data to PHIVOLCS", "trait_tags": {"Environmental-Sci": 0.8, "Electronics-Dev": 0.7, "Data-Analytics": 0.6, "Field-Research": 0.5}},
+            {"option_id": 28100, "option_text": "Aquaculture recovery — testing water quality, relocating fish pens to safe zones, and restocking native tawilis fingerlings", "trait_tags": {"Fisheries-Agri-Path": 0.8, "Environmental-Eng": 0.7, "Lab-Research": 0.6, "Agri-Nature": 0.5}},
+            {"option_id": 28101, "option_text": "Evacuation and shelter management — pre-positioning relief goods, mapping family-reunification centers, and running quarterly drills", "trait_tags": {"Social-Work": 0.8, "Admin-Skill": 0.7, "Community-Serve": 0.6, "People-Skill": 0.5}},
+            {"option_id": 28102, "option_text": "Lakeshore reforestation — planting bamboo and mangrove buffers to stabilize eroding banks and absorb volcanic sediment", "trait_tags": {"Forestry-Path": 0.8, "Agri-Nature": 0.7, "Environmental-Sci": 0.6, "Field-Research": 0.5}},
+            {"option_id": 28103, "option_text": "Hazard communication — translating scientific bulletins into simple Tagalog infographics and SMS alerts for lakeside barangays", "trait_tags": {"Digital-Media": 0.8, "Writing-Comm": 0.7, "Teaching-Ed": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 28104, "option_text": "Tourism redirect plan — promoting heritage walks and culinary tours in Taal town to sustain local income while the island is off-limits", "trait_tags": {"Tourism-Hospitality-Path": 0.8, "Marketing-Sales": 0.7, "Hospitality-Svc": 0.6, "Tourism-Travel": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5163,
+        "question_text": "A national bookstore chain is reinventing its flagship branch into an experiential learning destination rather than just a retail space. Which zone do you curate?",
+        "category": "bookstore_reinvention",
+        "options": [
+            {"option_id": 28105, "option_text": "Author stage and podcast lounge — hosting book launches, author panels, and recording live podcast episodes with listeners", "trait_tags": {"Writing-Comm": 0.8, "Performing-Arts": 0.7, "Film-Broadcast": 0.6, "People-Skill": 0.5}},
+            {"option_id": 28106, "option_text": "Children's play-and-read zone — curating age-appropriate books, sensory play stations, and weekly storytelling circles", "trait_tags": {"Early-Childhood": 0.8, "Library-Info": 0.7, "Teaching-Ed": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28107, "option_text": "Test-kitchen demo area — pairing cookbook sales with live cooking demonstrations by local chefs every Saturday", "trait_tags": {"Culinary-Arts": 0.8, "Marketing-Sales": 0.7, "Hospitality-Svc": 0.6, "People-Skill": 0.5}},
+            {"option_id": 28108, "option_text": "Student study and co-work loft — quiet desks, power outlets, and a barista counter for an all-day academic hangout", "trait_tags": {"Spatial-Design": 0.8, "Hotel-Resort-Path": 0.7, "Admin-Skill": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 28109, "option_text": "Board-game and tabletop café — stocking hundreds of games, running tournament nights, and selling hobby supplies", "trait_tags": {"Game-Dev": 0.8, "People-Skill": 0.7, "Marketing-Sales": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28110, "option_text": "Retail analytics dashboard — tracking foot traffic, best-seller velocity, and display-effectiveness to optimize store layout", "trait_tags": {"Data-Analytics": 0.8, "Software-Dev": 0.7, "Finance-Acct": 0.6, "Analytical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5164,
+        "question_text": "A Davao del Sur cacao farming collective is invited to compete at the Paris Salon du Chocolat. Which preparation role do you take on?",
+        "category": "cacao_international_competition",
+        "options": [
+            {"option_id": 28111, "option_text": "Fermentation and drying specialist — perfecting five-day box-fermentation protocols and monitoring bean moisture with hygrometers", "trait_tags": {"Food-Science": 0.8, "Lab-Research": 0.7, "Agri-Nature": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28112, "option_text": "Bean-to-bar chocolatier — roasting, winnowing, conching, and tempering single-origin bars to present at the tasting panel", "trait_tags": {"Culinary-Arts": 0.8, "Culinary-Mgmt-Path": 0.7, "Creative-Skill": 0.6, "Food-Science": 0.5}},
+            {"option_id": 28113, "option_text": "Booth and brand designer — creating the Philippine pavilion's visual identity, tasting trays, and video backdrop", "trait_tags": {"Visual-Design": 0.8, "Marketing-Sales": 0.7, "Digital-Media": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28114, "option_text": "Travel and logistics coordinator — booking flights, shipping sample boxes under cold-chain, and arranging interpreter services in Paris", "trait_tags": {"Tourism-Travel": 0.7, "Admin-Skill": 0.8, "Industrial-Ops": 0.6, "Finance-Acct": 0.5}},
+            {"option_id": 28115, "option_text": "Sustainability narrative writer — authoring the story of shade-grown, bird-friendly cacao for the competition's origin profile essay", "trait_tags": {"Writing-Comm": 0.8, "Environmental-Sci": 0.7, "Agri-Nature": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28116, "option_text": "Soil scientist — sampling farm plots to correlate terroir characteristics with flavor notes the judges will evaluate", "trait_tags": {"Field-Research": 0.8, "Lab-Research": 0.7, "Agri-Nature": 0.6, "Analytical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5165,
+        "question_text": "A Philippine Space Agency satellite has just captured its first images, and the agency needs analysts to turn raw data into useful products. Which application team do you join?",
+        "category": "satellite_data_applications",
+        "options": [
+            {"option_id": 28117, "option_text": "Agricultural crop monitoring — classifying rice-paddy stages from multispectral imagery and alerting DA regional offices to pest outbreaks", "trait_tags": {"Agri-Nature": 0.8, "AI-ML": 0.7, "Data-Analytics": 0.6, "Software-Dev": 0.5}},
+            {"option_id": 28118, "option_text": "Urban heat-island mapping — identifying Metro Manila hot zones and recommending green-roof or tree-planting interventions", "trait_tags": {"Environmental-Sci": 0.8, "Data-Analytics": 0.7, "Environmental-Eng": 0.6, "Spatial-Design": 0.5}},
+            {"option_id": 28119, "option_text": "Maritime domain awareness — detecting dark vessels and illegal transshipment using synthetic-aperture radar imagery", "trait_tags": {"Maritime-Sea": 0.8, "Cyber-Defense": 0.7, "Military-Defense": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28120, "option_text": "Flood inundation modeler — combining satellite elevation data with rainfall forecasts to generate real-time flood-risk maps", "trait_tags": {"Civil-Build": 0.7, "Software-Dev": 0.8, "Environmental-Sci": 0.6, "Data-Analytics": 0.5}},
+            {"option_id": 28121, "option_text": "Forest-cover change detector — quantifying deforestation and illegal logging by comparing yearly composite images", "trait_tags": {"Forestry-Path": 0.8, "Environmental-Sci": 0.7, "AI-ML": 0.6, "Law-Enforce": 0.5}},
+            {"option_id": 28122, "option_text": "Public data portal developer — building an open-access web platform where researchers and LGUs can download and visualize satellite layers", "trait_tags": {"Web-Dev": 0.8, "Cloud-Systems": 0.7, "Software-Dev": 0.6, "Data-Analytics": 0.5}},
+        ],
+    },
+]
+
+# --- collision guard --------------------------------------------------------
+_repl24_existing_qids = {q["question_id"] for q in QUESTIONS_POOL_ENHANCED}
+_repl24_new_qids = {q["question_id"] for q in _REPLACEMENT_BATCH_24}
+if _repl24_existing_qids & _repl24_new_qids:
+    raise ValueError(f"Replacement batch 24 question IDs overlap: {_repl24_existing_qids & _repl24_new_qids}")
+
+_repl24_existing_oids = {o["option_id"] for q in QUESTIONS_POOL_ENHANCED for o in q.get("options", [])}
+_repl24_new_oids = {o["option_id"] for q in _REPLACEMENT_BATCH_24 for o in q.get("options", [])}
+if _repl24_existing_oids & _repl24_new_oids:
+    raise ValueError(f"Replacement batch 24 option IDs overlap: {_repl24_existing_oids & _repl24_new_oids}")
+
+QUESTIONS_POOL_ENHANCED.extend(_REPLACEMENT_BATCH_24)
+
+
+# ─── REPLACEMENT BATCH 25 (20 scenario questions) ───────────────────────────
+_REPLACEMENT_BATCH_25 = [
+    {
+        "question_id": 5166,
+        "question_text": "A Palawan eco-lodge is adding an on-site marine research station so guests can participate in real science while on vacation. Which program do you launch?",
+        "category": "eco_lodge_marine_research",
+        "options": [
+            {"option_id": 28123, "option_text": "Coral reef health survey — training guests to photograph quadrats, identify bleached colonies, and enter data into a global reef-monitoring database", "trait_tags": {"Environmental-Sci": 0.8, "Teaching-Ed": 0.7, "Field-Research": 0.6, "Data-Analytics": 0.5}},
+            {"option_id": 28124, "option_text": "Sea turtle hatchery — monitoring nesting beaches at night, relocating eggs to a protected nursery, and tagging hatchlings before release", "trait_tags": {"Veterinary-Path": 0.8, "Environmental-Sci": 0.7, "Field-Research": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 28125, "option_text": "Underwater acoustic monitoring — installing hydrophones to record whale songs and reef soundscapes for marine bioacoustics research", "trait_tags": {"Music-Audio": 0.7, "Electronics-Dev": 0.8, "Environmental-Sci": 0.6, "Lab-Research": 0.5}},
+            {"option_id": 28126, "option_text": "Mangrove replanting excursions — guiding visitors through knee-deep mud to plant propagules and measure seedling survival rates quarterly", "trait_tags": {"Forestry-Path": 0.8, "Tourism-Travel": 0.7, "Agri-Nature": 0.6, "Physical-Skill": 0.5}},
+            {"option_id": 28127, "option_text": "Sustainable seafood kitchen — sourcing only line-caught fish, teaching guests ceviche and kinilaw preparation, and explaining ocean-to-plate ethics", "trait_tags": {"Culinary-Arts": 0.8, "Tourism-Hospitality-Path": 0.7, "Food-Science": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 28128, "option_text": "Research station website and donor portal — building an online platform that streams live reef cameras and accepts international research grants", "trait_tags": {"Web-Dev": 0.8, "Cloud-Systems": 0.7, "Finance-Acct": 0.6, "Digital-Media": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5167,
+        "question_text": "A Rizal provincial hospital is piloting the first rural robotic-surgery suite in the Philippines by partnering with a Seoul medical center. Which role do you fill?",
+        "category": "rural_robotic_surgery",
+        "options": [
+            {"option_id": 28129, "option_text": "Surgical robot technician — sterilizing the da Vinci arms, calibrating instruments, and troubleshooting mid-operation faults", "trait_tags": {"Hardware-Systems": 0.8, "Medical-Lab": 0.7, "Mechanical-Design": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28130, "option_text": "Telemedicine bridge engineer — ensuring sub-50ms latency video links so Korean mentors can guide Filipino surgeons in real time", "trait_tags": {"Cloud-Systems": 0.8, "Software-Dev": 0.7, "Electronics-Dev": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28131, "option_text": "Patient navigator — screening candidates, explaining risks in Tagalog, and coordinating pre-op imaging and post-op home visits", "trait_tags": {"Patient-Care": 0.8, "People-Skill": 0.7, "Health-Admin": 0.6, "Counseling": 0.5}},
+            {"option_id": 28132, "option_text": "Outcomes researcher — comparing robotic versus open-surgery recovery times, infection rates, and patient satisfaction scores", "trait_tags": {"Data-Analytics": 0.8, "Analytical-Skill": 0.7, "Writing-Comm": 0.6, "Medical-Lab": 0.5}},
+            {"option_id": 28133, "option_text": "Biomedical ethics officer — drafting informed-consent protocols and reviewing equity concerns about who gets access to robotic surgery", "trait_tags": {"Philosophy-Path": 0.8, "Legal-Practice": 0.7, "Writing-Comm": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 28134, "option_text": "Hospital finance and grant manager — budgeting instrument-replacement cycles and applying to DOH for capital-equipment subsidies", "trait_tags": {"Finance-Acct": 0.8, "Health-Admin": 0.7, "Admin-Skill": 0.6, "Analytical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5168,
+        "question_text": "A Marikina shoe-manufacturing cluster wants to compete with imported sneakers by launching a Filipino athletic-footwear brand. Which department do you head?",
+        "category": "athletic_shoe_brand",
+        "options": [
+            {"option_id": 28135, "option_text": "Sole and midsole R&D — testing rubber compounds and EVA foam densities for cushioning, traction, and durability on tropical roads", "trait_tags": {"Lab-Research": 0.8, "Mechanical-Design": 0.7, "Food-Science": 0.5, "Technical-Skill": 0.6}},
+            {"option_id": 28136, "option_text": "Shoe-pattern designer — drafting uppers in 3D CAD, selecting breathable meshes, and grading sizes from children's to men's 13", "trait_tags": {"Visual-Design": 0.8, "Creative-Skill": 0.7, "Software-Dev": 0.6, "Spatial-Design": 0.5}},
+            {"option_id": 28137, "option_text": "Production-line engineer — configuring stitching machines, cement-bonding presses, and quality-control checkpoints for 2,000 pairs per day", "trait_tags": {"Industrial-Ops": 0.8, "TVET-Path": 0.7, "Mechanical-Design": 0.6, "Automotive-Tech": 0.5}},
+            {"option_id": 28138, "option_text": "Athlete endorsement manager — signing Filipino runners, basketball players, and MMA fighters and producing ad campaigns", "trait_tags": {"Marketing-Sales": 0.8, "Sports-Fitness-Path": 0.7, "Digital-Media": 0.6, "People-Skill": 0.5}},
+            {"option_id": 28139, "option_text": "Export compliance and customs broker — handling PEZA incentives, labeling regulations, and tariff schedules for ASEAN markets", "trait_tags": {"Legal-Mgmt": 0.8, "Finance-Acct": 0.7, "Admin-Skill": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28140, "option_text": "Biomechanics tester — placing runners on treadmills with pressure-sensing insoles and analyzing gait data to improve shoe support", "trait_tags": {"Exercise-Sci-Path": 0.8, "Data-Analytics": 0.7, "Hardware-Systems": 0.6, "Sports-Ed": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5169,
+        "question_text": "An Ifugao rice-terrace heritage site is losing walls due to neglect and out-migration of terrace builders. Which preservation initiative do you lead?",
+        "category": "rice_terrace_preservation",
+        "options": [
+            {"option_id": 28141, "option_text": "Stone-wall masonry revival — recruiting youth and paying them apprentice wages to learn the ancestral mud-and-rock bonding technique", "trait_tags": {"TVET-Path": 0.8, "Civil-Build": 0.7, "Community-Serve": 0.6, "Physical-Skill": 0.5}},
+            {"option_id": 28142, "option_text": "Heirloom-rice seed bank — cataloging and multiplying 60+ indigenous varieties to prevent genetic erosion", "trait_tags": {"Agri-Nature": 0.8, "Lab-Research": 0.7, "Fisheries-Agri-Path": 0.6, "Field-Research": 0.5}},
+            {"option_id": 28143, "option_text": "Terrace-stay homestay network — listing restored farmhouses on booking platforms and training host families on guest services", "trait_tags": {"Hotel-Resort-Path": 0.8, "Tourism-Hospitality-Path": 0.7, "Hospitality-Svc": 0.6, "Marketing-Sales": 0.5}},
+            {"option_id": 28144, "option_text": "Drone and LiDAR mapping — creating centimeter-accurate digital elevation models to track wall collapse and water-channel erosion over time", "trait_tags": {"Hardware-Systems": 0.7, "Data-Analytics": 0.8, "Software-Dev": 0.6, "Environmental-Eng": 0.5}},
+            {"option_id": 28145, "option_text": "Living-culture documentary — filming ritual chants, planting calendars, and elder interviews for a UNESCO submission video", "trait_tags": {"Film-Broadcast": 0.8, "Writing-Comm": 0.7, "Performing-Arts": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28146, "option_text": "Irrigation engineer — repairing the ancient bamboo-pipe aqueducts and designing debris traps to prevent landslide blockages", "trait_tags": {"Environmental-Eng": 0.8, "Civil-Build": 0.7, "Mechanical-Design": 0.6, "Technical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5170,
+        "question_text": "A Bulacan fireworks town is pivoting to also manufacture stage pyrotechnics for concert tours across Southeast Asia. Which team do you join?",
+        "category": "stage_pyrotechnics_export",
+        "options": [
+            {"option_id": 28147, "option_text": "Chemical formulator — developing low-smoke color compositions and testing flash-powder ignition temperatures in a blast-proof bunker", "trait_tags": {"Lab-Research": 0.8, "Mechanical-Design": 0.7, "Analytical-Skill": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28148, "option_text": "Electronic firing-system programmer — coding DMX-triggered cue sequences that sync flame jets and gerbs to beat drops in the music", "trait_tags": {"Software-Dev": 0.8, "Music-Audio": 0.7, "Electronics-Dev": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28149, "option_text": "Safety and transport compliance — writing MSDS sheets, packing Class 1.4G goods, and securing PNP explosive-transport permits across borders", "trait_tags": {"Legal-Mgmt": 0.8, "Admin-Skill": 0.7, "Writing-Comm": 0.6, "Industrial-Ops": 0.5}},
+            {"option_id": 28150, "option_text": "Show designer — choreographing flame and spark effects to complement artists' setlists and stage movements", "trait_tags": {"Performing-Arts": 0.8, "Creative-Skill": 0.7, "Music-Audio": 0.6, "Film-Broadcast": 0.5}},
+            {"option_id": 28151, "option_text": "Sales and touring account manager — pitching pyro packages to concert promoters in Bangkok, Jakarta, and Kuala Lumpur", "trait_tags": {"Marketing-Sales": 0.8, "People-Skill": 0.7, "Tourism-Travel": 0.6, "Finance-Acct": 0.5}},
+            {"option_id": 28152, "option_text": "Crew training officer — certifying technicians on fall-protection harnesses, fire-extinguisher use, and venue-specific emergency protocols", "trait_tags": {"Teaching-Ed": 0.8, "Sports-Fitness-Path": 0.6, "Physical-Skill": 0.7, "TVET-Path": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5171,
+        "question_text": "A Mindanao coffee cooperative has just won a Specialty Coffee Association score of 87 and is ready to scale up. Which growth function do you manage?",
+        "category": "specialty_coffee_scaleup",
+        "options": [
+            {"option_id": 28153, "option_text": "Green-bean buyer and cupper — traveling to farms, evaluating cherry ripeness, and scoring samples on the SCA cupping wheel", "trait_tags": {"Agri-Nature": 0.8, "Food-Science": 0.7, "Analytical-Skill": 0.6, "Field-Research": 0.5}},
+            {"option_id": 28154, "option_text": "Roast-profile developer — adjusting drum speed, air flow, and first-crack timing to highlight each lot's unique flavor notes", "trait_tags": {"Culinary-Mgmt-Path": 0.8, "Food-Science": 0.7, "Mechanical-Design": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28155, "option_text": "Cooperative financial officer — managing members' profit shares, loan repayments, and a group health-insurance fund", "trait_tags": {"Finance-Acct": 0.8, "HR-Management": 0.7, "Admin-Skill": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 28156, "option_text": "Barista competition coach — training members for the Philippine National Barista Championship and World Brewer's Cup qualifiers", "trait_tags": {"Teaching-Ed": 0.8, "Culinary-Arts": 0.7, "People-Skill": 0.6, "Sports-Ed": 0.5}},
+            {"option_id": 28157, "option_text": "Shade-tree agroforester — interplanting coffee with cacao and mahogany to improve soil, sequester carbon, and add income streams", "trait_tags": {"Forestry-Path": 0.8, "Agri-Nature": 0.7, "Environmental-Sci": 0.6, "Field-Research": 0.5}},
+            {"option_id": 28158, "option_text": "Online subscription manager — operating a direct-trade web store with roast-to-order fulfillment and monthly curated boxes", "trait_tags": {"Web-Dev": 0.8, "Startup-Venture": 0.7, "Marketing-Sales": 0.6, "Digital-Media": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5172,
+        "question_text": "A provincial jail in Cebu is introducing rehabilitation programs to cut re-offending rates. Which program do you design and run?",
+        "category": "jail_rehabilitation",
+        "options": [
+            {"option_id": 28159, "option_text": "Auto-body and painting shop — teaching detainees panel beating, spray finishing, and estimating repair costs for eventual employment", "trait_tags": {"Automotive-Tech": 0.8, "TVET-Path": 0.7, "Creative-Skill": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28160, "option_text": "Literacy and high-school equivalency classes — preparing inmates for ALS exams so they can pursue college upon release", "trait_tags": {"Teaching-Ed": 0.8, "Inclusive-Ed": 0.7, "Writing-Comm": 0.6, "People-Skill": 0.5}},
+            {"option_id": 28161, "option_text": "Anger management and cognitive-behavioral therapy groups — facilitating twice-weekly sessions with certified psychologists", "trait_tags": {"Counseling": 0.8, "Social-Work": 0.7, "People-Skill": 0.6, "Philosophy-Path": 0.5}},
+            {"option_id": 28162, "option_text": "Urban farming pod — building container-garden systems inside the compound so detainees grow vegetables for the jail kitchen", "trait_tags": {"Agri-Nature": 0.8, "Nutrition-Diet": 0.7, "Environmental-Eng": 0.6, "TVET-Path": 0.5}},
+            {"option_id": 28163, "option_text": "Legal aid desk — assisting inmates with plea-bargain paperwork, parole petitions, and connecting them with public attorneys", "trait_tags": {"Legal-Practice": 0.8, "Social-Work": 0.7, "Writing-Comm": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 28164, "option_text": "Re-entry job-placement coordinator — partnering with local employers, tracking post-release employment, and running monthly mentoring circles", "trait_tags": {"HR-Management": 0.8, "Community-Serve": 0.7, "People-Skill": 0.6, "Admin-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5173,
+        "question_text": "A consortium of Philippine museums is digitizing its combined two-million-item collection so the public can explore artifacts online. Which digitization unit do you lead?",
+        "category": "museum_digitization",
+        "options": [
+            {"option_id": 28165, "option_text": "High-resolution photography studio — operating focus-stacking rigs and color-calibrated backdrops for paintings, textiles, and pottery", "trait_tags": {"Film-Broadcast": 0.8, "Visual-Design": 0.7, "Hardware-Systems": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28166, "option_text": "3D scanning and photogrammetry — creating rotatable models of sculptures, fossils, and archaeological finds for a virtual gallery", "trait_tags": {"Animation-3D": 0.8, "Software-Dev": 0.7, "Hardware-Systems": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28167, "option_text": "Metadata and cataloging librarian — tagging every item with provenance, material, period, and exhibition history using Dublin Core standards", "trait_tags": {"Library-Info": 0.8, "Admin-Skill": 0.7, "Writing-Comm": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28168, "option_text": "Web platform developer — building the searchable online collection with filtered views, zoom tools, and multilingual descriptions", "trait_tags": {"Web-Dev": 0.8, "Cloud-Systems": 0.7, "Software-Dev": 0.6, "Digital-Media": 0.5}},
+            {"option_id": 28169, "option_text": "Conservation scientist — assessing which fragile items need stabilization before handling and advising on safe lighting levels", "trait_tags": {"Lab-Research": 0.8, "Environmental-Eng": 0.7, "Analytical-Skill": 0.6, "Medical-Lab": 0.5}},
+            {"option_id": 28170, "option_text": "Education and outreach — designing virtual field-trip lesson plans that teachers can book for classrooms with no museum nearby", "trait_tags": {"Teaching-Ed": 0.8, "Early-Childhood": 0.7, "Digital-Media": 0.6, "Community-Serve": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5174,
+        "question_text": "A Philippine Airlines subsidiary is launching a regional carrier connecting underserved Visayan islands using 19-seat turboprops. Which operations team do you staff?",
+        "category": "regional_airline_launch",
+        "options": [
+            {"option_id": 28171, "option_text": "Turboprop maintenance engineer — performing 100-hour inspections, propeller balancing, and avionics updates on Twin Otters", "trait_tags": {"Aeronautical-Eng": 0.8, "Mechanical-Design": 0.7, "Electronics-Dev": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28172, "option_text": "Flight dispatcher — filing flight plans, calculating fuel loads for short island hops, and monitoring weather across routes", "trait_tags": {"Aeronautical-Eng": 0.7, "Data-Analytics": 0.8, "Analytical-Skill": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 28173, "option_text": "Ground-handling supervisor — managing ramp operations, baggage loading sequences, and turnaround times at grass-strip airports", "trait_tags": {"Industrial-Ops": 0.8, "Physical-Skill": 0.7, "Admin-Skill": 0.6, "People-Skill": 0.5}},
+            {"option_id": 28174, "option_text": "Revenue management analyst — pricing seats dynamically based on demand forecasts, festival calendars, and competitor ferry schedules", "trait_tags": {"Finance-Acct": 0.8, "Data-Analytics": 0.7, "AI-ML": 0.6, "Marketing-Sales": 0.5}},
+            {"option_id": 28175, "option_text": "Safety and quality auditor — conducting CAAT compliance checks, filing occurrence reports, and running crew resource management refreshers", "trait_tags": {"Legal-Mgmt": 0.8, "Analytical-Skill": 0.7, "Writing-Comm": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 28176, "option_text": "Community route planner — surveying island mayors and fisherfolk on travel needs to decide which routes to serve first", "trait_tags": {"Community-Serve": 0.8, "People-Skill": 0.7, "Tourism-Travel": 0.6, "Data-Analytics": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5175,
+        "question_text": "A Tagaytay horse-riding academy is expanding into equine-assisted therapy for children with cerebral palsy and autism. Which program role do you take?",
+        "category": "equine_assisted_therapy",
+        "options": [
+            {"option_id": 28177, "option_text": "Hippotherapy instructor — guiding horse movements to stimulate the child's core muscles, balance, and sensory integration", "trait_tags": {"Rehab-Therapy": 0.8, "Exercise-Sci-Path": 0.7, "Patient-Care": 0.6, "Veterinary-Path": 0.5}},
+            {"option_id": 28178, "option_text": "Equine welfare manager — ensuring therapy horses receive proper nutrition, hoof care, and rest rotations between sessions", "trait_tags": {"Veterinary-Path": 0.8, "Agri-Nature": 0.7, "Nutrition-Diet": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 28179, "option_text": "Child psychologist — conducting pre-and-post assessments using standardized developmental scales and adjusting therapy goals quarterly", "trait_tags": {"Counseling": 0.8, "Early-Childhood": 0.7, "Analytical-Skill": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 28180, "option_text": "Adaptive-equipment fabricator — building custom saddle supports, helmets, and mounting ramps for children with limited mobility", "trait_tags": {"TVET-Path": 0.8, "Mechanical-Design": 0.7, "Inclusive-Ed": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28181, "option_text": "Parent training facilitator — teaching caregivers exercises they can do at home to reinforce gains made during riding sessions", "trait_tags": {"Teaching-Ed": 0.8, "People-Skill": 0.7, "Early-Childhood": 0.6, "Social-Work": 0.5}},
+            {"option_id": 28182, "option_text": "Fundraising and PhilHealth liaison — negotiating therapy-session reimbursement codes and writing grant proposals to disability-advocacy foundations", "trait_tags": {"Finance-Acct": 0.8, "Health-Admin": 0.7, "Writing-Comm": 0.6, "Legal-Practice": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5176,
+        "question_text": "A Zamboanga sardine-packing company wants to turn fish waste into profitable by-products instead of dumping it. Which value-chain extension do you develop?",
+        "category": "fish_waste_valorization",
+        "options": [
+            {"option_id": 28183, "option_text": "Fish-meal and fish-oil plant — rendering heads, bones, and viscera into high-protein animal feed and omega-3 supplements", "trait_tags": {"Food-Science": 0.8, "Fisheries-Agri-Path": 0.7, "Industrial-Ops": 0.6, "Mechanical-Design": 0.5}},
+            {"option_id": 28184, "option_text": "Collagen extraction lab — hydrolyzing fish skin into cosmetic-grade collagen peptides for beauty-product manufacturers", "trait_tags": {"Lab-Research": 0.8, "Pharmacy": 0.7, "Analytical-Skill": 0.6, "Food-Science": 0.5}},
+            {"option_id": 28185, "option_text": "Biogas digester — converting organic sludge into methane that powers the factory's boilers, cutting the diesel bill in half", "trait_tags": {"Environmental-Eng": 0.8, "Electrical-Power": 0.7, "Mechanical-Design": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28186, "option_text": "Organic liquid fertilizer bottling — fermenting fish hydrolysate and selling it to vegetable farmers in Mindanao", "trait_tags": {"Agri-Nature": 0.8, "Food-Science": 0.7, "Marketing-Sales": 0.6, "Industrial-Ops": 0.5}},
+            {"option_id": 28187, "option_text": "Environmental monitoring officer — testing effluent BOD levels, filing DENR self-monitoring reports, and maintaining the waste-treatment log", "trait_tags": {"Environmental-Sci": 0.8, "Legal-Practice": 0.7, "Analytical-Skill": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 28188, "option_text": "Circular-economy storyteller — producing video tours and infographics showing zero-waste practices to win ESG-conscious retail buyers abroad", "trait_tags": {"Digital-Media": 0.8, "Film-Broadcast": 0.7, "Marketing-Sales": 0.6, "Creative-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5177,
+        "question_text": "A Philippine national museum is curating a traveling exhibit on the Galleon Trade route from Manila to Acapulco. Which exhibit component do you produce?",
+        "category": "galleon_trade_exhibit",
+        "options": [
+            {"option_id": 28189, "option_text": "Augmented-reality treasure map — an app that overlays 3D galleon models and trade-route animations on visitors' phones as they walk the gallery", "trait_tags": {"Mobile-Dev": 0.8, "Animation-3D": 0.7, "Creative-Skill": 0.6, "Software-Dev": 0.5}},
+            {"option_id": 28190, "option_text": "Replica galleon hull section — overseeing carpenters who build a walk-through wooden cross-section showing cargo holds, cannon decks, and crew quarters", "trait_tags": {"Maritime-Sea": 0.8, "Civil-Build": 0.7, "TVET-Path": 0.6, "Spatial-Design": 0.5}},
+            {"option_id": 28191, "option_text": "Archival research and catalog essays — translating 17th-century Spanish shipping records and writing wall-panel narratives for each display case", "trait_tags": {"Writing-Comm": 0.8, "Library-Info": 0.7, "Analytical-Skill": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 28192, "option_text": "Porcelain and textile conservator — cleaning, reassembling, and mounting fragile Ming-dynasty ceramics and silk fabrics recovered from shipwrecks", "trait_tags": {"Lab-Research": 0.7, "Visual-Design": 0.8, "Creative-Skill": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28193, "option_text": "Interactive spice-trade market — a hands-on station where visitors smell, grind, and trade cinnamon, cloves, and pepper using replica currency", "trait_tags": {"Teaching-Ed": 0.7, "Hospitality-Svc": 0.8, "Tourism-Travel": 0.6, "People-Skill": 0.5}},
+            {"option_id": 28194, "option_text": "Traveling-exhibit logistics — crating artifacts to museum standards, insuring shipments, and coordinating schedules with five international venues", "trait_tags": {"Industrial-Ops": 0.8, "Admin-Skill": 0.7, "Finance-Acct": 0.6, "Legal-Mgmt": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5178,
+        "question_text": "A Bataan nuclear-power-plant site is being repurposed as a science-tourism attraction and renewable-energy research hub. Which conversion project do you manage?",
+        "category": "nuclear_plant_repurpose",
+        "options": [
+            {"option_id": 28195, "option_text": "Reactor-building museum — designing interactive displays that explain nuclear fission, radiation safety, and the plant's controversial history", "trait_tags": {"Teaching-Ed": 0.8, "Electrical-Power": 0.7, "Spatial-Design": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 28196, "option_text": "Solar and wind research field — installing test arrays on the plant grounds and benchmarking output against coastal weather patterns", "trait_tags": {"Electrical-Power": 0.8, "Environmental-Eng": 0.7, "Data-Analytics": 0.6, "Hardware-Systems": 0.5}},
+            {"option_id": 28197, "option_text": "Decommissioning safety officer — monitoring residual radioactivity, managing asbestos abatement, and securing hazardous areas", "trait_tags": {"Environmental-Sci": 0.8, "Public-Health": 0.7, "Technical-Skill": 0.6, "Legal-Practice": 0.5}},
+            {"option_id": 28198, "option_text": "Tourism experience designer — creating guided-tour routes, VR simulations of the never-activated control room, and gift-shop merchandise", "trait_tags": {"Tourism-Hospitality-Path": 0.8, "Digital-Media": 0.7, "Creative-Skill": 0.6, "Marketing-Sales": 0.5}},
+            {"option_id": 28199, "option_text": "Battery storage lab — testing grid-scale lithium-iron-phosphate and vanadium-redox-flow batteries to pair with intermittent renewables", "trait_tags": {"Electronics-Dev": 0.8, "Lab-Research": 0.7, "Mechanical-Design": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28200, "option_text": "Government and media liaison — briefing Congress on conversion progress, handling FOI requests, and managing public perception", "trait_tags": {"Writing-Comm": 0.8, "Legal-Mgmt": 0.7, "People-Skill": 0.6, "Digital-Media": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5179,
+        "question_text": "A Quezon province coconut-farmers' federation is building a processing campus to maximize value from every part of the coconut. Which processing line do you set up?",
+        "category": "coconut_processing_campus",
+        "options": [
+            {"option_id": 28201, "option_text": "Virgin coconut oil cold-press — installing expeller machines and bottling VCO for both domestic retail and bulk export", "trait_tags": {"Food-Science": 0.8, "Industrial-Ops": 0.7, "Mechanical-Design": 0.6, "Marketing-Sales": 0.5}},
+            {"option_id": 28202, "option_text": "Coco-coir and geo-textile factory — defibering husks and weaving erosion-control mats for road-slope stabilization projects", "trait_tags": {"TVET-Path": 0.8, "Environmental-Eng": 0.7, "Industrial-Ops": 0.6, "Civil-Build": 0.5}},
+            {"option_id": 28203, "option_text": "Activated-carbon kiln — carbonizing shells and steam-activating them for water-filtration and gold-mining applications", "trait_tags": {"Lab-Research": 0.8, "Mechanical-Design": 0.7, "Environmental-Eng": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28204, "option_text": "Coconut sugar and syrup kitchen — tapping toddy, cooking it into granulated sugar, and labeling jars for the organic-foods market", "trait_tags": {"Culinary-Mgmt-Path": 0.8, "Culinary-Arts": 0.7, "Food-Science": 0.6, "Agri-Nature": 0.5}},
+            {"option_id": 28205, "option_text": "Farmer cooperative IT — deploying a mobile app for toddy collection scheduling, weighbridge data, and instant digital payments to tappers", "trait_tags": {"Mobile-Dev": 0.8, "Software-Dev": 0.7, "Cloud-Systems": 0.6, "Data-Analytics": 0.5}},
+            {"option_id": 28206, "option_text": "Occupational health clinic — screening workers for repetitive-strain injuries, hearing loss from machinery, and heat-stress episodes", "trait_tags": {"Patient-Care": 0.8, "Public-Health": 0.7, "Rehab-Therapy": 0.6, "Admin-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5180,
+        "question_text": "A Baguio City creative collective is producing a large-scale outdoor mural festival to rebrand the city as the Philippine street-art capital. Which festival role do you take?",
+        "category": "mural_festival",
+        "options": [
+            {"option_id": 28207, "option_text": "Lead muralist — sketching building-scale designs inspired by Cordillera weaving patterns and painting them with weather-resistant acrylics", "trait_tags": {"Visual-Design": 0.8, "Creative-Skill": 0.7, "Physical-Skill": 0.6, "Performing-Arts": 0.5}},
+            {"option_id": 28208, "option_text": "Scaffold and safety engineer — erecting access platforms on uneven hillside walls and enforcing harness protocols for volunteer painters", "trait_tags": {"Civil-Build": 0.8, "TVET-Path": 0.7, "Physical-Skill": 0.6, "Industrial-Ops": 0.5}},
+            {"option_id": 28209, "option_text": "Festival marketing director — launching a social media countdown, arranging travel packages with bus companies, and pitching to travel bloggers", "trait_tags": {"Marketing-Sales": 0.8, "Digital-Media": 0.7, "Tourism-Travel": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 28210, "option_text": "Cultural liaison — consulting with indigenous Ibaloi elders to ensure sacred symbols are not misappropriated in the artworks", "trait_tags": {"Community-Serve": 0.8, "Philosophy-Path": 0.7, "People-Skill": 0.6, "Legal-Practice": 0.5}},
+            {"option_id": 28211, "option_text": "Time-lapse videographer — filming each mural's creation from blank wall to finished piece and editing a behind-the-scenes documentary", "trait_tags": {"Film-Broadcast": 0.8, "Digital-Media": 0.7, "Creative-Skill": 0.6, "Music-Audio": 0.5}},
+            {"option_id": 28212, "option_text": "Sponsorship and budget controller — negotiating paint-brand sponsorships, tracking expenses, and reporting financials to the city arts council", "trait_tags": {"Finance-Acct": 0.8, "Admin-Skill": 0.7, "People-Skill": 0.6, "Legal-Mgmt": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5181,
+        "question_text": "A Philippine call-center company is pivoting from voice support to an AI-augmented customer-experience center. Which transformation team do you join?",
+        "category": "callcenter_ai_pivot",
+        "options": [
+            {"option_id": 28213, "option_text": "Conversational AI trainer — labeling intent data, fine-tuning the NLP model, and writing fallback dialogue trees for complex queries", "trait_tags": {"AI-ML": 0.8, "Software-Dev": 0.7, "Writing-Comm": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28214, "option_text": "Workforce transition coach — reskilling voice agents into quality auditors, prompt engineers, and chatbot supervisors", "trait_tags": {"HR-Management": 0.8, "Teaching-Ed": 0.7, "People-Skill": 0.6, "Counseling": 0.5}},
+            {"option_id": 28215, "option_text": "Data privacy and compliance lead — ensuring chat logs meet GDPR and Philippine Data Privacy Act standards before feeding them to AI models", "trait_tags": {"Cyber-Defense": 0.8, "Legal-Practice": 0.7, "Admin-Skill": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28216, "option_text": "Dashboard and reporting developer — building real-time wallboards showing resolution rates, CSAT scores, and bot-vs-human escalation trends", "trait_tags": {"Data-Analytics": 0.8, "Software-Dev": 0.7, "Cloud-Systems": 0.6, "Web-Dev": 0.5}},
+            {"option_id": 28217, "option_text": "Client success manager — onboarding enterprise accounts onto the new AI platform and managing SLA negotiations", "trait_tags": {"Marketing-Sales": 0.8, "People-Skill": 0.7, "Finance-Acct": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 28218, "option_text": "Voice biometrics engineer — implementing speaker-verification to replace knowledge-based security questions for caller authentication", "trait_tags": {"Electronics-Dev": 0.8, "AI-ML": 0.7, "Cyber-Defense": 0.6, "Software-Dev": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5182,
+        "question_text": "A Lanao del Sur community is restoring a traditional Maranao torogan longhouse as a living cultural center. Which restoration specialty do you contribute?",
+        "category": "torogan_restoration",
+        "options": [
+            {"option_id": 28219, "option_text": "Okir woodcarver — hand-carving the intricate naga and sarimanok motifs on beams and lintels using original tools and techniques", "trait_tags": {"Creative-Skill": 0.8, "TVET-Path": 0.7, "Visual-Design": 0.6, "Physical-Skill": 0.5}},
+            {"option_id": 28220, "option_text": "Structural engineer — reinforcing the elevated post-and-beam foundation against earthquakes while keeping the traditional open-floor plan", "trait_tags": {"Civil-Build": 0.8, "Mechanical-Design": 0.7, "Technical-Skill": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28221, "option_text": "Ethnomusicologist — documenting kulintang ensemble performances and teaching young Maranao musicians to keep the tradition alive", "trait_tags": {"Music-Audio": 0.8, "Teaching-Ed": 0.7, "Performing-Arts": 0.6, "Library-Info": 0.5}},
+            {"option_id": 28222, "option_text": "Heritage tourism coordinator — scheduling guided visits, training local youth as storytelling guides, and listing the site on cultural-tourism maps", "trait_tags": {"Tourism-Hospitality-Path": 0.8, "Tourism-Travel": 0.7, "People-Skill": 0.6, "Marketing-Sales": 0.5}},
+            {"option_id": 28223, "option_text": "Grant and heritage-law specialist — filing the National Cultural Treasures nomination and applying for NCCA and UNESCO funding", "trait_tags": {"Legal-Practice": 0.8, "Writing-Comm": 0.7, "Admin-Skill": 0.6, "Finance-Acct": 0.5}},
+            {"option_id": 28224, "option_text": "Community peace-building facilitator — using the torogan as a neutral venue for inter-clan conflict mediation and youth dialogue circles", "trait_tags": {"Social-Work": 0.8, "Counseling": 0.7, "Community-Serve": 0.6, "People-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5183,
+        "question_text": "An Isabela tobacco-farming province is diversifying into medicinal-plant cultivation after a WHO report highlights Philippine herbal-medicine potential. Which program do you head?",
+        "category": "medicinal_plant_diversification",
+        "options": [
+            {"option_id": 28225, "option_text": "Lagundi and sambong nursery — mass-propagating DOST-approved herbal plants and distributing seedlings to former tobacco farmers", "trait_tags": {"Agri-Nature": 0.8, "Pharmacy": 0.7, "Field-Research": 0.6, "Lab-Research": 0.5}},
+            {"option_id": 28226, "option_text": "Phytochemistry lab — extracting active compounds, running HPLC assays, and filing Philippine patent applications for novel formulations", "trait_tags": {"Lab-Research": 0.8, "Pharmacy": 0.7, "Analytical-Skill": 0.6, "Legal-Practice": 0.5}},
+            {"option_id": 28227, "option_text": "GMP herbal-capsule factory — setting up a clean-room facility that produces FDA-registered capsules and syrups for nationwide distribution", "trait_tags": {"Industrial-Ops": 0.8, "Pharmacy": 0.7, "Mechanical-Design": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 28228, "option_text": "Traditional-healer integration — interviewing Ilocano and Ibanag herbalists to document indigenous knowledge under bioprospecting consent protocols", "trait_tags": {"Community-Serve": 0.8, "Philosophy-Path": 0.7, "Writing-Comm": 0.6, "Field-Research": 0.5}},
+            {"option_id": 28229, "option_text": "Clinical-trial coordinator — recruiting patients, randomizing treatments, and monitoring adverse effects for a lagundi cough-syrup efficacy study", "trait_tags": {"Patient-Care": 0.8, "Data-Analytics": 0.7, "Medical-Lab": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28230, "option_text": "Agri-extension educator — visiting farms to teach drying techniques, post-harvest handling, and fair-trade certification steps", "trait_tags": {"Teaching-Ed": 0.8, "Agri-Nature": 0.7, "Forestry-Path": 0.6, "People-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5184,
+        "question_text": "A Davao City fire department is upgrading its capabilities after a series of high-rise fires in the growing downtown area. Which modernization project do you lead?",
+        "category": "fire_department_upgrade",
+        "options": [
+            {"option_id": 28231, "option_text": "Aerial-ladder and pump-truck fleet — specifying water-tower ladder reach, pump capacities, and outrigger footprints for narrow Davao streets", "trait_tags": {"Automotive-Tech": 0.8, "Mechanical-Design": 0.7, "Civil-Build": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28232, "option_text": "Building-inspection and fire-code enforcement — auditing high-rise sprinkler systems, exit signage, and standpipe water pressure quarterly", "trait_tags": {"Legal-Mgmt": 0.8, "Civil-Build": 0.7, "Analytical-Skill": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 28233, "option_text": "Thermal-imaging drone unit — deploying infrared drones to locate trapped victims and hotspots through smoke and collapsed ceilings", "trait_tags": {"Hardware-Systems": 0.8, "Electronics-Dev": 0.7, "Military-Defense": 0.6, "Software-Dev": 0.5}},
+            {"option_id": 28234, "option_text": "Fire-investigation forensics — collecting burn patterns, accelerant residue, and electrical-fault evidence for arson prosecution", "trait_tags": {"Forensic-Sci": 0.8, "Law-Enforce": 0.7, "Lab-Research": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28235, "option_text": "Community fire-safety educator — running school fire drills, barangay smoke-alarm giveaways, and social media prevention campaigns", "trait_tags": {"Teaching-Ed": 0.7, "Community-Serve": 0.8, "Digital-Media": 0.6, "People-Skill": 0.5}},
+            {"option_id": 28236, "option_text": "Firefighter health and fitness — designing heat-acclimation regimens, SCBA endurance training, and PTSD screening after critical incidents", "trait_tags": {"Exercise-Sci-Path": 0.8, "Sports-Fitness-Path": 0.7, "Counseling": 0.6, "Physical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5185,
+        "question_text": "A Sulu seaweed-farming community is exporting carrageenan to food and cosmetic industries worldwide. Which value-chain role do you strengthen?",
+        "category": "seaweed_carrageenan_export",
+        "options": [
+            {"option_id": 28237, "option_text": "Seedling nursery technician — selecting fast-growing Kappaphycus strains, tying them to monolines, and monitoring growth rates weekly", "trait_tags": {"Fisheries-Agri-Path": 0.8, "Agri-Nature": 0.7, "Field-Research": 0.6, "Lab-Research": 0.5}},
+            {"option_id": 28238, "option_text": "Drying and quality-control inspector — ensuring sun-dried seaweed meets moisture, color, and foreign-matter specs before baling for export", "trait_tags": {"Food-Science": 0.8, "Industrial-Ops": 0.7, "Analytical-Skill": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28239, "option_text": "Carrageenan extraction plant chemist — running alkali treatment, filtering, and spray-drying to produce refined kappa-carrageenan powder", "trait_tags": {"Lab-Research": 0.8, "Food-Science": 0.7, "Mechanical-Design": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28240, "option_text": "Peace-and-order coordinator — negotiating safe sea-lane access with local authorities so farmers can tend offshore lines without conflict", "trait_tags": {"Military-Defense": 0.7, "Community-Serve": 0.8, "People-Skill": 0.6, "Social-Work": 0.5}},
+            {"option_id": 28241, "option_text": "Export documentation specialist — preparing phytosanitary certificates, bills of lading, and letters of credit for European and Asian buyers", "trait_tags": {"Admin-Skill": 0.8, "Legal-Mgmt": 0.7, "Finance-Acct": 0.6, "Maritime-Sea": 0.5}},
+            {"option_id": 28242, "option_text": "Climate-adaptation researcher — studying how rising sea temperatures affect seaweed yields and testing deeper-water farming techniques", "trait_tags": {"Environmental-Sci": 0.8, "Data-Analytics": 0.7, "Field-Research": 0.6, "Analytical-Skill": 0.5}},
+        ],
+    },
+]
+
+# --- collision guard --------------------------------------------------------
+_repl25_existing_qids = {q["question_id"] for q in QUESTIONS_POOL_ENHANCED}
+_repl25_new_qids = {q["question_id"] for q in _REPLACEMENT_BATCH_25}
+if _repl25_existing_qids & _repl25_new_qids:
+    raise ValueError(f"Replacement batch 25 question IDs overlap: {_repl25_existing_qids & _repl25_new_qids}")
+
+_repl25_existing_oids = {o["option_id"] for q in QUESTIONS_POOL_ENHANCED for o in q.get("options", [])}
+_repl25_new_oids = {o["option_id"] for q in _REPLACEMENT_BATCH_25 for o in q.get("options", [])}
+if _repl25_existing_oids & _repl25_new_oids:
+    raise ValueError(f"Replacement batch 25 option IDs overlap: {_repl25_existing_oids & _repl25_new_oids}")
+
+QUESTIONS_POOL_ENHANCED.extend(_REPLACEMENT_BATCH_25)
+
+
+# ─── REPLACEMENT BATCH 26 (20 scenario questions) ───────────────────────────
+_REPLACEMENT_BATCH_26 = [
+    {
+        "question_id": 5186,
+        "question_text": "A Benguet strawberry-growing town wants to build a year-round agritourism park that also trains new farmers. Which component do you develop?",
+        "category": "agritourism_training_park",
+        "options": [
+            {"option_id": 28243, "option_text": "Greenhouse technology center — installing vertical hydroponic towers so visitors see how strawberries grow without soil in a controlled climate", "trait_tags": {"Agri-Nature": 0.8, "Mechanical-Design": 0.7, "Environmental-Eng": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28244, "option_text": "Farm-to-table cooking studio — running jam-making, pastry, and freeze-drying workshops where tourists process the berries they just picked", "trait_tags": {"Culinary-Arts": 0.8, "Culinary-Mgmt-Path": 0.7, "Tourism-Hospitality-Path": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 28245, "option_text": "Soil and pest diagnostics lab — testing pH, mineral content, and insect populations for visiting farmers who bring samples from their own plots", "trait_tags": {"Lab-Research": 0.8, "Agri-Nature": 0.7, "Analytical-Skill": 0.6, "Field-Research": 0.5}},
+            {"option_id": 28246, "option_text": "Cottagecore glamping village — designing A-frame cabins with strawberry-field views and booking them through an online reservation platform", "trait_tags": {"Hotel-Resort-Path": 0.8, "Spatial-Design": 0.7, "Web-Dev": 0.6, "Tourism-Travel": 0.5}},
+            {"option_id": 28247, "option_text": "Youth apprenticeship program — recruiting out-of-school teens for a six-month paid farming track that earns them a TESDA certificate", "trait_tags": {"TVET-Path": 0.8, "Teaching-Ed": 0.7, "Community-Serve": 0.6, "HR-Management": 0.5}},
+            {"option_id": 28248, "option_text": "Drone crop-monitoring service — flying multispectral drones over strawberry fields to detect disease patches and irrigation gaps early", "trait_tags": {"Hardware-Systems": 0.8, "Data-Analytics": 0.7, "Software-Dev": 0.6, "Agri-Nature": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5187,
+        "question_text": "A Cagayan de Oro adventure-sports company is designing a multi-day whitewater-rafting and canyoneering expedition package. Which role do you take?",
+        "category": "adventure_expedition_package",
+        "options": [
+            {"option_id": 28249, "option_text": "River safety officer — scouting Class IV rapids, setting throw-rope stations, and certifying each guide in swift-water rescue techniques", "trait_tags": {"Sports-Fitness-Path": 0.8, "Physical-Skill": 0.7, "Teaching-Ed": 0.6, "Exercise-Sci-Path": 0.5}},
+            {"option_id": 28250, "option_text": "Expedition cook — preparing high-calorie riverside meals in camp ovens using locally sourced ingredients and waterproof food storage", "trait_tags": {"Culinary-Arts": 0.8, "Food-Science": 0.7, "Hospitality-Svc": 0.6, "Physical-Skill": 0.5}},
+            {"option_id": 28251, "option_text": "Booking and logistics coordinator — scheduling guides, transporting gear, arranging accommodation with riverside homestays, and managing cancellations", "trait_tags": {"Tourism-Hospitality-Path": 0.8, "Admin-Skill": 0.7, "People-Skill": 0.6, "Finance-Acct": 0.5}},
+            {"option_id": 28252, "option_text": "GoPro content producer — filming underwater raft flips, cliff jumps, and campfire moments and editing highlight reels for each guest party", "trait_tags": {"Film-Broadcast": 0.8, "Digital-Media": 0.7, "Creative-Skill": 0.6, "Music-Audio": 0.5}},
+            {"option_id": 28253, "option_text": "Environmental impact assessor — measuring riverbank erosion, monitoring trail wear, and setting daily visitor caps to protect the canyon ecosystem", "trait_tags": {"Environmental-Sci": 0.8, "Field-Research": 0.7, "Analytical-Skill": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 28254, "option_text": "Wilderness first-responder — carrying a trauma kit, splinting fractures trailside, and coordinating helicopter medevac when terrain blocks road access", "trait_tags": {"Patient-Care": 0.8, "Rehab-Therapy": 0.7, "Physical-Skill": 0.6, "Public-Health": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5188,
+        "question_text": "A Philippine Coast Guard station on the Sulu Sea is establishing a maritime law-enforcement training academy for ASEAN coast guards. Which academy division do you set up?",
+        "category": "maritime_law_academy",
+        "options": [
+            {"option_id": 28255, "option_text": "Small-boat tactical piloting — teaching RHIB assault formations, night boarding drills, and high-speed pursuit maneuvers in monsoon swells", "trait_tags": {"Military-Defense": 0.8, "Maritime-Sea": 0.7, "Physical-Skill": 0.6, "Sports-Fitness-Path": 0.5}},
+            {"option_id": 28256, "option_text": "Maritime law curriculum — writing lecture modules on UNCLOS, fisheries violations, piracy prosecution, and hot-pursuit doctrine", "trait_tags": {"Legal-Practice": 0.8, "Writing-Comm": 0.7, "Military-Defense": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 28257, "option_text": "Vessel traffic surveillance — operating radar arrays and AIS monitoring dashboards to track suspicious craft across overlapping EEZ boundaries", "trait_tags": {"Electronics-Dev": 0.8, "Data-Analytics": 0.7, "Hardware-Systems": 0.6, "Cloud-Systems": 0.5}},
+            {"option_id": 28258, "option_text": "Physical fitness and survival instructor — running open-ocean swim qualifications, helicopter-dunker drills, and heat-stress conditioning", "trait_tags": {"Exercise-Sci-Path": 0.8, "Sports-Ed": 0.7, "Physical-Skill": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 28259, "option_text": "Forensic evidence collection — teaching trainees how to preserve chain-of-custody for seized contraband and document crime scenes aboard vessels", "trait_tags": {"Forensic-Sci": 0.8, "Law-Enforce": 0.7, "Analytical-Skill": 0.6, "Legal-Mgmt": 0.5}},
+            {"option_id": 28260, "option_text": "Cross-cultural liaison office — arranging interpreter support, halal dining options, and shared sleeping quarters for multinational officer cohorts", "trait_tags": {"Hospitality-Svc": 0.8, "People-Skill": 0.7, "Admin-Skill": 0.6, "Inclusive-Ed": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5189,
+        "question_text": "A Tarlac solar-farm developer is building a 50-megawatt photovoltaic plant on former sugarcane land. Which project team do you join?",
+        "category": "solar_farm_development",
+        "options": [
+            {"option_id": 28261, "option_text": "Panel layout engineer — orienting 120,000 modules at the optimal tilt, spacing rows to avoid shading, and routing DC cabling to inverters", "trait_tags": {"Electrical-Power": 0.8, "Civil-Build": 0.7, "Mechanical-Design": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28262, "option_text": "Grid interconnection specialist — negotiating with NGCP for transformer bay allocation and programming the SCADA relay protection scheme", "trait_tags": {"Electronics-Dev": 0.8, "Electrical-Power": 0.7, "Software-Dev": 0.6, "Legal-Mgmt": 0.5}},
+            {"option_id": 28263, "option_text": "Agrivoltaics researcher — growing shade-tolerant vegetables between panel rows to keep the land productive and provide extra income for the landowner", "trait_tags": {"Agri-Nature": 0.8, "Fisheries-Agri-Path": 0.7, "Environmental-Eng": 0.6, "Field-Research": 0.5}},
+            {"option_id": 28264, "option_text": "Environmental compliance officer — preparing the EIS, monitoring bird collisions, and managing panel-washing wastewater to meet DENR discharge limits", "trait_tags": {"Environmental-Sci": 0.8, "Legal-Practice": 0.7, "Writing-Comm": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28265, "option_text": "Project finance analyst — modeling 25-year cash flows, structuring the feed-in-tariff contract, and presenting the bankable feasibility study to lenders", "trait_tags": {"Finance-Acct": 0.8, "Data-Analytics": 0.7, "Writing-Comm": 0.6, "Startup-Venture": 0.5}},
+            {"option_id": 28266, "option_text": "Community relations manager — hiring local labor, sponsoring barangay electrification, and settling land-use disputes with sugarcane-worker unions", "trait_tags": {"Community-Serve": 0.8, "HR-Management": 0.7, "People-Skill": 0.6, "Social-Work": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5190,
+        "question_text": "A Pangasinan bangus-milkfish hatchery is scaling up to supply fingerlings to 500 grow-out ponds across Luzon. Which hatchery function do you manage?",
+        "category": "milkfish_hatchery_scaleup",
+        "options": [
+            {"option_id": 28267, "option_text": "Broodstock conditioning — managing hormone-injection schedules, spawning tank salinity, and live-feed rotifer cultures for larval rearing", "trait_tags": {"Fisheries-Agri-Path": 0.8, "Veterinary-Path": 0.7, "Lab-Research": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28268, "option_text": "Water quality engineer — maintaining biofilters, UV sterilizers, and recirculating aquaculture system pumps to keep ammonia below lethal thresholds", "trait_tags": {"Environmental-Eng": 0.8, "Mechanical-Design": 0.7, "Analytical-Skill": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28269, "option_text": "Fingerling logistics — oxygenating transport bags, scheduling overnight trucking routes, and ensuring survival rates exceed 95 percent on delivery", "trait_tags": {"Industrial-Ops": 0.8, "Admin-Skill": 0.7, "Fisheries-Agri-Path": 0.6, "Automotive-Tech": 0.5}},
+            {"option_id": 28270, "option_text": "Fish health veterinarian — diagnosing vibriosis and parasitic infections under the microscope and prescribing BFAR-approved treatments", "trait_tags": {"Veterinary-Path": 0.8, "Medical-Lab": 0.7, "Lab-Research": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28271, "option_text": "Cooperative extension trainer — visiting grow-out farmers to demo proper stocking densities, feeding schedules, and pond-bottom preparation", "trait_tags": {"Teaching-Ed": 0.8, "Agri-Nature": 0.7, "People-Skill": 0.6, "Field-Research": 0.5}},
+            {"option_id": 28272, "option_text": "Hatchery data dashboard — building a sensor-connected app that logs dissolved oxygen, temperature, and fry counts in real time for all tanks", "trait_tags": {"Software-Dev": 0.8, "Data-Analytics": 0.7, "Hardware-Systems": 0.6, "Cloud-Systems": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5191,
+        "question_text": "A Manila-based animation studio has won a contract to produce a 26-episode Filipino mythology series for an international streaming platform. Which department do you head?",
+        "category": "mythology_animation_series",
+        "options": [
+            {"option_id": 28273, "option_text": "Character design lead — illustrating diwata, tikbalang, and kapre in a style that blends Filipino komiks art with modern 2D animation aesthetics", "trait_tags": {"Animation-3D": 0.8, "Visual-Design": 0.7, "Creative-Skill": 0.6, "Performing-Arts": 0.5}},
+            {"option_id": 28274, "option_text": "Storyboard and script supervisor — adapting oral folklore into 22-minute episode arcs with conflict, pacing, and culturally accurate dialogue", "trait_tags": {"Writing-Comm": 0.8, "Film-Broadcast": 0.7, "Creative-Skill": 0.6, "Library-Info": 0.5}},
+            {"option_id": 28275, "option_text": "Sound design and original score — composing kulintang-and-orchestra motifs for each mythical creature and mixing spatial audio for streaming", "trait_tags": {"Music-Audio": 0.8, "Performing-Arts": 0.7, "Creative-Skill": 0.6, "Electronics-Dev": 0.5}},
+            {"option_id": 28276, "option_text": "Production pipeline engineer — configuring Toon Boom and After Effects render farms, automating asset hand-offs, and tracking episode milestones", "trait_tags": {"Software-Dev": 0.8, "Cloud-Systems": 0.7, "Industrial-Ops": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 28277, "option_text": "Cultural consultancy panel — convening ethnographers and indigenous elders to vet script accuracy and prevent misrepresentation of sacred narratives", "trait_tags": {"Philosophy-Path": 0.8, "Community-Serve": 0.7, "Writing-Comm": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 28278, "option_text": "Licensing and merchandising manager — negotiating toy, apparel, and game rights across Southeast Asian markets before the premiere", "trait_tags": {"Marketing-Sales": 0.8, "Legal-Mgmt": 0.7, "Finance-Acct": 0.6, "Startup-Venture": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5192,
+        "question_text": "A Leyte town devastated by Typhoon Haiyan is building permanent disaster-resilient housing to replace the last temporary shelters. Which construction role do you fill?",
+        "category": "disaster_resilient_housing",
+        "options": [
+            {"option_id": 28279, "option_text": "Typhoon-rated structural designer — engineering reinforced-concrete homes with hip roofs, hurricane straps, and elevated floor slabs above storm-surge level", "trait_tags": {"Civil-Build": 0.8, "Mechanical-Design": 0.7, "Analytical-Skill": 0.6, "Environmental-Eng": 0.5}},
+            {"option_id": 28280, "option_text": "Community-driven construction trainer — teaching families to lay hollow blocks, tie rebar, and read house plans so they build their own units", "trait_tags": {"TVET-Path": 0.8, "Teaching-Ed": 0.7, "Community-Serve": 0.6, "Physical-Skill": 0.5}},
+            {"option_id": 28281, "option_text": "Off-grid power installer — wiring each house with rooftop solar, a lithium battery, and a pre-paid smart meter that works without grid connection", "trait_tags": {"Electrical-Power": 0.8, "Electronics-Dev": 0.7, "Technical-Skill": 0.6, "Hardware-Systems": 0.5}},
+            {"option_id": 28282, "option_text": "Psychosocial support counselor — providing trauma-informed care groups for resettled families still processing displacement a decade later", "trait_tags": {"Counseling": 0.8, "Social-Work": 0.7, "People-Skill": 0.6, "Early-Childhood": 0.5}},
+            {"option_id": 28283, "option_text": "Sanitation and water engineer — designing rainwater-harvesting cisterns and gravity-fed septic systems suited to the clay-heavy soil", "trait_tags": {"Environmental-Eng": 0.8, "Civil-Build": 0.7, "Mechanical-Design": 0.6, "Public-Health": 0.5}},
+            {"option_id": 28284, "option_text": "Procurement and donor auditor — tracking material deliveries against World Bank budgets and producing quarterly compliance reports", "trait_tags": {"Finance-Acct": 0.8, "Admin-Skill": 0.7, "Writing-Comm": 0.6, "Legal-Practice": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5193,
+        "question_text": "A Subic Bay special economic zone is converting an old naval shipyard into an electric-vehicle assembly plant for three-wheelers and delivery vans. Which startup function do you lead?",
+        "category": "ev_assembly_plant",
+        "options": [
+            {"option_id": 28285, "option_text": "Chassis and suspension tuner — adapting steel-tube frames for Philippine road conditions, testing payload limits, and fitting leaf springs for cargo variants", "trait_tags": {"Automotive-Tech": 0.8, "Mechanical-Design": 0.7, "Technical-Skill": 0.6, "Industrial-Ops": 0.5}},
+            {"option_id": 28286, "option_text": "Battery-pack integrator — selecting LFP cells, welding bus bars, programming the battery management system, and crash-testing enclosures", "trait_tags": {"Electronics-Dev": 0.8, "Software-Dev": 0.7, "Automotive-Tech": 0.6, "Lab-Research": 0.5}},
+            {"option_id": 28287, "option_text": "Assembly-line planner — designing the takt-time workflow, installing robotic welding stations, and training technicians on torque-spec fastening", "trait_tags": {"Industrial-Ops": 0.8, "TVET-Path": 0.7, "Mechanical-Design": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 28288, "option_text": "Homologation and type-approval engineer — coordinating DOTr crash tests, emissions-exempt certification, and ASEAN mutual-recognition paperwork", "trait_tags": {"Legal-Mgmt": 0.8, "Automotive-Tech": 0.7, "Analytical-Skill": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 28289, "option_text": "Dealer and fleet sales head — signing up tricycle-operator cooperatives, LGU fleets, and last-mile delivery companies as launch customers", "trait_tags": {"Marketing-Sales": 0.8, "People-Skill": 0.7, "Finance-Acct": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 28290, "option_text": "EV charging infrastructure planner — mapping charge-point locations along Zambales and Bataan corridors and negotiating Meralco power-supply contracts", "trait_tags": {"Electrical-Power": 0.8, "Data-Analytics": 0.7, "Civil-Build": 0.6, "Startup-Venture": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5194,
+        "question_text": "A Negros Occidental heritage sugar hacienda is transforming into a living-history museum and event venue while still producing muscovado. Which operation do you oversee?",
+        "category": "hacienda_living_museum",
+        "options": [
+            {"option_id": 28291, "option_text": "Muscovado production master — firing the traditional pugon kiln, stirring open pans of boiling cane juice, and training seasonal workers on safe ladling", "trait_tags": {"Food-Science": 0.8, "TVET-Path": 0.7, "Culinary-Mgmt-Path": 0.6, "Physical-Skill": 0.5}},
+            {"option_id": 28292, "option_text": "Heritage architect — restoring the 1890s bahay-na-bato main house with lime mortar, capiz windows, and period-accurate hardwood flooring", "trait_tags": {"Civil-Build": 0.8, "Spatial-Design": 0.7, "Creative-Skill": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28293, "option_text": "Wedding and event planner — marketing the hacienda garden for destination weddings, managing vendor setup on cobblestone grounds, and curating playlists", "trait_tags": {"Hospitality-Svc": 0.8, "Marketing-Sales": 0.7, "Music-Audio": 0.6, "People-Skill": 0.5}},
+            {"option_id": 28294, "option_text": "Oral history archivist — recording sacada migrant-worker stories, digitizing plantation ledgers, and displaying them in a permanent human-rights exhibit", "trait_tags": {"Library-Info": 0.8, "Writing-Comm": 0.7, "Social-Work": 0.6, "Film-Broadcast": 0.5}},
+            {"option_id": 28295, "option_text": "Sugarcane agronomist — testing ratoon-management cycles, introducing drip irrigation, and advising on organic certification to charge a premium", "trait_tags": {"Agri-Nature": 0.8, "Fisheries-Agri-Path": 0.7, "Lab-Research": 0.6, "Field-Research": 0.5}},
+            {"option_id": 28296, "option_text": "Heritage-site grant writer — filing National Historical Commission applications, NCCA funding bids, and corporate CSR partnership proposals", "trait_tags": {"Writing-Comm": 0.8, "Finance-Acct": 0.7, "Legal-Practice": 0.6, "Admin-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5195,
+        "question_text": "An Iloilo City government is opening a municipal early-childhood development center that serves infants through kindergartners from low-income families. Which center role do you staff?",
+        "category": "early_childhood_center",
+        "options": [
+            {"option_id": 28297, "option_text": "Preschool curriculum designer — creating play-based learning stations with Filipino and Hiligaynon storybooks, math manipulatives, and sensory bins", "trait_tags": {"Early-Childhood": 0.8, "Teaching-Ed": 0.7, "Creative-Skill": 0.6, "Inclusive-Ed": 0.5}},
+            {"option_id": 28298, "option_text": "Pediatric nutrition officer — planning iron-fortified feeding menus, screening for stunting, and training cooks on allergen-safe food prep", "trait_tags": {"Nutrition-Diet": 0.8, "Food-Science": 0.7, "Patient-Care": 0.6, "Public-Health": 0.5}},
+            {"option_id": 28299, "option_text": "Developmental screening psychologist — administering ASQ and Denver II assessments and referring children with delays to therapy services", "trait_tags": {"Counseling": 0.8, "Early-Childhood": 0.7, "Analytical-Skill": 0.6, "Patient-Care": 0.5}},
+            {"option_id": 28300, "option_text": "Inclusive-education specialist — adapting activities for children with visual impairments, hearing loss, and autism so they learn alongside typical peers", "trait_tags": {"Inclusive-Ed": 0.8, "Early-Childhood": 0.7, "People-Skill": 0.6, "Rehab-Therapy": 0.5}},
+            {"option_id": 28301, "option_text": "Parent engagement coordinator — running weekend workshops on positive discipline, read-aloud routines, and home learning environments", "trait_tags": {"Social-Work": 0.8, "Teaching-Ed": 0.7, "Community-Serve": 0.6, "People-Skill": 0.5}},
+            {"option_id": 28302, "option_text": "Facility safety and maintenance — childproofing corners, inspecting playground equipment monthly, and installing CCTV for safeguarding protocols", "trait_tags": {"TVET-Path": 0.7, "Admin-Skill": 0.8, "Hardware-Systems": 0.6, "Legal-Practice": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5196,
+        "question_text": "A Batangas port authority is building a roll-on/roll-off ferry terminal to replace the congested old pier and speed up cargo flow to Mindoro. Which terminal project do you manage?",
+        "category": "roro_terminal_construction",
+        "options": [
+            {"option_id": 28303, "option_text": "Marine structural engineer — designing the floating ramp, fender piles, and seawall to withstand a one-in-fifty-year storm surge", "trait_tags": {"Civil-Build": 0.8, "Maritime-Sea": 0.7, "Mechanical-Design": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28304, "option_text": "Traffic flow modeler — simulating truck queuing, lane widths, and marshaling-yard layouts so 200 vehicles per hour can board without gridlock", "trait_tags": {"Data-Analytics": 0.8, "Industrial-Ops": 0.7, "Software-Dev": 0.6, "Civil-Build": 0.5}},
+            {"option_id": 28305, "option_text": "Passenger terminal architect — laying out ticketing counters, waiting lounges, PWD ramps, and a rooftop viewing deck with harbor views", "trait_tags": {"Spatial-Design": 0.8, "Inclusive-Ed": 0.7, "Creative-Skill": 0.6, "Tourism-Hospitality-Path": 0.5}},
+            {"option_id": 28306, "option_text": "Environmental mitigation specialist — transplanting coral colonies before dredging, installing silt curtains, and monitoring turbidity during construction", "trait_tags": {"Environmental-Sci": 0.8, "Maritime-Sea": 0.7, "Field-Research": 0.6, "Lab-Research": 0.5}},
+            {"option_id": 28307, "option_text": "Port tariff and concession analyst — modeling user fees, lease terms for retail tenants, and a revenue-sharing deal with the private developer", "trait_tags": {"Finance-Acct": 0.8, "Legal-Mgmt": 0.7, "Analytical-Skill": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 28308, "option_text": "Safety and vessel-traffic controller — installing AIS transponders, marine VHF radios, and a control tower to manage docking sequences during peak hours", "trait_tags": {"Electronics-Dev": 0.8, "Hardware-Systems": 0.7, "Maritime-Sea": 0.6, "Military-Defense": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5197,
+        "question_text": "A Bukidnon highland ranch is becoming the first accredited equestrian sport venue in Mindanao, hosting dressage, show-jumping, and polo training. Which ranch operation do you run?",
+        "category": "equestrian_sport_venue",
+        "options": [
+            {"option_id": 28309, "option_text": "Riding-arena groundskeeper — maintaining footing mixtures of sand and fiber, grading surfaces after rain, and painting jump poles to competition specs", "trait_tags": {"Sports-Fitness-Path": 0.8, "Physical-Skill": 0.7, "Agri-Nature": 0.6, "TVET-Path": 0.5}},
+            {"option_id": 28310, "option_text": "Sport-horse veterinarian — performing pre-purchase exams, administering joint injections, and managing FEI anti-doping sample collection", "trait_tags": {"Veterinary-Path": 0.8, "Lab-Research": 0.7, "Analytical-Skill": 0.6, "Sports-Ed": 0.5}},
+            {"option_id": 28311, "option_text": "Riding coach and judge — training riders in half-pass and flying changes, then scoring regional dressage tests using FEI protocol", "trait_tags": {"Exercise-Sci-Path": 0.8, "Teaching-Ed": 0.7, "Sports-Ed": 0.6, "People-Skill": 0.5}},
+            {"option_id": 28312, "option_text": "Stable manager and feed planner — ordering hay and supplements, scheduling farrier visits, and rotating horses through paddock rest cycles", "trait_tags": {"Agri-Nature": 0.8, "Nutrition-Diet": 0.7, "Admin-Skill": 0.6, "Veterinary-Path": 0.5}},
+            {"option_id": 28313, "option_text": "Event marketing and sponsorship — attracting equestrian-brand sponsors, livestreaming competitions on social media, and selling VIP hospitality tents", "trait_tags": {"Marketing-Sales": 0.8, "Digital-Media": 0.7, "Finance-Acct": 0.6, "Hospitality-Svc": 0.5}},
+            {"option_id": 28314, "option_text": "Rider fitness and sports psychologist — prescribing core-stability workouts and focus visualization drills to improve performance under competition pressure", "trait_tags": {"Exercise-Sci-Path": 0.7, "Counseling": 0.8, "Sports-Fitness-Path": 0.6, "Rehab-Therapy": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5198,
+        "question_text": "A Bicol express-bus cooperative wants to electrify its long-haul fleet running Naga-to-Manila overnight routes. Which transition team do you join?",
+        "category": "electric_bus_fleet",
+        "options": [
+            {"option_id": 28315, "option_text": "Electric-bus chassis engineer — selecting battery capacity for 400 km range, designing air-ride suspension for passenger comfort, and reinforcing the luggage bay", "trait_tags": {"Automotive-Tech": 0.8, "Mechanical-Design": 0.7, "Electrical-Power": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28316, "option_text": "Depot charging station designer — sizing transformers, installing 350 kW DC chargers, and scheduling overnight charge rotations for 20 buses", "trait_tags": {"Electrical-Power": 0.8, "Electronics-Dev": 0.7, "Data-Analytics": 0.6, "Civil-Build": 0.5}},
+            {"option_id": 28317, "option_text": "Driver retraining coordinator — certifying diesel drivers on regenerative braking, battery thermal management alerts, and silent-departure safety protocols", "trait_tags": {"Teaching-Ed": 0.8, "Automotive-Tech": 0.7, "HR-Management": 0.6, "People-Skill": 0.5}},
+            {"option_id": 28318, "option_text": "Route energy optimizer — analyzing elevation profiles, headwind data, and passenger loads to model kWh-per-km figures for each schedule", "trait_tags": {"Data-Analytics": 0.8, "Software-Dev": 0.7, "Analytical-Skill": 0.6, "Environmental-Eng": 0.5}},
+            {"option_id": 28319, "option_text": "Government subsidy and carbon-credit broker — applying for DOTr fleet-modernization grants and registering carbon-reduction offsets for international trading", "trait_tags": {"Finance-Acct": 0.8, "Legal-Practice": 0.7, "Writing-Comm": 0.6, "Environmental-Sci": 0.5}},
+            {"option_id": 28320, "option_text": "Passenger experience designer — configuring USB ports, Wi-Fi, HEPA air filters, and noise-dampened sleeper seats for the 10-hour overnight ride", "trait_tags": {"Spatial-Design": 0.8, "Hospitality-Svc": 0.7, "Creative-Skill": 0.6, "Tourism-Hospitality-Path": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5199,
+        "question_text": "A Philippine public library system is creating mobile library buses that bring books and digital resources to remote barangays with no internet access. Which bus capability do you develop?",
+        "category": "mobile_library_bus",
+        "options": [
+            {"option_id": 28321, "option_text": "Collection curator — selecting 3,000 titles in Filipino, English, and regional languages and rotating them quarterly based on borrowing data", "trait_tags": {"Library-Info": 0.8, "Writing-Comm": 0.7, "Teaching-Ed": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28322, "option_text": "Offline digital learning station — loading tablets with Khan Academy Lite, Wikipedia offline, and DepEd eLearning modules powered by a roof-mounted solar panel", "trait_tags": {"Hardware-Systems": 0.8, "Teaching-Ed": 0.7, "Inclusive-Ed": 0.6, "Electrical-Power": 0.5}},
+            {"option_id": 28323, "option_text": "Children's read-aloud and puppet-show host — performing storytime sessions that build pre-literacy skills for toddlers and kindergartners", "trait_tags": {"Early-Childhood": 0.8, "Performing-Arts": 0.7, "Creative-Skill": 0.6, "People-Skill": 0.5}},
+            {"option_id": 28324, "option_text": "Bus interior designer — fitting fold-out shelving, a wheelchair-accessible ramp, child-height browsing bins, and a quiet reading nook with cushions", "trait_tags": {"Spatial-Design": 0.8, "Inclusive-Ed": 0.7, "Creative-Skill": 0.6, "Automotive-Tech": 0.5}},
+            {"option_id": 28325, "option_text": "Community health info corner — stocking DOST and DOH pamphlets, providing blood-pressure screening, and referring residents to the nearest rural health unit", "trait_tags": {"Public-Health": 0.8, "Patient-Care": 0.7, "Community-Serve": 0.6, "Nutrition-Diet": 0.5}},
+            {"option_id": 28326, "option_text": "Route and impact analyst — mapping underserved barangays by literacy rates, scheduling weekly stops, and tracking borrowing and attendance metrics", "trait_tags": {"Data-Analytics": 0.8, "Software-Dev": 0.7, "Library-Info": 0.6, "Admin-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5200,
+        "question_text": "A Zambales Aeta community is opening a forest-survival school where tourists and military trainees learn indigenous bushcraft skills. Which school module do you design?",
+        "category": "forest_survival_school",
+        "options": [
+            {"option_id": 28327, "option_text": "Jungle shelter and fire-craft — teaching participants to weave cogon-grass lean-tos, start fires with bamboo friction, and purify stream water with charcoal filters", "trait_tags": {"Forestry-Path": 0.8, "Military-Defense": 0.7, "Physical-Skill": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 28328, "option_text": "Edible-plant identification trek — leading guided hikes where learners harvest wild ferns, mushrooms, and tubers and prepare them into safe meals", "trait_tags": {"Agri-Nature": 0.8, "Food-Science": 0.7, "Forestry-Path": 0.6, "Field-Research": 0.5}},
+            {"option_id": 28329, "option_text": "Ethnobotanical medicine workshop — demonstrating bark decoctions, poultice preparations, and snakebite first-aid using forest plants identified by Aeta healers", "trait_tags": {"Pharmacy": 0.8, "Veterinary-Path": 0.6, "Community-Serve": 0.7, "Lab-Research": 0.5}},
+            {"option_id": 28330, "option_text": "Navigation and orienteering — teaching compass bearings, river-drainage logic, and night navigation by stars in tropical canopy conditions", "trait_tags": {"Military-Defense": 0.8, "Sports-Fitness-Path": 0.7, "Exercise-Sci-Path": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 28331, "option_text": "Cultural immersion photography — documenting the school's operations and Aeta traditions through a respectful photo-essay published in a National Geographic-style magazine", "trait_tags": {"Film-Broadcast": 0.8, "Writing-Comm": 0.7, "Creative-Skill": 0.6, "Philosophy-Path": 0.5}},
+            {"option_id": 28332, "option_text": "Revenue and community benefit manager — pricing courses, splitting profits with the tribal council, and reporting transparent financials at barangay assemblies", "trait_tags": {"Finance-Acct": 0.8, "Community-Serve": 0.7, "HR-Management": 0.6, "Admin-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5201,
+        "question_text": "A Philippine General Hospital satellite campus is establishing a sports-medicine clinic for national athletes preparing for the Asian Games. Which clinic function do you direct?",
+        "category": "sports_medicine_clinic",
+        "options": [
+            {"option_id": 28333, "option_text": "Musculoskeletal imaging suite — operating MRI and ultrasound units to diagnose ACL tears, stress fractures, and rotator-cuff injuries same-day", "trait_tags": {"Medical-Lab": 0.8, "Hardware-Systems": 0.7, "Patient-Care": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28334, "option_text": "Strength and conditioning lab — programming periodized training cycles, monitoring VO₂ max on treadmill protocols, and tracking body-composition via DEXA scans", "trait_tags": {"Exercise-Sci-Path": 0.8, "Sports-Ed": 0.7, "Data-Analytics": 0.6, "Nutrition-Diet": 0.5}},
+            {"option_id": 28335, "option_text": "Orthopedic surgery and rehab unit — performing arthroscopic repairs and guiding athletes through phased return-to-play protocols", "trait_tags": {"Rehab-Therapy": 0.8, "Patient-Care": 0.7, "Physical-Skill": 0.6, "Medical-Lab": 0.5}},
+            {"option_id": 28336, "option_text": "Anti-doping compliance office — educating athletes on WADA prohibited lists, collecting urine and blood samples, and managing therapeutic-use exemptions", "trait_tags": {"Legal-Mgmt": 0.8, "Public-Health": 0.7, "Writing-Comm": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28337, "option_text": "Mental performance consultant — teaching mindfulness, competition visualization, and pre-race anxiety management to boxers, weightlifters, and archers", "trait_tags": {"Counseling": 0.8, "Sports-Fitness-Path": 0.7, "People-Skill": 0.6, "Philosophy-Path": 0.5}},
+            {"option_id": 28338, "option_text": "Clinic data and research coordinator — maintaining an injury registry, publishing case studies, and securing PSC research grants for sports-science innovation", "trait_tags": {"Data-Analytics": 0.8, "Writing-Comm": 0.7, "Finance-Acct": 0.6, "Lab-Research": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5202,
+        "question_text": "A Palawan pearl-farming company is vertically integrating — from oyster hatchery to luxury-jewelry retail. Which value-chain step do you manage?",
+        "category": "pearl_farm_integration",
+        "options": [
+            {"option_id": 28339, "option_text": "Oyster nursery technician — nucleating Pinctada maxima with shell beads, monitoring nacre growth underwater, and harvesting pearls after 18 months", "trait_tags": {"Fisheries-Agri-Path": 0.8, "Lab-Research": 0.7, "Field-Research": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28340, "option_text": "Jewelry designer — sketching settings in gold and silver, rendering pieces in Rhino 3D, and casting wax models for the master goldsmith", "trait_tags": {"Visual-Design": 0.8, "Creative-Skill": 0.7, "Animation-3D": 0.6, "Spatial-Design": 0.5}},
+            {"option_id": 28341, "option_text": "Gemological grader — classifying pearls by luster, surface quality, shape symmetry, and color using GIA standards before they enter the showroom", "trait_tags": {"Analytical-Skill": 0.8, "Lab-Research": 0.7, "Food-Science": 0.5, "Technical-Skill": 0.6}},
+            {"option_id": 28342, "option_text": "Retail boutique manager — training sales associates, merchandising display cases, and hosting VIP trunk shows in Manila and Cebu five-star hotels", "trait_tags": {"Hotel-Resort-Path": 0.8, "Marketing-Sales": 0.7, "People-Skill": 0.6, "Hospitality-Svc": 0.5}},
+            {"option_id": 28343, "option_text": "Marine-farm environmental officer — monitoring sea-cage density, testing for harmful algal blooms, and filing DENR coastal-use permits annually", "trait_tags": {"Environmental-Sci": 0.8, "Maritime-Sea": 0.7, "Legal-Practice": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28344, "option_text": "Export and customs coordinator — arranging CITES permits for shell products, insuring shipments, and preparing invoices in yen, euro, and dollar denominations", "trait_tags": {"Admin-Skill": 0.8, "Legal-Mgmt": 0.7, "Finance-Acct": 0.6, "Maritime-Sea": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5203,
+        "question_text": "A Quezon City automotive-repair academy is upgrading its curriculum to include hybrid and electric-vehicle diagnostics. Which training module do you build?",
+        "category": "auto_repair_ev_curriculum",
+        "options": [
+            {"option_id": 28345, "option_text": "High-voltage safety lab — teaching lockout/tag-out procedures, insulated-glove testing, and rescue protocols for electrocution emergencies on EV platforms", "trait_tags": {"Automotive-Tech": 0.8, "Electrical-Power": 0.7, "TVET-Path": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 28346, "option_text": "OBD-II and CAN-bus diagnostics — using scan tools to read hybrid inverter fault codes, battery state-of-health reports, and regenerative-brake calibration data", "trait_tags": {"Electronics-Dev": 0.8, "Automotive-Tech": 0.7, "Software-Dev": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28347, "option_text": "AC system and thermal-management trainer — explaining heat-pump cabin heating, battery-cooling loops, and R-1234yf refrigerant handling regulations", "trait_tags": {"Mechanical-Design": 0.8, "TVET-Path": 0.7, "Environmental-Eng": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28348, "option_text": "Curriculum writer and TESDA assessor — aligning modules with TESDA competency standards, writing rubrics, and conducting practical-skills assessments", "trait_tags": {"Teaching-Ed": 0.8, "Writing-Comm": 0.7, "Admin-Skill": 0.6, "Inclusive-Ed": 0.5}},
+            {"option_id": 28349, "option_text": "Workshop parts and tool inventory manager — sourcing specialty EV tools, managing consignment with Korean and Japanese parts suppliers, and tracking warranty claims", "trait_tags": {"Industrial-Ops": 0.8, "Finance-Acct": 0.7, "Admin-Skill": 0.6, "Automotive-Tech": 0.5}},
+            {"option_id": 28350, "option_text": "Career-placement and OJT coordinator — partnering with Toyota, Hyundai, and BYD dealerships to place graduates in certified service-bay positions", "trait_tags": {"HR-Management": 0.8, "People-Skill": 0.7, "Marketing-Sales": 0.6, "Community-Serve": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5204,
+        "question_text": "A Cotabato City NGO is setting up a sign-language media center to produce Filipino Sign Language (FSL) content for the deaf community nationwide. Which center unit do you lead?",
+        "category": "sign_language_media_center",
+        "options": [
+            {"option_id": 28351, "option_text": "FSL news broadcast team — translating daily headlines into sign language, recording them in a green-screen studio, and streaming on YouTube and Facebook", "trait_tags": {"Film-Broadcast": 0.8, "Inclusive-Ed": 0.7, "Writing-Comm": 0.6, "Digital-Media": 0.5}},
+            {"option_id": 28352, "option_text": "Children's educational series producer — creating animated FSL lessons for deaf preschoolers covering numbers, colors, animals, and basic Tagalog literacy", "trait_tags": {"Early-Childhood": 0.8, "Animation-3D": 0.7, "Teaching-Ed": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28353, "option_text": "FSL lexicon researcher — documenting regional sign variations, standardizing new technical signs, and publishing an open-source FSL dictionary app", "trait_tags": {"Library-Info": 0.8, "Mobile-Dev": 0.7, "Analytical-Skill": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 28354, "option_text": "Deaf employment coach — preparing deaf applicants for job interviews via video relay, coaching professional signing etiquette, and liaising with HR departments", "trait_tags": {"HR-Management": 0.8, "Counseling": 0.7, "People-Skill": 0.6, "Inclusive-Ed": 0.5}},
+            {"option_id": 28355, "option_text": "Accessibility technology developer — building real-time FSL-to-text AI using pose-estimation models and deploying it as a web widget for government websites", "trait_tags": {"AI-ML": 0.8, "Software-Dev": 0.7, "Web-Dev": 0.6, "Inclusive-Ed": 0.5}},
+            {"option_id": 28356, "option_text": "Donor relations and impact evaluator — surveying deaf beneficiaries, writing annual impact reports, and pitching to USAID and JICA for multi-year funding", "trait_tags": {"Finance-Acct": 0.8, "Writing-Comm": 0.7, "Data-Analytics": 0.6, "Social-Work": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5205,
+        "question_text": "An Aurora province fishing village is building a community-owned cold-storage and ice plant to reduce post-catch spoilage and increase fish prices. Which facility role do you fill?",
+        "category": "community_cold_storage",
+        "options": [
+            {"option_id": 28357, "option_text": "Refrigeration mechanic — installing ammonia compressors, blast-freezer tunnels, and insulated panel rooms rated to –25 °C for tuna-grade freezing", "trait_tags": {"Mechanical-Design": 0.8, "Automotive-Tech": 0.7, "Technical-Skill": 0.6, "Electrical-Power": 0.5}},
+            {"option_id": 28358, "option_text": "HACCP and food-safety officer — writing sanitation standard operating procedures, training fish handlers on icing ratios, and auditing cold-chain temperatures", "trait_tags": {"Food-Science": 0.8, "Public-Health": 0.7, "Writing-Comm": 0.6, "Industrial-Ops": 0.5}},
+            {"option_id": 28359, "option_text": "Cooperative treasurer — collecting member contributions, budgeting ice-block production costs, and filing BIR tax-exempt cooperative returns", "trait_tags": {"Finance-Acct": 0.8, "Admin-Skill": 0.7, "Legal-Practice": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 28360, "option_text": "Market-linkage negotiator — contacting supermarket chains, sashimi-grade exporters, and restaurant-supply distributors to secure volume purchase contracts", "trait_tags": {"Marketing-Sales": 0.8, "People-Skill": 0.7, "Fisheries-Agri-Path": 0.6, "Finance-Acct": 0.5}},
+            {"option_id": 28361, "option_text": "Solar-powered backup engineer — sizing a rooftop PV array and battery bank that keeps freezers running during the frequent brownouts in Aurora", "trait_tags": {"Electrical-Power": 0.8, "Electronics-Dev": 0.7, "Hardware-Systems": 0.6, "Environmental-Eng": 0.5}},
+            {"option_id": 28362, "option_text": "Catch data recorder — digitizing daily landing weights, species mix, and vessel GPS tracks into a BFAR fisheries-management database", "trait_tags": {"Data-Analytics": 0.8, "Fisheries-Agri-Path": 0.7, "Software-Dev": 0.6, "Maritime-Sea": 0.5}},
+        ],
+    },
+]
+
+# --- collision guard --------------------------------------------------------
+_repl26_existing_qids = {q["question_id"] for q in QUESTIONS_POOL_ENHANCED}
+_repl26_new_qids = {q["question_id"] for q in _REPLACEMENT_BATCH_26}
+if _repl26_existing_qids & _repl26_new_qids:
+    raise ValueError(f"Replacement batch 26 question IDs overlap: {_repl26_existing_qids & _repl26_new_qids}")
+
+_repl26_existing_oids = {o["option_id"] for q in QUESTIONS_POOL_ENHANCED for o in q.get("options", [])}
+_repl26_new_oids = {o["option_id"] for q in _REPLACEMENT_BATCH_26 for o in q.get("options", [])}
+if _repl26_existing_oids & _repl26_new_oids:
+    raise ValueError(f"Replacement batch 26 option IDs overlap: {_repl26_existing_oids & _repl26_new_oids}")
+
+QUESTIONS_POOL_ENHANCED.extend(_REPLACEMENT_BATCH_26)
+
+
+# ─── REPLACEMENT BATCH 27 (20 scenario questions) ───────────────────────────
+_REPLACEMENT_BATCH_27 = [
+    {
+        "question_id": 5206,
+        "question_text": "A Zambales coastal town is constructing an artificial reef from decommissioned military vehicles to revive depleted fishing grounds. Which project arm do you lead?",
+        "category": "artificial_reef_project",
+        "options": [
+            {"option_id": 28363, "option_text": "Marine biologist — selecting reef-safe vehicle types, removing hazardous fluids, and surveying coral-recruitment rates on sunken hulls quarterly", "trait_tags": {"Environmental-Sci": 0.8, "Field-Research": 0.7, "Lab-Research": 0.6, "Maritime-Sea": 0.5}},
+            {"option_id": 28364, "option_text": "Heavy-equipment dive operator — rigging crane lifts, guiding flatbed barges to GPS waypoints, and placing vehicles on the seabed at calculated depths", "trait_tags": {"Maritime-Sea": 0.8, "Mechanical-Design": 0.7, "Physical-Skill": 0.6, "Military-Defense": 0.5}},
+            {"option_id": 28365, "option_text": "Fisherfolk cooperative organizer — registering members, setting catch quotas around the reef zone, and marketing their premium reef-caught fish to Manila restaurants", "trait_tags": {"Community-Serve": 0.8, "Marketing-Sales": 0.7, "Fisheries-Agri-Path": 0.6, "People-Skill": 0.5}},
+            {"option_id": 28366, "option_text": "Dive-tourism operator — certifying recreational divers, plotting underwater trail markers, and scheduling dive-boat rotations to avoid overcrowding the reef", "trait_tags": {"Tourism-Hospitality-Path": 0.8, "Tourism-Travel": 0.7, "Sports-Fitness-Path": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 28367, "option_text": "Underwater drone videographer — flying ROVs through the reef at night to capture bioluminescent footage for a marine-conservation documentary", "trait_tags": {"Film-Broadcast": 0.8, "Electronics-Dev": 0.7, "Creative-Skill": 0.6, "Hardware-Systems": 0.5}},
+            {"option_id": 28368, "option_text": "Environmental permit specialist — preparing the ECC application, conducting public-consultation hearings, and filing DENR monitoring reports every semester", "trait_tags": {"Legal-Practice": 0.8, "Writing-Comm": 0.7, "Admin-Skill": 0.6, "Environmental-Sci": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5207,
+        "question_text": "A Pampanga culinary school is launching an international scholarship program that brings young ASEAN chefs to the Philippines for a one-year residency. Which program element do you direct?",
+        "category": "culinary_scholarship_program",
+        "options": [
+            {"option_id": 28369, "option_text": "Filipino regional cuisine immersion — leading scholars through Kapampangan, Bicolano, and Ilonggo kitchens to master fermentation, smoking, and open-fire techniques", "trait_tags": {"Culinary-Arts": 0.8, "Culinary-Mgmt-Path": 0.7, "Teaching-Ed": 0.6, "Tourism-Travel": 0.5}},
+            {"option_id": 28370, "option_text": "Food-science lecture series — teaching emulsification, Maillard reactions, and sous-vide temperature curves using lab-grade equipment", "trait_tags": {"Food-Science": 0.8, "Lab-Research": 0.7, "Teaching-Ed": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28371, "option_text": "Scholar housing and welfare coordinator — arranging dormitory beds, health insurance, airport transfers, and mental-health check-ins for homesick residents", "trait_tags": {"Hotel-Resort-Path": 0.8, "Hospitality-Svc": 0.7, "Counseling": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 28372, "option_text": "Alumni network and industry placement — connecting graduates with Manila hotel groups, cruise-ship galleys, and catering startups across the region", "trait_tags": {"HR-Management": 0.8, "People-Skill": 0.7, "Marketing-Sales": 0.6, "Startup-Venture": 0.5}},
+            {"option_id": 28373, "option_text": "Social media content manager — filming daily kitchen vlogs, editing recipe reels, and growing the school's Instagram following to attract future applicants", "trait_tags": {"Digital-Media": 0.8, "Film-Broadcast": 0.7, "Creative-Skill": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 28374, "option_text": "Donor and embassy liaison — securing tuition grants from ASEAN cultural funds and coordinating visa paperwork with the Bureau of Immigration", "trait_tags": {"Finance-Acct": 0.8, "Legal-Mgmt": 0.7, "Writing-Comm": 0.6, "Admin-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5208,
+        "question_text": "A Bohol local government is converting abandoned limestone quarries into an eco-adventure park with climbing walls, zip lines, and cave tours. Which park feature do you develop?",
+        "category": "quarry_eco_adventure_park",
+        "options": [
+            {"option_id": 28375, "option_text": "Rock-wall route setter — bolting sport-climbing anchors into quarry faces, grading routes from 5.6 to 5.12, and installing belay stations at the top", "trait_tags": {"Sports-Fitness-Path": 0.8, "Physical-Skill": 0.7, "TVET-Path": 0.6, "Exercise-Sci-Path": 0.5}},
+            {"option_id": 28376, "option_text": "Zip-line structural engineer — calculating cable tension, tower foundations, and braking systems for a 600-meter flight across the quarry lake", "trait_tags": {"Civil-Build": 0.8, "Mechanical-Design": 0.7, "Analytical-Skill": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28377, "option_text": "Spelunking guide trainer — certifying guides in vertical rope techniques, cave-rescue protocols, and bat-colony conservation awareness", "trait_tags": {"Teaching-Ed": 0.8, "Environmental-Sci": 0.7, "Physical-Skill": 0.6, "Forestry-Path": 0.5}},
+            {"option_id": 28378, "option_text": "Landscape architect — designing native-plant rehabilitation zones, walking trails, and picnic areas that blend seamlessly with the quarry's raw-stone aesthetic", "trait_tags": {"Spatial-Design": 0.8, "Environmental-Eng": 0.7, "Creative-Skill": 0.6, "Agri-Nature": 0.5}},
+            {"option_id": 28379, "option_text": "Ticketing and reservation app developer — coding a mobile booking system with capacity caps, waiver e-signatures, and QR code gate entry", "trait_tags": {"Mobile-Dev": 0.8, "Software-Dev": 0.7, "Cloud-Systems": 0.6, "Web-Dev": 0.5}},
+            {"option_id": 28380, "option_text": "First-aid and emergency response team leader — positioning rescue personnel at high-risk stations and maintaining spinal-board and oxygen equipment", "trait_tags": {"Patient-Care": 0.8, "Public-Health": 0.7, "Physical-Skill": 0.6, "Admin-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5209,
+        "question_text": "A Davao del Norte banana cooperative is developing a premium dried-fruit export line to compete with Thai and Vietnamese products. Which value-added step do you manage?",
+        "category": "premium_dried_banana_export",
+        "options": [
+            {"option_id": 28381, "option_text": "Solar-tunnel dehydrator operator — loading sliced Cavendish onto racks, controlling airflow and humidity, and testing moisture to meet 14% target before packing", "trait_tags": {"Food-Science": 0.8, "Mechanical-Design": 0.7, "Agri-Nature": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28382, "option_text": "Flavor R&D scientist — infusing banana chips with calamansi, dark chocolate, and chili-vinegar coatings and running taste panels to pick winning SKUs", "trait_tags": {"Lab-Research": 0.8, "Culinary-Mgmt-Path": 0.7, "Food-Science": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28383, "option_text": "Packaging designer — creating compostable stand-up pouches with bilingual labels, nutrition facts, and barcodes that scan at Japanese convenience stores", "trait_tags": {"Visual-Design": 0.8, "Marketing-Sales": 0.7, "Environmental-Eng": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28384, "option_text": "Organic and fair-trade certifier — auditing farm inputs, tracing every bunch from field to factory, and maintaining USDA and EU organic documentation", "trait_tags": {"Legal-Mgmt": 0.8, "Analytical-Skill": 0.7, "Agri-Nature": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 28385, "option_text": "Cooperative finance treasurer — pooling farmer equity contributions, negotiating a Land Bank loan, and distributing quarterly profit dividends", "trait_tags": {"Finance-Acct": 0.8, "Community-Serve": 0.7, "Admin-Skill": 0.6, "HR-Management": 0.5}},
+            {"option_id": 28386, "option_text": "Pest and post-harvest loss analyst — tracking weevil damage from field to warehouse and recommending cold-chain improvements to cut spoilage below 5%", "trait_tags": {"Fisheries-Agri-Path": 0.7, "Data-Analytics": 0.8, "Agri-Nature": 0.6, "Analytical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5210,
+        "question_text": "A Tacloban City hospital is establishing the Eastern Visayas' first neonatal intensive-care unit to reduce infant mortality in typhoon-prone communities. Which NICU role do you fill?",
+        "category": "neonatal_icu_establishment",
+        "options": [
+            {"option_id": 28387, "option_text": "Biomedical equipment technician — calibrating incubators, pulse oximeters, and ventilators and running monthly preventive-maintenance schedules", "trait_tags": {"Hardware-Systems": 0.8, "Medical-Lab": 0.7, "Electronics-Dev": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28388, "option_text": "Neonatal nurse educator — training midwives on kangaroo mother care, phototherapy for jaundice, and infection-control hand-hygiene protocols", "trait_tags": {"Teaching-Ed": 0.8, "Patient-Care": 0.7, "Public-Health": 0.6, "People-Skill": 0.5}},
+            {"option_id": 28389, "option_text": "Human milk bank coordinator — pasteurizing donated breast milk, screening donors for infections, and distributing it to mothers who cannot breastfeed", "trait_tags": {"Nutrition-Diet": 0.8, "Lab-Research": 0.7, "Food-Science": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 28390, "option_text": "Disaster-preparedness planner — designing a generator-backed power system and evacuation protocol so NICU babies survive a Category 5 typhoon", "trait_tags": {"Electrical-Power": 0.8, "Military-Defense": 0.7, "Civil-Build": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 28391, "option_text": "Parent counselor — supporting families through premature-birth grief, explaining ventilator decisions, and connecting them with social-welfare assistance", "trait_tags": {"Counseling": 0.8, "Social-Work": 0.7, "People-Skill": 0.6, "Early-Childhood": 0.5}},
+            {"option_id": 28392, "option_text": "Clinical data registrar — entering birth weights, Apgar scores, and discharge outcomes into a DOH surveillance database for policy analysis", "trait_tags": {"Data-Analytics": 0.8, "Health-Admin": 0.7, "Writing-Comm": 0.6, "Analytical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5211,
+        "question_text": "A Cebu furniture exporter is pivoting from mass-produced rattan to bespoke designer pieces showcased at Milan Design Week. Which pivot function do you handle?",
+        "category": "designer_furniture_export",
+        "options": [
+            {"option_id": 28393, "option_text": "Industrial designer — sketching lounge chairs in Fusion 360, prototyping steam-bent rattan frames, and iterating with Italian gallery curators on form and finish", "trait_tags": {"Visual-Design": 0.8, "Creative-Skill": 0.7, "Spatial-Design": 0.6, "Software-Dev": 0.5}},
+            {"option_id": 28394, "option_text": "Master weaver and joiner — hand-weaving complex double-wall patterns and pegging mortise-and-tenon joints that meet European load-test standards", "trait_tags": {"TVET-Path": 0.8, "Physical-Skill": 0.7, "Creative-Skill": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28395, "option_text": "Sustainable-sourcing officer — certifying rattan from community-managed forests, tracking chain-of-custody, and filing CITES and FSC paperwork", "trait_tags": {"Forestry-Path": 0.8, "Legal-Practice": 0.7, "Environmental-Sci": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 28396, "option_text": "International trade-show manager — booking booth space in Milan, shipping crated pieces through customs, and staging the exhibit lighting and signage", "trait_tags": {"Marketing-Sales": 0.8, "Industrial-Ops": 0.7, "Tourism-Travel": 0.6, "Finance-Acct": 0.5}},
+            {"option_id": 28397, "option_text": "E-commerce platform developer — building a Shopify-plus storefront with 360-degree product spins, AR room previews, and international shipping calculators", "trait_tags": {"Web-Dev": 0.8, "Digital-Media": 0.7, "Software-Dev": 0.6, "Marketing-Sales": 0.5}},
+            {"option_id": 28398, "option_text": "Worker-skills upgrader — running finishing workshops on lacquer spraying, upholstery padding, and CNC-router operation for the retooled production line", "trait_tags": {"Teaching-Ed": 0.8, "TVET-Path": 0.7, "HR-Management": 0.6, "Mechanical-Design": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5212,
+        "question_text": "A Philippine Army reserve unit is deploying to a flood-stricken Cagayan Valley town for humanitarian assistance and disaster relief. Which relief cell do you command?",
+        "category": "military_disaster_relief",
+        "options": [
+            {"option_id": 28399, "option_text": "Water purification team — setting up reverse-osmosis trailers at the town plaza and distributing 10,000 liters of potable water per day", "trait_tags": {"Military-Defense": 0.8, "Environmental-Eng": 0.7, "Mechanical-Design": 0.6, "Public-Health": 0.5}},
+            {"option_id": 28400, "option_text": "Search and rescue squad — deploying inflatable boats to rooftops, cutting through debris with hydraulic tools, and triaging casualties at staging areas", "trait_tags": {"Physical-Skill": 0.8, "Patient-Care": 0.7, "Military-Defense": 0.6, "Sports-Fitness-Path": 0.5}},
+            {"option_id": 28401, "option_text": "Civil-military operations center — coordinating with DSWD, Red Cross, and LGU officials to prevent duplication of relief efforts and map affected barangays", "trait_tags": {"Admin-Skill": 0.8, "People-Skill": 0.7, "Data-Analytics": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 28402, "option_text": "Field medical team — running a tented clinic treating leptospirosis, wound infections, and diarrheal disease with limited pharmaceutical stocks", "trait_tags": {"Patient-Care": 0.8, "Pharmacy": 0.7, "Public-Health": 0.6, "Lab-Research": 0.5}},
+            {"option_id": 28403, "option_text": "Signals and communications platoon — erecting portable cell towers and satellite uplinks so responders and evacuees can make emergency calls", "trait_tags": {"Electronics-Dev": 0.8, "Cloud-Systems": 0.7, "Hardware-Systems": 0.6, "Military-Defense": 0.5}},
+            {"option_id": 28404, "option_text": "Psychosocial first-aid team — facilitating stress debriefings for children in evacuation centers using art therapy and storytelling sessions", "trait_tags": {"Counseling": 0.8, "Early-Childhood": 0.7, "Social-Work": 0.6, "Creative-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5213,
+        "question_text": "A Laguna lakeside town is launching a floating solar-farm research station that also monitors Laguna de Bay's water quality. Which station capability do you build?",
+        "category": "floating_solar_research_station",
+        "options": [
+            {"option_id": 28405, "option_text": "Floating PV array engineer — anchoring pontoon-mounted panels against typhoon waves, running underwater cables to shore, and tracking generation versus lake-level fluctuations", "trait_tags": {"Electrical-Power": 0.8, "Maritime-Sea": 0.7, "Hardware-Systems": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28406, "option_text": "Limnology lab technician — collecting weekly samples for phosphorus, nitrogen, coliform, and algae counts and feeding data into a LLDA pollution model", "trait_tags": {"Environmental-Sci": 0.8, "Lab-Research": 0.7, "Analytical-Skill": 0.6, "Field-Research": 0.5}},
+            {"option_id": 28407, "option_text": "IoT sensor network developer — deploying solar-powered water-quality probes that stream dissolved-oxygen and turbidity readings to a cloud dashboard", "trait_tags": {"Software-Dev": 0.8, "Electronics-Dev": 0.7, "Cloud-Systems": 0.6, "Data-Analytics": 0.5}},
+            {"option_id": 28408, "option_text": "Fisheries liaison — consulting with cage-culture operators about whether floating panels affect tilapia growth and negotiating shared lake-use schedules", "trait_tags": {"Fisheries-Agri-Path": 0.8, "People-Skill": 0.7, "Community-Serve": 0.6, "Agri-Nature": 0.5}},
+            {"option_id": 28409, "option_text": "Educational tour host — welcoming school groups, explaining solar-energy basics and lake ecology through interactive demos, and supervising the floating boardwalk", "trait_tags": {"Teaching-Ed": 0.8, "Tourism-Hospitality-Path": 0.7, "People-Skill": 0.6, "Environmental-Sci": 0.5}},
+            {"option_id": 28410, "option_text": "Grant writer and data publisher — drafting DOST and UNDP proposals, preparing open-data releases, and presenting findings at the annual Philippine Science Congress", "trait_tags": {"Writing-Comm": 0.8, "Finance-Acct": 0.7, "Data-Analytics": 0.6, "Analytical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5214,
+        "question_text": "A Taguig City co-working space is incubating a Filipino language-learning app that teaches Tagalog, Cebuano, and Ilocano to overseas workers' children. Which startup role do you take?",
+        "category": "language_learning_app_startup",
+        "options": [
+            {"option_id": 28411, "option_text": "Computational linguist — tokenizing Philippine-language corpora, building pronunciation models, and designing spaced-repetition vocabulary decks", "trait_tags": {"AI-ML": 0.8, "Software-Dev": 0.7, "Writing-Comm": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28412, "option_text": "Game designer — creating interactive quests where children earn badges for ordering at a sari-sari store or singing folk rhymes in the target language", "trait_tags": {"Game-Dev": 0.8, "Creative-Skill": 0.7, "Animation-3D": 0.6, "Early-Childhood": 0.5}},
+            {"option_id": 28413, "option_text": "Voice actor and audio engineer — recording native speakers for all three languages, editing waveforms for clarity, and normalizing loudness for mobile playback", "trait_tags": {"Music-Audio": 0.8, "Performing-Arts": 0.7, "Electronics-Dev": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28414, "option_text": "UX researcher — running usability tests with children aged 5–12, tracking drop-off points, and redesigning confusing screens based on eye-tracking heatmaps", "trait_tags": {"UI-UX": 0.8, "Data-Analytics": 0.7, "People-Skill": 0.6, "Inclusive-Ed": 0.5}},
+            {"option_id": 28415, "option_text": "Growth hacker and diaspora marketer — targeting Filipino communities in the Gulf, Hong Kong, and Canada through Facebook and TikTok ad campaigns", "trait_tags": {"Marketing-Sales": 0.8, "Digital-Media": 0.7, "Startup-Venture": 0.6, "Data-Analytics": 0.5}},
+            {"option_id": 28416, "option_text": "Investor-relations and pitch-deck writer — preparing Series A materials, modeling user-acquisition costs, and presenting to venture-capital firms", "trait_tags": {"Finance-Acct": 0.8, "Writing-Comm": 0.7, "Startup-Venture": 0.6, "Analytical-Skill": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5215,
+        "question_text": "An Ilocos Norte provincial government is restoring a Spanish-era tobacco warehouse district into a craft-beer and artisan-food hall. Which restoration element do you lead?",
+        "category": "tobacco_warehouse_food_hall",
+        "options": [
+            {"option_id": 28417, "option_text": "Structural retrofit engineer — reinforcing century-old brick walls with steel frames, replacing rotted timber trusses, and ensuring seismic compliance", "trait_tags": {"Civil-Build": 0.8, "Mechanical-Design": 0.7, "Technical-Skill": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28418, "option_text": "Craft-brewery consultant — specifying fermentation tanks, glycol chillers, and CIP systems for a 5-barrel brewpub that uses local rice and sugarcane adjuncts", "trait_tags": {"Food-Science": 0.8, "Culinary-Mgmt-Path": 0.7, "Mechanical-Design": 0.6, "Lab-Research": 0.5}},
+            {"option_id": 28419, "option_text": "Tenant mix curator — hand-picking Ilocano empanada makers, bagnet vendors, and vigan-longganisa stalls to create a complementary food-hall lineup", "trait_tags": {"Culinary-Arts": 0.8, "Marketing-Sales": 0.7, "Hospitality-Svc": 0.6, "People-Skill": 0.5}},
+            {"option_id": 28420, "option_text": "Heritage interior designer — preserving exposed-brick character, installing industrial pendant lighting, and sourcing reclaimed-wood communal tables", "trait_tags": {"Spatial-Design": 0.8, "Creative-Skill": 0.7, "Visual-Design": 0.6, "Forestry-Path": 0.5}},
+            {"option_id": 28421, "option_text": "Wastewater and grease-trap engineer — designing the kitchen drainage network so food-hall effluent meets LGU sewer-discharge standards", "trait_tags": {"Environmental-Eng": 0.8, "Civil-Build": 0.7, "Mechanical-Design": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28422, "option_text": "Cultural events programmer — booking live Pamulinawen folk bands, organizing Ilocano poetry-slam nights, and curating seasonal harvest festivals", "trait_tags": {"Performing-Arts": 0.8, "Music-Audio": 0.7, "Tourism-Travel": 0.6, "Community-Serve": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5216,
+        "question_text": "A Palawan indigenous Tagbanwa community is developing a community-based ecotourism venture that protects their ancestral waters while generating income. Which venture role do you take?",
+        "category": "indigenous_ecotourism_venture",
+        "options": [
+            {"option_id": 28423, "option_text": "Kayak-tour guide — paddling guests through mangrove channels, identifying wildlife, and explaining indigenous fishing calendar rules", "trait_tags": {"Tourism-Travel": 0.8, "Environmental-Sci": 0.7, "Physical-Skill": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 28424, "option_text": "Free-prior-and-informed-consent facilitator — drafting FPIC agreements with NCIP, ensuring benefit-sharing terms, and training the tribal council on contract review", "trait_tags": {"Legal-Practice": 0.8, "Philosophy-Path": 0.7, "People-Skill": 0.6, "Writing-Comm": 0.5}},
+            {"option_id": 28425, "option_text": "Sustainable-lodge builder — constructing native-material tree houses with composting toilets and rainwater showers that leave zero permanent footprint", "trait_tags": {"Civil-Build": 0.8, "Forestry-Path": 0.7, "TVET-Path": 0.6, "Environmental-Eng": 0.5}},
+            {"option_id": 28426, "option_text": "Biodiversity-monitoring assistant — recording bird, reptile, and insect species counts during guided walks and uploading observations to the iNaturalist database", "trait_tags": {"Field-Research": 0.8, "Veterinary-Path": 0.7, "Data-Analytics": 0.6, "Environmental-Sci": 0.5}},
+            {"option_id": 28427, "option_text": "Community accounting trainer — teaching basic bookkeeping, profit-and-loss statements, and mobile-banking skills to village treasurers", "trait_tags": {"Finance-Acct": 0.8, "Teaching-Ed": 0.7, "Inclusive-Ed": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 28428, "option_text": "Handicraft product developer — helping weavers scale up beadwork and basket production to sell at the lodge gift shop and online marketplace", "trait_tags": {"Creative-Skill": 0.8, "Startup-Venture": 0.7, "Marketing-Sales": 0.6, "Visual-Design": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5217,
+        "question_text": "A Cavite provincial library is partnering with a tech company to offer free coding bootcamps for high schoolers using the library's computer lab. Which bootcamp track do you teach?",
+        "category": "library_coding_bootcamp",
+        "options": [
+            {"option_id": 28429, "option_text": "Web development fundamentals — guiding students through HTML, CSS, and JavaScript to build a portfolio website they deploy on GitHub Pages", "trait_tags": {"Web-Dev": 0.8, "Software-Dev": 0.7, "Teaching-Ed": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28430, "option_text": "Python data exploration — teaching pandas, matplotlib, and real-world data sets like PhilSA weather or PSA census data for beginner analytics projects", "trait_tags": {"Data-Analytics": 0.8, "Software-Dev": 0.7, "Teaching-Ed": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28431, "option_text": "Mobile-app prototyping — walking students through Flutter basics so they can design and run a simple Android app on their phones by week four", "trait_tags": {"Mobile-Dev": 0.8, "UI-UX": 0.7, "Software-Dev": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28432, "option_text": "Cybersecurity awareness — running capture-the-flag challenges that teach password hygiene, phishing detection, and basic network scanning ethics", "trait_tags": {"Cyber-Defense": 0.8, "Teaching-Ed": 0.7, "Software-Dev": 0.6, "Analytical-Skill": 0.5}},
+            {"option_id": 28433, "option_text": "Library media-maker lab — helping teens produce podcasts, edit short films, and design posters using free software so they become digital storytellers", "trait_tags": {"Library-Info": 0.8, "Film-Broadcast": 0.7, "Music-Audio": 0.6, "Digital-Media": 0.5}},
+            {"option_id": 28434, "option_text": "Bootcamp logistics and mentorship coordinator — scheduling sessions, tracking attendance, and pairing each student with a volunteer industry mentor", "trait_tags": {"Admin-Skill": 0.8, "HR-Management": 0.7, "People-Skill": 0.6, "Community-Serve": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5218,
+        "question_text": "A Masbate cattle-ranching province wants to modernize its livestock auction system and develop a branded-beef program for Metro Manila supermarkets. Which modernization task do you own?",
+        "category": "livestock_auction_modernization",
+        "options": [
+            {"option_id": 28435, "option_text": "RFID ear-tag and weighbridge system — tagging every animal, recording live weights automatically, and displaying real-time auction data on LED screens", "trait_tags": {"Hardware-Systems": 0.8, "Electronics-Dev": 0.7, "Software-Dev": 0.6, "Data-Analytics": 0.5}},
+            {"option_id": 28436, "option_text": "Beef-grading inspector — evaluating carcass marbling, rib-eye area, and fat color at the slaughterhouse using the Philippine meat-grading rubric", "trait_tags": {"Veterinary-Path": 0.8, "Food-Science": 0.7, "Analytical-Skill": 0.6, "Lab-Research": 0.5}},
+            {"option_id": 28437, "option_text": "Pasture-management agronomist — introducing improved grass varieties, rotational grazing fences, and dry-season silage storage to boost cattle weight gain", "trait_tags": {"Agri-Nature": 0.8, "Fisheries-Agri-Path": 0.7, "Field-Research": 0.6, "Forestry-Path": 0.5}},
+            {"option_id": 28438, "option_text": "Cold-chain logistics coordinator — scheduling reefer trucks from ranch to Metro Manila distribution centers and monitoring temperature-logger compliance", "trait_tags": {"Industrial-Ops": 0.8, "Automotive-Tech": 0.7, "Admin-Skill": 0.6, "Food-Science": 0.5}},
+            {"option_id": 28439, "option_text": "Brand marketing strategist — designing premium-beef packaging, running chef partnerships for steak-night promotions, and managing the Instagram brand account", "trait_tags": {"Marketing-Sales": 0.8, "Visual-Design": 0.7, "Digital-Media": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28440, "option_text": "Rancher cooperative legal adviser — drafting supply agreements, handling NFA and DTI compliance, and registering the collective trademark at the IPO", "trait_tags": {"Legal-Mgmt": 0.8, "Legal-Practice": 0.7, "Writing-Comm": 0.6, "Finance-Acct": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5219,
+        "question_text": "A Surigao del Norte mining-transition town is retraining displaced nickel miners for careers in sustainable industries. Which retraining track do you design?",
+        "category": "mining_town_retraining",
+        "options": [
+            {"option_id": 28441, "option_text": "Solar-panel installation and maintenance — certifying former miners on rooftop mounting, inverter wiring, and performance testing for residential systems", "trait_tags": {"Electrical-Power": 0.8, "TVET-Path": 0.7, "Technical-Skill": 0.6, "Automotive-Tech": 0.5}},
+            {"option_id": 28442, "option_text": "Aquaculture pond technician — teaching tilapia and milkfish grow-out in rehabilitated mining pits converted into freshwater ponds", "trait_tags": {"Fisheries-Agri-Path": 0.8, "Agri-Nature": 0.7, "Teaching-Ed": 0.6, "Environmental-Eng": 0.5}},
+            {"option_id": 28443, "option_text": "Heavy-equipment operator for construction — transitioning haul-truck drivers to excavator and crane roles on road and building projects", "trait_tags": {"Automotive-Tech": 0.8, "Civil-Build": 0.7, "TVET-Path": 0.6, "Physical-Skill": 0.5}},
+            {"option_id": 28444, "option_text": "Eco-tourism homestay host — training families to convert their homes into guest lodges, cook local specialties, and share mining-heritage stories", "trait_tags": {"Hotel-Resort-Path": 0.8, "Tourism-Hospitality-Path": 0.7, "Culinary-Arts": 0.6, "People-Skill": 0.5}},
+            {"option_id": 28445, "option_text": "Mental-health and transition counselor — running group therapy sessions for miners grieving job loss and helping them set realistic career goals", "trait_tags": {"Counseling": 0.8, "Social-Work": 0.7, "People-Skill": 0.6, "Philosophy-Path": 0.5}},
+            {"option_id": 28446, "option_text": "Mined-land rehabilitation forester — planting native species on tailings ponds, monitoring soil heavy-metal levels, and earning carbon credits from new forest cover", "trait_tags": {"Forestry-Path": 0.8, "Environmental-Sci": 0.7, "Agri-Nature": 0.6, "Field-Research": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5220,
+        "question_text": "A Quezon City special-education school is piloting assistive-technology tools so students with diverse disabilities can access the K-12 curriculum independently. Which assistive-tech project do you implement?",
+        "category": "assistive_tech_sped_school",
+        "options": [
+            {"option_id": 28447, "option_text": "Screen-reader and braille-display deployment — configuring NVDA for blind students, training teachers on accessible-document formatting, and transcribing textbooks", "trait_tags": {"Inclusive-Ed": 0.8, "Hardware-Systems": 0.7, "Teaching-Ed": 0.6, "Software-Dev": 0.5}},
+            {"option_id": 28448, "option_text": "Eye-gaze communication system — calibrating Tobii eye-trackers for students with cerebral palsy so they can type, browse, and participate in class discussions", "trait_tags": {"Electronics-Dev": 0.8, "Inclusive-Ed": 0.7, "Rehab-Therapy": 0.6, "Software-Dev": 0.5}},
+            {"option_id": 28449, "option_text": "Augmentative-communication app customizer — loading symbol boards in Filipino and English on tablets and teaching non-verbal students to compose sentences", "trait_tags": {"Early-Childhood": 0.8, "Mobile-Dev": 0.7, "Inclusive-Ed": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 28450, "option_text": "Wheelchair-accessible campus architect — redesigning ramps, classroom furniture heights, restroom grab bars, and playground surfaces for mobility-aid users", "trait_tags": {"Spatial-Design": 0.8, "Civil-Build": 0.7, "Inclusive-Ed": 0.6, "Mechanical-Design": 0.5}},
+            {"option_id": 28451, "option_text": "Sensory-room designer — creating controlled-light, textured-wall, and weighted-blanket spaces where students with autism can self-regulate before returning to class", "trait_tags": {"Creative-Skill": 0.8, "Rehab-Therapy": 0.7, "Early-Childhood": 0.6, "Spatial-Design": 0.5}},
+            {"option_id": 28452, "option_text": "Assistive-tech grant and procurement officer — surveying UNICEF and DepEd catalogs, writing purchase justifications, and distributing devices equitably across classrooms", "trait_tags": {"Finance-Acct": 0.8, "Admin-Skill": 0.7, "Legal-Practice": 0.6, "Writing-Comm": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5221,
+        "question_text": "A Bataan shipyard is constructing the Philippine Navy's first locally built offshore-patrol vessel to strengthen maritime sovereignty. Which shipbuilding division do you staff?",
+        "category": "naval_patrol_vessel",
+        "options": [
+            {"option_id": 28453, "option_text": "Hull structural welder — reading naval-architecture drawings, tack-welding steel plate sections in the dry dock, and passing X-ray weld-quality inspections", "trait_tags": {"TVET-Path": 0.8, "Maritime-Sea": 0.7, "Physical-Skill": 0.6, "Mechanical-Design": 0.5}},
+            {"option_id": 28454, "option_text": "Combat-system integrator — installing radars, fire-control consoles, and encrypted communication suites and verifying interoperability during sea trials", "trait_tags": {"Military-Defense": 0.8, "Electronics-Dev": 0.7, "Software-Dev": 0.6, "Hardware-Systems": 0.5}},
+            {"option_id": 28455, "option_text": "Propulsion engineer — selecting diesel engines, aligning shaftlines with propellers, and tuning fuel-injection maps for economy during long patrols", "trait_tags": {"Mechanical-Design": 0.8, "Automotive-Tech": 0.7, "Aeronautical-Eng": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28456, "option_text": "Quality-assurance and classification surveyor — inspecting compartment coatings, fire-safety gear, and stability calculations against Bureau Veritas rules", "trait_tags": {"Legal-Mgmt": 0.8, "Analytical-Skill": 0.7, "Writing-Comm": 0.6, "Maritime-Sea": 0.5}},
+            {"option_id": 28457, "option_text": "Crew habitability designer — laying out bunks, galley, medical bay, and recreation lounge to keep 80 sailors comfortable on 30-day deployments", "trait_tags": {"Spatial-Design": 0.8, "Hospitality-Svc": 0.7, "Creative-Skill": 0.6, "Nutrition-Diet": 0.5}},
+            {"option_id": 28458, "option_text": "Project management and timeline tracker — coordinating steel delivery, sub-contractor schedules, and milestone payments across a three-year build program", "trait_tags": {"Industrial-Ops": 0.8, "Finance-Acct": 0.7, "Admin-Skill": 0.6, "Data-Analytics": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5222,
+        "question_text": "A Legazpi City geothermal-energy company is expanding its plant while also developing a hot-spring wellness resort heated by waste geothermal brine. Which dual-use project do you manage?",
+        "category": "geothermal_wellness_resort",
+        "options": [
+            {"option_id": 28459, "option_text": "Geothermal well driller — supervising rotary-drill rigs boring 2 km into volcanic rock, monitoring mud returns for steam pressure, and casing the well", "trait_tags": {"Mechanical-Design": 0.8, "Environmental-Eng": 0.7, "Physical-Skill": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28460, "option_text": "Turbine control-room operator — managing steam separators, back-pressure turbines, and generator synchronization to dispatch 20 MW to the Bicol grid", "trait_tags": {"Electrical-Power": 0.8, "Electronics-Dev": 0.7, "Mechanical-Design": 0.6, "Data-Analytics": 0.5}},
+            {"option_id": 28461, "option_text": "Hot-spring spa designer — piping cooled brine into soaking pools, selecting mineral-safe tile finishes, and creating onsen-inspired bathing rituals for guests", "trait_tags": {"Hotel-Resort-Path": 0.8, "Spatial-Design": 0.7, "Tourism-Hospitality-Path": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28462, "option_text": "Environmental chemist — testing brine for arsenic, silica, and hydrogen sulfide before discharge, and designing reinjection wells to prevent ground subsidence", "trait_tags": {"Lab-Research": 0.8, "Environmental-Sci": 0.7, "Analytical-Skill": 0.6, "Environmental-Eng": 0.5}},
+            {"option_id": 28463, "option_text": "Wellness program director — hiring licensed massage therapists, acupuncturists, and yoga instructors and packaging multi-day detox retreat itineraries", "trait_tags": {"Rehab-Therapy": 0.8, "Exercise-Sci-Path": 0.7, "Hospitality-Svc": 0.6, "HR-Management": 0.5}},
+            {"option_id": 28464, "option_text": "Carbon-credit and ESG reporter — quantifying avoided CO₂ emissions versus coal, filing verified carbon units, and publishing sustainability scorecards for investors", "trait_tags": {"Finance-Acct": 0.8, "Writing-Comm": 0.7, "Data-Analytics": 0.6, "Legal-Practice": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5223,
+        "question_text": "A Mindoro Mangyan tribal school is creating a mother-tongue-based multilingual education program so indigenous children learn in their own language first. Which program component do you build?",
+        "category": "mother_tongue_tribal_school",
+        "options": [
+            {"option_id": 28465, "option_text": "Hanunuo script primer author — working with elders to publish the first illustrated reading book in Mangyan syllabary for Grade 1 students", "trait_tags": {"Writing-Comm": 0.8, "Early-Childhood": 0.7, "Library-Info": 0.6, "Creative-Skill": 0.5}},
+            {"option_id": 28466, "option_text": "Multilingual teacher trainer — coaching community volunteers on scaffolded language transfer from Mangyan to Filipino to English across grade levels", "trait_tags": {"Teaching-Ed": 0.8, "Inclusive-Ed": 0.7, "People-Skill": 0.6, "Philosophy-Path": 0.5}},
+            {"option_id": 28467, "option_text": "Educational materials illustrator — drawing culturally familiar characters, plants, and animals for math and science workbooks used in the tribal school", "trait_tags": {"Visual-Design": 0.8, "Creative-Skill": 0.7, "Early-Childhood": 0.6, "Teaching-Ed": 0.5}},
+            {"option_id": 28468, "option_text": "Mobile classroom builder — fitting a solar-powered van with fold-out desks, a whiteboard, and a mini-library that reaches satellite hamlets on mountain trails", "trait_tags": {"Automotive-Tech": 0.8, "Electrical-Power": 0.7, "TVET-Path": 0.6, "Inclusive-Ed": 0.5}},
+            {"option_id": 28469, "option_text": "Nutrition and school-feeding coordinator — preparing fortified lunches using locally grown camote and malunggay to improve attendance and concentration", "trait_tags": {"Nutrition-Diet": 0.8, "Public-Health": 0.7, "Agri-Nature": 0.6, "Community-Serve": 0.5}},
+            {"option_id": 28470, "option_text": "Education data analyst — tracking enrollment, completion rates, and mother-tongue test scores to demonstrate program impact to DepEd and UNICEF funders", "trait_tags": {"Data-Analytics": 0.8, "Analytical-Skill": 0.7, "Writing-Comm": 0.6, "Finance-Acct": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5224,
+        "question_text": "A General Santos tuna-processing plant is adding a sashimi-grade facility that meets Japanese import standards for direct export to Tokyo's Toyosu Market. Which upgrade do you engineer?",
+        "category": "sashimi_grade_tuna_export",
+        "options": [
+            {"option_id": 28471, "option_text": "Ultra-low-temperature blast freezer — commissioning –60 °C plate freezers that lock sashimi quality within four hours of landing and maintain it through container shipping", "trait_tags": {"Mechanical-Design": 0.8, "Food-Science": 0.7, "Industrial-Ops": 0.6, "Technical-Skill": 0.5}},
+            {"option_id": 28472, "option_text": "Fish-quality grader — examining flesh color, fat marbling, and histamine levels on the dock and rejecting lots that fail Japan's 50 ppm histamine threshold", "trait_tags": {"Fisheries-Agri-Path": 0.8, "Lab-Research": 0.7, "Analytical-Skill": 0.6, "Food-Science": 0.5}},
+            {"option_id": 28473, "option_text": "HACCP and BFAR export-certification officer — documenting critical control points, calibrating metal detectors, and hosting Japanese MAFF auditor inspections", "trait_tags": {"Legal-Mgmt": 0.8, "Writing-Comm": 0.7, "Admin-Skill": 0.6, "Public-Health": 0.5}},
+            {"option_id": 28474, "option_text": "Vessel-improvement consultant — fitting handline boats with insulated fish holds, onboard ice makers, and LED deck lights to improve catch freshness at sea", "trait_tags": {"Maritime-Sea": 0.8, "Mechanical-Design": 0.7, "Electrical-Power": 0.6, "Automotive-Tech": 0.5}},
+            {"option_id": 28475, "option_text": "Japanese-market trade representative — attending Toyosu auctions, cultivating buyer relationships in Tokyo, and negotiating yen-denominated supply contracts", "trait_tags": {"Marketing-Sales": 0.8, "Finance-Acct": 0.7, "People-Skill": 0.6, "Tourism-Travel": 0.5}},
+            {"option_id": 28476, "option_text": "Worker sanitation and hygiene trainer — drilling filleting staff on knife sterilization, hairnet protocols, and stainless-steel boot-wash station procedures", "trait_tags": {"Teaching-Ed": 0.8, "TVET-Path": 0.7, "Public-Health": 0.6, "Food-Science": 0.5}},
+        ],
+    },
+    {
+        "question_id": 5225,
+        "question_text": "A Rizal province arts foundation is opening a residency villa where international printmakers, ceramicists, and textile artists spend three months creating work inspired by Philippine landscapes. Which residency service do you provide?",
+        "category": "artist_residency_villa",
+        "options": [
+            {"option_id": 28477, "option_text": "Printmaking studio manager — maintaining an etching press, mixing non-toxic inks, and teaching visiting artists traditional Filipino block-carving motifs", "trait_tags": {"Visual-Design": 0.8, "Creative-Skill": 0.7, "Teaching-Ed": 0.6, "TVET-Path": 0.5}},
+            {"option_id": 28478, "option_text": "Ceramics kiln technician — loading bisque and glaze firings, programming ramp-and-hold schedules, and sourcing local Angono clay for artist experiments", "trait_tags": {"Lab-Research": 0.7, "TVET-Path": 0.8, "Creative-Skill": 0.6, "Mechanical-Design": 0.5}},
+            {"option_id": 28479, "option_text": "Resident-artist curator — selecting applicants from 300 portfolios worldwide, negotiating stipends, and organizing an end-of-residency group exhibition in Makati", "trait_tags": {"Library-Info": 0.7, "Marketing-Sales": 0.8, "Writing-Comm": 0.6, "People-Skill": 0.5}},
+            {"option_id": 28480, "option_text": "Villa hospitality steward — managing meals, laundry, and countryside excursions so artists can focus entirely on creative output during their stay", "trait_tags": {"Hospitality-Svc": 0.8, "Hotel-Resort-Path": 0.7, "Tourism-Hospitality-Path": 0.6, "Admin-Skill": 0.5}},
+            {"option_id": 28481, "option_text": "Documentary filmmaker — producing a short film following each cohort's creative journey from arrival to exhibition opening for arts-council promotion", "trait_tags": {"Film-Broadcast": 0.8, "Music-Audio": 0.7, "Creative-Skill": 0.6, "Digital-Media": 0.5}},
+            {"option_id": 28482, "option_text": "Endowment and foundation manager — investing donated funds, filing SEC annual reports, and cultivating corporate sponsors to sustain the residency long-term", "trait_tags": {"Finance-Acct": 0.8, "Legal-Practice": 0.7, "Writing-Comm": 0.6, "Admin-Skill": 0.5}},
+        ],
+    },
+]
+
+# --- collision guard --------------------------------------------------------
+_repl27_existing_qids = {q["question_id"] for q in QUESTIONS_POOL_ENHANCED}
+_repl27_new_qids = {q["question_id"] for q in _REPLACEMENT_BATCH_27}
+if _repl27_existing_qids & _repl27_new_qids:
+    raise ValueError(f"Replacement batch 27 question IDs overlap: {_repl27_existing_qids & _repl27_new_qids}")
+
+_repl27_existing_oids = {o["option_id"] for q in QUESTIONS_POOL_ENHANCED for o in q.get("options", [])}
+_repl27_new_oids = {o["option_id"] for q in _REPLACEMENT_BATCH_27 for o in q.get("options", [])}
+if _repl27_existing_oids & _repl27_new_oids:
+    raise ValueError(f"Replacement batch 27 option IDs overlap: {_repl27_existing_oids & _repl27_new_oids}")
+
+QUESTIONS_POOL_ENHANCED.extend(_REPLACEMENT_BATCH_27)
+
+
 # ══════════════════════════════════════════════════════════════════════════════
 # EXPANSION DEDUPLICATION
 # ══════════════════════════════════════════════════════════════════════════════
