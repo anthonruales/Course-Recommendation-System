@@ -4294,6 +4294,80 @@ QUESTION_CATEGORY_DOMAIN_HINTS["agriculture"].extend(["Agriculture & Farming", "
 QUESTION_CATEGORY_DOMAIN_HINTS["hospitality"].extend(["Culinary Management"])
 QUESTION_CATEGORY_DOMAIN_HINTS["education"].extend(["Technical-Vocational Training"])
 QUESTION_CATEGORY_DOMAIN_HINTS["technology"].extend(["Technical-Vocational Training"])
+# General/broad category hints for remaining unclassified questions
+QUESTION_CATEGORY_DOMAIN_HINTS["social"].extend(["Social General"])
+QUESTION_CATEGORY_DOMAIN_HINTS["business"].extend(["Business General", "Logistics & Supply Chain", "Economics", "Statistics & Probability"])
+QUESTION_CATEGORY_DOMAIN_HINTS["technology"].extend(["Technology General", "Game Development", "Statistics & Probability"])
+QUESTION_CATEGORY_DOMAIN_HINTS["engineering"].extend(["Product & Industrial Design", "Aircraft Maintenance & Avionics"])
+QUESTION_CATEGORY_DOMAIN_HINTS["physical"].extend(["Aircraft Maintenance & Avionics"])
+QUESTION_CATEGORY_DOMAIN_HINTS["science"].extend(["Environment & Nature"])
+QUESTION_CATEGORY_DOMAIN_HINTS["healthcare"].extend(["Health Admin", "Hospital Dept"])
+QUESTION_CATEGORY_DOMAIN_HINTS["business"].extend(["HR Management", "HR", "Health Admin"])
+QUESTION_CATEGORY_DOMAIN_HINTS["public_service"].extend(["Social Work", "Child Welfare"])
+QUESTION_CATEGORY_DOMAIN_HINTS["science"].extend(["Forensic", "Food Safety"])
+QUESTION_CATEGORY_DOMAIN_HINTS["hospitality"].extend(["Tourism", "Local Tourism"])
+# Catch-all for remaining edge cases
+QUESTION_CATEGORY_DOMAIN_HINTS["creative"].extend(["Arts & Design", "Landscape Architecture"])
+QUESTION_CATEGORY_DOMAIN_HINTS["engineering"].extend(["Landscape Architecture"])
+QUESTION_CATEGORY_DOMAIN_HINTS["business"].extend(["Startup & Innovation", "PH Industry Trends",
+                                                    "Career Shadow Extended", "Work Environment Extended",
+                                                    "Licensure Extended"])
+
+# ── AUTO-CLASSIFY UNCLASSIFIED QUESTIONS ────────────────────────────
+# Many enhanced questions are not explicitly added to QUESTION_TREE_NODES.
+# Without classification, _is_relevant_question() cannot filter them,
+# so veterinary questions appear for healthcare users, etc.
+# Infer branches from the question's category string using the
+# QUESTION_CATEGORY_DOMAIN_HINTS mapping.
+
+def _infer_branches_from_category(category: str) -> list:
+    """Infer branch domains from a question's category string."""
+    if not category:
+        return []
+    cat_lower = category.lower()
+    # Strip common prefixes
+    for prefix in ("academic interest - ", "career - ", "situational - ",
+                   "domain - ", "work environment ", "licensure ",
+                   "ph industry "):
+        if cat_lower.startswith(prefix):
+            cat_lower = cat_lower[len(prefix):]
+            break
+
+    matched = []
+    for domain, keywords in QUESTION_CATEGORY_DOMAIN_HINTS.items():
+        for kw in keywords:
+            if kw.lower() in cat_lower or cat_lower in kw.lower():
+                matched.append(domain)
+                break
+    # Special handling for "Engineering CS" prefix categories
+    if "engineering cs" in category.lower():
+        matched = list(set(matched) | {"engineering", "technology"})
+    return list(set(matched)) if matched else []
+
+# Apply to all questions not already in QUESTION_TREE_NODES
+# Note: will be re-run in AdaptiveAssessmentEngine.__init__ once questions are available.
+try:
+    _all_questions_to_classify = QUESTIONS_POOL_ENHANCED
+except NameError:
+    _all_questions_to_classify = []
+
+_auto_classified = 0
+for _q in _all_questions_to_classify:
+    _qid = _q.get("question_id")
+    if _qid and _qid not in QUESTION_TREE_NODES:
+        _branches = _infer_branches_from_category(_q.get("category", ""))
+        if _branches:
+            QUESTION_TREE_NODES[_qid] = {
+                "level": 1,
+                "weight": 1.4,
+                "branches": _branches,
+            }
+            _auto_classified += 1
+
+if _auto_classified:
+    print(f"[TREE] Auto-classified {_auto_classified} unclassified questions by category")
+
+# ────────────────────────────────────────────────────────────────────
 
 # Minimum questions to ask in a domain before moving on
 DOMAIN_MIN_QUESTIONS = 3
@@ -4389,6 +4463,22 @@ class AdaptiveAssessmentEngine:
         
         print(f"[ENGINE] Adaptive Engine initialized with {len(self.courses)} courses and {len(self.questions)} questions")
         print(f"[ENGINE] Pre-computed trait affinity for {len(self.question_trait_affinity)} questions")
+        
+        # Auto-classify any questions not already in QUESTION_TREE_NODES
+        _auto_n = 0
+        for _qid, _q in self.questions.items():
+            if _qid not in QUESTION_TREE_NODES:
+                _branches = _infer_branches_from_category(_q.get("category", ""))
+                if _branches:
+                    QUESTION_TREE_NODES[_qid] = {
+                        "level": 1,
+                        "weight": 1.4,
+                        "branches": _branches,
+                    }
+                    _auto_n += 1
+        if _auto_n:
+            print(f"[ENGINE] Auto-classified {_auto_n} previously unclassified questions by category")
+        
         print(f"[ENGINE] Decision tree nodes classified: {len(QUESTION_TREE_NODES)} questions")
     
     def _parse_traits(self, trait_tag) -> Set[str]:
@@ -5523,7 +5613,7 @@ class AdaptiveAssessmentEngine:
             """Check if a question belongs to at least one profile-relevant branch."""
             node = QUESTION_TREE_NODES.get(qid)
             if not node:
-                return True  # Questions without node classification are broad/general — allow
+                return False  # Unclassified questions must not bypass relevance filtering
             return bool(set(node["branches"]) & relevant)
         
         def _passes_trait_continuity(qid):
@@ -6103,21 +6193,8 @@ class AdaptiveAssessmentEngine:
         print(f"[CHAIN-{phase}] Round {round_num}: Q{selected_qid} "
               f"cat='{best_question.get('category')}' — {selection_reason}")
         
-        # Get top courses preview
-        sorted_courses = sorted(
-            session.course_scores.items(),
-            key=lambda x: x[1],
-            reverse=True
-        )
-        top_courses = [
-            {
-                "course_name": name,
-                "current_score": round(score, 1),
-                "traits_matched": len(self.course_traits.get(name, set()) & 
-                                    set(session.trait_scores.keys()))
-            }
-            for name, score in sorted_courses[:5]
-        ]
+        # Get top courses preview (with unique-trait affinity adjustment)
+        top_courses = self._get_affinity_adjusted_preview(session)
         
         return {
             "session_id": session_id,
@@ -6626,23 +6703,8 @@ class AdaptiveAssessmentEngine:
         # Calculate confidence
         session.confidence = self._calculate_confidence(session)
         
-        # Get current top courses for preview (from ALL courses, not just active)
-        sorted_courses = sorted(
-            session.course_scores.items(),
-            key=lambda x: x[1],
-            reverse=True
-        )
-        
-        # Show top 5 courses with their matched trait count
-        top_courses = [
-            {
-                "course_name": name,
-                "current_score": round(score, 1),
-                "traits_matched": len(self.course_traits.get(name, set()) & 
-                                    set(session.trait_scores.keys()))
-            }
-            for name, score in sorted_courses[:5]
-        ]
+        # Get current top courses for preview (with unique-trait affinity)
+        top_courses = self._get_affinity_adjusted_preview(session)
         
         # Build all_traits as a list of trait names (sorted by weight descending for dicts)
         if isinstance(chosen_trait_tags, dict) and chosen_trait_tags:
@@ -6686,7 +6748,14 @@ class AdaptiveAssessmentEngine:
     
     def _update_course_scores(self, session: AdaptiveSession, chosen_trait: str,
                              trait_weight: float = 1.0, is_primary: bool = True):
-        """Boost course scores based on trait matches, weighted by question depth and trait importance."""
+        """Boost course scores based on trait matches, weighted by question depth and trait importance.
+
+        Trait *rarity* is factored in: a match on a rare/specialized trait
+        (e.g. Rehab-Therapy in 6 courses) gives a much bigger signal than a
+        match on a common trait (e.g. Analytical-Skill in 41 courses).  This
+        prevents courses that only share broad traits from out-scoring courses
+        whose specialized traits actually match the user's answers.
+        """
         if not chosen_trait:
             return
         
@@ -6701,35 +6770,105 @@ class AdaptiveAssessmentEngine:
         primary_bonus = 1.3 if is_primary else 1.0
 
         # Combined multiplier: question weight × trait weight × primary bonus
-        # All answers are weighted equally by position — the user's overall
-        # pattern (volume of answers in a domain) determines the final ranking,
-        # not which questions were asked first.
         total_multiplier = (
             question_weight *
             trait_weight *
             primary_bonus
         )
+
+        # Trait rarity discount: traits shared by many courses carry less
+        # discriminating signal.  _TRAIT_COURSE_COUNT is computed once on init.
+        if not hasattr(self, '_trait_course_count'):
+            from collections import Counter
+            self._trait_course_count = Counter()
+            for _cname, _ctraits in self.course_traits.items():
+                for _t in _ctraits:
+                    self._trait_course_count[_t] += 1
+            self._total_courses = max(len(self.courses), 1)
+
+        def _rarity_factor(trait_name: str) -> float:
+            """Return 1.0 for rare traits, scaling down to 0.3 for very common ones."""
+            count = self._trait_course_count.get(trait_name, 1)
+            prevalence = count / self._total_courses  # 0.0 – 1.0
+            # rare (≤5%) → 1.0; common (≥40%) → 0.3; linear between
+            if prevalence <= 0.05:
+                return 1.0
+            if prevalence >= 0.40:
+                return 0.3
+            return 1.0 - (prevalence - 0.05) * (0.7 / 0.35)
         
         for course_name in list(session.active_courses):
             course_traits = self.course_traits.get(course_name, set())
             
-            # Direct trait match - BIG BOOST (matches unique specialized trait)
+            # Direct trait match — rarity-weighted boost
             if chosen_trait in course_traits:
-                boost = 12.0 * total_multiplier
+                rf = _rarity_factor(chosen_trait)
+                boost = 12.0 * total_multiplier * rf
                 session.course_scores[course_name] += boost
             else:
                 # Check for similar traits using our SPECIALIZED trait system
                 best_similarity = 0
+                best_course_trait = ""
                 for course_trait in course_traits:
                     sim = self._get_specialized_similarity(chosen_trait, course_trait)
-                    best_similarity = max(best_similarity, sim)
+                    if sim > best_similarity:
+                        best_similarity = sim
+                        best_course_trait = course_trait
                 
-                # Similarity-based score boost (tighter thresholds to prevent spillover)
+                # Similarity-based score boost — tighter thresholds & smaller
+                # boosts to prevent cross-domain spillover
                 if best_similarity > 0.7:
-                    session.course_scores[course_name] += 5.0 * total_multiplier
-                elif best_similarity > 0.4:
-                    session.course_scores[course_name] += 2.0 * total_multiplier
+                    rf = _rarity_factor(best_course_trait)
+                    session.course_scores[course_name] += 3.0 * total_multiplier * rf
+                elif best_similarity > 0.5:
+                    rf = _rarity_factor(best_course_trait)
+                    session.course_scores[course_name] += 1.0 * total_multiplier * rf
     
+    # ── Common traits list (shared between preview & finalization) ──
+    _COMMON_TRAITS = frozenset({
+        "Analytical-Skill", "Investigative", "People-Skill",
+        "Technical-Skill", "Community-Serve", "Social", "Admin-Skill",
+        "Realistic", "Artistic", "Creative-Skill", "Teaching-Ed",
+        "Enterprising", "Conventional", "Physical-Skill", "Patient-Care",
+    })
+
+    def _get_affinity_adjusted_preview(self, session) -> list:
+        """Return top-5 courses with unique-trait affinity factored in.
+
+        Courses whose rare/defining traits (unique_traits = course_traits −
+        COMMON_TRAITS) were never triggered by the user's answers get a 0.6×
+        penalty.  Courses with ≥50 % unique trait matches get 1.15× boost.
+        This prevents generic-trait spillover from pushing irrelevant courses
+        to the top of the live sidebar.
+        """
+        user_traits = set(session.trait_scores.keys())
+        adjusted = {}
+        for name, raw in session.course_scores.items():
+            course_traits = self.course_traits.get(name, set())
+            unique_traits = course_traits - self._COMMON_TRAITS
+            if unique_traits:
+                matched = unique_traits & user_traits
+                ratio = len(matched) / len(unique_traits)
+                if ratio >= 0.5:
+                    adjusted[name] = raw * 1.15
+                elif ratio == 0:
+                    adjusted[name] = raw * 0.6
+                else:
+                    adjusted[name] = raw
+            else:
+                adjusted[name] = raw
+
+        sorted_courses = sorted(adjusted.items(), key=lambda x: x[1], reverse=True)
+        return [
+            {
+                "course_name": name,
+                "current_score": round(score, 1),
+                "traits_matched": len(self.course_traits.get(name, set())
+                                      & user_traits),
+            }
+            for name, score in sorted_courses[:5]
+        ]
+
     def _calculate_confidence(self, session: AdaptiveSession) -> float:
         """Calculate recommendation confidence based on score separation and trait focus."""
         if len(session.active_courses) == 0:
@@ -6779,7 +6918,23 @@ class AdaptiveAssessmentEngine:
         """Build final course recommendations."""
         print(f"[OK_GREEN] FINALIZE SESSION CALLED - session_id: {session.session_id}")
         session.is_complete = True
-        
+
+        # ── UNIQUE TRAIT AFFINITY ADJUSTMENT ──
+        # Same logic as _get_affinity_adjusted_preview, but applied to the
+        # actual session scores before final ranking.
+        user_traits = set(session.trait_scores.keys())
+        for course_name in list(session.course_scores.keys()):
+            course_traits = self.course_traits.get(course_name, set())
+            unique_traits = course_traits - self._COMMON_TRAITS
+            if not unique_traits:
+                continue
+            matched_unique = unique_traits & user_traits
+            ratio = len(matched_unique) / len(unique_traits)
+            if ratio >= 0.5:
+                session.course_scores[course_name] *= 1.15
+            elif ratio == 0:
+                session.course_scores[course_name] *= 0.6
+
         # Sort courses by score
         sorted_courses = sorted(
             session.course_scores.items(),
@@ -7316,21 +7471,8 @@ class AdaptiveAssessmentEngine:
         # Recalculate confidence
         session.confidence = self._calculate_confidence(session)
         
-        # Get top courses preview - ALWAYS show based on current scores (includes profile bonuses)
-        sorted_courses = sorted(
-            session.course_scores.items(),
-            key=lambda x: x[1],
-            reverse=True
-        )
-        top_courses = [
-            {
-                "course_name": name,
-                "current_score": round(score, 1),
-                "traits_matched": len(self.course_traits.get(name, set()) & 
-                                    set(session.trait_scores.keys()))
-            }
-            for name, score in sorted_courses[:5]
-        ]
+        # Get top courses preview (with unique-trait affinity adjustment)
+        top_courses = self._get_affinity_adjusted_preview(session)
         
         print(f"[PREVIOUS] Went back to Q{previous_question_id}. Round: {session.round_number}, answers: {len(session.answered_questions)}, traits: {len(session.trait_scores)}")
         
