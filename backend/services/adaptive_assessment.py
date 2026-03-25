@@ -4113,12 +4113,14 @@ INTEREST_CATEGORY_KEYWORDS = {
     "theater": ["Theater & Performing Arts"],
     # Science
     "science": ["Science & Research", "Science General"],
-    "biology": ["Biology & Life Sciences"],
+    "biology": ["Biology & Life Sciences", "Biotechnology & Genetics", "Marine Science & Oceanography"],
     "chemistry": ["Chemistry"],
     "physics": ["Physics"],
     "environment": ["Environment & Nature", "Environmental Planning"],
     "biotechnology": ["Biotechnology & Genetics"],
-    "earth_science": ["Earth Science & Geology"],
+    "earth_science": ["Earth Science & Geology", "Environment & Nature", "Environmental Planning & Sustainability", "Geodetic & Surveying", "Weather & Atmospheric Science"],
+    "geology": ["Earth Science & Geology", "Geodetic & Surveying"],
+    "earth": ["Earth Science & Geology", "Environment & Nature"],
     "meteorology": ["Weather & Atmospheric Science"],
     "food_science": ["Culinary & Food Science", "Food Science"],
     # Education
@@ -4132,7 +4134,15 @@ INTEREST_CATEGORY_KEYWORDS = {
     "fisheries": ["Fisheries & Agriculture", "Fisheries & Aquaculture"],
     "forestry": ["Forestry & Natural Resources"],
     # Maritime
-    "maritime": ["Maritime", "Marine"],
+    "maritime": ["Maritime", "Marine", "Maritime & Seafaring", "Maritime General", "Marine Engineering", "Marine Transportation & Navigation", "Marine Science & Oceanography"],
+    "marine": ["Marine", "Marine Engineering", "Marine Transportation & Navigation", "Marine Science & Oceanography", "Maritime", "Maritime & Seafaring", "Maritime General"],
+    "marine_transport": ["Marine Transportation & Navigation", "Maritime & Seafaring", "Maritime General", "Marine Engineering"],
+    "marine_transport": ["Marine Transportation & Navigation", "Maritime & Seafaring", "Maritime General", "Marine Engineering"],
+    "marine_transportation": ["Marine Transportation & Navigation", "Maritime & Seafaring"],
+    "marine_engineering": ["Marine Engineering", "Maritime"],
+    "marine_science": ["Marine Science & Oceanography", "Marine"],
+    "oceanography": ["Marine Science & Oceanography"],
+    "seafaring": ["Maritime & Seafaring", "Maritime", "Marine"],
     "aviation": ["Aviation & Aerospace", "Aeronautical"],
     # Hospitality
     "tourism": ["Tourism & Hospitality"],
@@ -4221,6 +4231,10 @@ INTEREST_CATEGORY_KEYWORDS = {
     "occupational_therapy": ["Occupational Therapy"],
     "medical_tech": ["Medical Technology & Lab Science"],
     "lab_science": ["Medical Technology & Lab Science"],
+    "laboratory": ["Laboratory Research", "Science & Research", "Medical Technology & Lab Science"],
+    "laboratory_work": ["Laboratory Research", "Science & Research"],
+    "machine_operation": ["Mechanical Systems", "Industrial & Manufacturing", "Engineering General"],
+    "machine": ["Mechanical Systems", "Industrial & Manufacturing"],
     "dietetics": ["Nutrition & Dietetics"],
     "pharmaceutical": ["Pharmacy & Pharmaceutical Science"],
     "rehabilitation": ["Physical Therapy & Rehabilitation"],
@@ -5388,6 +5402,58 @@ class AdaptiveAssessmentEngine:
             return matching_options >= 2
         return matching_options >= 1
 
+    def _has_primary_trait_alignment(self, question: dict, session: AdaptiveSession) -> bool:
+        """
+        STRICT check: a question is aligned only if its options' PRIMARY traits
+        (the highest-weight trait per option) overlap with the user's dominant
+        traits or profile seed traits.
+
+        This is stricter than _has_dominant_trait_overlap because it ignores
+        secondary/tangential trait matches. For example, a Writing & Literature
+        question whose primary trait is Writing-Comm (not in the user's profile)
+        will NOT pass even if it has Creative-Skill as a secondary trait.
+
+        Requires at least 2 options (for questions with 6+ options) or 1 option
+        (for smaller questions) to have their primary trait in the dominant set.
+        """
+        dominant = self._get_dominant_traits(session, top_n=8)
+        if not dominant:
+            return True  # No dominant traits yet
+
+        # Always allow profile-category questions
+        qid = question.get('question_id')
+        if qid and qid in session.profile_relevant_qids:
+            return True
+
+        # Also check profile seed traits (covers early rounds before accumulation)
+        all_ref_traits = dominant | set(session.profile_seed_traits)
+
+        options = question.get('options', [])
+        matching_primary = 0
+        substantive_count = 0
+        for opt in options:
+            if self._is_rejection_option(opt):
+                continue
+            substantive_count += 1
+            trait_tags = opt.get('trait_tags', {})
+            if isinstance(trait_tags, dict) and trait_tags:
+                # Get the primary trait (highest weight)
+                primary_trait = max(trait_tags, key=trait_tags.get)
+                if primary_trait in all_ref_traits:
+                    matching_primary += 1
+            elif isinstance(trait_tags, list) and trait_tags:
+                # First in list is primary
+                if trait_tags[0] in all_ref_traits:
+                    matching_primary += 1
+            else:
+                trait = opt.get('trait_tag')
+                if trait and trait in all_ref_traits:
+                    matching_primary += 1
+
+        if substantive_count >= 6:
+            return matching_primary >= 2
+        return matching_primary >= 1
+
     def _has_trait_continuity(self, question: dict, session: AdaptiveSession) -> bool:
         """
         Check if a question has at least one option that shares a trait with
@@ -5695,16 +5761,17 @@ class AdaptiveAssessmentEngine:
         # "Database & Information" still match "Database & Information Systems".
         profile_relevant_qids = set()
         if profile_categories:
-            min_profile_match_score = 1
-            if any(len(self._normalize_category_name(cat_kw).replace("&", " ").replace("/", " ").replace("-", " ").split()) >= 2 for cat_kw in profile_categories):
-                min_profile_match_score = 2
+            # Per-keyword threshold: each keyword must have ALL its tokens
+            # present in the category.  _category_match_score already returns
+            # len(keyword_tokens) on a full subset match and 0 otherwise,
+            # so threshold = 1 is sufficient (a 1-token keyword like "Maritime"
+            # scores 1 when matched, a 3-token keyword scores 3).
             for qid, question in self.questions.items():
                 q_cat = question.get('category', '')
-                best_score = 0
                 for cat_kw in profile_categories:
-                    best_score = max(best_score, self._category_match_score(q_cat, cat_kw))
-                if best_score >= min_profile_match_score:
-                    profile_relevant_qids.add(qid)
+                    if self._category_match_score(q_cat, cat_kw) >= 1:
+                        profile_relevant_qids.add(qid)
+                        break
         
         session.profile_categories = profile_categories
         session.profile_relevant_qids = profile_relevant_qids
@@ -5880,11 +5947,29 @@ class AdaptiveAssessmentEngine:
         profile_qids = session.profile_relevant_qids
         
         def _is_relevant_question(qid):
-            """Check if a question belongs to at least one profile-relevant branch."""
+            """HARD GATE: question must belong to a relevant branch AND be
+            in the user's profile-category pool when profile data exists.
+
+            Branch-level filtering alone is too coarse (e.g. the 'creative'
+            branch includes Writing, Music, Theater, Fashion — all irrelevant
+            for a user who only selected Arts & Design + Animation + Photography).
+            Trait-based fallbacks also fail because generic traits like
+            Creative-Skill appear on unrelated questions (e.g. Writing & Literature).
+
+            A question passes if:
+              1. It belongs to at least one profile-relevant branch, AND
+              2. It is in the profile-category pool (profile_relevant_qids).
+            When no profile data exists, branch check alone suffices.
+            """
             node = QUESTION_TREE_NODES.get(qid)
             if not node:
-                return False  # Unclassified questions must not bypass relevance filtering
-            return bool(set(node["branches"]) & relevant)
+                return False  # Unclassified questions must not bypass filtering
+            if not set(node["branches"]) & relevant:
+                return False  # Wrong branch entirely
+            # If user has profile data, require profile-category match
+            if profile_qids:
+                return qid in profile_qids
+            return True  # No profile data — branch check alone suffices
         
         def _passes_trait_continuity(qid):
             """Check if question has trait overlap with user's accumulated/profile traits."""
@@ -6087,7 +6172,7 @@ class AdaptiveAssessmentEngine:
                     if session.current_category_focus:
                         sorted_entry = [q for q in sorted_entry if _matches_current_category_focus(q)] + [q for q in sorted_entry if not _matches_current_category_focus(q)]
                     for eq in sorted_entry:
-                        if eq not in asked and eq in self.questions and _is_allowed_profile_question(eq):
+                        if eq not in asked and eq in self.questions and _is_relevant_question(eq) and _is_allowed_profile_question(eq):
                             selected_qid = eq
                             selection_reason = f"new domain entry ({domain})"
                             session.chain_queue = [q for q in sorted_entry if q != eq and q not in asked]
@@ -6111,6 +6196,9 @@ class AdaptiveAssessmentEngine:
                     continue
                 if not _is_allowed_profile_question(qid):
                     continue
+                # HARD GATE: must pass full relevance + alignment check
+                if not _is_relevant_question(qid):
+                    continue
                 node = QUESTION_TREE_NODES.get(qid)
                 if not node:
                     continue
@@ -6118,10 +6206,6 @@ class AdaptiveAssessmentEngine:
                 q_branches = set(node["branches"])
                 options = question.get('options', [])
                 if not options:
-                    continue
-                
-                # STRICT: Only consider questions that touch at least one relevant branch
-                if not q_branches & relevant:
                     continue
                 
                 # Skip heavily rejected questions
@@ -6153,6 +6237,13 @@ class AdaptiveAssessmentEngine:
                 # with the user's accumulated trait profile and profile seeds
                 profile_relevance = self._question_profile_relevance_score(question, session)
                 score += profile_relevance * 10.0  # Strong bonus for trait-continuous questions
+                
+                # DOMINANT TRAIT OVERLAP PENALTY — questions with NO overlap with
+                # the user's dominant traits get a heavy penalty to push them out of
+                # contention. Prevents "Writing & Literature" from appearing when
+                # the user's profile is about Programming/Game Dev/Visual Arts.
+                if not self._has_dominant_trait_overlap(question, session):
+                    score -= 25.0
                 
                 # Branch affinity — boost questions whose branches overlap with profile
                 relevant_overlap = len(q_branches & relevant)
@@ -6202,14 +6293,30 @@ class AdaptiveAssessmentEngine:
             
             if candidates:
                 candidates.sort(reverse=True, key=lambda x: x[0])
-                # Prefer a candidate with trait continuity
+                # Prefer a candidate with BOTH trait continuity AND dominant trait overlap
                 selected_qid = None
                 for c_score, c_qid in candidates:
-                    if _passes_trait_continuity(c_qid):
+                    c_question = self.questions.get(c_qid)
+                    if c_question and self._has_dominant_trait_overlap(c_question, session) and _passes_trait_continuity(c_qid):
                         selected_qid = c_qid
                         selection_reason = f"fallback scoring with continuity (score={c_score:.1f})"
                         break
-                # If no trait-continuous candidate, take the top scorer anyway
+                # Second pass: relax to trait continuity only (without dominant overlap)
+                if not selected_qid:
+                    for c_score, c_qid in candidates:
+                        if _passes_trait_continuity(c_qid):
+                            selected_qid = c_qid
+                            selection_reason = f"fallback scoring with trait continuity (score={c_score:.1f})"
+                            break
+                # Third pass: relax to dominant trait overlap only
+                if not selected_qid:
+                    for c_score, c_qid in candidates:
+                        c_question = self.questions.get(c_qid)
+                        if c_question and self._has_dominant_trait_overlap(c_question, session):
+                            selected_qid = c_qid
+                            selection_reason = f"fallback scoring with dominant overlap (score={c_score:.1f})"
+                            break
+                # Last resort: take the top scorer
                 if not selected_qid:
                     selected_qid = candidates[0][1]
                     selection_reason = f"fallback scoring (score={candidates[0][0]:.1f})"
@@ -6229,12 +6336,14 @@ class AdaptiveAssessmentEngine:
                     print(f"[SAFETY] Trait-continuous fallback at round {round_num}")
                     break
         
-        # Last resort: any unanswered question to avoid premature end
+        # Last resort: any unanswered RELEVANT question to avoid premature end
+        # Do NOT serve questions from unrelated branches — better to end the
+        # assessment early than ask about agriculture for a programming student.
         if not selected_qid and session.round_number < session.max_questions:
             for qid, question in self.questions.items():
-                if qid not in asked and _is_relevant_question(qid) and _is_allowed_profile_question(qid):
+                if qid not in asked and _is_relevant_question(qid):
                     selected_qid = qid
-                    selection_reason = "safety net (last resort)"
+                    selection_reason = "safety net (last resort, relevant)"
                     print(f"[SAFETY] Last resort fallback at round {round_num}")
                     break
         
@@ -6415,18 +6524,40 @@ class AdaptiveAssessmentEngine:
                     replacement_found = True
                     print(f"[DEDUP] Swapped Q (profile priority, relaxed category) -> Q{alt_qid}")
                     break
-            # Pass 2: widen to ANY unanswered question — only when profile lock is OFF
+            # Pass 2: widen to relevant unanswered questions — only when profile lock is OFF
+            # IMPORTANT: Still enforce branch relevance AND trait continuity to
+            # prevent unrelated topics (e.g. Writing & Literature for a
+            # Programming/Arts profile)
             if not replacement_found and not strict_profile_lock:
+                # Pass 2a: prefer trait-continuous + relevant
                 for alt_qid, alt_q in self.questions.items():
                     if alt_qid in asked or alt_qid == selected_qid:
+                        continue
+                    if not _is_relevant_question(alt_qid):
+                        continue
+                    if not _passes_trait_continuity(alt_qid):
                         continue
                     if _is_dup(alt_q):
                         continue
                     selected_qid = alt_qid
                     best_question = alt_q
                     replacement_found = True
-                    print(f"[DEDUP] Swapped Q (widened) -> Q{alt_qid}")
+                    print(f"[DEDUP] Swapped Q (widened, trait-continuous) -> Q{alt_qid}")
                     break
+                # Pass 2b: relax to relevant-only if no trait-continuous match
+                if not replacement_found:
+                    for alt_qid, alt_q in self.questions.items():
+                        if alt_qid in asked or alt_qid == selected_qid:
+                            continue
+                        if not _is_relevant_question(alt_qid):
+                            continue
+                        if _is_dup(alt_q):
+                            continue
+                        selected_qid = alt_qid
+                        best_question = alt_q
+                        replacement_found = True
+                        print(f"[DEDUP] Swapped Q (widened, relevant) -> Q{alt_qid}")
+                        break
             # Pass 3: if still no replacement, skip and recurse (depth limit)
             if not replacement_found:
                 _depth = getattr(session, '_dedup_depth', 0)
@@ -6477,7 +6608,7 @@ class AdaptiveAssessmentEngine:
                         for dom in under_budget_domains:
                             entry_qs = DOMAIN_ENTRY_QUESTIONS.get(dom, [])
                             for eq in entry_qs:
-                                if eq not in session.answered_questions and eq not in session.excluded_question_ids and eq in self.questions:
+                                if eq not in session.answered_questions and eq not in session.excluded_question_ids and eq in self.questions and _is_relevant_question(eq):
                                     selected_qid = eq
                                     best_question = self.questions[eq]
                                     node = QUESTION_TREE_NODES.get(selected_qid, {})
