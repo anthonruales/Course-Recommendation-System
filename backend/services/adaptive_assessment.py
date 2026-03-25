@@ -4428,6 +4428,28 @@ QUESTION_TREE_NODES[5363] = {"level": 2, "weight": 2.0, "branches": ["education"
 QUESTION_TREE_NODES[5364] = {"level": 2, "weight": 2.0, "branches": ["healthcare"]}                          # Nursing & Emergency Health
 QUESTION_TREE_NODES[5365] = {"level": 2, "weight": 2.0, "branches": ["creative", "public_service"]}          # Development Communication
 
+# Batch 35 – Q5366-Q5385
+QUESTION_TREE_NODES[5366] = {"level": 2, "weight": 2.0, "branches": ["healthcare", "science"]}               # Pharmacy & Pharmaceutical Science
+QUESTION_TREE_NODES[5367] = {"level": 2, "weight": 2.0, "branches": ["healthcare", "science"]}               # Nutrition & Dietetics
+QUESTION_TREE_NODES[5368] = {"level": 2, "weight": 2.0, "branches": ["science", "public_service"]}           # Forensic Science & Criminology
+QUESTION_TREE_NODES[5369] = {"level": 2, "weight": 2.0, "branches": ["healthcare"]}                          # Physical Therapy & Rehabilitation
+QUESTION_TREE_NODES[5370] = {"level": 2, "weight": 2.0, "branches": ["public_service"]}                      # Social Work & Community Services
+QUESTION_TREE_NODES[5371] = {"level": 2, "weight": 2.0, "branches": ["healthcare", "science"]}               # Medical Technology & Laboratory
+QUESTION_TREE_NODES[5372] = {"level": 2, "weight": 2.0, "branches": ["public_service", "business"]}          # Public Administration & Governance
+QUESTION_TREE_NODES[5373] = {"level": 2, "weight": 2.0, "branches": ["business", "creative"]}                # Hospitality & Hotel Management
+QUESTION_TREE_NODES[5374] = {"level": 2, "weight": 2.0, "branches": ["public_service"]}                      # Legal Studies & Law
+QUESTION_TREE_NODES[5375] = {"level": 2, "weight": 2.0, "branches": ["creative", "engineering"]}             # Architecture & Spatial Design
+QUESTION_TREE_NODES[5376] = {"level": 2, "weight": 2.0, "branches": ["creative", "science"]}                 # Culinary Arts & Food Science
+QUESTION_TREE_NODES[5377] = {"level": 2, "weight": 2.0, "branches": ["engineering", "technology"]}           # Electrical Engineering & Renewable Energy
+QUESTION_TREE_NODES[5378] = {"level": 2, "weight": 2.0, "branches": ["business", "science"]}                 # Tourism & Ecotourism Management
+QUESTION_TREE_NODES[5379] = {"level": 2, "weight": 2.0, "branches": ["technology"]}                          # Software Engineering & Web Development
+QUESTION_TREE_NODES[5380] = {"level": 2, "weight": 2.0, "branches": ["science", "agriculture"]}              # Environmental Science & Ecology
+QUESTION_TREE_NODES[5381] = {"level": 2, "weight": 2.0, "branches": ["healthcare", "public_service"]}        # Nursing & Public Health
+QUESTION_TREE_NODES[5382] = {"level": 2, "weight": 2.0, "branches": ["engineering", "technology"]}           # Mechanical Engineering & Automotive
+QUESTION_TREE_NODES[5383] = {"level": 2, "weight": 2.0, "branches": ["education", "public_service"]}         # Education & Inclusive Learning
+QUESTION_TREE_NODES[5384] = {"level": 2, "weight": 2.0, "branches": ["technology"]}                          # Cybersecurity & Information Assurance
+QUESTION_TREE_NODES[5385] = {"level": 2, "weight": 2.0, "branches": ["engineering", "public_service"]}       # Maritime & Naval Architecture
+
 # ── AUTO-CLASSIFY UNCLASSIFIED QUESTIONS ────────────────────────────
 # Many enhanced questions are not explicitly added to QUESTION_TREE_NODES.
 # Without classification, _is_relevant_question() cannot filter them,
@@ -5772,6 +5794,34 @@ class AdaptiveAssessmentEngine:
                     if self._category_match_score(q_cat, cat_kw) >= 1:
                         profile_relevant_qids.add(qid)
                         break
+
+        # ── TRAIT-BASED POOL EXPANSION ──
+        # Category keyword matching misses newer questions with different
+        # category naming conventions.  Also include branch-relevant questions
+        # whose option traits overlap with the user's profile traits — this
+        # pulls Batch 15+ scenario-style questions into the candidate pool.
+        _profile_trait_set = set(profile_ranked[:10]) if profile_ranked else set()
+        if _profile_trait_set and relevant_domains:
+            for qid, question in self.questions.items():
+                if qid in profile_relevant_qids:
+                    continue
+                node = QUESTION_TREE_NODES.get(qid)
+                if not node or not set(node.get("branches", [])) & relevant_domains:
+                    continue
+                # Collect traits this question covers
+                _q_traits = set()
+                for _opt in question.get("options", []):
+                    _tt = _opt.get("trait_tags", {})
+                    if isinstance(_tt, dict):
+                        for _t, _w in _tt.items():
+                            if isinstance(_w, (int, float)) and _w >= 0.5:
+                                _q_traits.add(_t)
+                    elif isinstance(_tt, list):
+                        _q_traits.update(_tt)
+                # Require at least 2 profile traits present to avoid
+                # overly loose matching on single generic traits
+                if len(_q_traits & _profile_trait_set) >= 2:
+                    profile_relevant_qids.add(qid)
         
         session.profile_categories = profile_categories
         session.profile_relevant_qids = profile_relevant_qids
@@ -5947,29 +5997,19 @@ class AdaptiveAssessmentEngine:
         profile_qids = session.profile_relevant_qids
         
         def _is_relevant_question(qid):
-            """HARD GATE: question must belong to a relevant branch AND be
-            in the user's profile-category pool when profile data exists.
+            """GATE: question must belong to a relevant branch.
 
-            Branch-level filtering alone is too coarse (e.g. the 'creative'
-            branch includes Writing, Music, Theater, Fashion — all irrelevant
-            for a user who only selected Arts & Design + Animation + Photography).
-            Trait-based fallbacks also fail because generic traits like
-            Creative-Skill appear on unrelated questions (e.g. Writing & Literature).
-
-            A question passes if:
-              1. It belongs to at least one profile-relevant branch, AND
-              2. It is in the profile-category pool (profile_relevant_qids).
-            When no profile data exists, branch check alone suffices.
+            Profile-category matching (profile_relevant_qids) is used as a
+            PREFERENCE in the multi-pass selection logic, not as a hard gate
+            here. This ensures newer batch questions with scenario-style
+            categories are reachable through the wider passes.
             """
             node = QUESTION_TREE_NODES.get(qid)
             if not node:
                 return False  # Unclassified questions must not bypass filtering
             if not set(node["branches"]) & relevant:
                 return False  # Wrong branch entirely
-            # If user has profile data, require profile-category match
-            if profile_qids:
-                return qid in profile_qids
-            return True  # No profile data — branch check alone suffices
+            return True
         
         def _passes_trait_continuity(qid):
             """Check if question has trait overlap with user's accumulated/profile traits."""
@@ -6013,7 +6053,8 @@ class AdaptiveAssessmentEngine:
             allow_chain = trait_is_dominant or len(session.answered_questions) < 5
             
             if allow_chain:
-                followups = TRAIT_FOLLOWUP_MAP[session.last_answer_trait]
+                followups = list(TRAIT_FOLLOWUP_MAP[session.last_answer_trait])
+                random.shuffle(followups)
                 # FIRST PASS: if the user is already consistent in a category family,
                 # keep the follow-up in that same category before widening out.
                 if profile_qids and session.current_category_focus:
@@ -6036,7 +6077,7 @@ class AdaptiveAssessmentEngine:
                                 session.current_chain_trait = session.last_answer_trait
                                 break
                 # SECOND PASS: allow any relevant follow-up
-                if not selected_qid and not profile_qids:
+                if not selected_qid:
                     for fq in followups:
                         if fq not in asked and fq in self.questions and _is_relevant_question(fq):
                             fq_question = self.questions[fq]
@@ -6052,7 +6093,9 @@ class AdaptiveAssessmentEngine:
         # --- Step 1B: If no follow-up found, try the pre-loaded chain_queue ---
         if not force_domain_rotation and not selected_qid and session.chain_queue:
             ordered_chain = list(session.chain_queue)
+            random.shuffle(ordered_chain)
             if session.current_category_focus:
+                # Re-sort: category-focus first, rest after (both halves already shuffled)
                 ordered_chain = [q for q in ordered_chain if _matches_current_category_focus(q)] + [q for q in ordered_chain if not _matches_current_category_focus(q)]
             for cq in ordered_chain:
                 if cq not in asked and cq in self.questions and _is_relevant_question(cq) and _is_allowed_profile_question(cq):
@@ -6079,6 +6122,7 @@ class AdaptiveAssessmentEngine:
                     continue
                 focused_qids.append(qid)
 
+            random.shuffle(focused_qids)
             for fq in focused_qids:
                 fq_question = self.questions[fq]
                 if self._has_dominant_trait_overlap(fq_question, session):
@@ -6105,7 +6149,9 @@ class AdaptiveAssessmentEngine:
             if focus_only:
                 for trait, score in sorted_traits:
                     if trait in TRAIT_FOLLOWUP_MAP:
-                        for fq in TRAIT_FOLLOWUP_MAP[trait]:
+                        _p2_followups = list(TRAIT_FOLLOWUP_MAP[trait])
+                        random.shuffle(_p2_followups)
+                        for fq in _p2_followups:
                             if fq not in asked and fq in self.questions and _is_relevant_question(fq) and _matches_current_category_focus(fq) and _is_allowed_profile_question(fq):
                                 fq_question = self.questions[fq]
                                 if self._has_dominant_trait_overlap(fq_question, session):
@@ -6118,7 +6164,9 @@ class AdaptiveAssessmentEngine:
             if profile_qids:
                 for trait, score in sorted_traits:
                     if trait in TRAIT_FOLLOWUP_MAP:
-                        for fq in TRAIT_FOLLOWUP_MAP[trait]:
+                        _p2b_followups = list(TRAIT_FOLLOWUP_MAP[trait])
+                        random.shuffle(_p2b_followups)
+                        for fq in _p2b_followups:
                             if fq not in asked and fq in self.questions and _is_relevant_question(fq) and _is_profile_category_question(fq):
                                 fq_question = self.questions[fq]
                                 if self._has_dominant_trait_overlap(fq_question, session):
@@ -6129,10 +6177,12 @@ class AdaptiveAssessmentEngine:
                     if selected_qid:
                         break
             # THEN: allow any relevant follow-up
-            if not selected_qid and not profile_qids:
+            if not selected_qid:
                 for trait, score in sorted_traits:
                     if trait in TRAIT_FOLLOWUP_MAP:
-                        for fq in TRAIT_FOLLOWUP_MAP[trait]:
+                        _p2c_followups = list(TRAIT_FOLLOWUP_MAP[trait])
+                        random.shuffle(_p2c_followups)
+                        for fq in _p2c_followups:
                             if fq not in asked and fq in self.questions and _is_relevant_question(fq):
                                 fq_question = self.questions[fq]
                                 if self._has_dominant_trait_overlap(fq_question, session):
@@ -6169,6 +6219,7 @@ class AdaptiveAssessmentEngine:
                             sorted_entry = entry_qs
                     else:
                         sorted_entry = entry_qs
+                    random.shuffle(sorted_entry)
                     if session.current_category_focus:
                         sorted_entry = [q for q in sorted_entry if _matches_current_category_focus(q)] + [q for q in sorted_entry if not _matches_current_category_focus(q)]
                     for eq in sorted_entry:
@@ -6329,23 +6380,21 @@ class AdaptiveAssessmentEngine:
         
         if not selected_qid and session.round_number < session.max_questions:
             # First pass: look for any unanswered question with trait continuity
-            for qid, question in self.questions.items():
-                if qid not in asked and _passes_trait_continuity(qid) and _is_relevant_question(qid) and _is_allowed_profile_question(qid):
-                    selected_qid = qid
-                    selection_reason = "safety net (trait-continuous)"
-                    print(f"[SAFETY] Trait-continuous fallback at round {round_num}")
-                    break
+            _safety_candidates = [qid for qid in self.questions if qid not in asked and _passes_trait_continuity(qid) and _is_relevant_question(qid) and _is_allowed_profile_question(qid)]
+            if _safety_candidates:
+                selected_qid = random.choice(_safety_candidates)
+                selection_reason = "safety net (trait-continuous)"
+                print(f"[SAFETY] Trait-continuous fallback at round {round_num}")
         
         # Last resort: any unanswered RELEVANT question to avoid premature end
         # Do NOT serve questions from unrelated branches — better to end the
         # assessment early than ask about agriculture for a programming student.
         if not selected_qid and session.round_number < session.max_questions:
-            for qid, question in self.questions.items():
-                if qid not in asked and _is_relevant_question(qid):
-                    selected_qid = qid
-                    selection_reason = "safety net (last resort, relevant)"
-                    print(f"[SAFETY] Last resort fallback at round {round_num}")
-                    break
+            _last_resort = [qid for qid in self.questions if qid not in asked and _is_relevant_question(qid)]
+            if _last_resort:
+                selected_qid = random.choice(_last_resort)
+                selection_reason = "safety net (last resort, relevant)"
+                print(f"[SAFETY] Last resort fallback at round {round_num}")
         
         # ═══════════════════════════════════════════════════════════════════
         # NO QUESTION AVAILABLE — finalize
