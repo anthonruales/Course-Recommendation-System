@@ -112,6 +112,7 @@ class AdaptiveSession:
     profile_relevant_qids: Set[int] = field(default_factory=set)  # QIDs from profile-matching categories
     category_history: List[str] = field(default_factory=list)     # Recently answered question categories
     current_category_focus: str = ""                            # Dominant category thread (e.g. Fine Arts & Painting)
+    blocked_categories: Set[str] = field(default_factory=set)     # Categories blocked by "I'm not interested" (no more Qs from these)
 
 
 # Maps SHS strand to prioritized traits for question selection
@@ -4768,10 +4769,15 @@ class AdaptiveAssessmentEngine:
         }
 
     def _append_none_option(self, question: dict, session: AdaptiveSession) -> dict:
-        """Return a copy of the question with the profile-based 'None' option appended."""
+        """Return a copy of the question with the profile-based 'None' option and 'Not interested' option appended."""
         none_opt = self._build_profile_none_option(session)
+        not_interested_opt = {
+            "option_id": -2,
+            "option_text": "I'm not interested",
+            "trait_tags": {}
+        }
         q_copy = dict(question)
-        q_copy["options"] = list(question.get("options", [])) + [none_opt]
+        q_copy["options"] = list(question.get("options", [])) + [none_opt, not_interested_opt]
         return q_copy
 
     def _get_profile_traits_for_selection(self, selection: str) -> List[str]:
@@ -6027,6 +6033,12 @@ class AdaptiveAssessmentEngine:
             node = QUESTION_TREE_NODES.get(qid)
             if not node:
                 return False  # Unclassified questions must not bypass filtering
+            # BLOCKED CATEGORY GATE: if user clicked "I'm not interested" on a
+            # question from this category, never show this category again.
+            if session.blocked_categories:
+                q_cat = self._normalize_category_name(self.questions.get(qid, {}).get('category', ''))
+                if q_cat and q_cat in session.blocked_categories:
+                    return False
             q_branches = set(node["branches"])
             if not q_branches & relevant:
                 return False  # Wrong branch entirely
@@ -6986,6 +6998,9 @@ class AdaptiveAssessmentEngine:
         if chosen_option_id == -1:
             # Special "I don't see what I want" option — build dynamically from profile
             chosen_option = self._build_profile_none_option(session)
+        elif chosen_option_id == -2:
+            # Special "I'm not interested" option — penalize category and block it
+            chosen_option = {"option_id": -2, "option_text": "I'm not interested", "trait_tags": {}}
         else:
             for opt in question.get('options', []):
                 if opt.get('option_id') == chosen_option_id:
@@ -7030,6 +7045,93 @@ class AdaptiveAssessmentEngine:
         # The special "I don't see what I want" option (option_id == -1) is NOT a rejection.
         # It carries profile-derived traits and should be processed like a normal answer.
         is_profile_none_option = (chosen_option_id == -1)
+        
+        # The special "I'm not interested" option (option_id == -2) blocks the entire category.
+        is_not_interested_option = (chosen_option_id == -2)
+        
+        if is_not_interested_option:
+            # Block this question's category — no more questions from it during this assessment
+            blocked_cat = self._normalize_category_name(question.get('category', ''))
+            raw_cat = question.get('category', '').lower()
+            
+            # Track rejection/block data for reversal
+            rejection_data = {"rejected_topics": [], "course_penalties": {}, "blocked_category": blocked_cat}
+            
+            if blocked_cat and blocked_cat not in session.blocked_categories:
+                session.blocked_categories.add(blocked_cat)
+                print(f"[NOT_INTERESTED] Blocked category: '{blocked_cat}'")
+            
+            # Penalize courses associated with this category's trait domain
+            domain_trait = CATEGORY_TRAIT_DOMAIN.get(raw_cat, "broad")
+            if domain_trait and domain_trait != "broad":
+                rejection_data["rejected_topics"].append(domain_trait)
+                if domain_trait not in session.rejected_topics:
+                    session.rejected_topics.add(domain_trait)
+                for course_name, course_traits in self.course_traits.items():
+                    if domain_trait in course_traits:
+                        session.course_scores[course_name] = session.course_scores.get(course_name, 50.0) - 8
+                        rejection_data["course_penalties"][course_name] = rejection_data["course_penalties"].get(course_name, 0) + 8
+            else:
+                # For "broad" categories, penalize based on the majority trait of the question's options
+                majority_trait = self._determine_rejected_topic(question, chosen_option)
+                if majority_trait:
+                    rejection_data["rejected_topics"].append(majority_trait)
+                    if majority_trait not in session.rejected_topics:
+                        session.rejected_topics.add(majority_trait)
+                    for course_name, course_traits in self.course_traits.items():
+                        if majority_trait in course_traits:
+                            session.course_scores[course_name] = session.course_scores.get(course_name, 50.0) - 8
+                            rejection_data["course_penalties"][course_name] = rejection_data["course_penalties"].get(course_name, 0) + 8
+            
+            # Store for reversal, record empty trait changes, then skip to end of answer processing
+            session.answer_rejection_data[question_id] = rejection_data
+            session.answer_trait_changes[question_id] = {}
+            print(f"[NOT_INTERESTED] No traits added — user not interested in this category")
+            
+            # Skip normal trait/rejection processing — jump directly to round increment and next question
+            session.round_number += 1
+            session.confidence = self._calculate_confidence(session)
+            
+            top_courses = self._get_affinity_adjusted_preview(session)
+            
+            if self._should_stop(session):
+                self._finalize_session(session)
+                return {
+                    "status": "complete",
+                    "is_complete": True,
+                    "session_id": session_id,
+                    "recommendations": session.final_recommendations,
+                    "confidence": round(session.confidence * 100, 1),
+                    "traits_discovered": len(session.trait_scores)
+                }
+            
+            next_q = self.get_next_question(session_id)
+            if not next_q:
+                self._finalize_session(session)
+                return {
+                    "status": "complete",
+                    "is_complete": True,
+                    "session_id": session_id,
+                    "recommendations": session.final_recommendations,
+                    "confidence": round(session.confidence * 100, 1),
+                    "traits_discovered": len(session.trait_scores)
+                }
+            
+            return {
+                "status": "continue",
+                "is_complete": False,
+                "session_id": session_id,
+                "current_round": session.round_number,
+                "total_max_rounds": session.max_questions,
+                "next_question": next_q,
+                "trait_recorded": None,
+                "all_traits": list(session.trait_scores.keys()),
+                "courses_remaining": len(session.active_courses),
+                "confidence": round(session.confidence * 100, 1),
+                "traits_discovered": len(session.trait_scores),
+                "can_finish_early": session.round_number >= session.min_questions,
+                "top_courses_preview": top_courses
+            }
         
         # Check if user rejected this topic (e.g., "none", "not interested")
         option_text = chosen_option.get('option_text', '').lower()
@@ -7892,6 +7994,12 @@ class AdaptiveAssessmentEngine:
             for topic in rejection_data.get("rejected_topics", []):
                 session.rejected_topics.discard(topic)
                 print(f"[PREVIOUS] Removed rejected topic: {topic}")
+            
+            # Remove blocked category if this was a "not interested" answer
+            blocked_cat = rejection_data.get("blocked_category", "")
+            if blocked_cat:
+                session.blocked_categories.discard(blocked_cat)
+                print(f"[PREVIOUS] Unblocked category: '{blocked_cat}'")
             
             # Reverse course penalties
             for course_name, penalty in rejection_data.get("course_penalties", {}).items():

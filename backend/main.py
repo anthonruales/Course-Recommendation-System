@@ -3024,7 +3024,7 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
             # Always store the raw JSON fallback on the TestAttempt itself,
             # so answers are never lost even when FK inserts fail.
             try:
-                clean_answers = {str(k): v for k, v in answered_questions.items() if v != -1}
+                clean_answers = {str(k): v for k, v in answered_questions.items() if v not in (-1, -2)}
                 test_attempt.answered_questions_json = clean_answers
                 db.commit()
                 print(f"[OK] Stored {len(clean_answers)} answers as JSON fallback on attempt {attempt_id}")
@@ -3038,6 +3038,9 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
                     if option_id == -1:
                         _log(f"skipping virtual option for q_id={question_id}")
                         continue  # virtual "I don't see what I want" option — no DB row
+                    if option_id == -2:
+                        _log(f"skipping 'not interested' option for q_id={question_id}")
+                        continue  # virtual "I'm not interested" option — no DB row
                     db.add(models.StudentAnswer(
                         attempt_id=attempt_id,
                         question_id=question_id,
