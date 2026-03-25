@@ -7088,49 +7088,40 @@ class AdaptiveAssessmentEngine:
             session.answer_trait_changes[question_id] = {}
             print(f"[NOT_INTERESTED] No traits added — user not interested in this category")
             
-            # Skip normal trait/rejection processing — jump directly to round increment and next question
-            session.round_number += 1
+            # Purge chain_queue of questions belonging to the blocked category
+            # so the next question selection replaces them with relevant alternatives
+            if session.chain_queue and session.blocked_categories:
+                before_len = len(session.chain_queue)
+                session.chain_queue = [
+                    q for q in session.chain_queue
+                    if self._normalize_category_name(self.questions.get(q, {}).get('category', '')) not in session.blocked_categories
+                ]
+                purged = before_len - len(session.chain_queue)
+                if purged:
+                    print(f"[NOT_INTERESTED] Purged {purged} blocked-category questions from chain_queue")
+            
+            # Clear current chain trait so the engine doesn't try to follow up
+            # on the rejected category's topic
+            session.current_chain_trait = ""
+            session.last_answer_trait = ""
+            
             session.confidence = self._calculate_confidence(session)
             
             top_courses = self._get_affinity_adjusted_preview(session)
             
-            if self._should_stop(session):
-                self._finalize_session(session)
-                return {
-                    "status": "complete",
-                    "is_complete": True,
-                    "session_id": session_id,
-                    "recommendations": session.final_recommendations,
-                    "confidence": round(session.confidence * 100, 1),
-                    "traits_discovered": len(session.trait_scores)
-                }
-            
-            next_q = self.get_next_question(session_id)
-            if not next_q:
-                self._finalize_session(session)
-                return {
-                    "status": "complete",
-                    "is_complete": True,
-                    "session_id": session_id,
-                    "recommendations": session.final_recommendations,
-                    "confidence": round(session.confidence * 100, 1),
-                    "traits_discovered": len(session.trait_scores)
-                }
-            
+            # Return in the same format as the normal answer flow.
+            # Do NOT call get_next_question here — main.py will call it,
+            # which correctly increments round_number exactly once.
             return {
                 "status": "continue",
-                "is_complete": False,
                 "session_id": session_id,
-                "current_round": session.round_number,
-                "total_max_rounds": session.max_questions,
-                "next_question": next_q,
+                "round": session.round_number,
                 "trait_recorded": None,
                 "all_traits": list(session.trait_scores.keys()),
                 "courses_remaining": len(session.active_courses),
                 "confidence": round(session.confidence * 100, 1),
-                "traits_discovered": len(session.trait_scores),
-                "can_finish_early": session.round_number >= session.min_questions,
-                "top_courses_preview": top_courses
+                "top_courses_preview": top_courses,
+                "traits_discovered": len(session.trait_scores)
             }
         
         # Check if user rejected this topic (e.g., "none", "not interested")
