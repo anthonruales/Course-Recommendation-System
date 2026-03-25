@@ -2224,6 +2224,29 @@ def get_assessment_history(user_id: int, current_user: models.User = Depends(get
         if missed_answers:
             print(f"[WARN] attempt_id={attempt.attempt_id}: {len(missed_answers)} answers could not be resolved. Missed: {missed_answers}")
         
+        # Merge virtual answers (-1, -2) from JSON even when StudentAnswer rows exist
+        if student_answers:
+            json_answers = getattr(attempt, 'answered_questions_json', None)
+            if json_answers and isinstance(json_answers, dict):
+                existing_qids = {qa['question_id'] for qa in answered_questions}
+                for q_id_str, opt_id in json_answers.items():
+                    q_id = int(q_id_str)
+                    opt_id = int(opt_id)
+                    if q_id in existing_qids:
+                        continue
+                    if opt_id == -1 or opt_id == -2:
+                        src_q = _source_questions.get(q_id)
+                        virtual_text = "I don't see what I want" if opt_id == -1 else "I'm not interested"
+                        answered_questions.append({
+                            "question_id": q_id,
+                            "question_text": src_q['question_text'] if src_q else f"Question #{q_id}",
+                            "category": src_q['category'] if src_q else "Assessment",
+                            "chosen_option_id": opt_id,
+                            "chosen_option_text": virtual_text,
+                            "trait_tag": ""
+                        })
+                        answer_count += 1
+
         # If NO StudentAnswer rows found, try the JSON fallback on TestAttempt
         if not answered_questions and not student_answers:
             json_answers = getattr(attempt, 'answered_questions_json', None)
@@ -2231,6 +2254,19 @@ def get_assessment_history(user_id: int, current_user: models.User = Depends(get
                 for q_id_str, opt_id in json_answers.items():
                     q_id = int(q_id_str)
                     opt_id = int(opt_id)
+                    # Handle virtual options ("I don't see what I want" / "I'm not interested")
+                    if opt_id == -1 or opt_id == -2:
+                        src_q = _source_questions.get(q_id)
+                        virtual_text = "I don't see what I want" if opt_id == -1 else "I'm not interested"
+                        answered_questions.append({
+                            "question_id": q_id,
+                            "question_text": src_q['question_text'] if src_q else f"Question #{q_id}",
+                            "category": src_q['category'] if src_q else "Assessment",
+                            "chosen_option_id": opt_id,
+                            "chosen_option_text": virtual_text,
+                            "trait_tag": ""
+                        })
+                        continue
                     src_q = _source_questions.get(q_id)
                     if src_q:
                         src_opt = src_q['options'].get(opt_id, {})
@@ -3024,10 +3060,10 @@ def save_adaptive_session_to_db(db: Session, engine, session_id: str, recommenda
             # Always store the raw JSON fallback on the TestAttempt itself,
             # so answers are never lost even when FK inserts fail.
             try:
-                clean_answers = {str(k): v for k, v in answered_questions.items() if v not in (-1, -2)}
-                test_attempt.answered_questions_json = clean_answers
+                all_answers = {str(k): v for k, v in answered_questions.items()}
+                test_attempt.answered_questions_json = all_answers
                 db.commit()
-                print(f"[OK] Stored {len(clean_answers)} answers as JSON fallback on attempt {attempt_id}")
+                print(f"[OK] Stored {len(all_answers)} answers (incl. virtual) as JSON fallback on attempt {attempt_id}")
             except Exception as json_err:
                 db.rollback()
                 print(f"[WARN] Could not store JSON fallback: {json_err}")
