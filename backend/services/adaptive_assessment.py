@@ -660,11 +660,14 @@ BRANCH_ADJACENCY = {
     "education": ["social", "healthcare", "public_service"],
     "public_service": ["social", "education", "healthcare"],
     "social": ["education", "public_service", "healthcare"],
-    "creative": ["technology", "hospitality", "social"],
+    # Creative is adjacent to technology and business (designers work with both),
+    # NOT hospitality — arts/design/film users should not drift into tourism/hotel Qs.
+    "creative": ["technology", "business", "social"],
     "maritime": ["engineering", "physical", "technology"],
     "agriculture": ["science", "physical", "education"],
     "science": ["healthcare", "technology", "agriculture"],
-    "hospitality": ["business", "creative", "social"],
+    # Hospitality is adjacent to business and social, NOT creative.
+    "hospitality": ["business", "social", "education"],
     "physical": ["healthcare", "maritime", "agriculture"],
 }
 
@@ -855,16 +858,16 @@ QUESTION_TREE_NODES = {
     # Agriculture/Maritime/Hospitality situational
     161: {"level": 2, "weight": 2.0, "branches": ["agriculture", "technology"]},         # Sit - Modern Farm
     162: {"level": 3, "weight": 2.5, "branches": ["maritime", "engineering"]},           # Sit - Ship Engine
-    163: {"level": 2, "weight": 2.0, "branches": ["hospitality", "business", "creative"]},# Sit - Resort Improve
-    164: {"level": 2, "weight": 2.0, "branches": ["hospitality", "creative", "business"]},# Sit - Food Festival
+    163: {"level": 2, "weight": 2.0, "branches": ["hospitality", "business"]},             # Sit - Resort Improve
+    164: {"level": 2, "weight": 2.0, "branches": ["hospitality", "business"]},             # Sit - Food Festival
 
     # ===== CROSS-DOMAIN & PERSONALITY (Weight 1.5-2.0) =====
-    165: {"level": 1, "weight": 1.5, "branches": ["business", "technology", "creative", "hospitality"]},# Online Business
+    165: {"level": 1, "weight": 1.5, "branches": ["business", "technology", "creative"]},         # Online Business
     166: {"level": 1, "weight": 1.5, "branches": ["education", "healthcare", "public_service", "science"]},# Volunteering
     167: {"level": 1, "weight": 1.5, "branches": ["science", "technology", "agriculture", "social"]},# PH Research
     168: {"level": 2, "weight": 2.0, "branches": ["science", "creative", "technology"]}, # Group Research
     169: {"level": 2, "weight": 2.0, "branches": ["public_service", "healthcare", "technology", "physical"]},# Barangay Budget
-    170: {"level": 1, "weight": 1.5, "branches": ["creative", "technology", "hospitality", "science"]},# YouTube Channel
+    170: {"level": 1, "weight": 1.5, "branches": ["creative", "technology", "science"]},   # YouTube Channel
     171: {"level": 1, "weight": 1.5, "branches": ["technology", "healthcare", "creative", "business", "education"]},# Accomplishment
     172: {"level": 1, "weight": 1.5, "branches": ["science", "technology", "creative", "business"]},# School Subjects
     173: {"level": 1, "weight": 1.5, "branches": ["business", "science", "technology", "creative"]},# Leadership Style
@@ -932,9 +935,9 @@ QUESTION_TREE_NODES = {
     # ===== BATCH 3: Massive trait coverage expansion (Q223-Q278) =====
     # Hospitality & Tourism
     223: {"level": 2, "weight": 2.0, "branches": ["hospitality", "business"]},              # Resort Department
-    224: {"level": 2, "weight": 2.0, "branches": ["hospitality", "creative"]},              # Tourism Planning
+    224: {"level": 2, "weight": 2.0, "branches": ["hospitality", "business"]},             # Tourism Planning
     225: {"level": 2, "weight": 2.0, "branches": ["hospitality", "business"]},              # Hotel Management
-    226: {"level": 2, "weight": 2.0, "branches": ["hospitality", "creative", "technology"]},# Tourism Marketing
+    226: {"level": 2, "weight": 2.0, "branches": ["hospitality", "business"]},              # Tourism Marketing
     # Health & Medical
     227: {"level": 2, "weight": 2.0, "branches": ["healthcare", "science"]},                # Hospital Department
     228: {"level": 2, "weight": 2.0, "branches": ["healthcare", "science"]},                # Pharmacy Career
@@ -1084,7 +1087,7 @@ QUESTION_TREE_NODES = {
     423: {"level": 2, "weight": 2.0, "branches": ["law", "public_service"]},
 
     # Gap-fill questions (424-442)
-    424: {"branches": ['hospitality', 'creative'], "depth": 2},
+    424: {"branches": ['hospitality', 'business'], "depth": 2},
     425: {"branches": ['engineering', 'science'], "depth": 2},
     426: {"branches": ['business', 'public_service'], "depth": 2},
     427: {"branches": ['business', 'public_service'], "depth": 2},
@@ -1099,9 +1102,9 @@ QUESTION_TREE_NODES = {
     436: {"branches": ['healthcare', 'public_service'], "depth": 2},
     437: {"branches": ['healthcare', 'science', 'technology'], "depth": 2},
     438: {"branches": ['hospitality', 'business'], "depth": 2},
-    439: {"branches": ['hospitality', 'business', 'creative'], "depth": 2},
+    439: {"branches": ['hospitality', 'business'], "depth": 2},
     440: {"branches": ['hospitality', 'business'], "depth": 2},
-    441: {"branches": ['hospitality', 'creative'], "depth": 2},
+    441: {"branches": ['hospitality', 'business'], "depth": 2},
     442: {"branches": ['hospitality', 'technology'], "depth": 2},
 
     443: {"level": 2, "weight": 1.5, "branches": ['maritime']},
@@ -4437,7 +4440,7 @@ QUESTION_TREE_NODES[5369] = {"level": 2, "weight": 2.0, "branches": ["healthcare
 QUESTION_TREE_NODES[5370] = {"level": 2, "weight": 2.0, "branches": ["public_service"]}                      # Social Work & Community Services
 QUESTION_TREE_NODES[5371] = {"level": 2, "weight": 2.0, "branches": ["healthcare", "science"]}               # Medical Technology & Laboratory
 QUESTION_TREE_NODES[5372] = {"level": 2, "weight": 2.0, "branches": ["public_service", "business"]}          # Public Administration & Governance
-QUESTION_TREE_NODES[5373] = {"level": 2, "weight": 2.0, "branches": ["business", "creative"]}                # Hospitality & Hotel Management
+QUESTION_TREE_NODES[5373] = {"level": 2, "weight": 2.0, "branches": ["hospitality", "business"]}               # Hospitality & Hotel Management
 QUESTION_TREE_NODES[5374] = {"level": 2, "weight": 2.0, "branches": ["public_service"]}                      # Legal Studies & Law
 QUESTION_TREE_NODES[5375] = {"level": 2, "weight": 2.0, "branches": ["creative", "engineering"]}             # Architecture & Spatial Design
 QUESTION_TREE_NODES[5376] = {"level": 2, "weight": 2.0, "branches": ["creative", "science"]}                 # Culinary Arts & Food Science
