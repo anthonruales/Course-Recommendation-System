@@ -414,6 +414,7 @@ const styles = {
 
 function ResultsView({ recommendation, profileData, onRetake, onBack, onViewProfile, onViewActivity }) {
   const [showFeedback, setShowFeedback] = useState(null);
+  const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
   const [exporting, setExporting] = useState(false);
   const [emailSending, setEmailSending] = useState(false);
   const [exportMessage, setExportMessage] = useState(null);
@@ -703,12 +704,14 @@ function ResultsView({ recommendation, profileData, onRetake, onBack, onViewProf
           <p style={styles.footerSubtitle}>Your feedback helps us improve our recommendation engine.</p>
           
           <div style={styles.buttonGroup}>
-            <button 
-              onClick={() => setShowFeedback({ overall: true })}
-              style={styles.primaryBtn}
-            >
-              💬 Provide Feedback
-            </button>
+            {!feedbackSubmitted && (
+              <button 
+                onClick={() => setShowFeedback({ overall: true })}
+                style={styles.primaryBtn}
+              >
+                💬 Provide Feedback
+              </button>
+            )}
             <button onClick={onRetake} style={styles.secondaryBtn}>
               Retake Assessment
             </button>
@@ -723,7 +726,7 @@ function ResultsView({ recommendation, profileData, onRetake, onBack, onViewProf
         <FeedbackForm
           recommendation={showFeedback}
           userId={parseInt(userId) || null}
-          onSubmit={() => {}}
+          onSubmit={() => setFeedbackSubmitted(true)}
           onClose={() => setShowFeedback(null)}
         />
       )}
