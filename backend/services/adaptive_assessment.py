@@ -269,7 +269,7 @@ UNIFIED_PROFILE_TO_TRAITS = {
     "ai": ["Software-Dev", "Data-Analytics", "AI-ML"],
     "cybersecurity": ["Cyber-Defense", "Software-Dev"],
     "robotics": ["Hardware-Systems", "Software-Dev", "Mechanical-Design"],
-    "game_dev": ["Digital-Media", "Software-Dev", "Game-Dev"],
+    "game_dev": ["Game-Dev", "Digital-Media", "Software-Dev"],
     "web_tech": ["Software-Dev", "Web-Dev", "Digital-Media"],
     "multimedia": ["Digital-Media", "Animation-3D", "Creative-Skill"],
     "networking": ["Cloud-Systems", "Hardware-Systems", "Software-Dev"],
@@ -306,7 +306,7 @@ UNIFIED_PROFILE_TO_TRAITS = {
     "film": ["Digital-Media", "Creative-Skill", "Film-Broadcast"],
     "writing": ["Creative-Skill"],
     "photography": ["Visual-Design", "Digital-Media"],
-    "animation": ["Digital-Media", "Visual-Design", "Animation-3D"],
+    "animation": ["Animation-3D", "Digital-Media", "Visual-Design"],
     "fashion": ["Visual-Design", "Creative-Skill", "Spatial-Design"],
     "theater": ["Performing-Arts", "Creative-Skill", "Visual-Design"],
     "advertising_arts": ["Visual-Design", "Marketing-Sales", "Creative-Skill"],
@@ -4308,7 +4308,7 @@ QUESTION_CATEGORY_DOMAIN_HINTS = {
         "Agriculture", "Agribusiness", "Veterinary", "Forestry", "Fisheries", "Aquaculture",
     ],
     "maritime": [
-        "Maritime", "Marine", "Aviation", "Aeronautical & Aerospace", "Marine Engineering",
+        "Maritime", "Marine", "Marine Engineering",
     ],
     "education": [
         "Education & Teaching", "Teaching", "Early Childhood", "Special Education",
@@ -5377,20 +5377,21 @@ class AdaptiveAssessmentEngine:
         (top accumulated traits + profile seeds).
         
         For questions with many options: require at least 2 options to match
-        dominant traits, OR require the question to be in the profile category pool.
+        dominant traits.
         For questions with few options (<=4): require at least 1 match.
         
         This prevents off-topic questions (where only 1 out of 8+ options 
         tangentially matches) from being served.
+        
+        NOTE: profile_relevant_qids membership alone is NOT sufficient to pass
+        this check. The profile pool controls candidate *eligibility*, but
+        dominant trait overlap must still be verified to prevent broad/generic
+        questions from being served just because they were pulled in via
+        trait-based pool expansion.
         """
         dominant = self._get_dominant_traits(session)
         if not dominant:
             return True  # No dominant traits yet — allow anything
-        
-        # If question is in profile category pool, always allow
-        qid = question.get('question_id')
-        if qid and qid in session.profile_relevant_qids:
-            return True
         
         options = question.get('options', [])
         matching_options = 0
@@ -5441,11 +5442,6 @@ class AdaptiveAssessmentEngine:
         dominant = self._get_dominant_traits(session, top_n=8)
         if not dominant:
             return True  # No dominant traits yet
-
-        # Always allow profile-category questions
-        qid = question.get('question_id')
-        if qid and qid in session.profile_relevant_qids:
-            return True
 
         # Also check profile seed traits (covers early rounds before accumulation)
         all_ref_traits = dominant | set(session.profile_seed_traits)
@@ -5800,13 +5796,31 @@ class AdaptiveAssessmentEngine:
         # category naming conventions.  Also include branch-relevant questions
         # whose option traits overlap with the user's profile traits — this
         # pulls Batch 15+ scenario-style questions into the candidate pool.
+        #
+        # GUARD: Exclude broad multi-branch questions (level 0 with 5+ branches)
+        # from trait-based expansion. These questions cover ALL domains and
+        # easily match 2+ profile traits, which would defeat the purpose of
+        # filtering questions to the user's specific interests.
         _profile_trait_set = set(profile_ranked[:10]) if profile_ranked else set()
         if _profile_trait_set and relevant_domains:
             for qid, question in self.questions.items():
                 if qid in profile_relevant_qids:
                     continue
                 node = QUESTION_TREE_NODES.get(qid)
-                if not node or not set(node.get("branches", [])) & relevant_domains:
+                if not node:
+                    continue
+                q_branches = set(node.get("branches", []))
+                if not q_branches & relevant_domains:
+                    continue
+                # Skip broad multi-branch questions: they cover too many domains
+                # and would pollute the profile pool with generic questions whose
+                # options include unrelated career paths.
+                if len(q_branches) >= 5:
+                    continue
+                # Require MAJORITY of the question's branches to be in relevant domains
+                # so that questions primarily about other domains don't sneak in
+                overlap_ratio = len(q_branches & relevant_domains) / len(q_branches)
+                if overlap_ratio < 0.5:
                     continue
                 # Collect traits this question covers
                 _q_traits = set()
@@ -6003,12 +6017,48 @@ class AdaptiveAssessmentEngine:
             PREFERENCE in the multi-pass selection logic, not as a hard gate
             here. This ensures newer batch questions with scenario-style
             categories are reachable through the wider passes.
+
+            GUARD: Broad multi-branch questions (covering 5+ domains) must
+            have MAJORITY overlap with the user's relevant domains. This
+            prevents generic discovery questions (Dream Career, Work
+            Environment, Skill Mastery, etc.) from being served to users
+            with specific interest profiles.
             """
             node = QUESTION_TREE_NODES.get(qid)
             if not node:
                 return False  # Unclassified questions must not bypass filtering
-            if not set(node["branches"]) & relevant:
+            q_branches = set(node["branches"])
+            if not q_branches & relevant:
                 return False  # Wrong branch entirely
+            # Broad questions with many branches are generic discovery Qs.
+            # Only allow them if the user's relevant domains cover at least
+            # half the question's branches — otherwise these Qs will present
+            # many unrelated options (e.g., "Criminal investigation" for an
+            # earth science student).
+            if len(q_branches) >= 5:
+                overlap_ratio = len(q_branches & relevant) / len(q_branches)
+                if overlap_ratio < 0.5:
+                    return False
+            # STRICT GATE: "Academic Interest - X" questions are highly specific.
+            # Only serve them if their sub-topic (X) is genuinely related to the
+            # user's stated profile categories using BIDIRECTIONAL substring matching:
+            #   - Does any profile category appear AS A SUBSTRING in the sub-topic?
+            #     e.g. "Animation" ⊆ "Animation & Multimedia" → PASS
+            #   - Does the sub-topic appear AS A SUBSTRING in any profile category?
+            #     e.g. "Fine Arts & Painting" ⊆ "Fine Arts & Painting" → PASS (exact)
+            #
+            # This blocks token-only false positives like:
+            #   "Photography & Visual Arts" passing because "arts" is in "Fine Arts & Painting"
+            #   "Fashion & Textile Design" passing because "design" is in "Art & Design"
+            q_category = self.questions.get(qid, {}).get('category', '')
+            if q_category.startswith('Academic Interest -'):
+                sub_topic = q_category[len('Academic Interest -'):].strip().lower()
+                category_match = any(
+                    pc.lower() in sub_topic or sub_topic in pc.lower()
+                    for pc in session.profile_categories
+                )
+                if not category_match:
+                    return False
             return True
         
         def _passes_trait_continuity(qid):
